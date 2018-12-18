@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.13)
 
 project(nakama-cpp CXX)
 
@@ -17,7 +17,6 @@ IF (WIN32)
     add_definitions(-D_WIN32_WINNT=${ver})
 ENDIF()
 
-#add_subdirectory(thirdparty/catch)
 set(SOURCE_FILES
     api/github.com/heroiclabs/nakama/api/api.pb.cc
     api/github.com/heroiclabs/nakama/api/api.pb.h
@@ -33,10 +32,12 @@ set(SOURCE_FILES
     api/protoc-gen-swagger/options/openapiv2.pb.h
 )
 
-include_directories(api)
-include_directories(api/third_party/googleapis)
-include_directories(../third_party/grpc/include)
-include_directories(../third_party/grpc/third_party/protobuf/src)
+include_directories(
+    api
+    api/third_party/googleapis
+    ../third_party/grpc/include
+    ../third_party/grpc/third_party/protobuf/src
+)
 
 add_library(nakama-cpp SHARED STATIC ${SOURCE_FILES})
 
