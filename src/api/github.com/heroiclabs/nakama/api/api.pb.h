@@ -2313,17 +2313,17 @@ class AuthenticateFacebookRequest : public ::google::protobuf::Message /* @@prot
   ::google::protobuf::BoolValue* mutable_create();
   void set_allocated_create(::google::protobuf::BoolValue* create);
 
-  // .google.protobuf.BoolValue import = 4;
-  bool has_import() const;
-  void clear_import();
-  static const int kImportFieldNumber = 4;
+  // .google.protobuf.BoolValue sync = 4;
+  bool has_sync() const;
+  void clear_sync();
+  static const int kSyncFieldNumber = 4;
   private:
-  const ::google::protobuf::BoolValue& _internal_import() const;
+  const ::google::protobuf::BoolValue& _internal_sync() const;
   public:
-  const ::google::protobuf::BoolValue& import() const;
-  ::google::protobuf::BoolValue* release_import();
-  ::google::protobuf::BoolValue* mutable_import();
-  void set_allocated_import(::google::protobuf::BoolValue* import);
+  const ::google::protobuf::BoolValue& sync() const;
+  ::google::protobuf::BoolValue* release_sync();
+  ::google::protobuf::BoolValue* mutable_sync();
+  void set_allocated_sync(::google::protobuf::BoolValue* sync);
 
   // @@protoc_insertion_point(class_scope:nakama.api.AuthenticateFacebookRequest)
  private:
@@ -2332,7 +2332,7 @@ class AuthenticateFacebookRequest : public ::google::protobuf::Message /* @@prot
   ::google::protobuf::internal::ArenaStringPtr username_;
   ::nakama::api::AccountFacebook* account_;
   ::google::protobuf::BoolValue* create_;
-  ::google::protobuf::BoolValue* import_;
+  ::google::protobuf::BoolValue* sync_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -6284,24 +6284,24 @@ class LinkFacebookRequest : public ::google::protobuf::Message /* @@protoc_inser
   ::nakama::api::AccountFacebook* mutable_account();
   void set_allocated_account(::nakama::api::AccountFacebook* account);
 
-  // .google.protobuf.BoolValue import = 4;
-  bool has_import() const;
-  void clear_import();
-  static const int kImportFieldNumber = 4;
+  // .google.protobuf.BoolValue sync = 4;
+  bool has_sync() const;
+  void clear_sync();
+  static const int kSyncFieldNumber = 4;
   private:
-  const ::google::protobuf::BoolValue& _internal_import() const;
+  const ::google::protobuf::BoolValue& _internal_sync() const;
   public:
-  const ::google::protobuf::BoolValue& import() const;
-  ::google::protobuf::BoolValue* release_import();
-  ::google::protobuf::BoolValue* mutable_import();
-  void set_allocated_import(::google::protobuf::BoolValue* import);
+  const ::google::protobuf::BoolValue& sync() const;
+  ::google::protobuf::BoolValue* release_sync();
+  ::google::protobuf::BoolValue* mutable_sync();
+  void set_allocated_sync(::google::protobuf::BoolValue* sync);
 
   // @@protoc_insertion_point(class_scope:nakama.api.LinkFacebookRequest)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::nakama::api::AccountFacebook* account_;
-  ::google::protobuf::BoolValue* import_;
+  ::google::protobuf::BoolValue* sync_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -14223,53 +14223,53 @@ inline void AuthenticateFacebookRequest::set_allocated_username(::std::string* u
   // @@protoc_insertion_point(field_set_allocated:nakama.api.AuthenticateFacebookRequest.username)
 }
 
-// .google.protobuf.BoolValue import = 4;
-inline bool AuthenticateFacebookRequest::has_import() const {
-  return this != internal_default_instance() && import_ != NULL;
+// .google.protobuf.BoolValue sync = 4;
+inline bool AuthenticateFacebookRequest::has_sync() const {
+  return this != internal_default_instance() && sync_ != NULL;
 }
-inline const ::google::protobuf::BoolValue& AuthenticateFacebookRequest::_internal_import() const {
-  return *import_;
+inline const ::google::protobuf::BoolValue& AuthenticateFacebookRequest::_internal_sync() const {
+  return *sync_;
 }
-inline const ::google::protobuf::BoolValue& AuthenticateFacebookRequest::import() const {
-  const ::google::protobuf::BoolValue* p = import_;
-  // @@protoc_insertion_point(field_get:nakama.api.AuthenticateFacebookRequest.import)
+inline const ::google::protobuf::BoolValue& AuthenticateFacebookRequest::sync() const {
+  const ::google::protobuf::BoolValue* p = sync_;
+  // @@protoc_insertion_point(field_get:nakama.api.AuthenticateFacebookRequest.sync)
   return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::BoolValue*>(
       &::google::protobuf::_BoolValue_default_instance_);
 }
-inline ::google::protobuf::BoolValue* AuthenticateFacebookRequest::release_import() {
-  // @@protoc_insertion_point(field_release:nakama.api.AuthenticateFacebookRequest.import)
+inline ::google::protobuf::BoolValue* AuthenticateFacebookRequest::release_sync() {
+  // @@protoc_insertion_point(field_release:nakama.api.AuthenticateFacebookRequest.sync)
   
-  ::google::protobuf::BoolValue* temp = import_;
-  import_ = NULL;
+  ::google::protobuf::BoolValue* temp = sync_;
+  sync_ = NULL;
   return temp;
 }
-inline ::google::protobuf::BoolValue* AuthenticateFacebookRequest::mutable_import() {
+inline ::google::protobuf::BoolValue* AuthenticateFacebookRequest::mutable_sync() {
   
-  if (import_ == NULL) {
+  if (sync_ == NULL) {
     auto* p = CreateMaybeMessage<::google::protobuf::BoolValue>(GetArenaNoVirtual());
-    import_ = p;
+    sync_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:nakama.api.AuthenticateFacebookRequest.import)
-  return import_;
+  // @@protoc_insertion_point(field_mutable:nakama.api.AuthenticateFacebookRequest.sync)
+  return sync_;
 }
-inline void AuthenticateFacebookRequest::set_allocated_import(::google::protobuf::BoolValue* import) {
+inline void AuthenticateFacebookRequest::set_allocated_sync(::google::protobuf::BoolValue* sync) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(import_);
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(sync_);
   }
-  if (import) {
+  if (sync) {
     ::google::protobuf::Arena* submessage_arena =
-      reinterpret_cast<::google::protobuf::MessageLite*>(import)->GetArena();
+      reinterpret_cast<::google::protobuf::MessageLite*>(sync)->GetArena();
     if (message_arena != submessage_arena) {
-      import = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, import, submessage_arena);
+      sync = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, sync, submessage_arena);
     }
     
   } else {
     
   }
-  import_ = import;
-  // @@protoc_insertion_point(field_set_allocated:nakama.api.AuthenticateFacebookRequest.import)
+  sync_ = sync;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.AuthenticateFacebookRequest.sync)
 }
 
 // -------------------------------------------------------------------
@@ -18446,53 +18446,53 @@ inline void LinkFacebookRequest::set_allocated_account(::nakama::api::AccountFac
   // @@protoc_insertion_point(field_set_allocated:nakama.api.LinkFacebookRequest.account)
 }
 
-// .google.protobuf.BoolValue import = 4;
-inline bool LinkFacebookRequest::has_import() const {
-  return this != internal_default_instance() && import_ != NULL;
+// .google.protobuf.BoolValue sync = 4;
+inline bool LinkFacebookRequest::has_sync() const {
+  return this != internal_default_instance() && sync_ != NULL;
 }
-inline const ::google::protobuf::BoolValue& LinkFacebookRequest::_internal_import() const {
-  return *import_;
+inline const ::google::protobuf::BoolValue& LinkFacebookRequest::_internal_sync() const {
+  return *sync_;
 }
-inline const ::google::protobuf::BoolValue& LinkFacebookRequest::import() const {
-  const ::google::protobuf::BoolValue* p = import_;
-  // @@protoc_insertion_point(field_get:nakama.api.LinkFacebookRequest.import)
+inline const ::google::protobuf::BoolValue& LinkFacebookRequest::sync() const {
+  const ::google::protobuf::BoolValue* p = sync_;
+  // @@protoc_insertion_point(field_get:nakama.api.LinkFacebookRequest.sync)
   return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::BoolValue*>(
       &::google::protobuf::_BoolValue_default_instance_);
 }
-inline ::google::protobuf::BoolValue* LinkFacebookRequest::release_import() {
-  // @@protoc_insertion_point(field_release:nakama.api.LinkFacebookRequest.import)
+inline ::google::protobuf::BoolValue* LinkFacebookRequest::release_sync() {
+  // @@protoc_insertion_point(field_release:nakama.api.LinkFacebookRequest.sync)
   
-  ::google::protobuf::BoolValue* temp = import_;
-  import_ = NULL;
+  ::google::protobuf::BoolValue* temp = sync_;
+  sync_ = NULL;
   return temp;
 }
-inline ::google::protobuf::BoolValue* LinkFacebookRequest::mutable_import() {
+inline ::google::protobuf::BoolValue* LinkFacebookRequest::mutable_sync() {
   
-  if (import_ == NULL) {
+  if (sync_ == NULL) {
     auto* p = CreateMaybeMessage<::google::protobuf::BoolValue>(GetArenaNoVirtual());
-    import_ = p;
+    sync_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:nakama.api.LinkFacebookRequest.import)
-  return import_;
+  // @@protoc_insertion_point(field_mutable:nakama.api.LinkFacebookRequest.sync)
+  return sync_;
 }
-inline void LinkFacebookRequest::set_allocated_import(::google::protobuf::BoolValue* import) {
+inline void LinkFacebookRequest::set_allocated_sync(::google::protobuf::BoolValue* sync) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(import_);
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(sync_);
   }
-  if (import) {
+  if (sync) {
     ::google::protobuf::Arena* submessage_arena =
-      reinterpret_cast<::google::protobuf::MessageLite*>(import)->GetArena();
+      reinterpret_cast<::google::protobuf::MessageLite*>(sync)->GetArena();
     if (message_arena != submessage_arena) {
-      import = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, import, submessage_arena);
+      sync = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, sync, submessage_arena);
     }
     
   } else {
     
   }
-  import_ = import;
-  // @@protoc_insertion_point(field_set_allocated:nakama.api.LinkFacebookRequest.import)
+  sync_ = sync;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.LinkFacebookRequest.sync)
 }
 
 // -------------------------------------------------------------------

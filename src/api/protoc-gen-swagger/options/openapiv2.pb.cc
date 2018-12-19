@@ -923,7 +923,7 @@ const JSONSchema_JSONSchemaSimpleTypes JSONSchema::UNKNOWN;
 const JSONSchema_JSONSchemaSimpleTypes JSONSchema::ARRAY;
 const JSONSchema_JSONSchemaSimpleTypes JSONSchema::BOOLEAN;
 const JSONSchema_JSONSchemaSimpleTypes JSONSchema::INTEGER;
-const JSONSchema_JSONSchemaSimpleTypes JSONSchema::NULL;
+//const JSONSchema_JSONSchemaSimpleTypes JSONSchema::NULL;
 const JSONSchema_JSONSchemaSimpleTypes JSONSchema::NUMBER;
 const JSONSchema_JSONSchemaSimpleTypes JSONSchema::OBJECT;
 const JSONSchema_JSONSchemaSimpleTypes JSONSchema::STRING;

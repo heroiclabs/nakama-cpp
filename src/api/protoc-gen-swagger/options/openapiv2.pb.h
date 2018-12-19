@@ -1842,8 +1842,8 @@ class JSONSchema : public ::google::protobuf::Message /* @@protoc_insertion_poin
     JSONSchema_JSONSchemaSimpleTypes_BOOLEAN;
   static const JSONSchemaSimpleTypes INTEGER =
     JSONSchema_JSONSchemaSimpleTypes_INTEGER;
-  static const JSONSchemaSimpleTypes NULL =
-    JSONSchema_JSONSchemaSimpleTypes_NULL;
+//  static const JSONSchemaSimpleTypes NULL =
+//    JSONSchema_JSONSchemaSimpleTypes_NULL;
   static const JSONSchemaSimpleTypes NUMBER =
     JSONSchema_JSONSchemaSimpleTypes_NUMBER;
   static const JSONSchemaSimpleTypes OBJECT =

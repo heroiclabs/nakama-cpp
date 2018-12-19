@@ -30,11 +30,16 @@ set(SOURCE_FILES
     api/protoc-gen-swagger/options/annotations.pb.h
     api/protoc-gen-swagger/options/openapiv2.pb.cc
     api/protoc-gen-swagger/options/openapiv2.pb.h
+    api/google/api/annotations.pb.cc
+    api/google/api/annotations.pb.h
+    api/google/api/http.pb.cc
+    api/google/api/http.pb.h
+    api/google/rpc/status.pb.cc
+    api/google/rpc/status.pb.h
 )
 
 include_directories(
     api
-    api/third_party/googleapis
     ../third_party/grpc/include
     ../third_party/grpc/third_party/protobuf/src
 )

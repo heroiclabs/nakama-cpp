@@ -4750,19 +4750,19 @@ class Stream : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::std::string* release_subject();
   void set_allocated_subject(::std::string* subject);
 
-  // string descriptor = 3;
-  void clear_descriptor();
-  static const int kDescriptorFieldNumber = 3;
-  const ::std::string& descriptor() const;
-  void set_descriptor(const ::std::string& value);
+  // string subcontext = 3;
+  void clear_subcontext();
+  static const int kSubcontextFieldNumber = 3;
+  const ::std::string& subcontext() const;
+  void set_subcontext(const ::std::string& value);
   #if LANG_CXX11
-  void set_descriptor(::std::string&& value);
+  void set_subcontext(::std::string&& value);
   #endif
-  void set_descriptor(const char* value);
-  void set_descriptor(const char* value, size_t size);
-  ::std::string* mutable_descriptor();
-  ::std::string* release_descriptor();
-  void set_allocated_descriptor(::std::string* descriptor);
+  void set_subcontext(const char* value);
+  void set_subcontext(const char* value, size_t size);
+  ::std::string* mutable_subcontext();
+  ::std::string* release_subcontext();
+  void set_allocated_subcontext(::std::string* subcontext);
 
   // string label = 4;
   void clear_label();
@@ -4789,7 +4789,7 @@ class Stream : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr subject_;
-  ::google::protobuf::internal::ArenaStringPtr descriptor_;
+  ::google::protobuf::internal::ArenaStringPtr subcontext_;
   ::google::protobuf::internal::ArenaStringPtr label_;
   ::google::protobuf::int32 mode_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -9945,57 +9945,57 @@ inline void Stream::set_allocated_subject(::std::string* subject) {
   // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Stream.subject)
 }
 
-// string descriptor = 3;
-inline void Stream::clear_descriptor() {
-  descriptor_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string subcontext = 3;
+inline void Stream::clear_subcontext() {
+  subcontext_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Stream::descriptor() const {
-  // @@protoc_insertion_point(field_get:nakama.realtime.Stream.descriptor)
-  return descriptor_.GetNoArena();
+inline const ::std::string& Stream::subcontext() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.Stream.subcontext)
+  return subcontext_.GetNoArena();
 }
-inline void Stream::set_descriptor(const ::std::string& value) {
+inline void Stream::set_subcontext(const ::std::string& value) {
   
-  descriptor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:nakama.realtime.Stream.descriptor)
+  subcontext_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.Stream.subcontext)
 }
 #if LANG_CXX11
-inline void Stream::set_descriptor(::std::string&& value) {
+inline void Stream::set_subcontext(::std::string&& value) {
   
-  descriptor_.SetNoArena(
+  subcontext_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.Stream.descriptor)
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.Stream.subcontext)
 }
 #endif
-inline void Stream::set_descriptor(const char* value) {
+inline void Stream::set_subcontext(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  descriptor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:nakama.realtime.Stream.descriptor)
+  subcontext_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.Stream.subcontext)
 }
-inline void Stream::set_descriptor(const char* value, size_t size) {
+inline void Stream::set_subcontext(const char* value, size_t size) {
   
-  descriptor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  subcontext_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.Stream.descriptor)
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.Stream.subcontext)
 }
-inline ::std::string* Stream::mutable_descriptor() {
+inline ::std::string* Stream::mutable_subcontext() {
   
-  // @@protoc_insertion_point(field_mutable:nakama.realtime.Stream.descriptor)
-  return descriptor_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.Stream.subcontext)
+  return subcontext_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Stream::release_descriptor() {
-  // @@protoc_insertion_point(field_release:nakama.realtime.Stream.descriptor)
+inline ::std::string* Stream::release_subcontext() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.Stream.subcontext)
   
-  return descriptor_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return subcontext_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Stream::set_allocated_descriptor(::std::string* descriptor) {
-  if (descriptor != NULL) {
+inline void Stream::set_allocated_subcontext(::std::string* subcontext) {
+  if (subcontext != NULL) {
     
   } else {
     
   }
-  descriptor_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), descriptor);
-  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Stream.descriptor)
+  subcontext_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), subcontext);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Stream.subcontext)
 }
 
 // string label = 4;

@@ -1235,7 +1235,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Stream, mode_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Stream, subject_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Stream, descriptor_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Stream, subcontext_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Stream, label_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::StreamData, _internal_metadata_),
@@ -1504,7 +1504,7 @@ void AddDescriptorsImpl() {
       "\020\n\010user_ids\030\001 \003(\t\"<\n\014StatusUpdate\022,\n\006sta"
       "tus\030\001 \001(\0132\034.google.protobuf.StringValue\""
       "J\n\006Stream\022\014\n\004mode\030\001 \001(\005\022\017\n\007subject\030\002 \001(\t"
-      "\022\022\n\ndescriptor\030\003 \001(\t\022\r\n\005label\030\004 \001(\t\"r\n\nS"
+      "\022\022\n\nsubcontext\030\003 \001(\t\022\r\n\005label\030\004 \001(\t\"r\n\nS"
       "treamData\022\'\n\006stream\030\001 \001(\0132\027.nakama.realt"
       "ime.Stream\022-\n\006sender\030\002 \001(\0132\035.nakama.real"
       "time.UserPresence\022\014\n\004data\030\003 \001(\t\"\233\001\n\023Stre"
@@ -13145,7 +13145,7 @@ void Stream::InitAsDefaultInstance() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Stream::kModeFieldNumber;
 const int Stream::kSubjectFieldNumber;
-const int Stream::kDescriptorFieldNumber;
+const int Stream::kSubcontextFieldNumber;
 const int Stream::kLabelFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -13164,9 +13164,9 @@ Stream::Stream(const Stream& from)
   if (from.subject().size() > 0) {
     subject_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.subject_);
   }
-  descriptor_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.descriptor().size() > 0) {
-    descriptor_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.descriptor_);
+  subcontext_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.subcontext().size() > 0) {
+    subcontext_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.subcontext_);
   }
   label_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.label().size() > 0) {
@@ -13178,7 +13178,7 @@ Stream::Stream(const Stream& from)
 
 void Stream::SharedCtor() {
   subject_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  descriptor_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  subcontext_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   label_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   mode_ = 0;
 }
@@ -13190,7 +13190,7 @@ Stream::~Stream() {
 
 void Stream::SharedDtor() {
   subject_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  descriptor_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  subcontext_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   label_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -13215,7 +13215,7 @@ void Stream::Clear() {
   (void) cached_has_bits;
 
   subject_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  descriptor_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  subcontext_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   mode_ = 0;
   _internal_metadata_.Clear();
@@ -13261,16 +13261,16 @@ bool Stream::MergePartialFromCodedStream(
         break;
       }
 
-      // string descriptor = 3;
+      // string subcontext = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_descriptor()));
+                input, this->mutable_subcontext()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->descriptor().data(), static_cast<int>(this->descriptor().length()),
+            this->subcontext().data(), static_cast<int>(this->subcontext().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "nakama.realtime.Stream.descriptor"));
+            "nakama.realtime.Stream.subcontext"));
         } else {
           goto handle_unusual;
         }
@@ -13334,14 +13334,14 @@ void Stream::SerializeWithCachedSizes(
       2, this->subject(), output);
   }
 
-  // string descriptor = 3;
-  if (this->descriptor().size() > 0) {
+  // string subcontext = 3;
+  if (this->subcontext().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->descriptor().data(), static_cast<int>(this->descriptor().length()),
+      this->subcontext().data(), static_cast<int>(this->subcontext().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.Stream.descriptor");
+      "nakama.realtime.Stream.subcontext");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->descriptor(), output);
+      3, this->subcontext(), output);
   }
 
   // string label = 4;
@@ -13384,15 +13384,15 @@ void Stream::SerializeWithCachedSizes(
         2, this->subject(), target);
   }
 
-  // string descriptor = 3;
-  if (this->descriptor().size() > 0) {
+  // string subcontext = 3;
+  if (this->subcontext().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->descriptor().data(), static_cast<int>(this->descriptor().length()),
+      this->subcontext().data(), static_cast<int>(this->subcontext().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.Stream.descriptor");
+      "nakama.realtime.Stream.subcontext");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->descriptor(), target);
+        3, this->subcontext(), target);
   }
 
   // string label = 4;
@@ -13430,11 +13430,11 @@ size_t Stream::ByteSizeLong() const {
         this->subject());
   }
 
-  // string descriptor = 3;
-  if (this->descriptor().size() > 0) {
+  // string subcontext = 3;
+  if (this->subcontext().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->descriptor());
+        this->subcontext());
   }
 
   // string label = 4;
@@ -13482,9 +13482,9 @@ void Stream::MergeFrom(const Stream& from) {
 
     subject_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.subject_);
   }
-  if (from.descriptor().size() > 0) {
+  if (from.subcontext().size() > 0) {
 
-    descriptor_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.descriptor_);
+    subcontext_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.subcontext_);
   }
   if (from.label().size() > 0) {
 
@@ -13521,7 +13521,7 @@ void Stream::InternalSwap(Stream* other) {
   using std::swap;
   subject_.Swap(&other->subject_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  descriptor_.Swap(&other->descriptor_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  subcontext_.Swap(&other->subcontext_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   label_.Swap(&other->label_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());

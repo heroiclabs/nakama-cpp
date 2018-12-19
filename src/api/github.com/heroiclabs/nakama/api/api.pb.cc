@@ -1907,7 +1907,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookRequest, account_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookRequest, create_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookRequest, username_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookRequest, import_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookRequest, sync_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateGameCenterRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2132,7 +2132,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::LinkFacebookRequest, account_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::LinkFacebookRequest, import_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::LinkFacebookRequest, sync_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::ListChannelMessagesRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2716,235 +2716,235 @@ void AddDescriptorsImpl() {
       "\t\"\203\001\n\030AuthenticateEmailRequest\022)\n\007accoun"
       "t\030\001 \001(\0132\030.nakama.api.AccountEmail\022*\n\006cre"
       "ate\030\002 \001(\0132\032.google.protobuf.BoolValue\022\020\n"
-      "\010username\030\003 \001(\t\"\265\001\n\033AuthenticateFacebook"
+      "\010username\030\003 \001(\t\"\263\001\n\033AuthenticateFacebook"
       "Request\022,\n\007account\030\001 \001(\0132\033.nakama.api.Ac"
       "countFacebook\022*\n\006create\030\002 \001(\0132\032.google.p"
-      "rotobuf.BoolValue\022\020\n\010username\030\003 \001(\t\022*\n\006i"
-      "mport\030\004 \001(\0132\032.google.protobuf.BoolValue\""
-      "\215\001\n\035AuthenticateGameCenterRequest\022.\n\007acc"
-      "ount\030\001 \001(\0132\035.nakama.api.AccountGameCente"
-      "r\022*\n\006create\030\002 \001(\0132\032.google.protobuf.Bool"
-      "Value\022\020\n\010username\030\003 \001(\t\"\205\001\n\031Authenticate"
-      "GoogleRequest\022*\n\007account\030\001 \001(\0132\031.nakama."
-      "api.AccountGoogle\022*\n\006create\030\002 \001(\0132\032.goog"
-      "le.protobuf.BoolValue\022\020\n\010username\030\003 \001(\t\""
-      "\203\001\n\030AuthenticateSteamRequest\022)\n\007account\030"
-      "\001 \001(\0132\030.nakama.api.AccountSteam\022*\n\006creat"
-      "e\030\002 \001(\0132\032.google.protobuf.BoolValue\022\020\n\010u"
-      "sername\030\003 \001(\t\"5\n\023BlockFriendsRequest\022\013\n\003"
-      "ids\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\"\253\002\n\016Channel"
-      "Message\022\022\n\nchannel_id\030\001 \001(\t\022\022\n\nmessage_i"
-      "d\030\002 \001(\t\022)\n\004code\030\003 \001(\0132\033.google.protobuf."
-      "Int32Value\022\021\n\tsender_id\030\004 \001(\t\022\020\n\010usernam"
-      "e\030\005 \001(\t\022\017\n\007content\030\006 \001(\t\022/\n\013create_time\030"
-      "\007 \001(\0132\032.google.protobuf.Timestamp\022/\n\013upd"
-      "ate_time\030\010 \001(\0132\032.google.protobuf.Timesta"
-      "mp\022.\n\npersistent\030\t \001(\0132\032.google.protobuf"
-      ".BoolValue\"l\n\022ChannelMessageList\022,\n\010mess"
-      "ages\030\001 \003(\0132\032.nakama.api.ChannelMessage\022\023"
-      "\n\013next_cursor\030\002 \001(\t\022\023\n\013prev_cursor\030\003 \001(\t"
-      "\"k\n\022CreateGroupRequest\022\014\n\004name\030\001 \001(\t\022\023\n\013"
-      "description\030\002 \001(\t\022\020\n\010lang_tag\030\003 \001(\t\022\022\n\na"
-      "vatar_url\030\004 \001(\t\022\014\n\004open\030\005 \001(\010\"6\n\024DeleteF"
-      "riendsRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030"
-      "\002 \003(\t\"&\n\022DeleteGroupRequest\022\020\n\010group_id\030"
-      "\001 \001(\t\"8\n\036DeleteLeaderboardRecordRequest\022"
-      "\026\n\016leaderboard_id\030\001 \001(\t\")\n\032DeleteNotific"
-      "ationsRequest\022\013\n\003ids\030\001 \003(\t\"I\n\025DeleteStor"
-      "ageObjectId\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002"
-      " \001(\t\022\017\n\007version\030\003 \001(\t\"T\n\033DeleteStorageOb"
-      "jectsRequest\0225\n\nobject_ids\030\001 \003(\0132!.nakam"
-      "a.api.DeleteStorageObjectId\"\234\001\n\006Friend\022\036"
-      "\n\004user\030\001 \001(\0132\020.nakama.api.User\022*\n\005state\030"
-      "\002 \001(\0132\033.google.protobuf.Int32Value\"F\n\005St"
-      "ate\022\n\n\006FRIEND\020\000\022\017\n\013INVITE_SENT\020\001\022\023\n\017INVI"
-      "TE_RECEIVED\020\002\022\013\n\007BLOCKED\020\003\".\n\007Friends\022#\n"
-      "\007friends\030\001 \003(\0132\022.nakama.api.Friend\"G\n\017Ge"
-      "tUsersRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030"
-      "\002 \003(\t\022\024\n\014facebook_ids\030\003 \003(\t\"\265\002\n\005Group\022\n\n"
-      "\002id\030\001 \001(\t\022\022\n\ncreator_id\030\002 \001(\t\022\014\n\004name\030\003 "
-      "\001(\t\022\023\n\013description\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001"
-      "(\t\022\020\n\010metadata\030\006 \001(\t\022\022\n\navatar_url\030\007 \001(\t"
-      "\022(\n\004open\030\010 \001(\0132\032.google.protobuf.BoolVal"
-      "ue\022\022\n\nedge_count\030\t \001(\005\022\021\n\tmax_count\030\n \001("
-      "\005\022/\n\013create_time\030\013 \001(\0132\032.google.protobuf"
-      ".Timestamp\022/\n\013update_time\030\014 \001(\0132\032.google"
-      ".protobuf.Timestamp\">\n\tGroupList\022!\n\006grou"
-      "ps\030\001 \003(\0132\021.nakama.api.Group\022\016\n\006cursor\030\002 "
-      "\001(\t\"\345\001\n\rGroupUserList\0228\n\013group_users\030\001 \003"
-      "(\0132#.nakama.api.GroupUserList.GroupUser\032"
-      "\231\001\n\tGroupUser\022\036\n\004user\030\001 \001(\0132\020.nakama.api"
-      ".User\022*\n\005state\030\002 \001(\0132\033.google.protobuf.I"
-      "nt32Value\"@\n\005State\022\016\n\nSUPERADMIN\020\000\022\t\n\005AD"
-      "MIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN_REQUEST\020\003\"w\n\034I"
-      "mportFacebookFriendsRequest\022,\n\007account\030\001"
-      " \001(\0132\033.nakama.api.AccountFacebook\022)\n\005res"
-      "et\030\002 \001(\0132\032.google.protobuf.BoolValue\"$\n\020"
-      "JoinGroupRequest\022\020\n\010group_id\030\001 \001(\t\".\n\025Jo"
-      "inTournamentRequest\022\025\n\rtournament_id\030\001 \001"
-      "(\t\";\n\025KickGroupUsersRequest\022\020\n\010group_id\030"
-      "\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"\353\002\n\021LeaderboardR"
-      "ecord\022\026\n\016leaderboard_id\030\001 \001(\t\022\020\n\010owner_i"
-      "d\030\002 \001(\t\022.\n\010username\030\003 \001(\0132\034.google.proto"
-      "buf.StringValue\022\r\n\005score\030\004 \001(\003\022\020\n\010subsco"
-      "re\030\005 \001(\003\022\021\n\tnum_score\030\006 \001(\005\022\020\n\010metadata\030"
-      "\007 \001(\t\022/\n\013create_time\030\010 \001(\0132\032.google.prot"
-      "obuf.Timestamp\022/\n\013update_time\030\t \001(\0132\032.go"
-      "ogle.protobuf.Timestamp\022/\n\013expiry_time\030\n"
-      " \001(\0132\032.google.protobuf.Timestamp\022\014\n\004rank"
-      "\030\013 \001(\003\022\025\n\rmax_num_score\030\014 \001(\r\"\247\001\n\025Leader"
-      "boardRecordList\022.\n\007records\030\001 \003(\0132\035.nakam"
-      "a.api.LeaderboardRecord\0224\n\rowner_records"
-      "\030\002 \003(\0132\035.nakama.api.LeaderboardRecord\022\023\n"
-      "\013next_cursor\030\003 \001(\t\022\023\n\013prev_cursor\030\004 \001(\t\""
-      "%\n\021LeaveGroupRequest\022\020\n\010group_id\030\001 \001(\t\"o"
-      "\n\023LinkFacebookRequest\022,\n\007account\030\001 \001(\0132\033"
-      ".nakama.api.AccountFacebook\022*\n\006import\030\004 "
-      "\001(\0132\032.google.protobuf.BoolValue\"\231\001\n\032List"
-      "ChannelMessagesRequest\022\022\n\nchannel_id\030\001 \001"
-      "(\t\022*\n\005limit\030\002 \001(\0132\033.google.protobuf.Int3"
-      "2Value\022+\n\007forward\030\003 \001(\0132\032.google.protobu"
-      "f.BoolValue\022\016\n\006cursor\030\004 \001(\t\"]\n\021ListGroup"
-      "sRequest\022\014\n\004name\030\001 \001(\t\022\016\n\006cursor\030\002 \001(\t\022*"
-      "\n\005limit\030\003 \001(\0132\033.google.protobuf.Int32Val"
-      "ue\")\n\025ListGroupUsersRequest\022\020\n\010group_id\030"
-      "\001 \001(\t\"\201\001\n(ListLeaderboardRecordsAroundOw"
-      "nerRequest\022\026\n\016leaderboard_id\030\001 \001(\t\022+\n\005li"
-      "mit\030\002 \001(\0132\034.google.protobuf.UInt32Value\022"
-      "\020\n\010owner_id\030\003 \001(\t\"\206\001\n\035ListLeaderboardRec"
-      "ordsRequest\022\026\n\016leaderboard_id\030\001 \001(\t\022\021\n\to"
-      "wner_ids\030\002 \003(\t\022*\n\005limit\030\003 \001(\0132\033.google.p"
-      "rotobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\253\002\n\022L"
-      "istMatchesRequest\022*\n\005limit\030\001 \001(\0132\033.googl"
-      "e.protobuf.Int32Value\0221\n\rauthoritative\030\002"
-      " \001(\0132\032.google.protobuf.BoolValue\022+\n\005labe"
-      "l\030\003 \001(\0132\034.google.protobuf.StringValue\022-\n"
-      "\010min_size\030\004 \001(\0132\033.google.protobuf.Int32V"
-      "alue\022-\n\010max_size\030\005 \001(\0132\033.google.protobuf"
-      ".Int32Value\022+\n\005query\030\006 \001(\0132\034.google.prot"
-      "obuf.StringValue\"`\n\030ListNotificationsReq"
-      "uest\022*\n\005limit\030\001 \001(\0132\033.google.protobuf.In"
-      "t32Value\022\030\n\020cacheable_cursor\030\002 \001(\t\"|\n\031Li"
-      "stStorageObjectsRequest\022\017\n\007user_id\030\001 \001(\t"
-      "\022\022\n\ncollection\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.go"
-      "ogle.protobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t"
-      "\"\177\n\'ListTournamentRecordsAroundOwnerRequ"
-      "est\022\025\n\rtournament_id\030\001 \001(\t\022+\n\005limit\030\002 \001("
-      "\0132\034.google.protobuf.UInt32Value\022\020\n\010owner"
-      "_id\030\003 \001(\t\"\204\001\n\034ListTournamentRecordsReque"
-      "st\022\025\n\rtournament_id\030\001 \001(\t\022\021\n\towner_ids\030\002"
-      " \003(\t\022*\n\005limit\030\003 \001(\0132\033.google.protobuf.In"
-      "t32Value\022\016\n\006cursor\030\004 \001(\t\"\240\002\n\026ListTournam"
-      "entsRequest\0224\n\016category_start\030\001 \001(\0132\034.go"
-      "ogle.protobuf.UInt32Value\0222\n\014category_en"
-      "d\030\002 \001(\0132\034.google.protobuf.UInt32Value\0220\n"
-      "\nstart_time\030\003 \001(\0132\034.google.protobuf.UInt"
-      "32Value\022.\n\010end_time\030\004 \001(\0132\034.google.proto"
-      "buf.UInt32Value\022*\n\005limit\030\006 \001(\0132\033.google."
-      "protobuf.Int32Value\022\016\n\006cursor\030\010 \001(\t\"(\n\025L"
-      "istUserGroupsRequest\022\017\n\007user_id\030\001 \001(\t\"k\n"
-      "\005Match\022\020\n\010match_id\030\001 \001(\t\022\025\n\rauthoritativ"
-      "e\030\002 \001(\010\022+\n\005label\030\003 \001(\0132\034.google.protobuf"
-      ".StringValue\022\014\n\004size\030\004 \001(\005\"/\n\tMatchList\022"
-      "\"\n\007matches\030\001 \003(\0132\021.nakama.api.Match\"\242\001\n\014"
-      "Notification\022\n\n\002id\030\001 \001(\t\022\017\n\007subject\030\002 \001("
-      "\t\022\017\n\007content\030\003 \001(\t\022\014\n\004code\030\004 \001(\005\022\021\n\tsend"
-      "er_id\030\005 \001(\t\022/\n\013create_time\030\006 \001(\0132\032.googl"
-      "e.protobuf.Timestamp\022\022\n\npersistent\030\007 \001(\010"
-      "\"]\n\020NotificationList\022/\n\rnotifications\030\001 "
-      "\003(\0132\030.nakama.api.Notification\022\030\n\020cacheab"
-      "le_cursor\030\002 \001(\t\">\n\030PromoteGroupUsersRequ"
-      "est\022\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\""
-      "G\n\023ReadStorageObjectId\022\022\n\ncollection\030\001 \001"
-      "(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007user_id\030\003 \001(\t\"P\n\031Read"
-      "StorageObjectsRequest\0223\n\nobject_ids\030\001 \003("
-      "\0132\037.nakama.api.ReadStorageObjectId\"4\n\003Rp"
-      "c\022\n\n\002id\030\001 \001(\t\022\017\n\007payload\030\002 \001(\t\022\020\n\010http_k"
-      "ey\030\003 \001(\t\"<\n\007Session\022\017\n\007created\030\001 \001(\010\022\r\n\005"
-      "token\030\002 \001(\t\022\021\n\tudp_token\030\003 \001(\t\"\366\001\n\rStora"
-      "geObject\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001("
-      "\t\022\017\n\007user_id\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\022\017\n\007ver"
-      "sion\030\005 \001(\t\022\027\n\017permission_read\030\006 \001(\005\022\030\n\020p"
-      "ermission_write\030\007 \001(\005\022/\n\013create_time\030\010 \001"
-      "(\0132\032.google.protobuf.Timestamp\022/\n\013update"
-      "_time\030\t \001(\0132\032.google.protobuf.Timestamp\""
-      "U\n\020StorageObjectAck\022\022\n\ncollection\030\001 \001(\t\022"
-      "\013\n\003key\030\002 \001(\t\022\017\n\007version\030\003 \001(\t\022\017\n\007user_id"
-      "\030\004 \001(\t\"\?\n\021StorageObjectAcks\022*\n\004acks\030\001 \003("
-      "\0132\034.nakama.api.StorageObjectAck\"<\n\016Stora"
-      "geObjects\022*\n\007objects\030\001 \003(\0132\031.nakama.api."
-      "StorageObject\"O\n\021StorageObjectList\022*\n\007ob"
-      "jects\030\001 \003(\0132\031.nakama.api.StorageObject\022\016"
-      "\n\006cursor\030\002 \001(\t\"\207\003\n\nTournament\022\n\n\002id\030\001 \001("
-      "\t\022\r\n\005title\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n"
-      "\010category\030\004 \001(\r\022\022\n\nsort_order\030\005 \001(\r\022\014\n\004s"
-      "ize\030\006 \001(\r\022\020\n\010max_size\030\007 \001(\r\022\025\n\rmax_num_s"
-      "core\030\010 \001(\r\022\021\n\tcan_enter\030\t \001(\010\022\022\n\nend_act"
-      "ive\030\n \001(\r\022\022\n\nnext_reset\030\013 \001(\r\022\020\n\010metadat"
-      "a\030\014 \001(\t\022/\n\013create_time\030\r \001(\0132\032.google.pr"
-      "otobuf.Timestamp\022.\n\nstart_time\030\016 \001(\0132\032.g"
-      "oogle.protobuf.Timestamp\022,\n\010end_time\030\017 \001"
-      "(\0132\032.google.protobuf.Timestamp\022\020\n\010durati"
-      "on\030\020 \001(\r\"M\n\016TournamentList\022+\n\013tournament"
-      "s\030\001 \003(\0132\026.nakama.api.Tournament\022\016\n\006curso"
-      "r\030\002 \001(\t\"\246\001\n\024TournamentRecordList\022.\n\007reco"
-      "rds\030\001 \003(\0132\035.nakama.api.LeaderboardRecord"
-      "\0224\n\rowner_records\030\002 \003(\0132\035.nakama.api.Lea"
-      "derboardRecord\022\023\n\013next_cursor\030\003 \001(\t\022\023\n\013p"
-      "rev_cursor\030\004 \001(\t\"\274\002\n\024UpdateAccountReques"
-      "t\022.\n\010username\030\001 \001(\0132\034.google.protobuf.St"
-      "ringValue\0222\n\014display_name\030\002 \001(\0132\034.google"
-      ".protobuf.StringValue\0220\n\navatar_url\030\003 \001("
-      "\0132\034.google.protobuf.StringValue\022.\n\010lang_"
-      "tag\030\004 \001(\0132\034.google.protobuf.StringValue\022"
-      ".\n\010location\030\005 \001(\0132\034.google.protobuf.Stri"
-      "ngValue\022.\n\010timezone\030\006 \001(\0132\034.google.proto"
-      "buf.StringValue\"\221\002\n\022UpdateGroupRequest\022\020"
-      "\n\010group_id\030\001 \001(\t\022*\n\004name\030\002 \001(\0132\034.google."
-      "protobuf.StringValue\0221\n\013description\030\003 \001("
-      "\0132\034.google.protobuf.StringValue\022.\n\010lang_"
-      "tag\030\004 \001(\0132\034.google.protobuf.StringValue\022"
-      "0\n\navatar_url\030\005 \001(\0132\034.google.protobuf.St"
-      "ringValue\022(\n\004open\030\006 \001(\0132\032.google.protobu"
-      "f.BoolValue\"\355\002\n\004User\022\n\n\002id\030\001 \001(\t\022\020\n\010user"
-      "name\030\002 \001(\t\022\024\n\014display_name\030\003 \001(\t\022\022\n\navat"
-      "ar_url\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001(\t\022\020\n\010locati"
-      "on\030\006 \001(\t\022\020\n\010timezone\030\007 \001(\t\022\020\n\010metadata\030\010"
-      " \001(\t\022\023\n\013facebook_id\030\t \001(\t\022\021\n\tgoogle_id\030\n"
-      " \001(\t\022\025\n\rgamecenter_id\030\013 \001(\t\022\020\n\010steam_id\030"
-      "\014 \001(\t\022\016\n\006online\030\r \001(\010\022\022\n\nedge_count\030\016 \001("
-      "\005\022/\n\013create_time\030\017 \001(\0132\032.google.protobuf"
-      ".Timestamp\022/\n\013update_time\030\020 \001(\0132\032.google"
-      ".protobuf.Timestamp\"\347\001\n\rUserGroupList\0228\n"
-      "\013user_groups\030\001 \003(\0132#.nakama.api.UserGrou"
-      "pList.UserGroup\032\233\001\n\tUserGroup\022 \n\005group\030\001"
-      " \001(\0132\021.nakama.api.Group\022*\n\005state\030\002 \001(\0132\033"
-      ".google.protobuf.Int32Value\"@\n\005State\022\016\n\n"
-      "SUPERADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014J"
-      "OIN_REQUEST\020\003\"(\n\005Users\022\037\n\005users\030\001 \003(\0132\020."
-      "nakama.api.User\"\326\001\n\035WriteLeaderboardReco"
-      "rdRequest\022\026\n\016leaderboard_id\030\001 \001(\t\022P\n\006rec"
-      "ord\030\002 \001(\0132@.nakama.api.WriteLeaderboardR"
-      "ecordRequest.LeaderboardRecordWrite\032K\n\026L"
-      "eaderboardRecordWrite\022\r\n\005score\030\001 \001(\003\022\020\n\010"
-      "subscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\t\"\302\001\n\022Wri"
-      "teStorageObject\022\022\n\ncollection\030\001 \001(\t\022\013\n\003k"
-      "ey\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\022\017\n\007version\030\004 \001(\t"
-      "\0224\n\017permission_read\030\005 \001(\0132\033.google.proto"
-      "buf.Int32Value\0225\n\020permission_write\030\006 \001(\013"
-      "2\033.google.protobuf.Int32Value\"M\n\032WriteSt"
-      "orageObjectsRequest\022/\n\007objects\030\001 \003(\0132\036.n"
-      "akama.api.WriteStorageObject\"\321\001\n\034WriteTo"
-      "urnamentRecordRequest\022\025\n\rtournament_id\030\001"
-      " \001(\t\022N\n\006record\030\002 \001(\0132>.nakama.api.WriteT"
-      "ournamentRecordRequest.TournamentRecordW"
-      "rite\032J\n\025TournamentRecordWrite\022\r\n\005score\030\001"
-      " \001(\003\022\020\n\010subscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\t"
-      "B=\n\031com.heroiclabs.nakama.apiB\tNakamaApi"
-      "P\001Z\003api\242\002\004NKPB\252\002\006Nakamab\006proto3"
+      "rotobuf.BoolValue\022\020\n\010username\030\003 \001(\t\022(\n\004s"
+      "ync\030\004 \001(\0132\032.google.protobuf.BoolValue\"\215\001"
+      "\n\035AuthenticateGameCenterRequest\022.\n\007accou"
+      "nt\030\001 \001(\0132\035.nakama.api.AccountGameCenter\022"
+      "*\n\006create\030\002 \001(\0132\032.google.protobuf.BoolVa"
+      "lue\022\020\n\010username\030\003 \001(\t\"\205\001\n\031AuthenticateGo"
+      "ogleRequest\022*\n\007account\030\001 \001(\0132\031.nakama.ap"
+      "i.AccountGoogle\022*\n\006create\030\002 \001(\0132\032.google"
+      ".protobuf.BoolValue\022\020\n\010username\030\003 \001(\t\"\203\001"
+      "\n\030AuthenticateSteamRequest\022)\n\007account\030\001 "
+      "\001(\0132\030.nakama.api.AccountSteam\022*\n\006create\030"
+      "\002 \001(\0132\032.google.protobuf.BoolValue\022\020\n\010use"
+      "rname\030\003 \001(\t\"5\n\023BlockFriendsRequest\022\013\n\003id"
+      "s\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\"\253\002\n\016ChannelMe"
+      "ssage\022\022\n\nchannel_id\030\001 \001(\t\022\022\n\nmessage_id\030"
+      "\002 \001(\t\022)\n\004code\030\003 \001(\0132\033.google.protobuf.In"
+      "t32Value\022\021\n\tsender_id\030\004 \001(\t\022\020\n\010username\030"
+      "\005 \001(\t\022\017\n\007content\030\006 \001(\t\022/\n\013create_time\030\007 "
+      "\001(\0132\032.google.protobuf.Timestamp\022/\n\013updat"
+      "e_time\030\010 \001(\0132\032.google.protobuf.Timestamp"
+      "\022.\n\npersistent\030\t \001(\0132\032.google.protobuf.B"
+      "oolValue\"l\n\022ChannelMessageList\022,\n\010messag"
+      "es\030\001 \003(\0132\032.nakama.api.ChannelMessage\022\023\n\013"
+      "next_cursor\030\002 \001(\t\022\023\n\013prev_cursor\030\003 \001(\t\"k"
+      "\n\022CreateGroupRequest\022\014\n\004name\030\001 \001(\t\022\023\n\013de"
+      "scription\030\002 \001(\t\022\020\n\010lang_tag\030\003 \001(\t\022\022\n\nava"
+      "tar_url\030\004 \001(\t\022\014\n\004open\030\005 \001(\010\"6\n\024DeleteFri"
+      "endsRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 "
+      "\003(\t\"&\n\022DeleteGroupRequest\022\020\n\010group_id\030\001 "
+      "\001(\t\"8\n\036DeleteLeaderboardRecordRequest\022\026\n"
+      "\016leaderboard_id\030\001 \001(\t\")\n\032DeleteNotificat"
+      "ionsRequest\022\013\n\003ids\030\001 \003(\t\"I\n\025DeleteStorag"
+      "eObjectId\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001"
+      "(\t\022\017\n\007version\030\003 \001(\t\"T\n\033DeleteStorageObje"
+      "ctsRequest\0225\n\nobject_ids\030\001 \003(\0132!.nakama."
+      "api.DeleteStorageObjectId\"\234\001\n\006Friend\022\036\n\004"
+      "user\030\001 \001(\0132\020.nakama.api.User\022*\n\005state\030\002 "
+      "\001(\0132\033.google.protobuf.Int32Value\"F\n\005Stat"
+      "e\022\n\n\006FRIEND\020\000\022\017\n\013INVITE_SENT\020\001\022\023\n\017INVITE"
+      "_RECEIVED\020\002\022\013\n\007BLOCKED\020\003\".\n\007Friends\022#\n\007f"
+      "riends\030\001 \003(\0132\022.nakama.api.Friend\"G\n\017GetU"
+      "sersRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 "
+      "\003(\t\022\024\n\014facebook_ids\030\003 \003(\t\"\265\002\n\005Group\022\n\n\002i"
+      "d\030\001 \001(\t\022\022\n\ncreator_id\030\002 \001(\t\022\014\n\004name\030\003 \001("
+      "\t\022\023\n\013description\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001(\t"
+      "\022\020\n\010metadata\030\006 \001(\t\022\022\n\navatar_url\030\007 \001(\t\022("
+      "\n\004open\030\010 \001(\0132\032.google.protobuf.BoolValue"
+      "\022\022\n\nedge_count\030\t \001(\005\022\021\n\tmax_count\030\n \001(\005\022"
+      "/\n\013create_time\030\013 \001(\0132\032.google.protobuf.T"
+      "imestamp\022/\n\013update_time\030\014 \001(\0132\032.google.p"
+      "rotobuf.Timestamp\">\n\tGroupList\022!\n\006groups"
+      "\030\001 \003(\0132\021.nakama.api.Group\022\016\n\006cursor\030\002 \001("
+      "\t\"\345\001\n\rGroupUserList\0228\n\013group_users\030\001 \003(\013"
+      "2#.nakama.api.GroupUserList.GroupUser\032\231\001"
+      "\n\tGroupUser\022\036\n\004user\030\001 \001(\0132\020.nakama.api.U"
+      "ser\022*\n\005state\030\002 \001(\0132\033.google.protobuf.Int"
+      "32Value\"@\n\005State\022\016\n\nSUPERADMIN\020\000\022\t\n\005ADMI"
+      "N\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN_REQUEST\020\003\"w\n\034Imp"
+      "ortFacebookFriendsRequest\022,\n\007account\030\001 \001"
+      "(\0132\033.nakama.api.AccountFacebook\022)\n\005reset"
+      "\030\002 \001(\0132\032.google.protobuf.BoolValue\"$\n\020Jo"
+      "inGroupRequest\022\020\n\010group_id\030\001 \001(\t\".\n\025Join"
+      "TournamentRequest\022\025\n\rtournament_id\030\001 \001(\t"
+      "\";\n\025KickGroupUsersRequest\022\020\n\010group_id\030\001 "
+      "\001(\t\022\020\n\010user_ids\030\002 \003(\t\"\353\002\n\021LeaderboardRec"
+      "ord\022\026\n\016leaderboard_id\030\001 \001(\t\022\020\n\010owner_id\030"
+      "\002 \001(\t\022.\n\010username\030\003 \001(\0132\034.google.protobu"
+      "f.StringValue\022\r\n\005score\030\004 \001(\003\022\020\n\010subscore"
+      "\030\005 \001(\003\022\021\n\tnum_score\030\006 \001(\005\022\020\n\010metadata\030\007 "
+      "\001(\t\022/\n\013create_time\030\010 \001(\0132\032.google.protob"
+      "uf.Timestamp\022/\n\013update_time\030\t \001(\0132\032.goog"
+      "le.protobuf.Timestamp\022/\n\013expiry_time\030\n \001"
+      "(\0132\032.google.protobuf.Timestamp\022\014\n\004rank\030\013"
+      " \001(\003\022\025\n\rmax_num_score\030\014 \001(\r\"\247\001\n\025Leaderbo"
+      "ardRecordList\022.\n\007records\030\001 \003(\0132\035.nakama."
+      "api.LeaderboardRecord\0224\n\rowner_records\030\002"
+      " \003(\0132\035.nakama.api.LeaderboardRecord\022\023\n\013n"
+      "ext_cursor\030\003 \001(\t\022\023\n\013prev_cursor\030\004 \001(\t\"%\n"
+      "\021LeaveGroupRequest\022\020\n\010group_id\030\001 \001(\t\"m\n\023"
+      "LinkFacebookRequest\022,\n\007account\030\001 \001(\0132\033.n"
+      "akama.api.AccountFacebook\022(\n\004sync\030\004 \001(\0132"
+      "\032.google.protobuf.BoolValue\"\231\001\n\032ListChan"
+      "nelMessagesRequest\022\022\n\nchannel_id\030\001 \001(\t\022*"
+      "\n\005limit\030\002 \001(\0132\033.google.protobuf.Int32Val"
+      "ue\022+\n\007forward\030\003 \001(\0132\032.google.protobuf.Bo"
+      "olValue\022\016\n\006cursor\030\004 \001(\t\"]\n\021ListGroupsReq"
+      "uest\022\014\n\004name\030\001 \001(\t\022\016\n\006cursor\030\002 \001(\t\022*\n\005li"
+      "mit\030\003 \001(\0132\033.google.protobuf.Int32Value\")"
+      "\n\025ListGroupUsersRequest\022\020\n\010group_id\030\001 \001("
+      "\t\"\201\001\n(ListLeaderboardRecordsAroundOwnerR"
+      "equest\022\026\n\016leaderboard_id\030\001 \001(\t\022+\n\005limit\030"
+      "\002 \001(\0132\034.google.protobuf.UInt32Value\022\020\n\010o"
+      "wner_id\030\003 \001(\t\"\206\001\n\035ListLeaderboardRecords"
+      "Request\022\026\n\016leaderboard_id\030\001 \001(\t\022\021\n\towner"
+      "_ids\030\002 \003(\t\022*\n\005limit\030\003 \001(\0132\033.google.proto"
+      "buf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\253\002\n\022ListM"
+      "atchesRequest\022*\n\005limit\030\001 \001(\0132\033.google.pr"
+      "otobuf.Int32Value\0221\n\rauthoritative\030\002 \001(\013"
+      "2\032.google.protobuf.BoolValue\022+\n\005label\030\003 "
+      "\001(\0132\034.google.protobuf.StringValue\022-\n\010min"
+      "_size\030\004 \001(\0132\033.google.protobuf.Int32Value"
+      "\022-\n\010max_size\030\005 \001(\0132\033.google.protobuf.Int"
+      "32Value\022+\n\005query\030\006 \001(\0132\034.google.protobuf"
+      ".StringValue\"`\n\030ListNotificationsRequest"
+      "\022*\n\005limit\030\001 \001(\0132\033.google.protobuf.Int32V"
+      "alue\022\030\n\020cacheable_cursor\030\002 \001(\t\"|\n\031ListSt"
+      "orageObjectsRequest\022\017\n\007user_id\030\001 \001(\t\022\022\n\n"
+      "collection\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.google"
+      ".protobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\177\n\'"
+      "ListTournamentRecordsAroundOwnerRequest\022"
+      "\025\n\rtournament_id\030\001 \001(\t\022+\n\005limit\030\002 \001(\0132\034."
+      "google.protobuf.UInt32Value\022\020\n\010owner_id\030"
+      "\003 \001(\t\"\204\001\n\034ListTournamentRecordsRequest\022\025"
+      "\n\rtournament_id\030\001 \001(\t\022\021\n\towner_ids\030\002 \003(\t"
+      "\022*\n\005limit\030\003 \001(\0132\033.google.protobuf.Int32V"
+      "alue\022\016\n\006cursor\030\004 \001(\t\"\240\002\n\026ListTournaments"
+      "Request\0224\n\016category_start\030\001 \001(\0132\034.google"
+      ".protobuf.UInt32Value\0222\n\014category_end\030\002 "
+      "\001(\0132\034.google.protobuf.UInt32Value\0220\n\nsta"
+      "rt_time\030\003 \001(\0132\034.google.protobuf.UInt32Va"
+      "lue\022.\n\010end_time\030\004 \001(\0132\034.google.protobuf."
+      "UInt32Value\022*\n\005limit\030\006 \001(\0132\033.google.prot"
+      "obuf.Int32Value\022\016\n\006cursor\030\010 \001(\t\"(\n\025ListU"
+      "serGroupsRequest\022\017\n\007user_id\030\001 \001(\t\"k\n\005Mat"
+      "ch\022\020\n\010match_id\030\001 \001(\t\022\025\n\rauthoritative\030\002 "
+      "\001(\010\022+\n\005label\030\003 \001(\0132\034.google.protobuf.Str"
+      "ingValue\022\014\n\004size\030\004 \001(\005\"/\n\tMatchList\022\"\n\007m"
+      "atches\030\001 \003(\0132\021.nakama.api.Match\"\242\001\n\014Noti"
+      "fication\022\n\n\002id\030\001 \001(\t\022\017\n\007subject\030\002 \001(\t\022\017\n"
+      "\007content\030\003 \001(\t\022\014\n\004code\030\004 \001(\005\022\021\n\tsender_i"
+      "d\030\005 \001(\t\022/\n\013create_time\030\006 \001(\0132\032.google.pr"
+      "otobuf.Timestamp\022\022\n\npersistent\030\007 \001(\010\"]\n\020"
+      "NotificationList\022/\n\rnotifications\030\001 \003(\0132"
+      "\030.nakama.api.Notification\022\030\n\020cacheable_c"
+      "ursor\030\002 \001(\t\">\n\030PromoteGroupUsersRequest\022"
+      "\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"G\n\023R"
+      "eadStorageObjectId\022\022\n\ncollection\030\001 \001(\t\022\013"
+      "\n\003key\030\002 \001(\t\022\017\n\007user_id\030\003 \001(\t\"P\n\031ReadStor"
+      "ageObjectsRequest\0223\n\nobject_ids\030\001 \003(\0132\037."
+      "nakama.api.ReadStorageObjectId\"4\n\003Rpc\022\n\n"
+      "\002id\030\001 \001(\t\022\017\n\007payload\030\002 \001(\t\022\020\n\010http_key\030\003"
+      " \001(\t\"<\n\007Session\022\017\n\007created\030\001 \001(\010\022\r\n\005toke"
+      "n\030\002 \001(\t\022\021\n\tudp_token\030\003 \001(\t\"\366\001\n\rStorageOb"
+      "ject\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n"
+      "\007user_id\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\022\017\n\007version"
+      "\030\005 \001(\t\022\027\n\017permission_read\030\006 \001(\005\022\030\n\020permi"
+      "ssion_write\030\007 \001(\005\022/\n\013create_time\030\010 \001(\0132\032"
+      ".google.protobuf.Timestamp\022/\n\013update_tim"
+      "e\030\t \001(\0132\032.google.protobuf.Timestamp\"U\n\020S"
+      "torageObjectAck\022\022\n\ncollection\030\001 \001(\t\022\013\n\003k"
+      "ey\030\002 \001(\t\022\017\n\007version\030\003 \001(\t\022\017\n\007user_id\030\004 \001"
+      "(\t\"\?\n\021StorageObjectAcks\022*\n\004acks\030\001 \003(\0132\034."
+      "nakama.api.StorageObjectAck\"<\n\016StorageOb"
+      "jects\022*\n\007objects\030\001 \003(\0132\031.nakama.api.Stor"
+      "ageObject\"O\n\021StorageObjectList\022*\n\007object"
+      "s\030\001 \003(\0132\031.nakama.api.StorageObject\022\016\n\006cu"
+      "rsor\030\002 \001(\t\"\207\003\n\nTournament\022\n\n\002id\030\001 \001(\t\022\r\n"
+      "\005title\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010cat"
+      "egory\030\004 \001(\r\022\022\n\nsort_order\030\005 \001(\r\022\014\n\004size\030"
+      "\006 \001(\r\022\020\n\010max_size\030\007 \001(\r\022\025\n\rmax_num_score"
+      "\030\010 \001(\r\022\021\n\tcan_enter\030\t \001(\010\022\022\n\nend_active\030"
+      "\n \001(\r\022\022\n\nnext_reset\030\013 \001(\r\022\020\n\010metadata\030\014 "
+      "\001(\t\022/\n\013create_time\030\r \001(\0132\032.google.protob"
+      "uf.Timestamp\022.\n\nstart_time\030\016 \001(\0132\032.googl"
+      "e.protobuf.Timestamp\022,\n\010end_time\030\017 \001(\0132\032"
+      ".google.protobuf.Timestamp\022\020\n\010duration\030\020"
+      " \001(\r\"M\n\016TournamentList\022+\n\013tournaments\030\001 "
+      "\003(\0132\026.nakama.api.Tournament\022\016\n\006cursor\030\002 "
+      "\001(\t\"\246\001\n\024TournamentRecordList\022.\n\007records\030"
+      "\001 \003(\0132\035.nakama.api.LeaderboardRecord\0224\n\r"
+      "owner_records\030\002 \003(\0132\035.nakama.api.Leaderb"
+      "oardRecord\022\023\n\013next_cursor\030\003 \001(\t\022\023\n\013prev_"
+      "cursor\030\004 \001(\t\"\274\002\n\024UpdateAccountRequest\022.\n"
+      "\010username\030\001 \001(\0132\034.google.protobuf.String"
+      "Value\0222\n\014display_name\030\002 \001(\0132\034.google.pro"
+      "tobuf.StringValue\0220\n\navatar_url\030\003 \001(\0132\034."
+      "google.protobuf.StringValue\022.\n\010lang_tag\030"
+      "\004 \001(\0132\034.google.protobuf.StringValue\022.\n\010l"
+      "ocation\030\005 \001(\0132\034.google.protobuf.StringVa"
+      "lue\022.\n\010timezone\030\006 \001(\0132\034.google.protobuf."
+      "StringValue\"\221\002\n\022UpdateGroupRequest\022\020\n\010gr"
+      "oup_id\030\001 \001(\t\022*\n\004name\030\002 \001(\0132\034.google.prot"
+      "obuf.StringValue\0221\n\013description\030\003 \001(\0132\034."
+      "google.protobuf.StringValue\022.\n\010lang_tag\030"
+      "\004 \001(\0132\034.google.protobuf.StringValue\0220\n\na"
+      "vatar_url\030\005 \001(\0132\034.google.protobuf.String"
+      "Value\022(\n\004open\030\006 \001(\0132\032.google.protobuf.Bo"
+      "olValue\"\355\002\n\004User\022\n\n\002id\030\001 \001(\t\022\020\n\010username"
+      "\030\002 \001(\t\022\024\n\014display_name\030\003 \001(\t\022\022\n\navatar_u"
+      "rl\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001(\t\022\020\n\010location\030\006"
+      " \001(\t\022\020\n\010timezone\030\007 \001(\t\022\020\n\010metadata\030\010 \001(\t"
+      "\022\023\n\013facebook_id\030\t \001(\t\022\021\n\tgoogle_id\030\n \001(\t"
+      "\022\025\n\rgamecenter_id\030\013 \001(\t\022\020\n\010steam_id\030\014 \001("
+      "\t\022\016\n\006online\030\r \001(\010\022\022\n\nedge_count\030\016 \001(\005\022/\n"
+      "\013create_time\030\017 \001(\0132\032.google.protobuf.Tim"
+      "estamp\022/\n\013update_time\030\020 \001(\0132\032.google.pro"
+      "tobuf.Timestamp\"\347\001\n\rUserGroupList\0228\n\013use"
+      "r_groups\030\001 \003(\0132#.nakama.api.UserGroupLis"
+      "t.UserGroup\032\233\001\n\tUserGroup\022 \n\005group\030\001 \001(\013"
+      "2\021.nakama.api.Group\022*\n\005state\030\002 \001(\0132\033.goo"
+      "gle.protobuf.Int32Value\"@\n\005State\022\016\n\nSUPE"
+      "RADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN_"
+      "REQUEST\020\003\"(\n\005Users\022\037\n\005users\030\001 \003(\0132\020.naka"
+      "ma.api.User\"\326\001\n\035WriteLeaderboardRecordRe"
+      "quest\022\026\n\016leaderboard_id\030\001 \001(\t\022P\n\006record\030"
+      "\002 \001(\0132@.nakama.api.WriteLeaderboardRecor"
+      "dRequest.LeaderboardRecordWrite\032K\n\026Leade"
+      "rboardRecordWrite\022\r\n\005score\030\001 \001(\003\022\020\n\010subs"
+      "core\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\t\"\302\001\n\022WriteSt"
+      "orageObject\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002"
+      " \001(\t\022\r\n\005value\030\003 \001(\t\022\017\n\007version\030\004 \001(\t\0224\n\017"
+      "permission_read\030\005 \001(\0132\033.google.protobuf."
+      "Int32Value\0225\n\020permission_write\030\006 \001(\0132\033.g"
+      "oogle.protobuf.Int32Value\"M\n\032WriteStorag"
+      "eObjectsRequest\022/\n\007objects\030\001 \003(\0132\036.nakam"
+      "a.api.WriteStorageObject\"\321\001\n\034WriteTourna"
+      "mentRecordRequest\022\025\n\rtournament_id\030\001 \001(\t"
+      "\022N\n\006record\030\002 \001(\0132>.nakama.api.WriteTourn"
+      "amentRecordRequest.TournamentRecordWrite"
+      "\032J\n\025TournamentRecordWrite\022\r\n\005score\030\001 \001(\003"
+      "\022\020\n\010subscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\tB=\n\031"
+      "com.heroiclabs.nakama.apiB\tNakamaApiP\001Z\003"
+      "api\242\002\004NKPB\252\002\006Nakamab\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 10191);
+      descriptor, 10187);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "github.com/heroiclabs/nakama/api/api.proto", &protobuf_RegisterTypes);
   ::protobuf_google_2fprotobuf_2ftimestamp_2eproto::AddDescriptors();
@@ -7203,7 +7203,7 @@ void AuthenticateFacebookRequest::InitAsDefaultInstance() {
       ::nakama::api::AccountFacebook::internal_default_instance());
   ::nakama::api::_AuthenticateFacebookRequest_default_instance_._instance.get_mutable()->create_ = const_cast< ::google::protobuf::BoolValue*>(
       ::google::protobuf::BoolValue::internal_default_instance());
-  ::nakama::api::_AuthenticateFacebookRequest_default_instance_._instance.get_mutable()->import_ = const_cast< ::google::protobuf::BoolValue*>(
+  ::nakama::api::_AuthenticateFacebookRequest_default_instance_._instance.get_mutable()->sync_ = const_cast< ::google::protobuf::BoolValue*>(
       ::google::protobuf::BoolValue::internal_default_instance());
 }
 void AuthenticateFacebookRequest::clear_create() {
@@ -7212,17 +7212,17 @@ void AuthenticateFacebookRequest::clear_create() {
   }
   create_ = NULL;
 }
-void AuthenticateFacebookRequest::clear_import() {
-  if (GetArenaNoVirtual() == NULL && import_ != NULL) {
-    delete import_;
+void AuthenticateFacebookRequest::clear_sync() {
+  if (GetArenaNoVirtual() == NULL && sync_ != NULL) {
+    delete sync_;
   }
-  import_ = NULL;
+  sync_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int AuthenticateFacebookRequest::kAccountFieldNumber;
 const int AuthenticateFacebookRequest::kCreateFieldNumber;
 const int AuthenticateFacebookRequest::kUsernameFieldNumber;
-const int AuthenticateFacebookRequest::kImportFieldNumber;
+const int AuthenticateFacebookRequest::kSyncFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 AuthenticateFacebookRequest::AuthenticateFacebookRequest()
@@ -7250,10 +7250,10 @@ AuthenticateFacebookRequest::AuthenticateFacebookRequest(const AuthenticateFaceb
   } else {
     create_ = NULL;
   }
-  if (from.has_import()) {
-    import_ = new ::google::protobuf::BoolValue(*from.import_);
+  if (from.has_sync()) {
+    sync_ = new ::google::protobuf::BoolValue(*from.sync_);
   } else {
-    import_ = NULL;
+    sync_ = NULL;
   }
   // @@protoc_insertion_point(copy_constructor:nakama.api.AuthenticateFacebookRequest)
 }
@@ -7261,8 +7261,8 @@ AuthenticateFacebookRequest::AuthenticateFacebookRequest(const AuthenticateFaceb
 void AuthenticateFacebookRequest::SharedCtor() {
   username_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&account_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&import_) -
-      reinterpret_cast<char*>(&account_)) + sizeof(import_));
+      reinterpret_cast<char*>(&sync_) -
+      reinterpret_cast<char*>(&account_)) + sizeof(sync_));
 }
 
 AuthenticateFacebookRequest::~AuthenticateFacebookRequest() {
@@ -7274,7 +7274,7 @@ void AuthenticateFacebookRequest::SharedDtor() {
   username_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete account_;
   if (this != internal_default_instance()) delete create_;
-  if (this != internal_default_instance()) delete import_;
+  if (this != internal_default_instance()) delete sync_;
 }
 
 void AuthenticateFacebookRequest::SetCachedSize(int size) const {
@@ -7306,10 +7306,10 @@ void AuthenticateFacebookRequest::Clear() {
     delete create_;
   }
   create_ = NULL;
-  if (GetArenaNoVirtual() == NULL && import_ != NULL) {
-    delete import_;
+  if (GetArenaNoVirtual() == NULL && sync_ != NULL) {
+    delete sync_;
   }
-  import_ = NULL;
+  sync_ = NULL;
   _internal_metadata_.Clear();
 }
 
@@ -7363,12 +7363,12 @@ bool AuthenticateFacebookRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // .google.protobuf.BoolValue import = 4;
+      // .google.protobuf.BoolValue sync = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_import()));
+               input, mutable_sync()));
         } else {
           goto handle_unusual;
         }
@@ -7423,10 +7423,10 @@ void AuthenticateFacebookRequest::SerializeWithCachedSizes(
       3, this->username(), output);
   }
 
-  // .google.protobuf.BoolValue import = 4;
-  if (this->has_import()) {
+  // .google.protobuf.BoolValue sync = 4;
+  if (this->has_sync()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->_internal_import(), output);
+      4, this->_internal_sync(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -7468,11 +7468,11 @@ void AuthenticateFacebookRequest::SerializeWithCachedSizes(
         3, this->username(), target);
   }
 
-  // .google.protobuf.BoolValue import = 4;
-  if (this->has_import()) {
+  // .google.protobuf.BoolValue sync = 4;
+  if (this->has_sync()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, this->_internal_import(), deterministic, target);
+        4, this->_internal_sync(), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -7513,11 +7513,11 @@ size_t AuthenticateFacebookRequest::ByteSizeLong() const {
         *create_);
   }
 
-  // .google.protobuf.BoolValue import = 4;
-  if (this->has_import()) {
+  // .google.protobuf.BoolValue sync = 4;
+  if (this->has_sync()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *import_);
+        *sync_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -7557,8 +7557,8 @@ void AuthenticateFacebookRequest::MergeFrom(const AuthenticateFacebookRequest& f
   if (from.has_create()) {
     mutable_create()->::google::protobuf::BoolValue::MergeFrom(from.create());
   }
-  if (from.has_import()) {
-    mutable_import()->::google::protobuf::BoolValue::MergeFrom(from.import());
+  if (from.has_sync()) {
+    mutable_sync()->::google::protobuf::BoolValue::MergeFrom(from.sync());
   }
 }
 
@@ -7590,7 +7590,7 @@ void AuthenticateFacebookRequest::InternalSwap(AuthenticateFacebookRequest* othe
     GetArenaNoVirtual());
   swap(account_, other->account_);
   swap(create_, other->create_);
-  swap(import_, other->import_);
+  swap(sync_, other->sync_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -16983,18 +16983,18 @@ void LeaveGroupRequest::InternalSwap(LeaveGroupRequest* other) {
 void LinkFacebookRequest::InitAsDefaultInstance() {
   ::nakama::api::_LinkFacebookRequest_default_instance_._instance.get_mutable()->account_ = const_cast< ::nakama::api::AccountFacebook*>(
       ::nakama::api::AccountFacebook::internal_default_instance());
-  ::nakama::api::_LinkFacebookRequest_default_instance_._instance.get_mutable()->import_ = const_cast< ::google::protobuf::BoolValue*>(
+  ::nakama::api::_LinkFacebookRequest_default_instance_._instance.get_mutable()->sync_ = const_cast< ::google::protobuf::BoolValue*>(
       ::google::protobuf::BoolValue::internal_default_instance());
 }
-void LinkFacebookRequest::clear_import() {
-  if (GetArenaNoVirtual() == NULL && import_ != NULL) {
-    delete import_;
+void LinkFacebookRequest::clear_sync() {
+  if (GetArenaNoVirtual() == NULL && sync_ != NULL) {
+    delete sync_;
   }
-  import_ = NULL;
+  sync_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int LinkFacebookRequest::kAccountFieldNumber;
-const int LinkFacebookRequest::kImportFieldNumber;
+const int LinkFacebookRequest::kSyncFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 LinkFacebookRequest::LinkFacebookRequest()
@@ -17013,18 +17013,18 @@ LinkFacebookRequest::LinkFacebookRequest(const LinkFacebookRequest& from)
   } else {
     account_ = NULL;
   }
-  if (from.has_import()) {
-    import_ = new ::google::protobuf::BoolValue(*from.import_);
+  if (from.has_sync()) {
+    sync_ = new ::google::protobuf::BoolValue(*from.sync_);
   } else {
-    import_ = NULL;
+    sync_ = NULL;
   }
   // @@protoc_insertion_point(copy_constructor:nakama.api.LinkFacebookRequest)
 }
 
 void LinkFacebookRequest::SharedCtor() {
   ::memset(&account_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&import_) -
-      reinterpret_cast<char*>(&account_)) + sizeof(import_));
+      reinterpret_cast<char*>(&sync_) -
+      reinterpret_cast<char*>(&account_)) + sizeof(sync_));
 }
 
 LinkFacebookRequest::~LinkFacebookRequest() {
@@ -17034,7 +17034,7 @@ LinkFacebookRequest::~LinkFacebookRequest() {
 
 void LinkFacebookRequest::SharedDtor() {
   if (this != internal_default_instance()) delete account_;
-  if (this != internal_default_instance()) delete import_;
+  if (this != internal_default_instance()) delete sync_;
 }
 
 void LinkFacebookRequest::SetCachedSize(int size) const {
@@ -17061,10 +17061,10 @@ void LinkFacebookRequest::Clear() {
     delete account_;
   }
   account_ = NULL;
-  if (GetArenaNoVirtual() == NULL && import_ != NULL) {
-    delete import_;
+  if (GetArenaNoVirtual() == NULL && sync_ != NULL) {
+    delete sync_;
   }
-  import_ = NULL;
+  sync_ = NULL;
   _internal_metadata_.Clear();
 }
 
@@ -17090,12 +17090,12 @@ bool LinkFacebookRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // .google.protobuf.BoolValue import = 4;
+      // .google.protobuf.BoolValue sync = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_import()));
+               input, mutable_sync()));
         } else {
           goto handle_unusual;
         }
@@ -17134,10 +17134,10 @@ void LinkFacebookRequest::SerializeWithCachedSizes(
       1, this->_internal_account(), output);
   }
 
-  // .google.protobuf.BoolValue import = 4;
-  if (this->has_import()) {
+  // .google.protobuf.BoolValue sync = 4;
+  if (this->has_sync()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->_internal_import(), output);
+      4, this->_internal_sync(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -17161,11 +17161,11 @@ void LinkFacebookRequest::SerializeWithCachedSizes(
         1, this->_internal_account(), deterministic, target);
   }
 
-  // .google.protobuf.BoolValue import = 4;
-  if (this->has_import()) {
+  // .google.protobuf.BoolValue sync = 4;
+  if (this->has_sync()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, this->_internal_import(), deterministic, target);
+        4, this->_internal_sync(), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -17192,11 +17192,11 @@ size_t LinkFacebookRequest::ByteSizeLong() const {
         *account_);
   }
 
-  // .google.protobuf.BoolValue import = 4;
-  if (this->has_import()) {
+  // .google.protobuf.BoolValue sync = 4;
+  if (this->has_sync()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *import_);
+        *sync_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -17229,8 +17229,8 @@ void LinkFacebookRequest::MergeFrom(const LinkFacebookRequest& from) {
   if (from.has_account()) {
     mutable_account()->::nakama::api::AccountFacebook::MergeFrom(from.account());
   }
-  if (from.has_import()) {
-    mutable_import()->::google::protobuf::BoolValue::MergeFrom(from.import());
+  if (from.has_sync()) {
+    mutable_sync()->::google::protobuf::BoolValue::MergeFrom(from.sync());
   }
 }
 
@@ -17259,7 +17259,7 @@ void LinkFacebookRequest::Swap(LinkFacebookRequest* other) {
 void LinkFacebookRequest::InternalSwap(LinkFacebookRequest* other) {
   using std::swap;
   swap(account_, other->account_);
-  swap(import_, other->import_);
+  swap(sync_, other->sync_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
