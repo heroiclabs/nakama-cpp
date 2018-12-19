@@ -7,4 +7,4 @@ set(INSTALL_LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
 
 add_subdirectory(src)
 add_subdirectory(third_party/grpc)
-add_subdirectory(test)
+#add_subdirectory(test)
