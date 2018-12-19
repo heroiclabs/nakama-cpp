@@ -2,14 +2,14 @@
 
 set NAKAMA=C:\dev\sandbox\my\nakama\nakama-master
 set GRPC_GATEWAY=C:\dev\sandbox\my\libs\grpc-gateway-1.6.2
-set NAKAMA_CPP=..
+set NAKAMA_CPP=%CD%\..
 
 set GRPC=%NAKAMA_CPP%\third_party\grpc
 set GOOGLEAPIS=%GRPC_GATEWAY%\third_party\googleapis
 set GRPC_CPP_PLUGIN=%NAKAMA_CPP%\build\third_party\grpc\Debug\grpc_cpp_plugin.exe
 set PROTOC=%NAKAMA_CPP%\build\third_party\grpc\third_party\protobuf\Debug\protoc.exe
 set PROTOBUF_SRC=%GRPC%\third_party\protobuf\src
-set OUT=.\cppout
+set OUT=%CD%\cppout
 
 if not exist %NAKAMA% (
     echo ERROR: not exist %NAKAMA%
@@ -46,7 +46,11 @@ if not exist %PROTOBUF_SRC% (
     goto error
 )
 
+set CUR_DIR=%CD%
+
 if not exist %OUT% mkdir %OUT%
+if not exist %OUT%\google\api mkdir %OUT%\google\api
+if not exist %OUT%\google\rpc mkdir %OUT%\google\rpc
 
 if not exist github.com (
     mkdir github.com\heroiclabs\nakama\api
@@ -68,17 +72,20 @@ if %errorlevel% neq 0 goto error
 %PROTOC% -I. -I%GRPC_GATEWAY% -I%GOOGLEAPIS% -I%PROTOBUF_SRC% --cpp_out=%OUT% github.com\heroiclabs\nakama\api\api.proto
 if %errorlevel% neq 0 goto error
 
-%PROTOC% -I. -I%GRPC_GATEWAY% -I%GOOGLEAPIS% -I%PROTOBUF_SRC% --cpp_out=%OUT% %GOOGLEAPIS%\google\rpc\status.proto
+cd %GOOGLEAPIS%\google\rpc
+
+%PROTOC% -I. -I%GRPC_GATEWAY% -I%GOOGLEAPIS% -I%PROTOBUF_SRC% --cpp_out=%OUT%\google\rpc status.proto
 if %errorlevel% neq 0 goto error
 
-%PROTOC% -I. -I%GRPC_GATEWAY% -I%GOOGLEAPIS% -I%PROTOBUF_SRC% --cpp_out=%OUT% %GOOGLEAPIS%\google\api\annotations.proto
+cd %GOOGLEAPIS%\google\api
+
+%PROTOC% -I. -I%GRPC_GATEWAY% -I%GOOGLEAPIS% -I%PROTOBUF_SRC% --cpp_out=%OUT%\google\api annotations.proto
 if %errorlevel% neq 0 goto error
 
-%PROTOC% -I. -I%GRPC_GATEWAY% -I%GOOGLEAPIS% -I%PROTOBUF_SRC% --cpp_out=%OUT% %GOOGLEAPIS%\google\api\http.proto
+%PROTOC% -I. -I%GRPC_GATEWAY% -I%GOOGLEAPIS% -I%PROTOBUF_SRC% --cpp_out=%OUT%\google\api http.proto
 if %errorlevel% neq 0 goto error
 
-%PROTOC% -I. -I%GRPC_GATEWAY% -I%GOOGLEAPIS% -I%PROTOBUF_SRC% --cpp_out=%OUT% %GOOGLEAPIS%\google\rpc\status.proto
-if %errorlevel% neq 0 goto error
+cd %CUR_DIR%
 
 %PROTOC% -I. -I%GRPC_GATEWAY% -I%GOOGLEAPIS% -I%PROTOBUF_SRC% --cpp_out=%OUT% %GRPC_GATEWAY%\protoc-gen-swagger\options\annotations.proto
 if %errorlevel% neq 0 goto error
@@ -98,3 +105,4 @@ goto quit
 echo Stopped because of error
 
 :quit
+cd %CUR_DIR%
