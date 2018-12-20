@@ -24,13 +24,16 @@ set(SOURCE_FILES
     api/google/rpc/status.pb.cc
     api/google/rpc/status.pb.h
     nakama.cpp
+    strutil.cpp
+    ${PUBLIC_INCLUDE_DIR}/nakama-cpp/strutil.h
+    ${PUBLIC_INCLUDE_DIR}/nakama-cpp/nakama.h
 )
 
 include_directories(
     api
     ../third_party/grpc/include
     ../third_party/grpc/third_party/protobuf/src
-    ../include
+    ${PUBLIC_INCLUDE_DIR}
 )
 
 add_library(nakama-cpp SHARED STATIC ${SOURCE_FILES})

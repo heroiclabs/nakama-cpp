@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(INSTALL_LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
+set(PUBLIC_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 
 add_subdirectory(src)
 add_subdirectory(third_party/grpc)

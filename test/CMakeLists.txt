@@ -9,7 +9,7 @@ set(SOURCE_FILES
 )
 
 include_directories(
-    ../include
+    ${PUBLIC_INCLUDE_DIR}
 )
 
 add_executable(nakama-test ${SOURCE_FILES})
