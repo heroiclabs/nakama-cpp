@@ -12,4 +12,10 @@ IF (WIN32)
 
     get_WIN32_WINNT(ver)
     add_definitions(-D_WIN32_WINNT=${ver})
+    
+    if(MSVC)
+        set(CMAKE_DEBUG_POSTFIX "d")
+        add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
+        add_definitions(-D_CRT_NONSTDC_NO_DEPRECATE)
+    endif()
 ENDIF()
