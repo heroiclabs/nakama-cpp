@@ -1,6 +1,6 @@
 @echo off
 
-set NAKAMA=C:\dev\sandbox\my\nakama\nakama-master
+set NAKAMA=C:\dev\sandbox\my\nakama\nakama-2.3.0
 set GRPC_GATEWAY=C:\dev\sandbox\my\libs\grpc-gateway-1.6.2
 set NAKAMA_CPP=%CD%\..
 
