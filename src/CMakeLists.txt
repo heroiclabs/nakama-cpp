@@ -25,8 +25,12 @@ set(SOURCE_FILES
     api/google/rpc/status.pb.h
     nakama.cpp
     strutil.cpp
+    default_client.cpp
+    default_client.h
     ${PUBLIC_INCLUDE_DIR}/nakama-cpp/strutil.h
     ${PUBLIC_INCLUDE_DIR}/nakama-cpp/nakama.h
+    ${PUBLIC_INCLUDE_DIR}/nakama-cpp/client_interface.h
+    ${PUBLIC_INCLUDE_DIR}/nakama-cpp/default_client.h
 )
 
 include_directories(
@@ -37,6 +41,7 @@ include_directories(
 )
 
 add_library(nakama-cpp SHARED STATIC ${SOURCE_FILES})
+target_compile_features(nakama-cpp PRIVATE cxx_std_11)
 target_link_libraries(nakama-cpp PRIVATE grpc++ libprotobuf)
 
 install(TARGETS nakama-cpp DESTINATION ${INSTALL_LIB_DIR})
