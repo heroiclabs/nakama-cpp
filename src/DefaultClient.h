@@ -62,6 +62,15 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void authenticateFacebook(
+            const std::string& accessToken,
+            const std::string& username,
+            bool create,
+            bool importFriends,
+            std::function<void(NSessionPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
         void getAccount(
             NSessionPtr session,
             std::function<void(const NAccount&)> successCallback = nullptr,
