@@ -111,6 +111,31 @@ namespace Nakama {
         ) = 0;
 
         /**
+         * Authenticate a user with Apple Game Center.
+         *
+         * @param playerId The player id of the user in Game Center.
+         * @param bundleId The bundle id of the Game Center application.
+         * @param timestampSeconds The date and time that the signature was created.
+         * @param salt A random <c>NSString</c> used to compute the hash and keep it randomized.
+         * @param signature The verification signature data generated.
+         * @param publicKeyUrl The URL for the public encryption key.
+         * @param create True if the user should be created when authenticated.
+         * @param username A username used to create the user.
+         */
+        virtual void authenticateGameCenter(
+            const std::string& playerId,
+            const std::string& bundleId,
+            uint64_t timestampSeconds,
+            const std::string& salt,
+            const std::string& signature,
+            const std::string& publicKeyUrl,
+            const std::string& username = std::string(),
+            bool create = false,
+            std::function<void(NSessionPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
          * Authenticate a user with a custom id.
          *
          * @param id A custom identifier usually obtained from an external authentication service.
@@ -119,6 +144,21 @@ namespace Nakama {
          */
         virtual void authenticateCustom(
             const std::string& id,
+            const std::string& username = std::string(),
+            bool create = false,
+            std::function<void(NSessionPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Authenticate a user with a Steam auth token.
+         *
+         * @param token An authentication token from the Steam network.
+         * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
+         */
+        virtual void authenticateSteam(
+            const std::string& token,
             const std::string& username = std::string(),
             bool create = false,
             std::function<void(NSessionPtr)> successCallback = nullptr,

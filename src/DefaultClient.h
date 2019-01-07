@@ -79,8 +79,29 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void authenticateGameCenter(
+            const std::string& playerId,
+            const std::string& bundleId,
+            uint64_t timestampSeconds,
+            const std::string& salt,
+            const std::string& signature,
+            const std::string& publicKeyUrl,
+            const std::string& username,
+            bool create,
+            std::function<void(NSessionPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
         void authenticateCustom(
             const std::string& id,
+            const std::string& username,
+            bool create,
+            std::function<void(NSessionPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void authenticateSteam(
+            const std::string& token,
             const std::string& username,
             bool create,
             std::function<void(NSessionPtr)> successCallback,
