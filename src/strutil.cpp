@@ -1,7 +1,7 @@
-#include "nakama-cpp/strutil.h"
+#include "nakama-cpp/StrUtil.h"
 #include <google/protobuf/stubs/strutil.h>
 
-namespace nakama {
+namespace Nakama {
 
 std::string base64_encode(const Base64Buffer& buffer)
 {

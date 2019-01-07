@@ -16,9 +16,9 @@
 
 #pragma once
 
-#include "nakama-cpp/client_interface.h"
+#include "nakama-cpp/ClientInterface.h"
 
-namespace nakama {
+namespace Nakama {
 
     /**
      * @param serverKey The key used to authenticate with the server without a session. Defaults to "defaultkey".
@@ -35,6 +35,6 @@ namespace nakama {
     /**
      * Creates a default client to interact with Nakama server.
      */
-    ClientInterface* createDefaultClient(const DefaultClientParameters& parameters);
+    ClientPtr createDefaultClient(const DefaultClientParameters& parameters);
 
 }

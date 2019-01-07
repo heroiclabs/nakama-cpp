@@ -16,14 +16,24 @@
 
 #pragma once
 
-#include "nakama-cpp/client_interface.h"
+#include "nakama-cpp/ClientInterface.h"
+#include "nakama-cpp/DefaultClient.h"
 #include "api/github.com/heroiclabs/nakama/apigrpc/apigrpc.grpc.pb.h"
+#include <set>
 
-namespace nakama {
+namespace Nakama {
+
+    struct RpcRequest
+    {
+        grpc::ClientContext context;
+        grpc::Status status;
+        std::function<void()> successCallback;
+        ErrorCallback errorCallback;
+    };
 
     /**
      * A client to interact with Nakama server.
-     * private class
+     * Don't use it directly, use `createDefaultClient` instead.
      */
     class DefaultClient : public ClientInterface
     {
@@ -31,14 +41,32 @@ namespace nakama {
         DefaultClient(const DefaultClientParameters& parameters);
         ~DefaultClient();
 
+        void disconnect() override;
+
+        void tick() override;
+
         void authenticateDevice(
             const std::string& id,
-            const std::string& username = std::string(),
-            bool create = false
+            const std::string& username,
+            bool create,
+            std::function<void(const NSession&)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void getAccount(
+            const NSession& session,
+            std::function<void(const NAccount&)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
         ) override;
 
     private:
+        RpcRequest* createRpcRequest(const NSession* session);
+        void onResponse(void* tag, bool ok);
+
+    private:
         std::unique_ptr< nakama::api::Nakama::Stub> _stub;
+        grpc::CompletionQueue _cq;
         std::string _basicAuthMetadata;
+        std::set<RpcRequest*> _requests;
     };
 }

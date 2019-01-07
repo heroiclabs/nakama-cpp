@@ -17,8 +17,15 @@
 #pragma once
 
 #include <string>
+#include <functional>
+#include <memory>
+#include "nakama-cpp/NSession.h"
+#include "nakama-cpp/NError.h"
+#include "nakama-cpp/NAccount.h"
 
-namespace nakama {
+namespace Nakama {
+
+    typedef std::function<void(const NError&)> ErrorCallback;
 
     /**
      * A client interface to interact with Nakama server.
@@ -29,7 +36,19 @@ namespace nakama {
         virtual ~ClientInterface() {}
 
         /**
+         * Disconnects the client. This function kills all outgoing exchanges immediately without waiting.
+         */
+        virtual void disconnect() = 0;
+
+        /**
+         * Pumps requests queue in your thread.
+         * Call it periodically, each 50 ms is ok.
+         */
+        virtual void tick() = 0;
+
+        /**
          * Authenticate a user with a device id.
+         *
          * @param id A device identifier usually obtained from a platform API.
          * @param username A username used to create the user. Defaults to empty string.
          * @param create True if the user should be created when authenticated. Defaults to false.
@@ -37,8 +56,22 @@ namespace nakama {
         virtual void authenticateDevice(
             const std::string& id,
             const std::string& username = std::string(),
-            bool create = false
+            bool create = false,
+            std::function<void (const NSession&)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
         ) = 0;
 
+        /**
+         * Fetch the user account owned by the session.
+         *
+         * @param session The session of the user.
+         */
+        virtual void getAccount(
+            const NSession& session,
+            std::function<void(const NAccount&)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
     };
+
+    using ClientPtr = std::shared_ptr<ClientInterface>;
 }

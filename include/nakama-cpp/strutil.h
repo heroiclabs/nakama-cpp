@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace nakama {
+namespace Nakama {
 
     typedef std::string Base64Buffer;
 

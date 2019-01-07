@@ -1,7 +1,3 @@
 #pragma once
 
-namespace nakama {
-
-    void do_test();
-
-}
+#include "nakama-cpp/DefaultClient.h"
