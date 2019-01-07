@@ -19,9 +19,9 @@
 #include <string>
 #include <functional>
 #include <memory>
-#include "nakama-cpp/NSession.h"
+#include "nakama-cpp/NSessionInterface.h"
 #include "nakama-cpp/NError.h"
-#include "nakama-cpp/NAccount.h"
+#include "nakama-cpp/data/NAccount.h"
 
 namespace Nakama {
 
@@ -57,7 +57,7 @@ namespace Nakama {
             const std::string& id,
             const std::string& username = std::string(),
             bool create = false,
-            std::function<void (const NSession&)> successCallback = nullptr,
+            std::function<void (NSessionPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
 
@@ -67,7 +67,7 @@ namespace Nakama {
          * @param session The session of the user.
          */
         virtual void getAccount(
-            const NSession& session,
+            NSessionPtr session,
             std::function<void(const NAccount&)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;

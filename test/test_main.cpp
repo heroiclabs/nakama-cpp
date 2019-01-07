@@ -22,9 +22,9 @@ void test_authenticateDevice()
     ClientPtr client = createDefaultClient(parameters);
     bool continue_loop = true;
 
-    auto successCallback = [&continue_loop](const NSession& session)
+    auto successCallback = [&continue_loop](NSessionPtr session)
     {
-        std::cout << "session token: " << session.token << std::endl;
+        std::cout << "session token: " << session->getAuthToken() << std::endl;
         continue_loop = false;
     };
 
@@ -57,9 +57,9 @@ void test_authenticateDevice2()
     ClientPtr client = createDefaultClient(parameters);
     bool continue_loop = true;
 
-    auto successCallback = [&continue_loop](const NSession& session)
+    auto successCallback = [&continue_loop](NSessionPtr session)
     {
-        std::cout << "session token: " << session.token << std::endl;
+        std::cout << "session token: " << session->getAuthToken() << std::endl;
         continue_loop = false;
     };
 
@@ -92,9 +92,9 @@ void test_connectError()
     ClientPtr client = createDefaultClient(parameters);
     bool continue_loop = true;
 
-    auto successCallback = [&continue_loop](const NSession& session)
+    auto successCallback = [&continue_loop](NSessionPtr session)
     {
-        std::cout << "session token: " << session.token << std::endl;
+        std::cout << "session token: " << session->getAuthToken() << std::endl;
         continue_loop = false;
     };
 
@@ -125,9 +125,9 @@ void test_disconnect()
     ClientPtr client = createDefaultClient(parameters);
     bool continue_loop = true;
 
-    auto successCallback = [&continue_loop](const NSession& session)
+    auto successCallback = [&continue_loop](NSessionPtr session)
     {
-        std::cout << "session token: " << session.token << std::endl;
+        std::cout << "session token: " << session->getAuthToken() << std::endl;
         continue_loop = false;
     };
 

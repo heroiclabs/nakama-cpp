@@ -16,8 +16,10 @@
 
 #pragma once
 
-#include "nakama-cpp/NUser.h"
+#include "nakama-cpp/data/NUser.h"
+#include "nakama-cpp/data/NAccountDevice.h"
 #include <memory>
+#include <vector>
 
 namespace Nakama {
 
@@ -25,7 +27,7 @@ namespace Nakama {
         NUser user;                                // The user object.
         std::string wallet;                        // The user's wallet data.
         std::string email;                         // The email address of the user.
-        //std::vector<AccountDevice> devices;        // The devices which belong to the user's account.
+        std::vector<NAccountDevice> devices;       // The devices which belong to the user's account.
         std::string custom_id;                     // The custom id in the user's account.
         uint64_t verify_time = 0;                  // The UNIX time when the user's email was verified.
     };

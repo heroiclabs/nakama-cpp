@@ -15,7 +15,7 @@ void test_getAccount()
 
     ClientPtr client = createDefaultClient(parameters);
     bool continue_loop = true;
-    NSession my_session;
+    NSessionPtr my_session;
 
     auto errorCallback = [&continue_loop](const NError& error)
     {
@@ -23,10 +23,10 @@ void test_getAccount()
         continue_loop = false;
     };
 
-    auto successCallback = [client, &continue_loop, &my_session, errorCallback](const NSession& session)
+    auto successCallback = [client, &continue_loop, &my_session, errorCallback](NSessionPtr session)
     {
         my_session = session;
-        std::cout << "session token: " << session.token << std::endl;
+        std::cout << "session token: " << session->getAuthToken() << std::endl;
 
         auto successCallback = [&continue_loop](const NAccount& account)
         {

@@ -16,6 +16,8 @@
 
 #pragma once
 
+#include <string>
+
 namespace Nakama {
 
     struct NAKAMA_API NUser

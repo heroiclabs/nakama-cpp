@@ -49,18 +49,18 @@ namespace Nakama {
             const std::string& id,
             const std::string& username,
             bool create,
-            std::function<void(const NSession&)> successCallback,
+            std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
 
         void getAccount(
-            const NSession& session,
+            NSessionPtr session,
             std::function<void(const NAccount&)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) override;
 
     private:
-        RpcRequest* createRpcRequest(const NSession* session);
+        RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);
 
     private:

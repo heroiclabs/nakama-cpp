@@ -16,6 +16,8 @@
 
 #include "DefaultClient.h"
 #include "nakama-cpp/StrUtil.h"
+#include "DefaultSession.h"
+#include "DataHelper.h"
 #include <grpc++/create_channel.h>
 #include <sstream>
 
@@ -81,13 +83,13 @@ void DefaultClient::tick()
     } while (continueLoop);
 }
 
-RpcRequest * DefaultClient::createRpcRequest(const NSession* session)
+RpcRequest * DefaultClient::createRpcRequest(NSessionPtr session)
 {
     RpcRequest* rpcRequest = new RpcRequest();
 
     if (session)
     {
-        rpcRequest->context.AddMetadata("authorization", "Bearer " + session->token);
+        rpcRequest->context.AddMetadata("authorization", "Bearer " + session->getAuthToken());
     }
     else
     {
@@ -151,7 +153,7 @@ void DefaultClient::authenticateDevice(
     const std::string& id,
     const std::string& username,
     bool create,
-    std::function<void(const NSession&)> successCallback,
+    std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
 {
@@ -162,9 +164,7 @@ void DefaultClient::authenticateDevice(
     {
         rpcRequest->successCallback = [sessionData, successCallback]()
         {
-            NSession session;
-            session.created = sessionData->created();
-            session.token = sessionData->token();
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
             successCallback(session);
         };
     }
@@ -185,12 +185,12 @@ void DefaultClient::authenticateDevice(
 }
 
 void DefaultClient::getAccount(
-    const NSession& session,
+    NSessionPtr session,
     std::function<void(const NAccount&)> successCallback,
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(&session);
+    RpcRequest* rpcRequest = createRpcRequest(session);
     auto accoutData(make_shared<nakama::api::Account>());
 
     if (successCallback)
@@ -198,14 +198,7 @@ void DefaultClient::getAccount(
         rpcRequest->successCallback = [accoutData, successCallback]()
         {
             NAccount account;
-
-            account.user.id = accoutData->user().id();
-            account.custom_id = accoutData->custom_id();
-            account.email = accoutData->email();
-            //account.user = accoutData->user();
-            account.verify_time = accoutData->verify_time().seconds() * 1000;
-            account.wallet = accoutData->wallet();
-            
+            assign(account, *accoutData);
             successCallback(account);
         };
     }
