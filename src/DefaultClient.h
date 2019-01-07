@@ -114,6 +114,56 @@ namespace Nakama {
             ErrorCallback errorCallback = nullptr
         ) override;
 
+        void addFriends(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void deleteFriends(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void blockFriends(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void createGroup(
+            NSessionPtr session,
+            const std::string& name,
+            const std::string& description,
+            const std::string& avatarUrl,
+            const std::string& langTag,
+            bool open,
+            std::function<void(const NGroup&)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void deleteGroup(
+            NSessionPtr session,
+            const std::string& groupId,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void addGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);

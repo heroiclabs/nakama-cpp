@@ -25,6 +25,11 @@ void assign(uint64_t& time, const google::protobuf::Timestamp& data)
     time = data.seconds() * 1000;
 }
 
+void assign(bool & b, const::google::protobuf::BoolValue & data)
+{
+    b = data.value();
+}
+
 void assign(NAccount& account, const nakama::api::Account& data)
 {
     assign(account.user.id, data.user().id());
@@ -59,6 +64,22 @@ void assign(NUser& user, const nakama::api::User& data)
 void assign(NAccountDevice & device, const nakama::api::AccountDevice & data)
 {
     assign(device.id, data.id());
+}
+
+void assign(NGroup& group, const nakama::api::Group& data)
+{
+    assign(group.id, data.id());
+    assign(group.creator_id, data.creator_id());
+    assign(group.name, data.name());
+    assign(group.description, data.description());
+    assign(group.lang, data.lang_tag());
+    assign(group.metadata, data.metadata());
+    assign(group.avatar_url, data.avatar_url());
+    assign(group.open, data.open());
+    assign(group.edge_count, data.edge_count());
+    assign(group.max_count, data.max_count());
+    assign(group.create_time, data.create_time());
+    assign(group.update_time, data.update_time());
 }
 
 }

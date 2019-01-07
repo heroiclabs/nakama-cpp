@@ -435,4 +435,186 @@ void DefaultClient::getAccount(
     responseReader->Finish(&(*accoutData), &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::addFriends(
+    NSessionPtr session,
+    const std::vector<std::string>& ids,
+    const std::vector<std::string>& usernames,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback
+)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AddFriendsRequest req;
+
+    for (auto& id : ids)
+    {
+        req.mutable_ids()->Add()->assign(id);
+    }
+
+    for (auto& username : usernames)
+    {
+        req.mutable_usernames()->Add()->assign(username);
+    }
+
+    auto responseReader = _stub->AsyncAddFriends(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::deleteFriends(
+    NSessionPtr session,
+    const std::vector<std::string>& ids,
+    const std::vector<std::string>& usernames,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback
+)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::DeleteFriendsRequest req;
+
+    for (auto& id : ids)
+    {
+        req.mutable_ids()->Add()->assign(id);
+    }
+
+    for (auto& username : usernames)
+    {
+        req.mutable_usernames()->Add()->assign(username);
+    }
+
+    auto responseReader = _stub->AsyncDeleteFriends(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::blockFriends(
+    NSessionPtr session,
+    const std::vector<std::string>& ids,
+    const std::vector<std::string>& usernames,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::BlockFriendsRequest req;
+
+    for (auto& id : ids)
+    {
+        req.mutable_ids()->Add()->assign(id);
+    }
+
+    for (auto& username : usernames)
+    {
+        req.mutable_usernames()->Add()->assign(username);
+    }
+
+    auto responseReader = _stub->AsyncBlockFriends(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::createGroup(
+    NSessionPtr session,
+    const std::string & name,
+    const std::string & description,
+    const std::string & avatarUrl,
+    const std::string & langTag,
+    bool open,
+    std::function<void(const NGroup&)> successCallback,
+    ErrorCallback errorCallback
+)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto groupData(make_shared<nakama::api::Group>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [groupData, successCallback]()
+        {
+            NGroup group;
+            assign(group, *groupData);
+            successCallback(group);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::CreateGroupRequest req;
+
+    req.set_name(name);
+
+    if (!description.empty())
+        req.set_description(description);
+
+    if (!avatarUrl.empty())
+        req.set_avatar_url(avatarUrl);
+
+    if (!langTag.empty())
+        req.set_lang_tag(langTag);
+
+    req.set_open(open);
+
+    auto responseReader = _stub->AsyncCreateGroup(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*groupData), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::deleteGroup(
+    NSessionPtr session,
+    const std::string & groupId,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback
+)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::DeleteGroupRequest req;
+
+    req.set_group_id(groupId);
+
+    auto responseReader = _stub->AsyncDeleteGroup(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::addGroupUsers(
+    NSessionPtr session,
+    const std::string & groupId,
+    const std::vector<std::string>& ids,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback
+)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AddGroupUsersRequest req;
+
+    req.set_group_id(groupId);
+
+    for (auto& id : ids)
+    {
+        req.add_user_ids(id);
+    }
+
+    auto responseReader = _stub->AsyncAddGroupUsers(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
 }

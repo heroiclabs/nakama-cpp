@@ -19,9 +19,11 @@
 #include <string>
 #include <functional>
 #include <memory>
+#include <vector>
 #include "nakama-cpp/NSessionInterface.h"
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
+#include "nakama-cpp/data/NGroup.h"
 
 namespace Nakama {
 
@@ -173,6 +175,100 @@ namespace Nakama {
         virtual void getAccount(
             NSessionPtr session,
             std::function<void(const NAccount&)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Add one or more friends by id.
+         *
+         * @param session The session of the user.
+         * @param ids The ids of the users to add or invite as friends.
+         * @param usernames The usernames of the users to add as friends.
+         */
+        virtual void addFriends(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames = {},
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Delete one more or users by id or username from friends.
+         *
+         * @param session The session of the user.
+         * @param ids the user ids to remove as friends.
+         * @param usernames The usernames to remove as friends.
+         */
+        virtual void deleteFriends(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames = {},
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Block one or more friends by id.
+         *
+         * @param session The session of the user.
+         * @param ids The ids of the users to block.
+         * @param usernames The usernames of the users to block.
+         */
+        virtual void blockFriends(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames = {},
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Create a group.
+         *
+         * @param session The session of the user.
+         * @param name The name for the group.
+         * @param description A description for the group.
+         * @param avatarUrl An avatar url for the group.
+         * @param langTag A language tag in BCP-47 format for the group.
+         * @param open True if the group should have open membership.
+         */
+        virtual void createGroup(
+            NSessionPtr session,
+            const std::string& name,
+            const std::string& description = "",
+            const std::string& avatarUrl = "",
+            const std::string& langTag = "",
+            bool open = false,
+            std::function<void(const NGroup&)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Delete a group by id.
+         *
+         * @param session The session of the user.
+         * @param groupId The group id to to remove.
+         */
+        virtual void deleteGroup(
+            NSessionPtr session,
+            const std::string& groupId,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Add one or more users to the group.
+         *
+         * @param session The session of the user.
+         * @param groupId The id of the group to add users into.
+         * @param ids The ids of the users to add or invite to the group.
+         */
+        virtual void addGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids,
+            std::function<void()> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
     };
