@@ -96,6 +96,21 @@ namespace Nakama {
         ) = 0;
 
         /**
+        * Authenticate a user with a Google auth token.
+        *
+        * @param accessToken An OAuth access token from the Google SDK.
+        * @param username A username used to create the user.
+        * @param create True if the user should be created when authenticated.
+        */
+        virtual void authenticateGoogle(
+            const std::string& accessToken,
+            const std::string& username = std::string(),
+            bool create = false,
+            std::function<void(NSessionPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
          * Fetch the user account owned by the session.
          *
          * @param session The session of the user.

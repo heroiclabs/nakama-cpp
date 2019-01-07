@@ -260,6 +260,41 @@ void DefaultClient::authenticateFacebook(
     responseReader->Finish(&(*sessionData), &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::authenticateGoogle(
+    const std::string & accessToken,
+    const std::string & username,
+    bool create,
+    std::function<void(NSessionPtr)> successCallback,
+    ErrorCallback errorCallback
+)
+{
+    RpcRequest* rpcRequest = createRpcRequest(nullptr);
+    auto sessionData(make_shared<nakama::api::Session>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [sessionData, successCallback]()
+        {
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
+            successCallback(session);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AuthenticateGoogleRequest req;
+
+    req.mutable_account()->set_token(accessToken);
+
+    if (!username.empty())
+        req.set_username(username);
+
+    req.mutable_create()->set_value(create);
+
+    auto responseReader = _stub->AsyncAuthenticateGoogle(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*sessionData), &rpcRequest->status, (void*)rpcRequest);
+}
+
 void DefaultClient::getAccount(
     NSessionPtr session,
     std::function<void(const NAccount&)> successCallback,
