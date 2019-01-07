@@ -79,6 +79,14 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void authenticateCustom(
+            const std::string& id,
+            const std::string& username,
+            bool create,
+            std::function<void(NSessionPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
         void getAccount(
             NSessionPtr session,
             std::function<void(const NAccount&)> successCallback = nullptr,

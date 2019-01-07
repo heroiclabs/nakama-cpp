@@ -111,6 +111,21 @@ namespace Nakama {
         ) = 0;
 
         /**
+         * Authenticate a user with a custom id.
+         *
+         * @param id A custom identifier usually obtained from an external authentication service.
+         * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
+         */
+        virtual void authenticateCustom(
+            const std::string& id,
+            const std::string& username = std::string(),
+            bool create = false,
+            std::function<void(NSessionPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
          * Fetch the user account owned by the session.
          *
          * @param session The session of the user.
