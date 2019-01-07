@@ -62,6 +62,23 @@ namespace Nakama {
         ) = 0;
 
         /**
+        * Authenticate a user with an email and password.
+        *
+        * @param email The email address of the user.
+        * @param password The password for the user.
+        * @param username A username used to create the user.
+        * @param create True if the user should be created when authenticated.
+        */
+        virtual void authenticateEmail(
+            const std::string& email,
+            const std::string& password,
+            const std::string& username = std::string(),
+            bool create = false,
+            std::function<void(NSessionPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
          * Fetch the user account owned by the session.
          *
          * @param session The session of the user.
