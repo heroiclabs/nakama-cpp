@@ -24,6 +24,10 @@
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
 #include "nakama-cpp/data/NGroup.h"
+#include "nakama-cpp/data/NGroupList.h"
+#include "nakama-cpp/data/NGroupUserList.h"
+#include "nakama-cpp/data/NUsers.h"
+#include "nakama-cpp/data/NFriends.h"
 
 namespace Nakama {
 
@@ -179,6 +183,23 @@ namespace Nakama {
         ) = 0;
 
         /**
+        * Fetch one or more users by id, usernames, and Facebook ids.
+        *
+        * @param session The session of the user.
+        * @param ids List of user IDs.
+        * @param usernames List of usernames.
+        * @param facebookIds List of Facebook IDs.
+        */
+        virtual void getUsers(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames = {},
+            const std::vector<std::string>& facebookIds = {},
+            std::function<void(const NUsers&)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
          * Add one or more friends by id.
          *
          * @param session The session of the user.
@@ -220,6 +241,17 @@ namespace Nakama {
             const std::vector<std::string>& ids,
             const std::vector<std::string>& usernames = {},
             std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * List of friends of the current user.
+        *
+        * @param session The session of the user.
+        */
+        virtual void listFriends(
+            NSessionPtr session,
+            std::function<void(NFriendsPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
 
@@ -269,6 +301,77 @@ namespace Nakama {
             const std::string& groupId,
             const std::vector<std::string>& ids,
             std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * List all users part of the group.
+        *
+        * @param session The session of the user.
+        * @param groupId The id of the group.
+        */
+        virtual void listGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            std::function<void(NGroupUserListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * Kick one or more users from the group.
+        *
+        * @param session The session of the user.
+        * @param groupId The id of the group.
+        * @param ids The ids of the users to kick.
+        */
+        virtual void kickGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * Join a group if it has open membership or request to join it.
+        *
+        * @param session The session of the user.
+        * @param groupId The id of the group to join.
+        */
+        virtual void joinGroup(
+            NSessionPtr session,
+            const std::string& groupId,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * Leave a group by id.
+        *
+        * @param session The session of the user.
+        * @param groupId The id of the group to leave.
+        */
+        virtual void leaveGroup(
+            NSessionPtr session,
+            const std::string& groupId,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * List groups on the server.
+        *
+        * @param session The session of the user.
+        * @param name The name filter to apply to the group list.
+        * @param limit The number of groups to list.
+        * @param cursor A cursor for the current position in the groups to list.
+        */
+        virtual void listGroups(
+            NSessionPtr session,
+            const std::string& name,
+            int limit = 0,
+            const std::string& cursor = "",
+            std::function<void(NGroupListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
     };

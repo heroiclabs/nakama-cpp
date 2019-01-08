@@ -82,4 +82,37 @@ void assign(NGroup& group, const nakama::api::Group& data)
     assign(group.update_time, data.update_time());
 }
 
+void assign(NGroupList & groups, const nakama::api::GroupList & data)
+{
+    assign(groups.groups, data.groups());
+    assign(groups.cursor, data.cursor());
+}
+
+void assign(NGroupUserList & users, const nakama::api::GroupUserList & data)
+{
+    assign(users.group_users, data.group_users());
+}
+
+void assign(NGroupUser & user, const nakama::api::GroupUserList_GroupUser & data)
+{
+    assign(user.user, data.user());
+    user.state = static_cast<NGroupUser::State>(data.state().value());
+}
+
+void assign(NUsers & users, const nakama::api::Users & data)
+{
+    assign(users.users, data.users());
+}
+
+void assign(NFriend & afriend, const nakama::api::Friend & data)
+{
+    assign(afriend.user, data.user());
+    afriend.state = static_cast<NFriend::State>(data.state().value());
+}
+
+void assign(NFriends & friends, const nakama::api::Friends & data)
+{
+    assign(friends.friends, data.friends());
+}
+
 }

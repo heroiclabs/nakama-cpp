@@ -114,6 +114,15 @@ namespace Nakama {
             ErrorCallback errorCallback = nullptr
         ) override;
 
+        void getUsers(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames,
+            const std::vector<std::string>& facebookIds,
+            std::function<void(const NUsers&)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
         void addFriends(
             NSessionPtr session,
             const std::vector<std::string>& ids,
@@ -135,6 +144,12 @@ namespace Nakama {
             const std::vector<std::string>& ids,
             const std::vector<std::string>& usernames,
             std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void listFriends(
+            NSessionPtr session,
+            std::function<void(NFriendsPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
 
@@ -161,6 +176,44 @@ namespace Nakama {
             const std::string& groupId,
             const std::vector<std::string>& ids,
             std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void listGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            std::function<void(NGroupUserListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void kickGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void joinGroup(
+            NSessionPtr session,
+            const std::string& groupId,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void leaveGroup(
+            NSessionPtr session,
+            const std::string& groupId,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void listGroups(
+            NSessionPtr session,
+            const std::string& name,
+            int limit,
+            const std::string& cursor,
+            std::function<void(NGroupListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
 

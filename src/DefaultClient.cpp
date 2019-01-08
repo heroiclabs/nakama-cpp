@@ -430,9 +430,54 @@ void DefaultClient::getAccount(
     }
     rpcRequest->errorCallback = errorCallback;
 
-    auto responseReader = _stub->AsyncGetAccount(&rpcRequest->context, google::protobuf::Empty(), &_cq);
+    auto responseReader = _stub->AsyncGetAccount(&rpcRequest->context, {}, &_cq);
 
     responseReader->Finish(&(*accoutData), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::getUsers(
+    NSessionPtr session,
+    const std::vector<std::string>& ids,
+    const std::vector<std::string>& usernames,
+    const std::vector<std::string>& facebookIds,
+    std::function<void(const NUsers&)> successCallback,
+    ErrorCallback errorCallback
+)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto usersData(make_shared<nakama::api::Users>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [usersData, successCallback]()
+        {
+            NUsers users;
+            assign(users, *usersData);
+            successCallback(users);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::GetUsersRequest req;
+
+    for (auto& id : ids)
+    {
+        req.mutable_ids()->Add()->assign(id);
+    }
+
+    for (auto& username : usernames)
+    {
+        req.mutable_usernames()->Add()->assign(username);
+    }
+
+    for (auto& facebookId : facebookIds)
+    {
+        req.mutable_facebook_ids()->Add()->assign(facebookId);
+    }
+
+    auto responseReader = _stub->AsyncGetUsers(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*usersData), &rpcRequest->status, (void*)rpcRequest);
 }
 
 void DefaultClient::addFriends(
@@ -522,6 +567,27 @@ void DefaultClient::blockFriends(
     auto responseReader = _stub->AsyncBlockFriends(&rpcRequest->context, req, &_cq);
 
     responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::Friends>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NFriendsPtr friends(new NFriends());
+            assign(*friends, *data);
+            successCallback(friends);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    auto responseReader = _stub->AsyncListFriends(&rpcRequest->context, {}, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
 }
 
 void DefaultClient::createGroup(
@@ -615,6 +681,115 @@ void DefaultClient::addGroupUsers(
     auto responseReader = _stub->AsyncAddGroupUsers(&rpcRequest->context, req, &_cq);
 
     responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::listGroupUsers(NSessionPtr session, const std::string & groupId, std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto groupData(make_shared<nakama::api::GroupUserList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [groupData, successCallback]()
+        {
+            NGroupUserListPtr users(new NGroupUserList());
+            assign(*users, *groupData);
+            successCallback(users);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListGroupUsersRequest req;
+
+    req.set_group_id(groupId);
+
+    auto responseReader = _stub->AsyncListGroupUsers(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*groupData), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::kickGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::KickGroupUsersRequest req;
+
+    req.set_group_id(groupId);
+
+    for (auto& id : ids)
+    {
+        req.add_user_ids(id);
+    }
+
+    auto responseReader = _stub->AsyncKickGroupUsers(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::joinGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::JoinGroupRequest req;
+
+    req.set_group_id(groupId);
+
+    auto responseReader = _stub->AsyncJoinGroup(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::leaveGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::LeaveGroupRequest req;
+
+    req.set_group_id(groupId);
+
+    auto responseReader = _stub->AsyncLeaveGroup(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::listGroups(NSessionPtr session, const std::string & name, int limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto groupData(make_shared<nakama::api::GroupList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [groupData, successCallback]()
+        {
+            NGroupListPtr groups(new NGroupList());
+            assign(*groups, *groupData);
+            successCallback(groups);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListGroupsRequest req;
+
+    req.set_name(name);
+
+    if (limit > 0)
+        req.mutable_limit()->set_value(limit);
+
+    if (!cursor.empty())
+        req.set_cursor(cursor);
+
+    auto responseReader = _stub->AsyncListGroups(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*groupData), &rpcRequest->status, (void*)rpcRequest);
 }
 
 }

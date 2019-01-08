@@ -18,6 +18,10 @@
 
 #include "nakama-cpp/data/NAccount.h"
 #include "nakama-cpp/data/NGroup.h"
+#include "nakama-cpp/data/NGroupList.h"
+#include "nakama-cpp/data/NGroupUserList.h"
+#include "nakama-cpp/data/NUsers.h"
+#include "nakama-cpp/data/NFriends.h"
 #include "api/github.com/heroiclabs/nakama/api/api.pb.h"
 
 namespace Nakama {
@@ -28,6 +32,12 @@ namespace Nakama {
     void assign(NUser& user, const nakama::api::User& data);
     void assign(NAccountDevice& device, const nakama::api::AccountDevice& data);
     void assign(NGroup& group, const nakama::api::Group& data);
+    void assign(NGroupList& groups, const nakama::api::GroupList& data);
+    void assign(NGroupUserList& users, const nakama::api::GroupUserList& data);
+    void assign(NGroupUser& user, const nakama::api::GroupUserList_GroupUser& data);
+    void assign(NUsers& users, const nakama::api::Users& data);
+    void assign(NFriend& afriend, const nakama::api::Friend& data);
+    void assign(NFriends& friends, const nakama::api::Friends& data);
 
     template <class T>
     void assign(T& b, const T& data)
