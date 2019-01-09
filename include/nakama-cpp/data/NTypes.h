@@ -16,15 +16,14 @@
 
 #pragma once
 
-#include "nakama-cpp/data/NUser.h"
-#include "nakama-cpp/data/NTypes.h"
-
 namespace Nakama {
 
-    struct NAKAMA_API NGroupUser
+    enum class NUserGroupState
     {
-        NUser user;            // User.
-        NUserGroupState state; // Their relationship to the group.
+        SUPERADMIN       = 0,   // The user is a superadmin with full control of the group.
+        ADMIN            = 1,   // The user is an admin with additional privileges.
+        MEMBER           = 2,   // The user is a regular member.
+        JOIN_REQUEST     = 3    // The user has requested to join the group
     };
 
 }

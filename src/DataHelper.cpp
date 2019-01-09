@@ -30,6 +30,11 @@ void assign(bool & b, const::google::protobuf::BoolValue & data)
     b = data.value();
 }
 
+void assign(NUserGroupState & state, const::google::protobuf::Int32Value & data)
+{
+    state = static_cast<NUserGroupState>(data.value());
+}
+
 void assign(NAccount& account, const nakama::api::Account& data)
 {
     assign(account.user.id, data.user().id());
@@ -96,7 +101,18 @@ void assign(NGroupUserList & users, const nakama::api::GroupUserList & data)
 void assign(NGroupUser & user, const nakama::api::GroupUserList_GroupUser & data)
 {
     assign(user.user, data.user());
-    user.state = static_cast<NGroupUser::State>(data.state().value());
+    assign(user.state, data.state());
+}
+
+void assign(NUserGroup & group, const nakama::api::UserGroupList_UserGroup & data)
+{
+    assign(group.group, data.group());
+    assign(group.state, data.state());
+}
+
+void assign(NUserGroupList & users, const nakama::api::UserGroupList & data)
+{
+    assign(users.user_groups, data.user_groups());
 }
 
 void assign(NUsers & users, const nakama::api::Users & data)

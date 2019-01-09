@@ -792,4 +792,56 @@ void DefaultClient::listGroups(NSessionPtr session, const std::string & name, in
     responseReader->Finish(&(*groupData), &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::listUserGroups(NSessionPtr session, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    listUserGroups(session, "", successCallback, errorCallback);
+}
+
+void DefaultClient::listUserGroups(NSessionPtr session, const std::string & userId, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto groupData(make_shared<nakama::api::UserGroupList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [groupData, successCallback]()
+        {
+            NUserGroupListPtr groups(new NUserGroupList());
+            assign(*groups, *groupData);
+            successCallback(groups);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListUserGroupsRequest req;
+
+    if (!userId.empty())
+        req.set_user_id(userId);
+
+    auto responseReader = _stub->AsyncListUserGroups(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*groupData), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::promoteGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::PromoteGroupUsersRequest req;
+
+    req.set_group_id(groupId);
+
+    for (auto& id : ids)
+    {
+        req.add_user_ids(id);
+    }
+
+    auto responseReader = _stub->AsyncPromoteGroupUsers(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
 }

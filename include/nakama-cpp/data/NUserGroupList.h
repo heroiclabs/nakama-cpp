@@ -16,15 +16,17 @@
 
 #pragma once
 
-#include "nakama-cpp/data/NUser.h"
-#include "nakama-cpp/data/NTypes.h"
+#include "nakama-cpp/data/NUserGroup.h"
+#include <vector>
+#include <memory>
 
 namespace Nakama {
 
-    struct NAKAMA_API NGroupUser
+    // A list of groups belonging to a user, along with the user's role in each group.
+    struct NAKAMA_API NUserGroupList
     {
-        NUser user;            // User.
-        NUserGroupState state; // Their relationship to the group.
+        std::vector<NUserGroup> user_groups;
     };
 
+    using NUserGroupListPtr = std::shared_ptr<NUserGroupList>;
 }

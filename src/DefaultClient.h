@@ -217,6 +217,27 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void listUserGroups(
+            NSessionPtr session,
+            std::function<void(NUserGroupListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void listUserGroups(
+            NSessionPtr session,
+            const std::string& userId,
+            std::function<void(NUserGroupListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void promoteGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);

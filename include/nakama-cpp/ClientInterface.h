@@ -27,6 +27,7 @@
 #include "nakama-cpp/data/NGroupList.h"
 #include "nakama-cpp/data/NGroupUserList.h"
 #include "nakama-cpp/data/NUsers.h"
+#include "nakama-cpp/data/NUserGroupList.h"
 #include "nakama-cpp/data/NFriends.h"
 
 namespace Nakama {
@@ -372,6 +373,45 @@ namespace Nakama {
             int limit = 0,
             const std::string& cursor = "",
             std::function<void(NGroupListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * List of groups the current user is a member of.
+         *
+         * @param session The session of the user.
+         */
+        virtual void listUserGroups(
+            NSessionPtr session,
+            std::function<void(NUserGroupListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * List groups a user is a member of.
+         *
+         * @param session The session of the user.
+         * @param userId The id of the user whose groups to list.
+         */
+        virtual void listUserGroups(
+            NSessionPtr session,
+            const std::string& userId,
+            std::function<void(NUserGroupListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Promote one or more users in the group.
+         *
+         * @param session The session of the user.
+         * @param groupId The id of the group to promote users into.
+         * @param ids The ids of the users to promote.
+         */
+        virtual void promoteGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids,
+            std::function<void()> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
     };

@@ -16,15 +16,16 @@
 
 #pragma once
 
-#include "nakama-cpp/data/NUser.h"
+#include "nakama-cpp/data/NGroup.h"
 #include "nakama-cpp/data/NTypes.h"
 
 namespace Nakama {
 
-    struct NAKAMA_API NGroupUser
+    // A single group-role pair.
+    struct NAKAMA_API NUserGroup
     {
-        NUser user;            // User.
-        NUserGroupState state; // Their relationship to the group.
+        NGroup group;          // Group.
+        NUserGroupState state; // The user's relationship to the group.
     };
 
 }
