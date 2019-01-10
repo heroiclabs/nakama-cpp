@@ -20,6 +20,7 @@
 #include <functional>
 #include <memory>
 #include <vector>
+#include "nonstd/optional.hpp"
 #include "nakama-cpp/NSessionInterface.h"
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
@@ -31,6 +32,8 @@
 #include "nakama-cpp/data/NFriends.h"
 
 namespace Nakama {
+
+    namespace opt = nonstd;
 
     typedef std::function<void(const NError&)> ErrorCallback;
 
@@ -62,8 +65,8 @@ namespace Nakama {
          */
         virtual void authenticateDevice(
             const std::string& id,
-            const std::string& username = std::string(),
-            bool create = false,
+            const opt::optional<std::string>& username = opt::nullopt,
+            const opt::optional<bool>& create = opt::nullopt,
             std::function<void (NSessionPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;

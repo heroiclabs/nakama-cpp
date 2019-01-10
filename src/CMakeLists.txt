@@ -20,17 +20,18 @@ file(
     "${_include_root_path}/*.h*"
 )
 
-include_directories(
-    api
-    ../third_party/grpc/include
-    ../third_party/grpc/third_party/protobuf/src
-    ${PUBLIC_INCLUDE_DIR}
-)
-
 add_library(nakama-cpp SHARED STATIC ${_source_list} ${_public_headers_list})
 target_compile_features(nakama-cpp PRIVATE cxx_std_11)
 add_definitions(-DNAKAMA_API=)
 target_link_libraries(nakama-cpp PRIVATE grpc++ libprotobuf)
+
+target_include_directories(nakama-cpp
+    PUBLIC ../third_party
+    PUBLIC ${PUBLIC_INCLUDE_DIR}
+    PRIVATE api
+    PRIVATE ../third_party/grpc/include
+    PRIVATE ../third_party/grpc/third_party/protobuf/src
+)
 
 foreach(_source IN ITEMS ${_source_list})
     get_filename_component(_source_path "${_source}" PATH)

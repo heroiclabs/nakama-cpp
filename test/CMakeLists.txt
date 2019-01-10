@@ -12,10 +12,6 @@ file(
     "${_src_root_path}/*.h*"
 )
 
-include_directories(
-    ${PUBLIC_INCLUDE_DIR}
-)
-
 add_executable(nakama-test ${_source_list})
 target_compile_features(nakama-test PRIVATE cxx_std_11)
 add_definitions(-DNAKAMA_API=)

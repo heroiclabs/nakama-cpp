@@ -151,8 +151,8 @@ void DefaultClient::onResponse(void * tag, bool ok)
 
 void DefaultClient::authenticateDevice(
     const std::string& id,
-    const std::string& username,
-    bool create,
+    const opt::optional<std::string>& username,
+    const opt::optional<bool>& create,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -174,10 +174,11 @@ void DefaultClient::authenticateDevice(
 
     req.mutable_account()->set_id(id);
 
-    if (!username.empty())
-        req.set_username(username);
+    if (username)
+        req.set_username(*username);
 
-    req.mutable_create()->set_value(create);
+    if (create)
+        req.mutable_create()->set_value(*create);
 
     auto responseReader = _stub->AsyncAuthenticateDevice(&rpcRequest->context, req, &_cq);
 

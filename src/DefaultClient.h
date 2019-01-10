@@ -47,8 +47,8 @@ namespace Nakama {
 
         void authenticateDevice(
             const std::string& id,
-            const std::string& username,
-            bool create,
+            const opt::optional<std::string>& username,
+            const opt::optional<bool>& create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
