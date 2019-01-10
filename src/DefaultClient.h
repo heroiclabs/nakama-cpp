@@ -108,10 +108,141 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void linkFacebook(
+            NSessionPtr session,
+            const std::string& accessToken,
+            const opt::optional<bool>& importFriends,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void linkEmail(
+            NSessionPtr session,
+            const std::string& email,
+            const std::string& password,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void linkDevice(
+            NSessionPtr session,
+            const std::string& id,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void linkGoogle(
+            NSessionPtr session,
+            const std::string& accessToken,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void linkGameCenter(
+            NSessionPtr session,
+            const std::string& playerId,
+            const std::string& bundleId,
+            uint64_t timestampSeconds,
+            const std::string& salt,
+            const std::string& signature,
+            const std::string& publicKeyUrl,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void linkSteam(
+            NSessionPtr session,
+            const std::string& token,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void linkCustom(
+            NSessionPtr session,
+            const std::string& id,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void unlinkFacebook(
+            NSessionPtr session,
+            const std::string& accessToken,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void unlinkEmail(
+            NSessionPtr session,
+            const std::string& email,
+            const std::string& password,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void unlinkGoogle(
+            NSessionPtr session,
+            const std::string& accessToken,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void unlinkGameCenter(
+            NSessionPtr session,
+            const std::string& playerId,
+            const std::string& bundleId,
+            uint64_t timestampSeconds,
+            const std::string& salt,
+            const std::string& signature,
+            const std::string& publicKeyUrl,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void unlinkSteam(
+            NSessionPtr session,
+            const std::string& token,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void unlinkDevice(
+            NSessionPtr session,
+            const std::string& id,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void unlinkCustom(
+            NSessionPtr session,
+            const std::string& id,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void importFacebookFriends(
+            NSessionPtr session,
+            const std::string& token,
+            const opt::optional<bool>& reset,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
         void getAccount(
             NSessionPtr session,
             std::function<void(const NAccount&)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
+        ) override;
+
+        void updateAccount(
+            NSessionPtr session,
+            const opt::optional<std::string>& username,
+            const opt::optional<std::string>& displayName,
+            const opt::optional<std::string>& avatarUrl,
+            const opt::optional<std::string>& langTag,
+            const opt::optional<std::string>& location,
+            const opt::optional<std::string>& timezone,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
         ) override;
 
         void getUsers(
@@ -234,6 +365,18 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& groupId,
             const std::vector<std::string>& ids,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void updateGroup(
+            NSessionPtr session,
+            const std::string& groupId,
+            const opt::optional<std::string> name,
+            const opt::optional<std::string> description,
+            const opt::optional<std::string> avatarUrl,
+            const opt::optional<std::string> langTag,
+            const opt::optional<bool> open,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
         ) override;

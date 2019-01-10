@@ -176,6 +176,232 @@ namespace Nakama {
         ) = 0;
 
         /**
+         * Link a Facebook profile to a user account.
+         *
+         * @param session The session of the user.
+         * @param accessToken An OAuth access token from the Facebook SDK.
+         * @param importFriends True if the Facebook friends should be imported.
+         */
+        virtual void linkFacebook(
+            NSessionPtr session,
+            const std::string& accessToken,
+            const opt::optional<bool>& importFriends = opt::nullopt,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Link an email with password to the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param email The email address of the user.
+         * @param password The password for the user.
+         */
+        virtual void linkEmail(
+            NSessionPtr session,
+            const std::string& email,
+            const std::string& password,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Link a device id to the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param id A device identifier usually obtained from a platform API.
+         */
+        virtual void linkDevice(
+            NSessionPtr session,
+            const std::string& id,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Link a Google profile to a user account.
+         *
+         * @param session The session of the user.
+         * @param accessToken An OAuth access token from the Google SDK.
+         */
+        virtual void linkGoogle(
+            NSessionPtr session,
+            const std::string& accessToken,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Link a Game Center profile to a user account.
+         *
+         * @param session The session of the user.
+         * @param playerId The player id of the user in Game Center.
+         * @param bundleId The bundle id of the Game Center application.
+         * @param timestampSeconds The date and time that the signature was created.
+         * @param salt A random <c>NSString</c> used to compute the hash and keep it randomized.
+         * @param signature The verification signature data generated.
+         * @param publicKeyUrl The URL for the public encryption key.
+         */
+        virtual void linkGameCenter(
+            NSessionPtr session,
+            const std::string& playerId,
+            const std::string& bundleId,
+            uint64_t timestampSeconds,
+            const std::string& salt,
+            const std::string& signature,
+            const std::string& publicKeyUrl,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Link a Steam profile to a user account.
+         *
+         * @param session The session of the user.
+         * @param token An authentication token from the Steam network.
+         */
+        virtual void linkSteam(
+            NSessionPtr session,
+            const std::string& token,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Link a custom id to the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param id A custom identifier usually obtained from an external authentication service.
+         */
+        virtual void linkCustom(
+            NSessionPtr session,
+            const std::string& id,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Unlink a Facebook profile from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param accessToken An OAuth access token from the Facebook SDK.
+         */
+        virtual void unlinkFacebook(
+            NSessionPtr session,
+            const std::string& accessToken,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Unlink an email with password from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param email The email address of the user.
+         * @param password The password for the user.
+         */
+        virtual void unlinkEmail(
+            NSessionPtr session,
+            const std::string& email,
+            const std::string& password,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Unlink a Google profile from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param accessToken An OAuth access token from the Google SDK.
+         */
+        virtual void unlinkGoogle(
+            NSessionPtr session,
+            const std::string& accessToken,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Unlink a Game Center profile from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param playerId The player id of the user in Game Center.
+         * @param bundleId The bundle id of the Game Center application.
+         * @param timestampSeconds The date and time that the signature was created.
+         * @param salt A random <c>NSString</c> used to compute the hash and keep it randomized.
+         * @param signature The verification signature data generated.
+         * @param publicKeyUrl The URL for the public encryption key.
+         */
+        virtual void unlinkGameCenter(
+            NSessionPtr session,
+            const std::string& playerId,
+            const std::string& bundleId,
+            uint64_t timestampSeconds,
+            const std::string& salt,
+            const std::string& signature,
+            const std::string& publicKeyUrl,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Unlink a Steam profile from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param token An authentication token from the Steam network.
+         */
+        virtual void unlinkSteam(
+            NSessionPtr session,
+            const std::string& token,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Unlink a device id from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param id A device identifier usually obtained from a platform API.
+         */
+        virtual void unlinkDevice(
+            NSessionPtr session,
+            const std::string& id,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Unlink a custom id from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param id A custom identifier usually obtained from an external authentication service.
+         */
+        virtual void unlinkCustom(
+            NSessionPtr session,
+            const std::string& id,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Import Facebook friends and add them to the user's account.
+         *
+         * The server will import friends when the user authenticates with Facebook. This function can be used to be
+         * explicit with the import operation.
+         *
+         * @param session The session of the user.
+         * @param token An OAuth access token from the Facebook SDK.
+         * @param reset True if the Facebook friend import for the user should be reset.
+         */
+        virtual void importFacebookFriends(
+            NSessionPtr session,
+            const std::string& token,
+            const opt::optional<bool>& reset = opt::nullopt,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
          * Fetch the user account owned by the session.
          *
          * @param session The session of the user.
@@ -184,6 +410,29 @@ namespace Nakama {
             NSessionPtr session,
             std::function<void(const NAccount&)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Update the current user's account on the server.
+         *
+         * @param session The session for the user.
+         * @param username The new username for the user.
+         * @param displayName A new display name for the user.
+         * @param avatarUrl A new avatar url for the user.
+         * @param langTag A new language tag in BCP-47 format for the user.
+         * @param location A new location for the user.
+         * @param timezone New timezone information for the user.
+         */
+        virtual void updateAccount(
+            NSessionPtr session,
+            const opt::optional<std::string>& username    = opt::nullopt,
+            const opt::optional<std::string>& displayName = opt::nullopt,
+            const opt::optional<std::string>& avatarUrl   = opt::nullopt,
+            const opt::optional<std::string>& langTag     = opt::nullopt,
+            const opt::optional<std::string>& location    = opt::nullopt,
+            const opt::optional<std::string>& timezone    = opt::nullopt,
+            std::function<void()> successCallback         = nullptr,
+            ErrorCallback errorCallback                   = nullptr
         ) = 0;
 
         /**
@@ -414,6 +663,31 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& groupId,
             const std::vector<std::string>& ids,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Update a group.
+         *
+         * The user must have the correct access permissions for the group.
+         *
+         * @param session The session of the user.
+         * @param groupId The id of the group to update.
+         * @param name A new name for the group.
+         * @param description A new description for the group.
+         * @param avatarUrl A new avatar url for the group.
+         * @param langTag A new language tag in BCP-47 format for the group.
+         * @param open True if the group should have open membership.
+         */
+        virtual void updateGroup(
+            NSessionPtr session,
+            const std::string& groupId,
+            const opt::optional<std::string> name = opt::nullopt,
+            const opt::optional<std::string> description = opt::nullopt,
+            const opt::optional<std::string> avatarUrl = opt::nullopt,
+            const opt::optional<std::string> langTag = opt::nullopt,
+            const opt::optional<bool> open = opt::nullopt,
             std::function<void()> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;

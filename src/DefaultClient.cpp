@@ -411,6 +411,289 @@ void DefaultClient::authenticateSteam(
     responseReader->Finish(&(*sessionData), &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::linkFacebook(
+    NSessionPtr session,
+    const std::string & accessToken,
+    const opt::optional<bool>& importFriends,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::LinkFacebookRequest req;
+
+    req.mutable_account()->set_token(accessToken);
+    if (importFriends) req.mutable_sync()->set_value(*importFriends);
+
+    auto responseReader = _stub->AsyncLinkFacebook(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::linkEmail(
+    NSessionPtr session,
+    const std::string & email,
+    const std::string & password,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountEmail req;
+
+    req.set_email(email);
+    req.set_password(password);
+
+    auto responseReader = _stub->AsyncLinkEmail(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::linkDevice(
+    NSessionPtr session,
+    const std::string & id,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountDevice req;
+
+    req.set_id(id);
+
+    auto responseReader = _stub->AsyncLinkDevice(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::linkGoogle(
+    NSessionPtr session,
+    const std::string & accessToken,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountGoogle req;
+
+    req.set_token(accessToken);
+
+    auto responseReader = _stub->AsyncLinkGoogle(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::linkGameCenter(
+    NSessionPtr session,
+    const std::string & playerId,
+    const std::string & bundleId,
+    uint64_t timestampSeconds,
+    const std::string & salt,
+    const std::string & signature,
+    const std::string & publicKeyUrl,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountGameCenter req;
+
+    req.set_player_id(playerId);
+    req.set_bundle_id(bundleId);
+    req.set_timestamp_seconds(timestampSeconds);
+    req.set_salt(salt);
+    req.set_signature(signature);
+    req.set_public_key_url(publicKeyUrl);
+
+    auto responseReader = _stub->AsyncLinkGameCenter(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::linkSteam(
+    NSessionPtr session,
+    const std::string & token,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountSteam req;
+
+    req.set_token(token);
+
+    auto responseReader = _stub->AsyncLinkSteam(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::linkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountCustom req;
+
+    req.set_id(id);
+
+    auto responseReader = _stub->AsyncLinkCustom(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::unlinkFacebook(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountFacebook req;
+
+    req.set_token(accessToken);
+
+    auto responseReader = _stub->AsyncUnlinkFacebook(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::unlinkEmail(NSessionPtr session, const std::string & email, const std::string & password, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountEmail req;
+
+    req.set_email(email);
+    req.set_password(password);
+
+    auto responseReader = _stub->AsyncUnlinkEmail(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::unlinkGoogle(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountGoogle req;
+
+    req.set_token(accessToken);
+
+    auto responseReader = _stub->AsyncUnlinkGoogle(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & playerId, const std::string & bundleId, uint64_t timestampSeconds, const std::string & salt, const std::string & signature, const std::string & publicKeyUrl, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountGameCenter req;
+
+    req.set_player_id(playerId);
+    req.set_bundle_id(bundleId);
+    req.set_timestamp_seconds(timestampSeconds);
+    req.set_salt(salt);
+    req.set_signature(signature);
+    req.set_public_key_url(publicKeyUrl);
+
+    auto responseReader = _stub->AsyncUnlinkGameCenter(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::unlinkSteam(NSessionPtr session, const std::string & token, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountSteam req;
+
+    req.set_token(token);
+
+    auto responseReader = _stub->AsyncUnlinkSteam(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::unlinkDevice(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountDevice req;
+
+    req.set_id(id);
+
+    auto responseReader = _stub->AsyncUnlinkDevice(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::unlinkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::AccountCustom req;
+
+    req.set_id(id);
+
+    auto responseReader = _stub->AsyncUnlinkCustom(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::importFacebookFriends(
+    NSessionPtr session,
+    const std::string& token,
+    const opt::optional<bool>& reset,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ImportFacebookFriendsRequest req;
+
+    req.mutable_account()->set_token(token);
+    if (reset) req.mutable_reset()->set_value(*reset);
+
+    auto responseReader = _stub->AsyncImportFacebookFriends(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
 void DefaultClient::getAccount(
     NSessionPtr session,
     std::function<void(const NAccount&)> successCallback,
@@ -434,6 +717,35 @@ void DefaultClient::getAccount(
     auto responseReader = _stub->AsyncGetAccount(&rpcRequest->context, {}, &_cq);
 
     responseReader->Finish(&(*accoutData), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::updateAccount(
+    NSessionPtr session,
+    const opt::optional<std::string>& username,
+    const opt::optional<std::string>& displayName,
+    const opt::optional<std::string>& avatarUrl,
+    const opt::optional<std::string>& langTag,
+    const opt::optional<std::string>& location,
+    const opt::optional<std::string>& timezone,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::UpdateAccountRequest req;
+
+    if (username) req.mutable_username()->set_value(*username);
+    if (displayName) req.mutable_display_name()->set_value(*displayName);
+    if (avatarUrl) req.mutable_avatar_url()->set_value(*avatarUrl);
+    if (langTag) req.mutable_lang_tag()->set_value(*langTag);
+    if (location) req.mutable_location()->set_value(*location);
+    if (timezone) req.mutable_timezone()->set_value(*timezone);
+
+    auto responseReader = _stub->AsyncUpdateAccount(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
 }
 
 void DefaultClient::getUsers(
@@ -841,6 +1153,38 @@ void DefaultClient::promoteGroupUsers(NSessionPtr session, const std::string & g
     }
 
     auto responseReader = _stub->AsyncPromoteGroupUsers(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::updateGroup(
+    NSessionPtr session,
+    const std::string & groupId,
+    const opt::optional<std::string> name,
+    const opt::optional<std::string> description,
+    const opt::optional<std::string> avatarUrl,
+    const opt::optional<std::string> langTag,
+    const opt::optional<bool> open,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback
+)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::UpdateGroupRequest req;
+
+    req.set_group_id(groupId);
+
+    if (name) req.mutable_name()->set_value(*name);
+    if (description) req.mutable_description()->set_value(*description);
+    if (avatarUrl) req.mutable_avatar_url()->set_value(*avatarUrl);
+    if (langTag) req.mutable_lang_tag()->set_value(*langTag);
+    if (open) req.mutable_open()->set_value(*open);
+
+    auto responseReader = _stub->AsyncUpdateGroup(&rpcRequest->context, req, &_cq);
 
     responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
 }
