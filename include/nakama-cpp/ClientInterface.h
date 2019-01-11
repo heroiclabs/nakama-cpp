@@ -30,6 +30,7 @@
 #include "nakama-cpp/data/NUsers.h"
 #include "nakama-cpp/data/NUserGroupList.h"
 #include "nakama-cpp/data/NFriends.h"
+#include "nakama-cpp/data/NLeaderboardRecordList.h"
 
 namespace Nakama {
 
@@ -135,7 +136,7 @@ namespace Nakama {
         virtual void authenticateGameCenter(
             const std::string& playerId,
             const std::string& bundleId,
-            uint64_t timestampSeconds,
+            NTimestamp timestampSeconds,
             const std::string& salt,
             const std::string& signature,
             const std::string& publicKeyUrl,
@@ -246,7 +247,7 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& playerId,
             const std::string& bundleId,
-            uint64_t timestampSeconds,
+            NTimestamp timestampSeconds,
             const std::string& salt,
             const std::string& signature,
             const std::string& publicKeyUrl,
@@ -336,7 +337,7 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& playerId,
             const std::string& bundleId,
-            uint64_t timestampSeconds,
+            NTimestamp timestampSeconds,
             const std::string& salt,
             const std::string& signature,
             const std::string& publicKeyUrl,
@@ -683,12 +684,31 @@ namespace Nakama {
         virtual void updateGroup(
             NSessionPtr session,
             const std::string& groupId,
-            const opt::optional<std::string> name = opt::nullopt,
-            const opt::optional<std::string> description = opt::nullopt,
-            const opt::optional<std::string> avatarUrl = opt::nullopt,
-            const opt::optional<std::string> langTag = opt::nullopt,
-            const opt::optional<bool> open = opt::nullopt,
+            const opt::optional<std::string>& name = opt::nullopt,
+            const opt::optional<std::string>& description = opt::nullopt,
+            const opt::optional<std::string>& avatarUrl = opt::nullopt,
+            const opt::optional<std::string>& langTag = opt::nullopt,
+            const opt::optional<bool>& open = opt::nullopt,
             std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * List records from a leaderboard.
+         *
+         * @param session The session of the user.
+         * @param leaderboardId The id of the leaderboard to list.
+         * @param ownerIds Record owners to fetch with the list of records.
+         * @param limit The number of records to list.
+         * @param cursor A cursor for the current position in the leaderboard records to list.
+         */
+        virtual void listLeaderboardRecords(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            const std::vector<std::string>& ownerIds = {},
+            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt,
+            std::function<void(NLeaderboardRecordListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
     };

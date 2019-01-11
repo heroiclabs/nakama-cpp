@@ -20,7 +20,7 @@ using namespace std;
 
 namespace Nakama {
 
-void assign(uint64_t& time, const google::protobuf::Timestamp& data)
+void assign(NTimestamp& time, const google::protobuf::Timestamp& data)
 {
     time = data.seconds() * 1000;
 }
@@ -33,6 +33,14 @@ void assign(bool & b, const::google::protobuf::BoolValue & data)
 void assign(NUserGroupState & state, const::google::protobuf::Int32Value & data)
 {
     state = static_cast<NUserGroupState>(data.value());
+}
+
+void assign(std::string & str, const::google::protobuf::StringValue & data)
+{
+    if (data.IsInitialized())
+        str = data.value();
+    else
+        str.clear();
 }
 
 void assign(NAccount& account, const nakama::api::Account& data)
@@ -129,6 +137,30 @@ void assign(NFriend & afriend, const nakama::api::Friend & data)
 void assign(NFriends & friends, const nakama::api::Friends & data)
 {
     assign(friends.friends, data.friends());
+}
+
+void assign(NLeaderboardRecordList & list, const nakama::api::LeaderboardRecordList & data)
+{
+    assign(list.next_cursor, data.next_cursor());
+    assign(list.prev_cursor, data.prev_cursor());
+    assign(list.owner_records, data.owner_records());
+    assign(list.records, data.records());
+}
+
+void assign(NLeaderboardRecord & record, const nakama::api::LeaderboardRecord & data)
+{
+    assign(record.leaderboard_id, data.leaderboard_id());
+    assign(record.owner_id, data.owner_id());
+    assign(record.username, data.username());
+    assign(record.score, data.score());
+    assign(record.subscore, data.subscore());
+    assign(record.num_score, data.num_score());
+    assign(record.max_num_score, data.max_num_score());
+    assign(record.metadata, data.metadata());
+    assign(record.create_time, data.create_time());
+    assign(record.update_time, data.update_time());
+    assign(record.expiry_time, data.expiry_time());
+    assign(record.rank, data.rank());
 }
 
 }

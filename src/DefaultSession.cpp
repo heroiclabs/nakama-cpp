@@ -95,12 +95,12 @@ const std::string & DefaultSession::getUserId()
     return _user_id;
 }
 
-uint64_t DefaultSession::getCreateTime()
+NTimestamp DefaultSession::getCreateTime()
 {
     return _create_time;
 }
 
-uint64_t DefaultSession::getExpireTime()
+NTimestamp DefaultSession::getExpireTime()
 {
     return _expire_time;
 }
@@ -112,7 +112,7 @@ bool DefaultSession::isExpired()
     return isExpired(ms.count());
 }
 
-bool DefaultSession::isExpired(uint64_t now)
+bool DefaultSession::isExpired(NTimestamp now)
 {
     return now >= _expire_time;
 }

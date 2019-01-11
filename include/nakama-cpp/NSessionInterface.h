@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include "nakama-cpp/data/NTypes.h"
 #include <string>
 #include <memory>
 
@@ -49,12 +50,12 @@ namespace Nakama {
         /**
         * @return The timestamp in seconds when this session object was created.
         */
-        virtual uint64_t getCreateTime() = 0;
+        virtual NTimestamp getCreateTime() = 0;
 
         /**
         * @return The timestamp in seconds when this session will expire.
         */
-        virtual uint64_t getExpireTime() = 0;
+        virtual NTimestamp getExpireTime() = 0;
 
         /**
         * @return <c>True</c> if the session has expired against the current time.
@@ -67,7 +68,7 @@ namespace Nakama {
         * @param now The time to compare against the session.
         * @return <c>true</c> if the session has expired.
         */
-        virtual bool isExpired(uint64_t now) = 0;
+        virtual bool isExpired(NTimestamp now) = 0;
     };
 
     using NSessionPtr = std::shared_ptr<NSessionInterface>;

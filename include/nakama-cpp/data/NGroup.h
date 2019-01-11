@@ -32,8 +32,8 @@ namespace Nakama {
         bool open = false;         // Anyone can join open groups, otherwise only admins can accept members.
         int32_t edge_count = 0;    // The current count of all members in the group.
         int32_t max_count = 0;     // The maximum number of members allowed.
-        uint64_t create_time = 0;  // The UNIX time when the group was created.
-        uint64_t update_time = 0;  // The UNIX time when the group was last updated.
+        NTimestamp create_time = 0;// The UNIX time when the group was created.
+        NTimestamp update_time = 0;// The UNIX time when the group was last updated.
     };
 
 }

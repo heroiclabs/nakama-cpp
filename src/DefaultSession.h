@@ -29,18 +29,18 @@ namespace Nakama {
         bool isCreated() override;
         const std::string& getUsername() override;
         const std::string& getUserId() override;
-        uint64_t getCreateTime() override;
-        uint64_t getExpireTime() override;
+        NTimestamp getCreateTime() override;
+        NTimestamp getExpireTime() override;
         bool isExpired() override;
-        bool isExpired(uint64_t now) override;
+        bool isExpired(NTimestamp now) override;
 
     private:
         std::string _token;
         std::string _user_id;
         std::string _username;
         bool _created = false;
-        uint64_t _create_time = 0;
-        uint64_t _expire_time = 0;
+        NTimestamp _create_time = 0;
+        NTimestamp _expire_time = 0;
     };
 
 }

@@ -23,13 +23,15 @@
 #include "nakama-cpp/data/NUsers.h"
 #include "nakama-cpp/data/NUserGroupList.h"
 #include "nakama-cpp/data/NFriends.h"
+#include "nakama-cpp/data/NLeaderboardRecordList.h"
 #include "api/github.com/heroiclabs/nakama/api/api.pb.h"
 
 namespace Nakama {
 
-    void assign(uint64_t& time, const ::google::protobuf::Timestamp& data);
+    void assign(NTimestamp& time, const ::google::protobuf::Timestamp& data);
     void assign(bool& b, const ::google::protobuf::BoolValue& data);
     void assign(NUserGroupState& state, const ::google::protobuf::Int32Value& data);
+    void assign(std::string& str, const ::google::protobuf::StringValue& data);
     void assign(NAccount& account, const nakama::api::Account& data);
     void assign(NUser& user, const nakama::api::User& data);
     void assign(NAccountDevice& device, const nakama::api::AccountDevice& data);
@@ -42,6 +44,8 @@ namespace Nakama {
     void assign(NUsers& users, const nakama::api::Users& data);
     void assign(NFriend& afriend, const nakama::api::Friend& data);
     void assign(NFriends& friends, const nakama::api::Friends& data);
+    void assign(NLeaderboardRecordList& list, const nakama::api::LeaderboardRecordList& data);
+    void assign(NLeaderboardRecord& record, const nakama::api::LeaderboardRecord& data);
 
     template <class T>
     void assign(T& b, const T& data)

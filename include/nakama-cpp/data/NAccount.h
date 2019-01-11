@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include "nakama-cpp/data/NTypes.h"
 #include "nakama-cpp/data/NUser.h"
 #include "nakama-cpp/data/NAccountDevice.h"
 #include <memory>
@@ -29,7 +30,7 @@ namespace Nakama {
         std::string email;                         // The email address of the user.
         std::vector<NAccountDevice> devices;       // The devices which belong to the user's account.
         std::string custom_id;                     // The custom id in the user's account.
-        uint64_t verify_time = 0;                  // The UNIX time when the user's email was verified.
+        NTimestamp verify_time = 0;                // The UNIX time when the user's email was verified.
     };
 
     using NAccountPtr = std::shared_ptr<NAccount>;

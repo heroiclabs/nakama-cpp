@@ -16,6 +16,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 namespace Nakama {
 
     enum class NUserGroupState
@@ -26,4 +28,5 @@ namespace Nakama {
         JOIN_REQUEST     = 3    // The user has requested to join the group
     };
 
+    using NTimestamp = uint64_t;
 }

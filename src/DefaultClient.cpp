@@ -299,7 +299,7 @@ void DefaultClient::authenticateGoogle(
 void DefaultClient::authenticateGameCenter(
     const std::string & playerId,
     const std::string & bundleId,
-    uint64_t timestampSeconds,
+    NTimestamp timestampSeconds,
     const std::string & salt,
     const std::string & signature,
     const std::string & publicKeyUrl,
@@ -495,7 +495,7 @@ void DefaultClient::linkGameCenter(
     NSessionPtr session,
     const std::string & playerId,
     const std::string & bundleId,
-    uint64_t timestampSeconds,
+    NTimestamp timestampSeconds,
     const std::string & salt,
     const std::string & signature,
     const std::string & publicKeyUrl,
@@ -604,7 +604,7 @@ void DefaultClient::unlinkGoogle(NSessionPtr session, const std::string & access
     responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
 }
 
-void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & playerId, const std::string & bundleId, uint64_t timestampSeconds, const std::string & salt, const std::string & signature, const std::string & publicKeyUrl, std::function<void()> successCallback, ErrorCallback errorCallback)
+void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & playerId, const std::string & bundleId, NTimestamp timestampSeconds, const std::string & salt, const std::string & signature, const std::string & publicKeyUrl, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     RpcRequest* rpcRequest = createRpcRequest(session);
 
@@ -1160,11 +1160,11 @@ void DefaultClient::promoteGroupUsers(NSessionPtr session, const std::string & g
 void DefaultClient::updateGroup(
     NSessionPtr session,
     const std::string & groupId,
-    const opt::optional<std::string> name,
-    const opt::optional<std::string> description,
-    const opt::optional<std::string> avatarUrl,
-    const opt::optional<std::string> langTag,
-    const opt::optional<bool> open,
+    const opt::optional<std::string>& name,
+    const opt::optional<std::string>& description,
+    const opt::optional<std::string>& avatarUrl,
+    const opt::optional<std::string>& langTag,
+    const opt::optional<bool>& open,
     std::function<void()> successCallback,
     ErrorCallback errorCallback
 )
@@ -1187,6 +1187,45 @@ void DefaultClient::updateGroup(
     auto responseReader = _stub->AsyncUpdateGroup(&rpcRequest->context, req, &_cq);
 
     responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::listLeaderboardRecords(
+    NSessionPtr session,
+    const std::string & leaderboardId,
+    const std::vector<std::string>& ownerIds,
+    const opt::optional<int>& limit,
+    const opt::optional<std::string>& cursor,
+    std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::LeaderboardRecordList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
+            assign(*list, *data);
+            successCallback(list);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListLeaderboardRecordsRequest req;
+
+    req.set_leaderboard_id(leaderboardId);
+
+    for (auto& id : ownerIds)
+    {
+        req.add_owner_ids(id);
+    }
+
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (cursor) req.set_cursor(*cursor);
+
+    auto responseReader = _stub->AsyncListLeaderboardRecords(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
 }
 
 }

@@ -82,7 +82,7 @@ namespace Nakama {
         void authenticateGameCenter(
             const std::string& playerId,
             const std::string& bundleId,
-            uint64_t timestampSeconds,
+            NTimestamp timestampSeconds,
             const std::string& salt,
             const std::string& signature,
             const std::string& publicKeyUrl,
@@ -142,7 +142,7 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& playerId,
             const std::string& bundleId,
-            uint64_t timestampSeconds,
+            NTimestamp timestampSeconds,
             const std::string& salt,
             const std::string& signature,
             const std::string& publicKeyUrl,
@@ -190,7 +190,7 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& playerId,
             const std::string& bundleId,
-            uint64_t timestampSeconds,
+            NTimestamp timestampSeconds,
             const std::string& salt,
             const std::string& signature,
             const std::string& publicKeyUrl,
@@ -372,12 +372,22 @@ namespace Nakama {
         void updateGroup(
             NSessionPtr session,
             const std::string& groupId,
-            const opt::optional<std::string> name,
-            const opt::optional<std::string> description,
-            const opt::optional<std::string> avatarUrl,
-            const opt::optional<std::string> langTag,
-            const opt::optional<bool> open,
+            const opt::optional<std::string>& name,
+            const opt::optional<std::string>& description,
+            const opt::optional<std::string>& avatarUrl,
+            const opt::optional<std::string>& langTag,
+            const opt::optional<bool>& open,
             std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void listLeaderboardRecords(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            const std::vector<std::string>& ownerIds,
+            const opt::optional<int>& limit,
+            const opt::optional<std::string>& cursor,
+            std::function<void(NLeaderboardRecordListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
 

@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include "nakama-cpp/data/NTypes.h"
 #include <string>
 
 namespace Nakama {
@@ -36,8 +37,8 @@ namespace Nakama {
         std::string steamId;       // The Steam id in the user's account.
         bool online = false;       // Indicates whether the user is currently online.
         int32_t edge_count = 0;    // Number of related edges to this user (friends).
-        uint64_t createdAt = 0;    // The UNIX time when the user was created.
-        uint64_t updatedAt = 0;    // The UNIX time when the user was last updated.
+        NTimestamp createdAt = 0;  // The UNIX time when the user was created.
+        NTimestamp updatedAt = 0;  // The UNIX time when the user was last updated.
     };
 
 }
