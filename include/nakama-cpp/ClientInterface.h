@@ -33,6 +33,7 @@
 #include "nakama-cpp/data/NLeaderboardRecordList.h"
 #include "nakama-cpp/data/NMatchList.h"
 #include "nakama-cpp/data/NNotificationList.h"
+#include "nakama-cpp/data/NChannelMessageList.h"
 
 namespace Nakama {
 
@@ -828,6 +829,25 @@ namespace Nakama {
             NSessionPtr session,
             const std::vector<std::string>& notificationIds,
             std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * List messages from a chat channel.
+        *
+        * @param session The session of the user.
+        * @param channelId A channel identifier.
+        * @param limit The number of chat messages to list.
+        * @param cursor A cursor for the current position in the messages history to list.
+        * @param forward Fetch messages forward from the current cursor (or the start).
+        */
+        virtual void listChannelMessages(
+            NSessionPtr session,
+            const std::string& channelId,
+            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt,
+            const opt::optional<bool>& forward = opt::nullopt,
+            std::function<void(NChannelMessageListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
     };

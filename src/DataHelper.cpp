@@ -30,6 +30,11 @@ void assign(bool & b, const::google::protobuf::BoolValue & data)
     b = data.value();
 }
 
+void assign(int32_t & value, const::google::protobuf::Int32Value & data)
+{
+    value = data.value();
+}
+
 void assign(NUserGroupState & state, const::google::protobuf::Int32Value & data)
 {
     state = static_cast<NUserGroupState>(data.value());
@@ -191,6 +196,26 @@ void assign(NNotification & notif, const nakama::api::Notification & data)
     assign(notif.sender_id, data.sender_id());
     assign(notif.create_time, data.create_time());
     assign(notif.persistent, data.persistent());
+}
+
+void assign(NChannelMessageList & list, const nakama::api::ChannelMessageList & data)
+{
+    assign(list.messages, data.messages());
+    assign(list.prev_cursor, data.prev_cursor());
+    assign(list.next_cursor, data.next_cursor());
+}
+
+void assign(NChannelMessage & msg, const nakama::api::ChannelMessage & data)
+{
+    assign(msg.channel_id, data.channel_id());
+    assign(msg.code, data.code());
+    assign(msg.content, data.content());
+    assign(msg.create_time, data.create_time());
+    assign(msg.message_id, data.message_id());
+    assign(msg.persistent, data.persistent());
+    assign(msg.sender_id, data.sender_id());
+    assign(msg.update_time, data.update_time());
+    assign(msg.username, data.username());
 }
 
 }

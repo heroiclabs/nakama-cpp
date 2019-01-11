@@ -1425,4 +1425,38 @@ void DefaultClient::deleteNotifications(NSessionPtr session, const std::vector<s
     responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::listChannelMessages(
+    NSessionPtr session,
+    const std::string & channelId,
+    const opt::optional<int>& limit,
+    const opt::optional<std::string>& cursor,
+    const opt::optional<bool>& forward,
+    std::function<void(NChannelMessageListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::ChannelMessageList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NChannelMessageListPtr list(new NChannelMessageList());
+            assign(*list, *data);
+            successCallback(list);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListChannelMessagesRequest req;
+
+    req.set_channel_id(channelId);
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (cursor) req.set_cursor(*cursor);
+    if (forward) req.mutable_forward()->set_value(*forward);
+
+    auto responseReader = _stub->AsyncListChannelMessages(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
 }

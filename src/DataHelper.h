@@ -26,12 +26,14 @@
 #include "nakama-cpp/data/NLeaderboardRecordList.h"
 #include "nakama-cpp/data/NMatchList.h"
 #include "nakama-cpp/data/NNotificationList.h"
+#include "nakama-cpp/data/NChannelMessageList.h"
 #include "api/github.com/heroiclabs/nakama/api/api.pb.h"
 
 namespace Nakama {
 
     void assign(NTimestamp& time, const ::google::protobuf::Timestamp& data);
     void assign(bool& b, const ::google::protobuf::BoolValue& data);
+    void assign(int32_t& value, const ::google::protobuf::Int32Value& data);
     void assign(NUserGroupState& state, const ::google::protobuf::Int32Value& data);
     void assign(std::string& str, const ::google::protobuf::StringValue& data);
     void assign(NAccount& account, const nakama::api::Account& data);
@@ -52,6 +54,8 @@ namespace Nakama {
     void assign(NMatch& match, const nakama::api::Match& data);
     void assign(NNotificationList& list, const nakama::api::NotificationList& data);
     void assign(NNotification& notif, const nakama::api::Notification& data);
+    void assign(NChannelMessageList& list, const nakama::api::ChannelMessageList& data);
+    void assign(NChannelMessage& msg, const nakama::api::ChannelMessage& data);
 
     template <class T>
     void assign(T& b, const T& data)

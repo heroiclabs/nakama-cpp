@@ -453,6 +453,16 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void listChannelMessages(
+            NSessionPtr session,
+            const std::string& channelId,
+            const opt::optional<int>& limit,
+            const opt::optional<std::string>& cursor,
+            const opt::optional<bool>& forward,
+            std::function<void(NChannelMessageListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);
