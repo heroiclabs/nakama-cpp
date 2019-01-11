@@ -23,29 +23,6 @@ namespace Nakama {
 using namespace std;
 using namespace std::chrono;
 
-string getJsonField(const string& json, const string& field_name)
-{
-    string result;
-
-    auto pos = json.find("\"" + field_name + "\"");
-    if (pos != string::npos)
-    {
-        auto pos1 = json.find("\"", pos);
-        if (pos1 != string::npos)
-        {
-            ++pos1;
-            auto pos2 = json.find("\"", pos1);
-            if (pos2 != string::npos)
-            {
-                --pos2;
-                result = json.substr(pos1, pos2 - pos1);
-            }
-        }
-    }
-
-    return result;
-}
-
 DefaultSession::DefaultSession(const std::string & token, bool created)
 {
     milliseconds ms = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
@@ -65,14 +42,14 @@ DefaultSession::DefaultSession(const std::string & token, bool created)
 
     // now we have some json to parse.
     // e.g.: {"exp":1489862293,"uid":"3c01e3ee-878a-4ec4-8923-40d51a86f91f"}
-    string exp_str = getJsonField(json, "exp");
+    string exp_str = getJsonFieldValue(json, "exp");
     if (!exp_str.empty())
     {
         _expire_time = std::atol(exp_str.c_str()) * 1000L;
     }
 
-    _username = getJsonField(json, "usn");
-    _user_id = getJsonField(json, "uid");
+    _username = getJsonFieldValue(json, "usn");
+    _user_id = getJsonFieldValue(json, "uid");
 }
 
 const std::string & DefaultSession::getAuthToken()

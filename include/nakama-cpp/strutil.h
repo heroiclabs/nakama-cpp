@@ -10,4 +10,6 @@ namespace Nakama {
 
     Base64Buffer base64_decode(const std::string& base64str);
 
+    std::string getJsonFieldValue(const std::string& json, const std::string& field_name);
+
 } // namespace nakama
