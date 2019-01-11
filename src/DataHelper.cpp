@@ -244,4 +244,12 @@ void assign(NTournament & tournament, const nakama::api::Tournament & data)
     assign(tournament.metadata, data.metadata());
 }
 
+void assign(NTournamentRecordList & list, const nakama::api::TournamentRecordList & data)
+{
+    assign(list.records, data.records());
+    assign(list.owner_records, data.owner_records());
+    assign(list.next_cursor, data.next_cursor());
+    assign(list.prev_cursor, data.prev_cursor());
+}
+
 }

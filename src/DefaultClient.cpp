@@ -1497,4 +1497,76 @@ void DefaultClient::listTournaments(
     responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::listTournamentRecords(
+    NSessionPtr session,
+    const std::string & tournamentId,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cursor,
+    const std::vector<std::string>& ownerIds,
+    std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::TournamentRecordList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NTournamentRecordListPtr list(new NTournamentRecordList());
+            assign(*list, *data);
+            successCallback(list);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListTournamentRecordsRequest req;
+
+    req.set_tournament_id(tournamentId);
+
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (cursor) req.set_cursor(*cursor);
+
+    for (auto& id : ownerIds)
+    {
+        req.add_owner_ids(id);
+    }
+
+    auto responseReader = _stub->AsyncListTournamentRecords(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::listTournamentRecordsAroundOwner(
+    NSessionPtr session,
+    const std::string & tournamentId,
+    const std::string & ownerId,
+    const opt::optional<int32_t>& limit,
+    std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::TournamentRecordList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NTournamentRecordListPtr list(new NTournamentRecordList());
+            assign(*list, *data);
+            successCallback(list);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListTournamentRecordsAroundOwnerRequest req;
+
+    req.set_tournament_id(tournamentId);
+    req.set_owner_id(ownerId);
+
+    if (limit) req.mutable_limit()->set_value(*limit);
+
+    auto responseReader = _stub->AsyncListTournamentRecordsAroundOwner(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
 }

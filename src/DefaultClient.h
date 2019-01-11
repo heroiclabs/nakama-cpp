@@ -475,6 +475,25 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void listTournamentRecords(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<std::string>& cursor,
+            const std::vector<std::string>& ownerIds,
+            std::function<void(NTournamentRecordListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void listTournamentRecordsAroundOwner(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            const std::string& ownerId,
+            const opt::optional<int32_t>& limit,
+            std::function<void(NTournamentRecordListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);

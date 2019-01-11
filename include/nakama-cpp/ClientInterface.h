@@ -35,6 +35,7 @@
 #include "nakama-cpp/data/NNotificationList.h"
 #include "nakama-cpp/data/NChannelMessageList.h"
 #include "nakama-cpp/data/NTournamentList.h"
+#include "nakama-cpp/data/NTournamentRecordList.h"
 
 namespace Nakama {
 
@@ -872,6 +873,42 @@ namespace Nakama {
             const opt::optional<int32_t>& limit = opt::nullopt,
             const opt::optional<std::string>& cursor = opt::nullopt,
             std::function<void(NTournamentListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * List tournament records from a given tournament.
+         *
+         * @param session The session of the user.
+         * @param tournamentId The ID of the tournament to list for.
+         * @param limit Max number of records to return. Between 1 and 100.
+         * @param cursor A next or previous page cursor.
+         * @param ownerIds One or more owners to retrieve records for.
+         */
+        virtual void listTournamentRecords(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt,
+            const std::vector<std::string>& ownerIds = {},
+            std::function<void(NTournamentRecordListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * List tournament records from a given tournament around the owner.
+         *
+         * @param session The session of the user.
+         * @param tournamentId The ID of the tournament to list for.
+         * @param ownerId The owner to retrieve records around.
+         * @param limit Max number of records to return. Between 1 and 100.
+         */
+        virtual void listTournamentRecordsAroundOwner(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            const std::string& ownerId,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            std::function<void(NTournamentRecordListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
     };
