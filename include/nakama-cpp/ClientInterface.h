@@ -711,6 +711,74 @@ namespace Nakama {
             std::function<void(NLeaderboardRecordListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
+
+        /**
+        * List leaderboard records from a given leaderboard around the owner.
+        *
+        * @param session The session of the user.
+        * @param leaderboardId The id of the leaderboard to list.
+        * @param ownerId The owner to retrieve records around.
+        * @param limit Max number of records to return. Between 1 and 100.
+        */
+        virtual void listLeaderboardRecordsAroundOwner(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            const std::string& ownerId,
+            const opt::optional<int>& limit = opt::nullopt,
+            std::function<void(NLeaderboardRecordListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * Write a record to a leaderboard.
+        *
+        * @param session The session for the user.
+        * @param leaderboardId The id of the leaderboard to write.
+        * @param score The score for the leaderboard record.
+        * @param subscore The subscore for the leaderboard record.
+        * @param metadata The metadata for the leaderboard record.
+        */
+        virtual void writeLeaderboardRecord(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            int64_t score,
+            const opt::optional<int64_t>& subscore = opt::nullopt,
+            const opt::optional<std::string>& metadata = opt::nullopt,
+            std::function<void(NLeaderboardRecord)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * A request to submit a score to a tournament.
+        *
+        * @param session The session for the user.
+        * @param tournamentId The tournament ID to write the record for.
+        * @param score The score value to submit.
+        * @param subscore  An optional secondary value.
+        * @param metadata A JSON object of additional properties.
+        */
+        virtual void writeTournamentRecord(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            int64_t score,
+            const opt::optional<int64_t>& subscore = opt::nullopt,
+            const opt::optional<std::string>& metadata = opt::nullopt,
+            std::function<void(NLeaderboardRecord)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * Delete a leaderboard record.
+        *
+        * @param session The session of the user.
+        * @param leaderboardId The id of the leaderboard with the record to be deleted.
+        */
+        virtual void deleteLeaderboardRecord(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
     };
 
     using ClientPtr = std::shared_ptr<ClientInterface>;

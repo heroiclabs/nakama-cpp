@@ -1228,4 +1228,116 @@ void DefaultClient::listLeaderboardRecords(
     responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const std::string & leaderboardId, const std::string & ownerId, const opt::optional<int>& limit, std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::LeaderboardRecordList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
+            assign(*list, *data);
+            successCallback(list);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListLeaderboardRecordsAroundOwnerRequest req;
+
+    req.set_leaderboard_id(leaderboardId);
+    req.set_owner_id(ownerId);
+
+    if (limit) req.mutable_limit()->set_value(*limit);
+
+    auto responseReader = _stub->AsyncListLeaderboardRecordsAroundOwner(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::writeLeaderboardRecord(
+    NSessionPtr session,
+    const std::string & leaderboardId,
+    int64_t score,
+    const opt::optional<int64_t>& subscore,
+    const opt::optional<std::string>& metadata,
+    std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::LeaderboardRecord>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NLeaderboardRecord record;
+            assign(record, *data);
+            successCallback(record);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::WriteLeaderboardRecordRequest req;
+
+    req.set_leaderboard_id(leaderboardId);
+    req.mutable_record()->set_score(score);
+    if (subscore) req.mutable_record()->set_subscore(*subscore);
+    if (metadata) req.mutable_record()->set_metadata(*metadata);
+
+    auto responseReader = _stub->AsyncWriteLeaderboardRecord(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::writeTournamentRecord(
+    NSessionPtr session,
+    const std::string & tournamentId,
+    int64_t score,
+    const opt::optional<int64_t>& subscore,
+    const opt::optional<std::string>& metadata,
+    std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::LeaderboardRecord>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NLeaderboardRecord record;
+            assign(record, *data);
+            successCallback(record);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::WriteTournamentRecordRequest req;
+
+    req.set_tournament_id(tournamentId);
+    req.mutable_record()->set_score(score);
+    if (subscore) req.mutable_record()->set_subscore(*subscore);
+    if (metadata) req.mutable_record()->set_metadata(*metadata);
+
+    auto responseReader = _stub->AsyncWriteTournamentRecord(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::deleteLeaderboardRecord(NSessionPtr session, const std::string & leaderboardId, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::DeleteLeaderboardRecordRequest req;
+
+    req.set_leaderboard_id(leaderboardId);
+
+    auto responseReader = _stub->AsyncDeleteLeaderboardRecord(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
 }

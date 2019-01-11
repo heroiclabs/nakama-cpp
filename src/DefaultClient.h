@@ -391,6 +391,42 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void listLeaderboardRecordsAroundOwner(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            const std::string& ownerId,
+            const opt::optional<int>& limit,
+            std::function<void(NLeaderboardRecordListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void writeLeaderboardRecord(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            int64_t score,
+            const opt::optional<int64_t>& subscore,
+            const opt::optional<std::string>& metadata,
+            std::function<void(NLeaderboardRecord)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void writeTournamentRecord(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            int64_t score,
+            const opt::optional<int64_t>& subscore,
+            const opt::optional<std::string>& metadata,
+            std::function<void(NLeaderboardRecord)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void deleteLeaderboardRecord(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);
