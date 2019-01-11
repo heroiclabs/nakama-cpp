@@ -1376,4 +1376,53 @@ void DefaultClient::listMatches(
     responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::listNotifications(
+    NSessionPtr session,
+    const opt::optional<int>& limit,
+    const opt::optional<std::string>& cacheableCursor,
+    std::function<void(NNotificationListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::NotificationList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NNotificationListPtr list(new NNotificationList());
+            assign(*list, *data);
+            successCallback(list);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListNotificationsRequest req;
+
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (cacheableCursor) req.set_cacheable_cursor(*cacheableCursor);
+
+    auto responseReader = _stub->AsyncListNotifications(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::deleteNotifications(NSessionPtr session, const std::vector<std::string>& notificationIds, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::DeleteNotificationsRequest req;
+
+    for (auto& id : notificationIds)
+    {
+        req.add_ids(id);
+    }
+
+    auto responseReader = _stub->AsyncDeleteNotifications(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
 }

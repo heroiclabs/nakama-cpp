@@ -32,6 +32,7 @@
 #include "nakama-cpp/data/NFriends.h"
 #include "nakama-cpp/data/NLeaderboardRecordList.h"
 #include "nakama-cpp/data/NMatchList.h"
+#include "nakama-cpp/data/NNotificationList.h"
 
 namespace Nakama {
 
@@ -799,6 +800,34 @@ namespace Nakama {
             const opt::optional<std::string>& label = opt::nullopt,
             const opt::optional<bool>& authoritative = opt::nullopt,
             std::function<void(NMatchListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * List notifications for the user with an optional cursor.
+        *
+        * @param session The session of the user.
+        * @param limit The number of notifications to list.
+        * @param cacheableCursor A cursor for the current position in notifications to list.
+        */
+        virtual void listNotifications(
+            NSessionPtr session,
+            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<std::string>& cacheableCursor = opt::nullopt,
+            std::function<void(NNotificationListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * Delete one or more notifications by id.
+        *
+        * @param session The session of the user.
+        * @param notificationIds The notification ids to remove.
+        */
+        virtual void deleteNotifications(
+            NSessionPtr session,
+            const std::vector<std::string>& notificationIds,
+            std::function<void()> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
     };

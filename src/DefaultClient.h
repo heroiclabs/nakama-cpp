@@ -438,6 +438,21 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void listNotifications(
+            NSessionPtr session,
+            const opt::optional<int>& limit,
+            const opt::optional<std::string>& cacheableCursor,
+            std::function<void(NNotificationListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void deleteNotifications(
+            NSessionPtr session,
+            const std::vector<std::string>& notificationIds,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);

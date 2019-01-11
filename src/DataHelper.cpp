@@ -176,4 +176,21 @@ void assign(NMatch & match, const nakama::api::Match & data)
     assign(match.label, data.label());
 }
 
+void assign(NNotificationList & list, const nakama::api::NotificationList & data)
+{
+    assign(list.notifications, data.notifications());
+    assign(list.cacheable_cursor, data.cacheable_cursor());
+}
+
+void assign(NNotification & notif, const nakama::api::Notification & data)
+{
+    assign(notif.id, data.id());
+    assign(notif.subject, data.subject());
+    assign(notif.content, data.content());
+    assign(notif.code, data.code());
+    assign(notif.sender_id, data.sender_id());
+    assign(notif.create_time, data.create_time());
+    assign(notif.persistent, data.persistent());
+}
+
 }
