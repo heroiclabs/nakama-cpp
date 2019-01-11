@@ -163,4 +163,17 @@ void assign(NLeaderboardRecord & record, const nakama::api::LeaderboardRecord & 
     assign(record.rank, data.rank());
 }
 
+void assign(NMatchList & list, const nakama::api::MatchList & data)
+{
+    assign(list.matches, data.matches());
+}
+
+void assign(NMatch & match, const nakama::api::Match & data)
+{
+    assign(match.match_id, data.match_id());
+    assign(match.size, data.size());
+    assign(match.authoritative, data.authoritative());
+    assign(match.label, data.label());
+}
+
 }

@@ -31,6 +31,7 @@
 #include "nakama-cpp/data/NUserGroupList.h"
 #include "nakama-cpp/data/NFriends.h"
 #include "nakama-cpp/data/NLeaderboardRecordList.h"
+#include "nakama-cpp/data/NMatchList.h"
 
 namespace Nakama {
 
@@ -777,6 +778,27 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& leaderboardId,
             std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * Fetch a list of matches active on the server.
+        *
+        * @param session The session of the user.
+        * @param min The minimum number of match participants.
+        * @param max The maximum number of match participants.
+        * @param limit The number of matches to list.
+        * @param authoritative <c>True</c> to include authoritative matches.
+        * @param label The label to filter the match list on.
+        */
+        virtual void listMatches(
+            NSessionPtr session,
+            const opt::optional<int>& min_size = opt::nullopt,
+            const opt::optional<int>& max_size = opt::nullopt,
+            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<std::string>& label = opt::nullopt,
+            const opt::optional<bool>& authoritative = opt::nullopt,
+            std::function<void(NMatchListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
     };

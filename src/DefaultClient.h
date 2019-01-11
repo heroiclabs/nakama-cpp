@@ -427,6 +427,17 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void listMatches(
+            NSessionPtr session,
+            const opt::optional<int>& min_size,
+            const opt::optional<int>& max_size,
+            const opt::optional<int>& limit,
+            const opt::optional<std::string>& label,
+            const opt::optional<bool>& authoritative,
+            std::function<void(NMatchListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);

@@ -24,6 +24,7 @@
 #include "nakama-cpp/data/NUserGroupList.h"
 #include "nakama-cpp/data/NFriends.h"
 #include "nakama-cpp/data/NLeaderboardRecordList.h"
+#include "nakama-cpp/data/NMatchList.h"
 #include "api/github.com/heroiclabs/nakama/api/api.pb.h"
 
 namespace Nakama {
@@ -46,6 +47,8 @@ namespace Nakama {
     void assign(NFriends& friends, const nakama::api::Friends& data);
     void assign(NLeaderboardRecordList& list, const nakama::api::LeaderboardRecordList& data);
     void assign(NLeaderboardRecord& record, const nakama::api::LeaderboardRecord& data);
+    void assign(NMatchList& list, const nakama::api::MatchList& data);
+    void assign(NMatch& match, const nakama::api::Match& data);
 
     template <class T>
     void assign(T& b, const T& data)

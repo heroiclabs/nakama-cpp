@@ -1340,4 +1340,40 @@ void DefaultClient::deleteLeaderboardRecord(NSessionPtr session, const std::stri
     responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::listMatches(
+    NSessionPtr session,
+    const opt::optional<int>& min_size,
+    const opt::optional<int>& max_size,
+    const opt::optional<int>& limit,
+    const opt::optional<std::string>& label,
+    const opt::optional<bool>& authoritative,
+    std::function<void(NMatchListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::MatchList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NMatchListPtr match_list(new NMatchList());
+            assign(*match_list, *data);
+            successCallback(match_list);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListMatchesRequest req;
+
+    if (min_size) req.mutable_min_size()->set_value(*min_size);
+    if (max_size) req.mutable_max_size()->set_value(*max_size);
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (label) req.mutable_label()->set_value(*label);
+    if (authoritative) req.mutable_authoritative()->set_value(*authoritative);
+
+    auto responseReader = _stub->AsyncListMatches(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
 }
