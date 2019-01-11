@@ -16,19 +16,23 @@
 
 #pragma once
 
-#include "nonstd/optional.hpp"
-#include <cstdint>
+#include <string>
 
 namespace Nakama {
 
-    enum class NUserGroupState
+    // Storage objects to get.
+    struct NAKAMA_API NReadStorageObjectId
     {
-        SUPERADMIN       = 0,   // The user is a superadmin with full control of the group.
-        ADMIN            = 1,   // The user is an admin with additional privileges.
-        MEMBER           = 2,   // The user is a regular member.
-        JOIN_REQUEST     = 3    // The user has requested to join the group
+        std::string collection;     // The collection which stores the object.
+        std::string key;            // The key of the object within the collection.
+        std::string user_id;        // The user owner of the object.
     };
 
-    using NTimestamp = uint64_t;
-    namespace opt = nonstd;
+    // Storage objects to delete.
+    struct NAKAMA_API NDeleteStorageObjectId
+    {
+        std::string collection;     // The collection which stores the object.
+        std::string key;            // The key of the object within the collection.
+        std::string version;        // The version hash of the object.
+    };
 }

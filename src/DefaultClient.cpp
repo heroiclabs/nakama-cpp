@@ -1585,4 +1585,204 @@ void DefaultClient::joinTournament(NSessionPtr session, const std::string & tour
     responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::listStorageObjects(
+    NSessionPtr session,
+    const std::string & collection,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cursor,
+    std::function<void(NStorageObjectListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::StorageObjectList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NStorageObjectListPtr list(new NStorageObjectList());
+            assign(*list, *data);
+            successCallback(list);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListStorageObjectsRequest req;
+
+    req.set_collection(collection);
+
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (cursor) req.set_cursor(*cursor);
+
+    auto responseReader = _stub->AsyncListStorageObjects(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::listUsersStorageObjects(
+    NSessionPtr session,
+    const std::string & collection,
+    const std::string & userId,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cursor,
+    std::function<void(NStorageObjectListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::StorageObjectList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NStorageObjectListPtr list(new NStorageObjectList());
+            assign(*list, *data);
+            successCallback(list);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListStorageObjectsRequest req;
+
+    req.set_collection(collection);
+    req.set_user_id(userId);
+
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (cursor) req.set_cursor(*cursor);
+
+    auto responseReader = _stub->AsyncListStorageObjects(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::writeStorageObjects(
+    NSessionPtr session,
+    const std::vector<NStorageObjectWrite>& objects,
+    std::function<void(const NStorageObjectAcks&)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::StorageObjectAcks>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NStorageObjectAcks acks;
+            assign(acks, data->acks());
+            successCallback(acks);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::WriteStorageObjectsRequest req;
+
+    for (auto& obj : objects)
+    {
+        auto* write_obj = req.mutable_objects()->Add();
+
+        write_obj->set_collection(obj.collection);
+        write_obj->set_key(obj.key);
+        write_obj->set_value(obj.value);
+        write_obj->set_version(obj.version);
+
+        if (obj.permission_read)
+            write_obj->mutable_permission_read()->set_value(*obj.permission_read);
+
+        if (obj.permission_write)
+            write_obj->mutable_permission_write()->set_value(*obj.permission_write);
+    }
+
+    auto responseReader = _stub->AsyncWriteStorageObjects(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::readStorageObjects(
+    NSessionPtr session,
+    const std::vector<NReadStorageObjectId>& objectIds,
+    std::function<void(const NStorageObjects&)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::StorageObjects>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NStorageObjects objects;
+            assign(objects, data->objects());
+            successCallback(objects);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ReadStorageObjectsRequest req;
+
+    for (auto& obj : objectIds)
+    {
+        auto* write_obj = req.mutable_object_ids()->Add();
+
+        write_obj->set_collection(obj.collection);
+        write_obj->set_key(obj.key);
+        write_obj->set_user_id(obj.user_id);
+    }
+
+    auto responseReader = _stub->AsyncReadStorageObjects(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::deleteStorageObjects(NSessionPtr session, const std::vector<NDeleteStorageObjectId>& objectIds, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::DeleteStorageObjectsRequest req;
+
+    for (auto& obj : objectIds)
+    {
+        auto* write_obj = req.mutable_object_ids()->Add();
+
+        write_obj->set_collection(obj.collection);
+        write_obj->set_key(obj.key);
+        write_obj->set_version(obj.version);
+    }
+
+    auto responseReader = _stub->AsyncDeleteStorageObjects(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
+void DefaultClient::rpc(
+    NSessionPtr session,
+    const std::string & id,
+    const opt::optional<std::string>& payload,
+    std::function<void(const NRpc&)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::Rpc>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NRpc rpc;
+            assign(rpc, *data);
+            successCallback(rpc);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::Rpc req;
+
+    req.set_id(id);
+
+    if (payload)
+        req.set_payload(*payload);
+
+    auto responseReader = _stub->AsyncRpcFunc(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
 }

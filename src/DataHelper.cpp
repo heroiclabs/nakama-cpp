@@ -252,4 +252,38 @@ void assign(NTournamentRecordList & list, const nakama::api::TournamentRecordLis
     assign(list.prev_cursor, data.prev_cursor());
 }
 
+void assign(NStorageObjectList & list, const nakama::api::StorageObjectList & data)
+{
+    assign(list.objects, data.objects());
+    assign(list.cursor, data.cursor());
+}
+
+void assign(NStorageObject & obj, const nakama::api::StorageObject & data)
+{
+    assign(obj.collection, data.collection());
+    assign(obj.create_time, data.create_time());
+    assign(obj.key, data.key());
+    assign(obj.permission_read, data.permission_read());
+    assign(obj.permission_write, data.permission_write());
+    assign(obj.update_time, data.update_time());
+    assign(obj.user_id, data.user_id());
+    assign(obj.value, data.value());
+    assign(obj.version, data.version());
+}
+
+void assign(NStorageObjectAck & ack, const nakama::api::StorageObjectAck & data)
+{
+    assign(ack.collection, data.collection());
+    assign(ack.key, data.key());
+    assign(ack.user_id, data.user_id());
+    assign(ack.version, data.version());
+}
+
+void assign(NRpc & rpc, const nakama::api::Rpc & data)
+{
+    assign(rpc.id, data.id());
+    assign(rpc.payload, data.payload());
+    assign(rpc.http_key, data.http_key());
+}
+
 }

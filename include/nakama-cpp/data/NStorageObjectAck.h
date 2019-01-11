@@ -16,19 +16,20 @@
 
 #pragma once
 
-#include "nonstd/optional.hpp"
-#include <cstdint>
+#include "nakama-cpp/data/NTypes.h"
+#include <vector>
 
 namespace Nakama {
 
-    enum class NUserGroupState
+    // A storage acknowledgement.
+    struct NAKAMA_API NStorageObjectAck
     {
-        SUPERADMIN       = 0,   // The user is a superadmin with full control of the group.
-        ADMIN            = 1,   // The user is an admin with additional privileges.
-        MEMBER           = 2,   // The user is a regular member.
-        JOIN_REQUEST     = 3    // The user has requested to join the group
+        std::string collection;                // The collection which stores the object.
+        std::string key;                       // The key of the object within the collection.
+        std::string version;                   // The version hash of the object.
+        std::string user_id;                   // The owner of the object.
     };
 
-    using NTimestamp = uint64_t;
-    namespace opt = nonstd;
+    // Batch of acknowledgements.
+    using NStorageObjectAcks = std::vector<NStorageObjectAck>;
 }

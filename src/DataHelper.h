@@ -29,6 +29,9 @@
 #include "nakama-cpp/data/NChannelMessageList.h"
 #include "nakama-cpp/data/NTournamentList.h"
 #include "nakama-cpp/data/NTournamentRecordList.h"
+#include "nakama-cpp/data/NStorageObjectList.h"
+#include "nakama-cpp/data/NStorageObjectAck.h"
+#include "nakama-cpp/data/NRpc.h"
 #include "api/github.com/heroiclabs/nakama/api/api.pb.h"
 
 namespace Nakama {
@@ -61,6 +64,10 @@ namespace Nakama {
     void assign(NTournamentList& list, const nakama::api::TournamentList& data);
     void assign(NTournament& tournament, const nakama::api::Tournament& data);
     void assign(NTournamentRecordList& list, const nakama::api::TournamentRecordList& data);
+    void assign(NStorageObjectList& list, const nakama::api::StorageObjectList& data);
+    void assign(NStorageObject& obj, const nakama::api::StorageObject& data);
+    void assign(NStorageObjectAck& ack, const nakama::api::StorageObjectAck& data);
+    void assign(NRpc& rpc, const nakama::api::Rpc& data);
 
     template <class T>
     void assign(T& b, const T& data)

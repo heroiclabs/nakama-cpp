@@ -501,6 +501,54 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void listStorageObjects(
+            NSessionPtr session,
+            const std::string& collection,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<std::string>& cursor,
+            std::function<void(NStorageObjectListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void listUsersStorageObjects(
+            NSessionPtr session,
+            const std::string& collection,
+            const std::string& userId,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<std::string>& cursor,
+            std::function<void(NStorageObjectListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void writeStorageObjects(
+            NSessionPtr session,
+            const std::vector<NStorageObjectWrite>& objects,
+            std::function<void(const NStorageObjectAcks&)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void readStorageObjects(
+            NSessionPtr session,
+            const std::vector<NReadStorageObjectId>& objectIds,
+            std::function<void(const NStorageObjects&)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void deleteStorageObjects(
+            NSessionPtr session,
+            const std::vector<NDeleteStorageObjectId>& objectIds,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
+        void rpc(
+            NSessionPtr session,
+            const std::string& id,
+            const opt::optional<std::string>& payload,
+            std::function<void(const NRpc&)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);

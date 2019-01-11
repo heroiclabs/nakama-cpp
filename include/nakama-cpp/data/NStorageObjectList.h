@@ -16,19 +16,18 @@
 
 #pragma once
 
-#include "nonstd/optional.hpp"
-#include <cstdint>
+#include "nakama-cpp/data/NStorageObject.h"
+#include <vector>
+#include <memory>
 
 namespace Nakama {
 
-    enum class NUserGroupState
+    // List of storage objects.
+    struct NAKAMA_API NStorageObjectList
     {
-        SUPERADMIN       = 0,   // The user is a superadmin with full control of the group.
-        ADMIN            = 1,   // The user is an admin with additional privileges.
-        MEMBER           = 2,   // The user is a regular member.
-        JOIN_REQUEST     = 3    // The user has requested to join the group
+        std::vector<NStorageObject> objects;  // The list of storage objects.
+        std::string cursor;                   // The cursor associated with the query a page of results.
     };
 
-    using NTimestamp = uint64_t;
-    namespace opt = nonstd;
+    using NStorageObjectListPtr = std::shared_ptr<NStorageObjectList>;
 }

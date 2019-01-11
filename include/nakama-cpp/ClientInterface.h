@@ -36,10 +36,13 @@
 #include "nakama-cpp/data/NChannelMessageList.h"
 #include "nakama-cpp/data/NTournamentList.h"
 #include "nakama-cpp/data/NTournamentRecordList.h"
+#include "nakama-cpp/data/NStorageObjectList.h"
+#include "nakama-cpp/data/NStorageObjectAck.h"
+#include "nakama-cpp/data/NStorageObjectWrite.h"
+#include "nakama-cpp/data/NStorageObjectId.h"
+#include "nakama-cpp/data/NRpc.h"
 
 namespace Nakama {
-
-    namespace opt = nonstd;
 
     typedef std::function<void(const NError&)> ErrorCallback;
 
@@ -922,6 +925,96 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& tournamentId,
             std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * List storage objects in a collection which have public read access.
+         *
+         * @param session The session of the user.
+         * @param collection The collection to list over.
+         * @param limit The number of objects to list.
+         * @param cursor A cursor to paginate over the collection.
+         */
+        virtual void listStorageObjects(
+            NSessionPtr session,
+            const std::string& collection,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt,
+            std::function<void(NStorageObjectListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * List storage objects in a collection which belong to a specific user and have public read access.
+         *
+         * @param session The session of the user.
+         * @param collection The collection to list over.
+         * @param userId The user ID of the user to list objects for.
+         * @param limit The number of objects to list.
+         * @param cursor A cursor to paginate over the collection.
+         */
+        virtual void listUsersStorageObjects(
+            NSessionPtr session,
+            const std::string& collection,
+            const std::string& userId,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt,
+            std::function<void(NStorageObjectListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Write objects to the storage engine.
+         *
+         * @param session The session of the user.
+         * @param objects The objects to write.
+         */
+        virtual void writeStorageObjects(
+            NSessionPtr session,
+            const std::vector<NStorageObjectWrite>& objects,
+            std::function<void(const NStorageObjectAcks&)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Read one or more objects from the storage engine.
+         *
+         * @param session The session of the user.
+         * @param objectIds The objects to read.
+         */
+        virtual void readStorageObjects(
+            NSessionPtr session,
+            const std::vector<NReadStorageObjectId>& objectIds,
+            std::function<void(const NStorageObjects&)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Delete one or more storage objects.
+         *
+         * @param session The session of the user.
+         * @param objectIds The ids of the objects to delete.
+         */
+        virtual void deleteStorageObjects(
+            NSessionPtr session,
+            const std::vector<NDeleteStorageObjectId>& objectIds,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Execute a Lua function with an input payload on the server.
+         *
+         * @param session The session of the user.
+         * @param id The id of the function to execute on the server.
+         * @param payload The payload to send with the function call.
+         */
+        virtual void rpc(
+            NSessionPtr session,
+            const std::string& id,
+            const opt::optional<std::string>& payload = opt::nullopt,
+            std::function<void(const NRpc&)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
     };

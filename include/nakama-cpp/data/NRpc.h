@@ -16,19 +16,15 @@
 
 #pragma once
 
-#include "nonstd/optional.hpp"
-#include <cstdint>
+#include <string>
 
 namespace Nakama {
 
-    enum class NUserGroupState
+    struct NAKAMA_API NRpc
     {
-        SUPERADMIN       = 0,   // The user is a superadmin with full control of the group.
-        ADMIN            = 1,   // The user is an admin with additional privileges.
-        MEMBER           = 2,   // The user is a regular member.
-        JOIN_REQUEST     = 3    // The user has requested to join the group
+        std::string id;            // The identifier of the function.
+        std::string payload;       // The payload of the function which must be a JSON object.
+        std::string http_key;      // The authentication key used when executed as a non-client HTTP request.
     };
 
-    using NTimestamp = uint64_t;
-    namespace opt = nonstd;
 }
