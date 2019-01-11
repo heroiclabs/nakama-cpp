@@ -34,6 +34,7 @@
 #include "nakama-cpp/data/NMatchList.h"
 #include "nakama-cpp/data/NNotificationList.h"
 #include "nakama-cpp/data/NChannelMessageList.h"
+#include "nakama-cpp/data/NTournamentList.h"
 
 namespace Nakama {
 
@@ -848,6 +849,29 @@ namespace Nakama {
             const opt::optional<std::string>& cursor = opt::nullopt,
             const opt::optional<bool>& forward = opt::nullopt,
             std::function<void(NChannelMessageListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+        * List active/upcoming tournaments based on given filters.
+        *
+        * @param session The session of the user.
+        * @param categoryStart The start of the categories to include. Defaults to 0.
+        * @param categoryEnd The end of the categories to include. Defaults to 128.
+        * @param startTime The start time for tournaments. Defaults to current Unix time.
+        * @param endTime The end time for tournaments. Defaults to +1 year from current Unix time.
+        * @param limit Max number of records to return. Between 1 and 100.
+        * @param cursor A next page cursor for listings.
+        */
+        virtual void listTournaments(
+            NSessionPtr session,
+            const opt::optional<int>& categoryStart = opt::nullopt,
+            const opt::optional<int>& categoryEnd = opt::nullopt,
+            const opt::optional<NTimestamp>& startTime = opt::nullopt,
+            const opt::optional<NTimestamp>& endTime = opt::nullopt,
+            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt,
+            std::function<void(NTournamentListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
     };
