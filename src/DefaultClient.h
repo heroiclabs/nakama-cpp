@@ -494,6 +494,13 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void joinTournament(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);

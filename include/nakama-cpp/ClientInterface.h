@@ -911,6 +911,19 @@ namespace Nakama {
             std::function<void(NTournamentRecordListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
+
+        /**
+         * Join a tournament if it has open membership or request to join it.
+         *
+         * @param session The session of the user.
+         * @param tournamentId The id of the tournament to join.
+         */
+        virtual void joinTournament(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
     };
 
     using ClientPtr = std::shared_ptr<ClientInterface>;

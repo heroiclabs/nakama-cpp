@@ -1569,4 +1569,20 @@ void DefaultClient::listTournamentRecordsAroundOwner(
     responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::joinTournament(NSessionPtr session, const std::string & tournamentId, std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+
+    rpcRequest->successCallback = successCallback;
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::JoinTournamentRequest req;
+
+    req.set_tournament_id(tournamentId);
+
+    auto responseReader = _stub->AsyncJoinTournament(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+}
+
 }
