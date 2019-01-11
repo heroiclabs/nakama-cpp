@@ -218,4 +218,30 @@ void assign(NChannelMessage & msg, const nakama::api::ChannelMessage & data)
     assign(msg.username, data.username());
 }
 
+void assign(NTournamentList & list, const nakama::api::TournamentList & data)
+{
+    assign(list.tournaments, data.tournaments());
+    assign(list.cursor, data.cursor());
+}
+
+void assign(NTournament & tournament, const nakama::api::Tournament & data)
+{
+    assign(tournament.id, data.id());
+    assign(tournament.title, data.title());
+    assign(tournament.description, data.description());
+    assign(tournament.category, data.category());
+    assign(tournament.sort_order, data.sort_order());
+    assign(tournament.size, data.size());
+    assign(tournament.max_size, data.max_size());
+    assign(tournament.max_num_score, data.max_num_score());
+    assign(tournament.can_enter ,data.can_enter());
+    assign(tournament.create_time, data.create_time());
+    assign(tournament.start_time, data.start_time());
+    assign(tournament.end_time, data.end_time());
+    assign(tournament.end_active, data.end_active());
+    assign(tournament.next_reset, data.next_reset());
+    assign(tournament.duration, data.duration());
+    assign(tournament.metadata, data.metadata());
+}
+
 }

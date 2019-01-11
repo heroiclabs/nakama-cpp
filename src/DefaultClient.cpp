@@ -1459,4 +1459,42 @@ void DefaultClient::listChannelMessages(
     responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
 }
 
+void DefaultClient::listTournaments(
+    NSessionPtr session,
+    const opt::optional<uint32_t>& categoryStart,
+    const opt::optional<uint32_t>& categoryEnd,
+    const opt::optional<uint32_t>& startTime,
+    const opt::optional<uint32_t>& endTime,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cursor,
+    std::function<void(NTournamentListPtr)> successCallback, ErrorCallback errorCallback)
+{
+    RpcRequest* rpcRequest = createRpcRequest(session);
+    auto data(make_shared<nakama::api::TournamentList>());
+
+    if (successCallback)
+    {
+        rpcRequest->successCallback = [data, successCallback]()
+        {
+            NTournamentListPtr list(new NTournamentList());
+            assign(*list, *data);
+            successCallback(list);
+        };
+    }
+    rpcRequest->errorCallback = errorCallback;
+
+    nakama::api::ListTournamentsRequest req;
+
+    if (categoryStart) req.mutable_category_start()->set_value(*categoryStart);
+    if (categoryEnd) req.mutable_category_end()->set_value(*categoryEnd);
+    if (startTime) req.mutable_start_time()->set_value(*startTime);
+    if (endTime) req.mutable_end_time()->set_value(*endTime);
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (cursor) req.set_cursor(*cursor);
+
+    auto responseReader = _stub->AsyncListTournaments(&rpcRequest->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+}
+
 }

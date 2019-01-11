@@ -36,10 +36,10 @@ namespace Nakama {
         NTimestamp create_time = 0;    // The UNIX time when the tournament was created.
         NTimestamp start_time = 0;     // The UNIX time when the tournament will start.
         NTimestamp end_time = 0;       // The UNIX time when the tournament will be stopped.
-        NTimestamp end_active = 0;     // The UNIX timestamp when the tournament stops being active until next reset. A computed value.
-        NTimestamp next_reset = 0;     // The UNIX timestamp when the tournament is next playable. A computed value.
-        std::string metadata;          // Additional information stored as a JSON object.
+        uint32_t end_active = 0;       // The UNIX timestamp when the tournament stops being active until next reset. A computed value.
+        uint32_t next_reset = 0;       // The UNIX timestamp when the tournament is next playable. A computed value.
         uint32_t duration = 0;         // The UNIX timestamp for duration of a tournament.
+        std::string metadata;          // Additional information stored as a JSON object.
     };
 
 }

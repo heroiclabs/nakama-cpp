@@ -27,6 +27,7 @@
 #include "nakama-cpp/data/NMatchList.h"
 #include "nakama-cpp/data/NNotificationList.h"
 #include "nakama-cpp/data/NChannelMessageList.h"
+#include "nakama-cpp/data/NTournamentList.h"
 #include "api/github.com/heroiclabs/nakama/api/api.pb.h"
 
 namespace Nakama {
@@ -56,6 +57,8 @@ namespace Nakama {
     void assign(NNotification& notif, const nakama::api::Notification& data);
     void assign(NChannelMessageList& list, const nakama::api::ChannelMessageList& data);
     void assign(NChannelMessage& msg, const nakama::api::ChannelMessage& data);
+    void assign(NTournamentList& list, const nakama::api::TournamentList& data);
+    void assign(NTournament& tournament, const nakama::api::Tournament& data);
 
     template <class T>
     void assign(T& b, const T& data)

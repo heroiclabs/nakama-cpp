@@ -865,11 +865,11 @@ namespace Nakama {
         */
         virtual void listTournaments(
             NSessionPtr session,
-            const opt::optional<int>& categoryStart = opt::nullopt,
-            const opt::optional<int>& categoryEnd = opt::nullopt,
-            const opt::optional<NTimestamp>& startTime = opt::nullopt,
-            const opt::optional<NTimestamp>& endTime = opt::nullopt,
-            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<uint32_t>& categoryStart = opt::nullopt,
+            const opt::optional<uint32_t>& categoryEnd = opt::nullopt,
+            const opt::optional<uint32_t>& startTime = opt::nullopt,
+            const opt::optional<uint32_t>& endTime = opt::nullopt,
+            const opt::optional<int32_t>& limit = opt::nullopt,
             const opt::optional<std::string>& cursor = opt::nullopt,
             std::function<void(NTournamentListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr

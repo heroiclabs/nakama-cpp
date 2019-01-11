@@ -463,6 +463,18 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void listTournaments(
+            NSessionPtr session,
+            const opt::optional<uint32_t>& categoryStart,
+            const opt::optional<uint32_t>& categoryEnd,
+            const opt::optional<uint32_t>& startTime,
+            const opt::optional<uint32_t>& endTime,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<std::string>& cursor,
+            std::function<void(NTournamentListPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RpcRequest* createRpcRequest(NSessionPtr session);
         void onResponse(void* tag, bool ok);
