@@ -52,44 +52,44 @@ DefaultSession::DefaultSession(const std::string & token, bool created)
     _user_id = getJsonFieldValue(json, "uid");
 }
 
-const std::string & DefaultSession::getAuthToken()
+const std::string & DefaultSession::getAuthToken() const
 {
     return _token;
 }
 
-bool DefaultSession::isCreated()
+bool DefaultSession::isCreated() const
 {
     return _created;
 }
 
-const std::string & DefaultSession::getUsername()
+const std::string & DefaultSession::getUsername() const
 {
     return _username;
 }
 
-const std::string & DefaultSession::getUserId()
+const std::string & DefaultSession::getUserId() const
 {
     return _user_id;
 }
 
-NTimestamp DefaultSession::getCreateTime()
+NTimestamp DefaultSession::getCreateTime() const
 {
     return _create_time;
 }
 
-NTimestamp DefaultSession::getExpireTime()
+NTimestamp DefaultSession::getExpireTime() const
 {
     return _expire_time;
 }
 
-bool DefaultSession::isExpired()
+bool DefaultSession::isExpired() const
 {
     milliseconds ms = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
     return isExpired(ms.count());
 }
 
-bool DefaultSession::isExpired(NTimestamp now)
+bool DefaultSession::isExpired(NTimestamp now) const
 {
     return now >= _expire_time;
 }

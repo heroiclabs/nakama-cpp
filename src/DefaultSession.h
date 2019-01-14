@@ -25,14 +25,14 @@ namespace Nakama {
     public:
         DefaultSession(const std::string& token, bool created);
 
-        const std::string& getAuthToken() override;
-        bool isCreated() override;
-        const std::string& getUsername() override;
-        const std::string& getUserId() override;
-        NTimestamp getCreateTime() override;
-        NTimestamp getExpireTime() override;
-        bool isExpired() override;
-        bool isExpired(NTimestamp now) override;
+        const std::string& getAuthToken() const override;
+        bool isCreated() const override;
+        const std::string& getUsername() const override;
+        const std::string& getUserId() const override;
+        NTimestamp getCreateTime() const override;
+        NTimestamp getExpireTime() const override;
+        bool isExpired() const override;
+        bool isExpired(NTimestamp now) const override;
 
     private:
         std::string _token;

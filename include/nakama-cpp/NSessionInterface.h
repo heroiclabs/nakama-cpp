@@ -30,37 +30,37 @@ namespace Nakama {
         /**
         * @return The authentication token used to construct this session.
         */
-        virtual const std::string& getAuthToken() = 0;
+        virtual const std::string& getAuthToken() const = 0;
 
         /**
         * @return <c>True</c> if the user account for this session was just created.
         */
-        virtual bool isCreated() = 0;
+        virtual bool isCreated() const = 0;
 
         /**
         * @return The username of the user who owns this session.
         */
-        virtual const std::string& getUsername() = 0;
+        virtual const std::string& getUsername() const = 0;
 
         /**
         * @return The ID of the user who owns this session.
         */
-        virtual const std::string& getUserId() = 0;
+        virtual const std::string& getUserId() const = 0;
 
         /**
         * @return The timestamp in seconds when this session object was created.
         */
-        virtual NTimestamp getCreateTime() = 0;
+        virtual NTimestamp getCreateTime() const = 0;
 
         /**
         * @return The timestamp in seconds when this session will expire.
         */
-        virtual NTimestamp getExpireTime() = 0;
+        virtual NTimestamp getExpireTime() const = 0;
 
         /**
         * @return <c>True</c> if the session has expired against the current time.
         */
-        virtual bool isExpired() = 0;
+        virtual bool isExpired() const = 0;
 
         /**
         * Check if the session has expired against the input time.
@@ -68,7 +68,7 @@ namespace Nakama {
         * @param now The time to compare against the session.
         * @return <c>true</c> if the session has expired.
         */
-        virtual bool isExpired(NTimestamp now) = 0;
+        virtual bool isExpired(NTimestamp now) const = 0;
     };
 
     using NSessionPtr = std::shared_ptr<NSessionInterface>;
