@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "nakama-cpp/ClientInterface.h"
+#include "nakama-cpp/NClientInterface.h"
 #include "nakama-cpp/DefaultClient.h"
 #include "api/github.com/heroiclabs/nakama/apigrpc/apigrpc.grpc.pb.h"
 #include <set>
@@ -35,7 +35,7 @@ namespace Nakama {
      * A client to interact with Nakama server.
      * Don't use it directly, use `createDefaultClient` instead.
      */
-    class DefaultClient : public ClientInterface
+    class DefaultClient : public NClientInterface
     {
     public:
         DefaultClient(const DefaultClientParameters& parameters);

@@ -49,10 +49,10 @@ namespace Nakama {
     /**
      * A client interface to interact with Nakama server.
      */
-    class ClientInterface
+    class NClientInterface
     {
     public:
-        virtual ~ClientInterface() {}
+        virtual ~NClientInterface() {}
 
         /**
          * Disconnects the client. This function kills all outgoing exchanges immediately without waiting.
@@ -1019,5 +1019,5 @@ namespace Nakama {
         ) = 0;
     };
 
-    using ClientPtr = std::shared_ptr<ClientInterface>;
+    using NClientPtr = std::shared_ptr<NClientInterface>;
 }

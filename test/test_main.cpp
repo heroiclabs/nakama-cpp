@@ -35,7 +35,7 @@ void test_authenticateDevice()
 
     setWorkingClientParameters(parameters);
 
-    ClientPtr client = createDefaultClient(parameters);
+    NClientPtr client = createDefaultClient(parameters);
     bool continue_loop = true;
 
     auto successCallback = [&continue_loop](NSessionPtr session)
@@ -50,7 +50,7 @@ void test_authenticateDevice()
         continue_loop = false;
     };
 
-    client->authenticateDevice("mytestdevice0000", "", true, successCallback, errorCallback);
+    client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
 
     std::chrono::milliseconds sleep_period(15);
 
@@ -70,7 +70,7 @@ void test_authenticateDevice2()
 
     setWorkingClientParameters(parameters);
 
-    ClientPtr client = createDefaultClient(parameters);
+    NClientPtr client = createDefaultClient(parameters);
     bool continue_loop = true;
 
     auto successCallback = [&continue_loop](NSessionPtr session)
@@ -85,7 +85,7 @@ void test_authenticateDevice2()
         continue_loop = false;
     };
 
-    client->authenticateDevice("mytestdevice0001", "", false, successCallback, errorCallback);
+    client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
 
     std::chrono::milliseconds sleep_period(15);
 
@@ -105,7 +105,7 @@ void test_connectError()
 
     parameters.port = 1111;
 
-    ClientPtr client = createDefaultClient(parameters);
+    NClientPtr client = createDefaultClient(parameters);
     bool continue_loop = true;
 
     auto successCallback = [&continue_loop](NSessionPtr session)
@@ -120,7 +120,7 @@ void test_connectError()
         continue_loop = false;
     };
 
-    client->authenticateDevice("mytestdevice0001", "", false, successCallback, errorCallback);
+    client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
 
     std::chrono::milliseconds sleep_period(15);
 
@@ -138,7 +138,7 @@ void test_disconnect()
 
     DefaultClientParameters parameters;
 
-    ClientPtr client = createDefaultClient(parameters);
+    NClientPtr client = createDefaultClient(parameters);
     bool continue_loop = true;
 
     auto successCallback = [&continue_loop](NSessionPtr session)
@@ -153,7 +153,7 @@ void test_disconnect()
         continue_loop = false;
     };
 
-    client->authenticateDevice("mytestdevice0001", "", false, successCallback, errorCallback);
+    client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
 
     client->disconnect();
 

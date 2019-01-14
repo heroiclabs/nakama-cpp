@@ -29,7 +29,7 @@ void test_getAccount()
 
     setWorkingClientParameters(parameters);
 
-    ClientPtr client = createDefaultClient(parameters);
+    NClientPtr client = createDefaultClient(parameters);
     bool continue_loop = true;
     NSessionPtr my_session;
 
@@ -53,7 +53,7 @@ void test_getAccount()
         client->getAccount(session, successCallback, errorCallback);
     };
 
-    client->authenticateDevice("mytestdevice0000", "", true, successCallback, errorCallback);
+    client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
 
     std::chrono::milliseconds sleep_period(15);
 

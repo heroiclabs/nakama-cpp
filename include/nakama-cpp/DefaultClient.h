@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "nakama-cpp/ClientInterface.h"
+#include "nakama-cpp/NClientInterface.h"
 
 namespace Nakama {
 
@@ -35,6 +35,6 @@ namespace Nakama {
     /**
      * Creates a default client to interact with Nakama server.
      */
-    ClientPtr createDefaultClient(const DefaultClientParameters& parameters);
+    NClientPtr createDefaultClient(const DefaultClientParameters& parameters);
 
 }

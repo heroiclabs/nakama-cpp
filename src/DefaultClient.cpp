@@ -25,9 +25,9 @@ using namespace std;
 
 namespace Nakama {
 
-ClientPtr createDefaultClient(const DefaultClientParameters& parameters)
+NClientPtr createDefaultClient(const DefaultClientParameters& parameters)
 {
-    ClientPtr client(new DefaultClient(parameters));
+    NClientPtr client(new DefaultClient(parameters));
     return client;
 }
 
