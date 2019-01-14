@@ -33,12 +33,13 @@ namespace Test {
         void createClientWithParameters(const DefaultClientParameters& parameters);
 
         void runTest();
-        void stopTest();
+        void stopTest(bool succeeded = false);
 
         NClientPtr client;
 
     protected:
         bool _continue_loop = true;
+        bool _testSucceeded = false;
     };
 
     void setWorkingClientParameters(DefaultClientParameters& parameters);

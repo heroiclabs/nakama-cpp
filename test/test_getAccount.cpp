@@ -43,7 +43,7 @@ void test_getAccount()
         auto successCallback = [&test](const NAccount& account)
         {
             std::cout << "account user id: " << account.user.id << std::endl;
-            test.stopTest();
+            test.stopTest(true);
         };
 
         test.client->getAccount(session, successCallback, errorCallback);

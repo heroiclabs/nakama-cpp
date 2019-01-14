@@ -34,12 +34,20 @@ void setWorkingClientParameters(DefaultClientParameters& parameters)
 
 // *************************************************************
 
+// stats
+uint32_t g_runTestsCount = 0;
+uint32_t g_failedTestsCount = 0;
+
 NTest::NTest(const char * name)
 {
-    cout << endl << endl;
+    if (g_runTestsCount > 0)
+        cout << endl << endl;
+
     cout << "*************************************" << endl;
     cout << "Running " << name << endl;
     cout << "*************************************" << endl;
+
+    ++g_runTestsCount;
 }
 
 void NTest::createWorkingClient()
@@ -66,14 +74,41 @@ void NTest::runTest()
 
         std::this_thread::sleep_for(sleep_period);
     }
+
+    cout << "Result: ";
+
+    if (_testSucceeded)
+    {
+        cout << "OK" << endl;
+    }
+    else
+    {
+        cout << "Failed!" << endl;
+        ++g_failedTestsCount;
+    }
 }
 
-void NTest::stopTest()
+void NTest::stopTest(bool succeeded)
 {
+    _testSucceeded = succeeded;
     _continue_loop = false;
 }
 
 // *************************************************************
+
+ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
+{
+    if (totalCount > 0)
+    {
+        os << count * 100 / totalCount << "%";
+    }
+    else
+    {
+        os << "0%";
+    }
+
+    return os;
+}
 
 int runAllTests()
 {
@@ -84,6 +119,13 @@ int runAllTests()
     test_disconnect();
     test_restoreSession();
 
+    // total stats
+    uint32_t testsPassed = (g_runTestsCount - g_failedTestsCount);
+
+    cout << endl << endl;
+    cout << "Total tests : " << g_runTestsCount << endl;
+    cout << "Tests passed: " << testsPassed << " ("; printPercent(cout, g_runTestsCount, testsPassed) << ")" << endl;
+    cout << "Tests failed: " << g_failedTestsCount << " ("; printPercent(cout, g_runTestsCount, g_failedTestsCount) << ")" << endl;
     return 0;
 }
 

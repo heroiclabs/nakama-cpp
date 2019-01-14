@@ -40,7 +40,7 @@ void test_connectError()
     auto errorCallback = [&test](const NError& error)
     {
         std::cout << "error: " << error.GetErrorMessage() << std::endl;
-        test.stopTest();
+        test.stopTest(true);
     };
 
     test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
@@ -63,7 +63,7 @@ void test_disconnect()
     auto errorCallback = [&test](const NError& error)
     {
         std::cout << "error: " << error.GetErrorMessage() << std::endl;
-        test.stopTest();
+        test.stopTest(true);
     };
 
     test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
