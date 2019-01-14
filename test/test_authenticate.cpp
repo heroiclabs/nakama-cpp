@@ -21,13 +21,17 @@ namespace Test {
 
 using namespace std;
 
-void test_getAccount()
+void test_authenticateDevice()
 {
     NTest test(__func__);
 
     test.createWorkingClient();
 
-    NSessionPtr my_session;
+    auto successCallback = [&test](NSessionPtr session)
+    {
+        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        test.stopTest();
+    };
 
     auto errorCallback = [&test](const NError& error)
     {
@@ -35,21 +39,30 @@ void test_getAccount()
         test.stopTest();
     };
 
-    auto successCallback = [&test, &my_session, errorCallback](NSessionPtr session)
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
+
+    test.runTest();
+}
+
+void test_authenticateDevice2()
+{
+    NTest test(__func__);
+
+    test.createWorkingClient();
+
+    auto successCallback = [&test](NSessionPtr session)
     {
-        my_session = session;
         std::cout << "session token: " << session->getAuthToken() << std::endl;
-
-        auto successCallback = [&test](const NAccount& account)
-        {
-            std::cout << "account user id: " << account.user.id << std::endl;
-            test.stopTest();
-        };
-
-        test.client->getAccount(session, successCallback, errorCallback);
+        test.stopTest();
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
+    auto errorCallback = [&test](const NError& error)
+    {
+        std::cout << "error: " << error.GetErrorMessage() << std::endl;
+        test.stopTest();
+    };
+
+    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
 
     test.runTest();
 }

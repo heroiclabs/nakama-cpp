@@ -22,109 +22,44 @@ namespace Test {
 using namespace std;
 
 void test_getAccount();
+void test_authenticateDevice();
+void test_authenticateDevice2();
+void test_connectError();
+void test_disconnect();
 
 void setWorkingClientParameters(DefaultClientParameters& parameters)
 {
 }
 
-void test_authenticateDevice()
-{
-    cout << endl << __func__ << endl;
+// *************************************************************
 
+NTest::NTest(const char * name)
+{
+    cout << endl << endl;
+    cout << "*************************************" << endl;
+    cout << "Running " << name << endl;
+    cout << "*************************************" << endl;
+}
+
+void NTest::createWorkingClient()
+{
     DefaultClientParameters parameters;
 
     setWorkingClientParameters(parameters);
 
-    NClientPtr client = createDefaultClient(parameters);
-    bool continue_loop = true;
-
-    auto successCallback = [&continue_loop](NSessionPtr session)
-    {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
-        continue_loop = false;
-    };
-
-    auto errorCallback = [&continue_loop](const NError& error)
-    {
-        std::cout << "error: " << error.GetErrorMessage() << std::endl;
-        continue_loop = false;
-    };
-
-    client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
-
-    std::chrono::milliseconds sleep_period(15);
-
-    while (continue_loop)
-    {
-        client->tick();
-
-        std::this_thread::sleep_for(sleep_period);
-    }
+    client = createDefaultClient(parameters);
 }
 
-void test_authenticateDevice2()
+void NTest::createClientWithParameters(const DefaultClientParameters & parameters)
 {
-    cout << endl << __func__ << endl;
-
-    DefaultClientParameters parameters;
-
-    setWorkingClientParameters(parameters);
-
-    NClientPtr client = createDefaultClient(parameters);
-    bool continue_loop = true;
-
-    auto successCallback = [&continue_loop](NSessionPtr session)
-    {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
-        continue_loop = false;
-    };
-
-    auto errorCallback = [&continue_loop](const NError& error)
-    {
-        std::cout << "error: " << error.GetErrorMessage() << std::endl;
-        continue_loop = false;
-    };
-
-    client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
-
-    std::chrono::milliseconds sleep_period(15);
-
-    while (continue_loop)
-    {
-        client->tick();
-
-        std::this_thread::sleep_for(sleep_period);
-    }
+    client = createDefaultClient(parameters);
 }
 
-void test_connectError()
+void NTest::runTest()
 {
-    cout << endl << __func__ << endl;
-
-    DefaultClientParameters parameters;
-
-    parameters.port = 1111;
-
-    NClientPtr client = createDefaultClient(parameters);
-    bool continue_loop = true;
-
-    auto successCallback = [&continue_loop](NSessionPtr session)
-    {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
-        continue_loop = false;
-    };
-
-    auto errorCallback = [&continue_loop](const NError& error)
-    {
-        std::cout << "error: " << error.GetErrorMessage() << std::endl;
-        continue_loop = false;
-    };
-
-    client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
-
     std::chrono::milliseconds sleep_period(15);
 
-    while (continue_loop)
+    while (_continue_loop)
     {
         client->tick();
 
@@ -132,40 +67,12 @@ void test_connectError()
     }
 }
 
-void test_disconnect()
+void NTest::stopTest()
 {
-    cout << endl << __func__ << endl;
-
-    DefaultClientParameters parameters;
-
-    NClientPtr client = createDefaultClient(parameters);
-    bool continue_loop = true;
-
-    auto successCallback = [&continue_loop](NSessionPtr session)
-    {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
-        continue_loop = false;
-    };
-
-    auto errorCallback = [&continue_loop](const NError& error)
-    {
-        std::cout << "error: " << error.GetErrorMessage() << std::endl;
-        continue_loop = false;
-    };
-
-    client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
-
-    client->disconnect();
-
-    std::chrono::milliseconds sleep_period(15);
-
-    while (continue_loop)
-    {
-        client->tick();
-
-        std::this_thread::sleep_for(sleep_period);
-    }
+    _continue_loop = false;
 }
+
+// *************************************************************
 
 int runAllTests()
 {
@@ -174,7 +81,7 @@ int runAllTests()
     test_getAccount();
     test_connectError();
     test_disconnect();
-    
+
     return 0;
 }
 

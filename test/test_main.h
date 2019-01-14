@@ -24,6 +24,23 @@
 namespace Nakama {
 namespace Test {
 
+    class NTest
+    {
+    public:
+        NTest(const char* name);
+
+        void createWorkingClient();
+        void createClientWithParameters(const DefaultClientParameters& parameters);
+
+        void runTest();
+        void stopTest();
+
+        NClientPtr client;
+
+    protected:
+        bool _continue_loop = true;
+    };
+
     void setWorkingClientParameters(DefaultClientParameters& parameters);
 
 } // namespace Test
