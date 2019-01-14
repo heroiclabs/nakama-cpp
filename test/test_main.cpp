@@ -26,6 +26,7 @@ void test_authenticateDevice();
 void test_authenticateDevice2();
 void test_connectError();
 void test_disconnect();
+void test_restoreSession();
 
 void setWorkingClientParameters(DefaultClientParameters& parameters)
 {
@@ -81,6 +82,7 @@ int runAllTests()
     test_getAccount();
     test_connectError();
     test_disconnect();
+    test_restoreSession();
 
     return 0;
 }

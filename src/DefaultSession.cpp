@@ -94,7 +94,7 @@ bool DefaultSession::isExpired(NTimestamp now) const
     return now >= _expire_time;
 }
 
-NSessionPtr restore(const std::string& token)
+NSessionPtr restoreSession(const std::string& token)
 {
     return NSessionPtr(new DefaultSession(token, false));
 }

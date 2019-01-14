@@ -79,6 +79,6 @@ namespace Nakama {
      * @param token The authentication token from a <c>Session</c>.
      * @return A session restored from the authentication token.
      */
-    NSessionPtr restore(const std::string& token);
+    NSessionPtr restoreSession(const std::string& token);
 
 }
