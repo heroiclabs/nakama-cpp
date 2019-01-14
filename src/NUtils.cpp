@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-#pragma once
-
-#include <string>
+#include "nakama-cpp/NUtils.h"
+#include <chrono>
 
 namespace Nakama {
 
-    typedef std::string Base64Buffer;
+using namespace std::chrono;
 
-    std::string base64_encode(const Base64Buffer& buffer);
+NTimestamp getUnixTimestampMs()
+{
+    milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 
-    Base64Buffer base64_decode(const std::string& base64str);
-
-    std::string getJsonFieldValue(const std::string& json, const std::string& field_name);
+    return ms.count();
+}
 
 } // namespace Nakama

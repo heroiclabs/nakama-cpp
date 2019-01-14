@@ -89,4 +89,4 @@ std::string getJsonFieldValue(const std::string & json, const std::string & fiel
     return result;
 }
 
-} // namespace nakama
+} // namespace Nakama

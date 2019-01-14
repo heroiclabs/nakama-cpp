@@ -15,6 +15,7 @@
  */
 
 #include "test_main.h"
+#include "nakama-cpp/NUtils.h"
 
 namespace Nakama {
 namespace Test {
@@ -42,13 +43,31 @@ void test_restoreSession()
         std::cout << "session token: " << my_session->getAuthToken() << std::endl;
         std::cout << "isExpired: " << my_session->isExpired() << std::endl;
 
-        auto successCallback = [&test](const NAccount& account)
+        if (session->isExpired())
         {
-            std::cout << "account user id: " << account.user.id << std::endl;
+            std::cout << "original session must not be expired" << std::endl;
             test.stopTest();
-        };
+        }
+        else if (my_session->isExpired())
+        {
+            std::cout << "restored session must not be expired" << std::endl;
+            test.stopTest();
+        }
+        else if (!my_session->isExpired(getUnixTimestampMs() + 2 * 60 * 1000))
+        {
+            std::cout << "restored session must expired after 2 minutes" << std::endl;
+            test.stopTest();
+        }
+        else
+        {
+            auto successCallback = [&test](const NAccount& account)
+            {
+                std::cout << "account user id: " << account.user.id << std::endl;
+                test.stopTest(true);
+            };
 
-        test.client->getAccount(my_session, successCallback, errorCallback);
+            test.client->getAccount(my_session, successCallback, errorCallback);
+        }
     };
 
     test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);

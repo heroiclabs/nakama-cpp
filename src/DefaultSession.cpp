@@ -16,20 +16,17 @@
 
 #include "DefaultSession.h"
 #include "nakama-cpp/StrUtil.h"
-#include <chrono>
+#include "nakama-cpp/NUtils.h"
 
 namespace Nakama {
 
 using namespace std;
-using namespace std::chrono;
 
 DefaultSession::DefaultSession(const std::string & token, bool created)
 {
-    milliseconds ms = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-
     _token = token;
     _created = created;
-    _create_time = ms.count();
+    _create_time = getUnixTimestampMs();
 
     // Hack decode JSON payload from JWT
     // first we narrow down to the segment between the first two '.'
@@ -45,7 +42,7 @@ DefaultSession::DefaultSession(const std::string & token, bool created)
     string exp_str = getJsonFieldValue(json, "exp");
     if (!exp_str.empty())
     {
-        _expire_time = std::atol(exp_str.c_str()) * 1000L;
+        _expire_time = ((NTimestamp)std::atol(exp_str.c_str())) * 1000ULL;
     }
 
     _username = getJsonFieldValue(json, "usn");
@@ -84,9 +81,7 @@ NTimestamp DefaultSession::getExpireTime() const
 
 bool DefaultSession::isExpired() const
 {
-    milliseconds ms = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-
-    return isExpired(ms.count());
+    return isExpired(getUnixTimestampMs());
 }
 
 bool DefaultSession::isExpired(NTimestamp now) const
