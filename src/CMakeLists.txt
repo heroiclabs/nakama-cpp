@@ -1,8 +1,17 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.10)
 
 project(nakama-cpp CXX)
 
-include(windows_support)
+if(WIN32)
+    include(windows_support)
+    set(INSTALL_SUBFOLDER win32)
+elseif(ANDROID)
+    set(INSTALL_SUBFOLDER android)
+elseif(CMAKE_OSX_SYSROOT MATCHES ".*iphoneos.*")
+    set(INSTALL_SUBFOLDER ios)
+endif()
+
+message("INSTALL_SUBFOLDER=${INSTALL_SUBFOLDER}")
 
 set(_src_root_path ${CMAKE_CURRENT_LIST_DIR})
 file(
@@ -47,4 +56,4 @@ foreach(_source IN ITEMS ${_public_headers_list})
     source_group("include\\${_group_path}" FILES "${_source}")
 endforeach()
 
-install(TARGETS nakama-cpp DESTINATION ${INSTALL_LIB_DIR})
+install(TARGETS nakama-cpp DESTINATION ${INSTALL_LIB_DIR}/${INSTALL_SUBFOLDER})
