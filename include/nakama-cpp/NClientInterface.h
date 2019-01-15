@@ -20,7 +20,6 @@
 #include <functional>
 #include <memory>
 #include <vector>
-#include "nonstd/optional.hpp"
 #include "nakama-cpp/NSessionInterface.h"
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"

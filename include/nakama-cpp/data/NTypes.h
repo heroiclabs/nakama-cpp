@@ -18,6 +18,7 @@
 
 #include "nonstd/optional.hpp"
 #include <cstdint>
+#include <vector>
 
 namespace Nakama {
 
@@ -29,6 +30,15 @@ namespace Nakama {
         JOIN_REQUEST     = 3    // The user has requested to join the group
     };
 
+    // The available channel types on the server.
+    enum class NChannelType
+    {
+        ROOM             = 0,   // A chat room which can be created dynamically with a name.
+        DIRECT_MESSAGE   = 1,   // A private chat between two users.
+        GROUP            = 2    // A chat within a group on the server.
+    };
+
     using NTimestamp = uint64_t;
+    using NBytes = std::vector<uint8_t>;
     namespace opt = nonstd;
 }
