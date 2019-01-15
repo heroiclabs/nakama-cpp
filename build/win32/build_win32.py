@@ -14,12 +14,17 @@ def call(command):
 
 def build(target):
     print 'building ' + target + '...'
-    call('cmake --build ' + build_dir + ' --target ' + target)
+    call('cmake --build ' + build_dir + ' --target ' + target + ' --config "Debug"')
 
 # generate Visual Studio projects
-call('cmake -B ' + build_dir + ' -G"Visual Studio 15 2017" ../..')
+#generator = 'Visual Studio 14 2015'
+generator = 'Visual Studio 15 2017'
+call('cmake -B ' + build_dir + ' -G"' + generator + '" ../..')
 
 build('grpc_cpp_plugin')
 build('protoc')
 build('nakama-cpp')
 build('nakama-test')
+
+#print 'installing...'
+#call('cmake --build ' + build_dir + ' --target install')

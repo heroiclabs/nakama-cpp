@@ -10,9 +10,29 @@ if len(sys.argv) < 2:
 
 ABI = sys.argv[1]
 
-ANDROID_NDK = os.environ['ANDROID_NDK']
+if os.name == 'nt':
+    # windows
+    grpc_cpp_plugin_path = r'..\win32\build\third_party\grpc\Debug\grpc_cpp_plugin.exe'
+    protoc_path = r'..\win32\build\third_party\grpc\third_party\protobuf\Debug\protoc.exe'
+
+    if not os.path.isfile(grpc_cpp_plugin_path) or not os.path.isfile(protoc_path):
+        print 'grpc_cpp_plugin_path =', grpc_cpp_plugin_path
+        print 'protoc_path =', protoc_path
+        print "please build for windows first"
+        sys.exit(-1)
+
+else:
+    print "currently not supported OS"
+    sys.exit(-1)
+
+def getEnvVar(name):
+    if name in os.environ:
+        return os.environ[name]
+    return ''
+
+ANDROID_NDK = getEnvVar('ANDROID_NDK')
 if not ANDROID_NDK:
-    ANDROID_NDK = os.environ['NDK_ROOT']
+    ANDROID_NDK = getEnvVar('NDK_ROOT')
     if not ANDROID_NDK:
         print "Error: no ANDROID_NDK or NDK_ROOT environment variable"
         sys.exit(-1)
