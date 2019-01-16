@@ -34,6 +34,12 @@
 #include "nakama-cpp/data/NRpc.h"
 #include "api/github.com/heroiclabs/nakama/api/api.pb.h"
 
+#include "nakama-cpp/realtime/rtdata/NChannelMessageAck.h"
+#include "nakama-cpp/realtime/rtdata/NChannel.h"
+#include "nakama-cpp/realtime/rtdata/NMatchmakerTicket.h"
+#include "nakama-cpp/realtime/rtdata/NStatus.h"
+#include "github.com/heroiclabs/nakama/rtapi/realtime.pb.h"
+
 namespace Nakama {
 
     void assign(NTimestamp& time, const ::google::protobuf::Timestamp& data);
@@ -68,6 +74,13 @@ namespace Nakama {
     void assign(NStorageObject& obj, const nakama::api::StorageObject& data);
     void assign(NStorageObjectAck& ack, const nakama::api::StorageObjectAck& data);
     void assign(NRpc& rpc, const nakama::api::Rpc& data);
+
+    void assign(NChannelMessageAck& ack, const ::nakama::realtime::ChannelMessageAck& data);
+    void assign(NChannel& channel, const ::nakama::realtime::Channel& data);
+    void assign(NUserPresence& presence, const ::nakama::realtime::UserPresence& data);
+    void assign(NMatch& match, const ::nakama::realtime::Match& data);
+    void assign(NMatchmakerTicket& ticket, const ::nakama::realtime::MatchmakerTicket& data);
+    void assign(NStatus& status, const ::nakama::realtime::Status& data);
 
     template <class T>
     void assign(T& b, const T& data)

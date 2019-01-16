@@ -21,7 +21,8 @@
 namespace Nakama {
 
     // The selection of possible error codes.
-    enum class RtErrorCode {
+    enum class RtErrorCode
+    {
         RUNTIME_EXCEPTION             = 0,            // An unexpected result from the server.
         UNRECOGNIZED_PAYLOAD          = 1,            // The server received a message which is not recognised.
         MISSING_PAYLOAD               = 2,            // A message was expected but contains no content.

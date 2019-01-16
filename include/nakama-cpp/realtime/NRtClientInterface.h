@@ -58,7 +58,7 @@ namespace Nakama {
         *
         * @param listener The listener of client events.
         */
-        virtual void setListener(NRtClientListenerInterface& listener) = 0;
+        virtual void setListener(NRtClientListenerInterface* listener) = 0;
 
         /**
         * Connect to the server.

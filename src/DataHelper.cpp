@@ -181,6 +181,26 @@ void assign(NMatch & match, const nakama::api::Match & data)
     assign(match.label, data.label());
 }
 
+void assign(NMatch& match, const ::nakama::realtime::Match& data)
+{
+    assign(match.match_id, data.match_id());
+    assign(match.size, data.size());
+    assign(match.authoritative, data.authoritative());
+    assign(match.label, data.label());
+    assign(match.self, data.self());
+    assign(match.presences, data.presences());
+}
+
+void assign(NMatchmakerTicket & ticket, const::nakama::realtime::MatchmakerTicket & data)
+{
+    assign(ticket.ticket, data.ticket());
+}
+
+void assign(NStatus & status, const::nakama::realtime::Status & data)
+{
+    assign(status.presences, data.presences());
+}
+
 void assign(NNotificationList & list, const nakama::api::NotificationList & data)
 {
     assign(list.notifications, data.notifications());
@@ -284,6 +304,33 @@ void assign(NRpc & rpc, const nakama::api::Rpc & data)
     assign(rpc.id, data.id());
     assign(rpc.payload, data.payload());
     assign(rpc.http_key, data.http_key());
+}
+
+void assign(NChannelMessageAck & ack, const::nakama::realtime::ChannelMessageAck & data)
+{
+    assign(ack.channel_id, data.channel_id());
+    assign(ack.code, data.code());
+    assign(ack.create_time, data.create_time());
+    assign(ack.message_id, data.message_id());
+    assign(ack.persistent, data.persistent());
+    assign(ack.update_time, data.update_time());
+    assign(ack.username, data.username());
+}
+
+void assign(NChannel & channel, const::nakama::realtime::Channel & data)
+{
+    assign(channel.id, data.id());
+    assign(channel.self, data.self());
+    assign(channel.presences, data.presences());
+}
+
+void assign(NUserPresence & presence, const::nakama::realtime::UserPresence & data)
+{
+    assign(presence.persistence, data.persistence());
+    assign(presence.session_id, data.session_id());
+    assign(presence.status, data.status());
+    assign(presence.username, data.username());
+    assign(presence.user_id, data.user_id());
 }
 
 }

@@ -38,6 +38,7 @@ target_include_directories(nakama-cpp
     PUBLIC ../third_party
     PUBLIC ${PUBLIC_INCLUDE_DIR}
     PRIVATE api
+    PRIVATE .
     PRIVATE ../third_party/grpc/include
     PRIVATE ../third_party/grpc/third_party/protobuf/src
 )
