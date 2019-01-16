@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "nakama-cpp/data/NTypes.h"
+#include "nakama-cpp/NTypes.h"
 #include "nakama-cpp/data/NUser.h"
 #include "nakama-cpp/data/NAccountDevice.h"
 #include <memory>

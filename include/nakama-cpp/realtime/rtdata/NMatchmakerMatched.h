@@ -17,17 +17,17 @@
 #pragma once
 
 #include "nakama-cpp/realtime/rtdata/NUserPresence.h"
+#include "nakama-cpp/NTypes.h"
 #include <vector>
 #include <memory>
-#include <map>
 
 namespace Nakama {
 
     struct NMatchmakerUser
     {
-        NUserPresence presence;                               // User info.
-        std::map<std::string, std::string> string_properties; // String properties.
-        std::map<std::string, double> numeric_properties;     // Numeric properties.
+        NUserPresence presence;                  // User info.
+        NStringMap string_properties;            // String properties.
+        NStringDoubleMap numeric_properties;     // Numeric properties.
     };
 
     // A successful matchmaking result.

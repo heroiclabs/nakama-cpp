@@ -19,6 +19,8 @@
 #include "nonstd/optional.hpp"
 #include <cstdint>
 #include <vector>
+#include <string>
+#include <map>
 
 namespace Nakama {
 
@@ -40,5 +42,7 @@ namespace Nakama {
 
     using NTimestamp = uint64_t;
     using NBytes = std::vector<uint8_t>;
+    using NStringMap = std::map<std::string, std::string>;
+    using NStringDoubleMap = std::map<std::string, double>;
     namespace opt = nonstd;
 }

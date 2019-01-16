@@ -43,7 +43,7 @@
 
 namespace Nakama {
 
-    typedef std::function<void(const NError&)> ErrorCallback;
+    using ErrorCallback = std::function<void(const NError&)>;
 
     /**
      * A client interface to interact with Nakama server.

@@ -17,7 +17,7 @@
 #pragma once
 
 #include "nakama-cpp/data/NGroup.h"
-#include "nakama-cpp/data/NTypes.h"
+#include "nakama-cpp/NTypes.h"
 
 namespace Nakama {
 

@@ -16,8 +16,7 @@
 
 #pragma once
 
-#include <string>
-#include <map>
+#include "nakama-cpp/NTypes.h"
 
 namespace Nakama {
 
@@ -40,6 +39,6 @@ namespace Nakama {
     {
         RtErrorCode code;                             // The error code
         std::string message;                          // A message in English to help developers debug the response.
-        std::map<std::string, std::string> context;   // Additional error details which may be different for each response.
+        NStringMap context;                           // Additional error details which may be different for each response.
     };
 }
