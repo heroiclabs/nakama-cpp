@@ -18,12 +18,12 @@
 
 #include "nakama-cpp/NClientInterface.h"
 #include "nakama-cpp/DefaultClient.h"
-#include "api/github.com/heroiclabs/nakama/apigrpc/apigrpc.grpc.pb.h"
+#include "github.com/heroiclabs/nakama/apigrpc/apigrpc.grpc.pb.h"
 #include <set>
 
 namespace Nakama {
 
-    struct RpcRequest
+    struct ReqContext
     {
         grpc::ClientContext context;
         grpc::Status status;
@@ -550,13 +550,13 @@ namespace Nakama {
         ) override;
 
     private:
-        RpcRequest* createRpcRequest(NSessionPtr session);
+        ReqContext* createReqContext(NSessionPtr session);
         void onResponse(void* tag, bool ok);
 
     private:
-        std::unique_ptr< nakama::api::Nakama::Stub> _stub;
+        std::unique_ptr<nakama::api::Nakama::Stub> _stub;
         grpc::CompletionQueue _cq;
         std::string _basicAuthMetadata;
-        std::set<RpcRequest*> _requests;
+        std::set<ReqContext*> _reqContexts;
     };
 }

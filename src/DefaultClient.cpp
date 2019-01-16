@@ -83,30 +83,30 @@ void DefaultClient::tick()
     } while (continueLoop);
 }
 
-RpcRequest * DefaultClient::createRpcRequest(NSessionPtr session)
+ReqContext * DefaultClient::createReqContext(NSessionPtr session)
 {
-    RpcRequest* rpcRequest = new RpcRequest();
+    ReqContext* ctx = new ReqContext();
 
     if (session)
     {
-        rpcRequest->context.AddMetadata("authorization", "Bearer " + session->getAuthToken());
+        ctx->context.AddMetadata("authorization", "Bearer " + session->getAuthToken());
     }
     else
     {
-        rpcRequest->context.AddMetadata("authorization", _basicAuthMetadata);
+        ctx->context.AddMetadata("authorization", _basicAuthMetadata);
     }
 
-    _requests.emplace(rpcRequest);
-    return rpcRequest;
+    _reqContexts.emplace(ctx);
+    return ctx;
 }
 
 void DefaultClient::onResponse(void * tag, bool ok)
 {
-    auto it = _requests.find((RpcRequest*)tag);
+    auto it = _reqContexts.find((ReqContext*)tag);
 
-    if (it != _requests.end())
+    if (it != _reqContexts.end())
     {
-        RpcRequest* reqStatus = *it;
+        ReqContext* reqStatus = *it;
 
         if (ok)
         {
@@ -141,7 +141,7 @@ void DefaultClient::onResponse(void * tag, bool ok)
         }
 
         delete reqStatus;
-        _requests.erase(it);
+        _reqContexts.erase(it);
     }
     else
     {
@@ -157,18 +157,18 @@ void DefaultClient::authenticateDevice(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(nullptr);
+    ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [sessionData, successCallback]()
+        ctx->successCallback = [sessionData, successCallback]()
         {
             NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
             successCallback(session);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AuthenticateDeviceRequest req;
 
@@ -180,9 +180,9 @@ void DefaultClient::authenticateDevice(
     if (create)
         req.mutable_create()->set_value(*create);
 
-    auto responseReader = _stub->AsyncAuthenticateDevice(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncAuthenticateDevice(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*sessionData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::authenticateEmail(
@@ -194,18 +194,18 @@ void DefaultClient::authenticateEmail(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(nullptr);
+    ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [sessionData, successCallback]()
+        ctx->successCallback = [sessionData, successCallback]()
         {
             NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
             successCallback(session);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AuthenticateEmailRequest req;
 
@@ -219,9 +219,9 @@ void DefaultClient::authenticateEmail(
 
     req.mutable_create()->set_value(create);
 
-    auto responseReader = _stub->AsyncAuthenticateEmail(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncAuthenticateEmail(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*sessionData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::authenticateFacebook(
@@ -233,18 +233,18 @@ void DefaultClient::authenticateFacebook(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(nullptr);
+    ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [sessionData, successCallback]()
+        ctx->successCallback = [sessionData, successCallback]()
         {
             NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
             successCallback(session);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AuthenticateFacebookRequest req;
 
@@ -256,9 +256,9 @@ void DefaultClient::authenticateFacebook(
     req.mutable_create()->set_value(create);
     req.mutable_sync()->set_value(importFriends);
 
-    auto responseReader = _stub->AsyncAuthenticateFacebook(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncAuthenticateFacebook(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*sessionData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::authenticateGoogle(
@@ -269,18 +269,18 @@ void DefaultClient::authenticateGoogle(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(nullptr);
+    ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [sessionData, successCallback]()
+        ctx->successCallback = [sessionData, successCallback]()
         {
             NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
             successCallback(session);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AuthenticateGoogleRequest req;
 
@@ -291,9 +291,9 @@ void DefaultClient::authenticateGoogle(
 
     req.mutable_create()->set_value(create);
 
-    auto responseReader = _stub->AsyncAuthenticateGoogle(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncAuthenticateGoogle(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*sessionData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::authenticateGameCenter(
@@ -309,18 +309,18 @@ void DefaultClient::authenticateGameCenter(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(nullptr);
+    ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [sessionData, successCallback]()
+        ctx->successCallback = [sessionData, successCallback]()
         {
             NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
             successCallback(session);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AuthenticateGameCenterRequest req;
 
@@ -336,9 +336,9 @@ void DefaultClient::authenticateGameCenter(
 
     req.mutable_create()->set_value(create);
 
-    auto responseReader = _stub->AsyncAuthenticateGameCenter(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncAuthenticateGameCenter(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*sessionData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::authenticateCustom(
@@ -349,18 +349,18 @@ void DefaultClient::authenticateCustom(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(nullptr);
+    ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [sessionData, successCallback]()
+        ctx->successCallback = [sessionData, successCallback]()
         {
             NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
             successCallback(session);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AuthenticateCustomRequest req;
 
@@ -371,9 +371,9 @@ void DefaultClient::authenticateCustom(
 
     req.mutable_create()->set_value(create);
 
-    auto responseReader = _stub->AsyncAuthenticateCustom(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncAuthenticateCustom(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*sessionData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::authenticateSteam(
@@ -384,18 +384,18 @@ void DefaultClient::authenticateSteam(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(nullptr);
+    ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [sessionData, successCallback]()
+        ctx->successCallback = [sessionData, successCallback]()
         {
             NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
             successCallback(session);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AuthenticateSteamRequest req;
 
@@ -406,9 +406,9 @@ void DefaultClient::authenticateSteam(
 
     req.mutable_create()->set_value(create);
 
-    auto responseReader = _stub->AsyncAuthenticateSteam(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncAuthenticateSteam(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*sessionData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkFacebook(
@@ -417,19 +417,19 @@ void DefaultClient::linkFacebook(
     const opt::optional<bool>& importFriends,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::LinkFacebookRequest req;
 
     req.mutable_account()->set_token(accessToken);
     if (importFriends) req.mutable_sync()->set_value(*importFriends);
 
-    auto responseReader = _stub->AsyncLinkFacebook(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncLinkFacebook(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkEmail(
@@ -438,19 +438,19 @@ void DefaultClient::linkEmail(
     const std::string & password,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountEmail req;
 
     req.set_email(email);
     req.set_password(password);
 
-    auto responseReader = _stub->AsyncLinkEmail(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncLinkEmail(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkDevice(
@@ -458,18 +458,18 @@ void DefaultClient::linkDevice(
     const std::string & id,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountDevice req;
 
     req.set_id(id);
 
-    auto responseReader = _stub->AsyncLinkDevice(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncLinkDevice(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkGoogle(
@@ -477,18 +477,18 @@ void DefaultClient::linkGoogle(
     const std::string & accessToken,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountGoogle req;
 
     req.set_token(accessToken);
 
-    auto responseReader = _stub->AsyncLinkGoogle(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncLinkGoogle(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkGameCenter(
@@ -501,10 +501,10 @@ void DefaultClient::linkGameCenter(
     const std::string & publicKeyUrl,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountGameCenter req;
 
@@ -515,9 +515,9 @@ void DefaultClient::linkGameCenter(
     req.set_signature(signature);
     req.set_public_key_url(publicKeyUrl);
 
-    auto responseReader = _stub->AsyncLinkGameCenter(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncLinkGameCenter(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkSteam(
@@ -525,91 +525,91 @@ void DefaultClient::linkSteam(
     const std::string & token,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountSteam req;
 
     req.set_token(token);
 
-    auto responseReader = _stub->AsyncLinkSteam(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncLinkSteam(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountCustom req;
 
     req.set_id(id);
 
-    auto responseReader = _stub->AsyncLinkCustom(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncLinkCustom(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkFacebook(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountFacebook req;
 
     req.set_token(accessToken);
 
-    auto responseReader = _stub->AsyncUnlinkFacebook(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncUnlinkFacebook(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkEmail(NSessionPtr session, const std::string & email, const std::string & password, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountEmail req;
 
     req.set_email(email);
     req.set_password(password);
 
-    auto responseReader = _stub->AsyncUnlinkEmail(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncUnlinkEmail(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkGoogle(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountGoogle req;
 
     req.set_token(accessToken);
 
-    auto responseReader = _stub->AsyncUnlinkGoogle(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncUnlinkGoogle(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & playerId, const std::string & bundleId, NTimestamp timestampSeconds, const std::string & salt, const std::string & signature, const std::string & publicKeyUrl, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountGameCenter req;
 
@@ -620,57 +620,57 @@ void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & pl
     req.set_signature(signature);
     req.set_public_key_url(publicKeyUrl);
 
-    auto responseReader = _stub->AsyncUnlinkGameCenter(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncUnlinkGameCenter(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkSteam(NSessionPtr session, const std::string & token, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountSteam req;
 
     req.set_token(token);
 
-    auto responseReader = _stub->AsyncUnlinkSteam(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncUnlinkSteam(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkDevice(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountDevice req;
 
     req.set_id(id);
 
-    auto responseReader = _stub->AsyncUnlinkDevice(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncUnlinkDevice(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AccountCustom req;
 
     req.set_id(id);
 
-    auto responseReader = _stub->AsyncUnlinkCustom(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncUnlinkCustom(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::importFacebookFriends(
@@ -679,19 +679,19 @@ void DefaultClient::importFacebookFriends(
     const opt::optional<bool>& reset,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ImportFacebookFriendsRequest req;
 
     req.mutable_account()->set_token(token);
     if (reset) req.mutable_reset()->set_value(*reset);
 
-    auto responseReader = _stub->AsyncImportFacebookFriends(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncImportFacebookFriends(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::getAccount(
@@ -700,23 +700,23 @@ void DefaultClient::getAccount(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto accoutData(make_shared<nakama::api::Account>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [accoutData, successCallback]()
+        ctx->successCallback = [accoutData, successCallback]()
         {
             NAccount account;
             assign(account, *accoutData);
             successCallback(account);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
-    auto responseReader = _stub->AsyncGetAccount(&rpcRequest->context, {}, &_cq);
+    auto responseReader = _stub->AsyncGetAccount(&ctx->context, {}, &_cq);
 
-    responseReader->Finish(&(*accoutData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*accoutData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::updateAccount(
@@ -729,10 +729,10 @@ void DefaultClient::updateAccount(
     const opt::optional<std::string>& timezone,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::UpdateAccountRequest req;
 
@@ -743,9 +743,9 @@ void DefaultClient::updateAccount(
     if (location) req.mutable_location()->set_value(*location);
     if (timezone) req.mutable_timezone()->set_value(*timezone);
 
-    auto responseReader = _stub->AsyncUpdateAccount(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncUpdateAccount(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::getUsers(
@@ -757,19 +757,19 @@ void DefaultClient::getUsers(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto usersData(make_shared<nakama::api::Users>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [usersData, successCallback]()
+        ctx->successCallback = [usersData, successCallback]()
         {
             NUsers users;
             assign(users, *usersData);
             successCallback(users);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::GetUsersRequest req;
 
@@ -788,9 +788,9 @@ void DefaultClient::getUsers(
         req.mutable_facebook_ids()->Add()->assign(facebookId);
     }
 
-    auto responseReader = _stub->AsyncGetUsers(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncGetUsers(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*usersData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*usersData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::addFriends(
@@ -801,10 +801,10 @@ void DefaultClient::addFriends(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AddFriendsRequest req;
 
@@ -818,9 +818,9 @@ void DefaultClient::addFriends(
         req.mutable_usernames()->Add()->assign(username);
     }
 
-    auto responseReader = _stub->AsyncAddFriends(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncAddFriends(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::deleteFriends(
@@ -831,10 +831,10 @@ void DefaultClient::deleteFriends(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::DeleteFriendsRequest req;
 
@@ -848,9 +848,9 @@ void DefaultClient::deleteFriends(
         req.mutable_usernames()->Add()->assign(username);
     }
 
-    auto responseReader = _stub->AsyncDeleteFriends(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncDeleteFriends(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::blockFriends(
@@ -860,10 +860,10 @@ void DefaultClient::blockFriends(
     std::function<void()> successCallback,
     ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::BlockFriendsRequest req;
 
@@ -877,30 +877,30 @@ void DefaultClient::blockFriends(
         req.mutable_usernames()->Add()->assign(username);
     }
 
-    auto responseReader = _stub->AsyncBlockFriends(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncBlockFriends(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::Friends>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NFriendsPtr friends(new NFriends());
             assign(*friends, *data);
             successCallback(friends);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
-    auto responseReader = _stub->AsyncListFriends(&rpcRequest->context, {}, &_cq);
+    auto responseReader = _stub->AsyncListFriends(&ctx->context, {}, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::createGroup(
@@ -914,19 +914,19 @@ void DefaultClient::createGroup(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto groupData(make_shared<nakama::api::Group>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [groupData, successCallback]()
+        ctx->successCallback = [groupData, successCallback]()
         {
             NGroup group;
             assign(group, *groupData);
             successCallback(group);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::CreateGroupRequest req;
 
@@ -943,9 +943,9 @@ void DefaultClient::createGroup(
 
     req.set_open(open);
 
-    auto responseReader = _stub->AsyncCreateGroup(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncCreateGroup(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*groupData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::deleteGroup(
@@ -955,18 +955,18 @@ void DefaultClient::deleteGroup(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::DeleteGroupRequest req;
 
     req.set_group_id(groupId);
 
-    auto responseReader = _stub->AsyncDeleteGroup(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncDeleteGroup(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::addGroupUsers(
@@ -977,10 +977,10 @@ void DefaultClient::addGroupUsers(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::AddGroupUsersRequest req;
 
@@ -991,42 +991,42 @@ void DefaultClient::addGroupUsers(
         req.add_user_ids(id);
     }
 
-    auto responseReader = _stub->AsyncAddGroupUsers(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncAddGroupUsers(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listGroupUsers(NSessionPtr session, const std::string & groupId, std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto groupData(make_shared<nakama::api::GroupUserList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [groupData, successCallback]()
+        ctx->successCallback = [groupData, successCallback]()
         {
             NGroupUserListPtr users(new NGroupUserList());
             assign(*users, *groupData);
             successCallback(users);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListGroupUsersRequest req;
 
     req.set_group_id(groupId);
 
-    auto responseReader = _stub->AsyncListGroupUsers(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListGroupUsers(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*groupData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::kickGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::KickGroupUsersRequest req;
 
@@ -1037,58 +1037,58 @@ void DefaultClient::kickGroupUsers(NSessionPtr session, const std::string & grou
         req.add_user_ids(id);
     }
 
-    auto responseReader = _stub->AsyncKickGroupUsers(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncKickGroupUsers(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::joinGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::JoinGroupRequest req;
 
     req.set_group_id(groupId);
 
-    auto responseReader = _stub->AsyncJoinGroup(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncJoinGroup(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::leaveGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::LeaveGroupRequest req;
 
     req.set_group_id(groupId);
 
-    auto responseReader = _stub->AsyncLeaveGroup(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncLeaveGroup(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listGroups(NSessionPtr session, const std::string & name, int limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto groupData(make_shared<nakama::api::GroupList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [groupData, successCallback]()
+        ctx->successCallback = [groupData, successCallback]()
         {
             NGroupListPtr groups(new NGroupList());
             assign(*groups, *groupData);
             successCallback(groups);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListGroupsRequest req;
 
@@ -1100,9 +1100,9 @@ void DefaultClient::listGroups(NSessionPtr session, const std::string & name, in
     if (!cursor.empty())
         req.set_cursor(cursor);
 
-    auto responseReader = _stub->AsyncListGroups(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListGroups(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*groupData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listUserGroups(NSessionPtr session, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
@@ -1112,36 +1112,36 @@ void DefaultClient::listUserGroups(NSessionPtr session, std::function<void(NUser
 
 void DefaultClient::listUserGroups(NSessionPtr session, const std::string & userId, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto groupData(make_shared<nakama::api::UserGroupList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [groupData, successCallback]()
+        ctx->successCallback = [groupData, successCallback]()
         {
             NUserGroupListPtr groups(new NUserGroupList());
             assign(*groups, *groupData);
             successCallback(groups);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListUserGroupsRequest req;
 
     if (!userId.empty())
         req.set_user_id(userId);
 
-    auto responseReader = _stub->AsyncListUserGroups(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListUserGroups(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*groupData), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::promoteGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::PromoteGroupUsersRequest req;
 
@@ -1152,9 +1152,9 @@ void DefaultClient::promoteGroupUsers(NSessionPtr session, const std::string & g
         req.add_user_ids(id);
     }
 
-    auto responseReader = _stub->AsyncPromoteGroupUsers(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncPromoteGroupUsers(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::updateGroup(
@@ -1169,10 +1169,10 @@ void DefaultClient::updateGroup(
     ErrorCallback errorCallback
 )
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::UpdateGroupRequest req;
 
@@ -1184,9 +1184,9 @@ void DefaultClient::updateGroup(
     if (langTag) req.mutable_lang_tag()->set_value(*langTag);
     if (open) req.mutable_open()->set_value(*open);
 
-    auto responseReader = _stub->AsyncUpdateGroup(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncUpdateGroup(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listLeaderboardRecords(
@@ -1197,19 +1197,19 @@ void DefaultClient::listLeaderboardRecords(
     const opt::optional<std::string>& cursor,
     std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::LeaderboardRecordList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
             assign(*list, *data);
             successCallback(list);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListLeaderboardRecordsRequest req;
 
@@ -1223,26 +1223,26 @@ void DefaultClient::listLeaderboardRecords(
     if (limit) req.mutable_limit()->set_value(*limit);
     if (cursor) req.set_cursor(*cursor);
 
-    auto responseReader = _stub->AsyncListLeaderboardRecords(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListLeaderboardRecords(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const std::string & leaderboardId, const std::string & ownerId, const opt::optional<int>& limit, std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::LeaderboardRecordList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
             assign(*list, *data);
             successCallback(list);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListLeaderboardRecordsAroundOwnerRequest req;
 
@@ -1251,9 +1251,9 @@ void DefaultClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const
 
     if (limit) req.mutable_limit()->set_value(*limit);
 
-    auto responseReader = _stub->AsyncListLeaderboardRecordsAroundOwner(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListLeaderboardRecordsAroundOwner(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::writeLeaderboardRecord(
@@ -1264,19 +1264,19 @@ void DefaultClient::writeLeaderboardRecord(
     const opt::optional<std::string>& metadata,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::LeaderboardRecord>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NLeaderboardRecord record;
             assign(record, *data);
             successCallback(record);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::WriteLeaderboardRecordRequest req;
 
@@ -1285,9 +1285,9 @@ void DefaultClient::writeLeaderboardRecord(
     if (subscore) req.mutable_record()->set_subscore(*subscore);
     if (metadata) req.mutable_record()->set_metadata(*metadata);
 
-    auto responseReader = _stub->AsyncWriteLeaderboardRecord(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncWriteLeaderboardRecord(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::writeTournamentRecord(
@@ -1298,19 +1298,19 @@ void DefaultClient::writeTournamentRecord(
     const opt::optional<std::string>& metadata,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::LeaderboardRecord>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NLeaderboardRecord record;
             assign(record, *data);
             successCallback(record);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::WriteTournamentRecordRequest req;
 
@@ -1319,25 +1319,25 @@ void DefaultClient::writeTournamentRecord(
     if (subscore) req.mutable_record()->set_subscore(*subscore);
     if (metadata) req.mutable_record()->set_metadata(*metadata);
 
-    auto responseReader = _stub->AsyncWriteTournamentRecord(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncWriteTournamentRecord(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::deleteLeaderboardRecord(NSessionPtr session, const std::string & leaderboardId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::DeleteLeaderboardRecordRequest req;
 
     req.set_leaderboard_id(leaderboardId);
 
-    auto responseReader = _stub->AsyncDeleteLeaderboardRecord(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncDeleteLeaderboardRecord(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listMatches(
@@ -1349,19 +1349,19 @@ void DefaultClient::listMatches(
     const opt::optional<bool>& authoritative,
     std::function<void(NMatchListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::MatchList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NMatchListPtr match_list(new NMatchList());
             assign(*match_list, *data);
             successCallback(match_list);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListMatchesRequest req;
 
@@ -1371,9 +1371,9 @@ void DefaultClient::listMatches(
     if (label) req.mutable_label()->set_value(*label);
     if (authoritative) req.mutable_authoritative()->set_value(*authoritative);
 
-    auto responseReader = _stub->AsyncListMatches(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListMatches(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listNotifications(
@@ -1382,36 +1382,36 @@ void DefaultClient::listNotifications(
     const opt::optional<std::string>& cacheableCursor,
     std::function<void(NNotificationListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::NotificationList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NNotificationListPtr list(new NNotificationList());
             assign(*list, *data);
             successCallback(list);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListNotificationsRequest req;
 
     if (limit) req.mutable_limit()->set_value(*limit);
     if (cacheableCursor) req.set_cacheable_cursor(*cacheableCursor);
 
-    auto responseReader = _stub->AsyncListNotifications(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListNotifications(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::deleteNotifications(NSessionPtr session, const std::vector<std::string>& notificationIds, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::DeleteNotificationsRequest req;
 
@@ -1420,9 +1420,9 @@ void DefaultClient::deleteNotifications(NSessionPtr session, const std::vector<s
         req.add_ids(id);
     }
 
-    auto responseReader = _stub->AsyncDeleteNotifications(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncDeleteNotifications(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listChannelMessages(
@@ -1433,19 +1433,19 @@ void DefaultClient::listChannelMessages(
     const opt::optional<bool>& forward,
     std::function<void(NChannelMessageListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::ChannelMessageList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NChannelMessageListPtr list(new NChannelMessageList());
             assign(*list, *data);
             successCallback(list);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListChannelMessagesRequest req;
 
@@ -1454,9 +1454,9 @@ void DefaultClient::listChannelMessages(
     if (cursor) req.set_cursor(*cursor);
     if (forward) req.mutable_forward()->set_value(*forward);
 
-    auto responseReader = _stub->AsyncListChannelMessages(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListChannelMessages(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listTournaments(
@@ -1469,19 +1469,19 @@ void DefaultClient::listTournaments(
     const opt::optional<std::string>& cursor,
     std::function<void(NTournamentListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::TournamentList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NTournamentListPtr list(new NTournamentList());
             assign(*list, *data);
             successCallback(list);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListTournamentsRequest req;
 
@@ -1492,9 +1492,9 @@ void DefaultClient::listTournaments(
     if (limit) req.mutable_limit()->set_value(*limit);
     if (cursor) req.set_cursor(*cursor);
 
-    auto responseReader = _stub->AsyncListTournaments(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListTournaments(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listTournamentRecords(
@@ -1505,19 +1505,19 @@ void DefaultClient::listTournamentRecords(
     const std::vector<std::string>& ownerIds,
     std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::TournamentRecordList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NTournamentRecordListPtr list(new NTournamentRecordList());
             assign(*list, *data);
             successCallback(list);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListTournamentRecordsRequest req;
 
@@ -1531,9 +1531,9 @@ void DefaultClient::listTournamentRecords(
         req.add_owner_ids(id);
     }
 
-    auto responseReader = _stub->AsyncListTournamentRecords(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListTournamentRecords(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listTournamentRecordsAroundOwner(
@@ -1543,19 +1543,19 @@ void DefaultClient::listTournamentRecordsAroundOwner(
     const opt::optional<int32_t>& limit,
     std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::TournamentRecordList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NTournamentRecordListPtr list(new NTournamentRecordList());
             assign(*list, *data);
             successCallback(list);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListTournamentRecordsAroundOwnerRequest req;
 
@@ -1564,25 +1564,25 @@ void DefaultClient::listTournamentRecordsAroundOwner(
 
     if (limit) req.mutable_limit()->set_value(*limit);
 
-    auto responseReader = _stub->AsyncListTournamentRecordsAroundOwner(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListTournamentRecordsAroundOwner(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::joinTournament(NSessionPtr session, const std::string & tournamentId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::JoinTournamentRequest req;
 
     req.set_tournament_id(tournamentId);
 
-    auto responseReader = _stub->AsyncJoinTournament(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncJoinTournament(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listStorageObjects(
@@ -1592,19 +1592,19 @@ void DefaultClient::listStorageObjects(
     const opt::optional<std::string>& cursor,
     std::function<void(NStorageObjectListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::StorageObjectList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NStorageObjectListPtr list(new NStorageObjectList());
             assign(*list, *data);
             successCallback(list);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListStorageObjectsRequest req;
 
@@ -1613,9 +1613,9 @@ void DefaultClient::listStorageObjects(
     if (limit) req.mutable_limit()->set_value(*limit);
     if (cursor) req.set_cursor(*cursor);
 
-    auto responseReader = _stub->AsyncListStorageObjects(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListStorageObjects(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listUsersStorageObjects(
@@ -1626,19 +1626,19 @@ void DefaultClient::listUsersStorageObjects(
     const opt::optional<std::string>& cursor,
     std::function<void(NStorageObjectListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::StorageObjectList>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NStorageObjectListPtr list(new NStorageObjectList());
             assign(*list, *data);
             successCallback(list);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ListStorageObjectsRequest req;
 
@@ -1648,9 +1648,9 @@ void DefaultClient::listUsersStorageObjects(
     if (limit) req.mutable_limit()->set_value(*limit);
     if (cursor) req.set_cursor(*cursor);
 
-    auto responseReader = _stub->AsyncListStorageObjects(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncListStorageObjects(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::writeStorageObjects(
@@ -1658,19 +1658,19 @@ void DefaultClient::writeStorageObjects(
     const std::vector<NStorageObjectWrite>& objects,
     std::function<void(const NStorageObjectAcks&)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::StorageObjectAcks>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NStorageObjectAcks acks;
             assign(acks, data->acks());
             successCallback(acks);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::WriteStorageObjectsRequest req;
 
@@ -1690,9 +1690,9 @@ void DefaultClient::writeStorageObjects(
             write_obj->mutable_permission_write()->set_value(*obj.permission_write);
     }
 
-    auto responseReader = _stub->AsyncWriteStorageObjects(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncWriteStorageObjects(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::readStorageObjects(
@@ -1700,19 +1700,19 @@ void DefaultClient::readStorageObjects(
     const std::vector<NReadStorageObjectId>& objectIds,
     std::function<void(const NStorageObjects&)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::StorageObjects>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NStorageObjects objects;
             assign(objects, data->objects());
             successCallback(objects);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::ReadStorageObjectsRequest req;
 
@@ -1725,17 +1725,17 @@ void DefaultClient::readStorageObjects(
         write_obj->set_user_id(obj.user_id);
     }
 
-    auto responseReader = _stub->AsyncReadStorageObjects(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncReadStorageObjects(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::deleteStorageObjects(NSessionPtr session, const std::vector<NDeleteStorageObjectId>& objectIds, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
 
-    rpcRequest->successCallback = successCallback;
-    rpcRequest->errorCallback = errorCallback;
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::DeleteStorageObjectsRequest req;
 
@@ -1748,9 +1748,9 @@ void DefaultClient::deleteStorageObjects(NSessionPtr session, const std::vector<
         write_obj->set_version(obj.version);
     }
 
-    auto responseReader = _stub->AsyncDeleteStorageObjects(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncDeleteStorageObjects(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::rpc(
@@ -1759,19 +1759,19 @@ void DefaultClient::rpc(
     const opt::optional<std::string>& payload,
     std::function<void(const NRpc&)> successCallback, ErrorCallback errorCallback)
 {
-    RpcRequest* rpcRequest = createRpcRequest(session);
+    ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::Rpc>());
 
     if (successCallback)
     {
-        rpcRequest->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback]()
         {
             NRpc rpc;
             assign(rpc, *data);
             successCallback(rpc);
         };
     }
-    rpcRequest->errorCallback = errorCallback;
+    ctx->errorCallback = errorCallback;
 
     nakama::api::Rpc req;
 
@@ -1780,9 +1780,9 @@ void DefaultClient::rpc(
     if (payload)
         req.set_payload(*payload);
 
-    auto responseReader = _stub->AsyncRpcFunc(&rpcRequest->context, req, &_cq);
+    auto responseReader = _stub->AsyncRpcFunc(&ctx->context, req, &_cq);
 
-    responseReader->Finish(&(*data), &rpcRequest->status, (void*)rpcRequest);
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 }
