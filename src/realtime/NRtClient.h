@@ -38,13 +38,15 @@ namespace Nakama {
         NRtClient(const DefaultRtClientParameters& parameters);
         ~NRtClient();
 
-        void disconnect() override;
-
         void tick() override;
 
         void setListener(NRtClientListenerInterface* listener) override;
 
+        void setTransport(NRtTransportPtr transport) override;
+
         void connect(NSessionPtr session, bool createStatus) override;
+
+        void disconnect() override;
 
         void joinChat(
             const std::string& target,
@@ -155,11 +157,16 @@ namespace Nakama {
         ) override;
 
         protected:
+            void onDisconnected();
+            void onMessage(const NBytes& data);
+
             RtRequestContext* createReqContext(::nakama::realtime::Envelope& msg);
             void send(const ::google::protobuf::Message& msg);
 
         protected:
+            DefaultRtClientParameters _parameters;
             NRtClientListenerInterface* _listener = nullptr;
+            NRtTransportPtr _transport;
             std::map<int32_t, std::unique_ptr<RtRequestContext>> _reqContexts;
             int32_t _nextCid = 0;
     };

@@ -24,6 +24,7 @@
 #include "nakama-cpp/data/NMatch.h"
 #include "nakama-cpp/data/NRpc.h"
 #include "nakama-cpp/realtime/NRtClientListenerInterface.h"
+#include "nakama-cpp/realtime/NRtTransportInterface.h"
 #include "nakama-cpp/realtime/rtdata/NChannel.h"
 #include "nakama-cpp/realtime/rtdata/NChannelMessageAck.h"
 #include "nakama-cpp/realtime/rtdata/NMatchmakerTicket.h"
@@ -59,6 +60,13 @@ namespace Nakama {
         * @param listener The listener of client events.
         */
         virtual void setListener(NRtClientListenerInterface* listener) = 0;
+
+        /**
+        * Set transport
+        *
+        * @param transport The transport.
+        */
+        virtual void setTransport(NRtTransportPtr transport) = 0;
 
         /**
         * Connect to the server.

@@ -22,10 +22,10 @@ namespace Nakama {
 
     /**
      * @param port The port number of the server. Defaults to 7350.
-     * @param ssl Set connection strings to use the secure mode with the server. Defaults to false. The server must be configured to make use of this option. With HTTP, GRPC, and WebSockets the server must
-     * be configured with an SSL certificate or use a load balancer which performs SSL termination. For rUDP you
-     * must configure the server to expose it's IP address so it can be bundled within session tokens. See the
-     * server documentation for more information.
+     * @param ssl Set connection strings to use the secure mode with the server. Defaults to false. The server must be configured to make use of this option.
+     * With HTTP, GRPC, and WebSockets the server must be configured with an SSL certificate or use a load balancer which performs SSL termination.
+     * For rUDP you must configure the server to expose it's IP address so it can be bundled within session tokens.
+     * See the server documentation for more information.
      */
     struct DefaultRtClientParameters
     {

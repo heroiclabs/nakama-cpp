@@ -34,10 +34,6 @@ NRtClient::~NRtClient()
 {
 }
 
-void NRtClient::disconnect()
-{
-}
-
 void NRtClient::tick()
 {
 }
@@ -47,8 +43,151 @@ void NRtClient::setListener(NRtClientListenerInterface * listener)
     _listener = listener;
 }
 
+void NRtClient::setTransport(NRtTransportPtr transport)
+{
+    _transport = transport;
+
+    if (_transport)
+    {
+        _transport->setDisconnectCallback(std::bind(&NRtClient::onDisconnected, this));
+        _transport->setMessageCallback(std::bind(&NRtClient::onMessage, this, std::placeholders::_1));
+    }
+}
+
 void NRtClient::connect(NSessionPtr session, bool createStatus)
 {
+    if (_transport)
+    {
+        _transport->connect("", _parameters.port, "", _parameters.ssl);
+    }
+}
+
+void NRtClient::disconnect()
+{
+    if (_transport)
+    {
+        _transport->disconnect();
+    }
+}
+
+void NRtClient::onDisconnected()
+{
+    if (_listener)
+    {
+        _listener->onDisconnect();
+    }
+}
+
+void NRtClient::onMessage(const NBytes & data)
+{
+    ::nakama::realtime::Envelope msg;
+
+    if (!msg.ParseFromArray(data.data(), data.size()))
+    {
+        return;
+    }
+
+    NRtError error;
+
+    if (msg.has_error())
+    {
+        assign(error, msg.error());
+    }
+
+    if (msg.cid().empty())
+    {
+        if (_listener)
+        {
+            if (msg.has_error())
+            {
+                _listener->onError(error);
+            }
+            else if (msg.has_channel_message())
+            {
+                NChannelMessage channelMessage;
+                assign(channelMessage, msg.channel_message());
+                _listener->onChannelMessage(channelMessage);
+            }
+            else if (msg.has_channel_presence_event())
+            {
+                NChannelPresenceEvent channelPresenceEvent;
+                assign(channelPresenceEvent, msg.channel_presence_event());
+                _listener->onChannelPresence(channelPresenceEvent);
+            }
+            else if (msg.has_match_data())
+            {
+                NMatchData matchData;
+                assign(matchData, msg.match_data());
+                _listener->onMatchData(matchData);
+            }
+            else if (msg.has_match_presence_event())
+            {
+                NMatchPresenceEvent matchPresenceEvent;
+                assign(matchPresenceEvent, msg.match_presence_event());
+                _listener->onMatchPresence(matchPresenceEvent);
+            }
+            else if (msg.has_matchmaker_matched())
+            {
+                NMatchmakerMatchedPtr matchmakerMatched(new NMatchmakerMatched());
+                assign(*matchmakerMatched, msg.matchmaker_matched());
+                _listener->onMatchmakerMatched(matchmakerMatched);
+            }
+            else if (msg.has_notifications())
+            {
+                NNotificationList list;
+                assign(list, msg.notifications());
+                _listener->onNotifications(list);
+            }
+            else if (msg.has_status_presence_event())
+            {
+                NStatusPresenceEvent event;
+                assign(event, msg.status_presence_event());
+                _listener->onStatusPresence(event);
+            }
+            else if (msg.has_stream_data())
+            {
+                NStreamData data;
+                assign(data, msg.stream_data());
+                _listener->onStreamData(data);
+            }
+            else if (msg.has_stream_presence_event())
+            {
+                NStreamPresenceEvent event;
+                assign(event, msg.stream_presence_event());
+                _listener->onStreamPresence(event);
+            }
+            else
+            {
+
+            }
+        }
+    }
+    else
+    {
+        int32_t cid = std::stoi(msg.cid());
+        auto it = _reqContexts.find(cid);
+
+        if (it != _reqContexts.end())
+        {
+            if (msg.has_error())
+            {
+                if (it->second->errorCallback)
+                {
+                    it->second->errorCallback(error);
+                }
+            }
+            else if (it->second->successCallback)
+            {
+                it->second->successCallback(msg);
+            }
+
+            _reqContexts.erase(it);
+        }
+        else
+        {
+
+        }
+    }
 }
 
 void NRtClient::joinChat(
@@ -468,16 +607,22 @@ RtRequestContext * NRtClient::createReqContext(::nakama::realtime::Envelope& msg
 
 void NRtClient::send(const::google::protobuf::Message & msg)
 {
-    size_t size = msg.ByteSizeLong();
-    NBytes bytes(size);
-
-    if (msg.SerializeToArray(bytes.data(), size))
+    if (_transport)
     {
-        // to do: send bytes
+        size_t size = msg.ByteSizeLong();
+        NBytes bytes(size);
+
+        if (msg.SerializeToArray(bytes.data(), size))
+        {
+            _transport->send(bytes);
+        }
+        else
+        {
+
+        }
     }
     else
     {
-
     }
 }
 

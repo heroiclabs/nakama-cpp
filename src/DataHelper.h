@@ -36,8 +36,16 @@
 
 #include "nakama-cpp/realtime/rtdata/NChannelMessageAck.h"
 #include "nakama-cpp/realtime/rtdata/NChannel.h"
+#include "nakama-cpp/realtime/rtdata/NChannelPresenceEvent.h"
 #include "nakama-cpp/realtime/rtdata/NMatchmakerTicket.h"
+#include "nakama-cpp/realtime/rtdata/NMatchPresenceEvent.h"
+#include "nakama-cpp/realtime/rtdata/NMatchmakerMatched.h"
+#include "nakama-cpp/realtime/rtdata/NMatchData.h"
 #include "nakama-cpp/realtime/rtdata/NStatus.h"
+#include "nakama-cpp/realtime/rtdata/NStatusPresenceEvent.h"
+#include "nakama-cpp/realtime/rtdata/NRtError.h"
+#include "nakama-cpp/realtime/rtdata/NStreamData.h"
+#include "nakama-cpp/realtime/rtdata/NStreamPresenceEvent.h"
 #include "github.com/heroiclabs/nakama/rtapi/realtime.pb.h"
 
 namespace Nakama {
@@ -47,6 +55,7 @@ namespace Nakama {
     void assign(int32_t& value, const ::google::protobuf::Int32Value& data);
     void assign(NUserGroupState& state, const ::google::protobuf::Int32Value& data);
     void assign(std::string& str, const ::google::protobuf::StringValue& data);
+    void assign(NBytes& bytes, const std::string& str);
     void assign(NAccount& account, const nakama::api::Account& data);
     void assign(NUser& user, const nakama::api::User& data);
     void assign(NAccountDevice& device, const nakama::api::AccountDevice& data);
@@ -77,10 +86,21 @@ namespace Nakama {
 
     void assign(NChannelMessageAck& ack, const ::nakama::realtime::ChannelMessageAck& data);
     void assign(NChannel& channel, const ::nakama::realtime::Channel& data);
+    void assign(NChannelPresenceEvent& event, const ::nakama::realtime::ChannelPresenceEvent& data);
     void assign(NUserPresence& presence, const ::nakama::realtime::UserPresence& data);
     void assign(NMatch& match, const ::nakama::realtime::Match& data);
+    void assign(NMatchData& match_data, const ::nakama::realtime::MatchData& data);
     void assign(NMatchmakerTicket& ticket, const ::nakama::realtime::MatchmakerTicket& data);
+    void assign(NMatchPresenceEvent& event, const ::nakama::realtime::MatchPresenceEvent& data);
+    void assign(NMatchmakerMatched& matched, const ::nakama::realtime::MatchmakerMatched& data);
+    void assign(NMatchmakerUser& user, const ::nakama::realtime::MatchmakerMatched_MatchmakerUser& data);
+    void assign(NNotificationList& list, const ::nakama::realtime::Notifications& data);
     void assign(NStatus& status, const ::nakama::realtime::Status& data);
+    void assign(NStatusPresenceEvent& event, const ::nakama::realtime::StatusPresenceEvent& data);
+    void assign(NRtError& error, const ::nakama::realtime::Error& data);
+    void assign(NStream& stream, const ::nakama::realtime::Stream& data);
+    void assign(NStreamData& streamData, const ::nakama::realtime::StreamData& data);
+    void assign(NStreamPresenceEvent& event, const ::nakama::realtime::StreamPresenceEvent& data);
 
     template <class T>
     void assign(T& b, const T& data)
@@ -97,6 +117,17 @@ namespace Nakama {
         for (auto it : data)
         {
             assign(b[i++], it);
+        }
+    }
+
+    template <class A, class B>
+    void assign(std::map<A, B>& b, const ::google::protobuf::Map<A, B>& data)
+    {
+        b.clear();
+
+        for (auto it : data)
+        {
+            b.emplace(it.first, it.second);
         }
     }
 

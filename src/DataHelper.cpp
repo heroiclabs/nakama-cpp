@@ -48,6 +48,18 @@ void assign(std::string & str, const::google::protobuf::StringValue & data)
         str.clear();
 }
 
+void assign(NBytes & bytes, const std::string & str)
+{
+    uint32_t i = 0;
+
+    bytes.resize(str.size());
+
+    for (auto c : str)
+    {
+        bytes[i++] = c;
+    }
+}
+
 void assign(NAccount& account, const nakama::api::Account& data)
 {
     assign(account.user.id, data.user().id());
@@ -191,14 +203,89 @@ void assign(NMatch& match, const ::nakama::realtime::Match& data)
     assign(match.presences, data.presences());
 }
 
+void assign(NMatchData & match_data, const::nakama::realtime::MatchData & data)
+{
+    assign(match_data.match_id, data.match_id());
+    assign(match_data.op_code, data.op_code());
+    assign(match_data.presence, data.presence());
+    assign(match_data.data, data.data());
+}
+
 void assign(NMatchmakerTicket & ticket, const::nakama::realtime::MatchmakerTicket & data)
 {
     assign(ticket.ticket, data.ticket());
 }
 
+void assign(NMatchPresenceEvent & event, const::nakama::realtime::MatchPresenceEvent & data)
+{
+    assign(event.match_id, data.match_id());
+    assign(event.joins, data.joins());
+    assign(event.leaves, data.leaves());
+}
+
+void assign(NMatchmakerMatched & matched, const::nakama::realtime::MatchmakerMatched & data)
+{
+    assign(matched.match_id, data.match_id());
+    assign(matched.ticket, data.ticket());
+    assign(matched.token, data.token());
+    assign(matched.self, data.self());
+    assign(matched.users, data.users());
+}
+
+void assign(NMatchmakerUser & user, const::nakama::realtime::MatchmakerMatched_MatchmakerUser & data)
+{
+    assign(user.presence, data.presence());
+    assign(user.string_properties, data.string_properties());
+    assign(user.numeric_properties, data.numeric_properties());
+}
+
+void assign(NNotificationList & list, const::nakama::realtime::Notifications & data)
+{
+    assign(list.notifications, data.notifications());
+}
+
 void assign(NStatus & status, const::nakama::realtime::Status & data)
 {
     assign(status.presences, data.presences());
+}
+
+void assign(NStatusPresenceEvent & event, const::nakama::realtime::StatusPresenceEvent & data)
+{
+    assign(event.joins, data.joins());
+    assign(event.leaves, data.leaves());
+}
+
+void assign(NRtError & error, const::nakama::realtime::Error & data)
+{
+    assign(error.message, data.message());
+    error.code = static_cast<RtErrorCode>(data.code());
+
+    for (auto& it : data.context())
+    {
+        error.context.emplace(it.first, it.second);
+    }
+}
+
+void assign(NStream & stream, const::nakama::realtime::Stream & data)
+{
+    assign(stream.label, data.label());
+    assign(stream.mode, data.mode());
+    assign(stream.subcontext, data.subcontext());
+    assign(stream.subject, data.subject());
+}
+
+void assign(NStreamData & streamData, const::nakama::realtime::StreamData & data)
+{
+    assign(streamData.sender, data.sender());
+    assign(streamData.data, data.data());
+    assign(streamData.stream, data.stream());
+}
+
+void assign(NStreamPresenceEvent & event, const::nakama::realtime::StreamPresenceEvent & data)
+{
+    assign(event.stream, data.stream());
+    assign(event.joins, data.joins());
+    assign(event.leaves, data.leaves());
 }
 
 void assign(NNotificationList & list, const nakama::api::NotificationList & data)
@@ -322,6 +409,13 @@ void assign(NChannel & channel, const::nakama::realtime::Channel & data)
     assign(channel.id, data.id());
     assign(channel.self, data.self());
     assign(channel.presences, data.presences());
+}
+
+void assign(NChannelPresenceEvent & event, const::nakama::realtime::ChannelPresenceEvent & data)
+{
+    assign(event.channel_id, data.channel_id());
+    assign(event.joins, data.joins());
+    assign(event.leaves, data.leaves());
 }
 
 void assign(NUserPresence & presence, const::nakama::realtime::UserPresence & data)
