@@ -19,6 +19,7 @@
 #include "nakama-cpp/NTypes.h"
 #include <functional>
 #include <memory>
+#include <vector>
 
 namespace Nakama {
 
@@ -43,12 +44,10 @@ namespace Nakama {
         /**
          * Connect to the server.
          *
-         * @param host The host address.
-         * @param port The port number of the server.
-         * @param path The path on the server.
-         * @param ssl set true to use the secure mode with the server.
+         * @param url The URL of websocket server.
+         * @param protocols The websocket protocols that agree with websocket server.
          */
-        virtual void connect(const std::string& host, uint32_t port, const std::string& path, bool ssl) = 0;
+        virtual void connect(const std::string& url, const std::vector<std::string>& protocols = {}) = 0;
 
         /**
         * Close the connection with the server.

@@ -18,6 +18,14 @@
 
 namespace Nakama {
 
+    void NRtDefaultClientListener::onConnect()
+    {
+        if (_connectCallback)
+        {
+            _connectCallback();
+        }
+    }
+
     void NRtDefaultClientListener::onDisconnect()
     {
         if (_disconnectCallback)

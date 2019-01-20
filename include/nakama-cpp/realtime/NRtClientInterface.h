@@ -49,24 +49,11 @@ namespace Nakama {
         virtual void disconnect() = 0;
 
         /**
-         * Pumps requests queue in your thread.
-         * Call it periodically, each 50 ms is ok.
-         */
-        virtual void tick() = 0;
-
-        /**
         * Set events listener
         *
         * @param listener The listener of client events.
         */
         virtual void setListener(NRtClientListenerInterface* listener) = 0;
-
-        /**
-        * Set transport
-        *
-        * @param transport The transport.
-        */
-        virtual void setTransport(NRtTransportPtr transport) = 0;
 
         /**
         * Connect to the server.

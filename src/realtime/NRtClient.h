@@ -35,14 +35,10 @@ namespace Nakama {
     class NRtClient : public NRtClientInterface
     {
     public:
-        NRtClient(const DefaultRtClientParameters& parameters);
+        NRtClient(NRtTransportPtr transport, const std::string& host, int port, bool ssl);
         ~NRtClient();
 
-        void tick() override;
-
         void setListener(NRtClientListenerInterface* listener) override;
-
-        void setTransport(NRtTransportPtr transport) override;
 
         void connect(NSessionPtr session, bool createStatus) override;
 
@@ -164,7 +160,9 @@ namespace Nakama {
             void send(const ::google::protobuf::Message& msg);
 
         protected:
-            DefaultRtClientParameters _parameters;
+            std::string _host;
+            int _port = 0;
+            bool _ssl = false;
             NRtClientListenerInterface* _listener = nullptr;
             NRtTransportPtr _transport;
             std::map<int32_t, std::unique_ptr<RtRequestContext>> _reqContexts;

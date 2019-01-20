@@ -45,6 +45,8 @@ namespace Nakama {
 
         void tick() override;
 
+        NRtClientPtr createRtClient(NRtTransportPtr transport, int port) override;
+
         void authenticateDevice(
             const std::string& id,
             const opt::optional<std::string>& username,
@@ -554,6 +556,8 @@ namespace Nakama {
         void onResponse(void* tag, bool ok);
 
     private:
+        std::string _host;
+        bool _ssl = false;
         std::unique_ptr<nakama::api::Nakama::Stub> _stub;
         grpc::CompletionQueue _cq;
         std::string _basicAuthMetadata;

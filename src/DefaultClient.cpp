@@ -15,6 +15,7 @@
  */
 
 #include "DefaultClient.h"
+#include "realtime/NRtClient.h"
 #include "nakama-cpp/StrUtil.h"
 #include "DefaultSession.h"
 #include "DataHelper.h"
@@ -33,6 +34,9 @@ NClientPtr createDefaultClient(const DefaultClientParameters& parameters)
 
 DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
 {
+    _host = parameters.host;
+    _ssl = parameters.ssl;
+
     std::string target = parameters.host + ":" + std::to_string(parameters.port);
 
     auto channel = grpc::CreateChannel(target, grpc::InsecureChannelCredentials());
@@ -81,6 +85,12 @@ void DefaultClient::tick()
             break;
         }
     } while (continueLoop);
+}
+
+NRtClientPtr DefaultClient::createRtClient(NRtTransportPtr transport, int port)
+{
+    NRtClientPtr client(new NRtClient(transport, _host, port, _ssl));
+    return client;
 }
 
 ReqContext * DefaultClient::createReqContext(NSessionPtr session)

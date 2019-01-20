@@ -38,6 +38,11 @@ namespace Nakama {
         virtual ~NRtClientListenerInterface() {}
 
         /**
+        * Called when the client socket has been connected.
+        */
+        virtual void onConnect() {}
+
+        /**
         * Called when the client socket disconnects.
         */
         virtual void onDisconnect() {}
@@ -113,5 +118,5 @@ namespace Nakama {
         virtual void onStreamData(const NStreamData& data) {}
     };
 
-    using NRtClientListenerInterfacePtr = std::shared_ptr<NRtClientListenerInterface>;
+    using NRtClientListenerPtr = std::shared_ptr<NRtClientListenerInterface>;
 }

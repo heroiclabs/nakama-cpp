@@ -21,6 +21,7 @@
 #include <memory>
 #include <vector>
 #include "nakama-cpp/NSessionInterface.h"
+#include "nakama-cpp/realtime/NRtClientInterface.h"
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
 #include "nakama-cpp/data/NGroup.h"
@@ -63,6 +64,13 @@ namespace Nakama {
          * Call it periodically, each 50 ms is ok.
          */
         virtual void tick() = 0;
+
+        /**
+         * Create a new real-time client.
+         * @param port The port number of the server. Default is 7350.
+         * @return a new NRtClient instance.
+         */
+        virtual NRtClientPtr createRtClient(NRtTransportPtr transport, int port=7350) = 0;
 
         /**
          * Authenticate a user with a device id.

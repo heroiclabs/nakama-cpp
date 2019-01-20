@@ -14,27 +14,35 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/realtime/DefaultRtClient.h"
 #include "NRtClient.h"
 #include "DataHelper.h"
+#include "nakama-cpp/StrUtil.h"
 
 namespace Nakama {
 
-NRtClientPtr createDefaultRtClient(const DefaultRtClientParameters& parameters)
+NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int port, bool ssl)
 {
-    NRtClientPtr client(new NRtClient(parameters));
-    return client;
-}
+    _transport = transport;
+    _host = host;
+    _port = port;
+    _ssl = ssl;
 
-NRtClient::NRtClient(const DefaultRtClientParameters & parameters)
-{
+    if (_transport)
+    {
+        _transport->setConnectCallback([this]()
+        {
+            if (_listener)
+            {
+                _listener->onConnect();
+            }
+        });
+
+        _transport->setDisconnectCallback(std::bind(&NRtClient::onDisconnected, this));
+        _transport->setMessageCallback(std::bind(&NRtClient::onMessage, this, std::placeholders::_1));
+    }
 }
 
 NRtClient::~NRtClient()
-{
-}
-
-void NRtClient::tick()
 {
 }
 
@@ -43,22 +51,25 @@ void NRtClient::setListener(NRtClientListenerInterface * listener)
     _listener = listener;
 }
 
-void NRtClient::setTransport(NRtTransportPtr transport)
-{
-    _transport = transport;
-
-    if (_transport)
-    {
-        _transport->setDisconnectCallback(std::bind(&NRtClient::onDisconnected, this));
-        _transport->setMessageCallback(std::bind(&NRtClient::onMessage, this, std::placeholders::_1));
-    }
-}
-
 void NRtClient::connect(NSessionPtr session, bool createStatus)
 {
     if (_transport)
     {
-        _transport->connect("", _parameters.port, "", _parameters.ssl);
+        std::string url;
+
+        if (_ssl)
+            url.append("wss://");
+        else
+            url.append("ws://");
+
+        url.append(_host).append(":").append(std::to_string(_port)).append("/ws");
+        url.append("?token=").append(url_encode(session->getAuthToken()));
+        url.append("&status=").append(createStatus ? "true" : "false");
+        url.append("&format=protobuf");
+
+        std::vector<std::string> protocols = { "binary" };
+
+        _transport->connect(url, protocols);
     }
 }
 

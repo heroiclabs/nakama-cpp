@@ -28,6 +28,7 @@ namespace Nakama {
     class NRtDefaultClientListener : public NRtClientListenerInterface
     {
     public:
+        using ConnectCallback = std::function<void()>;
         using DisconnectCallback = std::function<void()>;
         using ErrorCallback = std::function<void(const NRtError&)>;
         using ChannelMessageCallback = std::function<void(const NChannelMessage&)>;
@@ -40,6 +41,7 @@ namespace Nakama {
         using StreamPresenceCallback = std::function<void(const NStreamPresenceEvent&)>;
         using StreamDataCallback = std::function<void(const NStreamData&)>;
 
+        void setConnectCallback(ConnectCallback callback) { _connectCallback = callback; }
         void setDisconnectCallback(DisconnectCallback callback) { _disconnectCallback = callback; }
         void setErrorCallback(ErrorCallback callback) { _errorCallback = callback; }
         void setChannelMessageCallback(ChannelMessageCallback callback) { _channelMessageCallback = callback; }
@@ -53,6 +55,7 @@ namespace Nakama {
         void setStreamDataCallback(StreamDataCallback callback) { _streamDataCallback = callback; }
 
     protected:
+        void onConnect() override;
         void onDisconnect() override;
         void onError(const NRtError& error) override;
         void onChannelMessage(const NChannelMessage& message) override;
@@ -66,6 +69,7 @@ namespace Nakama {
         void onStreamData(const NStreamData& data) override;
 
     protected:
+        ConnectCallback _connectCallback;
         DisconnectCallback _disconnectCallback;
         ErrorCallback _errorCallback;
         ChannelMessageCallback _channelMessageCallback;

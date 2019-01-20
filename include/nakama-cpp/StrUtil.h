@@ -28,4 +28,6 @@ namespace Nakama {
 
     std::string getJsonFieldValue(const std::string& json, const std::string& field_name);
 
+    std::string url_encode(const std::string& str);
+
 } // namespace Nakama

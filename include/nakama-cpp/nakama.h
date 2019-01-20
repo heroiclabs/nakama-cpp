@@ -17,4 +17,3 @@
 #pragma once
 
 #include "nakama-cpp/DefaultClient.h"
-#include "nakama-cpp/realtime/DefaultRtClient.h"
