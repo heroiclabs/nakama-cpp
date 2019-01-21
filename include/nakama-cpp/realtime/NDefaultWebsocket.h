@@ -16,33 +16,13 @@
 
 #pragma once
 
-#include <chrono>
-#include <thread>
-#include <iostream>
-#include "nakama-cpp/Nakama.h"
+#include "nakama-cpp/realtime/NRtTransportInterface.h"
 
 namespace Nakama {
-namespace Test {
 
-    class NTest
-    {
-    public:
-        NTest(const char* name);
+    /**
+     * Create default websocket transport
+     */
+    NRtTransportPtr createDefaultWebsocket();
 
-        virtual void createWorkingClient();
-        virtual void createClientWithParameters(const DefaultClientParameters& parameters);
-
-        virtual void runTest();
-        virtual void stopTest(bool succeeded = false);
-
-        NClientPtr client;
-
-    protected:
-        bool _continue_loop = true;
-        bool _testSucceeded = false;
-    };
-
-    void setWorkingClientParameters(DefaultClientParameters& parameters);
-
-} // namespace Test
-} // namespace Nakama
+}

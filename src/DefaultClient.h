@@ -45,7 +45,7 @@ namespace Nakama {
 
         void tick() override;
 
-        NRtClientPtr createRtClient(NRtTransportPtr transport, int port) override;
+        NRtClientPtr createRtClient(int port, NRtTransportPtr transport) override;
 
         void authenticateDevice(
             const std::string& id,

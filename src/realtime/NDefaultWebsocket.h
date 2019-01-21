@@ -16,33 +16,33 @@
 
 #pragma once
 
-#include <chrono>
-#include <thread>
-#include <iostream>
-#include "nakama-cpp/Nakama.h"
+#include "nakama-cpp/realtime/NRtTransportInterface.h"
+
+#define _WEBSOCKETPP_CPP11_STL_
+#include "websocketpp/config/core_client.hpp"
+#include "websocketpp/client.hpp"
 
 namespace Nakama {
-namespace Test {
 
-    class NTest
+    /**
+     * Default websocket transport
+     */
+    class NDefaultWebsocket : public NRtTransportInterface
     {
     public:
-        NTest(const char* name);
+        void connect(const std::string& url, const std::vector<std::string>& protocols) override;
 
-        virtual void createWorkingClient();
-        virtual void createClientWithParameters(const DefaultClientParameters& parameters);
+        void disconnect() override;
 
-        virtual void runTest();
-        virtual void stopTest(bool succeeded = false);
+        void send(const std::string& data) override;
 
-        NClientPtr client;
+        void send(const NBytes& data) override;
 
     protected:
-        bool _continue_loop = true;
-        bool _testSucceeded = false;
+        using WsClient = websocketpp::client<websocketpp::config::core_client>;
+
+        WsClient _wsClient;
+        websocketpp::connection_hdl _con_hdl;
     };
 
-    void setWorkingClientParameters(DefaultClientParameters& parameters);
-
-} // namespace Test
-} // namespace Nakama
+}

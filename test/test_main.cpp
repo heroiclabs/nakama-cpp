@@ -28,6 +28,8 @@ void test_connectError();
 void test_disconnect();
 void test_restoreSession();
 
+void test_rt_joinChat();
+
 void setWorkingClientParameters(DefaultClientParameters& parameters)
 {
 }
@@ -118,6 +120,8 @@ int runAllTests()
     test_connectError();
     test_disconnect();
     test_restoreSession();
+
+    test_rt_joinChat();
 
     // total stats
     uint32_t testsPassed = (g_runTestsCount - g_failedTestsCount);

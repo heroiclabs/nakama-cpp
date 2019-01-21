@@ -16,6 +16,7 @@
 
 #include "DefaultClient.h"
 #include "realtime/NRtClient.h"
+#include "nakama-cpp/realtime/NDefaultWebsocket.h"
 #include "nakama-cpp/StrUtil.h"
 #include "DefaultSession.h"
 #include "DataHelper.h"
@@ -87,8 +88,13 @@ void DefaultClient::tick()
     } while (continueLoop);
 }
 
-NRtClientPtr DefaultClient::createRtClient(NRtTransportPtr transport, int port)
+NRtClientPtr DefaultClient::createRtClient(int port, NRtTransportPtr transport)
 {
+    if (!transport)
+    {
+        transport = createDefaultWebsocket();
+    }
+
     NRtClientPtr client(new NRtClient(transport, _host, port, _ssl));
     return client;
 }
