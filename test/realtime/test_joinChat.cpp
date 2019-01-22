@@ -27,17 +27,31 @@ void test_rt_joinChat()
 
     test.onRtConnect = [&test]()
     {
-        auto successCallback = [&test](NChannelPtr channel)
-        {
-            std::cout << "joined chat: " << channel->id << std::endl;
-
-            test.stopTest(true);
-        };
-
         auto errorCallback = [&test](const NRtError& error)
         {
             std::cout << "error: " << error.message << std::endl;
             test.stopTest();
+        };
+
+        auto successCallback = [&test, errorCallback](NChannelPtr channel)
+        {
+            std::cout << "joined chat: " << channel->id << std::endl;
+
+            auto ackCallback = [&test](const NChannelMessageAck& ack)
+            {
+                std::cout << "message sent successfuly. msg id: " << ack.message_id << std::endl;
+                test.stopTest(true);
+            };
+
+            // data must be JSON
+            std::string json_data = "{\"msg\":\"Hello there!\"}";
+
+            test.rtClient->writeChatMessage(
+                channel->id,
+                json_data,
+                ackCallback,
+                errorCallback
+            );
         };
 
         test.rtClient->joinChat(
