@@ -34,6 +34,11 @@ void NDefaultWebsocket::connect(const std::string & url, const std::vector<std::
     try {
         websocketpp::lib::error_code ec;
 
+        // set logging to only fails
+        _wsClient.clear_access_channels(websocketpp::log::alevel::all);
+        _wsClient.set_access_channels(websocketpp::log::alevel::fail);
+        //_wsClient.set_error_channels(websocketpp::log::elevel::warn);
+
         _wsClient.init_asio();
 
         WsClient::connection_ptr con = _wsClient.get_connection(url, ec);
