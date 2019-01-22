@@ -16,10 +16,17 @@ def build(target):
     print 'building ' + target + '...'
     call('cmake --build ' + build_dir + ' --target ' + target + ' --config "Debug"')
 
+grpc_cpp_plugin_path = os.path.abspath(r'..\win32\build\third_party\grpc\Debug\grpc_cpp_plugin.exe')
+protoc_path = os.path.abspath(r'..\win32\build\third_party\grpc\third_party\protobuf\Debug\protoc.exe')
+
 # generate Visual Studio projects
 #generator = 'Visual Studio 14 2015'
 generator = 'Visual Studio 15 2017'
-call('cmake -B ' + build_dir + ' -G"' + generator + '" ../..')
+call('cmake -B ' + build_dir +
+ ' -G"' + generator + '"' +
+ ' -DPROTOBUF_PROTOC_EXECUTABLE=' + protoc_path +
+ ' -DGRPC_CPP_PLUGIN_EXECUTABLE=' + grpc_cpp_plugin_path +
+ ' ../..')
 
 build('grpc_cpp_plugin')
 build('protoc')

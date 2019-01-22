@@ -12,8 +12,8 @@ ABI = sys.argv[1]
 
 if os.name == 'nt':
     # windows
-    grpc_cpp_plugin_path = r'..\win32\build\third_party\grpc\Debug\grpc_cpp_plugin.exe'
-    protoc_path = r'..\win32\build\third_party\grpc\third_party\protobuf\Debug\protoc.exe'
+    grpc_cpp_plugin_path = os.path.abspath(r'..\win32\build\third_party\grpc\Debug\grpc_cpp_plugin.exe')
+    protoc_path = os.path.abspath(r'..\win32\build\third_party\grpc\third_party\protobuf\Debug\protoc.exe')
 
     if not os.path.isfile(grpc_cpp_plugin_path) or not os.path.isfile(protoc_path):
         print 'grpc_cpp_plugin_path =', grpc_cpp_plugin_path
@@ -51,6 +51,8 @@ print 'ANDROID_NDK=' + ANDROID_NDK
 
 call('cmake -DANDROID_ABI=' + ABI +
  ' -DCMAKE_TOOLCHAIN_FILE=' + ANDROID_NDK + '/build/cmake/android.toolchain.cmake' +
+ ' -DPROTOBUF_PROTOC_EXECUTABLE=' + protoc_path +
+ ' -DGRPC_CPP_PLUGIN_EXECUTABLE=' + grpc_cpp_plugin_path +
  ' -DANDROID_NATIVE_API_LEVEL=16 -B ' + build_dir + ' -GNinja ../..')
 
 call('ninja -C ' + build_dir + ' nakama-cpp')

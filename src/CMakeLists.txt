@@ -4,14 +4,16 @@ project(nakama-cpp CXX)
 
 if(WIN32)
     include(windows_support)
-    set(INSTALL_SUBFOLDER win32)
+    set(INSTALL_LIB_DIR ${INSTALL_LIB_DIR}\\win32)
 elseif(ANDROID)
-    set(INSTALL_SUBFOLDER android)
+    set(INSTALL_LIB_DIR ${INSTALL_LIB_DIR}/android/${ANDROID_ABI})
 elseif(CMAKE_OSX_SYSROOT MATCHES ".*iphoneos.*")
-    set(INSTALL_SUBFOLDER ios)
+    set(INSTALL_LIB_DIR ${INSTALL_LIB_DIR}/ios)
 endif()
 
-message("INSTALL_SUBFOLDER=${INSTALL_SUBFOLDER}")
+set(CMAKE_INSTALL_BINDIR)
+set(CMAKE_INSTALL_LIBDIR ${INSTALL_LIB_DIR})
+message("INSTALL_LIB_DIR=${INSTALL_LIB_DIR}")
 
 set(_src_root_path ${CMAKE_CURRENT_LIST_DIR})
 file(
@@ -57,4 +59,4 @@ foreach(_source IN ITEMS ${_public_headers_list})
     source_group("include\\${_group_path}" FILES "${_source}")
 endforeach()
 
-install(TARGETS nakama-cpp DESTINATION ${INSTALL_LIB_DIR}/${INSTALL_SUBFOLDER})
+install(TARGETS nakama-cpp DESTINATION ${INSTALL_LIB_DIR})
