@@ -30,6 +30,8 @@ namespace Nakama {
     class NDefaultWebsocket : public NRtTransportInterface
     {
     public:
+        NDefaultWebsocket();
+
         void tick() override;
 
         void connect(const std::string& url, const std::vector<std::string>& protocols) override;

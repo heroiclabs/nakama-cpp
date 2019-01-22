@@ -24,6 +24,11 @@ NRtTransportPtr createDefaultWebsocket()
     return NRtTransportPtr(new NDefaultWebsocket());
 }
 
+NDefaultWebsocket::NDefaultWebsocket()
+{
+    _wsClient.init_asio();
+}
+
 void NDefaultWebsocket::tick()
 {
     _wsClient.poll();
@@ -38,8 +43,6 @@ void NDefaultWebsocket::connect(const std::string & url, const std::vector<std::
         _wsClient.clear_access_channels(websocketpp::log::alevel::all);
         _wsClient.set_access_channels(websocketpp::log::alevel::fail);
         //_wsClient.set_error_channels(websocketpp::log::elevel::warn);
-
-        _wsClient.init_asio();
 
         WsClient::connection_ptr con = _wsClient.get_connection(url, ec);
 
