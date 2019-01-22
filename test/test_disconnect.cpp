@@ -39,7 +39,7 @@ void test_connectError()
 
     auto errorCallback = [&test](const NError& error)
     {
-        std::cout << "error: " << error.GetErrorMessage() << std::endl;
+        std::cout << "error: " << error.message << std::endl;
         test.stopTest(true);
     };
 
@@ -62,7 +62,7 @@ void test_disconnect()
 
     auto errorCallback = [&test](const NError& error)
     {
-        std::cout << "error: " << error.GetErrorMessage() << std::endl;
+        std::cout << "error: " << error.message << std::endl;
         test.stopTest(true);
     };
 

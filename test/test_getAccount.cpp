@@ -31,7 +31,7 @@ void test_getAccount()
 
     auto errorCallback = [&test](const NError& error)
     {
-        std::cout << "error: " << error.GetErrorMessage() << std::endl;
+        std::cout << "error: " << error.message << std::endl;
         test.stopTest();
     };
 

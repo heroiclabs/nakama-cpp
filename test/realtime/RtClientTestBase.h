@@ -63,7 +63,7 @@ public:
 
         auto errorCallback = [this](const NError& error)
         {
-            std::cout << "error: " << error.GetErrorMessage() << std::endl;
+            std::cout << "error: " << error.message << std::endl;
             stopTest();
         };
 

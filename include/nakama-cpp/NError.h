@@ -44,19 +44,14 @@ namespace Nakama {
         GrpcCallFailed          = -1
     };
 
-    class NAKAMA_API NError
+    struct NAKAMA_API NError
     {
-    public:
         NError() {}
         NError(const std::string& message, ErrorCode code = ErrorCode::Unknown) :
-            _message(message), _code(code) {}
+            message(message), code(code) {}
 
-        const std::string& GetErrorMessage() const { return _message; }
-        ErrorCode GetErrorCode() const { return _code; }
-
-    private:
-        std::string _message;
-        ErrorCode _code = ErrorCode::Unknown;
+        std::string message;
+        ErrorCode code = ErrorCode::Unknown;
     };
 
 }
