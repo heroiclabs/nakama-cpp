@@ -38,6 +38,8 @@ namespace Nakama {
         NRtClient(NRtTransportPtr transport, const std::string& host, int port, bool ssl);
         ~NRtClient();
 
+        void tick() override;
+
         void setListener(NRtClientListenerInterface* listener) override;
 
         void connect(NSessionPtr session, bool createStatus) override;

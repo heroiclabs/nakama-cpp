@@ -24,38 +24,51 @@ NRtTransportPtr createDefaultWebsocket()
     return NRtTransportPtr(new NDefaultWebsocket());
 }
 
+void NDefaultWebsocket::tick()
+{
+    _wsClient.poll();
+}
+
 void NDefaultWebsocket::connect(const std::string & url, const std::vector<std::string>& protocols)
 {
-    websocketpp::lib::error_code ec;
+    try {
+        websocketpp::lib::error_code ec;
 
-    WsClient::connection_ptr con = _wsClient.get_connection(url, ec);
+        _wsClient.init_asio();
 
-    con->set_open_handler([this](websocketpp::connection_hdl hdl)
+        WsClient::connection_ptr con = _wsClient.get_connection(url, ec);
+
+        con->set_open_handler([this](websocketpp::connection_hdl hdl)
+        {
+            _con_hdl = hdl;
+            onConnected();
+        });
+
+        con->set_message_handler([this](websocketpp::connection_hdl, WsClient::message_ptr msg)
+        {
+            NBytes bytes;
+
+            bytes.assign(msg->get_payload().begin(), msg->get_payload().end());
+
+            onMessage(bytes);
+        });
+
+        con->set_fail_handler([this](websocketpp::connection_hdl hdl)
+        {
+            onError("fail");
+        });
+
+        con->set_close_handler([this](websocketpp::connection_hdl hdl)
+        {
+            onDisconnected();
+        });
+
+        _wsClient.connect(con);
+    }
+    catch (websocketpp::exception const & e)
     {
-        _con_hdl = hdl;
-        onConnected();
-    });
-
-    con->set_message_handler([this](websocketpp::connection_hdl, WsClient::message_ptr msg)
-    {
-        NBytes bytes;
-
-        bytes.assign(msg->get_payload().begin(), msg->get_payload().end());
-
-        onMessage(bytes);
-    });
-
-    con->set_fail_handler([this](websocketpp::connection_hdl hdl)
-    {
-        onError("fail");
-    });
-
-    con->set_close_handler([this](websocketpp::connection_hdl hdl)
-    {
-        onDisconnected();
-    });
-
-    _wsClient.connect(con);
+        std::cout << __func__ << " - " << e.what() << std::endl;
+    }
 }
 
 void NDefaultWebsocket::disconnect()

@@ -38,6 +38,9 @@ namespace Test {
         NClientPtr client;
 
     protected:
+        virtual void tick();
+
+    protected:
         bool _continue_loop = true;
         bool _testSucceeded = false;
     };

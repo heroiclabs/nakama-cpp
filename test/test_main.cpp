@@ -72,7 +72,7 @@ void NTest::runTest()
 
     while (_continue_loop)
     {
-        client->tick();
+        tick();
 
         std::this_thread::sleep_for(sleep_period);
     }
@@ -94,6 +94,11 @@ void NTest::stopTest(bool succeeded)
 {
     _testSucceeded = succeeded;
     _continue_loop = false;
+}
+
+void NTest::tick()
+{
+    client->tick();
 }
 
 // *************************************************************

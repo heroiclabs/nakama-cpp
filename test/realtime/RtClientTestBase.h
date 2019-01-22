@@ -71,6 +71,16 @@ public:
 
         NTest::runTest();
     }
+
+    void tick() override
+    {
+        NTest::tick();
+
+        if (rtClient)
+        {
+            rtClient->tick();
+        }
+    }
 };
 
 } // namespace Test

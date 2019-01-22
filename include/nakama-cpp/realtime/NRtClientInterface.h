@@ -44,9 +44,10 @@ namespace Nakama {
         virtual ~NRtClientInterface() {}
 
         /**
-         * Close the connection with the server.
+         * Pumps requests queue in your thread.
+         * Call it periodically, each 50 ms is ok.
          */
-        virtual void disconnect() = 0;
+        virtual void tick() = 0;
 
         /**
         * Set events listener
@@ -62,6 +63,11 @@ namespace Nakama {
         * @param createStatus True if the socket should show the user as online to others.
         */
         virtual void connect(NSessionPtr session, bool createStatus) = 0;
+
+        /**
+         * Close the connection with the server.
+         */
+        virtual void disconnect() = 0;
 
         /**
         * Join a chat channel on the server.

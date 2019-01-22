@@ -46,6 +46,14 @@ NRtClient::~NRtClient()
 {
 }
 
+void NRtClient::tick()
+{
+    if (_transport)
+    {
+        _transport->tick();
+    }
+}
+
 void NRtClient::setListener(NRtClientListenerInterface * listener)
 {
     _listener = listener;

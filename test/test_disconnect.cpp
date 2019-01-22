@@ -57,7 +57,7 @@ void test_disconnect()
     auto successCallback = [&test](NSessionPtr session)
     {
         std::cout << "session token: " << session->getAuthToken() << std::endl;
-        test.stopTest();
+        test.stopTest(true);
     };
 
     auto errorCallback = [&test](const NError& error)

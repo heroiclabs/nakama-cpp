@@ -42,6 +42,12 @@ namespace Nakama {
         void setMessageCallback(MessageCallback callback) { _messageCallback = callback; }
 
         /**
+         * Pumps requests queue in your thread.
+         * NRtClient will call this from it's tick.
+         */
+        virtual void tick() = 0;
+
+        /**
          * Connect to the server.
          *
          * @param url The URL of websocket server.

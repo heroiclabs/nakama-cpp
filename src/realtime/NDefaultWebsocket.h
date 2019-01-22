@@ -19,7 +19,7 @@
 #include "nakama-cpp/realtime/NRtTransportInterface.h"
 
 #define _WEBSOCKETPP_CPP11_STL_
-#include "websocketpp/config/core_client.hpp"
+#include "websocketpp/config/asio_no_tls_client.hpp"
 #include "websocketpp/client.hpp"
 
 namespace Nakama {
@@ -30,6 +30,8 @@ namespace Nakama {
     class NDefaultWebsocket : public NRtTransportInterface
     {
     public:
+        void tick() override;
+
         void connect(const std::string& url, const std::vector<std::string>& protocols) override;
 
         void disconnect() override;
@@ -39,7 +41,7 @@ namespace Nakama {
         void send(const NBytes& data) override;
 
     protected:
-        using WsClient = websocketpp::client<websocketpp::config::core_client>;
+        using WsClient = websocketpp::client<websocketpp::config::asio_client>;
 
         WsClient _wsClient;
         websocketpp::connection_hdl _con_hdl;

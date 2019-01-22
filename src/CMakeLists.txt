@@ -34,7 +34,10 @@ file(
 add_library(nakama-cpp SHARED STATIC ${_source_list} ${_public_headers_list})
 target_compile_features(nakama-cpp PRIVATE cxx_std_11)
 add_definitions(-DNAKAMA_API=)
-target_link_libraries(nakama-cpp PRIVATE grpc++ libprotobuf)
+set(Boost_USE_STATIC_LIBS ON) # only find static libs
+find_package(Boost 1.67.0 REQUIRED COMPONENTS system date_time regex)
+target_include_directories(nakama-cpp PRIVATE ${Boost_INCLUDE_DIRS})
+target_link_libraries(nakama-cpp PUBLIC grpc++ libprotobuf ${Boost_LIBRARIES})
 
 target_include_directories(nakama-cpp
     PUBLIC ../third_party
