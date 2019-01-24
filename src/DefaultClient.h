@@ -45,7 +45,7 @@ namespace Nakama {
 
         void tick() override;
 
-        NRtClientPtr createRtClient(int port, NRtTransportPtr transport) override;
+        NRtClientPtr createRtClient(int32_t port, NRtTransportPtr transport) override;
 
         void authenticateDevice(
             const std::string& id,
@@ -344,7 +344,7 @@ namespace Nakama {
         void listGroups(
             NSessionPtr session,
             const std::string& name,
-            int limit,
+            int32_t limit,
             const std::string& cursor,
             std::function<void(NGroupListPtr)> successCallback,
             ErrorCallback errorCallback
@@ -387,7 +387,7 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& leaderboardId,
             const std::vector<std::string>& ownerIds,
-            const opt::optional<int>& limit,
+            const opt::optional<int32_t>& limit,
             const opt::optional<std::string>& cursor,
             std::function<void(NLeaderboardRecordListPtr)> successCallback,
             ErrorCallback errorCallback
@@ -397,7 +397,7 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& leaderboardId,
             const std::string& ownerId,
-            const opt::optional<int>& limit,
+            const opt::optional<int32_t>& limit,
             std::function<void(NLeaderboardRecordListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -431,9 +431,9 @@ namespace Nakama {
 
         void listMatches(
             NSessionPtr session,
-            const opt::optional<int>& min_size,
-            const opt::optional<int>& max_size,
-            const opt::optional<int>& limit,
+            const opt::optional<int32_t>& min_size,
+            const opt::optional<int32_t>& max_size,
+            const opt::optional<int32_t>& limit,
             const opt::optional<std::string>& label,
             const opt::optional<bool>& authoritative,
             std::function<void(NMatchListPtr)> successCallback,
@@ -442,7 +442,7 @@ namespace Nakama {
 
         void listNotifications(
             NSessionPtr session,
-            const opt::optional<int>& limit,
+            const opt::optional<int32_t>& limit,
             const opt::optional<std::string>& cacheableCursor,
             std::function<void(NNotificationListPtr)> successCallback,
             ErrorCallback errorCallback
@@ -458,7 +458,7 @@ namespace Nakama {
         void listChannelMessages(
             NSessionPtr session,
             const std::string& channelId,
-            const opt::optional<int>& limit,
+            const opt::optional<int32_t>& limit,
             const opt::optional<std::string>& cursor,
             const opt::optional<bool>& forward,
             std::function<void(NChannelMessageListPtr)> successCallback,

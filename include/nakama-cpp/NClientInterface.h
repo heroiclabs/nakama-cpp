@@ -71,7 +71,7 @@ namespace Nakama {
          * @param port The port number of the server. Default is 7350.
          * @return a new NRtClient instance.
          */
-        virtual NRtClientPtr createRtClient(int port = 7350, NRtTransportPtr transport = nullptr) = 0;
+        virtual NRtClientPtr createRtClient(int32_t port = 7350, NRtTransportPtr transport = nullptr) = 0;
 
         /**
          * Authenticate a user with a device id.
@@ -639,7 +639,7 @@ namespace Nakama {
         virtual void listGroups(
             NSessionPtr session,
             const std::string& name,
-            int limit = 0,
+            int32_t limit = 0,
             const std::string& cursor = "",
             std::function<void(NGroupListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
@@ -722,7 +722,7 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& leaderboardId,
             const std::vector<std::string>& ownerIds = {},
-            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<int32_t>& limit = opt::nullopt,
             const opt::optional<std::string>& cursor = opt::nullopt,
             std::function<void(NLeaderboardRecordListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
@@ -740,7 +740,7 @@ namespace Nakama {
             NSessionPtr session,
             const std::string& leaderboardId,
             const std::string& ownerId,
-            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<int32_t>& limit = opt::nullopt,
             std::function<void(NLeaderboardRecordListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
@@ -803,14 +803,14 @@ namespace Nakama {
         * @param min The minimum number of match participants.
         * @param max The maximum number of match participants.
         * @param limit The number of matches to list.
-        * @param authoritative <c>True</c> to include authoritative matches.
+        * @param authoritative <c>true</c> to include authoritative matches.
         * @param label The label to filter the match list on.
         */
         virtual void listMatches(
             NSessionPtr session,
-            const opt::optional<int>& min_size = opt::nullopt,
-            const opt::optional<int>& max_size = opt::nullopt,
-            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<int32_t>& min_size = opt::nullopt,
+            const opt::optional<int32_t>& max_size = opt::nullopt,
+            const opt::optional<int32_t>& limit = opt::nullopt,
             const opt::optional<std::string>& label = opt::nullopt,
             const opt::optional<bool>& authoritative = opt::nullopt,
             std::function<void(NMatchListPtr)> successCallback = nullptr,
@@ -826,7 +826,7 @@ namespace Nakama {
         */
         virtual void listNotifications(
             NSessionPtr session,
-            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<int32_t>& limit = opt::nullopt,
             const opt::optional<std::string>& cacheableCursor = opt::nullopt,
             std::function<void(NNotificationListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
@@ -857,7 +857,7 @@ namespace Nakama {
         virtual void listChannelMessages(
             NSessionPtr session,
             const std::string& channelId,
-            const opt::optional<int>& limit = opt::nullopt,
+            const opt::optional<int32_t>& limit = opt::nullopt,
             const opt::optional<std::string>& cursor = opt::nullopt,
             const opt::optional<bool>& forward = opt::nullopt,
             std::function<void(NChannelMessageListPtr)> successCallback = nullptr,

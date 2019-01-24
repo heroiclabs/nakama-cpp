@@ -88,7 +88,7 @@ void DefaultClient::tick()
     } while (continueLoop);
 }
 
-NRtClientPtr DefaultClient::createRtClient(int port, NRtTransportPtr transport)
+NRtClientPtr DefaultClient::createRtClient(int32_t port, NRtTransportPtr transport)
 {
     if (!transport)
     {
@@ -1090,7 +1090,7 @@ void DefaultClient::leaveGroup(NSessionPtr session, const std::string & groupId,
     responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listGroups(NSessionPtr session, const std::string & name, int limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
+void DefaultClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
     ReqContext* ctx = createReqContext(session);
     auto groupData(make_shared<nakama::api::GroupList>());
@@ -1209,7 +1209,7 @@ void DefaultClient::listLeaderboardRecords(
     NSessionPtr session,
     const std::string & leaderboardId,
     const std::vector<std::string>& ownerIds,
-    const opt::optional<int>& limit,
+    const opt::optional<int32_t>& limit,
     const opt::optional<std::string>& cursor,
     std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
@@ -1244,7 +1244,7 @@ void DefaultClient::listLeaderboardRecords(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const std::string & leaderboardId, const std::string & ownerId, const opt::optional<int>& limit, std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
+void DefaultClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const std::string & leaderboardId, const std::string & ownerId, const opt::optional<int32_t>& limit, std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::LeaderboardRecordList>());
@@ -1358,9 +1358,9 @@ void DefaultClient::deleteLeaderboardRecord(NSessionPtr session, const std::stri
 
 void DefaultClient::listMatches(
     NSessionPtr session,
-    const opt::optional<int>& min_size,
-    const opt::optional<int>& max_size,
-    const opt::optional<int>& limit,
+    const opt::optional<int32_t>& min_size,
+    const opt::optional<int32_t>& max_size,
+    const opt::optional<int32_t>& limit,
     const opt::optional<std::string>& label,
     const opt::optional<bool>& authoritative,
     std::function<void(NMatchListPtr)> successCallback, ErrorCallback errorCallback)
@@ -1394,7 +1394,7 @@ void DefaultClient::listMatches(
 
 void DefaultClient::listNotifications(
     NSessionPtr session,
-    const opt::optional<int>& limit,
+    const opt::optional<int32_t>& limit,
     const opt::optional<std::string>& cacheableCursor,
     std::function<void(NNotificationListPtr)> successCallback, ErrorCallback errorCallback)
 {
@@ -1444,7 +1444,7 @@ void DefaultClient::deleteNotifications(NSessionPtr session, const std::vector<s
 void DefaultClient::listChannelMessages(
     NSessionPtr session,
     const std::string & channelId,
-    const opt::optional<int>& limit,
+    const opt::optional<int32_t>& limit,
     const opt::optional<std::string>& cursor,
     const opt::optional<bool>& forward,
     std::function<void(NChannelMessageListPtr)> successCallback, ErrorCallback errorCallback)
