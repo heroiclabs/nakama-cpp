@@ -51,6 +51,7 @@ print 'ANDROID_NDK=' + ANDROID_NDK
 
 call('cmake -DANDROID_ABI=' + ABI +
  ' -DCMAKE_TOOLCHAIN_FILE=' + ANDROID_NDK + '/build/cmake/android.toolchain.cmake' +
+ ' -DBUILD_DEFAULT_WEBSOCKETS=OFF' +
  ' -DPROTOBUF_PROTOC_EXECUTABLE=' + protoc_path +
  ' -DGRPC_CPP_PLUGIN_EXECUTABLE=' + grpc_cpp_plugin_path +
  ' -DANDROID_NATIVE_API_LEVEL=16 -B ' + build_dir + ' -GNinja ../..')

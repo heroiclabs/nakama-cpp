@@ -93,6 +93,12 @@ NRtClientPtr DefaultClient::createRtClient(int32_t port, NRtTransportPtr transpo
     if (!transport)
     {
         transport = createDefaultWebsocket();
+
+        if (!transport)
+        {
+            std::cout << "No default websockets available. Please set custom transport." << std::endl;
+            return nullptr;
+        }
     }
 
     NRtClientPtr client(new NRtClient(transport, _host, port, _ssl));

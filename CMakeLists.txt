@@ -9,6 +9,8 @@ include(windows_support)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
+option(BUILD_DEFAULT_WEBSOCKETS "Build default websockets transport" ON)
+
 set(gRPC_BUILD_CSHARP_EXT OFF)
 set(protobuf_BUILD_TESTS OFF)
 set(BENCHMARK_ENABLE_LTO OFF)

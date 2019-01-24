@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-#include "realtime/NDefaultWebsocket.h"
 #include "nakama-cpp/realtime/NDefaultWebsocket.h"
+
+#ifdef BUILD_DEFAULT_WEBSOCKETS
+
+#include "realtime/NDefaultWebsocket.h"
 
 namespace Nakama {
 
@@ -94,4 +97,17 @@ void NDefaultWebsocket::send(const NBytes & data)
     _wsClient.send(_con_hdl, data.data(), data.size(), websocketpp::frame::opcode::binary);
 }
 
+} // namespace Nakama
+
+#else
+
+namespace Nakama {
+
+NRtTransportPtr createDefaultWebsocket()
+{
+    return nullptr;
 }
+
+} // namespace Nakama
+
+#endif // BUILD_DEFAULT_WEBSOCKETS
