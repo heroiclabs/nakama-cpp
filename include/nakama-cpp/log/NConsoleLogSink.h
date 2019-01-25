@@ -25,7 +25,7 @@ namespace Nakama {
     public:
         ~NConsoleLogSink() {}
 
-        void log(const NLogMessage& msg) override;
+        void log(NLogLevel level, const std::string& message, const char* func) override;
 
         void flush() override;
     };

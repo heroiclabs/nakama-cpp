@@ -23,22 +23,11 @@ namespace Nakama {
 
     enum class NAKAMA_API NLogLevel
     {
-        Trace    = 0,
         Debug    = 1,
         Info     = 2,
         Warn     = 3,
         Error    = 4,
         Fatal    = 5
-    };
-
-    struct NAKAMA_API NLogMessage
-    {
-        NLogMessage() = default;
-        NLogMessage(const std::string& msg, NLogLevel lvl) :
-            message(msg), level(lvl) {};
-
-        std::string message;
-        NLogLevel level;
     };
 
     class NAKAMA_API NLogSinkInterface
@@ -47,7 +36,7 @@ namespace Nakama {
         NLogSinkInterface() {}
         virtual ~NLogSinkInterface() {}
 
-        virtual void log(const NLogMessage& msg) = 0;
+        virtual void log(NLogLevel level, const std::string& message, const char* func = nullptr) = 0;
         virtual void flush() = 0;
 
         void setLevel(NLogLevel level) { _level = level; }

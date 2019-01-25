@@ -15,23 +15,41 @@
  */
 
 #include "nakama-cpp/log/NLogger.h"
+#include "nakama-cpp/log/NConsoleLogSink.h"
 #include <cstdarg>
 
 namespace Nakama {
 
-NLogger& NLogger::Instance()
+NLogSinkPtr NLogger::_sink;
+
+void NLogger::initWithConsoleSink(NLogLevel level)
 {
-    static NLogger instance;
-    return instance;
+    setSink(std::make_shared<NConsoleLogSink>());
+    _sink->setLevel(level);
 }
 
-NLogSinkPtr NLogger::getSink() const
+void NLogger::init(NLogSinkPtr sink, NLogLevel level)
+{
+    setSink(sink);
+
+    if (sink)
+    {
+        sink->setLevel(level);
+    }
+}
+
+NLogSinkPtr NLogger::getSink()
 {
     return _sink;
 }
 
 void NLogger::setSink(NLogSinkPtr sink)
 {
+    if (_sink)
+    {
+        _sink->flush();
+    }
+
     _sink = sink;
 }
 
@@ -43,52 +61,47 @@ void NLogger::setLevel(NLogLevel level)
     }
 }
 
-bool NLogger::shouldLog(NLogLevel level) const
+bool NLogger::shouldLog(NLogLevel level)
 {
-    return _sink && _sink->getLevel() >= level;
+    return _sink && _sink->getLevel() <= level;
 }
 
-void NLogger::Trace(const std::string& message)
+void NLogger::Debug(const std::string& message, const char* func)
 {
-    Log(NLogLevel::Trace, message);
+    Log(NLogLevel::Debug, message, func);
 }
 
-void NLogger::Debug(const std::string& message)
+void NLogger::Info(const std::string& message, const char* func)
 {
-    Log(NLogLevel::Debug, message);
+    Log(NLogLevel::Info, message, func);
 }
 
-void NLogger::Info(const std::string& message)
+void NLogger::Warn(const std::string& message, const char* func)
 {
-    Log(NLogLevel::Info, message);
+    Log(NLogLevel::Warn, message, func);
 }
 
-void NLogger::Warn(const std::string& message)
+void NLogger::Error(const std::string& message, const char* func)
 {
-    Log(NLogLevel::Warn, message);
+    Log(NLogLevel::Error, message, func);
 }
 
-void NLogger::Error(const std::string& message)
+void NLogger::Fatal(const std::string& message, const char* func)
 {
-    Log(NLogLevel::Error, message);
+    Log(NLogLevel::Fatal, message, func);
 }
 
-void NLogger::Fatal(const std::string& message)
+void NLogger::Log(NLogLevel level, const std::string & message, const char* func)
 {
-    Log(NLogLevel::Fatal, message);
-}
-
-void NLogger::Log(NLogLevel level, const std::string & message)
-{
-    if (Instance().shouldLog(level))
+    if (shouldLog(level))
     {
-        Instance().log(NLogMessage(message, level));
+        _sink->log(level, message, func);
     }
 }
 
-void NLogger::Format(NLogLevel level, const char* format, ...)
+void NLogger::Format(NLogLevel level, const char* func, const char* format, ...)
 {
-    if (Instance().shouldLog(level))
+    if (shouldLog(level))
     {
         va_list args, argsCpy;
 
@@ -105,16 +118,24 @@ void NLogger::Format(NLogLevel level, const char* format, ...)
             std::vsnprintf(&str[0], len + 1, format, args);
             va_end(args);
 
-            Instance().log(NLogMessage(str, level));
+            _sink->log(level, str, func);
         }
     }
 }
 
-void NLogger::log(const NLogMessage & msg)
+void NLogger::Error(const NError & error, const char * func)
 {
-    if (_sink)
+    if (shouldLog(NLogLevel::Error))
     {
-        _sink->log(msg);
+        _sink->log(NLogLevel::Error, toString(error), func);
+    }
+}
+
+void NLogger::Error(const NRtError & error, const char * func)
+{
+    if (shouldLog(NLogLevel::Error))
+    {
+        _sink->log(NLogLevel::Error, toString(error), func);
     }
 }
 

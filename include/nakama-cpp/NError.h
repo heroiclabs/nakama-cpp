@@ -23,25 +23,27 @@ namespace Nakama {
     enum class NAKAMA_API ErrorCode
     {
         Unknown = 0,
-        RuntimeException,
-        UnrecognizedPayload,
-        MissingPayload,
-        BadInput,
-        AuthError,
-        UserNotFound,
-        UserRegisterInuse,
-        UserLinkInuse,
-        UserLinkProviderUnavailable,
-        UserUnlinkDisallowed,
-        UserHandleInuse,
-        GroupNameInuse,
-        StorageRejected,
-        MatchNotFound,
-        RuntimeFunctionNotFound,
-        RuntimeFunctionException,
 
-        // Grpc errors
-        GrpcCallFailed          = -1
+        // server errors
+        //RuntimeException,
+        //UnrecognizedPayload,
+        //MissingPayload,
+        //BadInput,
+        //AuthError,
+        //UserNotFound,
+        //UserRegisterInuse,
+        //UserLinkInuse,
+        //UserLinkProviderUnavailable,
+        //UserUnlinkDisallowed,
+        //UserHandleInuse,
+        //GroupNameInuse,
+        //StorageRejected,
+        //MatchNotFound,
+        //RuntimeFunctionNotFound,
+        //RuntimeFunctionException,
+
+        // technical errors
+        ConnectionError          = -1
     };
 
     struct NAKAMA_API NError
@@ -53,5 +55,8 @@ namespace Nakama {
         std::string message;
         ErrorCode code = ErrorCode::Unknown;
     };
+
+    const char* toString(ErrorCode code);
+    std::string toString(const NError& error);
 
 }

@@ -19,14 +19,24 @@
 
 namespace Nakama {
 
-    void NConsoleLogSink::log(const NLogMessage& msg)
+    void NConsoleLogSink::log(NLogLevel level, const std::string& message, const char* func)
     {
-        std::cout << msg.message << std::endl;
+        std::ostream& os = (level >= NLogLevel::Error) ? std::cerr : std::cout;
+
+        if (func == nullptr || func[0] == 0)
+        {
+            os << message << std::endl;
+        }
+        else
+        {
+            os << func << ": " << message << std::endl;
+        }
     }
 
     void NConsoleLogSink::flush()
     {
         std::cout.flush();
+        std::cerr.flush();
     }
 
 }

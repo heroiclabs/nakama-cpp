@@ -42,4 +42,7 @@ namespace Nakama {
         std::string message;                          // A message in English to help developers debug the response.
         NStringMap context;                           // Additional error details which may be different for each response.
     };
+
+    const char* toString(RtErrorCode code);
+    std::string toString(const NRtError& error);
 }

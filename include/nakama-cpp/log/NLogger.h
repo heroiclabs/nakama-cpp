@@ -19,37 +19,54 @@
 #pragma once
 
 #include "nakama-cpp/log/NLogSinkInterface.h"
+#include "nakama-cpp/NError.h"
+#include "nakama-cpp/realtime/rtdata/NRtError.h"
+
+#ifdef NLOGS_ENABLED
+    #define NLOG_DEBUG(msg)           NLogger::Debug(msg, __func__)
+    #define NLOG_INFO(msg)            NLogger::Info(msg, __func__)
+    #define NLOG_WARN(msg)            NLogger::Warn(msg, __func__)
+    #define NLOG_ERROR(msg)           NLogger::Error(msg, __func__)
+    #define NLOG_FATAL(msg)           NLogger::Fatal(msg, __func__)
+    #define NLOG(level, format,...)   NLogger::Format(level, __func__, format, ##__VA_ARGS__)
+#else
+    #define NLOG_DEBUG(msg)           do {} while (0)
+    #define NLOG_INFO(msg)            do {} while (0)
+    #define NLOG_WARN(msg)            do {} while (0)
+    #define NLOG_ERROR(msg)           do {} while (0)
+    #define NLOG_FATAL(msg)           do {} while (0)
+    #define NLOG(level, format,...)   do {} while (0)
+#endif // NLOGS_ENABLED
 
 namespace Nakama {
 
     class NAKAMA_API NLogger
     {
     public:
-        static NLogger& Instance();
+        static void initWithConsoleSink(NLogLevel level = NLogLevel::Info);
+        static void init(NLogSinkPtr sink, NLogLevel level = NLogLevel::Info);
+        static NLogSinkPtr getSink();
+        static void setSink(NLogSinkPtr sink);
+        static void setLevel(NLogLevel level);
+        static bool shouldLog(NLogLevel level);
 
-        NLogSinkPtr getSink() const;
-
-        void setSink(NLogSinkPtr sink);
-        void setLevel(NLogLevel level);
-        bool shouldLog(NLogLevel level) const;
-
-        static void Trace(const std::string& message);
-        static void Debug(const std::string& message);
-        static void Info (const std::string& message);
-        static void Warn (const std::string& message);
-        static void Error(const std::string& message);
-        static void Fatal(const std::string& message);
-        static void Log(NLogLevel level, const std::string& message);
-        static void Format(NLogLevel level, const char* format, ...);
+        static void Debug(const std::string& message, const char* func = nullptr);
+        static void Info (const std::string& message, const char* func = nullptr);
+        static void Warn (const std::string& message, const char* func = nullptr);
+        static void Error(const std::string& message, const char* func = nullptr);
+        static void Fatal(const std::string& message, const char* func = nullptr);
+        static void Log(NLogLevel level, const std::string& message, const char* func = nullptr);
+        static void Format(NLogLevel level, const char* func, const char* format, ...);
+        static void Error(const NError& error, const char* func = nullptr);
+        static void Error(const NRtError& error, const char* func = nullptr);
 
     private:
-        NLogger();
-        ~NLogger() {}
-        NLogger(NLogger const&) = delete;
-        void operator=(NLogger const&) = delete;
-        void log(const NLogMessage& msg);
+        NLogger() = delete;
+        ~NLogger() = delete;
+        NLogger(const NLogger&) = delete;
+        void operator=(const NLogger&) = delete;
 
-        NLogSinkPtr _sink;
+        static NLogSinkPtr _sink;
     };
 
 }

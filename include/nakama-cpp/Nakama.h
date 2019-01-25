@@ -17,3 +17,4 @@
 #pragma once
 
 #include "nakama-cpp/DefaultClient.h"
+#include "nakama-cpp/log/NLogger.h"

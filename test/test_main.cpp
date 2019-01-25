@@ -119,6 +119,8 @@ ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
 
 int runAllTests()
 {
+    NLogger::initWithConsoleSink(NLogLevel::Debug);
+
     test_authenticateDevice();
     test_authenticateDevice2();
     test_getAccount();
