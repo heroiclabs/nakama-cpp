@@ -15,6 +15,7 @@
  */
 
 #include "nakama-cpp/realtime/NDefaultWebsocket.h"
+#include "nakama-cpp/log/NLogger.h"
 
 #ifdef BUILD_DEFAULT_WEBSOCKETS
 
@@ -51,12 +52,15 @@ void NDefaultWebsocket::connect(const std::string & url, const std::vector<std::
 
         con->set_open_handler([this](websocketpp::connection_hdl hdl)
         {
+            NLOG_DEBUG("socket connected");
             _con_hdl = hdl;
             onConnected();
         });
 
         con->set_message_handler([this](websocketpp::connection_hdl, WsClient::message_ptr msg)
         {
+            NLOG(NLogLevel::Debug, "socket message received %d bytes", msg->get_payload().size());
+
             NBytes bytes;
 
             bytes.assign(msg->get_payload().begin(), msg->get_payload().end());
@@ -66,34 +70,44 @@ void NDefaultWebsocket::connect(const std::string & url, const std::vector<std::
 
         con->set_fail_handler([this](websocketpp::connection_hdl hdl)
         {
+            NLOG_ERROR("socket fail");
             onError("fail");
         });
 
         con->set_close_handler([this](websocketpp::connection_hdl hdl)
         {
+            NLOG_DEBUG("socket closed");
             onDisconnected();
         });
 
+        NLOG_DEBUG("socket connecting...");
         _wsClient.connect(con);
     }
     catch (websocketpp::exception const & e)
     {
-        std::cout << __func__ << " - " << e.what() << std::endl;
+        onError("connect failed: " + std::string(e.what()));
+        NLOG_ERROR(e.what());
     }
 }
 
 void NDefaultWebsocket::disconnect()
 {
+    NLOG_DEBUG("...");
+
     _wsClient.close(_con_hdl, websocketpp::close::status::normal, "");
 }
 
 void NDefaultWebsocket::send(const std::string & data)
 {
+    NLOG(NLogLevel::Debug, "sending %d bytes...", data.size());
+
     _wsClient.send(_con_hdl, data.data(), data.size(), websocketpp::frame::opcode::text);
 }
 
 void NDefaultWebsocket::send(const NBytes & data)
 {
+    NLOG(NLogLevel::Debug, "sending %d bytes...", data.size());
+
     _wsClient.send(_con_hdl, data.data(), data.size(), websocketpp::frame::opcode::binary);
 }
 
@@ -105,6 +119,7 @@ namespace Nakama {
 
 NRtTransportPtr createDefaultWebsocket()
 {
+    NLOG_ERROR("Default websocket is not available for this platform.");
     return nullptr;
 }
 

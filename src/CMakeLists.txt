@@ -35,6 +35,10 @@ add_library(nakama-cpp SHARED STATIC ${_source_list} ${_public_headers_list})
 target_compile_features(nakama-cpp PRIVATE cxx_std_11)
 add_definitions(-DNAKAMA_API=)
 
+if(LOGS_ENABLED)
+	add_definitions(-DNLOGS_ENABLED=)
+endif(LOGS_ENABLED)
+
 if(BUILD_DEFAULT_WEBSOCKETS)
     add_definitions(-DBUILD_DEFAULT_WEBSOCKETS=)
     set(Boost_USE_STATIC_LIBS ON) # only find static libs
