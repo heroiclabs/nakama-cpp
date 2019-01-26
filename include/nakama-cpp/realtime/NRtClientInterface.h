@@ -35,6 +35,12 @@ namespace Nakama {
 
     using RtErrorCallback = std::function<void(const NRtError&)>;
 
+    enum class NRtClientProtocol
+    {
+        Protobuf,
+        Json
+    };
+
     /**
      * A real-time client interface to interact with Nakama server.
      */
@@ -62,7 +68,7 @@ namespace Nakama {
         * @param session The session of the user.
         * @param createStatus True if the socket should show the user as online to others.
         */
-        virtual void connect(NSessionPtr session, bool createStatus) = 0;
+        virtual void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol = NRtClientProtocol::Protobuf) = 0;
 
         /**
          * Close the connection with the server.

@@ -26,8 +26,7 @@ void test_authentication();
 void test_errors();
 void test_disconnect();
 void test_restoreSession();
-
-void test_rt_joinChat();
+void test_realtime();
 
 void setWorkingClientParameters(DefaultClientParameters& parameters)
 {
@@ -125,8 +124,7 @@ int runAllTests()
     test_disconnect();
     test_errors();
     test_restoreSession();
-
-    test_rt_joinChat();
+    test_realtime();
 
     // total stats
     uint32_t testsPassed = (g_runTestsCount - g_failedTestsCount);

@@ -18,6 +18,8 @@
 #include "DataHelper.h"
 #include "nakama-cpp/StrUtil.h"
 #include "nakama-cpp/log/NLogger.h"
+#include "realtime/NRtClientProtocol_Protobuf.h"
+#include "realtime/NRtClientProtocol_Json.h"
 
 namespace Nakama {
 
@@ -60,11 +62,12 @@ void NRtClient::setListener(NRtClientListenerInterface * listener)
     _listener = listener;
 }
 
-void NRtClient::connect(NSessionPtr session, bool createStatus)
+void NRtClient::connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol)
 {
     if (_transport)
     {
         std::string url;
+        NRtTransportType transportType;
 
         if (_ssl)
             url.append("wss://");
@@ -74,12 +77,22 @@ void NRtClient::connect(NSessionPtr session, bool createStatus)
         url.append(_host).append(":").append(std::to_string(_port)).append("/ws");
         url.append("?token=").append(url_encode(session->getAuthToken()));
         url.append("&status=").append(createStatus ? "true" : "false");
-        url.append("&format=protobuf");
 
-        std::vector<std::string> protocols = { "binary" };
+        // by default server uses Json protocol
+        if (protocol == NRtClientProtocol::Protobuf)
+        {
+            url.append("&format=protobuf");
+            _protocol.reset(new NRtClientProtocol_Protobuf());
+            transportType = NRtTransportType::Binary;
+        }
+        else
+        {
+            _protocol.reset(new NRtClientProtocol_Json());
+            transportType = NRtTransportType::Text;
+        }
 
         NLOG_INFO("...");
-        _transport->connect(url, protocols);
+        _transport->connect(url, transportType);
     }
     else
     {
@@ -107,7 +120,7 @@ void NRtClient::onMessage(const NBytes & data)
 {
     ::nakama::realtime::Envelope msg;
 
-    if (!msg.ParseFromArray(data.data(), data.size()))
+    if (!_protocol->parse(data, msg))
     {
         NLOG_ERROR("parse message failed");
         return;
@@ -667,10 +680,9 @@ void NRtClient::send(const::google::protobuf::Message & msg)
 {
     if (_transport)
     {
-        size_t size = msg.ByteSizeLong();
-        NBytes bytes(size);
+        NBytes bytes;
 
-        if (msg.SerializeToArray(bytes.data(), size))
+        if (_protocol->serialize(msg, bytes))
         {
             _transport->send(bytes);
         }

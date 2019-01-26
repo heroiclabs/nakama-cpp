@@ -18,6 +18,7 @@
 
 #include "nakama-cpp/realtime/NRtClientInterface.h"
 #include "github.com/heroiclabs/nakama/rtapi/realtime.pb.h"
+#include "realtime/NRtClientProtocolInterface.h"
 #include <map>
 
 namespace Nakama {
@@ -42,7 +43,7 @@ namespace Nakama {
 
         void setListener(NRtClientListenerInterface* listener) override;
 
-        void connect(NSessionPtr session, bool createStatus) override;
+        void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
 
         void disconnect() override;
 
@@ -167,6 +168,7 @@ namespace Nakama {
             bool _ssl = false;
             NRtClientListenerInterface* _listener = nullptr;
             NRtTransportPtr _transport;
+            NRtClientProtocolPtr _protocol;
             std::map<int32_t, std::unique_ptr<RtRequestContext>> _reqContexts;
             int32_t _nextCid = 0;
     };

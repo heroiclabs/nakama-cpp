@@ -23,6 +23,12 @@
 
 namespace Nakama {
 
+    enum class NRtTransportType
+    {
+        Binary,
+        Text
+    };
+
     /**
      * A real-time transport interface to send and receive data.
      */
@@ -53,7 +59,7 @@ namespace Nakama {
          * @param url The URL of websocket server.
          * @param protocols The websocket protocols that agree with websocket server.
          */
-        virtual void connect(const std::string& url, const std::vector<std::string>& protocols = {}) = 0;
+        virtual void connect(const std::string& url, NRtTransportType type) = 0;
 
         /**
         * Close the connection with the server.
@@ -61,14 +67,7 @@ namespace Nakama {
         virtual void disconnect() = 0;
 
         /**
-         * Send string data to the server.
-         *
-         * @param data The string data to send.
-         */
-        virtual void send(const std::string& data) = 0;
-
-        /**
-        * Send byte data to the server.
+        * Send bytes data to the server.
         *
         * @param data The byte data to send.
         */

@@ -34,17 +34,16 @@ namespace Nakama {
 
         void tick() override;
 
-        void connect(const std::string& url, const std::vector<std::string>& protocols) override;
+        void connect(const std::string& url, NRtTransportType type) override;
 
         void disconnect() override;
-
-        void send(const std::string& data) override;
 
         void send(const NBytes& data) override;
 
     protected:
         using WsClient = websocketpp::client<websocketpp::config::asio_client>;
 
+        websocketpp::frame::opcode::value _op_code = websocketpp::frame::opcode::binary;
         WsClient _wsClient;
         websocketpp::connection_hdl _con_hdl;
     };

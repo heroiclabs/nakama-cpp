@@ -14,27 +14,23 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
-#include "nakama-cpp/realtime/NRtDefaultClientListener.h"
+#include "realtime/NRtClientProtocol_Json.h"
+#include "google/protobuf/util/json_util.h"
 
 namespace Nakama {
-namespace Test {
 
-class NRtClientTest : public NTest
+bool NRtClientProtocol_Json::serialize(const google::protobuf::Message& message, NBytes& output)
 {
-public:
-    NRtClientTest(const char* name) : NTest(name) {}
+    auto status = google::protobuf::util::MessageToJsonString(message, &output);
 
-    std::function<void()> onRtConnect;
+    return status.ok();
+}
 
-    NRtDefaultClientListener listener;
-    NRtClientPtr rtClient;
-    static NRtClientProtocol protocol;
+bool NRtClientProtocol_Json::parse(const NBytes& input, google::protobuf::Message& message)
+{
+    auto status = google::protobuf::util::JsonStringToMessage(input, &message);
 
-    void runTest() override;
+    return status.ok();
+}
 
-    void tick() override;
-};
-
-} // namespace Test
-} // namespace Nakama
+}

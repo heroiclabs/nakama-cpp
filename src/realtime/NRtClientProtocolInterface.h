@@ -14,27 +14,20 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
-#include "nakama-cpp/realtime/NRtDefaultClientListener.h"
+#pragma once
+
+#include "nakama-cpp/NTypes.h"
+#include "google/protobuf/message.h"
 
 namespace Nakama {
-namespace Test {
 
-class NRtClientTest : public NTest
-{
-public:
-    NRtClientTest(const char* name) : NTest(name) {}
+    class NRtClientProtocolInterface
+    {
+    public:
+        virtual bool serialize(const google::protobuf::Message& message, NBytes& output) = 0;
+        virtual bool parse(const NBytes& input, google::protobuf::Message& message) = 0;
+    };
 
-    std::function<void()> onRtConnect;
+    using NRtClientProtocolPtr = std::shared_ptr<NRtClientProtocolInterface>;
 
-    NRtDefaultClientListener listener;
-    NRtClientPtr rtClient;
-    static NRtClientProtocol protocol;
-
-    void runTest() override;
-
-    void tick() override;
-};
-
-} // namespace Test
-} // namespace Nakama
+}

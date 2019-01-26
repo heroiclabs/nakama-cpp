@@ -66,5 +66,15 @@ void test_rt_joinChat()
     test.runTest();
 }
 
+void test_realtime()
+{
+    test_rt_joinChat();
+
+    NRtClientTest::protocol = NRtClientProtocol::Json;
+    std::cout << std::endl << "using Json protocol";
+
+    test_rt_joinChat();
+}
+
 } // namespace Test
 } // namespace Nakama

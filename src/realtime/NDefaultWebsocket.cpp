@@ -38,7 +38,7 @@ void NDefaultWebsocket::tick()
     _wsClient.poll();
 }
 
-void NDefaultWebsocket::connect(const std::string & url, const std::vector<std::string>& protocols)
+void NDefaultWebsocket::connect(const std::string & url, NRtTransportType type)
 {
     try {
         websocketpp::lib::error_code ec;
@@ -80,6 +80,11 @@ void NDefaultWebsocket::connect(const std::string & url, const std::vector<std::
             onDisconnected();
         });
 
+        if (type == NRtTransportType::Binary)
+            _op_code = websocketpp::frame::opcode::binary;
+        else
+            _op_code = websocketpp::frame::opcode::text;
+
         NLOG_DEBUG("socket connecting...");
         _wsClient.connect(con);
     }
@@ -97,18 +102,11 @@ void NDefaultWebsocket::disconnect()
     _wsClient.close(_con_hdl, websocketpp::close::status::normal, "");
 }
 
-void NDefaultWebsocket::send(const std::string & data)
-{
-    NLOG(NLogLevel::Debug, "sending %d bytes...", data.size());
-
-    _wsClient.send(_con_hdl, data.data(), data.size(), websocketpp::frame::opcode::text);
-}
-
 void NDefaultWebsocket::send(const NBytes & data)
 {
     NLOG(NLogLevel::Debug, "sending %d bytes...", data.size());
 
-    _wsClient.send(_con_hdl, data.data(), data.size(), websocketpp::frame::opcode::binary);
+    _wsClient.send(_con_hdl, data.data(), data.size(), _op_code);
 }
 
 } // namespace Nakama
