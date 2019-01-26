@@ -36,8 +36,6 @@ public:
 
         listener.setConnectCallback([this]()
         {
-            std::cout << "connected." << std::endl;
-
             if (onRtConnect)
                 onRtConnect();
             else
@@ -46,7 +44,6 @@ public:
 
         listener.setErrorCallback([this](const NRtError& error)
         {
-            std::cout << "connect error: " << error.message << std::endl;
             stopTest();
         });
 
@@ -63,7 +60,6 @@ public:
 
         auto errorCallback = [this](const NError& error)
         {
-            std::cout << "error: " << error.message << std::endl;
             stopTest();
         };
 

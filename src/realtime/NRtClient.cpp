@@ -17,6 +17,7 @@
 #include "NRtClient.h"
 #include "DataHelper.h"
 #include "nakama-cpp/StrUtil.h"
+#include "nakama-cpp/log/NLogger.h"
 
 namespace Nakama {
 
@@ -77,7 +78,12 @@ void NRtClient::connect(NSessionPtr session, bool createStatus)
 
         std::vector<std::string> protocols = { "binary" };
 
+        NLOG_INFO("...");
         _transport->connect(url, protocols);
+    }
+    else
+    {
+        NLOG_ERROR("no transport");
     }
 }
 
@@ -103,6 +109,7 @@ void NRtClient::onMessage(const NBytes & data)
 
     if (!msg.ParseFromArray(data.data(), data.size()))
     {
+        NLOG_ERROR("parse message failed");
         return;
     }
 
@@ -177,7 +184,7 @@ void NRtClient::onMessage(const NBytes & data)
             }
             else
             {
-
+                NLOG_ERROR("Unknown message received");
             }
         }
     }
@@ -204,7 +211,7 @@ void NRtClient::onMessage(const NBytes & data)
         }
         else
         {
-
+            NLOG_ERROR("request context not found. cid: " + msg.cid());
         }
     }
 }
@@ -217,6 +224,8 @@ void NRtClient::joinChat(
     std::function<void(NChannelPtr)> successCallback,
     RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
     auto* channelJoin = msg.mutable_channel_join();
 
@@ -244,6 +253,8 @@ void NRtClient::joinChat(
 
 void NRtClient::leaveChat(const std::string & channelId, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_channel_leave()->set_channel_id(channelId);
@@ -264,6 +275,8 @@ void NRtClient::leaveChat(const std::string & channelId, std::function<void()> s
 
 void NRtClient::writeChatMessage(const std::string & channelId, const std::string & content, std::function<void(const NChannelMessageAck&)> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_channel_message_send()->set_channel_id(channelId);
@@ -287,6 +300,8 @@ void NRtClient::writeChatMessage(const std::string & channelId, const std::strin
 
 void NRtClient::updateChatMessage(const std::string & channelId, const std::string & messageId, const std::string & content, std::function<void(const NChannelMessageAck&)> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_channel_message_update()->set_channel_id(channelId);
@@ -311,6 +326,8 @@ void NRtClient::updateChatMessage(const std::string & channelId, const std::stri
 
 void NRtClient::removeChatMessage(const std::string & channelId, const std::string & messageId, std::function<void(const NChannelMessageAck&)> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_channel_message_remove()->set_channel_id(channelId);
@@ -334,6 +351,8 @@ void NRtClient::removeChatMessage(const std::string & channelId, const std::stri
 
 void NRtClient::createMatch(std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_match_create();
@@ -356,6 +375,8 @@ void NRtClient::createMatch(std::function<void(const NMatch&)> successCallback, 
 
 void NRtClient::joinMatch(const std::string & matchId, std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_match_join()->set_match_id(matchId);
@@ -378,6 +399,8 @@ void NRtClient::joinMatch(const std::string & matchId, std::function<void(const 
 
 void NRtClient::joinMatchByToken(const std::string & token, std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_match_join()->set_token(token);
@@ -400,6 +423,8 @@ void NRtClient::joinMatchByToken(const std::string & token, std::function<void(c
 
 void NRtClient::leaveMatch(const std::string & matchId, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_match_leave()->set_match_id(matchId);
@@ -427,6 +452,8 @@ void NRtClient::addMatchmaker(
     std::function<void(const NMatchmakerTicket&)> successCallback,
     RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
     auto* data = msg.mutable_matchmaker_add();
 
@@ -462,6 +489,8 @@ void NRtClient::addMatchmaker(
 
 void NRtClient::removeMatchmaker(const std::string & ticket, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_matchmaker_remove()->set_ticket(ticket);
@@ -482,6 +511,8 @@ void NRtClient::removeMatchmaker(const std::string & ticket, std::function<void(
 
 void NRtClient::sendMatchData(const std::string & matchId, int64_t opCode, const NBytes & data, const std::vector<NUserPresence>& presences)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_match_data_send()->set_match_id(matchId);
@@ -512,6 +543,8 @@ void NRtClient::sendMatchData(const std::string & matchId, int64_t opCode, const
 
 void NRtClient::followUsers(const std::vector<std::string>& userIds, std::function<void(const NStatus&)> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
     auto* data = msg.mutable_status_follow();
 
@@ -538,6 +571,8 @@ void NRtClient::followUsers(const std::vector<std::string>& userIds, std::functi
 
 void NRtClient::unfollowUsers(const std::vector<std::string>& userIds, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
     auto* data = msg.mutable_status_unfollow();
 
@@ -562,6 +597,8 @@ void NRtClient::unfollowUsers(const std::vector<std::string>& userIds, std::func
 
 void NRtClient::updateStatus(const std::string & status, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_status_update()->mutable_status()->set_value(status);
@@ -582,6 +619,8 @@ void NRtClient::updateStatus(const std::string & status, std::function<void()> s
 
 void NRtClient::rpc(const std::string & id, const opt::optional<std::string>& payload, std::function<void(const NRpc&)> successCallback, RtErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ::nakama::realtime::Envelope msg;
     auto* data = msg.mutable_rpc();
 
@@ -637,11 +676,12 @@ void NRtClient::send(const::google::protobuf::Message & msg)
         }
         else
         {
-
+            NLOG_ERROR("serialize message failed");
         }
     }
     else
     {
+        NLOG_ERROR("no transport");
     }
 }
 
