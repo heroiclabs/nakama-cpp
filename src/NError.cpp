@@ -23,42 +23,44 @@ const char * toString(ErrorCode code)
 {
     switch (code)
     {
-    case Nakama::ErrorCode::Unknown:
+    case ErrorCode::Unknown:
         break;
-    /*case Nakama::ErrorCode::RuntimeException:
+    case ErrorCode::NotFound:
+        return "NotFound";
+    case ErrorCode::InvalidArgument:
+        return "InvalidArgument";
+    /*case ErrorCode::RuntimeException:
         break;
-    case Nakama::ErrorCode::UnrecognizedPayload:
+    case ErrorCode::UnrecognizedPayload:
         break;
-    case Nakama::ErrorCode::MissingPayload:
+    case ErrorCode::MissingPayload:
         break;
-    case Nakama::ErrorCode::BadInput:
+    case ErrorCode::BadInput:
         break;
-    case Nakama::ErrorCode::AuthError:
+    case ErrorCode::AuthError:
         break;
-    case Nakama::ErrorCode::UserNotFound:
+    case ErrorCode::UserNotFound:
         break;
-    case Nakama::ErrorCode::UserRegisterInuse:
+    case ErrorCode::UserRegisterInuse:
         break;
-    case Nakama::ErrorCode::UserLinkInuse:
+    case ErrorCode::UserLinkInuse:
         break;
-    case Nakama::ErrorCode::UserLinkProviderUnavailable:
+    case ErrorCode::UserLinkProviderUnavailable:
         break;
-    case Nakama::ErrorCode::UserUnlinkDisallowed:
+    case ErrorCode::UserUnlinkDisallowed:
         break;
-    case Nakama::ErrorCode::UserHandleInuse:
+    case ErrorCode::UserHandleInuse:
         break;
-    case Nakama::ErrorCode::GroupNameInuse:
+    case ErrorCode::GroupNameInuse:
         break;
-    case Nakama::ErrorCode::StorageRejected:
+    case ErrorCode::StorageRejected:
         break;
-    case Nakama::ErrorCode::MatchNotFound:
-        break;
-    case Nakama::ErrorCode::RuntimeFunctionNotFound:
-        break;
-    case Nakama::ErrorCode::RuntimeFunctionException:
+    case ErrorCode::MatchNotFound:
         break;*/
-    case Nakama::ErrorCode::ConnectionError:
+    case ErrorCode::ConnectionError:
         return "ConnectionError";
+    case ErrorCode::InternalError:
+        return "InternalError";
     default:
         break;
     }

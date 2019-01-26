@@ -22,9 +22,8 @@ namespace Test {
 using namespace std;
 
 void test_getAccount();
-void test_authenticateDevice();
-void test_authenticateDevice2();
-void test_connectError();
+void test_authentication();
+void test_errors();
 void test_disconnect();
 void test_restoreSession();
 
@@ -121,11 +120,10 @@ int runAllTests()
 {
     NLogger::initWithConsoleSink(NLogLevel::Debug);
 
-    test_authenticateDevice();
-    test_authenticateDevice2();
+    test_authentication();
     test_getAccount();
-    test_connectError();
     test_disconnect();
+    test_errors();
     test_restoreSession();
 
     test_rt_joinChat();

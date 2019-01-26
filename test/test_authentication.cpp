@@ -35,7 +35,6 @@ void test_authenticateDevice()
 
     auto errorCallback = [&test](const NError& error)
     {
-        std::cout << "error: " << error.message << std::endl;
         test.stopTest();
     };
 
@@ -58,13 +57,18 @@ void test_authenticateDevice2()
 
     auto errorCallback = [&test](const NError& error)
     {
-        std::cout << "error: " << error.message << std::endl;
         test.stopTest();
     };
 
     test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
 
     test.runTest();
+}
+
+void test_authentication()
+{
+    test_authenticateDevice();
+    test_authenticateDevice2();
 }
 
 } // namespace Test

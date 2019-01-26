@@ -17,6 +17,7 @@
 #include "DefaultClient.h"
 #include "realtime/NRtClient.h"
 #include "nakama-cpp/realtime/NDefaultWebsocket.h"
+#include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/StrUtil.h"
 #include "DefaultSession.h"
 #include "DataHelper.h"
@@ -72,12 +73,11 @@ void DefaultClient::tick()
         switch (_cq.AsyncNext(&tag, &ok, timespec))
         {
         case grpc::CompletionQueue::SHUTDOWN:
-            std::cerr << "The completion queue unexpectedly shutdown." << std::endl;
+            NLOG_DEBUG("completion queue is stopped");
             continueLoop = false;
             break;
 
         case grpc::CompletionQueue::GOT_EVENT:
-            std::cout << "call completed " << (int)(tag) << " ok: " << ok << std::endl;
             onResponse(tag, ok);
             break;
 
@@ -96,7 +96,7 @@ NRtClientPtr DefaultClient::createRtClient(int32_t port, NRtTransportPtr transpo
 
         if (!transport)
         {
-            std::cout << "No default websockets available. Please set custom transport." << std::endl;
+            NLOG_ERROR("No default websockets transport available. Please set transport.");
             return nullptr;
         }
     }
@@ -139,27 +139,51 @@ void DefaultClient::onResponse(void * tag, bool ok)
                     reqStatus->successCallback();
                 }
             }
-            else if (reqStatus->errorCallback)
+            else
             {
                 std::stringstream ss;
 
-                ss << "grpc call failed" << std::endl;
-                ss << "code: "    << reqStatus->status.error_code() << std::endl;
-                ss << "message: " << reqStatus->status.error_message() << std::endl;
-                ss << "details: " << reqStatus->status.error_details();
+                ss << "grpc code: " << reqStatus->status.error_code() << std::endl;
+                ss << "message: " << reqStatus->status.error_message();
 
-                reqStatus->errorCallback(NError(
-                    ss.str(),
-                    ErrorCode::GrpcCallFailed
-                ));
+                if (!reqStatus->status.error_details().empty())
+                {
+                    ss << std::endl << "details: " << reqStatus->status.error_details();
+                }
+
+                ErrorCode code = ErrorCode::Unknown;
+
+                switch (reqStatus->status.error_code())
+                {
+                    case grpc::StatusCode::UNAVAILABLE     : code = ErrorCode::ConnectionError; break;
+                    case grpc::StatusCode::INTERNAL        : code = ErrorCode::InternalError; break;
+                    case grpc::StatusCode::NOT_FOUND       : code = ErrorCode::NotFound; break;
+                    case grpc::StatusCode::INVALID_ARGUMENT: code = ErrorCode::InvalidArgument; break;
+
+                default:
+                    break;
+                }
+
+                NError error(ss.str(), code);
+
+                NLOG_ERROR(error);
+
+                if (reqStatus->errorCallback)
+                {
+                    reqStatus->errorCallback(error);
+                }
             }
         }
-        else if (reqStatus->errorCallback)
+        else
         {
-            reqStatus->errorCallback(NError(
-                "grpc call failed",
-                ErrorCode::GrpcCallFailed
-            ));
+            NError error("Communication failed. Please check connection.", ErrorCode::ConnectionError);
+
+            NLOG_ERROR(error);
+
+            if (reqStatus->errorCallback)
+            {
+                reqStatus->errorCallback(error);
+            }
         }
 
         delete reqStatus;
@@ -167,7 +191,7 @@ void DefaultClient::onResponse(void * tag, bool ok)
     }
     else
     {
-        std::cout << "DefaultClient::onResponse: not found tag " << tag << std::endl;
+        NLOG_ERROR("Internal error: not found request context.");
     }
 }
 
@@ -179,6 +203,8 @@ void DefaultClient::authenticateDevice(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
@@ -216,6 +242,8 @@ void DefaultClient::authenticateEmail(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
@@ -255,6 +283,8 @@ void DefaultClient::authenticateFacebook(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
@@ -291,6 +321,8 @@ void DefaultClient::authenticateGoogle(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
@@ -331,6 +363,8 @@ void DefaultClient::authenticateGameCenter(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
@@ -371,6 +405,8 @@ void DefaultClient::authenticateCustom(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
@@ -406,6 +442,8 @@ void DefaultClient::authenticateSteam(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
 
@@ -439,6 +477,8 @@ void DefaultClient::linkFacebook(
     const opt::optional<bool>& importFriends,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -460,6 +500,8 @@ void DefaultClient::linkEmail(
     const std::string & password,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -480,6 +522,8 @@ void DefaultClient::linkDevice(
     const std::string & id,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -499,6 +543,8 @@ void DefaultClient::linkGoogle(
     const std::string & accessToken,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -523,6 +569,8 @@ void DefaultClient::linkGameCenter(
     const std::string & publicKeyUrl,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -547,6 +595,8 @@ void DefaultClient::linkSteam(
     const std::string & token,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -563,6 +613,8 @@ void DefaultClient::linkSteam(
 
 void DefaultClient::linkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -579,6 +631,8 @@ void DefaultClient::linkCustom(NSessionPtr session, const std::string & id, std:
 
 void DefaultClient::unlinkFacebook(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -595,6 +649,8 @@ void DefaultClient::unlinkFacebook(NSessionPtr session, const std::string & acce
 
 void DefaultClient::unlinkEmail(NSessionPtr session, const std::string & email, const std::string & password, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -612,6 +668,8 @@ void DefaultClient::unlinkEmail(NSessionPtr session, const std::string & email, 
 
 void DefaultClient::unlinkGoogle(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -628,6 +686,8 @@ void DefaultClient::unlinkGoogle(NSessionPtr session, const std::string & access
 
 void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & playerId, const std::string & bundleId, NTimestamp timestampSeconds, const std::string & salt, const std::string & signature, const std::string & publicKeyUrl, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -649,6 +709,8 @@ void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & pl
 
 void DefaultClient::unlinkSteam(NSessionPtr session, const std::string & token, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -665,6 +727,8 @@ void DefaultClient::unlinkSteam(NSessionPtr session, const std::string & token, 
 
 void DefaultClient::unlinkDevice(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -681,6 +745,8 @@ void DefaultClient::unlinkDevice(NSessionPtr session, const std::string & id, st
 
 void DefaultClient::unlinkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -701,6 +767,8 @@ void DefaultClient::importFacebookFriends(
     const opt::optional<bool>& reset,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -722,6 +790,8 @@ void DefaultClient::getAccount(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto accoutData(make_shared<nakama::api::Account>());
 
@@ -751,6 +821,8 @@ void DefaultClient::updateAccount(
     const opt::optional<std::string>& timezone,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -779,6 +851,8 @@ void DefaultClient::getUsers(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto usersData(make_shared<nakama::api::Users>());
 
@@ -823,6 +897,8 @@ void DefaultClient::addFriends(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -853,6 +929,8 @@ void DefaultClient::deleteFriends(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -882,6 +960,8 @@ void DefaultClient::blockFriends(
     std::function<void()> successCallback,
     ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -906,6 +986,8 @@ void DefaultClient::blockFriends(
 
 void DefaultClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::Friends>());
 
@@ -936,6 +1018,8 @@ void DefaultClient::createGroup(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto groupData(make_shared<nakama::api::Group>());
 
@@ -977,6 +1061,8 @@ void DefaultClient::deleteGroup(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -999,6 +1085,8 @@ void DefaultClient::addGroupUsers(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -1020,6 +1108,8 @@ void DefaultClient::addGroupUsers(
 
 void DefaultClient::listGroupUsers(NSessionPtr session, const std::string & groupId, std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto groupData(make_shared<nakama::api::GroupUserList>());
 
@@ -1045,6 +1135,8 @@ void DefaultClient::listGroupUsers(NSessionPtr session, const std::string & grou
 
 void DefaultClient::kickGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -1066,6 +1158,8 @@ void DefaultClient::kickGroupUsers(NSessionPtr session, const std::string & grou
 
 void DefaultClient::joinGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -1082,6 +1176,8 @@ void DefaultClient::joinGroup(NSessionPtr session, const std::string & groupId, 
 
 void DefaultClient::leaveGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -1098,6 +1194,8 @@ void DefaultClient::leaveGroup(NSessionPtr session, const std::string & groupId,
 
 void DefaultClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto groupData(make_shared<nakama::api::GroupList>());
 
@@ -1134,6 +1232,8 @@ void DefaultClient::listUserGroups(NSessionPtr session, std::function<void(NUser
 
 void DefaultClient::listUserGroups(NSessionPtr session, const std::string & userId, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto groupData(make_shared<nakama::api::UserGroupList>());
 
@@ -1160,6 +1260,8 @@ void DefaultClient::listUserGroups(NSessionPtr session, const std::string & user
 
 void DefaultClient::promoteGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -1191,6 +1293,8 @@ void DefaultClient::updateGroup(
     ErrorCallback errorCallback
 )
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -1219,6 +1323,8 @@ void DefaultClient::listLeaderboardRecords(
     const opt::optional<std::string>& cursor,
     std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::LeaderboardRecordList>());
 
@@ -1252,6 +1358,8 @@ void DefaultClient::listLeaderboardRecords(
 
 void DefaultClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const std::string & leaderboardId, const std::string & ownerId, const opt::optional<int32_t>& limit, std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::LeaderboardRecordList>());
 
@@ -1286,6 +1394,8 @@ void DefaultClient::writeLeaderboardRecord(
     const opt::optional<std::string>& metadata,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::LeaderboardRecord>());
 
@@ -1320,6 +1430,8 @@ void DefaultClient::writeTournamentRecord(
     const opt::optional<std::string>& metadata,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::LeaderboardRecord>());
 
@@ -1348,6 +1460,8 @@ void DefaultClient::writeTournamentRecord(
 
 void DefaultClient::deleteLeaderboardRecord(NSessionPtr session, const std::string & leaderboardId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -1371,6 +1485,8 @@ void DefaultClient::listMatches(
     const opt::optional<bool>& authoritative,
     std::function<void(NMatchListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::MatchList>());
 
@@ -1404,6 +1520,8 @@ void DefaultClient::listNotifications(
     const opt::optional<std::string>& cacheableCursor,
     std::function<void(NNotificationListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::NotificationList>());
 
@@ -1430,6 +1548,8 @@ void DefaultClient::listNotifications(
 
 void DefaultClient::deleteNotifications(NSessionPtr session, const std::vector<std::string>& notificationIds, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -1455,6 +1575,8 @@ void DefaultClient::listChannelMessages(
     const opt::optional<bool>& forward,
     std::function<void(NChannelMessageListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::ChannelMessageList>());
 
@@ -1491,6 +1613,8 @@ void DefaultClient::listTournaments(
     const opt::optional<std::string>& cursor,
     std::function<void(NTournamentListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::TournamentList>());
 
@@ -1527,6 +1651,8 @@ void DefaultClient::listTournamentRecords(
     const std::vector<std::string>& ownerIds,
     std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::TournamentRecordList>());
 
@@ -1565,6 +1691,8 @@ void DefaultClient::listTournamentRecordsAroundOwner(
     const opt::optional<int32_t>& limit,
     std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::TournamentRecordList>());
 
@@ -1593,6 +1721,8 @@ void DefaultClient::listTournamentRecordsAroundOwner(
 
 void DefaultClient::joinTournament(NSessionPtr session, const std::string & tournamentId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -1614,6 +1744,8 @@ void DefaultClient::listStorageObjects(
     const opt::optional<std::string>& cursor,
     std::function<void(NStorageObjectListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::StorageObjectList>());
 
@@ -1648,6 +1780,8 @@ void DefaultClient::listUsersStorageObjects(
     const opt::optional<std::string>& cursor,
     std::function<void(NStorageObjectListPtr)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::StorageObjectList>());
 
@@ -1680,6 +1814,8 @@ void DefaultClient::writeStorageObjects(
     const std::vector<NStorageObjectWrite>& objects,
     std::function<void(const NStorageObjectAcks&)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::StorageObjectAcks>());
 
@@ -1722,6 +1858,8 @@ void DefaultClient::readStorageObjects(
     const std::vector<NReadStorageObjectId>& objectIds,
     std::function<void(const NStorageObjects&)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::StorageObjects>());
 
@@ -1754,6 +1892,8 @@ void DefaultClient::readStorageObjects(
 
 void DefaultClient::deleteStorageObjects(NSessionPtr session, const std::vector<NDeleteStorageObjectId>& objectIds, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
 
     ctx->successCallback = successCallback;
@@ -1781,6 +1921,8 @@ void DefaultClient::rpc(
     const opt::optional<std::string>& payload,
     std::function<void(const NRpc&)> successCallback, ErrorCallback errorCallback)
 {
+    NLOG_INFO("...");
+
     ReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::Rpc>());
 

@@ -25,6 +25,8 @@ namespace Nakama {
         Unknown = 0,
 
         // server errors
+        NotFound                        = 1,
+        InvalidArgument                 = 2,
         //RuntimeException,
         //UnrecognizedPayload,
         //MissingPayload,
@@ -39,11 +41,10 @@ namespace Nakama {
         //GroupNameInuse,
         //StorageRejected,
         //MatchNotFound,
-        //RuntimeFunctionNotFound,
-        //RuntimeFunctionException,
 
         // technical errors
-        ConnectionError          = -1
+        ConnectionError          = -1,
+        InternalError            = -2
     };
 
     struct NAKAMA_API NError

@@ -21,15 +21,33 @@ namespace Test {
 
 using namespace std;
 
-void test_connectError()
+void test_error_NotFound()
 {
     NTest test(__func__);
 
-    DefaultClientParameters parameters;
+    test.createWorkingClient();
 
-    parameters.port = 1111;
+    auto successCallback = [&test](NSessionPtr session)
+    {
+        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        test.stopTest(false);
+    };
 
-    test.createClientWithParameters(parameters);
+    auto errorCallback = [&test](const NError& error)
+    {
+        test.stopTest(error.code == ErrorCode::NotFound);
+    };
+
+    test.client->authenticateDevice("_not_existing_device_id_", opt::nullopt, false, successCallback, errorCallback);
+
+    test.runTest();
+}
+
+void test_error_InvalidArgument()
+{
+    NTest test(__func__);
+
+    test.createWorkingClient();
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -39,15 +57,15 @@ void test_connectError()
 
     auto errorCallback = [&test](const NError& error)
     {
-        test.stopTest(error.code == ErrorCode::ConnectionError);
+        test.stopTest(error.code == ErrorCode::InvalidArgument);
     };
 
-    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
+    test.client->authenticateDevice("", opt::nullopt, false, successCallback, errorCallback);
 
     test.runTest();
 }
 
-void test_disconnection()
+void test_error_InvalidArgument2()
 {
     NTest test(__func__);
 
@@ -56,25 +74,24 @@ void test_disconnection()
     auto successCallback = [&test](NSessionPtr session)
     {
         std::cout << "session token: " << session->getAuthToken() << std::endl;
-        test.stopTest(true);
+        test.stopTest();
     };
 
     auto errorCallback = [&test](const NError& error)
     {
-        test.stopTest(true);
+        test.stopTest(error.code == ErrorCode::InvalidArgument);
     };
 
-    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
-
-    test.client->disconnect();
+    test.client->authenticateDevice("1", opt::nullopt, false, successCallback, errorCallback);
 
     test.runTest();
 }
 
-void test_disconnect()
+void test_errors()
 {
-    test_connectError();
-    test_disconnection();
+    test_error_NotFound();
+    test_error_InvalidArgument();
+    test_error_InvalidArgument2();
 }
 
 } // namespace Test
