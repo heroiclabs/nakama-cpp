@@ -25,11 +25,12 @@ set(RUN_HAVE_GNU_POSIX_REGEX 0)
 set(RUN_HAVE_STEADY_CLOCK 0)
 
 set(INSTALL_LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
+set(CMAKE_INSTALL_PREFIX ${INSTALL_LIB_DIR})
 set(PUBLIC_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 
 add_subdirectory(src)
 add_subdirectory(third_party/grpc)
 
 if(WIN32)
-add_subdirectory(test)
+    add_subdirectory(test)
 endif()

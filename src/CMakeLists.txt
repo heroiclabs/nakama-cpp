@@ -36,16 +36,21 @@ target_compile_features(nakama-cpp PRIVATE cxx_std_11)
 add_definitions(-DNAKAMA_API=)
 
 if(LOGS_ENABLED)
-	add_definitions(-DNLOGS_ENABLED=)
+    add_definitions(-DNLOGS_ENABLED=)
 endif(LOGS_ENABLED)
 
 if(BUILD_DEFAULT_WEBSOCKETS)
     add_definitions(-DBUILD_DEFAULT_WEBSOCKETS=)
     set(Boost_USE_STATIC_LIBS ON) # only find static libs
     find_package(Boost 1.67.0 REQUIRED COMPONENTS system date_time regex)
+    if(NOT Boost_FOUND)
+        message(FATAL_ERROR "Boost not found")
+    endif()
     target_include_directories(nakama-cpp PRIVATE ${Boost_INCLUDE_DIRS})
-    target_link_libraries(nakama-cpp PUBLIC grpc++ libprotobuf ${Boost_LIBRARIES})
+    target_link_libraries(nakama-cpp PUBLIC ${Boost_LIBRARIES})
 endif(BUILD_DEFAULT_WEBSOCKETS)
+
+target_link_libraries(nakama-cpp PRIVATE grpc++ libprotobuf)
 
 target_include_directories(nakama-cpp
     PUBLIC ../third_party
