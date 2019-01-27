@@ -57,7 +57,7 @@ namespace Nakama {
          * Connect to the server.
          *
          * @param url The URL of websocket server.
-         * @param protocols The websocket protocols that agree with websocket server.
+         * @param type The transport type: Text or Binary.
          */
         virtual void connect(const std::string& url, NRtTransportType type) = 0;
 
