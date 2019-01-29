@@ -26,21 +26,10 @@ namespace Nakama {
 
         // server errors
         NotFound                        = 1,
-        InvalidArgument                 = 2,
-        //RuntimeException,
-        //UnrecognizedPayload,
-        //MissingPayload,
-        //BadInput,
-        //AuthError,
-        //UserNotFound,
-        //UserRegisterInuse,
-        //UserLinkInuse,
-        //UserLinkProviderUnavailable,
-        //UserUnlinkDisallowed,
-        //UserHandleInuse,
-        //GroupNameInuse,
-        //StorageRejected,
-        //MatchNotFound,
+        AlreadyExists                   = 2,
+        InvalidArgument                 = 3,
+        Unauthenticated                 = 4,
+        PermissionDenied                = 5,
 
         // technical errors
         ConnectionError          = -1,

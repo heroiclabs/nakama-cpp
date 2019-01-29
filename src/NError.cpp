@@ -23,49 +23,19 @@ const char * toString(ErrorCode code)
 {
     switch (code)
     {
-    case ErrorCode::Unknown:
-        break;
-    case ErrorCode::NotFound:
-        return "NotFound";
-    case ErrorCode::InvalidArgument:
-        return "InvalidArgument";
-    /*case ErrorCode::RuntimeException:
-        break;
-    case ErrorCode::UnrecognizedPayload:
-        break;
-    case ErrorCode::MissingPayload:
-        break;
-    case ErrorCode::BadInput:
-        break;
-    case ErrorCode::AuthError:
-        break;
-    case ErrorCode::UserNotFound:
-        break;
-    case ErrorCode::UserRegisterInuse:
-        break;
-    case ErrorCode::UserLinkInuse:
-        break;
-    case ErrorCode::UserLinkProviderUnavailable:
-        break;
-    case ErrorCode::UserUnlinkDisallowed:
-        break;
-    case ErrorCode::UserHandleInuse:
-        break;
-    case ErrorCode::GroupNameInuse:
-        break;
-    case ErrorCode::StorageRejected:
-        break;
-    case ErrorCode::MatchNotFound:
-        break;*/
-    case ErrorCode::ConnectionError:
-        return "ConnectionError";
-    case ErrorCode::InternalError:
-        return "InternalError";
+    case ErrorCode::Unknown:                 return "Unknown";
+    case ErrorCode::NotFound:                return "NotFound";
+    case ErrorCode::AlreadyExists:           return "AlreadyExists";
+    case ErrorCode::InvalidArgument:         return "InvalidArgument";
+    case ErrorCode::ConnectionError:         return "ConnectionError";
+    case ErrorCode::InternalError:           return "InternalError";
+    case ErrorCode::Unauthenticated:         return "Unauthenticated";
+    case ErrorCode::PermissionDenied:        return "PermissionDenied";
     default:
         break;
     }
 
-    return "Unknown";
+    return "";
 }
 
 std::string toString(const NError & error)

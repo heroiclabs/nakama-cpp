@@ -87,11 +87,30 @@ void test_error_InvalidArgument2()
     test.runTest();
 }
 
+void test_error_Unauthenticated()
+{
+    NTest test(__func__);
+
+    test.createWorkingClient();
+
+    auto errorCallback = [&test](const NError& error)
+    {
+        test.stopTest(error.code == ErrorCode::Unauthenticated);
+    };
+
+    auto session = restoreSession("dfgdfgdfg.dfgdfgdfg.dfgdfgdfg");
+
+    test.client->getAccount(session, nullptr, errorCallback);
+
+    test.runTest();
+}
+
 void test_errors()
 {
     test_error_NotFound();
     test_error_InvalidArgument();
     test_error_InvalidArgument2();
+    test_error_Unauthenticated();
 }
 
 } // namespace Test

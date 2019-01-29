@@ -155,10 +155,13 @@ void DefaultClient::onResponse(void * tag, bool ok)
 
                 switch (reqStatus->status.error_code())
                 {
-                    case grpc::StatusCode::UNAVAILABLE     : code = ErrorCode::ConnectionError; break;
-                    case grpc::StatusCode::INTERNAL        : code = ErrorCode::InternalError; break;
-                    case grpc::StatusCode::NOT_FOUND       : code = ErrorCode::NotFound; break;
-                    case grpc::StatusCode::INVALID_ARGUMENT: code = ErrorCode::InvalidArgument; break;
+                    case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
+                    case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
+                    case grpc::StatusCode::NOT_FOUND        : code = ErrorCode::NotFound; break;
+                    case grpc::StatusCode::ALREADY_EXISTS   : code = ErrorCode::AlreadyExists; break;
+                    case grpc::StatusCode::INVALID_ARGUMENT : code = ErrorCode::InvalidArgument; break;
+                    case grpc::StatusCode::UNAUTHENTICATED  : code = ErrorCode::Unauthenticated; break;
+                    case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
 
                 default:
                     break;
