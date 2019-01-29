@@ -15,6 +15,7 @@
  */
 
 #include "realtime/RtClientTestBase.h"
+#include "test_server_config.h"
 
 namespace Nakama {
 namespace Test {
@@ -47,7 +48,7 @@ void NRtClientTest::runTest()
     {
         std::cout << "session token: " << session->getAuthToken() << std::endl;
 
-        rtClient = client->createRtClient();
+        rtClient = client->createRtClient(SERVER_HTTP_PORT);
 
         rtClient->setListener(&listener);
 

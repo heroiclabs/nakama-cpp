@@ -15,6 +15,7 @@
  */
 
 #include "test_main.h"
+#include "test_server_config.h"
 
 namespace Nakama {
 namespace Test {
@@ -30,6 +31,9 @@ void test_realtime();
 
 void setWorkingClientParameters(DefaultClientParameters& parameters)
 {
+    parameters.host      = SERVER_HOST;
+    parameters.port      = SERVER_GRPC_PORT;
+    parameters.serverKey = SERVER_KEY;
 }
 
 // *************************************************************
@@ -133,7 +137,8 @@ int runAllTests()
     cout << "Total tests : " << g_runTestsCount << endl;
     cout << "Tests passed: " << testsPassed << " ("; printPercent(cout, g_runTestsCount, testsPassed) << ")" << endl;
     cout << "Tests failed: " << g_failedTestsCount << " ("; printPercent(cout, g_runTestsCount, g_failedTestsCount) << ")" << endl;
-    return 0;
+
+    return g_failedTestsCount == 0 ? 0 : -1;
 }
 
 } // namespace Test
