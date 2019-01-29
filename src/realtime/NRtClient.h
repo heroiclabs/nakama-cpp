@@ -45,6 +45,8 @@ namespace Nakama {
 
         void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
 
+        bool isConnected() const override;
+
         void disconnect() override;
 
         void joinChat(

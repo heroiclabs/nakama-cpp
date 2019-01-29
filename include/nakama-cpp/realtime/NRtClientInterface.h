@@ -71,6 +71,11 @@ namespace Nakama {
         virtual void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol = NRtClientProtocol::Protobuf) = 0;
 
         /**
+        * @return True if connected to server.
+        */
+        virtual bool isConnected() const = 0;
+
+        /**
          * Close the connection with the server.
          */
         virtual void disconnect() = 0;

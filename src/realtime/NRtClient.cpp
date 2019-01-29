@@ -30,19 +30,16 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int por
     _port = port;
     _ssl = ssl;
 
-    if (_transport)
+    _transport->setConnectCallback([this]()
     {
-        _transport->setConnectCallback([this]()
+        if (_listener)
         {
-            if (_listener)
-            {
-                _listener->onConnect();
-            }
-        });
+            _listener->onConnect();
+        }
+    });
 
-        _transport->setDisconnectCallback(std::bind(&NRtClient::onDisconnected, this));
-        _transport->setMessageCallback(std::bind(&NRtClient::onMessage, this, std::placeholders::_1));
-    }
+    _transport->setDisconnectCallback(std::bind(&NRtClient::onDisconnected, this));
+    _transport->setMessageCallback(std::bind(&NRtClient::onMessage, this, std::placeholders::_1));
 }
 
 NRtClient::~NRtClient()
@@ -51,10 +48,7 @@ NRtClient::~NRtClient()
 
 void NRtClient::tick()
 {
-    if (_transport)
-    {
-        _transport->tick();
-    }
+    _transport->tick();
 }
 
 void NRtClient::setListener(NRtClientListenerInterface * listener)
@@ -64,48 +58,43 @@ void NRtClient::setListener(NRtClientListenerInterface * listener)
 
 void NRtClient::connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol)
 {
-    if (_transport)
+    std::string url;
+    NRtTransportType transportType;
+
+    if (_ssl)
+        url.append("wss://");
+    else
+        url.append("ws://");
+
+    url.append(_host).append(":").append(std::to_string(_port)).append("/ws");
+    url.append("?token=").append(url_encode(session->getAuthToken()));
+    url.append("&status=").append(createStatus ? "true" : "false");
+
+    // by default server uses Json protocol
+    if (protocol == NRtClientProtocol::Protobuf)
     {
-        std::string url;
-        NRtTransportType transportType;
-
-        if (_ssl)
-            url.append("wss://");
-        else
-            url.append("ws://");
-
-        url.append(_host).append(":").append(std::to_string(_port)).append("/ws");
-        url.append("?token=").append(url_encode(session->getAuthToken()));
-        url.append("&status=").append(createStatus ? "true" : "false");
-
-        // by default server uses Json protocol
-        if (protocol == NRtClientProtocol::Protobuf)
-        {
-            url.append("&format=protobuf");
-            _protocol.reset(new NRtClientProtocol_Protobuf());
-            transportType = NRtTransportType::Binary;
-        }
-        else
-        {
-            _protocol.reset(new NRtClientProtocol_Json());
-            transportType = NRtTransportType::Text;
-        }
-
-        NLOG_INFO("...");
-        _transport->connect(url, transportType);
+        url.append("&format=protobuf");
+        _protocol.reset(new NRtClientProtocol_Protobuf());
+        transportType = NRtTransportType::Binary;
     }
     else
     {
-        NLOG_ERROR("no transport");
+        _protocol.reset(new NRtClientProtocol_Json());
+        transportType = NRtTransportType::Text;
     }
+
+    NLOG_INFO("...");
+    _transport->connect(url, transportType);
+}
+
+bool NRtClient::isConnected() const
+{
+    return _transport->isConnected();
 }
 
 void NRtClient::disconnect()
 {
-    if (_transport)
-    {
-        _transport->disconnect();
-    }
+    _transport->disconnect();
 }
 
 void NRtClient::onDisconnected()
@@ -678,7 +667,7 @@ RtRequestContext * NRtClient::createReqContext(::nakama::realtime::Envelope& msg
 
 void NRtClient::send(const::google::protobuf::Message & msg)
 {
-    if (_transport)
+    if (isConnected())
     {
         NBytes bytes;
 
@@ -693,7 +682,7 @@ void NRtClient::send(const::google::protobuf::Message & msg)
     }
     else
     {
-        NLOG_ERROR("no transport");
+        NLOG_ERROR("not connected");
     }
 }
 

@@ -25,8 +25,8 @@ namespace Nakama {
 
     enum class NRtTransportType
     {
-        Binary,
-        Text
+        Binary,  // used by `Protobuf` protocol
+        Text     // used by `Json` protocol
     };
 
     /**
@@ -62,6 +62,11 @@ namespace Nakama {
         virtual void connect(const std::string& url, NRtTransportType type) = 0;
 
         /**
+        * @return True if connected to server.
+        */
+        virtual bool isConnected() const { return _connected; }
+
+        /**
         * Close the connection with the server.
         */
         virtual void disconnect() = 0;
@@ -74,8 +79,8 @@ namespace Nakama {
         virtual void send(const NBytes& data) = 0;
 
     protected:
-        void onConnected() { if (_connectCallback) _connectCallback(); }
-        void onDisconnected() { if (_disconnectCallback) _disconnectCallback(); }
+        void onConnected() { _connected = true; if (_connectCallback) _connectCallback(); }
+        void onDisconnected() { _connected = false; if (_disconnectCallback) _disconnectCallback(); }
         void onError(const std::string& description) { if (_errorCallback) _errorCallback(description); }
         void onMessage(const NBytes& data) { if (_messageCallback) _messageCallback(data); }
 
@@ -84,6 +89,7 @@ namespace Nakama {
         DisconnectCallback _disconnectCallback;
         ErrorCallback _errorCallback;
         MessageCallback _messageCallback;
+        bool _connected = false;
     };
 
     using NRtTransportPtr = std::shared_ptr<NRtTransportInterface>;

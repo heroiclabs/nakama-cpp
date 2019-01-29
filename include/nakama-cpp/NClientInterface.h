@@ -67,8 +67,8 @@ namespace Nakama {
 
         /**
          * Create a new real-time client.
-         * @param transport The websocket transport. If not set then default websocket transport will be used.
          * @param port The port number of the server. Default is 7350.
+         * @param transport The websocket transport. If not set then default websocket transport will be used.
          * @return a new NRtClient instance.
          */
         virtual NRtClientPtr createRtClient(int32_t port = 7350, NRtTransportPtr transport = nullptr) = 0;
