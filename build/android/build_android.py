@@ -9,6 +9,7 @@ if len(sys.argv) < 2:
     sys.exit(-1)
 
 ABI = sys.argv[1]
+BUILD_MODE = 'Release'
 
 if os.name == 'nt':
     # windows
@@ -42,7 +43,7 @@ def call(command):
     if res != 0:
         sys.exit(-1)
 
-build_dir = './build/' + ABI
+build_dir = './build/' + ABI + '/' + BUILD_MODE
 
 if not os.path.isdir(build_dir):
     os.makedirs(build_dir)
@@ -54,8 +55,9 @@ call('cmake -DANDROID_ABI=' + ABI +
  ' -DBUILD_DEFAULT_WEBSOCKETS=OFF' +
  ' -DPROTOBUF_PROTOC_EXECUTABLE=' + protoc_path +
  ' -DGRPC_CPP_PLUGIN_EXECUTABLE=' + grpc_cpp_plugin_path +
+ ' -DCMAKE_BUILD_TYPE=' + BUILD_MODE +
  ' -DANDROID_NATIVE_API_LEVEL=16 -B ' + build_dir + ' -GNinja ../..')
 
 call('ninja -C ' + build_dir + ' nakama-cpp')
 
-call('cmake --build ' + build_dir + ' --target install')
+#call('cmake --build ' + build_dir + ' --target install')
