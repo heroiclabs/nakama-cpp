@@ -19,6 +19,7 @@
 #include "nakama-cpp/realtime/NDefaultWebsocket.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/StrUtil.h"
+#include "nakama-cpp/Nakama.h"
 #include "DefaultSession.h"
 #include "DataHelper.h"
 #include <grpc++/create_channel.h>
@@ -46,6 +47,8 @@ DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
     _stub = nakama::api::Nakama::NewStub(channel);
 
     _basicAuthMetadata = "Basic " + base64_encode(parameters.serverKey + ":");
+    
+    NLOG(NLogLevel::Info, "DefaultClient created. NakamaSdkVersion: %s", getNakamaSdkVersion());
 }
 
 DefaultClient::~DefaultClient()

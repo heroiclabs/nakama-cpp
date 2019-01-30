@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-#pragma once
-
-#include "nakama-cpp/DefaultClient.h"
-#include "nakama-cpp/log/NLogger.h"
+#include "nakama-cpp/Nakama.h"
 
 namespace Nakama {
 
-    const char* getNakamaSdkVersion();
+const char* getNakamaSdkVersion()
+{
+    return "2.0.0";
+}
 
 }
