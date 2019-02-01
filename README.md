@@ -35,6 +35,8 @@ Nakama C++ are released for:
 
 In theory any platform is supported which `grpc` and `boost` support.
 
+The client compiled with C++11.
+
 ## Usage
 
 The client object has many methods to execute various features in the server or open realtime socket connections with the server.
@@ -43,6 +45,12 @@ Include nakama header.
 
 ```cpp
 #include "nakama-cpp/Nakama.h"
+```
+
+Use nakama namespace.
+
+```cpp
+using namespace Nakama;
 ```
 
 Use the connection credentials to build a client object.
@@ -127,7 +135,7 @@ client->getAccount(session, successCallback, errorCallback);
 
 ### Realtime client
 
-The client can create one or more realtime clients with the server. Each realtime client can have it's own event listeners registered for responses received from the server.
+The client can create one or more realtime clients with the server. Each realtime client can have it's own events listener registered for responses received from the server.
 
 ```cpp
 int port = 7350; // different port to the main API port
@@ -142,7 +150,7 @@ rtClient->setListener(&listener);
 rtClient->connect(session, createStatus, protocol);
 ```
 
-Don't forget to call `tick`. See [tick](#Tick) section.
+Don't forget to call `tick`. See [Tick](#Tick) section.
 
 ### For Android
 
@@ -152,7 +160,7 @@ Android uses a permissions system which determines which platform services the a
 <uses-permission android:name="android.permission.INTERNET"/>
 ```
 
-#### Logging
+### Logging
 
 By default logs are off.
 
