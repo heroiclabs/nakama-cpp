@@ -5,7 +5,7 @@ import os
 
 if len(sys.argv) < 2:
     print "Pass ABI parameter."
-    print "e.g. armeabi-v7a or x86"
+    print "e.g. armeabi-v7a, arm64-v8a or x86"
     sys.exit(-1)
 
 ABI = sys.argv[1]
@@ -13,14 +13,24 @@ BUILD_MODE = 'Release'
 
 if os.name == 'nt':
     # windows
-    grpc_cpp_plugin_path = os.path.abspath(r'..\win32\build\third_party\grpc\Debug\grpc_cpp_plugin.exe')
-    protoc_path = os.path.abspath(r'..\win32\build\third_party\grpc\third_party\protobuf\Debug\protoc.exe')
+    
+    # check in Release
+    grpc_cpp_plugin_path = os.path.abspath(r'..\win32\build\third_party\grpc\Release\grpc_cpp_plugin.exe')
+    protoc_path = os.path.abspath(r'..\win32\build\third_party\grpc\third_party\protobuf\Release\protoc.exe')
 
     if not os.path.isfile(grpc_cpp_plugin_path) or not os.path.isfile(protoc_path):
-        print 'grpc_cpp_plugin_path =', grpc_cpp_plugin_path
-        print 'protoc_path =', protoc_path
-        print "please build for windows first"
-        sys.exit(-1)
+        # check in Debug
+        grpc_cpp_plugin_path = os.path.abspath(r'..\win32\build\third_party\grpc\Debug\grpc_cpp_plugin.exe')
+        protoc_path = os.path.abspath(r'..\win32\build\third_party\grpc\third_party\protobuf\Debug\protoc.exe')
+        
+        if not os.path.isfile(grpc_cpp_plugin_path) or not os.path.isfile(protoc_path):
+            print 'grpc_cpp_plugin_path =', grpc_cpp_plugin_path
+            print 'protoc_path =', protoc_path
+            print "please build for windows first"
+            sys.exit(-1)
+
+    print 'grpc_cpp_plugin_path =', grpc_cpp_plugin_path
+    print 'protoc_path =', protoc_path
 
 else:
     print "currently not supported OS"
