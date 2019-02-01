@@ -230,7 +230,7 @@ The build is primarily intended for SDK developers.
 * Visual Studio 2015 or 2017 - for Windows only
 * boost - for Windows and Mac, used by websocketpp library
 
-Third party libries:
+Third party libraries:
 
 * grpc - added as git submodule
 * boost - must be installed in system and set path to `BOOST_ROOT` system variable.
