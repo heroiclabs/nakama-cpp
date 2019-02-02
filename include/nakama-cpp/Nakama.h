@@ -17,6 +17,7 @@
 #pragma once
 
 #include "nakama-cpp/DefaultClient.h"
+#include "nakama-cpp/realtime/NRtDefaultClientListener.h"
 #include "nakama-cpp/log/NLogger.h"
 
 namespace Nakama {

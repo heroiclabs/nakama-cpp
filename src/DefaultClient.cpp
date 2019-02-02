@@ -42,7 +42,19 @@ DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
 
     std::string target = parameters.host + ":" + std::to_string(parameters.port);
 
-    auto channel = grpc::CreateChannel(target, grpc::InsecureChannelCredentials());
+    std::shared_ptr<grpc::ChannelCredentials> creds;
+
+    if (_ssl)
+    {
+        grpc::SslCredentialsOptions options;
+        creds = grpc::SslCredentials(options);
+    }
+    else
+    {
+        creds = grpc::InsecureChannelCredentials();
+    }
+
+    auto channel = grpc::CreateChannel(target, creds);
 
     _stub = nakama::api::Nakama::NewStub(channel);
 
