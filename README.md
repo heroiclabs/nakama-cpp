@@ -21,8 +21,8 @@ You'll need to setup the server and database before you can connect with the cli
 
 - Windows (x86, Visual Studio 2015, 2017)
 - Android (armeabi-v7a, arm64-v8a, x86)
-- iOS, Mac
-- Linux - coming soon
+- Mac
+- iOS, Linux - coming soon
 
 In theory any platform that meets the requirement for `grpc` and `boost` is also supported. The client is compiled with C++11.
 
@@ -194,9 +194,9 @@ NLogger::init(sink, NLogLevel::Debug);
 
 #### Websockets transport
 
-Nakama C++ client has built-in support for WebSocket. This is currently on tested on Windows.
+Nakama C++ client has built-in support for WebSocket. This is currently tested on Windows and Mac.
 
-To add support for Android, you need to use the ported version of the Boost library for Android. This is because `websocketpp` depends on boost.
+To add support for Android, you need to use the ported version of the `boost` library for Android. This is because `websocketpp` depends on `boost`.
 
 Client will default to use the provided Websocket transport if available on the platform. You can use a custom Websocket transport if it implements the `NRtTransportInterface`:
 
@@ -210,7 +210,7 @@ For more code examples, have a look at `NWebSocket` is [Cocos2d-x client](https:
 
 The development roadmap is managed as GitHub issues and pull requests are welcome. If you're interested to enhance the code please open an issue to discuss the changes or drop in and discuss it in the [community chat](https://gitter.im/heroiclabs/nakama).
 
-### Source Builds
+## Source Builds
 
 Clone the Nakama C++ repository:
 
@@ -247,17 +247,15 @@ Where `Mode` is build mode: `Debug` or `Release`
 
 ### Building for Android
 
-You need to build Nakama C++ for your desktop OS because Android builds will need to use `protoc` and `grpc_cpp_plugin` executables from your system.
-
 Set `ANDROID_NDK` or `NDK_ROOT` system variable to Android NDK folder.
 
 ```bash
 cd build/android
 python build_android.py ABI
 ```
-Where `ABI` is Android ABI e.g. armeabi-v7a, arm64-v8a or x86
+Where `ABI` is Android ABI e.g. `armeabi-v7a`, `arm64-v8a` or `x86`
 
-It builds for Andoid API level 16 in Release mode.
+It builds for Andoid API level 16 in `Release` mode.
 
 ## Tests
 
