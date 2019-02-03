@@ -2,6 +2,7 @@
 import sys
 import subprocess
 import os
+import platform
 
 if len(sys.argv) < 2:
     print "Pass ABI parameter."
@@ -10,10 +11,8 @@ if len(sys.argv) < 2:
 
 ABI = sys.argv[1]
 BUILD_MODE = 'Release'
-
-if os.name == 'nt':
-    # windows
-    
+'''
+if platform.system() == 'Windows':
     # check in Release
     grpc_cpp_plugin_path = os.path.abspath(r'..\win32\build\third_party\grpc\Release\grpc_cpp_plugin.exe')
     protoc_path = os.path.abspath(r'..\win32\build\third_party\grpc\third_party\protobuf\Release\protoc.exe')
@@ -26,16 +25,12 @@ if os.name == 'nt':
         if not os.path.isfile(grpc_cpp_plugin_path) or not os.path.isfile(protoc_path):
             print 'grpc_cpp_plugin_path =', grpc_cpp_plugin_path
             print 'protoc_path =', protoc_path
-            print "please build for windows first"
+            print "please build for Windows first"
             sys.exit(-1)
 
     print 'grpc_cpp_plugin_path =', grpc_cpp_plugin_path
     print 'protoc_path =', protoc_path
-
-else:
-    print "currently not supported OS"
-    sys.exit(-1)
-
+'''
 def getEnvVar(name):
     if name in os.environ:
         return os.environ[name]
@@ -49,7 +44,7 @@ if not ANDROID_NDK:
         sys.exit(-1)
 
 def call(command):
-    res = subprocess.call(command)
+    res = subprocess.call(command, shell=False)
     if res != 0:
         sys.exit(-1)
 
@@ -60,14 +55,25 @@ if not os.path.isdir(build_dir):
 
 print 'ANDROID_NDK=' + ANDROID_NDK
 
-call('cmake -DANDROID_ABI=' + ABI +
- ' -DCMAKE_TOOLCHAIN_FILE=' + ANDROID_NDK + '/build/cmake/android.toolchain.cmake' +
- ' -DBUILD_DEFAULT_WEBSOCKETS=OFF' +
- ' -DPROTOBUF_PROTOC_EXECUTABLE=' + protoc_path +
- ' -DGRPC_CPP_PLUGIN_EXECUTABLE=' + grpc_cpp_plugin_path +
- ' -DCMAKE_BUILD_TYPE=' + BUILD_MODE +
- ' -DANDROID_NATIVE_API_LEVEL=16 -B ' + build_dir + ' -GNinja ../..')
+cmake_args = [
+              'cmake',
+              '-DANDROID_ABI=' + ABI,
+              '-DCMAKE_TOOLCHAIN_FILE=' + ANDROID_NDK + '/build/cmake/android.toolchain.cmake',
+              '-DBUILD_DEFAULT_WEBSOCKETS=OFF',
+              '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
+              '-DANDROID_NATIVE_API_LEVEL=16',
+              '-B',
+              build_dir,
+              '-GNinja',
+              '../..'
+              ]
 
-call('ninja -C ' + build_dir + ' nakama-cpp')
+#if platform.system() == 'Windows':
+#    cmake_args.append('-DPROTOBUF_PROTOC_EXECUTABLE=' + protoc_path)
+#    cmake_args.append('-DGRPC_CPP_PLUGIN_EXECUTABLE=' + grpc_cpp_plugin_path)
 
-#call('cmake --build ' + build_dir + ' --target install')
+# generate projects
+call(cmake_args)
+
+# build
+call(['ninja', '-C', build_dir, 'nakama-cpp'])
