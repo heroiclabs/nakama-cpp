@@ -1,13 +1,15 @@
 Nakama C++ SDK
 =============
 
-> General C++ client for Nakama server 2.3.x.
+> General C++ client for Nakama server.
 
 [Nakama](https://github.com/heroiclabs/nakama) is an open-source server designed to power modern games and apps. Features include user accounts, chat, social, matchmaker, realtime multiplayer, and much [more](https://heroiclabs.com).
 
-This client implements the full API and socket options with the server. It's written in C++ with minimal dependencies to support Unity, Cocos2d-x and other engines and frameworks.
+This client implements the full API and socket options with the server. It's written in C++ with minimal dependencies to support Cocos2d-x, Unreal and other custom engines and frameworks.
 
-If you encounter any issues with the server you can generate diagnostics for us with `nakama doctor`. Send these to support@heroiclabs.com or [open an issue](https://github.com/heroiclabs/nakama/issues). If you experience any issues with the client, it can be useful to enable debug logs (see [Logging](#Logging) section) and [open an issue](https://github.com/heroiclabs/nakama-cpp/issues).
+If you experience any issues with the client, it can be useful to enable debug logs (see [Logging](#Logging) section) and [open an issue](https://github.com/heroiclabs/nakama-cpp/issues).
+
+Full documentation is online - https://heroiclabs.com/docs
 
 ## Getting Started
 
@@ -15,27 +17,48 @@ You'll need to setup the server and database before you can connect with the cli
 
 1. Install and run the servers. Follow these [instructions](https://heroiclabs.com/docs/install-docker-quickstart).
 
-2. Choose your engine:
+2. Ensure that you are on one of the supported platforms:
 
-    2.1. [Unreal](https://github.com/heroiclabs/nakama-unreal)
+- Windows (x86, Visual Studio 2015, 2017)
+- Android (armeabi-v7a, arm64-v8a, x86)
+- iOS, Mac
+- Linux - coming soon
 
-    2.2. [Cocos2d-x](https://github.com/heroiclabs/nakama-cocos2d-x)
+In theory any platform that meets the requirement for `grpc` and `boost` is also supported. The client is compiled with C++11.
 
-    or download the client from the [releases page](https://github.com/heroiclabs/nakama-cpp/releases) and import it into your project. You can also [build from source](#Building).
+3. Download the client from the [releases page](https://github.com/heroiclabs/nakama-cpp/releases) and import it into your project. You can also [build from source](#source-builds).
 
-    See [Integration](#Integration) section.
+<!-- You can download clients that are tailored for [Cocos2d-x](https://github.com/heroiclabs/nakama-cocos2d-x) or [Unreal 4](https://github.com/heroiclabs/nakama-unreal). -->
 
-## Supported platforms
+4. Integrate the client library into your project:
 
-Nakama C++ are released for:
+- add defines: `NAKAMA_API=`, `NLOGS_ENABLED`
+- add include directory: `$(NAKAMA_CPP_SDK)/include`
+- add link directory: `$(NAKAMA_CPP_SDK)/libs/{platform}/{ABI}`
+- add link libraries:
 
-* Windows - x86, Visual Studio 2015, 2017
-* Android - armeabi-v7a, arm64-v8a, x86
-* iOS, Mac, Linux - coming soon
+    nakama-cpp
+    grpc++
+    libprotobuf
+    gpr
+    grpc
+    cares
+    crypto
+    ssl
+    address_sorting
 
-In theory any platform is supported which `grpc` and `boost` support.
+For Windows:
 
-The client compiled with C++11.
+- Add extension `.lib` to libs names e.g. `nakama-cpp.lib`
+- To debug you must add `d` suffix to libs names e.g. `nakama-cppd.lib`
+
+For Android:
+
+The client uses the network to communicate with the server so you must add the "INTERNET" permission.
+
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+```
 
 ## Usage
 
@@ -65,14 +88,15 @@ NClientPtr client = createDefaultClient(parameters);
 
 ## Tick
 
-To allow the client execute your callbacks in your thread you have to call `tick` method periodically in your thread. Each 50 ms is ok.
+Allow the client to execute your callbacks in your thread. To do this you must call `tick` method periodically (recommended every 50ms) in your thread.
+
 ```cpp
 client->tick();
 if (rtClient)
     rtClient->tick();
 ```
 
-Without this the default client and realtime client will not work.
+Without this the default client and realtime client will not work, and you will not send or receives responses from the server.
 
 ### Authenticate
 
@@ -150,73 +174,45 @@ rtClient->setListener(&listener);
 rtClient->connect(session, createStatus, protocol);
 ```
 
-Don't forget to call `tick`. See [Tick](#Tick) section.
-
-### For Android
-
-Android uses a permissions system which determines which platform services the application will request to use and ask permission for from the user. The client uses the network to communicate with the server so you must add the "INTERNET" permission.
-
-```xml
-<uses-permission android:name="android.permission.INTERNET"/>
-```
+Don't forget to call `tick` method. See [Tick](#Tick) section for details.
 
 ### Logging
 
-By default logs are off.
+By default client logging is turned off.
 
-To enable logs output to console with debug logging level: `NLogger::initWithConsoleSink(NLogLevel::Debug);`
+To enable logs output to console with debug logging level:
 
-To enable logs output to custom sink with debug logging level: `NLogger::init(sink, NLogLevel::Debug);`
+```cpp
+NLogger::initWithConsoleSink(NLogLevel::Debug);
+```
 
-## Integration
+To enable logs output to custom sink with debug logging level:
 
-To integrate SDK into your project, follow instructions:
-
-add defines: `NAKAMA_API=`, `NLOGS_ENABLED`
-
-add include directory: `$(NAKAMA_CPP_SDK)/include`
-
-add link directory: `$(NAKAMA_CPP_SDK)/libs/{platform}/{ABI}`
-
-add link libraries:
-
-    nakama-cpp
-    grpc++
-    libprotobuf
-    gpr
-    grpc
-    cares
-    crypto
-    ssl
-    address_sorting
-
-For Windows add extension `.lib` to libs names e.g. `nakama-cpp.lib`
-For Windows Debug you must add `d` suffix to libs names e.g. `nakama-cppd.lib`
+```cpp
+NLogger::init(sink, NLogLevel::Debug);
+```
 
 #### Websockets transport
 
-Nakama C++ has built in websockets transport.
-Currently it is available only on Windows platform.
-Possible to support Android if use android port of boost (websocketpp uses boost).
+Nakama C++ client has built-in support for WebSocket. This is currently on tested on Windows.
 
-Default client will create and use default websockets transport if it's available on the platform.
+To add support for Android, you need to use the ported version of the Boost library for Android. This is because `websocketpp` depends on boost.
 
-#### Custom websockets transport
+Client will default to use the provided Websocket transport if available on the platform. You can use a custom Websocket transport if it implements the `NRtTransportInterface`:
 
-To use custom websockets transport, implement `NRtTransportInterface`, create it and pass pointer to:
 ```cpp
 rtClient = client->createRtClient(port, websockets_transport);
 ```
 
-For example cocos2d-x has built-in websockets.
+For more code examples, have a look at `NWebSocket` is [Cocos2d-x client](https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/Classes/NakamaCocos2d/NWebSocket.h).
 
-Nakama cocos2d-x client uses it.
+## Contribute
 
-Look at `NWebSocket` class in: [Cocos2d-x](https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/Classes/NakamaCocos2d/NWebSocket.h)
+The development roadmap is managed as GitHub issues and pull requests are welcome. If you're interested to enhance the code please open an issue to discuss the changes or drop in and discuss it in the [community chat](https://gitter.im/heroiclabs/nakama).
 
-### Clonning
+### Source Builds
 
-Clone the Nakama C++ sources:
+Clone the Nakama C++ repository:
 
 `git clone --recurse-submodules -j8 git://github.com/heroiclabs/nakama-cpp.git`
 
@@ -224,26 +220,22 @@ To update all submodules:
 
 `git submodule update --init --recursive`
 
-## Building
+## Build Prerequisites
 
-The build is primarily intended for SDK developers.
-
-### Build Prerequisites
-
-* git
-* python 2.7
-* cmake 3.10+
-* go
-* perl
-* Visual Studio 2015 or 2017 - for Windows only
-* boost - for Windows and Mac, used by websocketpp library
+- git
+- python 2.7
+- cmake 3.10+
+- go
+- perl
+- Visual Studio 2015 or 2017 - for Windows only
+- boost - for Windows and Mac, used by websocketpp library
 
 Third party libraries:
 
-* grpc - added as git submodule
-* boost - must be installed in system and set path to `BOOST_ROOT` system variable.
-* optional-lite - added to git
-* websocketpp - added to git
+- boost - must be installed in system and set path to `BOOST_ROOT` system variable.
+- grpc - in source control as git submodule
+- optional-lite - in source control
+- websocketpp - in source control
 
 ### Building for Windows
 
@@ -251,11 +243,12 @@ Third party libraries:
 cd build\win32
 python build_win32.py -m Mode
 ```
-Where `Mode` is build mode: Debug or Release
+Where `Mode` is build mode: `Debug` or `Release`
 
 ### Building for Android
 
-At first build Nakama C++ for your desktop OS because android build will use `protoc` and `grpc_cpp_plugin` executables.
+You need to build Nakama C++ for your desktop OS because Android builds will need to use `protoc` and `grpc_cpp_plugin` executables from your system.
+
 Set `ANDROID_NDK` or `NDK_ROOT` system variable to Android NDK folder.
 
 ```bash
@@ -269,6 +262,7 @@ It builds for Andoid API level 16 in Release mode.
 ## Tests
 
 Tests are built when you build Nakama C++ SDK for desktop OS (Windows or Mac).
+
 By default tests try to connect to local server by `127.0.0.1`.
 To use another IP of your server, edit `test/test_server_config.h` file.
 
@@ -280,4 +274,8 @@ build/{platform}/build/test/Debug/nakama-test
 
 ### License
 
-This project is licensed under the [Apache-2 License](https://github.com/heroiclabs/nakama-cpp/blob/master/LICENSE).
+This project is licensed under the [Apache-2 License](https://github.com/heroiclabs/nakama-dotnet/blob/master/LICENSE).
+
+### Special Thanks
+
+Thanks to @dimon4eg for this excellent support on developing Nakama C++, Cocos2d-x and Unreal client libraries.
