@@ -32,20 +32,21 @@ In theory any platform that meets the requirement for `grpc` and `boost` is also
 
 4. Integrate the client library into your project:
 
-- add defines: `NAKAMA_API=`, `NLOGS_ENABLED`
+- add defines: 
+  - `NAKAMA_API=`
+  - `NLOGS_ENABLED`
 - add include directory: `$(NAKAMA_CPP_SDK)/include`
 - add link directory: `$(NAKAMA_CPP_SDK)/libs/{platform}/{ABI}`
 - add link libraries:
-
-    nakama-cpp
-    grpc++
-    libprotobuf
-    gpr
-    grpc
-    cares
-    crypto
-    ssl
-    address_sorting
+  - `nakama-cpp`
+  - `grpc++`
+  - `libprotobuf`
+  - `gpr`
+  - `grpc`
+  - `cares`
+  - `crypto`
+  - `ssl`
+  - `address_sorting`
 
 For Windows:
 
