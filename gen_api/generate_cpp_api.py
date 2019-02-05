@@ -1,7 +1,9 @@
+#!/usr/bin/env python
 import os
 import sys
 import subprocess
 import argparse
+import platform
 
 def getEnvVar(name):
     if name in os.environ:
@@ -34,35 +36,56 @@ GRPC_GATEWAY = getArgOrEnvVar('GRPC_GATEWAY', args.gateway)
 def path(p):
     return os.path.normpath(p)
 
+NAKAMA_CPP      = os.path.abspath('./..')
+GRPC            = path(NAKAMA_CPP + '/third_party/grpc')
+GOOGLEAPIS      = path(GRPC_GATEWAY + '/third_party/googleapis')
+PROTOBUF_SRC    = path(GRPC + '/third_party/protobuf/src')
+OUT             = os.path.abspath('cppout')
+
+is_windows = platform.system() == 'Windows'
+is_mac     = platform.system() == 'Darwin'
+
+if is_windows:
+    build_dir = NAKAMA_CPP + '/build/win32/build'
+elif is_mac:
+    build_dir = NAKAMA_CPP + '/build/mac/build'
+else:
+    # linux
+    build_dir = NAKAMA_CPP + '/build/linux/build'
+
 def find_grpc_cpp_plugin():
-    grpc_cpp_plugin = path(NAKAMA_CPP + '/build/win32/build/third_party/grpc/Debug/grpc_cpp_plugin.exe')
-    if not os.path.exists(grpc_cpp_plugin):
-        grpc_cpp_plugin = path(NAKAMA_CPP + '/build/win32/build/third_party/grpc/Release/grpc_cpp_plugin.exe')
+    if is_windows:
+        grpc_cpp_plugin = path(build_dir + '/third_party/grpc/Debug/grpc_cpp_plugin.exe')
+        if not os.path.exists(grpc_cpp_plugin):
+            grpc_cpp_plugin = path(build_dir + '/third_party/grpc/Release/grpc_cpp_plugin.exe')
+    else:
+        grpc_cpp_plugin = path(build_dir + '/Release/third_party/grpc/grpc_cpp_plugin')
+        if not os.path.exists(grpc_cpp_plugin):
+            grpc_cpp_plugin = path(NAKAMA_CPP + 'Debug/third_party/grpc/grpc_cpp_plugin')
 
     if not os.path.exists(grpc_cpp_plugin):
+        print 'grpc_cpp_plugin not found'
         print 'Please build for desktop OS first'
         sys.exit(-1)
     
     return grpc_cpp_plugin
 
 def find_protoc():
-    protoc = path(NAKAMA_CPP + '/build/win32/build/third_party/grpc/third_party/protobuf/Debug/protoc.exe')
-    if not os.path.exists(protoc):
-        protoc = path(NAKAMA_CPP + '/build/win32/build/third_party/grpc/third_party/protobuf/Release/protoc.exe')
+    if is_windows:
+        protoc = path(build_dir + '/third_party/grpc/third_party/protobuf/Debug/protoc.exe')
+        if not os.path.exists(protoc):
+            protoc = path(build_dir + '/third_party/grpc/third_party/protobuf/Release/protoc.exe')
+    else:
+        protoc = path(build_dir + '/Release/third_party/grpc/third_party/protobuf/protoc')
+        if not os.path.exists(protoc):
+            protoc = path(build_dir + '/Debug/third_party/grpc/third_party/protobuf/protoc')
 
     if not os.path.exists(protoc):
+        print 'protoc not found'
         print 'Please build for desktop OS first'
         sys.exit(-1)
     
     return protoc
-
-NAKAMA_CPP      = os.path.abspath('./..')
-GRPC            = path(NAKAMA_CPP + '/third_party/grpc')
-GOOGLEAPIS      = path(GRPC_GATEWAY + '/third_party/googleapis')
-GRPC_CPP_PLUGIN = find_grpc_cpp_plugin()
-PROTOC          = find_protoc()
-PROTOBUF_SRC    = path(GRPC + '/third_party/protobuf/src')
-OUT             = os.path.abspath('cppout')
 
 def call(commands, shell=False):
     #print 'call', str(commands)
@@ -80,8 +103,14 @@ def makedirs(path):
         os.makedirs(path)
 
 def mklink(link, target):
-    if not os.path.exists(target):
-        call(['mklink', link, target], shell=True)
+    if not os.path.exists(link):
+        if is_windows:
+            call(['mklink', link, target], shell=True)
+        else:
+            call(['ln', '-s', target, link], shell=False)
+
+GRPC_CPP_PLUGIN = find_grpc_cpp_plugin()
+PROTOC          = find_protoc()
 
 check_required_folder(NAKAMA)
 check_required_folder(GRPC)
@@ -97,12 +126,12 @@ makedirs(OUT)
 makedirs(path(OUT + '/google/api'))
 makedirs(path(OUT + '/google/rpc'))
 
-makedirs(path('github.com/heroiclabs/nakama/api'))
-makedirs(path('github.com/heroiclabs/nakama/apigrpc'))
-makedirs(path('github.com/heroiclabs/nakama/rtapi'))
-mklink(path('github.com/heroiclabs/nakama/api/api.proto'), path(NAKAMA + '/api/api.proto'))
-mklink(path('github.com/heroiclabs/nakama/apigrpc/apigrpc.proto'), path(NAKAMA + '/apigrpc/apigrpc.proto'))
-mklink(path('github.com/heroiclabs/nakama/rtapi/realtime.proto'), path(NAKAMA + '/rtapi/realtime.proto'))
+makedirs(path(CUR_DIR + '/github.com/heroiclabs/nakama/api'))
+makedirs(path(CUR_DIR + '/github.com/heroiclabs/nakama/apigrpc'))
+makedirs(path(CUR_DIR + '/github.com/heroiclabs/nakama/rtapi'))
+mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama/api/api.proto'), path(NAKAMA + '/api/api.proto'))
+mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama/apigrpc/apigrpc.proto'), path(NAKAMA + '/apigrpc/apigrpc.proto'))
+mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama/rtapi/realtime.proto'), path(NAKAMA + '/rtapi/realtime.proto'))
 
 print 'generating apigrpc'
 
