@@ -27,6 +27,7 @@
 #include <grpcpp/impl/codegen/async_generic_service.h>
 #include <grpcpp/impl/codegen/async_stream.h>
 #include <grpcpp/impl/codegen/async_unary_call.h>
+#include <grpcpp/impl/codegen/client_callback.h>
 #include <grpcpp/impl/codegen/method_handler_impl.h>
 #include <grpcpp/impl/codegen/proto_utils.h>
 #include <grpcpp/impl/codegen/rpc_method.h>
@@ -2751,13 +2752,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_AddFriends() {
       ::grpc::Service::experimental().MarkMethodCallback(0,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_AddFriends<BaseClass>, ::nakama::api::AddFriendsRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AddFriendsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AddFriendsRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->AddFriends(context, request, response, controller);
-                 }, this));
+                   return this->AddFriends(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_AddFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2776,13 +2777,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_AddGroupUsers() {
       ::grpc::Service::experimental().MarkMethodCallback(1,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_AddGroupUsers<BaseClass>, ::nakama::api::AddGroupUsersRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AddGroupUsersRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AddGroupUsersRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->AddGroupUsers(context, request, response, controller);
-                 }, this));
+                   return this->AddGroupUsers(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_AddGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2801,13 +2802,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_AuthenticateCustom() {
       ::grpc::Service::experimental().MarkMethodCallback(2,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_AuthenticateCustom<BaseClass>, ::nakama::api::AuthenticateCustomRequest, ::nakama::api::Session>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateCustomRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateCustomRequest* request,
                  ::nakama::api::Session* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->AuthenticateCustom(context, request, response, controller);
-                 }, this));
+                   return this->AuthenticateCustom(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_AuthenticateCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2826,13 +2827,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_AuthenticateDevice() {
       ::grpc::Service::experimental().MarkMethodCallback(3,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_AuthenticateDevice<BaseClass>, ::nakama::api::AuthenticateDeviceRequest, ::nakama::api::Session>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateDeviceRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateDeviceRequest* request,
                  ::nakama::api::Session* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->AuthenticateDevice(context, request, response, controller);
-                 }, this));
+                   return this->AuthenticateDevice(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_AuthenticateDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2851,13 +2852,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_AuthenticateEmail() {
       ::grpc::Service::experimental().MarkMethodCallback(4,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_AuthenticateEmail<BaseClass>, ::nakama::api::AuthenticateEmailRequest, ::nakama::api::Session>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateEmailRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateEmailRequest* request,
                  ::nakama::api::Session* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->AuthenticateEmail(context, request, response, controller);
-                 }, this));
+                   return this->AuthenticateEmail(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_AuthenticateEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2876,13 +2877,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_AuthenticateFacebook() {
       ::grpc::Service::experimental().MarkMethodCallback(5,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_AuthenticateFacebook<BaseClass>, ::nakama::api::AuthenticateFacebookRequest, ::nakama::api::Session>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateFacebookRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateFacebookRequest* request,
                  ::nakama::api::Session* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->AuthenticateFacebook(context, request, response, controller);
-                 }, this));
+                   return this->AuthenticateFacebook(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_AuthenticateFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2901,13 +2902,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_AuthenticateGameCenter() {
       ::grpc::Service::experimental().MarkMethodCallback(6,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_AuthenticateGameCenter<BaseClass>, ::nakama::api::AuthenticateGameCenterRequest, ::nakama::api::Session>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateGameCenterRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateGameCenterRequest* request,
                  ::nakama::api::Session* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->AuthenticateGameCenter(context, request, response, controller);
-                 }, this));
+                   return this->AuthenticateGameCenter(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_AuthenticateGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2926,13 +2927,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_AuthenticateGoogle() {
       ::grpc::Service::experimental().MarkMethodCallback(7,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_AuthenticateGoogle<BaseClass>, ::nakama::api::AuthenticateGoogleRequest, ::nakama::api::Session>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateGoogleRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateGoogleRequest* request,
                  ::nakama::api::Session* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->AuthenticateGoogle(context, request, response, controller);
-                 }, this));
+                   return this->AuthenticateGoogle(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_AuthenticateGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2951,13 +2952,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_AuthenticateSteam() {
       ::grpc::Service::experimental().MarkMethodCallback(8,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_AuthenticateSteam<BaseClass>, ::nakama::api::AuthenticateSteamRequest, ::nakama::api::Session>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateSteamRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateSteamRequest* request,
                  ::nakama::api::Session* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->AuthenticateSteam(context, request, response, controller);
-                 }, this));
+                   return this->AuthenticateSteam(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_AuthenticateSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2976,13 +2977,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_BlockFriends() {
       ::grpc::Service::experimental().MarkMethodCallback(9,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_BlockFriends<BaseClass>, ::nakama::api::BlockFriendsRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::BlockFriendsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::BlockFriendsRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->BlockFriends(context, request, response, controller);
-                 }, this));
+                   return this->BlockFriends(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_BlockFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3001,13 +3002,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_CreateGroup() {
       ::grpc::Service::experimental().MarkMethodCallback(10,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_CreateGroup<BaseClass>, ::nakama::api::CreateGroupRequest, ::nakama::api::Group>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::CreateGroupRequest, ::nakama::api::Group>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::CreateGroupRequest* request,
                  ::nakama::api::Group* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CreateGroup(context, request, response, controller);
-                 }, this));
+                   return this->CreateGroup(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_CreateGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3026,13 +3027,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_DeleteFriends() {
       ::grpc::Service::experimental().MarkMethodCallback(11,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteFriends<BaseClass>, ::nakama::api::DeleteFriendsRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DeleteFriendsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::DeleteFriendsRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteFriends(context, request, response, controller);
-                 }, this));
+                   return this->DeleteFriends(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_DeleteFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3051,13 +3052,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_DeleteGroup() {
       ::grpc::Service::experimental().MarkMethodCallback(12,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteGroup<BaseClass>, ::nakama::api::DeleteGroupRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DeleteGroupRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::DeleteGroupRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteGroup(context, request, response, controller);
-                 }, this));
+                   return this->DeleteGroup(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_DeleteGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3076,13 +3077,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_DeleteLeaderboardRecord() {
       ::grpc::Service::experimental().MarkMethodCallback(13,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteLeaderboardRecord<BaseClass>, ::nakama::api::DeleteLeaderboardRecordRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DeleteLeaderboardRecordRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::DeleteLeaderboardRecordRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteLeaderboardRecord(context, request, response, controller);
-                 }, this));
+                   return this->DeleteLeaderboardRecord(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_DeleteLeaderboardRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3101,13 +3102,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_DeleteNotifications() {
       ::grpc::Service::experimental().MarkMethodCallback(14,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteNotifications<BaseClass>, ::nakama::api::DeleteNotificationsRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DeleteNotificationsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::DeleteNotificationsRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteNotifications(context, request, response, controller);
-                 }, this));
+                   return this->DeleteNotifications(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_DeleteNotifications() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3126,13 +3127,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_DeleteStorageObjects() {
       ::grpc::Service::experimental().MarkMethodCallback(15,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_DeleteStorageObjects<BaseClass>, ::nakama::api::DeleteStorageObjectsRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DeleteStorageObjectsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::DeleteStorageObjectsRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->DeleteStorageObjects(context, request, response, controller);
-                 }, this));
+                   return this->DeleteStorageObjects(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_DeleteStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3151,13 +3152,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_GetAccount() {
       ::grpc::Service::experimental().MarkMethodCallback(16,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_GetAccount<BaseClass>, ::google::protobuf::Empty, ::nakama::api::Account>(
+        new ::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::nakama::api::Account>(
           [this](::grpc::ServerContext* context,
                  const ::google::protobuf::Empty* request,
                  ::nakama::api::Account* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->GetAccount(context, request, response, controller);
-                 }, this));
+                   return this->GetAccount(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_GetAccount() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3176,13 +3177,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_GetUsers() {
       ::grpc::Service::experimental().MarkMethodCallback(17,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_GetUsers<BaseClass>, ::nakama::api::GetUsersRequest, ::nakama::api::Users>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::GetUsersRequest, ::nakama::api::Users>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::GetUsersRequest* request,
                  ::nakama::api::Users* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->GetUsers(context, request, response, controller);
-                 }, this));
+                   return this->GetUsers(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_GetUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3201,13 +3202,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_Healthcheck() {
       ::grpc::Service::experimental().MarkMethodCallback(18,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_Healthcheck<BaseClass>, ::google::protobuf::Empty, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::google::protobuf::Empty* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->Healthcheck(context, request, response, controller);
-                 }, this));
+                   return this->Healthcheck(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_Healthcheck() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3226,13 +3227,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ImportFacebookFriends() {
       ::grpc::Service::experimental().MarkMethodCallback(19,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ImportFacebookFriends<BaseClass>, ::nakama::api::ImportFacebookFriendsRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ImportFacebookFriendsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ImportFacebookFriendsRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ImportFacebookFriends(context, request, response, controller);
-                 }, this));
+                   return this->ImportFacebookFriends(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ImportFacebookFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3251,13 +3252,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_JoinGroup() {
       ::grpc::Service::experimental().MarkMethodCallback(20,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_JoinGroup<BaseClass>, ::nakama::api::JoinGroupRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::JoinGroupRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::JoinGroupRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->JoinGroup(context, request, response, controller);
-                 }, this));
+                   return this->JoinGroup(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_JoinGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3276,13 +3277,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_JoinTournament() {
       ::grpc::Service::experimental().MarkMethodCallback(21,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_JoinTournament<BaseClass>, ::nakama::api::JoinTournamentRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::JoinTournamentRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::JoinTournamentRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->JoinTournament(context, request, response, controller);
-                 }, this));
+                   return this->JoinTournament(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_JoinTournament() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3301,13 +3302,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_KickGroupUsers() {
       ::grpc::Service::experimental().MarkMethodCallback(22,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_KickGroupUsers<BaseClass>, ::nakama::api::KickGroupUsersRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::KickGroupUsersRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::KickGroupUsersRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->KickGroupUsers(context, request, response, controller);
-                 }, this));
+                   return this->KickGroupUsers(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_KickGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3326,13 +3327,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_LeaveGroup() {
       ::grpc::Service::experimental().MarkMethodCallback(23,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_LeaveGroup<BaseClass>, ::nakama::api::LeaveGroupRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::LeaveGroupRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::LeaveGroupRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->LeaveGroup(context, request, response, controller);
-                 }, this));
+                   return this->LeaveGroup(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_LeaveGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3351,13 +3352,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_LinkCustom() {
       ::grpc::Service::experimental().MarkMethodCallback(24,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_LinkCustom<BaseClass>, ::nakama::api::AccountCustom, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountCustom, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountCustom* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->LinkCustom(context, request, response, controller);
-                 }, this));
+                   return this->LinkCustom(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_LinkCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3376,13 +3377,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_LinkDevice() {
       ::grpc::Service::experimental().MarkMethodCallback(25,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_LinkDevice<BaseClass>, ::nakama::api::AccountDevice, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountDevice, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountDevice* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->LinkDevice(context, request, response, controller);
-                 }, this));
+                   return this->LinkDevice(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_LinkDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3401,13 +3402,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_LinkEmail() {
       ::grpc::Service::experimental().MarkMethodCallback(26,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_LinkEmail<BaseClass>, ::nakama::api::AccountEmail, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountEmail, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountEmail* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->LinkEmail(context, request, response, controller);
-                 }, this));
+                   return this->LinkEmail(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_LinkEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3426,13 +3427,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_LinkFacebook() {
       ::grpc::Service::experimental().MarkMethodCallback(27,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_LinkFacebook<BaseClass>, ::nakama::api::LinkFacebookRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::LinkFacebookRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::LinkFacebookRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->LinkFacebook(context, request, response, controller);
-                 }, this));
+                   return this->LinkFacebook(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_LinkFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3451,13 +3452,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_LinkGameCenter() {
       ::grpc::Service::experimental().MarkMethodCallback(28,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_LinkGameCenter<BaseClass>, ::nakama::api::AccountGameCenter, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountGameCenter, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountGameCenter* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->LinkGameCenter(context, request, response, controller);
-                 }, this));
+                   return this->LinkGameCenter(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_LinkGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3476,13 +3477,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_LinkGoogle() {
       ::grpc::Service::experimental().MarkMethodCallback(29,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_LinkGoogle<BaseClass>, ::nakama::api::AccountGoogle, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountGoogle, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountGoogle* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->LinkGoogle(context, request, response, controller);
-                 }, this));
+                   return this->LinkGoogle(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_LinkGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3501,13 +3502,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_LinkSteam() {
       ::grpc::Service::experimental().MarkMethodCallback(30,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_LinkSteam<BaseClass>, ::nakama::api::AccountSteam, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountSteam, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountSteam* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->LinkSteam(context, request, response, controller);
-                 }, this));
+                   return this->LinkSteam(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_LinkSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3526,13 +3527,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListChannelMessages() {
       ::grpc::Service::experimental().MarkMethodCallback(31,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListChannelMessages<BaseClass>, ::nakama::api::ListChannelMessagesRequest, ::nakama::api::ChannelMessageList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListChannelMessagesRequest, ::nakama::api::ChannelMessageList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListChannelMessagesRequest* request,
                  ::nakama::api::ChannelMessageList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListChannelMessages(context, request, response, controller);
-                 }, this));
+                   return this->ListChannelMessages(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListChannelMessages() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3551,13 +3552,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListFriends() {
       ::grpc::Service::experimental().MarkMethodCallback(32,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListFriends<BaseClass>, ::google::protobuf::Empty, ::nakama::api::Friends>(
+        new ::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::nakama::api::Friends>(
           [this](::grpc::ServerContext* context,
                  const ::google::protobuf::Empty* request,
                  ::nakama::api::Friends* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListFriends(context, request, response, controller);
-                 }, this));
+                   return this->ListFriends(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3576,13 +3577,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListGroups() {
       ::grpc::Service::experimental().MarkMethodCallback(33,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListGroups<BaseClass>, ::nakama::api::ListGroupsRequest, ::nakama::api::GroupList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListGroupsRequest, ::nakama::api::GroupList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListGroupsRequest* request,
                  ::nakama::api::GroupList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListGroups(context, request, response, controller);
-                 }, this));
+                   return this->ListGroups(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListGroups() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3601,13 +3602,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListGroupUsers() {
       ::grpc::Service::experimental().MarkMethodCallback(34,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListGroupUsers<BaseClass>, ::nakama::api::ListGroupUsersRequest, ::nakama::api::GroupUserList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListGroupUsersRequest, ::nakama::api::GroupUserList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListGroupUsersRequest* request,
                  ::nakama::api::GroupUserList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListGroupUsers(context, request, response, controller);
-                 }, this));
+                   return this->ListGroupUsers(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3626,13 +3627,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListLeaderboardRecords() {
       ::grpc::Service::experimental().MarkMethodCallback(35,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListLeaderboardRecords<BaseClass>, ::nakama::api::ListLeaderboardRecordsRequest, ::nakama::api::LeaderboardRecordList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListLeaderboardRecordsRequest, ::nakama::api::LeaderboardRecordList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListLeaderboardRecordsRequest* request,
                  ::nakama::api::LeaderboardRecordList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListLeaderboardRecords(context, request, response, controller);
-                 }, this));
+                   return this->ListLeaderboardRecords(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListLeaderboardRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3651,13 +3652,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListLeaderboardRecordsAroundOwner() {
       ::grpc::Service::experimental().MarkMethodCallback(36,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListLeaderboardRecordsAroundOwner<BaseClass>, ::nakama::api::ListLeaderboardRecordsAroundOwnerRequest, ::nakama::api::LeaderboardRecordList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListLeaderboardRecordsAroundOwnerRequest, ::nakama::api::LeaderboardRecordList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListLeaderboardRecordsAroundOwnerRequest* request,
                  ::nakama::api::LeaderboardRecordList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListLeaderboardRecordsAroundOwner(context, request, response, controller);
-                 }, this));
+                   return this->ListLeaderboardRecordsAroundOwner(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListLeaderboardRecordsAroundOwner() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3676,13 +3677,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListMatches() {
       ::grpc::Service::experimental().MarkMethodCallback(37,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListMatches<BaseClass>, ::nakama::api::ListMatchesRequest, ::nakama::api::MatchList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListMatchesRequest, ::nakama::api::MatchList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListMatchesRequest* request,
                  ::nakama::api::MatchList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListMatches(context, request, response, controller);
-                 }, this));
+                   return this->ListMatches(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListMatches() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3701,13 +3702,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListNotifications() {
       ::grpc::Service::experimental().MarkMethodCallback(38,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListNotifications<BaseClass>, ::nakama::api::ListNotificationsRequest, ::nakama::api::NotificationList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListNotificationsRequest, ::nakama::api::NotificationList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListNotificationsRequest* request,
                  ::nakama::api::NotificationList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListNotifications(context, request, response, controller);
-                 }, this));
+                   return this->ListNotifications(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListNotifications() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3726,13 +3727,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListStorageObjects() {
       ::grpc::Service::experimental().MarkMethodCallback(39,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListStorageObjects<BaseClass>, ::nakama::api::ListStorageObjectsRequest, ::nakama::api::StorageObjectList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListStorageObjectsRequest, ::nakama::api::StorageObjectList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListStorageObjectsRequest* request,
                  ::nakama::api::StorageObjectList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListStorageObjects(context, request, response, controller);
-                 }, this));
+                   return this->ListStorageObjects(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3751,13 +3752,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListTournaments() {
       ::grpc::Service::experimental().MarkMethodCallback(40,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListTournaments<BaseClass>, ::nakama::api::ListTournamentsRequest, ::nakama::api::TournamentList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListTournamentsRequest, ::nakama::api::TournamentList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListTournamentsRequest* request,
                  ::nakama::api::TournamentList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListTournaments(context, request, response, controller);
-                 }, this));
+                   return this->ListTournaments(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListTournaments() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3776,13 +3777,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListTournamentRecords() {
       ::grpc::Service::experimental().MarkMethodCallback(41,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListTournamentRecords<BaseClass>, ::nakama::api::ListTournamentRecordsRequest, ::nakama::api::TournamentRecordList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListTournamentRecordsRequest, ::nakama::api::TournamentRecordList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListTournamentRecordsRequest* request,
                  ::nakama::api::TournamentRecordList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListTournamentRecords(context, request, response, controller);
-                 }, this));
+                   return this->ListTournamentRecords(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListTournamentRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3801,13 +3802,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListTournamentRecordsAroundOwner() {
       ::grpc::Service::experimental().MarkMethodCallback(42,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListTournamentRecordsAroundOwner<BaseClass>, ::nakama::api::ListTournamentRecordsAroundOwnerRequest, ::nakama::api::TournamentRecordList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListTournamentRecordsAroundOwnerRequest, ::nakama::api::TournamentRecordList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListTournamentRecordsAroundOwnerRequest* request,
                  ::nakama::api::TournamentRecordList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListTournamentRecordsAroundOwner(context, request, response, controller);
-                 }, this));
+                   return this->ListTournamentRecordsAroundOwner(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListTournamentRecordsAroundOwner() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3826,13 +3827,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListUserGroups() {
       ::grpc::Service::experimental().MarkMethodCallback(43,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ListUserGroups<BaseClass>, ::nakama::api::ListUserGroupsRequest, ::nakama::api::UserGroupList>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListUserGroupsRequest, ::nakama::api::UserGroupList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListUserGroupsRequest* request,
                  ::nakama::api::UserGroupList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ListUserGroups(context, request, response, controller);
-                 }, this));
+                   return this->ListUserGroups(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ListUserGroups() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3851,13 +3852,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_PromoteGroupUsers() {
       ::grpc::Service::experimental().MarkMethodCallback(44,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_PromoteGroupUsers<BaseClass>, ::nakama::api::PromoteGroupUsersRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::PromoteGroupUsersRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::PromoteGroupUsersRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->PromoteGroupUsers(context, request, response, controller);
-                 }, this));
+                   return this->PromoteGroupUsers(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_PromoteGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3876,13 +3877,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ReadStorageObjects() {
       ::grpc::Service::experimental().MarkMethodCallback(45,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_ReadStorageObjects<BaseClass>, ::nakama::api::ReadStorageObjectsRequest, ::nakama::api::StorageObjects>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ReadStorageObjectsRequest, ::nakama::api::StorageObjects>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ReadStorageObjectsRequest* request,
                  ::nakama::api::StorageObjects* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->ReadStorageObjects(context, request, response, controller);
-                 }, this));
+                   return this->ReadStorageObjects(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_ReadStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3901,13 +3902,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_RpcFunc() {
       ::grpc::Service::experimental().MarkMethodCallback(46,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_RpcFunc<BaseClass>, ::nakama::api::Rpc, ::nakama::api::Rpc>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::Rpc, ::nakama::api::Rpc>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::Rpc* request,
                  ::nakama::api::Rpc* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->RpcFunc(context, request, response, controller);
-                 }, this));
+                   return this->RpcFunc(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_RpcFunc() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3926,13 +3927,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_UnlinkCustom() {
       ::grpc::Service::experimental().MarkMethodCallback(47,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_UnlinkCustom<BaseClass>, ::nakama::api::AccountCustom, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountCustom, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountCustom* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->UnlinkCustom(context, request, response, controller);
-                 }, this));
+                   return this->UnlinkCustom(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_UnlinkCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3951,13 +3952,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_UnlinkDevice() {
       ::grpc::Service::experimental().MarkMethodCallback(48,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_UnlinkDevice<BaseClass>, ::nakama::api::AccountDevice, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountDevice, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountDevice* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->UnlinkDevice(context, request, response, controller);
-                 }, this));
+                   return this->UnlinkDevice(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_UnlinkDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -3976,13 +3977,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_UnlinkEmail() {
       ::grpc::Service::experimental().MarkMethodCallback(49,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_UnlinkEmail<BaseClass>, ::nakama::api::AccountEmail, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountEmail, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountEmail* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->UnlinkEmail(context, request, response, controller);
-                 }, this));
+                   return this->UnlinkEmail(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_UnlinkEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4001,13 +4002,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_UnlinkFacebook() {
       ::grpc::Service::experimental().MarkMethodCallback(50,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_UnlinkFacebook<BaseClass>, ::nakama::api::AccountFacebook, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountFacebook, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountFacebook* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->UnlinkFacebook(context, request, response, controller);
-                 }, this));
+                   return this->UnlinkFacebook(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_UnlinkFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4026,13 +4027,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_UnlinkGameCenter() {
       ::grpc::Service::experimental().MarkMethodCallback(51,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_UnlinkGameCenter<BaseClass>, ::nakama::api::AccountGameCenter, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountGameCenter, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountGameCenter* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->UnlinkGameCenter(context, request, response, controller);
-                 }, this));
+                   return this->UnlinkGameCenter(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_UnlinkGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4051,13 +4052,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_UnlinkGoogle() {
       ::grpc::Service::experimental().MarkMethodCallback(52,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_UnlinkGoogle<BaseClass>, ::nakama::api::AccountGoogle, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountGoogle, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountGoogle* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->UnlinkGoogle(context, request, response, controller);
-                 }, this));
+                   return this->UnlinkGoogle(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_UnlinkGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4076,13 +4077,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_UnlinkSteam() {
       ::grpc::Service::experimental().MarkMethodCallback(53,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_UnlinkSteam<BaseClass>, ::nakama::api::AccountSteam, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountSteam, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountSteam* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->UnlinkSteam(context, request, response, controller);
-                 }, this));
+                   return this->UnlinkSteam(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_UnlinkSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4101,13 +4102,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_UpdateAccount() {
       ::grpc::Service::experimental().MarkMethodCallback(54,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_UpdateAccount<BaseClass>, ::nakama::api::UpdateAccountRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::UpdateAccountRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::UpdateAccountRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->UpdateAccount(context, request, response, controller);
-                 }, this));
+                   return this->UpdateAccount(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_UpdateAccount() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4126,13 +4127,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_UpdateGroup() {
       ::grpc::Service::experimental().MarkMethodCallback(55,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_UpdateGroup<BaseClass>, ::nakama::api::UpdateGroupRequest, ::google::protobuf::Empty>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::UpdateGroupRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::UpdateGroupRequest* request,
                  ::google::protobuf::Empty* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->UpdateGroup(context, request, response, controller);
-                 }, this));
+                   return this->UpdateGroup(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_UpdateGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4151,13 +4152,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_WriteLeaderboardRecord() {
       ::grpc::Service::experimental().MarkMethodCallback(56,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_WriteLeaderboardRecord<BaseClass>, ::nakama::api::WriteLeaderboardRecordRequest, ::nakama::api::LeaderboardRecord>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::WriteLeaderboardRecordRequest, ::nakama::api::LeaderboardRecord>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::WriteLeaderboardRecordRequest* request,
                  ::nakama::api::LeaderboardRecord* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->WriteLeaderboardRecord(context, request, response, controller);
-                 }, this));
+                   return this->WriteLeaderboardRecord(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_WriteLeaderboardRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4176,13 +4177,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_WriteStorageObjects() {
       ::grpc::Service::experimental().MarkMethodCallback(57,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_WriteStorageObjects<BaseClass>, ::nakama::api::WriteStorageObjectsRequest, ::nakama::api::StorageObjectAcks>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::WriteStorageObjectsRequest, ::nakama::api::StorageObjectAcks>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::WriteStorageObjectsRequest* request,
                  ::nakama::api::StorageObjectAcks* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->WriteStorageObjects(context, request, response, controller);
-                 }, this));
+                   return this->WriteStorageObjects(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_WriteStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4201,13 +4202,13 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_WriteTournamentRecord() {
       ::grpc::Service::experimental().MarkMethodCallback(58,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithCallbackMethod_WriteTournamentRecord<BaseClass>, ::nakama::api::WriteTournamentRecordRequest, ::nakama::api::LeaderboardRecord>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::WriteTournamentRecordRequest, ::nakama::api::LeaderboardRecord>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::WriteTournamentRecordRequest* request,
                  ::nakama::api::LeaderboardRecord* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->WriteTournamentRecord(context, request, response, controller);
-                 }, this));
+                   return this->WriteTournamentRecord(context, request, response, controller);
+                 }));
     }
     ~ExperimentalWithCallbackMethod_WriteTournamentRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6410,13 +6411,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_AddFriends() {
       ::grpc::Service::experimental().MarkMethodRawCallback(0,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_AddFriends<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->AddFriends(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_AddFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6435,13 +6436,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_AddGroupUsers() {
       ::grpc::Service::experimental().MarkMethodRawCallback(1,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_AddGroupUsers<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->AddGroupUsers(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_AddGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6460,13 +6461,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateCustom() {
       ::grpc::Service::experimental().MarkMethodRawCallback(2,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_AuthenticateCustom<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->AuthenticateCustom(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_AuthenticateCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6485,13 +6486,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateDevice() {
       ::grpc::Service::experimental().MarkMethodRawCallback(3,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_AuthenticateDevice<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->AuthenticateDevice(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_AuthenticateDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6510,13 +6511,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateEmail() {
       ::grpc::Service::experimental().MarkMethodRawCallback(4,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_AuthenticateEmail<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->AuthenticateEmail(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_AuthenticateEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6535,13 +6536,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateFacebook() {
       ::grpc::Service::experimental().MarkMethodRawCallback(5,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_AuthenticateFacebook<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->AuthenticateFacebook(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_AuthenticateFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6560,13 +6561,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateGameCenter() {
       ::grpc::Service::experimental().MarkMethodRawCallback(6,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_AuthenticateGameCenter<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->AuthenticateGameCenter(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_AuthenticateGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6585,13 +6586,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateGoogle() {
       ::grpc::Service::experimental().MarkMethodRawCallback(7,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_AuthenticateGoogle<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->AuthenticateGoogle(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_AuthenticateGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6610,13 +6611,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateSteam() {
       ::grpc::Service::experimental().MarkMethodRawCallback(8,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_AuthenticateSteam<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->AuthenticateSteam(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_AuthenticateSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6635,13 +6636,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_BlockFriends() {
       ::grpc::Service::experimental().MarkMethodRawCallback(9,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_BlockFriends<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->BlockFriends(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_BlockFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6660,13 +6661,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_CreateGroup() {
       ::grpc::Service::experimental().MarkMethodRawCallback(10,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_CreateGroup<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->CreateGroup(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_CreateGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6685,13 +6686,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_DeleteFriends() {
       ::grpc::Service::experimental().MarkMethodRawCallback(11,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteFriends<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->DeleteFriends(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_DeleteFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6710,13 +6711,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_DeleteGroup() {
       ::grpc::Service::experimental().MarkMethodRawCallback(12,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteGroup<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->DeleteGroup(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_DeleteGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6735,13 +6736,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_DeleteLeaderboardRecord() {
       ::grpc::Service::experimental().MarkMethodRawCallback(13,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteLeaderboardRecord<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->DeleteLeaderboardRecord(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_DeleteLeaderboardRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6760,13 +6761,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_DeleteNotifications() {
       ::grpc::Service::experimental().MarkMethodRawCallback(14,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteNotifications<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->DeleteNotifications(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_DeleteNotifications() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6785,13 +6786,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_DeleteStorageObjects() {
       ::grpc::Service::experimental().MarkMethodRawCallback(15,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_DeleteStorageObjects<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->DeleteStorageObjects(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_DeleteStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6810,13 +6811,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_GetAccount() {
       ::grpc::Service::experimental().MarkMethodRawCallback(16,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_GetAccount<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->GetAccount(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_GetAccount() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6835,13 +6836,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_GetUsers() {
       ::grpc::Service::experimental().MarkMethodRawCallback(17,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_GetUsers<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->GetUsers(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_GetUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6860,13 +6861,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_Healthcheck() {
       ::grpc::Service::experimental().MarkMethodRawCallback(18,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_Healthcheck<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->Healthcheck(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_Healthcheck() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6885,13 +6886,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ImportFacebookFriends() {
       ::grpc::Service::experimental().MarkMethodRawCallback(19,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ImportFacebookFriends<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ImportFacebookFriends(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ImportFacebookFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6910,13 +6911,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_JoinGroup() {
       ::grpc::Service::experimental().MarkMethodRawCallback(20,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_JoinGroup<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->JoinGroup(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_JoinGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6935,13 +6936,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_JoinTournament() {
       ::grpc::Service::experimental().MarkMethodRawCallback(21,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_JoinTournament<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->JoinTournament(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_JoinTournament() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6960,13 +6961,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_KickGroupUsers() {
       ::grpc::Service::experimental().MarkMethodRawCallback(22,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_KickGroupUsers<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->KickGroupUsers(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_KickGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6985,13 +6986,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_LeaveGroup() {
       ::grpc::Service::experimental().MarkMethodRawCallback(23,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_LeaveGroup<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->LeaveGroup(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_LeaveGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7010,13 +7011,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_LinkCustom() {
       ::grpc::Service::experimental().MarkMethodRawCallback(24,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_LinkCustom<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->LinkCustom(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_LinkCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7035,13 +7036,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_LinkDevice() {
       ::grpc::Service::experimental().MarkMethodRawCallback(25,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_LinkDevice<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->LinkDevice(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_LinkDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7060,13 +7061,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_LinkEmail() {
       ::grpc::Service::experimental().MarkMethodRawCallback(26,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_LinkEmail<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->LinkEmail(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_LinkEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7085,13 +7086,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_LinkFacebook() {
       ::grpc::Service::experimental().MarkMethodRawCallback(27,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_LinkFacebook<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->LinkFacebook(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_LinkFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7110,13 +7111,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_LinkGameCenter() {
       ::grpc::Service::experimental().MarkMethodRawCallback(28,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_LinkGameCenter<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->LinkGameCenter(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_LinkGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7135,13 +7136,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_LinkGoogle() {
       ::grpc::Service::experimental().MarkMethodRawCallback(29,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_LinkGoogle<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->LinkGoogle(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_LinkGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7160,13 +7161,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_LinkSteam() {
       ::grpc::Service::experimental().MarkMethodRawCallback(30,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_LinkSteam<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->LinkSteam(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_LinkSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7185,13 +7186,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListChannelMessages() {
       ::grpc::Service::experimental().MarkMethodRawCallback(31,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListChannelMessages<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListChannelMessages(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListChannelMessages() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7210,13 +7211,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListFriends() {
       ::grpc::Service::experimental().MarkMethodRawCallback(32,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListFriends<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListFriends(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7235,13 +7236,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListGroups() {
       ::grpc::Service::experimental().MarkMethodRawCallback(33,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListGroups<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListGroups(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListGroups() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7260,13 +7261,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListGroupUsers() {
       ::grpc::Service::experimental().MarkMethodRawCallback(34,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListGroupUsers<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListGroupUsers(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7285,13 +7286,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListLeaderboardRecords() {
       ::grpc::Service::experimental().MarkMethodRawCallback(35,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListLeaderboardRecords<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListLeaderboardRecords(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListLeaderboardRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7310,13 +7311,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListLeaderboardRecordsAroundOwner() {
       ::grpc::Service::experimental().MarkMethodRawCallback(36,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListLeaderboardRecordsAroundOwner<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListLeaderboardRecordsAroundOwner(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListLeaderboardRecordsAroundOwner() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7335,13 +7336,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListMatches() {
       ::grpc::Service::experimental().MarkMethodRawCallback(37,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListMatches<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListMatches(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListMatches() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7360,13 +7361,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListNotifications() {
       ::grpc::Service::experimental().MarkMethodRawCallback(38,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListNotifications<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListNotifications(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListNotifications() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7385,13 +7386,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListStorageObjects() {
       ::grpc::Service::experimental().MarkMethodRawCallback(39,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListStorageObjects<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListStorageObjects(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7410,13 +7411,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListTournaments() {
       ::grpc::Service::experimental().MarkMethodRawCallback(40,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListTournaments<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListTournaments(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListTournaments() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7435,13 +7436,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListTournamentRecords() {
       ::grpc::Service::experimental().MarkMethodRawCallback(41,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListTournamentRecords<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListTournamentRecords(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListTournamentRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7460,13 +7461,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListTournamentRecordsAroundOwner() {
       ::grpc::Service::experimental().MarkMethodRawCallback(42,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListTournamentRecordsAroundOwner<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListTournamentRecordsAroundOwner(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListTournamentRecordsAroundOwner() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7485,13 +7486,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ListUserGroups() {
       ::grpc::Service::experimental().MarkMethodRawCallback(43,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ListUserGroups<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ListUserGroups(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ListUserGroups() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7510,13 +7511,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_PromoteGroupUsers() {
       ::grpc::Service::experimental().MarkMethodRawCallback(44,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_PromoteGroupUsers<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->PromoteGroupUsers(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_PromoteGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7535,13 +7536,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_ReadStorageObjects() {
       ::grpc::Service::experimental().MarkMethodRawCallback(45,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_ReadStorageObjects<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->ReadStorageObjects(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_ReadStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7560,13 +7561,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_RpcFunc() {
       ::grpc::Service::experimental().MarkMethodRawCallback(46,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_RpcFunc<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->RpcFunc(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_RpcFunc() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7585,13 +7586,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_UnlinkCustom() {
       ::grpc::Service::experimental().MarkMethodRawCallback(47,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_UnlinkCustom<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->UnlinkCustom(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_UnlinkCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7610,13 +7611,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_UnlinkDevice() {
       ::grpc::Service::experimental().MarkMethodRawCallback(48,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_UnlinkDevice<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->UnlinkDevice(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_UnlinkDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7635,13 +7636,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_UnlinkEmail() {
       ::grpc::Service::experimental().MarkMethodRawCallback(49,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_UnlinkEmail<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->UnlinkEmail(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_UnlinkEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7660,13 +7661,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_UnlinkFacebook() {
       ::grpc::Service::experimental().MarkMethodRawCallback(50,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_UnlinkFacebook<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->UnlinkFacebook(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_UnlinkFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7685,13 +7686,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_UnlinkGameCenter() {
       ::grpc::Service::experimental().MarkMethodRawCallback(51,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_UnlinkGameCenter<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->UnlinkGameCenter(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_UnlinkGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7710,13 +7711,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_UnlinkGoogle() {
       ::grpc::Service::experimental().MarkMethodRawCallback(52,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_UnlinkGoogle<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->UnlinkGoogle(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_UnlinkGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7735,13 +7736,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_UnlinkSteam() {
       ::grpc::Service::experimental().MarkMethodRawCallback(53,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_UnlinkSteam<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->UnlinkSteam(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_UnlinkSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7760,13 +7761,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_UpdateAccount() {
       ::grpc::Service::experimental().MarkMethodRawCallback(54,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_UpdateAccount<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->UpdateAccount(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_UpdateAccount() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7785,13 +7786,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_UpdateGroup() {
       ::grpc::Service::experimental().MarkMethodRawCallback(55,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_UpdateGroup<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->UpdateGroup(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_UpdateGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7810,13 +7811,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_WriteLeaderboardRecord() {
       ::grpc::Service::experimental().MarkMethodRawCallback(56,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_WriteLeaderboardRecord<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->WriteLeaderboardRecord(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_WriteLeaderboardRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7835,13 +7836,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_WriteStorageObjects() {
       ::grpc::Service::experimental().MarkMethodRawCallback(57,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_WriteStorageObjects<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->WriteStorageObjects(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_WriteStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -7860,13 +7861,13 @@ class Nakama final {
    public:
     ExperimentalWithRawCallbackMethod_WriteTournamentRecord() {
       ::grpc::Service::experimental().MarkMethodRawCallback(58,
-        new ::grpc::internal::CallbackUnaryHandler< ExperimentalWithRawCallbackMethod_WriteTournamentRecord<BaseClass>, ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
                  ::grpc::ByteBuffer* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    this->WriteTournamentRecord(context, request, response, controller);
-                 }, this));
+                 }));
     }
     ~ExperimentalWithRawCallbackMethod_WriteTournamentRecord() override {
       BaseClassMustBeDerivedFromService(this);
