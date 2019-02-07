@@ -220,6 +220,12 @@ To update all submodules:
 
 `git submodule update --init --recursive`
 
+Change submodule branch:
+
+- edit `.gitmodules`
+
+- `git submodule update --remote`
+
 ## Build Prerequisites
 
 - git
@@ -240,10 +246,12 @@ Third party libraries:
 ### Building for Windows
 
 ```bash
-cd build\win32
-python build_win32.py -m Mode
+cd build\windows
+python build_windows.py -m Mode -a Arch
 ```
 Where `Mode` is build mode: `Debug` or `Release`
+
+Where `Arch` is architecture: `x86` or `x64`
 
 ### Building for Android
 
