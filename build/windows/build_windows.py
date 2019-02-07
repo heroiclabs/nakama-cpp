@@ -46,8 +46,8 @@ grpc_cpp_plugin_path = os.path.abspath(r'build\third_party\grpc\\' + BUILD_MODE 
 protoc_path = os.path.abspath(r'build\third_party\grpc\third_party\protobuf\\' + BUILD_MODE + '\\protoc.exe')
 
 # generate Visual Studio projects
-generator = 'Visual Studio 14 2015'
-#generator = 'Visual Studio 15 2017'
+#generator = 'Visual Studio 14 2015'
+generator = 'Visual Studio 15 2017'
 
 if ARCH == 'x64':
     generator += ' Win64'
