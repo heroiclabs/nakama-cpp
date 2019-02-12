@@ -659,7 +659,7 @@ RtRequestContext * NRtClient::createReqContext(::nakama::realtime::Envelope& msg
     RtRequestContext * ctx = new RtRequestContext();
     int32_t cid = _nextCid++;
 
-    _reqContexts.emplace(cid, ctx);
+    _reqContexts.emplace(cid, std::unique_ptr<RtRequestContext>(ctx));
     msg.set_cid(std::to_string(cid));
 
     return ctx;
