@@ -253,6 +253,39 @@ Where `Mode` is build mode: `Debug` or `Release`
 
 Where `Arch` is architecture: `x86` or `x64`
 
+### Building for Mac
+
+```bash
+cd build\mac
+python build_mac.py
+```
+It builds in `Release` mode.
+
+### Building for Linux
+
+Prerequisites:
+
+- `sudo apt-get install build-essential autoconf libtool pkg-config`
+- `sudo apt-get install libgflags-dev libgtest-dev`
+- `sudo apt-get install clang libc++-dev`
+- `sudo apt-get install golang`
+- `sudo apt-get install perl`
+- download `boost` sources and build them:
+
+  `./bootstrap.sh`
+
+  `./b2`
+
+  set `BOOST_ROOT` env var to `boost` folder:
+
+  `export BOOST_ROOT={path to boost}`
+
+```bash
+cd build\linux
+python build_linux.py
+```
+It builds in `Release` mode.
+
 ### Building for Android
 
 Set `ANDROID_NDK` or `NDK_ROOT` system variable to Android NDK folder.
