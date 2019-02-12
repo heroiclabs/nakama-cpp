@@ -13,6 +13,12 @@ elseif(WIN32)
     # vc140 - Visual Studio 2015
     # vc141 - Visual Studio 2017
     set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/win32/vc141")
+elseif(APPLE AND NOT IOS_PLATFORM)
+    # Mac
+    set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/mac")
+elseif(UNIX AND NOT APPLE)
+    # Linux
+    set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/linux/x86")
 endif()
 
 set(LIB_PREFIX "")
