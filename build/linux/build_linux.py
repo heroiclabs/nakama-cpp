@@ -8,11 +8,11 @@ import platform
 bits, linkage = platform.architecture()
 
 if bits == '64bit':
-	ARCH = 'x64'
+    ARCH = 'x64'
 elif bits == '32bit':
-	ARCH = 'x86'
+    ARCH = 'x86'
 else:
-	ARCH = bits
+    ARCH = bits
 
 BUILD_MODE = 'Release'
 build_dir = os.path.abspath('build/' + BUILD_MODE + '_' + ARCH)
@@ -22,8 +22,8 @@ print 'Architecture:', ARCH
 print 'Build mode  :', BUILD_MODE
 
 def makedirs(dir):
-	if not os.path.isdir(dir):
-		os.makedirs(dir)
+    if not os.path.isdir(dir):
+        os.makedirs(dir)
 
 def call(command, shell=False):
     res = subprocess.call(command, shell=shell)
