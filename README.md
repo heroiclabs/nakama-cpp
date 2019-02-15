@@ -19,10 +19,11 @@ You'll need to setup the server and database before you can connect with the cli
 
 2. Ensure that you are on one of the supported platforms:
 
-- Windows (x86, Visual Studio 2015, 2017)
-- Android (armeabi-v7a, arm64-v8a, x86)
+- Windows - Visual Studio 2015, 2017 (x86)
+- Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86)
+- Linux - Ubuntu 14.04.5 (x86, x64)
 - Mac
-- iOS, Linux - coming soon
+- iOS - coming soon
 
 In theory any platform that meets the requirement for `grpc` and `boost` is also supported. The client is compiled with C++11.
 
@@ -254,15 +255,21 @@ Where `Mode` is build mode: `Debug` or `Release`
 
 Where `Arch` is architecture: `x86` or `x64`
 
+It builds and copies nakama lib to release folder.
+
 ### Building for Mac
 
 ```bash
 cd build\mac
 python build_mac.py
 ```
-It builds in `Release` mode.
+It builds in `Release` mode and copies nakama lib to release folder.
 
 ### Building for Linux
+
+To build for x86 architecture use x86 linux distro (we use Ubuntu 14.04.5 i386)
+
+To build for x64 architecture use x64 linux distro (we use Ubuntu 14.04.5 amd64)
 
 Prerequisites:
 
@@ -281,11 +288,15 @@ Prerequisites:
 
   `export BOOST_ROOT={path to boost}`
 
+- download `cmake` 3.10+ sources and build them:
+
+  `./bootstrap && make && make install`
+
 ```bash
 cd build\linux
 python build_linux.py
 ```
-It builds in `Release` mode.
+It builds in `Release` mode and copies nakama lib to release folder.
 
 ### Building for Android
 
