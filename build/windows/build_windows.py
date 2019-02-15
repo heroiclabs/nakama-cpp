@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess
 import argparse
+import shutil
 
 parser = argparse.ArgumentParser(description='builder for Windows')
 parser.add_argument('-m', '--mode', help='build mode: Debug or Release')
@@ -28,10 +29,16 @@ if args.arch:
         print 'Not valid architecture. Supported values:', str(valid_archs)
         sys.exit(-1)
 
-build_dir = '.\\build\\' + ARCH
+build_dir = os.path.abspath('build\\' + ARCH)
 
-if not os.path.isdir(build_dir):
-    os.makedirs(build_dir)
+if BUILD_MODE == 'Debug':
+    libs_postfix = 'd'
+else:
+    libs_postfix = ''
+
+def makedirs(dir):
+    if not os.path.isdir(dir):
+        os.makedirs(dir)
 
 def call(command):
     res = subprocess.call(command)
@@ -42,8 +49,14 @@ def build(target):
     print 'building ' + target + ' for ' + BUILD_MODE + '...'
     call('cmake --build ' + build_dir + ' --target ' + target + ' --config ' + BUILD_MODE)
 
-grpc_cpp_plugin_path = os.path.abspath(r'build\third_party\grpc\\' + BUILD_MODE + '\\grpc_cpp_plugin.exe')
-protoc_path = os.path.abspath(r'build\third_party\grpc\third_party\protobuf\\' + BUILD_MODE + '\\protoc.exe')
+def copy_file(src, dest):
+    shutil.copy(src, dest)
+    print 'copied', os.path.basename(src)
+
+def copy_libs(dest):
+    print
+    print 'copying to release folder...'
+    copy_file(build_dir + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.lib', dest)
 
 # generate Visual Studio projects
 #generator = 'Visual Studio 14 2015'
@@ -52,10 +65,10 @@ generator = 'Visual Studio 15 2017'
 if ARCH == 'x64':
     generator += ' Win64'
 
+makedirs(build_dir)
+
 call('cmake -B ' + build_dir +
  ' -G"' + generator + '"' +
- ' -DPROTOBUF_PROTOC_EXECUTABLE=' + protoc_path +
- ' -DGRPC_CPP_PLUGIN_EXECUTABLE=' + grpc_cpp_plugin_path +
  ' ../..')
 
 build('grpc_cpp_plugin')
@@ -63,5 +76,20 @@ build('protoc')
 build('nakama-cpp')
 build('nakama-test')
 
-#print 'installing...'
-#call('cmake --build ' + build_dir + ' --target install')
+if generator.startswith('Visual Studio 14 2015'):
+    vc = 'vc140'
+elif generator.startswith('Visual Studio 15 2017'):
+    vc = 'vc141'
+else:
+    print 'Unknown Visual Studio version.'
+    sys.exit(-1)
+
+if ARCH == 'x64':
+    win = 'win64'
+else:
+    win = 'win32'
+
+release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/' + win + '/' + vc)
+
+makedirs(release_libs_dir)
+copy_libs(release_libs_dir)
