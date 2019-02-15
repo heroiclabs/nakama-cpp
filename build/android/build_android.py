@@ -2,6 +2,7 @@
 import sys
 import subprocess
 import os
+import shutil
 
 if len(sys.argv) < 2:
     print "Pass ABI parameter."
@@ -28,12 +29,25 @@ def call(command):
     if res != 0:
         sys.exit(-1)
 
-build_dir = './build/' + ABI + '/' + BUILD_MODE
+build_dir = os.path.abspath('build/' + ABI + '/' + BUILD_MODE)
+release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/android/' + ABI)
 
-if not os.path.isdir(build_dir):
-    os.makedirs(build_dir)
+def makedirs(dir):
+    if not os.path.isdir(dir):
+        os.makedirs(dir)
+
+def copy_file(src, dest):
+    shutil.copy(src, dest)
+    print 'copied', os.path.basename(src)
+
+def copy_libs(dest):
+    print
+    print 'copying to release folder...'
+    copy_file(build_dir + '/src/libnakama-cpp.a', dest)
 
 print 'ANDROID_NDK=' + ANDROID_NDK
+
+makedirs(build_dir)
 
 cmake_args = [
               'cmake',
@@ -53,3 +67,6 @@ call(cmake_args)
 
 # build
 call(['ninja', '-C', build_dir, 'nakama-cpp'])
+
+makedirs(release_libs_dir)
+copy_libs(release_libs_dir)
