@@ -44,13 +44,22 @@ DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
 
     std::shared_ptr<grpc::ChannelCredentials> creds;
 
+#if defined(NAKAMA_SSL_ENABLED)
     if (_ssl)
     {
         grpc::SslCredentialsOptions options;
         creds = grpc::SslCredentials(options);
     }
     else
+#endif
     {
+#if !defined(NAKAMA_SSL_ENABLED)
+        if (_ssl)
+        {
+            NLOG_WARN("SSL is not supported");
+        }
+#endif
+        
         creds = grpc::InsecureChannelCredentials();
     }
 
