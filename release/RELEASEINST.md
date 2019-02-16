@@ -2,21 +2,29 @@
 
 ### New releases
 
-Extract `release/libs.7z` to `release/nakama-cpp-sdk`.
+Download `libs_x.x.x.7z` from [libs](https://drive.google.com/drive/folders/1KHnSy28Og8uzanMPNRYSKlI0mbRUBFhH)
+
+Extract `libs_x.x.x.7z` to `release/nakama-cpp-sdk`.
 
 Copy `include` to `release/nakama-cpp-sdk`.
 
 Copy `third_party/nonstd` to `release/nakama-cpp-sdk/include`.
 
+Copy `LICENSE` to `release/nakama-cpp-sdk/LICENSE`.
+
+Copy `README.md` to `release/nakama-cpp-sdk/README.md`.
+
 Release folder structure:
 ```
 nakama-cpp-sdk/
 ├── include/
-│   ├── nakama-cpp
-│   └── nonstd
+│   ├── nakama-cpp/
+│   └── nonstd/
 ├── libs/
 ├── nakama-cpp-android/
-└── CMakeLists.txt
+├── CMakeLists.txt
+├── LICENSE
+└── README.md
 ```
 
 ### Full release workflow
