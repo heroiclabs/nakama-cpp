@@ -120,6 +120,8 @@ void NRtClient::onMessage(const NBytes & data)
     if (msg.has_error())
     {
         assign(error, msg.error());
+
+        NLOG_ERROR(toString(error));
     }
 
     if (msg.cid().empty())
@@ -189,6 +191,10 @@ void NRtClient::onMessage(const NBytes & data)
                 NLOG_ERROR("Unknown message received");
             }
         }
+        else
+        {
+            NLOG_ERROR("No listener. Received message has been ignored.");
+        }
     }
     else
     {
@@ -202,6 +208,14 @@ void NRtClient::onMessage(const NBytes & data)
                 if (it->second->errorCallback)
                 {
                     it->second->errorCallback(error);
+                }
+                else if (_listener)
+                {
+                    _listener->onError(error);
+                }
+                else
+                {
+                    NLOG_WARN("error not handled");
                 }
             }
             else if (it->second->successCallback)
