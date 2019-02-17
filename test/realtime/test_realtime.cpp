@@ -21,6 +21,8 @@ namespace Test {
 
 using namespace std;
 
+void test_rt_match();
+
 void test_rt_joinChat()
 {
     NRtClientTest test(__func__);
@@ -66,14 +68,20 @@ void test_rt_joinChat()
     test.runTest();
 }
 
-void test_realtime()
+void run_realtime_tests()
 {
     test_rt_joinChat();
+    test_rt_match();
+}
+
+void test_realtime()
+{
+    run_realtime_tests();
 
     NRtClientTest::protocol = NRtClientProtocol::Json;
     std::cout << std::endl << "using Json protocol";
 
-    test_rt_joinChat();
+    run_realtime_tests();
 }
 
 } // namespace Test
