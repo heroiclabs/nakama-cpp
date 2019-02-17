@@ -196,7 +196,7 @@ NLogger::init(sink, NLogLevel::Debug);
 
 #### Websockets transport
 
-Nakama C++ client has built-in support for WebSocket. This is currently tested on Windows and Mac.
+Nakama C++ client has built-in support for WebSocket. This is currently available on Windows, Mac and Linux.
 
 To add support for Android, you need to use the ported version of the `boost` library for Android. This is because `websocketpp` depends on `boost`.
 
@@ -280,7 +280,7 @@ Prerequisites:
 - `sudo apt-get install perl`
 - download `boost` sources and build them:
 
-  `./bootstrap.sh`
+  `./bootstrap.sh --with-libraries=system,regex,date_time`
 
   `./b2`
 
