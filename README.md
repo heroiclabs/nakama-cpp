@@ -23,7 +23,7 @@ You'll need to setup the server and database before you can connect with the cli
 - Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86)
 - Linux - Ubuntu 14.04.5 (x86, x64)
 - Mac
-- iOS - coming soon
+- iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off
 
 In theory any platform that meets the requirement for `grpc` and `boost` is also supported. The client is compiled with C++11.
 
@@ -34,8 +34,8 @@ In theory any platform that meets the requirement for `grpc` and `boost` is also
 4. Integrate the client library into your project:
 
 - add defines: 
-  - `NAKAMA_API=`
-  - `NLOGS_ENABLED`
+  - `NAKAMA_API=` - the `=` is mandatory to make define empty
+  - `NLOGS_ENABLED` - define it if you want to use Nakama logger. See [Logging](#Logging) section
 - add include directory: `$(NAKAMA_CPP_SDK)/include`
 - add link directory: `$(NAKAMA_CPP_SDK)/libs/{platform}/{ABI}`
 - add link libraries:
@@ -53,6 +53,14 @@ For Windows:
 
 - Add extension `.lib` to libs names e.g. `nakama-cpp.lib`
 - To debug you must add `d` suffix to libs names e.g. `nakama-cppd.lib`
+
+For Mac, iOS, Android and Linux:
+
+- Add prefix `lib` and extension `.a` to libs names e.g. `libnakama-cpp.a`
+
+For Mac and iOS:
+
+- Add `libresolv.9.tbd` system library
 
 For Android:
 
@@ -265,6 +273,27 @@ python build_mac.py
 ```
 It builds in `Release` mode and copies nakama lib to release folder.
 
+### Building for iOS
+
+To build for one architecture:
+
+```bash
+cd build\ios
+python build_ios.py Arch
+```
+Where `Arch` is architecture: `arm64`, `armv7`, `armv7s` or `x86_64`.
+
+It builds in `Release` mode.
+
+To build for all architectures `arm64`, `armv7`, `armv7s` and `x86_64`:
+
+```bash
+cd build\ios
+python build_ios_all.py
+```
+
+It builds in `Release` mode, creates universal libraries and copies them to release folder.
+
 ### Building for Linux
 
 To build for x86 architecture use x86 linux distro (we use Ubuntu 14.04.5 i386)
@@ -302,6 +331,8 @@ It builds in `Release` mode and copies nakama lib to release folder.
 
 Set `ANDROID_NDK` or `NDK_ROOT` system variable to Android NDK folder.
 
+To build for one ABI:
+
 ```bash
 cd build/android
 python build_android.py ABI
@@ -309,6 +340,13 @@ python build_android.py ABI
 Where `ABI` is Android ABI e.g. `armeabi-v7a`, `arm64-v8a` or `x86`
 
 It builds for Andoid API level 16 in `Release` mode.
+
+To build for all ABIs `armeabi-v7a`, `arm64-v8a` and `x86`:
+
+```bash
+cd build/android
+python build_android_all.py
+```
 
 ## Tests
 
