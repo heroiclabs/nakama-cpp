@@ -70,6 +70,10 @@ The client uses the network to communicate with the server so you must add the "
 <uses-permission android:name="android.permission.INTERNET"/>
 ```
 
+## Threading model
+
+Nakama C++ is designed to use in one thread only.
+
 ## Usage
 
 The client object has many methods to execute various features in the server or open realtime socket connections with the server.
@@ -188,6 +192,8 @@ Don't forget to call `tick` method. See [Tick](#Tick) section for details.
 
 ### Logging
 
+#### Initializing Logger
+
 By default client logging is turned off.
 
 To enable logs output to console with debug logging level:
@@ -201,6 +207,41 @@ To enable logs output to custom sink with debug logging level:
 ```cpp
 NLogger::init(sink, NLogLevel::Debug);
 ```
+
+#### Using Logger
+
+To log string with debug logging level:
+
+```
+NLOG_DEBUG("debug log");
+```
+
+formatted log:
+
+```
+NLOG(NLogLevel::Info, "This is string: %s", "yup I'm string");
+NLOG(NLogLevel::Info, "This is int: %d", 5);
+```
+
+Changing logging level boundary:
+
+```
+NLogger::setLevel(NLogLevel::Debug);
+```
+
+`NLogger` behaviour depending on logging level boundary:
+
+- `Debug` writes all logs.
+
+- `Info` writes logs with `Info`, `Warn`, `Error` and `Fatal` logging level.
+
+- `Warn` writes logs with `Warn`, `Error` and `Fatal` logging level.
+
+- `Error` writes logs with `Error` and `Fatal` logging level.
+
+- `Fatal` writes only logs with `Fatal` logging level.
+
+Note: to use logging macroses you have to define `NLOGS_ENABLED`.
 
 #### Websockets transport
 
@@ -244,7 +285,7 @@ Change submodule branch:
 - go
 - perl
 - Visual Studio 2015 or 2017 - for Windows only
-- boost - for Windows and Mac, used by websocketpp library
+- boost - for Windows, Mac and Linux, used by websocketpp library
 
 Third party libraries:
 
@@ -266,6 +307,15 @@ Where `Arch` is architecture: `x86` or `x64`
 It builds and copies nakama lib to release folder.
 
 ### Building for Mac
+
+Prerequisites:
+```bash
+sudo xcode-select --install
+brew install autoconf automake libtool shtool
+brew install gflags
+```
+
+Build:
 
 ```bash
 cd build\mac
@@ -350,9 +400,9 @@ python build_android_all.py
 
 ## Tests
 
-Tests are built when you build Nakama C++ SDK for desktop OS (Windows or Mac).
+Tests are built when you build Nakama C++ SDK for desktop OS (Windows, Mac or Linux).
 
-By default tests try to connect to local server by `127.0.0.1`.
+By default tests connect to local server by `127.0.0.1`.
 To use another IP of your server, edit `test/test_server_config.h` file.
 
 Run tests (console application):
