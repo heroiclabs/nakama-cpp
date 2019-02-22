@@ -25,6 +25,9 @@
 #include <grpc++/create_channel.h>
 #include <sstream>
 
+#undef NMODULE_NAME
+#define NMODULE_NAME "NDefaultClient"
+
 using namespace std;
 
 namespace Nakama {
@@ -69,7 +72,7 @@ DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
 
     _basicAuthMetadata = "Basic " + base64_encode(parameters.serverKey + ":");
     
-    NLOG(NLogLevel::Info, "DefaultClient created. NakamaSdkVersion: %s", getNakamaSdkVersion());
+    NLOG(NLogLevel::Info, "Created. NakamaSdkVersion: %s", getNakamaSdkVersion());
 }
 
 DefaultClient::~DefaultClient()

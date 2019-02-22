@@ -21,6 +21,9 @@
 #include "realtime/NRtClientProtocol_Protobuf.h"
 #include "realtime/NRtClientProtocol_Json.h"
 
+#undef NMODULE_NAME
+#define NMODULE_NAME "NRtClient"
+
 namespace Nakama {
 
 NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int port, bool ssl)
@@ -40,6 +43,8 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int por
 
     _transport->setDisconnectCallback(std::bind(&NRtClient::onDisconnected, this));
     _transport->setMessageCallback(std::bind(&NRtClient::onMessage, this, std::placeholders::_1));
+
+    NLOG_INFO("Created");
 }
 
 NRtClient::~NRtClient()

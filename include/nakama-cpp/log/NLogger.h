@@ -22,13 +22,17 @@
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/realtime/rtdata/NRtError.h"
 
+#ifndef NMODULE_NAME
+    #define NMODULE_NAME ""
+#endif // !NMODULE_NAME
+
 #ifdef NLOGS_ENABLED
-    #define NLOG_DEBUG(msg)           NLogger::Debug(msg, __func__)
-    #define NLOG_INFO(msg)            NLogger::Info(msg, __func__)
-    #define NLOG_WARN(msg)            NLogger::Warn(msg, __func__)
-    #define NLOG_ERROR(msg)           NLogger::Error(msg, __func__)
-    #define NLOG_FATAL(msg)           NLogger::Fatal(msg, __func__)
-    #define NLOG(level, format,...)   NLogger::Format(level, __func__, format, ##__VA_ARGS__)
+    #define NLOG_DEBUG(msg)           NLogger::Debug (msg, NMODULE_NAME, __func__)
+    #define NLOG_INFO(msg)            NLogger::Info  (msg, NMODULE_NAME, __func__)
+    #define NLOG_WARN(msg)            NLogger::Warn  (msg, NMODULE_NAME, __func__)
+    #define NLOG_ERROR(msg)           NLogger::Error (msg, NMODULE_NAME, __func__)
+    #define NLOG_FATAL(msg)           NLogger::Fatal (msg, NMODULE_NAME, __func__)
+    #define NLOG(level, format,...)   NLogger::Format(level, NMODULE_NAME, __func__, format, ##__VA_ARGS__)
 #else
     #define NLOG_DEBUG(msg)           do {} while (0)
     #define NLOG_INFO(msg)            do {} while (0)
@@ -50,15 +54,15 @@ namespace Nakama {
         static void setLevel(NLogLevel level);
         static bool shouldLog(NLogLevel level);
 
-        static void Debug(const std::string& message, const char* func = nullptr);
-        static void Info (const std::string& message, const char* func = nullptr);
-        static void Warn (const std::string& message, const char* func = nullptr);
-        static void Error(const std::string& message, const char* func = nullptr);
-        static void Fatal(const std::string& message, const char* func = nullptr);
-        static void Log(NLogLevel level, const std::string& message, const char* func = nullptr);
-        static void Format(NLogLevel level, const char* func, const char* format, ...);
-        static void Error(const NError& error, const char* func = nullptr);
-        static void Error(const NRtError& error, const char* func = nullptr);
+        static void Debug(const std::string& message, const char* module_name, const char* func = nullptr);
+        static void Info (const std::string& message, const char* module_name, const char* func = nullptr);
+        static void Warn (const std::string& message, const char* module_name, const char* func = nullptr);
+        static void Error(const std::string& message, const char* module_name, const char* func = nullptr);
+        static void Fatal(const std::string& message, const char* module_name, const char* func = nullptr);
+        static void Log(NLogLevel level, const std::string& message, const char* module_name, const char* func = nullptr);
+        static void Format(NLogLevel level, const char* module_name, const char* func, const char* format, ...);
+        static void Error(const NError& error, const char* module_name, const char* func = nullptr);
+        static void Error(const NRtError& error, const char* module_name, const char* func = nullptr);
 
     private:
         NLogger() = delete;
