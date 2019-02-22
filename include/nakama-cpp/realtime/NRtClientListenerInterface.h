@@ -52,70 +52,70 @@ namespace Nakama {
         *
         * @param error The {@code Error} received.
         */
-        virtual void onError(const NRtError& error) {}
+        virtual void onError(const NRtError& error) { (void)error; }
 
         /**
         * Called when a new topic message has been received.
         *
         * @param message The {@code ChannelMessage} received.
         */
-        virtual void onChannelMessage(const NChannelMessage& message) {}
+        virtual void onChannelMessage(const NChannelMessage& message) { (void)message; }
 
         /**
         * Called when a new topic presence update has been received.
         *
         * @param presence The {@code ChannelPresenceEvent} received.
         */
-        virtual void onChannelPresence(const NChannelPresenceEvent& presence) {}
+        virtual void onChannelPresence(const NChannelPresenceEvent& presence) { (void)presence; }
 
         /**
         * Called when a matchmaking has found a match.
         *
         * @param matched The {@code MatchmakerMatched} received.
         */
-        virtual void onMatchmakerMatched(NMatchmakerMatchedPtr matched) {}
+        virtual void onMatchmakerMatched(NMatchmakerMatchedPtr matched) { (void)matched; }
 
         /**
         * Called when a new match data is received.
         *
         * @param matchData The {@code MatchData} received.
         */
-        virtual void onMatchData(const NMatchData& matchData) {}
+        virtual void onMatchData(const NMatchData& matchData) { (void)matchData; }
 
         /**
         * Called when a new match presence update is received.
         *
         * @param matchPresence The {@code MatchPresenceEvent} received.
         */
-        virtual void onMatchPresence(const NMatchPresenceEvent& matchPresence) {}
+        virtual void onMatchPresence(const NMatchPresenceEvent& matchPresence) { (void)matchPresence; }
 
         /**
         * Called when the client receives new notifications.
         *
         * @param notifications The list of {@code Notification} received.
         */
-        virtual void onNotifications(const NNotificationList& notifications) {}
+        virtual void onNotifications(const NNotificationList& notifications) { (void)notifications; }
 
         /**
         * Called when the client receives status presence updates.
         *
         * @param presence Updated {@code StatusPresenceEvent} presence.
         */
-        virtual void onStatusPresence(const NStatusPresenceEvent& presence) {}
+        virtual void onStatusPresence(const NStatusPresenceEvent& presence) { (void)presence; }
 
         /**
         * Called when the client receives stream presence updates.
         *
         * @param presence Updated {@code StreamPresenceEvent} presence.
         */
-        virtual void onStreamPresence(const NStreamPresenceEvent& presence) {}
+        virtual void onStreamPresence(const NStreamPresenceEvent& presence) { (void)presence; }
 
         /**
         * Called when the client receives stream data.
         *
         * @param data Stream {@code StreamData} data received.
         */
-        virtual void onStreamData(const NStreamData& data) {}
+        virtual void onStreamData(const NStreamData& data) { (void)data; }
     };
 
     using NRtClientListenerPtr = std::shared_ptr<NRtClientListenerInterface>;
