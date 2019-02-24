@@ -176,7 +176,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> port = 7350; <span class="comment">// different port to the main API port</span></div><div class="line"><span class="keywordtype">bool</span> createStatus = <span class="keyword">true</span>; <span class="comment">// if the socket should show the user as online to others.</span></div><div class="line"><a class="code" href="namespace_nakama.html#a82f80ebd5bda5569e3f2f5c47e658e20">NRtClientPtr</a> rtClient = client-&gt;createRtClient(port);</div><div class="line"><span class="comment">// create listener in your class as NRtDefaultClientListener listener;</span></div><div class="line">listener.setConnectCallback([]()</div><div class="line">    {</div><div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Socket connected&quot;</span> &lt;&lt; std::endl;</div><div class="line">    });</div><div class="line">rtClient-&gt;setListener(&amp;listener);</div><div class="line">rtClient-&gt;connect(session, createStatus, protocol);</div></div><!-- fragment --><p>Don't forget to call <code>tick</code> method. See <a href="#Tick">Tick</a> section for details.</p>
 <h3>Logging</h3>
 <h4>Initializing Logger</h4>
-<p>By default client logging is turned off.</p>
+<p>Client logging is off by default.</p>
 <p>To enable logs output to console with debug logging level:</p>
 <div class="fragment"><div class="line">NLogger::initWithConsoleSink(<a class="code" href="_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8">NLogLevel::Debug</a>);</div></div><!-- fragment --><p>To enable logs output to custom sink with debug logging level:</p>
 <div class="fragment"><div class="line">NLogger::init(sink, <a class="code" href="_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8">NLogLevel::Debug</a>);</div></div><!-- fragment --><h4>Using Logger</h4>
@@ -270,9 +270,12 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p>Tests are built when you build <a class="el" href="namespace_nakama.html">Nakama</a> C++ SDK for desktop OS (Windows, Mac or Linux).</p>
 <p>By default tests connect to local server by <code>127.0.0.1</code>. To use another IP of your server, edit <code>test/test_server_config.h</code> file.</p>
 <p>Run tests (console application):</p>
-<div class="fragment"><div class="line">build/{platform}/build/test/Debug/nakama-test</div></div><!-- fragment --><h3>License</h3>
+<div class="fragment"><div class="line">build/{platform}/build/test/Debug/nakama-test</div></div><!-- fragment --><h2>Generating Docs</h2>
+<p>Prerequisites: <code>doxygen</code></p>
+<p>Generate docs:</p>
+<div class="fragment"><div class="line">cd docs</div><div class="line">doxygen Doxyfile</div></div><!-- fragment --><h2>License</h2>
 <p>This project is licensed under the <a href="https://github.com/heroiclabs/nakama-dotnet/blob/master/LICENSE">Apache-2 License</a>.</p>
-<h3>Special Thanks</h3>
+<h2>Special Thanks</h2>
 <p>Thanks to @dimon4eg for this excellent support on developing <a class="el" href="namespace_nakama.html">Nakama</a> C++, Cocos2d-x and Unreal client libraries. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
