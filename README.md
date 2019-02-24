@@ -194,7 +194,7 @@ Don't forget to call `tick` method. See [Tick](#Tick) section for details.
 
 #### Initializing Logger
 
-By default client logging is turned off.
+Client logging is off by default.
 
 To enable logs output to console with debug logging level:
 
@@ -411,10 +411,21 @@ Run tests (console application):
 build/{platform}/build/test/Debug/nakama-test
 ```
 
-### License
+## Generating Docs
+
+Prerequisites: `doxygen`
+
+Generate docs:
+
+```bash
+cd docs
+doxygen Doxyfile
+```
+
+## License
 
 This project is licensed under the [Apache-2 License](https://github.com/heroiclabs/nakama-dotnet/blob/master/LICENSE).
 
-### Special Thanks
+## Special Thanks
 
 Thanks to @dimon4eg for this excellent support on developing Nakama C++, Cocos2d-x and Unreal client libraries.
