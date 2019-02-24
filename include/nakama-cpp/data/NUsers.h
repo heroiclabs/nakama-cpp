@@ -21,7 +21,7 @@
 
 namespace Nakama {
 
-    // A collection of zero or more users.
+    /// A collection of zero or more users.
     struct NAKAMA_API NUsers
     {
         std::vector<NUser> users;

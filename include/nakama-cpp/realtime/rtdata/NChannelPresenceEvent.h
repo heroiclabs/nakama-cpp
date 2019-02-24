@@ -21,11 +21,11 @@
 
 namespace Nakama {
 
-    // A set of joins and leaves on a particular channel.
+    /// A set of joins and leaves on a particular channel.
     struct NChannelPresenceEvent
     {
-        std::string channel_id;                  // The channel identifier this event is for.
-        std::vector<NUserPresence> joins;        // Presences joining the channel as part of this event, if any.
-        std::vector<NUserPresence> leaves;       // Presences leaving the channel as part of this event, if any.
+        std::string channel_id;                  ///< The channel identifier this event is for.
+        std::vector<NUserPresence> joins;        ///< Presences joining the channel as part of this event, if any.
+        std::vector<NUserPresence> leaves;       ///< Presences leaving the channel as part of this event, if any.
     };
 }

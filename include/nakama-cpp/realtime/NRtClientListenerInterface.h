@@ -30,7 +30,7 @@
 namespace Nakama {
 
     /**
-     * A listener for receiving {@code NRtClientInterface} events.
+     * A listener for receiving <c>NRtClientInterface</c> events.
      */
     class NRtClientListenerInterface
     {
@@ -50,70 +50,70 @@ namespace Nakama {
         /**
         * Called when the client receives an error.
         *
-        * @param error The {@code Error} received.
+        * @param error The <c>NRtError</c> received.
         */
         virtual void onError(const NRtError& error) { (void)error; }
 
         /**
-        * Called when a new topic message has been received.
+        * Called when a new channel message has been received.
         *
-        * @param message The {@code ChannelMessage} received.
+        * @param message The <c>NChannelMessage</c> received.
         */
         virtual void onChannelMessage(const NChannelMessage& message) { (void)message; }
 
         /**
-        * Called when a new topic presence update has been received.
+        * Called when a new channel presence update has been received.
         *
-        * @param presence The {@code ChannelPresenceEvent} received.
+        * @param presence The <c>NChannelPresenceEvent</c> received.
         */
         virtual void onChannelPresence(const NChannelPresenceEvent& presence) { (void)presence; }
 
         /**
         * Called when a matchmaking has found a match.
         *
-        * @param matched The {@code MatchmakerMatched} received.
+        * @param matched The <c>NMatchmakerMatched</c> received.
         */
         virtual void onMatchmakerMatched(NMatchmakerMatchedPtr matched) { (void)matched; }
 
         /**
         * Called when a new match data is received.
         *
-        * @param matchData The {@code MatchData} received.
+        * @param matchData The <c>NMatchData</c> received.
         */
         virtual void onMatchData(const NMatchData& matchData) { (void)matchData; }
 
         /**
         * Called when a new match presence update is received.
         *
-        * @param matchPresence The {@code MatchPresenceEvent} received.
+        * @param matchPresence The <c>NMatchPresenceEvent</c> received.
         */
         virtual void onMatchPresence(const NMatchPresenceEvent& matchPresence) { (void)matchPresence; }
 
         /**
         * Called when the client receives new notifications.
         *
-        * @param notifications The list of {@code Notification} received.
+        * @param notifications The list of <c>NNotification</c> received.
         */
         virtual void onNotifications(const NNotificationList& notifications) { (void)notifications; }
 
         /**
         * Called when the client receives status presence updates.
         *
-        * @param presence Updated {@code StatusPresenceEvent} presence.
+        * @param presence Updated <c>NStatusPresenceEvent</c> presence.
         */
         virtual void onStatusPresence(const NStatusPresenceEvent& presence) { (void)presence; }
 
         /**
         * Called when the client receives stream presence updates.
         *
-        * @param presence Updated {@code StreamPresenceEvent} presence.
+        * @param presence Updated <c>NStreamPresenceEvent</c> presence.
         */
         virtual void onStreamPresence(const NStreamPresenceEvent& presence) { (void)presence; }
 
         /**
         * Called when the client receives stream data.
         *
-        * @param data Stream {@code StreamData} data received.
+        * @param data Stream <c>NStreamData</c> data received.
         */
         virtual void onStreamData(const NStreamData& data) { (void)data; }
     };

@@ -24,13 +24,14 @@
 
 namespace Nakama {
 
+    /// A user with additional account details. Always the current user.
     struct NAKAMA_API NAccount {
-        NUser user;                                // The user object.
-        std::string wallet;                        // The user's wallet data.
-        std::string email;                         // The email address of the user.
-        std::vector<NAccountDevice> devices;       // The devices which belong to the user's account.
-        std::string custom_id;                     // The custom id in the user's account.
-        NTimestamp verify_time = 0;                // The UNIX time when the user's email was verified.
+        NUser user;                                ///< The user object.
+        std::string wallet;                        ///< The user's wallet data.
+        std::string email;                         ///< The email address of the user.
+        std::vector<NAccountDevice> devices;       ///< The devices which belong to the user's account.
+        std::string custom_id;                     ///< The custom id in the user's account.
+        NTimestamp verify_time = 0;                ///< The UNIX time when the user's email was verified.
     };
 
     using NAccountPtr = std::shared_ptr<NAccount>;

@@ -21,8 +21,12 @@
 namespace Nakama {
 
     /**
-    * Returns current UNIX time in milliseconds.
-    */
+     * Get current UNIX time in milliseconds.
+     * 
+     * Returns number of milliseconds that have elapsed since 00:00:00 Thursday, 1 January 1970.
+     * 
+     * @return UNIX time in milliseconds.
+     */
     NTimestamp getUnixTimestampMs();
 
 } // namespace Nakama

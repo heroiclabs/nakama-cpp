@@ -20,13 +20,13 @@
 
 namespace Nakama {
 
-    // A user session associated to a stream, usually through a list operation or a join/leave event.
+    /// A user session associated to a stream, usually through a list operation or a join/leave event.
     struct NUserPresence
     {
-        std::string user_id;            // The user this presence belongs to.
-        std::string session_id;         // A unique session ID identifying the particular connection, because the user may have many.
-        std::string username;           // The username for display purposes.
-        bool persistence = false;       // Whether this presence generates persistent data/messages, if applicable for the stream type.
-        std::string status;             // A user-set status message for this stream, if applicable.
+        std::string user_id;            ///< The user this presence belongs to.
+        std::string session_id;         ///< A unique session ID identifying the particular connection, because the user may have many.
+        std::string username;           ///< The username for display purposes.
+        bool persistence = false;       ///< Whether this presence generates persistent data/messages, if applicable for the stream type.
+        std::string status;             ///< A user-set status message for this stream, if applicable.
     };
 }

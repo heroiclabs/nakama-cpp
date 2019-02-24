@@ -22,12 +22,12 @@
 
 namespace Nakama {
 
-    // A realtime chat channel.
+    /// A realtime chat channel.
     struct NChannel
     {
-        std::string id;                           // The ID of the channel.
-        std::vector<NUserPresence> presences;     // The users currently in the channel.
-        NUserPresence self;                       // A reference to the current user's presence in the channel.
+        std::string id;                           ///< The ID of the channel.
+        std::vector<NUserPresence> presences;     ///< The users currently in the channel.
+        NUserPresence self;                       ///< A reference to the current user's presence in the channel.
     };
 
     using NChannelPtr = std::shared_ptr<NChannel>;

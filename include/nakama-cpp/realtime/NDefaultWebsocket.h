@@ -21,7 +21,9 @@
 namespace Nakama {
 
     /**
-     * Create default websocket transport
+     * Create default websocket transport.
+     * 
+     * Check out README for supported platforms.
      */
     NRtTransportPtr createDefaultWebsocket();
 

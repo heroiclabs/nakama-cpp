@@ -20,19 +20,19 @@
 
 namespace Nakama {
 
-    // A friend of a user.
+    /// A friend of a user.
     struct NAKAMA_API NFriend
     {
-        // The friendship status.
+        /// The friendship status.
         enum class State {
-            FRIEND          = 0,   // The user is a friend of the current user.
-            INVITE_SENT     = 1,   // The current user has sent an invite to the user.
-            INVITE_RECEIVED = 2,   // The current user has received an invite from this user.
-            BLOCKED         = 3    // The current user has blocked this user.
+            FRIEND          = 0,   ///< The user is a friend of the current user.
+            INVITE_SENT     = 1,   ///< The current user has sent an invite to the user.
+            INVITE_RECEIVED = 2,   ///< The current user has received an invite from this user.
+            BLOCKED         = 3    ///< The current user has blocked this user.
         };
 
-        NUser user;    // The user object.
-        State state;   // The friend status.
+        NUser user;    ///< The user object.
+        State state;   ///< The friend status.
     };
 
 }

@@ -44,10 +44,23 @@
 
 namespace Nakama {
 
+    /// Logger
     class NAKAMA_API NLogger
     {
     public:
+        /**
+         * Initialize logger with <c>NConsoleLogSink</c>
+         * 
+         * @param level logging boundary
+         */
         static void initWithConsoleSink(NLogLevel level = NLogLevel::Info);
+
+        /**
+         * Initialize logger with custom log sink
+         * 
+         * @param sink custom log sink
+         * @param level logging boundary
+         */
         static void init(NLogSinkPtr sink, NLogLevel level = NLogLevel::Info);
         static NLogSinkPtr getSink();
         static void setSink(NLogSinkPtr sink);

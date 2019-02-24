@@ -21,11 +21,11 @@
 
 namespace Nakama {
 
-    // A data message delivered over a stream.
+    /// A data message delivered over a stream.
     struct NStreamData
     {
-        NStream stream;          // The stream this data message relates to.
-        NUserPresence sender;    // The sender, if any.
-        std::string data;        // Arbitrary contents of the data message.
+        NStream stream;          ///< The stream this data message relates to.
+        NUserPresence sender;    ///< The sender, if any.
+        std::string data;        ///< Arbitrary contents of the data message.
     };
 }

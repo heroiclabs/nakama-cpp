@@ -20,16 +20,16 @@
 
 namespace Nakama {
 
-    // A notification in the server.
+    /// A notification in the server.
     struct NAKAMA_API NNotification
     {
-        std::string id;                  // ID of the Notification.
-        std::string subject;             // Subject of the notification.
-        std::string content;             // Content of the notification in JSON.
-        int32_t code = 0;                // Category code for this notification.
-        std::string sender_id;           // ID of the sender, if a user. Otherwise 'null'.
-        NTimestamp create_time = 0;      // The UNIX time when the notification was created.
-        bool persistent = false;         // True if this notification was persisted to the database.
+        std::string id;                  ///< ID of the Notification.
+        std::string subject;             ///< Subject of the notification.
+        std::string content;             ///< Content of the notification in JSON.
+        int32_t code = 0;                ///< Category code for this notification.
+        std::string sender_id;           ///< ID of the sender, if a user. Otherwise 'null'.
+        NTimestamp create_time = 0;      ///< The UNIX time when the notification was created.
+        bool persistent = false;         ///< True if this notification was persisted to the database.
     };
 
 }

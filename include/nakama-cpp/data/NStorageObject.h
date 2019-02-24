@@ -21,18 +21,18 @@
 
 namespace Nakama {
 
-    // An object within the storage engine.
+    /// An object within the storage engine.
     struct NAKAMA_API NStorageObject
     {
-        std::string collection;                // The collection which stores the object.
-        std::string key;                       // The key of the object within the collection.
-        std::string user_id;                   // The user owner of the object.
-        std::string value;                     // The value of the object.
-        std::string version;                   // The version hash of the object.
-        int32_t permission_read = 0;           // The read access permissions for the object.
-        int32_t permission_write = 0;          // The write access permissions for the object.
-        NTimestamp create_time = 0;            // The UNIX time when the object was created.
-        NTimestamp update_time = 0;            // The UNIX time when the object was last updated.
+        std::string collection;                ///< The collection which stores the object.
+        std::string key;                       ///< The key of the object within the collection.
+        std::string user_id;                   ///< The user owner of the object.
+        std::string value;                     ///< The value of the object.
+        std::string version;                   ///< The version hash of the object.
+        int32_t permission_read = 0;           ///< The read access permissions for the object.
+        int32_t permission_write = 0;          ///< The write access permissions for the object.
+        NTimestamp create_time = 0;            ///< The UNIX time when the object was created.
+        NTimestamp update_time = 0;            ///< The UNIX time when the object was last updated.
     };
 
     using NStorageObjects = std::vector<NStorageObject>;

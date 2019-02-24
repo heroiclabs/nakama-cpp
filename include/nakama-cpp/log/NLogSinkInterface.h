@@ -36,10 +36,33 @@ namespace Nakama {
         NLogSinkInterface() {}
         virtual ~NLogSinkInterface() {}
 
+        /**
+         * Output log message
+         * 
+         * @param level the level of log message
+         * @param message the log message string
+         * @param func the function name from which log message comes.
+         *        Usually has class name e.g. `NDefaultClient::onResponse`
+         */
         virtual void log(NLogLevel level, const std::string& message, const char* func = nullptr) = 0;
+
+        /**
+         * Flush cached data.
+         */
         virtual void flush() = 0;
 
+        /**
+         * Set the logging level boundary
+         * 
+         * @param level the logging level boundary
+         */
         void setLevel(NLogLevel level) { _level = level; }
+
+        /**
+         * Get the logging level boundary
+         * 
+         * @return NLogLevel
+         */
         NLogLevel getLevel() const { return _level; }
 
     protected:

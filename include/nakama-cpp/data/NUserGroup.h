@@ -21,11 +21,11 @@
 
 namespace Nakama {
 
-    // A single group-role pair.
+    /// A single group-role pair.
     struct NAKAMA_API NUserGroup
     {
-        NGroup group;          // Group.
-        NUserGroupState state; // The user's relationship to the group.
+        NGroup group;          ///< Group.
+        NUserGroupState state; ///< The user's relationship to the group.
     };
 
 }

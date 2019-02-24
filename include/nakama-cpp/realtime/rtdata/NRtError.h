@@ -20,27 +20,25 @@
 
 namespace Nakama {
 
-    // The selection of possible error codes.
+    /// The selection of possible error codes.
     enum class RtErrorCode
     {
-        RUNTIME_EXCEPTION             = 0,            // An unexpected result from the server.
-        UNRECOGNIZED_PAYLOAD          = 1,            // The server received a message which is not recognised.
-        MISSING_PAYLOAD               = 2,            // A message was expected but contains no content.
-        BAD_INPUT                     = 3,            // Fields in the message have an invalid format.
-        MATCH_NOT_FOUND               = 4,            // The match id was not found.
-        MATCH_JOIN_REJECTED           = 5,            // The match join was rejected.
-        RUNTIME_FUNCTION_NOT_FOUND    = 6,            // The runtime function does not exist on the server.
-        RUNTIME_FUNCTION_EXCEPTION    = 7             // The runtime function executed with an error.
+        RUNTIME_EXCEPTION             = 0,            ///< An unexpected result from the server.
+        UNRECOGNIZED_PAYLOAD          = 1,            ///< The server received a message which is not recognised.
+        MISSING_PAYLOAD               = 2,            ///< A message was expected but contains no content.
+        BAD_INPUT                     = 3,            ///< Fields in the message have an invalid format.
+        MATCH_NOT_FOUND               = 4,            ///< The match id was not found.
+        MATCH_JOIN_REJECTED           = 5,            ///< The match join was rejected.
+        RUNTIME_FUNCTION_NOT_FOUND    = 6,            ///< The runtime function does not exist on the server.
+        RUNTIME_FUNCTION_EXCEPTION    = 7             ///< The runtime function executed with an error.
     };
 
-    /**
-     * A logical error which may occur on the server.
-     */
+    /// A logical error which may occur on the server.
     struct NRtError
     {
-        RtErrorCode code;                             // The error code
-        std::string message;                          // A message in English to help developers debug the response.
-        NStringMap context;                           // Additional error details which may be different for each response.
+        RtErrorCode code;                             ///< The error code
+        std::string message;                          ///< A message in English to help developers debug the response.
+        NStringMap context;                           ///< Additional error details which may be different for each response.
     };
 
     const char* toString(RtErrorCode code);

@@ -25,20 +25,20 @@ namespace Nakama {
 
     struct NMatchmakerUser
     {
-        NUserPresence presence;                  // User info.
-        NStringMap string_properties;            // String properties.
-        NStringDoubleMap numeric_properties;     // Numeric properties.
+        NUserPresence presence;                  ///< User info.
+        NStringMap string_properties;            ///< String properties.
+        NStringDoubleMap numeric_properties;     ///< Numeric properties.
     };
 
-    // A successful matchmaking result.
+    /// A successful matchmaking result.
     struct NMatchmakerMatched
     {
-        std::string ticket;                  // The matchmaking ticket that has completed.
-                                             // The match token or match ID to join.
-        std::string match_id;                // Match ID.
-        std::string token;                   // Match join token.
-        std::vector<NMatchmakerUser> users;  // The users that have been matched together, and information about their matchmaking data.
-        NMatchmakerUser self;                // A reference to the current user and their properties.
+        std::string ticket;                  ///< The matchmaking ticket that has completed.
+                                             ///< The match token or match ID to join.
+        std::string match_id;                ///< Match ID.
+        std::string token;                   ///< Match join token.
+        std::vector<NMatchmakerUser> users;  ///< The users that have been matched together, and information about their matchmaking data.
+        NMatchmakerUser self;                ///< A reference to the current user and their properties.
     };
 
     using NMatchmakerMatchedPtr = std::shared_ptr<NMatchmakerMatched>;
