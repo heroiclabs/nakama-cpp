@@ -1,0 +1,25 @@
+var class_nakama_1_1_n_rt_client_interface =
+[
+    [ "~NRtClientInterface", "class_nakama_1_1_n_rt_client_interface.html#a73853ed63355f7100e9f37b532167303", null ],
+    [ "addMatchmaker", "class_nakama_1_1_n_rt_client_interface.html#a83e13ecc802ef83be63b906899050244", null ],
+    [ "connect", "class_nakama_1_1_n_rt_client_interface.html#aa50ec6f461050c004144fc0ab4c5444b", null ],
+    [ "createMatch", "class_nakama_1_1_n_rt_client_interface.html#a45a5667f2efbc7199d4ea73dc4c71ef3", null ],
+    [ "disconnect", "class_nakama_1_1_n_rt_client_interface.html#a7b90bb506e8f121197e2634671991b65", null ],
+    [ "followUsers", "class_nakama_1_1_n_rt_client_interface.html#ab4cca77cc7910e5bbc8a658ffa901f51", null ],
+    [ "isConnected", "class_nakama_1_1_n_rt_client_interface.html#ab4d332c103e2d0a3137d0fe37c7f8d8a", null ],
+    [ "joinChat", "class_nakama_1_1_n_rt_client_interface.html#a0a76634b3e9b9bc6c1fc968c6942a165", null ],
+    [ "joinMatch", "class_nakama_1_1_n_rt_client_interface.html#a2fb511bf30ddd144ed558ec3a793fdc3", null ],
+    [ "joinMatchByToken", "class_nakama_1_1_n_rt_client_interface.html#a8491324322b2a847351bd157b45e7c0a", null ],
+    [ "leaveChat", "class_nakama_1_1_n_rt_client_interface.html#a29c646bb9ea9456c947ad721a05b97ae", null ],
+    [ "leaveMatch", "class_nakama_1_1_n_rt_client_interface.html#aaa7a59aef733fceb3a535bb740b79ac3", null ],
+    [ "removeChatMessage", "class_nakama_1_1_n_rt_client_interface.html#a532680c08ef7ba0f405ef1c5ab110d7f", null ],
+    [ "removeMatchmaker", "class_nakama_1_1_n_rt_client_interface.html#aaec88763e5ad31459e0d2a5b27a9f8a8", null ],
+    [ "rpc", "class_nakama_1_1_n_rt_client_interface.html#a82f516a67fa5cbdc6087584c581eeb83", null ],
+    [ "sendMatchData", "class_nakama_1_1_n_rt_client_interface.html#aba3433a278145e867e8217c74179a3b7", null ],
+    [ "setListener", "class_nakama_1_1_n_rt_client_interface.html#a757a5a91ceb33c5e73911d14afd57dc9", null ],
+    [ "tick", "class_nakama_1_1_n_rt_client_interface.html#a40f04f1a92b89bbe81e35e32721b5734", null ],
+    [ "unfollowUsers", "class_nakama_1_1_n_rt_client_interface.html#ac47e02bb5bfe7cc6fe9f17157b70b4b1", null ],
+    [ "updateChatMessage", "class_nakama_1_1_n_rt_client_interface.html#a1cd1e7362d47b1cd1dda670fb48af14c", null ],
+    [ "updateStatus", "class_nakama_1_1_n_rt_client_interface.html#ab22e572baa857c8fbc5ba1d26195df6d", null ],
+    [ "writeChatMessage", "class_nakama_1_1_n_rt_client_interface.html#a94a66e715a51a8d9c6ed802c069ae9b4", null ]
+];
