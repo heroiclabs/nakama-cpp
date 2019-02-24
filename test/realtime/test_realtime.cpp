@@ -79,7 +79,7 @@ void test_realtime()
     run_realtime_tests();
 
     NRtClientTest::protocol = NRtClientProtocol::Json;
-    std::cout << std::endl << "using Json protocol";
+    std::cout << std::endl << "using Json protocol" << std::endl;
 
     run_realtime_tests();
 }

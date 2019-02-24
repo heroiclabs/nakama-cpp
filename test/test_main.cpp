@@ -27,6 +27,7 @@ void test_authentication();
 void test_errors();
 void test_disconnect();
 void test_restoreSession();
+void test_storage();
 void test_realtime();
 
 // currently running tests
@@ -139,6 +140,8 @@ void NTest::stopTest(bool succeeded)
         ++g_failedTestsCount;
         printTestName("Failed");
     }
+
+    cout << endl << endl;
 }
 
 void NTest::tick()
@@ -178,6 +181,7 @@ int runAllTests()
     test_disconnect();
     test_errors();
     test_restoreSession();
+    test_storage();
     test_realtime();
 
     // total stats
