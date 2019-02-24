@@ -22,11 +22,11 @@
 
 namespace Nakama {
 
-    // A list of tournaments.
+    /// A list of tournaments.
     struct NAKAMA_API NTournamentList
     {
-        std::vector<NTournament> tournaments;     // The list of tournaments returned.
-        std::string cursor;                       // A pagination cursor (optional).
+        std::vector<NTournament> tournaments;     ///< The list of tournaments returned.
+        std::string cursor;                       ///< A pagination cursor (optional).
     };
 
     using NTournamentListPtr = std::shared_ptr<NTournamentList>;

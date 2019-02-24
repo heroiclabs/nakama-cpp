@@ -22,8 +22,8 @@
 namespace Nakama {
 
     /**
-     * A default listener for receiving {@code NRtClientInterface} events.
-     * It allows to set callbacks for needed events without creating own class
+     * A default listener for receiving <c>NRtClientInterface</c> events.
+     * It allows to set callbacks for needed events without creating own class.
      */
     class NRtDefaultClientListener : public NRtClientListenerInterface
     {

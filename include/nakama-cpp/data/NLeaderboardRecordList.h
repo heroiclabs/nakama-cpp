@@ -23,13 +23,13 @@
 
 namespace Nakama {
 
-    // A set of leaderboard records, may be part of a leaderboard records page or a batch of individual records.
+    /// A set of leaderboard records, may be part of a leaderboard records page or a batch of individual records.
     struct NAKAMA_API NLeaderboardRecordList
     {
-        std::vector<NLeaderboardRecord> records;           // A list of leaderboard records.
-        std::vector<NLeaderboardRecord> owner_records;     // A batched set of leaderobard records belonging to specified owners.
-        std::string next_cursor;                           // The cursor to send when retireving the next page, if any.
-        std::string prev_cursor;                           // The cursor to send when retrieving the previous page, if any.
+        std::vector<NLeaderboardRecord> records;           ///< A list of leaderboard records.
+        std::vector<NLeaderboardRecord> owner_records;     ///< A batched set of leaderobard records belonging to specified owners.
+        std::string next_cursor;                           ///< The cursor to send when retireving the next page, if any.
+        std::string prev_cursor;                           ///< The cursor to send when retrieving the previous page, if any.
     };
 
     using NLeaderboardRecordListPtr = std::shared_ptr<NLeaderboardRecordList>;

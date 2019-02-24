@@ -22,11 +22,11 @@
 
 namespace Nakama {
 
-    // One or more groups returned from a listing operation.
+    /// One or more groups returned from a listing operation.
     struct NAKAMA_API NGroupList
     {
-        std::vector<NGroup> groups;   // One or more groups.
-        std::string cursor;           // A cursor used to get the next page.
+        std::vector<NGroup> groups;   ///< One or more groups.
+        std::string cursor;           ///< A cursor used to get the next page.
     };
 
     using NGroupListPtr = std::shared_ptr<NGroupList>;

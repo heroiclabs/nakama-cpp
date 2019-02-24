@@ -28,6 +28,7 @@ namespace Test {
     {
     public:
         NTest(const char* name);
+        ~NTest();
 
         virtual void createWorkingClient();
         virtual void createClientWithParameters(const DefaultClientParameters& parameters);
@@ -37,12 +38,17 @@ namespace Test {
 
         NClientPtr client;
 
-    protected:
         virtual void tick();
+        bool isDone() const { return !_continue_loop; }
+        bool isSucceeded() const { return _testSucceeded; }
+
+    protected:
+        void printTestName(const char* event);
 
     protected:
         bool _continue_loop = true;
         bool _testSucceeded = false;
+        std::string _name;
     };
 
     void setWorkingClientParameters(DefaultClientParameters& parameters);

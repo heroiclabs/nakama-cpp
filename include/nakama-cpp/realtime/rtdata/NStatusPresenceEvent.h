@@ -21,10 +21,10 @@
 
 namespace Nakama {
 
-    // A batch of status updates for a given user.
+    /// A batch of status updates for a given user.
     struct NStatusPresenceEvent
     {
-        std::vector<NUserPresence> joins;    // New statuses for the user.
-        std::vector<NUserPresence> leaves;   // Previous statuses for the user.
+        std::vector<NUserPresence> joins;    ///< New statuses for the user.
+        std::vector<NUserPresence> leaves;   ///< Previous statuses for the user.
     };
 }

@@ -20,19 +20,19 @@
 
 namespace Nakama {
 
-    // Storage objects to get.
+    /// Storage objects to get.
     struct NAKAMA_API NReadStorageObjectId
     {
-        std::string collection;     // The collection which stores the object.
-        std::string key;            // The key of the object within the collection.
-        std::string user_id;        // The user owner of the object.
+        std::string collection;     ///< The collection which stores the object.
+        std::string key;            ///< The key of the object within the collection.
+        std::string user_id;        ///< The user owner of the object.
     };
 
-    // Storage objects to delete.
+    /// Storage objects to delete.
     struct NAKAMA_API NDeleteStorageObjectId
     {
-        std::string collection;     // The collection which stores the object.
-        std::string key;            // The key of the object within the collection.
-        std::string version;        // The version hash of the object.
+        std::string collection;     ///< The collection which stores the object.
+        std::string key;            ///< The key of the object within the collection.
+        std::string version;        ///< The version hash of the object.
     };
 }

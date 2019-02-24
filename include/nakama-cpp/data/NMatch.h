@@ -21,15 +21,15 @@
 
 namespace Nakama {
 
-    // Represents a realtime match.
+    /// Represents a realtime match.
     struct NAKAMA_API NMatch
     {
-        std::string match_id;                    // The ID of the match, can be used to join.
-        bool authoritative = false;              // True if it's an server-managed authoritative match, false otherwise.
-        std::string label;                       // Match label, if any.
-        int32_t size = 0;                        // Current number of users in the match.
-        std::vector<NUserPresence> presences;    // The users currently in the match.
-        NUserPresence self;                      // A reference to the current user's presence in the match.
+        std::string match_id;                    ///< The ID of the match, can be used to join.
+        bool authoritative = false;              ///< True if it's an server-managed authoritative match, false otherwise.
+        std::string label;                       ///< Match label, if any.
+        int32_t size = 0;                        ///< Current number of users in the match.
+        std::vector<NUserPresence> presences;    ///< The users currently in the match.
+        NUserPresence self;                      ///< A reference to the current user's presence in the match.
     };
 
 }

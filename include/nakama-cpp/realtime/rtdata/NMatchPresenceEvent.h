@@ -21,11 +21,11 @@
 
 namespace Nakama {
 
-    // A set of joins and leaves on a particular realtime match.
+    /// A set of joins and leaves on a particular realtime match.
     struct NMatchPresenceEvent
     {
-        std::string match_id;                // The match unique ID.
-        std::vector<NUserPresence> joins;    // User presences that have just joined the match.
-        std::vector<NUserPresence> leaves;   // User presences that have just left the match.
+        std::string match_id;                /// The match unique ID.
+        std::vector<NUserPresence> joins;    /// User presences that have just joined the match.
+        std::vector<NUserPresence> leaves;   /// User presences that have just left the match.
     };
 }

@@ -29,6 +29,13 @@ void test_disconnect();
 void test_restoreSession();
 void test_realtime();
 
+// currently running tests
+std::vector<NTest*> g_running_tests;
+
+// stats
+uint32_t g_runTestsCount = 0;
+uint32_t g_failedTestsCount = 0;
+
 void setWorkingClientParameters(DefaultClientParameters& parameters)
 {
     parameters.host      = SERVER_HOST;
@@ -36,22 +43,53 @@ void setWorkingClientParameters(DefaultClientParameters& parameters)
     parameters.serverKey = SERVER_KEY;
 }
 
-// *************************************************************
+void addRunningTest(NTest* test)
+{
+    g_running_tests.push_back(test);
+}
 
-// stats
-uint32_t g_runTestsCount = 0;
-uint32_t g_failedTestsCount = 0;
+void removeRunningTest(NTest* test)
+{
+    for (auto it = g_running_tests.begin(); it != g_running_tests.end(); ++it)
+    {
+        if (*it == test)
+        {
+            g_running_tests.erase(it);
+            break;
+        }
+    }
+}
+
+void runTestsLoop()
+{
+    std::chrono::milliseconds sleep_period(15);
+
+    while (!g_running_tests.empty())
+    {
+        auto running_tests = g_running_tests;
+
+        for (auto test : running_tests)
+        {
+            if (!test->isDone())
+            {
+                test->tick();
+            }
+        }
+
+        std::this_thread::sleep_for(sleep_period);
+    }
+}
+
+// *************************************************************
 
 NTest::NTest(const char * name)
 {
-    if (g_runTestsCount > 0)
-        cout << endl << endl;
+    _name = name;
+}
 
-    cout << "*************************************" << endl;
-    cout << "Running " << name << endl;
-    cout << "*************************************" << endl;
-
-    ++g_runTestsCount;
+NTest::~NTest()
+{
+    removeRunningTest(this);
 }
 
 void NTest::createWorkingClient()
@@ -70,37 +108,49 @@ void NTest::createClientWithParameters(const DefaultClientParameters & parameter
 
 void NTest::runTest()
 {
-    std::chrono::milliseconds sleep_period(15);
+    if (g_runTestsCount > 0)
+        cout << endl << endl;
 
-    while (_continue_loop)
+    ++g_runTestsCount;
+
+    addRunningTest(this);
+
+    printTestName("Running");
+
+    if (g_running_tests.size() == 1)
     {
-        tick();
-
-        std::this_thread::sleep_for(sleep_period);
-    }
-
-    cout << "Result: ";
-
-    if (_testSucceeded)
-    {
-        cout << "OK" << endl;
-    }
-    else
-    {
-        cout << "Failed!" << endl;
-        ++g_failedTestsCount;
+        runTestsLoop();
     }
 }
 
 void NTest::stopTest(bool succeeded)
 {
+    removeRunningTest(this);
+
     _testSucceeded = succeeded;
     _continue_loop = false;
+
+    if (succeeded)
+    {
+        printTestName("Succeeded");
+    }
+    else
+    {
+        ++g_failedTestsCount;
+        printTestName("Failed");
+    }
 }
 
 void NTest::tick()
 {
     client->tick();
+}
+
+void NTest::printTestName(const char* event)
+{
+    cout << "*************************************" << endl;
+    cout << event << " " << _name << endl;
+    cout << "*************************************" << endl;
 }
 
 // *************************************************************

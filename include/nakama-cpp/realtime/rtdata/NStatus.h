@@ -21,9 +21,9 @@
 
 namespace Nakama {
 
-    // A snapshot of statuses for some set of users.
+    /// A snapshot of statuses for some set of users.
     struct NStatus
     {
-        std::vector<NUserPresence> presences;   // User statuses.
+        std::vector<NUserPresence> presences;   ///< User statuses.
     };
 }

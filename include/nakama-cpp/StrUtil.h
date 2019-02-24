@@ -22,12 +22,39 @@ namespace Nakama {
 
     typedef std::string Base64Buffer;
 
+    /**
+     * Encode bytes buffer using `base64` algorithm
+     * 
+     * @param buffer byte buffer to encode
+     * @return std::string encoded `base64` string
+     */
     std::string base64_encode(const Base64Buffer& buffer);
 
+    /**
+     * Decode `base64` string
+     * 
+     * @param base64str `base64` string
+     * @return Base64Buffer byte buffer
+     */
     Base64Buffer base64_decode(const std::string& base64str);
 
+    /**
+     * Get the field value from json string
+     * 
+     * Supports only simple field types: number, string, boolean and null
+     * 
+     * @param json the json string
+     * @param field_name name of field
+     * @return std::string value of specified field
+     */
     std::string getJsonFieldValue(const std::string& json, const std::string& field_name);
 
+    /**
+     * Encode string to allow use it in an URL
+     * 
+     * @param str string to encode
+     * @return std::string encoded string
+     */
     std::string url_encode(const std::string& str);
 
 } // namespace Nakama

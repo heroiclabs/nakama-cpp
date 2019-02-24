@@ -21,15 +21,15 @@
 
 namespace Nakama {
 
-    // A storage acknowledgement.
+    /// A storage acknowledgement.
     struct NAKAMA_API NStorageObjectAck
     {
-        std::string collection;                // The collection which stores the object.
-        std::string key;                       // The key of the object within the collection.
-        std::string version;                   // The version hash of the object.
-        std::string user_id;                   // The owner of the object.
+        std::string collection;                ///< The collection which stores the object.
+        std::string key;                       ///< The key of the object within the collection.
+        std::string version;                   ///< The version hash of the object.
+        std::string user_id;                   ///< The owner of the object.
     };
 
-    // Batch of acknowledgements.
+    /// Batch of acknowledgements.
     using NStorageObjectAcks = std::vector<NStorageObjectAck>;
 }

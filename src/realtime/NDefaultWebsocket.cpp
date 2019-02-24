@@ -21,6 +21,9 @@
 
 #include "realtime/NDefaultWebsocket.h"
 
+#undef NMODULE_NAME
+#define NMODULE_NAME "NDefaultWebsocket"
+
 namespace Nakama {
 
 NRtTransportPtr createDefaultWebsocket()

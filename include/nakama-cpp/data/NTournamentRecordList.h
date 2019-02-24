@@ -23,13 +23,13 @@
 
 namespace Nakama {
 
-    // A set of tournament records which may be part of a tournament records page or a batch of individual records.
+    /// A set of tournament records which may be part of a tournament records page or a batch of individual records.
     struct NAKAMA_API NTournamentRecordList
     {
-        std::vector<NLeaderboardRecord> records;           // A list of tournament records.
-        std::vector<NLeaderboardRecord> owner_records;     // A batched set of tournament records belonging to specified owners.
-        std::string next_cursor;                           // The cursor to send when retireving the next page, if any.
-        std::string prev_cursor;                           // The cursor to send when retrieving the previous page, if any.
+        std::vector<NLeaderboardRecord> records;           ///< A list of tournament records.
+        std::vector<NLeaderboardRecord> owner_records;     ///< A batched set of tournament records belonging to specified owners.
+        std::string next_cursor;                           ///< The cursor to send when retireving the next page, if any.
+        std::string prev_cursor;                           ///< The cursor to send when retrieving the previous page, if any.
     };
 
     using NTournamentRecordListPtr = std::shared_ptr<NTournamentRecordList>;

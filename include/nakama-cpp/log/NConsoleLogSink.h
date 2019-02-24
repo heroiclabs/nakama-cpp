@@ -20,6 +20,7 @@
 
 namespace Nakama {
 
+    /// Writes logs to console output
     class NAKAMA_API NConsoleLogSink : public NLogSinkInterface
     {
     public:

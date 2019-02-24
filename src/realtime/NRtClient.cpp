@@ -21,6 +21,9 @@
 #include "realtime/NRtClientProtocol_Protobuf.h"
 #include "realtime/NRtClientProtocol_Json.h"
 
+#undef NMODULE_NAME
+#define NMODULE_NAME "NRtClient"
+
 namespace Nakama {
 
 NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int port, bool ssl)
@@ -40,6 +43,8 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int por
 
     _transport->setDisconnectCallback(std::bind(&NRtClient::onDisconnected, this));
     _transport->setMessageCallback(std::bind(&NRtClient::onMessage, this, std::placeholders::_1));
+
+    NLOG_INFO("Created");
 }
 
 NRtClient::~NRtClient()
@@ -120,6 +125,8 @@ void NRtClient::onMessage(const NBytes & data)
     if (msg.has_error())
     {
         assign(error, msg.error());
+
+        NLOG_ERROR(toString(error));
     }
 
     if (msg.cid().empty())
@@ -189,6 +196,10 @@ void NRtClient::onMessage(const NBytes & data)
                 NLOG_ERROR("Unknown message received");
             }
         }
+        else
+        {
+            NLOG_ERROR("No listener. Received message has been ignored.");
+        }
     }
     else
     {
@@ -202,6 +213,14 @@ void NRtClient::onMessage(const NBytes & data)
                 if (it->second->errorCallback)
                 {
                     it->second->errorCallback(error);
+                }
+                else if (_listener)
+                {
+                    _listener->onError(error);
+                }
+                else
+                {
+                    NLOG_WARN("error not handled");
                 }
             }
             else if (it->second->successCallback)
@@ -659,7 +678,7 @@ RtRequestContext * NRtClient::createReqContext(::nakama::realtime::Envelope& msg
     RtRequestContext * ctx = new RtRequestContext();
     int32_t cid = _nextCid++;
 
-    _reqContexts.emplace(cid, ctx);
+    _reqContexts.emplace(cid, std::unique_ptr<RtRequestContext>(ctx));
     msg.set_cid(std::to_string(cid));
 
     return ctx;

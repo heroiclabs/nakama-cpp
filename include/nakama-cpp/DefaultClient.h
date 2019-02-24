@@ -20,26 +20,29 @@
 
 namespace Nakama {
 
-    /**
-     * @param serverKey The key used to authenticate with the server without a session. Defaults to "defaultkey".
-     * @param host The host address of the server. Defaults to "127.0.0.1".
-     * @param port The port number of the server. Defaults to 7349.
-     * @param ssl Set connection strings to use the secure mode with the server. Defaults to false.
-     * The server must be configured to make use of this option. With HTTP, GRPC, and WebSockets the server must
-     * be configured with an SSL certificate or use a load balancer which performs SSL termination.
-     * For rUDP you must configure the server to expose it's IP address so it can be bundled within session tokens.
-     * See the server documentation for more information.
-     */
     struct DefaultClientParameters
     {
+        /// The key used to authenticate with the server without a session. Defaults to "defaultkey".
         std::string serverKey = "defaultkey";
+
+        /// The host address of the server. Defaults to "127.0.0.1".
         std::string host = "127.0.0.1";
+
+        /// The port number of the server. Defaults to 7349.
         int port = 7349;
+
+        /// Set connection strings to use the secure mode with the server. Defaults to false.
+        /// The server must be configured to make use of this option. With HTTP, GRPC, and WebSockets the server must
+        /// be configured with an SSL certificate or use a load balancer which performs SSL termination.
+        /// For rUDP you must configure the server to expose it's IP address so it can be bundled within session tokens.
+        /// See the server documentation for more information.
         bool ssl = false;
     };
 
     /**
      * Creates a default client to interact with Nakama server.
+     * 
+     * @param parameters the client parameters
      */
     NClientPtr createDefaultClient(const DefaultClientParameters& parameters);
 

@@ -25,6 +25,9 @@
 #include <grpc++/create_channel.h>
 #include <sstream>
 
+#undef NMODULE_NAME
+#define NMODULE_NAME "NDefaultClient"
+
 using namespace std;
 
 namespace Nakama {
@@ -44,13 +47,22 @@ DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
 
     std::shared_ptr<grpc::ChannelCredentials> creds;
 
+#if defined(NAKAMA_SSL_ENABLED)
     if (_ssl)
     {
         grpc::SslCredentialsOptions options;
         creds = grpc::SslCredentials(options);
     }
     else
+#endif
     {
+#if !defined(NAKAMA_SSL_ENABLED)
+        if (_ssl)
+        {
+            NLOG_WARN("SSL is not supported");
+        }
+#endif
+        
         creds = grpc::InsecureChannelCredentials();
     }
 
@@ -60,7 +72,7 @@ DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
 
     _basicAuthMetadata = "Basic " + base64_encode(parameters.serverKey + ":");
     
-    NLOG(NLogLevel::Info, "DefaultClient created. NakamaSdkVersion: %s", getNakamaSdkVersion());
+    NLOG(NLogLevel::Info, "Created. NakamaSdkVersion: %s", getNakamaSdkVersion());
 }
 
 DefaultClient::~DefaultClient()

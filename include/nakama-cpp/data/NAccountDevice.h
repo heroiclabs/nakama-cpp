@@ -20,9 +20,9 @@
 
 namespace Nakama {
 
+    /// Used with authenticate/link/unlink and user.
     struct NAKAMA_API NAccountDevice {
-        // A device identifier. Should be obtained by a platform-specific device API.
-        std::string id;
+        std::string id;   ///< A device identifier. Should be obtained by a platform-specific device API.
     };
 
 }

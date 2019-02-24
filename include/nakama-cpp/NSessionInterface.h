@@ -48,12 +48,12 @@ namespace Nakama {
         virtual const std::string& getUserId() const = 0;
 
         /**
-        * @return The timestamp in seconds when this session object was created.
+        * @return The timestamp in milliseconds when this session object was created.
         */
         virtual NTimestamp getCreateTime() const = 0;
 
         /**
-        * @return The timestamp in seconds when this session will expire.
+        * @return The timestamp in milliseconds when this session will expire.
         */
         virtual NTimestamp getExpireTime() const = 0;
 
@@ -66,6 +66,7 @@ namespace Nakama {
         * Check if the session has expired against the input time.
         *
         * @param now The time to compare against the session.
+        *        Use getUnixTimestampMs() to get current time.
         * @return <c>true</c> if the session has expired.
         */
         virtual bool isExpired(NTimestamp now) const = 0;
@@ -76,7 +77,7 @@ namespace Nakama {
     /**
      * Restore a session from an authentication token.
      *
-     * @param token The authentication token from a <c>Session</c>.
+     * @param token The authentication token from a <c>NSessionInterface</c>.
      * @return A session restored from the authentication token.
      */
     NSessionPtr restoreSession(const std::string& token);

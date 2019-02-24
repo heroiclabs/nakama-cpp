@@ -22,11 +22,11 @@
 
 namespace Nakama {
 
-    // A collection of zero or more notifications.
+    /// A collection of zero or more notifications.
     struct NAKAMA_API NNotificationList
     {
-        std::vector<NNotification> notifications;      // Collection of notifications.
-        std::string cacheable_cursor;                  // Use this cursor to paginate notifications. Cache this to catch up to new notifications.
+        std::vector<NNotification> notifications;      ///< Collection of notifications.
+        std::string cacheable_cursor;                  ///< Use this cursor to paginate notifications. Cache this to catch up to new notifications.
     };
 
     using NNotificationListPtr = std::shared_ptr<NNotificationList>;

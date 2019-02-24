@@ -23,14 +23,12 @@ namespace Nakama {
     {
         std::ostream& os = (level >= NLogLevel::Error) ? std::cerr : std::cout;
 
-        if (func == nullptr || func[0] == 0)
+        if (func && func[0])
         {
-            os << message << std::endl;
+            os << "[" << func << "] ";
         }
-        else
-        {
-            os << func << ": " << message << std::endl;
-        }
+
+        os << message << std::endl;
     }
 
     void NConsoleLogSink::flush()

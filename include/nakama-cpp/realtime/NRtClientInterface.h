@@ -37,7 +37,12 @@ namespace Nakama {
 
     enum class NRtClientProtocol
     {
+        /// Protobuf binary protocol. It is recommented to use for production
+        /// as it's faster and uses less traffic for communication.
+        /// Protobuf support is added in nakama server 2.3.0
         Protobuf,
+
+        /// Json is text protocol. Might be useful for analyzing server traffic.
         Json
     };
 
@@ -112,7 +117,7 @@ namespace Nakama {
         * Send a chat message to a channel on the server.
         *
         * @param channelId The channel to send on.
-        * @param content The content of the chat message.
+        * @param content The content of the chat message. Must be a JSON object.
         */
         virtual void writeChatMessage(
             const std::string& channelId,
@@ -126,7 +131,7 @@ namespace Nakama {
         *
         * @param channelId The ID of the chat channel with the message.
         * @param messageId The ID of the message to update.
-        * @param content The content update for the message.
+        * @param content The content update for the message. Must be a JSON object.
         */
         virtual void updateChatMessage(
             const std::string& channelId,

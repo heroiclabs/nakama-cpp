@@ -22,10 +22,10 @@
 
 namespace Nakama {
 
-    // A list of realtime matches.
+    /// A list of realtime matches.
     struct NAKAMA_API NMatchList
     {
-        std::vector<NMatch> matches;   // A number of matches corresponding to a list operation.
+        std::vector<NMatch> matches;   ///< A number of matches corresponding to a list operation.
     };
 
     using NMatchListPtr = std::shared_ptr<NMatchList>;

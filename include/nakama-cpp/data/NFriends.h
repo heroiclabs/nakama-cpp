@@ -22,7 +22,7 @@
 
 namespace Nakama {
 
-    // A collection of zero or more friends of the user.
+    ///< A collection of zero or more friends of the user.
     struct NAKAMA_API NFriends
     {
         std::vector<NFriend> friends;

@@ -22,7 +22,7 @@
 
 namespace Nakama {
 
-    // A list of users belonging to a group, along with their role.
+    /// A list of users belonging to a group, along with their role.
     struct NAKAMA_API NGroupUserList
     {
         std::vector<NGroupUser> group_users;

@@ -25,8 +25,8 @@ namespace Nakama {
 
     enum class NRtTransportType
     {
-        Binary,  // used by `Protobuf` protocol
-        Text     // used by `Json` protocol
+        Binary,  ///< used by `Protobuf` protocol
+        Text     ///< used by `Json` protocol
     };
 
     /**
@@ -49,7 +49,7 @@ namespace Nakama {
 
         /**
          * Pumps requests queue in your thread.
-         * NRtClient will call this from it's tick.
+         * <c>NRtClientInterface</c> will call this from it's `tick`.
          */
         virtual void tick() = 0;
 

@@ -13,7 +13,7 @@ endif()
 
 set(CMAKE_INSTALL_BINDIR)
 set(CMAKE_INSTALL_LIBDIR ${INSTALL_LIB_DIR})
-message("INSTALL_LIB_DIR=${INSTALL_LIB_DIR}")
+#message("INSTALL_LIB_DIR=${INSTALL_LIB_DIR}")
 
 set(_src_root_path ${CMAKE_CURRENT_LIST_DIR})
 file(

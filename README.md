@@ -19,10 +19,11 @@ You'll need to setup the server and database before you can connect with the cli
 
 2. Ensure that you are on one of the supported platforms:
 
-- Windows (x86, Visual Studio 2015, 2017)
-- Android (armeabi-v7a, arm64-v8a, x86)
+- Windows - Visual Studio 2015, 2017 (x86)
+- Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86)
+- Linux - Ubuntu 14.04.5 (x86, x64)
 - Mac
-- iOS, Linux - coming soon
+- iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off
 
 In theory any platform that meets the requirement for `grpc` and `boost` is also supported. The client is compiled with C++11.
 
@@ -33,8 +34,8 @@ In theory any platform that meets the requirement for `grpc` and `boost` is also
 4. Integrate the client library into your project:
 
 - add defines: 
-  - `NAKAMA_API=`
-  - `NLOGS_ENABLED`
+  - `NAKAMA_API=` - the `=` is mandatory to make define empty
+  - `NLOGS_ENABLED` - define it if you want to use Nakama logger. See [Logging](#Logging) section
 - add include directory: `$(NAKAMA_CPP_SDK)/include`
 - add link directory: `$(NAKAMA_CPP_SDK)/libs/{platform}/{ABI}`
 - add link libraries:
@@ -53,6 +54,14 @@ For Windows:
 - Add extension `.lib` to libs names e.g. `nakama-cpp.lib`
 - To debug you must add `d` suffix to libs names e.g. `nakama-cppd.lib`
 
+For Mac, iOS, Android and Linux:
+
+- Add prefix `lib` and extension `.a` to libs names e.g. `libnakama-cpp.a`
+
+For Mac and iOS:
+
+- Add `libresolv.9.tbd` system library
+
 For Android:
 
 The client uses the network to communicate with the server so you must add the "INTERNET" permission.
@@ -60,6 +69,10 @@ The client uses the network to communicate with the server so you must add the "
 ```xml
 <uses-permission android:name="android.permission.INTERNET"/>
 ```
+
+## Threading model
+
+Nakama C++ is designed to use in one thread only.
 
 ## Usage
 
@@ -179,6 +192,8 @@ Don't forget to call `tick` method. See [Tick](#Tick) section for details.
 
 ### Logging
 
+#### Initializing Logger
+
 By default client logging is turned off.
 
 To enable logs output to console with debug logging level:
@@ -193,9 +208,44 @@ To enable logs output to custom sink with debug logging level:
 NLogger::init(sink, NLogLevel::Debug);
 ```
 
+#### Using Logger
+
+To log string with debug logging level:
+
+```
+NLOG_DEBUG("debug log");
+```
+
+formatted log:
+
+```
+NLOG(NLogLevel::Info, "This is string: %s", "yup I'm string");
+NLOG(NLogLevel::Info, "This is int: %d", 5);
+```
+
+Changing logging level boundary:
+
+```
+NLogger::setLevel(NLogLevel::Debug);
+```
+
+`NLogger` behaviour depending on logging level boundary:
+
+- `Debug` writes all logs.
+
+- `Info` writes logs with `Info`, `Warn`, `Error` and `Fatal` logging level.
+
+- `Warn` writes logs with `Warn`, `Error` and `Fatal` logging level.
+
+- `Error` writes logs with `Error` and `Fatal` logging level.
+
+- `Fatal` writes only logs with `Fatal` logging level.
+
+Note: to use logging macroses you have to define `NLOGS_ENABLED`.
+
 #### Websockets transport
 
-Nakama C++ client has built-in support for WebSocket. This is currently tested on Windows and Mac.
+Nakama C++ client has built-in support for WebSocket. This is currently available on Windows, Mac and Linux.
 
 To add support for Android, you need to use the ported version of the `boost` library for Android. This is because `websocketpp` depends on `boost`.
 
@@ -221,6 +271,12 @@ To update all submodules:
 
 `git submodule update --init --recursive`
 
+Change submodule branch:
+
+- edit `.gitmodules`
+
+- `git submodule update --remote`
+
 ## Build Prerequisites
 
 - git
@@ -229,7 +285,7 @@ To update all submodules:
 - go
 - perl
 - Visual Studio 2015 or 2017 - for Windows only
-- boost - for Windows and Mac, used by websocketpp library
+- boost - for Windows, Mac and Linux, used by websocketpp library
 
 Third party libraries:
 
@@ -241,14 +297,91 @@ Third party libraries:
 ### Building for Windows
 
 ```bash
-cd build\win32
-python build_win32.py -m Mode
+cd build\windows
+python build_windows.py -m Mode -a Arch
 ```
 Where `Mode` is build mode: `Debug` or `Release`
+
+Where `Arch` is architecture: `x86` or `x64`
+
+It builds and copies nakama lib to release folder.
+
+### Building for Mac
+
+Prerequisites:
+```bash
+sudo xcode-select --install
+brew install autoconf automake libtool shtool
+brew install gflags
+```
+
+Build:
+
+```bash
+cd build\mac
+python build_mac.py
+```
+It builds in `Release` mode and copies nakama lib to release folder.
+
+### Building for iOS
+
+To build for one architecture:
+
+```bash
+cd build\ios
+python build_ios.py Arch
+```
+Where `Arch` is architecture: `arm64`, `armv7`, `armv7s` or `x86_64`.
+
+It builds in `Release` mode.
+
+To build for all architectures `arm64`, `armv7`, `armv7s` and `x86_64`:
+
+```bash
+cd build\ios
+python build_ios_all.py
+```
+
+It builds in `Release` mode, creates universal libraries and copies them to release folder.
+
+### Building for Linux
+
+To build for x86 architecture use x86 linux distro (we use Ubuntu 14.04.5 i386)
+
+To build for x64 architecture use x64 linux distro (we use Ubuntu 14.04.5 amd64)
+
+Prerequisites:
+
+- `sudo apt-get install build-essential autoconf libtool pkg-config`
+- `sudo apt-get install libgflags-dev libgtest-dev`
+- `sudo apt-get install clang libc++-dev`
+- `sudo apt-get install golang`
+- `sudo apt-get install perl`
+- download `boost` sources and build them:
+
+  `./bootstrap.sh --with-libraries=system,regex,date_time`
+
+  `./b2`
+
+  set `BOOST_ROOT` env var to `boost` folder:
+
+  `export BOOST_ROOT={path to boost}`
+
+- download `cmake` 3.10+ sources and build them:
+
+  `./bootstrap && make && make install`
+
+```bash
+cd build\linux
+python build_linux.py
+```
+It builds in `Release` mode and copies nakama lib to release folder.
 
 ### Building for Android
 
 Set `ANDROID_NDK` or `NDK_ROOT` system variable to Android NDK folder.
+
+To build for one ABI:
 
 ```bash
 cd build/android
@@ -258,11 +391,18 @@ Where `ABI` is Android ABI e.g. `armeabi-v7a`, `arm64-v8a` or `x86`
 
 It builds for Andoid API level 16 in `Release` mode.
 
+To build for all ABIs `armeabi-v7a`, `arm64-v8a` and `x86`:
+
+```bash
+cd build/android
+python build_android_all.py
+```
+
 ## Tests
 
-Tests are built when you build Nakama C++ SDK for desktop OS (Windows or Mac).
+Tests are built when you build Nakama C++ SDK for desktop OS (Windows, Mac or Linux).
 
-By default tests try to connect to local server by `127.0.0.1`.
+By default tests connect to local server by `127.0.0.1`.
 To use another IP of your server, edit `test/test_server_config.h` file.
 
 Run tests (console application):

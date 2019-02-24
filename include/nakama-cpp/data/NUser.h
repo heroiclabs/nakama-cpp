@@ -21,24 +21,25 @@
 
 namespace Nakama {
 
+    /// A user in the server.
     struct NAKAMA_API NUser
     {
-        std::string id;            // The id of the user's account.
-        std::string username;      // The username of the user's account.
-        std::string displayName;   // The display name of the user.
-        std::string avatarUrl;     // A URL for an avatar image.
-        std::string lang;          // The language expected to be a tag which follows the BCP-47 spec.
-        std::string location;      // The location set by the user.
-        std::string timeZone;      // The timezone set by the user.
-        std::string metadata;      // Additional information stored as a JSON object.
-        std::string facebookId;    // The Facebook id in the user's account.
-        std::string googleId;      // The Google id in the user's account.
-        std::string gameCenterId;  // The Apple Game Center in of the user's account.
-        std::string steamId;       // The Steam id in the user's account.
-        bool online = false;       // Indicates whether the user is currently online.
-        int32_t edge_count = 0;    // Number of related edges to this user (friends).
-        NTimestamp createdAt = 0;  // The UNIX time when the user was created.
-        NTimestamp updatedAt = 0;  // The UNIX time when the user was last updated.
+        std::string id;            ///< The id of the user's account.
+        std::string username;      ///< The username of the user's account.
+        std::string displayName;   ///< The display name of the user.
+        std::string avatarUrl;     ///< A URL for an avatar image.
+        std::string lang;          ///< The language expected to be a tag which follows the BCP-47 spec.
+        std::string location;      ///< The location set by the user.
+        std::string timeZone;      ///< The timezone set by the user.
+        std::string metadata;      ///< Additional information stored as a JSON object.
+        std::string facebookId;    ///< The Facebook id in the user's account.
+        std::string googleId;      ///< The Google id in the user's account.
+        std::string gameCenterId;  ///< The Apple Game Center in of the user's account.
+        std::string steamId;       ///< The Steam id in the user's account.
+        bool online = false;       ///< Indicates whether the user is currently online.
+        int32_t edge_count = 0;    ///< Number of related edges to this user (friends).
+        NTimestamp createdAt = 0;  ///< The UNIX time when the user was created.
+        NTimestamp updatedAt = 0;  ///< The UNIX time when the user was last updated.
     };
 
 }

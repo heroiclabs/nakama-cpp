@@ -800,11 +800,11 @@ namespace Nakama {
         * Fetch a list of matches active on the server.
         *
         * @param session The session of the user.
-        * @param min The minimum number of match participants.
-        * @param max The maximum number of match participants.
+        * @param min_size The minimum number of match participants.
+        * @param max_size The maximum number of match participants.
         * @param limit The number of matches to list.
-        * @param authoritative <c>true</c> to include authoritative matches.
         * @param label The label to filter the match list on.
+        * @param authoritative <c>true</c> to include authoritative matches.
         */
         virtual void listMatches(
             NSessionPtr session,

@@ -20,19 +20,38 @@
  
 namespace Nakama {
 
+    /// Error codes
     enum class NAKAMA_API ErrorCode
     {
-        Unknown = 0,
+        /// Unknown error
+        Unknown                  = 0,
 
-        // server errors
-        NotFound                        = 1,
-        AlreadyExists                   = 2,
-        InvalidArgument                 = 3,
-        Unauthenticated                 = 4,
-        PermissionDenied                = 5,
+        /// Some requested entity was not found.
+        NotFound                 = 1,
 
-        // technical errors
+        /// Some entity that we attempted to create already exists.
+        AlreadyExists            = 2,
+
+        /// Client specified an invalid argument.
+        InvalidArgument          = 3,
+
+        /// The request does not have valid authentication credentials for the operation.
+        Unauthenticated          = 4,
+
+        /// The caller does not have permission to execute the specified operation.
+        PermissionDenied         = 5,
+
+        /// The service is currently unavailable. This is a most likely a transient
+        /// condition and may be corrected by retrying with a backoff.
+        ///
+        /// \warning Although data MIGHT not have been transmitted when this
+        /// status occurs, there is NOT A GUARANTEE that the server has not seen
+        /// anything. So in general it is unsafe to retry on this status code
+        /// if the call is non-idempotent.
         ConnectionError          = -1,
+
+        /// Internal errors. Means some invariants expected by underlying System has
+        /// been broken. If you see one of these errors, Something is very broken.
         InternalError            = -2
     };
 
