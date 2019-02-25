@@ -48,12 +48,12 @@ void NRtClientTest::runTest()
     {
         for (auto& presence : event.joins)
         {
-            std::cout << "User ID: " << presence.user_id << " Username: " << presence.username << " Status: " << presence.status << std::endl;
+            std::cout << "Joined User ID: " << presence.user_id << " Username: " << presence.username << " Status: " << presence.status << std::endl;
         }
 
         for (auto& presence : event.leaves)
         {
-            std::cout << "User ID: " << presence.user_id << " Username: " << presence.username << " Status: " << presence.status << std::endl;
+            std::cout << "Left User ID: " << presence.user_id << " Username: " << presence.username << " Status: " << presence.status << std::endl;
         }
     });
 
