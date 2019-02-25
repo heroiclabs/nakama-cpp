@@ -44,6 +44,25 @@ void NRtClientTest::runTest()
         stopTest();
     });
 
+    listener.setStatusPresenceCallback([](const NStatusPresenceEvent& event)
+    {
+        for (auto& presence : event.joins)
+        {
+            std::cout << "User ID: " << presence.user_id << " Username: " << presence.username << " Status: " << presence.status << std::endl;
+        }
+
+        for (auto& presence : event.leaves)
+        {
+            std::cout << "User ID: " << presence.user_id << " Username: " << presence.username << " Status: " << presence.status << std::endl;
+        }
+    });
+
+    listener.setChannelMessageCallback([](const NChannelMessage& message)
+    {
+        std::cout << "Received a message on channel " << message.channel_id << std::endl;
+        std::cout << "Message content: " << message.content << std::endl;
+    });
+
     auto successCallback = [this](NSessionPtr session)
     {
         std::cout << "session token: " << session->getAuthToken() << std::endl;
