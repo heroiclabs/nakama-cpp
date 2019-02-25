@@ -21,7 +21,7 @@
 namespace Nakama {
 
     /// Error codes
-    enum class NAKAMA_API ErrorCode
+    enum class ErrorCode
     {
         /// Unknown error
         Unknown                  = 0,
