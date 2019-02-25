@@ -1,5 +1,8 @@
 var NAVTREEINDEX2 =
 {
+"struct_nakama_1_1_n_channel_message_ack.html#a0487aa81efb25e9c2e7baacaafde1809":[2,0,0,5,1],
+"struct_nakama_1_1_n_channel_message_ack.html#aa707bf2676701d64ea2bb4f427d18fa4":[2,0,0,5,6],
+"struct_nakama_1_1_n_channel_message_ack.html#ab33db3d4891109ea7271e9f0b698e463":[2,0,0,5,3],
 "struct_nakama_1_1_n_channel_message_ack.html#ab64e5e5c834e402ce0f3b1e3a814fb75":[2,0,0,5,4],
 "struct_nakama_1_1_n_channel_message_ack.html#abc1f2ba139aea100f6c1183aaa5ac32c":[2,0,0,5,2],
 "struct_nakama_1_1_n_channel_message_ack.html#ae200e8d68f3f0bbf28206a11109eae3a":[2,0,0,5,0],

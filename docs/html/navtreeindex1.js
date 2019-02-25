@@ -1,5 +1,9 @@
 var NAVTREEINDEX1 =
 {
+"class_nakama_1_1_n_client_interface.html#ab3577a1e4da3677fbd3c1df4d5dae242":[2,0,0,8,58],
+"class_nakama_1_1_n_client_interface.html#ab3f75133e69f43bccdc9a82280642a11":[2,0,0,8,19],
+"class_nakama_1_1_n_client_interface.html#abecbbd0c6e9ea8cd71906bb2199a11b4":[2,0,0,8,31],
+"class_nakama_1_1_n_client_interface.html#ac0fcea244e4af8331be4c4be81c826eb":[2,0,0,8,1],
 "class_nakama_1_1_n_client_interface.html#ac41d61fe274f4acc7d4267fcdefa4dcb":[2,0,0,8,53],
 "class_nakama_1_1_n_client_interface.html#ac568e062c22cc8ebd70b7b4f0f1c18b1":[2,0,0,8,2],
 "class_nakama_1_1_n_client_interface.html#ac99b4b3de3f8cad77d98ea3d3c1a07bb":[2,0,0,8,35],
@@ -205,8 +209,7 @@ var NAVTREEINDEX1 =
 "functions_w.html":[2,3,0,22],
 "functions_~.html":[2,3,0,23],
 "globals.html":[3,1,0],
-"globals_defs.html":[3,1,2],
-"globals_vars.html":[3,1,1],
+"globals_defs.html":[3,1,1],
 "hierarchy.html":[2,2],
 "index.html":[],
 "index.html":[0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "struct_nakama_1_1_n_channel_message.html#aa6d2a1f045b3f0e46472f1e113c13501":[2,0,0,4,5],
 "struct_nakama_1_1_n_channel_message.html#aae5e812a9aa01dc3bea405cd15fb7d43":[2,0,0,4,8],
 "struct_nakama_1_1_n_channel_message.html#ac7fb9ab3ba61d2d46dcc2b1e25589ec0":[2,0,0,4,7],
-"struct_nakama_1_1_n_channel_message_ack.html":[2,0,0,5],
-"struct_nakama_1_1_n_channel_message_ack.html#a0487aa81efb25e9c2e7baacaafde1809":[2,0,0,5,1],
-"struct_nakama_1_1_n_channel_message_ack.html#aa707bf2676701d64ea2bb4f427d18fa4":[2,0,0,5,6],
-"struct_nakama_1_1_n_channel_message_ack.html#ab33db3d4891109ea7271e9f0b698e463":[2,0,0,5,3]
+"struct_nakama_1_1_n_channel_message_ack.html":[2,0,0,5]
 };

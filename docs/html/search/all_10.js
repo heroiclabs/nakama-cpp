@@ -3,7 +3,7 @@ var searchData=
   ['payload',['payload',['../struct_nakama_1_1_n_rpc.html#a93602c44f0572cc7fca60001f831db7d',1,'Nakama::NRpc']]],
   ['permission_5fread',['permission_read',['../struct_nakama_1_1_n_storage_object.html#a7126e9eb9c8c70a93cde31968b49b7e2',1,'Nakama::NStorageObject::permission_read()'],['../struct_nakama_1_1_n_storage_object_write.html#a923ec73f5e31084dce89b1ec6507452c',1,'Nakama::NStorageObjectWrite::permission_read()']]],
   ['permission_5fwrite',['permission_write',['../struct_nakama_1_1_n_storage_object.html#a4a76bd075186d4405d6f31540dac485a',1,'Nakama::NStorageObject::permission_write()'],['../struct_nakama_1_1_n_storage_object_write.html#af7ca065da308269a31ab7dc1e4cb8476',1,'Nakama::NStorageObjectWrite::permission_write()']]],
-  ['permissiondenied',['PermissionDenied',['../_n_error_8h.html#ad8172f411ba27cc30dba68ad3c382a9d',1,'NError.h']]],
+  ['permissiondenied',['PermissionDenied',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba4b33a686be73bb172407d73b26356275',1,'Nakama']]],
   ['persistence',['persistence',['../struct_nakama_1_1_n_user_presence.html#a8e753339e49b53ad2762a51e58ea29db',1,'Nakama::NUserPresence']]],
   ['persistent',['persistent',['../struct_nakama_1_1_n_channel_message.html#aa6d2a1f045b3f0e46472f1e113c13501',1,'Nakama::NChannelMessage::persistent()'],['../struct_nakama_1_1_n_notification.html#a21a9e2282b2585595e50c2812b46f94a',1,'Nakama::NNotification::persistent()'],['../struct_nakama_1_1_n_channel_message_ack.html#ab64e5e5c834e402ce0f3b1e3a814fb75',1,'Nakama::NChannelMessageAck::persistent()']]],
   ['port',['port',['../struct_nakama_1_1_default_client_parameters.html#a8c01ecbd5819093403518ddd28d9521f',1,'Nakama::DefaultClientParameters']]],
