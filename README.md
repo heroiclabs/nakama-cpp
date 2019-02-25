@@ -102,7 +102,7 @@ NClientPtr client = createDefaultClient(parameters);
 
 ## Tick
 
-Allow the client to execute your callbacks in your thread. To do this you must call `tick` method periodically (recommended every 50ms) in your thread.
+The `tick` method pumps requests queue and executes callbacks in your thread. You must call it periodically (recommended every 50ms) in your thread.
 
 ```cpp
 client->tick();
@@ -110,7 +110,7 @@ if (rtClient)
     rtClient->tick();
 ```
 
-Without this the default client and realtime client will not work, and you will not send or receives responses from the server.
+Without this the default client and realtime client will not work, and you will not receive responses from the server.
 
 ### Authenticate
 
@@ -178,14 +178,15 @@ The client can create one or more realtime clients with the server. Each realtim
 ```cpp
 int port = 7350; // different port to the main API port
 bool createStatus = true; // if the socket should show the user as online to others.
-NRtClientPtr rtClient = client->createRtClient(port);
-// create listener in your class as NRtDefaultClientListener listener;
+// define realtime client in your class as NRtClientPtr rtClient;
+rtClient = client->createRtClient(port);
+// define listener in your class as NRtDefaultClientListener listener;
 listener.setConnectCallback([]()
-    {
-        std::cout << "Socket connected" << std::endl;
-    });
+{
+    std::cout << "Socket connected" << std::endl;
+});
 rtClient->setListener(&listener);
-rtClient->connect(session, createStatus, protocol);
+rtClient->connect(session, createStatus);
 ```
 
 Don't forget to call `tick` method. See [Tick](#Tick) section for details.
