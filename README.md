@@ -34,7 +34,6 @@ In theory any platform that meets the requirement for `grpc` and `boost` is also
 4. Integrate the client library into your project:
 
 - add defines: 
-  - `NAKAMA_API=` - the `=` is mandatory to make define empty
   - `NLOGS_ENABLED` - define it if you want to use Nakama logger. See [Logging](#Logging) section
 - add include directory: `$(NAKAMA_CPP_SDK)/include`
 - add link directory: `$(NAKAMA_CPP_SDK)/libs/{platform}/{ABI}`
