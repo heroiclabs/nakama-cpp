@@ -4,7 +4,7 @@ var searchData=
   ['addgroupusers',['addGroupUsers',['../class_nakama_1_1_n_client_interface.html#ac568e062c22cc8ebd70b7b4f0f1c18b1',1,'Nakama::NClientInterface']]],
   ['addmatchmaker',['addMatchmaker',['../class_nakama_1_1_n_rt_client_interface.html#a83e13ecc802ef83be63b906899050244',1,'Nakama::NRtClientInterface']]],
   ['admin',['ADMIN',['../namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa73acd9a5972130b75066c82595a1fae3',1,'Nakama']]],
-  ['alreadyexists',['AlreadyExists',['../_n_error_8h.html#ae4bdc1a54131de1240c10218da6afa9a',1,'NError.h']]],
+  ['alreadyexists',['AlreadyExists',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba89b69484680b18e9179e826c6e023805',1,'Nakama']]],
   ['authenticatecustom',['authenticateCustom',['../class_nakama_1_1_n_client_interface.html#ade35ba502ff097d368b0129ba4baf183',1,'Nakama::NClientInterface']]],
   ['authenticatedevice',['authenticateDevice',['../class_nakama_1_1_n_client_interface.html#a56bcdc6384e71876637e21d152cba402',1,'Nakama::NClientInterface']]],
   ['authenticateemail',['authenticateEmail',['../class_nakama_1_1_n_client_interface.html#a8d55766f5b59e66ca87c3ccd86d22f3f',1,'Nakama::NClientInterface']]],

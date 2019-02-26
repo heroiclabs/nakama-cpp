@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['match_5fjoin_5frejected',['MATCH_JOIN_REJECTED',['../namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47add60591216a7adb3c4301aff21c296ab',1,'Nakama']]],
-  ['match_5fnot_5ffound',['MATCH_NOT_FOUND',['../namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a229d3b781246d17833c0353fc058d6bf',1,'Nakama']]],
-  ['member',['MEMBER',['../namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa77e6cb59f088a2937324f798be141b4b',1,'Nakama']]],
-  ['missing_5fpayload',['MISSING_PAYLOAD',['../namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a484498e713de0402906e44fbf6d5dbed',1,'Nakama']]]
+  ['info',['Info',['../namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21a4059b0251f66a18cb56f544728796875',1,'Nakama']]],
+  ['internalerror',['InternalError',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba8462b58246e70e5c83e5b939a9332cb5',1,'Nakama']]],
+  ['invalidargument',['InvalidArgument',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba253ca7dd096ee0956cccee4d376cab8b',1,'Nakama']]],
+  ['invite_5freceived',['INVITE_RECEIVED',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5ba20a5b72a2207dd32155dfe4e08c80203',1,'Nakama::NFriend']]],
+  ['invite_5fsent',['INVITE_SENT',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5ba0afccba45e914fcae995d30f26ed22f4',1,'Nakama::NFriend']]]
 ];

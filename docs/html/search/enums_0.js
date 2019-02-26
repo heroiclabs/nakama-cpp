@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['nchanneltype',['NChannelType',['../namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7',1,'Nakama']]],
-  ['nrtclientprotocol',['NRtClientProtocol',['../namespace_nakama.html#a48351d12832fad6920a0b54a4ba40589',1,'Nakama']]],
-  ['nrttransporttype',['NRtTransportType',['../namespace_nakama.html#af81b5db13e2f54dbe22d30ddbe947567',1,'Nakama']]],
-  ['nusergroupstate',['NUserGroupState',['../namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcf',1,'Nakama']]]
+  ['errorcode',['ErrorCode',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b',1,'Nakama']]]
 ];

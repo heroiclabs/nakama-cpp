@@ -1,7 +1,7 @@
 var searchData=
 [
   ['data',['data',['../struct_nakama_1_1_n_match_data.html#ac324baf44b46ffd30e8a23fa3f86ccf4',1,'Nakama::NMatchData::data()'],['../struct_nakama_1_1_n_stream_data.html#a2a61434f12edc08503649c11b6ae3d0d',1,'Nakama::NStreamData::data()']]],
-  ['debug',['Debug',['../class_nakama_1_1_n_logger.html#a59675ee3d74cf72715b6604695f46506',1,'Nakama::NLogger::Debug()'],['../_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8',1,'Debug():&#160;NLogSinkInterface.h']]],
+  ['debug',['Debug',['../class_nakama_1_1_n_logger.html#a59675ee3d74cf72715b6604695f46506',1,'Nakama::NLogger::Debug()'],['../namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21aa603905470e2a5b8c13e96b579ef0dba',1,'Nakama::Debug()']]],
   ['defaultclient_2eh',['DefaultClient.h',['../_default_client_8h.html',1,'']]],
   ['defaultclientparameters',['DefaultClientParameters',['../struct_nakama_1_1_default_client_parameters.html',1,'Nakama']]],
   ['deletefriends',['deleteFriends',['../class_nakama_1_1_n_client_interface.html#a84d0477b4ba184fe1e4f5fc2a0beab72',1,'Nakama::NClientInterface']]],

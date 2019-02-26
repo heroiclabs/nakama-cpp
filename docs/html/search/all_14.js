@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['unauthenticated',['Unauthenticated',['../_n_error_8h.html#af433a4828e34f82ebc977d9aca96ba98',1,'NError.h']]],
+  ['unauthenticated',['Unauthenticated',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378bab403ce880ed2c28d0784a2430a9b6eda',1,'Nakama']]],
   ['unfollowusers',['unfollowUsers',['../class_nakama_1_1_n_rt_client_interface.html#ac47e02bb5bfe7cc6fe9f17157b70b4b1',1,'Nakama::NRtClientInterface']]],
-  ['unknown',['Unknown',['../_n_error_8h.html#a915d220aba4527d1e33010bdfcbc6855',1,'NError.h']]],
+  ['unknown',['Unknown',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba88183b946cc5f0e8c96b2e66e1c74a7e',1,'Nakama']]],
   ['unlinkcustom',['unlinkCustom',['../class_nakama_1_1_n_client_interface.html#a22ba0de5a5323b91d23468ca87022f74',1,'Nakama::NClientInterface']]],
   ['unlinkdevice',['unlinkDevice',['../class_nakama_1_1_n_client_interface.html#ac41d61fe274f4acc7d4267fcdefa4dcb',1,'Nakama::NClientInterface']]],
   ['unlinkemail',['unlinkEmail',['../class_nakama_1_1_n_client_interface.html#af5d4a480b3ecc84b8fdaaff4e6a3f484',1,'Nakama::NClientInterface']]],

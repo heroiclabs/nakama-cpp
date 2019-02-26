@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['superadmin',['SUPERADMIN',['../namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa545514976ad64ba23911d485536249c9',1,'Nakama']]]
+  ['notfound',['NotFound',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba38c300f4fc9ce8a77aad4a30de05cad8',1,'Nakama']]]
 ];

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['unauthenticated',['Unauthenticated',['../_n_error_8h.html#af433a4828e34f82ebc977d9aca96ba98',1,'NError.h']]],
-  ['unknown',['Unknown',['../_n_error_8h.html#a915d220aba4527d1e33010bdfcbc6855',1,'NError.h']]],
   ['update_5ftime',['update_time',['../struct_nakama_1_1_n_channel_message.html#ac7fb9ab3ba61d2d46dcc2b1e25589ec0',1,'Nakama::NChannelMessage::update_time()'],['../struct_nakama_1_1_n_group.html#a4e110d7c47e3cd20de487b8aee24cde0',1,'Nakama::NGroup::update_time()'],['../struct_nakama_1_1_n_leaderboard_record.html#a3c697d1278a7d591b3cf2e9fe04fcb41',1,'Nakama::NLeaderboardRecord::update_time()'],['../struct_nakama_1_1_n_storage_object.html#a7f60ccee0ca8725ea6ba2c0835e6dc0d',1,'Nakama::NStorageObject::update_time()'],['../struct_nakama_1_1_n_channel_message_ack.html#ae70e63164083429a458d2c43b27859ac',1,'Nakama::NChannelMessageAck::update_time()']]],
   ['updatedat',['updatedAt',['../struct_nakama_1_1_n_user.html#ae3b8ff62b7586f730b359e10cd4f2b5d',1,'Nakama::NUser']]],
   ['user',['user',['../struct_nakama_1_1_n_account.html#ae20fdc167626cec27ea9101899b6807f',1,'Nakama::NAccount::user()'],['../struct_nakama_1_1_n_friend.html#a1cb1fa9011e1c71a4e2ebbef67daff12',1,'Nakama::NFriend::user()'],['../struct_nakama_1_1_n_group_user.html#a5b0cffa70f5010bb712760bed81dd188',1,'Nakama::NGroupUser::user()']]],

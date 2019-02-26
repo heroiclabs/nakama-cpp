@@ -324,6 +324,30 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:a1cda621bf2e5189661567a7e07f3da21"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21">NLogLevel</a> { <br />
+&#160;&#160;<a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21aa603905470e2a5b8c13e96b579ef0dba">NLogLevel::Debug</a> = 1, 
+<a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21a4059b0251f66a18cb56f544728796875">NLogLevel::Info</a> = 2, 
+<a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21a56525ae64d370c0b448ac0d60710ef17">NLogLevel::Warn</a> = 3, 
+<a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21a902b0d55fddef6f8d651fe1035b7d4bd">NLogLevel::Error</a> = 4, 
+<br />
+&#160;&#160;<a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21a882384ec38ce8d9582b57e70861730e4">NLogLevel::Fatal</a> = 5
+<br />
+ }</td></tr>
+<tr class="separator:a1cda621bf2e5189661567a7e07f3da21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accc7b4ac5f52cab6b3b903d7c5fa378b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b">ErrorCode</a> { <br />
+&#160;&#160;<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba88183b946cc5f0e8c96b2e66e1c74a7e">ErrorCode::Unknown</a> = 0, 
+<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba38c300f4fc9ce8a77aad4a30de05cad8">ErrorCode::NotFound</a> = 1, 
+<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba89b69484680b18e9179e826c6e023805">ErrorCode::AlreadyExists</a> = 2, 
+<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba253ca7dd096ee0956cccee4d376cab8b">ErrorCode::InvalidArgument</a> = 3, 
+<br />
+&#160;&#160;<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378bab403ce880ed2c28d0784a2430a9b6eda">ErrorCode::Unauthenticated</a> = 4, 
+<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba4b33a686be73bb172407d73b26356275">ErrorCode::PermissionDenied</a> = 5, 
+<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba094a6f6b0868122a9dd008cb91c083e4">ErrorCode::ConnectionError</a> = -1, 
+<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba8462b58246e70e5c83e5b939a9332cb5">ErrorCode::InternalError</a> = -2
+<br />
+ }</td></tr>
+<tr class="memdesc:accc7b4ac5f52cab6b3b903d7c5fa378b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error codes.  <a href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b">More...</a><br /></td></tr>
+<tr class="separator:accc7b4ac5f52cab6b3b903d7c5fa378b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59ee0ae7a159e7547bc101f1cd55abcf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcf">NUserGroupState</a> { <a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa545514976ad64ba23911d485536249c9">NUserGroupState::SUPERADMIN</a> = 0, 
 <a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa73acd9a5972130b75066c82595a1fae3">NUserGroupState::ADMIN</a> = 1, 
 <a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa77e6cb59f088a2937324f798be141b4b">NUserGroupState::MEMBER</a> = 2, 
@@ -366,7 +390,7 @@ Functions</h2></td></tr>
 <tr class="separator:aa1e421d42a47edf64bc7b8d7056bc8d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab64166a93f87824b742697466d4132e3"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ab64166a93f87824b742697466d4132e3">getNakamaSdkVersion</a> ()</td></tr>
 <tr class="separator:ab64166a93f87824b742697466d4132e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8dec68dbc275e60c0f0e120868c013dc"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a8dec68dbc275e60c0f0e120868c013dc">toString</a> (ErrorCode code)</td></tr>
+<tr class="memitem:a8dec68dbc275e60c0f0e120868c013dc"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a8dec68dbc275e60c0f0e120868c013dc">toString</a> (<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b">ErrorCode</a> code)</td></tr>
 <tr class="separator:a8dec68dbc275e60c0f0e120868c013dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e001e7b794380c7dc61cad3ffc3d034"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a5e001e7b794380c7dc61cad3ffc3d034">toString</a> (const <a class="el" href="struct_nakama_1_1_n_error.html">NError</a> &amp;error)</td></tr>
 <tr class="separator:a5e001e7b794380c7dc61cad3ffc3d034"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -802,6 +826,49 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="accc7b4ac5f52cab6b3b903d7c5fa378b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accc7b4ac5f52cab6b3b903d7c5fa378b">&#9670;&nbsp;</a></span>ErrorCode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b">Nakama::ErrorCode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Error codes. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba88183b946cc5f0e8c96b2e66e1c74a7e"></a>Unknown&#160;</td><td class="fielddoc"><p>Unknown error. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba38c300f4fc9ce8a77aad4a30de05cad8"></a>NotFound&#160;</td><td class="fielddoc"><p>Some requested entity was not found. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba89b69484680b18e9179e826c6e023805"></a>AlreadyExists&#160;</td><td class="fielddoc"><p>Some entity that we attempted to create already exists. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba253ca7dd096ee0956cccee4d376cab8b"></a>InvalidArgument&#160;</td><td class="fielddoc"><p>Client specified an invalid argument. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378bab403ce880ed2c28d0784a2430a9b6eda"></a>Unauthenticated&#160;</td><td class="fielddoc"><p>The request does not have valid authentication credentials for the operation. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba4b33a686be73bb172407d73b26356275"></a>PermissionDenied&#160;</td><td class="fielddoc"><p>The caller does not have permission to execute the specified operation. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba094a6f6b0868122a9dd008cb91c083e4"></a>ConnectionError&#160;</td><td class="fielddoc"><p>The service is currently unavailable. This is a most likely a transient condition and may be corrected by retrying with a backoff.</p>
+<dl class="section warning"><dt>Warning</dt><dd>Although data MIGHT not have been transmitted when this status occurs, there is NOT A GUARANTEE that the server has not seen anything. So in general it is unsafe to retry on this status code if the call is non-idempotent. </dd></dl>
+</td></tr>
+<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba8462b58246e70e5c83e5b939a9332cb5"></a>InternalError&#160;</td><td class="fielddoc"><p>Internal errors. Means some invariants expected by underlying System has been broken. If you see one of these errors, Something is very broken. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <a id="ac35def09c2440dbfdea24b4bbefac2e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac35def09c2440dbfdea24b4bbefac2e7">&#9670;&nbsp;</a></span>NChannelType</h2>
 
@@ -830,6 +897,35 @@ Functions</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="ac35def09c2440dbfdea24b4bbefac2e7a720909a4b948fc9e33633b61960d6b3c"></a>GROUP&#160;</td><td class="fielddoc"><p>A chat within a group on the server. </p>
 </td></tr>
+</table>
+
+</div>
+</div>
+<a id="a1cda621bf2e5189661567a7e07f3da21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cda621bf2e5189661567a7e07f3da21">&#9670;&nbsp;</a></span>NLogLevel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21">Nakama::NLogLevel</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1cda621bf2e5189661567a7e07f3da21aa603905470e2a5b8c13e96b579ef0dba"></a>Debug&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cda621bf2e5189661567a7e07f3da21a4059b0251f66a18cb56f544728796875"></a>Info&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cda621bf2e5189661567a7e07f3da21a56525ae64d370c0b448ac0d60710ef17"></a>Warn&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cda621bf2e5189661567a7e07f3da21a902b0d55fddef6f8d651fe1035b7d4bd"></a>Error&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cda621bf2e5189661567a7e07f3da21a882384ec38ce8d9582b57e70861730e4"></a>Fatal&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -1209,7 +1305,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">const char* Nakama::toString </td>
           <td>(</td>
-          <td class="paramtype">ErrorCode&#160;</td>
+          <td class="paramtype"><a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b">ErrorCode</a>&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
           <td></td>
         </tr>

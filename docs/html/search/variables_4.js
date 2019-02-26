@@ -4,6 +4,5 @@ var searchData=
   ['email',['email',['../struct_nakama_1_1_n_account.html#a2c1965d4ec6ad1069dce9a2f897ee6c8',1,'Nakama::NAccount']]],
   ['end_5factive',['end_active',['../struct_nakama_1_1_n_tournament.html#aae9fcc28934b6f0bf135c7df3d0156d5',1,'Nakama::NTournament']]],
   ['end_5ftime',['end_time',['../struct_nakama_1_1_n_tournament.html#a1c35b06df57baef8c4ad4321a05b93f6',1,'Nakama::NTournament']]],
-  ['error',['Error',['../_n_log_sink_interface_8h.html#a2c3e4bb40f36b262a5214e2da2bca9c5',1,'NLogSinkInterface.h']]],
   ['expiry_5ftime',['expiry_time',['../struct_nakama_1_1_n_leaderboard_record.html#ac4332fee057c5ff3c0b1aecaa85410b5',1,'Nakama::NLeaderboardRecord']]]
 ];
