@@ -53,12 +53,10 @@ The development team use these steps to build and upload a release.
 
 4. Make archive from `nakama-cpp-sdk` folder and name it `nakama-cpp-sdk_x.x.x.zip`
 
-5. Do `RELEASEINST_Cocos2d-x.md`
+5. Login and create a [new draft release](https://github.com/heroiclabs/nakama-cpp/releases/new) on GitHub.
 
-6. Login and create a [new draft release](https://github.com/heroiclabs/nakama-cpp/releases/new) on GitHub.
+6. Repeat the changelog in the release description.
 
-7. Repeat the changelog in the release description.
+7. Attach `nakama-cpp-sdk_x.x.x.zip`
 
-8. Attach `nakama-cpp-sdk_x.x.x.zip` and `nakama-cocos2d-x-sdk_x.x.x.zip`
-
-9. Publish the release.
+8. Publish the release.
