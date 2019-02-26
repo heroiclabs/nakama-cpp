@@ -14,7 +14,6 @@ file(
 
 add_executable(nakama-test ${_source_list})
 target_compile_features(nakama-test PRIVATE cxx_std_11)
-add_definitions(-DNAKAMA_API=)
 target_link_libraries(nakama-test PRIVATE nakama-cpp)
 
 target_include_directories(nakama-test

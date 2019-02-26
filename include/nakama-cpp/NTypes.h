@@ -21,6 +21,10 @@
 #include <string>
 #include <map>
 
+#if !defined(NAKAMA_API)
+    #define NAKAMA_API
+#endif
+
 namespace Nakama {
 
     /// The group role status.

@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include <string>
+#include "nakama-cpp/NTypes.h"
 #include <memory>
 
 namespace Nakama {

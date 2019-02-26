@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include <string>
+#include "nakama-cpp/NTypes.h"
  
 namespace Nakama {
 
@@ -58,7 +58,7 @@ namespace Nakama {
     struct NAKAMA_API NError
     {
         NError() {}
-        NError(const std::string& message, ErrorCode code = ErrorCode::Unknown) :
+        explicit NError(const std::string& message, ErrorCode code = ErrorCode::Unknown) :
             message(message), code(code) {}
 
         std::string message;
