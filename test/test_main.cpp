@@ -29,6 +29,7 @@ void test_disconnect();
 void test_restoreSession();
 void test_storage();
 void test_realtime();
+void full_example();
 
 // currently running tests
 std::vector<NTest*> g_running_tests;
@@ -183,6 +184,7 @@ int runAllTests()
     test_restoreSession();
     test_storage();
     test_realtime();
+    full_example();
 
     // total stats
     uint32_t testsPassed = (g_runTestsCount - g_failedTestsCount);
