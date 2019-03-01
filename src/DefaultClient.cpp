@@ -39,10 +39,9 @@ NClientPtr createDefaultClient(const DefaultClientParameters& parameters)
 }
 
 DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
+    : _host(parameters.host)
+    , _ssl(parameters.ssl)
 {
-    _host = parameters.host;
-    _ssl = parameters.ssl;
-
     std::string target = parameters.host + ":" + std::to_string(parameters.port);
 
     std::shared_ptr<grpc::ChannelCredentials> creds;
@@ -109,6 +108,7 @@ void DefaultClient::tick()
             break;
 
         case grpc::CompletionQueue::TIMEOUT:
+        default:
             continueLoop = false;
             break;
         }
@@ -151,36 +151,36 @@ ReqContext * DefaultClient::createReqContext(NSessionPtr session)
 
 void DefaultClient::onResponse(void * tag, bool ok)
 {
-    auto it = _reqContexts.find((ReqContext*)tag);
+    ReqContext* reqContext = static_cast<ReqContext*>(tag);
+
+    auto it = _reqContexts.find(reqContext);
 
     if (it != _reqContexts.end())
     {
-        ReqContext* reqStatus = *it;
-
         if (ok)
         {
-            if (reqStatus->status.ok())
+            if (reqContext->status.ok())
             {
-                if (reqStatus->successCallback)
+                if (reqContext->successCallback)
                 {
-                    reqStatus->successCallback();
+                    reqContext->successCallback();
                 }
             }
             else
             {
                 std::stringstream ss;
 
-                ss << "grpc code: " << reqStatus->status.error_code() << std::endl;
-                ss << "message: " << reqStatus->status.error_message();
+                ss << "grpc code: " << reqContext->status.error_code() << std::endl;
+                ss << "message: " << reqContext->status.error_message();
 
-                if (!reqStatus->status.error_details().empty())
+                if (!reqContext->status.error_details().empty())
                 {
-                    ss << std::endl << "details: " << reqStatus->status.error_details();
+                    ss << std::endl << "details: " << reqContext->status.error_details();
                 }
 
                 ErrorCode code = ErrorCode::Unknown;
 
-                switch (reqStatus->status.error_code())
+                switch (reqContext->status.error_code())
                 {
                     case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
                     case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
@@ -198,9 +198,9 @@ void DefaultClient::onResponse(void * tag, bool ok)
 
                 NLOG_ERROR(error);
 
-                if (reqStatus->errorCallback)
+                if (reqContext->errorCallback)
                 {
-                    reqStatus->errorCallback(error);
+                    reqContext->errorCallback(error);
                 }
             }
         }
@@ -210,13 +210,13 @@ void DefaultClient::onResponse(void * tag, bool ok)
 
             NLOG_ERROR(error);
 
-            if (reqStatus->errorCallback)
+            if (reqContext->errorCallback)
             {
-                reqStatus->errorCallback(error);
+                reqContext->errorCallback(error);
             }
         }
 
-        delete reqStatus;
+        delete reqContext;
         _reqContexts.erase(it);
     }
     else

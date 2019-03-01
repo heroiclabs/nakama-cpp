@@ -92,14 +92,13 @@ std::string getJsonFieldValue(const std::string & json, const std::string & fiel
 string url_encode(const string & str)
 {
     string result;
-    char c;
     const char* chars = str.c_str();
     char bufHex[10];
     uint32_t len = str.size();
 
     for (uint32_t i = 0; i < len; i++)
     {
-        c = chars[i];
+        char c = chars[i];
         // uncomment this if you want to encode spaces with +
         /*if (c==' ') new_str += '+';
         else */if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~')
@@ -116,6 +115,7 @@ string url_encode(const string & str)
             result += bufHex;
         }
     }
+
     return result;
 }
 

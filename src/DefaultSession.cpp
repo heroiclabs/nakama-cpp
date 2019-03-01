@@ -23,9 +23,9 @@ namespace Nakama {
 using namespace std;
 
 DefaultSession::DefaultSession(const std::string & token, bool created)
+    : _token(token)
+    , _created(created)
 {
-    _token = token;
-    _created = created;
     _create_time = getUnixTimestampMs();
 
     // Hack decode JSON payload from JWT

@@ -38,7 +38,7 @@ namespace Nakama {
     class DefaultClient : public NClientInterface
     {
     public:
-        DefaultClient(const DefaultClientParameters& parameters);
+        explicit DefaultClient(const DefaultClientParameters& parameters);
         ~DefaultClient();
 
         void disconnect() override;

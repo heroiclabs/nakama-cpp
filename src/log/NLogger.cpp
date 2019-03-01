@@ -123,7 +123,8 @@ void NLogger::Format(NLogLevel level, const char* module_name, const char* func,
 
         va_start(args, format);
         va_copy(argsCpy, args);
-        size_t len = std::vsnprintf(NULL, 0, format, argsCpy);
+        size_t len = std::vsnprintf(nullptr, 0, format, argsCpy);
+        va_end(argsCpy);
         va_end(args);
 
         if (len > 0)

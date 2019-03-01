@@ -27,12 +27,11 @@
 namespace Nakama {
 
 NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int port, bool ssl)
+    : _transport(transport)
+    , _host(host)
+    , _port(port)
+    , _ssl(ssl)
 {
-    _transport = transport;
-    _host = host;
-    _port = port;
-    _ssl = ssl;
-
     _transport->setConnectCallback([this]()
     {
         if (_listener)
