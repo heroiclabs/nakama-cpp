@@ -428,4 +428,6 @@ This project is licensed under the [Apache-2 License](https://github.com/heroicl
 
 ## Special Thanks
 
-Thanks to @dimon4eg for this excellent support on developing Nakama C++, Cocos2d-x and Unreal client libraries.
+Thanks to [@dimon4eg](https://github.com/dimon4eg) for this excellent support on developing Nakama C++, Cocos2d-x and Unreal client libraries.
+
+Thanks to [@thewtex](https://github.com/thewtex) for his excellent work on [iOS CMake Toolchain](https://github.com/thewtex/cmake-ios-toolchain) project.

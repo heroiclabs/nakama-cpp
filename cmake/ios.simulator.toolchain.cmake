@@ -1,3 +1,5 @@
+# source https://github.com/thewtex/cmake-ios-toolchain
+
 set(CMAKE_SYSTEM_NAME Darwin)
 
 # Set developer directory
