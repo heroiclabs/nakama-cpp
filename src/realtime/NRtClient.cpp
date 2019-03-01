@@ -48,6 +48,10 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int por
 
 NRtClient::~NRtClient()
 {
+    if (_reqContexts.size() > 0)
+    {
+        NLOG(NLogLevel::Warn, "Not handled %u realtime requests detected.", _reqContexts.size());
+    }
 }
 
 void NRtClient::tick()

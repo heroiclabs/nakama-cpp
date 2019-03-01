@@ -77,6 +77,18 @@ DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
 DefaultClient::~DefaultClient()
 {
     disconnect();
+
+    if (_reqContexts.size() > 0)
+    {
+        NLOG(NLogLevel::Warn, "Not handled %u requests detected.", _reqContexts.size());
+
+        for (ReqContext* reqContext : _reqContexts)
+        {
+            delete reqContext;
+        }
+
+        _reqContexts.clear();
+    }
 }
 
 void DefaultClient::disconnect()
