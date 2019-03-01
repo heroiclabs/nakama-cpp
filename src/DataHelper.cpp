@@ -65,7 +65,7 @@ void assign(NAccount& account, const nakama::api::Account& data)
     assign(account.user.id, data.user().id());
     assign(account.custom_id, data.custom_id());
     assign(account.email, data.email());
-    assign(account.verify_time, data.verify_time());
+    assign(account.verifyTime, data.verify_time());
     assign(account.wallet, data.wallet());
     assign(account.user, data.user());
     assign(account.devices, data.devices());
@@ -86,7 +86,7 @@ void assign(NUser& user, const nakama::api::User& data)
     assign(user.gameCenterId, data.gamecenter_id());
     assign(user.steamId, data.steam_id());
     assign(user.online, data.online());
-    assign(user.edge_count, data.edge_count());
+    assign(user.edgeCount, data.edge_count());
     assign(user.createdAt, data.create_time());
     assign(user.updatedAt, data.update_time());
 }
@@ -99,17 +99,17 @@ void assign(NAccountDevice & device, const nakama::api::AccountDevice & data)
 void assign(NGroup& group, const nakama::api::Group& data)
 {
     assign(group.id, data.id());
-    assign(group.creator_id, data.creator_id());
+    assign(group.creatorId, data.creator_id());
     assign(group.name, data.name());
     assign(group.description, data.description());
     assign(group.lang, data.lang_tag());
     assign(group.metadata, data.metadata());
-    assign(group.avatar_url, data.avatar_url());
+    assign(group.avatarUrl, data.avatar_url());
     assign(group.open, data.open());
-    assign(group.edge_count, data.edge_count());
-    assign(group.max_count, data.max_count());
-    assign(group.create_time, data.create_time());
-    assign(group.update_time, data.update_time());
+    assign(group.edgeCount, data.edge_count());
+    assign(group.maxCount, data.max_count());
+    assign(group.createTime, data.create_time());
+    assign(group.updateTime, data.update_time());
 }
 
 void assign(NGroupList & groups, const nakama::api::GroupList & data)
@@ -120,7 +120,7 @@ void assign(NGroupList & groups, const nakama::api::GroupList & data)
 
 void assign(NGroupUserList & users, const nakama::api::GroupUserList & data)
 {
-    assign(users.group_users, data.group_users());
+    assign(users.groupUsers, data.group_users());
 }
 
 void assign(NGroupUser & user, const nakama::api::GroupUserList_GroupUser & data)
@@ -137,7 +137,7 @@ void assign(NUserGroup & group, const nakama::api::UserGroupList_UserGroup & dat
 
 void assign(NUserGroupList & users, const nakama::api::UserGroupList & data)
 {
-    assign(users.user_groups, data.user_groups());
+    assign(users.userGroups, data.user_groups());
 }
 
 void assign(NUsers & users, const nakama::api::Users & data)
@@ -158,25 +158,25 @@ void assign(NFriends & friends, const nakama::api::Friends & data)
 
 void assign(NLeaderboardRecordList & list, const nakama::api::LeaderboardRecordList & data)
 {
-    assign(list.next_cursor, data.next_cursor());
-    assign(list.prev_cursor, data.prev_cursor());
-    assign(list.owner_records, data.owner_records());
+    assign(list.nextCursor, data.next_cursor());
+    assign(list.prevCursor, data.prev_cursor());
+    assign(list.ownerRecords, data.owner_records());
     assign(list.records, data.records());
 }
 
 void assign(NLeaderboardRecord & record, const nakama::api::LeaderboardRecord & data)
 {
-    assign(record.leaderboard_id, data.leaderboard_id());
-    assign(record.owner_id, data.owner_id());
+    assign(record.leaderboardId, data.leaderboard_id());
+    assign(record.ownerId, data.owner_id());
     assign(record.username, data.username());
     assign(record.score, data.score());
     assign(record.subscore, data.subscore());
-    assign(record.num_score, data.num_score());
-    assign(record.max_num_score, data.max_num_score());
+    assign(record.numScore, data.num_score());
+    assign(record.maxNumScore, data.max_num_score());
     assign(record.metadata, data.metadata());
-    assign(record.create_time, data.create_time());
-    assign(record.update_time, data.update_time());
-    assign(record.expiry_time, data.expiry_time());
+    assign(record.createTime, data.create_time());
+    assign(record.updateTime, data.update_time());
+    assign(record.expiryTime, data.expiry_time());
     assign(record.rank, data.rank());
 }
 
@@ -187,7 +187,7 @@ void assign(NMatchList & list, const nakama::api::MatchList & data)
 
 void assign(NMatch & match, const nakama::api::Match & data)
 {
-    assign(match.match_id, data.match_id());
+    assign(match.matchId, data.match_id());
     assign(match.size, data.size());
     assign(match.authoritative, data.authoritative());
     assign(match.label, data.label());
@@ -195,7 +195,7 @@ void assign(NMatch & match, const nakama::api::Match & data)
 
 void assign(NMatch& match, const ::nakama::realtime::Match& data)
 {
-    assign(match.match_id, data.match_id());
+    assign(match.matchId, data.match_id());
     assign(match.size, data.size());
     assign(match.authoritative, data.authoritative());
     assign(match.label, data.label());
@@ -205,8 +205,8 @@ void assign(NMatch& match, const ::nakama::realtime::Match& data)
 
 void assign(NMatchData & match_data, const::nakama::realtime::MatchData & data)
 {
-    assign(match_data.match_id, data.match_id());
-    assign(match_data.op_code, data.op_code());
+    assign(match_data.matchId, data.match_id());
+    assign(match_data.opCode, data.op_code());
     assign(match_data.presence, data.presence());
     assign(match_data.data, data.data());
 }
@@ -218,14 +218,14 @@ void assign(NMatchmakerTicket & ticket, const::nakama::realtime::MatchmakerTicke
 
 void assign(NMatchPresenceEvent & event, const::nakama::realtime::MatchPresenceEvent & data)
 {
-    assign(event.match_id, data.match_id());
+    assign(event.matchId, data.match_id());
     assign(event.joins, data.joins());
     assign(event.leaves, data.leaves());
 }
 
 void assign(NMatchmakerMatched & matched, const::nakama::realtime::MatchmakerMatched & data)
 {
-    assign(matched.match_id, data.match_id());
+    assign(matched.matchId, data.match_id());
     assign(matched.ticket, data.ticket());
     assign(matched.token, data.token());
     assign(matched.self, data.self());
@@ -235,8 +235,8 @@ void assign(NMatchmakerMatched & matched, const::nakama::realtime::MatchmakerMat
 void assign(NMatchmakerUser & user, const::nakama::realtime::MatchmakerMatched_MatchmakerUser & data)
 {
     assign(user.presence, data.presence());
-    assign(user.string_properties, data.string_properties());
-    assign(user.numeric_properties, data.numeric_properties());
+    assign(user.stringProperties, data.string_properties());
+    assign(user.numericProperties, data.numeric_properties());
 }
 
 void assign(NNotificationList & list, const::nakama::realtime::Notifications & data)
@@ -291,7 +291,7 @@ void assign(NStreamPresenceEvent & event, const::nakama::realtime::StreamPresenc
 void assign(NNotificationList & list, const nakama::api::NotificationList & data)
 {
     assign(list.notifications, data.notifications());
-    assign(list.cacheable_cursor, data.cacheable_cursor());
+    assign(list.cacheableCursor, data.cacheable_cursor());
 }
 
 void assign(NNotification & notif, const nakama::api::Notification & data)
@@ -300,28 +300,28 @@ void assign(NNotification & notif, const nakama::api::Notification & data)
     assign(notif.subject, data.subject());
     assign(notif.content, data.content());
     assign(notif.code, data.code());
-    assign(notif.sender_id, data.sender_id());
-    assign(notif.create_time, data.create_time());
+    assign(notif.senderId, data.sender_id());
+    assign(notif.createTime, data.create_time());
     assign(notif.persistent, data.persistent());
 }
 
 void assign(NChannelMessageList & list, const nakama::api::ChannelMessageList & data)
 {
     assign(list.messages, data.messages());
-    assign(list.prev_cursor, data.prev_cursor());
-    assign(list.next_cursor, data.next_cursor());
+    assign(list.prevCursor, data.prev_cursor());
+    assign(list.nextCursor, data.next_cursor());
 }
 
 void assign(NChannelMessage & msg, const nakama::api::ChannelMessage & data)
 {
-    assign(msg.channel_id, data.channel_id());
+    assign(msg.channelId, data.channel_id());
     assign(msg.code, data.code());
     assign(msg.content, data.content());
-    assign(msg.create_time, data.create_time());
-    assign(msg.message_id, data.message_id());
+    assign(msg.createTime, data.create_time());
+    assign(msg.messageId, data.message_id());
     assign(msg.persistent, data.persistent());
-    assign(msg.sender_id, data.sender_id());
-    assign(msg.update_time, data.update_time());
+    assign(msg.senderId, data.sender_id());
+    assign(msg.updateTime, data.update_time());
     assign(msg.username, data.username());
 }
 
@@ -337,16 +337,16 @@ void assign(NTournament & tournament, const nakama::api::Tournament & data)
     assign(tournament.title, data.title());
     assign(tournament.description, data.description());
     assign(tournament.category, data.category());
-    assign(tournament.sort_order, data.sort_order());
+    assign(tournament.sortOrder, data.sort_order());
     assign(tournament.size, data.size());
-    assign(tournament.max_size, data.max_size());
-    assign(tournament.max_num_score, data.max_num_score());
-    assign(tournament.can_enter ,data.can_enter());
-    assign(tournament.create_time, data.create_time());
-    assign(tournament.start_time, data.start_time());
-    assign(tournament.end_time, data.end_time());
-    assign(tournament.end_active, data.end_active());
-    assign(tournament.next_reset, data.next_reset());
+    assign(tournament.maxSize, data.max_size());
+    assign(tournament.maxNumScore, data.max_num_score());
+    assign(tournament.canEnter ,data.can_enter());
+    assign(tournament.createTime, data.create_time());
+    assign(tournament.startTime, data.start_time());
+    assign(tournament.endTime, data.end_time());
+    assign(tournament.endActive, data.end_active());
+    assign(tournament.nextReset, data.next_reset());
     assign(tournament.duration, data.duration());
     assign(tournament.metadata, data.metadata());
 }
@@ -354,9 +354,9 @@ void assign(NTournament & tournament, const nakama::api::Tournament & data)
 void assign(NTournamentRecordList & list, const nakama::api::TournamentRecordList & data)
 {
     assign(list.records, data.records());
-    assign(list.owner_records, data.owner_records());
-    assign(list.next_cursor, data.next_cursor());
-    assign(list.prev_cursor, data.prev_cursor());
+    assign(list.ownerRecords, data.owner_records());
+    assign(list.nextCursor, data.next_cursor());
+    assign(list.prevCursor, data.prev_cursor());
 }
 
 void assign(NStorageObjectList & list, const nakama::api::StorageObjectList & data)
@@ -368,12 +368,12 @@ void assign(NStorageObjectList & list, const nakama::api::StorageObjectList & da
 void assign(NStorageObject & obj, const nakama::api::StorageObject & data)
 {
     assign(obj.collection, data.collection());
-    assign(obj.create_time, data.create_time());
+    assign(obj.createTime, data.create_time());
     assign(obj.key, data.key());
-    assign(obj.permission_read, data.permission_read());
-    assign(obj.permission_write, data.permission_write());
-    assign(obj.update_time, data.update_time());
-    assign(obj.user_id, data.user_id());
+    assign(obj.permissionRead, data.permission_read());
+    assign(obj.permissionWrite, data.permission_write());
+    assign(obj.updateTime, data.update_time());
+    assign(obj.userId, data.user_id());
     assign(obj.value, data.value());
     assign(obj.version, data.version());
 }
@@ -382,7 +382,7 @@ void assign(NStorageObjectAck & ack, const nakama::api::StorageObjectAck & data)
 {
     assign(ack.collection, data.collection());
     assign(ack.key, data.key());
-    assign(ack.user_id, data.user_id());
+    assign(ack.userId, data.user_id());
     assign(ack.version, data.version());
 }
 
@@ -390,17 +390,17 @@ void assign(NRpc & rpc, const nakama::api::Rpc & data)
 {
     assign(rpc.id, data.id());
     assign(rpc.payload, data.payload());
-    assign(rpc.http_key, data.http_key());
+    assign(rpc.httpKey, data.http_key());
 }
 
 void assign(NChannelMessageAck & ack, const::nakama::realtime::ChannelMessageAck & data)
 {
-    assign(ack.channel_id, data.channel_id());
+    assign(ack.channelId, data.channel_id());
     assign(ack.code, data.code());
-    assign(ack.create_time, data.create_time());
-    assign(ack.message_id, data.message_id());
+    assign(ack.createTime, data.create_time());
+    assign(ack.messageId, data.message_id());
     assign(ack.persistent, data.persistent());
-    assign(ack.update_time, data.update_time());
+    assign(ack.updateTime, data.update_time());
     assign(ack.username, data.username());
 }
 
@@ -413,7 +413,7 @@ void assign(NChannel & channel, const::nakama::realtime::Channel & data)
 
 void assign(NChannelPresenceEvent & event, const::nakama::realtime::ChannelPresenceEvent & data)
 {
-    assign(event.channel_id, data.channel_id());
+    assign(event.channelId, data.channel_id());
     assign(event.joins, data.joins());
     assign(event.leaves, data.leaves());
 }
@@ -421,10 +421,10 @@ void assign(NChannelPresenceEvent & event, const::nakama::realtime::ChannelPrese
 void assign(NUserPresence & presence, const::nakama::realtime::UserPresence & data)
 {
     assign(presence.persistence, data.persistence());
-    assign(presence.session_id, data.session_id());
+    assign(presence.sessionId, data.session_id());
     assign(presence.status, data.status());
     assign(presence.username, data.username());
-    assign(presence.user_id, data.user_id());
+    assign(presence.userId, data.user_id());
 }
 
 }

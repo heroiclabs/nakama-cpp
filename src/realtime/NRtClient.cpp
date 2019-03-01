@@ -75,7 +75,7 @@ void NRtClient::connect(NSessionPtr session, bool createStatus, NRtClientProtoco
         url.append("ws://");
 
     url.append(_host).append(":").append(std::to_string(_port)).append("/ws");
-    url.append("?token=").append(url_encode(session->getAuthToken()));
+    url.append("?token=").append(urlEncode(session->getAuthToken()));
     url.append("&status=").append(createStatus ? "true" : "false");
 
     // by default server uses Json protocol
@@ -547,14 +547,14 @@ void NRtClient::sendMatchData(const std::string & matchId, int64_t opCode, const
     {
         auto* presenceData = msg.mutable_match_data_send()->mutable_presences()->Add();
 
-        if (!presence.user_id.empty())
-            presenceData->set_user_id(presence.user_id);
+        if (!presence.userId.empty())
+            presenceData->set_user_id(presence.userId);
 
         if (!presence.username.empty())
             presenceData->set_username(presence.username);
 
-        if (!presence.session_id.empty())
-            presenceData->set_session_id(presence.session_id);
+        if (!presence.sessionId.empty())
+            presenceData->set_session_id(presence.sessionId);
 
         if (!presence.status.empty())
             presenceData->mutable_status()->set_value(presence.status);

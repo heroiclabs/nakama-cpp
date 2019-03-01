@@ -26,8 +26,8 @@ namespace Nakama {
     struct NAKAMA_API NChannelMessageList
     {
         std::vector<NChannelMessage> messages;       ///< A list of messages.
-        std::string next_cursor;                     ///< The cursor to send when retireving the next page, if any.
-        std::string prev_cursor;                     ///< The cursor to send when retrieving the previous page, if any.
+        std::string nextCursor;                      ///< The cursor to send when retireving the next page, if any.
+        std::string prevCursor;                      ///< The cursor to send when retrieving the previous page, if any.
     };
 
     using NChannelMessageListPtr = std::shared_ptr<NChannelMessageList>;

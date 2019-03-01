@@ -35,7 +35,7 @@ DefaultSession::DefaultSession(const std::string & token, bool created)
     std::string payload = token.substr(dotIndex1 + 1, dotIndex2 - dotIndex1 - 1);
 
     // the segment is base64 encoded, so decode it...
-    std::string json = base64_decode(payload);
+    std::string json = base64Decode(payload);
 
     // now we have some json to parse.
     // e.g.: {"exp":1489862293,"uid":"3c01e3ee-878a-4ec4-8923-40d51a86f91f"}

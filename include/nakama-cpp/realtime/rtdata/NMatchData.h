@@ -24,9 +24,9 @@ namespace Nakama {
     /// Realtime match data received from the server.
     struct NMatchData
     {
-        std::string match_id;      ///< The match unique ID.
+        std::string matchId;       ///< The match unique ID.
         NUserPresence presence;    ///< A reference to the user presence that sent this data, if any.
-        int64_t op_code;           ///< Op code value.
+        int64_t opCode;            ///< Op code value.
         NBytes data;               ///< Data payload, if any.
     };
 }

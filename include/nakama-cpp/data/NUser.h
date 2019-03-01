@@ -37,7 +37,7 @@ namespace Nakama {
         std::string gameCenterId;  ///< The Apple Game Center in of the user's account.
         std::string steamId;       ///< The Steam id in the user's account.
         bool online = false;       ///< Indicates whether the user is currently online.
-        int32_t edge_count = 0;    ///< Number of related edges to this user (friends).
+        int32_t edgeCount = 0;     ///< Number of related edges to this user (friends).
         NTimestamp createdAt = 0;  ///< The UNIX time when the user was created.
         NTimestamp updatedAt = 0;  ///< The UNIX time when the user was last updated.
     };

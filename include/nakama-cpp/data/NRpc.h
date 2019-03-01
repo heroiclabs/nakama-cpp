@@ -25,7 +25,7 @@ namespace Nakama {
     {
         std::string id;            ///< The identifier of the function.
         std::string payload;       ///< The payload of the function which must be a JSON object.
-        std::string http_key;      ///< The authentication key used when executed as a non-client HTTP request.
+        std::string httpKey;       ///< The authentication key used when executed as a non-client HTTP request.
     };
 
 }

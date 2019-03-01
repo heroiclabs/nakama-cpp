@@ -26,8 +26,8 @@ namespace Nakama {
     struct NMatchmakerUser
     {
         NUserPresence presence;                  ///< User info.
-        NStringMap string_properties;            ///< String properties.
-        NStringDoubleMap numeric_properties;     ///< Numeric properties.
+        NStringMap stringProperties;             ///< String properties.
+        NStringDoubleMap numericProperties;      ///< Numeric properties.
     };
 
     /// A successful matchmaking result.
@@ -35,7 +35,7 @@ namespace Nakama {
     {
         std::string ticket;                  ///< The matchmaking ticket that has completed.
                                              ///< The match token or match ID to join.
-        std::string match_id;                ///< Match ID.
+        std::string matchId;                 ///< Match ID.
         std::string token;                   ///< Match join token.
         std::vector<NMatchmakerUser> users;  ///< The users that have been matched together, and information about their matchmaking data.
         NMatchmakerUser self;                ///< A reference to the current user and their properties.

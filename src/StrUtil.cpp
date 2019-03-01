@@ -21,7 +21,7 @@ namespace Nakama {
 
 using namespace std;
 
-std::string base64_encode(const Base64Buffer& buffer)
+std::string base64Encode(const Base64Buffer& buffer)
 {
     std::string base64str;
 
@@ -30,7 +30,7 @@ std::string base64_encode(const Base64Buffer& buffer)
     return base64str;
 }
 
-Base64Buffer base64_decode(const std::string& base64str)
+Base64Buffer base64Decode(const std::string& base64str)
 {
     Base64Buffer buffer;
 
@@ -89,7 +89,7 @@ std::string getJsonFieldValue(const std::string & json, const std::string & fiel
     return result;
 }
 
-string url_encode(const string & str)
+string urlEncode(const string & str)
 {
     string result;
     const char* chars = str.c_str();

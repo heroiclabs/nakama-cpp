@@ -28,8 +28,8 @@ namespace Nakama {
         std::string key;                          ///< The key of the object within the collection.
         std::string value;                        ///< The value of the object. Must be JSON
         std::string version;                      ///< The version hash of the object to check. Possible values are: ["", "*", "#hash#"].
-        opt::optional<int32_t> permission_read;   ///< The read access permissions for the object.
-        opt::optional<int32_t> permission_write;  ///< The write access permissions for the object.
+        opt::optional<int32_t> permissionRead;    ///< The read access permissions for the object.
+        opt::optional<int32_t> permissionWrite;   ///< The write access permissions for the object.
     };
 
 }

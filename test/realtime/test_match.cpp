@@ -33,12 +33,12 @@ void test_rt_match_join(NRtClientTest& test2, const std::string& match_id)
 
         auto successCallback = [&test2, errorCallback](const NMatch& match)
         {
-            std::cout << "joined match: " << match.match_id << std::endl;
+            std::cout << "joined match: " << match.matchId << std::endl;
 
             std::string json_data = "How are you?";
 
             test2.rtClient->sendMatchData(
-                match.match_id,
+                match.matchId,
                 1, // op code
                 json_data,
                 {}
@@ -75,9 +75,9 @@ void test_rt_create_match()
 
         auto successCallback = [&test1, &test2](const NMatch& match)
         {
-            std::cout << "created match: " << match.match_id << std::endl;
+            std::cout << "created match: " << match.matchId << std::endl;
 
-            test_rt_match_join(test2, match.match_id);
+            test_rt_match_join(test2, match.matchId);
         };
 
         test1.rtClient->createMatch(
@@ -92,7 +92,7 @@ void test_rt_create_match()
         std::string payload = "I'm fine";
 
         test1.rtClient->sendMatchData(
-            data.match_id,
+            data.matchId,
             1, // op code
             payload,
             {}

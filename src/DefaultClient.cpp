@@ -69,7 +69,7 @@ DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
 
     _stub = nakama::api::Nakama::NewStub(channel);
 
-    _basicAuthMetadata = "Basic " + base64_encode(parameters.serverKey + ":");
+    _basicAuthMetadata = "Basic " + base64Encode(parameters.serverKey + ":");
     
     NLOG(NLogLevel::Info, "Created. NakamaSdkVersion: %s", getNakamaSdkVersion());
 }
@@ -1883,11 +1883,11 @@ void DefaultClient::writeStorageObjects(
         write_obj->set_value(obj.value);
         write_obj->set_version(obj.version);
 
-        if (obj.permission_read)
-            write_obj->mutable_permission_read()->set_value(*obj.permission_read);
+        if (obj.permissionRead)
+            write_obj->mutable_permission_read()->set_value(*obj.permissionRead);
 
-        if (obj.permission_write)
-            write_obj->mutable_permission_write()->set_value(*obj.permission_write);
+        if (obj.permissionWrite)
+            write_obj->mutable_permission_write()->set_value(*obj.permissionWrite);
     }
 
     auto responseReader = _stub->AsyncWriteStorageObjects(&ctx->context, req, &_cq);
@@ -1924,7 +1924,7 @@ void DefaultClient::readStorageObjects(
 
         write_obj->set_collection(obj.collection);
         write_obj->set_key(obj.key);
-        write_obj->set_user_id(obj.user_id);
+        write_obj->set_user_id(obj.userId);
     }
 
     auto responseReader = _stub->AsyncReadStorageObjects(&ctx->context, req, &_cq);

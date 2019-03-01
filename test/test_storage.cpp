@@ -96,8 +96,8 @@ void test_writeStorage()
         obj.collection = "candies";
         obj.key = "Ice cream";
         obj.value = "{ \"price\": 25 }";
-        obj.permission_read = 1;
-        obj.permission_write = 1;
+        obj.permissionRead = 1;
+        obj.permissionWrite = 1;
 
         objects.push_back(obj);
 

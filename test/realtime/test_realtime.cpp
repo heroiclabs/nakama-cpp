@@ -41,7 +41,7 @@ void test_rt_joinChat()
 
             auto ackCallback = [&test](const NChannelMessageAck& ack)
             {
-                std::cout << "message sent successfuly. msg id: " << ack.message_id << std::endl;
+                std::cout << "message sent successfuly. msg id: " << ack.messageId << std::endl;
                 test.stopTest(true);
             };
 

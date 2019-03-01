@@ -26,13 +26,13 @@ namespace Nakama {
     {
         std::string collection;                ///< The collection which stores the object.
         std::string key;                       ///< The key of the object within the collection.
-        std::string user_id;                   ///< The user owner of the object.
+        std::string userId;                    ///< The user owner of the object.
         std::string value;                     ///< The value of the object.
         std::string version;                   ///< The version hash of the object.
-        int32_t permission_read = 0;           ///< The read access permissions for the object.
-        int32_t permission_write = 0;          ///< The write access permissions for the object.
-        NTimestamp create_time = 0;            ///< The UNIX time when the object was created.
-        NTimestamp update_time = 0;            ///< The UNIX time when the object was last updated.
+        int32_t permissionRead = 0;            ///< The read access permissions for the object.
+        int32_t permissionWrite = 0;           ///< The write access permissions for the object.
+        NTimestamp createTime = 0;             ///< The UNIX time when the object was created.
+        NTimestamp updateTime = 0;             ///< The UNIX time when the object was last updated.
     };
 
     using NStorageObjects = std::vector<NStorageObject>;

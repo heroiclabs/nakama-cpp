@@ -24,12 +24,12 @@ namespace Nakama {
     /// A receipt reply from a channel message send operation.
     struct NChannelMessageAck
     {
-        std::string channel_id;         ///< The channel the message was sent to.
-        std::string message_id;         ///< The unique ID assigned to the message.
+        std::string channelId;          ///< The channel the message was sent to.
+        std::string messageId;          ///< The unique ID assigned to the message.
         std::string username;           ///< Username of the message sender.
         int32_t code = 0;               ///< The code representing a message type or category.
-        NTimestamp create_time = 0;     ///< The UNIX time when the message was created.
-        NTimestamp update_time = 0;     ///< The UNIX time when the message was last updated.
+        NTimestamp createTime = 0;      ///< The UNIX time when the message was created.
+        NTimestamp updateTime = 0;      ///< The UNIX time when the message was last updated.
         bool persistent = false;        ///< True if the message was persisted to the channel's history, false otherwise.
     };
 }

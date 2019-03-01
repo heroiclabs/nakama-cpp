@@ -23,14 +23,14 @@ namespace Nakama {
     /// A message sent on a channel.
     struct NAKAMA_API NChannelMessage
     {
-        std::string channel_id;        ///< The channel this message belongs to.
-        std::string message_id;        ///< The unique ID of this message.
+        std::string channelId;         ///< The channel this message belongs to.
+        std::string messageId;         ///< The unique ID of this message.
         int32_t code = 0;              ///< The code representing a message type or category.
-        std::string sender_id;         ///< Message sender, usually a user ID.
+        std::string senderId;          ///< Message sender, usually a user ID.
         std::string username;          ///< The username of the message sender, if any.
         std::string content;           ///< The content payload.
-        NTimestamp create_time = 0;    ///< The UNIX time when the message was created.
-        NTimestamp update_time = 0;    ///< The UNIX time when the message was last updated.
+        NTimestamp createTime = 0;     ///< The UNIX time when the message was created.
+        NTimestamp updateTime = 0;     ///< The UNIX time when the message was last updated.
         bool persistent = false;       ///< True if the message was persisted to the channel's history, false otherwise.
     };
 

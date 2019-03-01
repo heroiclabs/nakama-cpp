@@ -25,7 +25,7 @@ namespace Nakama {
     /// A list of users belonging to a group, along with their role.
     struct NAKAMA_API NGroupUserList
     {
-        std::vector<NGroupUser> group_users;
+        std::vector<NGroupUser> groupUsers;
     };
 
     using NGroupUserListPtr = std::shared_ptr<NGroupUserList>;

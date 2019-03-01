@@ -48,18 +48,18 @@ void NRtClientTest::runTest()
     {
         for (auto& presence : event.joins)
         {
-            std::cout << "Joined User ID: " << presence.user_id << " Username: " << presence.username << " Status: " << presence.status << std::endl;
+            std::cout << "Joined User ID: " << presence.userId << " Username: " << presence.username << " Status: " << presence.status << std::endl;
         }
 
         for (auto& presence : event.leaves)
         {
-            std::cout << "Left User ID: " << presence.user_id << " Username: " << presence.username << " Status: " << presence.status << std::endl;
+            std::cout << "Left User ID: " << presence.userId << " Username: " << presence.username << " Status: " << presence.status << std::endl;
         }
     });
 
     listener.setChannelMessageCallback([](const NChannelMessage& message)
     {
-        std::cout << "Received a message on channel " << message.channel_id << std::endl;
+        std::cout << "Received a message on channel " << message.channelId << std::endl;
         std::cout << "Message content: " << message.content << std::endl;
     });
 

@@ -24,17 +24,17 @@ namespace Nakama {
     struct NAKAMA_API NGroup
     {
         std::string id;              ///< The id of a group.
-        std::string creator_id;      ///< The id of the user who created the group.
+        std::string creatorId;       ///< The id of the user who created the group.
         std::string name;            ///< The unique name of the group.
         std::string description;     ///< A description for the group.
         std::string lang;            ///< The language expected to be a tag which follows the BCP-47 spec.
         std::string metadata;        ///< Additional information stored as a JSON object.
-        std::string avatar_url;      ///< A URL for an avatar image.
+        std::string avatarUrl;       ///< A URL for an avatar image.
         bool open = false;           ///< Anyone can join open groups, otherwise only admins can accept members.
-        int32_t edge_count = 0;      ///< The current count of all members in the group.
-        int32_t max_count = 0;       ///< The maximum number of members allowed.
-        NTimestamp create_time = 0;  ///< The UNIX time when the group was created.
-        NTimestamp update_time = 0;  ///< The UNIX time when the group was last updated.
+        int32_t edgeCount = 0;       ///< The current count of all members in the group.
+        int32_t maxCount = 0;        ///< The maximum number of members allowed.
+        NTimestamp createTime = 0;   ///< The UNIX time when the group was created.
+        NTimestamp updateTime = 0;   ///< The UNIX time when the group was last updated.
     };
 
 }

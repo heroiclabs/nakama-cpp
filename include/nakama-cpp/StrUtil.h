@@ -28,7 +28,7 @@ namespace Nakama {
      * @param buffer byte buffer to encode
      * @return std::string encoded `base64` string
      */
-    std::string base64_encode(const Base64Buffer& buffer);
+    std::string base64Encode(const Base64Buffer& buffer);
 
     /**
      * Decode `base64` string
@@ -36,7 +36,7 @@ namespace Nakama {
      * @param base64str `base64` string
      * @return Base64Buffer byte buffer
      */
-    Base64Buffer base64_decode(const std::string& base64str);
+    Base64Buffer base64Decode(const std::string& base64str);
 
     /**
      * Get the field value from json string
@@ -55,6 +55,6 @@ namespace Nakama {
      * @param str string to encode
      * @return std::string encoded string
      */
-    std::string url_encode(const std::string& str);
+    std::string urlEncode(const std::string& str);
 
 } // namespace Nakama
