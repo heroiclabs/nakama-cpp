@@ -26,7 +26,10 @@ set(LIB_SUFFIX "")
 set(LIB_EXT "")
 
 if(WIN32)
-    if(CMAKE_BUILD_TYPE EQUAL "Debug")
+    if (NOT CMAKE_BUILD_TYPE)
+        set(CMAKE_BUILD_TYPE Debug)
+    endif()
+    if(CMAKE_BUILD_TYPE MATCHES Debug)
         set(LIB_SUFFIX "d")
     endif()
     set(LIB_EXT ".lib")
@@ -53,9 +56,16 @@ set_target_properties(grpc PROPERTIES
 # protobuf
 project(protobuf)
 add_library(protobuf STATIC IMPORTED GLOBAL)
-set_target_properties(protobuf PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}protobuf${LIB_SUFFIX}${LIB_EXT}"
-)
+if(WIN32)
+    set_target_properties(protobuf PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}libprotobuf${LIB_SUFFIX}${LIB_EXT}"
+    )
+else()
+    # Android, Mac, iOS, Linux
+    set_target_properties(protobuf PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}protobuf${LIB_SUFFIX}${LIB_EXT}"
+    )
+endif()
 
 # cares
 project(cares)
@@ -78,19 +88,33 @@ set_target_properties(gpr PROPERTIES
     IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}gpr${LIB_SUFFIX}${LIB_EXT}"
 )
 
+# zlib
+project(zlib)
+add_library(zlib STATIC IMPORTED GLOBAL)
+if(WIN32)
+    set_target_properties(zlib PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}zlib${LIB_SUFFIX}${LIB_EXT}"
+    )
+else()
+    # Android, Mac, iOS, Linux
+    set_target_properties(zlib PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}z${LIB_SUFFIX}${LIB_EXT}"
+    )
+endif()
+
 # ssl
-project(ssl)
-add_library(ssl STATIC IMPORTED GLOBAL)
-set_target_properties(ssl PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}ssl${LIB_SUFFIX}${LIB_EXT}"
-)
+#project(ssl)
+#add_library(ssl STATIC IMPORTED GLOBAL)
+#set_target_properties(ssl PROPERTIES
+#    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}ssl${LIB_SUFFIX}${LIB_EXT}"
+#)
 
 # crypto
-project(crypto)
-add_library(crypto STATIC IMPORTED GLOBAL)
-set_target_properties(crypto PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}crypto${LIB_SUFFIX}${LIB_EXT}"
-)
+#project(crypto)
+#add_library(crypto STATIC IMPORTED GLOBAL)
+#set_target_properties(crypto PROPERTIES
+#    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}crypto${LIB_SUFFIX}${LIB_EXT}"
+#)
 
 # nakama-cpp
 set(lib_name nakama-cpp)
@@ -105,7 +129,15 @@ set_target_properties(${target_name} PROPERTIES
 )
 
 set_target_properties(${target_name} PROPERTIES
+    INTERFACE_LINK_DIRECTORIES "${LIBS_FOLDER}"
+)
+
+set_target_properties(${target_name} PROPERTIES
     IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}${lib_name}${LIB_SUFFIX}${LIB_EXT}"
 )
 
-target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares address_sorting gpr ssl crypto)
+target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares address_sorting gpr zlib)
+
+if(ANDROID)
+    target_link_libraries(${target_name} INTERFACE log)
+endif()
