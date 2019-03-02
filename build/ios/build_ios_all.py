@@ -55,6 +55,7 @@ cares_libs = []
 crypto_libs = []
 ssl_libs = []
 protobuf_libs = []
+z_libs = []
 
 build_dir = os.path.abspath('build/' + BUILD_MODE) + '/'
 
@@ -71,6 +72,7 @@ for arch in arch_list:
     crypto_libs.append(build_dir + arch + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a')
     ssl_libs.append(build_dir + arch + '/third_party/grpc/third_party/boringssl/ssl/libssl.a')
     protobuf_libs.append(build_dir + arch + '/third_party/grpc/third_party/protobuf/libprotobuf.a')
+    z_libs.append(build_dir + arch + '/third_party/grpc/third_party/zlib/libz.a')
 
 create_universal_lib(nakama_cpp_libs)
 create_universal_lib(grpc_libs)
@@ -81,5 +83,6 @@ create_universal_lib(cares_libs)
 create_universal_lib(crypto_libs)
 create_universal_lib(ssl_libs)
 create_universal_lib(protobuf_libs)
+create_universal_lib(z_libs)
 
 print 'done.'
