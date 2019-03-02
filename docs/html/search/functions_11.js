@@ -12,5 +12,5 @@ var searchData=
   ['updatechatmessage',['updateChatMessage',['../class_nakama_1_1_n_rt_client_interface.html#a1cd1e7362d47b1cd1dda670fb48af14c',1,'Nakama::NRtClientInterface']]],
   ['updategroup',['updateGroup',['../class_nakama_1_1_n_client_interface.html#a5b6daab5436b425193ed2541cdb8412d',1,'Nakama::NClientInterface']]],
   ['updatestatus',['updateStatus',['../class_nakama_1_1_n_rt_client_interface.html#ab22e572baa857c8fbc5ba1d26195df6d',1,'Nakama::NRtClientInterface']]],
-  ['url_5fencode',['url_encode',['../namespace_nakama.html#a562bb91a24a7d74e13e8565faef15d0c',1,'Nakama']]]
+  ['urlencode',['urlEncode',['../namespace_nakama.html#ace9d15af2b9937d1f4f8fc92c41bc9e4',1,'Nakama']]]
 ];

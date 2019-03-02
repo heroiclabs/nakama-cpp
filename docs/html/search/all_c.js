@@ -2,7 +2,7 @@ var searchData=
 [
   ['label',['label',['../struct_nakama_1_1_n_match.html#a30fb8ed6296ca121b65723b0c7aa1ff3',1,'Nakama::NMatch::label()'],['../struct_nakama_1_1_n_stream.html#a28ed8f84e8822636f9e393ed4bd17bf6',1,'Nakama::NStream::label()']]],
   ['lang',['lang',['../struct_nakama_1_1_n_group.html#ac5bf84e7fbb660868b13bec56692b55b',1,'Nakama::NGroup::lang()'],['../struct_nakama_1_1_n_user.html#a18b29652cdcc38463c1b654698dbc154',1,'Nakama::NUser::lang()']]],
-  ['leaderboard_5fid',['leaderboard_id',['../struct_nakama_1_1_n_leaderboard_record.html#a31f7c3ed44c18faf34d5adee89cc940b',1,'Nakama::NLeaderboardRecord']]],
+  ['leaderboardid',['leaderboardId',['../struct_nakama_1_1_n_leaderboard_record.html#ae2b11145b83ce2beb27305cba8887285',1,'Nakama::NLeaderboardRecord']]],
   ['leavechat',['leaveChat',['../class_nakama_1_1_n_rt_client_interface.html#a29c646bb9ea9456c947ad721a05b97ae',1,'Nakama::NRtClientInterface']]],
   ['leavegroup',['leaveGroup',['../class_nakama_1_1_n_client_interface.html#a6860640deb23d9b4ef03292a1661655a',1,'Nakama::NClientInterface']]],
   ['leavematch',['leaveMatch',['../class_nakama_1_1_n_rt_client_interface.html#aaa7a59aef733fceb3a535bb740b79ac3',1,'Nakama::NRtClientInterface']]],
@@ -29,5 +29,5 @@ var searchData=
   ['listusergroups',['listUserGroups',['../class_nakama_1_1_n_client_interface.html#a4c532bf03dfa705c67b2a7fbb8f3c235',1,'Nakama::NClientInterface::listUserGroups(NSessionPtr session, std::function&lt; void(NUserGroupListPtr)&gt; successCallback=nullptr, ErrorCallback errorCallback=nullptr)=0'],['../class_nakama_1_1_n_client_interface.html#a3ad2d9c596fe881d2ff291770aa61e4d',1,'Nakama::NClientInterface::listUserGroups(NSessionPtr session, const std::string &amp;userId, std::function&lt; void(NUserGroupListPtr)&gt; successCallback=nullptr, ErrorCallback errorCallback=nullptr)=0']]],
   ['listusersstorageobjects',['listUsersStorageObjects',['../class_nakama_1_1_n_client_interface.html#a8275dec5d1609b5cb8c82a8f82f83af7',1,'Nakama::NClientInterface']]],
   ['location',['location',['../struct_nakama_1_1_n_user.html#a3ccb36a1a195325ab43ac56dbd4ca58b',1,'Nakama::NUser']]],
-  ['log',['Log',['../class_nakama_1_1_n_logger.html#af53010ff689ab91e2a52a3ae927e40fc',1,'Nakama::NLogger::Log()'],['../class_nakama_1_1_n_console_log_sink.html#adaa0deaecf6ef552a2d767b218037465',1,'Nakama::NConsoleLogSink::log()'],['../class_nakama_1_1_n_log_sink_interface.html#a00ca2269476df1063fdbb5f579714160',1,'Nakama::NLogSinkInterface::log()']]]
+  ['log',['log',['../class_nakama_1_1_n_console_log_sink.html#adaa0deaecf6ef552a2d767b218037465',1,'Nakama::NConsoleLogSink::log()'],['../class_nakama_1_1_n_log_sink_interface.html#a00ca2269476df1063fdbb5f579714160',1,'Nakama::NLogSinkInterface::log()'],['../class_nakama_1_1_n_logger.html#af53010ff689ab91e2a52a3ae927e40fc',1,'Nakama::NLogger::Log()']]]
 ];

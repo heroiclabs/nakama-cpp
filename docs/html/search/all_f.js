@@ -17,8 +17,8 @@ var searchData=
   ['onstatuspresence',['onStatusPresence',['../class_nakama_1_1_n_rt_client_listener_interface.html#ac435ec38f90a988edfd6ec3a66c6d016',1,'Nakama::NRtClientListenerInterface::onStatusPresence()'],['../class_nakama_1_1_n_rt_default_client_listener.html#a90e7ba86da4d1703b354c3d8c4f96795',1,'Nakama::NRtDefaultClientListener::onStatusPresence()']]],
   ['onstreamdata',['onStreamData',['../class_nakama_1_1_n_rt_client_listener_interface.html#a76fbfe9eba7d6aafc9e66e7af8d9013a',1,'Nakama::NRtClientListenerInterface::onStreamData()'],['../class_nakama_1_1_n_rt_default_client_listener.html#accadcd6c80a03bac6a7927539b9690fc',1,'Nakama::NRtDefaultClientListener::onStreamData()']]],
   ['onstreampresence',['onStreamPresence',['../class_nakama_1_1_n_rt_client_listener_interface.html#a5cdcea65c5062c8de15c254a50092218',1,'Nakama::NRtClientListenerInterface::onStreamPresence()'],['../class_nakama_1_1_n_rt_default_client_listener.html#a7654f4e5c438d85b493571288ae86d45',1,'Nakama::NRtDefaultClientListener::onStreamPresence()']]],
-  ['op_5fcode',['op_code',['../struct_nakama_1_1_n_match_data.html#a6cf3d832c63ff47f686f3c11443ec1a2',1,'Nakama::NMatchData']]],
+  ['opcode',['opCode',['../struct_nakama_1_1_n_match_data.html#a7caee06b9d07f50942314356a1642018',1,'Nakama::NMatchData']]],
   ['open',['open',['../struct_nakama_1_1_n_group.html#a02df8e88409044fbbf6c2b491169041a',1,'Nakama::NGroup']]],
-  ['owner_5fid',['owner_id',['../struct_nakama_1_1_n_leaderboard_record.html#af2a8654325f64fcbc94f11f16a09d889',1,'Nakama::NLeaderboardRecord']]],
-  ['owner_5frecords',['owner_records',['../struct_nakama_1_1_n_leaderboard_record_list.html#a4f297613bc4e7cbe5235d01ff2a81700',1,'Nakama::NLeaderboardRecordList::owner_records()'],['../struct_nakama_1_1_n_tournament_record_list.html#a000389658db2fb0ff404350f2ab46038',1,'Nakama::NTournamentRecordList::owner_records()']]]
+  ['ownerid',['ownerId',['../struct_nakama_1_1_n_leaderboard_record.html#aaa613ce42458524803eace7eb3315ad0',1,'Nakama::NLeaderboardRecord']]],
+  ['ownerrecords',['ownerRecords',['../struct_nakama_1_1_n_leaderboard_record_list.html#a22abba55353bc506720dc3a2e581970d',1,'Nakama::NLeaderboardRecordList::ownerRecords()'],['../struct_nakama_1_1_n_tournament_record_list.html#ad864fdc1da908c5bc8185eeeb0b054fa',1,'Nakama::NTournamentRecordList::ownerRecords()']]]
 ];

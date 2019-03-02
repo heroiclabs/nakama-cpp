@@ -3,7 +3,7 @@ var struct_nakama_1_1_n_user =
     [ "avatarUrl", "struct_nakama_1_1_n_user.html#ab521488bd9bb6937ac87a7619259315c", null ],
     [ "createdAt", "struct_nakama_1_1_n_user.html#abe8473339304efaf87dd7b3d6b6874af", null ],
     [ "displayName", "struct_nakama_1_1_n_user.html#a1bdb25fe20dc54b8472ded0cd3df11de", null ],
-    [ "edge_count", "struct_nakama_1_1_n_user.html#a20df640dc97fb6020c645d93fe41e47f", null ],
+    [ "edgeCount", "struct_nakama_1_1_n_user.html#a92e9cc8b330d9dcde6872fe1f95849cf", null ],
     [ "facebookId", "struct_nakama_1_1_n_user.html#a54b22c5fb7ce0b01162b3ee129a59c28", null ],
     [ "gameCenterId", "struct_nakama_1_1_n_user.html#adc4f80a2036c0ca40bc715cd6b95d934", null ],
     [ "googleId", "struct_nakama_1_1_n_user.html#af5555a3bc4e3703d1bc534f66d20587e", null ],

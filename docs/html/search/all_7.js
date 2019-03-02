@@ -15,6 +15,6 @@ var searchData=
   ['getusers',['getUsers',['../class_nakama_1_1_n_client_interface.html#a1be2c35ca7d14725945626c02a3bd0b8',1,'Nakama::NClientInterface']]],
   ['googleid',['googleId',['../struct_nakama_1_1_n_user.html#af5555a3bc4e3703d1bc534f66d20587e',1,'Nakama::NUser']]],
   ['group',['group',['../struct_nakama_1_1_n_user_group.html#a55016343dd8b3950d6cd25c08d177402',1,'Nakama::NUserGroup::group()'],['../namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7a720909a4b948fc9e33633b61960d6b3c',1,'Nakama::GROUP()']]],
-  ['group_5fusers',['group_users',['../struct_nakama_1_1_n_group_user_list.html#afbf459ef56c85797623f7d56cfa0da4e',1,'Nakama::NGroupUserList']]],
-  ['groups',['groups',['../struct_nakama_1_1_n_group_list.html#afe147488cbebde3c60e031d2baf9f2ef',1,'Nakama::NGroupList']]]
+  ['groups',['groups',['../struct_nakama_1_1_n_group_list.html#afe147488cbebde3c60e031d2baf9f2ef',1,'Nakama::NGroupList']]],
+  ['groupusers',['groupUsers',['../struct_nakama_1_1_n_group_user_list.html#a0a1ab9cccc4da7bed88a1bfde4a4e3fb',1,'Nakama::NGroupUserList']]]
 ];

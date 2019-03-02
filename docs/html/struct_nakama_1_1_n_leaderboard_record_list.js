@@ -1,7 +1,7 @@
 var struct_nakama_1_1_n_leaderboard_record_list =
 [
-    [ "next_cursor", "struct_nakama_1_1_n_leaderboard_record_list.html#a0567c88095c5eea15c84b6feb9fd15cd", null ],
-    [ "owner_records", "struct_nakama_1_1_n_leaderboard_record_list.html#a4f297613bc4e7cbe5235d01ff2a81700", null ],
-    [ "prev_cursor", "struct_nakama_1_1_n_leaderboard_record_list.html#ad355e11349003c6c6a00023fa42eb7e4", null ],
+    [ "nextCursor", "struct_nakama_1_1_n_leaderboard_record_list.html#a584764a8ed7743866238527f39aaf8c3", null ],
+    [ "ownerRecords", "struct_nakama_1_1_n_leaderboard_record_list.html#a22abba55353bc506720dc3a2e581970d", null ],
+    [ "prevCursor", "struct_nakama_1_1_n_leaderboard_record_list.html#a4eaa89d7c8483215a7da4318accf3a77", null ],
     [ "records", "struct_nakama_1_1_n_leaderboard_record_list.html#af370d1d286c52ad21d1514554bc94a9f", null ]
 ];

@@ -13,6 +13,5 @@ var searchData=
   ['authenticategoogle',['authenticateGoogle',['../class_nakama_1_1_n_client_interface.html#a5c82d269f2d41392e2b5ce2f0fc6c806',1,'Nakama::NClientInterface']]],
   ['authenticatesteam',['authenticateSteam',['../class_nakama_1_1_n_client_interface.html#a55a31d693f9df04ae7aabbb8cff93728',1,'Nakama::NClientInterface']]],
   ['authoritative',['authoritative',['../struct_nakama_1_1_n_match.html#a1eb17f83adbed22fae954c8c17af2085',1,'Nakama::NMatch']]],
-  ['avatar_5furl',['avatar_url',['../struct_nakama_1_1_n_group.html#a65ba1b99c5973761d0b62f40ce09a00a',1,'Nakama::NGroup']]],
-  ['avatarurl',['avatarUrl',['../struct_nakama_1_1_n_user.html#ab521488bd9bb6937ac87a7619259315c',1,'Nakama::NUser']]]
+  ['avatarurl',['avatarUrl',['../struct_nakama_1_1_n_group.html#a1666bfd82fab279cf09470be6f56d8e6',1,'Nakama::NGroup::avatarUrl()'],['../struct_nakama_1_1_n_user.html#ab521488bd9bb6937ac87a7619259315c',1,'Nakama::NUser::avatarUrl()']]]
 ];
