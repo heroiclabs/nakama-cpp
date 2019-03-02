@@ -50,7 +50,7 @@ void NLogger::setSink(NLogSinkPtr sink)
         _sink->flush();
     }
 
-    _sink = sink;
+    _sink = std::move(sink);
 }
 
 void NLogger::setLevel(NLogLevel level)

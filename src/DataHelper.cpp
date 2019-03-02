@@ -50,7 +50,7 @@ void assign(std::string & str, const::google::protobuf::StringValue & data)
 
 void assign(NBytes & bytes, const std::string & str)
 {
-    uint32_t i = 0;
+    size_t i = 0;
 
     bytes.resize(str.size());
 

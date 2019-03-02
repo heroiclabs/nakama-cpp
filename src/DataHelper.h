@@ -113,10 +113,10 @@ namespace Nakama {
     {
         b.resize(data.size());
 
-        int i = 0;
-        for (auto it : data)
+        size_t i = 0;
+        for (auto& item : data)
         {
-            assign(b[i++], it);
+            assign(b[i++], item);
         }
     }
 

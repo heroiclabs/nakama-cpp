@@ -24,12 +24,12 @@ bool NRtClientProtocol_Protobuf::serialize(const google::protobuf::Message& mess
 
     output.resize(size);
 
-    return message.SerializeToArray(&output[0], size);
+    return message.SerializeToArray(&output[0], static_cast<int>(size));
 }
 
 bool NRtClientProtocol_Protobuf::parse(const NBytes& input, google::protobuf::Message& message)
 {
-    return message.ParseFromArray(input.data(), input.size());
+    return message.ParseFromArray(input.data(), static_cast<int>(input.size()));
 }
 
 }

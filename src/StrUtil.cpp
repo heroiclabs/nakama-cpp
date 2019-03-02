@@ -49,7 +49,7 @@ std::string getJsonFieldValue(const std::string & json, const std::string & fiel
     {
         pos += field_name.size() + 2;
 
-        pos = json.find(":", pos);
+        pos = json.find(':', pos);
         if (pos != string::npos)
         {
             ++pos;
@@ -94,9 +94,9 @@ string urlEncode(const string & str)
     string result;
     const char* chars = str.c_str();
     char bufHex[10];
-    uint32_t len = str.size();
+    size_t len = str.size();
 
-    for (uint32_t i = 0; i < len; i++)
+    for (size_t i = 0; i < len; i++)
     {
         char c = chars[i];
         // uncomment this if you want to encode spaces with +

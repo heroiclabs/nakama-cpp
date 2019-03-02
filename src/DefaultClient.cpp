@@ -422,12 +422,16 @@ void DefaultClient::authenticateGameCenter(
 
     nakama::api::AuthenticateGameCenterRequest req;
 
-    req.mutable_account()->set_player_id(playerId);
-    req.mutable_account()->set_bundle_id(bundleId);
-    req.mutable_account()->set_timestamp_seconds(timestampSeconds);
-    req.mutable_account()->set_salt(salt);
-    req.mutable_account()->set_signature(signature);
-    req.mutable_account()->set_public_key_url(publicKeyUrl);
+    {
+        auto* account = req.mutable_account();
+
+        account->set_player_id(playerId);
+        account->set_bundle_id(bundleId);
+        account->set_timestamp_seconds(timestampSeconds);
+        account->set_salt(salt);
+        account->set_signature(signature);
+        account->set_public_key_url(publicKeyUrl);
+    }
 
     if (!username.empty())
         req.set_username(username);

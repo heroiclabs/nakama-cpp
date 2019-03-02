@@ -62,11 +62,13 @@ void NDefaultWebsocket::connect(const std::string & url, NRtTransportType type)
 
         con->set_message_handler([this](websocketpp::connection_hdl, WsClient::message_ptr msg)
         {
-            NLOG(NLogLevel::Debug, "socket message received %d bytes", msg->get_payload().size());
+            auto& payload = msg->get_payload();
+
+            NLOG(NLogLevel::Debug, "socket message received %d bytes", payload.size());
 
             NBytes bytes;
 
-            bytes.assign(msg->get_payload().begin(), msg->get_payload().end());
+            bytes.assign(payload.begin(), payload.end());
 
             onMessage(bytes);
         });
@@ -93,8 +95,8 @@ void NDefaultWebsocket::connect(const std::string & url, NRtTransportType type)
     }
     catch (websocketpp::exception const & e)
     {
-        onError("connect failed: " + std::string(e.what()));
         NLOG_ERROR(e.what());
+        onError("connect failed: " + std::string(e.what()));
     }
 }
 

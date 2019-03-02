@@ -328,9 +328,13 @@ void NRtClient::updateChatMessage(const std::string & channelId, const std::stri
 
     ::nakama::realtime::Envelope msg;
 
-    msg.mutable_channel_message_update()->set_channel_id(channelId);
-    msg.mutable_channel_message_update()->set_message_id(messageId);
-    msg.mutable_channel_message_update()->set_content(content);
+    {
+        auto *channel_message = msg.mutable_channel_message_update();
+
+        channel_message->set_channel_id(channelId);
+        channel_message->set_message_id(messageId);
+        channel_message->set_content(content);
+    }
 
     RtRequestContext * ctx = createReqContext(msg);
 
@@ -539,9 +543,13 @@ void NRtClient::sendMatchData(const std::string & matchId, int64_t opCode, const
 
     ::nakama::realtime::Envelope msg;
 
-    msg.mutable_match_data_send()->set_match_id(matchId);
-    msg.mutable_match_data_send()->set_op_code(opCode);
-    msg.mutable_match_data_send()->set_data(data.data(), data.size());
+    {
+        auto* match_data = msg.mutable_match_data_send();
+
+        match_data->set_match_id(matchId);
+        match_data->set_op_code(opCode);
+        match_data->set_data(data.data(), data.size());
+    }
 
     for (auto& presence : presences)
     {

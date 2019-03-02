@@ -30,23 +30,31 @@ DefaultSession::DefaultSession(const std::string & token, bool created)
 
     // Hack decode JSON payload from JWT
     // first we narrow down to the segment between the first two '.'
-    int dotIndex1 = token.find('.');
-    int dotIndex2 = token.find('.', dotIndex1 + 1);
-    std::string payload = token.substr(dotIndex1 + 1, dotIndex2 - dotIndex1 - 1);
-
-    // the segment is base64 encoded, so decode it...
-    std::string json = base64Decode(payload);
-
-    // now we have some json to parse.
-    // e.g.: {"exp":1489862293,"uid":"3c01e3ee-878a-4ec4-8923-40d51a86f91f"}
-    string exp_str = getJsonFieldValue(json, "exp");
-    if (!exp_str.empty())
+    size_t dotIndex1 = token.find('.');
+    if (dotIndex1 != string::npos)
     {
-        _expire_time = ((NTimestamp)std::atol(exp_str.c_str())) * 1000ULL;
-    }
+        ++dotIndex1;
+        size_t dotIndex2 = token.find('.', dotIndex1);
 
-    _username = getJsonFieldValue(json, "usn");
-    _user_id = getJsonFieldValue(json, "uid");
+        if (dotIndex2 != string::npos)
+        {
+            std::string payload = token.substr(dotIndex1, dotIndex2 - dotIndex1);
+
+            // the segment is base64 encoded, so decode it...
+            std::string json = base64Decode(payload);
+
+            // now we have some json to parse.
+            // e.g.: {"exp":1489862293,"uid":"3c01e3ee-878a-4ec4-8923-40d51a86f91f"}
+            string exp_str = getJsonFieldValue(json, "exp");
+            if (!exp_str.empty())
+            {
+                _expire_time = ((NTimestamp)std::atol(exp_str.c_str())) * 1000ULL;
+            }
+
+            _username = getJsonFieldValue(json, "usn");
+            _user_id = getJsonFieldValue(json, "uid");
+        }
+    }
 }
 
 const std::string & DefaultSession::getAuthToken() const
