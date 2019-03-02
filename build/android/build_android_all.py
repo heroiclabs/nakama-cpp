@@ -17,7 +17,7 @@
 import sys
 import subprocess
 
-abi_list = ['armeabi-v7a', 'arm64-v8a', 'x86']
+abi_list = ['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']
 
 def call(command):
     res = subprocess.call(command, shell=False)

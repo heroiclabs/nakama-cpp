@@ -21,7 +21,7 @@ import shutil
 
 if len(sys.argv) < 2:
     print "Pass ABI parameter."
-    print "e.g. armeabi-v7a, arm64-v8a or x86"
+    print "e.g. armeabi-v7a, arm64-v8a, x86 or x86_64"
     sys.exit(-1)
 
 ABI = sys.argv[1]
