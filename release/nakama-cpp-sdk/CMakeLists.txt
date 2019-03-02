@@ -141,3 +141,8 @@ target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares addres
 if(ANDROID)
     target_link_libraries(${target_name} INTERFACE log)
 endif()
+
+if(UNIX AND NOT APPLE)
+    # Linux
+    target_link_libraries(${target_name} INTERFACE pthread)
+endif()
