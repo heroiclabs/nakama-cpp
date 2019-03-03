@@ -27,7 +27,10 @@ elseif(WIN32)
     # vc140 - Visual Studio 2015
     # vc141 - Visual Studio 2017
     set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/win32/vc141")
-elseif(APPLE AND NOT IOS_PLATFORM)
+elseif(APPLE_IOS)
+    # iOS
+    set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/ios")
+elseif(APPLE)
     # Mac
     set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/mac")
 elseif(UNIX AND NOT APPLE)
@@ -154,6 +157,10 @@ target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares addres
 
 if(ANDROID)
     target_link_libraries(${target_name} INTERFACE log)
+endif()
+
+if(APPLE_IOS)
+    target_link_libraries(${target_name} INTERFACE resolv.9)
 endif()
 
 if(UNIX AND NOT APPLE)
