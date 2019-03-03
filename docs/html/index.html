@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Nakama C++ Client SDK: Nakama C++ SDK</title>
+<title>Nakama C++ Client SDK: Nakama C++ Client SDK</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title"><a class="el" href="namespace_nakama.html">Nakama</a> C++ SDK </div>  </div>
+<div class="title"><a class="el" href="namespace_nakama.html">Nakama</a> C++ Client SDK </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><blockquote class="doxtable">
@@ -97,62 +97,70 @@ $(document).ready(function(){initNavTree('index.html','');});
 </blockquote>
 <p><a href="https://github.com/heroiclabs/nakama">Nakama</a> is an open-source server designed to power modern games and apps. Features include user accounts, chat, social, matchmaker, realtime multiplayer, and much <a href="https://heroiclabs.com">more</a>.</p>
 <p>This client implements the full API and socket options with the server. It's written in C++ with minimal dependencies to support Cocos2d-x, Unreal and other custom engines and frameworks.</p>
-<p>If you experience any issues with the client, it can be useful to enable debug logs (see <a href="#Logging">Logging</a> section) and <a href="https://github.com/heroiclabs/nakama-cpp/issues">open an issue</a>.</p>
+<p>If you experience any issues with the client, it can be useful to enable debug logs (see <a href="#logging">Logging</a> section) and <a href="https://github.com/heroiclabs/nakama-cpp/issues">open an issue</a>.</p>
 <p>Full documentation is online - <a href="https://heroiclabs.com/docs">https://heroiclabs.com/docs</a></p>
 <h2>Getting Started</h2>
 <p>You'll need to setup the server and database before you can connect with the client. The simplest way is to use Docker but have a look at the <a href="https://github.com/heroiclabs/nakama#getting-started">server documentation</a> for other options.</p>
 <ol type="1">
 <li>Install and run the servers. Follow these <a href="https://heroiclabs.com/docs/install-docker-quickstart">instructions</a>.</li>
-<li>Ensure that you are on one of the supported platforms:</li>
+<li><a class="el" href="namespace_nakama.html">Nakama</a> C++ SDK is released with prebuilt libraries for following platforms and architectures:</li>
 </ol>
 <ul>
 <li>Windows - Visual Studio 2015, 2017 (x86)</li>
-<li>Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86)</li>
+<li>Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86, x86_64)</li>
 <li>Linux - Ubuntu 14.04.5 (x86, x64)</li>
 <li>Mac</li>
 <li>iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off</li>
 </ul>
 <p>In theory any platform that meets the requirement for <code>grpc</code> and <code>boost</code> is also supported. The client is compiled with C++11.</p>
 <ol type="1">
-<li>Download the client from the <a href="https://github.com/heroiclabs/nakama-cpp/releases">releases page</a> and import it into your project. You can also <a href="#source-builds">build from source</a>.</li>
+<li>Download the client from the <a href="https://github.com/heroiclabs/nakama-cpp/releases">releases page</a>. You can also <a href="#source-builds">build from source</a>.</li>
 <li>Integrate the client library into your project:</li>
 </ol>
+<p>When you've downloaded the <a class="el" href="namespace_nakama.html">Nakama</a> C++ archive and extracted it to <code>NAKAMA_CPP_SDK</code> folder, you should include it in your project.</p>
+<p>We don't recommend to copy <a class="el" href="namespace_nakama.html">Nakama</a> C++ SDK to your project because it's quite big in size (~1 Gb).</p>
+<h3>Setup for Mac and iOS projects</h3>
+<ol type="1">
+<li>Add <code>NAKAMA_CPP_SDK/include</code> in <code>Build Settings &gt; Header Search Paths</code></li>
+<li>Add libs folder in <code>Build Settings &gt; Library Search Paths</code>:<ul>
+<li><code>NAKAMA_CPP_SDK/libs/ios</code> - for iOS</li>
+<li><code>NAKAMA_CPP_SDK/libs/mac</code> - for Mac</li>
+</ul>
+</li>
+<li>Add all <code>.a</code> files located in libs folder and <code>libresolv.9.tbd</code> in <code>General &gt; Linked Frameworks and Libraries</code></li>
+</ol>
+<h3>Setup for Android projects</h3>
+<p>If you use <code>CMake</code> then see <a href="#setup-for-cmake-projects">Setup for CMake projects</a> section.</p>
+<p>If you use <code>ndk-build</code> then add following to your <code>Android.mk</code> file:</p>
+<div class="fragment"><div class="line"># add this to your module</div><div class="line">LOCAL_STATIC_LIBRARIES += nakama-cpp</div><div class="line"></div><div class="line"># add this at bottom of Android.mk file</div><div class="line">$(call import-add-path, NAKAMA_CPP_SDK)</div><div class="line">$(call import-module, nakama-cpp-android)</div></div><!-- fragment --><p>Android uses a permissions system which determines which platform services the application will request to use and ask permission for from the user. The client uses the network to communicate with the server so you must add the "INTERNET" permission.</p>
+<div class="fragment"><div class="line">&lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.INTERNET&quot;</span>/&gt;</div></div><!-- fragment --><h3>Setup for CMake projects</h3>
+<p>Add following to your <code>CMakeLists.txt</code> file:</p>
+<div class="fragment"><div class="line">add_subdirectory(NAKAMA_CPP_SDK ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp)</div><div class="line">target_link_libraries(${APP_NAME} ext_nakama-cpp)</div></div><!-- fragment --><h3>Setup for Visual Studio projects</h3>
+<p>In <code>Project Settings</code> add following:</p>
+<ol type="1">
+<li>Add <code>NAKAMA_CPP_SDK/include</code> in <code>C/C++ &gt; General &gt; Additional Include Directories</code></li>
+<li>Add libs folder in <code>Linker &gt; General &gt; Additional Library Directories</code>:<ul>
+<li><code>NAKAMA_CPP_SDK/libs/win32/vc140</code> - for VS 2015</li>
+<li><code>NAKAMA_CPP_SDK/libs/win32/vc141</code> - for VS 2017</li>
+</ul>
+</li>
+<li>Add all <code>.lib</code> files located in libs folder in <code>Linker &gt; Input &gt; Additional Dependencies</code></li>
+</ol>
+<h3>Custom setup</h3>
 <ul>
-<li>add defines:<ul>
-<li><code>NLOGS_ENABLED</code> - define it if you want to use <a class="el" href="namespace_nakama.html">Nakama</a> logger. See <a href="#Logging">Logging</a> section</li>
+<li>add define:<ul>
+<li><code>NLOGS_ENABLED</code> - define it if you want to use <a class="el" href="namespace_nakama.html">Nakama</a> logger. See <a href="#logging">Logging</a> section</li>
 </ul>
 </li>
 <li>add include directory: <code>/Users/dimo4eg/dev/nakama-cpp/release/nakama-cpp-sdk/include</code></li>
 <li>add link directory: <code>/Users/dimo4eg/dev/nakama-cpp/release/nakama-cpp-sdk/libs/{platform}/{ABI}</code></li>
-<li>add link libraries:<ul>
-<li><code>nakama-cpp</code></li>
-<li><code>grpc++</code></li>
-<li><code>libprotobuf</code></li>
-<li><code>gpr</code></li>
-<li><code>grpc</code></li>
-<li><code>cares</code></li>
-<li><code>crypto</code></li>
-<li><code>ssl</code></li>
-<li><code>address_sorting</code></li>
-</ul>
-</li>
-</ul>
-<p>For Windows:</p>
-<ul>
-<li>Add extension <code>.lib</code> to libs names e.g. <code>nakama-cpp.lib</code></li>
-<li>To debug you must add <code>d</code> suffix to libs names e.g. <code>nakama-cppd.lib</code></li>
-</ul>
-<p>For Mac, iOS, Android and Linux:</p>
-<ul>
-<li>Add prefix <code>lib</code> and extension <code>.a</code> to libs names e.g. <code>libnakama-cpp.a</code></li>
+<li>add all libraries for linking from link directory</li>
 </ul>
 <p>For Mac and iOS:</p>
 <ul>
 <li>Add <code>libresolv.9.tbd</code> system library</li>
 </ul>
-<p>For Android:</p>
-<p>The client uses the network to communicate with the server so you must add the "INTERNET" permission.</p>
-<div class="fragment"><div class="line">&lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.INTERNET&quot;</span>/&gt;</div></div><!-- fragment --><h2>Threading model</h2>
+<h2>Threading model</h2>
 <p><a class="el" href="namespace_nakama.html">Nakama</a> C++ is designed to use in one thread only.</p>
 <h2>Usage</h2>
 <p>The client object has many methods to execute various features in the server or open realtime socket connections with the server.</p>
@@ -172,7 +180,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p>All requests are sent with a session object which authorizes the client.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> successCallback = [](<span class="keyword">const</span> NAccount&amp; account)</div><div class="line">{</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;user id : &quot;</span> &lt;&lt; account.user.id &lt;&lt; std::endl;</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;username: &quot;</span> &lt;&lt; account.user.username &lt;&lt; std::endl;</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;wallet  : &quot;</span> &lt;&lt; account.wallet &lt;&lt; std::endl;</div><div class="line">};</div><div class="line"></div><div class="line">client-&gt;getAccount(session, successCallback, errorCallback);</div></div><!-- fragment --><h3>Realtime client</h3>
 <p>The client can create one or more realtime clients with the server. Each realtime client can have it's own events listener registered for responses received from the server.</p>
-<div class="fragment"><div class="line"><span class="keywordtype">int</span> port = 7350; <span class="comment">// different port to the main API port</span></div><div class="line"><span class="keywordtype">bool</span> createStatus = <span class="keyword">true</span>; <span class="comment">// if the socket should show the user as online to others.</span></div><div class="line"><span class="comment">// define realtime client in your class as NRtClientPtr rtClient;</span></div><div class="line">rtClient = client-&gt;createRtClient(port);</div><div class="line"><span class="comment">// define listener in your class as NRtDefaultClientListener listener;</span></div><div class="line">listener.setConnectCallback([]()</div><div class="line">{</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Socket connected&quot;</span> &lt;&lt; std::endl;</div><div class="line">});</div><div class="line">rtClient-&gt;setListener(&amp;listener);</div><div class="line">rtClient-&gt;connect(session, createStatus);</div></div><!-- fragment --><p>Don't forget to call <code>tick</code> method. See <a href="#Tick">Tick</a> section for details.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> port = 7350; <span class="comment">// different port to the main API port</span></div><div class="line"><span class="keywordtype">bool</span> createStatus = <span class="keyword">true</span>; <span class="comment">// if the socket should show the user as online to others.</span></div><div class="line"><span class="comment">// define realtime client in your class as NRtClientPtr rtClient;</span></div><div class="line">rtClient = client-&gt;createRtClient(port);</div><div class="line"><span class="comment">// define listener in your class as NRtDefaultClientListener listener;</span></div><div class="line">listener.setConnectCallback([]()</div><div class="line">{</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Socket connected&quot;</span> &lt;&lt; std::endl;</div><div class="line">});</div><div class="line">rtClient-&gt;setListener(&amp;listener);</div><div class="line">rtClient-&gt;connect(session, createStatus);</div></div><!-- fragment --><p>Don't forget to call <code>tick</code> method. See <a href="#tick">Tick</a> section for details.</p>
 <h3>Logging</h3>
 <h4>Initializing Logger</h4>
 <p>Client logging is off by default.</p>
@@ -262,14 +270,16 @@ $(document).ready(function(){initNavTree('index.html','');});
 <h3>Building for Android</h3>
 <p>Set <code>ANDROID_NDK</code> or <code>NDK_ROOT</code> system variable to Android NDK folder.</p>
 <p>To build for one ABI:</p>
-<div class="fragment"><div class="line">cd build/android</div><div class="line">python build_android.py ABI</div></div><!-- fragment --><p> Where <code>ABI</code> is Android ABI e.g. <code>armeabi-v7a</code>, <code>arm64-v8a</code> or <code>x86</code></p>
+<div class="fragment"><div class="line">cd build/android</div><div class="line">python build_android.py ABI</div></div><!-- fragment --><p> Where <code>ABI</code> is Android ABI e.g. <code>armeabi-v7a</code>, <code>arm64-v8a</code>, <code>x86</code> or <code>x86_64</code></p>
 <p>It builds for Andoid API level 16 in <code>Release</code> mode.</p>
-<p>To build for all ABIs <code>armeabi-v7a</code>, <code>arm64-v8a</code> and <code>x86</code>:</p>
+<p>To build for all ABIs <code>armeabi-v7a</code>, <code>arm64-v8a</code>, <code>x86</code> and <code>x86_64</code>:</p>
 <div class="fragment"><div class="line">cd build/android</div><div class="line">python build_android_all.py</div></div><!-- fragment --><h2>Tests</h2>
 <p>Tests are built when you build <a class="el" href="namespace_nakama.html">Nakama</a> C++ SDK for desktop OS (Windows, Mac or Linux).</p>
-<p>By default tests connect to local server by <code>127.0.0.1</code>. To use another IP of your server, edit <code>test/test_server_config.h</code> file.</p>
+<p>By default tests connect to local server by <code>127.0.0.1</code>. To use another IP of your server, edit <code>test/test_serverConfig.h</code> file.</p>
 <p>Run tests (console application):</p>
-<div class="fragment"><div class="line">build/{platform}/build/test/Debug/nakama-test</div></div><!-- fragment --><h2>Generating Docs</h2>
+<div class="fragment"><div class="line">build/{platform}/build/test/Debug/nakama-test</div></div><!-- fragment --><h2>Full C++ Client example</h2>
+<p>You can find the C++ Client example <a href="https://github.com/heroiclabs/nakama-cpp/tree/master/examples/nakama-cmake-client-example">here</a></p>
+<h2>Generating Docs</h2>
 <p>Prerequisites: <code>doxygen</code></p>
 <p>Generate docs:</p>
 <div class="fragment"><div class="line">cd docs</div><div class="line">doxygen Doxyfile</div></div><!-- fragment --><h2>License</h2>

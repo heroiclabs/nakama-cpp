@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['nakama_20c_2b_2b_20sdk',['Nakama C++ SDK',['../index.html',1,'']]],
+  ['nakama_20c_2b_2b_20client_20sdk',['Nakama C++ Client SDK',['../index.html',1,'']]],
   ['naccount',['NAccount',['../struct_nakama_1_1_n_account.html',1,'Nakama']]],
   ['naccount_2eh',['NAccount.h',['../_n_account_8h.html',1,'']]],
   ['naccountdevice',['NAccountDevice',['../struct_nakama_1_1_n_account_device.html',1,'Nakama']]],

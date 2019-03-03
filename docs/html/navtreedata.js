@@ -24,7 +24,6 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "Nakama C++ Client SDK", "index.html", [
-    [ "Nakama C++ SDK", "index.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -60,7 +59,7 @@ var NAVTREEINDEX =
 [
 "_default_client_8h.html",
 "class_nakama_1_1_n_client_interface.html#ab3577a1e4da3677fbd3c1df4d5dae242",
-"struct_nakama_1_1_n_channel_message_ack.html#a0487aa81efb25e9c2e7baacaafde1809"
+"struct_nakama_1_1_n_channel_message_ack.html#a06dcd90202068bbe3470c6f9c3f04444"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
