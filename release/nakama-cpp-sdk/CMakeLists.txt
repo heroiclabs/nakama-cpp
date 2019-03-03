@@ -35,7 +35,11 @@ elseif(APPLE)
     set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/mac")
 elseif(UNIX AND NOT APPLE)
     # Linux
-    set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/linux/x86")
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8) 
+        set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/linux/x64")
+    else()
+        set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/linux/x86")
+    endif()
 endif()
 
 set(LIB_PREFIX "")
