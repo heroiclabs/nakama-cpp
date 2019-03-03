@@ -167,7 +167,7 @@ if(APPLE_IOS)
     target_link_libraries(${target_name} INTERFACE resolv.9)
 endif()
 
-if(UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE AND NOT ANDROID)
     # Linux
     target_link_libraries(${target_name} INTERFACE pthread)
 endif()
