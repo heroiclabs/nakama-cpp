@@ -15,14 +15,10 @@
  */
 
 #include "nakama-cpp/Nakama.h"
-#include "test_server_config.h"
-#include <chrono>
-#include <thread>
 #include <iostream>
+#include <thread>
 
-namespace Nakama {
-namespace Test {
-
+using namespace Nakama;
 using namespace std;
 
 class NakamaSessionManager
@@ -32,9 +28,10 @@ public:
     {
         DefaultClientParameters parameters;
 
-        parameters.host = SERVER_HOST;
-        parameters.port = SERVER_GRPC_PORT;
-        parameters.serverKey = SERVER_KEY;
+        // set server end point
+        parameters.serverKey = "defaultkey";
+        parameters.host      = "127.0.0.1";
+        parameters.port      = 7349;
 
         _client = createDefaultClient(parameters);
     }
@@ -53,6 +50,8 @@ public:
             {
                 // Session was valid and is restored now.
                 _session = session;
+                cout << "restored session with token: " << session->getAuthToken() << endl;
+                onAuthenticated();
                 return;
             }
         }
@@ -60,13 +59,13 @@ public:
         auto successCallback = [this](NSessionPtr session)
         {
             // to do: save session token in your storage
-            std::cout << "session token: " << session->getAuthToken() << std::endl;
-            _done = true;
+            _session = session;
+            cout << "session token: " << session->getAuthToken() << endl;
+            onAuthenticated();
         };
 
-        auto errorCallback = [this](const NError& error)
+        auto errorCallback = [](const NError& error)
         {
-            _done = true;
         };
 
         _client->authenticateDevice(deviceId, opt::nullopt, opt::nullopt, successCallback, errorCallback);
@@ -76,32 +75,43 @@ public:
     {
         _client->tick();
     }
+    
+    void onAuthenticated()
+    {
+        auto successCallback = [this](const NAccount& account)
+        {
+            cout << "account user id: " << account.user.id << endl;
+            cout << "account user created at: " << account.user.createdAt << endl;
+        };
+        
+        auto errorCallback = [](const NError& error)
+        {
+        };
 
-    bool isDone() const { return _done; }
+        _client->getAccount(_session, successCallback, errorCallback);
+    }
 
 protected:
     NClientPtr _client;
     NSessionPtr _session;
-    bool _done = false;
 };
 
-void full_example()
+int main()
 {
-    std::cout << "running full example..." << std::endl;
+    // enable debug logs to console
+    NLogger::initWithConsoleSink(NLogLevel::Debug);
 
     NakamaSessionManager sessionManager;
 
     sessionManager.start("mytestdevice0001");
 
-    std::chrono::milliseconds sleep_period(15);
+    chrono::milliseconds sleep_period(50);
 
-    while (!sessionManager.isDone())
+    // run main loop
+    while (true)
     {
         sessionManager.tick();
 
-        std::this_thread::sleep_for(sleep_period);
+        this_thread::sleep_for(sleep_period);
     }
 }
-
-} // namespace Test
-} // namespace Nakama
