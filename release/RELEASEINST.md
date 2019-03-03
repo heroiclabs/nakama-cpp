@@ -24,6 +24,7 @@ nakama-cpp-sdk/
 ├── nakama-cpp-android/
 ├── CMakeLists.txt
 ├── LICENSE
+├── CHANGELOG.md
 └── README.md
 ```
 
@@ -34,6 +35,8 @@ The development team use these steps to build and upload a release.
 1. Update the `CHANGELOG.md`.
 
    Make sure to add the relevant "Added", "Changed", "Deprecated", "Removed", "Fixed", and "Security" sections as suggested by [keep a changelog](http://keepachangelog.com).
+   
+   Copy `CHANGELOG.md` to `release/nakama-cpp-sdk/CHANGELOG.md`.
 
 2. Update version in `src/Nakama.cpp`, build and commit.
 
