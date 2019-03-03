@@ -1,4 +1,4 @@
-Nakama C++ SDK
+Nakama C++ Client SDK
 =============
 
 > General C++ client for Nakama server.
@@ -7,7 +7,7 @@ Nakama C++ SDK
 
 This client implements the full API and socket options with the server. It's written in C++ with minimal dependencies to support Cocos2d-x, Unreal and other custom engines and frameworks.
 
-If you experience any issues with the client, it can be useful to enable debug logs (see [Logging](#Logging) section) and [open an issue](https://github.com/heroiclabs/nakama-cpp/issues).
+If you experience any issues with the client, it can be useful to enable debug logs (see [Logging](#logging) section) and [open an issue](https://github.com/heroiclabs/nakama-cpp/issues).
 
 Full documentation is online - https://heroiclabs.com/docs
 
@@ -17,57 +17,85 @@ You'll need to setup the server and database before you can connect with the cli
 
 1. Install and run the servers. Follow these [instructions](https://heroiclabs.com/docs/install-docker-quickstart).
 
-2. Ensure that you are on one of the supported platforms:
+2. Nakama C++ SDK is released with prebuilt libraries for following platforms and architectures:
 
 - Windows - Visual Studio 2015, 2017 (x86)
-- Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86)
+- Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86, x86_64)
 - Linux - Ubuntu 14.04.5 (x86, x64)
 - Mac
 - iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off
 
 In theory any platform that meets the requirement for `grpc` and `boost` is also supported. The client is compiled with C++11.
 
-3. Download the client from the [releases page](https://github.com/heroiclabs/nakama-cpp/releases) and import it into your project. You can also [build from source](#source-builds).
+3. Download the client from the [releases page](https://github.com/heroiclabs/nakama-cpp/releases). You can also [build from source](#source-builds).
 
 <!-- You can download clients that are tailored for [Cocos2d-x](https://github.com/heroiclabs/nakama-cocos2d-x) or [Unreal 4](https://github.com/heroiclabs/nakama-unreal). -->
 
 4. Integrate the client library into your project:
 
-- add defines: 
-  - `NLOGS_ENABLED` - define it if you want to use Nakama logger. See [Logging](#Logging) section
-- add include directory: `$(NAKAMA_CPP_SDK)/include`
-- add link directory: `$(NAKAMA_CPP_SDK)/libs/{platform}/{ABI}`
-- add link libraries:
-  - `nakama-cpp`
-  - `grpc++`
-  - `libprotobuf`
-  - `gpr`
-  - `grpc`
-  - `cares`
-  - `crypto`
-  - `ssl`
-  - `address_sorting`
+When you've downloaded the Nakama C++ archive and extracted it to `NAKAMA_CPP_SDK` folder, you should include it in your project.
 
-For Windows:
+We don't recommend to copy Nakama C++ SDK to your project because it's quite big in size (~1 Gb).
 
-- Add extension `.lib` to libs names e.g. `nakama-cpp.lib`
-- To debug you must add `d` suffix to libs names e.g. `nakama-cppd.lib`
+### Setup for Mac and iOS projects
 
-For Mac, iOS, Android and Linux:
+1. Add `NAKAMA_CPP_SDK/include` in `Build Settings > Header Search Paths`
+2. Add libs folder in `Build Settings > Library Search Paths`:
+    - `NAKAMA_CPP_SDK/libs/ios` - for iOS
+    - `NAKAMA_CPP_SDK/libs/mac` - for Mac
+3. Add all `.a` files located in libs folder and `libresolv.9.tbd` in `General > Linked Frameworks and Libraries`
 
-- Add prefix `lib` and extension `.a` to libs names e.g. `libnakama-cpp.a`
+### Setup for Android projects
 
-For Mac and iOS:
+If you use `CMake` then see [Setup for CMake projects](#setup-for-cmake-projects) section.
 
-- Add `libresolv.9.tbd` system library
+If you use `ndk-build` then add following to your `Android.mk` file:
 
-For Android:
+```makefile
+# add this to your module
+LOCAL_STATIC_LIBRARIES += nakama-cpp
 
-The client uses the network to communicate with the server so you must add the "INTERNET" permission.
+# add this at bottom of Android.mk file
+$(call import-add-path, NAKAMA_CPP_SDK)
+$(call import-module, nakama-cpp-android)
+```
+
+Android uses a permissions system which determines which platform services the application will request to use and ask permission for from the user. The client uses the network to communicate with the server so you must add the "INTERNET" permission.
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET"/>
 ```
+
+### Setup for CMake projects
+
+Add following to your `CMakeLists.txt` file:
+
+```cmake
+add_subdirectory(NAKAMA_CPP_SDK ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp)
+target_link_libraries(${APP_NAME} ext_nakama-cpp)
+```
+
+### Setup for Visual Studio projects
+
+In `Project Settings` add following:
+
+1. Add `NAKAMA_CPP_SDK/include` in `C/C++ > General > Additional Include Directories`
+2. Add libs folder in `Linker > General > Additional Library Directories`:
+    - `NAKAMA_CPP_SDK/libs/win32/vc140` - for VS 2015
+    - `NAKAMA_CPP_SDK/libs/win32/vc141` - for VS 2017
+3. Add all `.lib` files located in libs folder in `Linker > Input > Additional Dependencies`
+
+### Custom setup
+
+- add define:
+  * `NLOGS_ENABLED` - define it if you want to use Nakama logger. See [Logging](#logging) section
+- add include directory: `$(NAKAMA_CPP_SDK)/include`
+- add link directory: `$(NAKAMA_CPP_SDK)/libs/{platform}/{ABI}`
+- add all libraries for linking from link directory
+
+For Mac and iOS:
+
+- Add `libresolv.9.tbd` system library
 
 ## Threading model
 
@@ -188,7 +216,7 @@ rtClient->setListener(&listener);
 rtClient->connect(session, createStatus);
 ```
 
-Don't forget to call `tick` method. See [Tick](#Tick) section for details.
+Don't forget to call `tick` method. See [Tick](#tick) section for details.
 
 ### Logging
 
@@ -387,11 +415,11 @@ To build for one ABI:
 cd build/android
 python build_android.py ABI
 ```
-Where `ABI` is Android ABI e.g. `armeabi-v7a`, `arm64-v8a` or `x86`
+Where `ABI` is Android ABI e.g. `armeabi-v7a`, `arm64-v8a`, `x86` or `x86_64`
 
 It builds for Andoid API level 16 in `Release` mode.
 
-To build for all ABIs `armeabi-v7a`, `arm64-v8a` and `x86`:
+To build for all ABIs `armeabi-v7a`, `arm64-v8a`, `x86` and `x86_64`:
 
 ```bash
 cd build/android
@@ -403,13 +431,17 @@ python build_android_all.py
 Tests are built when you build Nakama C++ SDK for desktop OS (Windows, Mac or Linux).
 
 By default tests connect to local server by `127.0.0.1`.
-To use another IP of your server, edit `test/test_server_config.h` file.
+To use another IP of your server, edit `test/test_serverConfig.h` file.
 
 Run tests (console application):
 
 ```bash
 build/{platform}/build/test/Debug/nakama-test
 ```
+
+## Full C++ Client example
+
+You can find the C++ Client example [here](https://github.com/heroiclabs/nakama-cpp/tree/master/examples/nakama-cmake-client-example)
 
 ## Generating Docs
 
