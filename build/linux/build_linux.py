@@ -20,6 +20,12 @@ import os
 import shutil
 import platform
 
+cur_dir = os.path.abspath('.')
+if cur_dir.find(' ') >= 0:
+    print 'Error: space foud in path:', cur_dir
+    print 'please remove spaces from path and try again'
+    sys.exit(-1)
+
 bits, linkage = platform.architecture()
 
 if bits == '64bit':

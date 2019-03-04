@@ -19,6 +19,12 @@ import subprocess
 import os
 import shutil
 
+cur_dir = os.path.abspath('.')
+if cur_dir.find(' ') >= 0:
+    print 'Error: space foud in path:', cur_dir
+    print 'please remove spaces from path and try again'
+    sys.exit(-1)
+
 if len(sys.argv) < 2:
     print "Pass ABI parameter."
     print "e.g. armeabi-v7a, arm64-v8a, x86 or x86_64"

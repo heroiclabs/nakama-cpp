@@ -19,6 +19,12 @@ import subprocess
 import os
 import shutil
 
+cur_dir = os.path.abspath('.')
+if cur_dir.find(' ') >= 0:
+    print 'Error: space foud in path:', cur_dir
+    print 'please remove spaces from path and try again'
+    sys.exit(-1)
+
 BUILD_MODE = 'Release'
 build_dir = os.path.abspath('build/' + BUILD_MODE)
 release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/libs/mac')

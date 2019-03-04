@@ -19,6 +19,12 @@ import subprocess
 import os
 import shutil
 
+cur_dir = os.path.abspath('.')
+if cur_dir.find(' ') >= 0:
+    print 'Error: space foud in path:', cur_dir
+    print 'please remove spaces from path and try again'
+    sys.exit(-1)
+
 if len(sys.argv) < 2:
     print "Pass ARCH parameter."
     print "e.g. arm64 armv7 armv7s x86_64"

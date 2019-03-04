@@ -19,6 +19,12 @@ import subprocess
 import argparse
 import shutil
 
+cur_dir = os.path.abspath('.')
+if cur_dir.find(' ') >= 0:
+    print 'Error: space foud in path:', cur_dir
+    print 'please remove spaces from path and try again'
+    sys.exit(-1)
+
 parser = argparse.ArgumentParser(description='builder for Windows')
 parser.add_argument('-m', '--mode', help='build mode: Debug or Release')
 parser.add_argument('-a', '--arch', help='architecture: x86 or x64')
