@@ -41,6 +41,10 @@ def build(target):
     print 'building ' + target + '...'
     call('cmake --build . --target ' + target + ' --config ' + BUILD_MODE)
 
+def makedirs(dir):
+    if not os.path.isdir(dir):
+        os.makedirs(dir)
+
 def copy_file(src, dest):
     shutil.copy(src, dest)
     print 'copied', os.path.basename(src)
@@ -67,4 +71,5 @@ build('protoc')
 build('nakama-cpp')
 build('nakama-test')
 
+makedirs(release_libs_path)
 copy_libs(release_libs_path)
