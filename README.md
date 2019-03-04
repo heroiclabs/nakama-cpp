@@ -341,6 +341,7 @@ Prerequisites:
 sudo xcode-select --install
 brew install autoconf automake libtool shtool
 brew install gflags
+brew install cmake ninja boost
 ```
 
 Build:
