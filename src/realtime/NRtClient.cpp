@@ -542,18 +542,15 @@ void NRtClient::sendMatchData(const std::string & matchId, int64_t opCode, const
     NLOG_INFO("...");
 
     ::nakama::realtime::Envelope msg;
+    auto* match_data = msg.mutable_match_data_send();
 
-    {
-        auto* match_data = msg.mutable_match_data_send();
-
-        match_data->set_match_id(matchId);
-        match_data->set_op_code(opCode);
-        match_data->set_data(data.data(), data.size());
-    }
+    match_data->set_match_id(matchId);
+    match_data->set_op_code(opCode);
+    match_data->set_data(data.data(), data.size());
 
     for (auto& presence : presences)
     {
-        auto* presenceData = msg.mutable_match_data_send()->mutable_presences()->Add();
+        auto* presenceData = match_data->mutable_presences()->Add();
 
         if (!presence.userId.empty())
             presenceData->set_user_id(presence.userId);
