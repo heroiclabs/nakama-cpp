@@ -17,7 +17,6 @@
 import sys
 import subprocess
 import os
-import shutil
 
 BUILD_MODE = 'Release'
 build_dir = os.path.abspath('build/' + BUILD_MODE)
@@ -36,7 +35,6 @@ def build(target):
 
 os.chdir(build_dir)
 
-#generator = 'Xcode' # doesn't build crypto
 generator = 'Ninja'
 
 # generate projects

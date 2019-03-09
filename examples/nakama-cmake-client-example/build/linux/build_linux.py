@@ -17,7 +17,6 @@
 import sys
 import subprocess
 import os
-import shutil
 import platform
 
 bits, linkage = platform.architecture()

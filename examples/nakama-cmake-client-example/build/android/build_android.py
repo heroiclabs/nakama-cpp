@@ -17,7 +17,6 @@
 import sys
 import subprocess
 import os
-import shutil
 
 if len(sys.argv) < 2:
     print "Pass ABI parameter."

@@ -17,7 +17,6 @@ import sys
 import os
 import subprocess
 import argparse
-import shutil
 
 parser = argparse.ArgumentParser(description='builder for Windows')
 parser.add_argument('-m', '--mode', help='build mode: Debug or Release')
