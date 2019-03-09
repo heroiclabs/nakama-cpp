@@ -1273,7 +1273,14 @@ void DefaultClient::listGroups(NSessionPtr session, const std::string & name, in
 
 void DefaultClient::listUserGroups(NSessionPtr session, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    listUserGroups(session, "", successCallback, errorCallback);
+    if (session)
+    {
+        listUserGroups(session, session->getUserId(), successCallback, errorCallback);
+    }
+    else
+    {
+        NLOG_ERROR("No session");
+    }
 }
 
 void DefaultClient::listUserGroups(NSessionPtr session, const std::string & userId, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
@@ -1296,8 +1303,7 @@ void DefaultClient::listUserGroups(NSessionPtr session, const std::string & user
 
     nakama::api::ListUserGroupsRequest req;
 
-    if (!userId.empty())
-        req.set_user_id(userId);
+    req.set_user_id(userId);
 
     auto responseReader = _stub->AsyncListUserGroups(&ctx->context, req, &_cq);
 
