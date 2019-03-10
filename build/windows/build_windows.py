@@ -98,9 +98,9 @@ build('nakama-cpp')
 build('nakama-test')
 
 if generator.startswith('Visual Studio 14 2015'):
-    vc = 'vc140'
+    vc = 'v140'
 elif generator.startswith('Visual Studio 15 2017'):
-    vc = 'vc141'
+    vc = 'v141'
 else:
     print 'Unknown Visual Studio version.'
     sys.exit(-1)

@@ -17,6 +17,13 @@ cmake_minimum_required(VERSION 3.6)
 
 set(ROOT_LIBS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/libs")
 
+# check architecture
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(CPU_ARCH "x64")
+else()
+    set(CPU_ARCH "x86")
+endif()
+
 if(ANDROID)
     if("${ANDROID_STL}" STREQUAL "c++_static")
         set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/android/${ANDROID_ABI}")
@@ -26,7 +33,11 @@ if(ANDROID)
 elseif(WIN32)
     # vc140 - Visual Studio 2015
     # vc141 - Visual Studio 2017
-    set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/win32/vc141")
+    if(${CPU_ARCH} STREQUAL "x64")
+        set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/win64/${CMAKE_VS_PLATFORM_TOOLSET}/${CMAKE_BUILD_TYPE}")
+    else()
+        set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/win32/${CMAKE_VS_PLATFORM_TOOLSET}/${CMAKE_BUILD_TYPE}")
+    endif()
 elseif(APPLE_IOS)
     # iOS
     set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/ios")
@@ -35,10 +46,10 @@ elseif(APPLE)
     set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/mac")
 elseif(UNIX AND NOT APPLE)
     # Linux
-    if(CMAKE_SIZEOF_VOID_P EQUAL 8) 
-        set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/linux/x64")
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/linux/${CPU_ARCH}")
     else()
-        set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/linux/x86")
+        set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/linux/${CPU_ARCH}")
     endif()
 endif()
 
