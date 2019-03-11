@@ -81,8 +81,10 @@ In `Project Settings` add following:
 
 1. Add `NAKAMA_CPP_SDK/include` in `C/C++ > General > Additional Include Directories`
 2. Add libs folder in `Linker > General > Additional Library Directories`:
-    - `NAKAMA_CPP_SDK/libs/win32/vc140` - for VS 2015
-    - `NAKAMA_CPP_SDK/libs/win32/vc141` - for VS 2017
+    - `NAKAMA_COCOS2D_SDK/libs/win32/v140` - for VS 2015 x86
+    - `NAKAMA_COCOS2D_SDK/libs/win32/v141` - for VS 2017 x86
+    - `NAKAMA_COCOS2D_SDK/libs/win64/v140` - for VS 2015 x64
+    - `NAKAMA_COCOS2D_SDK/libs/win64/v141` - for VS 2017 x64
 3. Add all `.lib` files located in libs folder in `Linker > Input > Additional Dependencies`
 
 ### Custom setup
