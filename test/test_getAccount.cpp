@@ -39,10 +39,25 @@ void test_getAccount()
         my_session = session;
         std::cout << "session token: " << session->getAuthToken() << std::endl;
 
-        auto successCallback = [&test](const NAccount& account)
+        auto successCallback = [&test, my_session, errorCallback](const NAccount& account)
         {
             std::cout << "account user id: " << account.user.id << std::endl;
-            test.stopTest(true);
+
+            auto successCallback = [&test]()
+            {
+                std::cout << "account updated" << std::endl;
+                test.stopTest(true);
+            };
+
+            test.client->updateAccount(my_session,
+                opt::nullopt,
+                "Nakama-test",
+                opt::nullopt,
+                opt::nullopt,
+                opt::nullopt,
+                opt::nullopt,
+                successCallback,
+                errorCallback);
         };
 
         test.client->getAccount(session, successCallback, errorCallback);
