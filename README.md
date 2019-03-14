@@ -328,13 +328,25 @@ Third party libraries:
 
 ```bash
 cd build\windows
-python build_windows.py -m Mode -a Arch
+python build_windows.py -m Mode -a Arch -t Toolset
 ```
 Where `Mode` is build mode: `Debug` or `Release`
 
 Where `Arch` is architecture: `x86` or `x64`
 
+Where `Toolset` is platform toolset:
+
+- `v140` - Visual Studio 2015
+- `v141` - Visual Studio 2017
+
 It builds and copies nakama lib to release folder.
+
+To build for all modes, architectures and toolsets:
+
+```bash
+cd build\windows
+python build_windows_all.py
+```
 
 ### Building for Mac
 
