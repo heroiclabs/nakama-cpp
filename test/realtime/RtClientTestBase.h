@@ -29,6 +29,7 @@ public:
 
     NRtDefaultClientListener listener;
     NRtClientPtr rtClient;
+    NSessionPtr session;
     static NRtClientProtocol protocol;
 
     void runTest() override;

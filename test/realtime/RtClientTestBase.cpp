@@ -65,6 +65,8 @@ void NRtClientTest::runTest()
 
     auto successCallback = [this](NSessionPtr session)
     {
+        this->session = session;
+
         std::cout << "session token: " << session->getAuthToken() << std::endl;
 
         rtClient = client->createRtClient(SERVER_HTTP_PORT);
