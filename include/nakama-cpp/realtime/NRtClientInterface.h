@@ -72,6 +72,7 @@ namespace Nakama {
         *
         * @param session The session of the user.
         * @param createStatus True if the socket should show the user as online to others.
+        * @param protocol Communication protocol. Default is Protobuf.
         */
         virtual void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol = NRtClientProtocol::Protobuf) = 0;
 
