@@ -28,6 +28,7 @@ void test_errors();
 void test_disconnect();
 void test_restoreSession();
 void test_storage();
+void test_groups();
 void test_realtime();
 
 // currently running tests
@@ -84,8 +85,8 @@ void runTestsLoop()
 // *************************************************************
 
 NTest::NTest(const char * name)
+    : _name(name)
 {
-    _name = name;
 }
 
 NTest::~NTest()
@@ -182,6 +183,7 @@ int runAllTests()
     test_errors();
     test_restoreSession();
     test_storage();
+    test_groups();
     test_realtime();
 
     // total stats
