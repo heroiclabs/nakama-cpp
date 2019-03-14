@@ -125,18 +125,20 @@ void NLogger::Format(NLogLevel level, const char* module_name, const char* func,
         va_copy(argsCpy, args);
         size_t len = std::vsnprintf(nullptr, 0, format, argsCpy);
         va_end(argsCpy);
-        va_end(args);
 
         if (len > 0)
         {
             std::string str;
-            str.resize(len + 1);
-            va_start(args, format);
+            str.resize(len); // string will allocate space for null terminator
             std::vsnprintf(&str[0], len + 1, format, args);
-            va_end(args);
 
-            NLogger::Log(level, str, module_name, func);
+            if (str.size() > 0)
+            {
+                NLogger::Log(level, str, module_name, func);
+            }
         }
+
+        va_end(args);
     }
 }
 

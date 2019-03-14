@@ -17,18 +17,34 @@
 #include "nakama-cpp/log/NConsoleLogSink.h"
 #include <iostream>
 
+#ifdef WIN32
+    #define WIN32_LEAN_AND_MEAN
+    #include <Windows.h>
+#endif
+
 namespace Nakama {
+
+    using namespace std;
 
     void NConsoleLogSink::log(NLogLevel level, const std::string& message, const char* func)
     {
-        std::ostream& os = (level >= NLogLevel::Error) ? std::cerr : std::cout;
+        std::string tmp;
 
         if (func && func[0])
         {
-            os << "[" << func << "] ";
+            tmp.append("[").append(func).append("] ");
         }
 
-        os << message << std::endl;
+        tmp.append(message).append("\n");
+
+        // write to console
+        std::ostream& os = (level >= NLogLevel::Error) ? std::cerr : std::cout;
+        os << tmp;
+
+#ifdef WIN32
+        // write debug string so Visual Studio and DebugView will catch it
+        OutputDebugStringA(tmp.c_str());
+#endif
     }
 
     void NConsoleLogSink::flush()
