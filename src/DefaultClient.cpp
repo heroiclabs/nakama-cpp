@@ -537,7 +537,7 @@ void DefaultClient::linkFacebook(
 
     auto responseReader = _stub->AsyncLinkFacebook(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkEmail(
@@ -560,7 +560,7 @@ void DefaultClient::linkEmail(
 
     auto responseReader = _stub->AsyncLinkEmail(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkDevice(
@@ -581,7 +581,7 @@ void DefaultClient::linkDevice(
 
     auto responseReader = _stub->AsyncLinkDevice(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkGoogle(
@@ -602,7 +602,7 @@ void DefaultClient::linkGoogle(
 
     auto responseReader = _stub->AsyncLinkGoogle(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkGameCenter(
@@ -633,7 +633,7 @@ void DefaultClient::linkGameCenter(
 
     auto responseReader = _stub->AsyncLinkGameCenter(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkSteam(
@@ -654,7 +654,7 @@ void DefaultClient::linkSteam(
 
     auto responseReader = _stub->AsyncLinkSteam(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::linkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -672,7 +672,7 @@ void DefaultClient::linkCustom(NSessionPtr session, const std::string & id, std:
 
     auto responseReader = _stub->AsyncLinkCustom(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkFacebook(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -690,7 +690,7 @@ void DefaultClient::unlinkFacebook(NSessionPtr session, const std::string & acce
 
     auto responseReader = _stub->AsyncUnlinkFacebook(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkEmail(NSessionPtr session, const std::string & email, const std::string & password, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -709,7 +709,7 @@ void DefaultClient::unlinkEmail(NSessionPtr session, const std::string & email, 
 
     auto responseReader = _stub->AsyncUnlinkEmail(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkGoogle(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -727,7 +727,7 @@ void DefaultClient::unlinkGoogle(NSessionPtr session, const std::string & access
 
     auto responseReader = _stub->AsyncUnlinkGoogle(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & playerId, const std::string & bundleId, NTimestamp timestampSeconds, const std::string & salt, const std::string & signature, const std::string & publicKeyUrl, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -750,7 +750,7 @@ void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & pl
 
     auto responseReader = _stub->AsyncUnlinkGameCenter(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkSteam(NSessionPtr session, const std::string & token, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -768,7 +768,7 @@ void DefaultClient::unlinkSteam(NSessionPtr session, const std::string & token, 
 
     auto responseReader = _stub->AsyncUnlinkSteam(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkDevice(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -786,7 +786,7 @@ void DefaultClient::unlinkDevice(NSessionPtr session, const std::string & id, st
 
     auto responseReader = _stub->AsyncUnlinkDevice(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::unlinkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -804,7 +804,7 @@ void DefaultClient::unlinkCustom(NSessionPtr session, const std::string & id, st
 
     auto responseReader = _stub->AsyncUnlinkCustom(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::importFacebookFriends(
@@ -827,7 +827,7 @@ void DefaultClient::importFacebookFriends(
 
     auto responseReader = _stub->AsyncImportFacebookFriends(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::getAccount(
@@ -885,7 +885,7 @@ void DefaultClient::updateAccount(
 
     auto responseReader = _stub->AsyncUpdateAccount(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::getUsers(
@@ -964,7 +964,7 @@ void DefaultClient::addFriends(
 
     auto responseReader = _stub->AsyncAddFriends(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::deleteFriends(
@@ -996,7 +996,7 @@ void DefaultClient::deleteFriends(
 
     auto responseReader = _stub->AsyncDeleteFriends(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::blockFriends(
@@ -1027,7 +1027,7 @@ void DefaultClient::blockFriends(
 
     auto responseReader = _stub->AsyncBlockFriends(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr)> successCallback, ErrorCallback errorCallback)
@@ -1120,7 +1120,7 @@ void DefaultClient::deleteGroup(
 
     auto responseReader = _stub->AsyncDeleteGroup(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::addGroupUsers(
@@ -1149,7 +1149,7 @@ void DefaultClient::addGroupUsers(
 
     auto responseReader = _stub->AsyncAddGroupUsers(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listGroupUsers(NSessionPtr session, const std::string & groupId, std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
@@ -1199,7 +1199,7 @@ void DefaultClient::kickGroupUsers(NSessionPtr session, const std::string & grou
 
     auto responseReader = _stub->AsyncKickGroupUsers(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::joinGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -1217,7 +1217,7 @@ void DefaultClient::joinGroup(NSessionPtr session, const std::string & groupId, 
 
     auto responseReader = _stub->AsyncJoinGroup(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::leaveGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -1235,7 +1235,7 @@ void DefaultClient::leaveGroup(NSessionPtr session, const std::string & groupId,
 
     auto responseReader = _stub->AsyncLeaveGroup(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
@@ -1330,7 +1330,7 @@ void DefaultClient::promoteGroupUsers(NSessionPtr session, const std::string & g
 
     auto responseReader = _stub->AsyncPromoteGroupUsers(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::updateGroup(
@@ -1364,7 +1364,7 @@ void DefaultClient::updateGroup(
 
     auto responseReader = _stub->AsyncUpdateGroup(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listLeaderboardRecords(
@@ -1525,7 +1525,7 @@ void DefaultClient::deleteLeaderboardRecord(NSessionPtr session, const std::stri
 
     auto responseReader = _stub->AsyncDeleteLeaderboardRecord(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listMatches(
@@ -1616,7 +1616,7 @@ void DefaultClient::deleteNotifications(NSessionPtr session, const std::vector<s
 
     auto responseReader = _stub->AsyncDeleteNotifications(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listChannelMessages(
@@ -1786,7 +1786,7 @@ void DefaultClient::joinTournament(NSessionPtr session, const std::string & tour
 
     auto responseReader = _stub->AsyncJoinTournament(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::listStorageObjects(
@@ -1964,7 +1964,7 @@ void DefaultClient::deleteStorageObjects(NSessionPtr session, const std::vector<
 
     auto responseReader = _stub->AsyncDeleteStorageObjects(&ctx->context, req, &_cq);
 
-    responseReader->Finish(nullptr, &ctx->status, (void*)ctx);
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void DefaultClient::rpc(

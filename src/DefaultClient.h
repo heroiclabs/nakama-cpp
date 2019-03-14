@@ -562,5 +562,6 @@ namespace Nakama {
         grpc::CompletionQueue _cq;
         std::string _basicAuthMetadata;
         std::set<ReqContext*> _reqContexts;
+        google::protobuf::Empty _emptyData;
     };
 }
