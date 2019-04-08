@@ -98,12 +98,12 @@ add_library( ixwebsocket STATIC
 # gcc/Linux needs -pthread
 find_package(Threads)
 
-if(UNIX AND NOT APPLE)
-  find_package(OpenSSL REQUIRED)
-  add_definitions(${OPENSSL_DEFINITIONS})
-  message(STATUS "OpenSSL: " ${OPENSSL_VERSION})
-  include_directories(${OPENSSL_INCLUDE_DIR})
-endif()
+#if(UNIX AND NOT APPLE)
+#  find_package(OpenSSL REQUIRED)
+#  add_definitions(${OPENSSL_DEFINITIONS})
+#  message(STATUS "OpenSSL: " ${OPENSSL_VERSION})
+#  include_directories(${OPENSSL_INCLUDE_DIR})
+#endif()
 
 if (WIN32)
   get_filename_component(libz_path
@@ -123,9 +123,5 @@ else()
     z ${OPENSSL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
-set( IXWEBSOCKET_INCLUDE_DIRS
-    .
-    ../../shared/OpenSSL/include)
-target_include_directories( ixwebsocket PUBLIC ${IXWEBSOCKET_INCLUDE_DIRS} )
-
-add_subdirectory(ws)
+target_include_directories( ixwebsocket PRIVATE ../grpc/third_party/boringssl/include )
+target_include_directories( ixwebsocket PUBLIC . )
