@@ -50,11 +50,11 @@ add_library(nakama-cpp SHARED STATIC ${_source_list} ${_public_headers_list})
 target_compile_features(nakama-cpp PRIVATE cxx_std_11)
 
 if(LOGS_ENABLED)
-    add_definitions(-DNLOGS_ENABLED=)
+    add_definitions(-DNLOGS_ENABLED)
 endif(LOGS_ENABLED)
 
-if(BUILD_DEFAULT_WEBSOCKETS)
-    add_definitions(-DBUILD_DEFAULT_WEBSOCKETS=)
+if(BUILD_WEBSOCKETPP)
+    add_definitions(-DBUILD_WEBSOCKETPP)
     set(Boost_USE_STATIC_LIBS ON) # only find static libs
     find_package(Boost 1.67.0 REQUIRED COMPONENTS system date_time regex)
     if(NOT Boost_FOUND)
@@ -62,17 +62,21 @@ if(BUILD_DEFAULT_WEBSOCKETS)
     endif()
     target_include_directories(nakama-cpp PRIVATE ${Boost_INCLUDE_DIRS})
     target_link_libraries(nakama-cpp PUBLIC ${Boost_LIBRARIES})
-endif(BUILD_DEFAULT_WEBSOCKETS)
+endif(BUILD_WEBSOCKETPP)
+
+if(BUILD_IXWEBSOCKET)
+    add_definitions(-DBUILD_IXWEBSOCKET)
+    target_link_libraries(nakama-cpp PRIVATE ixwebsocket)
+endif(BUILD_IXWEBSOCKET)
 
 target_link_libraries(nakama-cpp PRIVATE grpc++ libprotobuf)
 
 target_include_directories(nakama-cpp
-    PUBLIC ../third_party
+    PUBLIC ${THIRD_PARTY_DIR}
     PUBLIC ${PUBLIC_INCLUDE_DIR}
     PRIVATE api
     PRIVATE .
-    PRIVATE ../third_party/grpc/include
-    PRIVATE ../third_party/grpc/third_party/protobuf/src
+    PRIVATE ${THIRD_PARTY_DIR}/grpc/third_party/protobuf/src
 )
 
 foreach(_source IN ITEMS ${_source_list})

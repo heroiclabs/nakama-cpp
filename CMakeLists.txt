@@ -29,7 +29,8 @@ include(windows_support)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-option(BUILD_DEFAULT_WEBSOCKETS "Build default websockets transport" ON)
+option(BUILD_WEBSOCKETPP "Build Websocketpp transport" ON)
+option(BUILD_IXWEBSOCKET "Build IXWebSocket transport" ON)
 option(LOGS_ENABLED "enable logs" ON)
 
 if(IOS_PLATFORM)
@@ -56,6 +57,7 @@ set(THIRD_PARTY_DIR ${PROJECT_SOURCE_DIR}/third_party)
 
 add_subdirectory(src)
 add_subdirectory(third_party/grpc)
+add_subdirectory(third_party/IXWebSocket)
 
 #if((WIN32 OR APPLE OR UNIX) AND NOT IOS_PLATFORM)
 # only build tests for desktop OS
