@@ -16,7 +16,7 @@
 
 #include "DefaultClient.h"
 #include "realtime/NRtClient.h"
-#include "nakama-cpp/realtime/NDefaultWebsocket.h"
+#include "nakama-cpp/realtime/NWebsockets.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/StrUtil.h"
 #include "nakama-cpp/Nakama.h"

@@ -17,35 +17,33 @@
 #pragma once
 
 #include "nakama-cpp/realtime/NRtTransportInterface.h"
-
-#define _WEBSOCKETPP_CPP11_STL_
-#include "websocketpp/config/asio_no_tls_client.hpp"
-#include "websocketpp/client.hpp"
+#include "ixwebsocket/IXWebSocket.h"
 
 namespace Nakama {
 
-    /**
-     * Default websocket transport
-     */
-    class NDefaultWebsocket : public NRtTransportInterface
+    class NIXWebsocket : public NRtTransportInterface
     {
     public:
-        NDefaultWebsocket();
-
-        void tick() override;
-
+        NIXWebsocket();
+        ~NIXWebsocket();
+        
+        void tick() override {}
         void connect(const std::string& url, NRtTransportType type) override;
-
         void disconnect() override;
-
         void send(const NBytes& data) override;
 
     protected:
-        using WsClient = websocketpp::client<websocketpp::config::asio_client>;
-
-        websocketpp::frame::opcode::value _op_code = websocketpp::frame::opcode::binary;
-        WsClient _wsClient;
-        websocketpp::connection_hdl _con_hdl;
+        void setOnMessageCallback(
+            ix::WebSocketMessageType messageType,
+            const std::string& str,
+            size_t wireSize,
+            const ix::WebSocketErrorInfo& error,
+            const ix::WebSocketOpenInfo& openInfo,
+            const ix::WebSocketCloseInfo& closeInfo);
+        
+    private:
+        NRtTransportType _type;
+        ix::WebSocket _ixWebSocket;
     };
 
 }

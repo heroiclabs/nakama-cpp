@@ -14,34 +14,27 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/realtime/NDefaultWebsocket.h"
+#ifdef BUILD_WEBSOCKETPP
+
+#include "NWebsocketpp.h"
 #include "nakama-cpp/log/NLogger.h"
 
-#ifdef BUILD_DEFAULT_WEBSOCKETS
-
-#include "realtime/NDefaultWebsocket.h"
-
 #undef NMODULE_NAME
-#define NMODULE_NAME "NDefaultWebsocket"
+#define NMODULE_NAME "NWebsocketpp"
 
 namespace Nakama {
 
-NRtTransportPtr createDefaultWebsocket()
-{
-    return NRtTransportPtr(new NDefaultWebsocket());
-}
-
-NDefaultWebsocket::NDefaultWebsocket()
+NWebsocketpp::NWebsocketpp()
 {
     _wsClient.init_asio();
 }
 
-void NDefaultWebsocket::tick()
+void NWebsocketpp::tick()
 {
     _wsClient.poll();
 }
 
-void NDefaultWebsocket::connect(const std::string & url, NRtTransportType type)
+void NWebsocketpp::connect(const std::string & url, NRtTransportType type)
 {
     try {
         websocketpp::lib::error_code ec;
@@ -100,14 +93,14 @@ void NDefaultWebsocket::connect(const std::string & url, NRtTransportType type)
     }
 }
 
-void NDefaultWebsocket::disconnect()
+void NWebsocketpp::disconnect()
 {
     NLOG_DEBUG("...");
 
     _wsClient.close(_con_hdl, websocketpp::close::status::normal, "");
 }
 
-void NDefaultWebsocket::send(const NBytes & data)
+void NWebsocketpp::send(const NBytes & data)
 {
     NLOG(NLogLevel::Debug, "sending %d bytes...", data.size());
 
@@ -116,16 +109,4 @@ void NDefaultWebsocket::send(const NBytes & data)
 
 } // namespace Nakama
 
-#else
-
-namespace Nakama {
-
-NRtTransportPtr createDefaultWebsocket()
-{
-    NLOG_ERROR("Default websocket is not available for this platform.");
-    return nullptr;
-}
-
-} // namespace Nakama
-
-#endif // BUILD_DEFAULT_WEBSOCKETS
+#endif // BUILD_WEBSOCKETPP
