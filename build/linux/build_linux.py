@@ -73,6 +73,8 @@ os.chdir(build_dir)
 call([
  'cmake',
  '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
+ '-DBUILD_WEBSOCKETPP=ON',
+ '-DBUILD_IXWEBSOCKET=ON',
  '../../../..'
 ])
 

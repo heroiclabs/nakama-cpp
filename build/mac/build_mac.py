@@ -63,6 +63,8 @@ generator = 'Ninja'
 call('cmake' +
  ' -DENABLE_BITCODE=FALSE' +
  ' -DENABLE_ARC=TRUE' +
+ ' -DBUILD_WEBSOCKETPP=ON' +
+ ' -DBUILD_IXWEBSOCKET=ON' +
  ' -G' + generator +
  ' ../../../..')
 

@@ -101,6 +101,8 @@ makedirs(build_dir)
 call('cmake -B ' + build_dir +
  ' -G"' + generator + '"' +
  ' -T ' + TOOLSET +
+ ' -DBUILD_WEBSOCKETPP=ON' +
+ ' -DBUILD_IXWEBSOCKET=OFF' +
  ' ../..')
 
 build('grpc_cpp_plugin')
