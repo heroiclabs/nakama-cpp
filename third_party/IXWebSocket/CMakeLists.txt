@@ -123,5 +123,9 @@ else()
     z ${OPENSSL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
-target_include_directories( ixwebsocket PRIVATE ../grpc/third_party/boringssl/include )
+target_include_directories( ixwebsocket PRIVATE
+  ../grpc/third_party/boringssl/include
+  ../grpc/third_party/zlib
+  ${CMAKE_CURRENT_BINARY_DIR}/../grpc/third_party/zlib
+  )
 target_include_directories( ixwebsocket PUBLIC . )
