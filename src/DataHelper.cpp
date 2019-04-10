@@ -386,6 +386,16 @@ void assign(NStorageObjectAck & ack, const nakama::api::StorageObjectAck & data)
     assign(ack.version, data.version());
 }
 
+void assign(NStoragePermissionRead & perm, const ::google::protobuf::int32 & data)
+{
+    perm = static_cast<NStoragePermissionRead>(data);
+}
+
+void assign(NStoragePermissionWrite & perm, const ::google::protobuf::int32 & data)
+{
+    perm = static_cast<NStoragePermissionWrite>(data);
+}
+
 void assign(NRpc & rpc, const nakama::api::Rpc & data)
 {
     assign(rpc.id, data.id());

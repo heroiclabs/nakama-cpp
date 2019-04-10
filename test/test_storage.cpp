@@ -96,8 +96,8 @@ void test_writeStorage()
         obj.collection = "candies";
         obj.key = "Ice cream";
         obj.value = "{ \"price\": 25 }";
-        obj.permissionRead = 1;
-        obj.permissionWrite = 1;
+        obj.permissionRead = NStoragePermissionRead::OWNER_READ;
+        obj.permissionWrite = NStoragePermissionWrite::OWNER_WRITE;
 
         objects.push_back(obj);
 

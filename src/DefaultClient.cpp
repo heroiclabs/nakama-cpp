@@ -1905,10 +1905,10 @@ void DefaultClient::writeStorageObjects(
         write_obj->set_version(obj.version);
 
         if (obj.permissionRead)
-            write_obj->mutable_permission_read()->set_value(*obj.permissionRead);
+            write_obj->mutable_permission_read()->set_value(static_cast<::google::protobuf::int32>(*obj.permissionRead));
 
         if (obj.permissionWrite)
-            write_obj->mutable_permission_write()->set_value(*obj.permissionWrite);
+            write_obj->mutable_permission_write()->set_value(static_cast<::google::protobuf::int32>(*obj.permissionWrite));
     }
 
     auto responseReader = _stub->AsyncWriteStorageObjects(&ctx->context, req, &_cq);

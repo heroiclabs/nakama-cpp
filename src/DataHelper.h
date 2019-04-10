@@ -82,6 +82,8 @@ namespace Nakama {
     void assign(NStorageObjectList& list, const nakama::api::StorageObjectList& data);
     void assign(NStorageObject& obj, const nakama::api::StorageObject& data);
     void assign(NStorageObjectAck& ack, const nakama::api::StorageObjectAck& data);
+    void assign(NStoragePermissionRead& perm, const ::google::protobuf::int32& data);
+    void assign(NStoragePermissionWrite& perm, const ::google::protobuf::int32& data);
     void assign(NRpc& rpc, const nakama::api::Rpc& data);
 
     void assign(NChannelMessageAck& ack, const ::nakama::realtime::ChannelMessageAck& data);
