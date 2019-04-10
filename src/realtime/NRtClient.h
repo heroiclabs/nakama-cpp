@@ -159,6 +159,7 @@ namespace Nakama {
 
         protected:
             void onDisconnected();
+            void onError(const std::string& description);
             void onMessage(const NBytes& data);
 
             RtRequestContext* createReqContext(::nakama::realtime::Envelope& msg);

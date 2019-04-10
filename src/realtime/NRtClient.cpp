@@ -40,6 +40,7 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int por
         }
     });
 
+    _transport->setErrorCallback(std::bind(&NRtClient::onError, this, std::placeholders::_1));
     _transport->setDisconnectCallback(std::bind(&NRtClient::onDisconnected, this));
     _transport->setMessageCallback(std::bind(&NRtClient::onMessage, this, std::placeholders::_1));
 
@@ -110,6 +111,22 @@ void NRtClient::onDisconnected()
     if (_listener)
     {
         _listener->onDisconnect();
+    }
+}
+
+// transport error
+void NRtClient::onError(const std::string& description)
+{
+    NRtError error;
+
+    error.message = description;
+    error.code    = _transport->isConnected() ? RtErrorCode::TRANSPORT_ERROR : RtErrorCode::CONNECT_ERROR;
+
+    NLOG_ERROR(toString(error));
+
+    if (_listener)
+    {
+        _listener->onError(error);
     }
 }
 
