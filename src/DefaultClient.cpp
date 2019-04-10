@@ -129,19 +129,13 @@ void DefaultClient::tick()
 
 NRtClientPtr DefaultClient::createRtClient(int32_t port, NRtTransportPtr transport)
 {
-    if (!transport)
-    {
-        transport = createDefaultWebsocket();
-
-        if (!transport)
-        {
-            NLOG_ERROR("No default websockets transport available. Please set transport.");
-            return nullptr;
-        }
-    }
-
-    NRtClientPtr client(new NRtClient(transport, _host, port, _ssl));
-    return client;
+    RtClientParameters parameters;
+    
+    parameters.host = _host;
+    parameters.port = port;
+    parameters.ssl  = _ssl;
+    
+    return createRtClient(parameters, transport);
 }
 
 NRtClientPtr DefaultClient::createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport)
