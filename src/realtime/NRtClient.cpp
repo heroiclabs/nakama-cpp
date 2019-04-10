@@ -569,13 +569,13 @@ void NRtClient::sendMatchData(const std::string & matchId, int64_t opCode, const
     {
         if (presence.userId.empty())
         {
-            NLOG_ERROR("Please set 'userId' for user presense");
+            NLOG_ERROR("Please set 'userId' for user presence");
             continue;
         }
 
         if (presence.sessionId.empty())
         {
-            NLOG_ERROR("Please set 'sessionId' for user presense");
+            NLOG_ERROR("Please set 'sessionId' for user presence");
             continue;
         }
 
