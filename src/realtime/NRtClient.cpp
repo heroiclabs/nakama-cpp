@@ -567,16 +567,25 @@ void NRtClient::sendMatchData(const std::string & matchId, int64_t opCode, const
 
     for (auto& presence : presences)
     {
+        if (presence.userId.empty())
+        {
+            NLOG_ERROR("Please set 'userId' for user presense");
+            continue;
+        }
+
+        if (presence.sessionId.empty())
+        {
+            NLOG_ERROR("Please set 'sessionId' for user presense");
+            continue;
+        }
+
         auto* presenceData = match_data->mutable_presences()->Add();
 
-        if (!presence.userId.empty())
-            presenceData->set_user_id(presence.userId);
+        presenceData->set_user_id(presence.userId);
+        presenceData->set_session_id(presence.sessionId);
 
         if (!presence.username.empty())
             presenceData->set_username(presence.username);
-
-        if (!presence.sessionId.empty())
-            presenceData->set_session_id(presence.sessionId);
 
         if (!presence.status.empty())
             presenceData->mutable_status()->set_value(presence.status);
