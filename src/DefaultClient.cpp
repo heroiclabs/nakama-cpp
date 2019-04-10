@@ -144,6 +144,23 @@ NRtClientPtr DefaultClient::createRtClient(int32_t port, NRtTransportPtr transpo
     return client;
 }
 
+NRtClientPtr DefaultClient::createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport)
+{
+    if (!transport)
+    {
+        transport = createDefaultWebsocket();
+
+        if (!transport)
+        {
+            NLOG_ERROR("No default websockets transport available. Please set transport.");
+            return nullptr;
+        }
+    }
+
+    NRtClientPtr client(new NRtClient(transport, parameters.host, parameters.port, parameters.ssl));
+    return client;
+}
+
 ReqContext * DefaultClient::createReqContext(NSessionPtr session)
 {
     ReqContext* ctx = new ReqContext();
