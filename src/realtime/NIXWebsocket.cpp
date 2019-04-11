@@ -28,6 +28,21 @@ using namespace std;
 
 NIXWebsocket::NIXWebsocket()
 {
+    // Setup a callback to be fired when a message or an event (open, close, error) is received
+    _ixWebSocket.setOnMessageCallback(
+        bind(
+            &NIXWebsocket::onSocketMessage,
+            this,
+            placeholders::_1,
+            placeholders::_2,
+            placeholders::_3,
+            placeholders::_4,
+            placeholders::_5,
+            placeholders::_6
+        )
+    );
+
+    _ixWebSocket.setHeartBeatPeriod(30);
 }
 
 NIXWebsocket::~NIXWebsocket()
@@ -43,27 +58,13 @@ void NIXWebsocket::connect(const string& url, NRtTransportType type)
     {
         NLOG_WARN("Text type is not supported");
     }
-    
+
+    NLOG_DEBUG("...");
     _ixWebSocket.setUrl(url);
-
-    // Setup a callback to be fired when a message or an event (open, close, error) is received
-    _ixWebSocket.setOnMessageCallback(
-        bind(
-            &NIXWebsocket::setOnMessageCallback,
-            this,
-            placeholders::_1,
-            placeholders::_2,
-            placeholders::_3,
-            placeholders::_4,
-            placeholders::_5,
-            placeholders::_6
-        )
-    );
-
     _ixWebSocket.start();
 }
 
-void NIXWebsocket::setOnMessageCallback(
+void NIXWebsocket::onSocketMessage(
     ix::WebSocketMessageType messageType,
     const string& str,
     size_t wireSize,
@@ -78,20 +79,23 @@ void NIXWebsocket::setOnMessageCallback(
     else if (messageType == ix::WebSocket_MessageType_Open)
     {
         NLOG_DEBUG("connected");
+        // prevent auto reconnect
+        _ixWebSocket.disableAutomaticReconnection();
         NRtTransportInterface::onConnected();
     }
     else if (messageType == ix::WebSocket_MessageType_Close)
     {
         NLOG_DEBUG("closed");
         // std::cout << "close with code: " << closeInfo.code << " reason: " << closeInfo.reason << std::endl;
-        NRtTransportInterface::onDisconnected();
-
         // prevent auto reconnect
-        //_ixWebSocket.disableAutomaticReconnection();
+        _ixWebSocket.disableAutomaticReconnection();
+        NRtTransportInterface::onDisconnected();
     }
     else if (messageType == ix::WebSocket_MessageType_Error)
     {
         NLOG(NLogLevel::Error, "error: %s", error.reason.c_str());
+        // prevent auto reconnect
+        _ixWebSocket.disableAutomaticReconnection();
         NRtTransportInterface::onError(error.reason);
     }
     else if (messageType == ix::WebSocket_MessageType_Ping)
@@ -102,20 +106,27 @@ void NIXWebsocket::setOnMessageCallback(
     }
     else if (messageType == ix::WebSocket_MessageType_Fragment)
     {
-        NLOG_DEBUG("fragment");
     }
 }
 
 void NIXWebsocket::send(const NBytes & data)
 {
+    ix::WebSocketSendInfo info;
+
     //if (_type == NRtTransportType::Binary)
     {
-        _ixWebSocket.send(data);
+        info = _ixWebSocket.send(data);
     }
     //else
     //{
-    //    _ixWebSocket.sendText(data);
+    //    info = _ixWebSocket.sendText(data);
     //}
+
+    if (!info.success)
+    {
+        NLOG_ERROR("send failed");
+        disconnect();
+    }
 }
 
 void NIXWebsocket::disconnect()

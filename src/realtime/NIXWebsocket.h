@@ -33,7 +33,7 @@ namespace Nakama {
         void send(const NBytes& data) override;
 
     protected:
-        void setOnMessageCallback(
+        void onSocketMessage(
             ix::WebSocketMessageType messageType,
             const std::string& str,
             size_t wireSize,
