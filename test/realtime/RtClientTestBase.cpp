@@ -36,6 +36,7 @@ void NRtClientTest::runTest()
 
     listener.setDisconnectCallback([this]()
     {
+        std::cout << "Disconnected!" << std::endl;
         stopTest();
     });
 

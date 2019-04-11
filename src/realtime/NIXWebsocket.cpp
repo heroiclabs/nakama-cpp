@@ -26,6 +26,8 @@ namespace Nakama {
 
 using namespace std;
 
+const uint16_t CloseCode_Normal = 1000;
+
 NIXWebsocket::NIXWebsocket()
 {
     // Setup a callback to be fired when a message or an event (open, close, error) is received
@@ -85,11 +87,19 @@ void NIXWebsocket::onSocketMessage(
     }
     else if (messageType == ix::WebSocket_MessageType_Close)
     {
-        NLOG_DEBUG("closed");
         // std::cout << "close with code: " << closeInfo.code << " reason: " << closeInfo.reason << std::endl;
         // prevent auto reconnect
         _ixWebSocket.disableAutomaticReconnection();
-        NRtTransportInterface::onDisconnected();
+
+        if (closeInfo.code == CloseCode_Normal)
+        {
+            NLOG_DEBUG("closed");
+        }
+        else
+        {
+            NLOG(NLogLevel::Debug, "disconnected. code: %d", closeInfo.code);
+            NRtTransportInterface::onDisconnected();
+        }
     }
     else if (messageType == ix::WebSocket_MessageType_Error)
     {
