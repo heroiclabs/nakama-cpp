@@ -25,6 +25,10 @@
 #include <grpc++/create_channel.h>
 #include <sstream>
 
+#ifdef NAKAMA_SSL_ENABLED
+    #include "roots_pem.h"
+#endif
+
 #undef NMODULE_NAME
 #define NMODULE_NAME "NDefaultClient"
 
@@ -50,6 +54,7 @@ DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
     if (_ssl)
     {
         grpc::SslCredentialsOptions options;
+        options.pem_root_certs = g_roots_pem;
         creds = grpc::SslCredentials(options);
     }
     else

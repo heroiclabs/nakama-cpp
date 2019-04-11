@@ -32,12 +32,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 option(BUILD_WEBSOCKETPP "Build Websocketpp transport" ON)
 option(BUILD_IXWEBSOCKET "Build IXWebSocket transport" ON)
 option(LOGS_ENABLED "enable logs" ON)
-
-if(IOS_PLATFORM)
-    message("CMAKE_CROSSCOMPILING=${CMAKE_CROSSCOMPILING}")
-    #set(CMAKE_CROSSCOMPILING FALSE)
-    #message("CMAKE_CROSSCOMPILING=${CMAKE_CROSSCOMPILING}")
-endif()
+option(NAKAMA_SSL_ENABLED "enable SSL" ON)
 
 set(gRPC_BUILD_CSHARP_EXT OFF)
 set(protobuf_BUILD_TESTS OFF)

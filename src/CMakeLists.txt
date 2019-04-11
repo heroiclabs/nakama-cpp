@@ -53,6 +53,10 @@ if(LOGS_ENABLED)
     add_definitions(-DNLOGS_ENABLED)
 endif(LOGS_ENABLED)
 
+if(NAKAMA_SSL_ENABLED)
+    add_definitions(-DNAKAMA_SSL_ENABLED)
+endif(NAKAMA_SSL_ENABLED)
+
 if(BUILD_WEBSOCKETPP)
     add_definitions(-DBUILD_WEBSOCKETPP)
     set(Boost_USE_STATIC_LIBS ON) # only find static libs
@@ -65,6 +69,9 @@ if(BUILD_WEBSOCKETPP)
 endif(BUILD_WEBSOCKETPP)
 
 if(BUILD_IXWEBSOCKET)
+    if(NAKAMA_SSL_ENABLED)
+        set(USE_TLS ON)
+    endif()
     add_definitions(-DBUILD_IXWEBSOCKET)
     target_link_libraries(nakama-cpp PRIVATE ixwebsocket)
 endif(BUILD_IXWEBSOCKET)

@@ -43,6 +43,7 @@ void setWorkingClientParameters(DefaultClientParameters& parameters)
     parameters.host      = SERVER_HOST;
     parameters.port      = SERVER_GRPC_PORT;
     parameters.serverKey = SERVER_KEY;
+    parameters.ssl       = SERVER_SSL;
 }
 
 void addRunningTest(NTest* test)
