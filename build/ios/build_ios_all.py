@@ -56,23 +56,27 @@ crypto_libs = []
 ssl_libs = []
 protobuf_libs = []
 z_libs = []
+ixwebsocket_libs = []
 
 build_dir = os.path.abspath('build/' + BUILD_MODE) + '/'
 
 for arch in arch_list:
     print 'building for', arch
     call(['python', 'build_ios.py', arch])
-
-    nakama_cpp_libs.append(build_dir + arch + '/src/libnakama-cpp.a')
-    grpc_libs.append(build_dir + arch + '/third_party/grpc/libgrpc.a')
-    grpcpp_libs.append(build_dir + arch + '/third_party/grpc/libgrpc++.a')
-    gpr_libs.append(build_dir + arch + '/third_party/grpc/libgpr.a')
-    address_sorting_libs.append(build_dir + arch + '/third_party/grpc/libaddress_sorting.a')
-    cares_libs.append(build_dir + arch + '/third_party/grpc/third_party/cares/cares/lib/libcares.a')
-    crypto_libs.append(build_dir + arch + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a')
-    ssl_libs.append(build_dir + arch + '/third_party/grpc/third_party/boringssl/ssl/libssl.a')
-    protobuf_libs.append(build_dir + arch + '/third_party/grpc/third_party/protobuf/libprotobuf.a')
-    z_libs.append(build_dir + arch + '/third_party/grpc/third_party/zlib/libz.a')
+    
+    build_arch_dir = build_dir + arch
+    
+    nakama_cpp_libs     .append(build_arch_dir + '/src/libnakama-cpp.a')
+    grpc_libs           .append(build_arch_dir + '/third_party/grpc/libgrpc.a')
+    grpcpp_libs         .append(build_arch_dir + '/third_party/grpc/libgrpc++.a')
+    gpr_libs            .append(build_arch_dir + '/third_party/grpc/libgpr.a')
+    address_sorting_libs.append(build_arch_dir + '/third_party/grpc/libaddress_sorting.a')
+    cares_libs          .append(build_arch_dir + '/third_party/grpc/third_party/cares/cares/lib/libcares.a')
+    crypto_libs         .append(build_arch_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a')
+    ssl_libs            .append(build_arch_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a')
+    protobuf_libs       .append(build_arch_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a')
+    z_libs              .append(build_arch_dir + '/third_party/grpc/third_party/zlib/libz.a')
+    ixwebsocket_libs    .append(build_arch_dir + '/third_party/IXWebSocket/libixwebsocket.a')
 
 create_universal_lib(nakama_cpp_libs)
 create_universal_lib(grpc_libs)
@@ -84,5 +88,6 @@ create_universal_lib(crypto_libs)
 create_universal_lib(ssl_libs)
 create_universal_lib(protobuf_libs)
 create_universal_lib(z_libs)
+create_universal_lib(ixwebsocket_libs)
 
 print 'done.'

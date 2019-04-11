@@ -65,6 +65,16 @@ def copy_libs(dest):
     print
     print 'copying to release folder...'
     copy_file(build_dir + '/src/libnakama-cpp.a', dest)
+    copy_file(build_dir + '/third_party/grpc/libaddress_sorting.a', dest)
+    copy_file(build_dir + '/third_party/grpc/libgpr.a', dest)
+    copy_file(build_dir + '/third_party/grpc/libgrpc++.a', dest)
+    copy_file(build_dir + '/third_party/grpc/libgrpc.a', dest)
+    copy_file(build_dir + '/third_party/grpc/third_party/cares/cares/lib/libcares.a', dest)
+    copy_file(build_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a', dest)
+    copy_file(build_dir + '/third_party/grpc/third_party/zlib/libz.a', dest)
+    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', dest)
+    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', dest)
+    copy_file(build_dir + '/third_party/IXWebSocket/libixwebsocket.a', dest)
 
 print 'ANDROID_NDK=' + ANDROID_NDK
 
