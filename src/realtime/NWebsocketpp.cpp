@@ -59,11 +59,13 @@ void NWebsocketpp::connect(const std::string & url, NRtTransportType type)
 
             NLOG(NLogLevel::Debug, "socket message received %d bytes", payload.size());
 
-            NBytes bytes;
+            //NBytes bytes;
 
-            bytes.assign(payload.begin(), payload.end());
+            //bytes.assign(payload.begin(), payload.end());
 
-            onMessage(bytes);
+            //onMessage(bytes);
+
+            onMessage(payload);
         });
 
         con->set_fail_handler([this](websocketpp::connection_hdl hdl)
