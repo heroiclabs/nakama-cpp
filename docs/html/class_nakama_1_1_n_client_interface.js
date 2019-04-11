@@ -13,6 +13,7 @@ var class_nakama_1_1_n_client_interface =
     [ "blockFriends", "class_nakama_1_1_n_client_interface.html#a3090c47b7d8083fa8d0b18972faca163", null ],
     [ "createGroup", "class_nakama_1_1_n_client_interface.html#a4296eccbbaf31b715724c5b6d9e099c3", null ],
     [ "createRtClient", "class_nakama_1_1_n_client_interface.html#ae63e5b2ab63edac8b077c7b891b333a0", null ],
+    [ "createRtClient", "class_nakama_1_1_n_client_interface.html#ac14d5f3ff8b3872e774b9b2db924a45a", null ],
     [ "deleteFriends", "class_nakama_1_1_n_client_interface.html#a84d0477b4ba184fe1e4f5fc2a0beab72", null ],
     [ "deleteGroup", "class_nakama_1_1_n_client_interface.html#a065c1f7cc136c61e09d31a138e9f930d", null ],
     [ "deleteLeaderboardRecord", "class_nakama_1_1_n_client_interface.html#adc915791d1ce9c1d87c8c0dec5980e06", null ],

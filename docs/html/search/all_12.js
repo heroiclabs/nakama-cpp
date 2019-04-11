@@ -27,7 +27,7 @@ var searchData=
   ['shouldlog',['shouldLog',['../class_nakama_1_1_n_logger.html#ab8372954ebc333867c77d7f20b70b9fe',1,'Nakama::NLogger']]],
   ['size',['size',['../struct_nakama_1_1_n_match.html#af6e4f7f21e7f133eefa0709a495e7646',1,'Nakama::NMatch::size()'],['../struct_nakama_1_1_n_tournament.html#ab07fa0a08e61b11db1189fe7f0ca4cfb',1,'Nakama::NTournament::size()']]],
   ['sortorder',['sortOrder',['../struct_nakama_1_1_n_tournament.html#a7cf67d460d3c7bccf7be51a7a3206bca',1,'Nakama::NTournament']]],
-  ['ssl',['ssl',['../struct_nakama_1_1_default_client_parameters.html#af8b0cfefeef59368807624b287a1c1a4',1,'Nakama::DefaultClientParameters']]],
+  ['ssl',['ssl',['../struct_nakama_1_1_default_client_parameters.html#af8b0cfefeef59368807624b287a1c1a4',1,'Nakama::DefaultClientParameters::ssl()'],['../struct_nakama_1_1_rt_client_parameters.html#abc6b029681605665007c948b627d1434',1,'Nakama::RtClientParameters::ssl()']]],
   ['starttime',['startTime',['../struct_nakama_1_1_n_tournament.html#a6ea0d9ea8d98c2144f4003d6100c01cf',1,'Nakama::NTournament']]],
   ['state',['State',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b',1,'Nakama::NFriend::State()'],['../struct_nakama_1_1_n_friend.html#ab4d08cbe281adf1517810a11d08c6012',1,'Nakama::NFriend::state()'],['../struct_nakama_1_1_n_group_user.html#a6284e26bff48b50668354dcf296af6d0',1,'Nakama::NGroupUser::state()'],['../struct_nakama_1_1_n_user_group.html#a08f7946cee30cb1cffc6628baed02351',1,'Nakama::NUserGroup::state()']]],
   ['status',['status',['../struct_nakama_1_1_n_user_presence.html#a1afd1fcb5dc809ae2d96bdb4313bdfc2',1,'Nakama::NUserPresence']]],

@@ -7,5 +7,6 @@ var searchData=
   ['title',['title',['../struct_nakama_1_1_n_tournament.html#a1fbca0dee25321555d10b56af9d35d5a',1,'Nakama::NTournament']]],
   ['token',['token',['../struct_nakama_1_1_n_matchmaker_matched.html#a185431d3fe6f10e265429a04c3e91b20',1,'Nakama::NMatchmakerMatched']]],
   ['tostring',['toString',['../namespace_nakama.html#a8dec68dbc275e60c0f0e120868c013dc',1,'Nakama::toString(ErrorCode code)'],['../namespace_nakama.html#a5e001e7b794380c7dc61cad3ffc3d034',1,'Nakama::toString(const NError &amp;error)'],['../namespace_nakama.html#a63eb54b1c6fd63758ff037abdf3d0007',1,'Nakama::toString(RtErrorCode code)'],['../namespace_nakama.html#a15741dce14722663ece272fc6d39a59f',1,'Nakama::toString(const NRtError &amp;error)']]],
-  ['tournaments',['tournaments',['../struct_nakama_1_1_n_tournament_list.html#ae3b243d66dcfcc537c9a7ecd97df8446',1,'Nakama::NTournamentList']]]
+  ['tournaments',['tournaments',['../struct_nakama_1_1_n_tournament_list.html#ae3b243d66dcfcc537c9a7ecd97df8446',1,'Nakama::NTournamentList']]],
+  ['transport_5ferror',['TRANSPORT_ERROR',['../namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47aaadf556bd097b61c56920ef42829167a',1,'Nakama']]]
 ];

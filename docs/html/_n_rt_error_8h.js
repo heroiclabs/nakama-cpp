@@ -2,6 +2,8 @@ var _n_rt_error_8h =
 [
     [ "NRtError", "struct_nakama_1_1_n_rt_error.html", "struct_nakama_1_1_n_rt_error" ],
     [ "RtErrorCode", "_n_rt_error_8h.html#a0941538c7d1d415b42a889bf121b6e47", [
+      [ "CONNECT_ERROR", "_n_rt_error_8h.html#a0941538c7d1d415b42a889bf121b6e47a9bccf65b7a01f8d62c945340236971ae", null ],
+      [ "TRANSPORT_ERROR", "_n_rt_error_8h.html#a0941538c7d1d415b42a889bf121b6e47aaadf556bd097b61c56920ef42829167a", null ],
       [ "RUNTIME_EXCEPTION", "_n_rt_error_8h.html#a0941538c7d1d415b42a889bf121b6e47a292a277592adec4f841a6ef389f0d67f", null ],
       [ "UNRECOGNIZED_PAYLOAD", "_n_rt_error_8h.html#a0941538c7d1d415b42a889bf121b6e47a2a7ff1d8f71288ea00570fb104d93d8a", null ],
       [ "MISSING_PAYLOAD", "_n_rt_error_8h.html#a0941538c7d1d415b42a889bf121b6e47a484498e713de0402906e44fbf6d5dbed", null ],

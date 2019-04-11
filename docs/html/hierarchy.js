@@ -57,5 +57,6 @@ var hierarchy =
     [ "Nakama::NUserGroup", "struct_nakama_1_1_n_user_group.html", null ],
     [ "Nakama::NUserGroupList", "struct_nakama_1_1_n_user_group_list.html", null ],
     [ "Nakama::NUserPresence", "struct_nakama_1_1_n_user_presence.html", null ],
-    [ "Nakama::NUsers", "struct_nakama_1_1_n_users.html", null ]
+    [ "Nakama::NUsers", "struct_nakama_1_1_n_users.html", null ],
+    [ "Nakama::RtClientParameters", "struct_nakama_1_1_rt_client_parameters.html", null ]
 ];

@@ -28,7 +28,6 @@ var searchData=
   ['nclientptr',['NClientPtr',['../namespace_nakama.html#ad9239c034b2a391b1bf7d9891d8a07ff',1,'Nakama']]],
   ['nconsolelogsink',['NConsoleLogSink',['../class_nakama_1_1_n_console_log_sink.html',1,'Nakama']]],
   ['nconsolelogsink_2eh',['NConsoleLogSink.h',['../_n_console_log_sink_8h.html',1,'']]],
-  ['ndefaultwebsocket_2eh',['NDefaultWebsocket.h',['../_n_default_websocket_8h.html',1,'']]],
   ['ndeletestorageobjectid',['NDeleteStorageObjectId',['../struct_nakama_1_1_n_delete_storage_object_id.html',1,'Nakama']]],
   ['nerror',['NError',['../struct_nakama_1_1_n_error.html',1,'Nakama::NError'],['../struct_nakama_1_1_n_error.html#aa19dd1d820ccb3afd078030baaaf6763',1,'Nakama::NError::NError()'],['../struct_nakama_1_1_n_error.html#a319b1c0dd5f22d590253e838c2de3c3e',1,'Nakama::NError::NError(const std::string &amp;message, ErrorCode code=ErrorCode::Unknown)']]],
   ['nerror_2eh',['NError.h',['../_n_error_8h.html',1,'']]],
@@ -87,6 +86,8 @@ var searchData=
   ['nnotificationlist',['NNotificationList',['../struct_nakama_1_1_n_notification_list.html',1,'Nakama']]],
   ['nnotificationlist_2eh',['NNotificationList.h',['../_n_notification_list_8h.html',1,'']]],
   ['nnotificationlistptr',['NNotificationListPtr',['../namespace_nakama.html#a4001c54f92db8f9af472a59ebb28ef57',1,'Nakama']]],
+  ['no_5fread',['NO_READ',['../namespace_nakama.html#ac65107ae4c1c5b0319f7a6fbbd3966fdaf3d10b591cab3aae952a7cd9e247a31f',1,'Nakama']]],
+  ['no_5fwrite',['NO_WRITE',['../namespace_nakama.html#ad86376ac5e7b0a210c7a965e747c5c52ab50162468dccf82aa29be29f569ad387',1,'Nakama']]],
   ['notfound',['NotFound',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba38c300f4fc9ce8a77aad4a30de05cad8',1,'Nakama']]],
   ['notifications',['notifications',['../struct_nakama_1_1_n_notification_list.html#a4cdba3e8df23ef50e0c49533d2883fea',1,'Nakama::NNotificationList']]],
   ['notificationscallback',['NotificationsCallback',['../class_nakama_1_1_n_rt_default_client_listener.html#a5e74facb2829ac2766709171b0f33bf6',1,'Nakama::NRtDefaultClientListener']]],
@@ -127,6 +128,9 @@ var searchData=
   ['nstorageobjects',['NStorageObjects',['../namespace_nakama.html#a4b63f6f539115dbe758fe77354e6688f',1,'Nakama']]],
   ['nstorageobjectwrite',['NStorageObjectWrite',['../struct_nakama_1_1_n_storage_object_write.html',1,'Nakama']]],
   ['nstorageobjectwrite_2eh',['NStorageObjectWrite.h',['../_n_storage_object_write_8h.html',1,'']]],
+  ['nstoragepermissionread',['NStoragePermissionRead',['../namespace_nakama.html#ac65107ae4c1c5b0319f7a6fbbd3966fd',1,'Nakama']]],
+  ['nstoragepermissions_2eh',['NStoragePermissions.h',['../_n_storage_permissions_8h.html',1,'']]],
+  ['nstoragepermissionwrite',['NStoragePermissionWrite',['../namespace_nakama.html#ad86376ac5e7b0a210c7a965e747c5c52',1,'Nakama']]],
   ['nstream',['NStream',['../struct_nakama_1_1_n_stream.html',1,'Nakama']]],
   ['nstream_2eh',['NStream.h',['../_n_stream_8h.html',1,'']]],
   ['nstreamdata',['NStreamData',['../struct_nakama_1_1_n_stream_data.html',1,'Nakama']]],
@@ -159,5 +163,6 @@ var searchData=
   ['nuserpresence_2eh',['NUserPresence.h',['../_n_user_presence_8h.html',1,'']]],
   ['nusers',['NUsers',['../struct_nakama_1_1_n_users.html',1,'Nakama']]],
   ['nusers_2eh',['NUsers.h',['../_n_users_8h.html',1,'']]],
-  ['nutils_2eh',['NUtils.h',['../_n_utils_8h.html',1,'']]]
+  ['nutils_2eh',['NUtils.h',['../_n_utils_8h.html',1,'']]],
+  ['nwebsockets_2eh',['NWebsockets.h',['../_n_websockets_8h.html',1,'']]]
 ];

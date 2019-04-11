@@ -108,6 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a33e9be3acbcf4e738323231efb00f538"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae63e5b2ab63edac8b077c7b891b333a0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_nakama.html#a82f80ebd5bda5569e3f2f5c47e658e20">NRtClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ae63e5b2ab63edac8b077c7b891b333a0">createRtClient</a> (int32_t port=7350, <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> transport=nullptr)=0</td></tr>
 <tr class="separator:ae63e5b2ab63edac8b077c7b891b333a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac14d5f3ff8b3872e774b9b2db924a45a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_nakama.html#a82f80ebd5bda5569e3f2f5c47e658e20">NRtClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ac14d5f3ff8b3872e774b9b2db924a45a">createRtClient</a> (const <a class="el" href="struct_nakama_1_1_rt_client_parameters.html">RtClientParameters</a> &amp;parameters, <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> transport=nullptr)=0</td></tr>
+<tr class="separator:ac14d5f3ff8b3872e774b9b2db924a45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56bcdc6384e71876637e21d152cba402"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a56bcdc6384e71876637e21d152cba402">authenticateDevice</a> (const std::string &amp;id, const opt::optional&lt; std::string &gt; &amp;username=opt::nullopt, const opt::optional&lt; bool &gt; &amp;create=opt::nullopt, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a56bcdc6384e71876637e21d152cba402"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d55766f5b59e66ca87c3ccd86d22f3f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a8d55766f5b59e66ca87c3ccd86d22f3f">authenticateEmail</a> (const std::string &amp;email, const std::string &amp;password, const std::string &amp;username=std::string(), bool create=false, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
@@ -1022,7 +1024,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="ae63e5b2ab63edac8b077c7b891b333a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae63e5b2ab63edac8b077c7b891b333a0">&#9670;&nbsp;</a></span>createRtClient()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae63e5b2ab63edac8b077c7b891b333a0">&#9670;&nbsp;</a></span>createRtClient() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1054,9 +1056,55 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Create a new real-time client. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Create a new real-time client with parameters from client.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">port</td><td>The port number of the server. Default is 7350. </td></tr>
+    <tr><td class="paramname">transport</td><td>The websocket transport. If not set then default websocket transport will be used. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a new NRtClient instance. </dd></dl>
+
+</div>
+</div>
+<a id="ac14d5f3ff8b3872e774b9b2db924a45a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac14d5f3ff8b3872e774b9b2db924a45a">&#9670;&nbsp;</a></span>createRtClient() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="namespace_nakama.html#a82f80ebd5bda5569e3f2f5c47e658e20">NRtClientPtr</a> Nakama::NClientInterface::createRtClient </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_nakama_1_1_rt_client_parameters.html">RtClientParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a>&#160;</td>
+          <td class="paramname"><em>transport</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create a new real-time client with custom parameters.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameters</td><td>The real-time client parameters. </td></tr>
     <tr><td class="paramname">transport</td><td>The websocket transport. If not set then default websocket transport will be used. </td></tr>
   </table>
   </dd>

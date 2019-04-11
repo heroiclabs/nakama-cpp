@@ -55,5 +55,6 @@ var namespace_nakama =
     [ "NUserGroup", "struct_nakama_1_1_n_user_group.html", "struct_nakama_1_1_n_user_group" ],
     [ "NUserGroupList", "struct_nakama_1_1_n_user_group_list.html", "struct_nakama_1_1_n_user_group_list" ],
     [ "NUserPresence", "struct_nakama_1_1_n_user_presence.html", "struct_nakama_1_1_n_user_presence" ],
-    [ "NUsers", "struct_nakama_1_1_n_users.html", "struct_nakama_1_1_n_users" ]
+    [ "NUsers", "struct_nakama_1_1_n_users.html", "struct_nakama_1_1_n_users" ],
+    [ "RtClientParameters", "struct_nakama_1_1_rt_client_parameters.html", "struct_nakama_1_1_rt_client_parameters" ]
 ];

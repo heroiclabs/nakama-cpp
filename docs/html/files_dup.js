@@ -21,7 +21,6 @@ var files_dup =
     [ "NConsoleLogSink.h", "_n_console_log_sink_8h.html", [
       [ "NConsoleLogSink", "class_nakama_1_1_n_console_log_sink.html", "class_nakama_1_1_n_console_log_sink" ]
     ] ],
-    [ "NDefaultWebsocket.h", "_n_default_websocket_8h.html", "_n_default_websocket_8h" ],
     [ "NError.h", "_n_error_8h.html", "_n_error_8h" ],
     [ "NFriend.h", "_n_friend_8h.html", [
       [ "NFriend", "struct_nakama_1_1_n_friend.html", "struct_nakama_1_1_n_friend" ]
@@ -86,6 +85,7 @@ var files_dup =
     [ "NStorageObjectWrite.h", "_n_storage_object_write_8h.html", [
       [ "NStorageObjectWrite", "struct_nakama_1_1_n_storage_object_write.html", "struct_nakama_1_1_n_storage_object_write" ]
     ] ],
+    [ "NStoragePermissions.h", "_n_storage_permissions_8h.html", "_n_storage_permissions_8h" ],
     [ "NStream.h", "_n_stream_8h.html", [
       [ "NStream", "struct_nakama_1_1_n_stream.html", "struct_nakama_1_1_n_stream" ]
     ] ],
@@ -115,5 +115,6 @@ var files_dup =
       [ "NUsers", "struct_nakama_1_1_n_users.html", "struct_nakama_1_1_n_users" ]
     ] ],
     [ "NUtils.h", "_n_utils_8h.html", "_n_utils_8h" ],
+    [ "NWebsockets.h", "_n_websockets_8h.html", "_n_websockets_8h" ],
     [ "StrUtil.h", "_str_util_8h.html", "_str_util_8h" ]
 ];

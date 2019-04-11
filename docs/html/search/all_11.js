@@ -9,6 +9,7 @@ var searchData=
   ['restoresession',['restoreSession',['../namespace_nakama.html#a338c105d02b49ae233e0f47cd731d419',1,'Nakama']]],
   ['room',['ROOM',['../namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7ae4d7aa7fb6334ffed206a7b1ca150c50',1,'Nakama']]],
   ['rpc',['rpc',['../class_nakama_1_1_n_client_interface.html#a5913e7a61cdcbffe921b241725960960',1,'Nakama::NClientInterface::rpc()'],['../class_nakama_1_1_n_rt_client_interface.html#a82f516a67fa5cbdc6087584c581eeb83',1,'Nakama::NRtClientInterface::rpc()']]],
+  ['rtclientparameters',['RtClientParameters',['../struct_nakama_1_1_rt_client_parameters.html',1,'Nakama']]],
   ['rterrorcallback',['RtErrorCallback',['../namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd',1,'Nakama']]],
   ['rterrorcode',['RtErrorCode',['../namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47',1,'Nakama']]],
   ['runtime_5fexception',['RUNTIME_EXCEPTION',['../namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a292a277592adec4f841a6ef389f0d67f',1,'Nakama']]],

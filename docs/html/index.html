@@ -236,10 +236,16 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>websocketpp - in source control</li>
 </ul>
 <h3>Building for Windows</h3>
-<div class="fragment"><div class="line">cd build\windows</div><div class="line">python build_windows.py -m Mode -a Arch</div></div><!-- fragment --><p> Where <code>Mode</code> is build mode: <code>Debug</code> or <code>Release</code></p>
+<div class="fragment"><div class="line">cd build\windows</div><div class="line">python build_windows.py -m Mode -a Arch -t Toolset</div></div><!-- fragment --><p> Where <code>Mode</code> is build mode: <code>Debug</code> or <code>Release</code></p>
 <p>Where <code>Arch</code> is architecture: <code>x86</code> or <code>x64</code></p>
+<p>Where <code>Toolset</code> is platform toolset:</p>
+<ul>
+<li><code>v140</code> - Visual Studio 2015</li>
+<li><code>v141</code> - Visual Studio 2017</li>
+</ul>
 <p>It builds and copies nakama lib to release folder.</p>
-<h3>Building for Mac</h3>
+<p>To build for all modes, architectures and toolsets:</p>
+<div class="fragment"><div class="line">cd build\windows</div><div class="line">python build_windows_all.py</div></div><!-- fragment --><h3>Building for Mac</h3>
 <p>Prerequisites: </p><div class="fragment"><div class="line">sudo xcode-select --install</div><div class="line">brew install autoconf automake libtool shtool</div><div class="line">brew install gflags</div><div class="line">brew install cmake ninja boost</div></div><!-- fragment --><p>Build:</p>
 <div class="fragment"><div class="line">cd build\mac</div><div class="line">python build_mac.py</div></div><!-- fragment --><p> It builds in <code>Release</code> mode and copies nakama lib to release folder.</p>
 <h3>Building for iOS</h3>

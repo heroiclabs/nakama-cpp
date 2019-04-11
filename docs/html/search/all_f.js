@@ -19,6 +19,8 @@ var searchData=
   ['onstreampresence',['onStreamPresence',['../class_nakama_1_1_n_rt_client_listener_interface.html#a5cdcea65c5062c8de15c254a50092218',1,'Nakama::NRtClientListenerInterface::onStreamPresence()'],['../class_nakama_1_1_n_rt_default_client_listener.html#a7654f4e5c438d85b493571288ae86d45',1,'Nakama::NRtDefaultClientListener::onStreamPresence()']]],
   ['opcode',['opCode',['../struct_nakama_1_1_n_match_data.html#a7caee06b9d07f50942314356a1642018',1,'Nakama::NMatchData']]],
   ['open',['open',['../struct_nakama_1_1_n_group.html#a02df8e88409044fbbf6c2b491169041a',1,'Nakama::NGroup']]],
+  ['owner_5fread',['OWNER_READ',['../namespace_nakama.html#ac65107ae4c1c5b0319f7a6fbbd3966fda96d2235385562ead2cfc233669f825c5',1,'Nakama']]],
+  ['owner_5fwrite',['OWNER_WRITE',['../namespace_nakama.html#ad86376ac5e7b0a210c7a965e747c5c52ac046fe1b2c7cba3cea5041b15bd8b611',1,'Nakama']]],
   ['ownerid',['ownerId',['../struct_nakama_1_1_n_leaderboard_record.html#aaa613ce42458524803eace7eb3315ad0',1,'Nakama::NLeaderboardRecord']]],
   ['ownerrecords',['ownerRecords',['../struct_nakama_1_1_n_leaderboard_record_list.html#a22abba55353bc506720dc3a2e581970d',1,'Nakama::NLeaderboardRecordList::ownerRecords()'],['../struct_nakama_1_1_n_tournament_record_list.html#ad864fdc1da908c5bc8185eeeb0b054fa',1,'Nakama::NTournamentRecordList::ownerRecords()']]]
 ];

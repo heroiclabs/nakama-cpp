@@ -10,7 +10,6 @@ var searchData=
   ['nchannelpresenceevent_2eh',['NChannelPresenceEvent.h',['../_n_channel_presence_event_8h.html',1,'']]],
   ['nclientinterface_2eh',['NClientInterface.h',['../_n_client_interface_8h.html',1,'']]],
   ['nconsolelogsink_2eh',['NConsoleLogSink.h',['../_n_console_log_sink_8h.html',1,'']]],
-  ['ndefaultwebsocket_2eh',['NDefaultWebsocket.h',['../_n_default_websocket_8h.html',1,'']]],
   ['nerror_2eh',['NError.h',['../_n_error_8h.html',1,'']]],
   ['nfriend_2eh',['NFriend.h',['../_n_friend_8h.html',1,'']]],
   ['nfriends_2eh',['NFriends.h',['../_n_friends_8h.html',1,'']]],
@@ -44,6 +43,7 @@ var searchData=
   ['nstorageobjectid_2eh',['NStorageObjectId.h',['../_n_storage_object_id_8h.html',1,'']]],
   ['nstorageobjectlist_2eh',['NStorageObjectList.h',['../_n_storage_object_list_8h.html',1,'']]],
   ['nstorageobjectwrite_2eh',['NStorageObjectWrite.h',['../_n_storage_object_write_8h.html',1,'']]],
+  ['nstoragepermissions_2eh',['NStoragePermissions.h',['../_n_storage_permissions_8h.html',1,'']]],
   ['nstream_2eh',['NStream.h',['../_n_stream_8h.html',1,'']]],
   ['nstreamdata_2eh',['NStreamData.h',['../_n_stream_data_8h.html',1,'']]],
   ['nstreampresenceevent_2eh',['NStreamPresenceEvent.h',['../_n_stream_presence_event_8h.html',1,'']]],
@@ -56,5 +56,6 @@ var searchData=
   ['nusergrouplist_2eh',['NUserGroupList.h',['../_n_user_group_list_8h.html',1,'']]],
   ['nuserpresence_2eh',['NUserPresence.h',['../_n_user_presence_8h.html',1,'']]],
   ['nusers_2eh',['NUsers.h',['../_n_users_8h.html',1,'']]],
-  ['nutils_2eh',['NUtils.h',['../_n_utils_8h.html',1,'']]]
+  ['nutils_2eh',['NUtils.h',['../_n_utils_8h.html',1,'']]],
+  ['nwebsockets_2eh',['NWebsockets.h',['../_n_websockets_8h.html',1,'']]]
 ];
