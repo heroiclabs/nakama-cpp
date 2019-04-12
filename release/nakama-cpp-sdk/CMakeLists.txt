@@ -135,18 +135,31 @@ else()
 endif()
 
 # ssl
-#project(ssl)
-#add_library(ssl STATIC IMPORTED GLOBAL)
-#set_target_properties(ssl PROPERTIES
-#    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}ssl${LIB_SUFFIX}${LIB_EXT}"
-#)
+project(ssl)
+add_library(ssl STATIC IMPORTED GLOBAL)
+set_target_properties(ssl PROPERTIES
+    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}ssl${LIB_SUFFIX}${LIB_EXT}"
+)
 
 # crypto
-#project(crypto)
-#add_library(crypto STATIC IMPORTED GLOBAL)
-#set_target_properties(crypto PROPERTIES
-#    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}crypto${LIB_SUFFIX}${LIB_EXT}"
-#)
+project(crypto)
+add_library(crypto STATIC IMPORTED GLOBAL)
+set_target_properties(crypto PROPERTIES
+    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}crypto${LIB_SUFFIX}${LIB_EXT}"
+)
+
+if(ANDROID OR APPLE)
+    set(IXWEBSOCKET_AVL TRUE)
+
+    # ixwebsocket
+    project(ixwebsocket)
+    add_library(ixwebsocket STATIC IMPORTED GLOBAL)
+    set_target_properties(ixwebsocket PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}ixwebsocket${LIB_SUFFIX}${LIB_EXT}"
+    )
+else()
+    set(IXWEBSOCKET_AVL FALSE)
+endif()
 
 # nakama-cpp
 set(lib_name nakama-cpp)
@@ -168,7 +181,11 @@ set_target_properties(${target_name} PROPERTIES
     IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}${lib_name}${LIB_SUFFIX}${LIB_EXT}"
 )
 
-target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares address_sorting gpr zlib)
+target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares address_sorting gpr zlib ssl crypto)
+
+if(IXWEBSOCKET_AVL)
+    target_link_libraries(${target_name} INTERFACE ixwebsocket)
+endif()
 
 if(ANDROID)
     target_link_libraries(${target_name} INTERFACE log)
