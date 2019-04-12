@@ -275,11 +275,14 @@ Note: to use logging macroses you have to define `NLOGS_ENABLED`.
 
 #### Websockets transport
 
-Nakama C++ client has built-in support for WebSocket. This is currently available on Windows, Mac and Linux.
+Nakama C++ client has built-in support for WebSocket. This is available on all supported platforms.
 
-To add support for Android, you need to use the ported version of the `boost` library for Android. This is because `websocketpp` depends on `boost`.
+Client will default to use the Websocket transport which is available on the platform:
 
-Client will default to use the provided Websocket transport if available on the platform. You can use a custom Websocket transport if it implements the `NRtTransportInterface`:
+* on Mac, iOS, Android - IXWebSocket
+* on Windows and Linux - websocketpp
+
+You can use a custom Websocket transport by implementing the `NRtTransportInterface`:
 
 ```cpp
 rtClient = client->createRtClient(port, websockets_transport);
@@ -323,6 +326,7 @@ Third party libraries:
 - grpc - in source control as git submodule
 - optional-lite - in source control
 - websocketpp - in source control
+- IXWebsocket - in source control
 
 ### Building for Windows
 
