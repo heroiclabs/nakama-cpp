@@ -202,9 +202,13 @@ $(document).ready(function(){initNavTree('index.html','');});
 </ul>
 <p>Note: to use logging macroses you have to define <code>NLOGS_ENABLED</code>.</p>
 <h4>Websockets transport</h4>
-<p><a class="el" href="namespace_nakama.html">Nakama</a> C++ client has built-in support for WebSocket. This is currently available on Windows, Mac and Linux.</p>
-<p>To add support for Android, you need to use the ported version of the <code>boost</code> library for Android. This is because <code>websocketpp</code> depends on <code>boost</code>.</p>
-<p>Client will default to use the provided Websocket transport if available on the platform. You can use a custom Websocket transport if it implements the <code>NRtTransportInterface</code>:</p>
+<p><a class="el" href="namespace_nakama.html">Nakama</a> C++ client has built-in support for WebSocket. This is available on all supported platforms.</p>
+<p>Client will default to use the Websocket transport which is available on the platform:</p>
+<ul>
+<li>on Mac, iOS, Android - IXWebSocket</li>
+<li>on Windows and Linux - websocketpp</li>
+</ul>
+<p>You can use a custom Websocket transport by implementing the <code>NRtTransportInterface</code>:</p>
 <div class="fragment"><div class="line">rtClient = client-&gt;createRtClient(port, websockets_transport);</div></div><!-- fragment --><p>For more code examples, have a look at <code>NWebSocket</code> is <a href="https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/Classes/NakamaCocos2d/NWebSocket.h">Cocos2d-x client</a>.</p>
 <h2>Contribute</h2>
 <p>The development roadmap is managed as GitHub issues and pull requests are welcome. If you're interested to enhance the code please open an issue to discuss the changes or drop in and discuss it in the <a href="https://gitter.im/heroiclabs/nakama">community chat</a>.</p>
@@ -234,6 +238,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>grpc - in source control as git submodule</li>
 <li>optional-lite - in source control</li>
 <li>websocketpp - in source control</li>
+<li>IXWebsocket - in source control</li>
 </ul>
 <h3>Building for Windows</h3>
 <div class="fragment"><div class="line">cd build\windows</div><div class="line">python build_windows.py -m Mode -a Arch -t Toolset</div></div><!-- fragment --><p> Where <code>Mode</code> is build mode: <code>Debug</code> or <code>Release</code></p>
