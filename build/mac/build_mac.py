@@ -71,6 +71,7 @@ generator = 'Ninja'
 
 # generate projects
 call('cmake' +
+ ' -DCMAKE_OSX_DEPLOYMENT_TARGET=10.10' +
  ' -DENABLE_BITCODE=FALSE' +
  ' -DENABLE_ARC=TRUE' +
  ' -DBUILD_WEBSOCKETPP=ON' +

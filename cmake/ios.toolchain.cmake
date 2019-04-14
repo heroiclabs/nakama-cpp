@@ -30,16 +30,6 @@ execute_process(COMMAND /usr/bin/xcrun -sdk iphoneos --show-sdk-path
 #message("CMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}")
 #message("CMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}")
 
-set(IPHONEOS_DEPLOYMENT_TARGET "8.0")
-
-if(CMAKE_OSX_SYSROOT MATCHES iPhone[1-6].[0-9].sdk)  
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mios-version-min=${IPHONEOS_DEPLOYMENT_TARGET}")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mios-version-min=${IPHONEOS_DEPLOYMENT_TARGET}")
-else()
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -miphoneos-version-min=${IPHONEOS_DEPLOYMENT_TARGET}")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -miphoneos-version-min=${IPHONEOS_DEPLOYMENT_TARGET}")
-endif()
-
 if(NOT CMAKE_OSX_ARCHITECTURES)
     set(CMAKE_OSX_ARCHITECTURES "armv7s")
 endif()

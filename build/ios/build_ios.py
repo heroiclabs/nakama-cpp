@@ -68,6 +68,7 @@ generator = 'Unix Makefiles'
 call(['cmake',
       '-B',
       build_dir,
+      '-DCMAKE_OSX_DEPLOYMENT_TARGET=8.0',
       '-DCMAKE_OSX_ARCHITECTURES=' + ARCH,
       '-Dprotobuf_BUILD_PROTOC_BINARIES=OFF',
       '-DgRPC_BUILD_CODEGEN=OFF',
