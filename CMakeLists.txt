@@ -52,7 +52,11 @@ set(THIRD_PARTY_DIR ${PROJECT_SOURCE_DIR}/third_party)
 
 add_subdirectory(src)
 add_subdirectory(third_party/grpc)
-add_subdirectory(third_party/IXWebSocket)
+
+if(BUILD_IXWEBSOCKET)
+    set(USE_TLS ${NAKAMA_SSL_ENABLED})
+    add_subdirectory(third_party/IXWebSocket)
+endif()
 
 #if((WIN32 OR APPLE OR UNIX) AND NOT IOS_PLATFORM)
 # only build tests for desktop OS

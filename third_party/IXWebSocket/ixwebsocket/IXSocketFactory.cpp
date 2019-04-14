@@ -6,7 +6,7 @@
 
 #include "IXSocketFactory.h"
 
-#if defined(__APPLE__) or defined(__linux__)
+#ifdef IXWEBSOCKET_USE_TLS
 # ifdef __APPLE__
 #  include <ixwebsocket/IXSocketAppleSSL.h>
 # else

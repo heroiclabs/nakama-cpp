@@ -75,6 +75,7 @@ else()
     list( APPEND IXWEBSOCKET_HEADERS ixwebsocket/IXSelectInterruptEventFd.h)
 endif()
 
+set(USE_OPEN_SSL FALSE)
 if (USE_TLS)
     add_definitions(-DIXWEBSOCKET_USE_TLS)
 
@@ -85,6 +86,7 @@ if (USE_TLS)
         list( APPEND IXWEBSOCKET_HEADERS ixwebsocket/IXSocketSChannel.h)
         list( APPEND IXWEBSOCKET_SOURCES ixwebsocket/IXSocketSChannel.cpp)
     else()
+        set(USE_OPEN_SSL TRUE)
         list( APPEND IXWEBSOCKET_HEADERS ixwebsocket/IXSocketOpenSSL.h)
         list( APPEND IXWEBSOCKET_SOURCES ixwebsocket/IXSocketOpenSSL.cpp)
     endif()
@@ -98,6 +100,10 @@ add_library( ixwebsocket STATIC
 # gcc/Linux needs -pthread
 find_package(Threads)
 
+if (APPLE AND USE_TLS)
+    target_link_libraries(ixwebsocket "-framework foundation" "-framework security")
+endif()
+
 #if(UNIX AND NOT APPLE)
 #  find_package(OpenSSL REQUIRED)
 #  add_definitions(${OPENSSL_DEFINITIONS})
@@ -106,15 +112,6 @@ find_package(Threads)
 #endif()
 
 if (WIN32)
-  get_filename_component(libz_path
-    ${PROJECT_SOURCE_DIR}/third_party/ZLIB-Windows/zlib-1.2.11_deploy_v140/release_dynamic/x64/lib/zlib.lib
-    ABSOLUTE)
-  add_library(libz STATIC IMPORTED)
-  set_target_properties(libz PROPERTIES IMPORTED_LOCATION
-    ${libz_path})
-
-  include_directories(${PROJECT_SOURCE_DIR}/third_party/ZLIB-Windows/zlib-1.2.11_deploy_v140/include)
-
   target_link_libraries(ixwebsocket libz wsock32 ws2_32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
   
@@ -124,8 +121,14 @@ else()
 endif()
 
 target_include_directories( ixwebsocket PRIVATE
-  ../grpc/third_party/boringssl/include
   ../grpc/third_party/zlib
   ${CMAKE_CURRENT_BINARY_DIR}/../grpc/third_party/zlib
   )
+
+if(USE_OPEN_SSL)
+  target_include_directories( ixwebsocket PRIVATE
+    ../grpc/third_party/boringssl/include
+  )
+endif()
+
 target_include_directories( ixwebsocket PUBLIC . )
