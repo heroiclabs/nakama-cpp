@@ -22,7 +22,7 @@ You'll need to setup the server and database before you can connect with the cli
 - Windows - Visual Studio 2015, 2017 (x86, x64, Debug, Release)
 - Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86, x86_64)
 - Linux - Ubuntu 14.04.5 (x86, x64)
-- Mac
+- Mac - 10.10+
 - iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off
 
 In theory any platform that meets the requirement for `grpc` and `boost` is also supported. The client is compiled with C++11.
@@ -282,13 +282,17 @@ Client will default to use the Websocket transport which is available on the pla
 * on Mac, iOS, Android - IXWebSocket
 * on Windows and Linux - websocketpp
 
-You can use a custom Websocket transport by implementing the `NRtTransportInterface`:
+You can use a custom Websocket transport by implementing the [NRtTransportInterface](https://github.com/heroiclabs/nakama-cpp/blob/master/include/nakama-cpp/realtime/NRtTransportInterface.h):
 
 ```cpp
 rtClient = client->createRtClient(port, websockets_transport);
 ```
 
-For more code examples, have a look at `NWebSocket` is [Cocos2d-x client](https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/Classes/NakamaCocos2d/NWebSocket.h).
+For more code examples, have a look at:
+
+* [NWebsocketpp](https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NWebsocketpp.h)
+* [NIXWebsocket](https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NIXWebsocket.h)
+* [NWebSocket](https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/Classes/NakamaCocos2d/NWebSocket.h)
 
 ## Contribute
 
