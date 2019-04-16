@@ -25,7 +25,7 @@ std::string base64Encode(const Base64Buffer& buffer)
 {
     std::string base64str;
 
-    google::protobuf::Base64Escape((const unsigned char *)buffer.data(), buffer.size(), &base64str, true);
+    google::protobuf::Base64Escape((const unsigned char *)buffer.data(), static_cast<int>(buffer.size()), &base64str, true);
 
     return base64str;
 }

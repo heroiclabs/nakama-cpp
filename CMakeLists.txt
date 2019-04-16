@@ -18,16 +18,15 @@ cmake_minimum_required(VERSION 3.10)
 
 project(nakama-cpp-all)
 
-cmake_policy(SET CMP0074 NEW)
-cmake_policy(SET CMP0054 NEW)
 cmake_policy(SET CMP0042 NEW)
+cmake_policy(SET CMP0048 NEW)
+cmake_policy(SET CMP0054 NEW)
+cmake_policy(SET CMP0074 NEW)
+cmake_policy(SET CMP0077 NEW)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 include(windows_support)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 option(BUILD_WEBSOCKETPP "Build Websocketpp transport" ON)
 option(BUILD_IXWEBSOCKET "Build IXWebSocket transport" ON)
