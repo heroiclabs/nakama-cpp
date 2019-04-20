@@ -26,20 +26,20 @@ namespace Nakama {
      * Creates Websocketpp or IXWebSocket transport depending on platform.
      * Check out README for supported platforms.
      */
-    NRtTransportPtr createDefaultWebsocket();
+    NAKAMA_API NRtTransportPtr createDefaultWebsocket();
     
     /**
      * Create Websocketpp transport.
      * 
      * Check out README for supported platforms.
      */
-    NRtTransportPtr createWebsocketpp();
+    NAKAMA_API NRtTransportPtr createWebsocketpp();
     
     /**
      * Create IXWebSocket transport.
      * 
      * Check out README for supported platforms.
      */
-    NRtTransportPtr createIXWebSocket();
+    NAKAMA_API NRtTransportPtr createIXWebSocket();
 
 }

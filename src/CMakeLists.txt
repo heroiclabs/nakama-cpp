@@ -17,7 +17,7 @@ cmake_minimum_required(VERSION 3.10)
 
 cmake_policy(SET CMP0074 NEW)
 
-project(nakama-cpp CXX)
+project(nakama-cpp VERSION 2.0.2 DESCRIPTION "Nakama C++ Client" LANGUAGES CXX)
 
 if(WIN32)
     include(windows_support)
@@ -48,8 +48,16 @@ file(
     "${_include_root_path}/*.h*"
 )
 
-add_library(nakama-cpp SHARED STATIC ${_source_list} ${_public_headers_list})
-target_compile_features(nakama-cpp PRIVATE cxx_std_11)
+#add_library(nakama-cpp SHARED STATIC ${_source_list} ${_public_headers_list})
+add_library(nakama-cpp SHARED ${_source_list} ${_public_headers_list})
+set_target_properties(nakama-cpp PROPERTIES
+    VERSION ${PROJECT_VERSION}
+    SOVERSION 1
+)
+set(CMAKE_CXX_STANDARD 11)
+
+add_definitions(-DNAKAMA_SHARED_LIBRARY)
+add_definitions(-DNAKAMA_SHARED_LIBRARY_EXPORTS)
 
 if(LOGS_ENABLED)
     add_definitions(-DNLOGS_ENABLED)
@@ -72,10 +80,10 @@ endif(BUILD_WEBSOCKETPP)
 
 if(BUILD_IXWEBSOCKET)
     add_definitions(-DBUILD_IXWEBSOCKET)
-    target_link_libraries(nakama-cpp PRIVATE ixwebsocket)
+    target_link_libraries(nakama-cpp PUBLIC ixwebsocket)
 endif(BUILD_IXWEBSOCKET)
 
-target_link_libraries(nakama-cpp PRIVATE grpc++ libprotobuf)
+target_link_libraries(nakama-cpp PUBLIC grpc++ libprotobuf)
 
 target_include_directories(nakama-cpp
     PUBLIC ${THIRD_PARTY_DIR}
@@ -92,11 +100,11 @@ foreach(_source IN ITEMS ${_source_list})
     source_group("src\\${_group_path}" FILES "${_source}")
 endforeach()
 
-foreach(_source IN ITEMS ${_public_headers_list})
-    get_filename_component(_source_path "${_source}" PATH)
-    file(RELATIVE_PATH _source_path_rel "${_include_root_path}" "${_source_path}")
-    string(REPLACE "/" "\\" _group_path "${_source_path_rel}")
-    source_group("include\\${_group_path}" FILES "${_source}")
+foreach(_header IN ITEMS ${_public_headers_list})
+    get_filename_component(_header_path "${_header}" PATH)
+    file(RELATIVE_PATH _header_path_rel "${_include_root_path}" "${_header_path}")
+    string(REPLACE "/" "\\" _group_path "${_header_path_rel}")
+    source_group("include\\${_group_path}" FILES "${_header}")
 endforeach()
 
 install(TARGETS nakama-cpp DESTINATION ${INSTALL_LIB_DIR})

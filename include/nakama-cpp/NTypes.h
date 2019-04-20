@@ -16,14 +16,11 @@
 
 #pragma once
 
+#include "nakama-cpp/NExport.h"
 #include "nonstd/optional.hpp"
 #include <cstdint>
 #include <string>
 #include <map>
-
-#if !defined(NAKAMA_API)
-    #define NAKAMA_API
-#endif
 
 namespace Nakama {
 

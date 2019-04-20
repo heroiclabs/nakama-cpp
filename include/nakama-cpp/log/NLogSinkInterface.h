@@ -21,7 +21,7 @@
 
 namespace Nakama {
 
-    enum class NLogLevel
+    enum class NAKAMA_API NLogLevel
     {
         Debug    = 1,
         Info     = 2,
