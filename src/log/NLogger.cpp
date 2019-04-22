@@ -20,7 +20,7 @@
 
 namespace Nakama {
 
-NLogSinkPtr NLogger::_sink;
+static NLogSinkPtr _sink;
 
 void NLogger::initWithConsoleSink(NLogLevel level)
 {

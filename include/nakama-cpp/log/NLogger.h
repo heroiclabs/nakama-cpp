@@ -82,8 +82,6 @@ namespace Nakama {
         ~NLogger() = delete;
         NLogger(const NLogger&) = delete;
         void operator=(const NLogger&) = delete;
-
-        static NLogSinkPtr _sink;
     };
 
 }
