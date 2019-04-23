@@ -15,7 +15,12 @@
 #
 cmake_minimum_required(VERSION 3.6)
 
-set(ROOT_LIBS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/libs")
+if(NAKAMA_SHARED_LIBRARY)
+    add_definitions(-DNAKAMA_SHARED_LIBRARY)
+    set(ROOT_LIBS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/shared-libs")
+else()
+    set(ROOT_LIBS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/libs")
+endif()
 
 # check architecture
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -53,149 +58,178 @@ elseif(UNIX AND NOT APPLE)
     endif()
 endif()
 
-set(LIB_PREFIX "")
-set(LIB_SUFFIX "")
-set(LIB_EXT "")
+if(NAKAMA_SHARED_LIBRARY)
+    # nakama-cpp shared lib
+    message("Using Nakama shared lib")
+    set(lib_name nakama-cpp)
+    set(target_name ext_${lib_name})
 
-if(WIN32)
-    if (NOT CMAKE_BUILD_TYPE)
-        set(CMAKE_BUILD_TYPE Debug)
+    project(${lib_name})
+    
+    if(WIN32)
+        set(SHARED_LIB_FILE "nakama-cpp.dll")
+    else()
+        set(SHARED_LIB_FILE "libnakama-cpp.so")
     endif()
-    if(CMAKE_BUILD_TYPE MATCHES Debug)
-        set(LIB_SUFFIX "d")
+    
+    add_library(${target_name} SHARED IMPORTED GLOBAL)
+    
+    get_filename_component(nakama-cpp-shared_path
+        ${LIBS_FOLDER}/${SHARED_LIB_FILE}
+        ABSOLUTE)
+
+    set_target_properties(${target_name} PROPERTIES
+        IMPORTED_LOCATION ${nakama-cpp-shared_path})
+    
+    add_definitions(-DNAKAMA_SHARED_LIBRARY)
+
+else()
+    # static libs
+    message("Using Nakama static lib")
+    set(LIB_PREFIX "")
+    set(LIB_SUFFIX "")
+    set(LIB_EXT "")
+
+    if(WIN32)
+        if (NOT CMAKE_BUILD_TYPE)
+            set(CMAKE_BUILD_TYPE Debug)
+        endif()
+        if(CMAKE_BUILD_TYPE MATCHES Debug)
+            set(LIB_SUFFIX "d")
+        endif()
+        set(LIB_EXT ".lib")
+    else()
+        # Android, Mac, iOS, Linux
+        set(LIB_PREFIX "lib")
+        set(LIB_EXT ".a")
     endif()
-    set(LIB_EXT ".lib")
-else()
-    # Android, Mac, iOS, Linux
-    set(LIB_PREFIX "lib")
-    set(LIB_EXT ".a")
+
+    # grpc++
+    project(grpc++)
+    add_library(grpc++ STATIC IMPORTED GLOBAL)
+    set_target_properties(grpc++ PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}grpc++${LIB_SUFFIX}${LIB_EXT}"
+    )
+
+    # grpc
+    project(grpc)
+    add_library(grpc STATIC IMPORTED GLOBAL)
+    set_target_properties(grpc PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}grpc${LIB_SUFFIX}${LIB_EXT}"
+    )
+
+    # protobuf
+    project(protobuf)
+    add_library(protobuf STATIC IMPORTED GLOBAL)
+    if(WIN32)
+        set_target_properties(protobuf PROPERTIES
+            IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}libprotobuf${LIB_SUFFIX}${LIB_EXT}"
+        )
+    else()
+        # Android, Mac, iOS, Linux
+        set_target_properties(protobuf PROPERTIES
+            IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}protobuf${LIB_SUFFIX}${LIB_EXT}"
+        )
+    endif()
+
+    # cares
+    project(cares)
+    add_library(cares STATIC IMPORTED GLOBAL)
+    set_target_properties(cares PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}cares${LIB_SUFFIX}${LIB_EXT}"
+    )
+
+    # address_sorting
+    project(address_sorting)
+    add_library(address_sorting STATIC IMPORTED GLOBAL)
+    set_target_properties(address_sorting PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}address_sorting${LIB_SUFFIX}${LIB_EXT}"
+    )
+
+    # gpr
+    project(gpr)
+    add_library(gpr STATIC IMPORTED GLOBAL)
+    set_target_properties(gpr PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}gpr${LIB_SUFFIX}${LIB_EXT}"
+    )
+
+    # zlib
+    project(zlib)
+    add_library(zlib STATIC IMPORTED GLOBAL)
+    if(WIN32)
+        set_target_properties(zlib PROPERTIES
+            IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}zlib${LIB_SUFFIX}${LIB_EXT}"
+        )
+    else()
+        # Android, Mac, iOS, Linux
+        set_target_properties(zlib PROPERTIES
+            IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}z${LIB_SUFFIX}${LIB_EXT}"
+        )
+    endif()
+
+    # ssl
+    project(ssl)
+    add_library(ssl STATIC IMPORTED GLOBAL)
+    set_target_properties(ssl PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}ssl${LIB_SUFFIX}${LIB_EXT}"
+    )
+
+    # crypto
+    project(crypto)
+    add_library(crypto STATIC IMPORTED GLOBAL)
+    set_target_properties(crypto PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}crypto${LIB_SUFFIX}${LIB_EXT}"
+    )
+
+    if(ANDROID OR APPLE)
+        set(IXWEBSOCKET_AVL TRUE)
+
+        # ixwebsocket
+        project(ixwebsocket)
+        add_library(ixwebsocket STATIC IMPORTED GLOBAL)
+        set_target_properties(ixwebsocket PROPERTIES
+            IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}ixwebsocket${LIB_SUFFIX}${LIB_EXT}"
+        )
+    else()
+        set(IXWEBSOCKET_AVL FALSE)
+    endif()
+
+    # nakama-cpp static lib
+    set(lib_name nakama-cpp)
+    set(target_name ext_${lib_name})
+
+    project(${lib_name})
+
+    add_library(${target_name} STATIC IMPORTED GLOBAL)
+
+    set_target_properties(${target_name} PROPERTIES
+        INTERFACE_LINK_DIRECTORIES "${LIBS_FOLDER}"
+    )
+
+    set_target_properties(${target_name} PROPERTIES
+        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}${lib_name}${LIB_SUFFIX}${LIB_EXT}"
+    )
+
+    target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares address_sorting gpr zlib ssl crypto)
+
+    if(IXWEBSOCKET_AVL)
+        target_link_libraries(${target_name} INTERFACE ixwebsocket)
+    endif()
+    
+    if(ANDROID)
+        target_link_libraries(${target_name} INTERFACE log)
+    endif()
+
+    if(APPLE_IOS)
+        target_link_libraries(${target_name} INTERFACE resolv.9)
+    endif()
+
+    if(UNIX AND NOT APPLE AND NOT ANDROID)
+        # Linux
+        target_link_libraries(${target_name} INTERFACE pthread)
+    endif()
 endif()
-
-# grpc++
-project(grpc++)
-add_library(grpc++ STATIC IMPORTED GLOBAL)
-set_target_properties(grpc++ PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}grpc++${LIB_SUFFIX}${LIB_EXT}"
-)
-
-# grpc
-project(grpc)
-add_library(grpc STATIC IMPORTED GLOBAL)
-set_target_properties(grpc PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}grpc${LIB_SUFFIX}${LIB_EXT}"
-)
-
-# protobuf
-project(protobuf)
-add_library(protobuf STATIC IMPORTED GLOBAL)
-if(WIN32)
-    set_target_properties(protobuf PROPERTIES
-        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}libprotobuf${LIB_SUFFIX}${LIB_EXT}"
-    )
-else()
-    # Android, Mac, iOS, Linux
-    set_target_properties(protobuf PROPERTIES
-        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}protobuf${LIB_SUFFIX}${LIB_EXT}"
-    )
-endif()
-
-# cares
-project(cares)
-add_library(cares STATIC IMPORTED GLOBAL)
-set_target_properties(cares PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}cares${LIB_SUFFIX}${LIB_EXT}"
-)
-
-# address_sorting
-project(address_sorting)
-add_library(address_sorting STATIC IMPORTED GLOBAL)
-set_target_properties(address_sorting PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}address_sorting${LIB_SUFFIX}${LIB_EXT}"
-)
-
-# gpr
-project(gpr)
-add_library(gpr STATIC IMPORTED GLOBAL)
-set_target_properties(gpr PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}gpr${LIB_SUFFIX}${LIB_EXT}"
-)
-
-# zlib
-project(zlib)
-add_library(zlib STATIC IMPORTED GLOBAL)
-if(WIN32)
-    set_target_properties(zlib PROPERTIES
-        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}zlib${LIB_SUFFIX}${LIB_EXT}"
-    )
-else()
-    # Android, Mac, iOS, Linux
-    set_target_properties(zlib PROPERTIES
-        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}z${LIB_SUFFIX}${LIB_EXT}"
-    )
-endif()
-
-# ssl
-project(ssl)
-add_library(ssl STATIC IMPORTED GLOBAL)
-set_target_properties(ssl PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}ssl${LIB_SUFFIX}${LIB_EXT}"
-)
-
-# crypto
-project(crypto)
-add_library(crypto STATIC IMPORTED GLOBAL)
-set_target_properties(crypto PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}crypto${LIB_SUFFIX}${LIB_EXT}"
-)
-
-if(ANDROID OR APPLE)
-    set(IXWEBSOCKET_AVL TRUE)
-
-    # ixwebsocket
-    project(ixwebsocket)
-    add_library(ixwebsocket STATIC IMPORTED GLOBAL)
-    set_target_properties(ixwebsocket PROPERTIES
-        IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}ixwebsocket${LIB_SUFFIX}${LIB_EXT}"
-    )
-else()
-    set(IXWEBSOCKET_AVL FALSE)
-endif()
-
-# nakama-cpp
-set(lib_name nakama-cpp)
-set(target_name ext_${lib_name})
-
-project(${lib_name})
-
-add_library(${target_name} STATIC IMPORTED GLOBAL)
 
 set_target_properties(${target_name} PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
-
-set_target_properties(${target_name} PROPERTIES
-    INTERFACE_LINK_DIRECTORIES "${LIBS_FOLDER}"
-)
-
-set_target_properties(${target_name} PROPERTIES
-    IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}${lib_name}${LIB_SUFFIX}${LIB_EXT}"
-)
-
-target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares address_sorting gpr zlib ssl crypto)
-
-if(IXWEBSOCKET_AVL)
-    target_link_libraries(${target_name} INTERFACE ixwebsocket)
-endif()
-
-if(ANDROID)
-    target_link_libraries(${target_name} INTERFACE log)
-endif()
-
-if(APPLE_IOS)
-    target_link_libraries(${target_name} INTERFACE resolv.9)
-endif()
-
-if(UNIX AND NOT APPLE AND NOT ANDROID)
-    # Linux
-    target_link_libraries(${target_name} INTERFACE pthread)
-endif()
