@@ -49,10 +49,11 @@ file(
 )
 
 if(NAKAMA_SHARED_LIBRARY)
+    set(CMAKE_MACOSX_RPATH OFF)
+
     add_library(nakama-cpp SHARED ${_source_list} ${_public_headers_list})
     set_target_properties(nakama-cpp PROPERTIES
         VERSION ${PROJECT_VERSION}
-        SOVERSION 1
     )
 
     target_compile_definitions(nakama-cpp PRIVATE NAKAMA_SHARED_LIBRARY)
@@ -68,7 +69,7 @@ else()
     add_library(nakama-cpp STATIC ${_source_list} ${_public_headers_list})
 endif()
 
-set(CMAKE_CXX_STANDARD 11)
+target_compile_features(nakama-cpp PUBLIC cxx_std_11)
 
 if(LOGS_ENABLED)
     target_compile_definitions(nakama-cpp PRIVATE NLOGS_ENABLED)

@@ -139,7 +139,6 @@ call('cmake -B ' + build_dir +
 build('grpc_cpp_plugin')
 build('protoc')
 build('nakama-cpp')
-build('nakama-test')
 
 if ARCH == 'x64':
     win = 'win64'
@@ -157,3 +156,5 @@ if DLL:
     copy_dll(release_libs_dir)
 else:
     copy_libs(release_libs_dir)
+
+build('nakama-test')

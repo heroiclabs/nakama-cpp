@@ -18,6 +18,7 @@ import sys
 import subprocess
 import os
 import shutil
+import argparse
 
 cur_dir = os.path.abspath('.')
 if cur_dir.find(' ') >= 0:
@@ -25,9 +26,27 @@ if cur_dir.find(' ') >= 0:
     print 'please remove spaces from path and try again'
     sys.exit(-1)
 
+parser = argparse.ArgumentParser(description='builder for Mac')
+parser.add_argument('--dylib',  help='build DynamicLib', action='store_true')
+
+args = parser.parse_args()
+
 BUILD_MODE = 'Release'
+SHARED_LIB = args.dylib
+
+print
+if SHARED_LIB:
+    print 'Building dynamic lib'
+else:
+    print 'Building static lib'
+print
+
 build_dir = os.path.abspath('build/' + BUILD_MODE)
-release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/libs/mac')
+
+if SHARED_LIB:
+    release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/mac')
+else:
+    release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/libs/mac')
 
 if not os.path.isdir(build_dir):
     os.makedirs(build_dir)
@@ -64,7 +83,17 @@ def copy_libs(dest):
     copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', dest)
     copy_file(build_dir + '/third_party/IXWebSocket/libixwebsocket.a', dest)
 
+def copy_shared_lib(dest):
+    print
+    print 'copying to release folder...'
+    copy_file(build_dir + '/src/libnakama-cpp.dylib', dest)
+
 os.chdir(build_dir)
+
+if SHARED_LIB:
+    NAKAMA_SHARED_LIBRARY = 'TRUE'
+else:
+    NAKAMA_SHARED_LIBRARY = 'FALSE'
 
 #generator = 'Xcode' # doesn't build crypto
 generator = 'Ninja'
@@ -76,13 +105,19 @@ call('cmake' +
  ' -DENABLE_ARC=TRUE' +
  ' -DBUILD_WEBSOCKETPP=ON' +
  ' -DBUILD_IXWEBSOCKET=ON' +
+ ' -DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY +
  ' -G' + generator +
  ' ../../../..')
 
 build('grpc_cpp_plugin')
 build('protoc')
 build('nakama-cpp')
-build('nakama-test')
 
 makedirs(release_libs_path)
-copy_libs(release_libs_path)
+
+if SHARED_LIB:
+    copy_shared_lib(release_libs_path)
+else:
+    copy_libs(release_libs_path)
+
+build('nakama-test')

@@ -98,7 +98,11 @@ if(NAKAMA_SHARED_LIBRARY)
     else()
         add_library(${target_name} SHARED IMPORTED GLOBAL)
         
-        set(SHARED_LIB_FILE "libnakama-cpp.so")
+        if(APPLE)
+            set(SHARED_LIB_FILE "libnakama-cpp.dylib")
+        else()
+            set(SHARED_LIB_FILE "libnakama-cpp.so")
+        endif()
         
         get_filename_component(nakama-cpp-shared_path
             ${LIBS_FOLDER}/${SHARED_LIB_FILE}
