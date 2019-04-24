@@ -48,16 +48,27 @@ file(
     "${_include_root_path}/*.h*"
 )
 
-#add_library(nakama-cpp SHARED STATIC ${_source_list} ${_public_headers_list})
-add_library(nakama-cpp SHARED ${_source_list} ${_public_headers_list})
-set_target_properties(nakama-cpp PROPERTIES
-    VERSION ${PROJECT_VERSION}
-    SOVERSION 1
-)
-set(CMAKE_CXX_STANDARD 11)
+if(NAKAMA_SHARED_LIBRARY)
+    add_library(nakama-cpp SHARED ${_source_list} ${_public_headers_list})
+    set_target_properties(nakama-cpp PROPERTIES
+        VERSION ${PROJECT_VERSION}
+        SOVERSION 1
+    )
 
-add_definitions(-DNAKAMA_SHARED_LIBRARY)
-add_definitions(-DNAKAMA_SHARED_LIBRARY_EXPORTS)
+    target_compile_definitions(nakama-cpp PRIVATE NAKAMA_SHARED_LIBRARY)
+    target_compile_definitions(nakama-cpp PRIVATE NAKAMA_SHARED_LIBRARY_EXPORTS)
+
+    if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+        # disable C4251 warnings
+        target_compile_options(nakama-cpp INTERFACE /wd4251)
+    endif()
+
+else()
+    # static lib
+    add_library(nakama-cpp STATIC ${_source_list} ${_public_headers_list})
+endif()
+
+set(CMAKE_CXX_STANDARD 11)
 
 if(LOGS_ENABLED)
     add_definitions(-DNLOGS_ENABLED)

@@ -29,6 +29,10 @@ else()
     set(CPU_ARCH "x86")
 endif()
 
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
+endif()
+
 if(ANDROID)
     if("${ANDROID_STL}" STREQUAL "c++_static")
         set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/android/${ANDROID_ABI}")
@@ -36,8 +40,10 @@ if(ANDROID)
         message(FATAL_ERROR "nakama-cpp: only c++_static STL is supported")
     endif()
 elseif(WIN32)
-    # vc140 - Visual Studio 2015
-    # vc141 - Visual Studio 2017
+    # CMAKE_VS_PLATFORM_TOOLSET:
+    #   v140 - Visual Studio 2015
+    #   v141 - Visual Studio 2017
+    #   v142 - Visual Studio 2019
     if(${CPU_ARCH} STREQUAL "x64")
         set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/win64/${CMAKE_VS_PLATFORM_TOOLSET}/${CMAKE_BUILD_TYPE}")
     else()
@@ -65,23 +71,54 @@ if(NAKAMA_SHARED_LIBRARY)
     set(target_name ext_${lib_name})
 
     project(${lib_name})
-    
-    if(WIN32)
-        set(SHARED_LIB_FILE "nakama-cpp.dll")
-    else()
-        set(SHARED_LIB_FILE "libnakama-cpp.so")
-    endif()
-    
-    add_library(${target_name} SHARED IMPORTED GLOBAL)
-    
-    get_filename_component(nakama-cpp-shared_path
-        ${LIBS_FOLDER}/${SHARED_LIB_FILE}
-        ABSOLUTE)
 
-    set_target_properties(${target_name} PROPERTIES
-        IMPORTED_LOCATION ${nakama-cpp-shared_path})
+    if(WIN32)
+        add_library(${target_name} STATIC IMPORTED GLOBAL)
     
-    add_definitions(-DNAKAMA_SHARED_LIBRARY)
+        set(LIB_SUFFIX "")
+        if(CMAKE_BUILD_TYPE MATCHES Debug)
+            set(LIB_SUFFIX "d")
+        endif()
+        
+        get_filename_component(nakama-cpp-shared_path
+            ${LIBS_FOLDER}/nakama-cpp${LIB_SUFFIX}.lib
+            ABSOLUTE)
+
+        message("nakama-cpp-shared_path=${nakama-cpp-shared_path}")
+
+        set_target_properties(${target_name} PROPERTIES
+            IMPORTED_LOCATION ${nakama-cpp-shared_path})
+
+        get_filename_component(nakama-cpp-shared_path
+            ${LIBS_FOLDER}/nakama-cpp${LIB_SUFFIX}.dll
+            ABSOLUTE)
+        
+        # disable C4251 warnings
+        target_compile_options(${target_name} INTERFACE /wd4251)
+    else()
+        add_library(${target_name} SHARED IMPORTED GLOBAL)
+        
+        set(SHARED_LIB_FILE "libnakama-cpp.so")
+        
+        get_filename_component(nakama-cpp-shared_path
+            ${LIBS_FOLDER}/${SHARED_LIB_FILE}
+            ABSOLUTE)
+
+        set_target_properties(${target_name} PROPERTIES
+            IMPORTED_LOCATION ${nakama-cpp-shared_path})
+    endif()
+
+    set(nakama-cpp-shared-lib-path ${nakama-cpp-shared_path} CACHE STRING "Path to Nakama shared library" FORCE)
+    target_compile_definitions(${target_name} INTERFACE NAKAMA_SHARED_LIBRARY)
+    
+    function(CopyNakamaSharedLib target)
+        set(output_directory $<TARGET_FILE_DIR:${target}>)
+        message("CopyNakamaSharedLib output_directory=${output_directory}")
+        message("CopyNakamaSharedLib nakama-cpp-shared-lib-path=${nakama-cpp-shared-lib-path}")
+        add_custom_command(
+            TARGET ${target} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${nakama-cpp-shared-lib-path} ${output_directory})
+    endfunction()
 
 else()
     # static libs
@@ -91,9 +128,6 @@ else()
     set(LIB_EXT "")
 
     if(WIN32)
-        if (NOT CMAKE_BUILD_TYPE)
-            set(CMAKE_BUILD_TYPE Debug)
-        endif()
         if(CMAKE_BUILD_TYPE MATCHES Debug)
             set(LIB_SUFFIX "d")
         endif()
@@ -230,6 +264,4 @@ else()
     endif()
 endif()
 
-set_target_properties(${target_name} PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
-)
+target_include_directories(${target_name} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)

@@ -30,18 +30,13 @@ file(
 add_executable(nakama-test ${_source_list})
 target_compile_features(nakama-test PRIVATE cxx_std_11)
 
-get_filename_component(nakama-cpp-shared_path
-    ${CMAKE_BINARY_DIR}/src/Debug/nakama-cppd.lib
-    ABSOLUTE)
-add_library(nakama-cpp-shared STATIC IMPORTED)
-set_target_properties(nakama-cpp-shared PROPERTIES
-    IMPORTED_LOCATION ${nakama-cpp-shared_path})
-
-include_directories(${THIRD_PARTY_DIR} ${PUBLIC_INCLUDE_DIR})
-add_definitions(-DNAKAMA_SHARED_LIBRARY)
-
-#target_link_libraries(nakama-test PRIVATE nakama-cpp)
-target_link_libraries(nakama-test PUBLIC nakama-cpp-shared)
+if(NAKAMA_SHARED_LIBRARY)
+    add_subdirectory(../release/nakama-cpp-sdk ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp-shared)
+    target_link_libraries(nakama-test PUBLIC ext_nakama-cpp)
+    CopyNakamaSharedLib(nakama-test)
+else()
+    target_link_libraries(nakama-test PRIVATE nakama-cpp)
+endif()
 
 target_include_directories(nakama-test
     PRIVATE .

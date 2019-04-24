@@ -29,12 +29,14 @@ parser = argparse.ArgumentParser(description='builder for Windows')
 parser.add_argument('-m', '--mode', help='build mode: Debug or Release')
 parser.add_argument('-a', '--arch', help='architecture: x86 or x64')
 parser.add_argument('-t', '--tool', help='platform toolset: v140, v141...')
+parser.add_argument(      '--dll',  help='build DLL', action='store_true')
 
 args = parser.parse_args()
 
 BUILD_MODE = 'Debug'
 ARCH = 'x86'
 TOOLSET = args.tool
+DLL = args.dll
 
 if args.mode:
     valid_modes = ['Debug', 'Release']
@@ -88,6 +90,12 @@ def copy_libs(dest):
     copy_file(build_dir + '\\third_party\\grpc\\third_party\\boringssl\\crypto\\' + BUILD_MODE + '\\crypto' + libs_postfix + '.lib', dest)
     copy_file(build_dir + '\\third_party\\grpc\\third_party\\zlib\\' + BUILD_MODE + '\\zlibstatic' + libs_postfix + '.lib', dest + '\\zlib' + libs_postfix + '.lib')
 
+def copy_dll(dest):
+    print
+    print 'copying to release folder...'
+    copy_file(build_dir + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.lib', dest)
+    copy_file(build_dir + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.dll', dest)
+
 # generate Visual Studio projects
 #generator = 'Visual Studio 14 2015'
 #generator = 'Visual Studio 15 2017'
@@ -107,16 +115,23 @@ if not TOOLSET:
         print 'Unknown Visual Studio version.'
         sys.exit(-1)
 
+if DLL:
+    NAKAMA_SHARED_LIBRARY = 'TRUE'
+else:
+    NAKAMA_SHARED_LIBRARY = 'FALSE'
+
 build_dir = os.path.abspath('build\\' + TOOLSET + '_' + ARCH)
 makedirs(build_dir)
 
 print
-print 'Building for Arch:', ARCH + ', Toolset:', TOOLSET + ', Mode:', BUILD_MODE
+print 'Building for Arch:', ARCH + ', Toolset:', TOOLSET + ', Mode:', BUILD_MODE + ', DLL:', str(DLL)
 print
 
 call('cmake -B ' + build_dir +
  ' -G"' + generator + '"' +
  ' -T ' + TOOLSET +
+ ' -DCMAKE_BUILD_TYPE=' + BUILD_MODE +
+ ' -DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY +
  ' -DBUILD_WEBSOCKETPP=ON' +
  ' -DBUILD_IXWEBSOCKET=OFF' +
  ' ../..')
@@ -131,7 +146,14 @@ if ARCH == 'x64':
 else:
     win = 'win32'
 
-release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/' + win + '/' + TOOLSET + '/' + BUILD_MODE)
+if DLL:
+    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/' + win + '/' + TOOLSET + '/' + BUILD_MODE)
+else:
+    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/' + win + '/' + TOOLSET + '/' + BUILD_MODE)
 
 makedirs(release_libs_dir)
-copy_libs(release_libs_dir)
+
+if DLL:
+    copy_dll(release_libs_dir)
+else:
+    copy_libs(release_libs_dir)
