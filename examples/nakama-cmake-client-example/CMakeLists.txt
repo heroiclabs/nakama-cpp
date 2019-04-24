@@ -21,5 +21,7 @@ add_subdirectory(../../release/nakama-cpp-sdk ${CMAKE_CURRENT_BINARY_DIR}/nakama
 
 add_executable(nakama-cmake-client-example nakama-cmake-client-example.cpp)
 target_compile_features(nakama-cmake-client-example PRIVATE cxx_std_11)
-target_link_libraries(nakama-cmake-client-example PRIVATE ext_nakama-cpp)
 target_include_directories(nakama-cmake-client-example PRIVATE .)
+
+target_link_libraries(nakama-cmake-client-example PUBLIC ext_nakama-cpp)
+CopyNakamaSharedLib(nakama-cmake-client-example)
