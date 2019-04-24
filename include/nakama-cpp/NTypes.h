@@ -53,22 +53,4 @@ namespace Nakama {
     using NStringDoubleMap = std::map<std::string, double>;
     namespace opt = nonstd;
 
-    struct NAKAMA_API std::_Container_base12;
-
-    //std::basic_string depends on this allocator, so it must also be exported.
-    /*EXPIMP_TEMPLATE*/ template class NAKAMA_API std::allocator<char>;
-
-    template struct NAKAMA_API std::_Simple_types<char>;
-    template class NAKAMA_API std::_String_val<std::_Simple_types<char>>;
-    template class NAKAMA_API std::_Compressed_pair<std::_Wrap_alloc<std::allocator<char>>, std::_String_val<std::_Simple_types<char>>, true>;
-    //std::string is a typedef, so you cannot export it.  You must export std::basic_string
-    /*EXPIMP_TEMPLATE*/ template class NAKAMA_API std::basic_string< char, std::char_traits<char>, std::allocator<char> >;
-
-#define EXPORT_VECTOR(_Ty) \
-    template class NAKAMA_API std::allocator<_Ty>; \
-    template class NAKAMA_API std::_Vector_val<std::_Simple_types<_Ty>>; \
-    template class NAKAMA_API std::_Compressed_pair<std::_Wrap_alloc<std::allocator<_Ty>>,std::_Vector_val<std::_Simple_types<_Ty>>,true>; \
-    template class NAKAMA_API std::_Vector_alloc<std::_Vec_base_types<_Ty, std::allocator<_Ty> > >; \
-    template class NAKAMA_API std::vector<_Ty, std::allocator<_Ty> >;
-
 }

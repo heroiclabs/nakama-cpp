@@ -22,9 +22,6 @@
 
 namespace Nakama {
 
-    template class NAKAMA_API opt::optional<NStoragePermissionRead>;
-    template class NAKAMA_API opt::optional<NStoragePermissionWrite>;
-
     /// The object to store.
     struct NAKAMA_API NStorageObjectWrite
     {
