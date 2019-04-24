@@ -71,15 +71,15 @@ endif()
 set(CMAKE_CXX_STANDARD 11)
 
 if(LOGS_ENABLED)
-    add_definitions(-DNLOGS_ENABLED)
+    target_compile_definitions(nakama-cpp PRIVATE NLOGS_ENABLED)
 endif(LOGS_ENABLED)
 
 if(NAKAMA_SSL_ENABLED)
-    add_definitions(-DNAKAMA_SSL_ENABLED)
+    target_compile_definitions(nakama-cpp PRIVATE NAKAMA_SSL_ENABLED)
 endif(NAKAMA_SSL_ENABLED)
 
 if(BUILD_WEBSOCKETPP)
-    add_definitions(-DBUILD_WEBSOCKETPP)
+    target_compile_definitions(nakama-cpp PRIVATE BUILD_WEBSOCKETPP)
     set(Boost_USE_STATIC_LIBS ON) # only find static libs
     find_package(Boost 1.67.0 REQUIRED COMPONENTS system date_time regex)
     if(NOT Boost_FOUND)
@@ -90,7 +90,7 @@ if(BUILD_WEBSOCKETPP)
 endif(BUILD_WEBSOCKETPP)
 
 if(BUILD_IXWEBSOCKET)
-    add_definitions(-DBUILD_IXWEBSOCKET)
+    target_compile_definitions(nakama-cpp PRIVATE BUILD_IXWEBSOCKET)
     target_link_libraries(nakama-cpp PUBLIC ixwebsocket)
 endif(BUILD_IXWEBSOCKET)
 
