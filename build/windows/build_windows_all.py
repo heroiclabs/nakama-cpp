@@ -20,7 +20,7 @@ import subprocess
 
 modes_list    = ['Release', 'Debug']
 arch_list     = ['x86', 'x64']
-toolsets_list = ['v140', 'v141']
+toolsets_list = ['v140', 'v141', 'v142']
 
 def call(command):
     res = subprocess.call(command, shell=False)

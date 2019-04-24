@@ -90,7 +90,8 @@ def copy_libs(dest):
 
 # generate Visual Studio projects
 #generator = 'Visual Studio 14 2015'
-generator = 'Visual Studio 15 2017'
+#generator = 'Visual Studio 15 2017'
+generator = 'Visual Studio 16 2019'
 
 if ARCH == 'x64':
     generator += ' Win64'
@@ -100,12 +101,18 @@ if not TOOLSET:
         TOOLSET = 'v140'
     elif generator.startswith('Visual Studio 15 2017'):
         TOOLSET = 'v141'
+    elif generator.startswith('Visual Studio 16 2019'):
+        TOOLSET = 'v142'
     else:
         print 'Unknown Visual Studio version.'
         sys.exit(-1)
 
 build_dir = os.path.abspath('build\\' + TOOLSET + '_' + ARCH)
 makedirs(build_dir)
+
+print
+print 'Building for Arch:', ARCH + ', Toolset:', TOOLSET + ', Mode:', BUILD_MODE
+print
 
 call('cmake -B ' + build_dir +
  ' -G"' + generator + '"' +
