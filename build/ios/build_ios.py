@@ -18,6 +18,7 @@ import sys
 import subprocess
 import os
 import shutil
+import argparse
 
 cur_dir = os.path.abspath('.')
 if cur_dir.find(' ') >= 0:
@@ -25,13 +26,20 @@ if cur_dir.find(' ') >= 0:
     print 'please remove spaces from path and try again'
     sys.exit(-1)
 
-if len(sys.argv) < 2:
-    print "Pass ARCH parameter."
-    print "e.g. arm64 armv7 armv7s x86_64"
-    sys.exit(-1)
+parser = argparse.ArgumentParser(description='builder for iOS')
+parser.add_argument('arch',     help='architecture e.g. arm64 armv7 armv7s x86_64')
+parser.add_argument('--dylib',  help='build DynamicLib', action='store_true')
 
-ARCH = sys.argv[1]
+args = parser.parse_args()
+
+ARCH = args.arch
+SHARED_LIB = args.dylib
 BUILD_MODE = 'Release'
+
+print
+print 'Building for', ARCH + ', dylib:', str(SHARED_LIB)
+print
+
 build_dir = './build/' + BUILD_MODE + '/' + ARCH
 
 if ARCH == 'x86_64':
@@ -61,6 +69,11 @@ if is_simulator:
 else:
     cmake_toolchain_path = os.path.abspath('../../cmake/ios.toolchain.cmake')
 
+if SHARED_LIB:
+    NAKAMA_SHARED_LIBRARY = 'TRUE'
+else:
+    NAKAMA_SHARED_LIBRARY = 'FALSE'
+
 #generator = 'Xcode'
 generator = 'Unix Makefiles'
 
@@ -74,6 +87,7 @@ call(['cmake',
       '-DgRPC_BUILD_CODEGEN=OFF',
       '-DCMAKE_TOOLCHAIN_FILE=' + cmake_toolchain_path,
       '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
+      '-DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY,
       '-DENABLE_BITCODE=FALSE',
       '-DENABLE_ARC=TRUE',
       '-DBUILD_WEBSOCKETPP=OFF',

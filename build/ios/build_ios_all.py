@@ -31,10 +31,12 @@ def call(command):
     if res != 0:
         sys.exit(-1)
 
-release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/ios')
+def makedirs(dir):
+    if not os.path.isdir(dir):
+        os.makedirs(dir)
 
-if not os.path.isdir(release_libs_dir):
-    os.makedirs(release_libs_dir)
+release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/ios')
+makedirs(release_libs_dir)
 
 def create_universal_lib(libs):
     name = os.path.basename(libs[0])
@@ -46,6 +48,9 @@ def create_universal_lib(libs):
     lipo_commands.append(release_libs_dir + '/' + name)
     call(lipo_commands)
 
+build_dir = os.path.abspath('build/' + BUILD_MODE) + '/'
+
+# static libs
 nakama_cpp_libs = []
 grpc_libs = []
 grpcpp_libs = []
@@ -58,10 +63,7 @@ protobuf_libs = []
 z_libs = []
 ixwebsocket_libs = []
 
-build_dir = os.path.abspath('build/' + BUILD_MODE) + '/'
-
 for arch in arch_list:
-    print 'building for', arch
     call(['python', 'build_ios.py', arch])
     
     build_arch_dir = build_dir + arch
@@ -89,5 +91,20 @@ create_universal_lib(ssl_libs)
 create_universal_lib(protobuf_libs)
 create_universal_lib(z_libs)
 create_universal_lib(ixwebsocket_libs)
+
+# dynamic libs
+release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/ios')
+makedirs(release_libs_dir)
+
+nakama_cpp_libs = []
+
+for arch in arch_list:
+    call(['python', 'build_ios.py', '--dylib', arch])
+    
+    build_arch_dir = build_dir + arch
+    
+    nakama_cpp_libs.append(build_arch_dir + '/src/libnakama-cpp.dylib')
+
+create_universal_lib(nakama_cpp_libs)
 
 print 'done.'
