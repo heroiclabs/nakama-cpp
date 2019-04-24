@@ -262,6 +262,10 @@ else()
         # Linux
         target_link_libraries(${target_name} INTERFACE pthread)
     endif()
+    
+    function(CopyNakamaSharedLib target)
+        # do nothing for static lib
+    endfunction()
 endif()
 
 target_include_directories(${target_name} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
