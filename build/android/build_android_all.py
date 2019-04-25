@@ -24,6 +24,10 @@ def call(command):
     if res != 0:
         sys.exit(-1)
 
+# static libs
 for abi in abi_list:
-    print 'building for', abi
     call(['python', 'build_android.py', abi])
+
+# shared libs
+for abi in abi_list:
+    call(['python', 'build_android.py', abi, '--so'])

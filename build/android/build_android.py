@@ -18,6 +18,7 @@ import sys
 import subprocess
 import os
 import shutil
+import argparse
 
 cur_dir = os.path.abspath('.')
 if cur_dir.find(' ') >= 0:
@@ -25,13 +26,24 @@ if cur_dir.find(' ') >= 0:
     print 'please remove spaces from path and try again'
     sys.exit(-1)
 
+parser = argparse.ArgumentParser(description='builder for Windows')
+parser.add_argument('arch', help='architecture e.g. armeabi-v7a, arm64-v8a, x86, x86_64')
+parser.add_argument('--so',  help='build shared object', action='store_true')
+
+args = parser.parse_args()
+
 if len(sys.argv) < 2:
     print "Pass ABI parameter."
-    print "e.g. armeabi-v7a, arm64-v8a, x86 or x86_64"
+    print ""
     sys.exit(-1)
 
-ABI = sys.argv[1]
+ABI = args.arch
+SHARED_LIB = args.so
 BUILD_MODE = 'Release'
+
+print
+print 'Building for arch:', ABI + ', so:', str(SHARED_LIB)
+print
 
 def getEnvVar(name):
     if name in os.environ:
@@ -51,7 +63,11 @@ def call(command):
         sys.exit(-1)
 
 build_dir = os.path.abspath('build/' + ABI + '/' + BUILD_MODE)
-release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/android/' + ABI)
+
+if SHARED_LIB:
+    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/android/' + ABI)
+else:
+    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/android/' + ABI)
 
 def makedirs(dir):
     if not os.path.isdir(dir):
@@ -76,7 +92,17 @@ def copy_libs(dest):
     copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', dest)
     copy_file(build_dir + '/third_party/IXWebSocket/libixwebsocket.a', dest)
 
+def copy_shared_lib(dest):
+    print
+    print 'copying to release folder...'
+    copy_file(build_dir + '/src/libnakama-cpp.so', dest)
+
 print 'ANDROID_NDK=' + ANDROID_NDK
+
+if SHARED_LIB:
+    NAKAMA_SHARED_LIBRARY = 'TRUE'
+else:
+    NAKAMA_SHARED_LIBRARY = 'FALSE'
 
 makedirs(build_dir)
 
@@ -85,6 +111,7 @@ cmake_args = [
               '-DANDROID_ABI=' + ABI,
               '-DCMAKE_TOOLCHAIN_FILE=' + ANDROID_NDK + '/build/cmake/android.toolchain.cmake',
               '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
+              '-DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY,
               '-DANDROID_NATIVE_API_LEVEL=16',
               '-DBUILD_WEBSOCKETPP=OFF',
               '-DBUILD_IXWEBSOCKET=ON',
@@ -101,4 +128,8 @@ call(cmake_args)
 call(['ninja', '-C', build_dir, 'nakama-cpp'])
 
 makedirs(release_libs_dir)
-copy_libs(release_libs_dir)
+
+if SHARED_LIB:
+    copy_shared_lib(release_libs_dir)
+else:
+    copy_libs(release_libs_dir)
