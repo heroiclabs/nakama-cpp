@@ -27,10 +27,16 @@ def call(command):
     if res != 0:
         sys.exit(-1)
 
+# static libs
 for toolset in toolsets_list:
     for arch in arch_list:
         for mode in modes_list:
-            print 'building for', arch, mode, toolset
             call(['python', 'build_windows.py', '-a', arch, '-m', mode, '-t', toolset])
+
+# DLLs
+for toolset in toolsets_list:
+    for arch in arch_list:
+        for mode in modes_list:
+            call(['python', 'build_windows.py', '-a', arch, '-m', mode, '-t', toolset, '--dll'])
 
 print 'done.'

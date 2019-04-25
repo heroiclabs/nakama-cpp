@@ -97,11 +97,11 @@ def copy_dll(dest):
     copy_file(build_dir + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.dll', dest)
 
 # generate Visual Studio projects
-#generator = 'Visual Studio 14 2015'
-#generator = 'Visual Studio 15 2017'
-generator = 'Visual Studio 16 2019'
+#generator, vs_year = 'Visual Studio 14 2015', 2015
+#generator, vs_year = 'Visual Studio 15 2017', 2017
+generator, vs_year = 'Visual Studio 16 2019', 2019
 
-if ARCH == 'x64':
+if ARCH == 'x64' and vs_year < 2019:
     generator += ' Win64'
 
 if not TOOLSET:
@@ -127,30 +127,46 @@ print
 print 'Building for Arch:', ARCH + ', Toolset:', TOOLSET + ', Mode:', BUILD_MODE + ', DLL:', str(DLL)
 print
 
-call('cmake -B ' + build_dir +
- ' -G"' + generator + '"' +
- ' -T ' + TOOLSET +
- ' -DCMAKE_BUILD_TYPE=' + BUILD_MODE +
- ' -DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY +
- ' -DBUILD_WEBSOCKETPP=ON' +
- ' -DBUILD_IXWEBSOCKET=OFF' +
- ' ../..')
+#if generator == 'Visual Studio 16 2019':
+
+if ARCH == 'x64':
+    arch_folder = 'win64'
+else:
+    arch_folder = 'win32'
+
+cmake_cmd = ['cmake',
+ '-B', build_dir,
+ '-G', generator,
+ '-T', TOOLSET,
+ '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
+ '-DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY,
+ '-DBUILD_WEBSOCKETPP=ON',
+ '-DBUILD_IXWEBSOCKET=OFF',
+]
+
+if vs_year >= 2019:
+    cmake_cmd.append('-A')
+    
+    if ARCH == 'x64':
+        cmake_cmd.append('x64')
+    else:
+        cmake_cmd.append('Win32')
+
+cmake_cmd.append('../..')
+
+call(cmake_cmd)
 
 build('grpc_cpp_plugin')
 build('protoc')
 build('nakama-cpp')
 
-if ARCH == 'x64':
-    win = 'win64'
-else:
-    win = 'win32'
-
 if DLL:
-    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/' + win + '/' + TOOLSET + '/' + BUILD_MODE)
+    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/' + arch_folder + '/' + TOOLSET + '/' + BUILD_MODE)
 else:
-    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/' + win + '/' + TOOLSET + '/' + BUILD_MODE)
+    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/' + arch_folder + '/' + TOOLSET + '/' + BUILD_MODE)
 
 makedirs(release_libs_dir)
+print 'release_libs_dir:', release_libs_dir
 
 if DLL:
     copy_dll(release_libs_dir)
