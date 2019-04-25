@@ -61,12 +61,16 @@ if(NAKAMA_SHARED_LIBRARY)
 
     if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
         # disable C4251 warnings
-        target_compile_options(nakama-cpp INTERFACE /wd4251)
+        target_compile_options(nakama-cpp PRIVATE /wd4251)
     endif()
 
 else()
     # static lib
     add_library(nakama-cpp STATIC ${_source_list} ${_public_headers_list})
+endif()
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    target_compile_options(nakama-cpp PRIVATE /MP)
 endif()
 
 target_compile_features(nakama-cpp PUBLIC cxx_std_11)
