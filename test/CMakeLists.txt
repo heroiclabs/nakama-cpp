@@ -30,6 +30,10 @@ file(
 add_executable(nakama-test ${_source_list})
 target_compile_features(nakama-test PRIVATE cxx_std_11)
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    target_compile_options(nakama-test PRIVATE /MP)
+endif()
+
 if(NAKAMA_SHARED_LIBRARY)
     add_subdirectory(../release/nakama-cpp-sdk ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp-shared)
     target_link_libraries(nakama-test PUBLIC ext_nakama-cpp)
