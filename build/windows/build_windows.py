@@ -97,23 +97,15 @@ def copy_dll(dest):
     copy_file(build_dir + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.dll', dest)
 
 # generate Visual Studio projects
-#generator, vs_year = 'Visual Studio 14 2015', 2015
-#generator, vs_year = 'Visual Studio 15 2017', 2017
-generator, vs_year = 'Visual Studio 16 2019', 2019
+#generator, vs_year, default_toolset = 'Visual Studio 14 2015', 2015, 'v140'
+#generator, vs_year, default_toolset = 'Visual Studio 15 2017', 2017, 'v141'
+generator, vs_year, default_toolset = 'Visual Studio 16 2019', 2019, 'v142'
 
 if ARCH == 'x64' and vs_year < 2019:
     generator += ' Win64'
 
 if not TOOLSET:
-    if generator.startswith('Visual Studio 14 2015'):
-        TOOLSET = 'v140'
-    elif generator.startswith('Visual Studio 15 2017'):
-        TOOLSET = 'v141'
-    elif generator.startswith('Visual Studio 16 2019'):
-        TOOLSET = 'v142'
-    else:
-        print 'Unknown Visual Studio version.'
-        sys.exit(-1)
+    TOOLSET = default_toolset
 
 if DLL:
     NAKAMA_SHARED_LIBRARY = 'TRUE'
@@ -126,8 +118,6 @@ makedirs(build_dir)
 print
 print 'Building for Arch:', ARCH + ', Toolset:', TOOLSET + ', Mode:', BUILD_MODE + ', DLL:', str(DLL)
 print
-
-#if generator == 'Visual Studio 16 2019':
 
 if ARCH == 'x64':
     arch_folder = 'win64'
