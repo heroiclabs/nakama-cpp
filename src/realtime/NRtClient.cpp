@@ -508,13 +508,11 @@ void NRtClient::addMatchmaker(
 
     for (auto it : stringProperties)
     {
-        NLOG(NLogLevel::Debug, "%s=%s", it.first.c_str(), it.second.c_str());
         (*data->mutable_string_properties())[it.first] = it.second;
     }
 
     for (auto it : numericProperties)
     {
-        NLOG(NLogLevel::Debug, "%s=%f", it.first.c_str(), it.second);
         (*data->mutable_numeric_properties())[it.first] = it.second;
     }
 

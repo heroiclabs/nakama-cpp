@@ -34,15 +34,6 @@ public:
         parameters.port      = 7349;
 
         _client = createDefaultClient(parameters);
-        _rtClient = _client->createRtClient();
-        
-        NStringMap smap;
-        NStringDoubleMap dmap;
-        
-        smap.emplace("key", "value");
-        dmap.emplace("key", 2.0);
-        
-        _rtClient->addMatchmaker({}, {}, {}, smap, dmap);
     }
 
     void start(const string& deviceId)
@@ -102,7 +93,6 @@ public:
 
 protected:
     NClientPtr _client;
-    NRtClientPtr _rtClient;
     NSessionPtr _session;
 };
 
