@@ -4,15 +4,9 @@ var _n_types_8h =
     [ "NStringDoubleMap", "_n_types_8h.html#a4845aaac94e24680c94947607868b41c", null ],
     [ "NStringMap", "_n_types_8h.html#af5bc2b81dde0b3ada693748e8c1ee337", null ],
     [ "NTimestamp", "_n_types_8h.html#a80117c553946865d276bacca06169ed3", null ],
-    [ "NChannelType", "_n_types_8h.html#ac35def09c2440dbfdea24b4bbefac2e7", [
-      [ "ROOM", "_n_types_8h.html#ac35def09c2440dbfdea24b4bbefac2e7ae4d7aa7fb6334ffed206a7b1ca150c50", null ],
-      [ "DIRECT_MESSAGE", "_n_types_8h.html#ac35def09c2440dbfdea24b4bbefac2e7aa39d74738432bfad73300f1fe0dd0fe0", null ],
-      [ "GROUP", "_n_types_8h.html#ac35def09c2440dbfdea24b4bbefac2e7a720909a4b948fc9e33633b61960d6b3c", null ]
-    ] ],
-    [ "NUserGroupState", "_n_types_8h.html#a59ee0ae7a159e7547bc101f1cd55abcf", [
-      [ "SUPERADMIN", "_n_types_8h.html#a59ee0ae7a159e7547bc101f1cd55abcfa545514976ad64ba23911d485536249c9", null ],
-      [ "ADMIN", "_n_types_8h.html#a59ee0ae7a159e7547bc101f1cd55abcfa73acd9a5972130b75066c82595a1fae3", null ],
-      [ "MEMBER", "_n_types_8h.html#a59ee0ae7a159e7547bc101f1cd55abcfa77e6cb59f088a2937324f798be141b4b", null ],
-      [ "JOIN_REQUEST", "_n_types_8h.html#a59ee0ae7a159e7547bc101f1cd55abcfa48d89bc571a42cb17b3ee614be9a7d69", null ]
-    ] ]
+    [ "ADMIN", "_n_types_8h.html#a6bfc500738d8e9d168cd0a2024c94f5a", null ],
+    [ "DIRECT_MESSAGE", "_n_types_8h.html#a01cd7fde59423eaae6ea390a392991b1", null ],
+    [ "MEMBER", "_n_types_8h.html#ad07a6e6e0096abd7b8a0d2c05331ef88", null ],
+    [ "ROOM", "_n_types_8h.html#a76ab038d7eca8b09a85c9646565f276c", null ],
+    [ "SUPERADMIN", "_n_types_8h.html#aec1155c650a97a4d09278741d0070265", null ]
 ];

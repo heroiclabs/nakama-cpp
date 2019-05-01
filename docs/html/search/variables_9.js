@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['joins',['joins',['../struct_nakama_1_1_n_channel_presence_event.html#a63790a6d85d09e03d3b643a56a87fb28',1,'Nakama::NChannelPresenceEvent::joins()'],['../struct_nakama_1_1_n_match_presence_event.html#a51b52f1647dc03b04a5a944da980a9c7',1,'Nakama::NMatchPresenceEvent::joins()'],['../struct_nakama_1_1_n_status_presence_event.html#ad3096f6a0cfd4b3b3d4691a8abd81985',1,'Nakama::NStatusPresenceEvent::joins()'],['../struct_nakama_1_1_n_stream_presence_event.html#a7a51bd1084c4c9a6ee0185d97b336473',1,'Nakama::NStreamPresenceEvent::joins()']]]
+  ['id',['id',['../struct_nakama_1_1_n_account_device.html#aab581b0c25616cfc70ba59c0553ab2cd',1,'Nakama::NAccountDevice::id()'],['../struct_nakama_1_1_n_group.html#ad710faf7782df6a971f1ce82436319fb',1,'Nakama::NGroup::id()'],['../struct_nakama_1_1_n_notification.html#a332cd63c97eba73aaa96ace5a1e510be',1,'Nakama::NNotification::id()'],['../struct_nakama_1_1_n_rpc.html#a6dbe75cf36a23e4a9efe16c9939a1657',1,'Nakama::NRpc::id()'],['../struct_nakama_1_1_n_tournament.html#aef9f11c13ed925c12f110cd01ebb6bfd',1,'Nakama::NTournament::id()'],['../struct_nakama_1_1_n_user.html#a9b2e068ae26e7c2ee3c8f2a6c0b66199',1,'Nakama::NUser::id()'],['../struct_nakama_1_1_n_channel.html#ad30a97530f0bffa5e048e89f6aa5da57',1,'Nakama::NChannel::id()']]],
+  ['info',['Info',['../_n_log_sink_interface_8h.html#a10e136332d6dc091c13986d59367f7a1',1,'NLogSinkInterface.h']]],
+  ['invalidargument',['InvalidArgument',['../_n_error_8h.html#abf26e50538c1d0f6e2658a1830c31dc8',1,'NError.h']]]
 ];

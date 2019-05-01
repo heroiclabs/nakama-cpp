@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['edgecount',['edgeCount',['../struct_nakama_1_1_n_group.html#ac39abd088c28b9c1396149776bf5c78a',1,'Nakama::NGroup::edgeCount()'],['../struct_nakama_1_1_n_user.html#a92e9cc8b330d9dcde6872fe1f95849cf',1,'Nakama::NUser::edgeCount()']]],
-  ['email',['email',['../struct_nakama_1_1_n_account.html#a2c1965d4ec6ad1069dce9a2f897ee6c8',1,'Nakama::NAccount']]],
-  ['endactive',['endActive',['../struct_nakama_1_1_n_tournament.html#a6b733fdd0b71605ecf652cdbc03df4c1',1,'Nakama::NTournament']]],
-  ['endtime',['endTime',['../struct_nakama_1_1_n_tournament.html#ad9b73ef85799f5fecaa301407db6fe03',1,'Nakama::NTournament']]],
-  ['expirytime',['expiryTime',['../struct_nakama_1_1_n_leaderboard_record.html#a9d42dde3b488863e0ee06d6d9b72a240',1,'Nakama::NLeaderboardRecord']]]
+  ['data',['data',['../struct_nakama_1_1_n_match_data.html#ac324baf44b46ffd30e8a23fa3f86ccf4',1,'Nakama::NMatchData::data()'],['../struct_nakama_1_1_n_stream_data.html#a2a61434f12edc08503649c11b6ae3d0d',1,'Nakama::NStreamData::data()']]],
+  ['debug',['Debug',['../_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8',1,'NLogSinkInterface.h']]],
+  ['description',['description',['../struct_nakama_1_1_n_group.html#a7354ee5c48a28dac5cf3874aa5ab917b',1,'Nakama::NGroup::description()'],['../struct_nakama_1_1_n_tournament.html#a74f4a074b8ec4fb2131cca9a4f53736d',1,'Nakama::NTournament::description()']]],
+  ['devices',['devices',['../struct_nakama_1_1_n_account.html#aa7305ec7e297227d75e16e961d729af8',1,'Nakama::NAccount']]],
+  ['direct_5fmessage',['DIRECT_MESSAGE',['../_n_types_8h.html#a01cd7fde59423eaae6ea390a392991b1',1,'NTypes.h']]],
+  ['displayname',['displayName',['../struct_nakama_1_1_n_user.html#a1bdb25fe20dc54b8472ded0cd3df11de',1,'Nakama::NUser']]],
+  ['duration',['duration',['../struct_nakama_1_1_n_tournament.html#aa2ec859b5cb956487fedaa1eb0812adb',1,'Nakama::NTournament']]]
 ];

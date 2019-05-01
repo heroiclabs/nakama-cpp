@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['errorcode',['ErrorCode',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b',1,'Nakama']]]
+  ['state',['State',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b',1,'Nakama::NFriend']]]
 ];

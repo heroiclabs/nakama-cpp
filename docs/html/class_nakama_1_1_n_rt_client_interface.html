@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.2</span>
+   &#160;<span id="projectnumber">2.0.3</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -106,13 +106,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a40f04f1a92b89bbe81e35e32721b5734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a757a5a91ceb33c5e73911d14afd57dc9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a757a5a91ceb33c5e73911d14afd57dc9">setListener</a> (<a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html">NRtClientListenerInterface</a> *listener)=0</td></tr>
 <tr class="separator:a757a5a91ceb33c5e73911d14afd57dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa50ec6f461050c004144fc0ab4c5444b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#aa50ec6f461050c004144fc0ab4c5444b">connect</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, bool createStatus, <a class="el" href="namespace_nakama.html#a48351d12832fad6920a0b54a4ba40589">NRtClientProtocol</a> protocol=<a class="el" href="namespace_nakama.html#a48351d12832fad6920a0b54a4ba40589aecd8db69ede756bb2833887a7a1ebf35">NRtClientProtocol::Protobuf</a>)=0</td></tr>
+<tr class="memitem:aa50ec6f461050c004144fc0ab4c5444b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#aa50ec6f461050c004144fc0ab4c5444b">connect</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, bool createStatus, NRtClientProtocol protocol=<a class="el" href="_n_rt_client_interface_8h.html#a845c2de7ee7452e7b38afd1417bb8359">NRtClientProtocol::Protobuf</a>)=0</td></tr>
 <tr class="separator:aa50ec6f461050c004144fc0ab4c5444b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d332c103e2d0a3137d0fe37c7f8d8a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#ab4d332c103e2d0a3137d0fe37c7f8d8a">isConnected</a> () const =0</td></tr>
 <tr class="separator:ab4d332c103e2d0a3137d0fe37c7f8d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b90bb506e8f121197e2634671991b65"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a7b90bb506e8f121197e2634671991b65">disconnect</a> ()=0</td></tr>
 <tr class="separator:a7b90bb506e8f121197e2634671991b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a76634b3e9b9bc6c1fc968c6942a165"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a0a76634b3e9b9bc6c1fc968c6942a165">joinChat</a> (const std::string &amp;target, <a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7">NChannelType</a> type, const opt::optional&lt; bool &gt; &amp;persistence=opt::nullopt, const opt::optional&lt; bool &gt; &amp;hidden=opt::nullopt, std::function&lt; void(<a class="el" href="namespace_nakama.html#acf8858344ae8a768a39ff5c1a479cfbe">NChannelPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="memitem:a0a76634b3e9b9bc6c1fc968c6942a165"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a0a76634b3e9b9bc6c1fc968c6942a165">joinChat</a> (const std::string &amp;target, NChannelType type, const opt::optional&lt; bool &gt; &amp;persistence=opt::nullopt, const opt::optional&lt; bool &gt; &amp;hidden=opt::nullopt, std::function&lt; void(<a class="el" href="namespace_nakama.html#acf8858344ae8a768a39ff5c1a479cfbe">NChannelPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a0a76634b3e9b9bc6c1fc968c6942a165"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29c646bb9ea9456c947ad721a05b97ae"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a29c646bb9ea9456c947ad721a05b97ae">leaveChat</a> (const std::string &amp;channelId, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a29c646bb9ea9456c947ad721a05b97ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -275,8 +275,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_nakama.html#a48351d12832fad6920a0b54a4ba40589">NRtClientProtocol</a>&#160;</td>
-          <td class="paramname"><em>protocol</em> = <code><a class="el" href="namespace_nakama.html#a48351d12832fad6920a0b54a4ba40589aecd8db69ede756bb2833887a7a1ebf35">NRtClientProtocol::Protobuf</a></code>&#160;</td>
+          <td class="paramtype">NRtClientProtocol&#160;</td>
+          <td class="paramname"><em>protocol</em> = <code><a class="el" href="_n_rt_client_interface_8h.html#a845c2de7ee7452e7b38afd1417bb8359">NRtClientProtocol::Protobuf</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -458,7 +458,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7">NChannelType</a>&#160;</td>
+          <td class="paramtype">NChannelType&#160;</td>
           <td class="paramname"><em>type</em>, </td>
         </tr>
         <tr>

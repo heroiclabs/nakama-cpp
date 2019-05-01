@@ -41,5 +41,5 @@ var searchData=
   ['subcontext',['subcontext',['../struct_nakama_1_1_n_stream.html#a32b28efefafb7e5f97008fada181bfc3',1,'Nakama::NStream']]],
   ['subject',['subject',['../struct_nakama_1_1_n_notification.html#a926bfdce3d3196f93668397670849530',1,'Nakama::NNotification::subject()'],['../struct_nakama_1_1_n_stream.html#aa7203565376944b997334f21dc1f3034',1,'Nakama::NStream::subject()']]],
   ['subscore',['subscore',['../struct_nakama_1_1_n_leaderboard_record.html#a8a05d461c694b8cf87ceda8204692f2b',1,'Nakama::NLeaderboardRecord']]],
-  ['superadmin',['SUPERADMIN',['../namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa545514976ad64ba23911d485536249c9',1,'Nakama']]]
+  ['superadmin',['SUPERADMIN',['../_n_types_8h.html#aec1155c650a97a4d09278741d0070265',1,'NTypes.h']]]
 ];

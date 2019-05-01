@@ -1,16 +1,13 @@
 var _n_error_8h =
 [
     [ "NError", "struct_nakama_1_1_n_error.html", "struct_nakama_1_1_n_error" ],
-    [ "ErrorCode", "_n_error_8h.html#accc7b4ac5f52cab6b3b903d7c5fa378b", [
-      [ "Unknown", "_n_error_8h.html#accc7b4ac5f52cab6b3b903d7c5fa378ba88183b946cc5f0e8c96b2e66e1c74a7e", null ],
-      [ "NotFound", "_n_error_8h.html#accc7b4ac5f52cab6b3b903d7c5fa378ba38c300f4fc9ce8a77aad4a30de05cad8", null ],
-      [ "AlreadyExists", "_n_error_8h.html#accc7b4ac5f52cab6b3b903d7c5fa378ba89b69484680b18e9179e826c6e023805", null ],
-      [ "InvalidArgument", "_n_error_8h.html#accc7b4ac5f52cab6b3b903d7c5fa378ba253ca7dd096ee0956cccee4d376cab8b", null ],
-      [ "Unauthenticated", "_n_error_8h.html#accc7b4ac5f52cab6b3b903d7c5fa378bab403ce880ed2c28d0784a2430a9b6eda", null ],
-      [ "PermissionDenied", "_n_error_8h.html#accc7b4ac5f52cab6b3b903d7c5fa378ba4b33a686be73bb172407d73b26356275", null ],
-      [ "ConnectionError", "_n_error_8h.html#accc7b4ac5f52cab6b3b903d7c5fa378ba094a6f6b0868122a9dd008cb91c083e4", null ],
-      [ "InternalError", "_n_error_8h.html#accc7b4ac5f52cab6b3b903d7c5fa378ba8462b58246e70e5c83e5b939a9332cb5", null ]
-    ] ],
-    [ "toString", "_n_error_8h.html#a8dec68dbc275e60c0f0e120868c013dc", null ],
-    [ "toString", "_n_error_8h.html#a5e001e7b794380c7dc61cad3ffc3d034", null ]
+    [ "toString", "_n_error_8h.html#a81c112b7500d36ed1078d8999aec1b46", null ],
+    [ "toString", "_n_error_8h.html#a5a1cc24dccebdc603397d34643fa774a", null ],
+    [ "AlreadyExists", "_n_error_8h.html#ae4bdc1a54131de1240c10218da6afa9a", null ],
+    [ "ConnectionError", "_n_error_8h.html#a3eb2ebd912cc5460d23e45f7188a0a86", null ],
+    [ "InvalidArgument", "_n_error_8h.html#abf26e50538c1d0f6e2658a1830c31dc8", null ],
+    [ "NotFound", "_n_error_8h.html#a0cfc295e037d42309933d7471dcfd28e", null ],
+    [ "PermissionDenied", "_n_error_8h.html#ad8172f411ba27cc30dba68ad3c382a9d", null ],
+    [ "Unauthenticated", "_n_error_8h.html#af433a4828e34f82ebc977d9aca96ba98", null ],
+    [ "Unknown", "_n_error_8h.html#a915d220aba4527d1e33010bdfcbc6855", null ]
 ];

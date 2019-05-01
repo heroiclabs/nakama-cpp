@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.2</span>
+   &#160;<span id="projectnumber">2.0.3</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -106,10 +106,10 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li><a class="el" href="namespace_nakama.html">Nakama</a> C++ SDK is released with prebuilt libraries for following platforms and architectures:</li>
 </ol>
 <ul>
-<li>Windows - Visual Studio 2015, 2017 (x86, x64, Debug, Release)</li>
+<li>Windows - Visual Studio 2015, 2017, 2019 (x86, x64, Debug, Release)</li>
 <li>Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86, x86_64)</li>
 <li>Linux - Ubuntu 14.04.5 (x86, x64)</li>
-<li>Mac</li>
+<li>Mac - 10.10+</li>
 <li>iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off</li>
 </ul>
 <p>In theory any platform that meets the requirement for <code>grpc</code> and <code>boost</code> is also supported. The client is compiled with C++11.</p>
@@ -134,16 +134,19 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p>If you use <code>ndk-build</code> then add following to your <code>Android.mk</code> file:</p>
 <div class="fragment"><div class="line"># add this to your module</div><div class="line">LOCAL_STATIC_LIBRARIES += nakama-cpp</div><div class="line"></div><div class="line"># add this at bottom of Android.mk file</div><div class="line">$(call import-add-path, NAKAMA_CPP_SDK)</div><div class="line">$(call import-module, nakama-cpp-android)</div></div><!-- fragment --><p>Android uses a permissions system which determines which platform services the application will request to use and ask permission for from the user. The client uses the network to communicate with the server so you must add the "INTERNET" permission.</p>
 <div class="fragment"><div class="line">&lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.INTERNET&quot;</span>/&gt;</div></div><!-- fragment --><h3>Setup for CMake projects</h3>
-<p>Add following to your <code>CMakeLists.txt</code> file:</p>
-<div class="fragment"><div class="line">add_subdirectory(NAKAMA_CPP_SDK ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp)</div><div class="line">target_link_libraries(${APP_NAME} ext_nakama-cpp)</div></div><!-- fragment --><h3>Setup for Visual Studio projects</h3>
+<p>To link <a class="el" href="namespace_nakama.html">Nakama</a>'s static lib add following to your <code>CMakeLists.txt</code> file:</p>
+<div class="fragment"><div class="line">add_subdirectory(NAKAMA_CPP_SDK ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp)</div><div class="line">target_link_libraries(${APP_NAME} ext_nakama-cpp)</div></div><!-- fragment --><p>To link <a class="el" href="namespace_nakama.html">Nakama</a>'s shared lib add following to your <code>CMakeLists.txt</code> file:</p>
+<div class="fragment"><div class="line">set(NAKAMA_SHARED_LIBRARY TRUE)</div><div class="line">add_subdirectory(NAKAMA_CPP_SDK ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp)</div><div class="line">target_link_libraries(${APP_NAME} ext_nakama-cpp)</div><div class="line">CopyNakamaSharedLib(nakama-cmake-client-example)</div></div><!-- fragment --><h3>Setup for Visual Studio projects</h3>
 <p>In <code>Project Settings</code> add following:</p>
 <ol type="1">
 <li>Add <code>NAKAMA_CPP_SDK/include</code> in <code>C/C++ &gt; General &gt; Additional Include Directories</code></li>
 <li>Add libs folder in <code>Linker &gt; General &gt; Additional Library Directories</code>:<ul>
 <li><code>NAKAMA_COCOS2D_SDK/libs/win32/v140</code> - for VS 2015 x86</li>
-<li><code>NAKAMA_COCOS2D_SDK/libs/win32/v141</code> - for VS 2017 x86</li>
 <li><code>NAKAMA_COCOS2D_SDK/libs/win64/v140</code> - for VS 2015 x64</li>
+<li><code>NAKAMA_COCOS2D_SDK/libs/win32/v141</code> - for VS 2017 x86</li>
 <li><code>NAKAMA_COCOS2D_SDK/libs/win64/v141</code> - for VS 2017 x64</li>
+<li><code>NAKAMA_COCOS2D_SDK/libs/win32/v142</code> - for VS 2019 x86</li>
+<li><code>NAKAMA_COCOS2D_SDK/libs/win64/v142</code> - for VS 2019 x64</li>
 </ul>
 </li>
 <li>Add all <code>.lib</code> files located in libs folder in <code>Linker &gt; Input &gt; Additional Dependencies</code></li>
@@ -169,7 +172,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p>Include nakama header.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_nakama_8h.html">nakama-cpp/Nakama.h</a>&quot;</span></div></div><!-- fragment --><p>Use nakama namespace.</p>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_nakama.html">Nakama</a>;</div></div><!-- fragment --><p>Use the connection credentials to build a client object.</p>
-<div class="fragment"><div class="line">DefaultClientParameters parameters;</div><div class="line">parameters.serverKey = <span class="stringliteral">&quot;defaultkey&quot;</span>;</div><div class="line">parameters.host = <span class="stringliteral">&quot;127.0.0.1&quot;</span>;</div><div class="line">parameters.port = 7349;</div><div class="line"><a class="code" href="namespace_nakama.html#ad9239c034b2a391b1bf7d9891d8a07ff">NClientPtr</a> client = <a class="code" href="namespace_nakama.html#aa1e421d42a47edf64bc7b8d7056bc8d5">createDefaultClient</a>(parameters);</div></div><!-- fragment --><h2>Tick</h2>
+<div class="fragment"><div class="line">DefaultClientParameters parameters;</div><div class="line">parameters.serverKey = <span class="stringliteral">&quot;defaultkey&quot;</span>;</div><div class="line">parameters.host = <span class="stringliteral">&quot;127.0.0.1&quot;</span>;</div><div class="line">parameters.port = 7349;</div><div class="line"><a class="code" href="namespace_nakama.html#ad9239c034b2a391b1bf7d9891d8a07ff">NClientPtr</a> client = <a class="code" href="namespace_nakama.html#a046003480471d47cb09ce17ff6f645ea">createDefaultClient</a>(parameters);</div></div><!-- fragment --><h2>Tick</h2>
 <p>The <code>tick</code> method pumps requests queue and executes callbacks in your thread. You must call it periodically (recommended every 50ms) in your thread.</p>
 <div class="fragment"><div class="line">client-&gt;tick();</div><div class="line"><span class="keywordflow">if</span> (rtClient)</div><div class="line">    rtClient-&gt;tick();</div></div><!-- fragment --><p>Without this the default client and realtime client will not work, and you will not receive responses from the server.</p>
 <h3>Authenticate</h3>
@@ -177,7 +180,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="fragment"><div class="line"><span class="keywordtype">string</span> email = <span class="stringliteral">&quot;super@heroes.com&quot;</span>;</div><div class="line"><span class="keywordtype">string</span> password = <span class="stringliteral">&quot;batsignal&quot;</span>;</div><div class="line"></div><div class="line"><span class="keyword">auto</span> successCallback = [](<a class="code" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session)</div><div class="line">{</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;session token: &quot;</span> &lt;&lt; session-&gt;getAuthToken() &lt;&lt; std::endl;</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">auto</span> errorCallback = [](<span class="keyword">const</span> NError&amp; error)</div><div class="line">{</div><div class="line">};</div><div class="line"></div><div class="line">client-&gt;authenticateEmail(email, password, <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">false</span>, successCallback, errorCallback);</div></div><!-- fragment --><h3>Sessions</h3>
 <p>When authenticated the server responds with an auth token (JWT) which contains useful properties and gets deserialized into a <code>NSession</code> object.</p>
 <div class="fragment"><div class="line">std::cout &lt;&lt; session-&gt;getAuthToken() &lt;&lt; std::endl; <span class="comment">// raw JWT token</span></div><div class="line">std::cout &lt;&lt; session-&gt;getUserId() &lt;&lt; std::endl;</div><div class="line">std::cout &lt;&lt; session-&gt;getUsername() &lt;&lt; std::endl;</div><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Session has expired: &quot;</span> &lt;&lt; session-&gt;isExpired() &lt;&lt; std::endl;</div><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Session expires at: &quot;</span> &lt;&lt; session-&gt;getExpireTime() &lt;&lt; std::endl;</div></div><!-- fragment --><p>It is recommended to store the auth token from the session and check at startup if it has expired. If the token has expired you must reauthenticate. The expiry time of the token can be changed as a setting in the server.</p>
-<div class="fragment"><div class="line"><span class="keywordtype">string</span> authtoken = <span class="stringliteral">&quot;restored from somewhere&quot;</span>;</div><div class="line"><a class="code" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session = <a class="code" href="namespace_nakama.html#a338c105d02b49ae233e0f47cd731d419">restoreSession</a>(authtoken);</div><div class="line"><span class="keywordflow">if</span> (session-&gt;isExpired()) {</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Session has expired. Must reauthenticate!&quot;</span> &lt;&lt; std::endl;</div><div class="line">}</div></div><!-- fragment --><h3>Requests</h3>
+<div class="fragment"><div class="line"><span class="keywordtype">string</span> authtoken = <span class="stringliteral">&quot;restored from somewhere&quot;</span>;</div><div class="line"><a class="code" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session = <a class="code" href="namespace_nakama.html#a8d3e611f5b0d24a6afc98af3fab2617e">restoreSession</a>(authtoken);</div><div class="line"><span class="keywordflow">if</span> (session-&gt;isExpired()) {</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Session has expired. Must reauthenticate!&quot;</span> &lt;&lt; std::endl;</div><div class="line">}</div></div><!-- fragment --><h3>Requests</h3>
 <p>The client includes lots of builtin APIs for various features of the game server. These can be accessed with the async methods. It can also call custom logic as RPC functions on the server. These can also be executed with a socket object.</p>
 <p>All requests are sent with a session object which authorizes the client.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> successCallback = [](<span class="keyword">const</span> NAccount&amp; account)</div><div class="line">{</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;user id : &quot;</span> &lt;&lt; account.user.id &lt;&lt; std::endl;</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;username: &quot;</span> &lt;&lt; account.user.username &lt;&lt; std::endl;</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;wallet  : &quot;</span> &lt;&lt; account.wallet &lt;&lt; std::endl;</div><div class="line">};</div><div class="line"></div><div class="line">client-&gt;getAccount(session, successCallback, errorCallback);</div></div><!-- fragment --><h3>Realtime client</h3>
@@ -187,8 +190,8 @@ $(document).ready(function(){initNavTree('index.html','');});
 <h4>Initializing Logger</h4>
 <p>Client logging is off by default.</p>
 <p>To enable logs output to console with debug logging level:</p>
-<div class="fragment"><div class="line">NLogger::initWithConsoleSink(NLogLevel::Debug);</div></div><!-- fragment --><p>To enable logs output to custom sink with debug logging level:</p>
-<div class="fragment"><div class="line">NLogger::init(sink, NLogLevel::Debug);</div></div><!-- fragment --><h4>Using Logger</h4>
+<div class="fragment"><div class="line">NLogger::initWithConsoleSink(<a class="code" href="_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8">NLogLevel::Debug</a>);</div></div><!-- fragment --><p>To enable logs output to custom sink with debug logging level:</p>
+<div class="fragment"><div class="line">NLogger::init(sink, <a class="code" href="_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8">NLogLevel::Debug</a>);</div></div><!-- fragment --><h4>Using Logger</h4>
 <p>To log string with debug logging level:</p>
 <div class="fragment"><div class="line">NLOG_DEBUG(&quot;debug log&quot;);</div></div><!-- fragment --><p>formatted log:</p>
 <div class="fragment"><div class="line">NLOG(NLogLevel::Info, &quot;This is string: %s&quot;, &quot;yup I&#39;m string&quot;);</div><div class="line">NLOG(NLogLevel::Info, &quot;This is int: %d&quot;, 5);</div></div><!-- fragment --><p>Changing logging level boundary:</p>
@@ -208,8 +211,13 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>on Mac, iOS, Android - IXWebSocket</li>
 <li>on Windows and Linux - websocketpp</li>
 </ul>
-<p>You can use a custom Websocket transport by implementing the <code>NRtTransportInterface</code>:</p>
-<div class="fragment"><div class="line">rtClient = client-&gt;createRtClient(port, websockets_transport);</div></div><!-- fragment --><p>For more code examples, have a look at <code>NWebSocket</code> is <a href="https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/Classes/NakamaCocos2d/NWebSocket.h">Cocos2d-x client</a>.</p>
+<p>You can use a custom Websocket transport by implementing the <a href="https://github.com/heroiclabs/nakama-cpp/blob/master/include/nakama-cpp/realtime/NRtTransportInterface.h">NRtTransportInterface</a>:</p>
+<div class="fragment"><div class="line">rtClient = client-&gt;createRtClient(port, websockets_transport);</div></div><!-- fragment --><p>For more code examples, have a look at:</p>
+<ul>
+<li><a href="https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NWebsocketpp.h">NWebsocketpp</a></li>
+<li><a href="https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NIXWebsocket.h">NIXWebsocket</a></li>
+<li><a href="https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/Classes/NakamaCocos2d/NWebSocket.h">NWebSocket</a></li>
+</ul>
 <h2>Contribute</h2>
 <p>The development roadmap is managed as GitHub issues and pull requests are welcome. If you're interested to enhance the code please open an issue to discuss the changes or drop in and discuss it in the <a href="https://gitter.im/heroiclabs/nakama">community chat</a>.</p>
 <h2>Source Builds</h2>
@@ -229,7 +237,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>cmake 3.10+</li>
 <li>go</li>
 <li>perl</li>
-<li>Visual Studio 2015 or 2017 - for Windows only</li>
+<li>Visual Studio 2015, 2017 or 2019 - for Windows only</li>
 <li>boost - for Windows, Mac and Linux, used by websocketpp library</li>
 </ul>
 <p>Third party libraries:</p>
@@ -241,21 +249,25 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>IXWebsocket - in source control</li>
 </ul>
 <h3>Building for Windows</h3>
-<div class="fragment"><div class="line">cd build\windows</div><div class="line">python build_windows.py -m Mode -a Arch -t Toolset</div></div><!-- fragment --><p> Where <code>Mode</code> is build mode: <code>Debug</code> or <code>Release</code></p>
+<div class="fragment"><div class="line">cd build\windows</div><div class="line">python build_windows.py -m Mode -a Arch -t Toolset --dll</div></div><!-- fragment --><p> Where <code>Mode</code> is build mode: <code>Debug</code> or <code>Release</code></p>
 <p>Where <code>Arch</code> is architecture: <code>x86</code> or <code>x64</code></p>
 <p>Where <code>Toolset</code> is platform toolset:</p>
 <ul>
 <li><code>v140</code> - Visual Studio 2015</li>
 <li><code>v141</code> - Visual Studio 2017</li>
+<li><code>v142</code> - Visual Studio 2019</li>
 </ul>
+<p><code>--dll</code> is optional parameter. If set then <a class="el" href="namespace_nakama.html">Nakama</a> will be built as DLL otherwise as static library.</p>
 <p>It builds and copies nakama lib to release folder.</p>
 <p>To build for all modes, architectures and toolsets:</p>
 <div class="fragment"><div class="line">cd build\windows</div><div class="line">python build_windows_all.py</div></div><!-- fragment --><h3>Building for Mac</h3>
 <p>Prerequisites: </p><div class="fragment"><div class="line">sudo xcode-select --install</div><div class="line">brew install autoconf automake libtool shtool</div><div class="line">brew install gflags</div><div class="line">brew install cmake ninja boost</div></div><!-- fragment --><p>Build:</p>
-<div class="fragment"><div class="line">cd build\mac</div><div class="line">python build_mac.py</div></div><!-- fragment --><p> It builds in <code>Release</code> mode and copies nakama lib to release folder.</p>
+<div class="fragment"><div class="line">cd build\mac</div><div class="line">python build_mac.py --dylib</div></div><!-- fragment --><p><code>--dylib</code> is optional parameter. If set then <a class="el" href="namespace_nakama.html">Nakama</a> will be built as dynamic library otherwise as static.</p>
+<p>It builds in <code>Release</code> mode and copies nakama lib to release folder.</p>
 <h3>Building for iOS</h3>
 <p>To build for one architecture:</p>
-<div class="fragment"><div class="line">cd build\ios</div><div class="line">python build_ios.py Arch</div></div><!-- fragment --><p> Where <code>Arch</code> is architecture: <code>arm64</code>, <code>armv7</code>, <code>armv7s</code> or <code>x86_64</code>.</p>
+<div class="fragment"><div class="line">cd build\ios</div><div class="line">python build_ios.py Arch --dylib</div></div><!-- fragment --><p> Where <code>Arch</code> is architecture: <code>arm64</code>, <code>armv7</code>, <code>armv7s</code> or <code>x86_64</code>.</p>
+<p><code>--dylib</code> is optional parameter. If set then <a class="el" href="namespace_nakama.html">Nakama</a> will be built as dynamic library otherwise as static.</p>
 <p>It builds in <code>Release</code> mode.</p>
 <p>To build for all architectures <code>arm64</code>, <code>armv7</code>, <code>armv7s</code> and <code>x86_64</code>:</p>
 <div class="fragment"><div class="line">cd build\ios</div><div class="line">python build_ios_all.py</div></div><!-- fragment --><p>It builds in <code>Release</code> mode, creates universal libraries and copies them to release folder.</p>
@@ -279,11 +291,13 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p class="startli"><code>./bootstrap &amp;&amp; make &amp;&amp; make install</code></p>
 </li>
 </ul>
-<div class="fragment"><div class="line">cd build\linux</div><div class="line">python build_linux.py</div></div><!-- fragment --><p> It builds in <code>Release</code> mode and copies nakama lib to release folder.</p>
+<div class="fragment"><div class="line">cd build\linux</div><div class="line">python build_linux.py --so</div></div><!-- fragment --><p><code>--so</code> is optional parameter. If set then <a class="el" href="namespace_nakama.html">Nakama</a> will be built as shared library otherwise as static.</p>
+<p>It builds in <code>Release</code> mode and copies nakama lib to release folder.</p>
 <h3>Building for Android</h3>
 <p>Set <code>ANDROID_NDK</code> or <code>NDK_ROOT</code> system variable to Android NDK folder.</p>
 <p>To build for one ABI:</p>
-<div class="fragment"><div class="line">cd build/android</div><div class="line">python build_android.py ABI</div></div><!-- fragment --><p> Where <code>ABI</code> is Android ABI e.g. <code>armeabi-v7a</code>, <code>arm64-v8a</code>, <code>x86</code> or <code>x86_64</code></p>
+<div class="fragment"><div class="line">cd build/android</div><div class="line">python build_android.py ABI --so</div></div><!-- fragment --><p> Where <code>ABI</code> is Android ABI e.g. <code>armeabi-v7a</code>, <code>arm64-v8a</code>, <code>x86</code> or <code>x86_64</code></p>
+<p><code>--so</code> is optional parameter. If set then <a class="el" href="namespace_nakama.html">Nakama</a> will be built as shared library otherwise as static.</p>
 <p>It builds for Andoid API level 16 in <code>Release</code> mode.</p>
 <p>To build for all ABIs <code>armeabi-v7a</code>, <code>arm64-v8a</code>, <code>x86</code> and <code>x86_64</code>:</p>
 <div class="fragment"><div class="line">cd build/android</div><div class="line">python build_android_all.py</div></div><!-- fragment --><h2>Tests</h2>

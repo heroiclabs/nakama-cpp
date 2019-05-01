@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.2</span>
+   &#160;<span id="projectnumber">2.0.3</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -91,7 +91,6 @@ $(document).ready(function(){initNavTree('namespace_nakama.html','');});
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Nakama Namespace Reference</div>  </div>
@@ -324,114 +323,38 @@ Typedefs</h2></td></tr>
 <tr class="memitem:afb460f98d3c2b0f0987df12333d3c47d"><td class="memItemLeft" align="right" valign="top">typedef std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d">Base64Buffer</a></td></tr>
 <tr class="separator:afb460f98d3c2b0f0987df12333d3c47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:ac65107ae4c1c5b0319f7a6fbbd3966fd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ac65107ae4c1c5b0319f7a6fbbd3966fd">NStoragePermissionRead</a> { <a class="el" href="namespace_nakama.html#ac65107ae4c1c5b0319f7a6fbbd3966fdaf3d10b591cab3aae952a7cd9e247a31f">NStoragePermissionRead::NO_READ</a> = 0, 
-<a class="el" href="namespace_nakama.html#ac65107ae4c1c5b0319f7a6fbbd3966fda96d2235385562ead2cfc233669f825c5">NStoragePermissionRead::OWNER_READ</a> = 1, 
-<a class="el" href="namespace_nakama.html#ac65107ae4c1c5b0319f7a6fbbd3966fdab67ac4359dc817560f072fefd13c6628">NStoragePermissionRead::PUBLIC_READ</a> = 2
- }</td></tr>
-<tr class="memdesc:ac65107ae4c1c5b0319f7a6fbbd3966fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The read access permissions.  <a href="namespace_nakama.html#ac65107ae4c1c5b0319f7a6fbbd3966fd">More...</a><br /></td></tr>
-<tr class="separator:ac65107ae4c1c5b0319f7a6fbbd3966fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad86376ac5e7b0a210c7a965e747c5c52"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ad86376ac5e7b0a210c7a965e747c5c52">NStoragePermissionWrite</a> { <a class="el" href="namespace_nakama.html#ad86376ac5e7b0a210c7a965e747c5c52ab50162468dccf82aa29be29f569ad387">NStoragePermissionWrite::NO_WRITE</a> = 0, 
-<a class="el" href="namespace_nakama.html#ad86376ac5e7b0a210c7a965e747c5c52ac046fe1b2c7cba3cea5041b15bd8b611">NStoragePermissionWrite::OWNER_WRITE</a> = 1
- }</td></tr>
-<tr class="memdesc:ad86376ac5e7b0a210c7a965e747c5c52"><td class="mdescLeft">&#160;</td><td class="mdescRight">The write access permissions.  <a href="namespace_nakama.html#ad86376ac5e7b0a210c7a965e747c5c52">More...</a><br /></td></tr>
-<tr class="separator:ad86376ac5e7b0a210c7a965e747c5c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cda621bf2e5189661567a7e07f3da21"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21">NLogLevel</a> { <br />
-&#160;&#160;<a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21aa603905470e2a5b8c13e96b579ef0dba">NLogLevel::Debug</a> = 1, 
-<a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21a4059b0251f66a18cb56f544728796875">NLogLevel::Info</a> = 2, 
-<a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21a56525ae64d370c0b448ac0d60710ef17">NLogLevel::Warn</a> = 3, 
-<a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21a902b0d55fddef6f8d651fe1035b7d4bd">NLogLevel::Error</a> = 4, 
-<br />
-&#160;&#160;<a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21a882384ec38ce8d9582b57e70861730e4">NLogLevel::Fatal</a> = 5
-<br />
- }</td></tr>
-<tr class="separator:a1cda621bf2e5189661567a7e07f3da21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accc7b4ac5f52cab6b3b903d7c5fa378b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b">ErrorCode</a> { <br />
-&#160;&#160;<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba88183b946cc5f0e8c96b2e66e1c74a7e">ErrorCode::Unknown</a> = 0, 
-<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba38c300f4fc9ce8a77aad4a30de05cad8">ErrorCode::NotFound</a> = 1, 
-<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba89b69484680b18e9179e826c6e023805">ErrorCode::AlreadyExists</a> = 2, 
-<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba253ca7dd096ee0956cccee4d376cab8b">ErrorCode::InvalidArgument</a> = 3, 
-<br />
-&#160;&#160;<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378bab403ce880ed2c28d0784a2430a9b6eda">ErrorCode::Unauthenticated</a> = 4, 
-<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba4b33a686be73bb172407d73b26356275">ErrorCode::PermissionDenied</a> = 5, 
-<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba094a6f6b0868122a9dd008cb91c083e4">ErrorCode::ConnectionError</a> = -1, 
-<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba8462b58246e70e5c83e5b939a9332cb5">ErrorCode::InternalError</a> = -2
-<br />
- }</td></tr>
-<tr class="memdesc:accc7b4ac5f52cab6b3b903d7c5fa378b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error codes.  <a href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b">More...</a><br /></td></tr>
-<tr class="separator:accc7b4ac5f52cab6b3b903d7c5fa378b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59ee0ae7a159e7547bc101f1cd55abcf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcf">NUserGroupState</a> { <a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa545514976ad64ba23911d485536249c9">NUserGroupState::SUPERADMIN</a> = 0, 
-<a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa73acd9a5972130b75066c82595a1fae3">NUserGroupState::ADMIN</a> = 1, 
-<a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa77e6cb59f088a2937324f798be141b4b">NUserGroupState::MEMBER</a> = 2, 
-<a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa48d89bc571a42cb17b3ee614be9a7d69">NUserGroupState::JOIN_REQUEST</a> = 3
- }</td></tr>
-<tr class="memdesc:a59ee0ae7a159e7547bc101f1cd55abcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The group role status.  <a href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcf">More...</a><br /></td></tr>
-<tr class="separator:a59ee0ae7a159e7547bc101f1cd55abcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac35def09c2440dbfdea24b4bbefac2e7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7">NChannelType</a> { <a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7ae4d7aa7fb6334ffed206a7b1ca150c50">NChannelType::ROOM</a> = 0, 
-<a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7aa39d74738432bfad73300f1fe0dd0fe0">NChannelType::DIRECT_MESSAGE</a> = 1, 
-<a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7a720909a4b948fc9e33633b61960d6b3c">NChannelType::GROUP</a> = 2
- }</td></tr>
-<tr class="memdesc:ac35def09c2440dbfdea24b4bbefac2e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The available channel types on the server.  <a href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7">More...</a><br /></td></tr>
-<tr class="separator:ac35def09c2440dbfdea24b4bbefac2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48351d12832fad6920a0b54a4ba40589"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a48351d12832fad6920a0b54a4ba40589">NRtClientProtocol</a> { <a class="el" href="namespace_nakama.html#a48351d12832fad6920a0b54a4ba40589aecd8db69ede756bb2833887a7a1ebf35">NRtClientProtocol::Protobuf</a>, 
-<a class="el" href="namespace_nakama.html#a48351d12832fad6920a0b54a4ba40589aeed8d85b888a6c015834240885ee6333">NRtClientProtocol::Json</a>
- }</td></tr>
-<tr class="separator:a48351d12832fad6920a0b54a4ba40589"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af81b5db13e2f54dbe22d30ddbe947567"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#af81b5db13e2f54dbe22d30ddbe947567">NRtTransportType</a> { <a class="el" href="namespace_nakama.html#af81b5db13e2f54dbe22d30ddbe947567a6ce976e8f061b2b5cfe4d0c50c3405dd">NRtTransportType::Binary</a>, 
-<a class="el" href="namespace_nakama.html#af81b5db13e2f54dbe22d30ddbe947567a9dffbf69ffba8bc38bc4e01abf4b1675">NRtTransportType::Text</a>
- }</td></tr>
-<tr class="separator:af81b5db13e2f54dbe22d30ddbe947567"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0941538c7d1d415b42a889bf121b6e47"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47">RtErrorCode</a> { <br />
-&#160;&#160;<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a9bccf65b7a01f8d62c945340236971ae">RtErrorCode::CONNECT_ERROR</a> = -1, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47aaadf556bd097b61c56920ef42829167a">RtErrorCode::TRANSPORT_ERROR</a> = -2, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a292a277592adec4f841a6ef389f0d67f">RtErrorCode::RUNTIME_EXCEPTION</a> = 0, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a2a7ff1d8f71288ea00570fb104d93d8a">RtErrorCode::UNRECOGNIZED_PAYLOAD</a> = 1, 
-<br />
-&#160;&#160;<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a484498e713de0402906e44fbf6d5dbed">RtErrorCode::MISSING_PAYLOAD</a> = 2, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a5a159a4278f76743500af8ba0211ea03">RtErrorCode::BAD_INPUT</a> = 3, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a229d3b781246d17833c0353fc058d6bf">RtErrorCode::MATCH_NOT_FOUND</a> = 4, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47add60591216a7adb3c4301aff21c296ab">RtErrorCode::MATCH_JOIN_REJECTED</a> = 5, 
-<br />
-&#160;&#160;<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a6a63939f12a5c40c182be9928f61080d">RtErrorCode::RUNTIME_FUNCTION_NOT_FOUND</a> = 6, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a17f1bc403776d82c9c8e9275889fdd1f">RtErrorCode::RUNTIME_FUNCTION_EXCEPTION</a> = 7
-<br />
- }</td></tr>
-<tr class="memdesc:a0941538c7d1d415b42a889bf121b6e47"><td class="mdescLeft">&#160;</td><td class="mdescRight">The selection of possible error codes.  <a href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47">More...</a><br /></td></tr>
-<tr class="separator:a0941538c7d1d415b42a889bf121b6e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa1e421d42a47edf64bc7b8d7056bc8d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_nakama.html#ad9239c034b2a391b1bf7d9891d8a07ff">NClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#aa1e421d42a47edf64bc7b8d7056bc8d5">createDefaultClient</a> (const <a class="el" href="struct_nakama_1_1_default_client_parameters.html">DefaultClientParameters</a> &amp;parameters)</td></tr>
-<tr class="separator:aa1e421d42a47edf64bc7b8d7056bc8d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab64166a93f87824b742697466d4132e3"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ab64166a93f87824b742697466d4132e3">getNakamaSdkVersion</a> ()</td></tr>
-<tr class="separator:ab64166a93f87824b742697466d4132e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8dec68dbc275e60c0f0e120868c013dc"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a8dec68dbc275e60c0f0e120868c013dc">toString</a> (<a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b">ErrorCode</a> code)</td></tr>
-<tr class="separator:a8dec68dbc275e60c0f0e120868c013dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e001e7b794380c7dc61cad3ffc3d034"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a5e001e7b794380c7dc61cad3ffc3d034">toString</a> (const <a class="el" href="struct_nakama_1_1_n_error.html">NError</a> &amp;error)</td></tr>
-<tr class="separator:a5e001e7b794380c7dc61cad3ffc3d034"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a338c105d02b49ae233e0f47cd731d419"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a338c105d02b49ae233e0f47cd731d419">restoreSession</a> (const std::string &amp;token)</td></tr>
-<tr class="separator:a338c105d02b49ae233e0f47cd731d419"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cdeec16cac4cb0885938014da354310"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_nakama.html#a80117c553946865d276bacca06169ed3">NTimestamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a3cdeec16cac4cb0885938014da354310">getUnixTimestampMs</a> ()</td></tr>
-<tr class="separator:a3cdeec16cac4cb0885938014da354310"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adca4eeccf88d6a53c0924af7f24001fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#adca4eeccf88d6a53c0924af7f24001fa">createDefaultWebsocket</a> ()</td></tr>
-<tr class="separator:adca4eeccf88d6a53c0924af7f24001fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7811d7ffbfe1a46bb9389cd69a194336"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a7811d7ffbfe1a46bb9389cd69a194336">createWebsocketpp</a> ()</td></tr>
-<tr class="separator:a7811d7ffbfe1a46bb9389cd69a194336"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7862005af05df95c2b326ee15e517eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#aa7862005af05df95c2b326ee15e517eb">createIXWebSocket</a> ()</td></tr>
-<tr class="separator:aa7862005af05df95c2b326ee15e517eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63eb54b1c6fd63758ff037abdf3d0007"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a63eb54b1c6fd63758ff037abdf3d0007">toString</a> (<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47">RtErrorCode</a> code)</td></tr>
-<tr class="separator:a63eb54b1c6fd63758ff037abdf3d0007"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15741dce14722663ece272fc6d39a59f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a15741dce14722663ece272fc6d39a59f">toString</a> (const <a class="el" href="struct_nakama_1_1_n_rt_error.html">NRtError</a> &amp;error)</td></tr>
-<tr class="separator:a15741dce14722663ece272fc6d39a59f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84f8c5a5fdc3af532df7076f0f630224"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a84f8c5a5fdc3af532df7076f0f630224">base64Encode</a> (const <a class="el" href="namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d">Base64Buffer</a> &amp;buffer)</td></tr>
-<tr class="separator:a84f8c5a5fdc3af532df7076f0f630224"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7fba2ad444cd4df2fa1d4f4087ae885"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d">Base64Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#aa7fba2ad444cd4df2fa1d4f4087ae885">base64Decode</a> (const std::string &amp;base64str)</td></tr>
-<tr class="separator:aa7fba2ad444cd4df2fa1d4f4087ae885"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1aa7f27e2896e68fe42b4e380d4d3a78"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a1aa7f27e2896e68fe42b4e380d4d3a78">getJsonFieldValue</a> (const std::string &amp;json, const std::string &amp;field_name)</td></tr>
-<tr class="separator:a1aa7f27e2896e68fe42b4e380d4d3a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace9d15af2b9937d1f4f8fc92c41bc9e4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ace9d15af2b9937d1f4f8fc92c41bc9e4">urlEncode</a> (const std::string &amp;str)</td></tr>
-<tr class="separator:ace9d15af2b9937d1f4f8fc92c41bc9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a046003480471d47cb09ce17ff6f645ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#ad9239c034b2a391b1bf7d9891d8a07ff">NClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a046003480471d47cb09ce17ff6f645ea">createDefaultClient</a> (const <a class="el" href="struct_nakama_1_1_default_client_parameters.html">DefaultClientParameters</a> &amp;parameters)</td></tr>
+<tr class="separator:a046003480471d47cb09ce17ff6f645ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adffd030148919a7acac5cb82875c7be3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#adffd030148919a7acac5cb82875c7be3">getNakamaSdkVersion</a> ()</td></tr>
+<tr class="separator:adffd030148919a7acac5cb82875c7be3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81c112b7500d36ed1078d8999aec1b46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a81c112b7500d36ed1078d8999aec1b46">toString</a> (ErrorCode code)</td></tr>
+<tr class="separator:a81c112b7500d36ed1078d8999aec1b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a1cc24dccebdc603397d34643fa774a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a5a1cc24dccebdc603397d34643fa774a">toString</a> (const <a class="el" href="struct_nakama_1_1_n_error.html">NError</a> &amp;error)</td></tr>
+<tr class="separator:a5a1cc24dccebdc603397d34643fa774a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d3e611f5b0d24a6afc98af3fab2617e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a8d3e611f5b0d24a6afc98af3fab2617e">restoreSession</a> (const std::string &amp;token)</td></tr>
+<tr class="separator:a8d3e611f5b0d24a6afc98af3fab2617e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a197c7cdd6ddf8955307c9ecdba3a7df8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#a80117c553946865d276bacca06169ed3">NTimestamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a197c7cdd6ddf8955307c9ecdba3a7df8">getUnixTimestampMs</a> ()</td></tr>
+<tr class="separator:a197c7cdd6ddf8955307c9ecdba3a7df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba619ae3fe00bc936164bdd4bba1be37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#aba619ae3fe00bc936164bdd4bba1be37">createDefaultWebsocket</a> ()</td></tr>
+<tr class="separator:aba619ae3fe00bc936164bdd4bba1be37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e421646ee74c1819b2bbb474f3dcc5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a8e421646ee74c1819b2bbb474f3dcc5e">createWebsocketpp</a> ()</td></tr>
+<tr class="separator:a8e421646ee74c1819b2bbb474f3dcc5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe5864fc73f7912cd475060bd50dd692"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#abe5864fc73f7912cd475060bd50dd692">createIXWebSocket</a> ()</td></tr>
+<tr class="separator:abe5864fc73f7912cd475060bd50dd692"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a277324960ae2606553e514e648ef2b5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a277324960ae2606553e514e648ef2b5f">toString</a> (RtErrorCode code)</td></tr>
+<tr class="separator:a277324960ae2606553e514e648ef2b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c3df6789965bcc2793d477cdd308a99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a8c3df6789965bcc2793d477cdd308a99">toString</a> (const <a class="el" href="struct_nakama_1_1_n_rt_error.html">NRtError</a> &amp;error)</td></tr>
+<tr class="separator:a8c3df6789965bcc2793d477cdd308a99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f29cba66f3f6f263c2c8748bfa50d83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a9f29cba66f3f6f263c2c8748bfa50d83">base64Encode</a> (const <a class="el" href="namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d">Base64Buffer</a> &amp;buffer)</td></tr>
+<tr class="separator:a9f29cba66f3f6f263c2c8748bfa50d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42a2ade68904f33bbf88fb82c8be70c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d">Base64Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a42a2ade68904f33bbf88fb82c8be70c6">base64Decode</a> (const std::string &amp;base64str)</td></tr>
+<tr class="separator:a42a2ade68904f33bbf88fb82c8be70c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f648530320bc960dd74aaf669687763"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a2f648530320bc960dd74aaf669687763">getJsonFieldValue</a> (const std::string &amp;json, const std::string &amp;field_name)</td></tr>
+<tr class="separator:a2f648530320bc960dd74aaf669687763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a542fbdc2815ad8fb102ad0bd9e578c77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a542fbdc2815ad8fb102ad0bd9e578c77">urlEncode</a> (const std::string &amp;str)</td></tr>
+<tr class="separator:a542fbdc2815ad8fb102ad0bd9e578c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="afb460f98d3c2b0f0987df12333d3c47d"></a>
@@ -785,7 +708,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>UNIX time in milliseconds. Use <a class="el" href="namespace_nakama.html#a3cdeec16cac4cb0885938014da354310">getUnixTimestampMs()</a> to get current time. </p>
+<p>UNIX time in milliseconds. Use <a class="el" href="namespace_nakama.html#a197c7cdd6ddf8955307c9ecdba3a7df8">getUnixTimestampMs()</a> to get current time. </p>
 
 </div>
 </div>
@@ -845,318 +768,15 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="accc7b4ac5f52cab6b3b903d7c5fa378b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accc7b4ac5f52cab6b3b903d7c5fa378b">&#9670;&nbsp;</a></span>ErrorCode</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b">Nakama::ErrorCode</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Error codes. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba88183b946cc5f0e8c96b2e66e1c74a7e"></a>Unknown&#160;</td><td class="fielddoc"><p>Unknown error. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba38c300f4fc9ce8a77aad4a30de05cad8"></a>NotFound&#160;</td><td class="fielddoc"><p>Some requested entity was not found. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba89b69484680b18e9179e826c6e023805"></a>AlreadyExists&#160;</td><td class="fielddoc"><p>Some entity that we attempted to create already exists. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba253ca7dd096ee0956cccee4d376cab8b"></a>InvalidArgument&#160;</td><td class="fielddoc"><p>Client specified an invalid argument. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378bab403ce880ed2c28d0784a2430a9b6eda"></a>Unauthenticated&#160;</td><td class="fielddoc"><p>The request does not have valid authentication credentials for the operation. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba4b33a686be73bb172407d73b26356275"></a>PermissionDenied&#160;</td><td class="fielddoc"><p>The caller does not have permission to execute the specified operation. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba094a6f6b0868122a9dd008cb91c083e4"></a>ConnectionError&#160;</td><td class="fielddoc"><p>The service is currently unavailable. This is a most likely a transient condition and may be corrected by retrying with a backoff.</p>
-<dl class="section warning"><dt>Warning</dt><dd>Although data MIGHT not have been transmitted when this status occurs, there is NOT A GUARANTEE that the server has not seen anything. So in general it is unsafe to retry on this status code if the call is non-idempotent. </dd></dl>
-</td></tr>
-<tr><td class="fieldname"><a id="accc7b4ac5f52cab6b3b903d7c5fa378ba8462b58246e70e5c83e5b939a9332cb5"></a>InternalError&#160;</td><td class="fielddoc"><p>Internal errors. Means some invariants expected by underlying System has been broken. If you see one of these errors, Something is very broken. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<a id="ac35def09c2440dbfdea24b4bbefac2e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac35def09c2440dbfdea24b4bbefac2e7">&#9670;&nbsp;</a></span>NChannelType</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7">Nakama::NChannelType</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The available channel types on the server. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac35def09c2440dbfdea24b4bbefac2e7ae4d7aa7fb6334ffed206a7b1ca150c50"></a>ROOM&#160;</td><td class="fielddoc"><p>A chat room which can be created dynamically with a name. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ac35def09c2440dbfdea24b4bbefac2e7aa39d74738432bfad73300f1fe0dd0fe0"></a>DIRECT_MESSAGE&#160;</td><td class="fielddoc"><p>A private chat between two users. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ac35def09c2440dbfdea24b4bbefac2e7a720909a4b948fc9e33633b61960d6b3c"></a>GROUP&#160;</td><td class="fielddoc"><p>A chat within a group on the server. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<a id="a1cda621bf2e5189661567a7e07f3da21"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cda621bf2e5189661567a7e07f3da21">&#9670;&nbsp;</a></span>NLogLevel</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespace_nakama.html#a1cda621bf2e5189661567a7e07f3da21">Nakama::NLogLevel</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1cda621bf2e5189661567a7e07f3da21aa603905470e2a5b8c13e96b579ef0dba"></a>Debug&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cda621bf2e5189661567a7e07f3da21a4059b0251f66a18cb56f544728796875"></a>Info&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cda621bf2e5189661567a7e07f3da21a56525ae64d370c0b448ac0d60710ef17"></a>Warn&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cda621bf2e5189661567a7e07f3da21a902b0d55fddef6f8d651fe1035b7d4bd"></a>Error&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cda621bf2e5189661567a7e07f3da21a882384ec38ce8d9582b57e70861730e4"></a>Fatal&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
-<a id="a48351d12832fad6920a0b54a4ba40589"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48351d12832fad6920a0b54a4ba40589">&#9670;&nbsp;</a></span>NRtClientProtocol</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespace_nakama.html#a48351d12832fad6920a0b54a4ba40589">Nakama::NRtClientProtocol</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a48351d12832fad6920a0b54a4ba40589aecd8db69ede756bb2833887a7a1ebf35"></a>Protobuf&#160;</td><td class="fielddoc"><p>Protobuf binary protocol. It is recommented to use for production as it's faster and uses less traffic for communication. Protobuf support is added in nakama server 2.3.0 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a48351d12832fad6920a0b54a4ba40589aeed8d85b888a6c015834240885ee6333"></a>Json&#160;</td><td class="fielddoc"><p>Json is text protocol. Might be useful for analyzing server traffic. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<a id="af81b5db13e2f54dbe22d30ddbe947567"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af81b5db13e2f54dbe22d30ddbe947567">&#9670;&nbsp;</a></span>NRtTransportType</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespace_nakama.html#af81b5db13e2f54dbe22d30ddbe947567">Nakama::NRtTransportType</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="af81b5db13e2f54dbe22d30ddbe947567a6ce976e8f061b2b5cfe4d0c50c3405dd"></a>Binary&#160;</td><td class="fielddoc"><p>used by <code>Protobuf</code> protocol </p>
-</td></tr>
-<tr><td class="fieldname"><a id="af81b5db13e2f54dbe22d30ddbe947567a9dffbf69ffba8bc38bc4e01abf4b1675"></a>Text&#160;</td><td class="fielddoc"><p>used by <code>Json</code> protocol </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<a id="ac65107ae4c1c5b0319f7a6fbbd3966fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac65107ae4c1c5b0319f7a6fbbd3966fd">&#9670;&nbsp;</a></span>NStoragePermissionRead</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespace_nakama.html#ac65107ae4c1c5b0319f7a6fbbd3966fd">Nakama::NStoragePermissionRead</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The read access permissions. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac65107ae4c1c5b0319f7a6fbbd3966fdaf3d10b591cab3aae952a7cd9e247a31f"></a>NO_READ&#160;</td><td class="fielddoc"><p>The object is only readable by server runtime. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ac65107ae4c1c5b0319f7a6fbbd3966fda96d2235385562ead2cfc233669f825c5"></a>OWNER_READ&#160;</td><td class="fielddoc"><p>Only the user who owns it may access. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ac65107ae4c1c5b0319f7a6fbbd3966fdab67ac4359dc817560f072fefd13c6628"></a>PUBLIC_READ&#160;</td><td class="fielddoc"><p>Any user can read the object. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<a id="ad86376ac5e7b0a210c7a965e747c5c52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad86376ac5e7b0a210c7a965e747c5c52">&#9670;&nbsp;</a></span>NStoragePermissionWrite</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespace_nakama.html#ad86376ac5e7b0a210c7a965e747c5c52">Nakama::NStoragePermissionWrite</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The write access permissions. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad86376ac5e7b0a210c7a965e747c5c52ab50162468dccf82aa29be29f569ad387"></a>NO_WRITE&#160;</td><td class="fielddoc"><p>The object is only writable by server runtime. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ad86376ac5e7b0a210c7a965e747c5c52ac046fe1b2c7cba3cea5041b15bd8b611"></a>OWNER_WRITE&#160;</td><td class="fielddoc"><p>Only the user who owns it may write. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<a id="a59ee0ae7a159e7547bc101f1cd55abcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59ee0ae7a159e7547bc101f1cd55abcf">&#9670;&nbsp;</a></span>NUserGroupState</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcf">Nakama::NUserGroupState</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The group role status. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a59ee0ae7a159e7547bc101f1cd55abcfa545514976ad64ba23911d485536249c9"></a>SUPERADMIN&#160;</td><td class="fielddoc"><p>The user is a superadmin with full control of the group. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a59ee0ae7a159e7547bc101f1cd55abcfa73acd9a5972130b75066c82595a1fae3"></a>ADMIN&#160;</td><td class="fielddoc"><p>The user is an admin with additional privileges. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a59ee0ae7a159e7547bc101f1cd55abcfa77e6cb59f088a2937324f798be141b4b"></a>MEMBER&#160;</td><td class="fielddoc"><p>The user is a regular member. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a59ee0ae7a159e7547bc101f1cd55abcfa48d89bc571a42cb17b3ee614be9a7d69"></a>JOIN_REQUEST&#160;</td><td class="fielddoc"><p>The user has requested to join the group. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<a id="a0941538c7d1d415b42a889bf121b6e47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0941538c7d1d415b42a889bf121b6e47">&#9670;&nbsp;</a></span>RtErrorCode</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47">Nakama::RtErrorCode</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The selection of possible error codes. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0941538c7d1d415b42a889bf121b6e47a9bccf65b7a01f8d62c945340236971ae"></a>CONNECT_ERROR&#160;</td><td class="fielddoc"><p>Connect has failed. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0941538c7d1d415b42a889bf121b6e47aaadf556bd097b61c56920ef42829167a"></a>TRANSPORT_ERROR&#160;</td><td class="fielddoc"><p>Transport error. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0941538c7d1d415b42a889bf121b6e47a292a277592adec4f841a6ef389f0d67f"></a>RUNTIME_EXCEPTION&#160;</td><td class="fielddoc"><p>An unexpected result from the server. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0941538c7d1d415b42a889bf121b6e47a2a7ff1d8f71288ea00570fb104d93d8a"></a>UNRECOGNIZED_PAYLOAD&#160;</td><td class="fielddoc"><p>The server received a message which is not recognised. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0941538c7d1d415b42a889bf121b6e47a484498e713de0402906e44fbf6d5dbed"></a>MISSING_PAYLOAD&#160;</td><td class="fielddoc"><p>A message was expected but contains no content. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0941538c7d1d415b42a889bf121b6e47a5a159a4278f76743500af8ba0211ea03"></a>BAD_INPUT&#160;</td><td class="fielddoc"><p>Fields in the message have an invalid format. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0941538c7d1d415b42a889bf121b6e47a229d3b781246d17833c0353fc058d6bf"></a>MATCH_NOT_FOUND&#160;</td><td class="fielddoc"><p>The match id was not found. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0941538c7d1d415b42a889bf121b6e47add60591216a7adb3c4301aff21c296ab"></a>MATCH_JOIN_REJECTED&#160;</td><td class="fielddoc"><p>The match join was rejected. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0941538c7d1d415b42a889bf121b6e47a6a63939f12a5c40c182be9928f61080d"></a>RUNTIME_FUNCTION_NOT_FOUND&#160;</td><td class="fielddoc"><p>The runtime function does not exist on the server. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0941538c7d1d415b42a889bf121b6e47a17f1bc403776d82c9c8e9275889fdd1f"></a>RUNTIME_FUNCTION_EXCEPTION&#160;</td><td class="fielddoc"><p>The runtime function executed with an error. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aa7fba2ad444cd4df2fa1d4f4087ae885"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7fba2ad444cd4df2fa1d4f4087ae885">&#9670;&nbsp;</a></span>base64Decode()</h2>
+<a id="a42a2ade68904f33bbf88fb82c8be70c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a2ade68904f33bbf88fb82c8be70c6">&#9670;&nbsp;</a></span>base64Decode()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d">Base64Buffer</a> Nakama::base64Decode </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d">Base64Buffer</a> Nakama::base64Decode </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>base64str</em></td><td>)</td>
@@ -1175,14 +795,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a84f8c5a5fdc3af532df7076f0f630224"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84f8c5a5fdc3af532df7076f0f630224">&#9670;&nbsp;</a></span>base64Encode()</h2>
+<a id="a9f29cba66f3f6f263c2c8748bfa50d83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f29cba66f3f6f263c2c8748bfa50d83">&#9670;&nbsp;</a></span>base64Encode()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Nakama::base64Encode </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string Nakama::base64Encode </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d">Base64Buffer</a> &amp;&#160;</td>
           <td class="paramname"><em>buffer</em></td><td>)</td>
@@ -1201,14 +821,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa1e421d42a47edf64bc7b8d7056bc8d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1e421d42a47edf64bc7b8d7056bc8d5">&#9670;&nbsp;</a></span>createDefaultClient()</h2>
+<a id="a046003480471d47cb09ce17ff6f645ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a046003480471d47cb09ce17ff6f645ea">&#9670;&nbsp;</a></span>createDefaultClient()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_nakama.html#ad9239c034b2a391b1bf7d9891d8a07ff">NClientPtr</a> Nakama::createDefaultClient </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#ad9239c034b2a391b1bf7d9891d8a07ff">NClientPtr</a> Nakama::createDefaultClient </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_nakama_1_1_default_client_parameters.html">DefaultClientParameters</a> &amp;&#160;</td>
           <td class="paramname"><em>parameters</em></td><td>)</td>
@@ -1226,14 +846,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="adca4eeccf88d6a53c0924af7f24001fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adca4eeccf88d6a53c0924af7f24001fa">&#9670;&nbsp;</a></span>createDefaultWebsocket()</h2>
+<a id="aba619ae3fe00bc936164bdd4bba1be37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba619ae3fe00bc936164bdd4bba1be37">&#9670;&nbsp;</a></span>createDefaultWebsocket()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> Nakama::createDefaultWebsocket </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> Nakama::createDefaultWebsocket </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1245,14 +865,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa7862005af05df95c2b326ee15e517eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7862005af05df95c2b326ee15e517eb">&#9670;&nbsp;</a></span>createIXWebSocket()</h2>
+<a id="abe5864fc73f7912cd475060bd50dd692"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe5864fc73f7912cd475060bd50dd692">&#9670;&nbsp;</a></span>createIXWebSocket()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> Nakama::createIXWebSocket </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> Nakama::createIXWebSocket </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1264,14 +884,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7811d7ffbfe1a46bb9389cd69a194336"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7811d7ffbfe1a46bb9389cd69a194336">&#9670;&nbsp;</a></span>createWebsocketpp()</h2>
+<a id="a8e421646ee74c1819b2bbb474f3dcc5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e421646ee74c1819b2bbb474f3dcc5e">&#9670;&nbsp;</a></span>createWebsocketpp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> Nakama::createWebsocketpp </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> Nakama::createWebsocketpp </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1283,14 +903,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1aa7f27e2896e68fe42b4e380d4d3a78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1aa7f27e2896e68fe42b4e380d4d3a78">&#9670;&nbsp;</a></span>getJsonFieldValue()</h2>
+<a id="a2f648530320bc960dd74aaf669687763"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f648530320bc960dd74aaf669687763">&#9670;&nbsp;</a></span>getJsonFieldValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Nakama::getJsonFieldValue </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string Nakama::getJsonFieldValue </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>json</em>, </td>
@@ -1321,14 +941,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab64166a93f87824b742697466d4132e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab64166a93f87824b742697466d4132e3">&#9670;&nbsp;</a></span>getNakamaSdkVersion()</h2>
+<a id="adffd030148919a7acac5cb82875c7be3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adffd030148919a7acac5cb82875c7be3">&#9670;&nbsp;</a></span>getNakamaSdkVersion()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* Nakama::getNakamaSdkVersion </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> const char* Nakama::getNakamaSdkVersion </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1338,14 +958,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3cdeec16cac4cb0885938014da354310"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cdeec16cac4cb0885938014da354310">&#9670;&nbsp;</a></span>getUnixTimestampMs()</h2>
+<a id="a197c7cdd6ddf8955307c9ecdba3a7df8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a197c7cdd6ddf8955307c9ecdba3a7df8">&#9670;&nbsp;</a></span>getUnixTimestampMs()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_nakama.html#a80117c553946865d276bacca06169ed3">NTimestamp</a> Nakama::getUnixTimestampMs </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#a80117c553946865d276bacca06169ed3">NTimestamp</a> Nakama::getUnixTimestampMs </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1358,14 +978,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a338c105d02b49ae233e0f47cd731d419"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a338c105d02b49ae233e0f47cd731d419">&#9670;&nbsp;</a></span>restoreSession()</h2>
+<a id="a8d3e611f5b0d24a6afc98af3fab2617e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d3e611f5b0d24a6afc98af3fab2617e">&#9670;&nbsp;</a></span>restoreSession()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> Nakama::restoreSession </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> Nakama::restoreSession </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>token</em></td><td>)</td>
@@ -1384,16 +1004,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a63eb54b1c6fd63758ff037abdf3d0007"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63eb54b1c6fd63758ff037abdf3d0007">&#9670;&nbsp;</a></span>toString() <span class="overload">[1/4]</span></h2>
+<a id="a277324960ae2606553e514e648ef2b5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a277324960ae2606553e514e648ef2b5f">&#9670;&nbsp;</a></span>toString() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* Nakama::toString </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> const char* Nakama::toString </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47">RtErrorCode</a>&#160;</td>
+          <td class="paramtype">RtErrorCode&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1402,14 +1022,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a15741dce14722663ece272fc6d39a59f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15741dce14722663ece272fc6d39a59f">&#9670;&nbsp;</a></span>toString() <span class="overload">[2/4]</span></h2>
+<a id="a8c3df6789965bcc2793d477cdd308a99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c3df6789965bcc2793d477cdd308a99">&#9670;&nbsp;</a></span>toString() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Nakama::toString </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string Nakama::toString </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_nakama_1_1_n_rt_error.html">NRtError</a> &amp;&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
@@ -1420,16 +1040,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8dec68dbc275e60c0f0e120868c013dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8dec68dbc275e60c0f0e120868c013dc">&#9670;&nbsp;</a></span>toString() <span class="overload">[3/4]</span></h2>
+<a id="a81c112b7500d36ed1078d8999aec1b46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81c112b7500d36ed1078d8999aec1b46">&#9670;&nbsp;</a></span>toString() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* Nakama::toString </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> const char* Nakama::toString </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378b">ErrorCode</a>&#160;</td>
+          <td class="paramtype">ErrorCode&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1438,14 +1058,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5e001e7b794380c7dc61cad3ffc3d034"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e001e7b794380c7dc61cad3ffc3d034">&#9670;&nbsp;</a></span>toString() <span class="overload">[4/4]</span></h2>
+<a id="a5a1cc24dccebdc603397d34643fa774a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a1cc24dccebdc603397d34643fa774a">&#9670;&nbsp;</a></span>toString() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Nakama::toString </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string Nakama::toString </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_nakama_1_1_n_error.html">NError</a> &amp;&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
@@ -1456,14 +1076,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ace9d15af2b9937d1f4f8fc92c41bc9e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace9d15af2b9937d1f4f8fc92c41bc9e4">&#9670;&nbsp;</a></span>urlEncode()</h2>
+<a id="a542fbdc2815ad8fb102ad0bd9e578c77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a542fbdc2815ad8fb102ad0bd9e578c77">&#9670;&nbsp;</a></span>urlEncode()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Nakama::urlEncode </td>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string Nakama::urlEncode </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>str</em></td><td>)</td>

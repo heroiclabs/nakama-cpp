@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.2</span>
+   &#160;<span id="projectnumber">2.0.3</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -91,14 +91,16 @@ $(document).ready(function(){initNavTree('_n_types_8h.html','');});
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">NTypes.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;nonstd/optional.hpp&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_n_export_8h_source.html">nakama-cpp/NExport.h</a>&quot;</code><br />
+<code>#include &quot;nonstd/optional.hpp&quot;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
 </div>
 <p><a href="_n_types_8h_source.html">Go to the source code of this file.</a></p>
@@ -120,22 +122,105 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a4845aaac94e24680c94947607868b41c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a4845aaac94e24680c94947607868b41c">Nakama::NStringDoubleMap</a> = std::map&lt; std::string, double &gt;</td></tr>
 <tr class="separator:a4845aaac94e24680c94947607868b41c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a59ee0ae7a159e7547bc101f1cd55abcf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcf">Nakama::NUserGroupState</a> { <a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa545514976ad64ba23911d485536249c9">Nakama::NUserGroupState::SUPERADMIN</a> = 0, 
-<a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa73acd9a5972130b75066c82595a1fae3">Nakama::NUserGroupState::ADMIN</a> = 1, 
-<a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa77e6cb59f088a2937324f798be141b4b">Nakama::NUserGroupState::MEMBER</a> = 2, 
-<a class="el" href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcfa48d89bc571a42cb17b3ee614be9a7d69">Nakama::NUserGroupState::JOIN_REQUEST</a> = 3
- }</td></tr>
-<tr class="memdesc:a59ee0ae7a159e7547bc101f1cd55abcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The group role status.  <a href="namespace_nakama.html#a59ee0ae7a159e7547bc101f1cd55abcf">More...</a><br /></td></tr>
-<tr class="separator:a59ee0ae7a159e7547bc101f1cd55abcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac35def09c2440dbfdea24b4bbefac2e7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7">Nakama::NChannelType</a> { <a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7ae4d7aa7fb6334ffed206a7b1ca150c50">Nakama::NChannelType::ROOM</a> = 0, 
-<a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7aa39d74738432bfad73300f1fe0dd0fe0">Nakama::NChannelType::DIRECT_MESSAGE</a> = 1, 
-<a class="el" href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7a720909a4b948fc9e33633b61960d6b3c">Nakama::NChannelType::GROUP</a> = 2
- }</td></tr>
-<tr class="memdesc:ac35def09c2440dbfdea24b4bbefac2e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The available channel types on the server.  <a href="namespace_nakama.html#ac35def09c2440dbfdea24b4bbefac2e7">More...</a><br /></td></tr>
-<tr class="separator:ac35def09c2440dbfdea24b4bbefac2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aec1155c650a97a4d09278741d0070265"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#aec1155c650a97a4d09278741d0070265">SUPERADMIN</a> = 0</td></tr>
+<tr class="memdesc:aec1155c650a97a4d09278741d0070265"><td class="mdescLeft">&#160;</td><td class="mdescRight">The user is a superadmin with full control of the group.  <a href="#aec1155c650a97a4d09278741d0070265">More...</a><br /></td></tr>
+<tr class="separator:aec1155c650a97a4d09278741d0070265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bfc500738d8e9d168cd0a2024c94f5a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#a6bfc500738d8e9d168cd0a2024c94f5a">ADMIN</a> = 1</td></tr>
+<tr class="memdesc:a6bfc500738d8e9d168cd0a2024c94f5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The user is an admin with additional privileges.  <a href="#a6bfc500738d8e9d168cd0a2024c94f5a">More...</a><br /></td></tr>
+<tr class="separator:a6bfc500738d8e9d168cd0a2024c94f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad07a6e6e0096abd7b8a0d2c05331ef88"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#ad07a6e6e0096abd7b8a0d2c05331ef88">MEMBER</a> = 2</td></tr>
+<tr class="memdesc:ad07a6e6e0096abd7b8a0d2c05331ef88"><td class="mdescLeft">&#160;</td><td class="mdescRight">The user is a regular member.  <a href="#ad07a6e6e0096abd7b8a0d2c05331ef88">More...</a><br /></td></tr>
+<tr class="separator:ad07a6e6e0096abd7b8a0d2c05331ef88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76ab038d7eca8b09a85c9646565f276c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#a76ab038d7eca8b09a85c9646565f276c">ROOM</a> = 0</td></tr>
+<tr class="memdesc:a76ab038d7eca8b09a85c9646565f276c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A chat room which can be created dynamically with a name.  <a href="#a76ab038d7eca8b09a85c9646565f276c">More...</a><br /></td></tr>
+<tr class="separator:a76ab038d7eca8b09a85c9646565f276c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01cd7fde59423eaae6ea390a392991b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#a01cd7fde59423eaae6ea390a392991b1">DIRECT_MESSAGE</a> = 1</td></tr>
+<tr class="memdesc:a01cd7fde59423eaae6ea390a392991b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">A private chat between two users.  <a href="#a01cd7fde59423eaae6ea390a392991b1">More...</a><br /></td></tr>
+<tr class="separator:a01cd7fde59423eaae6ea390a392991b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a6bfc500738d8e9d168cd0a2024c94f5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bfc500738d8e9d168cd0a2024c94f5a">&#9670;&nbsp;</a></span>ADMIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ADMIN = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The user is an admin with additional privileges. </p>
+
+</div>
+</div>
+<a id="a01cd7fde59423eaae6ea390a392991b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01cd7fde59423eaae6ea390a392991b1">&#9670;&nbsp;</a></span>DIRECT_MESSAGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DIRECT_MESSAGE = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A private chat between two users. </p>
+
+</div>
+</div>
+<a id="ad07a6e6e0096abd7b8a0d2c05331ef88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad07a6e6e0096abd7b8a0d2c05331ef88">&#9670;&nbsp;</a></span>MEMBER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MEMBER = 2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The user is a regular member. </p>
+
+</div>
+</div>
+<a id="a76ab038d7eca8b09a85c9646565f276c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76ab038d7eca8b09a85c9646565f276c">&#9670;&nbsp;</a></span>ROOM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ROOM = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A chat room which can be created dynamically with a name. </p>
+
+</div>
+</div>
+<a id="aec1155c650a97a4d09278741d0070265"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec1155c650a97a4d09278741d0070265">&#9670;&nbsp;</a></span>SUPERADMIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SUPERADMIN = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The user is a superadmin with full control of the group. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -22,6 +22,7 @@ var files_dup =
       [ "NConsoleLogSink", "class_nakama_1_1_n_console_log_sink.html", "class_nakama_1_1_n_console_log_sink" ]
     ] ],
     [ "NError.h", "_n_error_8h.html", "_n_error_8h" ],
+    [ "NExport.h", "_n_export_8h.html", "_n_export_8h" ],
     [ "NFriend.h", "_n_friend_8h.html", [
       [ "NFriend", "struct_nakama_1_1_n_friend.html", "struct_nakama_1_1_n_friend" ]
     ] ],

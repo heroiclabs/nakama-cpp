@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.2</span>
+   &#160;<span id="projectnumber">2.0.3</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -91,8 +91,8 @@ $(document).ready(function(){initNavTree('_n_rt_error_8h.html','');});
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">NRtError.h File Reference</div>  </div>
 </div><!--header-->
@@ -112,33 +112,188 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespace_nakama"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html">Nakama</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a0941538c7d1d415b42a889bf121b6e47"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47">Nakama::RtErrorCode</a> { <br />
-&#160;&#160;<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a9bccf65b7a01f8d62c945340236971ae">Nakama::RtErrorCode::CONNECT_ERROR</a> = -1, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47aaadf556bd097b61c56920ef42829167a">Nakama::RtErrorCode::TRANSPORT_ERROR</a> = -2, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a292a277592adec4f841a6ef389f0d67f">Nakama::RtErrorCode::RUNTIME_EXCEPTION</a> = 0, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a2a7ff1d8f71288ea00570fb104d93d8a">Nakama::RtErrorCode::UNRECOGNIZED_PAYLOAD</a> = 1, 
-<br />
-&#160;&#160;<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a484498e713de0402906e44fbf6d5dbed">Nakama::RtErrorCode::MISSING_PAYLOAD</a> = 2, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a5a159a4278f76743500af8ba0211ea03">Nakama::RtErrorCode::BAD_INPUT</a> = 3, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a229d3b781246d17833c0353fc058d6bf">Nakama::RtErrorCode::MATCH_NOT_FOUND</a> = 4, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47add60591216a7adb3c4301aff21c296ab">Nakama::RtErrorCode::MATCH_JOIN_REJECTED</a> = 5, 
-<br />
-&#160;&#160;<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a6a63939f12a5c40c182be9928f61080d">Nakama::RtErrorCode::RUNTIME_FUNCTION_NOT_FOUND</a> = 6, 
-<a class="el" href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a17f1bc403776d82c9c8e9275889fdd1f">Nakama::RtErrorCode::RUNTIME_FUNCTION_EXCEPTION</a> = 7
-<br />
- }</td></tr>
-<tr class="memdesc:a0941538c7d1d415b42a889bf121b6e47"><td class="mdescLeft">&#160;</td><td class="mdescRight">The selection of possible error codes.  <a href="namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47">More...</a><br /></td></tr>
-<tr class="separator:a0941538c7d1d415b42a889bf121b6e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a63eb54b1c6fd63758ff037abdf3d0007"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a63eb54b1c6fd63758ff037abdf3d0007">Nakama::toString</a> (RtErrorCode code)</td></tr>
-<tr class="separator:a63eb54b1c6fd63758ff037abdf3d0007"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15741dce14722663ece272fc6d39a59f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a15741dce14722663ece272fc6d39a59f">Nakama::toString</a> (const NRtError &amp;error)</td></tr>
-<tr class="separator:a15741dce14722663ece272fc6d39a59f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a277324960ae2606553e514e648ef2b5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a277324960ae2606553e514e648ef2b5f">Nakama::toString</a> (RtErrorCode code)</td></tr>
+<tr class="separator:a277324960ae2606553e514e648ef2b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c3df6789965bcc2793d477cdd308a99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a8c3df6789965bcc2793d477cdd308a99">Nakama::toString</a> (const NRtError &amp;error)</td></tr>
+<tr class="separator:a8c3df6789965bcc2793d477cdd308a99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ad1241dc498924bb0678c370788b83716"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_rt_error_8h.html#ad1241dc498924bb0678c370788b83716">CONNECT_ERROR</a> = -1</td></tr>
+<tr class="memdesc:ad1241dc498924bb0678c370788b83716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect has failed.  <a href="#ad1241dc498924bb0678c370788b83716">More...</a><br /></td></tr>
+<tr class="separator:ad1241dc498924bb0678c370788b83716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89ecb927f24940781d6cf815a4ee6996"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_rt_error_8h.html#a89ecb927f24940781d6cf815a4ee6996">TRANSPORT_ERROR</a> = -2</td></tr>
+<tr class="memdesc:a89ecb927f24940781d6cf815a4ee6996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transport error.  <a href="#a89ecb927f24940781d6cf815a4ee6996">More...</a><br /></td></tr>
+<tr class="separator:a89ecb927f24940781d6cf815a4ee6996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedc5d7bfbd3380881498c5b8cafa95e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_rt_error_8h.html#aedc5d7bfbd3380881498c5b8cafa95e0">RUNTIME_EXCEPTION</a> = 0</td></tr>
+<tr class="memdesc:aedc5d7bfbd3380881498c5b8cafa95e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">An unexpected result from the server.  <a href="#aedc5d7bfbd3380881498c5b8cafa95e0">More...</a><br /></td></tr>
+<tr class="separator:aedc5d7bfbd3380881498c5b8cafa95e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a86178f5bea196d22208d9812a0559b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_rt_error_8h.html#a4a86178f5bea196d22208d9812a0559b">UNRECOGNIZED_PAYLOAD</a> = 1</td></tr>
+<tr class="memdesc:a4a86178f5bea196d22208d9812a0559b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The server received a message which is not recognised.  <a href="#a4a86178f5bea196d22208d9812a0559b">More...</a><br /></td></tr>
+<tr class="separator:a4a86178f5bea196d22208d9812a0559b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76801f791ec81ff38fc3e669ebe1bd94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_rt_error_8h.html#a76801f791ec81ff38fc3e669ebe1bd94">MISSING_PAYLOAD</a> = 2</td></tr>
+<tr class="memdesc:a76801f791ec81ff38fc3e669ebe1bd94"><td class="mdescLeft">&#160;</td><td class="mdescRight">A message was expected but contains no content.  <a href="#a76801f791ec81ff38fc3e669ebe1bd94">More...</a><br /></td></tr>
+<tr class="separator:a76801f791ec81ff38fc3e669ebe1bd94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0776189cdd951acffba66ccff48bf3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_rt_error_8h.html#aa0776189cdd951acffba66ccff48bf3d">BAD_INPUT</a> = 3</td></tr>
+<tr class="memdesc:aa0776189cdd951acffba66ccff48bf3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fields in the message have an invalid format.  <a href="#aa0776189cdd951acffba66ccff48bf3d">More...</a><br /></td></tr>
+<tr class="separator:aa0776189cdd951acffba66ccff48bf3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f19e5b444e7e1ca25138afc2bf4508f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_rt_error_8h.html#a7f19e5b444e7e1ca25138afc2bf4508f">MATCH_NOT_FOUND</a> = 4</td></tr>
+<tr class="memdesc:a7f19e5b444e7e1ca25138afc2bf4508f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The match id was not found.  <a href="#a7f19e5b444e7e1ca25138afc2bf4508f">More...</a><br /></td></tr>
+<tr class="separator:a7f19e5b444e7e1ca25138afc2bf4508f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b00f97d4de273d6924e1d4a5a918fef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_rt_error_8h.html#a8b00f97d4de273d6924e1d4a5a918fef">MATCH_JOIN_REJECTED</a> = 5</td></tr>
+<tr class="memdesc:a8b00f97d4de273d6924e1d4a5a918fef"><td class="mdescLeft">&#160;</td><td class="mdescRight">The match join was rejected.  <a href="#a8b00f97d4de273d6924e1d4a5a918fef">More...</a><br /></td></tr>
+<tr class="separator:a8b00f97d4de273d6924e1d4a5a918fef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8610c5c9b4a4fb1a4b6c9deeb6fe66ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_rt_error_8h.html#a8610c5c9b4a4fb1a4b6c9deeb6fe66ba">RUNTIME_FUNCTION_NOT_FOUND</a> = 6</td></tr>
+<tr class="memdesc:a8610c5c9b4a4fb1a4b6c9deeb6fe66ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">The runtime function does not exist on the server.  <a href="#a8610c5c9b4a4fb1a4b6c9deeb6fe66ba">More...</a><br /></td></tr>
+<tr class="separator:a8610c5c9b4a4fb1a4b6c9deeb6fe66ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aa0776189cdd951acffba66ccff48bf3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0776189cdd951acffba66ccff48bf3d">&#9670;&nbsp;</a></span>BAD_INPUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BAD_INPUT = 3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fields in the message have an invalid format. </p>
+
+</div>
+</div>
+<a id="ad1241dc498924bb0678c370788b83716"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1241dc498924bb0678c370788b83716">&#9670;&nbsp;</a></span>CONNECT_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CONNECT_ERROR = -1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Connect has failed. </p>
+
+</div>
+</div>
+<a id="a8b00f97d4de273d6924e1d4a5a918fef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b00f97d4de273d6924e1d4a5a918fef">&#9670;&nbsp;</a></span>MATCH_JOIN_REJECTED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MATCH_JOIN_REJECTED = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The match join was rejected. </p>
+
+</div>
+</div>
+<a id="a7f19e5b444e7e1ca25138afc2bf4508f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f19e5b444e7e1ca25138afc2bf4508f">&#9670;&nbsp;</a></span>MATCH_NOT_FOUND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MATCH_NOT_FOUND = 4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The match id was not found. </p>
+
+</div>
+</div>
+<a id="a76801f791ec81ff38fc3e669ebe1bd94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76801f791ec81ff38fc3e669ebe1bd94">&#9670;&nbsp;</a></span>MISSING_PAYLOAD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MISSING_PAYLOAD = 2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A message was expected but contains no content. </p>
+
+</div>
+</div>
+<a id="aedc5d7bfbd3380881498c5b8cafa95e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedc5d7bfbd3380881498c5b8cafa95e0">&#9670;&nbsp;</a></span>RUNTIME_EXCEPTION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RUNTIME_EXCEPTION = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An unexpected result from the server. </p>
+
+</div>
+</div>
+<a id="a8610c5c9b4a4fb1a4b6c9deeb6fe66ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8610c5c9b4a4fb1a4b6c9deeb6fe66ba">&#9670;&nbsp;</a></span>RUNTIME_FUNCTION_NOT_FOUND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RUNTIME_FUNCTION_NOT_FOUND = 6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The runtime function does not exist on the server. </p>
+
+</div>
+</div>
+<a id="a89ecb927f24940781d6cf815a4ee6996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89ecb927f24940781d6cf815a4ee6996">&#9670;&nbsp;</a></span>TRANSPORT_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TRANSPORT_ERROR = -2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Transport error. </p>
+
+</div>
+</div>
+<a id="a4a86178f5bea196d22208d9812a0559b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a86178f5bea196d22208d9812a0559b">&#9670;&nbsp;</a></span>UNRECOGNIZED_PAYLOAD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UNRECOGNIZED_PAYLOAD = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The server received a message which is not recognised. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

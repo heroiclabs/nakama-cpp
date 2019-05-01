@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['label',['label',['../struct_nakama_1_1_n_match.html#a30fb8ed6296ca121b65723b0c7aa1ff3',1,'Nakama::NMatch::label()'],['../struct_nakama_1_1_n_stream.html#a28ed8f84e8822636f9e393ed4bd17bf6',1,'Nakama::NStream::label()']]],
-  ['lang',['lang',['../struct_nakama_1_1_n_group.html#ac5bf84e7fbb660868b13bec56692b55b',1,'Nakama::NGroup::lang()'],['../struct_nakama_1_1_n_user.html#a18b29652cdcc38463c1b654698dbc154',1,'Nakama::NUser::lang()']]],
-  ['leaderboardid',['leaderboardId',['../struct_nakama_1_1_n_leaderboard_record.html#ae2b11145b83ce2beb27305cba8887285',1,'Nakama::NLeaderboardRecord']]],
-  ['leaves',['leaves',['../struct_nakama_1_1_n_channel_presence_event.html#a804ffa1a33ab6255d76f6f049274563e',1,'Nakama::NChannelPresenceEvent::leaves()'],['../struct_nakama_1_1_n_match_presence_event.html#a0c0dde56dcaf459918f3b8ba132ebde1',1,'Nakama::NMatchPresenceEvent::leaves()'],['../struct_nakama_1_1_n_status_presence_event.html#a940c9fe68ab7ac61a64b268c5fccce14',1,'Nakama::NStatusPresenceEvent::leaves()'],['../struct_nakama_1_1_n_stream_presence_event.html#a69efe1d0d9aed473960938c280547494',1,'Nakama::NStreamPresenceEvent::leaves()']]],
-  ['location',['location',['../struct_nakama_1_1_n_user.html#a3ccb36a1a195325ab43ac56dbd4ca58b',1,'Nakama::NUser']]]
+  ['key',['key',['../struct_nakama_1_1_n_storage_object.html#a88553302e52fc34dc6e1d06b77350b98',1,'Nakama::NStorageObject::key()'],['../struct_nakama_1_1_n_storage_object_ack.html#af3b8670dd32283b94ef3bebc36ba4c52',1,'Nakama::NStorageObjectAck::key()'],['../struct_nakama_1_1_n_read_storage_object_id.html#acbfe127acb15f9c3720c67e5096b01d0',1,'Nakama::NReadStorageObjectId::key()'],['../struct_nakama_1_1_n_delete_storage_object_id.html#a1fef6dd10d2700f8a638e95e37cea6ba',1,'Nakama::NDeleteStorageObjectId::key()'],['../struct_nakama_1_1_n_storage_object_write.html#a57e49e6260192a32477ff0036f49d441',1,'Nakama::NStorageObjectWrite::key()']]]
 ];

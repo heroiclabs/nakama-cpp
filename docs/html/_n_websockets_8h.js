@@ -1,6 +1,6 @@
 var _n_websockets_8h =
 [
-    [ "createDefaultWebsocket", "_n_websockets_8h.html#adca4eeccf88d6a53c0924af7f24001fa", null ],
-    [ "createIXWebSocket", "_n_websockets_8h.html#aa7862005af05df95c2b326ee15e517eb", null ],
-    [ "createWebsocketpp", "_n_websockets_8h.html#a7811d7ffbfe1a46bb9389cd69a194336", null ]
+    [ "createDefaultWebsocket", "_n_websockets_8h.html#aba619ae3fe00bc936164bdd4bba1be37", null ],
+    [ "createIXWebSocket", "_n_websockets_8h.html#abe5864fc73f7912cd475060bd50dd692", null ],
+    [ "createWebsocketpp", "_n_websockets_8h.html#a8e421646ee74c1819b2bbb474f3dcc5e", null ]
 ];

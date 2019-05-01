@@ -1,7 +1,7 @@
 var searchData=
 [
   ['payload',['payload',['../struct_nakama_1_1_n_rpc.html#a93602c44f0572cc7fca60001f831db7d',1,'Nakama::NRpc']]],
-  ['permissiondenied',['PermissionDenied',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba4b33a686be73bb172407d73b26356275',1,'Nakama']]],
+  ['permissiondenied',['PermissionDenied',['../_n_error_8h.html#ad8172f411ba27cc30dba68ad3c382a9d',1,'NError.h']]],
   ['permissionread',['permissionRead',['../struct_nakama_1_1_n_storage_object.html#a53e0afed7193cdd823af283cf359d994',1,'Nakama::NStorageObject::permissionRead()'],['../struct_nakama_1_1_n_storage_object_write.html#ab712cf65d8e06e7445052203a8c8a0d4',1,'Nakama::NStorageObjectWrite::permissionRead()']]],
   ['permissionwrite',['permissionWrite',['../struct_nakama_1_1_n_storage_object.html#a9058f422e6eb58fd52fda1795a08384d',1,'Nakama::NStorageObject::permissionWrite()'],['../struct_nakama_1_1_n_storage_object_write.html#a536761a6e226c8ba1c1f03631ad6e393',1,'Nakama::NStorageObjectWrite::permissionWrite()']]],
   ['persistence',['persistence',['../struct_nakama_1_1_n_user_presence.html#a8e753339e49b53ad2762a51e58ea29db',1,'Nakama::NUserPresence']]],
@@ -11,6 +11,5 @@ var searchData=
   ['presences',['presences',['../struct_nakama_1_1_n_match.html#afd7e76a1f9fbfb272dca22a91a07856a',1,'Nakama::NMatch::presences()'],['../struct_nakama_1_1_n_channel.html#ad3c508477e4224dbd5f8d22ed8bd56bc',1,'Nakama::NChannel::presences()'],['../struct_nakama_1_1_n_status.html#ac418c4c198656a16ab4f8cb3fd6b7662',1,'Nakama::NStatus::presences()']]],
   ['prevcursor',['prevCursor',['../struct_nakama_1_1_n_channel_message_list.html#af179a04b8ace5938848def3fcf0bb82b',1,'Nakama::NChannelMessageList::prevCursor()'],['../struct_nakama_1_1_n_leaderboard_record_list.html#a4eaa89d7c8483215a7da4318accf3a77',1,'Nakama::NLeaderboardRecordList::prevCursor()'],['../struct_nakama_1_1_n_tournament_record_list.html#a61cc692af4689b2bfc6db8712f6c233d',1,'Nakama::NTournamentRecordList::prevCursor()']]],
   ['promotegroupusers',['promoteGroupUsers',['../class_nakama_1_1_n_client_interface.html#aa4c6dd44768528b6fee8208693689ba1',1,'Nakama::NClientInterface']]],
-  ['protobuf',['Protobuf',['../namespace_nakama.html#a48351d12832fad6920a0b54a4ba40589aecd8db69ede756bb2833887a7a1ebf35',1,'Nakama']]],
-  ['public_5fread',['PUBLIC_READ',['../namespace_nakama.html#ac65107ae4c1c5b0319f7a6fbbd3966fdab67ac4359dc817560f072fefd13c6628',1,'Nakama']]]
+  ['protobuf',['Protobuf',['../_n_rt_client_interface_8h.html#a845c2de7ee7452e7b38afd1417bb8359',1,'NRtClientInterface.h']]]
 ];

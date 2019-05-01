@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['connect_5ferror',['CONNECT_ERROR',['../namespace_nakama.html#a0941538c7d1d415b42a889bf121b6e47a9bccf65b7a01f8d62c945340236971ae',1,'Nakama']]],
-  ['connectionerror',['ConnectionError',['../namespace_nakama.html#accc7b4ac5f52cab6b3b903d7c5fa378ba094a6f6b0868122a9dd008cb91c083e4',1,'Nakama']]]
+  ['invite_5freceived',['INVITE_RECEIVED',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5ba20a5b72a2207dd32155dfe4e08c80203',1,'Nakama::NFriend']]],
+  ['invite_5fsent',['INVITE_SENT',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5ba0afccba45e914fcae995d30f26ed22f4',1,'Nakama::NFriend']]]
 ];

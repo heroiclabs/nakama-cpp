@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['objects',['objects',['../struct_nakama_1_1_n_storage_object_list.html#aefaa746941223205178863dc0c18e121',1,'Nakama::NStorageObjectList']]],
-  ['online',['online',['../struct_nakama_1_1_n_user.html#abbfe71e631b68a67aae9faec5e10af2f',1,'Nakama::NUser']]],
-  ['opcode',['opCode',['../struct_nakama_1_1_n_match_data.html#a7caee06b9d07f50942314356a1642018',1,'Nakama::NMatchData']]],
-  ['open',['open',['../struct_nakama_1_1_n_group.html#a02df8e88409044fbbf6c2b491169041a',1,'Nakama::NGroup']]],
-  ['ownerid',['ownerId',['../struct_nakama_1_1_n_leaderboard_record.html#aaa613ce42458524803eace7eb3315ad0',1,'Nakama::NLeaderboardRecord']]],
-  ['ownerrecords',['ownerRecords',['../struct_nakama_1_1_n_leaderboard_record_list.html#a22abba55353bc506720dc3a2e581970d',1,'Nakama::NLeaderboardRecordList::ownerRecords()'],['../struct_nakama_1_1_n_tournament_record_list.html#ad864fdc1da908c5bc8185eeeb0b054fa',1,'Nakama::NTournamentRecordList::ownerRecords()']]]
+  ['name',['name',['../struct_nakama_1_1_n_group.html#ac34c53f4a433ee538ff38414ba6af3a7',1,'Nakama::NGroup']]],
+  ['nextcursor',['nextCursor',['../struct_nakama_1_1_n_channel_message_list.html#a3d25bced825ad0198984cb611f0cc456',1,'Nakama::NChannelMessageList::nextCursor()'],['../struct_nakama_1_1_n_leaderboard_record_list.html#a584764a8ed7743866238527f39aaf8c3',1,'Nakama::NLeaderboardRecordList::nextCursor()'],['../struct_nakama_1_1_n_tournament_record_list.html#a96387f2706b2aba2ab97880254dc6e0b',1,'Nakama::NTournamentRecordList::nextCursor()']]],
+  ['nextreset',['nextReset',['../struct_nakama_1_1_n_tournament.html#a9a239a53c51dc4a9f89aec7a328df2aa',1,'Nakama::NTournament']]],
+  ['no_5fread',['NO_READ',['../_n_storage_permissions_8h.html#abe6811a72a8d8afab5d4fce81f22c325',1,'NStoragePermissions.h']]],
+  ['no_5fwrite',['NO_WRITE',['../_n_storage_permissions_8h.html#a59cc7d84ea01bfbb63938e597186dc40',1,'NStoragePermissions.h']]],
+  ['notfound',['NotFound',['../_n_error_8h.html#a0cfc295e037d42309933d7471dcfd28e',1,'NError.h']]],
+  ['notifications',['notifications',['../struct_nakama_1_1_n_notification_list.html#a4cdba3e8df23ef50e0c49533d2883fea',1,'Nakama::NNotificationList']]],
+  ['numericproperties',['numericProperties',['../struct_nakama_1_1_n_matchmaker_user.html#a9f49e97fefd1a4a315b7435402468b67',1,'Nakama::NMatchmakerUser']]],
+  ['numscore',['numScore',['../struct_nakama_1_1_n_leaderboard_record.html#a9fe665e87b63711ad4f032d4a33bc94a',1,'Nakama::NLeaderboardRecord']]]
 ];
