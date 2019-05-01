@@ -17,6 +17,7 @@
 import sys
 import subprocess
 import os
+import argparse
 import shutil
 import platform
 
@@ -25,6 +26,12 @@ if cur_dir.find(' ') >= 0:
     print 'Error: space foud in path:', cur_dir
     print 'please remove spaces from path and try again'
     sys.exit(-1)
+
+parser = argparse.ArgumentParser(description='builder for Windows')
+parser.add_argument('--so', help='build shared object', action='store_true')
+
+args = parser.parse_args()
+SO = args.so
 
 bits, linkage = platform.architecture()
 
@@ -37,10 +44,15 @@ else:
 
 BUILD_MODE = 'Release'
 build_dir = os.path.abspath('build/' + BUILD_MODE + '_' + ARCH)
-release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/linux/' + ARCH)
+
+if SO:
+    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/linux/' + ARCH)
+else:
+    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/linux/' + ARCH)
 
 print 'Architecture:', ARCH
 print 'Build mode  :', BUILD_MODE
+print 'Shared object:', str(SO)
 
 def makedirs(dir):
     if not os.path.isdir(dir):
@@ -73,15 +85,27 @@ def copy_libs(dest):
     copy_file(build_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', dest)
     copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', dest)
 
+
+def copy_so(dest):
+    print
+    print 'copying to release folder...'
+    copy_file(build_dir + '/src/libnakama-cpp.so', dest)
+
 makedirs(build_dir)
 makedirs(release_libs_dir)
 
 os.chdir(build_dir)
 
+if SO:
+    NAKAMA_SHARED_LIBRARY = 'TRUE'
+else:
+    NAKAMA_SHARED_LIBRARY = 'FALSE'
+
 # generate projects
 call([
  'cmake',
  '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
+ '-DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY,
  '-DBUILD_WEBSOCKETPP=ON',
  '-DBUILD_IXWEBSOCKET=OFF',
  '../../../..'
@@ -90,6 +114,11 @@ call([
 build('grpc_cpp_plugin')
 build('protoc')
 build('nakama-cpp')
+
+if SO:
+    copy_so(release_libs_dir)
+else:
+    copy_libs(release_libs_dir)
+
 build('nakama-test')
 
-copy_libs(release_libs_dir)

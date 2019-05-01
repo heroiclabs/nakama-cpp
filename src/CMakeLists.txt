@@ -60,6 +60,8 @@ endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     target_compile_options(nakama-cpp PRIVATE /MP)
+elseif(CMAKE_COMPILER_IS_GNUCC)
+    target_compile_options(nakama-cpp PRIVATE -Wno-attributes)
 endif()
 
 target_compile_features(nakama-cpp PUBLIC cxx_std_11)
