@@ -19,7 +19,7 @@ You'll need to setup the server and database before you can connect with the cli
 
 2. Nakama C++ SDK is released with prebuilt libraries for following platforms and architectures:
 
-- Windows - Visual Studio 2015, 2017 (x86, x64, Debug, Release)
+- Windows - Visual Studio 2015, 2017, 2019 (x86, x64, Debug, Release)
 - Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86, x86_64)
 - Linux - Ubuntu 14.04.5 (x86, x64)
 - Mac - 10.10+
@@ -68,11 +68,20 @@ Android uses a permissions system which determines which platform services the a
 
 ### Setup for CMake projects
 
-Add following to your `CMakeLists.txt` file:
+To link Nakama's static lib add following to your `CMakeLists.txt` file:
 
 ```cmake
 add_subdirectory(NAKAMA_CPP_SDK ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp)
 target_link_libraries(${APP_NAME} ext_nakama-cpp)
+```
+
+To link Nakama's shared lib add following to your `CMakeLists.txt` file:
+
+```cmake
+set(NAKAMA_SHARED_LIBRARY TRUE)
+add_subdirectory(NAKAMA_CPP_SDK ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp)
+target_link_libraries(${APP_NAME} ext_nakama-cpp)
+CopyNakamaSharedLib(nakama-cmake-client-example)
 ```
 
 ### Setup for Visual Studio projects
@@ -82,9 +91,11 @@ In `Project Settings` add following:
 1. Add `NAKAMA_CPP_SDK/include` in `C/C++ > General > Additional Include Directories`
 2. Add libs folder in `Linker > General > Additional Library Directories`:
     - `NAKAMA_COCOS2D_SDK/libs/win32/v140` - for VS 2015 x86
-    - `NAKAMA_COCOS2D_SDK/libs/win32/v141` - for VS 2017 x86
     - `NAKAMA_COCOS2D_SDK/libs/win64/v140` - for VS 2015 x64
+    - `NAKAMA_COCOS2D_SDK/libs/win32/v141` - for VS 2017 x86
     - `NAKAMA_COCOS2D_SDK/libs/win64/v141` - for VS 2017 x64
+    - `NAKAMA_COCOS2D_SDK/libs/win32/v142` - for VS 2019 x86
+    - `NAKAMA_COCOS2D_SDK/libs/win64/v142` - for VS 2019 x64
 3. Add all `.lib` files located in libs folder in `Linker > Input > Additional Dependencies`
 
 ### Custom setup
@@ -321,7 +332,7 @@ Change submodule branch:
 - cmake 3.10+
 - go
 - perl
-- Visual Studio 2015 or 2017 - for Windows only
+- Visual Studio 2015, 2017 or 2019 - for Windows only
 - boost - for Windows, Mac and Linux, used by websocketpp library
 
 Third party libraries:
@@ -336,7 +347,7 @@ Third party libraries:
 
 ```bash
 cd build\windows
-python build_windows.py -m Mode -a Arch -t Toolset
+python build_windows.py -m Mode -a Arch -t Toolset --dll
 ```
 Where `Mode` is build mode: `Debug` or `Release`
 
@@ -346,6 +357,9 @@ Where `Toolset` is platform toolset:
 
 - `v140` - Visual Studio 2015
 - `v141` - Visual Studio 2017
+- `v142` - Visual Studio 2019
+
+`--dll` is optional parameter. If set then Nakama will be built as DLL otherwise as static library.
 
 It builds and copies nakama lib to release folder.
 
@@ -370,8 +384,11 @@ Build:
 
 ```bash
 cd build\mac
-python build_mac.py
+python build_mac.py --dylib
 ```
+
+`--dylib` is optional parameter. If set then Nakama will be built as dynamic library otherwise as static.
+
 It builds in `Release` mode and copies nakama lib to release folder.
 
 ### Building for iOS
@@ -380,9 +397,11 @@ To build for one architecture:
 
 ```bash
 cd build\ios
-python build_ios.py Arch
+python build_ios.py Arch --dylib
 ```
 Where `Arch` is architecture: `arm64`, `armv7`, `armv7s` or `x86_64`.
+
+`--dylib` is optional parameter. If set then Nakama will be built as dynamic library otherwise as static.
 
 It builds in `Release` mode.
 
@@ -424,8 +443,11 @@ Prerequisites:
 
 ```bash
 cd build\linux
-python build_linux.py
+python build_linux.py --so
 ```
+
+`--so` is optional parameter. If set then Nakama will be built as shared library otherwise as static.
+
 It builds in `Release` mode and copies nakama lib to release folder.
 
 ### Building for Android
@@ -436,9 +458,11 @@ To build for one ABI:
 
 ```bash
 cd build/android
-python build_android.py ABI
+python build_android.py ABI --so
 ```
 Where `ABI` is Android ABI e.g. `armeabi-v7a`, `arm64-v8a`, `x86` or `x86_64`
+
+`--so` is optional parameter. If set then Nakama will be built as shared library otherwise as static.
 
 It builds for Andoid API level 16 in `Release` mode.
 
