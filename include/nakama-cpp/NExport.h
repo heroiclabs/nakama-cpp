@@ -16,6 +16,8 @@
 
 #pragma once
 
+#undef NAKAMA_API
+
 #ifdef NAKAMA_SHARED_LIBRARY
 
 #if defined _WIN32 || defined __CYGWIN__
@@ -37,5 +39,3 @@
 #else
     #define NAKAMA_API
 #endif
-
-#define EXPORT_VECTOR(T)
