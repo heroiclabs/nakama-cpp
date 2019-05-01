@@ -30,8 +30,7 @@ cmake_policy(SET CMP0077 NEW)
 #set(CMAKE_VISIBILITY_INLINES_HIDDEN TRUE)
 
 if(NOT WIN32)
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+  add_compile_options(-fvisibility=hidden)
 endif()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
