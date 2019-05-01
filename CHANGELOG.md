@@ -4,6 +4,14 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+## [2.0.3] - 2019-05-01
+### Added
+- support Visual Studio 2019.
+- support build as shared lib (DLL)
+
+### Fixed
+- enable SSL for IXWebsocket.
+
 ## [2.0.2] - 2019-04-12
 ### Added
 - SSL support.
