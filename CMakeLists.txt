@@ -54,8 +54,6 @@ set(RUN_HAVE_POSIX_REGEX 0)
 set(RUN_HAVE_GNU_POSIX_REGEX 0)
 set(RUN_HAVE_STEADY_CLOCK 0)
 
-set(INSTALL_LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
-set(CMAKE_INSTALL_PREFIX ${INSTALL_LIB_DIR})
 set(PUBLIC_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(THIRD_PARTY_DIR ${PROJECT_SOURCE_DIR}/third_party)
 
@@ -67,7 +65,6 @@ if(BUILD_IXWEBSOCKET)
     add_subdirectory(third_party/IXWebSocket)
 endif()
 
-#if((WIN32 OR APPLE OR UNIX) AND NOT IOS_PLATFORM)
 # only build tests for desktop OS
 if(NOT CMAKE_CROSSCOMPILING)
     add_subdirectory(test)

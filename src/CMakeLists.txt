@@ -19,18 +19,7 @@ cmake_policy(SET CMP0074 NEW)
 
 project(nakama-cpp VERSION 2.0.2 DESCRIPTION "Nakama C++ Client" LANGUAGES CXX)
 
-if(WIN32)
-    include(windows_support)
-    set(INSTALL_LIB_DIR ${INSTALL_LIB_DIR}\\win32)
-elseif(ANDROID)
-    set(INSTALL_LIB_DIR ${INSTALL_LIB_DIR}/android/${ANDROID_ABI})
-elseif(CMAKE_OSX_SYSROOT MATCHES ".*iphoneos.*")
-    set(INSTALL_LIB_DIR ${INSTALL_LIB_DIR}/ios)
-endif()
-
-set(CMAKE_INSTALL_BINDIR)
-set(CMAKE_INSTALL_LIBDIR ${INSTALL_LIB_DIR})
-#message("INSTALL_LIB_DIR=${INSTALL_LIB_DIR}")
+include(windows_support)
 
 set(_src_root_path ${CMAKE_CURRENT_LIST_DIR})
 file(
@@ -122,5 +111,3 @@ foreach(_header IN ITEMS ${_public_headers_list})
     string(REPLACE "/" "\\" _group_path "${_header_path_rel}")
     source_group("include\\${_group_path}" FILES "${_header}")
 endforeach()
-
-install(TARGETS nakama-cpp DESTINATION ${INSTALL_LIB_DIR})
