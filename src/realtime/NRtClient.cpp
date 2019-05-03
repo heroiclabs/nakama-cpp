@@ -717,24 +717,60 @@ RtRequestContext * NRtClient::createReqContext(::nakama::realtime::Envelope& msg
     return ctx;
 }
 
-void NRtClient::send(const::google::protobuf::Message & msg)
+void NRtClient::reqInternalError(int32_t cid, const NRtError & error)
 {
+    NLOG_ERROR(toString(error));
+
+    auto it = _reqContexts.find(cid);
+
+    if (it != _reqContexts.end())
+    {
+        if (it->second->errorCallback)
+        {
+            it->second->errorCallback(error);
+        }
+        else if (_listener)
+        {
+            _listener->onError(error);
+        }
+        else
+        {
+            NLOG_WARN("error not handled");
+        }
+
+        _reqContexts.erase(it);
+    }
+    else
+    {
+        NLOG(NLogLevel::Error, "request context not found. cid: %d", cid);
+    }
+}
+
+void NRtClient::send(const ::nakama::realtime::Envelope & msg)
+{
+    bool res = false;
+
     if (isConnected())
     {
         NBytes bytes;
 
         if (_protocol->serialize(msg, bytes))
         {
-            _transport->send(bytes);
+            if (!_transport->send(bytes))
+            {
+                reqInternalError(std::stoi(msg.cid()), NRtError(RtErrorCode::TRANSPORT_ERROR, "Send message failed"));
+
+                _transport->disconnect();
+            }
         }
         else
         {
-            NLOG_ERROR("serialize message failed");
+            reqInternalError(std::stoi(msg.cid()), NRtError(RtErrorCode::TRANSPORT_ERROR, "Serialize message failed"));
         }
     }
     else
     {
-        NLOG_ERROR("not connected");
+        reqInternalError(std::stoi(msg.cid()), NRtError(RtErrorCode::CONNECT_ERROR, "Not connected"));
     }
 }
 

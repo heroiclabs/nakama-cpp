@@ -119,8 +119,10 @@ void NIXWebsocket::onSocketMessage(
     }
 }
 
-void NIXWebsocket::send(const NBytes & data)
+bool NIXWebsocket::send(const NBytes & data)
 {
+    NLOG(NLogLevel::Debug, "sending %d bytes...", data.size());
+
     ix::WebSocketSendInfo info;
 
     //if (_type == NRtTransportType::Binary)
@@ -135,12 +137,15 @@ void NIXWebsocket::send(const NBytes & data)
     if (!info.success)
     {
         NLOG_ERROR("send failed");
-        disconnect();
     }
+
+    return info.success;
 }
 
 void NIXWebsocket::disconnect()
 {
+    NLOG_DEBUG("...");
+
     _ixWebSocket.stop();
 }
 

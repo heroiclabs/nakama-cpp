@@ -162,8 +162,10 @@ namespace Nakama {
             void onTransportError(const std::string& description);
             void onTransportMessage(const NBytes& data);
 
+            void reqInternalError(int32_t cid, const NRtError& error);
+
             RtRequestContext* createReqContext(::nakama::realtime::Envelope& msg);
-            void send(const ::google::protobuf::Message& msg);
+            void send(const ::nakama::realtime::Envelope& msg);
 
         protected:
             std::string _host;

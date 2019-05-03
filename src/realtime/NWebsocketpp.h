@@ -38,7 +38,7 @@ namespace Nakama {
 
         void disconnect() override;
 
-        void send(const NBytes& data) override;
+        bool send(const NBytes& data) override;
 
     protected:
         using WsClient = websocketpp::client<websocketpp::config::asio_client>;

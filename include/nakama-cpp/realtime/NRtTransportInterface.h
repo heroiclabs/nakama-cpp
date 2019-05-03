@@ -75,8 +75,9 @@ namespace Nakama {
         * Send bytes data to the server.
         *
         * @param data The byte data to send.
+        * @return True if sent successfully.
         */
-        virtual void send(const NBytes& data) = 0;
+        virtual bool send(const NBytes& data) = 0;
 
     protected:
         void onConnected() { _connected = true; if (_connectCallback) _connectCallback(); }

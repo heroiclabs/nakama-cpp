@@ -85,7 +85,7 @@ void NWebsocketpp::connect(const std::string & url, NRtTransportType type)
         else
             _op_code = websocketpp::frame::opcode::text;
 
-        NLOG_DEBUG("socket connecting...");
+        NLOG_DEBUG("...");
         _wsClient.connect(con);
     }
     catch (websocketpp::exception const & e)
@@ -102,11 +102,20 @@ void NWebsocketpp::disconnect()
     _wsClient.close(_con_hdl, websocketpp::close::status::normal, "");
 }
 
-void NWebsocketpp::send(const NBytes & data)
+bool NWebsocketpp::send(const NBytes & data)
 {
     NLOG(NLogLevel::Debug, "sending %d bytes...", data.size());
 
-    _wsClient.send(_con_hdl, data.data(), data.size(), _op_code);
+    websocketpp::lib::error_code ec;
+
+    _wsClient.send(_con_hdl, data.data(), data.size(), _op_code, ec);
+
+    if (ec)
+    {
+        NLOG(NLogLevel::Error, "error: %d, %s", ec.value(), ec.message().c_str());
+    }
+
+    return !ec;
 }
 
 } // namespace Nakama
