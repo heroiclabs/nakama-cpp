@@ -31,12 +31,7 @@ void test_createAndDeleteNotifications()
         {
             std::cout << "Received notifications: " << list.notifications.size() << std::endl;
 
-            auto errorCallback = [&test](const NError& error)
-            {
-                test.stopTest();
-            };
-
-            auto removedNotificationCallback = [&test, errorCallback]()
+            auto removedNotificationCallback = [&test]()
             {
                 std::cout << "Notification removed." << std::endl;
                 test.stopTest(true);
@@ -50,17 +45,11 @@ void test_createAndDeleteNotifications()
                 test.client->deleteNotifications(
                     test.session,
                     { notification.id },
-                    removedNotificationCallback,
-                    errorCallback);
+                    removedNotificationCallback);
             }
         });
 
-        auto errorCallback = [&test](const NRtError& error)
-        {
-            test.stopTest();
-        };
-
-        auto successCallback = [&test, errorCallback](const NRpc& rpc)
+        auto successCallback = [&test](const NRpc& rpc)
         {
             std::cout << "rpc response: " << rpc.payload << std::endl;
         };
@@ -68,8 +57,7 @@ void test_createAndDeleteNotifications()
         test.rtClient->rpc(
             "clientrpc.send_notification",
             "{\"user_id\":\"" + test.session->getUserId() + "\"}",
-            successCallback,
-            errorCallback);
+            successCallback);
     };
 
     test.runTest();
@@ -81,25 +69,15 @@ void test_createListAndDeleteNotifications()
 
     test.onRtConnect = [&test]()
     {
-        auto errorCallback = [&test](const NRtError& error)
-        {
-            test.stopTest();
-        };
-
         auto successCallback = [&test](const NRpc& rpc)
         {
             std::cout << "rpc response: " << rpc.payload << std::endl;
 
-            auto errorCallback = [&test](const NError& error)
-            {
-                test.stopTest();
-            };
-
-            auto listCallback = [&test, errorCallback](NNotificationListPtr list)
+            auto listCallback = [&test](NNotificationListPtr list)
             {
                 if (list->notifications.size() > 0)
                 {
-                    auto removedNotificationCallback = [&test, errorCallback]()
+                    auto removedNotificationCallback = [&test]()
                     {
                         std::cout << "Notification removed." << std::endl;
                         test.stopTest(true);
@@ -113,8 +91,7 @@ void test_createListAndDeleteNotifications()
                         test.client->deleteNotifications(
                             test.session,
                             { notification.id },
-                            removedNotificationCallback,
-                            errorCallback);
+                            removedNotificationCallback);
                     }
                 }
                 else
@@ -124,15 +101,13 @@ void test_createListAndDeleteNotifications()
             test.client->listNotifications(test.session,
                 opt::nullopt,
                 opt::nullopt,
-                listCallback,
-                errorCallback);
+                listCallback);
         };
 
         test.rtClient->rpc(
             "clientrpc.send_notification",
             "{\"user_id\":\"" + test.session->getUserId() + "\"}",
-            successCallback,
-            errorCallback);
+            successCallback);
     };
 
     test.runTest();

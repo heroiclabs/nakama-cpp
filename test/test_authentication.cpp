@@ -33,12 +33,7 @@ void test_authenticateDevice()
         test.stopTest(true);
     };
 
-    auto errorCallback = [&test](const NError& error)
-    {
-        test.stopTest();
-    };
-
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
 
     test.runTest();
 }
@@ -55,12 +50,7 @@ void test_authenticateDevice2()
         test.stopTest(true);
     };
 
-    auto errorCallback = [&test](const NError& error)
-    {
-        test.stopTest();
-    };
-
-    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
+    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback);
 
     test.runTest();
 }

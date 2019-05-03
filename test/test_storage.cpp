@@ -27,11 +27,6 @@ void test_writeStorageInvalidArgument()
 
     test.createWorkingClient();
 
-    auto errorCallback = [&test](const NError& error)
-    {
-        test.stopTest();
-    };
-
     auto successCallback = [&test](NSessionPtr session)
     {
         std::vector<NStorageObjectWrite> objects;
@@ -51,7 +46,7 @@ void test_writeStorageInvalidArgument()
         test.client->writeStorageObjects(session, objects, nullptr, errorCallback);
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
 
     test.runTest();
 }
@@ -62,14 +57,9 @@ void test_writeStorage()
 
     test.createWorkingClient();
 
-    auto errorCallback = [&test](const NError& error)
+    auto successCallback = [&test](NSessionPtr session)
     {
-        test.stopTest();
-    };
-
-    auto successCallback = [&test, errorCallback](NSessionPtr session)
-    {
-        auto writeSuccessCallback = [&test, session, errorCallback](const NStorageObjectAcks& acks)
+        auto writeSuccessCallback = [&test, session](const NStorageObjectAcks& acks)
         {
             if (acks.size() == 1)
             {
@@ -82,7 +72,7 @@ void test_writeStorage()
                     test.stopTest(list->objects.size() > 0);
                 };
 
-                test.client->listUsersStorageObjects(session, "candies", session->getUserId(), {}, {}, successCallback, errorCallback);
+                test.client->listUsersStorageObjects(session, "candies", session->getUserId(), {}, {}, successCallback);
             }
             else
             {
@@ -101,10 +91,10 @@ void test_writeStorage()
 
         objects.push_back(obj);
 
-        test.client->writeStorageObjects(session, objects, writeSuccessCallback, errorCallback);
+        test.client->writeStorageObjects(session, objects, writeSuccessCallback);
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
 
     test.runTest();
 }

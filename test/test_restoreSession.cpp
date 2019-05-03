@@ -30,12 +30,7 @@ void test_restoreSession()
 
     NSessionPtr my_session;
 
-    auto errorCallback = [&test](const NError& error)
-    {
-        test.stopTest();
-    };
-
-    auto successCallback = [&test, &my_session, errorCallback](NSessionPtr session)
+    auto successCallback = [&test, &my_session](NSessionPtr session)
     {
         my_session = restoreSession(session->getAuthToken());
 
@@ -65,11 +60,11 @@ void test_restoreSession()
                 test.stopTest(true);
             };
 
-            test.client->getAccount(my_session, successCallback, errorCallback);
+            test.client->getAccount(my_session, successCallback);
         }
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
 
     test.runTest();
 }

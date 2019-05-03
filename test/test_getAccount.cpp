@@ -29,17 +29,12 @@ void test_getAccount()
 
     NSessionPtr my_session;
 
-    auto errorCallback = [&test](const NError& error)
-    {
-        test.stopTest();
-    };
-
-    auto successCallback = [&test, &my_session, errorCallback](NSessionPtr session)
+    auto successCallback = [&test, &my_session](NSessionPtr session)
     {
         my_session = session;
         std::cout << "session token: " << session->getAuthToken() << std::endl;
 
-        auto successCallback = [&test, my_session, errorCallback](const NAccount& account)
+        auto successCallback = [&test, my_session](const NAccount& account)
         {
             std::cout << "account user id: " << account.user.id << std::endl;
 
@@ -56,14 +51,13 @@ void test_getAccount()
                 opt::nullopt,
                 opt::nullopt,
                 opt::nullopt,
-                successCallback,
-                errorCallback);
+                successCallback);
         };
 
-        test.client->getAccount(session, successCallback, errorCallback);
+        test.client->getAccount(session, successCallback);
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
 
     test.runTest();
 }

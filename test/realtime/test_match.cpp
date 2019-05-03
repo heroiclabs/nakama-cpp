@@ -23,11 +23,6 @@ using namespace std;
 
 void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const std::string& match_token = "")
 {
-    auto errorCallback = [&test](const NRtError& error)
-    {
-        test.stopTest();
-    };
-
     auto successCallback = [&test](const NMatch& match)
     {
         std::cout << "joined match: " << match.matchId << std::endl;
@@ -46,15 +41,13 @@ void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const 
     {
         test.rtClient->joinMatch(
             match_id,
-            successCallback,
-            errorCallback);
+            successCallback);
     }
     else
     {
         test.rtClient->joinMatchByToken(
             match_token,
-            successCallback,
-            errorCallback);
+            successCallback);
     }
 
     test.listener.setMatchDataCallback([&test](const NMatchData& data)
@@ -71,11 +64,6 @@ void test_rt_create_match()
 
     test1.onRtConnect = [&test1, &test2]()
     {
-        auto errorCallback = [&test1, &test2](const NRtError& error)
-        {
-            test1.stopTest();
-        };
-
         auto successCallback = [&test1, &test2](const NMatch& match)
         {
             std::cout << "created match: " << match.matchId << std::endl;
@@ -89,8 +77,7 @@ void test_rt_create_match()
         };
 
         test1.rtClient->createMatch(
-            successCallback,
-            errorCallback);
+            successCallback);
     };
 
     test1.listener.setMatchDataCallback([&test1](const NMatchData& data)
@@ -116,11 +103,6 @@ void test_rt_matchmaker2(NRtClientTest& test2)
 {
     test2.onRtConnect = [&test2]()
     {
-        auto errorCallback = [&test2](const NRtError& error)
-        {
-            test2.stopTest();
-        };
-
         auto successCallback = [&test2](const NMatchmakerTicket& ticket)
         {
             std::cout << "matchmaker ticket: " << ticket.ticket << std::endl;
@@ -133,8 +115,7 @@ void test_rt_matchmaker2(NRtClientTest& test2)
             opt::nullopt,
             {},
             {},
-            successCallback,
-            errorCallback);
+            successCallback);
     };
 
     test2.listener.setMatchmakerMatchedCallback([&test2](NMatchmakerMatchedPtr matched)
@@ -173,11 +154,6 @@ void test_rt_matchmaker()
         // run second test
         test_rt_matchmaker2(test2);
 
-        auto errorCallback = [&test1, &test2](const NRtError& error)
-        {
-            test1.stopTest();
-        };
-
         auto successCallback = [&test1, &test2](const NMatchmakerTicket& ticket)
         {
             std::cout << "matchmaker ticket: " << ticket.ticket << std::endl;
@@ -190,8 +166,7 @@ void test_rt_matchmaker()
             opt::nullopt,
             {},
             {},
-            successCallback,
-            errorCallback);
+            successCallback);
     };
 
     test1.listener.setMatchmakerMatchedCallback([&test1](NMatchmakerMatchedPtr matched)

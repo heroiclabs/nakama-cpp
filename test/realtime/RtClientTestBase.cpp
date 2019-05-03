@@ -77,12 +77,7 @@ void NRtClientTest::runTest()
         rtClient->connect(session, true, protocol);
     };
 
-    auto errorCallback = [this](const NError& error)
-    {
-        stopTest();
-    };
-
-    client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
+    client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
 
     NTest::runTest();
 }

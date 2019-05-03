@@ -102,11 +102,15 @@ void NTest::createWorkingClient()
     setWorkingClientParameters(parameters);
 
     client = createDefaultClient(parameters);
+
+    initClient();
 }
 
 void NTest::createClientWithParameters(const DefaultClientParameters & parameters)
 {
     client = createDefaultClient(parameters);
+
+    initClient();
 }
 
 void NTest::runTest()
@@ -149,6 +153,14 @@ void NTest::stopTest(bool succeeded)
 void NTest::tick()
 {
     client->tick();
+}
+
+void NTest::initClient()
+{
+    client->setErrorCallback([this](const NError& error)
+    {
+        stopTest();
+    });
 }
 
 void NTest::printTestName(const char* event)

@@ -34,12 +34,7 @@ public:
     {
         createWorkingClient();
 
-        auto errorCallback = [this](const NError& error)
-        {
-            stopTest();
-        };
-
-        auto successCallback = [this, errorCallback](NSessionPtr session)
+        auto successCallback = [this](NSessionPtr session)
         {
             this->session = session;
 
@@ -48,18 +43,13 @@ public:
             listGroups();
         };
 
-        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback, errorCallback);
+        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
 
         NTest::runTest();
     }
 
     void listGroups()
     {
-        auto errorCallback = [this](const NError& error)
-        {
-            stopTest();
-        };
-
         auto successCallback = [this](NGroupListPtr list)
         {
             cout << "Groups count " << list->groups.size() << endl;
@@ -80,16 +70,11 @@ public:
             }
         };
 
-        client->listGroups(session, group_name, 0, "", successCallback, errorCallback);
+        client->listGroups(session, group_name, 0, "", successCallback);
     }
 
     void createGroup()
     {
-        auto errorCallback = [this](const NError& error)
-        {
-            stopTest();
-        };
-
         auto successCallback = [this](const NGroup& group)
         {
             updateGroup(group.id);
@@ -103,17 +88,11 @@ public:
             "",  // avatar URL
             "en_US",
             true, // open
-            successCallback,
-            errorCallback);
+            successCallback);
     }
 
     void updateGroup(const string& groupId)
     {
-        auto errorCallback = [this](const NError& error)
-        {
-            stopTest();
-        };
-
         auto successCallback = [this]()
         {
             std::cout << "group updated" << std::endl;
@@ -127,8 +106,7 @@ public:
             opt::nullopt,
             opt::nullopt,
             opt::nullopt,
-            successCallback,
-            errorCallback
+            successCallback
         );
     }
 };

@@ -30,13 +30,7 @@ void test_rt_joinChat()
 
     test.onRtConnect = [&test]()
     {
-        auto errorCallback = [&test](const NRtError& error)
-        {
-            std::cout << "error: " << error.message << std::endl;
-            test.stopTest();
-        };
-
-        auto successCallback = [&test, errorCallback](NChannelPtr channel)
+        auto successCallback = [&test](NChannelPtr channel)
         {
             std::cout << "joined chat: " << channel->id << std::endl;
 
@@ -52,8 +46,7 @@ void test_rt_joinChat()
             test.rtClient->writeChatMessage(
                 channel->id,
                 json_data,
-                ackCallback,
-                errorCallback
+                ackCallback
             );
         };
 
@@ -62,8 +55,8 @@ void test_rt_joinChat()
             NChannelType::ROOM,
             {},
             {},
-            successCallback,
-            errorCallback);
+            successCallback
+        );
     };
 
     test.runTest();

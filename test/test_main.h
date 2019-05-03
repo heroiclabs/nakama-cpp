@@ -32,6 +32,7 @@ namespace Test {
 
         virtual void createWorkingClient();
         virtual void createClientWithParameters(const DefaultClientParameters& parameters);
+        virtual void initClient();
 
         virtual void runTest();
         virtual void stopTest(bool succeeded = false);
