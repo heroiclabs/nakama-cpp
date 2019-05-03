@@ -40,9 +40,9 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int por
         }
     });
 
-    _transport->setErrorCallback(std::bind(&NRtClient::onError, this, std::placeholders::_1));
-    _transport->setDisconnectCallback(std::bind(&NRtClient::onDisconnected, this));
-    _transport->setMessageCallback(std::bind(&NRtClient::onMessage, this, std::placeholders::_1));
+    _transport->setErrorCallback(std::bind(&NRtClient::onTransportError, this, std::placeholders::_1));
+    _transport->setDisconnectCallback(std::bind(&NRtClient::onTransportDisconnected, this));
+    _transport->setMessageCallback(std::bind(&NRtClient::onTransportMessage, this, std::placeholders::_1));
 
     NLOG_INFO("Created");
 }
@@ -106,7 +106,7 @@ void NRtClient::disconnect()
     _transport->disconnect();
 }
 
-void NRtClient::onDisconnected()
+void NRtClient::onTransportDisconnected()
 {
     if (_listener)
     {
@@ -114,8 +114,7 @@ void NRtClient::onDisconnected()
     }
 }
 
-// transport error
-void NRtClient::onError(const std::string& description)
+void NRtClient::onTransportError(const std::string& description)
 {
     NRtError error;
 
@@ -130,7 +129,7 @@ void NRtClient::onError(const std::string& description)
     }
 }
 
-void NRtClient::onMessage(const NBytes & data)
+void NRtClient::onTransportMessage(const NBytes & data)
 {
     ::nakama::realtime::Envelope msg;
 

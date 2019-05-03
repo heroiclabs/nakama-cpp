@@ -158,9 +158,9 @@ namespace Nakama {
         ) override;
 
         protected:
-            void onDisconnected();
-            void onError(const std::string& description);
-            void onMessage(const NBytes& data);
+            void onTransportDisconnected();
+            void onTransportError(const std::string& description);
+            void onTransportMessage(const NBytes& data);
 
             RtRequestContext* createReqContext(::nakama::realtime::Envelope& msg);
             void send(const ::google::protobuf::Message& msg);
