@@ -41,6 +41,8 @@ namespace Nakama {
         explicit DefaultClient(const DefaultClientParameters& parameters);
         ~DefaultClient();
 
+        void setErrorCallback(ErrorCallback errorCallback) override { _defaultErrorCallback = errorCallback; }
+
         void disconnect() override;
 
         void tick() override;
@@ -556,6 +558,7 @@ namespace Nakama {
     private:
         ReqContext* createReqContext(NSessionPtr session);
         void onResponse(void* tag, bool ok);
+        void reqError(ReqContext* reqContext, const NError& error);
 
     private:
         std::string _host;
@@ -565,5 +568,6 @@ namespace Nakama {
         std::string _basicAuthMetadata;
         std::set<ReqContext*> _reqContexts;
         google::protobuf::Empty _emptyData;
+        ErrorCallback _defaultErrorCallback;
     };
 }

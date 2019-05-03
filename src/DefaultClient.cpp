@@ -85,7 +85,7 @@ DefaultClient::~DefaultClient()
 
     if (_reqContexts.size() > 0)
     {
-        NLOG(NLogLevel::Warn, "Not handled %u requests detected.", _reqContexts.size());
+        NLOG(NLogLevel::Warn, "Not handled %u request(s) detected.", _reqContexts.size());
 
         for (ReqContext* reqContext : _reqContexts)
         {
@@ -222,26 +222,12 @@ void DefaultClient::onResponse(void * tag, bool ok)
                     break;
                 }
 
-                NError error(ss.str(), code);
-
-                NLOG_ERROR(error);
-
-                if (reqContext->errorCallback)
-                {
-                    reqContext->errorCallback(error);
-                }
+                reqError(reqContext, NError(ss.str(), code));
             }
         }
         else
         {
-            NError error("Communication failed. Please check connection.", ErrorCode::ConnectionError);
-
-            NLOG_ERROR(error);
-
-            if (reqContext->errorCallback)
-            {
-                reqContext->errorCallback(error);
-            }
+            reqError(reqContext, NError("Communication failed. Please check connection.", ErrorCode::ConnectionError));
         }
 
         delete reqContext;
@@ -249,7 +235,32 @@ void DefaultClient::onResponse(void * tag, bool ok)
     }
     else
     {
-        NLOG_ERROR("Internal error: not found request context.");
+        NError error("Not found request context.", ErrorCode::InternalError);
+
+        NLOG_ERROR(toString(error));
+
+        if (_defaultErrorCallback)
+        {
+            _defaultErrorCallback(error);
+        }
+    }
+}
+
+void DefaultClient::reqError(ReqContext * reqContext, const NError & error)
+{
+    NLOG_ERROR(error);
+
+    if (reqContext->errorCallback)
+    {
+        reqContext->errorCallback(error);
+    }
+    else if (_defaultErrorCallback)
+    {
+        _defaultErrorCallback(error);
+    }
+    else
+    {
+        NLOG_WARN("error not handled");
     }
 }
 
@@ -1295,7 +1306,14 @@ void DefaultClient::listUserGroups(NSessionPtr session, std::function<void(NUser
     }
     else
     {
-        NLOG_ERROR("No session");
+        NError error("No session", ErrorCode::InvalidArgument);
+
+        NLOG_ERROR(toString(error));
+
+        if (errorCallback)
+        {
+            errorCallback(error);
+        }
     }
 }
 

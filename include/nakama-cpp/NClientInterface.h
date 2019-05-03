@@ -55,6 +55,15 @@ namespace Nakama {
         virtual ~NClientInterface() {}
 
         /**
+         * Set default error callback.
+         *
+         * Will be called if a request fails and no error callback was set for the request.
+         *
+         * @param errorCallback The error callback.
+         */
+        virtual void setErrorCallback(ErrorCallback errorCallback) = 0;
+
+        /**
          * Disconnects the client. This function kills all outgoing exchanges immediately without waiting.
          */
         virtual void disconnect() = 0;
