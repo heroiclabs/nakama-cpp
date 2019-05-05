@@ -81,7 +81,7 @@ To link Nakama's shared lib add following to your `CMakeLists.txt` file:
 set(NAKAMA_SHARED_LIBRARY TRUE)
 add_subdirectory(NAKAMA_CPP_SDK ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp)
 target_link_libraries(${APP_NAME} ext_nakama-cpp)
-CopyNakamaSharedLib(nakama-cmake-client-example)
+CopyNakamaSharedLib(${APP_NAME})
 ```
 
 ### Setup for Visual Studio projects
