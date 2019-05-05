@@ -46,6 +46,12 @@ void NWebsocketpp::connect(const std::string & url, NRtTransportType type)
 
         WsClient::connection_ptr con = _wsClient.get_connection(url, ec);
 
+        if (ec)
+        {
+            onError("initialize connect failed: " + ec.message());
+            return;
+        }
+
         con->set_open_handler([this](websocketpp::connection_hdl hdl)
         {
             NLOG_DEBUG("socket connected");
@@ -86,7 +92,7 @@ void NWebsocketpp::connect(const std::string & url, NRtTransportType type)
             _op_code = websocketpp::frame::opcode::text;
 
         NLOG_DEBUG("...");
-        _wsClient.connect(con);
+        (void) _wsClient.connect(con);
     }
     catch (websocketpp::exception const & e)
     {
