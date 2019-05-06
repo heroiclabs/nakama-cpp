@@ -26,7 +26,7 @@ IF (WIN32)
     endmacro()
 
     get_WIN32_WINNT(ver)
-    add_definitions(-D_WIN32_WINNT=${ver})
+    add_definitions(-D_WIN32_WINNT=${ver} -DWIN32_LEAN_AND_MEAN)
     
     if(MSVC)
         set(CMAKE_DEBUG_POSTFIX "d")

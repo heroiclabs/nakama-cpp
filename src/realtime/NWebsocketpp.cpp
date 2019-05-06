@@ -27,6 +27,12 @@ namespace Nakama {
 NWebsocketpp::NWebsocketpp()
 {
     _wsClient.init_asio();
+
+#ifdef NAKAMA_SSL_ENABLED
+    _wsClient.set_tls_init_handler([this](websocketpp::connection_hdl) {
+        return websocketpp::lib::make_shared<boost::asio::ssl::context>(boost::asio::ssl::context::tlsv1);
+    });
+#endif
 }
 
 void NWebsocketpp::tick()

@@ -19,7 +19,11 @@
 #include "nakama-cpp/realtime/NRtTransportInterface.h"
 
 #define _WEBSOCKETPP_CPP11_STL_
-#include "websocketpp/config/asio_no_tls_client.hpp"
+#ifdef NAKAMA_SSL_ENABLED
+    #include "websocketpp/config/asio_client.hpp"
+#else
+    #include "websocketpp/config/asio_no_tls_client.hpp"
+#endif
 #include "websocketpp/client.hpp"
 
 namespace Nakama {
@@ -41,7 +45,11 @@ namespace Nakama {
         bool send(const NBytes& data) override;
 
     protected:
+#ifdef NAKAMA_SSL_ENABLED
+        using WsClient = websocketpp::client<websocketpp::config::asio_tls_client>;
+#else
         using WsClient = websocketpp::client<websocketpp::config::asio_client>;
+#endif
 
         websocketpp::frame::opcode::value _op_code = websocketpp::frame::opcode::binary;
         WsClient _wsClient;
