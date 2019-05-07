@@ -55,11 +55,6 @@ NIXWebsocket::~NIXWebsocket()
 void NIXWebsocket::connect(const string& url, NRtTransportType type)
 {
     _type = type;
-    
-    if (_type == NRtTransportType::Text)
-    {
-        NLOG_WARN("Text type is not supported");
-    }
 
     NLOG_DEBUG("...");
     _ixWebSocket.setUrl(url);
@@ -125,14 +120,14 @@ bool NIXWebsocket::send(const NBytes & data)
 
     ix::WebSocketSendInfo info;
 
-    //if (_type == NRtTransportType::Binary)
+    if (_type == NRtTransportType::Binary)
     {
         info = _ixWebSocket.send(data);
     }
-    //else
-    //{
-    //    info = _ixWebSocket.sendText(data);
-    //}
+    else
+    {
+        info = _ixWebSocket.sendText(data);
+    }
 
     if (!info.success)
     {
