@@ -31,21 +31,25 @@ namespace ix
 {
     OnTrafficTrackerCallback WebSocket::_onTrafficTrackerCallback = nullptr;
     const int WebSocket::kDefaultHandShakeTimeoutSecs(60);
-    const int WebSocket::kDefaultHeartBeatPeriod(-1);
+    const int WebSocket::kDefaultPingIntervalSecs(-1);
+    const int WebSocket::kDefaultPingTimeoutSecs(-1);
+    const bool WebSocket::kDefaultEnablePong(true);
 
     WebSocket::WebSocket() :
         _onMessageCallback(OnMessageCallback()),
         _stop(false),
         _automaticReconnection(true),
         _handshakeTimeoutSecs(kDefaultHandShakeTimeoutSecs),
-        _heartBeatPeriod(kDefaultHeartBeatPeriod)
+        _enablePong(kDefaultEnablePong),
+        _pingIntervalSecs(kDefaultPingIntervalSecs),
+        _pingTimeoutSecs(kDefaultPingTimeoutSecs)
     {
         _ws.setOnCloseCallback(
-            [this](uint16_t code, const std::string& reason, size_t wireSize)
+            [this](uint16_t code, const std::string& reason, size_t wireSize, bool remote)
             {
                 _onMessageCallback(WebSocket_MessageType_Close, "", wireSize,
                                    WebSocketErrorInfo(), WebSocketOpenInfo(),
-                                   WebSocketCloseInfo(code, reason));
+                                   WebSocketCloseInfo(code, reason, remote));
             }
         );
     }
@@ -79,16 +83,52 @@ namespace ix
         return _perMessageDeflateOptions;
     }
 
-    void WebSocket::setHeartBeatPeriod(int hearBeatPeriod)
+    void WebSocket::setHeartBeatPeriod(int heartBeatPeriodSecs)
     {
         std::lock_guard<std::mutex> lock(_configMutex);
-        _heartBeatPeriod = hearBeatPeriod;
+        _pingIntervalSecs = heartBeatPeriodSecs;
     }
 
     int WebSocket::getHeartBeatPeriod() const
     {
         std::lock_guard<std::mutex> lock(_configMutex);
-        return _heartBeatPeriod;
+        return _pingIntervalSecs;
+    }
+
+    void WebSocket::setPingInterval(int pingIntervalSecs)
+    {
+        std::lock_guard<std::mutex> lock(_configMutex);
+        _pingIntervalSecs = pingIntervalSecs;
+    }
+
+    int WebSocket::getPingInterval() const
+    {
+        std::lock_guard<std::mutex> lock(_configMutex);
+        return _pingIntervalSecs;
+    }
+
+    void WebSocket::setPingTimeout(int pingTimeoutSecs)
+    {
+        std::lock_guard<std::mutex> lock(_configMutex);
+        _pingTimeoutSecs = pingTimeoutSecs;
+    }
+
+    int WebSocket::getPingTimeout() const
+    {
+        std::lock_guard<std::mutex> lock(_configMutex);
+        return _pingTimeoutSecs;
+    }
+
+    void WebSocket::enablePong()
+    {
+        std::lock_guard<std::mutex> lock(_configMutex);
+        _enablePong = true;
+    }
+
+    void WebSocket::disablePong()
+    {
+        std::lock_guard<std::mutex> lock(_configMutex);
+        _enablePong = false;
     }
 
     void WebSocket::start()
@@ -125,7 +165,9 @@ namespace ix
         {
             std::lock_guard<std::mutex> lock(_configMutex);
             _ws.configure(_perMessageDeflateOptions,
-                          _heartBeatPeriod);
+                          _enablePong,
+                          _pingIntervalSecs,
+                          _pingTimeoutSecs);
         }
 
         WebSocketInitResult status = _ws.connectToUrl(_url, timeoutSecs);
@@ -145,7 +187,10 @@ namespace ix
     {
         {
             std::lock_guard<std::mutex> lock(_configMutex);
-            _ws.configure(_perMessageDeflateOptions, _heartBeatPeriod);
+            _ws.configure(_perMessageDeflateOptions,
+                          _enablePong,
+                          _pingIntervalSecs,
+                          _pingTimeoutSecs);
         }
 
         WebSocketInitResult status = _ws.connectToSocket(fd, timeoutSecs);
@@ -184,16 +229,12 @@ namespace ix
         using millis = std::chrono::duration<double, std::milli>;
         millis duration;
 
-        while (true)
+        // Try to connect only once when we don't have automaticReconnection setup
+        if (!isConnected() && !isClosing() && !_stop && !_automaticReconnection)
         {
-            if (isConnected() || isClosing() || _stop || !_automaticReconnection)
-            {
-                break;
-            }
-
             status = connect(_handshakeTimeoutSecs);
 
-            if (!status.success && !_stop)
+            if (!status.success)
             {
                 duration = millis(calculateRetryWaitMilliseconds(retries++));
 
@@ -204,15 +245,45 @@ namespace ix
                 _onMessageCallback(WebSocket_MessageType_Error, "", 0,
                                    connectErr, WebSocketOpenInfo(),
                                    WebSocketCloseInfo());
+            }
+        }
+        else
+        {
+            // Otherwise try to reconnect perpertually
+            while (true)
+            {
+                if (isConnected() || isClosing() || _stop || !_automaticReconnection)
+                {
+                    break;
+                }
 
-                std::this_thread::sleep_for(duration);
+                status = connect(_handshakeTimeoutSecs);
+
+                if (!status.success)
+                {
+                    duration = millis(calculateRetryWaitMilliseconds(retries++));
+
+                    connectErr.retries = retries;
+                    connectErr.wait_time = duration.count();
+                    connectErr.reason = status.errorStr;
+                    connectErr.http_status = status.http_status;
+                    _onMessageCallback(WebSocket_MessageType_Error, "", 0,
+                                       connectErr, WebSocketOpenInfo(),
+                                       WebSocketCloseInfo());
+
+                    // Only sleep if we aren't in the middle of stopping
+                    if (!_stop)
+                    {
+                        std::this_thread::sleep_for(duration);
+                    }
+                }
             }
         }
     }
 
     void WebSocket::run()
     {
-        setThreadName(_url);
+        setThreadName(getUrl());
 
         while (true)
         {
@@ -269,10 +340,8 @@ namespace ix
                     WebSocket::invokeTrafficTrackerCallback(msg.size(), true);
                 });
 
-            // 4. In blocking mode, getting out of this function is triggered by
-            //    an explicit disconnection from the callback, or by the remote end
-            //    closing the connection, ie isConnected() == false.
-            if (!_thread.joinable() && !isConnected() && !_automaticReconnection) return;
+            // If we aren't trying to reconnect automatically, exit if we aren't connected
+            if (!isConnected() && !_automaticReconnection) return;
         }
     }
 
@@ -302,7 +371,13 @@ namespace ix
     WebSocketSendInfo WebSocket::send(const std::string& text,
                                       const OnProgressCallback& onProgressCallback)
     {
-        return sendMessage(text, false, onProgressCallback);
+        return sendMessage(text, SendMessageKind::Binary, onProgressCallback);
+    }
+
+    WebSocketSendInfo WebSocket::sendText(const std::string& text,
+                                          const OnProgressCallback& onProgressCallback)
+    {
+        return sendMessage(text, SendMessageKind::Text, onProgressCallback);
     }
 
     WebSocketSendInfo WebSocket::ping(const std::string& text)
@@ -311,11 +386,11 @@ namespace ix
         constexpr size_t pingMaxPayloadSize = 125;
         if (text.size() > pingMaxPayloadSize) return WebSocketSendInfo(false);
 
-        return sendMessage(text, true);
+        return sendMessage(text, SendMessageKind::Ping);
     }
 
     WebSocketSendInfo WebSocket::sendMessage(const std::string& text,
-                                             bool ping,
+                                             SendMessageKind sendMessageKind,
                                              const OnProgressCallback& onProgressCallback)
     {
         if (!isConnected()) return WebSocketSendInfo(false);
@@ -332,13 +407,22 @@ namespace ix
         std::lock_guard<std::mutex> lock(_writeMutex);
         WebSocketSendInfo webSocketSendInfo;
 
-        if (ping)
+        switch (sendMessageKind)
         {
-            webSocketSendInfo = _ws.sendPing(text);
-        }
-        else
-        {
-            webSocketSendInfo = _ws.sendBinary(text, onProgressCallback);
+            case SendMessageKind::Text:
+            {
+                webSocketSendInfo = _ws.sendText(text, onProgressCallback);
+            } break;
+
+            case SendMessageKind::Binary:
+            {
+                webSocketSendInfo = _ws.sendBinary(text, onProgressCallback);
+            } break;
+
+            case SendMessageKind::Ping:
+            {
+                webSocketSendInfo = _ws.sendPing(text);
+            } break;
         }
 
         WebSocket::invokeTrafficTrackerCallback(webSocketSendInfo.wireSize, false);

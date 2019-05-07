@@ -16,6 +16,20 @@
 #ifdef _WIN32
 #include <BaseTsd.h>
 typedef SSIZE_T ssize_t;
+
+#undef EWOULDBLOCK
+#undef EAGAIN
+#undef EINPROGRESS
+#undef EBADF
+#undef EINVAL
+
+// map to WSA error codes
+#define EWOULDBLOCK    WSAEWOULDBLOCK
+#define EAGAIN         WSATRY_AGAIN
+#define EINPROGRESS    WSAEINPROGRESS
+#define EBADF          WSAEBADF
+#define EINVAL         WSAEINVAL
+
 #endif
 
 #include "IXCancellationRequest.h"
@@ -25,29 +39,24 @@ namespace ix
 {
     class SelectInterrupt;
 
-    enum PollResultType
+    enum class PollResultType
     {
-        PollResultType_ReadyForRead = 0,
-        PollResultType_ReadyForWrite = 1,
-        PollResultType_Timeout = 2,
-        PollResultType_Error = 3,
-        PollResultType_SendRequest = 4,
-        PollResultType_CloseRequest = 5
+        ReadyForRead = 0,
+        ReadyForWrite = 1,
+        Timeout = 2,
+        Error = 3,
+        SendRequest = 4,
+        CloseRequest = 5
     };
 
     class Socket {
     public:
-        using OnPollCallback = std::function<void(PollResultType)>;
-
         Socket(int fd = -1);
         virtual ~Socket();
         bool init(std::string& errorMsg);
 
-        void configure();
-
         // Functions to check whether there is activity on the socket
-        void poll(const OnPollCallback& onPollCallback,
-                  int timeoutSecs = kDefaultPollTimeout);
+        PollResultType poll(int timeoutSecs = kDefaultPollTimeout);
         bool wakeUpFromPoll(uint8_t wakeUpCode);
 
         PollResultType isReadyToWrite(int timeoutMs);
@@ -79,14 +88,14 @@ namespace ix
             const CancellationRequest& isCancellationRequested);
 
         static int getErrno();
+        static bool isWaitNeeded();
+        static void closeSocket(int fd);
 
         // Used as special codes for pipe communication
         static const uint64_t kSendRequest;
         static const uint64_t kCloseRequest;
 
     protected:
-        void closeSocket(int fd);
-
         std::atomic<int> _sockfd;
         std::mutex _socketMutex;
 

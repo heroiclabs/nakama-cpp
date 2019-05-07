@@ -15,6 +15,10 @@ if (NOT WIN32)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 endif()
 
+if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wshorten-64-to-32")
+endif()
+
 set( IXWEBSOCKET_SOURCES
     ixwebsocket/IXSocket.cpp
     ixwebsocket/IXSocketServer.cpp
@@ -22,6 +26,7 @@ set( IXWEBSOCKET_SOURCES
     ixwebsocket/IXSocketFactory.cpp
     ixwebsocket/IXDNSLookup.cpp
     ixwebsocket/IXCancellationRequest.cpp
+    ixwebsocket/IXNetSystem.cpp
     ixwebsocket/IXWebSocket.cpp
     ixwebsocket/IXWebSocketServer.cpp
     ixwebsocket/IXWebSocketTransport.cpp
@@ -32,9 +37,10 @@ set( IXWEBSOCKET_SOURCES
     ixwebsocket/IXWebSocketHttpHeaders.cpp
     ixwebsocket/IXHttpClient.cpp
     ixwebsocket/IXUrlParser.cpp
+    ixwebsocket/LUrlParser.cpp
     ixwebsocket/IXSelectInterrupt.cpp
-    ixwebsocket/IXSelectInterruptPipe.cpp
     ixwebsocket/IXSelectInterruptFactory.cpp
+    ixwebsocket/IXConnectionState.cpp
 )
 
 set( IXWEBSOCKET_HEADERS
@@ -45,6 +51,7 @@ set( IXWEBSOCKET_HEADERS
     ixwebsocket/IXSetThreadName.h
     ixwebsocket/IXDNSLookup.h
     ixwebsocket/IXCancellationRequest.h
+    ixwebsocket/IXNetSystem.h
     ixwebsocket/IXProgressCallback.h
     ixwebsocket/IXWebSocket.h
     ixwebsocket/IXWebSocketServer.h
@@ -59,10 +66,17 @@ set( IXWEBSOCKET_HEADERS
     ixwebsocket/libwshandshake.hpp
     ixwebsocket/IXHttpClient.h
     ixwebsocket/IXUrlParser.h
+    ixwebsocket/LUrlParser.h
     ixwebsocket/IXSelectInterrupt.h
-    ixwebsocket/IXSelectInterruptPipe.h
     ixwebsocket/IXSelectInterruptFactory.h
+    ixwebsocket/IXConnectionState.h
 )
+
+if (UNIX)
+    # Linux, Mac, iOS, Android
+    list( APPEND IXWEBSOCKET_SOURCES ixwebsocket/IXSelectInterruptPipe.cpp )
+    list( APPEND IXWEBSOCKET_SOURCES ixwebsocket/IXSelectInterruptPipe.h )
+endif()
 
 # Platform specific code
 if (APPLE)
@@ -97,27 +111,32 @@ add_library( ixwebsocket STATIC
     ${IXWEBSOCKET_HEADERS}
 )
 
-# gcc/Linux needs -pthread
-find_package(Threads)
-
 if (APPLE AND USE_TLS)
-    target_link_libraries(ixwebsocket "-framework foundation" "-framework security")
+  target_link_libraries(ixwebsocket "-framework foundation" "-framework security")
 endif()
 
-#if(UNIX AND NOT APPLE)
-#  find_package(OpenSSL REQUIRED)
-#  add_definitions(${OPENSSL_DEFINITIONS})
-#  message(STATUS "OpenSSL: " ${OPENSSL_VERSION})
-#  include_directories(${OPENSSL_INCLUDE_DIR})
-#endif()
+if (USE_OPEN_SSL)
+  # use BoringSSL instead of OpenSSL
+  target_include_directories( ixwebsocket PRIVATE
+    ../grpc/third_party/boringssl/include
+  )
+  #find_package(OpenSSL REQUIRED)
+  #add_definitions(${OPENSSL_DEFINITIONS})
+  #message(STATUS "OpenSSL: " ${OPENSSL_VERSION})
+  #include_directories(${OPENSSL_INCLUDE_DIR})
+  #target_link_libraries(ixwebsocket ${OPENSSL_LIBRARIES})
+endif()
 
 if (WIN32)
-  target_link_libraries(ixwebsocket libz wsock32 ws2_32)
+  target_link_libraries(ixwebsocket zlibstatic wsock32 ws2_32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-  
+
 else()
+  # gcc/Linux needs -pthread
+  find_package(Threads)
+
   target_link_libraries(ixwebsocket 
-    z ${OPENSSL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+    z ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
 target_include_directories( ixwebsocket PRIVATE
@@ -125,10 +144,15 @@ target_include_directories( ixwebsocket PRIVATE
   ${CMAKE_CURRENT_BINARY_DIR}/../grpc/third_party/zlib
   )
 
-if(USE_OPEN_SSL)
-  target_include_directories( ixwebsocket PRIVATE
-    ../grpc/third_party/boringssl/include
-  )
+set( IXWEBSOCKET_INCLUDE_DIRS
+    .
+)
+
+if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    # Build with Multiple Processes
+    target_compile_options(ixwebsocket PRIVATE /MP)
 endif()
 
-target_include_directories( ixwebsocket PUBLIC . )
+target_include_directories( ixwebsocket PUBLIC ${IXWEBSOCKET_INCLUDE_DIRS} )
+
+set_target_properties(ixwebsocket PROPERTIES PUBLIC_HEADER "${IXWEBSOCKET_HEADERS}")

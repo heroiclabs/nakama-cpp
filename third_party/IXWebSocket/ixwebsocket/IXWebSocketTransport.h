@@ -30,6 +30,13 @@ namespace ix
 {
     class Socket;
 
+    enum class SendMessageKind
+    {
+        Text,
+        Binary,
+        Ping
+    };
+
     class WebSocketTransport
     {
     public:
@@ -55,13 +62,16 @@ namespace ix
                                                      MessageKind)>;
         using OnCloseCallback = std::function<void(uint16_t,
                                                    const std::string&,
-                                                   size_t)>;
+                                                   size_t,
+                                                   bool)>;
 
         WebSocketTransport();
         ~WebSocketTransport();
 
         void configure(const WebSocketPerMessageDeflateOptions& perMessageDeflateOptions,
-                       int hearBeatPeriod);
+                       bool enablePong,
+                       int pingIntervalSecs,
+                       int pingTimeoutSecs);
 
         WebSocketInitResult connectToUrl(const std::string& url, // Client
                                          int timeoutSecs);
@@ -71,8 +81,15 @@ namespace ix
         void poll();
         WebSocketSendInfo sendBinary(const std::string& message,
                                      const OnProgressCallback& onProgressCallback);
+        WebSocketSendInfo sendText(const std::string& message,
+                                   const OnProgressCallback& onProgressCallback);
         WebSocketSendInfo sendPing(const std::string& message);
-        void close();
+
+        void close(uint16_t code = 1000,
+                   const std::string& reason = "Normal closure",
+                   size_t closeWireSize = 0,
+                   bool remote = false);
+
         ReadyStateValues getReadyState() const;
         void setReadyState(ReadyStateValues readyStateValue);
         void setOnCloseCallback(const OnCloseCallback& onCloseCallback);
@@ -99,6 +116,10 @@ namespace ix
             uint64_t N;
             uint8_t masking_key[4];
         };
+
+        // Tells whether we should mask the data we send.
+        // client should mask but server should not
+        std::atomic<bool> _useMask;
 
         // Buffer for reading from our socket. That buffer is never resized.
         std::vector<uint8_t> _readbuf;
@@ -131,6 +152,7 @@ namespace ix
         uint16_t _closeCode;
         std::string _closeReason;
         size_t _closeWireSize;
+        bool _closeRemote;
         mutable std::mutex _closeDataMutex;
 
         // Data used for Per Message Deflate compression (with zlib)
@@ -141,15 +163,43 @@ namespace ix
         // Used to cancel dns lookup + socket connect + http upgrade
         std::atomic<bool> _requestInitCancellation;
 
-        // Optional Heartbeat
-        int _heartBeatPeriod;
-        static const int kDefaultHeartBeatPeriod;
-        const static std::string kHeartBeatPingMessage;
-        mutable std::mutex _lastSendTimePointMutex;
-        std::chrono::time_point<std::chrono::steady_clock> _lastSendTimePoint;
+        // Constants for dealing with closing conneections
+        static const uint16_t kInternalErrorCode;
+        static const uint16_t kAbnormalCloseCode;
+        static const uint16_t kProtocolErrorCode;
+        static const std::string kInternalErrorMessage;
+        static const std::string kAbnormalCloseMessage;
+        static const std::string kPingTimeoutMessage;
+        static const std::string kProtocolErrorMessage;
 
-        // No data was send through the socket for longer that the hearbeat period
-        bool heartBeatPeriodExceeded();
+        // enable auto response to ping
+        bool _enablePong;
+        static const bool kDefaultEnablePong;
+
+        // Optional ping and pong timeout
+        // if both ping interval and timeout are set (> 0),
+        // then use GCD of these value to wait for the lowest time
+        int _pingIntervalSecs;
+        int _pingTimeoutSecs;
+        int _pingIntervalOrTimeoutGCDSecs;
+
+        static const int kDefaultPingIntervalSecs;
+        static const int kDefaultPingTimeoutSecs;
+        static const std::string kPingMessage;
+
+        // We record when ping are being sent so that we can know when to send the next one
+        // We also record when pong are being sent as a reply to pings, to close the connections
+        // if no pong were received sufficiently fast.
+        mutable std::mutex _lastSendPingTimePointMutex;
+        mutable std::mutex _lastReceivePongTimePointMutex;
+        std::chrono::time_point<std::chrono::steady_clock> _lastSendPingTimePoint;
+        std::chrono::time_point<std::chrono::steady_clock> _lastReceivePongTimePoint;
+
+        // If this function returns true, it is time to send a new ping
+        bool pingIntervalExceeded();
+
+        // No PONG data was received through the socket for longer than ping timeout delay
+        bool pingTimeoutExceeded();
 
         void sendOnSocket();
         WebSocketSendInfo sendData(wsheader_type::opcode_type type,
@@ -174,7 +224,6 @@ namespace ix
                                 std::string::const_iterator end,
                                 uint64_t message_size,
                                 uint8_t masking_key[4]);
-        void appendToSendBuffer(const std::vector<uint8_t>& buffer);
 
         unsigned getRandomUnsigned();
         void unmaskReceiveBuffer(const wsheader_type& ws);

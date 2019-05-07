@@ -21,6 +21,10 @@
 #include <algorithm>
 #include <iostream>
 
+#ifdef min
+#undef min
+#endif
+
 namespace ix
 {
     const int Socket::kDefaultPollNoTimeout = -1; // No poll timeout by default
@@ -41,17 +45,14 @@ namespace ix
         close();
     }
 
-    void Socket::poll(const OnPollCallback& onPollCallback, int timeoutSecs)
+    PollResultType Socket::poll(int timeoutSecs)
     {
         if (_sockfd == -1)
         {
-            if (onPollCallback) onPollCallback(PollResultType_Error);
-            return;
+            return PollResultType::Error;
         }
 
-        PollResultType pollResult = isReadyToRead(1000 * timeoutSecs);
-
-        if (onPollCallback) onPollCallback(pollResult);
+        return isReadyToRead(1000 * timeoutSecs);
     }
 
     PollResultType Socket::select(bool readyToRead, int timeoutMs)
@@ -82,14 +83,14 @@ namespace ix
         int ret = ::select(nfds + 1, &rfds, &wfds, nullptr,
                            (timeoutMs < 0) ? nullptr : &timeout);
 
-        PollResultType pollResult = PollResultType_ReadyForRead;
+        PollResultType pollResult = PollResultType::ReadyForRead;
         if (ret < 0)
         {
-            pollResult = PollResultType_Error;
+            pollResult = PollResultType::Error;
         }
         else if (ret == 0)
         {
-            pollResult = PollResultType_Timeout;
+            pollResult = PollResultType::Timeout;
         }
         else if (interruptFd != -1 && FD_ISSET(interruptFd, &rfds))
         {
@@ -97,20 +98,20 @@ namespace ix
 
             if (value == kSendRequest)
             {
-                pollResult = PollResultType_SendRequest;
+                pollResult = PollResultType::SendRequest;
             }
             else if (value == kCloseRequest)
             {
-                pollResult = PollResultType_CloseRequest;
+                pollResult = PollResultType::CloseRequest;
             }
         }
         else if (sockfd != -1 && readyToRead && FD_ISSET(sockfd, &rfds))
         {
-            pollResult = PollResultType_ReadyForRead;
+            pollResult = PollResultType::ReadyForRead;
         }
         else if (sockfd != -1 && !readyToRead && FD_ISSET(sockfd, &wfds))
         {
-            pollResult = PollResultType_ReadyForWrite;
+            pollResult = PollResultType::ReadyForWrite;
         }
 
         return pollResult;
@@ -159,6 +160,8 @@ namespace ix
 
     ssize_t Socket::send(char* buffer, size_t length)
     {
+        std::lock_guard<std::mutex> lock(_socketMutex);
+
         int flags = 0;
 #ifdef MSG_NOSIGNAL
         flags = MSG_NOSIGNAL;
@@ -174,6 +177,8 @@ namespace ix
 
     ssize_t Socket::recv(void* buffer, size_t length)
     {
+        std::lock_guard<std::mutex> lock(_socketMutex);
+
         int flags = 0;
 #ifdef MSG_NOSIGNAL
         flags = MSG_NOSIGNAL;
@@ -184,11 +189,27 @@ namespace ix
 
     int Socket::getErrno()
     {
+        int err;
+
 #ifdef _WIN32
-        return WSAGetLastError();
+        err = WSAGetLastError();
 #else
-        return errno;
+        err = errno;
 #endif
+
+        return err;
+    }
+
+    bool Socket::isWaitNeeded()
+    {
+        int err = getErrno();
+
+        if (err == EWOULDBLOCK || err == EAGAIN || err == EINPROGRESS)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     void Socket::closeSocket(int fd)
@@ -210,7 +231,7 @@ namespace ix
     {
         while (true)
         {
-            if (isCancellationRequested()) return false;
+            if (isCancellationRequested && isCancellationRequested()) return false;
 
             char* buffer = const_cast<char*>(str.c_str());
             int len = (int) str.size();
@@ -222,9 +243,8 @@ namespace ix
             {
                 return ret == len;
             }
-            // There is possibly something to be write, try again
-            else if (ret < 0 && (getErrno() == EWOULDBLOCK ||
-                                 getErrno() == EAGAIN))
+            // There is possibly something to be writen, try again
+            else if (ret < 0 && Socket::isWaitNeeded())
             {
                 continue;
             }
@@ -241,7 +261,7 @@ namespace ix
     {
         while (true)
         {
-            if (isCancellationRequested()) return false;
+            if (isCancellationRequested && isCancellationRequested()) return false;
 
             ssize_t ret;
             ret = recv(buffer, 1);
@@ -252,12 +272,11 @@ namespace ix
                 return true;
             }
             // There is possibly something to be read, try again
-            else if (ret < 0 && (getErrno() == EWOULDBLOCK ||
-                                 getErrno() == EAGAIN))
+            else if (ret < 0 && Socket::isWaitNeeded())
             {
                 // Wait with a 1ms timeout until the socket is ready to read.
                 // This way we are not busy looping
-                if (isReadyToRead(1) == PollResultType_Error)
+                if (isReadyToRead(1) == PollResultType::Error)
                 {
                     return false;
                 }
@@ -304,18 +323,20 @@ namespace ix
         std::vector<uint8_t> output;
         while (output.size() != length)
         {
-            if (isCancellationRequested()) return std::make_pair(false, std::string());
+            if (isCancellationRequested && isCancellationRequested())
+            {
+                return std::make_pair(false, std::string());
+            }
 
-            int size = std::min(kChunkSize, length - output.size());
+            size_t size = std::min(kChunkSize, length - output.size());
             ssize_t ret = recv((char*)&_readBuffer[0], size);
 
-            if (ret <= 0 && (getErrno() != EWOULDBLOCK &&
-                             getErrno() != EAGAIN))
+            if (ret <= 0 && !Socket::isWaitNeeded())
             {
                 // Error
                 return std::make_pair(false, std::string());
             }
-            else if (ret > 0)
+            else
             {
                 output.insert(output.end(),
                               _readBuffer.begin(),
@@ -326,7 +347,7 @@ namespace ix
 
             // Wait with a 1ms timeout until the socket is ready to read.
             // This way we are not busy looping
-            if (isReadyToRead(1) == PollResultType_Error)
+            if (isReadyToRead(1) == PollResultType::Error)
             {
                 return std::make_pair(false, std::string());
             }

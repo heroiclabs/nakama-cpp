@@ -17,13 +17,15 @@
 namespace ix
 {
     const int WebSocketServer::kDefaultHandShakeTimeoutSecs(3); // 3 seconds
+    const bool WebSocketServer::kDefaultEnablePong(true);
 
     WebSocketServer::WebSocketServer(int port,
                                      const std::string& host,
                                      int backlog,
                                      size_t maxConnections,
                                      int handshakeTimeoutSecs) : SocketServer(port, host, backlog, maxConnections),
-        _handshakeTimeoutSecs(handshakeTimeoutSecs)
+        _handshakeTimeoutSecs(handshakeTimeoutSecs),
+        _enablePong(kDefaultEnablePong)
     {
 
     }
@@ -35,6 +37,8 @@ namespace ix
 
     void WebSocketServer::stop()
     {
+        stopAcceptingConnections();
+
         auto clients = getClients();
         for (auto client : clients)
         {
@@ -44,17 +48,34 @@ namespace ix
         SocketServer::stop();
     }
 
+    void WebSocketServer::enablePong()
+    {
+        _enablePong = true;
+    }
+
+    void WebSocketServer::disablePong()
+    {
+        _enablePong = false;
+    }
+
     void WebSocketServer::setOnConnectionCallback(const OnConnectionCallback& callback)
     {
         _onConnectionCallback = callback;
     }
 
-    void WebSocketServer::handleConnection(int fd)
+    void WebSocketServer::handleConnection(
+        int fd,
+        std::shared_ptr<ConnectionState> connectionState)
     {
         auto webSocket = std::make_shared<WebSocket>();
-        _onConnectionCallback(webSocket);
+        _onConnectionCallback(webSocket, connectionState);
 
         webSocket->disableAutomaticReconnection();
+
+        if (_enablePong)
+            webSocket->enablePong();
+        else
+            webSocket->disablePong();
 
         // Add this client to our client set
         {
@@ -89,6 +110,7 @@ namespace ix
         }
 
         logInfo("WebSocketServer::handleConnection() done");
+        connectionState->setTerminated();
     }
 
     std::set<std::shared_ptr<WebSocket>> WebSocketServer::getClients()

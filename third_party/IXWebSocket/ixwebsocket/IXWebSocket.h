@@ -61,11 +61,14 @@ namespace ix
     {
         uint16_t code;
         std::string reason;
+        bool remote;
 
         WebSocketCloseInfo(uint16_t c = 0,
-                           const std::string& r = std::string())
+                           const std::string& r = std::string(),
+                           bool rem = false)
             : code(c)
             , reason(r)
+            , remote(rem)
         {
             ;
         }
@@ -89,7 +92,11 @@ namespace ix
         void setUrl(const std::string& url);
         void setPerMessageDeflateOptions(const WebSocketPerMessageDeflateOptions& perMessageDeflateOptions);
         void setHandshakeTimeout(int handshakeTimeoutSecs);
-        void setHeartBeatPeriod(int hearBeatPeriod);
+        void setHeartBeatPeriod(int heartBeatPeriodSecs);
+        void setPingInterval(int pingIntervalSecs); // alias of setHeartBeatPeriod
+        void setPingTimeout(int pingTimeoutSecs);
+        void enablePong();
+        void disablePong();
 
         // Run asynchronously, by calling start and stop.
         void start();
@@ -101,6 +108,8 @@ namespace ix
 
         WebSocketSendInfo send(const std::string& text,
                                const OnProgressCallback& onProgressCallback = nullptr);
+        WebSocketSendInfo sendText(const std::string& text,
+                                   const OnProgressCallback& onProgressCallback = nullptr);
         WebSocketSendInfo ping(const std::string& text);
         void close();
 
@@ -112,6 +121,8 @@ namespace ix
         const std::string& getUrl() const;
         const WebSocketPerMessageDeflateOptions& getPerMessageDeflateOptions() const;
         int getHeartBeatPeriod() const;
+        int getPingInterval() const;
+        int getPingTimeout() const;
         size_t bufferedAmount() const;
 
         void enableAutomaticReconnection();
@@ -120,7 +131,7 @@ namespace ix
     private:
 
         WebSocketSendInfo sendMessage(const std::string& text,
-                                      bool ping,
+                                      SendMessageKind sendMessageKind,
                                       const OnProgressCallback& callback = nullptr);
 
         bool isConnected() const;
@@ -150,9 +161,15 @@ namespace ix
         std::atomic<int> _handshakeTimeoutSecs;
         static const int kDefaultHandShakeTimeoutSecs;
 
-        // Optional Heartbeat
-        int _heartBeatPeriod;
-        static const int kDefaultHeartBeatPeriod;
+        // enable or disable PONG frame response to received PING frame
+        bool _enablePong;
+        static const bool kDefaultEnablePong;
+
+        // Optional ping and ping timeout
+        int _pingIntervalSecs;
+        int _pingTimeoutSecs;
+        static const int kDefaultPingIntervalSecs;
+        static const int kDefaultPingTimeoutSecs;
 
         friend class WebSocketServer;
     };
