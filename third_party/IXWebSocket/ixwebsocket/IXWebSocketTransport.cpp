@@ -303,6 +303,8 @@ namespace ix
                 {
                     _rxbuf.clear();
                     _socket->close();
+
+                    if (getReadyState() != CLOSING)
                     {
                         std::lock_guard<std::mutex> lock(_closeDataMutex);
                         _closeCode = kAbnormalCloseCode;
@@ -541,18 +543,34 @@ namespace ix
             }
             else if (ws.opcode == wsheader_type::CLOSE)
             {
+                std::string reason;
+                uint16_t code = 0;
+                bool remote = true;
+
                 unmaskReceiveBuffer(ws);
 
+                // If there is a body, the first two bytes of the body MUST be a 2 - byte unsigned integer (in network byte order)
+                // representing a status code with value
+                // https://tools.ietf.org/html/rfc6455#section-5.5.1
+
                 // Extract the close code first, available as the first 2 bytes
-                uint16_t code = 0;
-                code |= ((uint64_t) _rxbuf[ws.header_size])   << 8;
-                code |= ((uint64_t) _rxbuf[ws.header_size+1]) << 0;
+                if (ws.N >= 2)
+                {
+                    code |= ((uint64_t)_rxbuf[ws.header_size]) << 8;
+                    code |= ((uint64_t)_rxbuf[ws.header_size + 1]) << 0;
 
-                // Get the reason.
-                std::string reason(_rxbuf.begin()+ws.header_size + 2,
-                                   _rxbuf.begin()+ws.header_size + (size_t) ws.N);
-
-                bool remote = true;
+                    // Get the UTF-8-encoded reason.
+                    if (ws.N > 2)
+                    {
+                        reason.assign(_rxbuf.begin() + ws.header_size + 2,
+                            _rxbuf.begin() + ws.header_size + (size_t)ws.N);
+                    }
+                }
+                else
+                {
+                    // no close code received
+                    code = 1005;
+                }
 
                 close(code, reason, _rxbuf.size(), remote);
             }
