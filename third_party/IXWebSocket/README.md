@@ -4,13 +4,13 @@
 
 ## Introduction
 
-[*WebSocket*](https://en.wikipedia.org/wiki/WebSocket) is a computer communications protocol, providing full-duplex
-communication channels over a single TCP connection. *IXWebSocket* is a C++ library for client and server Websocket communication, and for client HTTP communication. The code is derived from [easywsclient](https://github.com/dhbaird/easywsclient) and from the [Satori C SDK](https://github.com/satori-com/satori-rtm-sdk-c). It has been tested on the following platforms.
+[*WebSocket*](https://en.wikipedia.org/wiki/WebSocket) is a computer communications protocol, providing full-duplex and bi-directionnal communication channels over a single TCP connection. *IXWebSocket* is a C++ library for client and server Websocket communication, and for client HTTP communication. The code is derived from [easywsclient](https://github.com/dhbaird/easywsclient) and from the [Satori C SDK](https://github.com/satori-com/satori-rtm-sdk-c). It has been tested on the following platforms.
 
 * macOS
 * iOS
 * Linux
-* Android 
+* Android
+* Windows (no TLS)
 
 ## Examples
 
@@ -34,8 +34,8 @@ webSocket.setOnMessageCallback(
        const std::string& str,
        size_t wireSize,
        const ix::WebSocketErrorInfo& error,
-       const ix::WebSocketCloseInfo& closeInfo,
-       const ix::WebSocketHttpHeaders& headers)
+       const ix::WebSocketOpenInfo& openInfo,
+       const ix::WebSocketCloseInfo& closeInfo)
     {
         if (messageType == ix::WebSocket_MessageType_Message)
         {
@@ -46,8 +46,11 @@ webSocket.setOnMessageCallback(
 // Now that our callback is setup, we can start our background thread and receive messages
 webSocket.start();
 
-// Send a message to the server
+// Send a message to the server (default to BINARY mode)
 webSocket.send("hello world");
+
+// The message can be sent in TEXT mode
+webSocket.sendText("hello again");
 
 // ... finally ...
 
@@ -63,10 +66,11 @@ Here is what the server API looks like. Note that server support is very recent 
 ix::WebSocketServer server(port);
 
 server.setOnConnectionCallback(
-    [&server](std::shared_ptr<ix::WebSocket> webSocket)
+    [&server](std::shared_ptr<WebSocket> webSocket,
+              std::shared_ptr<ConnectionState> connectionState)
     {
         webSocket->setOnMessageCallback(
-            [webSocket, &server](ix::WebSocketMessageType messageType,
+            [webSocket, connectionState, &server](ix::WebSocketMessageType messageType,
                const std::string& str,
                size_t wireSize,
                const ix::WebSocketErrorInfo& error,
@@ -76,6 +80,12 @@ server.setOnConnectionCallback(
                 if (messageType == ix::WebSocket_MessageType_Open)
                 {
                     std::cerr << "New connection" << std::endl;
+
+                    // A connection state object is available, and has a default id
+                    // You can subclass ConnectionState and pass an alternate factory
+                    // to override it. It is useful if you want to store custom
+                    // attributes per connection (authenticated bool flag, attributes, etc...)
+                    std::cerr << "id: " << connectionState->getId() << std::endl;
 
                     // The uri the client did connect to.
                     std::cerr << "Uri: " << openInfo.uri << std::endl;
@@ -176,11 +186,36 @@ auto downloadSize = std::get<6>(out);
 
 ## Build
 
-CMakefiles for the library and the examples are available. This library has few dependencies, so it is possible to just add the source files into your project.
+CMakefiles for the library and the examples are available. This library has few dependencies, so it is possible to just add the source files into your project. Otherwise the usual way will suffice.
 
-There is a Dockerfile for running some code on Linux, and a unittest which can be executed by typing `make test`.
+```
+mkdir build # make a build dir so that you can build out of tree.
+cd build
+cmake ..
+make -j
+make install # will install to /usr/local on Unix, on macOS it is a good idea to sudo chown -R `whoami`:staff /usr/local
+```
 
-You can build and install the ws command line tool with Homebrew.
+Headers and a static library will be installed to the target dir.
+
+A [conan](https://conan.io/) file is available at [conan-IXWebSocket](https://github.com/Zinnion/conan-IXWebSocket).
+
+There is a unittest which can be executed by typing `make test`.
+
+There is a Dockerfile for running some code on Linux. To use docker-compose you must make a docker container first.
+
+```
+$ make docker
+...
+$ docker compose up &
+...
+$ docker exec -it ixwebsocket_ws_1 bash
+app@ca2340eb9106:~$ ws --help
+ws is a websocket tool
+...
+```
+
+Finally you can build and install the `ws command line tool` with Homebrew. The homebrew version might be slightly out of date.
 
 ```
 brew tap bsergean/IXWebSocket
@@ -207,11 +242,11 @@ If the remote end (server) breaks the connection, the code will try to perpetual
 
 ### Large messages
 
-Large frames are broken up into smaller chunks or messages to avoid filling up the os tcp buffers, which is permitted thanks to WebSocket [fragmentation](https://tools.ietf.org/html/rfc6455#section-5.4). Messages up to 500M were sent and received succesfully.
+Large frames are broken up into smaller chunks or messages to avoid filling up the os tcp buffers, which is permitted thanks to WebSocket [fragmentation](https://tools.ietf.org/html/rfc6455#section-5.4). Messages up to 1G were sent and received succesfully.
 
 ## Limitations
 
-* There is no text support for sending data, only the binary protocol is supported. Sending json or text over the binary protocol works well.
+* No utf-8 validation is made when sending TEXT message with sendText()
 * Automatic reconnection works at the TCP socket level, and will detect remote end disconnects. However, if the device/computer network become unreachable (by turning off wifi), it is quite hard to reliably and timely detect it at the socket level using `recv` and `send` error codes. [Here](https://stackoverflow.com/questions/14782143/linux-socket-how-to-detect-disconnected-network-in-a-client-program) is a good discussion on the subject. This behavior is consistent with other runtimes such as node.js. One way to detect a disconnected device with low level C code is to do a name resolution with DNS but this can be expensive. Mobile devices have good and reliable API to do that.
 * The server code is using select to detect incoming data, and creates one OS thread per connection. This is not as scalable as strategies using epoll or kqueue.
 
@@ -223,13 +258,13 @@ Here is a simplistic diagram which explains how the code is structured in term o
 +-----------------------+ --- Public
 |                       | Start the receiving Background thread. Auto reconnection. Simple websocket Ping.
 |  IXWebSocket          | Interface used by C++ test clients. No IX dependencies.
-|                       | 
+|                       |
 +-----------------------+
 |                       |
 |  IXWebSocketServer    | Run a server and give each connections its own WebSocket object.
 |                       | Each connection is handled in a new OS thread.
 |                       |
-+-----------------------+ --- Private 
++-----------------------+ --- Private
 |                       |
 |  IXWebSocketTransport | Low level websocket code, framing, managing raw socket. Adapted from easywsclient.
 |                       |
@@ -281,8 +316,8 @@ webSocket.setOnMessageCallback(
        const std::string& str,
        size_t wireSize,
        const ix::WebSocketErrorInfo& error,
-       const ix::WebSocketCloseInfo& closeInfo,
-       const ix::WebSocketHttpHeaders& headers)
+       const ix::WebSocketOpenInfo& openInfo,
+       const ix::WebSocketCloseInfo& closeInfo)
     {
         if (messageType == ix::WebSocket_MessageType_Open)
         {
@@ -318,8 +353,8 @@ webSocket.setOnMessageCallback(
        const std::string& str,
        size_t wireSize,
        const ix::WebSocketErrorInfo& error,
-       const ix::WebSocketCloseInfo& closeInfo,
-       const ix::WebSocketHttpHeaders& headers)
+       const ix::WebSocketOpenInfo& openInfo,
+       const ix::WebSocketCloseInfo& closeInfo)
     {
         if (messageType == ix::WebSocket_MessageType_Error)
         {
@@ -358,8 +393,8 @@ webSocket.setOnMessageCallback(
        const std::string& str,
        size_t wireSize,
        const ix::WebSocketErrorInfo& error,
-       const ix::WebSocketCloseInfo& closeInfo,
-       const ix::WebSocketHttpHeaders& headers)
+       const ix::WebSocketOpenInfo& openInfo,
+       const ix::WebSocketCloseInfo& closeInfo)
     {
         if (messageType == ix::WebSocket_MessageType_Ping ||
             messageType == ix::WebSocket_MessageType_Pong)
