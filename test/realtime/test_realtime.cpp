@@ -28,11 +28,27 @@ void test_rt_joinChat()
 {
     NRtClientTest test(__func__);
 
-    test.onRtConnect = [&test]()
+    thread::id main_thread_id = this_thread::get_id();
+
+    test.onRtConnect = [&test, &main_thread_id]()
     {
-        auto successCallback = [&test](NChannelPtr channel)
+        if (main_thread_id != this_thread::get_id())
+        {
+            std::cout << "ERROR: onRtConnect executed not from main thread!" << std::endl;
+            test.stopTest();
+            return;
+        }
+
+        auto successCallback = [&test, &main_thread_id](NChannelPtr channel)
         {
             std::cout << "joined chat: " << channel->id << std::endl;
+
+            if (main_thread_id != this_thread::get_id())
+            {
+                std::cout << "ERROR: successCallback executed not from main thread!" << std::endl;
+                test.stopTest();
+                return;
+            }
 
             auto ackCallback = [&test](const NChannelMessageAck& ack)
             {

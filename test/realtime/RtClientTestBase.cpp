@@ -36,8 +36,11 @@ void NRtClientTest::runTest()
 
     listener.setDisconnectCallback([this]()
     {
-        std::cout << "Disconnected!" << std::endl;
-        stopTest();
+        if (!isDone())
+        {
+            std::cout << "Disconnected!" << std::endl;
+            stopTest();
+        }
     });
 
     listener.setErrorCallback([this](const NRtError& error)
