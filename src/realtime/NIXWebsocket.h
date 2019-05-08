@@ -42,7 +42,7 @@ namespace Nakama {
             const ix::WebSocketCloseInfo& closeInfo);
         
     private:
-        NRtTransportType _type;
+        NRtTransportType _type = NRtTransportType::Binary;
         ix::WebSocket _ixWebSocket;
     };
 
