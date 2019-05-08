@@ -58,4 +58,13 @@ namespace Nakama {
      */
     NAKAMA_API std::string urlEncode(const std::string& str);
 
+    /**
+     * returns true if a string starts with the specified prefix
+     * 
+     * @param str The string
+     * @param prefix The prefix to check
+     * @return bool
+     */
+    NAKAMA_API bool isStringStartsWith(const std::string& str, const std::string& prefix);
+
 } // namespace Nakama

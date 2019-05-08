@@ -45,15 +45,26 @@ namespace Nakama {
         bool send(const NBytes& data) override;
 
     protected:
-#ifdef NAKAMA_SSL_ENABLED
-        using WsClient = websocketpp::client<websocketpp::config::asio_tls_client>;
-#else
         using WsClient = websocketpp::client<websocketpp::config::asio_client>;
+
+        void onOpened(websocketpp::connection_hdl hdl);
+        void onFailed(websocketpp::connection_hdl hdl);
+        void onClosed(websocketpp::connection_hdl hdl);
+        void onSocketMessage(websocketpp::connection_hdl hdl, WsClient::message_ptr msg);
+
+    protected:
+#ifdef NAKAMA_SSL_ENABLED
+        using WssClient = websocketpp::client<websocketpp::config::asio_tls_client>;
+
+        WssClient _wssClient; // SSL
 #endif
 
+        WsClient _wsClient; // no SSL
         websocketpp::frame::opcode::value _op_code = websocketpp::frame::opcode::binary;
-        WsClient _wsClient;
         websocketpp::connection_hdl _con_hdl;
+        bool _wsInitialized = false;
+        bool _wssInitialized = false;
+        bool _ssl = false;
     };
 
 }

@@ -119,4 +119,16 @@ string urlEncode(const string & str)
     return result;
 }
 
+NAKAMA_API bool isStringStartsWith(const string & str, const string & prefix)
+{
+    bool res = false;
+
+    if (str.size() >= prefix.size())
+    {
+        res = (str.compare(0, prefix.size(), prefix) == 0);
+    }
+
+    return res;
+}
+
 } // namespace Nakama
