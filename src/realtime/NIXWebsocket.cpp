@@ -28,8 +28,10 @@ using namespace std;
 
 NIXWebsocket::NIXWebsocket()
 {
+    _ixWebSocketPoll.bindWebsocket(&_ixWebSocket);
+
     // Setup a callback to be fired when a message or an event (open, close, error) is received
-    _ixWebSocket.setOnMessageCallback(
+    _ixWebSocketPoll.setOnMessageCallback(
         bind(
             &NIXWebsocket::onSocketMessage,
             this,
@@ -48,6 +50,12 @@ NIXWebsocket::NIXWebsocket()
 NIXWebsocket::~NIXWebsocket()
 {
     disconnect();
+    _ixWebSocketPoll.bindWebsocket(nullptr);
+}
+
+void NIXWebsocket::tick()
+{
+    _ixWebSocketPoll.poll();
 }
 
 void NIXWebsocket::connect(const string& url, NRtTransportType type)
@@ -80,19 +88,19 @@ void NIXWebsocket::onSocketMessage(
     }
     else if (messageType == ix::WebSocket_MessageType_Close)
     {
-        // std::cout << "close with code: " << closeInfo.code << " reason: " << closeInfo.reason << std::endl;
         // prevent auto reconnect
         _ixWebSocket.disableAutomaticReconnection();
 
         if (closeInfo.remote)
         {
             NLOG(NLogLevel::Debug, "disconnected. code: %d", closeInfo.code);
-            NRtTransportInterface::onDisconnected();
         }
         else
         {
             NLOG_DEBUG("closed");
         }
+
+        NRtTransportInterface::onDisconnected();
     }
     else if (messageType == ix::WebSocket_MessageType_Error)
     {

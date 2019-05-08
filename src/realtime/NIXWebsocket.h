@@ -18,6 +18,7 @@
 
 #include "nakama-cpp/realtime/NRtTransportInterface.h"
 #include "ixwebsocket/IXWebSocket.h"
+#include "ixwebsocket/IXWebSocketPoll.h"
 
 namespace Nakama {
 
@@ -27,7 +28,7 @@ namespace Nakama {
         NIXWebsocket();
         ~NIXWebsocket();
         
-        void tick() override {}
+        void tick() override;
         void connect(const std::string& url, NRtTransportType type) override;
         void disconnect() override;
         bool send(const NBytes& data) override;
@@ -43,6 +44,7 @@ namespace Nakama {
         
     private:
         NRtTransportType _type = NRtTransportType::Binary;
+        ix::WebSocketPoll _ixWebSocketPoll;
         ix::WebSocket _ixWebSocket;
     };
 
