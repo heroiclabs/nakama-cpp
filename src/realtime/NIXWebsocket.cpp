@@ -45,6 +45,7 @@ NIXWebsocket::NIXWebsocket()
     );
 
     _ixWebSocket.setHeartBeatPeriod(30);
+    _ixWebSocket.disableAutomaticReconnection();
 }
 
 NIXWebsocket::~NIXWebsocket()
@@ -82,15 +83,11 @@ void NIXWebsocket::onSocketMessage(
     else if (messageType == ix::WebSocket_MessageType_Open)
     {
         NLOG_DEBUG("connected");
-        // prevent auto reconnect
-        _ixWebSocket.disableAutomaticReconnection();
+
         NRtTransportInterface::onConnected();
     }
     else if (messageType == ix::WebSocket_MessageType_Close)
     {
-        // prevent auto reconnect
-        _ixWebSocket.disableAutomaticReconnection();
-
         if (closeInfo.remote)
         {
             NLOG(NLogLevel::Debug, "disconnected. code: %d", closeInfo.code);
@@ -105,8 +102,7 @@ void NIXWebsocket::onSocketMessage(
     else if (messageType == ix::WebSocket_MessageType_Error)
     {
         NLOG(NLogLevel::Error, "error: %s", error.reason.c_str());
-        // prevent auto reconnect
-        _ixWebSocket.disableAutomaticReconnection();
+
         NRtTransportInterface::onError(error.reason);
     }
     else if (messageType == ix::WebSocket_MessageType_Ping)
