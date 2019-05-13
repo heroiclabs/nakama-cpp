@@ -26,11 +26,11 @@ namespace Nakama {
         }
     }
 
-    void NRtDefaultClientListener::onDisconnect()
+    void NRtDefaultClientListener::onDisconnect(const NRtClientDisconnectInfo& info)
     {
         if (_disconnectCallback)
         {
-            _disconnectCallback();
+            _disconnectCallback(info);
         }
     }
 

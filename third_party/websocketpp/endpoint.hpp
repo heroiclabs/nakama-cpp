@@ -401,6 +401,11 @@ public:
         m_pong_timeout_dur = dur;
     }
 
+    long get_pong_timeout() const {
+        scoped_lock_type guard(m_mutex);
+        return m_pong_timeout_dur;
+    }
+
     /// Get default maximum message size
     /**
      * Get the default maximum message size that will be used for new 

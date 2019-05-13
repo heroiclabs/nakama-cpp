@@ -34,6 +34,8 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int por
 {
     _transport->setConnectCallback([this]()
     {
+        NLOG_DEBUG("connected");
+
         if (_listener)
         {
             _listener->onConnect();
@@ -41,7 +43,7 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int por
     });
 
     _transport->setErrorCallback(std::bind(&NRtClient::onTransportError, this, std::placeholders::_1));
-    _transport->setDisconnectCallback(std::bind(&NRtClient::onTransportDisconnected, this));
+    _transport->setDisconnectCallback(std::bind(&NRtClient::onTransportDisconnected, this, std::placeholders::_1));
     _transport->setMessageCallback(std::bind(&NRtClient::onTransportMessage, this, std::placeholders::_1));
 
     NLOG_INFO("Created");
@@ -106,11 +108,13 @@ void NRtClient::disconnect()
     _transport->disconnect();
 }
 
-void NRtClient::onTransportDisconnected()
+void NRtClient::onTransportDisconnected(const NRtClientDisconnectInfo& info)
 {
+    NLOG(NLogLevel::Debug, "code: %u, %s", info.code, info.reason.c_str());
+
     if (_listener)
     {
-        _listener->onDisconnect();
+        _listener->onDisconnect(info);
     }
 }
 
@@ -135,7 +139,7 @@ void NRtClient::onTransportMessage(const NBytes & data)
 
     if (!_protocol->parse(data, msg))
     {
-        NLOG_ERROR("parse message failed");
+        onTransportError("parse message failed");
         return;
     }
 
@@ -212,7 +216,7 @@ void NRtClient::onTransportMessage(const NBytes & data)
             }
             else
             {
-                NLOG_ERROR("Unknown message received");
+                onTransportError("Unknown message received");
             }
         }
         else
@@ -251,7 +255,7 @@ void NRtClient::onTransportMessage(const NBytes & data)
         }
         else
         {
-            NLOG_ERROR("request context not found. cid: " + msg.cid());
+            onTransportError("request context not found. cid: " + msg.cid());
         }
     }
 }

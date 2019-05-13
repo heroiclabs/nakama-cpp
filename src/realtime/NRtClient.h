@@ -160,7 +160,7 @@ namespace Nakama {
         ) override;
 
         protected:
-            void onTransportDisconnected();
+            void onTransportDisconnected(const NRtClientDisconnectInfo& info);
             void onTransportError(const std::string& description);
             void onTransportMessage(const NBytes& data);
 

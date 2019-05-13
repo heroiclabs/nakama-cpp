@@ -17,6 +17,7 @@
 #pragma once
 
 #include "nakama-cpp/NTypes.h"
+#include "nakama-cpp/realtime/NRtClientDisconnectInfo.h"
 #include <functional>
 #include <memory>
 #include <vector>
@@ -52,7 +53,7 @@ namespace Nakama {
         virtual ~NRtTransportInterface() {}
 
         using ConnectCallback = std::function<void()>;
-        using DisconnectCallback = std::function<void()>;
+        using DisconnectCallback = std::function<void(const NRtClientDisconnectInfo& info)>;
         using ErrorCallback = std::function<void(const std::string&)>;
         using MessageCallback = std::function<void(const NBytes&)>;
 
@@ -114,10 +115,10 @@ namespace Nakama {
         virtual bool send(const NBytes& data) = 0;
 
     protected:
-        void onConnected() { _connected = true; if (_connectCallback) _connectCallback(); }
-        void onDisconnected() { _connected = false; if (_disconnectCallback) _disconnectCallback(); }
-        void onError(const std::string& description) { if (_errorCallback) _errorCallback(description); }
-        void onMessage(const NBytes& data) { if (_messageCallback) _messageCallback(data); }
+        void fireOnConnected() { _connected = true; if (_connectCallback) _connectCallback(); }
+        void fireOnDisconnected(const NRtClientDisconnectInfo& info) { if (_disconnectCallback) _disconnectCallback(info); }
+        void fireOnError(const std::string& description) { if (_errorCallback) _errorCallback(description); }
+        void fireOnMessage(const NBytes& data) { if (_messageCallback) _messageCallback(data); }
 
     protected:
         ConnectCallback _connectCallback;

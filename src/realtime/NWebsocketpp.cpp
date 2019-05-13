@@ -36,7 +36,7 @@ NWebsocketpp::NWebsocketpp()
 
 void NWebsocketpp::setAutoReconnect(bool autoReconnect)
 {
-    
+    NLOG_WARN("Auto reconnect is not supported");
 }
 
 bool NWebsocketpp::getAutoReconnect() const
@@ -47,11 +47,18 @@ bool NWebsocketpp::getAutoReconnect() const
 void NWebsocketpp::setPingSettings(const NRtPingSettings & settings)
 {
     _wsClient.set_pong_timeout(settings.timeoutSec * 1000u);
+
+    if (settings.intervalSec > 0)
+    {
+        NLOG_WARN("Ping interval is not supported");
+    }
 }
 
 NRtPingSettings NWebsocketpp::getPingSettings() const
 {
     NRtPingSettings settings;
+
+    settings.timeoutSec = static_cast<uint32_t>(_wsClient.get_pong_timeout() / 1000u);
 
     return settings;
 }
@@ -79,6 +86,8 @@ void NWebsocketpp::connect(const std::string & url, NRtTransportType type)
     else
         _op_code = websocketpp::frame::opcode::text;
 
+    _disconnectInitiated = false;
+
     try {
         websocketpp::lib::error_code ec;
 
@@ -102,7 +111,7 @@ void NWebsocketpp::connect(const std::string & url, NRtTransportType type)
 
             if (ec)
             {
-                onError("initialize connect failed: " + ec.message());
+                fireOnError("initialize connect failed: " + ec.message());
                 return;
             }
 
@@ -113,7 +122,7 @@ void NWebsocketpp::connect(const std::string & url, NRtTransportType type)
 
             (void)_wssClient.connect(con);
 #else
-            onError("SSL not enabled");
+            fireOnError("SSL not enabled");
             return;
 #endif
         }
@@ -134,7 +143,7 @@ void NWebsocketpp::connect(const std::string & url, NRtTransportType type)
 
             if (ec)
             {
-                onError("initialize connect failed: " + ec.message());
+                fireOnError("initialize connect failed: " + ec.message());
                 return;
             }
 
@@ -151,7 +160,7 @@ void NWebsocketpp::connect(const std::string & url, NRtTransportType type)
     catch (websocketpp::exception const & e)
     {
         NLOG_ERROR(e.what());
-        onError("connect failed: " + std::string(e.what()));
+        fireOnError("connect failed: " + std::string(e.what()));
     }
 }
 
@@ -159,17 +168,26 @@ void NWebsocketpp::disconnect()
 {
     NLOG_DEBUG("...");
 
+    websocketpp::lib::error_code ec;
+
+    _disconnectInitiated = true;
+
 #ifdef NAKAMA_SSL_ENABLED
     if (_ssl)
     {
         if (_wssInitialized)
-            _wssClient.close(_con_hdl, websocketpp::close::status::normal, "");
+            _wssClient.close(_con_hdl, websocketpp::close::status::normal, "", ec);
     }
     else
 #endif
     {
         if (_wsInitialized)
-            _wsClient.close(_con_hdl, websocketpp::close::status::normal, "");
+            _wsClient.close(_con_hdl, websocketpp::close::status::normal, "", ec);
+    }
+
+    if (ec)
+    {
+        NLOG(NLogLevel::Error, "disconnect failed. code: %d, reason: %s", ec.value(), ec.message().c_str());
     }
 }
 
@@ -200,64 +218,83 @@ bool NWebsocketpp::send(const NBytes & data)
 
 void NWebsocketpp::onOpened(websocketpp::connection_hdl hdl)
 {
-    NLOG_DEBUG("socket connected");
-
     _con_hdl = hdl;
 
-    onConnected();
+    fireOnConnected();
 }
 
 void NWebsocketpp::onFailed(websocketpp::connection_hdl hdl)
 {
     std::string errStr;
+    websocketpp::lib::error_code ec;
 
 #ifdef NAKAMA_SSL_ENABLED
     if (_ssl)
     {
-        WssClient::connection_ptr con = _wssClient.get_con_from_hdl(hdl);
-        websocketpp::lib::error_code ec = con->get_ec();
+        WssClient::connection_ptr con = _wssClient.get_con_from_hdl(hdl, ec);
+        if (con) ec = con->get_ec();
         errStr = "connect failed: " + ec.message();
     }
     else
 #endif
     {
-        WsClient::connection_ptr con = _wsClient.get_con_from_hdl(hdl);
-        websocketpp::lib::error_code ec = con->get_ec();
+        WsClient::connection_ptr con = _wsClient.get_con_from_hdl(hdl, ec);
+        if (con) ec = con->get_ec();
         errStr = "connect failed: " + ec.message();
     }
 
-    NLOG_ERROR(errStr);
-
-    onError(errStr);
+    fireOnError(errStr);
 }
 
 void NWebsocketpp::onClosed(websocketpp::connection_hdl hdl)
 {
-    uint16_t code;
-    std::string codeStr, reason;
+    NRtClientDisconnectInfo info;
+    websocketpp::lib::error_code ec;
 
 #ifdef NAKAMA_SSL_ENABLED
     if (_ssl)
     {
-        WssClient::connection_ptr con = _wssClient.get_con_from_hdl(hdl);
-
-        code    = con->get_remote_close_code();
-        codeStr = websocketpp::close::status::get_string(code);
-        reason  = con->get_remote_close_reason();
+        WssClient::connection_ptr con = _wssClient.get_con_from_hdl(hdl, ec);
+        if (con)
+        {
+            info.code   = con->get_remote_close_code();
+            info.reason = con->get_remote_close_reason();
+        }
     }
     else
 #endif
     {
-        WsClient::connection_ptr con = _wsClient.get_con_from_hdl(hdl);
-
-        code    = con->get_remote_close_code();
-        codeStr = websocketpp::close::status::get_string(code);
-        reason  = con->get_remote_close_reason();
+        WsClient::connection_ptr con = _wsClient.get_con_from_hdl(hdl, ec);
+        if (con)
+        {
+            info.code   = con->get_remote_close_code();
+            info.reason = con->get_remote_close_reason();
+        }
     }
 
-    NLOG(NLogLevel::Debug, "socket closed. code: %u, %s, %s", code, codeStr.c_str(), reason.c_str());
+    if (ec)
+    {
+        info.code = ec.value();
+        info.reason = ec.message();
+    }
+    else
+    {
+        if (info.code == websocketpp::close::status::no_status)
+        {
+            info.remote = !_disconnectInitiated;
+        }
+        else
+        {
+            info.remote = !_disconnectInitiated && !websocketpp::close::status::invalid(info.code);
+        }
 
-    onDisconnected();
+        if (info.reason.empty())
+        {
+            info.reason = websocketpp::close::status::get_string(info.code);
+        }
+    }
+
+    fireOnDisconnected(info);
 }
 
 void NWebsocketpp::onSocketMessage(websocketpp::connection_hdl hdl, WsClient::message_ptr msg)
@@ -266,7 +303,7 @@ void NWebsocketpp::onSocketMessage(websocketpp::connection_hdl hdl, WsClient::me
 
     NLOG(NLogLevel::Debug, "socket message received %d bytes", payload.size());
 
-    onMessage(payload);
+    fireOnMessage(payload);
 }
 
 } // namespace Nakama

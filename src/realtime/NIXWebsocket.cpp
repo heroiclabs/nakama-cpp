@@ -110,32 +110,25 @@ void NIXWebsocket::onSocketMessage(
 {
     if (messageType == ix::WebSocketMessageType::Message)
     {
-        NRtTransportInterface::onMessage(str);
+        NRtTransportInterface::fireOnMessage(str);
     }
     else if (messageType == ix::WebSocketMessageType::Open)
     {
-        NLOG_DEBUG("connected");
-
-        NRtTransportInterface::onConnected();
+        NRtTransportInterface::fireOnConnected();
     }
     else if (messageType == ix::WebSocketMessageType::Close)
     {
-        if (closeInfo.remote)
-        {
-            NLOG(NLogLevel::Debug, "disconnected. code: %d", closeInfo.code);
-        }
-        else
-        {
-            NLOG_DEBUG("closed");
-        }
+        NRtClientDisconnectInfo info;
 
-        NRtTransportInterface::onDisconnected();
+        info.code   = closeInfo.code;
+        info.remote = closeInfo.remote;
+        info.reason = closeInfo.reason;
+
+        NRtTransportInterface::fireOnDisconnected(info);
     }
     else if (messageType == ix::WebSocketMessageType::Error)
     {
-        NLOG(NLogLevel::Error, "error: %s", error.reason.c_str());
-
-        NRtTransportInterface::onError(error.reason);
+        NRtTransportInterface::fireOnError(error.reason);
     }
     else if (messageType == ix::WebSocketMessageType::Ping)
     {

@@ -34,11 +34,10 @@ void NRtClientTest::runTest()
             stopTest();
     });
 
-    listener.setDisconnectCallback([this]()
+    listener.setDisconnectCallback([this](const NRtClientDisconnectInfo & info)
     {
         if (!isDone())
         {
-            std::cout << "Disconnected!" << std::endl;
             stopTest();
         }
     });

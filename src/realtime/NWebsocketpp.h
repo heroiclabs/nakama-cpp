@@ -71,6 +71,7 @@ namespace Nakama {
         bool _wsInitialized = false;
         bool _wssInitialized = false;
         bool _ssl = false;
+        bool _disconnectInitiated = false;
     };
 
 }
