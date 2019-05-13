@@ -83,7 +83,7 @@ if(BUILD_WEBSOCKETPP)
     endif()
     target_include_directories(nakama-cpp PRIVATE ${Boost_INCLUDE_DIRS})
     target_link_libraries(nakama-cpp PUBLIC ${Boost_LIBRARIES})
-	target_include_directories(nakama-cpp PRIVATE ${THIRD_PARTY_DIR}/grpc/third_party/boringssl/include)
+    target_include_directories(nakama-cpp PRIVATE ${THIRD_PARTY_DIR}/grpc/third_party/boringssl/include)
 endif(BUILD_WEBSOCKETPP)
 
 if(BUILD_IXWEBSOCKET)

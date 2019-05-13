@@ -28,10 +28,10 @@ using namespace std;
 
 NIXWebsocket::NIXWebsocket()
 {
-    _ixWebSocketPoll.bindWebsocket(&_ixWebSocket);
+    _wsMessageQueue.bindWebsocket(&_ixWebSocket);
 
     // Setup a callback to be fired when a message or an event (open, close, error) is received
-    _ixWebSocketPoll.setOnMessageCallback(
+    _wsMessageQueue.setOnMessageCallback(
         bind(
             &NIXWebsocket::onSocketMessage,
             this,
@@ -44,14 +44,14 @@ NIXWebsocket::NIXWebsocket()
         )
     );
 
-    _ixWebSocket.setHeartBeatPeriod(30);
-    _ixWebSocket.disableAutomaticReconnection();
+    setPingSettings(NRtPingSettings(30, 5));
+    setAutoReconnect(false);
 }
 
 NIXWebsocket::~NIXWebsocket()
 {
     disconnect();
-    _ixWebSocketPoll.bindWebsocket(nullptr);
+    _wsMessageQueue.bindWebsocket(nullptr);
 }
 
 void NIXWebsocket::setAutoReconnect(bool autoReconnect)
@@ -88,7 +88,7 @@ NRtPingSettings NIXWebsocket::getPingSettings() const
 
 void NIXWebsocket::tick()
 {
-    _ixWebSocketPoll.poll();
+    _wsMessageQueue.poll();
 }
 
 void NIXWebsocket::connect(const string& url, NRtTransportType type)
@@ -108,17 +108,17 @@ void NIXWebsocket::onSocketMessage(
     const ix::WebSocketOpenInfo& openInfo,
     const ix::WebSocketCloseInfo& closeInfo)
 {
-    if (messageType == ix::WebSocket_MessageType_Message)
+    if (messageType == ix::WebSocketMessageType::Message)
     {
         NRtTransportInterface::onMessage(str);
     }
-    else if (messageType == ix::WebSocket_MessageType_Open)
+    else if (messageType == ix::WebSocketMessageType::Open)
     {
         NLOG_DEBUG("connected");
 
         NRtTransportInterface::onConnected();
     }
-    else if (messageType == ix::WebSocket_MessageType_Close)
+    else if (messageType == ix::WebSocketMessageType::Close)
     {
         if (closeInfo.remote)
         {
@@ -131,19 +131,19 @@ void NIXWebsocket::onSocketMessage(
 
         NRtTransportInterface::onDisconnected();
     }
-    else if (messageType == ix::WebSocket_MessageType_Error)
+    else if (messageType == ix::WebSocketMessageType::Error)
     {
         NLOG(NLogLevel::Error, "error: %s", error.reason.c_str());
 
         NRtTransportInterface::onError(error.reason);
     }
-    else if (messageType == ix::WebSocket_MessageType_Ping)
+    else if (messageType == ix::WebSocketMessageType::Ping)
     {
     }
-    else if (messageType == ix::WebSocket_MessageType_Pong)
+    else if (messageType == ix::WebSocketMessageType::Pong)
     {
     }
-    else if (messageType == ix::WebSocket_MessageType_Fragment)
+    else if (messageType == ix::WebSocketMessageType::Fragment)
     {
     }
 }

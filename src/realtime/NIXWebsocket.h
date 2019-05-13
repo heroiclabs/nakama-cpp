@@ -18,7 +18,7 @@
 
 #include "nakama-cpp/realtime/NRtTransportInterface.h"
 #include "ixwebsocket/IXWebSocket.h"
-#include "ixwebsocket/IXWebSocketPoll.h"
+#include "ixwebsocket/IXWebSocketMessageQueue.h"
 
 namespace Nakama {
 
@@ -50,7 +50,7 @@ namespace Nakama {
         
     private:
         NRtTransportType _type = NRtTransportType::Binary;
-        ix::WebSocketPoll _ixWebSocketPoll;
+        ix::WebSocketMessageQueue _wsMessageQueue;
         ix::WebSocket _ixWebSocket;
     };
 
