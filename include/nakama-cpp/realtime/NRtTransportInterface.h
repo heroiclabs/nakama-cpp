@@ -29,6 +29,20 @@ namespace Nakama {
         Text     ///< used by `Json` protocol
     };
 
+    struct NAKAMA_API NRtPingSettings
+    {
+        /// Ping interval in seconds. Disabled if 0.
+        uint32_t intervalSec = 0;
+
+        /// Ping timeout in seconds. Disabled if 0.
+        /// If no ping received from server during timeout
+        /// then connection will be closed.
+        uint32_t timeoutSec = 0;
+
+        NRtPingSettings() {}
+        NRtPingSettings(uint32_t intervalSec, uint32_t timeoutSec = 0) : intervalSec(intervalSec), timeoutSec(timeoutSec) {}
+    };
+
     /**
      * A real-time transport interface to send and receive data.
      */
@@ -46,6 +60,26 @@ namespace Nakama {
         void setDisconnectCallback(DisconnectCallback callback) { _disconnectCallback = callback; }
         void setErrorCallback(ErrorCallback callback) { _errorCallback = callback; }
         void setMessageCallback(MessageCallback callback) { _messageCallback = callback; }
+
+        /**
+         * Set automatic reconnect setting.
+         */
+        virtual void setAutoReconnect(bool autoReconnect) = 0;
+
+        /**
+         * Get automatic reconnect setting.
+         */
+        virtual bool getAutoReconnect() const = 0;
+
+        /**
+         * Set ping settings.
+         */
+        virtual void setPingSettings(const NRtPingSettings& settings) = 0;
+
+        /**
+         * Get ping settings.
+         */
+        virtual NRtPingSettings getPingSettings() const = 0;
 
         /**
          * Pumps requests queue in your thread.

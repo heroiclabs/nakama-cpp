@@ -34,6 +34,28 @@ NWebsocketpp::NWebsocketpp()
 #endif
 }
 
+void NWebsocketpp::setAutoReconnect(bool autoReconnect)
+{
+    
+}
+
+bool NWebsocketpp::getAutoReconnect() const
+{
+    return false;
+}
+
+void NWebsocketpp::setPingSettings(const NRtPingSettings & settings)
+{
+    _wsClient.set_pong_timeout(settings.timeoutSec * 1000u);
+}
+
+NRtPingSettings NWebsocketpp::getPingSettings() const
+{
+    NRtPingSettings settings;
+
+    return settings;
+}
+
 void NWebsocketpp::tick()
 {
 #ifdef NAKAMA_SSL_ENABLED

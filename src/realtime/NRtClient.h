@@ -49,6 +49,8 @@ namespace Nakama {
 
         void disconnect() override;
 
+        NRtTransportPtr getTransport() const override { return _transport; }
+
         void joinChat(
             const std::string& target,
             NChannelType type,

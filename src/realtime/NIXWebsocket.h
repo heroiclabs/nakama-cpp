@@ -28,6 +28,12 @@ namespace Nakama {
         NIXWebsocket();
         ~NIXWebsocket();
         
+        void setAutoReconnect(bool autoReconnect) override;
+        bool getAutoReconnect() const override;
+
+        void setPingSettings(const NRtPingSettings& settings) override;
+        NRtPingSettings getPingSettings() const override;
+
         void tick() override;
         void connect(const std::string& url, NRtTransportType type) override;
         void disconnect() override;

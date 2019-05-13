@@ -54,6 +54,38 @@ NIXWebsocket::~NIXWebsocket()
     _ixWebSocketPoll.bindWebsocket(nullptr);
 }
 
+void NIXWebsocket::setAutoReconnect(bool autoReconnect)
+{
+    if (autoReconnect)
+        _ixWebSocket.enableAutomaticReconnection();
+    else
+        _ixWebSocket.disableAutomaticReconnection();
+}
+
+bool NIXWebsocket::getAutoReconnect() const
+{
+    return _ixWebSocket.isEnabledAutomaticReconnection();
+}
+
+void NIXWebsocket::setPingSettings(const NRtPingSettings & settings)
+{
+    _ixWebSocket.setPingInterval(static_cast<int>(settings.intervalSec));
+    _ixWebSocket.setPingTimeout(static_cast<int>(settings.timeoutSec));
+}
+
+NRtPingSettings NIXWebsocket::getPingSettings() const
+{
+    NRtPingSettings settings;
+
+    int pingInterval = _ixWebSocket.getPingInterval();
+    int pingTimeout  = _ixWebSocket.getPingTimeout();
+
+    if (pingInterval > 0) settings.intervalSec = static_cast<uint32_t>(pingInterval);
+    if (pingTimeout  > 0) settings.timeoutSec  = static_cast<uint32_t>(pingTimeout);
+
+    return settings;
+}
+
 void NIXWebsocket::tick()
 {
     _ixWebSocketPoll.poll();

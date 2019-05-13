@@ -103,6 +103,11 @@ namespace Nakama {
         virtual void disconnect() = 0;
 
         /**
+         * Get websocket transport which RtClient uses.
+         */
+        virtual NRtTransportPtr getTransport() const = 0;
+
+        /**
         * Join a chat channel on the server.
         *
         * @param target The target channel to join.
