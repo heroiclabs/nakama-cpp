@@ -44,14 +44,14 @@ namespace ix
         close();
     }
 
-    PollResultType Socket::poll(int timeoutSecs)
+    PollResultType Socket::poll(int timeoutMs)
     {
         if (_sockfd == -1)
         {
             return PollResultType::Error;
         }
 
-        return isReadyToRead(1000 * timeoutSecs);
+        return isReadyToRead(timeoutMs);
     }
 
     PollResultType Socket::select(bool readyToRead, int timeoutMs)
@@ -73,7 +73,7 @@ namespace ix
 
         struct timeval timeout;
         timeout.tv_sec = timeoutMs / 1000;
-        timeout.tv_usec = (timeoutMs < 1000) ? 0 : 1000 * (timeoutMs % 1000);
+        timeout.tv_usec = 1000 * (timeoutMs % 1000);
 
         // Compute the highest fd.
         int sockfd = _sockfd;
@@ -159,8 +159,6 @@ namespace ix
 
     ssize_t Socket::send(char* buffer, size_t length)
     {
-        std::lock_guard<std::mutex> lock(_socketMutex);
-
         int flags = 0;
 #ifdef MSG_NOSIGNAL
         flags = MSG_NOSIGNAL;
@@ -176,8 +174,6 @@ namespace ix
 
     ssize_t Socket::recv(void* buffer, size_t length)
     {
-        std::lock_guard<std::mutex> lock(_socketMutex);
-
         int flags = 0;
 #ifdef MSG_NOSIGNAL
         flags = MSG_NOSIGNAL;

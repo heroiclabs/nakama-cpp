@@ -40,7 +40,7 @@ namespace ix
     class WebSocketTransport
     {
     public:
-        enum ReadyStateValues
+        enum class ReadyState
         {
             CLOSING,
             CLOSED,
@@ -48,12 +48,18 @@ namespace ix
             OPEN
         };
 
-        enum MessageKind
+        enum class MessageKind
         {
             MSG,
             PING,
             PONG,
             FRAGMENT
+        };
+
+        enum class PollResult
+        {
+            Succeeded,
+            AbnormalClose
         };
 
         using OnMessageCallback = std::function<void(const std::string&,
@@ -78,7 +84,7 @@ namespace ix
         WebSocketInitResult connectToSocket(int fd,              // Server
                                             int timeoutSecs);
 
-        void poll();
+        PollResult poll();
         WebSocketSendInfo sendBinary(const std::string& message,
                                      const OnProgressCallback& onProgressCallback);
         WebSocketSendInfo sendText(const std::string& message,
@@ -90,10 +96,11 @@ namespace ix
                    size_t closeWireSize = 0,
                    bool remote = false);
 
-        ReadyStateValues getReadyState() const;
-        void setReadyState(ReadyStateValues readyStateValue);
+        ReadyState getReadyState() const;
+        void setReadyState(ReadyState readyState);
         void setOnCloseCallback(const OnCloseCallback& onCloseCallback);
-        void dispatch(const OnMessageCallback& onMessageCallback);
+        void dispatch(PollResult pollResult,
+                      const OnMessageCallback& onMessageCallback);
         size_t bufferedAmount() const;
 
     private:
@@ -106,11 +113,11 @@ namespace ix
             bool mask;
             enum opcode_type {
                 CONTINUATION = 0x0,
-                TEXT_FRAME = 0x1,
+                TEXT_FRAME   = 0x1,
                 BINARY_FRAME = 0x2,
-                CLOSE = 8,
-                PING = 9,
-                PONG = 0xa,
+                CLOSE        = 8,
+                PING         = 9,
+                PONG         = 0xa,
             } opcode;
             int N0;
             uint64_t N;
@@ -146,7 +153,7 @@ namespace ix
         std::shared_ptr<Socket> _socket;
 
         // Hold the state of the connection (OPEN, CLOSED, etc...)
-        std::atomic<ReadyStateValues> _readyState;
+        std::atomic<ReadyState> _readyState;
 
         OnCloseCallback _onCloseCallback;
         uint16_t _closeCode;
@@ -162,18 +169,24 @@ namespace ix
 
         // Used to cancel dns lookup + socket connect + http upgrade
         std::atomic<bool> _requestInitCancellation;
+              
+        mutable std::mutex _closingTimePointMutex;
+        std::chrono::time_point<std::chrono::steady_clock>_closingTimePoint;
+        static const int kClosingMaximumWaitingDelayInMs;
 
         // Constants for dealing with closing conneections
         static const uint16_t kInternalErrorCode;
         static const uint16_t kAbnormalCloseCode;
         static const uint16_t kProtocolErrorCode;
+        static const uint16_t kNoStatusCodeErrorCode;
         static const std::string kInternalErrorMessage;
         static const std::string kAbnormalCloseMessage;
         static const std::string kPingTimeoutMessage;
         static const std::string kProtocolErrorMessage;
+        static const std::string kNoStatusCodeErrorMessage;
 
         // enable auto response to ping
-        bool _enablePong;
+        std::atomic<bool> _enablePong;
         static const bool kDefaultEnablePong;
 
         // Optional ping and pong timeout
@@ -186,6 +199,9 @@ namespace ix
         static const int kDefaultPingIntervalSecs;
         static const int kDefaultPingTimeoutSecs;
         static const std::string kPingMessage;
+
+        // Record time step for ping/ ping timeout to ensure we wait for the right left duration
+        std::chrono::time_point<std::chrono::steady_clock> _nextGCDTimePoint;
 
         // We record when ping are being sent so that we can know when to send the next one
         // We also record when pong are being sent as a reply to pings, to close the connections
@@ -200,6 +216,18 @@ namespace ix
 
         // No PONG data was received through the socket for longer than ping timeout delay
         bool pingTimeoutExceeded();
+
+        // after calling close(), if no CLOSE frame answer is received back from the remote, we should close the connexion
+        bool closingDelayExceeded();
+
+        void initTimePointsAndGCDAfterConnect();
+
+        void sendCloseFrame(uint16_t code, const std::string& reason);
+
+        void closeSocketAndSwitchToClosedState(uint16_t code,
+                                               const std::string& reason,
+                                               size_t closeWireSize,
+                                               bool remote);
 
         void sendOnSocket();
         WebSocketSendInfo sendData(wsheader_type::opcode_type type,

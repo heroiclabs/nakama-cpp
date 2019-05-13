@@ -1,7 +1,7 @@
 /*
- *  IXWebSocketPoll.h
+ *  IXWebSocketMessageQueue.h
  *  Author: Korchynskyi Dmytro
- *  Copyright (c) 2017-2018 Machine Zone, Inc. All rights reserved.
+ *  Copyright (c) 2017-2019 Machine Zone, Inc. All rights reserved.
  */
 
 #pragma once
@@ -13,18 +13,19 @@
 
 namespace ix
 {
-    /**
-     * A helper class to dispatch websocket message callbacks in your thread.
-     */
-    class WebSocketPoll
+    //
+    // A helper class to dispatch websocket message callbacks in your thread.
+    //
+    class WebSocketMessageQueue
     {
     public:
-        WebSocketPoll(WebSocket* websocket = nullptr);
-        ~WebSocketPoll();
+        WebSocketMessageQueue(WebSocket* websocket = nullptr);
+        ~WebSocketMessageQueue();
 
         void bindWebsocket(WebSocket* websocket);
 
         void setOnMessageCallback(const OnMessageCallback& callback);
+        void setOnMessageCallback(OnMessageCallback&& callback);
 
         void poll(int count = 512);
 
@@ -39,14 +40,14 @@ namespace ix
             WebSocketCloseInfo closeInfo;
         };
 
-        using MessageDataPtr = std::shared_ptr<Message>;
+        using MessagePtr = std::shared_ptr<Message>;
 
-        MessageDataPtr popMessage();
+        MessagePtr popMessage();
 
     private:
         WebSocket* _websocket = nullptr;
         OnMessageCallback _onMessageUserCallback;
         std::mutex _messagesMutex;
-        std::list<MessageDataPtr> _messages;
+        std::list<MessagePtr> _messages;
     };
 }

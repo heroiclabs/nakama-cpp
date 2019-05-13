@@ -21,15 +21,13 @@ endif()
 
 set( IXWEBSOCKET_SOURCES
     ixwebsocket/IXSocket.cpp
-    ixwebsocket/IXSocketServer.cpp
     ixwebsocket/IXSocketConnect.cpp
     ixwebsocket/IXSocketFactory.cpp
     ixwebsocket/IXDNSLookup.cpp
     ixwebsocket/IXCancellationRequest.cpp
     ixwebsocket/IXNetSystem.cpp
     ixwebsocket/IXWebSocket.cpp
-    ixwebsocket/IXWebSocketPoll.cpp
-    ixwebsocket/IXWebSocketServer.cpp
+    ixwebsocket/IXWebSocketMessageQueue.cpp
     ixwebsocket/IXWebSocketTransport.cpp
     ixwebsocket/IXWebSocketHandshake.cpp
     ixwebsocket/IXWebSocketPerMessageDeflate.cpp
@@ -46,7 +44,6 @@ set( IXWEBSOCKET_SOURCES
 
 set( IXWEBSOCKET_HEADERS
     ixwebsocket/IXSocket.h
-    ixwebsocket/IXSocketServer.h
     ixwebsocket/IXSocketConnect.h
     ixwebsocket/IXSocketFactory.h
     ixwebsocket/IXSetThreadName.h
@@ -55,8 +52,7 @@ set( IXWEBSOCKET_HEADERS
     ixwebsocket/IXNetSystem.h
     ixwebsocket/IXProgressCallback.h
     ixwebsocket/IXWebSocket.h
-    ixwebsocket/IXWebSocketPoll.h
-    ixwebsocket/IXWebSocketServer.h
+    ixwebsocket/IXWebSocketMessageQueue.h
     ixwebsocket/IXWebSocketTransport.h
     ixwebsocket/IXWebSocketHandshake.h
     ixwebsocket/IXWebSocketSendInfo.h

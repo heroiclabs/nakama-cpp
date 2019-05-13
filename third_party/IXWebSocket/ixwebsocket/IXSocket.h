@@ -41,12 +41,12 @@ namespace ix
 
     enum class PollResultType
     {
-        ReadyForRead = 0,
-        ReadyForWrite = 1,
-        Timeout = 2,
-        Error = 3,
-        SendRequest = 4,
-        CloseRequest = 5
+        ReadyForRead    = 0,
+        ReadyForWrite   = 1,
+        Timeout         = 2,
+        Error           = 3,
+        SendRequest     = 4,
+        CloseRequest    = 5
     };
 
     class Socket {
@@ -56,7 +56,7 @@ namespace ix
         bool init(std::string& errorMsg);
 
         // Functions to check whether there is activity on the socket
-        PollResultType poll(int timeoutSecs = kDefaultPollTimeout);
+        PollResultType poll(int timeoutMs = kDefaultPollTimeout);
         bool wakeUpFromPoll(uint8_t wakeUpCode);
 
         PollResultType isReadyToWrite(int timeoutMs);
