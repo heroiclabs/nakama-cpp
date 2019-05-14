@@ -46,4 +46,10 @@ namespace Nakama {
      */
     NAKAMA_API NClientPtr createDefaultClient(const DefaultClientParameters& parameters);
 
+    /**
+     * Creates the gRPC client to interact with Nakama server.
+     *
+     * @param parameters the client parameters
+     */
+    NAKAMA_API NClientPtr createGrpcClient(const DefaultClientParameters& parameters);
 }

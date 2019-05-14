@@ -17,7 +17,7 @@
 #pragma once
 
 #include "nakama-cpp/NClientInterface.h"
-#include "nakama-cpp/DefaultClient.h"
+#include "nakama-cpp/ClientFactory.h"
 #include "github.com/heroiclabs/nakama/apigrpc/apigrpc.grpc.pb.h"
 #include <set>
 
@@ -32,14 +32,14 @@ namespace Nakama {
     };
 
     /**
-     * A client to interact with Nakama server.
+     * A gRPC client to interact with Nakama server.
      * Don't use it directly, use `createDefaultClient` instead.
      */
-    class DefaultClient : public NClientInterface
+    class GrpcClient : public NClientInterface
     {
     public:
-        explicit DefaultClient(const DefaultClientParameters& parameters);
-        ~DefaultClient();
+        explicit GrpcClient(const DefaultClientParameters& parameters);
+        ~GrpcClient();
 
         void setErrorCallback(ErrorCallback errorCallback) override { _defaultErrorCallback = errorCallback; }
 

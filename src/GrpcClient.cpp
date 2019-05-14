@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "DefaultClient.h"
+#include "GrpcClient.h"
 #include "realtime/NRtClient.h"
 #include "nakama-cpp/realtime/NWebsockets.h"
 #include "nakama-cpp/log/NLogger.h"
@@ -36,13 +36,7 @@ using namespace std;
 
 namespace Nakama {
 
-NClientPtr createDefaultClient(const DefaultClientParameters& parameters)
-{
-    NClientPtr client(new DefaultClient(parameters));
-    return client;
-}
-
-DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
+GrpcClient::GrpcClient(const DefaultClientParameters& parameters)
     : _host(parameters.host)
     , _ssl(parameters.ssl)
 {
@@ -79,7 +73,7 @@ DefaultClient::DefaultClient(const DefaultClientParameters& parameters)
     NLOG(NLogLevel::Info, "Created. NakamaSdkVersion: %s", getNakamaSdkVersion());
 }
 
-DefaultClient::~DefaultClient()
+GrpcClient::~GrpcClient()
 {
     disconnect();
 
@@ -96,12 +90,12 @@ DefaultClient::~DefaultClient()
     }
 }
 
-void DefaultClient::disconnect()
+void GrpcClient::disconnect()
 {
     _cq.Shutdown();
 }
 
-void DefaultClient::tick()
+void GrpcClient::tick()
 {
     bool ok;
     void* tag;
@@ -132,7 +126,7 @@ void DefaultClient::tick()
     } while (continueLoop);
 }
 
-NRtClientPtr DefaultClient::createRtClient(int32_t port, NRtTransportPtr transport)
+NRtClientPtr GrpcClient::createRtClient(int32_t port, NRtTransportPtr transport)
 {
     RtClientParameters parameters;
     
@@ -143,7 +137,7 @@ NRtClientPtr DefaultClient::createRtClient(int32_t port, NRtTransportPtr transpo
     return createRtClient(parameters, transport);
 }
 
-NRtClientPtr DefaultClient::createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport)
+NRtClientPtr GrpcClient::createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport)
 {
     if (!transport)
     {
@@ -160,7 +154,7 @@ NRtClientPtr DefaultClient::createRtClient(const RtClientParameters& parameters,
     return client;
 }
 
-ReqContext * DefaultClient::createReqContext(NSessionPtr session)
+ReqContext * GrpcClient::createReqContext(NSessionPtr session)
 {
     ReqContext* ctx = new ReqContext();
 
@@ -177,7 +171,7 @@ ReqContext * DefaultClient::createReqContext(NSessionPtr session)
     return ctx;
 }
 
-void DefaultClient::onResponse(void * tag, bool ok)
+void GrpcClient::onResponse(void * tag, bool ok)
 {
     ReqContext* reqContext = static_cast<ReqContext*>(tag);
 
@@ -246,7 +240,7 @@ void DefaultClient::onResponse(void * tag, bool ok)
     }
 }
 
-void DefaultClient::reqError(ReqContext * reqContext, const NError & error)
+void GrpcClient::reqError(ReqContext * reqContext, const NError & error)
 {
     NLOG_ERROR(error);
 
@@ -264,7 +258,7 @@ void DefaultClient::reqError(ReqContext * reqContext, const NError & error)
     }
 }
 
-void DefaultClient::authenticateDevice(
+void GrpcClient::authenticateDevice(
     const std::string& id,
     const opt::optional<std::string>& username,
     const opt::optional<bool>& create,
@@ -302,7 +296,7 @@ void DefaultClient::authenticateDevice(
     responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::authenticateEmail(
+void GrpcClient::authenticateEmail(
     const std::string & email,
     const std::string & password,
     const std::string & username,
@@ -343,7 +337,7 @@ void DefaultClient::authenticateEmail(
     responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::authenticateFacebook(
+void GrpcClient::authenticateFacebook(
     const std::string & accessToken,
     const std::string & username,
     bool create,
@@ -382,7 +376,7 @@ void DefaultClient::authenticateFacebook(
     responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::authenticateGoogle(
+void GrpcClient::authenticateGoogle(
     const std::string & accessToken,
     const std::string & username,
     bool create,
@@ -419,7 +413,7 @@ void DefaultClient::authenticateGoogle(
     responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::authenticateGameCenter(
+void GrpcClient::authenticateGameCenter(
     const std::string & playerId,
     const std::string & bundleId,
     NTimestamp timestampSeconds,
@@ -470,7 +464,7 @@ void DefaultClient::authenticateGameCenter(
     responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::authenticateCustom(
+void GrpcClient::authenticateCustom(
     const std::string & id,
     const std::string & username,
     bool create,
@@ -507,7 +501,7 @@ void DefaultClient::authenticateCustom(
     responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::authenticateSteam(
+void GrpcClient::authenticateSteam(
     const std::string & token,
     const std::string & username,
     bool create,
@@ -544,7 +538,7 @@ void DefaultClient::authenticateSteam(
     responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::linkFacebook(
+void GrpcClient::linkFacebook(
     NSessionPtr session,
     const std::string & accessToken,
     const opt::optional<bool>& importFriends,
@@ -567,7 +561,7 @@ void DefaultClient::linkFacebook(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::linkEmail(
+void GrpcClient::linkEmail(
     NSessionPtr session,
     const std::string & email,
     const std::string & password,
@@ -590,7 +584,7 @@ void DefaultClient::linkEmail(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::linkDevice(
+void GrpcClient::linkDevice(
     NSessionPtr session,
     const std::string & id,
     std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -611,7 +605,7 @@ void DefaultClient::linkDevice(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::linkGoogle(
+void GrpcClient::linkGoogle(
     NSessionPtr session,
     const std::string & accessToken,
     std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -632,7 +626,7 @@ void DefaultClient::linkGoogle(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::linkGameCenter(
+void GrpcClient::linkGameCenter(
     NSessionPtr session,
     const std::string & playerId,
     const std::string & bundleId,
@@ -663,7 +657,7 @@ void DefaultClient::linkGameCenter(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::linkSteam(
+void GrpcClient::linkSteam(
     NSessionPtr session,
     const std::string & token,
     std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -684,7 +678,7 @@ void DefaultClient::linkSteam(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::linkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::linkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -702,7 +696,7 @@ void DefaultClient::linkCustom(NSessionPtr session, const std::string & id, std:
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::unlinkFacebook(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::unlinkFacebook(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -720,7 +714,7 @@ void DefaultClient::unlinkFacebook(NSessionPtr session, const std::string & acce
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::unlinkEmail(NSessionPtr session, const std::string & email, const std::string & password, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::unlinkEmail(NSessionPtr session, const std::string & email, const std::string & password, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -739,7 +733,7 @@ void DefaultClient::unlinkEmail(NSessionPtr session, const std::string & email, 
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::unlinkGoogle(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::unlinkGoogle(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -757,7 +751,7 @@ void DefaultClient::unlinkGoogle(NSessionPtr session, const std::string & access
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & playerId, const std::string & bundleId, NTimestamp timestampSeconds, const std::string & salt, const std::string & signature, const std::string & publicKeyUrl, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::unlinkGameCenter(NSessionPtr session, const std::string & playerId, const std::string & bundleId, NTimestamp timestampSeconds, const std::string & salt, const std::string & signature, const std::string & publicKeyUrl, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -780,7 +774,7 @@ void DefaultClient::unlinkGameCenter(NSessionPtr session, const std::string & pl
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::unlinkSteam(NSessionPtr session, const std::string & token, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::unlinkSteam(NSessionPtr session, const std::string & token, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -798,7 +792,7 @@ void DefaultClient::unlinkSteam(NSessionPtr session, const std::string & token, 
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::unlinkDevice(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::unlinkDevice(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -816,7 +810,7 @@ void DefaultClient::unlinkDevice(NSessionPtr session, const std::string & id, st
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::unlinkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::unlinkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -834,7 +828,7 @@ void DefaultClient::unlinkCustom(NSessionPtr session, const std::string & id, st
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::importFacebookFriends(
+void GrpcClient::importFacebookFriends(
     NSessionPtr session,
     const std::string& token,
     const opt::optional<bool>& reset,
@@ -857,7 +851,7 @@ void DefaultClient::importFacebookFriends(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::getAccount(
+void GrpcClient::getAccount(
     NSessionPtr session,
     std::function<void(const NAccount&)> successCallback,
     ErrorCallback errorCallback
@@ -884,7 +878,7 @@ void DefaultClient::getAccount(
     responseReader->Finish(&(*accoutData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::updateAccount(
+void GrpcClient::updateAccount(
     NSessionPtr session,
     const opt::optional<std::string>& username,
     const opt::optional<std::string>& displayName,
@@ -915,7 +909,7 @@ void DefaultClient::updateAccount(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::getUsers(
+void GrpcClient::getUsers(
     NSessionPtr session,
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames,
@@ -962,7 +956,7 @@ void DefaultClient::getUsers(
     responseReader->Finish(&(*usersData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::addFriends(
+void GrpcClient::addFriends(
     NSessionPtr session,
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames,
@@ -994,7 +988,7 @@ void DefaultClient::addFriends(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::deleteFriends(
+void GrpcClient::deleteFriends(
     NSessionPtr session,
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames,
@@ -1026,7 +1020,7 @@ void DefaultClient::deleteFriends(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::blockFriends(
+void GrpcClient::blockFriends(
     NSessionPtr session,
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames,
@@ -1057,7 +1051,7 @@ void DefaultClient::blockFriends(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr)> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1080,7 +1074,7 @@ void DefaultClient::listFriends(NSessionPtr session, std::function<void(NFriends
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::createGroup(
+void GrpcClient::createGroup(
     NSessionPtr session,
     const std::string & name,
     const std::string & description,
@@ -1127,7 +1121,7 @@ void DefaultClient::createGroup(
     responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::deleteGroup(
+void GrpcClient::deleteGroup(
     NSessionPtr session,
     const std::string & groupId,
     std::function<void()> successCallback,
@@ -1150,7 +1144,7 @@ void DefaultClient::deleteGroup(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::addGroupUsers(
+void GrpcClient::addGroupUsers(
     NSessionPtr session,
     const std::string & groupId,
     const std::vector<std::string>& ids,
@@ -1179,7 +1173,7 @@ void DefaultClient::addGroupUsers(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listGroupUsers(NSessionPtr session, const std::string & groupId, std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listGroupUsers(NSessionPtr session, const std::string & groupId, std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1206,7 +1200,7 @@ void DefaultClient::listGroupUsers(NSessionPtr session, const std::string & grou
     responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::kickGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::kickGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1229,7 +1223,7 @@ void DefaultClient::kickGroupUsers(NSessionPtr session, const std::string & grou
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::joinGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::joinGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1247,7 +1241,7 @@ void DefaultClient::joinGroup(NSessionPtr session, const std::string & groupId, 
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::leaveGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::leaveGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1265,7 +1259,7 @@ void DefaultClient::leaveGroup(NSessionPtr session, const std::string & groupId,
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1298,7 +1292,7 @@ void DefaultClient::listGroups(NSessionPtr session, const std::string & name, in
     responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listUserGroups(NSessionPtr session, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listUserGroups(NSessionPtr session, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
     if (session)
     {
@@ -1317,7 +1311,7 @@ void DefaultClient::listUserGroups(NSessionPtr session, std::function<void(NUser
     }
 }
 
-void DefaultClient::listUserGroups(NSessionPtr session, const std::string & userId, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listUserGroups(NSessionPtr session, const std::string & userId, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1344,7 +1338,7 @@ void DefaultClient::listUserGroups(NSessionPtr session, const std::string & user
     responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::promoteGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::promoteGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1367,7 +1361,7 @@ void DefaultClient::promoteGroupUsers(NSessionPtr session, const std::string & g
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::updateGroup(
+void GrpcClient::updateGroup(
     NSessionPtr session,
     const std::string & groupId,
     const opt::optional<std::string>& name,
@@ -1401,7 +1395,7 @@ void DefaultClient::updateGroup(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listLeaderboardRecords(
+void GrpcClient::listLeaderboardRecords(
     NSessionPtr session,
     const std::string & leaderboardId,
     const std::vector<std::string>& ownerIds,
@@ -1442,7 +1436,7 @@ void DefaultClient::listLeaderboardRecords(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const std::string & leaderboardId, const std::string & ownerId, const opt::optional<int32_t>& limit, std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const std::string & leaderboardId, const std::string & ownerId, const opt::optional<int32_t>& limit, std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1472,7 +1466,7 @@ void DefaultClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::writeLeaderboardRecord(
+void GrpcClient::writeLeaderboardRecord(
     NSessionPtr session,
     const std::string & leaderboardId,
     int64_t score,
@@ -1508,7 +1502,7 @@ void DefaultClient::writeLeaderboardRecord(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::writeTournamentRecord(
+void GrpcClient::writeTournamentRecord(
     NSessionPtr session,
     const std::string & tournamentId,
     int64_t score,
@@ -1544,7 +1538,7 @@ void DefaultClient::writeTournamentRecord(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::deleteLeaderboardRecord(NSessionPtr session, const std::string & leaderboardId, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::deleteLeaderboardRecord(NSessionPtr session, const std::string & leaderboardId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1562,7 +1556,7 @@ void DefaultClient::deleteLeaderboardRecord(NSessionPtr session, const std::stri
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listMatches(
+void GrpcClient::listMatches(
     NSessionPtr session,
     const opt::optional<int32_t>& min_size,
     const opt::optional<int32_t>& max_size,
@@ -1600,7 +1594,7 @@ void DefaultClient::listMatches(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listNotifications(
+void GrpcClient::listNotifications(
     NSessionPtr session,
     const opt::optional<int32_t>& limit,
     const opt::optional<std::string>& cacheableCursor,
@@ -1632,7 +1626,7 @@ void DefaultClient::listNotifications(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::deleteNotifications(NSessionPtr session, const std::vector<std::string>& notificationIds, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::deleteNotifications(NSessionPtr session, const std::vector<std::string>& notificationIds, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1653,7 +1647,7 @@ void DefaultClient::deleteNotifications(NSessionPtr session, const std::vector<s
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listChannelMessages(
+void GrpcClient::listChannelMessages(
     NSessionPtr session,
     const std::string & channelId,
     const opt::optional<int32_t>& limit,
@@ -1689,7 +1683,7 @@ void DefaultClient::listChannelMessages(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listTournaments(
+void GrpcClient::listTournaments(
     NSessionPtr session,
     const opt::optional<uint32_t>& categoryStart,
     const opt::optional<uint32_t>& categoryEnd,
@@ -1729,7 +1723,7 @@ void DefaultClient::listTournaments(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listTournamentRecords(
+void GrpcClient::listTournamentRecords(
     NSessionPtr session,
     const std::string & tournamentId,
     const opt::optional<int32_t>& limit,
@@ -1770,7 +1764,7 @@ void DefaultClient::listTournamentRecords(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listTournamentRecordsAroundOwner(
+void GrpcClient::listTournamentRecordsAroundOwner(
     NSessionPtr session,
     const std::string & tournamentId,
     const std::string & ownerId,
@@ -1805,7 +1799,7 @@ void DefaultClient::listTournamentRecordsAroundOwner(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::joinTournament(NSessionPtr session, const std::string & tournamentId, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::joinTournament(NSessionPtr session, const std::string & tournamentId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1823,7 +1817,7 @@ void DefaultClient::joinTournament(NSessionPtr session, const std::string & tour
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listStorageObjects(
+void GrpcClient::listStorageObjects(
     NSessionPtr session,
     const std::string & collection,
     const opt::optional<int32_t>& limit,
@@ -1858,7 +1852,7 @@ void DefaultClient::listStorageObjects(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::listUsersStorageObjects(
+void GrpcClient::listUsersStorageObjects(
     NSessionPtr session,
     const std::string & collection,
     const std::string & userId,
@@ -1895,7 +1889,7 @@ void DefaultClient::listUsersStorageObjects(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::writeStorageObjects(
+void GrpcClient::writeStorageObjects(
     NSessionPtr session,
     const std::vector<NStorageObjectWrite>& objects,
     std::function<void(const NStorageObjectAcks&)> successCallback, ErrorCallback errorCallback)
@@ -1939,7 +1933,7 @@ void DefaultClient::writeStorageObjects(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::readStorageObjects(
+void GrpcClient::readStorageObjects(
     NSessionPtr session,
     const std::vector<NReadStorageObjectId>& objectIds,
     std::function<void(const NStorageObjects&)> successCallback, ErrorCallback errorCallback)
@@ -1976,7 +1970,7 @@ void DefaultClient::readStorageObjects(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::deleteStorageObjects(NSessionPtr session, const std::vector<NDeleteStorageObjectId>& objectIds, std::function<void()> successCallback, ErrorCallback errorCallback)
+void GrpcClient::deleteStorageObjects(NSessionPtr session, const std::vector<NDeleteStorageObjectId>& objectIds, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -2001,7 +1995,7 @@ void DefaultClient::deleteStorageObjects(NSessionPtr session, const std::vector<
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void DefaultClient::rpc(
+void GrpcClient::rpc(
     NSessionPtr session,
     const std::string & id,
     const opt::optional<std::string>& payload,

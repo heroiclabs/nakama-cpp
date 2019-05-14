@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-#pragma once
-
-#include "nakama-cpp/ClientFactory.h"
-#include "nakama-cpp/realtime/NRtDefaultClientListener.h"
-#include "nakama-cpp/log/NLogger.h"
+#include "GrpcClient.h"
 
 namespace Nakama {
 
-    NAKAMA_API const char* getNakamaSdkVersion();
+NClientPtr createDefaultClient(const DefaultClientParameters& parameters)
+{
+    return createGrpcClient(parameters);
+}
+
+NClientPtr createGrpcClient(const DefaultClientParameters& parameters)
+{
+    NClientPtr client(new GrpcClient(parameters));
+    return client;
+}
 
 }
