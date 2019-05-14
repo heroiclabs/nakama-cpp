@@ -198,7 +198,6 @@ void DefaultClient::onResponse(void * tag, bool ok)
             {
                 std::stringstream ss;
 
-                ss << "grpc code: " << reqContext->status.error_code() << std::endl;
                 ss << "message: " << reqContext->status.error_message();
 
                 if (!reqContext->status.error_details().empty())
@@ -219,6 +218,7 @@ void DefaultClient::onResponse(void * tag, bool ok)
                     case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
 
                 default:
+                    ss << std::endl << "grpc code: " << reqContext->status.error_code();
                     break;
                 }
 
