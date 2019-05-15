@@ -23,14 +23,13 @@
 #include "DefaultSession.h"
 #include "DataHelper.h"
 #include <grpc++/create_channel.h>
-#include <sstream>
 
 #ifdef NAKAMA_SSL_ENABLED
     #include "roots_pem.h"
 #endif
 
 #undef NMODULE_NAME
-#define NMODULE_NAME "NDefaultClient"
+#define NMODULE_NAME "Nakama::GrpcClient"
 
 using namespace std;
 
@@ -190,13 +189,13 @@ void GrpcClient::onResponse(void * tag, bool ok)
             }
             else
             {
-                std::stringstream ss;
+                std::string errMessage;
 
-                ss << "message: " << reqContext->status.error_message();
+                errMessage.append("message: ").append(reqContext->status.error_message());
 
                 if (!reqContext->status.error_details().empty())
                 {
-                    ss << std::endl << "details: " << reqContext->status.error_details();
+                    errMessage.append("\ndetails: ").append(reqContext->status.error_details());
                 }
 
                 ErrorCode code = ErrorCode::Unknown;
@@ -212,11 +211,11 @@ void GrpcClient::onResponse(void * tag, bool ok)
                     case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
 
                 default:
-                    ss << std::endl << "grpc code: " << reqContext->status.error_code();
+                    errMessage.append("\ngrpc code: ").append(std::to_string(reqContext->status.error_code()));
                     break;
                 }
 
-                reqError(reqContext, NError(ss.str(), code));
+                reqError(reqContext, NError(std::move(errMessage), code));
             }
         }
         else
@@ -229,14 +228,7 @@ void GrpcClient::onResponse(void * tag, bool ok)
     }
     else
     {
-        NError error("Not found request context.", ErrorCode::InternalError);
-
-        NLOG_ERROR(toString(error));
-
-        if (_defaultErrorCallback)
-        {
-            _defaultErrorCallback(error);
-        }
+        reqError(nullptr, NError("Not found request context.", ErrorCode::InternalError));
     }
 }
 
@@ -244,7 +236,7 @@ void GrpcClient::reqError(ReqContext * reqContext, const NError & error)
 {
     NLOG_ERROR(error);
 
-    if (reqContext->errorCallback)
+    if (reqContext && reqContext->errorCallback)
     {
         reqContext->errorCallback(error);
     }
@@ -254,7 +246,7 @@ void GrpcClient::reqError(ReqContext * reqContext, const NError & error)
     }
     else
     {
-        NLOG_WARN("error not handled");
+        NLOG_WARN("^ error not handled");
     }
 }
 

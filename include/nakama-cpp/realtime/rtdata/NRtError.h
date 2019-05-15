@@ -43,6 +43,7 @@ namespace Nakama {
     {
         NRtError() {}
         NRtError(RtErrorCode code, const std::string& message) : code(code), message(message) {}
+        NRtError(RtErrorCode code, std::string&& message) : code(code), message(std::move(message)) {}
 
         RtErrorCode code;                             ///< The error code
         std::string message;                          ///< A message in English to help developers debug the response.

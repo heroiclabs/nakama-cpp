@@ -15,7 +15,6 @@
  */
 
 #include "nakama-cpp/realtime/rtdata/NRtError.h"
-#include <sstream>
 
 namespace Nakama {
 
@@ -42,25 +41,25 @@ namespace Nakama {
 
     std::string toString(const NRtError & error)
     {
-        std::stringstream ss;
+        std::string str;
 
-        ss << "NRtError: " << toString(error.code);
+        str.append("NRtError: ").append(toString(error.code));
 
         if (!error.message.empty())
         {
-            ss << std::endl << error.message;
+            str.append("\n").append(error.message);
         }
 
         if (!error.context.empty())
         {
-            ss << std::endl << "Context:";
+            str.append("\nContext:");
 
             for (auto it : error.context)
             {
-                ss << std::endl << it.first << "=" << it.second;
+                str.append("\n").append(it.first).append("=").append(it.second);
             }
         }
 
-        return ss.str();
+        return str;
     }
 }

@@ -15,8 +15,7 @@
  */
 
 #include "nakama-cpp/NError.h"
-#include <sstream>
- 
+
 namespace Nakama {
 
 const char * toString(ErrorCode code)
@@ -40,16 +39,16 @@ const char * toString(ErrorCode code)
 
 std::string toString(const NError & error)
 {
-    std::stringstream ss;
+    std::string str;
 
-    ss << "NError: " << toString(error.code);
+    str.append("NError: ").append(toString(error.code));
 
     if (!error.message.empty())
     {
-        ss << std::endl << error.message;
+        str.append("\n").append(error.message);
     }
 
-    return ss.str();
+    return str;
 }
 
 }

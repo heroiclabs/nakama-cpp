@@ -243,7 +243,7 @@ void NRtClient::onTransportMessage(const NBytes & data)
                 }
                 else
                 {
-                    NLOG_WARN("error not handled");
+                    NLOG_WARN("^ error not handled");
                 }
             }
             else if (it->second->successCallback)
