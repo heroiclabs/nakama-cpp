@@ -45,26 +45,12 @@ NIXWebsocket::NIXWebsocket()
     );
 
     setPingSettings(NRtPingSettings(30, 5));
-    setAutoReconnect(false);
 }
 
 NIXWebsocket::~NIXWebsocket()
 {
     disconnect();
     _wsMessageQueue.bindWebsocket(nullptr);
-}
-
-void NIXWebsocket::setAutoReconnect(bool autoReconnect)
-{
-    if (autoReconnect)
-        _ixWebSocket.enableAutomaticReconnection();
-    else
-        _ixWebSocket.disableAutomaticReconnection();
-}
-
-bool NIXWebsocket::getAutoReconnect() const
-{
-    return _ixWebSocket.isEnabledAutomaticReconnection();
 }
 
 void NIXWebsocket::setPingSettings(const NRtPingSettings & settings)

@@ -34,16 +34,6 @@ NWebsocketpp::NWebsocketpp()
 #endif
 }
 
-void NWebsocketpp::setAutoReconnect(bool autoReconnect)
-{
-    NLOG_WARN("Auto reconnect is not supported");
-}
-
-bool NWebsocketpp::getAutoReconnect() const
-{
-    return false;
-}
-
 void NWebsocketpp::setPingSettings(const NRtPingSettings & settings)
 {
     _wsClient.set_pong_timeout(settings.timeoutSec * 1000u);

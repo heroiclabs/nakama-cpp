@@ -36,9 +36,6 @@ namespace Nakama {
     public:
         NWebsocketpp();
 
-        void setAutoReconnect(bool autoReconnect) override;
-        bool getAutoReconnect() const override;
-
         void setPingSettings(const NRtPingSettings& settings) override;
         NRtPingSettings getPingSettings() const override;
 
