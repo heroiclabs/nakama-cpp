@@ -29,17 +29,10 @@ namespace Nakama {
     NAKAMA_API NRtTransportPtr createDefaultWebsocket();
     
     /**
-     * Create Websocketpp transport.
+     * Create Websocket transport using cpprest SDK.
      * 
      * Check out README for supported platforms.
      */
-    NAKAMA_API NRtTransportPtr createWebsocketpp();
-    
-    /**
-     * Create IXWebSocket transport.
-     * 
-     * Check out README for supported platforms.
-     */
-    NAKAMA_API NRtTransportPtr createIXWebSocket();
+    NAKAMA_API NRtTransportPtr createWebsocketCppRest();
 
 }

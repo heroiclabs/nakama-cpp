@@ -17,12 +17,8 @@
 #include "nakama-cpp/realtime/NWebsockets.h"
 #include "nakama-cpp/log/NLogger.h"
 
-#ifdef BUILD_WEBSOCKETPP
-    #include "NWebsocketpp.h"
-#endif
-
-#ifdef BUILD_IXWEBSOCKET
-    #include "NIXWebsocket.h"
+#ifdef BUILD_WEBSOCKET_CPPREST
+    #include "NWebsocketCppRest.h"
 #endif
 
 namespace Nakama {
@@ -31,11 +27,8 @@ NRtTransportPtr createDefaultWebsocket()
 {
     NRtTransportPtr transport;
     
-#if defined(BUILD_IXWEBSOCKET)
-    transport = createIXWebSocket();
-    
-#elif defined(BUILD_WEBSOCKETPP)
-    transport = createWebsocketpp();
+#if defined(BUILD_WEBSOCKET_CPPREST)
+    transport = createWebsocketCppRest();
     
 #else
     NLOG_ERROR("No default websocket available for this platform.");
@@ -44,27 +37,14 @@ NRtTransportPtr createDefaultWebsocket()
     return transport;
 }
 
-NRtTransportPtr createWebsocketpp()
+NRtTransportPtr createWebsocketCppRest()
 {
     NRtTransportPtr transport;
     
-#ifdef BUILD_WEBSOCKETPP
-    transport.reset(new NWebsocketpp());
+#ifdef BUILD_WEBSOCKET_CPPREST
+    transport.reset(new NWebsocketCppRest());
 #else
-    NLOG_ERROR("Websocketpp is not available for this platform.");
-#endif
-    
-    return transport;
-}
-
-NRtTransportPtr createIXWebSocket()
-{
-    NRtTransportPtr transport;
-    
-#ifdef BUILD_IXWEBSOCKET
-    transport.reset(new NIXWebsocket());
-#else
-    NLOG_ERROR("IXWebsocket is not available for this platform.");
+    NLOG_ERROR("WebsocketCppRest is not available for this platform.");
 #endif
     
     return transport;
