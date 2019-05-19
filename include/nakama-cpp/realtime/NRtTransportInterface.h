@@ -63,16 +63,6 @@ namespace Nakama {
         void setMessageCallback(MessageCallback callback) { _messageCallback = callback; }
 
         /**
-         * Set automatic reconnect setting.
-         */
-        virtual void setAutoReconnect(bool autoReconnect) = 0;
-
-        /**
-         * Get automatic reconnect setting.
-         */
-        virtual bool getAutoReconnect() const = 0;
-
-        /**
          * Set ping settings.
          */
         virtual void setPingSettings(const NRtPingSettings& settings) = 0;
