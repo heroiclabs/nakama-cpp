@@ -2,3 +2,6 @@
 	path = third_party/grpc
 	url = https://github.com/grpc/grpc
 	branch = v1.19.x
+[submodule "third_party/cpprestsdk/Release/libs/websocketpp"]
+	path = third_party/cpprestsdk/Release/libs/websocketpp
+	url = https://github.com/zaphoyd/websocketpp/
