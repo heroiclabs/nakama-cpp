@@ -115,6 +115,9 @@ void NTest::createClientWithParameters(const DefaultClientParameters & parameter
 
 void NTest::runTest()
 {
+    if (!_continue_loop)
+        return;
+
     if (g_runTestsCount > 0)
         cout << endl << endl;
 
