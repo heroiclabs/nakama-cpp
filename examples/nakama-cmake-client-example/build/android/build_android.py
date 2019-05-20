@@ -19,8 +19,8 @@ import subprocess
 import os
 
 if len(sys.argv) < 2:
-    print "Pass ABI parameter."
-    print "e.g. armeabi-v7a, arm64-v8a or x86"
+    print("Pass ABI parameter.")
+    print("e.g. armeabi-v7a, arm64-v8a or x86")
     sys.exit(-1)
 
 ABI = sys.argv[1]
@@ -35,7 +35,7 @@ ANDROID_NDK = getEnvVar('ANDROID_NDK')
 if not ANDROID_NDK:
     ANDROID_NDK = getEnvVar('NDK_ROOT')
     if not ANDROID_NDK:
-        print "Error: no ANDROID_NDK or NDK_ROOT environment variable"
+        print("Error: no ANDROID_NDK or NDK_ROOT environment variable")
         sys.exit(-1)
 
 def call(command):
@@ -49,7 +49,7 @@ def makedirs(dir):
     if not os.path.isdir(dir):
         os.makedirs(dir)
 
-print 'ANDROID_NDK=' + ANDROID_NDK
+print('ANDROID_NDK=' + ANDROID_NDK)
 
 makedirs(build_dir)
 
