@@ -72,10 +72,18 @@ endif(LOGS_ENABLED)
 
 if(NAKAMA_SSL_ENABLED)
     target_compile_definitions(nakama-cpp PRIVATE NAKAMA_SSL_ENABLED)
+    target_include_directories(nakama-cpp PRIVATE ${THIRD_PARTY_DIR}/grpc/third_party/boringssl/include)
 endif(NAKAMA_SSL_ENABLED)
 
-if(BUILD_WEBSOCKETPP)
-    target_compile_definitions(nakama-cpp PRIVATE BUILD_WEBSOCKETPP)
+if(BUILD_WEBSOCKET_CPPREST)
+    target_compile_definitions(nakama-cpp PRIVATE BUILD_WEBSOCKET_CPPREST)
+endif(BUILD_WEBSOCKET_CPPREST)
+
+if(BUILD_REST_CLIENT)
+    target_compile_definitions(nakama-cpp PRIVATE BUILD_REST_CLIENT)
+endif(BUILD_REST_CLIENT)
+
+if(BUILD_REST_CLIENT OR BUILD_WEBSOCKET_CPPREST)
     set(Boost_USE_STATIC_LIBS ON) # only find static libs
     find_package(Boost 1.67.0 REQUIRED COMPONENTS system date_time regex)
     if(NOT Boost_FOUND)
@@ -83,13 +91,9 @@ if(BUILD_WEBSOCKETPP)
     endif()
     target_include_directories(nakama-cpp PRIVATE ${Boost_INCLUDE_DIRS})
     target_link_libraries(nakama-cpp PUBLIC ${Boost_LIBRARIES})
-    target_include_directories(nakama-cpp PRIVATE ${THIRD_PARTY_DIR}/grpc/third_party/boringssl/include)
-endif(BUILD_WEBSOCKETPP)
-
-if(BUILD_IXWEBSOCKET)
-    target_compile_definitions(nakama-cpp PRIVATE BUILD_IXWEBSOCKET)
-    target_link_libraries(nakama-cpp PUBLIC ixwebsocket)
-endif(BUILD_IXWEBSOCKET)
+    target_link_libraries(nakama-cpp PUBLIC cpprest)
+    target_compile_definitions(nakama-cpp PRIVATE _TURN_OFF_PLATFORM_STRING)
+endif()
 
 target_link_libraries(nakama-cpp PUBLIC grpc++ libprotobuf)
 

@@ -14,19 +14,43 @@
  * limitations under the License.
  */
 
+#include "nakama-cpp/ClientFactory.h"
+#include "nakama-cpp/log/NLogger.h"
 #include "GrpcClient.h"
+
+#ifdef BUILD_REST_CLIENT
+#include "RestClient.h"
+#include "NHttpClientCppRest.h"
+#endif
 
 namespace Nakama {
 
 NClientPtr createDefaultClient(const DefaultClientParameters& parameters)
 {
-    return createGrpcClient(parameters);
+    //return createGrpcClient(parameters);
+    return createRestClient(parameters);
 }
 
 NClientPtr createGrpcClient(const DefaultClientParameters& parameters)
 {
     NClientPtr client(new GrpcClient(parameters));
     return client;
+}
+
+NClientPtr createRestClient(const DefaultClientParameters& parameters, NHttpClientPtr httpClient)
+{
+#ifdef BUILD_REST_CLIENT
+    if (!httpClient)
+    {
+        httpClient.reset(new NHttpClientCppRest());
+    }
+
+    NClientPtr client(new RestClient(parameters, httpClient));
+    return client;
+#else
+    NLOG_ERROR("REST client is not available");
+    return nullptr;
+#endif
 }
 
 }

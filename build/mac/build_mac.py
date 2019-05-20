@@ -104,7 +104,6 @@ call('cmake' +
  ' -DENABLE_BITCODE=FALSE' +
  ' -DENABLE_ARC=TRUE' +
  ' -DBUILD_WEBSOCKETPP=ON' +
- ' -DBUILD_IXWEBSOCKET=ON' +
  ' -DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY +
  ' -G' + generator +
  ' ../../../..')

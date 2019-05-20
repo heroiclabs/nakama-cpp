@@ -17,6 +17,7 @@
 #pragma once
 
 #include "nakama-cpp/NClientInterface.h"
+#include "nakama-cpp/NHttpClientInterface.h"
 
 namespace Nakama {
 
@@ -52,4 +53,13 @@ namespace Nakama {
      * @param parameters the client parameters
      */
     NAKAMA_API NClientPtr createGrpcClient(const DefaultClientParameters& parameters);
+
+    /**
+     * Creates the REST client (HTTP/1.1) to interact with Nakama server.
+     *
+     * @param parameters the client parameters
+     * @param httpClient optional, the HTTP client. If not set then default HTTP client will be used.
+     */
+    NAKAMA_API NClientPtr createRestClient(const DefaultClientParameters& parameters, NHttpClientPtr httpClient = nullptr);
+
 }
