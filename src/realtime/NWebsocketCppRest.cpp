@@ -114,7 +114,7 @@ void NWebsocketCppRest::connect(const std::string & url, NRtTransportType type)
 
         auto task = _wsClient->connect(uri);
         // Task-based continuation.
-        task.then([this](concurrency::task<void> previousTask)
+        task.then([this](pplx::task<void> previousTask)
         {
             try
             {
@@ -145,7 +145,7 @@ void NWebsocketCppRest::disconnect()
 
     auto task = _wsClient->close();
     // Task-based continuation
-    task.then([this](concurrency::task<void> previousTask)
+    task.then([this](pplx::task<void> previousTask)
     {
         try
         {
@@ -192,7 +192,7 @@ bool NWebsocketCppRest::send(const NBytes & data)
 
         auto task = _wsClient->send(std::move(msg));
         // Task-based continuation
-        task.then([this](concurrency::task<void> previousTask)
+        task.then([this](pplx::task<void> previousTask)
         {
             try
             {

@@ -54,7 +54,7 @@ void NHttpClientCppRest::tick()
 {
     ReqContextPtr ctx;
 
-    while (ctx = popFinishedReq())
+    while ((ctx = popFinishedReq()))
     {
         if (ctx->callback)
             ctx->callback(ctx->response);
@@ -104,7 +104,7 @@ void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCal
 
     auto task = _client->request(request);
     // Task-based continuation
-    task.then([this, ctx](concurrency::task<http_response> previousTask)
+    task.then([this, ctx](pplx::task<http_response> previousTask)
     {
         try
         {

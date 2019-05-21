@@ -18,6 +18,7 @@
 
 #include "nakama-cpp/NHttpClientInterface.h"
 #include "cpprest/http_client.h"
+#include <list>
 #include <mutex>
 
 namespace Nakama {
