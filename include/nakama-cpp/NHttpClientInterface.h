@@ -25,7 +25,7 @@
 namespace Nakama {
 
     using NHttpHeaders = std::map<std::string, std::string>;
-    using NHttpQueryArgs = std::map<std::string, std::string>;
+    using NHttpQueryArgs = std::multimap<std::string, std::string>;
 
     enum class NAKAMA_API NHttpReqMethod
     {

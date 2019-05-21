@@ -19,18 +19,10 @@
 #include "NWebsocketCppRest.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/NakamaVersion.h"
-#include "cpprest/asyncrt_utils.h"
+#include "CppRestUtils.h"
 
 #undef NMODULE_NAME
 #define NMODULE_NAME "NWebsocketCppRest"
-
-#ifdef _WIN32
-    #define TO_STD_STR(ws_str)     utility::conversions::to_utf8string(ws_str)
-    #define FROM_STD_STR(utf8str)  utility::conversions::to_string_t(utf8str)
-#else
-    #define TO_STD_STR(ws_str)     ws_str
-    #define FROM_STD_STR(utf8str)  utf8str
-#endif
 
 namespace Nakama {
 
@@ -158,11 +150,6 @@ void NWebsocketCppRest::disconnect()
     });
 
     _wsClient.reset();
-
-    //if (ec)
-    //{
-    //    NLOG(NLogLevel::Error, "disconnect failed. code: %d, reason: %s", ec.value(), ec.message().c_str());
-    //}
 }
 
 bool NWebsocketCppRest::send(const NBytes & data)

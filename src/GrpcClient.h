@@ -32,7 +32,7 @@ namespace Nakama {
     };
 
     /**
-     * A gRPC client to interact with Nakama server.
+     * gRPC client to interact with Nakama server.
      * Don't use it directly, use `createGrpcClient` instead.
      */
     class GrpcClient : public NClientInterface

@@ -18,6 +18,7 @@
 
 #include "nakama-cpp/NClientInterface.h"
 #include "nakama-cpp/ClientFactory.h"
+#include "google/protobuf/message.h"
 #include <set>
 
 namespace Nakama {
@@ -27,10 +28,11 @@ namespace Nakama {
         std::string auth;
         std::function<void(NHttpResponsePtr)> successCallback;
         ErrorCallback errorCallback;
+        google::protobuf::Message* data = nullptr;
     };
 
     /**
-     * A REST client (HTTP/1.1) to interact with Nakama server.
+     * REST client (HTTP/1.1) to interact with Nakama server.
      * Don't use it directly, use `createRestClient` instead.
      */
     class RestClient : public NClientInterface
@@ -448,14 +450,14 @@ namespace Nakama {
             const opt::optional<std::string>& cacheableCursor,
             std::function<void(NNotificationListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void deleteNotifications(
             NSessionPtr session,
             const std::vector<std::string>& notificationIds,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listChannelMessages(
             NSessionPtr session,
@@ -551,7 +553,7 @@ namespace Nakama {
             const opt::optional<std::string>& payload,
             std::function<void(const NRpc&)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
     private:
         RestReqContext* createReqContext(NSessionPtr session);
@@ -560,7 +562,8 @@ namespace Nakama {
             RestReqContext* ctx,
             NHttpReqMethod method,
             std::string&& path,
-            std::string&& body);
+            std::string&& body,
+            NHttpQueryArgs&& args = NHttpQueryArgs());
 
         void onResponse(RestReqContext* reqContext, NHttpResponsePtr response);
         void reqError(RestReqContext* reqContext, const NError& error);

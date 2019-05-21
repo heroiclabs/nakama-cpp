@@ -19,16 +19,18 @@
 #include "nakama-cpp/realtime/NWebsockets.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/StrUtil.h"
-#include "nakama-cpp/Nakama.h"
+#include "nakama-cpp/NakamaVersion.h"
+#include "DataHelper.h"
 #include "DefaultSession.h"
+#include "google/rpc/status.pb.h"
+#include "grpc/include/grpcpp/impl/codegen/status_code_enum.h"
+#include "CppRestUtils.h"
+#include "cpprest/json.h"
 
 #undef NMODULE_NAME
 #define NMODULE_NAME "Nakama::RestClient"
 
-
 #include "google/protobuf/util/json_util.h"
-
-
 
 using namespace std;
 
@@ -126,13 +128,15 @@ void RestClient::sendReq(
     RestReqContext* ctx,
     NHttpReqMethod method,
     std::string&& path,
-    std::string&& body)
+    std::string&& body,
+    NHttpQueryArgs&& args)
 {
     NHttpRequest req;
 
-    req.method = method;
-    req.path = std::move(path);
-    req.body = std::move(body);
+    req.method    = method;
+    req.path      = std::move(path);
+    req.body      = std::move(body);
+    req.queryArgs = std::move(args);
 
     req.headers.emplace("Accept", "application/json");
     req.headers.emplace("Content-Type", "application/json");
@@ -150,38 +154,83 @@ void RestClient::onResponse(RestReqContext* reqContext, NHttpResponsePtr respons
 
     if (it != _reqContexts.end())
     {
-        if (response->statusCode == 200)
+        if (response->statusCode == 200) // OK
         {
             if (reqContext->successCallback)
             {
-                reqContext->successCallback(response);
+                bool ok = true;
+
+                if (reqContext->data)
+                {
+                    auto status = google::protobuf::util::JsonStringToMessage(response->body, reqContext->data);
+                    ok = status.ok();
+
+                    if (!ok)
+                    {
+                        reqError(reqContext, NError("Parse JSON failed. HTTP body: " + response->body, ErrorCode::InternalError));
+                    }
+                }
+
+                if (ok)
+                {
+                    reqContext->successCallback(response);
+                }
             }
         }
         else
         {
             std::string errMessage;
-
-            errMessage.append("message: ").append(response->errorMessage);
-            errMessage.append("\nHTTP status: ").append(std::to_string(response->statusCode));
-
             ErrorCode code = ErrorCode::Unknown;
 
-            /*switch (reqContext->status.error_code())
+            if (response->statusCode == 500) // Internal Server Error
             {
-                case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
-                case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
-                case grpc::StatusCode::NOT_FOUND        : code = ErrorCode::NotFound; break;
-                case grpc::StatusCode::ALREADY_EXISTS   : code = ErrorCode::AlreadyExists; break;
-                case grpc::StatusCode::INVALID_ARGUMENT : code = ErrorCode::InvalidArgument; break;
-                case grpc::StatusCode::UNAUTHENTICATED  : code = ErrorCode::Unauthenticated; break;
-                case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
+                if (!response->body.empty() && response->body[0] == '{') // have to be JSON
+                {
+                    try {
+                        utility::stringstream_t ss;
+                        ss << FROM_STD_STR(response->body);
+                        web::json::value jsonRoot = web::json::value::parse(ss);
+                        web::json::value jsonMessage = jsonRoot.at(FROM_STD_STR("message"));
+                        web::json::value jsonCode = jsonRoot.at(FROM_STD_STR("code"));
 
-            default:
-                errMessage.append("\ngrpc code: ").append(std::to_string(reqContext->status.error_code()));
-                break;
-            }*/
+                        if (jsonMessage.is_string())
+                        {
+                            errMessage.append("message: ").append(TO_STD_STR(jsonMessage.as_string()));
+                        }
 
-            errMessage.append("\nbody: ").append(response->body);
+                        if (jsonCode.is_integer())
+                        {
+                            int serverErrCode = jsonCode.as_integer();
+
+                            switch (serverErrCode)
+                            {
+                            case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
+                            case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
+                            case grpc::StatusCode::NOT_FOUND        : code = ErrorCode::NotFound; break;
+                            case grpc::StatusCode::ALREADY_EXISTS   : code = ErrorCode::AlreadyExists; break;
+                            case grpc::StatusCode::INVALID_ARGUMENT : code = ErrorCode::InvalidArgument; break;
+                            case grpc::StatusCode::UNAUTHENTICATED  : code = ErrorCode::Unauthenticated; break;
+                            case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
+
+                            default:
+                                errMessage.append("\ncode: ").append(std::to_string(serverErrCode));
+                                break;
+                            }
+                        }
+                    }
+                    catch (exception& e)
+                    {
+                        NLOG_ERROR("exception: " + string(e.what()));
+                    }
+                }
+            }
+
+            if (errMessage.empty())
+            {
+                errMessage.append("message: ").append(response->errorMessage);
+                errMessage.append("\nHTTP status: ").append(std::to_string(response->statusCode));
+                errMessage.append("\nbody: ").append(response->body);
+            }
 
             reqError(reqContext, NError(std::move(errMessage), code));
         }
@@ -225,33 +274,32 @@ void RestClient::authenticateDevice(
 
     RestReqContext* ctx = createReqContext(nullptr);
     auto sessionData(make_shared<nakama::api::Session>());
+    ctx->data = sessionData.get();
 
     if (successCallback)
     {
         ctx->successCallback = [sessionData, successCallback](NHttpResponsePtr response)
         {
-            auto status = google::protobuf::util::JsonStringToMessage(response->body, sessionData.get());
-
             NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
             successCallback(session);
         };
     }
     ctx->errorCallback = errorCallback;
 
-    nakama::api::AuthenticateDeviceRequest req;
-
-    req.mutable_account()->set_id(id);
+    NHttpQueryArgs args;
 
     if (username)
-        req.set_username(*username);
+        args.emplace("username", *username);
 
     if (create)
-        req.mutable_create()->set_value(*create);
+    {
+        *create ? args.emplace("create", "true") : args.emplace("create", "false");
+    }
 
     string body("{\"id\":\"");
     body.append(id).append("\"}");
 
-    sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/device", std::move(body));
+    sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/device", std::move(body), std::move(args));
 }
 /*
 void RestClient::authenticateEmail(
@@ -1523,7 +1571,7 @@ void RestClient::listMatches(
 
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
-
+*/
 void RestClient::listNotifications(
     NSessionPtr session,
     const opt::optional<int32_t>& limit,
@@ -1534,10 +1582,11 @@ void RestClient::listNotifications(
 
     RestReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::NotificationList>());
+    ctx->data = data.get();
 
     if (successCallback)
     {
-        ctx->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback](NHttpResponsePtr response)
         {
             NNotificationListPtr list(new NNotificationList());
             assign(*list, *data);
@@ -1546,14 +1595,12 @@ void RestClient::listNotifications(
     }
     ctx->errorCallback = errorCallback;
 
-    nakama::api::ListNotificationsRequest req;
+    NHttpQueryArgs args;
 
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (cacheableCursor) req.set_cacheable_cursor(*cacheableCursor);
+    if (limit) args.emplace("limit", std::to_string(*limit));
+    if (cacheableCursor) args.emplace("cursor", *cacheableCursor);
 
-    auto responseReader = _stub->AsyncListNotifications(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    sendReq(ctx, NHttpReqMethod::GET, "/v2/notification", "", std::move(args));
 }
 
 void RestClient::deleteNotifications(NSessionPtr session, const std::vector<std::string>& notificationIds, std::function<void()> successCallback, ErrorCallback errorCallback)
@@ -1562,21 +1609,25 @@ void RestClient::deleteNotifications(NSessionPtr session, const std::vector<std:
 
     RestReqContext* ctx = createReqContext(session);
 
-    ctx->successCallback = successCallback;
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](NHttpResponsePtr response)
+        {
+            successCallback();
+        };
+    }
     ctx->errorCallback = errorCallback;
 
-    nakama::api::DeleteNotificationsRequest req;
+    NHttpQueryArgs args;
 
     for (auto& id : notificationIds)
     {
-        req.add_ids(id);
+        args.emplace("ids", id);
     }
 
-    auto responseReader = _stub->AsyncDeleteNotifications(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+    sendReq(ctx, NHttpReqMethod::DEL, "/v2/notification", "", std::move(args));
 }
-
+/*
 void RestClient::listChannelMessages(
     NSessionPtr session,
     const std::string & channelId,
@@ -1924,7 +1975,7 @@ void RestClient::deleteStorageObjects(NSessionPtr session, const std::vector<NDe
 
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
-
+*/
 void RestClient::rpc(
     NSessionPtr session,
     const std::string & id,
@@ -1935,10 +1986,11 @@ void RestClient::rpc(
 
     RestReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::Rpc>());
+    ctx->data = data.get();
 
     if (successCallback)
     {
-        ctx->successCallback = [data, successCallback]()
+        ctx->successCallback = [data, successCallback](NHttpResponsePtr response)
         {
             NRpc rpc;
             assign(rpc, *data);
@@ -1947,16 +1999,16 @@ void RestClient::rpc(
     }
     ctx->errorCallback = errorCallback;
 
-    nakama::api::Rpc req;
+    NHttpQueryArgs args;
+    string body;
+    string path("/v2/rpc/");
 
-    req.set_id(id);
+    path.append(id);
 
     if (payload)
-        req.set_payload(*payload);
+        body = *payload;
 
-    auto responseReader = _stub->AsyncRpcFunc(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
-}*/
+    sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body), std::move(args));
+}
 
 }

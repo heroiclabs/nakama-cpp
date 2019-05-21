@@ -19,7 +19,7 @@
 #include "nakama-cpp/realtime/NWebsockets.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/StrUtil.h"
-#include "nakama-cpp/Nakama.h"
+#include "nakama-cpp/NakamaVersion.h"
 #include "DefaultSession.h"
 #include "DataHelper.h"
 #include <grpc++/create_channel.h>
