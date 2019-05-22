@@ -661,8 +661,6 @@ void RestClient::linkEmail(
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        NHttpQueryArgs args;
-
         utility::stringstream_t ss;
         web::json::value jsonRoot = web::json::value::object();
 
@@ -673,7 +671,7 @@ void RestClient::linkEmail(
 
         string body = TO_STD_STR(ss.str());
 
-        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/email", std::move(body), std::move(args));
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/email", std::move(body));
     }
     catch (exception& e)
     {
@@ -1145,52 +1143,55 @@ void RestClient::updateAccount(
         NLOG_ERROR("exception: " + string(e.what()));
     }
 }
-/*
+
 void RestClient::getUsers(
     NSessionPtr session,
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames,
     const std::vector<std::string>& facebookIds,
     std::function<void(const NUsers&)> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto usersData(make_shared<nakama::api::Users>());
+        auto usersData(make_shared<nakama::api::Users>());
+        RestReqContext* ctx = createReqContext(session, usersData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [usersData, successCallback]()
+        if (successCallback)
         {
-            NUsers users;
-            assign(users, *usersData);
-            successCallback(users);
-        };
+            ctx->successCallback = [usersData, successCallback]()
+            {
+                NUsers users;
+                assign(users, *usersData);
+                successCallback(users);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        for (auto& id : ids)
+        {
+            args.emplace("ids", id);
+        }
+
+        for (auto& username : usernames)
+        {
+            args.emplace("usernames", username);
+        }
+
+        for (auto& facebookId : facebookIds)
+        {
+            args.emplace("facebook_ids", facebookId);
+        }
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/user", "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::GetUsersRequest req;
-
-    for (auto& id : ids)
+    catch (exception& e)
     {
-        req.mutable_ids()->Add()->assign(id);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    for (auto& username : usernames)
-    {
-        req.mutable_usernames()->Add()->assign(username);
-    }
-
-    for (auto& facebookId : facebookIds)
-    {
-        req.mutable_facebook_ids()->Add()->assign(facebookId);
-    }
-
-    auto responseReader = _stub->AsyncGetUsers(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*usersData), &ctx->status, (void*)ctx);
 }
 
 void RestClient::addFriends(
@@ -1198,31 +1199,34 @@ void RestClient::addFriends(
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames,
     std::function<void()> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AddFriendsRequest req;
+        NHttpQueryArgs args;
 
-    for (auto& id : ids)
-    {
-        req.mutable_ids()->Add()->assign(id);
+        for (auto& id : ids)
+        {
+            args.emplace("ids", id);
+        }
+
+        for (auto& username : usernames)
+        {
+            args.emplace("usernames", username);
+        }
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/friend", "", std::move(args));
     }
-
-    for (auto& username : usernames)
+    catch (exception& e)
     {
-        req.mutable_usernames()->Add()->assign(username);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    auto responseReader = _stub->AsyncAddFriends(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void RestClient::deleteFriends(
@@ -1230,31 +1234,34 @@ void RestClient::deleteFriends(
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames,
     std::function<void()> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::DeleteFriendsRequest req;
+        NHttpQueryArgs args;
 
-    for (auto& id : ids)
-    {
-        req.mutable_ids()->Add()->assign(id);
+        for (auto& id : ids)
+        {
+            args.emplace("ids", id);
+        }
+
+        for (auto& username : usernames)
+        {
+            args.emplace("usernames", username);
+        }
+
+        sendReq(ctx, NHttpReqMethod::DEL, "/v2/friend", "", std::move(args));
     }
-
-    for (auto& username : usernames)
+    catch (exception& e)
     {
-        req.mutable_usernames()->Add()->assign(username);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    auto responseReader = _stub->AsyncDeleteFriends(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void RestClient::blockFriends(
@@ -1264,53 +1271,61 @@ void RestClient::blockFriends(
     std::function<void()> successCallback,
     ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::BlockFriendsRequest req;
+        NHttpQueryArgs args;
 
-    for (auto& id : ids)
-    {
-        req.mutable_ids()->Add()->assign(id);
+        for (auto& id : ids)
+        {
+            args.emplace("ids", id);
+        }
+
+        for (auto& username : usernames)
+        {
+            args.emplace("usernames", username);
+        }
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/friend/block", "", std::move(args));
     }
-
-    for (auto& username : usernames)
+    catch (exception& e)
     {
-        req.mutable_usernames()->Add()->assign(username);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    auto responseReader = _stub->AsyncBlockFriends(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void RestClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::Friends>());
+        auto data(make_shared<nakama::api::Friends>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NFriendsPtr friends(new NFriends());
-            assign(*friends, *data);
-            successCallback(friends);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NFriendsPtr friends(new NFriends());
+                assign(*friends, *data);
+                successCallback(friends);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/friend", "");
     }
-    ctx->errorCallback = errorCallback;
-
-    auto responseReader = _stub->AsyncListFriends(&ctx->context, {}, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
-
+/*
 void RestClient::createGroup(
     NSessionPtr session,
     const std::string & name,

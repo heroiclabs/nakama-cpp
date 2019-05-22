@@ -258,7 +258,7 @@ namespace Nakama {
             const std::vector<std::string>& facebookIds,
             std::function<void(const NUsers&)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void addFriends(
             NSessionPtr session,
@@ -266,7 +266,7 @@ namespace Nakama {
             const std::vector<std::string>& usernames,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void deleteFriends(
             NSessionPtr session,
@@ -274,7 +274,7 @@ namespace Nakama {
             const std::vector<std::string>& usernames,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void blockFriends(
             NSessionPtr session,
@@ -282,13 +282,13 @@ namespace Nakama {
             const std::vector<std::string>& usernames,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listFriends(
             NSessionPtr session,
             std::function<void(NFriendsPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void createGroup(
             NSessionPtr session,
