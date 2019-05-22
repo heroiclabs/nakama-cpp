@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/Nakama.h"
+#include "nakama-cpp/NakamaVersion.h"
 
 namespace Nakama {
 
