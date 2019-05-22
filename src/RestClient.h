@@ -26,7 +26,7 @@ namespace Nakama {
     struct RestReqContext
     {
         std::string auth;
-        std::function<void(NHttpResponsePtr)> successCallback;
+        std::function<void()> successCallback;
         ErrorCallback errorCallback;
         google::protobuf::Message* data = nullptr;
     };
@@ -66,7 +66,7 @@ namespace Nakama {
             bool create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void authenticateFacebook(
             const std::string& accessToken,
@@ -75,7 +75,7 @@ namespace Nakama {
             bool importFriends,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void authenticateGoogle(
             const std::string& accessToken,
@@ -83,7 +83,7 @@ namespace Nakama {
             bool create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void authenticateGameCenter(
             const std::string& playerId,
@@ -96,7 +96,7 @@ namespace Nakama {
             bool create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void authenticateCustom(
             const std::string& id,
@@ -104,7 +104,7 @@ namespace Nakama {
             bool create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void authenticateSteam(
             const std::string& token,
@@ -112,7 +112,7 @@ namespace Nakama {
             bool create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void linkFacebook(
             NSessionPtr session,
@@ -237,7 +237,7 @@ namespace Nakama {
             NSessionPtr session,
             std::function<void(const NAccount&)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
-        ) override {}
+        ) override;
 
         void updateAccount(
             NSessionPtr session,
@@ -249,7 +249,7 @@ namespace Nakama {
             const opt::optional<std::string>& timezone,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void getUsers(
             NSessionPtr session,
@@ -556,7 +556,7 @@ namespace Nakama {
         ) override;
 
     private:
-        RestReqContext* createReqContext(NSessionPtr session);
+        RestReqContext* createReqContext(NSessionPtr session, google::protobuf::Message* data);
 
         void sendReq(
             RestReqContext* ctx,
