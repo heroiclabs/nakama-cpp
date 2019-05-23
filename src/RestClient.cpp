@@ -1659,7 +1659,7 @@ void RestClient::updateGroup(
         NLOG_ERROR("exception: " + string(e.what()));
     }
 }
-/*
+
 void RestClient::listLeaderboardRecords(
     NSessionPtr session,
     const std::string & leaderboardId,
@@ -1668,67 +1668,75 @@ void RestClient::listLeaderboardRecords(
     const opt::optional<std::string>& cursor,
     std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::LeaderboardRecordList>());
+        auto data(make_shared<nakama::api::LeaderboardRecordList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        for (auto& id : ownerIds)
+        {
+            args.emplace("owner_ids", id);
+        }
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (cursor) args.emplace("cursor", *cursor);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/leaderboard/" + leaderboardId, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListLeaderboardRecordsRequest req;
-
-    req.set_leaderboard_id(leaderboardId);
-
-    for (auto& id : ownerIds)
+    catch (exception& e)
     {
-        req.add_owner_ids(id);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (cursor) req.set_cursor(*cursor);
-
-    auto responseReader = _stub->AsyncListLeaderboardRecords(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void RestClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const std::string & leaderboardId, const std::string & ownerId, const opt::optional<int32_t>& limit, std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
+void RestClient::listLeaderboardRecordsAroundOwner(
+    NSessionPtr session,
+    const std::string & leaderboardId,
+    const std::string & ownerId,
+    const opt::optional<int32_t>& limit,
+    std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::LeaderboardRecordList>());
+        auto data(make_shared<nakama::api::LeaderboardRecordList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/leaderboard/" + leaderboardId + "/owner/" + ownerId, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListLeaderboardRecordsAroundOwnerRequest req;
-
-    req.set_leaderboard_id(leaderboardId);
-    req.set_owner_id(ownerId);
-
-    if (limit) req.mutable_limit()->set_value(*limit);
-
-    auto responseReader = _stub->AsyncListLeaderboardRecordsAroundOwner(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::writeLeaderboardRecord(
@@ -1739,32 +1747,40 @@ void RestClient::writeLeaderboardRecord(
     const opt::optional<std::string>& metadata,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::LeaderboardRecord>());
+        auto data(make_shared<nakama::api::LeaderboardRecord>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NLeaderboardRecord record;
-            assign(record, *data);
-            successCallback(record);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NLeaderboardRecord record;
+                assign(record, *data);
+                successCallback(record);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("score")] = web::json::value(FROM_STD_STR(std::to_string(score)));
+        if (subscore) jsonRoot[FROM_STD_STR("subscore")] = web::json::value(FROM_STD_STR(std::to_string(*subscore)));
+        if (metadata) jsonRoot[FROM_STD_STR("metadata")] = web::json::value(FROM_STD_STR(*metadata));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/leaderboard/" + leaderboardId, std::move(body));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::WriteLeaderboardRecordRequest req;
-
-    req.set_leaderboard_id(leaderboardId);
-    req.mutable_record()->set_score(score);
-    if (subscore) req.mutable_record()->set_subscore(*subscore);
-    if (metadata) req.mutable_record()->set_metadata(*metadata);
-
-    auto responseReader = _stub->AsyncWriteLeaderboardRecord(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::writeTournamentRecord(
@@ -1775,52 +1791,60 @@ void RestClient::writeTournamentRecord(
     const opt::optional<std::string>& metadata,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::LeaderboardRecord>());
+        auto data(make_shared<nakama::api::LeaderboardRecord>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NLeaderboardRecord record;
-            assign(record, *data);
-            successCallback(record);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NLeaderboardRecord record;
+                assign(record, *data);
+                successCallback(record);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("score")] = web::json::value(FROM_STD_STR(std::to_string(score)));
+        if (subscore) jsonRoot[FROM_STD_STR("subscore")] = web::json::value(FROM_STD_STR(std::to_string(*subscore)));
+        if (metadata) jsonRoot[FROM_STD_STR("metadata")] = web::json::value(FROM_STD_STR(*metadata));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::PUT, "/v2/tournament/" + tournamentId, std::move(body));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::WriteTournamentRecordRequest req;
-
-    req.set_tournament_id(tournamentId);
-    req.mutable_record()->set_score(score);
-    if (subscore) req.mutable_record()->set_subscore(*subscore);
-    if (metadata) req.mutable_record()->set_metadata(*metadata);
-
-    auto responseReader = _stub->AsyncWriteTournamentRecord(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::deleteLeaderboardRecord(NSessionPtr session, const std::string & leaderboardId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::DeleteLeaderboardRecordRequest req;
-
-    req.set_leaderboard_id(leaderboardId);
-
-    auto responseReader = _stub->AsyncDeleteLeaderboardRecord(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        sendReq(ctx, NHttpReqMethod::DEL, "/v2/leaderboard/" + leaderboardId, "");
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
-
+/*
 void RestClient::listMatches(
     NSessionPtr session,
     const opt::optional<int32_t>& min_size,
@@ -1989,7 +2013,7 @@ void RestClient::listTournaments(
 
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
-
+*/
 void RestClient::listTournamentRecords(
     NSessionPtr session,
     const std::string & tournamentId,
@@ -1998,37 +2022,39 @@ void RestClient::listTournamentRecords(
     const std::vector<std::string>& ownerIds,
     std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::TournamentRecordList>());
+        auto data(make_shared<nakama::api::TournamentRecordList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NTournamentRecordListPtr list(new NTournamentRecordList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NTournamentRecordListPtr list(new NTournamentRecordList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (cursor) args.emplace("cursor", *cursor);
+
+        for (auto& id : ownerIds)
+        {
+            args.emplace("owner_ids", id);
+        }
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament/" + tournamentId, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListTournamentRecordsRequest req;
-
-    req.set_tournament_id(tournamentId);
-
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (cursor) req.set_cursor(*cursor);
-
-    for (auto& id : ownerIds)
+    catch (exception& e)
     {
-        req.add_owner_ids(id);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    auto responseReader = _stub->AsyncListTournamentRecords(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void RestClient::listTournamentRecordsAroundOwner(
@@ -2038,34 +2064,35 @@ void RestClient::listTournamentRecordsAroundOwner(
     const opt::optional<int32_t>& limit,
     std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::TournamentRecordList>());
+        auto data(make_shared<nakama::api::TournamentRecordList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NTournamentRecordListPtr list(new NTournamentRecordList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NTournamentRecordListPtr list(new NTournamentRecordList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament/" + tournamentId + "/owner/" + ownerId, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListTournamentRecordsAroundOwnerRequest req;
-
-    req.set_tournament_id(tournamentId);
-    req.set_owner_id(ownerId);
-
-    if (limit) req.mutable_limit()->set_value(*limit);
-
-    auto responseReader = _stub->AsyncListTournamentRecordsAroundOwner(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
-
+/*
 void RestClient::joinTournament(NSessionPtr session, const std::string & tournamentId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
@@ -2284,7 +2311,6 @@ void RestClient::rpc(
     }
     ctx->errorCallback = errorCallback;
 
-    NHttpQueryArgs args;
     string body;
     string path("/v2/rpc/");
 
@@ -2293,7 +2319,7 @@ void RestClient::rpc(
     if (payload)
         body = *payload;
 
-    sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body), std::move(args));
+    sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body));
 }
 
 }

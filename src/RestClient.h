@@ -395,7 +395,7 @@ namespace Nakama {
             const opt::optional<std::string>& cursor,
             std::function<void(NLeaderboardRecordListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listLeaderboardRecordsAroundOwner(
             NSessionPtr session,
@@ -404,7 +404,7 @@ namespace Nakama {
             const opt::optional<int32_t>& limit,
             std::function<void(NLeaderboardRecordListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void writeLeaderboardRecord(
             NSessionPtr session,
@@ -414,7 +414,7 @@ namespace Nakama {
             const opt::optional<std::string>& metadata,
             std::function<void(NLeaderboardRecord)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void writeTournamentRecord(
             NSessionPtr session,
@@ -424,14 +424,14 @@ namespace Nakama {
             const opt::optional<std::string>& metadata,
             std::function<void(NLeaderboardRecord)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void deleteLeaderboardRecord(
             NSessionPtr session,
             const std::string& leaderboardId,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listMatches(
             NSessionPtr session,
@@ -489,7 +489,7 @@ namespace Nakama {
             const std::vector<std::string>& ownerIds,
             std::function<void(NTournamentRecordListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listTournamentRecordsAroundOwner(
             NSessionPtr session,
@@ -498,7 +498,7 @@ namespace Nakama {
             const opt::optional<int32_t>& limit,
             std::function<void(NTournamentRecordListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void joinTournament(
             NSessionPtr session,
