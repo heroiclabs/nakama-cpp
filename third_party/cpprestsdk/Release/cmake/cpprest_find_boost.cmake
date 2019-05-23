@@ -28,7 +28,6 @@ function(cpprest_find_boost)
       set(IOS_SOURCE_DIR "${PROJECT_SOURCE_DIR}/../Build_iOS")
       set(Boost_LIBRARIES
         "${IOS_SOURCE_DIR}/boost/lib/libboost_system.a"
-        "${IOS_SOURCE_DIR}/boost/lib/libboost_atomic.a"
         "${IOS_SOURCE_DIR}/boost/lib/libboost_thread.a"
         "${IOS_SOURCE_DIR}/boost/lib/libboost_chrono.a"
          CACHE INTERNAL "")
