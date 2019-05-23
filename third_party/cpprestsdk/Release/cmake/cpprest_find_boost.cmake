@@ -57,6 +57,12 @@ function(cpprest_find_boost)
   endif()
 
   add_library(cpprestsdk_boost_internal INTERFACE)
+  
+  if(WIN32)
+    # disable automatic linking
+    target_compile_definitions(cpprestsdk_boost_internal INTERFACE BOOST_ALL_NO_LIB)
+  endif()
+  
   # FindBoost continually breaks imported targets whenever boost updates.
   if(1)
     target_include_directories(cpprestsdk_boost_internal INTERFACE "$<BUILD_INTERFACE:${Boost_INCLUDE_DIR}>")
