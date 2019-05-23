@@ -17,7 +17,7 @@ cmake_minimum_required(VERSION 3.10)
 
 cmake_policy(SET CMP0074 NEW)
 
-project(nakama-cpp VERSION 2.0.3 DESCRIPTION "Nakama C++ Client" LANGUAGES CXX)
+project(nakama-cpp VERSION 2.1.0 DESCRIPTION "Nakama C++ Client" LANGUAGES CXX)
 
 include(windows_support)
 
