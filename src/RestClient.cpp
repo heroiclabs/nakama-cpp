@@ -48,8 +48,12 @@ RestClient::RestClient(const DefaultClientParameters& parameters, NHttpClientPtr
 {
     std::string baseUrl;
 
+    int port = parameters.port;
+    if (port <= 0)
+        port = 7350;
+
     _ssl ? baseUrl.append("https") : baseUrl.append("http");
-    baseUrl.append("://").append(parameters.host).append(":").append(std::to_string(parameters.port));
+    baseUrl.append("://").append(parameters.host).append(":").append(std::to_string(port));
 
     _httpClient->setBaseUri(baseUrl);
 
