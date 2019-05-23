@@ -148,6 +148,7 @@ void NTest::stopTest(bool succeeded)
     {
         ++g_failedTestsCount;
         printTestName("Failed");
+        abort();
     }
 
     cout << endl << endl;
