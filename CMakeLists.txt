@@ -61,11 +61,11 @@ add_subdirectory(${THIRD_PARTY_DIR}/grpc)
 
 if(BUILD_REST_CLIENT OR BUILD_WEBSOCKET_CPPREST)
     set(OPENSSL_INCLUDE_DIR ${THIRD_PARTY_DIR}/grpc/third_party/boringssl/include)
-    set(OPENSSL_LIBRARIES "")
     set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
     set(BUILD_SAMPLES OFF CACHE BOOL "" FORCE)
     set(WERROR OFF CACHE BOOL "" FORCE)
     set(CPPREST_EXCLUDE_COMPRESSION ON CACHE BOOL "" FORCE)
+    set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
     add_subdirectory(${THIRD_PARTY_DIR}/cpprestsdk)
 endif()
 
