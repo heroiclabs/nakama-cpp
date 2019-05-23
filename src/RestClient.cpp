@@ -1844,7 +1844,7 @@ void RestClient::deleteLeaderboardRecord(NSessionPtr session, const std::string 
         NLOG_ERROR("exception: " + string(e.what()));
     }
 }
-/*
+
 void RestClient::listMatches(
     NSessionPtr session,
     const opt::optional<int32_t>& min_size,
@@ -1854,35 +1854,39 @@ void RestClient::listMatches(
     const opt::optional<bool>& authoritative,
     std::function<void(NMatchListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::MatchList>());
+        auto data(make_shared<nakama::api::MatchList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NMatchListPtr match_list(new NMatchList());
-            assign(*match_list, *data);
-            successCallback(match_list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NMatchListPtr match_list(new NMatchList());
+                assign(*match_list, *data);
+                successCallback(match_list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (min_size) args.emplace("min_size", std::to_string(*min_size));
+        if (max_size) args.emplace("max_size", std::to_string(*max_size));
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (label) args.emplace("label", *label);
+        if (authoritative) AddBoolArg(args, "authoritative", *authoritative);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/match", "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListMatchesRequest req;
-
-    if (min_size) req.mutable_min_size()->set_value(*min_size);
-    if (max_size) req.mutable_max_size()->set_value(*max_size);
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (label) req.mutable_label()->set_value(*label);
-    if (authoritative) req.mutable_authoritative()->set_value(*authoritative);
-
-    auto responseReader = _stub->AsyncListMatches(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
-*/
+
 void RestClient::listNotifications(
     NSessionPtr session,
     const opt::optional<int32_t>& limit,

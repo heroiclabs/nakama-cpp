@@ -442,7 +442,7 @@ namespace Nakama {
             const opt::optional<bool>& authoritative,
             std::function<void(NMatchListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listNotifications(
             NSessionPtr session,
