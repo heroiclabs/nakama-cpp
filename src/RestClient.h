@@ -299,14 +299,14 @@ namespace Nakama {
             bool open,
             std::function<void(const NGroup&)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void deleteGroup(
             NSessionPtr session,
             const std::string& groupId,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void addGroupUsers(
             NSessionPtr session,
@@ -314,14 +314,14 @@ namespace Nakama {
             const std::vector<std::string>& ids,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listGroupUsers(
             NSessionPtr session,
             const std::string& groupId,
             std::function<void(NGroupUserListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void kickGroupUsers(
             NSessionPtr session,
@@ -329,21 +329,21 @@ namespace Nakama {
             const std::vector<std::string>& ids,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void joinGroup(
             NSessionPtr session,
             const std::string& groupId,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void leaveGroup(
             NSessionPtr session,
             const std::string& groupId,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listGroups(
             NSessionPtr session,
@@ -352,20 +352,20 @@ namespace Nakama {
             const std::string& cursor,
             std::function<void(NGroupListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listUserGroups(
             NSessionPtr session,
             std::function<void(NUserGroupListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listUserGroups(
             NSessionPtr session,
             const std::string& userId,
             std::function<void(NUserGroupListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void promoteGroupUsers(
             NSessionPtr session,
@@ -373,7 +373,7 @@ namespace Nakama {
             const std::vector<std::string>& ids,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void updateGroup(
             NSessionPtr session,
@@ -385,7 +385,7 @@ namespace Nakama {
             const opt::optional<bool>& open,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listLeaderboardRecords(
             NSessionPtr session,

@@ -1325,7 +1325,7 @@ void RestClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr
         NLOG_ERROR("exception: " + string(e.what()));
     }
 }
-/*
+
 void RestClient::createGroup(
     NSessionPtr session,
     const std::string & name,
@@ -1334,66 +1334,66 @@ void RestClient::createGroup(
     const std::string & langTag,
     bool open,
     std::function<void(const NGroup&)> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto groupData(make_shared<nakama::api::Group>());
+        auto groupData(make_shared<nakama::api::Group>());
+        RestReqContext* ctx = createReqContext(session, groupData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [groupData, successCallback]()
+        if (successCallback)
         {
-            NGroup group;
-            assign(group, *groupData);
-            successCallback(group);
-        };
+            ctx->successCallback = [groupData, successCallback]()
+            {
+                NGroup group;
+                assign(group, *groupData);
+                successCallback(group);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("name")] = web::json::value(FROM_STD_STR(name));
+        jsonRoot[FROM_STD_STR("description")] = web::json::value(FROM_STD_STR(description));
+        jsonRoot[FROM_STD_STR("avatar_url")] = web::json::value(FROM_STD_STR(avatarUrl));
+        jsonRoot[FROM_STD_STR("lang_tag")] = web::json::value(FROM_STD_STR(langTag));
+        jsonRoot[FROM_STD_STR("open")] = web::json::value(open);
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group", std::move(body));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::CreateGroupRequest req;
-
-    req.set_name(name);
-
-    if (!description.empty())
-        req.set_description(description);
-
-    if (!avatarUrl.empty())
-        req.set_avatar_url(avatarUrl);
-
-    if (!langTag.empty())
-        req.set_lang_tag(langTag);
-
-    req.set_open(open);
-
-    auto responseReader = _stub->AsyncCreateGroup(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::deleteGroup(
     NSessionPtr session,
     const std::string & groupId,
     std::function<void()> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::DeleteGroupRequest req;
-
-    req.set_group_id(groupId);
-
-    auto responseReader = _stub->AsyncDeleteGroup(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        sendReq(ctx, NHttpReqMethod::DEL, "/v2/group/" + groupId, "");
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::addGroupUsers(
@@ -1401,147 +1401,150 @@ void RestClient::addGroupUsers(
     const std::string & groupId,
     const std::vector<std::string>& ids,
     std::function<void()> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AddGroupUsersRequest req;
+        NHttpQueryArgs args;
 
-    req.set_group_id(groupId);
+        for (auto& id : ids)
+        {
+            args.emplace("user_ids", id);
+        }
 
-    for (auto& id : ids)
-    {
-        req.add_user_ids(id);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/add", "", std::move(args));
     }
-
-    auto responseReader = _stub->AsyncAddGroupUsers(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::listGroupUsers(NSessionPtr session, const std::string & groupId, std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto groupData(make_shared<nakama::api::GroupUserList>());
+        auto groupData(make_shared<nakama::api::GroupUserList>());
+        RestReqContext* ctx = createReqContext(session, groupData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [groupData, successCallback]()
+        if (successCallback)
         {
-            NGroupUserListPtr users(new NGroupUserList());
-            assign(*users, *groupData);
-            successCallback(users);
-        };
+            ctx->successCallback = [groupData, successCallback]()
+            {
+                NGroupUserListPtr users(new NGroupUserList());
+                assign(*users, *groupData);
+                successCallback(users);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/group/" + groupId + "/user", "");
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListGroupUsersRequest req;
-
-    req.set_group_id(groupId);
-
-    auto responseReader = _stub->AsyncListGroupUsers(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::kickGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::KickGroupUsersRequest req;
+        NHttpQueryArgs args;
 
-    req.set_group_id(groupId);
+        for (auto& id : ids)
+        {
+            args.emplace("user_ids", id);
+        }
 
-    for (auto& id : ids)
-    {
-        req.add_user_ids(id);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/kick", "", std::move(args));
     }
-
-    auto responseReader = _stub->AsyncKickGroupUsers(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::joinGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::JoinGroupRequest req;
-
-    req.set_group_id(groupId);
-
-    auto responseReader = _stub->AsyncJoinGroup(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/join", "");
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::leaveGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::LeaveGroupRequest req;
-
-    req.set_group_id(groupId);
-
-    auto responseReader = _stub->AsyncLeaveGroup(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/leave", "");
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto groupData(make_shared<nakama::api::GroupList>());
+        auto groupData(make_shared<nakama::api::GroupList>());
+        RestReqContext* ctx = createReqContext(session, groupData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [groupData, successCallback]()
+        if (successCallback)
         {
-            NGroupListPtr groups(new NGroupList());
-            assign(*groups, *groupData);
-            successCallback(groups);
-        };
+            ctx->successCallback = [groupData, successCallback]()
+            {
+                NGroupListPtr groups(new NGroupList());
+                assign(*groups, *groupData);
+                successCallback(groups);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (!name.empty()) args.emplace("name", name);
+        if (!cursor.empty()) args.emplace("cursor", cursor);
+        if (limit > 0) args.emplace("limit", std::to_string(limit));
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/group", "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListGroupsRequest req;
-
-    req.set_name(name);
-
-    if (limit > 0)
-        req.mutable_limit()->set_value(limit);
-
-    if (!cursor.empty())
-        req.set_cursor(cursor);
-
-    auto responseReader = _stub->AsyncListGroups(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::listUserGroups(NSessionPtr session, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
@@ -1565,52 +1568,54 @@ void RestClient::listUserGroups(NSessionPtr session, std::function<void(NUserGro
 
 void RestClient::listUserGroups(NSessionPtr session, const std::string & userId, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto groupData(make_shared<nakama::api::UserGroupList>());
+        auto groupData(make_shared<nakama::api::UserGroupList>());
+        RestReqContext* ctx = createReqContext(session, groupData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [groupData, successCallback]()
+        if (successCallback)
         {
-            NUserGroupListPtr groups(new NUserGroupList());
-            assign(*groups, *groupData);
-            successCallback(groups);
-        };
+            ctx->successCallback = [groupData, successCallback]()
+            {
+                NUserGroupListPtr groups(new NUserGroupList());
+                assign(*groups, *groupData);
+                successCallback(groups);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/user/" + userId + "/group", "");
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListUserGroupsRequest req;
-
-    req.set_user_id(userId);
-
-    auto responseReader = _stub->AsyncListUserGroups(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::promoteGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::PromoteGroupUsersRequest req;
+        NHttpQueryArgs args;
 
-    req.set_group_id(groupId);
+        for (auto& id : ids)
+        {
+            args.emplace("user_ids", id);
+        }
 
-    for (auto& id : ids)
-    {
-        req.add_user_ids(id);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/promote", "", std::move(args));
     }
-
-    auto responseReader = _stub->AsyncPromoteGroupUsers(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::updateGroup(
@@ -1622,31 +1627,39 @@ void RestClient::updateGroup(
     const opt::optional<std::string>& langTag,
     const opt::optional<bool>& open,
     std::function<void()> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::UpdateGroupRequest req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_group_id(groupId);
+        jsonRoot[FROM_STD_STR("group_id")] = web::json::value(FROM_STD_STR(groupId));
 
-    if (name) req.mutable_name()->set_value(*name);
-    if (description) req.mutable_description()->set_value(*description);
-    if (avatarUrl) req.mutable_avatar_url()->set_value(*avatarUrl);
-    if (langTag) req.mutable_lang_tag()->set_value(*langTag);
-    if (open) req.mutable_open()->set_value(*open);
+        if (name) jsonRoot[FROM_STD_STR("name")] = web::json::value(FROM_STD_STR(*name));
+        if (description) jsonRoot[FROM_STD_STR("description")] = web::json::value(FROM_STD_STR(*description));
+        if (avatarUrl) jsonRoot[FROM_STD_STR("avatar_url")] = web::json::value(FROM_STD_STR(*avatarUrl));
+        if (langTag) jsonRoot[FROM_STD_STR("lang_tag")] = web::json::value(FROM_STD_STR(*langTag));
+        if (open) jsonRoot[FROM_STD_STR("open")] = web::json::value(*open);
 
-    auto responseReader = _stub->AsyncUpdateGroup(&ctx->context, req, &_cq);
+        jsonRoot.serialize(ss);
 
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::PUT, "/v2/group/" + groupId, std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
-
+/*
 void RestClient::listLeaderboardRecords(
     NSessionPtr session,
     const std::string & leaderboardId,
