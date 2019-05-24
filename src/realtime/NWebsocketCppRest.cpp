@@ -53,10 +53,7 @@ void NWebsocketCppRest::tick()
         
         if (_settings.intervalSec > 0 && getUnixTimestampMs()-_lastSentPingTimeMs >= 1000*_settings.intervalSec)
         {
-            if (sendPing())
-            {
-                _lastSentPingTimeMs = getUnixTimestampMs();
-            }
+            sendPing();
         }
     }
 
@@ -311,6 +308,11 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
     {
         addErrorEvent("[NWebsocketCppRest::onSocketMessage] exception: " + std::string(e.what()));
     }
+}
+
+void NWebsocketCppRest::onPongTimeout(const std::string& msg)
+{
+    disconnect();
 }
 
 // might be executed from internal thread of WsClient

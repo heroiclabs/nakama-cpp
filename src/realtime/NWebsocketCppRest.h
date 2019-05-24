@@ -49,8 +49,6 @@ namespace Nakama {
             const utility::string_t& reason,
             const std::error_code& error);
         void onSocketMessage(const web::websockets::client::websocket_incoming_message& msg);
-        bool onPing(const std::string& msg);
-        void onPong(const std::string& msg);
         void onPongTimeout(const std::string& msg);
 
         void addErrorEvent(std::string&& err);
