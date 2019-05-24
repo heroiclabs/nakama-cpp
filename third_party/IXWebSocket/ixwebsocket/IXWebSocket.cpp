@@ -142,9 +142,10 @@ namespace ix
         _thread = std::thread(&WebSocket::run, this);
     }
 
-    void WebSocket::stop()
+    void WebSocket::stop(uint16_t code,
+                         const std::string& reason)
     {
-        close();
+        close(code, reason);
 
         if (_thread.joinable())
         {
@@ -212,9 +213,10 @@ namespace ix
         return getReadyState() == ReadyState::Closing;
     }
 
-    void WebSocket::close()
+    void WebSocket::close(uint16_t code,
+                          const std::string& reason)
     {
-        _ws.close();
+        _ws.close(code, reason);
     }
 
     void WebSocket::checkConnection(bool firstConnectionAttempt)
@@ -261,7 +263,7 @@ namespace ix
                     connectErr.wait_time = duration.count();
                     connectErr.retries = retries;
                 }
-                
+
                 connectErr.reason      = status.errorStr;
                 connectErr.http_status = status.http_status;
 
@@ -290,6 +292,9 @@ namespace ix
             {
                 break;
             }
+
+            // We can avoid to poll if we want to stop and are not closing
+            if (_stop && !isClosing()) break;
 
             // 2. Poll to see if there's any new data available
             WebSocketTransport::PollResult pollResult = _ws.poll();
@@ -458,7 +463,7 @@ namespace ix
         _automaticReconnection = false;
     }
 
-    bool WebSocket::isEnabledAutomaticReconnection() const
+    bool WebSocket::isAutomaticReconnectionEnabled() const
     {
         return _automaticReconnection;
     }

@@ -25,6 +25,7 @@
 #include "IXCancellationRequest.h"
 #include "IXWebSocketHandshake.h"
 #include "IXProgressCallback.h"
+#include "IXWebSocketCloseConstants.h"
 
 namespace ix
 {
@@ -91,10 +92,13 @@ namespace ix
                                    const OnProgressCallback& onProgressCallback);
         WebSocketSendInfo sendPing(const std::string& message);
 
-        void close(uint16_t code = 1000,
-                   const std::string& reason = "Normal closure",
+        void close(uint16_t code = WebSocketCloseConstants::kNormalClosureCode,
+                   const std::string& reason = WebSocketCloseConstants::kNormalClosureMessage,
                    size_t closeWireSize = 0,
                    bool remote = false);
+
+        void closeSocket();
+        ssize_t send();
 
         ReadyState getReadyState() const;
         void setReadyState(ReadyState readyState);
@@ -151,6 +155,7 @@ namespace ix
 
         // Underlying TCP socket
         std::shared_ptr<Socket> _socket;
+        std::mutex _socketMutex;
 
         // Hold the state of the connection (OPEN, CLOSED, etc...)
         std::atomic<ReadyState> _readyState;
@@ -169,21 +174,10 @@ namespace ix
 
         // Used to cancel dns lookup + socket connect + http upgrade
         std::atomic<bool> _requestInitCancellation;
-              
+
         mutable std::mutex _closingTimePointMutex;
         std::chrono::time_point<std::chrono::steady_clock>_closingTimePoint;
         static const int kClosingMaximumWaitingDelayInMs;
-
-        // Constants for dealing with closing conneections
-        static const uint16_t kInternalErrorCode;
-        static const uint16_t kAbnormalCloseCode;
-        static const uint16_t kProtocolErrorCode;
-        static const uint16_t kNoStatusCodeErrorCode;
-        static const std::string kInternalErrorMessage;
-        static const std::string kAbnormalCloseMessage;
-        static const std::string kPingTimeoutMessage;
-        static const std::string kProtocolErrorMessage;
-        static const std::string kNoStatusCodeErrorMessage;
 
         // enable auto response to ping
         std::atomic<bool> _enablePong;

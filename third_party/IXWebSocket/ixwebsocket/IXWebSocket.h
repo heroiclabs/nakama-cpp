@@ -19,6 +19,7 @@
 #include "IXWebSocketSendInfo.h"
 #include "IXWebSocketPerMessageDeflateOptions.h"
 #include "IXWebSocketHttpHeaders.h"
+#include "IXWebSocketCloseConstants.h"
 #include "IXProgressCallback.h"
 
 namespace ix
@@ -99,8 +100,10 @@ namespace ix
 
         // Run asynchronously, by calling start and stop.
         void start();
+
         // stop is synchronous
-        void stop();
+        void stop(uint16_t code = WebSocketCloseConstants::kNormalClosureCode,
+                  const std::string& reason = WebSocketCloseConstants::kNormalClosureMessage);
 
         // Run in blocking mode, by connecting first manually, and then calling run.
         WebSocketInitResult connect(int timeoutSecs);
@@ -112,13 +115,11 @@ namespace ix
         WebSocketSendInfo sendText(const std::string& text,
                                    const OnProgressCallback& onProgressCallback = nullptr);
         WebSocketSendInfo ping(const std::string& text);
-        void close();
 
-        // Set callback to receive websocket messages.
-        // Be aware: your callback will be executed from websocket's internal thread!
-        // To receive message events in your thread, look at WebSocketMessageQueue class
+        void close(uint16_t code = 1000,
+                   const std::string& reason = "Normal closure");
+
         void setOnMessageCallback(const OnMessageCallback& callback);
-
         static void setTrafficTrackerCallback(const OnTrafficTrackerCallback& callback);
         static void resetTrafficTrackerCallback();
 
@@ -134,7 +135,7 @@ namespace ix
 
         void enableAutomaticReconnection();
         void disableAutomaticReconnection();
-        bool isEnabledAutomaticReconnection() const;
+        bool isAutomaticReconnectionEnabled() const;
 
     private:
 
