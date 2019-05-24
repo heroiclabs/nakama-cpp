@@ -105,29 +105,6 @@ if [ ! -e $ABS_PATH/boost.framework ] && [ ! -d $ABS_PATH/boost ]; then
     mv ${ABS_PATH}/boost.headers ${ABS_PATH}/boost.framework/Versions/A/Headers/boost
 fi
 
-## Build OpenSSL
-
-if [ ! -e ${ABS_PATH}/openssl/lib/libcrypto.a ]; then
-    if [ ! -d "${ABS_PATH}/OpenSSL-for-iPhone" ]; then
-       git clone --depth=1 https://github.com/x2on/OpenSSL-for-iPhone.git ${ABS_PATH}/OpenSSL-for-iPhone
-    fi
-    pushd ${ABS_PATH}/OpenSSL-for-iPhone
-    git checkout 10019638e80e8a8a5fc19642a840d8a69fac7349
-    ./build-libssl.sh --version=${OPENSSL_VERSION}
-    popd
-    mkdir -p ${ABS_PATH}/openssl/lib
-    if [ -e ${ABS_PATH}/OpenSSL-for-iPhone/bin/iPhoneOS${IOS_SDK_VERSION}-arm64.sdk/include ]
-    then
-        cp -r ${ABS_PATH}/OpenSSL-for-iPhone/bin/iPhoneOS${IOS_SDK_VERSION}-arm64.sdk/include ${ABS_PATH}/openssl
-    else
-        echo 'Could not find OpenSSL for iPhone'
-        exit 1
-    fi
-    cp ${ABS_PATH}/OpenSSL-for-iPhone/include/LICENSE ${ABS_PATH}/openssl
-    lipo -create -output ${ABS_PATH}/openssl/lib/libssl.a ${ABS_PATH}/OpenSSL-for-iPhone/bin/iPhone*/lib/libssl.a
-    lipo -create -output ${ABS_PATH}/openssl/lib/libcrypto.a ${ABS_PATH}/OpenSSL-for-iPhone/bin/iPhone*/lib/libcrypto.a
-fi
-
 ## Fetch CMake toolchain
 
 if [ ! -e ${ABS_PATH}/ios-cmake/ios.toolchain.cmake ]; then
@@ -137,16 +114,6 @@ if [ ! -e ${ABS_PATH}/ios-cmake/ios.toolchain.cmake ]; then
     pushd ${ABS_PATH}/ios-cmake
     git checkout 2.1.2
     popd
-fi
-
-## Build CPPRestSDK
-if [ -d "${ABS_PATH}/build.${CPPRESTSDK_BUILD_TYPE}.ios" ]; then
-    if [ "$CLEAN" -eq 1 ]; then
-        echo "Removing directory ${ABS_PATH}/build.${CPPRESTSDK_BUILD_TYPE}.ios prior to configuring."
-        rm -rf "${ABS_PATH}/build.${CPPRESTSDK_BUILD_TYPE}.ios"
-    else
-        printf "WARNING: Running configure on an already existing configuration.\nAny changes to the existing configuration will not be picked up.\nEither remove the directory and re-run configure or run configure with the -clean flag.\n\n"
-    fi
 fi
 
 mkdir -p ${ABS_PATH}/build.${CPPRESTSDK_BUILD_TYPE}.ios

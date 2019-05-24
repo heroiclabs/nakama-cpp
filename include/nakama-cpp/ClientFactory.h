@@ -29,8 +29,11 @@ namespace Nakama {
         /// The host address of the server. Defaults to "127.0.0.1".
         std::string host = "127.0.0.1";
 
-        /// The port number of the server. Defaults to 7349.
-        int port = 7349;
+        /// The port number of the server.
+        /// Default server ports (can be changed in the server config):
+        /// 7349 - gRPC API
+        /// 7350 - HTTP API
+        int port = 0;
 
         /// Set connection strings to use the secure mode with the server. Defaults to false.
         /// The server must be configured to make use of this option. With HTTP, GRPC, and WebSockets the server must

@@ -26,7 +26,11 @@ function(cpprest_find_boost)
   if(IOS)
     if (EXISTS "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
       set(IOS_SOURCE_DIR "${PROJECT_SOURCE_DIR}/../Build_iOS")
-      set(Boost_LIBRARIES "${IOS_SOURCE_DIR}/boost/lib" CACHE INTERNAL "")
+      set(Boost_LIBRARIES
+        "${IOS_SOURCE_DIR}/boost/lib/libboost_system.a"
+        "${IOS_SOURCE_DIR}/boost/lib/libboost_thread.a"
+        "${IOS_SOURCE_DIR}/boost/lib/libboost_chrono.a"
+         CACHE INTERNAL "")
       set(Boost_INCLUDE_DIR "${IOS_SOURCE_DIR}/boost/include" CACHE INTERNAL "")
     else()
       set(IOS_SOURCE_DIR "${PROJECT_SOURCE_DIR}/../Build_iOS")
@@ -52,6 +56,12 @@ function(cpprest_find_boost)
   endif()
 
   add_library(cpprestsdk_boost_internal INTERFACE)
+  
+  if(WIN32)
+    # disable automatic linking
+    target_compile_definitions(cpprestsdk_boost_internal INTERFACE BOOST_ALL_NO_LIB)
+  endif()
+  
   # FindBoost continually breaks imported targets whenever boost updates.
   if(1)
     target_include_directories(cpprestsdk_boost_internal INTERFACE "$<BUILD_INTERFACE:${Boost_INCLUDE_DIR}>")
@@ -70,9 +80,9 @@ function(cpprest_find_boost)
       endif()
       set(_prev "${_lib}")
     endforeach()
-    if (NOT IOS OR NOT EXISTS "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
+    #if (NOT IOS OR NOT EXISTS "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
       target_link_libraries(cpprestsdk_boost_internal INTERFACE "$<BUILD_INTERFACE:${_libs}>")
-    endif()
+    #endif()
   else()
     if(ANDROID)
       target_link_libraries(cpprestsdk_boost_internal INTERFACE

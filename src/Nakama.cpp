@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/Nakama.h"
+#include "nakama-cpp/NakamaVersion.h"
 
 namespace Nakama {
 
 const char* getNakamaSdkVersion()
 {
-    return "2.0.4 beta";
+    return "2.1.0 beta";
 }
 
 }

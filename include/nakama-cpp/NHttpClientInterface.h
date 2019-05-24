@@ -54,6 +54,12 @@ namespace Nakama {
     using NHttpResponsePtr = std::shared_ptr<NHttpResponse>;
     using NHttpResponseCallback = std::function<void (NHttpResponsePtr)>;
 
+    namespace InternalStatusCodes
+    {
+        static const int CONNECTION_ERROR = 600;            /// This indicates a general connection error
+        static const int NOT_INITIALIZED_ERROR = 601;       /// HTTP client is not initialized properly
+    }
+
     /**
      * HTTP client interface
      */

@@ -36,6 +36,11 @@ using namespace std;
 
 namespace Nakama {
 
+void AddBoolArg(NHttpQueryArgs& args, string&& name, bool value)
+{
+    value ? args.emplace(name, "true") : args.emplace(name, "false");
+}
+
 RestClient::RestClient(const DefaultClientParameters& parameters, NHttpClientPtr httpClient)
     : _host(parameters.host)
     , _ssl(parameters.ssl)
@@ -43,8 +48,12 @@ RestClient::RestClient(const DefaultClientParameters& parameters, NHttpClientPtr
 {
     std::string baseUrl;
 
+    int port = parameters.port;
+    if (port <= 0)
+        port = 7350;
+
     _ssl ? baseUrl.append("https") : baseUrl.append("http");
-    baseUrl.append("://").append(parameters.host).append(":").append(std::to_string(parameters.port));
+    baseUrl.append("://").append(parameters.host).append(":").append(std::to_string(port));
 
     _httpClient->setBaseUri(baseUrl);
 
@@ -107,7 +116,7 @@ NRtClientPtr RestClient::createRtClient(const RtClientParameters& parameters, NR
     return client;
 }
 
-RestReqContext * RestClient::createReqContext(NSessionPtr session)
+RestReqContext * RestClient::createReqContext(NSessionPtr session, google::protobuf::Message* data)
 {
     RestReqContext* ctx = new RestReqContext();
 
@@ -119,6 +128,8 @@ RestReqContext * RestClient::createReqContext(NSessionPtr session)
     {
         ctx->auth.append(_basicAuthMetadata);
     }
+
+    ctx->data = data;
 
     _reqContexts.emplace(ctx);
     return ctx;
@@ -173,7 +184,7 @@ void RestClient::onResponse(RestReqContext* reqContext, NHttpResponsePtr respons
 
                 if (ok)
                 {
-                    reqContext->successCallback(response);
+                    reqContext->successCallback();
                 }
             }
         }
@@ -182,46 +193,48 @@ void RestClient::onResponse(RestReqContext* reqContext, NHttpResponsePtr respons
             std::string errMessage;
             ErrorCode code = ErrorCode::Unknown;
 
-            if (response->statusCode == 500) // Internal Server Error
+            if (response->statusCode == InternalStatusCodes::CONNECTION_ERROR)
             {
-                if (!response->body.empty() && response->body[0] == '{') // have to be JSON
-                {
-                    try {
-                        utility::stringstream_t ss;
-                        ss << FROM_STD_STR(response->body);
-                        web::json::value jsonRoot = web::json::value::parse(ss);
-                        web::json::value jsonMessage = jsonRoot.at(FROM_STD_STR("message"));
-                        web::json::value jsonCode = jsonRoot.at(FROM_STD_STR("code"));
+                code = ErrorCode::ConnectionError;
+                errMessage.append("message: ").append(response->errorMessage);
+            }
+            else if (!response->body.empty() && response->body[0] == '{') // have to be JSON
+            {
+                try {
+                    utility::stringstream_t ss;
+                    ss << FROM_STD_STR(response->body);
+                    web::json::value jsonRoot = web::json::value::parse(ss);
+                    web::json::value jsonMessage = jsonRoot.at(FROM_STD_STR("message"));
+                    web::json::value jsonCode = jsonRoot.at(FROM_STD_STR("code"));
 
-                        if (jsonMessage.is_string())
-                        {
-                            errMessage.append("message: ").append(TO_STD_STR(jsonMessage.as_string()));
-                        }
-
-                        if (jsonCode.is_integer())
-                        {
-                            int serverErrCode = jsonCode.as_integer();
-
-                            switch (serverErrCode)
-                            {
-                            case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
-                            case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
-                            case grpc::StatusCode::NOT_FOUND        : code = ErrorCode::NotFound; break;
-                            case grpc::StatusCode::ALREADY_EXISTS   : code = ErrorCode::AlreadyExists; break;
-                            case grpc::StatusCode::INVALID_ARGUMENT : code = ErrorCode::InvalidArgument; break;
-                            case grpc::StatusCode::UNAUTHENTICATED  : code = ErrorCode::Unauthenticated; break;
-                            case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
-
-                            default:
-                                errMessage.append("\ncode: ").append(std::to_string(serverErrCode));
-                                break;
-                            }
-                        }
-                    }
-                    catch (exception& e)
+                    if (jsonMessage.is_string())
                     {
-                        NLOG_ERROR("exception: " + string(e.what()));
+                        errMessage.append("message: ").append(TO_STD_STR(jsonMessage.as_string()));
                     }
+
+                    if (jsonCode.is_integer())
+                    {
+                        int serverErrCode = jsonCode.as_integer();
+
+                        switch (serverErrCode)
+                        {
+                        case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
+                        case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
+                        case grpc::StatusCode::NOT_FOUND        : code = ErrorCode::NotFound; break;
+                        case grpc::StatusCode::ALREADY_EXISTS   : code = ErrorCode::AlreadyExists; break;
+                        case grpc::StatusCode::INVALID_ARGUMENT : code = ErrorCode::InvalidArgument; break;
+                        case grpc::StatusCode::UNAUTHENTICATED  : code = ErrorCode::Unauthenticated; break;
+                        case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
+
+                        default:
+                            errMessage.append("\ncode: ").append(std::to_string(serverErrCode));
+                            break;
+                        }
+                    }
+                }
+                catch (exception& e)
+                {
+                    NLOG_ERROR("exception: " + string(e.what()));
                 }
             }
 
@@ -270,38 +283,49 @@ void RestClient::authenticateDevice(
     ErrorCallback errorCallback
 )
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(nullptr);
-    auto sessionData(make_shared<nakama::api::Session>());
-    ctx->data = sessionData.get();
+        auto sessionData(make_shared<nakama::api::Session>());
+        RestReqContext* ctx = createReqContext(nullptr, sessionData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [sessionData, successCallback](NHttpResponsePtr response)
+        if (successCallback)
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
-            successCallback(session);
-        };
+            ctx->successCallback = [sessionData, successCallback]()
+            {
+                NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
+                successCallback(session);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (username)
+            args.emplace("username", *username);
+
+        if (create)
+        {
+            AddBoolArg(args, "create", *create);
+        }
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/device", std::move(body), std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    NHttpQueryArgs args;
-
-    if (username)
-        args.emplace("username", *username);
-
-    if (create)
+    catch (exception& e)
     {
-        *create ? args.emplace("create", "true") : args.emplace("create", "false");
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    string body("{\"id\":\"");
-    body.append(id).append("\"}");
-
-    sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/device", std::move(body), std::move(args));
 }
-/*
+
 void RestClient::authenticateEmail(
     const std::string & email,
     const std::string & password,
@@ -311,34 +335,43 @@ void RestClient::authenticateEmail(
     ErrorCallback errorCallback
 )
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(nullptr);
-    auto sessionData(make_shared<nakama::api::Session>());
+        auto sessionData(make_shared<nakama::api::Session>());
+        RestReqContext* ctx = createReqContext(nullptr, sessionData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [sessionData, successCallback]()
+        if (successCallback)
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
-            successCallback(session);
-        };
+            ctx->successCallback = [sessionData, successCallback]()
+            {
+                NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
+                successCallback(session);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        args.emplace("username", username);
+        AddBoolArg(args, "create", create);
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("email")] = web::json::value(FROM_STD_STR(email));
+        jsonRoot[FROM_STD_STR("password")] = web::json::value(FROM_STD_STR(password));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/email", std::move(body), std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::AuthenticateEmailRequest req;
-
-    if (!email.empty())
-        req.mutable_account()->set_email(email);
-
-    req.mutable_account()->set_password(password);
-
-    if (!username.empty())
-        req.set_username(username);
-
-    req.mutable_create()->set_value(create);
-
-    sendReq(req, sessionData);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::authenticateFacebook(
@@ -350,32 +383,43 @@ void RestClient::authenticateFacebook(
     ErrorCallback errorCallback
 )
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(nullptr);
-    auto sessionData(make_shared<nakama::api::Session>());
+        auto sessionData(make_shared<nakama::api::Session>());
+        RestReqContext* ctx = createReqContext(nullptr, sessionData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [sessionData, successCallback]()
+        if (successCallback)
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
-            successCallback(session);
-        };
+            ctx->successCallback = [sessionData, successCallback]()
+            {
+                NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
+                successCallback(session);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        args.emplace("username", username);
+        AddBoolArg(args, "create", create);
+        AddBoolArg(args, "import", importFriends);
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/facebook", std::move(body), std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::AuthenticateFacebookRequest req;
-
-    req.mutable_account()->set_token(accessToken);
-
-    if (!username.empty())
-        req.set_username(username);
-
-    req.mutable_create()->set_value(create);
-    req.mutable_sync()->set_value(importFriends);
-
-    sendReq(req, sessionData);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::authenticateGoogle(
@@ -386,31 +430,42 @@ void RestClient::authenticateGoogle(
     ErrorCallback errorCallback
 )
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(nullptr);
-    auto sessionData(make_shared<nakama::api::Session>());
+        auto sessionData(make_shared<nakama::api::Session>());
+        RestReqContext* ctx = createReqContext(nullptr, sessionData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [sessionData, successCallback]()
+        if (successCallback)
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
-            successCallback(session);
-        };
+            ctx->successCallback = [sessionData, successCallback]()
+            {
+                NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
+                successCallback(session);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        args.emplace("username", username);
+        AddBoolArg(args, "create", create);
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/google", std::move(body), std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::AuthenticateGoogleRequest req;
-
-    req.mutable_account()->set_token(accessToken);
-
-    if (!username.empty())
-        req.set_username(username);
-
-    req.mutable_create()->set_value(create);
-
-    sendReq(req, sessionData);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::authenticateGameCenter(
@@ -426,40 +481,47 @@ void RestClient::authenticateGameCenter(
     ErrorCallback errorCallback
 )
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(nullptr);
-    auto sessionData(make_shared<nakama::api::Session>());
+        auto sessionData(make_shared<nakama::api::Session>());
+        RestReqContext* ctx = createReqContext(nullptr, sessionData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [sessionData, successCallback]()
+        if (successCallback)
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
-            successCallback(session);
-        };
+            ctx->successCallback = [sessionData, successCallback]()
+            {
+                NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
+                successCallback(session);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        args.emplace("username", username);
+        AddBoolArg(args, "create", create);
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("player_id")] = web::json::value(FROM_STD_STR(playerId));
+        jsonRoot[FROM_STD_STR("bundle_id")] = web::json::value(FROM_STD_STR(bundleId));
+        jsonRoot[FROM_STD_STR("timestamp_seconds")] = web::json::value(timestampSeconds);
+        jsonRoot[FROM_STD_STR("salt")] = web::json::value(FROM_STD_STR(salt));
+        jsonRoot[FROM_STD_STR("signature")] = web::json::value(FROM_STD_STR(signature));
+        jsonRoot[FROM_STD_STR("public_key_url")] = web::json::value(FROM_STD_STR(publicKeyUrl));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/gamecenter", std::move(body), std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::AuthenticateGameCenterRequest req;
-
+    catch (exception& e)
     {
-        auto* account = req.mutable_account();
-
-        account->set_player_id(playerId);
-        account->set_bundle_id(bundleId);
-        account->set_timestamp_seconds(timestampSeconds);
-        account->set_salt(salt);
-        account->set_signature(signature);
-        account->set_public_key_url(publicKeyUrl);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    if (!username.empty())
-        req.set_username(username);
-
-    req.mutable_create()->set_value(create);
-
-    sendReq(req, sessionData);
 }
 
 void RestClient::authenticateCustom(
@@ -470,31 +532,42 @@ void RestClient::authenticateCustom(
     ErrorCallback errorCallback
 )
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(nullptr);
-    auto sessionData(make_shared<nakama::api::Session>());
+        auto sessionData(make_shared<nakama::api::Session>());
+        RestReqContext* ctx = createReqContext(nullptr, sessionData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [sessionData, successCallback]()
+        if (successCallback)
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
-            successCallback(session);
-        };
+            ctx->successCallback = [sessionData, successCallback]()
+            {
+                NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
+                successCallback(session);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        args.emplace("username", username);
+        AddBoolArg(args, "create", create);
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/custom", std::move(body), std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::AuthenticateCustomRequest req;
-
-    req.mutable_account()->set_id(id);
-
-    if (!username.empty())
-        req.set_username(username);
-
-    req.mutable_create()->set_value(create);
-
-    sendReq(req, sessionData);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::authenticateSteam(
@@ -505,31 +578,42 @@ void RestClient::authenticateSteam(
     ErrorCallback errorCallback
 )
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(nullptr);
-    auto sessionData(make_shared<nakama::api::Session>());
+        auto sessionData(make_shared<nakama::api::Session>());
+        RestReqContext* ctx = createReqContext(nullptr, sessionData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [sessionData, successCallback]()
+        if (successCallback)
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
-            successCallback(session);
-        };
+            ctx->successCallback = [sessionData, successCallback]()
+            {
+                NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
+                successCallback(session);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        args.emplace("username", username);
+        AddBoolArg(args, "create", create);
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(token));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/steam", std::move(body), std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::AuthenticateSteamRequest req;
-
-    req.mutable_account()->set_token(token);
-
-    if (!username.empty())
-        req.set_username(username);
-
-    req.mutable_create()->set_value(create);
-
-    sendReq(req, sessionData);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::linkFacebook(
@@ -538,19 +622,33 @@ void RestClient::linkFacebook(
     const opt::optional<bool>& importFriends,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::LinkFacebookRequest req;
+        NHttpQueryArgs args;
 
-    req.mutable_account()->set_token(accessToken);
-    if (importFriends) req.mutable_sync()->set_value(*importFriends);
+        if (importFriends) AddBoolArg(args, "import", *importFriends);
 
-    sendReq(req, nullptr);
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/facebook", std::move(body), std::move(args));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::linkEmail(
@@ -559,19 +657,30 @@ void RestClient::linkEmail(
     const std::string & password,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountEmail req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_email(email);
-    req.set_password(password);
+        jsonRoot[FROM_STD_STR("email")] = web::json::value(FROM_STD_STR(email));
+        jsonRoot[FROM_STD_STR("password")] = web::json::value(FROM_STD_STR(password));
 
-    sendReq(req, nullptr);
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/email", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::linkDevice(
@@ -579,18 +688,29 @@ void RestClient::linkDevice(
     const std::string & id,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountDevice req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_id(id);
+        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
 
-    sendReq(req, nullptr);
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/device", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::linkGoogle(
@@ -598,18 +718,29 @@ void RestClient::linkGoogle(
     const std::string & accessToken,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountGoogle req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_token(accessToken);
+        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
 
-    sendReq(req, nullptr);
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/google", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::linkGameCenter(
@@ -622,23 +753,34 @@ void RestClient::linkGameCenter(
     const std::string & publicKeyUrl,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountGameCenter req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_player_id(playerId);
-    req.set_bundle_id(bundleId);
-    req.set_timestamp_seconds(timestampSeconds);
-    req.set_salt(salt);
-    req.set_signature(signature);
-    req.set_public_key_url(publicKeyUrl);
+        jsonRoot[FROM_STD_STR("player_id")] = web::json::value(FROM_STD_STR(playerId));
+        jsonRoot[FROM_STD_STR("bundle_id")] = web::json::value(FROM_STD_STR(bundleId));
+        jsonRoot[FROM_STD_STR("timestamp_seconds")] = web::json::value(timestampSeconds);
+        jsonRoot[FROM_STD_STR("salt")] = web::json::value(FROM_STD_STR(salt));
+        jsonRoot[FROM_STD_STR("signature")] = web::json::value(FROM_STD_STR(signature));
+        jsonRoot[FROM_STD_STR("public_key_url")] = web::json::value(FROM_STD_STR(publicKeyUrl));
 
-    sendReq(req, nullptr);
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/gamecenter", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::linkSteam(
@@ -646,164 +788,258 @@ void RestClient::linkSteam(
     const std::string & token,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountSteam req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_token(token);
+        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(token));
 
-    sendReq(req, nullptr);
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/steam", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::linkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountCustom req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_id(id);
+        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
 
-    sendReq(req, nullptr);
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/custom", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::unlinkFacebook(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountFacebook req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_token(accessToken);
+        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
 
-    sendReq(req, nullptr);
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/facebook", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::unlinkEmail(NSessionPtr session, const std::string & email, const std::string & password, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountEmail req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_email(email);
-    req.set_password(password);
+        jsonRoot[FROM_STD_STR("email")] = web::json::value(FROM_STD_STR(email));
+        jsonRoot[FROM_STD_STR("password")] = web::json::value(FROM_STD_STR(password));
 
-    auto responseReader = _stub->AsyncUnlinkEmail(&ctx->context, req, &_cq);
+        jsonRoot.serialize(ss);
 
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/email", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::unlinkGoogle(NSessionPtr session, const std::string & accessToken, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountGoogle req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_token(accessToken);
+        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
 
-    auto responseReader = _stub->AsyncUnlinkGoogle(&ctx->context, req, &_cq);
+        jsonRoot.serialize(ss);
 
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/google", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
-void RestClient::unlinkGameCenter(NSessionPtr session, const std::string & playerId, const std::string & bundleId, NTimestamp timestampSeconds, const std::string & salt, const std::string & signature, const std::string & publicKeyUrl, std::function<void()> successCallback, ErrorCallback errorCallback)
+void RestClient::unlinkGameCenter(NSessionPtr session,
+    const std::string & playerId,
+    const std::string & bundleId,
+    NTimestamp timestampSeconds,
+    const std::string & salt,
+    const std::string & signature,
+    const std::string & publicKeyUrl,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountGameCenter req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_player_id(playerId);
-    req.set_bundle_id(bundleId);
-    req.set_timestamp_seconds(timestampSeconds);
-    req.set_salt(salt);
-    req.set_signature(signature);
-    req.set_public_key_url(publicKeyUrl);
+        jsonRoot[FROM_STD_STR("player_id")] = web::json::value(FROM_STD_STR(playerId));
+        jsonRoot[FROM_STD_STR("bundle_id")] = web::json::value(FROM_STD_STR(bundleId));
+        jsonRoot[FROM_STD_STR("timestamp_seconds")] = web::json::value(timestampSeconds);
+        jsonRoot[FROM_STD_STR("salt")] = web::json::value(FROM_STD_STR(salt));
+        jsonRoot[FROM_STD_STR("signature")] = web::json::value(FROM_STD_STR(signature));
+        jsonRoot[FROM_STD_STR("public_key_url")] = web::json::value(FROM_STD_STR(publicKeyUrl));
 
-    auto responseReader = _stub->AsyncUnlinkGameCenter(&ctx->context, req, &_cq);
+        jsonRoot.serialize(ss);
 
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/gamecenter", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::unlinkSteam(NSessionPtr session, const std::string & token, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountSteam req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_token(token);
+        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(token));
 
-    auto responseReader = _stub->AsyncUnlinkSteam(&ctx->context, req, &_cq);
+        jsonRoot.serialize(ss);
 
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/steam", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::unlinkDevice(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountDevice req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_id(id);
+        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
 
-    auto responseReader = _stub->AsyncUnlinkDevice(&ctx->context, req, &_cq);
+        jsonRoot.serialize(ss);
 
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/device", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::unlinkCustom(NSessionPtr session, const std::string & id, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AccountCustom req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_id(id);
+        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
 
-    auto responseReader = _stub->AsyncUnlinkCustom(&ctx->context, req, &_cq);
+        jsonRoot.serialize(ss);
 
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/custom", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::importFacebookFriends(
@@ -812,21 +1048,33 @@ void RestClient::importFacebookFriends(
     const opt::optional<bool>& reset,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::ImportFacebookFriendsRequest req;
+        NHttpQueryArgs args;
 
-    req.mutable_account()->set_token(token);
-    if (reset) req.mutable_reset()->set_value(*reset);
+        if (reset) AddBoolArg(args, "reset", *reset);
 
-    auto responseReader = _stub->AsyncImportFacebookFriends(&ctx->context, req, &_cq);
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(token));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/friend/facebook", std::move(body), std::move(args));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::getAccount(
@@ -835,25 +1083,29 @@ void RestClient::getAccount(
     ErrorCallback errorCallback
 )
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto accoutData(make_shared<nakama::api::Account>());
+        auto accoutData(make_shared<nakama::api::Account>());
+        RestReqContext* ctx = createReqContext(session, accoutData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [accoutData, successCallback]()
+        if (successCallback)
         {
-            NAccount account;
-            assign(account, *accoutData);
-            successCallback(account);
-        };
+            ctx->successCallback = [accoutData, successCallback]()
+            {
+                NAccount account;
+                assign(account, *accoutData);
+                successCallback(account);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/account", "");
     }
-    ctx->errorCallback = errorCallback;
-
-    auto responseReader = _stub->AsyncGetAccount(&ctx->context, {}, &_cq);
-
-    responseReader->Finish(&(*accoutData), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::updateAccount(
@@ -866,25 +1118,34 @@ void RestClient::updateAccount(
     const opt::optional<std::string>& timezone,
     std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::UpdateAccountRequest req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    if (username) req.mutable_username()->set_value(*username);
-    if (displayName) req.mutable_display_name()->set_value(*displayName);
-    if (avatarUrl) req.mutable_avatar_url()->set_value(*avatarUrl);
-    if (langTag) req.mutable_lang_tag()->set_value(*langTag);
-    if (location) req.mutable_location()->set_value(*location);
-    if (timezone) req.mutable_timezone()->set_value(*timezone);
+        if (username) jsonRoot[FROM_STD_STR("username")] = web::json::value(FROM_STD_STR(*username));
+        if (displayName) jsonRoot[FROM_STD_STR("display_name")] = web::json::value(FROM_STD_STR(*displayName));
+        if (avatarUrl) jsonRoot[FROM_STD_STR("avatar_url")] = web::json::value(FROM_STD_STR(*avatarUrl));
+        if (langTag) jsonRoot[FROM_STD_STR("lang_tag")] = web::json::value(FROM_STD_STR(*langTag));
+        if (location) jsonRoot[FROM_STD_STR("location")] = web::json::value(FROM_STD_STR(*location));
+        if (timezone) jsonRoot[FROM_STD_STR("timezone")] = web::json::value(FROM_STD_STR(*timezone));
 
-    auto responseReader = _stub->AsyncUpdateAccount(&ctx->context, req, &_cq);
+        jsonRoot.serialize(ss);
 
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::PUT, "/v2/account", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::getUsers(
@@ -893,45 +1154,48 @@ void RestClient::getUsers(
     const std::vector<std::string>& usernames,
     const std::vector<std::string>& facebookIds,
     std::function<void(const NUsers&)> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto usersData(make_shared<nakama::api::Users>());
+        auto usersData(make_shared<nakama::api::Users>());
+        RestReqContext* ctx = createReqContext(session, usersData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [usersData, successCallback]()
+        if (successCallback)
         {
-            NUsers users;
-            assign(users, *usersData);
-            successCallback(users);
-        };
+            ctx->successCallback = [usersData, successCallback]()
+            {
+                NUsers users;
+                assign(users, *usersData);
+                successCallback(users);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        for (auto& id : ids)
+        {
+            args.emplace("ids", id);
+        }
+
+        for (auto& username : usernames)
+        {
+            args.emplace("usernames", username);
+        }
+
+        for (auto& facebookId : facebookIds)
+        {
+            args.emplace("facebook_ids", facebookId);
+        }
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/user", "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::GetUsersRequest req;
-
-    for (auto& id : ids)
+    catch (exception& e)
     {
-        req.mutable_ids()->Add()->assign(id);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    for (auto& username : usernames)
-    {
-        req.mutable_usernames()->Add()->assign(username);
-    }
-
-    for (auto& facebookId : facebookIds)
-    {
-        req.mutable_facebook_ids()->Add()->assign(facebookId);
-    }
-
-    auto responseReader = _stub->AsyncGetUsers(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*usersData), &ctx->status, (void*)ctx);
 }
 
 void RestClient::addFriends(
@@ -939,31 +1203,34 @@ void RestClient::addFriends(
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames,
     std::function<void()> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AddFriendsRequest req;
+        NHttpQueryArgs args;
 
-    for (auto& id : ids)
-    {
-        req.mutable_ids()->Add()->assign(id);
+        for (auto& id : ids)
+        {
+            args.emplace("ids", id);
+        }
+
+        for (auto& username : usernames)
+        {
+            args.emplace("usernames", username);
+        }
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/friend", "", std::move(args));
     }
-
-    for (auto& username : usernames)
+    catch (exception& e)
     {
-        req.mutable_usernames()->Add()->assign(username);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    auto responseReader = _stub->AsyncAddFriends(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void RestClient::deleteFriends(
@@ -971,31 +1238,34 @@ void RestClient::deleteFriends(
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames,
     std::function<void()> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::DeleteFriendsRequest req;
+        NHttpQueryArgs args;
 
-    for (auto& id : ids)
-    {
-        req.mutable_ids()->Add()->assign(id);
+        for (auto& id : ids)
+        {
+            args.emplace("ids", id);
+        }
+
+        for (auto& username : usernames)
+        {
+            args.emplace("usernames", username);
+        }
+
+        sendReq(ctx, NHttpReqMethod::DEL, "/v2/friend", "", std::move(args));
     }
-
-    for (auto& username : usernames)
+    catch (exception& e)
     {
-        req.mutable_usernames()->Add()->assign(username);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    auto responseReader = _stub->AsyncDeleteFriends(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void RestClient::blockFriends(
@@ -1005,51 +1275,59 @@ void RestClient::blockFriends(
     std::function<void()> successCallback,
     ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::BlockFriendsRequest req;
+        NHttpQueryArgs args;
 
-    for (auto& id : ids)
-    {
-        req.mutable_ids()->Add()->assign(id);
+        for (auto& id : ids)
+        {
+            args.emplace("ids", id);
+        }
+
+        for (auto& username : usernames)
+        {
+            args.emplace("usernames", username);
+        }
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/friend/block", "", std::move(args));
     }
-
-    for (auto& username : usernames)
+    catch (exception& e)
     {
-        req.mutable_usernames()->Add()->assign(username);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    auto responseReader = _stub->AsyncBlockFriends(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
 void RestClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::Friends>());
+        auto data(make_shared<nakama::api::Friends>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NFriendsPtr friends(new NFriends());
-            assign(*friends, *data);
-            successCallback(friends);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NFriendsPtr friends(new NFriends());
+                assign(*friends, *data);
+                successCallback(friends);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/friend", "");
     }
-    ctx->errorCallback = errorCallback;
-
-    auto responseReader = _stub->AsyncListFriends(&ctx->context, {}, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::createGroup(
@@ -1060,66 +1338,66 @@ void RestClient::createGroup(
     const std::string & langTag,
     bool open,
     std::function<void(const NGroup&)> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto groupData(make_shared<nakama::api::Group>());
+        auto groupData(make_shared<nakama::api::Group>());
+        RestReqContext* ctx = createReqContext(session, groupData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [groupData, successCallback]()
+        if (successCallback)
         {
-            NGroup group;
-            assign(group, *groupData);
-            successCallback(group);
-        };
+            ctx->successCallback = [groupData, successCallback]()
+            {
+                NGroup group;
+                assign(group, *groupData);
+                successCallback(group);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("name")] = web::json::value(FROM_STD_STR(name));
+        jsonRoot[FROM_STD_STR("description")] = web::json::value(FROM_STD_STR(description));
+        jsonRoot[FROM_STD_STR("avatar_url")] = web::json::value(FROM_STD_STR(avatarUrl));
+        jsonRoot[FROM_STD_STR("lang_tag")] = web::json::value(FROM_STD_STR(langTag));
+        jsonRoot[FROM_STD_STR("open")] = web::json::value(open);
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group", std::move(body));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::CreateGroupRequest req;
-
-    req.set_name(name);
-
-    if (!description.empty())
-        req.set_description(description);
-
-    if (!avatarUrl.empty())
-        req.set_avatar_url(avatarUrl);
-
-    if (!langTag.empty())
-        req.set_lang_tag(langTag);
-
-    req.set_open(open);
-
-    auto responseReader = _stub->AsyncCreateGroup(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::deleteGroup(
     NSessionPtr session,
     const std::string & groupId,
     std::function<void()> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::DeleteGroupRequest req;
-
-    req.set_group_id(groupId);
-
-    auto responseReader = _stub->AsyncDeleteGroup(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        sendReq(ctx, NHttpReqMethod::DEL, "/v2/group/" + groupId, "");
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::addGroupUsers(
@@ -1127,147 +1405,150 @@ void RestClient::addGroupUsers(
     const std::string & groupId,
     const std::vector<std::string>& ids,
     std::function<void()> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::AddGroupUsersRequest req;
+        NHttpQueryArgs args;
 
-    req.set_group_id(groupId);
+        for (auto& id : ids)
+        {
+            args.emplace("user_ids", id);
+        }
 
-    for (auto& id : ids)
-    {
-        req.add_user_ids(id);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/add", "", std::move(args));
     }
-
-    auto responseReader = _stub->AsyncAddGroupUsers(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::listGroupUsers(NSessionPtr session, const std::string & groupId, std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto groupData(make_shared<nakama::api::GroupUserList>());
+        auto groupData(make_shared<nakama::api::GroupUserList>());
+        RestReqContext* ctx = createReqContext(session, groupData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [groupData, successCallback]()
+        if (successCallback)
         {
-            NGroupUserListPtr users(new NGroupUserList());
-            assign(*users, *groupData);
-            successCallback(users);
-        };
+            ctx->successCallback = [groupData, successCallback]()
+            {
+                NGroupUserListPtr users(new NGroupUserList());
+                assign(*users, *groupData);
+                successCallback(users);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/group/" + groupId + "/user", "");
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListGroupUsersRequest req;
-
-    req.set_group_id(groupId);
-
-    auto responseReader = _stub->AsyncListGroupUsers(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::kickGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::KickGroupUsersRequest req;
+        NHttpQueryArgs args;
 
-    req.set_group_id(groupId);
+        for (auto& id : ids)
+        {
+            args.emplace("user_ids", id);
+        }
 
-    for (auto& id : ids)
-    {
-        req.add_user_ids(id);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/kick", "", std::move(args));
     }
-
-    auto responseReader = _stub->AsyncKickGroupUsers(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::joinGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::JoinGroupRequest req;
-
-    req.set_group_id(groupId);
-
-    auto responseReader = _stub->AsyncJoinGroup(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/join", "");
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::leaveGroup(NSessionPtr session, const std::string & groupId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::LeaveGroupRequest req;
-
-    req.set_group_id(groupId);
-
-    auto responseReader = _stub->AsyncLeaveGroup(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/leave", "");
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto groupData(make_shared<nakama::api::GroupList>());
+        auto groupData(make_shared<nakama::api::GroupList>());
+        RestReqContext* ctx = createReqContext(session, groupData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [groupData, successCallback]()
+        if (successCallback)
         {
-            NGroupListPtr groups(new NGroupList());
-            assign(*groups, *groupData);
-            successCallback(groups);
-        };
+            ctx->successCallback = [groupData, successCallback]()
+            {
+                NGroupListPtr groups(new NGroupList());
+                assign(*groups, *groupData);
+                successCallback(groups);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (!name.empty()) args.emplace("name", name);
+        if (!cursor.empty()) args.emplace("cursor", cursor);
+        if (limit > 0) args.emplace("limit", std::to_string(limit));
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/group", "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListGroupsRequest req;
-
-    req.set_name(name);
-
-    if (limit > 0)
-        req.mutable_limit()->set_value(limit);
-
-    if (!cursor.empty())
-        req.set_cursor(cursor);
-
-    auto responseReader = _stub->AsyncListGroups(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::listUserGroups(NSessionPtr session, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
@@ -1291,52 +1572,54 @@ void RestClient::listUserGroups(NSessionPtr session, std::function<void(NUserGro
 
 void RestClient::listUserGroups(NSessionPtr session, const std::string & userId, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto groupData(make_shared<nakama::api::UserGroupList>());
+        auto groupData(make_shared<nakama::api::UserGroupList>());
+        RestReqContext* ctx = createReqContext(session, groupData.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [groupData, successCallback]()
+        if (successCallback)
         {
-            NUserGroupListPtr groups(new NUserGroupList());
-            assign(*groups, *groupData);
-            successCallback(groups);
-        };
+            ctx->successCallback = [groupData, successCallback]()
+            {
+                NUserGroupListPtr groups(new NUserGroupList());
+                assign(*groups, *groupData);
+                successCallback(groups);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/user/" + userId + "/group", "");
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListUserGroupsRequest req;
-
-    req.set_user_id(userId);
-
-    auto responseReader = _stub->AsyncListUserGroups(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::promoteGroupUsers(NSessionPtr session, const std::string & groupId, const std::vector<std::string>& ids, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::PromoteGroupUsersRequest req;
+        NHttpQueryArgs args;
 
-    req.set_group_id(groupId);
+        for (auto& id : ids)
+        {
+            args.emplace("user_ids", id);
+        }
 
-    for (auto& id : ids)
-    {
-        req.add_user_ids(id);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/promote", "", std::move(args));
     }
-
-    auto responseReader = _stub->AsyncPromoteGroupUsers(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::updateGroup(
@@ -1348,29 +1631,37 @@ void RestClient::updateGroup(
     const opt::optional<std::string>& langTag,
     const opt::optional<bool>& open,
     std::function<void()> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::UpdateGroupRequest req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
 
-    req.set_group_id(groupId);
+        jsonRoot[FROM_STD_STR("group_id")] = web::json::value(FROM_STD_STR(groupId));
 
-    if (name) req.mutable_name()->set_value(*name);
-    if (description) req.mutable_description()->set_value(*description);
-    if (avatarUrl) req.mutable_avatar_url()->set_value(*avatarUrl);
-    if (langTag) req.mutable_lang_tag()->set_value(*langTag);
-    if (open) req.mutable_open()->set_value(*open);
+        if (name) jsonRoot[FROM_STD_STR("name")] = web::json::value(FROM_STD_STR(*name));
+        if (description) jsonRoot[FROM_STD_STR("description")] = web::json::value(FROM_STD_STR(*description));
+        if (avatarUrl) jsonRoot[FROM_STD_STR("avatar_url")] = web::json::value(FROM_STD_STR(*avatarUrl));
+        if (langTag) jsonRoot[FROM_STD_STR("lang_tag")] = web::json::value(FROM_STD_STR(*langTag));
+        if (open) jsonRoot[FROM_STD_STR("open")] = web::json::value(*open);
 
-    auto responseReader = _stub->AsyncUpdateGroup(&ctx->context, req, &_cq);
+        jsonRoot.serialize(ss);
 
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::PUT, "/v2/group/" + groupId, std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::listLeaderboardRecords(
@@ -1381,67 +1672,75 @@ void RestClient::listLeaderboardRecords(
     const opt::optional<std::string>& cursor,
     std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::LeaderboardRecordList>());
+        auto data(make_shared<nakama::api::LeaderboardRecordList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        for (auto& id : ownerIds)
+        {
+            args.emplace("owner_ids", id);
+        }
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (cursor) args.emplace("cursor", *cursor);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/leaderboard/" + leaderboardId, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListLeaderboardRecordsRequest req;
-
-    req.set_leaderboard_id(leaderboardId);
-
-    for (auto& id : ownerIds)
+    catch (exception& e)
     {
-        req.add_owner_ids(id);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (cursor) req.set_cursor(*cursor);
-
-    auto responseReader = _stub->AsyncListLeaderboardRecords(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
-void RestClient::listLeaderboardRecordsAroundOwner(NSessionPtr session, const std::string & leaderboardId, const std::string & ownerId, const opt::optional<int32_t>& limit, std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
+void RestClient::listLeaderboardRecordsAroundOwner(
+    NSessionPtr session,
+    const std::string & leaderboardId,
+    const std::string & ownerId,
+    const opt::optional<int32_t>& limit,
+    std::function<void(NLeaderboardRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::LeaderboardRecordList>());
+        auto data(make_shared<nakama::api::LeaderboardRecordList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/leaderboard/" + leaderboardId + "/owner/" + ownerId, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListLeaderboardRecordsAroundOwnerRequest req;
-
-    req.set_leaderboard_id(leaderboardId);
-    req.set_owner_id(ownerId);
-
-    if (limit) req.mutable_limit()->set_value(*limit);
-
-    auto responseReader = _stub->AsyncListLeaderboardRecordsAroundOwner(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::writeLeaderboardRecord(
@@ -1452,32 +1751,40 @@ void RestClient::writeLeaderboardRecord(
     const opt::optional<std::string>& metadata,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::LeaderboardRecord>());
+        auto data(make_shared<nakama::api::LeaderboardRecord>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NLeaderboardRecord record;
-            assign(record, *data);
-            successCallback(record);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NLeaderboardRecord record;
+                assign(record, *data);
+                successCallback(record);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("score")] = web::json::value(FROM_STD_STR(std::to_string(score)));
+        if (subscore) jsonRoot[FROM_STD_STR("subscore")] = web::json::value(FROM_STD_STR(std::to_string(*subscore)));
+        if (metadata) jsonRoot[FROM_STD_STR("metadata")] = web::json::value(FROM_STD_STR(*metadata));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/leaderboard/" + leaderboardId, std::move(body));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::WriteLeaderboardRecordRequest req;
-
-    req.set_leaderboard_id(leaderboardId);
-    req.mutable_record()->set_score(score);
-    if (subscore) req.mutable_record()->set_subscore(*subscore);
-    if (metadata) req.mutable_record()->set_metadata(*metadata);
-
-    auto responseReader = _stub->AsyncWriteLeaderboardRecord(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::writeTournamentRecord(
@@ -1488,50 +1795,58 @@ void RestClient::writeTournamentRecord(
     const opt::optional<std::string>& metadata,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::LeaderboardRecord>());
+        auto data(make_shared<nakama::api::LeaderboardRecord>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NLeaderboardRecord record;
-            assign(record, *data);
-            successCallback(record);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NLeaderboardRecord record;
+                assign(record, *data);
+                successCallback(record);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+
+        jsonRoot[FROM_STD_STR("score")] = web::json::value(FROM_STD_STR(std::to_string(score)));
+        if (subscore) jsonRoot[FROM_STD_STR("subscore")] = web::json::value(FROM_STD_STR(std::to_string(*subscore)));
+        if (metadata) jsonRoot[FROM_STD_STR("metadata")] = web::json::value(FROM_STD_STR(*metadata));
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::PUT, "/v2/tournament/" + tournamentId, std::move(body));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::WriteTournamentRecordRequest req;
-
-    req.set_tournament_id(tournamentId);
-    req.mutable_record()->set_score(score);
-    if (subscore) req.mutable_record()->set_subscore(*subscore);
-    if (metadata) req.mutable_record()->set_metadata(*metadata);
-
-    auto responseReader = _stub->AsyncWriteTournamentRecord(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::deleteLeaderboardRecord(NSessionPtr session, const std::string & leaderboardId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::DeleteLeaderboardRecordRequest req;
-
-    req.set_leaderboard_id(leaderboardId);
-
-    auto responseReader = _stub->AsyncDeleteLeaderboardRecord(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        sendReq(ctx, NHttpReqMethod::DEL, "/v2/leaderboard/" + leaderboardId, "");
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::listMatches(
@@ -1543,35 +1858,39 @@ void RestClient::listMatches(
     const opt::optional<bool>& authoritative,
     std::function<void(NMatchListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::MatchList>());
+        auto data(make_shared<nakama::api::MatchList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NMatchListPtr match_list(new NMatchList());
-            assign(*match_list, *data);
-            successCallback(match_list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NMatchListPtr match_list(new NMatchList());
+                assign(*match_list, *data);
+                successCallback(match_list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (min_size) args.emplace("min_size", std::to_string(*min_size));
+        if (max_size) args.emplace("max_size", std::to_string(*max_size));
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (label) args.emplace("label", *label);
+        if (authoritative) AddBoolArg(args, "authoritative", *authoritative);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/match", "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListMatchesRequest req;
-
-    if (min_size) req.mutable_min_size()->set_value(*min_size);
-    if (max_size) req.mutable_max_size()->set_value(*max_size);
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (label) req.mutable_label()->set_value(*label);
-    if (authoritative) req.mutable_authoritative()->set_value(*authoritative);
-
-    auto responseReader = _stub->AsyncListMatches(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
-*/
+
 void RestClient::listNotifications(
     NSessionPtr session,
     const opt::optional<int32_t>& limit,
@@ -1580,13 +1899,12 @@ void RestClient::listNotifications(
 {
     NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::NotificationList>());
-    ctx->data = data.get();
+    RestReqContext* ctx = createReqContext(session, data.get());
 
     if (successCallback)
     {
-        ctx->successCallback = [data, successCallback](NHttpResponsePtr response)
+        ctx->successCallback = [data, successCallback]()
         {
             NNotificationListPtr list(new NNotificationList());
             assign(*list, *data);
@@ -1607,11 +1925,11 @@ void RestClient::deleteNotifications(NSessionPtr session, const std::vector<std:
 {
     NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+    RestReqContext* ctx = createReqContext(session, nullptr);
 
     if (successCallback)
     {
-        ctx->successCallback = [successCallback](NHttpResponsePtr response)
+        ctx->successCallback = [successCallback]()
         {
             successCallback();
         };
@@ -1703,7 +2021,7 @@ void RestClient::listTournaments(
 
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
-
+*/
 void RestClient::listTournamentRecords(
     NSessionPtr session,
     const std::string & tournamentId,
@@ -1712,37 +2030,39 @@ void RestClient::listTournamentRecords(
     const std::vector<std::string>& ownerIds,
     std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::TournamentRecordList>());
+        auto data(make_shared<nakama::api::TournamentRecordList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NTournamentRecordListPtr list(new NTournamentRecordList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NTournamentRecordListPtr list(new NTournamentRecordList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (cursor) args.emplace("cursor", *cursor);
+
+        for (auto& id : ownerIds)
+        {
+            args.emplace("owner_ids", id);
+        }
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament/" + tournamentId, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListTournamentRecordsRequest req;
-
-    req.set_tournament_id(tournamentId);
-
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (cursor) req.set_cursor(*cursor);
-
-    for (auto& id : ownerIds)
+    catch (exception& e)
     {
-        req.add_owner_ids(id);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    auto responseReader = _stub->AsyncListTournamentRecords(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void RestClient::listTournamentRecordsAroundOwner(
@@ -1752,34 +2072,35 @@ void RestClient::listTournamentRecordsAroundOwner(
     const opt::optional<int32_t>& limit,
     std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::TournamentRecordList>());
+        auto data(make_shared<nakama::api::TournamentRecordList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NTournamentRecordListPtr list(new NTournamentRecordList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NTournamentRecordListPtr list(new NTournamentRecordList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament/" + tournamentId + "/owner/" + ownerId, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListTournamentRecordsAroundOwnerRequest req;
-
-    req.set_tournament_id(tournamentId);
-    req.set_owner_id(ownerId);
-
-    if (limit) req.mutable_limit()->set_value(*limit);
-
-    auto responseReader = _stub->AsyncListTournamentRecordsAroundOwner(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
-
+/*
 void RestClient::joinTournament(NSessionPtr session, const std::string & tournamentId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
@@ -1984,13 +2305,12 @@ void RestClient::rpc(
 {
     NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
     auto data(make_shared<nakama::api::Rpc>());
-    ctx->data = data.get();
+    RestReqContext* ctx = createReqContext(session, data.get());
 
     if (successCallback)
     {
-        ctx->successCallback = [data, successCallback](NHttpResponsePtr response)
+        ctx->successCallback = [data, successCallback]()
         {
             NRpc rpc;
             assign(rpc, *data);
@@ -1999,7 +2319,6 @@ void RestClient::rpc(
     }
     ctx->errorCallback = errorCallback;
 
-    NHttpQueryArgs args;
     string body;
     string path("/v2/rpc/");
 
@@ -2008,7 +2327,7 @@ void RestClient::rpc(
     if (payload)
         body = *payload;
 
-    sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body), std::move(args));
+    sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body));
 }
 
 }

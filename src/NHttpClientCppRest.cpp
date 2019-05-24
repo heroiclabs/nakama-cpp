@@ -61,7 +61,7 @@ void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCal
 
     if (!_client)
     {
-        finishReqWithError(ctx, 1, "[NHttpClientCppRest::request] base uri is not set");
+        finishReqWithError(ctx, InternalStatusCodes::NOT_INITIALIZED_ERROR, "[NHttpClientCppRest::request] base uri is not set");
         return;
     }
 
@@ -124,7 +124,7 @@ void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCal
         }
         catch (const std::exception & e)
         {
-            finishReqWithError(ctx, 2, "[NHttpClientCppRest::request] exception: " + std::string(e.what()));
+            finishReqWithError(ctx, InternalStatusCodes::CONNECTION_ERROR, "[NHttpClientCppRest::request] exception: " + std::string(e.what()));
         }
     });
 }

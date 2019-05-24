@@ -26,7 +26,7 @@ namespace Nakama {
     struct RestReqContext
     {
         std::string auth;
-        std::function<void(NHttpResponsePtr)> successCallback;
+        std::function<void()> successCallback;
         ErrorCallback errorCallback;
         google::protobuf::Message* data = nullptr;
     };
@@ -66,7 +66,7 @@ namespace Nakama {
             bool create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void authenticateFacebook(
             const std::string& accessToken,
@@ -75,7 +75,7 @@ namespace Nakama {
             bool importFriends,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void authenticateGoogle(
             const std::string& accessToken,
@@ -83,7 +83,7 @@ namespace Nakama {
             bool create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void authenticateGameCenter(
             const std::string& playerId,
@@ -96,7 +96,7 @@ namespace Nakama {
             bool create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void authenticateCustom(
             const std::string& id,
@@ -104,7 +104,7 @@ namespace Nakama {
             bool create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void authenticateSteam(
             const std::string& token,
@@ -112,7 +112,7 @@ namespace Nakama {
             bool create,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void linkFacebook(
             NSessionPtr session,
@@ -120,7 +120,7 @@ namespace Nakama {
             const opt::optional<bool>& importFriends,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void linkEmail(
             NSessionPtr session,
@@ -128,21 +128,21 @@ namespace Nakama {
             const std::string& password,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void linkDevice(
             NSessionPtr session,
             const std::string& id,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void linkGoogle(
             NSessionPtr session,
             const std::string& accessToken,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void linkGameCenter(
             NSessionPtr session,
@@ -154,28 +154,28 @@ namespace Nakama {
             const std::string& publicKeyUrl,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void linkSteam(
             NSessionPtr session,
             const std::string& token,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void linkCustom(
             NSessionPtr session,
             const std::string& id,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void unlinkFacebook(
             NSessionPtr session,
             const std::string& accessToken,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void unlinkEmail(
             NSessionPtr session,
@@ -183,14 +183,14 @@ namespace Nakama {
             const std::string& password,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void unlinkGoogle(
             NSessionPtr session,
             const std::string& accessToken,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void unlinkGameCenter(
             NSessionPtr session,
@@ -202,28 +202,28 @@ namespace Nakama {
             const std::string& publicKeyUrl,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void unlinkSteam(
             NSessionPtr session,
             const std::string& token,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void unlinkDevice(
             NSessionPtr session,
             const std::string& id,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void unlinkCustom(
             NSessionPtr session,
             const std::string& id,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void importFacebookFriends(
             NSessionPtr session,
@@ -231,13 +231,13 @@ namespace Nakama {
             const opt::optional<bool>& reset,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void getAccount(
             NSessionPtr session,
             std::function<void(const NAccount&)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
-        ) override {}
+        ) override;
 
         void updateAccount(
             NSessionPtr session,
@@ -249,7 +249,7 @@ namespace Nakama {
             const opt::optional<std::string>& timezone,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void getUsers(
             NSessionPtr session,
@@ -258,7 +258,7 @@ namespace Nakama {
             const std::vector<std::string>& facebookIds,
             std::function<void(const NUsers&)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void addFriends(
             NSessionPtr session,
@@ -266,7 +266,7 @@ namespace Nakama {
             const std::vector<std::string>& usernames,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void deleteFriends(
             NSessionPtr session,
@@ -274,7 +274,7 @@ namespace Nakama {
             const std::vector<std::string>& usernames,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void blockFriends(
             NSessionPtr session,
@@ -282,13 +282,13 @@ namespace Nakama {
             const std::vector<std::string>& usernames,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listFriends(
             NSessionPtr session,
             std::function<void(NFriendsPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void createGroup(
             NSessionPtr session,
@@ -299,14 +299,14 @@ namespace Nakama {
             bool open,
             std::function<void(const NGroup&)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void deleteGroup(
             NSessionPtr session,
             const std::string& groupId,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void addGroupUsers(
             NSessionPtr session,
@@ -314,14 +314,14 @@ namespace Nakama {
             const std::vector<std::string>& ids,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listGroupUsers(
             NSessionPtr session,
             const std::string& groupId,
             std::function<void(NGroupUserListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void kickGroupUsers(
             NSessionPtr session,
@@ -329,21 +329,21 @@ namespace Nakama {
             const std::vector<std::string>& ids,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void joinGroup(
             NSessionPtr session,
             const std::string& groupId,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void leaveGroup(
             NSessionPtr session,
             const std::string& groupId,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listGroups(
             NSessionPtr session,
@@ -352,20 +352,20 @@ namespace Nakama {
             const std::string& cursor,
             std::function<void(NGroupListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listUserGroups(
             NSessionPtr session,
             std::function<void(NUserGroupListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listUserGroups(
             NSessionPtr session,
             const std::string& userId,
             std::function<void(NUserGroupListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void promoteGroupUsers(
             NSessionPtr session,
@@ -373,7 +373,7 @@ namespace Nakama {
             const std::vector<std::string>& ids,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void updateGroup(
             NSessionPtr session,
@@ -385,7 +385,7 @@ namespace Nakama {
             const opt::optional<bool>& open,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listLeaderboardRecords(
             NSessionPtr session,
@@ -395,7 +395,7 @@ namespace Nakama {
             const opt::optional<std::string>& cursor,
             std::function<void(NLeaderboardRecordListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listLeaderboardRecordsAroundOwner(
             NSessionPtr session,
@@ -404,7 +404,7 @@ namespace Nakama {
             const opt::optional<int32_t>& limit,
             std::function<void(NLeaderboardRecordListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void writeLeaderboardRecord(
             NSessionPtr session,
@@ -414,7 +414,7 @@ namespace Nakama {
             const opt::optional<std::string>& metadata,
             std::function<void(NLeaderboardRecord)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void writeTournamentRecord(
             NSessionPtr session,
@@ -424,14 +424,14 @@ namespace Nakama {
             const opt::optional<std::string>& metadata,
             std::function<void(NLeaderboardRecord)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void deleteLeaderboardRecord(
             NSessionPtr session,
             const std::string& leaderboardId,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listMatches(
             NSessionPtr session,
@@ -442,7 +442,7 @@ namespace Nakama {
             const opt::optional<bool>& authoritative,
             std::function<void(NMatchListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listNotifications(
             NSessionPtr session,
@@ -489,7 +489,7 @@ namespace Nakama {
             const std::vector<std::string>& ownerIds,
             std::function<void(NTournamentRecordListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listTournamentRecordsAroundOwner(
             NSessionPtr session,
@@ -498,7 +498,7 @@ namespace Nakama {
             const opt::optional<int32_t>& limit,
             std::function<void(NTournamentRecordListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void joinTournament(
             NSessionPtr session,
@@ -556,7 +556,7 @@ namespace Nakama {
         ) override;
 
     private:
-        RestReqContext* createReqContext(NSessionPtr session);
+        RestReqContext* createReqContext(NSessionPtr session, google::protobuf::Message* data);
 
         void sendReq(
             RestReqContext* ctx,

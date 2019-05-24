@@ -17,7 +17,7 @@ cmake_minimum_required(VERSION 3.10)
 
 cmake_policy(SET CMP0074 NEW)
 
-project(nakama-cpp VERSION 2.0.3 DESCRIPTION "Nakama C++ Client" LANGUAGES CXX)
+project(nakama-cpp VERSION 2.1.0 DESCRIPTION "Nakama C++ Client" LANGUAGES CXX)
 
 include(windows_support)
 
@@ -84,13 +84,6 @@ if(BUILD_REST_CLIENT)
 endif(BUILD_REST_CLIENT)
 
 if(BUILD_REST_CLIENT OR BUILD_WEBSOCKET_CPPREST)
-    set(Boost_USE_STATIC_LIBS ON) # only find static libs
-    find_package(Boost 1.67.0 REQUIRED COMPONENTS system date_time regex)
-    if(NOT Boost_FOUND)
-        message(FATAL_ERROR "Boost not found")
-    endif()
-    target_include_directories(nakama-cpp PRIVATE ${Boost_INCLUDE_DIRS})
-    target_link_libraries(nakama-cpp PUBLIC ${Boost_LIBRARIES})
     target_link_libraries(nakama-cpp PUBLIC cpprest)
     target_compile_definitions(nakama-cpp PRIVATE _TURN_OFF_PLATFORM_STRING)
 endif()

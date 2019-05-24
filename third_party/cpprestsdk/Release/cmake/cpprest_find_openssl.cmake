@@ -2,7 +2,7 @@ function(cpprest_find_openssl)
   if(TARGET cpprestsdk_openssl_internal)
     return()
   endif()
-
+#[[
   if(IOS)
     set(IOS_SOURCE_DIR "${PROJECT_SOURCE_DIR}/../Build_iOS")
 
@@ -54,15 +54,20 @@ function(cpprest_find_openssl)
       }
     " _SSL_LEAK_SUPPRESS_AVAILABLE)
   endif()
-
+]]
   add_library(cpprestsdk_openssl_internal INTERFACE)
+
+  # use BoringSSL
+  target_include_directories(cpprestsdk_openssl_internal INTERFACE "$<BUILD_INTERFACE:${OPENSSL_INCLUDE_DIR}>")
+
+#[[
   if(TARGET OpenSSL::SSL)
     target_link_libraries(cpprestsdk_openssl_internal INTERFACE OpenSSL::SSL)
   else()
     target_link_libraries(cpprestsdk_openssl_internal INTERFACE "$<BUILD_INTERFACE:${OPENSSL_LIBRARIES}>")
     target_include_directories(cpprestsdk_openssl_internal INTERFACE "$<BUILD_INTERFACE:${OPENSSL_INCLUDE_DIR}>")
   endif()
-
+]]
   if (NOT _SSL_LEAK_SUPPRESS_AVAILABLE)
     # libressl doesn't ship with the cleanup method being used in ws_client_wspp
     target_compile_definitions(cpprestsdk_openssl_internal INTERFACE -DCPPREST_NO_SSL_LEAK_SUPPRESS)

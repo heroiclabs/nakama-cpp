@@ -39,7 +39,11 @@ GrpcClient::GrpcClient(const DefaultClientParameters& parameters)
     : _host(parameters.host)
     , _ssl(parameters.ssl)
 {
-    std::string target = parameters.host + ":" + std::to_string(parameters.port);
+    int port = parameters.port;
+    if (port <= 0)
+        port = 7349;
+
+    std::string target = parameters.host + ":" + std::to_string(port);
 
     std::shared_ptr<grpc::ChannelCredentials> creds;
 
