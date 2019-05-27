@@ -53,7 +53,10 @@ void NWebsocketCppRest::tick()
         
         if (_settings.intervalSec > 0 && getUnixTimestampMs()-_lastSentPingTimeMs >= 1000*_settings.intervalSec)
         {
-            sendPing();
+            if (sendPing())
+            {
+                _lastSentPingTimeMs = getUnixTimestampMs();
+            }
         }
     }
 

@@ -479,7 +479,7 @@ public:
         {
             case websocket_message_type::text_message:
             case websocket_message_type::binary_message:
-            case websocket_message_type::ping: break;
+            case websocket_message_type::ping:
             case websocket_message_type::pong: break;
             default: return pplx::task_from_exception<void>(websocket_exception("Message Type not supported."));
         }
@@ -740,7 +740,7 @@ private:
             case websocket_message_type::binary_message:
                 client.send(this_client->m_con, sp_allocated.get(), length, websocketpp::frame::opcode::binary, ec);
                 break;
-            case websocket_message_type::ping: client.ping(this_client->m_con, ""); break;
+            case websocket_message_type::ping: client.ping(this_client->m_con, "", ec); break;
             case websocket_message_type::pong: client.pong(this_client->m_con, "", ec); break;
             default:
                 // This case should have already been filtered above.

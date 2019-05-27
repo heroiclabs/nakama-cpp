@@ -216,7 +216,7 @@ private:
     web::credentials m_credentials;
     web::http::http_headers m_headers;
     bool m_sni_enabled;
-    bool m_pong_timeout;
+    uint32_t m_pong_timeout;
     utf8string m_sni_hostname;
     bool m_validate_certificates;
 #if !defined(_WIN32) || !defined(__cplusplus_winrt)
