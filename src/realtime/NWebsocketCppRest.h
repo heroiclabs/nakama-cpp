@@ -52,6 +52,7 @@ namespace Nakama {
 
         void addErrorEvent(std::string&& err);
 
+        void disconnect(web::websockets::client::websocket_close_status status, const std::string& reason);
         bool sendPing();
         bool sendData(const NBytes & data, bool isPing = false);
 

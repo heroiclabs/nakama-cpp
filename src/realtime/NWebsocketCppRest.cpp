@@ -62,7 +62,7 @@ void NWebsocketCppRest::tick()
         }
         if (_settings.timeoutSec > 0 && getUnixTimestampMs()-_lastReceivedPongTimeMs >= 1000*_settings.timeoutSec)
         {
-            disconnect();
+            disconnect(web::websockets::client::websocket_close_status::pong_timeout, "Pong timeout");
         }
     }
 
@@ -138,6 +138,11 @@ void NWebsocketCppRest::connect(const std::string & url, NRtTransportType type)
 
 void NWebsocketCppRest::disconnect()
 {
+    disconnect(web::websockets::client::websocket_close_status::normal, "Normal close");
+}
+
+void NWebsocketCppRest::disconnect(web::websockets::client::websocket_close_status status, const std::string& reason)
+{
     if (!_wsClient)
         return;
 
@@ -146,7 +151,7 @@ void NWebsocketCppRest::disconnect()
     _disconnectInitiated = true;
     _connected = false;
 
-    auto task = _wsClient->close();
+    auto task = _wsClient->close(status, reason);
     // Task-based continuation
     task.then([this](pplx::task<void> previousTask)
     {
