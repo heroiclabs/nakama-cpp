@@ -27,7 +27,9 @@
 
 namespace Nakama {
 
-NWebsocketCppRest::NWebsocketCppRest()
+NWebsocketCppRest::NWebsocketCppRest():
+_lastSentPingTimeMs(0),
+_lastReceivedPongTimeMs(0)
 {
     NLOG_DEBUG("");
 }
@@ -57,6 +59,10 @@ void NWebsocketCppRest::tick()
             {
                 _lastSentPingTimeMs = getUnixTimestampMs();
             }
+        }
+        if (_settings.timeoutSec > 0 && getUnixTimestampMs()-_lastReceivedPongTimeMs >= 1000*_settings.timeoutSec)
+        {
+            disconnect();
         }
     }
 
@@ -98,17 +104,12 @@ void NWebsocketCppRest::connect(const std::string & url, NRtTransportType type)
         web::websockets::client::websocket_client_config config;
 
         config.set_user_agent(std::string("Nakama C++ ") + getNakamaSdkVersion());
-        if (_settings.timeoutSec > 0)
-            config.set_pong_timeout(_settings.timeoutSec);
         
         _wsClient.reset(new WsClient(config));
 
         _wsClient->set_message_handler(std::bind(&NWebsocketCppRest::onSocketMessage, this, std::placeholders::_1));
         _wsClient->set_close_handler(std::bind(&NWebsocketCppRest::onClosed, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
         
-        if (_settings.timeoutSec > 0)
-            _wsClient->set_pong_timeout_handler(std::bind(&NWebsocketCppRest::onPongTimeout, this, std::placeholders::_1));
-
         _type = type;
         _disconnectInitiated = false;
 
@@ -230,6 +231,9 @@ bool NWebsocketCppRest::send(const NBytes & data)
 // will be executed from internal thread of WsClient
 void NWebsocketCppRest::onOpened()
 {
+    _lastSentPingTimeMs = getUnixTimestampMs();
+    _lastReceivedPongTimeMs = getUnixTimestampMs();
+
     std::lock_guard<std::mutex> guard(_mutex);
     _connectedEvent = true;
     _connected = true;
@@ -300,6 +304,7 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
         case web::websockets::client::websocket_message_type::pong:
         {
             NLOG_DEBUG("pong");
+            _lastReceivedPongTimeMs = getUnixTimestampMs();
             break;
         }
 
@@ -311,11 +316,6 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
     {
         addErrorEvent("[NWebsocketCppRest::onSocketMessage] exception: " + std::string(e.what()));
     }
-}
-
-void NWebsocketCppRest::onPongTimeout(const std::string& msg)
-{
-    disconnect();
 }
 
 // might be executed from internal thread of WsClient

@@ -49,7 +49,6 @@ namespace Nakama {
             const utility::string_t& reason,
             const std::error_code& error);
         void onSocketMessage(const web::websockets::client::websocket_incoming_message& msg);
-        void onPongTimeout(const std::string& msg);
 
         void addErrorEvent(std::string&& err);
 
@@ -68,7 +67,7 @@ namespace Nakama {
         std::list<NBytes> _messageEvents;
         bool _connectedEvent = false;
         bool _connected = false;
-        std::atomic<uint64_t> _lastSentPingTimeMs;
+        std::atomic<uint64_t> _lastSentPingTimeMs, _lastReceivedPongTimeMs;
     };
 
 }
