@@ -31,7 +31,7 @@ namespace Test {
         ~NTest();
 
         virtual void createWorkingClient();
-        virtual void createClientWithParameters(const DefaultClientParameters& parameters);
+        virtual void createClientWithParameters(const NClientParameters& parameters);
         virtual void initClient();
 
         virtual void runTest();
@@ -52,7 +52,7 @@ namespace Test {
         std::string _name;
     };
 
-    void setWorkingClientParameters(DefaultClientParameters& parameters);
+    void setWorkingClientParameters(NClientParameters& parameters);
 
 } // namespace Test
 } // namespace Nakama

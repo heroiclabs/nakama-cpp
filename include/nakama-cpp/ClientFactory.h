@@ -21,7 +21,7 @@
 
 namespace Nakama {
 
-    struct NAKAMA_API DefaultClientParameters
+    struct NAKAMA_API NClientParameters
     {
         /// The key used to authenticate with the server without a session. Defaults to "defaultkey".
         std::string serverKey = "defaultkey";
@@ -43,19 +43,22 @@ namespace Nakama {
         bool ssl = false;
     };
 
+    /// DefaultClientParameters is deprectaed, use NClientParameters instead
+    using DefaultClientParameters = NClientParameters;
+
     /**
      * Creates a default client to interact with Nakama server.
      * 
      * @param parameters the client parameters
      */
-    NAKAMA_API NClientPtr createDefaultClient(const DefaultClientParameters& parameters);
+    NAKAMA_API NClientPtr createDefaultClient(const NClientParameters& parameters);
 
     /**
      * Creates the gRPC client to interact with Nakama server.
      *
      * @param parameters the client parameters
      */
-    NAKAMA_API NClientPtr createGrpcClient(const DefaultClientParameters& parameters);
+    NAKAMA_API NClientPtr createGrpcClient(const NClientParameters& parameters);
 
     /**
      * Creates the REST client (HTTP/1.1) to interact with Nakama server.
@@ -63,6 +66,6 @@ namespace Nakama {
      * @param parameters the client parameters
      * @param httpClient optional, the HTTP client. If not set then default HTTP client will be used.
      */
-    NAKAMA_API NClientPtr createRestClient(const DefaultClientParameters& parameters, NHttpClientPtr httpClient = nullptr);
+    NAKAMA_API NClientPtr createRestClient(const NClientParameters& parameters, NHttpClientPtr httpClient = nullptr);
 
 }

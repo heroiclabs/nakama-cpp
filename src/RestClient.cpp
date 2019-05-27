@@ -16,7 +16,7 @@
 
 #include "RestClient.h"
 #include "realtime/NRtClient.h"
-#include "nakama-cpp/realtime/NWebsockets.h"
+#include "nakama-cpp/realtime/NWebsocketsFactory.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/StrUtil.h"
 #include "nakama-cpp/NakamaVersion.h"
@@ -41,7 +41,7 @@ void AddBoolArg(NHttpQueryArgs& args, string&& name, bool value)
     value ? args.emplace(name, "true") : args.emplace(name, "false");
 }
 
-RestClient::RestClient(const DefaultClientParameters& parameters, NHttpClientPtr httpClient)
+RestClient::RestClient(const NClientParameters& parameters, NHttpClientPtr httpClient)
     : _host(parameters.host)
     , _ssl(parameters.ssl)
     , _httpClient(httpClient)

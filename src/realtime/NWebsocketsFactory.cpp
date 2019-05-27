@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/realtime/NWebsockets.h"
+#include "nakama-cpp/realtime/NWebsocketsFactory.h"
 #include "nakama-cpp/log/NLogger.h"
 
 #ifdef BUILD_WEBSOCKET_CPPREST

@@ -23,8 +23,8 @@ namespace Nakama {
     /**
      * Create default websocket transport.
      *
-     * Creates Websocketpp or IXWebSocket transport depending on platform.
-     * Check out README for supported platforms.
+     * Creates WebsocketCppRest transport as currently
+     * only it's used on all platforms.
      */
     NAKAMA_API NRtTransportPtr createDefaultWebsocket();
     
