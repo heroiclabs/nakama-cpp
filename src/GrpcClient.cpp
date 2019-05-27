@@ -41,7 +41,7 @@ GrpcClient::GrpcClient(const NClientParameters& parameters)
 {
     int port = parameters.port;
     if (port <= 0)
-        port = 7349;
+        port = parameters.ssl ? 443 : 7349;
 
     std::string target = parameters.host + ":" + std::to_string(port);
 

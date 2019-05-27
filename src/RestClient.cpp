@@ -50,7 +50,7 @@ RestClient::RestClient(const NClientParameters& parameters, NHttpClientPtr httpC
 
     int port = parameters.port;
     if (port <= 0)
-        port = 7350;
+        port = parameters.ssl ? 443 : 7350;
 
     _ssl ? baseUrl.append("https") : baseUrl.append("http");
     baseUrl.append("://").append(parameters.host).append(":").append(std::to_string(port));
