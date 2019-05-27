@@ -2118,7 +2118,7 @@ void RestClient::joinTournament(NSessionPtr session, const std::string & tournam
 
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
-
+*/
 void RestClient::listStorageObjects(
     NSessionPtr session,
     const std::string & collection,
@@ -2126,32 +2126,34 @@ void RestClient::listStorageObjects(
     const opt::optional<std::string>& cursor,
     std::function<void(NStorageObjectListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::StorageObjectList>());
+        auto data(make_shared<nakama::api::StorageObjectList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NStorageObjectListPtr list(new NStorageObjectList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NStorageObjectListPtr list(new NStorageObjectList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (cursor) args.emplace("cursor", *cursor);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/storage/" + collection, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListStorageObjectsRequest req;
-
-    req.set_collection(collection);
-
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (cursor) req.set_cursor(*cursor);
-
-    auto responseReader = _stub->AsyncListStorageObjects(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::listUsersStorageObjects(
@@ -2162,33 +2164,35 @@ void RestClient::listUsersStorageObjects(
     const opt::optional<std::string>& cursor,
     std::function<void(NStorageObjectListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::StorageObjectList>());
+        auto data(make_shared<nakama::api::StorageObjectList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NStorageObjectListPtr list(new NStorageObjectList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NStorageObjectListPtr list(new NStorageObjectList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        args.emplace("user_id", userId);
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (cursor) args.emplace("cursor", *cursor);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/storage/" + collection, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListStorageObjectsRequest req;
-
-    req.set_collection(collection);
-    req.set_user_id(userId);
-
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (cursor) req.set_cursor(*cursor);
-
-    auto responseReader = _stub->AsyncListStorageObjects(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::writeStorageObjects(
@@ -2196,43 +2200,57 @@ void RestClient::writeStorageObjects(
     const std::vector<NStorageObjectWrite>& objects,
     std::function<void(const NStorageObjectAcks&)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::StorageObjectAcks>());
+        auto data(make_shared<nakama::api::StorageObjectAcks>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NStorageObjectAcks acks;
-            assign(acks, data->acks());
-            successCallback(acks);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NStorageObjectAcks acks;
+                assign(acks, data->acks());
+                successCallback(acks);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+        web::json::value jsonObjects = web::json::value::array();
+
+        for (auto& obj : objects)
+        {
+            web::json::value jsonObj = web::json::value::object();
+
+            jsonObj[FROM_STD_STR("collection")] = web::json::value(FROM_STD_STR(obj.collection));
+            jsonObj[FROM_STD_STR("key")] = web::json::value(FROM_STD_STR(obj.key));
+            jsonObj[FROM_STD_STR("value")] = web::json::value(FROM_STD_STR(obj.value));
+            jsonObj[FROM_STD_STR("version")] = web::json::value(FROM_STD_STR(obj.version));
+
+            if (obj.permissionRead)
+                jsonObj[FROM_STD_STR("permission_read")] = web::json::value(static_cast<int32_t>(*obj.permissionRead));
+
+            if (obj.permissionWrite)
+                jsonObj[FROM_STD_STR("permission_write")] = web::json::value(static_cast<int32_t>(*obj.permissionWrite));
+
+            jsonObjects[jsonObjects.size()] = std::move(jsonObj);
+        }
+
+        jsonRoot[FROM_STD_STR("objects")] = std::move(jsonObjects);
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::PUT, "/v2/storage", std::move(body));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::WriteStorageObjectsRequest req;
-
-    for (auto& obj : objects)
+    catch (exception& e)
     {
-        auto* write_obj = req.mutable_objects()->Add();
-
-        write_obj->set_collection(obj.collection);
-        write_obj->set_key(obj.key);
-        write_obj->set_value(obj.value);
-        write_obj->set_version(obj.version);
-
-        if (obj.permissionRead)
-            write_obj->mutable_permission_read()->set_value(static_cast<::google::protobuf::int32>(*obj.permissionRead));
-
-        if (obj.permissionWrite)
-            write_obj->mutable_permission_write()->set_value(static_cast<::google::protobuf::int32>(*obj.permissionWrite));
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    auto responseReader = _stub->AsyncWriteStorageObjects(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void RestClient::readStorageObjects(
@@ -2240,94 +2258,128 @@ void RestClient::readStorageObjects(
     const std::vector<NReadStorageObjectId>& objectIds,
     std::function<void(const NStorageObjects&)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::StorageObjects>());
+        auto data(make_shared<nakama::api::StorageObjects>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NStorageObjects objects;
-            assign(objects, data->objects());
-            successCallback(objects);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NStorageObjects objects;
+                assign(objects, data->objects());
+                successCallback(objects);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+        web::json::value jsonObjects = web::json::value::array();
+
+        for (auto& obj : objectIds)
+        {
+            web::json::value jsonObj = web::json::value::object();
+
+            jsonObj[FROM_STD_STR("collection")] = web::json::value(FROM_STD_STR(obj.collection));
+            jsonObj[FROM_STD_STR("key")] = web::json::value(FROM_STD_STR(obj.key));
+            jsonObj[FROM_STD_STR("user_id")] = web::json::value(FROM_STD_STR(obj.userId));
+
+            jsonObjects[jsonObjects.size()] = std::move(jsonObj);
+        }
+
+        jsonRoot[FROM_STD_STR("object_ids")] = std::move(jsonObjects);
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/storage", std::move(body));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ReadStorageObjectsRequest req;
-
-    for (auto& obj : objectIds)
+    catch (exception& e)
     {
-        auto* write_obj = req.mutable_object_ids()->Add();
-
-        write_obj->set_collection(obj.collection);
-        write_obj->set_key(obj.key);
-        write_obj->set_user_id(obj.userId);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    auto responseReader = _stub->AsyncReadStorageObjects(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
 void RestClient::deleteStorageObjects(NSessionPtr session, const std::vector<NDeleteStorageObjectId>& objectIds, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::DeleteStorageObjectsRequest req;
+        utility::stringstream_t ss;
+        web::json::value jsonRoot = web::json::value::object();
+        web::json::value jsonObjects = web::json::value::array();
 
-    for (auto& obj : objectIds)
-    {
-        auto* write_obj = req.mutable_object_ids()->Add();
+        for (auto& obj : objectIds)
+        {
+            web::json::value jsonObj = web::json::value::object();
 
-        write_obj->set_collection(obj.collection);
-        write_obj->set_key(obj.key);
-        write_obj->set_version(obj.version);
+            jsonObj[FROM_STD_STR("collection")] = web::json::value(FROM_STD_STR(obj.collection));
+            jsonObj[FROM_STD_STR("key")] = web::json::value(FROM_STD_STR(obj.key));
+            jsonObj[FROM_STD_STR("version")] = web::json::value(FROM_STD_STR(obj.version));
+
+            jsonObjects[jsonObjects.size()] = std::move(jsonObj);
+        }
+
+        jsonRoot[FROM_STD_STR("object_ids")] = std::move(jsonObjects);
+
+        jsonRoot.serialize(ss);
+
+        string body = TO_STD_STR(ss.str());
+
+        sendReq(ctx, NHttpReqMethod::PUT, "/v2/storage/delete", std::move(body));
     }
-
-    auto responseReader = _stub->AsyncDeleteStorageObjects(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
-*/
+
 void RestClient::rpc(
     NSessionPtr session,
     const std::string & id,
     const opt::optional<std::string>& payload,
     std::function<void(const NRpc&)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    auto data(make_shared<nakama::api::Rpc>());
-    RestReqContext* ctx = createReqContext(session, data.get());
+        auto data(make_shared<nakama::api::Rpc>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NRpc rpc;
-            assign(rpc, *data);
-            successCallback(rpc);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NRpc rpc;
+                assign(rpc, *data);
+                successCallback(rpc);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        string body;
+        string path("/v2/rpc/");
+
+        path.append(id);
+
+        if (payload)
+            body = *payload;
+
+        sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body));
     }
-    ctx->errorCallback = errorCallback;
-
-    string body;
-    string path("/v2/rpc/");
-
-    path.append(id);
-
-    if (payload)
-        body = *payload;
-
-    sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body));
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 }
