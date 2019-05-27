@@ -254,10 +254,6 @@ else()
     if(APPLE)
         target_link_libraries(${target_name} INTERFACE "-framework foundation" "-framework security")
     endif()
-
-    if(IXWEBSOCKET_AVL)
-        target_link_libraries(${target_name} INTERFACE ixwebsocket)
-    endif()
     
     if(ANDROID)
         target_link_libraries(${target_name} INTERFACE log)
