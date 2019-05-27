@@ -25,13 +25,29 @@ function(cpprest_find_boost)
 
   if(IOS)
     if (EXISTS "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
-      set(IOS_SOURCE_DIR "${PROJECT_SOURCE_DIR}/../Build_iOS")
+      set(BOOST_DIR "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
+      
+      project(ext_boost_system)
+      add_library(ext_boost_system STATIC IMPORTED GLOBAL)
+      set_target_properties(ext_boost_system PROPERTIES
+          IMPORTED_LOCATION "${BOOST_DIR}/lib/libboost_system.a")
+
+      project(ext_boost_thread)
+      add_library(ext_boost_thread STATIC IMPORTED GLOBAL)
+      set_target_properties(ext_boost_thread PROPERTIES
+          IMPORTED_LOCATION "${BOOST_DIR}/lib/libboost_thread.a")
+
+      project(ext_boost_chrono)
+      add_library(ext_boost_chrono STATIC IMPORTED GLOBAL)
+      set_target_properties(ext_boost_chrono PROPERTIES
+          IMPORTED_LOCATION "${BOOST_DIR}/lib/libboost_chrono.a")
+      
       set(Boost_LIBRARIES
-        "${IOS_SOURCE_DIR}/boost/lib/libboost_system.a"
-        "${IOS_SOURCE_DIR}/boost/lib/libboost_thread.a"
-        "${IOS_SOURCE_DIR}/boost/lib/libboost_chrono.a"
-         CACHE INTERNAL "")
-      set(Boost_INCLUDE_DIR "${IOS_SOURCE_DIR}/boost/include" CACHE INTERNAL "")
+        ext_boost_system
+        ext_boost_thread
+        ext_boost_chrono
+        CACHE INTERNAL "")
+      set(Boost_INCLUDE_DIR "${BOOST_DIR}/include" CACHE INTERNAL "")
     else()
       set(IOS_SOURCE_DIR "${PROJECT_SOURCE_DIR}/../Build_iOS")
       set(Boost_LIBRARIES "${IOS_SOURCE_DIR}/boost.framework/boost" CACHE INTERNAL "")
@@ -83,6 +99,7 @@ function(cpprest_find_boost)
     #if (NOT IOS OR NOT EXISTS "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
       target_link_libraries(cpprestsdk_boost_internal INTERFACE "$<BUILD_INTERFACE:${_libs}>")
     #endif()
+#[[
   else()
     if(ANDROID)
       target_link_libraries(cpprestsdk_boost_internal INTERFACE
@@ -114,5 +131,6 @@ function(cpprest_find_boost)
         Boost::regex
       )
     endif()
+]]
   endif()
 endfunction()

@@ -17,6 +17,7 @@
 import os
 import sys
 import subprocess
+import shutil
 
 BUILD_MODE = 'Release'
 
@@ -34,6 +35,10 @@ def call(command):
 def makedirs(dir):
     if not os.path.isdir(dir):
         os.makedirs(dir)
+
+def copy_file(src, dest):
+    shutil.copy(src, dest)
+    print 'copied', os.path.basename(src)
 
 release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/ios')
 makedirs(release_libs_dir)
@@ -61,7 +66,7 @@ crypto_libs = []
 ssl_libs = []
 protobuf_libs = []
 z_libs = []
-ixwebsocket_libs = []
+cpprest_libs = []
 
 for arch in arch_list:
     call(['python', 'build_ios.py', arch])
@@ -78,7 +83,7 @@ for arch in arch_list:
     ssl_libs            .append(build_arch_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a')
     protobuf_libs       .append(build_arch_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a')
     z_libs              .append(build_arch_dir + '/third_party/grpc/third_party/zlib/libz.a')
-    ixwebsocket_libs    .append(build_arch_dir + '/third_party/IXWebSocket/libixwebsocket.a')
+    cpprest_libs        .append(build_arch_dir + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a')
 
 create_universal_lib(nakama_cpp_libs)
 create_universal_lib(grpc_libs)
@@ -90,7 +95,13 @@ create_universal_lib(crypto_libs)
 create_universal_lib(ssl_libs)
 create_universal_lib(protobuf_libs)
 create_universal_lib(z_libs)
-create_universal_lib(ixwebsocket_libs)
+create_universal_lib(cpprest_libs)
+
+# copy boost libs (they are already universal libs)
+boost_libs_path = os.path.abspath('../../third_party/cpprestsdk/Build_iOS/boost/lib')
+copy_file(os.path.join(boost_libs_path, 'libboost_system.a'), release_libs_dir)
+copy_file(os.path.join(boost_libs_path, 'libboost_chrono.a'), release_libs_dir)
+copy_file(os.path.join(boost_libs_path, 'libboost_thread.a'), release_libs_dir)
 
 # dynamic libs
 release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/ios')
