@@ -30,7 +30,7 @@ void test_authenticateDevice()
     auto successCallback = [&test](NSessionPtr session)
     {
         std::cout << "session token: " << session->getAuthToken() << std::endl;
-        test.stopTest(true);
+        test.stopTest(session->getAuthToken().empty() == false);
     };
 
     test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
@@ -47,7 +47,7 @@ void test_authenticateDevice2()
     auto successCallback = [&test](NSessionPtr session)
     {
         std::cout << "session token: " << session->getAuthToken() << std::endl;
-        test.stopTest(true);
+        test.stopTest(session->getAuthToken().empty() == false);
     };
 
     test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback);

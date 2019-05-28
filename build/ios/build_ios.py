@@ -90,8 +90,7 @@ call(['cmake',
       '-DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY,
       '-DENABLE_BITCODE=FALSE',
       '-DENABLE_ARC=TRUE',
-      '-DBUILD_WEBSOCKETPP=OFF',
-      '-DBUILD_IXWEBSOCKET=ON',
+      '-DBUILD_WEBSOCKETPP=ON',
       '-G' + generator,
       '../..'
       ])

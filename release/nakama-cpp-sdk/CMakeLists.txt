@@ -219,17 +219,18 @@ else()
         IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}crypto${LIB_SUFFIX}${LIB_EXT}"
     )
 
-    if(ANDROID OR APPLE)
-        set(IXWEBSOCKET_AVL TRUE)
-
-        # ixwebsocket
-        project(ixwebsocket)
-        add_library(ixwebsocket STATIC IMPORTED GLOBAL)
-        set_target_properties(ixwebsocket PROPERTIES
-            IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}ixwebsocket${LIB_SUFFIX}${LIB_EXT}"
+    if(1)
+        # cpprest
+        project(cpprest)
+        add_library(cpprest STATIC IMPORTED GLOBAL)
+        set_target_properties(cpprest PROPERTIES
+            IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}cpprest${LIB_SUFFIX}${LIB_EXT}"
         )
-    else()
-        set(IXWEBSOCKET_AVL FALSE)
+        target_link_libraries(cpprest INTERFACE
+            "${LIBS_FOLDER}/${LIB_PREFIX}boost_system${LIB_SUFFIX}${LIB_EXT}"
+            "${LIBS_FOLDER}/${LIB_PREFIX}boost_thread${LIB_SUFFIX}${LIB_EXT}"
+            "${LIBS_FOLDER}/${LIB_PREFIX}boost_chrono${LIB_SUFFIX}${LIB_EXT}"
+        )
     endif()
 
     # nakama-cpp static lib
@@ -248,10 +249,10 @@ else()
         IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}${lib_name}${LIB_SUFFIX}${LIB_EXT}"
     )
 
-    target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares address_sorting gpr zlib ssl crypto)
-
-    if(IXWEBSOCKET_AVL)
-        target_link_libraries(${target_name} INTERFACE ixwebsocket)
+    target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares address_sorting gpr zlib ssl crypto cpprest)
+    
+    if(APPLE)
+        target_link_libraries(${target_name} INTERFACE "-framework foundation" "-framework security")
     endif()
     
     if(ANDROID)
