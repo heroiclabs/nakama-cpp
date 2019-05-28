@@ -64,6 +64,12 @@ def makedirs(dir):
     if not os.path.isdir(dir):
         os.makedirs(dir)
 
+def bool2cmake(bVal):
+    if bVal:
+        return 'ON'
+    else:
+        return 'OFF'
+
 def copy_file(src, dest):
     shutil.copy(src, dest)
     print 'copied', os.path.basename(src)
@@ -90,10 +96,9 @@ def copy_shared_lib(dest):
 
 os.chdir(build_dir)
 
-if SHARED_LIB:
-    NAKAMA_SHARED_LIBRARY = 'TRUE'
-else:
-    NAKAMA_SHARED_LIBRARY = 'FALSE'
+BUILD_GRPC_CLIENT = False
+BUILD_HTTP_CPPREST = True
+BUILD_WEBSOCKET_CPPREST = True
 
 #generator = 'Xcode' # doesn't build crypto
 generator = 'Ninja'
@@ -103,8 +108,10 @@ call('cmake' +
  ' -DCMAKE_OSX_DEPLOYMENT_TARGET=10.10' +
  ' -DENABLE_BITCODE=FALSE' +
  ' -DENABLE_ARC=TRUE' +
- ' -DBUILD_WEBSOCKETPP=ON' +
- ' -DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY +
+ ' -DNAKAMA_SHARED_LIBRARY=' + bool2cmake(SHARED_LIB) +
+ ' -DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT) +
+ ' -DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST) +
+ ' -DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST) +
  ' -G' + generator +
  ' ../../../..')
 
