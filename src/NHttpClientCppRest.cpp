@@ -96,7 +96,7 @@ void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCal
 
     auto task = _client->request(request);
     // Task-based continuation
-    task.then([this, ctx](pplx::task<http_response> previousTask)
+    (void) task.then([this, ctx](pplx::task<http_response> previousTask)
     {
         try
         {

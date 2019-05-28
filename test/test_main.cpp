@@ -38,7 +38,7 @@ std::vector<NTest*> g_running_tests;
 uint32_t g_runTestsCount = 0;
 uint32_t g_failedTestsCount = 0;
 
-void setWorkingClientParameters(DefaultClientParameters& parameters)
+void setWorkingClientParameters(NClientParameters& parameters)
 {
     parameters.host      = SERVER_HOST;
     parameters.port      = SERVER_GRPC_PORT;
@@ -97,7 +97,7 @@ NTest::~NTest()
 
 void NTest::createWorkingClient()
 {
-    DefaultClientParameters parameters;
+    NClientParameters parameters;
 
     setWorkingClientParameters(parameters);
 
@@ -106,7 +106,7 @@ void NTest::createWorkingClient()
     initClient();
 }
 
-void NTest::createClientWithParameters(const DefaultClientParameters & parameters)
+void NTest::createClientWithParameters(const NClientParameters& parameters)
 {
     client = createDefaultClient(parameters);
 

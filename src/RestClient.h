@@ -38,7 +38,7 @@ namespace Nakama {
     class RestClient : public NClientInterface
     {
     public:
-        explicit RestClient(const DefaultClientParameters& parameters, NHttpClientPtr httpClient);
+        explicit RestClient(const NClientParameters& parameters, NHttpClientPtr httpClient);
         ~RestClient();
 
         void setErrorCallback(ErrorCallback errorCallback) override { _defaultErrorCallback = errorCallback; }
@@ -514,7 +514,7 @@ namespace Nakama {
             const opt::optional<std::string>& cursor,
             std::function<void(NStorageObjectListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listUsersStorageObjects(
             NSessionPtr session,
@@ -524,28 +524,28 @@ namespace Nakama {
             const opt::optional<std::string>& cursor,
             std::function<void(NStorageObjectListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void writeStorageObjects(
             NSessionPtr session,
             const std::vector<NStorageObjectWrite>& objects,
             std::function<void(const NStorageObjectAcks&)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void readStorageObjects(
             NSessionPtr session,
             const std::vector<NReadStorageObjectId>& objectIds,
             std::function<void(const NStorageObjects&)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void deleteStorageObjects(
             NSessionPtr session,
             const std::vector<NDeleteStorageObjectId>& objectIds,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void rpc(
             NSessionPtr session,

@@ -16,7 +16,7 @@
 
 #include "GrpcClient.h"
 #include "realtime/NRtClient.h"
-#include "nakama-cpp/realtime/NWebsockets.h"
+#include "nakama-cpp/realtime/NWebsocketsFactory.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/StrUtil.h"
 #include "nakama-cpp/NakamaVersion.h"
@@ -35,7 +35,7 @@ using namespace std;
 
 namespace Nakama {
 
-GrpcClient::GrpcClient(const DefaultClientParameters& parameters)
+GrpcClient::GrpcClient(const NClientParameters& parameters)
     : _host(parameters.host)
     , _ssl(parameters.ssl)
 {

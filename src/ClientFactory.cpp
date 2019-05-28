@@ -25,19 +25,19 @@
 
 namespace Nakama {
 
-NClientPtr createDefaultClient(const DefaultClientParameters& parameters)
+NClientPtr createDefaultClient(const NClientParameters& parameters)
 {
     //return createGrpcClient(parameters);
     return createRestClient(parameters);
 }
 
-NClientPtr createGrpcClient(const DefaultClientParameters& parameters)
+NClientPtr createGrpcClient(const NClientParameters& parameters)
 {
     NClientPtr client(new GrpcClient(parameters));
     return client;
 }
 
-NClientPtr createRestClient(const DefaultClientParameters& parameters, NHttpClientPtr httpClient)
+NClientPtr createRestClient(const NClientParameters& parameters, NHttpClientPtr httpClient)
 {
 #ifdef BUILD_REST_CLIENT
     if (!httpClient)

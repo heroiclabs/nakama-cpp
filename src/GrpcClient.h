@@ -38,7 +38,7 @@ namespace Nakama {
     class GrpcClient : public NClientInterface
     {
     public:
-        explicit GrpcClient(const DefaultClientParameters& parameters);
+        explicit GrpcClient(const NClientParameters& parameters);
         ~GrpcClient();
 
         void setErrorCallback(ErrorCallback errorCallback) override { _defaultErrorCallback = errorCallback; }

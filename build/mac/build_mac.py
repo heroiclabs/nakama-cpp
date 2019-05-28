@@ -81,7 +81,7 @@ def copy_libs(dest):
     copy_file(build_dir + '/third_party/grpc/third_party/zlib/libz.a', dest)
     copy_file(build_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', dest)
     copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', dest)
-    copy_file(build_dir + '/third_party/IXWebSocket/libixwebsocket.a', dest)
+    copy_file(build_dir + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a', dest)
 
 def copy_shared_lib(dest):
     print

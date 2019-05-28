@@ -25,7 +25,7 @@ void test_connectError()
 {
     NTest test(__func__);
 
-    DefaultClientParameters parameters;
+    NClientParameters parameters;
 
     parameters.port = 1111;
 
