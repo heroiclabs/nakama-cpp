@@ -1897,55 +1897,67 @@ void RestClient::listNotifications(
     const opt::optional<std::string>& cacheableCursor,
     std::function<void(NNotificationListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    auto data(make_shared<nakama::api::NotificationList>());
-    RestReqContext* ctx = createReqContext(session, data.get());
+        auto data(make_shared<nakama::api::NotificationList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NNotificationListPtr list(new NNotificationList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NNotificationListPtr list(new NNotificationList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (cacheableCursor) args.emplace("cursor", *cacheableCursor);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/notification", "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    NHttpQueryArgs args;
-
-    if (limit) args.emplace("limit", std::to_string(*limit));
-    if (cacheableCursor) args.emplace("cursor", *cacheableCursor);
-
-    sendReq(ctx, NHttpReqMethod::GET, "/v2/notification", "", std::move(args));
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::deleteNotifications(NSessionPtr session, const std::vector<std::string>& notificationIds, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session, nullptr);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    if (successCallback)
-    {
-        ctx->successCallback = [successCallback]()
+        if (successCallback)
         {
-            successCallback();
-        };
+            ctx->successCallback = [successCallback]()
+            {
+                successCallback();
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        for (auto& id : notificationIds)
+        {
+            args.emplace("ids", id);
+        }
+
+        sendReq(ctx, NHttpReqMethod::DEL, "/v2/notification", "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    NHttpQueryArgs args;
-
-    for (auto& id : notificationIds)
+    catch (exception& e)
     {
-        args.emplace("ids", id);
+        NLOG_ERROR("exception: " + string(e.what()));
     }
-
-    sendReq(ctx, NHttpReqMethod::DEL, "/v2/notification", "", std::move(args));
 }
-/*
+
 void RestClient::listChannelMessages(
     NSessionPtr session,
     const std::string & channelId,
@@ -1954,32 +1966,35 @@ void RestClient::listChannelMessages(
     const opt::optional<bool>& forward,
     std::function<void(NChannelMessageListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::ChannelMessageList>());
+        auto data(make_shared<nakama::api::ChannelMessageList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NChannelMessageListPtr list(new NChannelMessageList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NChannelMessageListPtr list(new NChannelMessageList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (cursor) args.emplace("cursor", *cursor);
+        if (forward) AddBoolArg(args, "forward", *forward);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/channel/" + channelId, "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListChannelMessagesRequest req;
-
-    req.set_channel_id(channelId);
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (cursor) req.set_cursor(*cursor);
-    if (forward) req.mutable_forward()->set_value(*forward);
-
-    auto responseReader = _stub->AsyncListChannelMessages(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
 
 void RestClient::listTournaments(
@@ -1992,36 +2007,40 @@ void RestClient::listTournaments(
     const opt::optional<std::string>& cursor,
     std::function<void(NTournamentListPtr)> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::TournamentList>());
+        auto data(make_shared<nakama::api::TournamentList>());
+        RestReqContext* ctx = createReqContext(session, data.get());
 
-    if (successCallback)
-    {
-        ctx->successCallback = [data, successCallback]()
+        if (successCallback)
         {
-            NTournamentListPtr list(new NTournamentList());
-            assign(*list, *data);
-            successCallback(list);
-        };
+            ctx->successCallback = [data, successCallback]()
+            {
+                NTournamentListPtr list(new NTournamentList());
+                assign(*list, *data);
+                successCallback(list);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+
+        if (categoryStart) args.emplace("category_start", std::to_string(*categoryStart));
+        if (categoryEnd) args.emplace("category_end", std::to_string(*categoryEnd));
+        if (startTime) args.emplace("start_time", std::to_string(*startTime));
+        if (endTime) args.emplace("end_time", std::to_string(*endTime));
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (cursor) args.emplace("cursor", *cursor);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament", "", std::move(args));
     }
-    ctx->errorCallback = errorCallback;
-
-    nakama::api::ListTournamentsRequest req;
-
-    if (categoryStart) req.mutable_category_start()->set_value(*categoryStart);
-    if (categoryEnd) req.mutable_category_end()->set_value(*categoryEnd);
-    if (startTime) req.mutable_start_time()->set_value(*startTime);
-    if (endTime) req.mutable_end_time()->set_value(*endTime);
-    if (limit) req.mutable_limit()->set_value(*limit);
-    if (cursor) req.set_cursor(*cursor);
-
-    auto responseReader = _stub->AsyncListTournaments(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
-*/
+
 void RestClient::listTournamentRecords(
     NSessionPtr session,
     const std::string & tournamentId,
@@ -2100,25 +2119,25 @@ void RestClient::listTournamentRecordsAroundOwner(
         NLOG_ERROR("exception: " + string(e.what()));
     }
 }
-/*
+
 void RestClient::joinTournament(NSessionPtr session, const std::string & tournamentId, std::function<void()> successCallback, ErrorCallback errorCallback)
 {
-    NLOG_INFO("...");
+    try {
+        NLOG_INFO("...");
 
-    RestReqContext* ctx = createReqContext(session);
+        RestReqContext* ctx = createReqContext(session, nullptr);
 
-    ctx->successCallback = successCallback;
-    ctx->errorCallback = errorCallback;
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
 
-    nakama::api::JoinTournamentRequest req;
-
-    req.set_tournament_id(tournamentId);
-
-    auto responseReader = _stub->AsyncJoinTournament(&ctx->context, req, &_cq);
-
-    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/tournament/" + tournamentId + "/join", "");
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
 }
-*/
+
 void RestClient::listStorageObjects(
     NSessionPtr session,
     const std::string & collection,

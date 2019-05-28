@@ -467,7 +467,7 @@ namespace Nakama {
             const opt::optional<bool>& forward,
             std::function<void(NChannelMessageListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listTournaments(
             NSessionPtr session,
@@ -479,7 +479,7 @@ namespace Nakama {
             const opt::optional<std::string>& cursor,
             std::function<void(NTournamentListPtr)> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listTournamentRecords(
             NSessionPtr session,
@@ -505,7 +505,7 @@ namespace Nakama {
             const std::string& tournamentId,
             std::function<void()> successCallback,
             ErrorCallback errorCallback
-        ) override {}
+        ) override;
 
         void listStorageObjects(
             NSessionPtr session,
