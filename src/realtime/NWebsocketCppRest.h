@@ -52,10 +52,15 @@ namespace Nakama {
 
         void addErrorEvent(std::string&& err);
 
+        void disconnect(web::websockets::client::websocket_close_status status, const std::string& reason);
+        bool sendPing();
+        bool sendData(const NBytes & data, bool isPing = false);
+
     protected:
         using WsClient = web::websockets::client::websocket_callback_client;
         std::unique_ptr<WsClient> _wsClient;
         NRtTransportType _type = NRtTransportType::Binary;
+        NRtPingSettings _settings;
         bool _disconnectInitiated = false;
         std::mutex _mutex;
         std::unique_ptr<NRtClientDisconnectInfo> _disconnectEvent;
@@ -63,6 +68,7 @@ namespace Nakama {
         std::list<NBytes> _messageEvents;
         bool _connectedEvent = false;
         bool _connected = false;
+        std::atomic<uint64_t> _lastSentPingTimeMs, _lastReceivedPongTimeMs;
     };
 
 }
