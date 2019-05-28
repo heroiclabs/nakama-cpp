@@ -119,7 +119,7 @@ string urlEncode(const string & str)
     return result;
 }
 
-NAKAMA_API bool isStringStartsWith(const string & str, const string & prefix)
+bool isStringStartsWith(const string & str, const string & prefix)
 {
     bool res = false;
 

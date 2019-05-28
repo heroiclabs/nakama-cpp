@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_GRPC_CLIENT
+
 #include "GrpcClient.h"
 #include "realtime/NRtClient.h"
-#include "nakama-cpp/realtime/NWebsockets.h"
+#include "nakama-cpp/realtime/NWebsocketsFactory.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/StrUtil.h"
-#include "nakama-cpp/Nakama.h"
+#include "nakama-cpp/NakamaVersion.h"
 #include "DefaultSession.h"
 #include "DataHelper.h"
 #include <grpc++/create_channel.h>
@@ -35,11 +37,15 @@ using namespace std;
 
 namespace Nakama {
 
-GrpcClient::GrpcClient(const DefaultClientParameters& parameters)
+GrpcClient::GrpcClient(const NClientParameters& parameters)
     : _host(parameters.host)
     , _ssl(parameters.ssl)
 {
-    std::string target = parameters.host + ":" + std::to_string(parameters.port);
+    int port = parameters.port;
+    if (port <= 0)
+        port = parameters.ssl ? 443 : 7349;
+
+    std::string target = parameters.host + ":" + std::to_string(port);
 
     std::shared_ptr<grpc::ChannelCredentials> creds;
 
@@ -2022,3 +2028,5 @@ void GrpcClient::rpc(
 }
 
 }
+
+#endif // BUILD_GRPC_CLIENT

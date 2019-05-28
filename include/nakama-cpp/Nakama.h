@@ -19,9 +19,4 @@
 #include "nakama-cpp/ClientFactory.h"
 #include "nakama-cpp/realtime/NRtDefaultClientListener.h"
 #include "nakama-cpp/log/NLogger.h"
-
-namespace Nakama {
-
-    NAKAMA_API const char* getNakamaSdkVersion();
-
-}
+#include "nakama-cpp/NakamaVersion.h"

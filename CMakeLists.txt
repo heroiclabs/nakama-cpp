@@ -37,8 +37,10 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 include(windows_support)
 
-option(BUILD_WEBSOCKETPP "Build Websocketpp transport" ON)
-option(BUILD_IXWEBSOCKET "Build IXWebSocket transport" ON)
+option(BUILD_REST_CLIENT "Build REST client" ON)
+option(BUILD_HTTP_CPPREST "Build HTTP transport using cpprest SDK" ON)
+option(BUILD_WEBSOCKET_CPPREST "Build Websocket transport using cpprest SDK" ON)
+option(BUILD_GRPC_CLIENT "Build gRPC client" OFF)
 option(LOGS_ENABLED "enable logs" ON)
 option(NAKAMA_SSL_ENABLED "enable SSL" ON)
 
@@ -57,11 +59,16 @@ set(PUBLIC_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(THIRD_PARTY_DIR ${PROJECT_SOURCE_DIR}/third_party)
 
 add_subdirectory(src)
-add_subdirectory(third_party/grpc)
+add_subdirectory(${THIRD_PARTY_DIR}/grpc)
 
-if(BUILD_IXWEBSOCKET)
-    set(USE_TLS ${NAKAMA_SSL_ENABLED})
-    add_subdirectory(third_party/IXWebSocket)
+if(BUILD_REST_CLIENT OR BUILD_WEBSOCKET_CPPREST)
+    set(OPENSSL_INCLUDE_DIR ${THIRD_PARTY_DIR}/grpc/third_party/boringssl/include)
+    set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
+    set(BUILD_SAMPLES OFF CACHE BOOL "" FORCE)
+    set(WERROR OFF CACHE BOOL "" FORCE)
+    set(CPPREST_EXCLUDE_COMPRESSION ON CACHE BOOL "" FORCE)
+    set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+    add_subdirectory(${THIRD_PARTY_DIR}/cpprestsdk)
 endif()
 
 # only build tests for desktop OS
