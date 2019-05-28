@@ -33,7 +33,7 @@ max_line_size = 80
 count_in_line = 0
 
 write_head(out_cpp_file)
-out_cpp_file.write('#ifdef NAKAMA_SSL_ENABLED\n\n')
+out_cpp_file.write('#if defined(NAKAMA_SSL_ENABLED) && defined(BUILD_GRPC_CLIENT)\n\n')
 out_cpp_file.write('#include "roots_pem.h"\n\n')
 out_cpp_file.write('const unsigned char g_roots_pem_buff[] = {\n')
 

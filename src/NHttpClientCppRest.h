@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "nakama-cpp/NHttpClientInterface.h"
+#include "nakama-cpp/NHttpTransportInterface.h"
 #include "cpprest/http_client.h"
 #include <list>
 #include <mutex>
@@ -26,7 +26,7 @@ namespace Nakama {
     /**
      * HTTP client using C++ REST SDK (https://github.com/microsoft/cpprestsdk)
      */
-    class NHttpClientCppRest : public NHttpClientInterface
+    class NHttpClientCppRest : public NHttpTransportInterface
     {
     public:
         ~NHttpClientCppRest();

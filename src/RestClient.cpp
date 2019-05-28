@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_REST_CLIENT
+
 #include "RestClient.h"
 #include "realtime/NRtClient.h"
 #include "nakama-cpp/realtime/NWebsocketsFactory.h"
@@ -41,7 +43,7 @@ void AddBoolArg(NHttpQueryArgs& args, string&& name, bool value)
     value ? args.emplace(name, "true") : args.emplace(name, "false");
 }
 
-RestClient::RestClient(const NClientParameters& parameters, NHttpClientPtr httpClient)
+RestClient::RestClient(const NClientParameters& parameters, NHttpTransportPtr httpClient)
     : _host(parameters.host)
     , _ssl(parameters.ssl)
     , _httpClient(httpClient)
@@ -2402,3 +2404,5 @@ void RestClient::rpc(
 }
 
 }
+
+#endif // BUILD_REST_CLIENT

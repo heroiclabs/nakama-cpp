@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#ifdef BUILD_REST_CLIENT
+#ifdef BUILD_HTTP_CPPREST
 
 #include "NHttpClientCppRest.h"
 #include "CppRestUtils.h"
@@ -195,4 +195,4 @@ NHttpClientCppRest::ReqContextPtr NHttpClientCppRest::popFinishedReq()
 
 }
 
-#endif // BUILD_REST_CLIENT
+#endif // BUILD_HTTP_CPPREST

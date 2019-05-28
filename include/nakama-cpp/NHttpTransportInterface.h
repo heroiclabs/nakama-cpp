@@ -61,12 +61,12 @@ namespace Nakama {
     }
 
     /**
-     * HTTP client interface
+     * HTTP transport interface
      */
-    class NAKAMA_API NHttpClientInterface
+    class NAKAMA_API NHttpTransportInterface
     {
     public:
-        virtual ~NHttpClientInterface() {}
+        virtual ~NHttpTransportInterface() {}
 
         virtual void setBaseUri(const std::string& uri) = 0;
 
@@ -78,6 +78,6 @@ namespace Nakama {
         virtual void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) = 0;
     };
 
-    using NHttpClientPtr = std::shared_ptr<NHttpClientInterface>;
+    using NHttpTransportPtr = std::shared_ptr<NHttpTransportInterface>;
 
 }

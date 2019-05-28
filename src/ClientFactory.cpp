@@ -16,40 +16,91 @@
 
 #include "nakama-cpp/ClientFactory.h"
 #include "nakama-cpp/log/NLogger.h"
-#include "GrpcClient.h"
+
+#ifdef BUILD_GRPC_CLIENT
+    #include "GrpcClient.h"
+#endif
 
 #ifdef BUILD_REST_CLIENT
-#include "RestClient.h"
-#include "NHttpClientCppRest.h"
+    #include "RestClient.h"
+#endif
+
+#ifdef BUILD_HTTP_CPPREST
+    #include "NHttpClientCppRest.h"
 #endif
 
 namespace Nakama {
 
 NClientPtr createDefaultClient(const NClientParameters& parameters)
 {
-    //return createGrpcClient(parameters);
+#ifdef BUILD_REST_CLIENT
+
     return createRestClient(parameters);
+
+#elif defined(BUILD_GRPC_CLIENT)
+
+    return createGrpcClient(parameters);
+
+#else
+
+    NLOG_ERROR("No default client is available");
+    return nullptr;
+
+#endif
 }
 
 NClientPtr createGrpcClient(const NClientParameters& parameters)
 {
+#ifdef BUILD_GRPC_CLIENT
+
     NClientPtr client(new GrpcClient(parameters));
     return client;
+
+#else
+
+    NLOG_ERROR("gRPC client is not available");
+    return nullptr;
+
+#endif
 }
 
-NClientPtr createRestClient(const NClientParameters& parameters, NHttpClientPtr httpClient)
+NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportPtr httpTransport)
 {
 #ifdef BUILD_REST_CLIENT
-    if (!httpClient)
+
+    if (!httpTransport)
     {
-        httpClient.reset(new NHttpClientCppRest());
+        httpTransport = createDefaultHttpTransport();
+
+        if (!httpTransport)
+        {
+            NLOG_ERROR("Unable create REST client without transport");
+            return nullptr;
+        }
     }
 
-    NClientPtr client(new RestClient(parameters, httpClient));
+    NClientPtr client(new RestClient(parameters, httpTransport));
     return client;
+
 #else
+
     NLOG_ERROR("REST client is not available");
     return nullptr;
+
+#endif
+}
+
+NHttpTransportPtr createDefaultHttpTransport()
+{
+#ifdef BUILD_HTTP_CPPREST
+
+    return NHttpTransportPtr(new NHttpClientCppRest());
+
+#else
+
+    NLOG_ERROR("Default HTTP transport is not available");
+    return nullptr;
+
 #endif
 }
 

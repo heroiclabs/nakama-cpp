@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_GRPC_CLIENT
+
 #include "GrpcClient.h"
 #include "realtime/NRtClient.h"
 #include "nakama-cpp/realtime/NWebsocketsFactory.h"
@@ -2026,3 +2028,5 @@ void GrpcClient::rpc(
 }
 
 }
+
+#endif // BUILD_GRPC_CLIENT

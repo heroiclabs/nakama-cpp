@@ -38,7 +38,7 @@ namespace Nakama {
     class RestClient : public NClientInterface
     {
     public:
-        explicit RestClient(const NClientParameters& parameters, NHttpClientPtr httpClient);
+        explicit RestClient(const NClientParameters& parameters, NHttpTransportPtr httpClient);
         ~RestClient();
 
         void setErrorCallback(ErrorCallback errorCallback) override { _defaultErrorCallback = errorCallback; }
@@ -574,6 +574,6 @@ namespace Nakama {
         std::string _basicAuthMetadata;
         std::set<RestReqContext*> _reqContexts;
         ErrorCallback _defaultErrorCallback;
-        NHttpClientPtr _httpClient;
+        NHttpTransportPtr _httpClient;
     };
 }

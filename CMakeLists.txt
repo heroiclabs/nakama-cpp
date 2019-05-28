@@ -38,7 +38,9 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 include(windows_support)
 
 option(BUILD_REST_CLIENT "Build REST client" ON)
+option(BUILD_HTTP_CPPREST "Build HTTP transport using cpprest SDK" ON)
 option(BUILD_WEBSOCKET_CPPREST "Build Websocket transport using cpprest SDK" ON)
+option(BUILD_GRPC_CLIENT "Build gRPC client" OFF)
 option(LOGS_ENABLED "enable logs" ON)
 option(NAKAMA_SSL_ENABLED "enable SSL" ON)
 

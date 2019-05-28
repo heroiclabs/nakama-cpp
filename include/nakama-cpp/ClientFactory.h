@@ -17,7 +17,7 @@
 #pragma once
 
 #include "nakama-cpp/NClientInterface.h"
-#include "nakama-cpp/NHttpClientInterface.h"
+#include "nakama-cpp/NHttpTransportInterface.h"
 
 namespace Nakama {
 
@@ -64,8 +64,13 @@ namespace Nakama {
      * Creates the REST client (HTTP/1.1) to interact with Nakama server.
      *
      * @param parameters the client parameters
-     * @param httpClient optional, the HTTP client. If not set then default HTTP client will be used.
+     * @param httpTransport optional, the HTTP client. If not set then default HTTP transport will be used.
      */
-    NAKAMA_API NClientPtr createRestClient(const NClientParameters& parameters, NHttpClientPtr httpClient = nullptr);
+    NAKAMA_API NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportPtr httpTransport = nullptr);
+
+    /**
+    * Creates default HTTP transport using C++ REST SDK.
+    */
+    NAKAMA_API NHttpTransportPtr createDefaultHttpTransport();
 
 }
