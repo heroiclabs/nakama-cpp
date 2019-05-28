@@ -151,7 +151,7 @@ void NWebsocketCppRest::disconnect(web::websockets::client::websocket_close_stat
     _disconnectInitiated = true;
     _connected = false;
 
-    auto task = _wsClient->close(status, reason);
+    auto task = _wsClient->close(status, FROM_STD_STR(reason));
     // Task-based continuation
     (void) task.then([this](pplx::task<void> previousTask)
     {
