@@ -27,9 +27,7 @@
 
 namespace Nakama {
 
-NWebsocketCppRest::NWebsocketCppRest():
-_lastSentPingTimeMs(0),
-_lastReceivedPongTimeMs(0)
+NWebsocketCppRest::NWebsocketCppRest()
 {
     NLOG_DEBUG("");
 }
@@ -39,30 +37,23 @@ NWebsocketCppRest::~NWebsocketCppRest()
     disconnect();
 }
 
-void NWebsocketCppRest::setPingSettings(const NRtPingSettings & settings)
+void NWebsocketCppRest::setActivityTimeout(uint32_t timeoutMs)
 {
-    _settings = settings;
+    _activityTimeoutMs = timeoutMs;
 }
 
-NRtPingSettings NWebsocketCppRest::getPingSettings() const
+uint32_t NWebsocketCppRest::getActivityTimeout() const
 {
-    return _settings;
+    return _activityTimeoutMs;
 }
 
 void NWebsocketCppRest::tick()
 {
     if (_wsClient && _connected) {
         
-        if (_settings.intervalSec > 0 && getUnixTimestampMs()-_lastSentPingTimeMs >= 1000*_settings.intervalSec)
+        if (_activityTimeoutMs > 0 && getUnixTimestampMs()-_lastReceivedMessageTimeMs >= _activityTimeoutMs)
         {
-            if (sendPing())
-            {
-                _lastSentPingTimeMs = getUnixTimestampMs();
-            }
-        }
-        if (_settings.timeoutSec > 0 && getUnixTimestampMs()-_lastReceivedPongTimeMs >= 1000*_settings.timeoutSec)
-        {
-            disconnect(web::websockets::client::websocket_close_status::pong_timeout, "Pong timeout");
+            disconnect(web::websockets::client::websocket_close_status::activity_timeout, "Activity timeout");
         }
     }
 
@@ -168,7 +159,7 @@ void NWebsocketCppRest::disconnect(web::websockets::client::websocket_close_stat
     _wsClient.reset();
 }
 
-bool NWebsocketCppRest::sendData(const NBytes & data, bool isPing)
+bool NWebsocketCppRest::send(const NBytes & data)
 {
     if (!_wsClient || !_connected)
     {
@@ -182,12 +173,7 @@ bool NWebsocketCppRest::sendData(const NBytes & data, bool isPing)
     {
         web::websockets::client::websocket_outgoing_message msg;
 
-        if (isPing)
-        {
-            NLOG(NLogLevel::Debug, "sending ping %d bytes text ...", data.size());
-            msg.set_ping_message();
-        }
-        else if (_type == NRtTransportType::Binary)
+        if (_type == NRtTransportType::Binary)
         {
             NLOG(NLogLevel::Debug, "sending %d bytes binary ...", data.size());
             msg.set_binary_message(concurrency::streams::bytestream::open_istream(data));
@@ -222,22 +208,10 @@ bool NWebsocketCppRest::sendData(const NBytes & data, bool isPing)
     return res;
 }
 
-bool NWebsocketCppRest::sendPing()
-{
-    bool isPing = true;
-    return sendData("", isPing);
-}
-
-bool NWebsocketCppRest::send(const NBytes & data)
-{
-    return sendData(data);
-}
-
 // will be executed from internal thread of WsClient
 void NWebsocketCppRest::onOpened()
 {
-    _lastSentPingTimeMs = getUnixTimestampMs();
-    _lastReceivedPongTimeMs = getUnixTimestampMs();
+    _lastReceivedMessageTimeMs = getUnixTimestampMs();
 
     std::lock_guard<std::mutex> guard(_mutex);
     _connectedEvent = true;
@@ -271,6 +245,8 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
 {
     try
     {
+        _lastReceivedMessageTimeMs = getUnixTimestampMs();
+
         switch (msg.message_type())
         {
         case web::websockets::client::websocket_message_type::binary_message:
@@ -309,7 +285,7 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
         case web::websockets::client::websocket_message_type::pong:
         {
             NLOG_DEBUG("pong");
-            _lastReceivedPongTimeMs = getUnixTimestampMs();
+            
             break;
         }
 

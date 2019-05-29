@@ -67,7 +67,7 @@ enum class websocket_close_status
     too_large = 1009,
     negotiate_error = 1010,
     server_terminate = 1011,
-    pong_timeout = 4000,
+    activity_timeout = 4000,
 };
 
 /// <summary>
