@@ -33,7 +33,7 @@ namespace Nakama {
         ~NWebsocketCppRest();
 
         void setActivityTimeout(uint16_t timeout) override;
-        uint16_t getActivityTimeout() override;
+        uint16_t getActivityTimeout() const override;
 
         void tick() override;
 
@@ -66,7 +66,7 @@ namespace Nakama {
         std::list<NBytes> _messageEvents;
         bool _connectedEvent = false;
         bool _connected = false;
-        std::atomic<uint64_t> _lastReceivedMessageTimeMs;
+        std::atomic<uint64_t> _lastReceivedMessageTimeMs = 0;
     };
 
 }

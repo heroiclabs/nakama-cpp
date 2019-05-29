@@ -56,7 +56,7 @@ namespace Nakama {
         /**
          * Get activity timeout.
          */
-        virtual uint16_t getActivityTimeout() = 0;
+        virtual uint16_t getActivityTimeout() const = 0;
 
         /**
          * Pumps requests queue in your thread.

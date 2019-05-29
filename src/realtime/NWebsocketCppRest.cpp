@@ -27,8 +27,7 @@
 
 namespace Nakama {
 
-NWebsocketCppRest::NWebsocketCppRest():
-_lastReceivedMessageTimeMs(0)
+NWebsocketCppRest::NWebsocketCppRest()
 {
     NLOG_DEBUG("");
 }
@@ -43,7 +42,7 @@ void NWebsocketCppRest::setActivityTimeout(uint16_t timeoutSec)
     _activityTimeoutSec = timeoutSec;
 }
 
-uint16_t NWebsocketCppRest::getActivityTimeout()
+uint16_t NWebsocketCppRest::getActivityTimeout() const
 {
     return _activityTimeoutSec;
 }
