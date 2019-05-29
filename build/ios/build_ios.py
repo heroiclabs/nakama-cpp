@@ -47,11 +47,14 @@ if ARCH == 'x86_64':
 else:
     is_simulator = False
 
+cwd = os.getcwd()
+
 if not os.path.isdir(build_dir):
     os.makedirs(build_dir)
 
-def call(command):
-    res = subprocess.call(command, shell=False)
+def call(command, shell=False):
+    print 'calling', str(command)
+    res = subprocess.call(command, shell=shell)
     if res != 0:
         sys.exit(-1)
 
@@ -64,15 +67,69 @@ def build(target):
           target
           ])
 
+def makedirs(dir):
+    if not os.path.isdir(dir):
+        os.makedirs(dir)
+
+def mklink(link, target):
+    if not os.path.exists(link):
+        call(['ln', '-s', target, link], shell=False)
+
+def bool2cmake(bVal):
+    if bVal:
+        return 'ON'
+    else:
+        return 'OFF'
+
+deployment_target = '8.0'
+boost_version = '1.69.0'
+
+CPPREST_IOS_PATH = os.path.abspath('../../third_party/cpprestsdk/Build_iOS')
+print 'CPPREST_IOS_PATH=', CPPREST_IOS_PATH
+
+Apple_Boost_BuildScript_Path = os.path.join(CPPREST_IOS_PATH, 'Apple-Boost-BuildScript')
+
+if not os.path.exists(Apple_Boost_BuildScript_Path):
+    # clone Apple-Boost-BuildScript
+    call([
+        'git', 'clone', 'https://github.com/faithfracture/Apple-Boost-BuildScript',
+        Apple_Boost_BuildScript_Path
+    ])
+    os.chdir(Apple_Boost_BuildScript_Path)
+    call(['git', 'checkout', '1b94ec2e2b5af1ee036d9559b96e70c113846392'])
+
+target_boost_path = os.path.join(CPPREST_IOS_PATH, 'boost')
+target_boost_lib_path = os.path.join(target_boost_path, 'lib')
+target_boost_inc_path = os.path.join(target_boost_path, 'include')
+
+# check is boost built
+if not os.path.exists(target_boost_lib_path) or not os.path.exists(target_boost_inc_path):
+    os.chdir(Apple_Boost_BuildScript_Path)
+    # boost.sh --min-ios-version 8.0 -ios --no-framework --universal --boost-libs "chrono system thread" --ios-archs "arm64 armv7 armv7s" --boost-version 1.69.0
+    call(['./boost.sh',
+        '--min-ios-version', deployment_target,
+        '-ios',
+        '--no-framework',
+        '--universal',
+        '--boost-libs', 'chrono system thread',
+        '--ios-archs', 'arm64 armv7 armv7s',
+        '--boost-version', boost_version
+        ])
+    os.chdir(cwd)
+
+    boost_universal_libs_path = os.path.join(Apple_Boost_BuildScript_Path, 'build/boost/' + boost_version + '/ios/build/universal')
+    makedirs(target_boost_path)
+    mklink(link=target_boost_lib_path, target=boost_universal_libs_path)
+    mklink(link=target_boost_inc_path, target=os.path.join(Apple_Boost_BuildScript_Path, 'build/boost/' + boost_version + '/ios/prefix/include'))
+
 if is_simulator:
     cmake_toolchain_path = os.path.abspath('../../cmake/ios.simulator.toolchain.cmake')
 else:
     cmake_toolchain_path = os.path.abspath('../../cmake/ios.toolchain.cmake')
 
-if SHARED_LIB:
-    NAKAMA_SHARED_LIBRARY = 'TRUE'
-else:
-    NAKAMA_SHARED_LIBRARY = 'FALSE'
+BUILD_GRPC_CLIENT = False
+BUILD_HTTP_CPPREST = True
+BUILD_WEBSOCKET_CPPREST = True
 
 #generator = 'Xcode'
 generator = 'Unix Makefiles'
@@ -81,16 +138,18 @@ generator = 'Unix Makefiles'
 call(['cmake',
       '-B',
       build_dir,
-      '-DCMAKE_OSX_DEPLOYMENT_TARGET=8.0',
+      '-DCMAKE_OSX_DEPLOYMENT_TARGET=' + deployment_target,
       '-DCMAKE_OSX_ARCHITECTURES=' + ARCH,
       '-Dprotobuf_BUILD_PROTOC_BINARIES=OFF',
       '-DgRPC_BUILD_CODEGEN=OFF',
       '-DCMAKE_TOOLCHAIN_FILE=' + cmake_toolchain_path,
       '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
-      '-DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY,
       '-DENABLE_BITCODE=FALSE',
       '-DENABLE_ARC=TRUE',
-      '-DBUILD_WEBSOCKETPP=ON',
+      '-DNAKAMA_SHARED_LIBRARY=' + bool2cmake(SHARED_LIB),
+      '-DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT),
+      '-DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST),
+      '-DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST),
       '-G' + generator,
       '../..'
       ])
