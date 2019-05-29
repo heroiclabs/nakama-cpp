@@ -66,7 +66,7 @@ namespace Nakama {
         bool _connectedEvent = false;
         bool _connected = false;
         uint32_t _activityTimeoutSec;
-        uint64_t _lastReceivedMessageTimeMs = 0;
+        std::atomic<uint64_t> _lastReceivedMessageTimeMs;
     };
 
 }

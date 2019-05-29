@@ -27,7 +27,8 @@
 
 namespace Nakama {
 
-NWebsocketCppRest::NWebsocketCppRest()
+NWebsocketCppRest::NWebsocketCppRest():
+_lastReceivedMessageTimeMs(0)
 {
     NLOG_DEBUG("");
 }
@@ -49,8 +50,6 @@ uint16_t NWebsocketCppRest::getActivityTimeout() const
 
 void NWebsocketCppRest::tick()
 {
-    std::lock_guard<std::mutex> guard(_mutex);
-
     if (_wsClient && _connected) {
         
         if (_activityTimeoutSec > 0 && getUnixTimestampMs()-_lastReceivedMessageTimeMs >= 1000*_activityTimeoutSec)
@@ -58,6 +57,8 @@ void NWebsocketCppRest::tick()
             disconnect(web::websockets::client::websocket_close_status::activity_timeout, "Activity timeout");
         }
     }
+
+    std::lock_guard<std::mutex> guard(_mutex);
 
     if (_connectedEvent)
     {
@@ -211,8 +212,9 @@ bool NWebsocketCppRest::send(const NBytes & data)
 // will be executed from internal thread of WsClient
 void NWebsocketCppRest::onOpened()
 {
-    std::lock_guard<std::mutex> guard(_mutex);
     _lastReceivedMessageTimeMs = getUnixTimestampMs();
+
+    std::lock_guard<std::mutex> guard(_mutex);
     _connectedEvent = true;
     _connected = true;
 }
@@ -244,6 +246,8 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
 {
     try
     {
+        _lastReceivedMessageTimeMs = getUnixTimestampMs();
+
         switch (msg.message_type())
         {
         case web::websockets::client::websocket_message_type::binary_message:
@@ -259,7 +263,6 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
 
                 std::lock_guard<std::mutex> guard(_mutex);
                 _messageEvents.emplace_back(std::move(payload));
-                _lastReceivedMessageTimeMs = getUnixTimestampMs();
             }
             break;
         }
@@ -271,18 +274,12 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
 
             std::lock_guard<std::mutex> guard(_mutex);
             _messageEvents.emplace_back(std::move(payload));
-            _lastReceivedMessageTimeMs = getUnixTimestampMs();
-
             break;
         }
 
         case web::websockets::client::websocket_message_type::ping:
         {
             NLOG_DEBUG("ping");
-
-            std::lock_guard<std::mutex> guard(_mutex);
-            _lastReceivedMessageTimeMs = getUnixTimestampMs();
-
             break;
         }
 
@@ -290,9 +287,6 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
         {
             NLOG_DEBUG("pong");
             
-            std::lock_guard<std::mutex> guard(_mutex);
-            _lastReceivedMessageTimeMs = getUnixTimestampMs();
-
             break;
         }
 
