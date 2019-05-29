@@ -58,7 +58,6 @@ namespace Nakama {
         using WsClient = web::websockets::client::websocket_callback_client;
         std::unique_ptr<WsClient> _wsClient;
         NRtTransportType _type = NRtTransportType::Binary;
-        NRtPingSettings _settings;
         bool _disconnectInitiated = false;
         std::mutex _mutex;
         std::unique_ptr<NRtClientDisconnectInfo> _disconnectEvent;
@@ -66,7 +65,8 @@ namespace Nakama {
         std::list<NBytes> _messageEvents;
         bool _connectedEvent = false;
         bool _connected = false;
-        std::atomic<uint64_t> _lastReceivedMessageTimeMs = 0;
+        uint32_t _activityTimeoutSec;
+        uint64_t _lastReceivedMessageTimeMs = 0;
     };
 
 }
