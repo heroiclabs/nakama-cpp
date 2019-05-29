@@ -49,8 +49,8 @@ uint32_t NWebsocketCppRest::getActivityTimeout() const
 
 void NWebsocketCppRest::tick()
 {
-    if (_wsClient && _connected) {
-        
+    if (isConnected())
+    {
         if (_activityTimeoutMs > 0 && getUnixTimestampMs()-_lastReceivedMessageTimeMs >= _activityTimeoutMs)
         {
             disconnect(web::websockets::client::websocket_close_status::activity_timeout, "Activity timeout");
@@ -59,30 +59,10 @@ void NWebsocketCppRest::tick()
 
     std::lock_guard<std::mutex> guard(_mutex);
 
-    if (_connectedEvent)
+    while (!_userThreadFuncs.empty())
     {
-        fireOnConnected();
-        _connectedEvent = false;
-    }
-
-    while (!_errorEvents.empty())
-    {
-        fireOnError(_errorEvents.front());
-        _errorEvents.pop_front();
-    }
-
-    while (!_messageEvents.empty())
-    {
-        const std::string& msg = _messageEvents.front();
-        NLOG(NLogLevel::Debug, "socket message received %d bytes", msg.size());
-        fireOnMessage(msg);
-        _messageEvents.pop_front();
-    }
-
-    if (_disconnectEvent)
-    {
-        fireOnDisconnected(*_disconnectEvent);
-        _disconnectEvent.reset();
+        _userThreadFuncs.front()();
+        _userThreadFuncs.pop_front();
     }
 }
 
@@ -161,7 +141,7 @@ void NWebsocketCppRest::disconnect(web::websockets::client::websocket_close_stat
 
 bool NWebsocketCppRest::send(const NBytes & data)
 {
-    if (!_wsClient || !_connected)
+    if (!isConnected())
     {
         NLOG_ERROR("send failed - not connected");
         return false;
@@ -208,14 +188,21 @@ bool NWebsocketCppRest::send(const NBytes & data)
     return res;
 }
 
+void NWebsocketCppRest::executeInUserThread(UserThreadFunc&& userThreadFunc)
+{
+    std::lock_guard<std::mutex> guard(_mutex);
+    _userThreadFuncs.push_back(std::move(userThreadFunc));
+}
+
 // will be executed from internal thread of WsClient
 void NWebsocketCppRest::onOpened()
 {
     _lastReceivedMessageTimeMs = getUnixTimestampMs();
 
-    std::lock_guard<std::mutex> guard(_mutex);
-    _connectedEvent = true;
-    _connected = true;
+    executeInUserThread([this]()
+    {
+        fireOnConnected();
+    });
 }
 
 // will be executed from internal thread of WsClient
@@ -223,21 +210,24 @@ void NWebsocketCppRest::onClosed(web::websockets::client::websocket_close_status
     const utility::string_t& reason,
     const std::error_code& error)
 {
-    std::lock_guard<std::mutex> guard(_mutex);
+    std::shared_ptr<NRtClientDisconnectInfo> disconnectInfo(new NRtClientDisconnectInfo);
 
-    _disconnectEvent.reset(new NRtClientDisconnectInfo);
+    disconnectInfo->code = static_cast<uint16_t>(close_status);
+    disconnectInfo->reason = TO_STD_STR(reason);
 
-    _disconnectEvent->code   = static_cast<uint16_t>(close_status);
-    _disconnectEvent->reason = TO_STD_STR(reason);
-
-    if (_disconnectEvent->code == 1005) // No Status Received
+    if (disconnectInfo->code == 1005) // No Status Received
     {
-        _disconnectEvent->remote = !_disconnectInitiated;
+        disconnectInfo->remote = !_disconnectInitiated;
     }
     else
     {
-        _disconnectEvent->remote = !_disconnectInitiated/* && !websocketpp::close::status::invalid(info.code)*/;
+        disconnectInfo->remote = !_disconnectInitiated/* && !websocketpp::close::status::invalid(info.code)*/;
     }
+
+    executeInUserThread([this, disconnectInfo]()
+    {
+        fireOnDisconnected(*disconnectInfo);
+    });
 }
 
 // will be executed from internal thread of WsClient
@@ -256,36 +246,48 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
 
             if (size > 0)
             {
-                NBytes payload;
-                payload.resize(size);
-                (void) buf.scopy(reinterpret_cast<uint8_t*>(&payload[0]), size);
+                std::shared_ptr<NBytes> payload(new NBytes());
+                payload->resize(size);
+                (void) buf.scopy(reinterpret_cast<uint8_t*>(&payload->at(0)), size);
 
-                std::lock_guard<std::mutex> guard(_mutex);
-                _messageEvents.emplace_back(std::move(payload));
+                executeInUserThread([this, payload]()
+                {
+                    NLOG(NLogLevel::Debug, "socket message received %d bytes", payload->size());
+                    fireOnMessage(*payload);
+                });
             }
             break;
         }
 
         case web::websockets::client::websocket_message_type::text_message:
         {
+            std::shared_ptr<NBytes> payload(new NBytes());
             auto task = msg.extract_string();
-            auto payload = task.get();
+            *payload = task.get();
 
-            std::lock_guard<std::mutex> guard(_mutex);
-            _messageEvents.emplace_back(std::move(payload));
+            executeInUserThread([this, payload]()
+            {
+                NLOG(NLogLevel::Debug, "socket message received %d bytes", payload->size());
+                fireOnMessage(*payload);
+            });
             break;
         }
 
         case web::websockets::client::websocket_message_type::ping:
         {
-            NLOG_DEBUG("ping");
+            executeInUserThread([]()
+            {
+                NLOG_DEBUG("ping");
+            });
             break;
         }
 
         case web::websockets::client::websocket_message_type::pong:
         {
-            NLOG_DEBUG("pong");
-            
+            executeInUserThread([]()
+            {
+                NLOG_DEBUG("pong");
+            });
             break;
         }
 
@@ -302,8 +304,14 @@ void NWebsocketCppRest::onSocketMessage(const web::websockets::client::websocket
 // might be executed from internal thread of WsClient
 void NWebsocketCppRest::addErrorEvent(std::string&& err)
 {
-    std::lock_guard<std::mutex> guard(_mutex);
-    _errorEvents.emplace_back(std::move(err));
+    std::shared_ptr<std::string> errPtr(new std::string());
+
+    *errPtr = std::move(err);
+
+    executeInUserThread([this, errPtr]()
+    {
+        fireOnError(*errPtr);
+    });
 }
 
 } // namespace Nakama

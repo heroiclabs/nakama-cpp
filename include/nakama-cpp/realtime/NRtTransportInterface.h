@@ -96,7 +96,7 @@ namespace Nakama {
 
     protected:
         void fireOnConnected() { _connected = true; if (_connectCallback) _connectCallback(); }
-        void fireOnDisconnected(const NRtClientDisconnectInfo& info) { if (_disconnectCallback) _disconnectCallback(info); }
+        void fireOnDisconnected(const NRtClientDisconnectInfo& info) { _connected = false; if (_disconnectCallback) _disconnectCallback(info); }
         void fireOnError(const std::string& description) { if (_errorCallback) _errorCallback(description); }
         void fireOnMessage(const NBytes& data) { if (_messageCallback) _messageCallback(data); }
 

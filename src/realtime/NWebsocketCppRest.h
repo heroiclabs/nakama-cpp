@@ -44,6 +44,10 @@ namespace Nakama {
         bool send(const NBytes& data) override;
 
     protected:
+        using UserThreadFunc = std::function<void()>;
+
+        void executeInUserThread(UserThreadFunc&& userThreadFunc);
+
         void onOpened();
         void onClosed(web::websockets::client::websocket_close_status close_status,
             const utility::string_t& reason,
@@ -60,11 +64,7 @@ namespace Nakama {
         NRtTransportType _type = NRtTransportType::Binary;
         bool _disconnectInitiated = false;
         std::mutex _mutex;
-        std::unique_ptr<NRtClientDisconnectInfo> _disconnectEvent;
-        std::list<std::string> _errorEvents;
-        std::list<NBytes> _messageEvents;
-        bool _connectedEvent = false;
-        bool _connected = false;
+        std::list<UserThreadFunc> _userThreadFuncs;
         uint32_t _activityTimeoutMs = 0;
         std::atomic<uint64_t> _lastReceivedMessageTimeMs;
     };
