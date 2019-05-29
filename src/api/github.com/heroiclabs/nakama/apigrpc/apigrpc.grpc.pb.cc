@@ -2,6 +2,8 @@
 // If you make any local change, they will be lost.
 // source: github.com/heroiclabs/nakama/apigrpc/apigrpc.proto
 
+#ifdef BUILD_GRPC_CLIENT
+
 #include "github.com/heroiclabs/nakama/apigrpc/apigrpc.pb.h"
 #include "github.com/heroiclabs/nakama/apigrpc/apigrpc.grpc.pb.h"
 
@@ -1811,3 +1813,4 @@ Nakama::Service::~Service() {
 }  // namespace nakama
 }  // namespace api
 
+#endif  // BUILD_GRPC_CLIENT
