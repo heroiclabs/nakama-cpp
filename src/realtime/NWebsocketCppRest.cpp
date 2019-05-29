@@ -27,8 +27,7 @@
 
 namespace Nakama {
 
-NWebsocketCppRest::NWebsocketCppRest():
-_lastReceivedMessageTimeMs(0)
+NWebsocketCppRest::NWebsocketCppRest()
 {
     NLOG_DEBUG("");
 }
