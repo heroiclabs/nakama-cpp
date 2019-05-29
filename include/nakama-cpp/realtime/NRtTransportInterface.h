@@ -51,12 +51,12 @@ namespace Nakama {
         /**
          * Set activity timeout.
          */
-        virtual void setActivityTimeout(uint16_t timeoutSec) = 0;
+        virtual void setActivityTimeout(uint32_t timeoutMs) = 0;
 
         /**
          * Get activity timeout.
          */
-        virtual uint16_t getActivityTimeout() const = 0;
+        virtual uint32_t getActivityTimeout() const = 0;
 
         /**
          * Pumps requests queue in your thread.

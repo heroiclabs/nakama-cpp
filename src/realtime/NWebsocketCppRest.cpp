@@ -37,21 +37,21 @@ NWebsocketCppRest::~NWebsocketCppRest()
     disconnect();
 }
 
-void NWebsocketCppRest::setActivityTimeout(uint16_t timeoutSec)
+void NWebsocketCppRest::setActivityTimeout(uint32_t timeoutMs)
 {
-    _activityTimeoutSec = timeoutSec;
+    _activityTimeoutMs = timeoutMs;
 }
 
-uint16_t NWebsocketCppRest::getActivityTimeout() const
+uint32_t NWebsocketCppRest::getActivityTimeout() const
 {
-    return _activityTimeoutSec;
+    return _activityTimeoutMs;
 }
 
 void NWebsocketCppRest::tick()
 {
     if (_wsClient && _connected) {
         
-        if (_activityTimeoutSec > 0 && getUnixTimestampMs()-_lastReceivedMessageTimeMs >= 1000*_activityTimeoutSec)
+        if (_activityTimeoutMs > 0 && getUnixTimestampMs()-_lastReceivedMessageTimeMs >= _activityTimeoutMs)
         {
             disconnect(web::websockets::client::websocket_close_status::activity_timeout, "Activity timeout");
         }
