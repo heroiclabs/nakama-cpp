@@ -49,12 +49,16 @@ namespace Nakama {
         void setMessageCallback(MessageCallback callback) { _messageCallback = callback; }
 
         /**
-         * Set activity timeout.
+         * Set activity timeout, milliseconds.
+         *
+         * If no any message (including ping) received from server during activity timeout
+         * then connection will be closed.
+         * Set 0 to disable (default value).
          */
         virtual void setActivityTimeout(uint32_t timeoutMs) = 0;
 
         /**
-         * Get activity timeout.
+         * Get activity timeout, milliseconds.
          */
         virtual uint32_t getActivityTimeout() const = 0;
 

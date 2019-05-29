@@ -137,7 +137,7 @@ void NWebsocketCppRest::disconnect(web::websockets::client::websocket_close_stat
     if (!_wsClient)
         return;
 
-    NLOG_DEBUG("...");
+    NLOG_DEBUG(reason);
 
     _disconnectInitiated = true;
     _connected = false;
