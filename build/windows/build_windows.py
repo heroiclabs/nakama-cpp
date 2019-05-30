@@ -89,6 +89,7 @@ def copy_libs(dest):
     copy_file(build_dir + '\\third_party\\grpc\\third_party\\boringssl\\ssl\\' + BUILD_MODE + '\\ssl' + libs_postfix + '.lib', dest)
     copy_file(build_dir + '\\third_party\\grpc\\third_party\\boringssl\\crypto\\' + BUILD_MODE + '\\crypto' + libs_postfix + '.lib', dest)
     copy_file(build_dir + '\\third_party\\grpc\\third_party\\zlib\\' + BUILD_MODE + '\\zlibstatic' + libs_postfix + '.lib', dest + '\\zlib' + libs_postfix + '.lib')
+    copy_file(build_dir + '\\third_party\\cpprestsdk\\Release\\Binaries\\' + BUILD_MODE + '\\cpprest' + libs_postfix + '.lib', dest)
 
 def copy_dll(dest):
     print

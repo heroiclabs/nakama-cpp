@@ -226,10 +226,15 @@ else()
         set_target_properties(cpprest PROPERTIES
             IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}cpprest${LIB_SUFFIX}${LIB_EXT}"
         )
-        target_link_libraries(cpprest INTERFACE
-            "${LIBS_FOLDER}/${LIB_PREFIX}boost_thread${LIB_SUFFIX}${LIB_EXT}"
-            "${LIBS_FOLDER}/${LIB_PREFIX}boost_chrono${LIB_SUFFIX}${LIB_EXT}"
-        )
+
+        if(WIN32)
+            target_link_libraries(cpprest INTERFACE Crypt32.lib Bcrypt.lib Winhttp.lib)
+        else()
+            target_link_libraries(cpprest INTERFACE
+                "${LIBS_FOLDER}/${LIB_PREFIX}boost_thread${LIB_SUFFIX}${LIB_EXT}"
+                "${LIBS_FOLDER}/${LIB_PREFIX}boost_chrono${LIB_SUFFIX}${LIB_EXT}"
+            )
+        endif()
     endif()
 
     # nakama-cpp static lib
