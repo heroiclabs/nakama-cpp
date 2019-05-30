@@ -26,12 +26,21 @@
 
 namespace Nakama {
 
-NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int port, bool ssl)
+NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int32_t port, bool ssl)
     : _transport(transport)
     , _host(host)
     , _port(port)
     , _ssl(ssl)
 {
+    NLOG_INFO("Created");
+
+    if (_port == DEFAULT_PORT)
+    {
+        _port = _ssl ? 443 : 7350;
+
+        NLOG(NLogLevel::Info, "using default port %d", _port);
+    }
+
     _transport->setConnectCallback([this]()
     {
         NLOG_DEBUG("connected");
@@ -45,8 +54,6 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int por
     _transport->setErrorCallback(std::bind(&NRtClient::onTransportError, this, std::placeholders::_1));
     _transport->setDisconnectCallback(std::bind(&NRtClient::onTransportDisconnected, this, std::placeholders::_1));
     _transport->setMessageCallback(std::bind(&NRtClient::onTransportMessage, this, std::placeholders::_1));
-
-    NLOG_INFO("Created");
 }
 
 NRtClient::~NRtClient()

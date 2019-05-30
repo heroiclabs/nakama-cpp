@@ -48,11 +48,17 @@ RestClient::RestClient(const NClientParameters& parameters, NHttpTransportPtr ht
     , _ssl(parameters.ssl)
     , _httpClient(httpClient)
 {
+    NLOG(NLogLevel::Info, "Created. NakamaSdkVersion: %s", getNakamaSdkVersion());
+
     std::string baseUrl;
 
-    int port = parameters.port;
-    if (port <= 0)
+    int32_t port = parameters.port;
+
+    if (port == DEFAULT_PORT)
+    {
         port = parameters.ssl ? 443 : 7350;
+        NLOG(NLogLevel::Info, "using default port %d", port);
+    }
 
     _ssl ? baseUrl.append("https") : baseUrl.append("http");
     baseUrl.append("://").append(parameters.host).append(":").append(std::to_string(port));
@@ -60,8 +66,6 @@ RestClient::RestClient(const NClientParameters& parameters, NHttpTransportPtr ht
     _httpClient->setBaseUri(baseUrl);
 
     _basicAuthMetadata = "Basic " + base64Encode(parameters.serverKey + ":");
-    
-    NLOG(NLogLevel::Info, "Created. NakamaSdkVersion: %s", getNakamaSdkVersion());
 }
 
 RestClient::~RestClient()
@@ -97,7 +101,7 @@ NRtClientPtr RestClient::createRtClient(int32_t port, NRtTransportPtr transport)
     parameters.host = _host;
     parameters.port = port;
     parameters.ssl  = _ssl;
-    
+
     return createRtClient(parameters, transport);
 }
 

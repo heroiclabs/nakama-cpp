@@ -41,9 +41,15 @@ GrpcClient::GrpcClient(const NClientParameters& parameters)
     : _host(parameters.host)
     , _ssl(parameters.ssl)
 {
-    int port = parameters.port;
-    if (port <= 0)
+    NLOG(NLogLevel::Info, "Created. NakamaSdkVersion: %s", getNakamaSdkVersion());
+
+    int32_t port = parameters.port;
+
+    if (port == DEFAULT_PORT)
+    {
         port = parameters.ssl ? 443 : 7349;
+        NLOG(NLogLevel::Info, "using default port %d", port);
+    }
 
     std::string target = parameters.host + ":" + std::to_string(port);
 
@@ -74,8 +80,6 @@ GrpcClient::GrpcClient(const NClientParameters& parameters)
     _stub = nakama::api::Nakama::NewStub(channel);
 
     _basicAuthMetadata = "Basic " + base64Encode(parameters.serverKey + ":");
-    
-    NLOG(NLogLevel::Info, "Created. NakamaSdkVersion: %s", getNakamaSdkVersion());
 }
 
 GrpcClient::~GrpcClient()
@@ -138,7 +142,7 @@ NRtClientPtr GrpcClient::createRtClient(int32_t port, NRtTransportPtr transport)
     parameters.host = _host;
     parameters.port = port;
     parameters.ssl  = _ssl;
-    
+
     return createRtClient(parameters, transport);
 }
 

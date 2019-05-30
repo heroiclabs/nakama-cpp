@@ -33,7 +33,8 @@ namespace Nakama {
         /// Default server ports (can be changed in the server config):
         /// 7349 - gRPC API
         /// 7350 - HTTP API
-        int port = 0;
+        /// 443  - gRPC & HTTP API if SSL is enabled
+        int32_t port = DEFAULT_PORT;
 
         /// Set connection strings to use the secure mode with the server. Defaults to false.
         /// The server must be configured to make use of this option. With HTTP, GRPC, and WebSockets the server must

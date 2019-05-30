@@ -36,7 +36,7 @@ namespace Nakama {
     class NRtClient : public NRtClientInterface
     {
     public:
-        NRtClient(NRtTransportPtr transport, const std::string& host, int port, bool ssl);
+        NRtClient(NRtTransportPtr transport, const std::string& host, int32_t port, bool ssl);
         ~NRtClient();
 
         void tick() override;
@@ -171,7 +171,7 @@ namespace Nakama {
 
         protected:
             std::string _host;
-            int _port = 0;
+            int32_t _port = 0;
             bool _ssl = false;
             NRtClientListenerInterface* _listener = nullptr;
             NRtTransportPtr _transport;
