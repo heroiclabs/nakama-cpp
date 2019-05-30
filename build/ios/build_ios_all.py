@@ -99,7 +99,6 @@ create_universal_lib(cpprest_libs)
 
 # copy boost libs (they are already universal libs)
 boost_libs_path = os.path.abspath('../../third_party/cpprestsdk/Build_iOS/boost/lib')
-copy_file(os.path.join(boost_libs_path, 'libboost_system.a'), release_libs_dir)
 copy_file(os.path.join(boost_libs_path, 'libboost_chrono.a'), release_libs_dir)
 copy_file(os.path.join(boost_libs_path, 'libboost_thread.a'), release_libs_dir)
 

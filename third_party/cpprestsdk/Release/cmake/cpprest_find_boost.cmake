@@ -26,11 +26,6 @@ function(cpprest_find_boost)
   if(IOS)
     if (EXISTS "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
       set(BOOST_DIR "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
-      
-      project(ext_boost_system)
-      add_library(ext_boost_system STATIC IMPORTED GLOBAL)
-      set_target_properties(ext_boost_system PROPERTIES
-          IMPORTED_LOCATION "${BOOST_DIR}/lib/libboost_system.a")
 
       project(ext_boost_thread)
       add_library(ext_boost_thread STATIC IMPORTED GLOBAL)
@@ -43,7 +38,6 @@ function(cpprest_find_boost)
           IMPORTED_LOCATION "${BOOST_DIR}/lib/libboost_chrono.a")
       
       set(Boost_LIBRARIES
-        ext_boost_system
         ext_boost_thread
         ext_boost_chrono
         CACHE INTERNAL "")

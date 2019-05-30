@@ -227,7 +227,6 @@ else()
             IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}cpprest${LIB_SUFFIX}${LIB_EXT}"
         )
         target_link_libraries(cpprest INTERFACE
-            "${LIBS_FOLDER}/${LIB_PREFIX}boost_system${LIB_SUFFIX}${LIB_EXT}"
             "${LIBS_FOLDER}/${LIB_PREFIX}boost_thread${LIB_SUFFIX}${LIB_EXT}"
             "${LIBS_FOLDER}/${LIB_PREFIX}boost_chrono${LIB_SUFFIX}${LIB_EXT}"
         )
