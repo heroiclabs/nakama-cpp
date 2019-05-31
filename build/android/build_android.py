@@ -15,16 +15,11 @@
 # limitations under the License.
 #
 import sys
-import subprocess
 import os
-import shutil
 import argparse
 
-cur_dir = os.path.abspath('.')
-if cur_dir.find(' ') >= 0:
-    print 'Error: space foud in path:', cur_dir
-    print 'please remove spaces from path and try again'
-    sys.exit(-1)
+execfile('../build_common.py')
+init_common(os.path.abspath('..'))
 
 parser = argparse.ArgumentParser(description='builder for Windows')
 parser.add_argument('arch', help='architecture e.g. armeabi-v7a, arm64-v8a, x86, x86_64')
@@ -45,11 +40,6 @@ print
 print 'Building for arch:', ABI + ', so:', str(SHARED_LIB)
 print
 
-def getEnvVar(name):
-    if name in os.environ:
-        return os.environ[name]
-    return ''
-
 ANDROID_NDK = getEnvVar('ANDROID_NDK')
 if not ANDROID_NDK:
     ANDROID_NDK = getEnvVar('NDK_ROOT')
@@ -57,40 +47,33 @@ if not ANDROID_NDK:
         print "Error: no ANDROID_NDK or NDK_ROOT environment variable"
         sys.exit(-1)
 
-def call(command):
-    res = subprocess.call(command, shell=False)
-    if res != 0:
-        sys.exit(-1)
-
 build_dir = os.path.abspath('build/' + ABI + '/' + BUILD_MODE)
 
 if SHARED_LIB:
-    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/android/' + ABI)
+    release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/android/' + ABI)
 else:
-    release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/android/' + ABI)
+    release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/libs/android/' + ABI)
 
-def makedirs(dir):
-    if not os.path.isdir(dir):
-        os.makedirs(dir)
+def copy_nakama_lib():
+    copy_file(build_dir + '/src/libnakama-cpp.a', release_libs_path)
 
-def copy_file(src, dest):
-    shutil.copy(src, dest)
-    print 'copied', os.path.basename(src)
+def copy_protobuf_lib():
+    copy_file(build_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a', release_libs_path)
 
-def copy_libs(dest):
-    print
-    print 'copying to release folder...'
-    copy_file(build_dir + '/src/libnakama-cpp.a', dest)
-    copy_file(build_dir + '/third_party/grpc/libaddress_sorting.a', dest)
-    copy_file(build_dir + '/third_party/grpc/libgpr.a', dest)
-    copy_file(build_dir + '/third_party/grpc/libgrpc++.a', dest)
-    copy_file(build_dir + '/third_party/grpc/libgrpc.a', dest)
-    copy_file(build_dir + '/third_party/grpc/third_party/cares/cares/lib/libcares.a', dest)
-    copy_file(build_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a', dest)
-    copy_file(build_dir + '/third_party/grpc/third_party/zlib/libz.a', dest)
-    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', dest)
-    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', dest)
-    copy_file(build_dir + '/third_party/IXWebSocket/libixwebsocket.a', dest)
+def copy_ssl_lib():
+    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', release_libs_path)
+
+def copy_grpc_lib():
+    copy_file(build_dir + '/third_party/grpc/libaddress_sorting.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/libgpr.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/libgrpc++.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/libgrpc.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/third_party/cares/cares/lib/libcares.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/third_party/zlib/libz.a', release_libs_path)
+
+def copy_rest_lib():
+    copy_file(build_dir + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a', release_libs_path)
 
 def copy_shared_lib(dest):
     print
@@ -99,11 +82,6 @@ def copy_shared_lib(dest):
 
 print 'ANDROID_NDK=' + ANDROID_NDK
 
-if SHARED_LIB:
-    NAKAMA_SHARED_LIBRARY = 'TRUE'
-else:
-    NAKAMA_SHARED_LIBRARY = 'FALSE'
-
 makedirs(build_dir)
 
 cmake_args = [
@@ -111,9 +89,12 @@ cmake_args = [
               '-DANDROID_ABI=' + ABI,
               '-DCMAKE_TOOLCHAIN_FILE=' + ANDROID_NDK + '/build/cmake/android.toolchain.cmake',
               '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
-              '-DNAKAMA_SHARED_LIBRARY=' + NAKAMA_SHARED_LIBRARY,
               '-DANDROID_NATIVE_API_LEVEL=16',
-              '-DBUILD_WEBSOCKETPP=ON',
+              '-DNAKAMA_SHARED_LIBRARY=' + bool2cmake(SHARED_LIB),
+              '-DBUILD_REST_CLIENT=' + bool2cmake(BUILD_REST_CLIENT),
+              '-DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT),
+              '-DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST),
+              '-DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST),
               '-B',
               build_dir,
               '-GNinja',
@@ -126,9 +107,9 @@ call(cmake_args)
 # build
 call(['ninja', '-C', build_dir, 'nakama-cpp'])
 
-makedirs(release_libs_dir)
+makedirs(release_libs_path)
 
 if SHARED_LIB:
-    copy_shared_lib(release_libs_dir)
+    copy_shared_lib(release_libs_path)
 else:
-    copy_libs(release_libs_dir)
+    copy_libs()

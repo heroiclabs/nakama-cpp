@@ -16,8 +16,9 @@
 #
 import os
 import sys
-import subprocess
-import shutil
+
+execfile('../build_common.py')
+init_common(os.path.abspath('..'))
 
 BUILD_MODE = 'Release'
 
@@ -27,23 +28,13 @@ arch_list = ['arm64',
             'x86_64'   # Simulator
             ]
 
-def call(command):
-    res = subprocess.call(command, shell=False)
-    if res != 0:
-        sys.exit(-1)
-
-def makedirs(dir):
-    if not os.path.isdir(dir):
-        os.makedirs(dir)
-
-def copy_file(src, dest):
-    shutil.copy(src, dest)
-    print 'copied', os.path.basename(src)
-
 release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/libs/ios')
 makedirs(release_libs_dir)
 
 def create_universal_lib(libs):
+    if len(libs) == 0:
+        return
+
     name = os.path.basename(libs[0])
     print 'creating universal library', name + ' ...'
     lipo_commands = ['lipo', '-create']
@@ -85,17 +76,33 @@ for arch in arch_list:
     z_libs              .append(build_arch_dir + '/third_party/grpc/third_party/zlib/libz.a')
     cpprest_libs        .append(build_arch_dir + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a')
 
-create_universal_lib(nakama_cpp_libs)
-create_universal_lib(grpc_libs)
-create_universal_lib(grpcpp_libs)
-create_universal_lib(gpr_libs)
-create_universal_lib(address_sorting_libs)
-create_universal_lib(cares_libs)
-create_universal_lib(crypto_libs)
-create_universal_lib(ssl_libs)
-create_universal_lib(protobuf_libs)
-create_universal_lib(z_libs)
-create_universal_lib(cpprest_libs)
+make_universal_list = []
+
+def copy_nakama_lib():
+    make_universal_list.append(nakama_cpp_libs)
+
+def copy_protobuf_lib():
+    make_universal_list.append(protobuf_libs)
+
+def copy_ssl_lib():
+    make_universal_list.append(ssl_libs)
+    make_universal_list.append(crypto_libs)
+
+def copy_grpc_lib():
+    make_universal_list.append(address_sorting_libs)
+    make_universal_list.append(gpr_libs)
+    make_universal_list.append(grpcpp_libs)
+    make_universal_list.append(grpc_libs)
+    make_universal_list.append(cares_libs)
+    make_universal_list.append(z_libs)
+
+def copy_rest_lib():
+    make_universal_list.append(cpprest_libs)
+
+copy_libs()
+
+for libs_list in make_universal_list:
+    create_universal_lib(libs_list)
 
 # copy boost libs (they are already universal libs)
 boost_libs_path = os.path.abspath('../../third_party/cpprestsdk/Build_iOS/boost/lib')

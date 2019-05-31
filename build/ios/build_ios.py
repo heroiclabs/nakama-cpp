@@ -15,16 +15,11 @@
 # limitations under the License.
 #
 import sys
-import subprocess
 import os
-import shutil
 import argparse
 
-cur_dir = os.path.abspath('.')
-if cur_dir.find(' ') >= 0:
-    print 'Error: space foud in path:', cur_dir
-    print 'please remove spaces from path and try again'
-    sys.exit(-1)
+execfile('../build_common.py')
+init_common(os.path.abspath('..'))
 
 parser = argparse.ArgumentParser(description='builder for iOS')
 parser.add_argument('arch',     help='architecture e.g. arm64 armv7 armv7s x86_64')
@@ -49,14 +44,7 @@ else:
 
 cwd = os.getcwd()
 
-if not os.path.isdir(build_dir):
-    os.makedirs(build_dir)
-
-def call(command, shell=False):
-    print 'calling', str(command)
-    res = subprocess.call(command, shell=shell)
-    if res != 0:
-        sys.exit(-1)
+makedirs(build_dir)
 
 def build(target):
     print 'building ' + target + '...'
@@ -67,25 +55,10 @@ def build(target):
           target
           ])
 
-def makedirs(dir):
-    if not os.path.isdir(dir):
-        os.makedirs(dir)
-
-def mklink(link, target):
-    if not os.path.exists(link):
-        call(['ln', '-s', target, link], shell=False)
-
-def bool2cmake(bVal):
-    if bVal:
-        return 'ON'
-    else:
-        return 'OFF'
-
 deployment_target = '8.0'
 boost_version = '1.69.0'
 
 CPPREST_IOS_PATH = os.path.abspath('../../third_party/cpprestsdk/Build_iOS')
-print 'CPPREST_IOS_PATH=', CPPREST_IOS_PATH
 
 Apple_Boost_BuildScript_Path = os.path.join(CPPREST_IOS_PATH, 'Apple-Boost-BuildScript')
 
@@ -127,10 +100,6 @@ if is_simulator:
 else:
     cmake_toolchain_path = os.path.abspath('../../cmake/ios.toolchain.cmake')
 
-BUILD_GRPC_CLIENT = False
-BUILD_HTTP_CPPREST = True
-BUILD_WEBSOCKET_CPPREST = True
-
 #generator = 'Xcode'
 generator = 'Unix Makefiles'
 
@@ -147,6 +116,7 @@ call(['cmake',
       '-DENABLE_BITCODE=FALSE',
       '-DENABLE_ARC=TRUE',
       '-DNAKAMA_SHARED_LIBRARY=' + bool2cmake(SHARED_LIB),
+      '-DBUILD_REST_CLIENT=' + bool2cmake(BUILD_REST_CLIENT),
       '-DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT),
       '-DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST),
       '-DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST),

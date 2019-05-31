@@ -15,16 +15,11 @@
 # limitations under the License.
 #
 import sys
-import subprocess
 import os
-import shutil
 import argparse
 
-cur_dir = os.path.abspath('.')
-if cur_dir.find(' ') >= 0:
-    print 'Error: space foud in path:', cur_dir
-    print 'please remove spaces from path and try again'
-    sys.exit(-1)
+execfile('../build_common.py')
+init_common(os.path.abspath('..'))
 
 parser = argparse.ArgumentParser(description='builder for Mac')
 parser.add_argument('--dylib',  help='build DynamicLib', action='store_true')
@@ -48,46 +43,32 @@ if SHARED_LIB:
 else:
     release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/libs/mac')
 
-if not os.path.isdir(build_dir):
-    os.makedirs(build_dir)
-
-def call(command):
-    res = subprocess.call(command, shell=True)
-    if res != 0:
-        sys.exit(-1)
+makedirs(build_dir)
 
 def build(target):
     print 'building ' + target + '...'
-    call('cmake --build . --target ' + target + ' --config ' + BUILD_MODE)
+    call('cmake --build . --target ' + target + ' --config ' + BUILD_MODE, shell=True)
 
-def makedirs(dir):
-    if not os.path.isdir(dir):
-        os.makedirs(dir)
+def copy_nakama_lib():
+    copy_file(build_dir + '/src/libnakama-cpp.a', release_libs_path)
 
-def bool2cmake(bVal):
-    if bVal:
-        return 'ON'
-    else:
-        return 'OFF'
+def copy_protobuf_lib():
+    copy_file(build_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a', release_libs_path)
 
-def copy_file(src, dest):
-    shutil.copy(src, dest)
-    print 'copied', os.path.basename(src)
+def copy_ssl_lib():
+    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', release_libs_path)
 
-def copy_libs(dest):
-    print
-    print 'copying to release folder...'
-    copy_file(build_dir + '/src/libnakama-cpp.a', dest)
-    copy_file(build_dir + '/third_party/grpc/libaddress_sorting.a', dest)
-    copy_file(build_dir + '/third_party/grpc/libgpr.a', dest)
-    copy_file(build_dir + '/third_party/grpc/libgrpc++.a', dest)
-    copy_file(build_dir + '/third_party/grpc/libgrpc.a', dest)
-    copy_file(build_dir + '/third_party/grpc/third_party/cares/cares/lib/libcares.a', dest)
-    copy_file(build_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a', dest)
-    copy_file(build_dir + '/third_party/grpc/third_party/zlib/libz.a', dest)
-    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', dest)
-    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', dest)
-    copy_file(build_dir + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a', dest)
+def copy_grpc_lib():
+    copy_file(build_dir + '/third_party/grpc/libaddress_sorting.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/libgpr.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/libgrpc++.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/libgrpc.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/third_party/cares/cares/lib/libcares.a', release_libs_path)
+    copy_file(build_dir + '/third_party/grpc/third_party/zlib/libz.a', release_libs_path)
+
+def copy_rest_lib():
+    copy_file(build_dir + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a', release_libs_path)
 
 def copy_shared_lib(dest):
     print
@@ -95,10 +76,6 @@ def copy_shared_lib(dest):
     copy_file(build_dir + '/src/libnakama-cpp.dylib', dest)
 
 os.chdir(build_dir)
-
-BUILD_GRPC_CLIENT = False
-BUILD_HTTP_CPPREST = True
-BUILD_WEBSOCKET_CPPREST = True
 
 #generator = 'Xcode' # doesn't build crypto
 generator = 'Ninja'
@@ -109,11 +86,12 @@ call('cmake' +
  ' -DENABLE_BITCODE=FALSE' +
  ' -DENABLE_ARC=TRUE' +
  ' -DNAKAMA_SHARED_LIBRARY=' + bool2cmake(SHARED_LIB) +
+ ' -DBUILD_REST_CLIENT=' + bool2cmake(BUILD_REST_CLIENT) +
  ' -DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT) +
  ' -DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST) +
  ' -DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST) +
  ' -G' + generator +
- ' ../../../..')
+ ' ../../../..', shell=True)
 
 build('grpc_cpp_plugin')
 build('protoc')
@@ -124,6 +102,6 @@ makedirs(release_libs_path)
 if SHARED_LIB:
     copy_shared_lib(release_libs_path)
 else:
-    copy_libs(release_libs_path)
+    copy_libs()
 
 build('nakama-test')

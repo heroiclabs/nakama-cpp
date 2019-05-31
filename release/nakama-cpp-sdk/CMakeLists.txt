@@ -127,6 +127,11 @@ if(NAKAMA_SHARED_LIBRARY)
 else()
     # static libs
     message("Using Nakama static lib")
+
+    set(NAKAMA_REST_CLIENT ON)
+    set(NAKAMA_GRPC_CLIENT OFF)
+    set(NAKAMA_CPPREST ON)
+
     set(LIB_PREFIX "")
     set(LIB_SUFFIX "")
     set(LIB_EXT "")
@@ -219,7 +224,7 @@ else()
         IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}crypto${LIB_SUFFIX}${LIB_EXT}"
     )
 
-    if(1)
+    if(NAKAMA_CPPREST)
         # cpprest
         project(cpprest)
         add_library(cpprest STATIC IMPORTED GLOBAL)
@@ -253,7 +258,17 @@ else()
         IMPORTED_LOCATION "${LIBS_FOLDER}/${LIB_PREFIX}${lib_name}${LIB_SUFFIX}${LIB_EXT}"
     )
 
-    target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares address_sorting gpr zlib ssl crypto cpprest)
+    if(NAKAMA_REST_CLIENT)
+        target_link_libraries(${target_name} INTERFACE protobuf)
+    endif()
+
+    if(NAKAMA_GRPC_CLIENT)
+        target_link_libraries(${target_name} INTERFACE grpc++ grpc protobuf cares address_sorting gpr zlib ssl crypto)
+    endif()
+
+    if(NAKAMA_CPPREST)
+        target_link_libraries(${target_name} INTERFACE cpprest ssl crypto)
+    endif()
     
     if(APPLE)
         target_link_libraries(${target_name} INTERFACE "-framework foundation" "-framework security")
