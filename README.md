@@ -25,7 +25,7 @@ You'll need to setup the server and database before you can connect with the cli
 - Mac - 10.10+
 - iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off
 
-In theory any platform that meets the requirement for `grpc` and `boost` is also supported. The client is compiled with C++11.
+In theory any platform that meets the requirement for `grpc`, `cpprest` and `boost` is also supported. The client is compiled with C++11.
 
 3. Download the client from the [releases page](https://github.com/heroiclabs/nakama-cpp/releases). You can also [build from source](#source-builds).
 
@@ -139,6 +139,8 @@ parameters.host = "127.0.0.1";
 parameters.port = 7349;
 NClientPtr client = createDefaultClient(parameters);
 ```
+
+The `createDefaultClient` will create HTTP/1.1 client to use REST API.
 
 ## Tick
 
@@ -288,10 +290,7 @@ Note: to use logging macroses you have to define `NLOGS_ENABLED`.
 
 Nakama C++ client has built-in support for WebSocket. This is available on all supported platforms.
 
-Client will default to use the Websocket transport which is available on the platform:
-
-* on Mac, iOS, Android - IXWebSocket
-* on Windows and Linux - websocketpp
+Client will default to use the Websocket transport provided by [C++ REST SDK](https://github.com/microsoft/cpprestsdk).
 
 You can use a custom Websocket transport by implementing the [NRtTransportInterface](https://github.com/heroiclabs/nakama-cpp/blob/master/include/nakama-cpp/realtime/NRtTransportInterface.h):
 
@@ -301,8 +300,7 @@ rtClient = client->createRtClient(port, websockets_transport);
 
 For more code examples, have a look at:
 
-* [NWebsocketpp](https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NWebsocketpp.h)
-* [NIXWebsocket](https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NIXWebsocket.h)
+* [NWebsocketCppRest](https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NWebsocketCppRest.h)
 * [NWebSocket](https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/Classes/NakamaCocos2d/NWebSocket.h)
 
 ## Contribute
@@ -333,15 +331,14 @@ Change submodule branch:
 - go
 - perl
 - Visual Studio 2015, 2017 or 2019 - for Windows only
-- boost - for Windows, Mac and Linux, used by websocketpp library
+- boost 1.69 - for Windows, Mac and Linux, used by cpprest library
 
 Third party libraries:
 
 - boost - must be installed in system and set path to `BOOST_ROOT` system variable.
 - grpc - in source control as git submodule
 - optional-lite - in source control
-- websocketpp - in source control
-- IXWebsocket - in source control
+- cpprestsdk - in source control
 
 ### Building for Windows
 
@@ -427,7 +424,7 @@ Prerequisites:
 - `sudo apt-get install clang libc++-dev`
 - `sudo apt-get install golang`
 - `sudo apt-get install perl`
-- download `boost` sources and build them:
+- download `boost` 1.69 sources and build them:
 
   `./bootstrap.sh --with-libraries=system,regex,date_time`
 
