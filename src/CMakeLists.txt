@@ -70,12 +70,6 @@ if(LOGS_ENABLED)
     target_compile_definitions(nakama-cpp PRIVATE NLOGS_ENABLED)
 endif(LOGS_ENABLED)
 
-if(NAKAMA_SSL_ENABLED)
-    target_compile_definitions(nakama-cpp PRIVATE NAKAMA_SSL_ENABLED)
-    target_include_directories(nakama-cpp PRIVATE ${THIRD_PARTY_DIR}/grpc/third_party/boringssl/include)
-	target_link_libraries(nakama-cpp PUBLIC ssl)
-endif(NAKAMA_SSL_ENABLED)
-
 if(BUILD_WEBSOCKET_CPPREST)
     target_compile_definitions(nakama-cpp PRIVATE BUILD_WEBSOCKET_CPPREST)
 endif(BUILD_WEBSOCKET_CPPREST)
@@ -93,12 +87,22 @@ if(BUILD_REST_CLIENT OR BUILD_WEBSOCKET_CPPREST)
     target_compile_definitions(nakama-cpp PRIVATE _TURN_OFF_PLATFORM_STRING)
 endif()
 
+if(NAKAMA_SSL_ENABLED)
+    target_compile_definitions(nakama-cpp PRIVATE NAKAMA_SSL_ENABLED)
+    target_include_directories(nakama-cpp PRIVATE ${THIRD_PARTY_DIR}/grpc/third_party/boringssl/include)
+    target_link_libraries(nakama-cpp PUBLIC ssl crypto)
+endif(NAKAMA_SSL_ENABLED)
+
 if(BUILD_GRPC_CLIENT)
     target_link_libraries(nakama-cpp PUBLIC grpc++)
     target_compile_definitions(nakama-cpp PRIVATE BUILD_GRPC_CLIENT)
 endif()
 
 target_link_libraries(nakama-cpp PUBLIC libprotobuf)
+
+if(ANDROID)
+    target_link_libraries(nakama-cpp PUBLIC log)
+endif()
 
 target_include_directories(nakama-cpp
     PUBLIC ${THIRD_PARTY_DIR}

@@ -39,15 +39,17 @@ def call(command, shell=False):
     if res != 0:
         sys.exit(-1)
 
+def is_windows():
+    import platform
+    return platform.system() == 'Windows'
+
 def makedirs(dir):
     if not os.path.isdir(dir):
         os.makedirs(dir)
 
 def mklink(link, target):
     if not os.path.exists(link):
-        import platform
-        
-        if platform.system() == 'Windows':
+        if is_windows():
             call(['mklink', link, target], shell=True)
         else:
             call(['ln', '-s', target, link], shell=False)

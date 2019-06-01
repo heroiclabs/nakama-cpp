@@ -48,6 +48,7 @@ if not ANDROID_NDK:
         sys.exit(-1)
 
 build_dir = os.path.abspath('build/' + ABI + '/' + BUILD_MODE)
+cwd = os.getcwd()
 
 if SHARED_LIB:
     release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/android/' + ABI)
@@ -83,6 +84,40 @@ def copy_shared_lib(dest):
 print 'ANDROID_NDK=' + ANDROID_NDK
 
 makedirs(build_dir)
+
+boost_version = '1.69.0'
+
+CPPREST_ANDROID_PATH = os.path.abspath('../../third_party/cpprestsdk/Build_android')
+
+Android_Boost_BuildScript_Path = os.path.join(CPPREST_ANDROID_PATH, 'Boost-for-Android')
+
+if not os.path.exists(Android_Boost_BuildScript_Path):
+    # clone Boost-for-Android
+    call([
+        'git', 'clone', 'https://github.com/moritz-wundke/Boost-for-Android',
+        Android_Boost_BuildScript_Path
+    ])
+    os.chdir(Android_Boost_BuildScript_Path)
+    call(['git', 'checkout', 'b1e2cb397d3ec573f1cfdf4f4d965766204c53f1'])
+    os.chdir(cwd)
+
+boost_build_path = os.path.join(Android_Boost_BuildScript_Path, "build")
+if not os.path.exists(boost_build_path):
+    # build boost
+    os.chdir(Android_Boost_BuildScript_Path)
+
+    if is_windows():
+        build_script = 'build-android.bat'
+    else:
+        build_script = './build-android.sh'
+
+    call([build_script,
+        '--with-libraries=system,thread,chrono',
+        '--arch=armeabi-v7a,arm64-v8a,x86,x86_64',
+        '--boost=' + boost_version,
+        ANDROID_NDK
+        ])
+    os.chdir(cwd)
 
 cmake_args = [
               'cmake',
