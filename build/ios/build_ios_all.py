@@ -111,13 +111,14 @@ copy_file(os.path.join(boost_libs_path, 'libboost_thread.a'), release_libs_dir)
 
 # dynamic libs
 release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/ios')
-makedirs(release_libs_dir)
 
 for arch in arch_list:
     call(['python', 'build_ios.py', '--dylib', arch])
     
     build_arch_dir = build_dir + arch
+    dest_dir = release_libs_dir + '/' + arch
     
-    copy_file(build_arch_dir + '/src/libnakama-cpp.dylib', release_libs_dir + '/libnakama-cpp-' + arch + '.dylib')
+    makedirs(dest_dir)
+    copy_file(build_arch_dir + '/src/libnakama-cpp.dylib', dest_dir)
 
 print 'done.'
