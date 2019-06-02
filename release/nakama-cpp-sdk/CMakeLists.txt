@@ -98,6 +98,8 @@ if(NAKAMA_SHARED_LIBRARY)
     else()
         add_library(${target_name} SHARED IMPORTED GLOBAL)
         
+        set(LIBS_FOLDER "${LIBS_FOLDER}/${CMAKE_OSX_ARCHITECTURES}")
+        
         if(APPLE)
             set(SHARED_LIB_FILE "libnakama-cpp.dylib")
         else()
