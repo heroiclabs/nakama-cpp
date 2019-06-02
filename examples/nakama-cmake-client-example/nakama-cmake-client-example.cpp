@@ -31,7 +31,7 @@ public:
         // set server end point
         parameters.serverKey = "defaultkey";
         parameters.host      = "127.0.0.1";
-        parameters.port      = 7349;
+        parameters.port      = DEFAULT_PORT;
 
         _client = createDefaultClient(parameters);
     }
