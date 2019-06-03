@@ -71,9 +71,11 @@ def copy_rest_lib():
     copy_file(build_dir + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a', release_libs_path)
 
 def copy_shared_lib(dest):
+    dylib_in_build = build_dir + '/src/libnakama-cpp.dylib'
+    call(['install_name_tool', '-id', '@executable_path/libnakama-cpp.dylib', dylib_in_build])
     print
     print 'copying to release folder...'
-    copy_file(build_dir + '/src/libnakama-cpp.dylib', dest)
+    copy_file(dylib_in_build, dest)
 
 os.chdir(build_dir)
 

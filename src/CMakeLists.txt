@@ -17,7 +17,7 @@ cmake_minimum_required(VERSION 3.10)
 
 cmake_policy(SET CMP0074 NEW)
 
-project(nakama-cpp VERSION 2.1.0 DESCRIPTION "Nakama C++ Client" LANGUAGES CXX)
+project(nakama-cpp DESCRIPTION "Nakama C++ Client" LANGUAGES CXX)
 
 include(windows_support)
 
@@ -38,12 +38,9 @@ file(
 )
 
 if(NAKAMA_SHARED_LIBRARY)
-    set(CMAKE_MACOSX_RPATH OFF)
+    set(CMAKE_MACOSX_RPATH ON)
 
     add_library(nakama-cpp SHARED ${_source_list} ${_public_headers_list})
-    set_target_properties(nakama-cpp PROPERTIES
-        VERSION ${PROJECT_VERSION}
-    )
 
     target_compile_definitions(nakama-cpp PRIVATE NAKAMA_SHARED_LIBRARY)
     target_compile_definitions(nakama-cpp PRIVATE NAKAMA_SHARED_LIBRARY_EXPORTS)

@@ -117,8 +117,11 @@ for arch in arch_list:
     
     build_arch_dir = build_dir + arch
     dest_dir = release_libs_dir + '/' + arch
+
+    dylib_in_build = build_arch_dir + '/src/libnakama-cpp.dylib'
+    call(['install_name_tool', '-id', '@executable_path/libnakama-cpp.dylib', dylib_in_build])
     
     makedirs(dest_dir)
-    copy_file(build_arch_dir + '/src/libnakama-cpp.dylib', dest_dir)
+    copy_file(dylib_in_build, dest_dir)
 
 print 'done.'
