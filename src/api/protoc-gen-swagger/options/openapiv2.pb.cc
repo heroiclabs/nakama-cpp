@@ -586,6 +586,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::JSONSchema, title_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::JSONSchema, description_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::JSONSchema, default__),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::JSONSchema, read_only_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::JSONSchema, multiple_of_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::JSONSchema, maximum_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::JSONSchema, exclusive_maximum_),
@@ -686,15 +687,15 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 83, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::ExternalDocumentation)},
   { 90, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Schema)},
   { 100, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::JSONSchema)},
-  { 125, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Tag)},
-  { 132, 139, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions_SecurityEntry_DoNotUse)},
-  { 141, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions)},
-  { 147, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme)},
-  { 160, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementValue)},
-  { 166, 173, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementEntry_DoNotUse)},
-  { 175, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement)},
-  { 181, 188, sizeof(::grpc::gateway::protoc_gen_swagger::options::Scopes_ScopeEntry_DoNotUse)},
-  { 190, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Scopes)},
+  { 126, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Tag)},
+  { 133, 140, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions_SecurityEntry_DoNotUse)},
+  { 142, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions)},
+  { 148, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme)},
+  { 161, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementValue)},
+  { 167, 174, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementEntry_DoNotUse)},
+  { 176, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement)},
+  { 182, 189, sizeof(::grpc::gateway::protoc_gen_swagger::options::Scopes_ScopeEntry_DoNotUse)},
+  { 191, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Scopes)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -794,65 +795,65 @@ void AddDescriptorsImpl() {
       "d_only\030\003 \001(\010\022U\n\rexternal_docs\030\005 \001(\0132>.gr"
       "pc.gateway.protoc_gen_swagger.options.Ex"
       "ternalDocumentation\022%\n\007example\030\006 \001(\0132\024.g"
-      "oogle.protobuf.AnyJ\004\010\004\020\005\"\255\005\n\nJSONSchema\022"
+      "oogle.protobuf.AnyJ\004\010\004\020\005\"\272\005\n\nJSONSchema\022"
       "\013\n\003ref\030\003 \001(\t\022\r\n\005title\030\005 \001(\t\022\023\n\013descripti"
-      "on\030\006 \001(\t\022\017\n\007default\030\007 \001(\t\022\023\n\013multiple_of"
-      "\030\n \001(\001\022\017\n\007maximum\030\013 \001(\001\022\031\n\021exclusive_max"
-      "imum\030\014 \001(\010\022\017\n\007minimum\030\r \001(\001\022\031\n\021exclusive"
-      "_minimum\030\016 \001(\010\022\022\n\nmax_length\030\017 \001(\004\022\022\n\nmi"
-      "n_length\030\020 \001(\004\022\017\n\007pattern\030\021 \001(\t\022\021\n\tmax_i"
-      "tems\030\024 \001(\004\022\021\n\tmin_items\030\025 \001(\004\022\024\n\014unique_"
-      "items\030\026 \001(\010\022\026\n\016max_properties\030\030 \001(\004\022\026\n\016m"
-      "in_properties\030\031 \001(\004\022\020\n\010required\030\032 \003(\t\022\r\n"
-      "\005array\030\" \003(\t\022W\n\004type\030# \003(\0162I.grpc.gatewa"
-      "y.protoc_gen_swagger.options.JSONSchema."
-      "JSONSchemaSimpleTypes\"w\n\025JSONSchemaSimpl"
-      "eTypes\022\013\n\007UNKNOWN\020\000\022\t\n\005ARRAY\020\001\022\013\n\007BOOLEA"
-      "N\020\002\022\013\n\007INTEGER\020\003\022\010\n\004NULL\020\004\022\n\n\006NUMBER\020\005\022\n"
-      "\n\006OBJECT\020\006\022\n\n\006STRING\020\007J\004\010\001\020\002J\004\010\002\020\003J\004\010\004\020\005"
-      "J\004\010\010\020\tJ\004\010\t\020\nJ\004\010\022\020\023J\004\010\023\020\024J\004\010\027\020\030J\004\010\033\020\034J\004\010\034"
-      "\020\035J\004\010\035\020\036J\004\010\036\020\"J\004\010$\020*J\004\010*\020+J\004\010+\020.\"w\n\003Tag\022"
-      "\023\n\013description\030\002 \001(\t\022U\n\rexternal_docs\030\003 "
-      "\001(\0132>.grpc.gateway.protoc_gen_swagger.op"
-      "tions.ExternalDocumentationJ\004\010\001\020\002\"\335\001\n\023Se"
-      "curityDefinitions\022\\\n\010security\030\001 \003(\0132J.gr"
-      "pc.gateway.protoc_gen_swagger.options.Se"
-      "curityDefinitions.SecurityEntry\032h\n\rSecur"
-      "ityEntry\022\013\n\003key\030\001 \001(\t\022F\n\005value\030\002 \001(\01327.g"
-      "rpc.gateway.protoc_gen_swagger.options.S"
-      "ecurityScheme:\0028\001\"\356\004\n\016SecurityScheme\022J\n\004"
-      "type\030\001 \001(\0162<.grpc.gateway.protoc_gen_swa"
-      "gger.options.SecurityScheme.Type\022\023\n\013desc"
-      "ription\030\002 \001(\t\022\014\n\004name\030\003 \001(\t\022F\n\002in\030\004 \001(\0162"
-      ":.grpc.gateway.protoc_gen_swagger.option"
-      "s.SecurityScheme.In\022J\n\004flow\030\005 \001(\0162<.grpc"
-      ".gateway.protoc_gen_swagger.options.Secu"
-      "rityScheme.Flow\022\031\n\021authorization_url\030\006 \001"
-      "(\t\022\021\n\ttoken_url\030\007 \001(\t\022\?\n\006scopes\030\010 \001(\0132/."
-      "grpc.gateway.protoc_gen_swagger.options."
-      "Scopes\"K\n\004Type\022\020\n\014TYPE_INVALID\020\000\022\016\n\nTYPE"
-      "_BASIC\020\001\022\020\n\014TYPE_API_KEY\020\002\022\017\n\013TYPE_OAUTH"
-      "2\020\003\"1\n\002In\022\016\n\nIN_INVALID\020\000\022\014\n\010IN_QUERY\020\001\022"
-      "\r\n\tIN_HEADER\020\002\"j\n\004Flow\022\020\n\014FLOW_INVALID\020\000"
-      "\022\021\n\rFLOW_IMPLICIT\020\001\022\021\n\rFLOW_PASSWORD\020\002\022\024"
-      "\n\020FLOW_APPLICATION\020\003\022\024\n\020FLOW_ACCESS_CODE"
-      "\020\004\"\311\002\n\023SecurityRequirement\022s\n\024security_r"
-      "equirement\030\001 \003(\0132U.grpc.gateway.protoc_g"
+      "on\030\006 \001(\t\022\017\n\007default\030\007 \001(\t\022\021\n\tread_only\030\010"
+      " \001(\010\022\023\n\013multiple_of\030\n \001(\001\022\017\n\007maximum\030\013 \001"
+      "(\001\022\031\n\021exclusive_maximum\030\014 \001(\010\022\017\n\007minimum"
+      "\030\r \001(\001\022\031\n\021exclusive_minimum\030\016 \001(\010\022\022\n\nmax"
+      "_length\030\017 \001(\004\022\022\n\nmin_length\030\020 \001(\004\022\017\n\007pat"
+      "tern\030\021 \001(\t\022\021\n\tmax_items\030\024 \001(\004\022\021\n\tmin_ite"
+      "ms\030\025 \001(\004\022\024\n\014unique_items\030\026 \001(\010\022\026\n\016max_pr"
+      "operties\030\030 \001(\004\022\026\n\016min_properties\030\031 \001(\004\022\020"
+      "\n\010required\030\032 \003(\t\022\r\n\005array\030\" \003(\t\022W\n\004type\030"
+      "# \003(\0162I.grpc.gateway.protoc_gen_swagger."
+      "options.JSONSchema.JSONSchemaSimpleTypes"
+      "\"w\n\025JSONSchemaSimpleTypes\022\013\n\007UNKNOWN\020\000\022\t"
+      "\n\005ARRAY\020\001\022\013\n\007BOOLEAN\020\002\022\013\n\007INTEGER\020\003\022\010\n\004N"
+      "ULL\020\004\022\n\n\006NUMBER\020\005\022\n\n\006OBJECT\020\006\022\n\n\006STRING\020"
+      "\007J\004\010\001\020\002J\004\010\002\020\003J\004\010\004\020\005J\004\010\t\020\nJ\004\010\022\020\023J\004\010\023\020\024J\004\010"
+      "\027\020\030J\004\010\033\020\034J\004\010\034\020\035J\004\010\035\020\036J\004\010\036\020\"J\004\010$\020*J\004\010*\020+J"
+      "\004\010+\020.\"w\n\003Tag\022\023\n\013description\030\002 \001(\t\022U\n\rext"
+      "ernal_docs\030\003 \001(\0132>.grpc.gateway.protoc_g"
+      "en_swagger.options.ExternalDocumentation"
+      "J\004\010\001\020\002\"\335\001\n\023SecurityDefinitions\022\\\n\010securi"
+      "ty\030\001 \003(\0132J.grpc.gateway.protoc_gen_swagg"
+      "er.options.SecurityDefinitions.SecurityE"
+      "ntry\032h\n\rSecurityEntry\022\013\n\003key\030\001 \001(\t\022F\n\005va"
+      "lue\030\002 \001(\01327.grpc.gateway.protoc_gen_swag"
+      "ger.options.SecurityScheme:\0028\001\"\356\004\n\016Secur"
+      "ityScheme\022J\n\004type\030\001 \001(\0162<.grpc.gateway.p"
+      "rotoc_gen_swagger.options.SecurityScheme"
+      ".Type\022\023\n\013description\030\002 \001(\t\022\014\n\004name\030\003 \001(\t"
+      "\022F\n\002in\030\004 \001(\0162:.grpc.gateway.protoc_gen_s"
+      "wagger.options.SecurityScheme.In\022J\n\004flow"
+      "\030\005 \001(\0162<.grpc.gateway.protoc_gen_swagger"
+      ".options.SecurityScheme.Flow\022\031\n\021authoriz"
+      "ation_url\030\006 \001(\t\022\021\n\ttoken_url\030\007 \001(\t\022\?\n\006sc"
+      "opes\030\010 \001(\0132/.grpc.gateway.protoc_gen_swa"
+      "gger.options.Scopes\"K\n\004Type\022\020\n\014TYPE_INVA"
+      "LID\020\000\022\016\n\nTYPE_BASIC\020\001\022\020\n\014TYPE_API_KEY\020\002\022"
+      "\017\n\013TYPE_OAUTH2\020\003\"1\n\002In\022\016\n\nIN_INVALID\020\000\022\014"
+      "\n\010IN_QUERY\020\001\022\r\n\tIN_HEADER\020\002\"j\n\004Flow\022\020\n\014F"
+      "LOW_INVALID\020\000\022\021\n\rFLOW_IMPLICIT\020\001\022\021\n\rFLOW"
+      "_PASSWORD\020\002\022\024\n\020FLOW_APPLICATION\020\003\022\024\n\020FLO"
+      "W_ACCESS_CODE\020\004\"\311\002\n\023SecurityRequirement\022"
+      "s\n\024security_requirement\030\001 \003(\0132U.grpc.gat"
+      "eway.protoc_gen_swagger.options.Security"
+      "Requirement.SecurityRequirementEntry\032)\n\030"
+      "SecurityRequirementValue\022\r\n\005scope\030\001 \003(\t\032"
+      "\221\001\n\030SecurityRequirementEntry\022\013\n\003key\030\001 \001("
+      "\t\022d\n\005value\030\002 \001(\0132U.grpc.gateway.protoc_g"
       "en_swagger.options.SecurityRequirement.S"
-      "ecurityRequirementEntry\032)\n\030SecurityRequi"
-      "rementValue\022\r\n\005scope\030\001 \003(\t\032\221\001\n\030SecurityR"
-      "equirementEntry\022\013\n\003key\030\001 \001(\t\022d\n\005value\030\002 "
-      "\001(\0132U.grpc.gateway.protoc_gen_swagger.op"
-      "tions.SecurityRequirement.SecurityRequir"
-      "ementValue:\0028\001\"\201\001\n\006Scopes\022I\n\005scope\030\001 \003(\013"
-      "2:.grpc.gateway.protoc_gen_swagger.optio"
-      "ns.Scopes.ScopeEntry\032,\n\nScopeEntry\022\013\n\003ke"
-      "y\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001BCZAgithub.com"
-      "/grpc-ecosystem/grpc-gateway/protoc-gen-"
-      "swagger/optionsb\006proto3"
+      "ecurityRequirementValue:\0028\001\"\201\001\n\006Scopes\022I"
+      "\n\005scope\030\001 \003(\0132:.grpc.gateway.protoc_gen_"
+      "swagger.options.Scopes.ScopeEntry\032,\n\nSco"
+      "peEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B"
+      "CZAgithub.com/grpc-ecosystem/grpc-gatewa"
+      "y/protoc-gen-swagger/optionsb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 4343);
+      descriptor, 4356);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protoc-gen-swagger/options/openapiv2.proto", &protobuf_RegisterTypes);
   ::protobuf_google_2fprotobuf_2fany_2eproto::AddDescriptors();
@@ -4964,6 +4965,7 @@ const int JSONSchema::kRefFieldNumber;
 const int JSONSchema::kTitleFieldNumber;
 const int JSONSchema::kDescriptionFieldNumber;
 const int JSONSchema::kDefaultFieldNumber;
+const int JSONSchema::kReadOnlyFieldNumber;
 const int JSONSchema::kMultipleOfFieldNumber;
 const int JSONSchema::kMaximumFieldNumber;
 const int JSONSchema::kExclusiveMaximumFieldNumber;
@@ -5148,6 +5150,20 @@ bool JSONSchema::MergePartialFromCodedStream(
             this->default_().data(), static_cast<int>(this->default_().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "grpc.gateway.protoc_gen_swagger.options.JSONSchema.default"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool read_only = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(64u /* 64 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &read_only_)));
         } else {
           goto handle_unusual;
         }
@@ -5467,6 +5483,11 @@ void JSONSchema::SerializeWithCachedSizes(
       7, this->default_(), output);
   }
 
+  // bool read_only = 8;
+  if (this->read_only() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(8, this->read_only(), output);
+  }
+
   // double multiple_of = 10;
   if (this->multiple_of() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(10, this->multiple_of(), output);
@@ -5627,6 +5648,11 @@ void JSONSchema::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         7, this->default_(), target);
+  }
+
+  // bool read_only = 8;
+  if (this->read_only() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(8, this->read_only(), target);
   }
 
   // double multiple_of = 10;
@@ -5862,6 +5888,11 @@ size_t JSONSchema::ByteSizeLong() const {
         this->min_items());
   }
 
+  // bool read_only = 8;
+  if (this->read_only() != 0) {
+    total_size += 1 + 1;
+  }
+
   // bool exclusive_maximum = 12;
   if (this->exclusive_maximum() != 0) {
     total_size += 1 + 1;
@@ -5962,6 +5993,9 @@ void JSONSchema::MergeFrom(const JSONSchema& from) {
   if (from.min_items() != 0) {
     set_min_items(from.min_items());
   }
+  if (from.read_only() != 0) {
+    set_read_only(from.read_only());
+  }
   if (from.exclusive_maximum() != 0) {
     set_exclusive_maximum(from.exclusive_maximum());
   }
@@ -6023,6 +6057,7 @@ void JSONSchema::InternalSwap(JSONSchema* other) {
   swap(min_length_, other->min_length_);
   swap(max_items_, other->max_items_);
   swap(min_items_, other->min_items_);
+  swap(read_only_, other->read_only_);
   swap(exclusive_maximum_, other->exclusive_maximum_);
   swap(exclusive_minimum_, other->exclusive_minimum_);
   swap(unique_items_, other->unique_items_);

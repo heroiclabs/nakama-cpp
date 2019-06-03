@@ -24,7 +24,7 @@ namespace Nakama {
     {
         /// close code.
         /// https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent
-        uint16_t code;
+        uint16_t code = 0;
 
         /// close reason. Optional.
         std::string reason;

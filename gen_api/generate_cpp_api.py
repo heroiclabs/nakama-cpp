@@ -61,7 +61,7 @@ is_windows = platform.system() == 'Windows'
 is_mac     = platform.system() == 'Darwin'
 
 if is_windows:
-    build_dir = NAKAMA_CPP + '/build/win32/build'
+    build_dir = NAKAMA_CPP + '/build/windows/build/v142_x86'
 elif is_mac:
     build_dir = NAKAMA_CPP + '/build/mac/build'
 else:

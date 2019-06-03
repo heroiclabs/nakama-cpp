@@ -70,8 +70,8 @@ namespace Nakama {
     NAKAMA_API NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportPtr httpTransport = nullptr);
 
     /**
-    * Creates default HTTP transport using C++ REST SDK.
-    */
+     * Creates default HTTP transport using C++ REST SDK.
+     */
     NAKAMA_API NHttpTransportPtr createDefaultHttpTransport();
 
 }

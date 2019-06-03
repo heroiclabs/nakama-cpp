@@ -348,6 +348,7 @@ void assign(NTournament & tournament, const nakama::api::Tournament & data)
     assign(tournament.endActive, data.end_active());
     assign(tournament.nextReset, data.next_reset());
     assign(tournament.duration, data.duration());
+    assign(tournament.startActive, data.start_active());
     assign(tournament.metadata, data.metadata());
 }
 

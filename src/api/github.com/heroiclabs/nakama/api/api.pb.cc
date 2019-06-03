@@ -28,6 +28,7 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2fap
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_AccountGoogle;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_AccountSteam;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_DeleteStorageObjectId;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Event_PropertiesEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ReadStorageObjectId;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_StorageObjectAck;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_WriteLeaderboardRecordRequest_LeaderboardRecordWrite;
@@ -191,6 +192,16 @@ class DeleteStorageObjectsRequestDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<DeleteStorageObjectsRequest>
       _instance;
 } _DeleteStorageObjectsRequest_default_instance_;
+class Event_PropertiesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Event_PropertiesEntry_DoNotUse>
+      _instance;
+} _Event_PropertiesEntry_DoNotUse_default_instance_;
+class EventDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Event>
+      _instance;
+} _Event_default_instance_;
 class FriendDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Friend>
@@ -873,6 +884,35 @@ static void InitDefaultsDeleteStorageObjectsRequest() {
 ::google::protobuf::internal::SCCInfo<1> scc_info_DeleteStorageObjectsRequest =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsDeleteStorageObjectsRequest}, {
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::scc_info_DeleteStorageObjectId.base,}};
+
+static void InitDefaultsEvent_PropertiesEntry_DoNotUse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_Event_PropertiesEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::api::Event_PropertiesEntry_DoNotUse();
+  }
+  ::nakama::api::Event_PropertiesEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_Event_PropertiesEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsEvent_PropertiesEntry_DoNotUse}, {}};
+
+static void InitDefaultsEvent() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_Event_default_instance_;
+    new (ptr) ::nakama::api::Event();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::nakama::api::Event::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<2> scc_info_Event =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsEvent}, {
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::scc_info_Event_PropertiesEntry_DoNotUse.base,
+      &protobuf_google_2fprotobuf_2ftimestamp_2eproto::scc_info_Timestamp.base,}};
 
 static void InitDefaultsFriend() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1740,6 +1780,8 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_DeleteNotificationsRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_DeleteStorageObjectId.base);
   ::google::protobuf::internal::InitSCC(&scc_info_DeleteStorageObjectsRequest.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Event_PropertiesEntry_DoNotUse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Event.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Friend.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Friends.base);
   ::google::protobuf::internal::InitSCC(&scc_info_GetUsersRequest.base);
@@ -1798,7 +1840,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_WriteTournamentRecordRequest.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[83];
+::google::protobuf::Metadata file_level_metadata[85];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[3];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -2010,6 +2052,23 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::DeleteStorageObjectsRequest, object_ids_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event_PropertiesEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event_PropertiesEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event_PropertiesEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event_PropertiesEntry_DoNotUse, value_),
+  0,
+  1,
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event, properties_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event, timestamp_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Friend, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2368,6 +2427,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Tournament, start_time_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Tournament, end_time_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Tournament, duration_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Tournament, start_active_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::TournamentList, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2522,62 +2582,64 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 188, -1, sizeof(::nakama::api::DeleteNotificationsRequest)},
   { 194, -1, sizeof(::nakama::api::DeleteStorageObjectId)},
   { 202, -1, sizeof(::nakama::api::DeleteStorageObjectsRequest)},
-  { 208, -1, sizeof(::nakama::api::Friend)},
-  { 215, -1, sizeof(::nakama::api::Friends)},
-  { 221, -1, sizeof(::nakama::api::GetUsersRequest)},
-  { 229, -1, sizeof(::nakama::api::Group)},
-  { 246, -1, sizeof(::nakama::api::GroupList)},
-  { 253, -1, sizeof(::nakama::api::GroupUserList_GroupUser)},
-  { 260, -1, sizeof(::nakama::api::GroupUserList)},
-  { 266, -1, sizeof(::nakama::api::ImportFacebookFriendsRequest)},
-  { 273, -1, sizeof(::nakama::api::JoinGroupRequest)},
-  { 279, -1, sizeof(::nakama::api::JoinTournamentRequest)},
-  { 285, -1, sizeof(::nakama::api::KickGroupUsersRequest)},
-  { 292, -1, sizeof(::nakama::api::LeaderboardRecord)},
-  { 309, -1, sizeof(::nakama::api::LeaderboardRecordList)},
-  { 318, -1, sizeof(::nakama::api::LeaveGroupRequest)},
-  { 324, -1, sizeof(::nakama::api::LinkFacebookRequest)},
-  { 331, -1, sizeof(::nakama::api::ListChannelMessagesRequest)},
-  { 340, -1, sizeof(::nakama::api::ListGroupsRequest)},
-  { 348, -1, sizeof(::nakama::api::ListGroupUsersRequest)},
-  { 354, -1, sizeof(::nakama::api::ListLeaderboardRecordsAroundOwnerRequest)},
-  { 362, -1, sizeof(::nakama::api::ListLeaderboardRecordsRequest)},
-  { 371, -1, sizeof(::nakama::api::ListMatchesRequest)},
-  { 382, -1, sizeof(::nakama::api::ListNotificationsRequest)},
-  { 389, -1, sizeof(::nakama::api::ListStorageObjectsRequest)},
-  { 398, -1, sizeof(::nakama::api::ListTournamentRecordsAroundOwnerRequest)},
-  { 406, -1, sizeof(::nakama::api::ListTournamentRecordsRequest)},
-  { 415, -1, sizeof(::nakama::api::ListTournamentsRequest)},
-  { 426, -1, sizeof(::nakama::api::ListUserGroupsRequest)},
-  { 432, -1, sizeof(::nakama::api::Match)},
-  { 441, -1, sizeof(::nakama::api::MatchList)},
-  { 447, -1, sizeof(::nakama::api::Notification)},
-  { 459, -1, sizeof(::nakama::api::NotificationList)},
-  { 466, -1, sizeof(::nakama::api::PromoteGroupUsersRequest)},
-  { 473, -1, sizeof(::nakama::api::ReadStorageObjectId)},
-  { 481, -1, sizeof(::nakama::api::ReadStorageObjectsRequest)},
-  { 487, -1, sizeof(::nakama::api::Rpc)},
-  { 495, -1, sizeof(::nakama::api::Session)},
-  { 503, -1, sizeof(::nakama::api::StorageObject)},
-  { 517, -1, sizeof(::nakama::api::StorageObjectAck)},
-  { 526, -1, sizeof(::nakama::api::StorageObjectAcks)},
-  { 532, -1, sizeof(::nakama::api::StorageObjects)},
-  { 538, -1, sizeof(::nakama::api::StorageObjectList)},
-  { 545, -1, sizeof(::nakama::api::Tournament)},
-  { 566, -1, sizeof(::nakama::api::TournamentList)},
-  { 573, -1, sizeof(::nakama::api::TournamentRecordList)},
-  { 582, -1, sizeof(::nakama::api::UpdateAccountRequest)},
-  { 593, -1, sizeof(::nakama::api::UpdateGroupRequest)},
-  { 604, -1, sizeof(::nakama::api::User)},
-  { 625, -1, sizeof(::nakama::api::UserGroupList_UserGroup)},
-  { 632, -1, sizeof(::nakama::api::UserGroupList)},
-  { 638, -1, sizeof(::nakama::api::Users)},
-  { 644, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite)},
-  { 652, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest)},
-  { 659, -1, sizeof(::nakama::api::WriteStorageObject)},
-  { 670, -1, sizeof(::nakama::api::WriteStorageObjectsRequest)},
-  { 676, -1, sizeof(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite)},
-  { 684, -1, sizeof(::nakama::api::WriteTournamentRecordRequest)},
+  { 208, 215, sizeof(::nakama::api::Event_PropertiesEntry_DoNotUse)},
+  { 217, -1, sizeof(::nakama::api::Event)},
+  { 225, -1, sizeof(::nakama::api::Friend)},
+  { 232, -1, sizeof(::nakama::api::Friends)},
+  { 238, -1, sizeof(::nakama::api::GetUsersRequest)},
+  { 246, -1, sizeof(::nakama::api::Group)},
+  { 263, -1, sizeof(::nakama::api::GroupList)},
+  { 270, -1, sizeof(::nakama::api::GroupUserList_GroupUser)},
+  { 277, -1, sizeof(::nakama::api::GroupUserList)},
+  { 283, -1, sizeof(::nakama::api::ImportFacebookFriendsRequest)},
+  { 290, -1, sizeof(::nakama::api::JoinGroupRequest)},
+  { 296, -1, sizeof(::nakama::api::JoinTournamentRequest)},
+  { 302, -1, sizeof(::nakama::api::KickGroupUsersRequest)},
+  { 309, -1, sizeof(::nakama::api::LeaderboardRecord)},
+  { 326, -1, sizeof(::nakama::api::LeaderboardRecordList)},
+  { 335, -1, sizeof(::nakama::api::LeaveGroupRequest)},
+  { 341, -1, sizeof(::nakama::api::LinkFacebookRequest)},
+  { 348, -1, sizeof(::nakama::api::ListChannelMessagesRequest)},
+  { 357, -1, sizeof(::nakama::api::ListGroupsRequest)},
+  { 365, -1, sizeof(::nakama::api::ListGroupUsersRequest)},
+  { 371, -1, sizeof(::nakama::api::ListLeaderboardRecordsAroundOwnerRequest)},
+  { 379, -1, sizeof(::nakama::api::ListLeaderboardRecordsRequest)},
+  { 388, -1, sizeof(::nakama::api::ListMatchesRequest)},
+  { 399, -1, sizeof(::nakama::api::ListNotificationsRequest)},
+  { 406, -1, sizeof(::nakama::api::ListStorageObjectsRequest)},
+  { 415, -1, sizeof(::nakama::api::ListTournamentRecordsAroundOwnerRequest)},
+  { 423, -1, sizeof(::nakama::api::ListTournamentRecordsRequest)},
+  { 432, -1, sizeof(::nakama::api::ListTournamentsRequest)},
+  { 443, -1, sizeof(::nakama::api::ListUserGroupsRequest)},
+  { 449, -1, sizeof(::nakama::api::Match)},
+  { 458, -1, sizeof(::nakama::api::MatchList)},
+  { 464, -1, sizeof(::nakama::api::Notification)},
+  { 476, -1, sizeof(::nakama::api::NotificationList)},
+  { 483, -1, sizeof(::nakama::api::PromoteGroupUsersRequest)},
+  { 490, -1, sizeof(::nakama::api::ReadStorageObjectId)},
+  { 498, -1, sizeof(::nakama::api::ReadStorageObjectsRequest)},
+  { 504, -1, sizeof(::nakama::api::Rpc)},
+  { 512, -1, sizeof(::nakama::api::Session)},
+  { 520, -1, sizeof(::nakama::api::StorageObject)},
+  { 534, -1, sizeof(::nakama::api::StorageObjectAck)},
+  { 543, -1, sizeof(::nakama::api::StorageObjectAcks)},
+  { 549, -1, sizeof(::nakama::api::StorageObjects)},
+  { 555, -1, sizeof(::nakama::api::StorageObjectList)},
+  { 562, -1, sizeof(::nakama::api::Tournament)},
+  { 584, -1, sizeof(::nakama::api::TournamentList)},
+  { 591, -1, sizeof(::nakama::api::TournamentRecordList)},
+  { 600, -1, sizeof(::nakama::api::UpdateAccountRequest)},
+  { 611, -1, sizeof(::nakama::api::UpdateGroupRequest)},
+  { 622, -1, sizeof(::nakama::api::User)},
+  { 643, -1, sizeof(::nakama::api::UserGroupList_UserGroup)},
+  { 650, -1, sizeof(::nakama::api::UserGroupList)},
+  { 656, -1, sizeof(::nakama::api::Users)},
+  { 662, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite)},
+  { 670, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest)},
+  { 677, -1, sizeof(::nakama::api::WriteStorageObject)},
+  { 688, -1, sizeof(::nakama::api::WriteStorageObjectsRequest)},
+  { 694, -1, sizeof(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite)},
+  { 702, -1, sizeof(::nakama::api::WriteTournamentRecordRequest)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -2608,6 +2670,8 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_DeleteNotificationsRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_DeleteStorageObjectId_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_DeleteStorageObjectsRequest_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_Event_PropertiesEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_Event_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_Friend_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_Friends_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_GetUsersRequest_default_instance_),
@@ -2681,7 +2745,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 83);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 85);
 }
 
 void AddDescriptorsImpl() {
@@ -2754,197 +2818,202 @@ void AddDescriptorsImpl() {
       "eObjectId\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001"
       "(\t\022\017\n\007version\030\003 \001(\t\"T\n\033DeleteStorageObje"
       "ctsRequest\0225\n\nobject_ids\030\001 \003(\0132!.nakama."
-      "api.DeleteStorageObjectId\"\234\001\n\006Friend\022\036\n\004"
-      "user\030\001 \001(\0132\020.nakama.api.User\022*\n\005state\030\002 "
-      "\001(\0132\033.google.protobuf.Int32Value\"F\n\005Stat"
-      "e\022\n\n\006FRIEND\020\000\022\017\n\013INVITE_SENT\020\001\022\023\n\017INVITE"
-      "_RECEIVED\020\002\022\013\n\007BLOCKED\020\003\".\n\007Friends\022#\n\007f"
-      "riends\030\001 \003(\0132\022.nakama.api.Friend\"G\n\017GetU"
-      "sersRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 "
-      "\003(\t\022\024\n\014facebook_ids\030\003 \003(\t\"\265\002\n\005Group\022\n\n\002i"
-      "d\030\001 \001(\t\022\022\n\ncreator_id\030\002 \001(\t\022\014\n\004name\030\003 \001("
-      "\t\022\023\n\013description\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001(\t"
-      "\022\020\n\010metadata\030\006 \001(\t\022\022\n\navatar_url\030\007 \001(\t\022("
-      "\n\004open\030\010 \001(\0132\032.google.protobuf.BoolValue"
-      "\022\022\n\nedge_count\030\t \001(\005\022\021\n\tmax_count\030\n \001(\005\022"
-      "/\n\013create_time\030\013 \001(\0132\032.google.protobuf.T"
-      "imestamp\022/\n\013update_time\030\014 \001(\0132\032.google.p"
-      "rotobuf.Timestamp\">\n\tGroupList\022!\n\006groups"
-      "\030\001 \003(\0132\021.nakama.api.Group\022\016\n\006cursor\030\002 \001("
-      "\t\"\345\001\n\rGroupUserList\0228\n\013group_users\030\001 \003(\013"
-      "2#.nakama.api.GroupUserList.GroupUser\032\231\001"
-      "\n\tGroupUser\022\036\n\004user\030\001 \001(\0132\020.nakama.api.U"
-      "ser\022*\n\005state\030\002 \001(\0132\033.google.protobuf.Int"
-      "32Value\"@\n\005State\022\016\n\nSUPERADMIN\020\000\022\t\n\005ADMI"
-      "N\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN_REQUEST\020\003\"w\n\034Imp"
-      "ortFacebookFriendsRequest\022,\n\007account\030\001 \001"
-      "(\0132\033.nakama.api.AccountFacebook\022)\n\005reset"
-      "\030\002 \001(\0132\032.google.protobuf.BoolValue\"$\n\020Jo"
-      "inGroupRequest\022\020\n\010group_id\030\001 \001(\t\".\n\025Join"
-      "TournamentRequest\022\025\n\rtournament_id\030\001 \001(\t"
-      "\";\n\025KickGroupUsersRequest\022\020\n\010group_id\030\001 "
-      "\001(\t\022\020\n\010user_ids\030\002 \003(\t\"\353\002\n\021LeaderboardRec"
-      "ord\022\026\n\016leaderboard_id\030\001 \001(\t\022\020\n\010owner_id\030"
-      "\002 \001(\t\022.\n\010username\030\003 \001(\0132\034.google.protobu"
-      "f.StringValue\022\r\n\005score\030\004 \001(\003\022\020\n\010subscore"
-      "\030\005 \001(\003\022\021\n\tnum_score\030\006 \001(\005\022\020\n\010metadata\030\007 "
-      "\001(\t\022/\n\013create_time\030\010 \001(\0132\032.google.protob"
-      "uf.Timestamp\022/\n\013update_time\030\t \001(\0132\032.goog"
-      "le.protobuf.Timestamp\022/\n\013expiry_time\030\n \001"
-      "(\0132\032.google.protobuf.Timestamp\022\014\n\004rank\030\013"
-      " \001(\003\022\025\n\rmax_num_score\030\014 \001(\r\"\247\001\n\025Leaderbo"
-      "ardRecordList\022.\n\007records\030\001 \003(\0132\035.nakama."
-      "api.LeaderboardRecord\0224\n\rowner_records\030\002"
-      " \003(\0132\035.nakama.api.LeaderboardRecord\022\023\n\013n"
-      "ext_cursor\030\003 \001(\t\022\023\n\013prev_cursor\030\004 \001(\t\"%\n"
-      "\021LeaveGroupRequest\022\020\n\010group_id\030\001 \001(\t\"m\n\023"
-      "LinkFacebookRequest\022,\n\007account\030\001 \001(\0132\033.n"
-      "akama.api.AccountFacebook\022(\n\004sync\030\004 \001(\0132"
-      "\032.google.protobuf.BoolValue\"\231\001\n\032ListChan"
-      "nelMessagesRequest\022\022\n\nchannel_id\030\001 \001(\t\022*"
-      "\n\005limit\030\002 \001(\0132\033.google.protobuf.Int32Val"
-      "ue\022+\n\007forward\030\003 \001(\0132\032.google.protobuf.Bo"
-      "olValue\022\016\n\006cursor\030\004 \001(\t\"]\n\021ListGroupsReq"
-      "uest\022\014\n\004name\030\001 \001(\t\022\016\n\006cursor\030\002 \001(\t\022*\n\005li"
-      "mit\030\003 \001(\0132\033.google.protobuf.Int32Value\")"
-      "\n\025ListGroupUsersRequest\022\020\n\010group_id\030\001 \001("
-      "\t\"\201\001\n(ListLeaderboardRecordsAroundOwnerR"
-      "equest\022\026\n\016leaderboard_id\030\001 \001(\t\022+\n\005limit\030"
-      "\002 \001(\0132\034.google.protobuf.UInt32Value\022\020\n\010o"
-      "wner_id\030\003 \001(\t\"\206\001\n\035ListLeaderboardRecords"
-      "Request\022\026\n\016leaderboard_id\030\001 \001(\t\022\021\n\towner"
-      "_ids\030\002 \003(\t\022*\n\005limit\030\003 \001(\0132\033.google.proto"
-      "buf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\253\002\n\022ListM"
-      "atchesRequest\022*\n\005limit\030\001 \001(\0132\033.google.pr"
-      "otobuf.Int32Value\0221\n\rauthoritative\030\002 \001(\013"
-      "2\032.google.protobuf.BoolValue\022+\n\005label\030\003 "
-      "\001(\0132\034.google.protobuf.StringValue\022-\n\010min"
-      "_size\030\004 \001(\0132\033.google.protobuf.Int32Value"
-      "\022-\n\010max_size\030\005 \001(\0132\033.google.protobuf.Int"
-      "32Value\022+\n\005query\030\006 \001(\0132\034.google.protobuf"
-      ".StringValue\"`\n\030ListNotificationsRequest"
-      "\022*\n\005limit\030\001 \001(\0132\033.google.protobuf.Int32V"
-      "alue\022\030\n\020cacheable_cursor\030\002 \001(\t\"|\n\031ListSt"
-      "orageObjectsRequest\022\017\n\007user_id\030\001 \001(\t\022\022\n\n"
-      "collection\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.google"
-      ".protobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\177\n\'"
-      "ListTournamentRecordsAroundOwnerRequest\022"
-      "\025\n\rtournament_id\030\001 \001(\t\022+\n\005limit\030\002 \001(\0132\034."
-      "google.protobuf.UInt32Value\022\020\n\010owner_id\030"
-      "\003 \001(\t\"\204\001\n\034ListTournamentRecordsRequest\022\025"
-      "\n\rtournament_id\030\001 \001(\t\022\021\n\towner_ids\030\002 \003(\t"
-      "\022*\n\005limit\030\003 \001(\0132\033.google.protobuf.Int32V"
-      "alue\022\016\n\006cursor\030\004 \001(\t\"\240\002\n\026ListTournaments"
-      "Request\0224\n\016category_start\030\001 \001(\0132\034.google"
-      ".protobuf.UInt32Value\0222\n\014category_end\030\002 "
-      "\001(\0132\034.google.protobuf.UInt32Value\0220\n\nsta"
-      "rt_time\030\003 \001(\0132\034.google.protobuf.UInt32Va"
-      "lue\022.\n\010end_time\030\004 \001(\0132\034.google.protobuf."
-      "UInt32Value\022*\n\005limit\030\006 \001(\0132\033.google.prot"
-      "obuf.Int32Value\022\016\n\006cursor\030\010 \001(\t\"(\n\025ListU"
-      "serGroupsRequest\022\017\n\007user_id\030\001 \001(\t\"k\n\005Mat"
-      "ch\022\020\n\010match_id\030\001 \001(\t\022\025\n\rauthoritative\030\002 "
-      "\001(\010\022+\n\005label\030\003 \001(\0132\034.google.protobuf.Str"
-      "ingValue\022\014\n\004size\030\004 \001(\005\"/\n\tMatchList\022\"\n\007m"
-      "atches\030\001 \003(\0132\021.nakama.api.Match\"\242\001\n\014Noti"
-      "fication\022\n\n\002id\030\001 \001(\t\022\017\n\007subject\030\002 \001(\t\022\017\n"
-      "\007content\030\003 \001(\t\022\014\n\004code\030\004 \001(\005\022\021\n\tsender_i"
-      "d\030\005 \001(\t\022/\n\013create_time\030\006 \001(\0132\032.google.pr"
-      "otobuf.Timestamp\022\022\n\npersistent\030\007 \001(\010\"]\n\020"
-      "NotificationList\022/\n\rnotifications\030\001 \003(\0132"
-      "\030.nakama.api.Notification\022\030\n\020cacheable_c"
-      "ursor\030\002 \001(\t\">\n\030PromoteGroupUsersRequest\022"
-      "\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"G\n\023R"
-      "eadStorageObjectId\022\022\n\ncollection\030\001 \001(\t\022\013"
-      "\n\003key\030\002 \001(\t\022\017\n\007user_id\030\003 \001(\t\"P\n\031ReadStor"
-      "ageObjectsRequest\0223\n\nobject_ids\030\001 \003(\0132\037."
-      "nakama.api.ReadStorageObjectId\"4\n\003Rpc\022\n\n"
-      "\002id\030\001 \001(\t\022\017\n\007payload\030\002 \001(\t\022\020\n\010http_key\030\003"
-      " \001(\t\"<\n\007Session\022\017\n\007created\030\001 \001(\010\022\r\n\005toke"
-      "n\030\002 \001(\t\022\021\n\tudp_token\030\003 \001(\t\"\366\001\n\rStorageOb"
-      "ject\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n"
-      "\007user_id\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\022\017\n\007version"
-      "\030\005 \001(\t\022\027\n\017permission_read\030\006 \001(\005\022\030\n\020permi"
-      "ssion_write\030\007 \001(\005\022/\n\013create_time\030\010 \001(\0132\032"
-      ".google.protobuf.Timestamp\022/\n\013update_tim"
-      "e\030\t \001(\0132\032.google.protobuf.Timestamp\"U\n\020S"
-      "torageObjectAck\022\022\n\ncollection\030\001 \001(\t\022\013\n\003k"
-      "ey\030\002 \001(\t\022\017\n\007version\030\003 \001(\t\022\017\n\007user_id\030\004 \001"
-      "(\t\"\?\n\021StorageObjectAcks\022*\n\004acks\030\001 \003(\0132\034."
-      "nakama.api.StorageObjectAck\"<\n\016StorageOb"
-      "jects\022*\n\007objects\030\001 \003(\0132\031.nakama.api.Stor"
-      "ageObject\"O\n\021StorageObjectList\022*\n\007object"
-      "s\030\001 \003(\0132\031.nakama.api.StorageObject\022\016\n\006cu"
-      "rsor\030\002 \001(\t\"\207\003\n\nTournament\022\n\n\002id\030\001 \001(\t\022\r\n"
-      "\005title\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010cat"
-      "egory\030\004 \001(\r\022\022\n\nsort_order\030\005 \001(\r\022\014\n\004size\030"
-      "\006 \001(\r\022\020\n\010max_size\030\007 \001(\r\022\025\n\rmax_num_score"
-      "\030\010 \001(\r\022\021\n\tcan_enter\030\t \001(\010\022\022\n\nend_active\030"
-      "\n \001(\r\022\022\n\nnext_reset\030\013 \001(\r\022\020\n\010metadata\030\014 "
-      "\001(\t\022/\n\013create_time\030\r \001(\0132\032.google.protob"
-      "uf.Timestamp\022.\n\nstart_time\030\016 \001(\0132\032.googl"
-      "e.protobuf.Timestamp\022,\n\010end_time\030\017 \001(\0132\032"
-      ".google.protobuf.Timestamp\022\020\n\010duration\030\020"
-      " \001(\r\"M\n\016TournamentList\022+\n\013tournaments\030\001 "
-      "\003(\0132\026.nakama.api.Tournament\022\016\n\006cursor\030\002 "
-      "\001(\t\"\246\001\n\024TournamentRecordList\022.\n\007records\030"
-      "\001 \003(\0132\035.nakama.api.LeaderboardRecord\0224\n\r"
-      "owner_records\030\002 \003(\0132\035.nakama.api.Leaderb"
-      "oardRecord\022\023\n\013next_cursor\030\003 \001(\t\022\023\n\013prev_"
-      "cursor\030\004 \001(\t\"\274\002\n\024UpdateAccountRequest\022.\n"
-      "\010username\030\001 \001(\0132\034.google.protobuf.String"
-      "Value\0222\n\014display_name\030\002 \001(\0132\034.google.pro"
-      "tobuf.StringValue\0220\n\navatar_url\030\003 \001(\0132\034."
-      "google.protobuf.StringValue\022.\n\010lang_tag\030"
-      "\004 \001(\0132\034.google.protobuf.StringValue\022.\n\010l"
-      "ocation\030\005 \001(\0132\034.google.protobuf.StringVa"
-      "lue\022.\n\010timezone\030\006 \001(\0132\034.google.protobuf."
-      "StringValue\"\221\002\n\022UpdateGroupRequest\022\020\n\010gr"
-      "oup_id\030\001 \001(\t\022*\n\004name\030\002 \001(\0132\034.google.prot"
-      "obuf.StringValue\0221\n\013description\030\003 \001(\0132\034."
-      "google.protobuf.StringValue\022.\n\010lang_tag\030"
-      "\004 \001(\0132\034.google.protobuf.StringValue\0220\n\na"
-      "vatar_url\030\005 \001(\0132\034.google.protobuf.String"
-      "Value\022(\n\004open\030\006 \001(\0132\032.google.protobuf.Bo"
-      "olValue\"\355\002\n\004User\022\n\n\002id\030\001 \001(\t\022\020\n\010username"
-      "\030\002 \001(\t\022\024\n\014display_name\030\003 \001(\t\022\022\n\navatar_u"
-      "rl\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001(\t\022\020\n\010location\030\006"
-      " \001(\t\022\020\n\010timezone\030\007 \001(\t\022\020\n\010metadata\030\010 \001(\t"
-      "\022\023\n\013facebook_id\030\t \001(\t\022\021\n\tgoogle_id\030\n \001(\t"
-      "\022\025\n\rgamecenter_id\030\013 \001(\t\022\020\n\010steam_id\030\014 \001("
-      "\t\022\016\n\006online\030\r \001(\010\022\022\n\nedge_count\030\016 \001(\005\022/\n"
-      "\013create_time\030\017 \001(\0132\032.google.protobuf.Tim"
-      "estamp\022/\n\013update_time\030\020 \001(\0132\032.google.pro"
-      "tobuf.Timestamp\"\347\001\n\rUserGroupList\0228\n\013use"
-      "r_groups\030\001 \003(\0132#.nakama.api.UserGroupLis"
-      "t.UserGroup\032\233\001\n\tUserGroup\022 \n\005group\030\001 \001(\013"
-      "2\021.nakama.api.Group\022*\n\005state\030\002 \001(\0132\033.goo"
-      "gle.protobuf.Int32Value\"@\n\005State\022\016\n\nSUPE"
-      "RADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN_"
-      "REQUEST\020\003\"(\n\005Users\022\037\n\005users\030\001 \003(\0132\020.naka"
-      "ma.api.User\"\326\001\n\035WriteLeaderboardRecordRe"
-      "quest\022\026\n\016leaderboard_id\030\001 \001(\t\022P\n\006record\030"
-      "\002 \001(\0132@.nakama.api.WriteLeaderboardRecor"
-      "dRequest.LeaderboardRecordWrite\032K\n\026Leade"
-      "rboardRecordWrite\022\r\n\005score\030\001 \001(\003\022\020\n\010subs"
-      "core\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\t\"\302\001\n\022WriteSt"
-      "orageObject\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002"
-      " \001(\t\022\r\n\005value\030\003 \001(\t\022\017\n\007version\030\004 \001(\t\0224\n\017"
-      "permission_read\030\005 \001(\0132\033.google.protobuf."
-      "Int32Value\0225\n\020permission_write\030\006 \001(\0132\033.g"
-      "oogle.protobuf.Int32Value\"M\n\032WriteStorag"
-      "eObjectsRequest\022/\n\007objects\030\001 \003(\0132\036.nakam"
-      "a.api.WriteStorageObject\"\321\001\n\034WriteTourna"
-      "mentRecordRequest\022\025\n\rtournament_id\030\001 \001(\t"
-      "\022N\n\006record\030\002 \001(\0132>.nakama.api.WriteTourn"
-      "amentRecordRequest.TournamentRecordWrite"
-      "\032J\n\025TournamentRecordWrite\022\r\n\005score\030\001 \001(\003"
-      "\022\020\n\010subscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\tB=\n\031"
-      "com.heroiclabs.nakama.apiB\tNakamaApiP\001Z\003"
-      "api\242\002\004NKPB\252\002\006Nakamab\006proto3"
+      "api.DeleteStorageObjectId\"\256\001\n\005Event\022\014\n\004n"
+      "ame\030\001 \001(\t\0225\n\nproperties\030\002 \003(\0132!.nakama.a"
+      "pi.Event.PropertiesEntry\022-\n\ttimestamp\030\003 "
+      "\001(\0132\032.google.protobuf.Timestamp\0321\n\017Prope"
+      "rtiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\002"
+      "8\001\"\234\001\n\006Friend\022\036\n\004user\030\001 \001(\0132\020.nakama.api"
+      ".User\022*\n\005state\030\002 \001(\0132\033.google.protobuf.I"
+      "nt32Value\"F\n\005State\022\n\n\006FRIEND\020\000\022\017\n\013INVITE"
+      "_SENT\020\001\022\023\n\017INVITE_RECEIVED\020\002\022\013\n\007BLOCKED\020"
+      "\003\".\n\007Friends\022#\n\007friends\030\001 \003(\0132\022.nakama.a"
+      "pi.Friend\"G\n\017GetUsersRequest\022\013\n\003ids\030\001 \003("
+      "\t\022\021\n\tusernames\030\002 \003(\t\022\024\n\014facebook_ids\030\003 \003"
+      "(\t\"\265\002\n\005Group\022\n\n\002id\030\001 \001(\t\022\022\n\ncreator_id\030\002"
+      " \001(\t\022\014\n\004name\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022"
+      "\020\n\010lang_tag\030\005 \001(\t\022\020\n\010metadata\030\006 \001(\t\022\022\n\na"
+      "vatar_url\030\007 \001(\t\022(\n\004open\030\010 \001(\0132\032.google.p"
+      "rotobuf.BoolValue\022\022\n\nedge_count\030\t \001(\005\022\021\n"
+      "\tmax_count\030\n \001(\005\022/\n\013create_time\030\013 \001(\0132\032."
+      "google.protobuf.Timestamp\022/\n\013update_time"
+      "\030\014 \001(\0132\032.google.protobuf.Timestamp\">\n\tGr"
+      "oupList\022!\n\006groups\030\001 \003(\0132\021.nakama.api.Gro"
+      "up\022\016\n\006cursor\030\002 \001(\t\"\345\001\n\rGroupUserList\0228\n\013"
+      "group_users\030\001 \003(\0132#.nakama.api.GroupUser"
+      "List.GroupUser\032\231\001\n\tGroupUser\022\036\n\004user\030\001 \001"
+      "(\0132\020.nakama.api.User\022*\n\005state\030\002 \001(\0132\033.go"
+      "ogle.protobuf.Int32Value\"@\n\005State\022\016\n\nSUP"
+      "ERADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN"
+      "_REQUEST\020\003\"w\n\034ImportFacebookFriendsReque"
+      "st\022,\n\007account\030\001 \001(\0132\033.nakama.api.Account"
+      "Facebook\022)\n\005reset\030\002 \001(\0132\032.google.protobu"
+      "f.BoolValue\"$\n\020JoinGroupRequest\022\020\n\010group"
+      "_id\030\001 \001(\t\".\n\025JoinTournamentRequest\022\025\n\rto"
+      "urnament_id\030\001 \001(\t\";\n\025KickGroupUsersReque"
+      "st\022\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"\353"
+      "\002\n\021LeaderboardRecord\022\026\n\016leaderboard_id\030\001"
+      " \001(\t\022\020\n\010owner_id\030\002 \001(\t\022.\n\010username\030\003 \001(\013"
+      "2\034.google.protobuf.StringValue\022\r\n\005score\030"
+      "\004 \001(\003\022\020\n\010subscore\030\005 \001(\003\022\021\n\tnum_score\030\006 \001"
+      "(\005\022\020\n\010metadata\030\007 \001(\t\022/\n\013create_time\030\010 \001("
+      "\0132\032.google.protobuf.Timestamp\022/\n\013update_"
+      "time\030\t \001(\0132\032.google.protobuf.Timestamp\022/"
+      "\n\013expiry_time\030\n \001(\0132\032.google.protobuf.Ti"
+      "mestamp\022\014\n\004rank\030\013 \001(\003\022\025\n\rmax_num_score\030\014"
+      " \001(\r\"\247\001\n\025LeaderboardRecordList\022.\n\007record"
+      "s\030\001 \003(\0132\035.nakama.api.LeaderboardRecord\0224"
+      "\n\rowner_records\030\002 \003(\0132\035.nakama.api.Leade"
+      "rboardRecord\022\023\n\013next_cursor\030\003 \001(\t\022\023\n\013pre"
+      "v_cursor\030\004 \001(\t\"%\n\021LeaveGroupRequest\022\020\n\010g"
+      "roup_id\030\001 \001(\t\"m\n\023LinkFacebookRequest\022,\n\007"
+      "account\030\001 \001(\0132\033.nakama.api.AccountFacebo"
+      "ok\022(\n\004sync\030\004 \001(\0132\032.google.protobuf.BoolV"
+      "alue\"\231\001\n\032ListChannelMessagesRequest\022\022\n\nc"
+      "hannel_id\030\001 \001(\t\022*\n\005limit\030\002 \001(\0132\033.google."
+      "protobuf.Int32Value\022+\n\007forward\030\003 \001(\0132\032.g"
+      "oogle.protobuf.BoolValue\022\016\n\006cursor\030\004 \001(\t"
+      "\"]\n\021ListGroupsRequest\022\014\n\004name\030\001 \001(\t\022\016\n\006c"
+      "ursor\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.google.prot"
+      "obuf.Int32Value\")\n\025ListGroupUsersRequest"
+      "\022\020\n\010group_id\030\001 \001(\t\"\201\001\n(ListLeaderboardRe"
+      "cordsAroundOwnerRequest\022\026\n\016leaderboard_i"
+      "d\030\001 \001(\t\022+\n\005limit\030\002 \001(\0132\034.google.protobuf"
+      ".UInt32Value\022\020\n\010owner_id\030\003 \001(\t\"\206\001\n\035ListL"
+      "eaderboardRecordsRequest\022\026\n\016leaderboard_"
+      "id\030\001 \001(\t\022\021\n\towner_ids\030\002 \003(\t\022*\n\005limit\030\003 \001"
+      "(\0132\033.google.protobuf.Int32Value\022\016\n\006curso"
+      "r\030\004 \001(\t\"\253\002\n\022ListMatchesRequest\022*\n\005limit\030"
+      "\001 \001(\0132\033.google.protobuf.Int32Value\0221\n\rau"
+      "thoritative\030\002 \001(\0132\032.google.protobuf.Bool"
+      "Value\022+\n\005label\030\003 \001(\0132\034.google.protobuf.S"
+      "tringValue\022-\n\010min_size\030\004 \001(\0132\033.google.pr"
+      "otobuf.Int32Value\022-\n\010max_size\030\005 \001(\0132\033.go"
+      "ogle.protobuf.Int32Value\022+\n\005query\030\006 \001(\0132"
+      "\034.google.protobuf.StringValue\"`\n\030ListNot"
+      "ificationsRequest\022*\n\005limit\030\001 \001(\0132\033.googl"
+      "e.protobuf.Int32Value\022\030\n\020cacheable_curso"
+      "r\030\002 \001(\t\"|\n\031ListStorageObjectsRequest\022\017\n\007"
+      "user_id\030\001 \001(\t\022\022\n\ncollection\030\002 \001(\t\022*\n\005lim"
+      "it\030\003 \001(\0132\033.google.protobuf.Int32Value\022\016\n"
+      "\006cursor\030\004 \001(\t\"\177\n\'ListTournamentRecordsAr"
+      "oundOwnerRequest\022\025\n\rtournament_id\030\001 \001(\t\022"
+      "+\n\005limit\030\002 \001(\0132\034.google.protobuf.UInt32V"
+      "alue\022\020\n\010owner_id\030\003 \001(\t\"\204\001\n\034ListTournamen"
+      "tRecordsRequest\022\025\n\rtournament_id\030\001 \001(\t\022\021"
+      "\n\towner_ids\030\002 \003(\t\022*\n\005limit\030\003 \001(\0132\033.googl"
+      "e.protobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\240\002"
+      "\n\026ListTournamentsRequest\0224\n\016category_sta"
+      "rt\030\001 \001(\0132\034.google.protobuf.UInt32Value\0222"
+      "\n\014category_end\030\002 \001(\0132\034.google.protobuf.U"
+      "Int32Value\0220\n\nstart_time\030\003 \001(\0132\034.google."
+      "protobuf.UInt32Value\022.\n\010end_time\030\004 \001(\0132\034"
+      ".google.protobuf.UInt32Value\022*\n\005limit\030\006 "
+      "\001(\0132\033.google.protobuf.Int32Value\022\016\n\006curs"
+      "or\030\010 \001(\t\"(\n\025ListUserGroupsRequest\022\017\n\007use"
+      "r_id\030\001 \001(\t\"k\n\005Match\022\020\n\010match_id\030\001 \001(\t\022\025\n"
+      "\rauthoritative\030\002 \001(\010\022+\n\005label\030\003 \001(\0132\034.go"
+      "ogle.protobuf.StringValue\022\014\n\004size\030\004 \001(\005\""
+      "/\n\tMatchList\022\"\n\007matches\030\001 \003(\0132\021.nakama.a"
+      "pi.Match\"\242\001\n\014Notification\022\n\n\002id\030\001 \001(\t\022\017\n"
+      "\007subject\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\022\014\n\004code\030"
+      "\004 \001(\005\022\021\n\tsender_id\030\005 \001(\t\022/\n\013create_time\030"
+      "\006 \001(\0132\032.google.protobuf.Timestamp\022\022\n\nper"
+      "sistent\030\007 \001(\010\"]\n\020NotificationList\022/\n\rnot"
+      "ifications\030\001 \003(\0132\030.nakama.api.Notificati"
+      "on\022\030\n\020cacheable_cursor\030\002 \001(\t\">\n\030PromoteG"
+      "roupUsersRequest\022\020\n\010group_id\030\001 \001(\t\022\020\n\010us"
+      "er_ids\030\002 \003(\t\"G\n\023ReadStorageObjectId\022\022\n\nc"
+      "ollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007user_id\030"
+      "\003 \001(\t\"P\n\031ReadStorageObjectsRequest\0223\n\nob"
+      "ject_ids\030\001 \003(\0132\037.nakama.api.ReadStorageO"
+      "bjectId\"4\n\003Rpc\022\n\n\002id\030\001 \001(\t\022\017\n\007payload\030\002 "
+      "\001(\t\022\020\n\010http_key\030\003 \001(\t\"<\n\007Session\022\017\n\007crea"
+      "ted\030\001 \001(\010\022\r\n\005token\030\002 \001(\t\022\021\n\tudp_token\030\003 "
+      "\001(\t\"\366\001\n\rStorageObject\022\022\n\ncollection\030\001 \001("
+      "\t\022\013\n\003key\030\002 \001(\t\022\017\n\007user_id\030\003 \001(\t\022\r\n\005value"
+      "\030\004 \001(\t\022\017\n\007version\030\005 \001(\t\022\027\n\017permission_re"
+      "ad\030\006 \001(\005\022\030\n\020permission_write\030\007 \001(\005\022/\n\013cr"
+      "eate_time\030\010 \001(\0132\032.google.protobuf.Timest"
+      "amp\022/\n\013update_time\030\t \001(\0132\032.google.protob"
+      "uf.Timestamp\"U\n\020StorageObjectAck\022\022\n\ncoll"
+      "ection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007version\030\003 \001"
+      "(\t\022\017\n\007user_id\030\004 \001(\t\"\?\n\021StorageObjectAcks"
+      "\022*\n\004acks\030\001 \003(\0132\034.nakama.api.StorageObjec"
+      "tAck\"<\n\016StorageObjects\022*\n\007objects\030\001 \003(\0132"
+      "\031.nakama.api.StorageObject\"O\n\021StorageObj"
+      "ectList\022*\n\007objects\030\001 \003(\0132\031.nakama.api.St"
+      "orageObject\022\016\n\006cursor\030\002 \001(\t\"\235\003\n\nTourname"
+      "nt\022\n\n\002id\030\001 \001(\t\022\r\n\005title\030\002 \001(\t\022\023\n\013descrip"
+      "tion\030\003 \001(\t\022\020\n\010category\030\004 \001(\r\022\022\n\nsort_ord"
+      "er\030\005 \001(\r\022\014\n\004size\030\006 \001(\r\022\020\n\010max_size\030\007 \001(\r"
+      "\022\025\n\rmax_num_score\030\010 \001(\r\022\021\n\tcan_enter\030\t \001"
+      "(\010\022\022\n\nend_active\030\n \001(\r\022\022\n\nnext_reset\030\013 \001"
+      "(\r\022\020\n\010metadata\030\014 \001(\t\022/\n\013create_time\030\r \001("
+      "\0132\032.google.protobuf.Timestamp\022.\n\nstart_t"
+      "ime\030\016 \001(\0132\032.google.protobuf.Timestamp\022,\n"
+      "\010end_time\030\017 \001(\0132\032.google.protobuf.Timest"
+      "amp\022\020\n\010duration\030\020 \001(\r\022\024\n\014start_active\030\021 "
+      "\001(\r\"M\n\016TournamentList\022+\n\013tournaments\030\001 \003"
+      "(\0132\026.nakama.api.Tournament\022\016\n\006cursor\030\002 \001"
+      "(\t\"\246\001\n\024TournamentRecordList\022.\n\007records\030\001"
+      " \003(\0132\035.nakama.api.LeaderboardRecord\0224\n\ro"
+      "wner_records\030\002 \003(\0132\035.nakama.api.Leaderbo"
+      "ardRecord\022\023\n\013next_cursor\030\003 \001(\t\022\023\n\013prev_c"
+      "ursor\030\004 \001(\t\"\274\002\n\024UpdateAccountRequest\022.\n\010"
+      "username\030\001 \001(\0132\034.google.protobuf.StringV"
+      "alue\0222\n\014display_name\030\002 \001(\0132\034.google.prot"
+      "obuf.StringValue\0220\n\navatar_url\030\003 \001(\0132\034.g"
+      "oogle.protobuf.StringValue\022.\n\010lang_tag\030\004"
+      " \001(\0132\034.google.protobuf.StringValue\022.\n\010lo"
+      "cation\030\005 \001(\0132\034.google.protobuf.StringVal"
+      "ue\022.\n\010timezone\030\006 \001(\0132\034.google.protobuf.S"
+      "tringValue\"\221\002\n\022UpdateGroupRequest\022\020\n\010gro"
+      "up_id\030\001 \001(\t\022*\n\004name\030\002 \001(\0132\034.google.proto"
+      "buf.StringValue\0221\n\013description\030\003 \001(\0132\034.g"
+      "oogle.protobuf.StringValue\022.\n\010lang_tag\030\004"
+      " \001(\0132\034.google.protobuf.StringValue\0220\n\nav"
+      "atar_url\030\005 \001(\0132\034.google.protobuf.StringV"
+      "alue\022(\n\004open\030\006 \001(\0132\032.google.protobuf.Boo"
+      "lValue\"\355\002\n\004User\022\n\n\002id\030\001 \001(\t\022\020\n\010username\030"
+      "\002 \001(\t\022\024\n\014display_name\030\003 \001(\t\022\022\n\navatar_ur"
+      "l\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001(\t\022\020\n\010location\030\006 "
+      "\001(\t\022\020\n\010timezone\030\007 \001(\t\022\020\n\010metadata\030\010 \001(\t\022"
+      "\023\n\013facebook_id\030\t \001(\t\022\021\n\tgoogle_id\030\n \001(\t\022"
+      "\025\n\rgamecenter_id\030\013 \001(\t\022\020\n\010steam_id\030\014 \001(\t"
+      "\022\016\n\006online\030\r \001(\010\022\022\n\nedge_count\030\016 \001(\005\022/\n\013"
+      "create_time\030\017 \001(\0132\032.google.protobuf.Time"
+      "stamp\022/\n\013update_time\030\020 \001(\0132\032.google.prot"
+      "obuf.Timestamp\"\347\001\n\rUserGroupList\0228\n\013user"
+      "_groups\030\001 \003(\0132#.nakama.api.UserGroupList"
+      ".UserGroup\032\233\001\n\tUserGroup\022 \n\005group\030\001 \001(\0132"
+      "\021.nakama.api.Group\022*\n\005state\030\002 \001(\0132\033.goog"
+      "le.protobuf.Int32Value\"@\n\005State\022\016\n\nSUPER"
+      "ADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN_R"
+      "EQUEST\020\003\"(\n\005Users\022\037\n\005users\030\001 \003(\0132\020.nakam"
+      "a.api.User\"\326\001\n\035WriteLeaderboardRecordReq"
+      "uest\022\026\n\016leaderboard_id\030\001 \001(\t\022P\n\006record\030\002"
+      " \001(\0132@.nakama.api.WriteLeaderboardRecord"
+      "Request.LeaderboardRecordWrite\032K\n\026Leader"
+      "boardRecordWrite\022\r\n\005score\030\001 \001(\003\022\020\n\010subsc"
+      "ore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\t\"\302\001\n\022WriteSto"
+      "rageObject\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 "
+      "\001(\t\022\r\n\005value\030\003 \001(\t\022\017\n\007version\030\004 \001(\t\0224\n\017p"
+      "ermission_read\030\005 \001(\0132\033.google.protobuf.I"
+      "nt32Value\0225\n\020permission_write\030\006 \001(\0132\033.go"
+      "ogle.protobuf.Int32Value\"M\n\032WriteStorage"
+      "ObjectsRequest\022/\n\007objects\030\001 \003(\0132\036.nakama"
+      ".api.WriteStorageObject\"\321\001\n\034WriteTournam"
+      "entRecordRequest\022\025\n\rtournament_id\030\001 \001(\t\022"
+      "N\n\006record\030\002 \001(\0132>.nakama.api.WriteTourna"
+      "mentRecordRequest.TournamentRecordWrite\032"
+      "J\n\025TournamentRecordWrite\022\r\n\005score\030\001 \001(\003\022"
+      "\020\n\010subscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\tB=\n\031c"
+      "om.heroiclabs.nakama.apiB\tNakamaApiP\001Z\003a"
+      "pi\242\002\004NKPB\252\002\006Nakamab\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 10187);
+      descriptor, 10386);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "github.com/heroiclabs/nakama/api/api.proto", &protobuf_RegisterTypes);
   ::protobuf_google_2fprotobuf_2ftimestamp_2eproto::AddDescriptors();
@@ -12010,6 +12079,477 @@ void DeleteStorageObjectsRequest::InternalSwap(DeleteStorageObjectsRequest* othe
 }
 
 ::google::protobuf::Metadata DeleteStorageObjectsRequest::GetMetadata() const {
+  protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+Event_PropertiesEntry_DoNotUse::Event_PropertiesEntry_DoNotUse() {}
+Event_PropertiesEntry_DoNotUse::Event_PropertiesEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
+void Event_PropertiesEntry_DoNotUse::MergeFrom(const Event_PropertiesEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::google::protobuf::Metadata Event_PropertiesEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::file_level_metadata[27];
+}
+void Event_PropertiesEntry_DoNotUse::MergeFrom(
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
+void Event::InitAsDefaultInstance() {
+  ::nakama::api::_Event_default_instance_._instance.get_mutable()->timestamp_ = const_cast< ::google::protobuf::Timestamp*>(
+      ::google::protobuf::Timestamp::internal_default_instance());
+}
+void Event::clear_timestamp() {
+  if (GetArenaNoVirtual() == NULL && timestamp_ != NULL) {
+    delete timestamp_;
+  }
+  timestamp_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int Event::kNameFieldNumber;
+const int Event::kPropertiesFieldNumber;
+const int Event::kTimestampFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+Event::Event()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::scc_info_Event.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:nakama.api.Event)
+}
+Event::Event(const Event& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  properties_.MergeFrom(from.properties_);
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.name().size() > 0) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.has_timestamp()) {
+    timestamp_ = new ::google::protobuf::Timestamp(*from.timestamp_);
+  } else {
+    timestamp_ = NULL;
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.Event)
+}
+
+void Event::SharedCtor() {
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  timestamp_ = NULL;
+}
+
+Event::~Event() {
+  // @@protoc_insertion_point(destructor:nakama.api.Event)
+  SharedDtor();
+}
+
+void Event::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete timestamp_;
+}
+
+void Event::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* Event::descriptor() {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const Event& Event::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::scc_info_Event.base);
+  return *internal_default_instance();
+}
+
+
+void Event::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.Event)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  properties_.Clear();
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && timestamp_ != NULL) {
+    delete timestamp_;
+  }
+  timestamp_ = NULL;
+  _internal_metadata_.Clear();
+}
+
+bool Event::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:nakama.api.Event)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string name = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->name().data(), static_cast<int>(this->name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.Event.name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // map<string, string> properties = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          Event_PropertiesEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              Event_PropertiesEntry_DoNotUse,
+              ::std::string, ::std::string,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::std::string > > parser(&properties_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.Event.PropertiesEntry.key"));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.value().data(), static_cast<int>(parser.value().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.Event.PropertiesEntry.value"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .google.protobuf.Timestamp timestamp = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_timestamp()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:nakama.api.Event)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:nakama.api.Event)
+  return false;
+#undef DO_
+}
+
+void Event::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:nakama.api.Event)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.Event.name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // map<string, string> properties = 2;
+  if (!this->properties().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::std::string >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.Event.PropertiesEntry.key");
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->second.data(), static_cast<int>(p->second.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.Event.PropertiesEntry.value");
+      }
+    };
+
+    if (output->IsSerializationDeterministic() &&
+        this->properties().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->properties().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::std::string >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->properties().begin();
+          it != this->properties().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Event_PropertiesEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(properties_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            2, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Event_PropertiesEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->properties().begin();
+          it != this->properties().end(); ++it) {
+        entry.reset(properties_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            2, *entry, output);
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  // .google.protobuf.Timestamp timestamp = 3;
+  if (this->has_timestamp()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->_internal_timestamp(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:nakama.api.Event)
+}
+
+::google::protobuf::uint8* Event::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.Event)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.Event.name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+
+  // map<string, string> properties = 2;
+  if (!this->properties().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::std::string >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.Event.PropertiesEntry.key");
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->second.data(), static_cast<int>(p->second.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.Event.PropertiesEntry.value");
+      }
+    };
+
+    if (deterministic &&
+        this->properties().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->properties().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::std::string >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->properties().begin();
+          it != this->properties().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Event_PropertiesEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(properties_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       2, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Event_PropertiesEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->properties().begin();
+          it != this->properties().end(); ++it) {
+        entry.reset(properties_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       2, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  // .google.protobuf.Timestamp timestamp = 3;
+  if (this->has_timestamp()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->_internal_timestamp(), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.Event)
+  return target;
+}
+
+size_t Event::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.Event)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // map<string, string> properties = 2;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->properties_size());
+  {
+    ::std::unique_ptr<Event_PropertiesEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+        it = this->properties().begin();
+        it != this->properties().end(); ++it) {
+      entry.reset(properties_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
+  }
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->name());
+  }
+
+  // .google.protobuf.Timestamp timestamp = 3;
+  if (this->has_timestamp()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *timestamp_);
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void Event::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.Event)
+  GOOGLE_DCHECK_NE(&from, this);
+  const Event* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const Event>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.Event)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.Event)
+    MergeFrom(*source);
+  }
+}
+
+void Event::MergeFrom(const Event& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.Event)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  properties_.MergeFrom(from.properties_);
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.has_timestamp()) {
+    mutable_timestamp()->::google::protobuf::Timestamp::MergeFrom(from.timestamp());
+  }
+}
+
+void Event::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.Event)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Event::CopyFrom(const Event& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.Event)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Event::IsInitialized() const {
+  return true;
+}
+
+void Event::Swap(Event* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Event::InternalSwap(Event* other) {
+  using std::swap;
+  properties_.Swap(&other->properties_);
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(timestamp_, other->timestamp_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata Event::GetMetadata() const {
   protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -26682,6 +27222,7 @@ const int Tournament::kCreateTimeFieldNumber;
 const int Tournament::kStartTimeFieldNumber;
 const int Tournament::kEndTimeFieldNumber;
 const int Tournament::kDurationFieldNumber;
+const int Tournament::kStartActiveFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Tournament::Tournament()
@@ -26727,8 +27268,8 @@ Tournament::Tournament(const Tournament& from)
     end_time_ = NULL;
   }
   ::memcpy(&category_, &from.category_,
-    static_cast<size_t>(reinterpret_cast<char*>(&duration_) -
-    reinterpret_cast<char*>(&category_)) + sizeof(duration_));
+    static_cast<size_t>(reinterpret_cast<char*>(&start_active_) -
+    reinterpret_cast<char*>(&category_)) + sizeof(start_active_));
   // @@protoc_insertion_point(copy_constructor:nakama.api.Tournament)
 }
 
@@ -26738,8 +27279,8 @@ void Tournament::SharedCtor() {
   description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&create_time_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&duration_) -
-      reinterpret_cast<char*>(&create_time_)) + sizeof(duration_));
+      reinterpret_cast<char*>(&start_active_) -
+      reinterpret_cast<char*>(&create_time_)) + sizeof(start_active_));
 }
 
 Tournament::~Tournament() {
@@ -26794,8 +27335,8 @@ void Tournament::Clear() {
   }
   end_time_ = NULL;
   ::memset(&category_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&duration_) -
-      reinterpret_cast<char*>(&category_)) + sizeof(duration_));
+      reinterpret_cast<char*>(&start_active_) -
+      reinterpret_cast<char*>(&category_)) + sizeof(start_active_));
   _internal_metadata_.Clear();
 }
 
@@ -27035,6 +27576,20 @@ bool Tournament::MergePartialFromCodedStream(
         break;
       }
 
+      // uint32 start_active = 17;
+      case 17: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(136u /* 136 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &start_active_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -27164,6 +27719,11 @@ void Tournament::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(16, this->duration(), output);
   }
 
+  // uint32 start_active = 17;
+  if (this->start_active() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(17, this->start_active(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -27286,6 +27846,11 @@ void Tournament::SerializeWithCachedSizes(
   // uint32 duration = 16;
   if (this->duration() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(16, this->duration(), target);
+  }
+
+  // uint32 start_active = 17;
+  if (this->start_active() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(17, this->start_active(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -27415,6 +27980,13 @@ size_t Tournament::ByteSizeLong() const {
         this->duration());
   }
 
+  // uint32 start_active = 17;
+  if (this->start_active() != 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->start_active());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -27494,6 +28066,9 @@ void Tournament::MergeFrom(const Tournament& from) {
   if (from.duration() != 0) {
     set_duration(from.duration());
   }
+  if (from.start_active() != 0) {
+    set_start_active(from.start_active());
+  }
 }
 
 void Tournament::CopyFrom(const ::google::protobuf::Message& from) {
@@ -27540,6 +28115,7 @@ void Tournament::InternalSwap(Tournament* other) {
   swap(end_active_, other->end_active_);
   swap(next_reset_, other->next_reset_);
   swap(duration_, other->duration_);
+  swap(start_active_, other->start_active_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -33154,6 +33730,12 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::DeleteStorageObject
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::DeleteStorageObjectsRequest* Arena::CreateMaybeMessage< ::nakama::api::DeleteStorageObjectsRequest >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::DeleteStorageObjectsRequest >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::Event_PropertiesEntry_DoNotUse* Arena::CreateMaybeMessage< ::nakama::api::Event_PropertiesEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::api::Event_PropertiesEntry_DoNotUse >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::Event* Arena::CreateMaybeMessage< ::nakama::api::Event >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::api::Event >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::Friend* Arena::CreateMaybeMessage< ::nakama::api::Friend >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::Friend >(arena);

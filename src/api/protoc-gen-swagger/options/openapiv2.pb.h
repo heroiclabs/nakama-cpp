@@ -2039,6 +2039,12 @@ class JSONSchema : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::uint64 min_items() const;
   void set_min_items(::google::protobuf::uint64 value);
 
+  // bool read_only = 8;
+  void clear_read_only();
+  static const int kReadOnlyFieldNumber = 8;
+  bool read_only() const;
+  void set_read_only(bool value);
+
   // bool exclusive_maximum = 12;
   void clear_exclusive_maximum();
   static const int kExclusiveMaximumFieldNumber = 12;
@@ -2089,6 +2095,7 @@ class JSONSchema : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::uint64 min_length_;
   ::google::protobuf::uint64 max_items_;
   ::google::protobuf::uint64 min_items_;
+  bool read_only_;
   bool exclusive_maximum_;
   bool exclusive_minimum_;
   bool unique_items_;
@@ -5386,6 +5393,20 @@ inline void JSONSchema::set_allocated_default_(::std::string* default_) {
   }
   default__.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), default_);
   // @@protoc_insertion_point(field_set_allocated:grpc.gateway.protoc_gen_swagger.options.JSONSchema.default)
+}
+
+// bool read_only = 8;
+inline void JSONSchema::clear_read_only() {
+  read_only_ = false;
+}
+inline bool JSONSchema::read_only() const {
+  // @@protoc_insertion_point(field_get:grpc.gateway.protoc_gen_swagger.options.JSONSchema.read_only)
+  return read_only_;
+}
+inline void JSONSchema::set_read_only(bool value) {
+  
+  read_only_ = value;
+  // @@protoc_insertion_point(field_set:grpc.gateway.protoc_gen_swagger.options.JSONSchema.read_only)
 }
 
 // double multiple_of = 10;
