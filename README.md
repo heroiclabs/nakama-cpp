@@ -25,7 +25,7 @@ You'll need to setup the server and database before you can connect with the cli
 - Mac - 10.10+
 - iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off
 
-In theory any platform that meets the requirement for `grpc`, `cpprest` and `boost` is also supported. The client is compiled with C++11.
+In theory any platform that meets the requirement for `cpprest` and `boost` is also supported. The client is compiled with C++11.
 
 3. Download the client from the [releases page](https://github.com/heroiclabs/nakama-cpp/releases). You can also [build from source](#source-builds).
 
@@ -133,10 +133,10 @@ using namespace Nakama;
 Use the connection credentials to build a client object.
 
 ```cpp
-DefaultClientParameters parameters;
+NClientParameters parameters;
 parameters.serverKey = "defaultkey";
 parameters.host = "127.0.0.1";
-parameters.port = 7349;
+parameters.port = DEFAULT_PORT;
 NClientPtr client = createDefaultClient(parameters);
 ```
 
@@ -218,7 +218,7 @@ client->getAccount(session, successCallback, errorCallback);
 The client can create one or more realtime clients with the server. Each realtime client can have it's own events listener registered for responses received from the server.
 
 ```cpp
-int port = 7350; // different port to the main API port
+int32_t port = DEFAULT_PORT;
 bool createStatus = true; // if the socket should show the user as online to others.
 // define realtime client in your class as NRtClientPtr rtClient;
 rtClient = client->createRtClient(port);
@@ -323,7 +323,7 @@ Change submodule branch:
 
 - `git submodule update --remote`
 
-## Build Prerequisites
+### Build Prerequisites
 
 - git
 - python 2.7
@@ -331,7 +331,7 @@ Change submodule branch:
 - go
 - perl
 - Visual Studio 2015, 2017 or 2019 - for Windows only
-- boost 1.69 - for Windows, Mac and Linux, used by cpprest library
+- boost 1.69 - for Windows, Mac and Linux, used by `cpprest` library
 
 Third party libraries:
 
@@ -339,6 +339,23 @@ Third party libraries:
 - grpc - in source control as git submodule
 - optional-lite - in source control
 - cpprestsdk - in source control
+
+### Build Configuration
+
+Build configuration is located here:
+
+```bash
+build/build_config.py
+```
+
+In the build configuration you can enable needed components depending on your needs.
+
+There are following components:
+
+* REST client (HTTP/1.1)
+* gRPC client
+* HTTP transport using C++ REST SDK
+* Websocket transport using C++ REST SDK
 
 ### Building for Windows
 
@@ -426,7 +443,7 @@ Prerequisites:
 - `sudo apt-get install perl`
 - download `boost` 1.69 sources and build them:
 
-  `./bootstrap.sh --with-libraries=system,regex,date_time`
+  `./bootstrap.sh --with-libraries=system,chrono,thread`
 
   `./b2`
 
@@ -448,6 +465,8 @@ python build_linux.py --so
 It builds in `Release` mode and copies nakama lib to release folder.
 
 ### Building for Android
+
+Currently buid for Android is supported from Mac OS.
 
 Set `ANDROID_NDK` or `NDK_ROOT` system variable to Android NDK folder.
 
