@@ -60,6 +60,32 @@ $(call import-add-path, NAKAMA_CPP_SDK)
 $(call import-module, nakama-cpp-android)
 ```
 
+#### Initialize Nakama SDK
+
+For most NativeActivity projects, if you have an entry point like:
+
+```cpp
+void android_main(struct android_app* state) {
+```
+
+Add include:
+
+```cpp
+#include "nakama-cpp/platform/android/android.h"
+```
+
+Add the following code at the top of the `android_main` function:
+
+```cpp
+Nakama::init(state->activity->vm);
+```
+
+#### Shared library size
+
+Don't be afraid that nakama shared library are near 100 Mb in size. After building final apk it will be just few Mb.
+
+#### Android permissions
+
 Android uses a permissions system which determines which platform services the application will request to use and ask permission for from the user. The client uses the network to communicate with the server so you must add the "INTERNET" permission.
 
 ```xml
@@ -218,10 +244,9 @@ client->getAccount(session, successCallback, errorCallback);
 The client can create one or more realtime clients with the server. Each realtime client can have it's own events listener registered for responses received from the server.
 
 ```cpp
-int32_t port = DEFAULT_PORT;
 bool createStatus = true; // if the socket should show the user as online to others.
 // define realtime client in your class as NRtClientPtr rtClient;
-rtClient = client->createRtClient(port);
+rtClient = client->createRtClient(DEFAULT_PORT);
 // define listener in your class as NRtDefaultClientListener listener;
 listener.setConnectCallback([]()
 {
@@ -301,7 +326,7 @@ rtClient = client->createRtClient(port, websockets_transport);
 For more code examples, have a look at:
 
 * [NWebsocketCppRest](https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NWebsocketCppRest.h)
-* [NWebSocket](https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/Classes/NakamaCocos2d/NWebSocket.h)
+* [NCocosWebSocket](https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/example/Classes/NakamaCocos2d/NCocosWebSocket.h)
 
 ## Contribute
 
@@ -348,7 +373,7 @@ Build configuration is located here:
 build/build_config.py
 ```
 
-In the build configuration you can enable needed components depending on your needs.
+In the build configuration you can enable components depending on your needs.
 
 There are following components:
 
