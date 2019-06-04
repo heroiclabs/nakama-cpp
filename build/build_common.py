@@ -19,6 +19,8 @@ import sys
 import shutil
 import subprocess
 
+USE_CPPREST = False
+
 def init_common(build_common_path):
     if build_common_path.find(' ') >= 0:
         print 'Error: space foud in path:', build_common_path
@@ -26,6 +28,8 @@ def init_common(build_common_path):
         sys.exit(-1)
 
     execfile(os.path.join(build_common_path, 'build_config.py'), globals())
+
+    USE_CPPREST = BUILD_HTTP_CPPREST or BUILD_WEBSOCKET_CPPREST
 
     print
     print 'BUILD_REST_CLIENT =', str(BUILD_REST_CLIENT)
@@ -77,10 +81,12 @@ def copy_libs():
 
     if BUILD_REST_CLIENT or BUILD_GRPC_CLIENT:
         copy_protobuf_lib()
+
+    if BUILD_GRPC_CLIENT or USE_CPPREST:
         copy_ssl_lib()
     
     if BUILD_GRPC_CLIENT:
         copy_grpc_lib()
 
-    if BUILD_HTTP_CPPREST or BUILD_WEBSOCKET_CPPREST:
+    if USE_CPPREST:
         copy_rest_lib()
