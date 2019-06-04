@@ -29,6 +29,7 @@ def init_common(build_common_path):
 
     execfile(os.path.join(build_common_path, 'build_config.py'), globals())
 
+    global USE_CPPREST
     USE_CPPREST = BUILD_HTTP_CPPREST or BUILD_WEBSOCKET_CPPREST
 
     print
