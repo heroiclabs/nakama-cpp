@@ -26,7 +26,7 @@ class NakamaSessionManager
 public:
     NakamaSessionManager()
     {
-        DefaultClientParameters parameters;
+        NClientParameters parameters;
 
         // set server end point
         parameters.serverKey = "defaultkey";
@@ -74,6 +74,7 @@ public:
     void tick()
     {
         _client->tick();
+        if (_rtClient) _rtClient->tick();
     }
     
     void onAuthenticated()
@@ -89,11 +90,29 @@ public:
         };
 
         _client->getAccount(_session, successCallback, errorCallback);
+
+        // create real-time client (will use websocket transport)
+        _rtClient = _client->createRtClient();
+
+        _listener.setConnectCallback([this]()
+        {
+            cout << "Socket connected" << endl;
+
+            _rtClient->updateStatus("Enjoying music", []()
+            {
+                cout << "Status updated" << endl;
+            });
+        });
+        _rtClient->setListener(&_listener);
+
+        _rtClient->connect(_session, true);
     }
 
 protected:
     NClientPtr _client;
     NSessionPtr _session;
+    NRtClientPtr _rtClient;
+    NRtDefaultClientListener _listener;
 };
 
 int main()
