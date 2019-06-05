@@ -22,6 +22,10 @@ else()
     set(ROOT_LIBS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/libs")
 endif()
 
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
 # check architecture
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(CPU_ARCH "x64")
@@ -55,7 +59,7 @@ elseif(APPLE_IOS)
 elseif(APPLE)
     # Mac
     set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/mac")
-elseif(UNIX AND NOT APPLE)
+elseif(LINUX)
     # Linux
     if(CMAKE_SIZEOF_VOID_P EQUAL 8)
         set(LIBS_FOLDER "${ROOT_LIBS_FOLDER}/linux/${CPU_ARCH}")
@@ -236,6 +240,8 @@ else()
 
         if(WIN32)
             target_link_libraries(cpprest INTERFACE Crypt32.lib Bcrypt.lib Winhttp.lib)
+        elseif(ANDROID OR LINUX)
+            # boost not needed
         else()
             target_link_libraries(cpprest INTERFACE
                 "${LIBS_FOLDER}/${LIB_PREFIX}boost_thread${LIB_SUFFIX}${LIB_EXT}"
@@ -284,8 +290,7 @@ else()
         target_link_libraries(${target_name} INTERFACE resolv.9)
     endif()
 
-    if(UNIX AND NOT APPLE AND NOT ANDROID)
-        # Linux
+    if(LINUX)
         target_link_libraries(${target_name} INTERFACE pthread)
     endif()
     

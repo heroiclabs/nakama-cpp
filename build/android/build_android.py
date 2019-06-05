@@ -109,6 +109,7 @@ if USE_CPPREST:
 
         if is_windows():
             build_script = 'build-android.bat'
+            ANDROID_NDK = ANDROID_NDK.replace('\\', '/')
         else:
             build_script = './build-android.sh'
 
