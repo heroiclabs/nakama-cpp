@@ -311,7 +311,7 @@ NLogger::setLevel(NLogLevel::Debug);
 
 Note: to use logging macroses you have to define `NLOGS_ENABLED`.
 
-#### Websockets transport
+### Websockets transport
 
 Nakama C++ client has built-in support for WebSocket. This is available on all supported platforms.
 
@@ -327,6 +327,18 @@ For more code examples, have a look at:
 
 * [NWebsocketCppRest](https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NWebsocketCppRest.h)
 * [NCocosWebSocket](https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/example/Classes/NakamaCocos2d/NCocosWebSocket.h)
+
+#### Activity timeout
+
+Built-in websocket transport supports "Activity timeout" feature - if no any message received from server during "Activity timeout" then connection will be closed. Set 0 to disable this feature (default value).
+
+```cpp
+rtClient->getTransport()->setActivityTimeout(20000); // 20 sec
+```
+
+You can change ping period on server - `ping_period_ms` parameter:
+
+https://heroiclabs.com/docs/install-configuration/#socket
 
 ## Contribute
 
