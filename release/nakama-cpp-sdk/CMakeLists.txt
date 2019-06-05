@@ -22,7 +22,7 @@ else()
     set(ROOT_LIBS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/libs")
 endif()
 
-if(UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE AND NOT ANDROID)
     set(LINUX TRUE)
 endif()
 
