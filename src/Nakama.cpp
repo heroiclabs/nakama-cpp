@@ -20,7 +20,7 @@ namespace Nakama {
 
 const char* getNakamaSdkVersion()
 {
-    return "2.1.0 beta";
+    return "2.1.0";
 }
 
 }
