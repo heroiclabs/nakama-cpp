@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['wallet',['wallet',['../struct_nakama_1_1_n_account.html#a0e0bc2183cb81f56929ad0c3b59f9f17',1,'Nakama::NAccount']]],
-  ['warn',['Warn',['../class_nakama_1_1_n_logger.html#a66b37f206abdd9c290575947d802a49a',1,'Nakama::NLogger::Warn()'],['../_n_log_sink_interface_8h.html#a6bb05f2a83393f9bf65e5a59e7d5f5e1',1,'Warn():&#160;NLogSinkInterface.h']]],
-  ['writechatmessage',['writeChatMessage',['../class_nakama_1_1_n_rt_client_interface.html#a94a66e715a51a8d9c6ed802c069ae9b4',1,'Nakama::NRtClientInterface']]],
-  ['writeleaderboardrecord',['writeLeaderboardRecord',['../class_nakama_1_1_n_client_interface.html#a365f616b567d7263eb866a88bfb09845',1,'Nakama::NClientInterface']]],
-  ['writestorageobjects',['writeStorageObjects',['../class_nakama_1_1_n_client_interface.html#a97d6c0c1dd43fe738a5b05d11a2d1966',1,'Nakama::NClientInterface']]],
-  ['writetournamentrecord',['writeTournamentRecord',['../class_nakama_1_1_n_client_interface.html#afe505f46bfc3e55a9a2655457ab94ad6',1,'Nakama::NClientInterface']]]
+  ['value',['value',['../struct_nakama_1_1_n_storage_object.html#af7212014878046409a0d4f30e8330078',1,'Nakama::NStorageObject::value()'],['../struct_nakama_1_1_n_storage_object_write.html#aa1d96c633e3b2063f3d01f9871de74b2',1,'Nakama::NStorageObjectWrite::value()']]],
+  ['verifytime',['verifyTime',['../struct_nakama_1_1_n_account.html#a06c2377c3ce1d4d78b43ee6090fcf979',1,'Nakama::NAccount']]],
+  ['version',['version',['../struct_nakama_1_1_n_storage_object.html#af1e96d670afb28b48a7a058a81a1a2e9',1,'Nakama::NStorageObject::version()'],['../struct_nakama_1_1_n_storage_object_ack.html#a443d912650a9e4460be221f05f4f92a7',1,'Nakama::NStorageObjectAck::version()'],['../struct_nakama_1_1_n_delete_storage_object_id.html#a7a662beaf92fbad4b5ea05dbd5e8f01d',1,'Nakama::NDeleteStorageObjectId::version()'],['../struct_nakama_1_1_n_storage_object_write.html#a8368356da0d9bff03d820509b9def4ca',1,'Nakama::NStorageObjectWrite::version()']]]
 ];

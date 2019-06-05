@@ -16,6 +16,7 @@ var searchData=
   ['messageid',['messageId',['../struct_nakama_1_1_n_channel_message.html#a3b697ba616172ed100f01f924eb30f89',1,'Nakama::NChannelMessage::messageId()'],['../struct_nakama_1_1_n_channel_message_ack.html#af4a8dc7deee1c1b1c90a9e976ce669a8',1,'Nakama::NChannelMessageAck::messageId()']]],
   ['messages',['messages',['../struct_nakama_1_1_n_channel_message_list.html#a9c9b2295d428efbc160601d519024e48',1,'Nakama::NChannelMessageList']]],
   ['metadata',['metadata',['../struct_nakama_1_1_n_group.html#a203d91b16ebb04cf72657e4d54f7f3b5',1,'Nakama::NGroup::metadata()'],['../struct_nakama_1_1_n_leaderboard_record.html#abe480284e0520b12ac0821fa709a4fd5',1,'Nakama::NLeaderboardRecord::metadata()'],['../struct_nakama_1_1_n_tournament.html#a61069724e8d9f4b1a6f2675d98a6393b',1,'Nakama::NTournament::metadata()'],['../struct_nakama_1_1_n_user.html#ab126bd958a7c7464270b115275dfcb12',1,'Nakama::NUser::metadata()']]],
+  ['method',['method',['../struct_nakama_1_1_n_http_request.html#ad1030aa13b7ada842f50b7b7d666bafa',1,'Nakama::NHttpRequest']]],
   ['missing_5fpayload',['MISSING_PAYLOAD',['../_n_rt_error_8h.html#a76801f791ec81ff38fc3e669ebe1bd94',1,'NRtError.h']]],
   ['mode',['mode',['../struct_nakama_1_1_n_stream.html#a80b91c48ac0f4828628c83cf3c5433a9',1,'Nakama::NStream']]]
 ];

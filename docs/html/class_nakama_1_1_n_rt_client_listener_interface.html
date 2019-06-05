@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.3</span>
+   &#160;<span id="projectnumber">2.1.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -113,8 +113,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac579a6c4c7c830f1ddeb3535206c4d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25f010dd109174a9126a5a5d3e79495a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a25f010dd109174a9126a5a5d3e79495a">onConnect</a> ()</td></tr>
 <tr class="separator:a25f010dd109174a9126a5a5d3e79495a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b252739802c1263bb0914ed0ba0490b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a8b252739802c1263bb0914ed0ba0490b">onDisconnect</a> ()</td></tr>
-<tr class="separator:a8b252739802c1263bb0914ed0ba0490b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53436bd6ff96758bf2523da61ab9f5c1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a53436bd6ff96758bf2523da61ab9f5c1">onDisconnect</a> (const <a class="el" href="struct_nakama_1_1_n_rt_client_disconnect_info.html">NRtClientDisconnectInfo</a> &amp;info)</td></tr>
+<tr class="separator:a53436bd6ff96758bf2523da61ab9f5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1403d84a76c637a6d424abb4cf357e51"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a1403d84a76c637a6d424abb4cf357e51">onError</a> (const <a class="el" href="struct_nakama_1_1_n_rt_error.html">NRtError</a> &amp;error)</td></tr>
 <tr class="separator:a1403d84a76c637a6d424abb4cf357e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e02a64a0067cafa43f950508b6a2938"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a7e02a64a0067cafa43f950508b6a2938">onChannelMessage</a> (const <a class="el" href="struct_nakama_1_1_n_channel_message.html">NChannelMessage</a> &amp;message)</td></tr>
@@ -263,8 +263,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8b252739802c1263bb0914ed0ba0490b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b252739802c1263bb0914ed0ba0490b">&#9670;&nbsp;</a></span>onDisconnect()</h2>
+<a id="a53436bd6ff96758bf2523da61ab9f5c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53436bd6ff96758bf2523da61ab9f5c1">&#9670;&nbsp;</a></span>onDisconnect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -275,7 +275,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void Nakama::NRtClientListenerInterface::onDisconnect </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="struct_nakama_1_1_n_rt_client_disconnect_info.html">NRtClientDisconnectInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -285,9 +286,15 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Called when the client socket disconnects. </p>
+<p>Called when the client socket disconnects.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">info</td><td>The <code><a class="el" href="struct_nakama_1_1_n_rt_client_disconnect_info.html">NRtClientDisconnectInfo</a></code>. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Reimplemented in <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ab7f1646324f511a50c4784806d14b668">Nakama::NRtDefaultClientListener</a>.</p>
+<p>Reimplemented in <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ad2dd97dec36ccfdc0f8431616e88afa8">Nakama::NRtDefaultClientListener</a>.</p>
 
 </div>
 </div>

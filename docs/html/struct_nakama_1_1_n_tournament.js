@@ -14,6 +14,7 @@ var struct_nakama_1_1_n_tournament =
     [ "nextReset", "struct_nakama_1_1_n_tournament.html#a9a239a53c51dc4a9f89aec7a328df2aa", null ],
     [ "size", "struct_nakama_1_1_n_tournament.html#ab07fa0a08e61b11db1189fe7f0ca4cfb", null ],
     [ "sortOrder", "struct_nakama_1_1_n_tournament.html#a7cf67d460d3c7bccf7be51a7a3206bca", null ],
+    [ "startActive", "struct_nakama_1_1_n_tournament.html#a3dac1e7bc1acd4c315498ceaf3378424", null ],
     [ "startTime", "struct_nakama_1_1_n_tournament.html#a6ea0d9ea8d98c2144f4003d6100c01cf", null ],
     [ "title", "struct_nakama_1_1_n_tournament.html#a1fbca0dee25321555d10b56af9d35d5a", null ]
 ];

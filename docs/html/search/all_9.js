@@ -10,5 +10,6 @@ var searchData=
   ['invite_5fsent',['INVITE_SENT',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5ba0afccba45e914fcae995d30f26ed22f4',1,'Nakama::NFriend']]],
   ['isconnected',['isConnected',['../class_nakama_1_1_n_rt_client_interface.html#ab4d332c103e2d0a3137d0fe37c7f8d8a',1,'Nakama::NRtClientInterface::isConnected()'],['../class_nakama_1_1_n_rt_transport_interface.html#ab1b6801fa9b1eeea540eca95f9630628',1,'Nakama::NRtTransportInterface::isConnected()']]],
   ['iscreated',['isCreated',['../class_nakama_1_1_n_session_interface.html#aebe0af7a7e55022af0aeb589d8ce3b38',1,'Nakama::NSessionInterface']]],
-  ['isexpired',['isExpired',['../class_nakama_1_1_n_session_interface.html#a741d13b0f877c4e167c0786341570f42',1,'Nakama::NSessionInterface::isExpired() const =0'],['../class_nakama_1_1_n_session_interface.html#aa8512c4741147d0ae23b4b2efb726994',1,'Nakama::NSessionInterface::isExpired(NTimestamp now) const =0']]]
+  ['isexpired',['isExpired',['../class_nakama_1_1_n_session_interface.html#a741d13b0f877c4e167c0786341570f42',1,'Nakama::NSessionInterface::isExpired() const =0'],['../class_nakama_1_1_n_session_interface.html#aa8512c4741147d0ae23b4b2efb726994',1,'Nakama::NSessionInterface::isExpired(NTimestamp now) const =0']]],
+  ['isstringstartswith',['isStringStartsWith',['../namespace_nakama.html#af96810e8851a3d4c03f086dfef16259c',1,'Nakama']]]
 ];

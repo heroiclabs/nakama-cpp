@@ -1,11 +1,13 @@
 var files_dup =
 [
-    [ "DefaultClient.h", "_default_client_8h.html", "_default_client_8h" ],
+    [ "android.h", "android_8h.html", null ],
+    [ "ClientFactory.h", "_client_factory_8h.html", "_client_factory_8h" ],
     [ "NAccount.h", "_n_account_8h.html", "_n_account_8h" ],
     [ "NAccountDevice.h", "_n_account_device_8h.html", [
       [ "NAccountDevice", "struct_nakama_1_1_n_account_device.html", "struct_nakama_1_1_n_account_device" ]
     ] ],
-    [ "Nakama.h", "_nakama_8h.html", "_nakama_8h" ],
+    [ "Nakama.h", "_nakama_8h.html", null ],
+    [ "NakamaVersion.h", "_nakama_version_8h.html", "_nakama_version_8h" ],
     [ "NChannel.h", "_n_channel_8h.html", "_n_channel_8h" ],
     [ "NChannelMessage.h", "_n_channel_message_8h.html", [
       [ "NChannelMessage", "struct_nakama_1_1_n_channel_message.html", "struct_nakama_1_1_n_channel_message" ]
@@ -35,6 +37,7 @@ var files_dup =
       [ "NGroupUser", "struct_nakama_1_1_n_group_user.html", "struct_nakama_1_1_n_group_user" ]
     ] ],
     [ "NGroupUserList.h", "_n_group_user_list_8h.html", "_n_group_user_list_8h" ],
+    [ "NHttpTransportInterface.h", "_n_http_transport_interface_8h.html", "_n_http_transport_interface_8h" ],
     [ "NLeaderboardRecord.h", "_n_leaderboard_record_8h.html", [
       [ "NLeaderboardRecord", "struct_nakama_1_1_n_leaderboard_record.html", "struct_nakama_1_1_n_leaderboard_record" ]
     ] ],
@@ -61,6 +64,9 @@ var files_dup =
     [ "NNotificationList.h", "_n_notification_list_8h.html", "_n_notification_list_8h" ],
     [ "NRpc.h", "_n_rpc_8h.html", [
       [ "NRpc", "struct_nakama_1_1_n_rpc.html", "struct_nakama_1_1_n_rpc" ]
+    ] ],
+    [ "NRtClientDisconnectInfo.h", "_n_rt_client_disconnect_info_8h.html", [
+      [ "NRtClientDisconnectInfo", "struct_nakama_1_1_n_rt_client_disconnect_info.html", "struct_nakama_1_1_n_rt_client_disconnect_info" ]
     ] ],
     [ "NRtClientInterface.h", "_n_rt_client_interface_8h.html", "_n_rt_client_interface_8h" ],
     [ "NRtClientListenerInterface.h", "_n_rt_client_listener_interface_8h.html", "_n_rt_client_listener_interface_8h" ],
@@ -116,6 +122,6 @@ var files_dup =
       [ "NUsers", "struct_nakama_1_1_n_users.html", "struct_nakama_1_1_n_users" ]
     ] ],
     [ "NUtils.h", "_n_utils_8h.html", "_n_utils_8h" ],
-    [ "NWebsockets.h", "_n_websockets_8h.html", "_n_websockets_8h" ],
+    [ "NWebsocketsFactory.h", "_n_websockets_factory_8h.html", "_n_websockets_factory_8h" ],
     [ "StrUtil.h", "_str_util_8h.html", "_str_util_8h" ]
 ];

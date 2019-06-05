@@ -6,5 +6,6 @@ var searchData=
   ['base64encode',['base64Encode',['../namespace_nakama.html#a9f29cba66f3f6f263c2c8748bfa50d83',1,'Nakama']]],
   ['binary',['Binary',['../_n_rt_transport_interface_8h.html#adfad08373e37ddf3708906a4b066e846',1,'NRtTransportInterface.h']]],
   ['blocked',['BLOCKED',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5baeecba0068950a2df17c47e851e1eef14',1,'Nakama::NFriend']]],
-  ['blockfriends',['blockFriends',['../class_nakama_1_1_n_client_interface.html#a3090c47b7d8083fa8d0b18972faca163',1,'Nakama::NClientInterface']]]
+  ['blockfriends',['blockFriends',['../class_nakama_1_1_n_client_interface.html#a3090c47b7d8083fa8d0b18972faca163',1,'Nakama::NClientInterface']]],
+  ['body',['body',['../struct_nakama_1_1_n_http_request.html#aedaacc159f9643edd4a082776475e1c4',1,'Nakama::NHttpRequest::body()'],['../struct_nakama_1_1_n_http_response.html#af51152b276cc52c9861497f69b395376',1,'Nakama::NHttpResponse::body()']]]
 ];

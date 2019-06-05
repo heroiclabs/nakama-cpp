@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.3</span>
+   &#160;<span id="projectnumber">2.1.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -114,8 +114,8 @@ Inheritance diagram for Nakama::NRtDefaultClientListener:</div>
 Public Types</h2></td></tr>
 <tr class="memitem:a30b9e3a6cdd06aabdb35e7fa7051a2fb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a30b9e3a6cdd06aabdb35e7fa7051a2fb">ConnectCallback</a> = std::function&lt; void()&gt;</td></tr>
 <tr class="separator:a30b9e3a6cdd06aabdb35e7fa7051a2fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b9c121a3a5f7890ef7613c3fec48024"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9b9c121a3a5f7890ef7613c3fec48024">DisconnectCallback</a> = std::function&lt; void()&gt;</td></tr>
-<tr class="separator:a9b9c121a3a5f7890ef7613c3fec48024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9839f0c80ec59dc1986087252582ec69"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9839f0c80ec59dc1986087252582ec69">DisconnectCallback</a> = std::function&lt; void(const <a class="el" href="struct_nakama_1_1_n_rt_client_disconnect_info.html">NRtClientDisconnectInfo</a> &amp;info)&gt;</td></tr>
+<tr class="separator:a9839f0c80ec59dc1986087252582ec69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada59f557b46a3ad71dbc948ef3f0c0d2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ada59f557b46a3ad71dbc948ef3f0c0d2">ErrorCallback</a> = std::function&lt; void(const <a class="el" href="struct_nakama_1_1_n_rt_error.html">NRtError</a> &amp;)&gt;</td></tr>
 <tr class="separator:ada59f557b46a3ad71dbc948ef3f0c0d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f7d784fb288654054440c78d903686b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a5f7d784fb288654054440c78d903686b">ChannelMessageCallback</a> = std::function&lt; void(const <a class="el" href="struct_nakama_1_1_n_channel_message.html">NChannelMessage</a> &amp;)&gt;</td></tr>
@@ -141,7 +141,7 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abc7c081fee51cdf2167256a2a0c5cae4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#abc7c081fee51cdf2167256a2a0c5cae4">setConnectCallback</a> (<a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a30b9e3a6cdd06aabdb35e7fa7051a2fb">ConnectCallback</a> callback)</td></tr>
 <tr class="separator:abc7c081fee51cdf2167256a2a0c5cae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a893f06d38f6691a9db3622bd23613559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a893f06d38f6691a9db3622bd23613559">setDisconnectCallback</a> (<a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9b9c121a3a5f7890ef7613c3fec48024">DisconnectCallback</a> callback)</td></tr>
+<tr class="memitem:a893f06d38f6691a9db3622bd23613559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a893f06d38f6691a9db3622bd23613559">setDisconnectCallback</a> (<a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9839f0c80ec59dc1986087252582ec69">DisconnectCallback</a> callback)</td></tr>
 <tr class="separator:a893f06d38f6691a9db3622bd23613559"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af00e4f9c5e1db3b766d15eb05391da89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#af00e4f9c5e1db3b766d15eb05391da89">setErrorCallback</a> (<a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ada59f557b46a3ad71dbc948ef3f0c0d2">ErrorCallback</a> callback)</td></tr>
 <tr class="separator:af00e4f9c5e1db3b766d15eb05391da89"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,8 +171,8 @@ Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a266e4cd174c94717d2e462aa68658e57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a266e4cd174c94717d2e462aa68658e57">onConnect</a> () override</td></tr>
 <tr class="separator:a266e4cd174c94717d2e462aa68658e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7f1646324f511a50c4784806d14b668"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ab7f1646324f511a50c4784806d14b668">onDisconnect</a> () override</td></tr>
-<tr class="separator:ab7f1646324f511a50c4784806d14b668"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2dd97dec36ccfdc0f8431616e88afa8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ad2dd97dec36ccfdc0f8431616e88afa8">onDisconnect</a> (const <a class="el" href="struct_nakama_1_1_n_rt_client_disconnect_info.html">NRtClientDisconnectInfo</a> &amp;info) override</td></tr>
+<tr class="separator:ad2dd97dec36ccfdc0f8431616e88afa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87c4b89a79449eb9a1847fa9a22fd81c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a87c4b89a79449eb9a1847fa9a22fd81c">onError</a> (const <a class="el" href="struct_nakama_1_1_n_rt_error.html">NRtError</a> &amp;error) override</td></tr>
 <tr class="separator:a87c4b89a79449eb9a1847fa9a22fd81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26c5c39866e112cb298bde827b1b7856"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a26c5c39866e112cb298bde827b1b7856">onChannelMessage</a> (const <a class="el" href="struct_nakama_1_1_n_channel_message.html">NChannelMessage</a> &amp;message) override</td></tr>
@@ -198,7 +198,7 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:acb98344a9275896e0e99f569ff991f7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a30b9e3a6cdd06aabdb35e7fa7051a2fb">ConnectCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#acb98344a9275896e0e99f569ff991f7d">_connectCallback</a></td></tr>
 <tr class="separator:acb98344a9275896e0e99f569ff991f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26223b2db1be19e0ddd9ee0690f8af4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9b9c121a3a5f7890ef7613c3fec48024">DisconnectCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a26223b2db1be19e0ddd9ee0690f8af4a">_disconnectCallback</a></td></tr>
+<tr class="memitem:a26223b2db1be19e0ddd9ee0690f8af4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9839f0c80ec59dc1986087252582ec69">DisconnectCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a26223b2db1be19e0ddd9ee0690f8af4a">_disconnectCallback</a></td></tr>
 <tr class="separator:a26223b2db1be19e0ddd9ee0690f8af4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5beae2a3fc7ed18063853aebaa4e55e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ada59f557b46a3ad71dbc948ef3f0c0d2">ErrorCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ab5beae2a3fc7ed18063853aebaa4e55e">_errorCallback</a></td></tr>
 <tr class="separator:ab5beae2a3fc7ed18063853aebaa4e55e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -266,14 +266,14 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9b9c121a3a5f7890ef7613c3fec48024"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b9c121a3a5f7890ef7613c3fec48024">&#9670;&nbsp;</a></span>DisconnectCallback</h2>
+<a id="a9839f0c80ec59dc1986087252582ec69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9839f0c80ec59dc1986087252582ec69">&#9670;&nbsp;</a></span>DisconnectCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9b9c121a3a5f7890ef7613c3fec48024">Nakama::NRtDefaultClientListener::DisconnectCallback</a> =  std::function&lt;void()&gt;</td>
+          <td class="memname">using <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9839f0c80ec59dc1986087252582ec69">Nakama::NRtDefaultClientListener::DisconnectCallback</a> =  std::function&lt;void(const <a class="el" href="struct_nakama_1_1_n_rt_client_disconnect_info.html">NRtClientDisconnectInfo</a>&amp; info)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -491,8 +491,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab7f1646324f511a50c4784806d14b668"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7f1646324f511a50c4784806d14b668">&#9670;&nbsp;</a></span>onDisconnect()</h2>
+<a id="ad2dd97dec36ccfdc0f8431616e88afa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2dd97dec36ccfdc0f8431616e88afa8">&#9670;&nbsp;</a></span>onDisconnect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -503,7 +503,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Nakama::NRtDefaultClientListener::onDisconnect </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="struct_nakama_1_1_n_rt_client_disconnect_info.html">NRtClientDisconnectInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -513,9 +514,15 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Called when the client socket disconnects. </p>
+<p>Called when the client socket disconnects.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">info</td><td>The <code><a class="el" href="struct_nakama_1_1_n_rt_client_disconnect_info.html">NRtClientDisconnectInfo</a></code>. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Reimplemented from <a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a8b252739802c1263bb0914ed0ba0490b">Nakama::NRtClientListenerInterface</a>.</p>
+<p>Reimplemented from <a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a53436bd6ff96758bf2523da61ab9f5c1">Nakama::NRtClientListenerInterface</a>.</p>
 
 </div>
 </div>
@@ -889,7 +896,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Nakama::NRtDefaultClientListener::setDisconnectCallback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9b9c121a3a5f7890ef7613c3fec48024">DisconnectCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9839f0c80ec59dc1986087252582ec69">DisconnectCallback</a>&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1188,7 +1195,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9b9c121a3a5f7890ef7613c3fec48024">DisconnectCallback</a> Nakama::NRtDefaultClientListener::_disconnectCallback</td>
+          <td class="memname"><a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a9839f0c80ec59dc1986087252582ec69">DisconnectCallback</a> Nakama::NRtDefaultClientListener::_disconnectCallback</td>
         </tr>
       </table>
   </td>

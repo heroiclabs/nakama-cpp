@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.3</span>
+   &#160;<span id="projectnumber">2.1.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -102,12 +102,14 @@ $(document).ready(function(){initNavTree('class_nakama_1_1_n_client_interface.ht
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1c14715908a83e5876c882f824479fe0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a1c14715908a83e5876c882f824479fe0">~NClientInterface</a> ()</td></tr>
 <tr class="separator:a1c14715908a83e5876c882f824479fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b650856c9045f7ff6deba5b3542937e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a1b650856c9045f7ff6deba5b3542937e">setErrorCallback</a> (<a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback)=0</td></tr>
+<tr class="separator:a1b650856c9045f7ff6deba5b3542937e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a217ad64ed97973e9d56b91dfbea6ca59"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a217ad64ed97973e9d56b91dfbea6ca59">disconnect</a> ()=0</td></tr>
 <tr class="separator:a217ad64ed97973e9d56b91dfbea6ca59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33e9be3acbcf4e738323231efb00f538"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a33e9be3acbcf4e738323231efb00f538">tick</a> ()=0</td></tr>
 <tr class="separator:a33e9be3acbcf4e738323231efb00f538"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae63e5b2ab63edac8b077c7b891b333a0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_nakama.html#a82f80ebd5bda5569e3f2f5c47e658e20">NRtClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ae63e5b2ab63edac8b077c7b891b333a0">createRtClient</a> (int32_t port=7350, <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> transport=nullptr)=0</td></tr>
-<tr class="separator:ae63e5b2ab63edac8b077c7b891b333a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa538b162595ecf523a657ed8db21fe4d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_nakama.html#a82f80ebd5bda5569e3f2f5c47e658e20">NRtClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#aa538b162595ecf523a657ed8db21fe4d">createRtClient</a> (int32_t port=DEFAULT_PORT, <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> transport=nullptr)=0</td></tr>
+<tr class="separator:aa538b162595ecf523a657ed8db21fe4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac14d5f3ff8b3872e774b9b2db924a45a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_nakama.html#a82f80ebd5bda5569e3f2f5c47e658e20">NRtClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ac14d5f3ff8b3872e774b9b2db924a45a">createRtClient</a> (const <a class="el" href="struct_nakama_1_1_rt_client_parameters.html">RtClientParameters</a> &amp;parameters, <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> transport=nullptr)=0</td></tr>
 <tr class="separator:ac14d5f3ff8b3872e774b9b2db924a45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56bcdc6384e71876637e21d152cba402"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a56bcdc6384e71876637e21d152cba402">authenticateDevice</a> (const std::string &amp;id, const opt::optional&lt; std::string &gt; &amp;username=opt::nullopt, const opt::optional&lt; bool &gt; &amp;create=opt::nullopt, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
@@ -1023,8 +1025,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae63e5b2ab63edac8b077c7b891b333a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae63e5b2ab63edac8b077c7b891b333a0">&#9670;&nbsp;</a></span>createRtClient() <span class="overload">[1/2]</span></h2>
+<a id="aa538b162595ecf523a657ed8db21fe4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa538b162595ecf523a657ed8db21fe4d">&#9670;&nbsp;</a></span>createRtClient() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1036,7 +1038,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual <a class="el" href="namespace_nakama.html#a82f80ebd5bda5569e3f2f5c47e658e20">NRtClientPtr</a> Nakama::NClientInterface::createRtClient </td>
           <td>(</td>
           <td class="paramtype">int32_t&#160;</td>
-          <td class="paramname"><em>port</em> = <code>7350</code>, </td>
+          <td class="paramname"><em>port</em> = <code>DEFAULT_PORT</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1059,7 +1061,7 @@ Public Member Functions</h2></td></tr>
 <p>Create a new real-time client with parameters from client.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">port</td><td>The port number of the server. Default is 7350. </td></tr>
+    <tr><td class="paramname">port</td><td>The port number of the server. Default is 7350 for non-SSL connection, 443 for SSL. </td></tr>
     <tr><td class="paramname">transport</td><td>The websocket transport. If not set then default websocket transport will be used. </td></tr>
   </table>
   </dd>
@@ -3493,6 +3495,40 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">session</td><td>The session of the user. </td></tr>
     <tr><td class="paramname">id</td><td>The id of the function to execute on the server. </td></tr>
     <tr><td class="paramname">payload</td><td>The payload to send with the function call. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1b650856c9045f7ff6deba5b3542937e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b650856c9045f7ff6deba5b3542937e">&#9670;&nbsp;</a></span>setErrorCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Nakama::NClientInterface::setErrorCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a>&#160;</td>
+          <td class="paramname"><em>errorCallback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set default error callback.</p>
+<p>Will be called if a request fails and no error callback was set for the request.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">errorCallback</td><td>The error callback. </td></tr>
   </table>
   </dd>
 </dl>

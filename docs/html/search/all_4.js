@@ -2,8 +2,8 @@ var searchData=
 [
   ['data',['data',['../struct_nakama_1_1_n_match_data.html#ac324baf44b46ffd30e8a23fa3f86ccf4',1,'Nakama::NMatchData::data()'],['../struct_nakama_1_1_n_stream_data.html#a2a61434f12edc08503649c11b6ae3d0d',1,'Nakama::NStreamData::data()']]],
   ['debug',['Debug',['../class_nakama_1_1_n_logger.html#a59675ee3d74cf72715b6604695f46506',1,'Nakama::NLogger::Debug()'],['../_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8',1,'Debug():&#160;NLogSinkInterface.h']]],
-  ['defaultclient_2eh',['DefaultClient.h',['../_default_client_8h.html',1,'']]],
-  ['defaultclientparameters',['DefaultClientParameters',['../struct_nakama_1_1_default_client_parameters.html',1,'Nakama']]],
+  ['defaultclientparameters',['DefaultClientParameters',['../namespace_nakama.html#a723b297c02497273ffd694f456310232',1,'Nakama']]],
+  ['del',['DEL',['../_n_http_transport_interface_8h.html#afb2a5705dcefcdaed77cea817ced1008',1,'NHttpTransportInterface.h']]],
   ['deletefriends',['deleteFriends',['../class_nakama_1_1_n_client_interface.html#a84d0477b4ba184fe1e4f5fc2a0beab72',1,'Nakama::NClientInterface']]],
   ['deletegroup',['deleteGroup',['../class_nakama_1_1_n_client_interface.html#a065c1f7cc136c61e09d31a138e9f930d',1,'Nakama::NClientInterface']]],
   ['deleteleaderboardrecord',['deleteLeaderboardRecord',['../class_nakama_1_1_n_client_interface.html#adc915791d1ce9c1d87c8c0dec5980e06',1,'Nakama::NClientInterface']]],
@@ -13,7 +13,7 @@ var searchData=
   ['devices',['devices',['../struct_nakama_1_1_n_account.html#aa7305ec7e297227d75e16e961d729af8',1,'Nakama::NAccount']]],
   ['direct_5fmessage',['DIRECT_MESSAGE',['../_n_types_8h.html#a01cd7fde59423eaae6ea390a392991b1',1,'NTypes.h']]],
   ['disconnect',['disconnect',['../class_nakama_1_1_n_client_interface.html#a217ad64ed97973e9d56b91dfbea6ca59',1,'Nakama::NClientInterface::disconnect()'],['../class_nakama_1_1_n_rt_client_interface.html#a7b90bb506e8f121197e2634671991b65',1,'Nakama::NRtClientInterface::disconnect()'],['../class_nakama_1_1_n_rt_transport_interface.html#a3225896854f1a40bca3d91ce8fa762ce',1,'Nakama::NRtTransportInterface::disconnect()']]],
-  ['disconnectcallback',['DisconnectCallback',['../class_nakama_1_1_n_rt_default_client_listener.html#a9b9c121a3a5f7890ef7613c3fec48024',1,'Nakama::NRtDefaultClientListener::DisconnectCallback()'],['../class_nakama_1_1_n_rt_transport_interface.html#adc4836908fa00a8a9518eacfb70757f7',1,'Nakama::NRtTransportInterface::DisconnectCallback()']]],
+  ['disconnectcallback',['DisconnectCallback',['../class_nakama_1_1_n_rt_default_client_listener.html#a9839f0c80ec59dc1986087252582ec69',1,'Nakama::NRtDefaultClientListener::DisconnectCallback()'],['../class_nakama_1_1_n_rt_transport_interface.html#ab426526aae40cd4c65f3bab802a6d995',1,'Nakama::NRtTransportInterface::DisconnectCallback()']]],
   ['displayname',['displayName',['../struct_nakama_1_1_n_user.html#a1bdb25fe20dc54b8472ded0cd3df11de',1,'Nakama::NUser']]],
   ['duration',['duration',['../struct_nakama_1_1_n_tournament.html#aa2ec859b5cb956487fedaa1eb0812adb',1,'Nakama::NTournament']]]
 ];

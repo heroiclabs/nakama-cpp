@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.3</span>
+   &#160;<span id="projectnumber">2.1.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 , <a class="el" href="struct_nakama_1_1_n_matchmaker_matched.html#a96a060a125e3a00d05ea97b0748e1033">Nakama::NMatchmakerMatched</a>
 </li>
 <li>send()
-: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a15673ad23d6423f11e4ce93624d8066d">Nakama::NRtTransportInterface</a>
+: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a32b8ecab84e4db1f3cab0866cbf051e7">Nakama::NRtTransportInterface</a>
 </li>
 <li>sender
 : <a class="el" href="struct_nakama_1_1_n_stream_data.html#acdb87c6ab7f255f81049fed60dedb822">Nakama::NStreamData</a>
@@ -113,10 +113,16 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 : <a class="el" href="class_nakama_1_1_n_rt_client_interface.html#aba3433a278145e867e8217c74179a3b7">Nakama::NRtClientInterface</a>
 </li>
 <li>serverKey
-: <a class="el" href="struct_nakama_1_1_default_client_parameters.html#a8449cb56837c43bc893621f4da86e201">Nakama::DefaultClientParameters</a>
+: <a class="el" href="struct_nakama_1_1_n_client_parameters.html#a48d0892c9b34e0426291ff36431e94f4">Nakama::NClientParameters</a>
 </li>
 <li>sessionId
 : <a class="el" href="struct_nakama_1_1_n_user_presence.html#a2e8ac6b5e46010dfaa3d1cabbd1cf29e">Nakama::NUserPresence</a>
+</li>
+<li>setActivityTimeout()
+: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a352f9c10b62adbb400ae27aa1c48871a">Nakama::NRtTransportInterface</a>
+</li>
+<li>setBaseUri()
+: <a class="el" href="class_nakama_1_1_n_http_transport_interface.html#a1fa048b8fd4fb74b28274fee64e4f340">Nakama::NHttpTransportInterface</a>
 </li>
 <li>setChannelMessageCallback()
 : <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ae2953ec2fb3dabcc84a6e765d6235d37">Nakama::NRtDefaultClientListener</a>
@@ -133,7 +139,8 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 , <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a2a20473a76192e6b6a2c0952a8642c3c">Nakama::NRtTransportInterface</a>
 </li>
 <li>setErrorCallback()
-: <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#af00e4f9c5e1db3b766d15eb05391da89">Nakama::NRtDefaultClientListener</a>
+: <a class="el" href="class_nakama_1_1_n_client_interface.html#a1b650856c9045f7ff6deba5b3542937e">Nakama::NClientInterface</a>
+, <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#af00e4f9c5e1db3b766d15eb05391da89">Nakama::NRtDefaultClientListener</a>
 , <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a467bf624b78914310d5fc0b7b3096540">Nakama::NRtTransportInterface</a>
 </li>
 <li>setLevel()
@@ -181,22 +188,30 @@ $(document).ready(function(){initNavTree('functions_s.html','');});
 : <a class="el" href="struct_nakama_1_1_n_tournament.html#a7cf67d460d3c7bccf7be51a7a3206bca">Nakama::NTournament</a>
 </li>
 <li>ssl
-: <a class="el" href="struct_nakama_1_1_default_client_parameters.html#af8b0cfefeef59368807624b287a1c1a4">Nakama::DefaultClientParameters</a>
+: <a class="el" href="struct_nakama_1_1_n_client_parameters.html#ad273ee33dcbccb34a212b39c102ee90d">Nakama::NClientParameters</a>
 , <a class="el" href="struct_nakama_1_1_rt_client_parameters.html#abc6b029681605665007c948b627d1434">Nakama::RtClientParameters</a>
+</li>
+<li>startActive
+: <a class="el" href="struct_nakama_1_1_n_tournament.html#a3dac1e7bc1acd4c315498ceaf3378424">Nakama::NTournament</a>
 </li>
 <li>startTime
 : <a class="el" href="struct_nakama_1_1_n_tournament.html#a6ea0d9ea8d98c2144f4003d6100c01cf">Nakama::NTournament</a>
+</li>
+<li>state
+: <a class="el" href="struct_nakama_1_1_n_friend.html#ab4d08cbe281adf1517810a11d08c6012">Nakama::NFriend</a>
 </li>
 <li>State
 : <a class="el" href="struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b">Nakama::NFriend</a>
 </li>
 <li>state
-: <a class="el" href="struct_nakama_1_1_n_friend.html#ab4d08cbe281adf1517810a11d08c6012">Nakama::NFriend</a>
-, <a class="el" href="struct_nakama_1_1_n_group_user.html#a6284e26bff48b50668354dcf296af6d0">Nakama::NGroupUser</a>
+: <a class="el" href="struct_nakama_1_1_n_group_user.html#a6284e26bff48b50668354dcf296af6d0">Nakama::NGroupUser</a>
 , <a class="el" href="struct_nakama_1_1_n_user_group.html#a08f7946cee30cb1cffc6628baed02351">Nakama::NUserGroup</a>
 </li>
 <li>status
 : <a class="el" href="struct_nakama_1_1_n_user_presence.html#a1afd1fcb5dc809ae2d96bdb4313bdfc2">Nakama::NUserPresence</a>
+</li>
+<li>statusCode
+: <a class="el" href="struct_nakama_1_1_n_http_response.html#a579e75f1fbea8b8c586db2061f1a9764">Nakama::NHttpResponse</a>
 </li>
 <li>StatusPresenceCallback
 : <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a287f15aa7625ccfd816e51d96d01dcd1">Nakama::NRtDefaultClientListener</a>

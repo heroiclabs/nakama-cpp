@@ -1,9 +1,24 @@
 var searchData=
 [
-  ['ticket',['ticket',['../struct_nakama_1_1_n_matchmaker_matched.html#a7c048c7677dfc71baac8b3800e07117b',1,'Nakama::NMatchmakerMatched::ticket()'],['../struct_nakama_1_1_n_matchmaker_ticket.html#af3520e6ab63e8c48d3aa5178a928b0d0',1,'Nakama::NMatchmakerTicket::ticket()']]],
-  ['timezone',['timeZone',['../struct_nakama_1_1_n_user.html#af6d3021912bb642bb52c0ecbe60f37a8',1,'Nakama::NUser']]],
-  ['title',['title',['../struct_nakama_1_1_n_tournament.html#a1fbca0dee25321555d10b56af9d35d5a',1,'Nakama::NTournament']]],
-  ['token',['token',['../struct_nakama_1_1_n_matchmaker_matched.html#a185431d3fe6f10e265429a04c3e91b20',1,'Nakama::NMatchmakerMatched']]],
-  ['tournaments',['tournaments',['../struct_nakama_1_1_n_tournament_list.html#ae3b243d66dcfcc537c9a7ecd97df8446',1,'Nakama::NTournamentList']]],
-  ['transport_5ferror',['TRANSPORT_ERROR',['../_n_rt_error_8h.html#a89ecb927f24940781d6cf815a4ee6996',1,'NRtError.h']]]
+  ['score',['score',['../struct_nakama_1_1_n_leaderboard_record.html#a3dd5ae055f1e03cf1bedb62f62506844',1,'Nakama::NLeaderboardRecord']]],
+  ['self',['self',['../struct_nakama_1_1_n_match.html#af83ad7f6fe4caf57cc043ba8d62ea230',1,'Nakama::NMatch::self()'],['../struct_nakama_1_1_n_channel.html#aa5e04ee989f875f8e6b7c455c5a2606e',1,'Nakama::NChannel::self()'],['../struct_nakama_1_1_n_matchmaker_matched.html#a96a060a125e3a00d05ea97b0748e1033',1,'Nakama::NMatchmakerMatched::self()']]],
+  ['sender',['sender',['../struct_nakama_1_1_n_stream_data.html#acdb87c6ab7f255f81049fed60dedb822',1,'Nakama::NStreamData']]],
+  ['senderid',['senderId',['../struct_nakama_1_1_n_channel_message.html#aa11b2e88245d61807403a2e5073eeb9d',1,'Nakama::NChannelMessage::senderId()'],['../struct_nakama_1_1_n_notification.html#a84cd3c5e0d715374db1de252072a59d5',1,'Nakama::NNotification::senderId()']]],
+  ['serverkey',['serverKey',['../struct_nakama_1_1_n_client_parameters.html#a48d0892c9b34e0426291ff36431e94f4',1,'Nakama::NClientParameters']]],
+  ['sessionid',['sessionId',['../struct_nakama_1_1_n_user_presence.html#a2e8ac6b5e46010dfaa3d1cabbd1cf29e',1,'Nakama::NUserPresence']]],
+  ['size',['size',['../struct_nakama_1_1_n_match.html#af6e4f7f21e7f133eefa0709a495e7646',1,'Nakama::NMatch::size()'],['../struct_nakama_1_1_n_tournament.html#ab07fa0a08e61b11db1189fe7f0ca4cfb',1,'Nakama::NTournament::size()']]],
+  ['sortorder',['sortOrder',['../struct_nakama_1_1_n_tournament.html#a7cf67d460d3c7bccf7be51a7a3206bca',1,'Nakama::NTournament']]],
+  ['ssl',['ssl',['../struct_nakama_1_1_n_client_parameters.html#ad273ee33dcbccb34a212b39c102ee90d',1,'Nakama::NClientParameters::ssl()'],['../struct_nakama_1_1_rt_client_parameters.html#abc6b029681605665007c948b627d1434',1,'Nakama::RtClientParameters::ssl()']]],
+  ['startactive',['startActive',['../struct_nakama_1_1_n_tournament.html#a3dac1e7bc1acd4c315498ceaf3378424',1,'Nakama::NTournament']]],
+  ['starttime',['startTime',['../struct_nakama_1_1_n_tournament.html#a6ea0d9ea8d98c2144f4003d6100c01cf',1,'Nakama::NTournament']]],
+  ['state',['state',['../struct_nakama_1_1_n_friend.html#ab4d08cbe281adf1517810a11d08c6012',1,'Nakama::NFriend::state()'],['../struct_nakama_1_1_n_group_user.html#a6284e26bff48b50668354dcf296af6d0',1,'Nakama::NGroupUser::state()'],['../struct_nakama_1_1_n_user_group.html#a08f7946cee30cb1cffc6628baed02351',1,'Nakama::NUserGroup::state()']]],
+  ['status',['status',['../struct_nakama_1_1_n_user_presence.html#a1afd1fcb5dc809ae2d96bdb4313bdfc2',1,'Nakama::NUserPresence']]],
+  ['statuscode',['statusCode',['../struct_nakama_1_1_n_http_response.html#a579e75f1fbea8b8c586db2061f1a9764',1,'Nakama::NHttpResponse']]],
+  ['steamid',['steamId',['../struct_nakama_1_1_n_user.html#adae1801a171adfe612b56dbf560bdcd7',1,'Nakama::NUser']]],
+  ['stream',['stream',['../struct_nakama_1_1_n_stream_data.html#aaed03b4e0e0b776a5c185d2924a6dc8c',1,'Nakama::NStreamData::stream()'],['../struct_nakama_1_1_n_stream_presence_event.html#aa7816e1f264965c3b305b302885cf0fc',1,'Nakama::NStreamPresenceEvent::stream()']]],
+  ['stringproperties',['stringProperties',['../struct_nakama_1_1_n_matchmaker_user.html#a5802a6a048e6430e861b07b432194e20',1,'Nakama::NMatchmakerUser']]],
+  ['subcontext',['subcontext',['../struct_nakama_1_1_n_stream.html#a32b28efefafb7e5f97008fada181bfc3',1,'Nakama::NStream']]],
+  ['subject',['subject',['../struct_nakama_1_1_n_notification.html#a926bfdce3d3196f93668397670849530',1,'Nakama::NNotification::subject()'],['../struct_nakama_1_1_n_stream.html#aa7203565376944b997334f21dc1f3034',1,'Nakama::NStream::subject()']]],
+  ['subscore',['subscore',['../struct_nakama_1_1_n_leaderboard_record.html#a8a05d461c694b8cf87ceda8204692f2b',1,'Nakama::NLeaderboardRecord']]],
+  ['superadmin',['SUPERADMIN',['../_n_types_8h.html#aec1155c650a97a4d09278741d0070265',1,'NTypes.h']]]
 ];

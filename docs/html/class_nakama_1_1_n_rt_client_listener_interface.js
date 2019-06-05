@@ -4,7 +4,7 @@ var class_nakama_1_1_n_rt_client_listener_interface =
     [ "onChannelMessage", "class_nakama_1_1_n_rt_client_listener_interface.html#a7e02a64a0067cafa43f950508b6a2938", null ],
     [ "onChannelPresence", "class_nakama_1_1_n_rt_client_listener_interface.html#a4b27ff5c02b7f98fb512ccf32cf79e22", null ],
     [ "onConnect", "class_nakama_1_1_n_rt_client_listener_interface.html#a25f010dd109174a9126a5a5d3e79495a", null ],
-    [ "onDisconnect", "class_nakama_1_1_n_rt_client_listener_interface.html#a8b252739802c1263bb0914ed0ba0490b", null ],
+    [ "onDisconnect", "class_nakama_1_1_n_rt_client_listener_interface.html#a53436bd6ff96758bf2523da61ab9f5c1", null ],
     [ "onError", "class_nakama_1_1_n_rt_client_listener_interface.html#a1403d84a76c637a6d424abb4cf357e51", null ],
     [ "onMatchData", "class_nakama_1_1_n_rt_client_listener_interface.html#aae3a08a0db8688b517fe58663390b952", null ],
     [ "onMatchmakerMatched", "class_nakama_1_1_n_rt_client_listener_interface.html#a4647d37f173c4ccfb9a4461c7e0325ae", null ],

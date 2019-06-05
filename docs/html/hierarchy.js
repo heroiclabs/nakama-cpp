@@ -1,6 +1,5 @@
 var hierarchy =
 [
-    [ "Nakama::DefaultClientParameters", "struct_nakama_1_1_default_client_parameters.html", null ],
     [ "Nakama::NAccount", "struct_nakama_1_1_n_account.html", null ],
     [ "Nakama::NAccountDevice", "struct_nakama_1_1_n_account_device.html", null ],
     [ "Nakama::NChannel", "struct_nakama_1_1_n_channel.html", null ],
@@ -9,6 +8,7 @@ var hierarchy =
     [ "Nakama::NChannelMessageList", "struct_nakama_1_1_n_channel_message_list.html", null ],
     [ "Nakama::NChannelPresenceEvent", "struct_nakama_1_1_n_channel_presence_event.html", null ],
     [ "Nakama::NClientInterface", "class_nakama_1_1_n_client_interface.html", null ],
+    [ "Nakama::NClientParameters", "struct_nakama_1_1_n_client_parameters.html", null ],
     [ "Nakama::NDeleteStorageObjectId", "struct_nakama_1_1_n_delete_storage_object_id.html", null ],
     [ "Nakama::NError", "struct_nakama_1_1_n_error.html", null ],
     [ "Nakama::NFriend", "struct_nakama_1_1_n_friend.html", null ],
@@ -17,6 +17,9 @@ var hierarchy =
     [ "Nakama::NGroupList", "struct_nakama_1_1_n_group_list.html", null ],
     [ "Nakama::NGroupUser", "struct_nakama_1_1_n_group_user.html", null ],
     [ "Nakama::NGroupUserList", "struct_nakama_1_1_n_group_user_list.html", null ],
+    [ "Nakama::NHttpRequest", "struct_nakama_1_1_n_http_request.html", null ],
+    [ "Nakama::NHttpResponse", "struct_nakama_1_1_n_http_response.html", null ],
+    [ "Nakama::NHttpTransportInterface", "class_nakama_1_1_n_http_transport_interface.html", null ],
     [ "Nakama::NLeaderboardRecord", "struct_nakama_1_1_n_leaderboard_record.html", null ],
     [ "Nakama::NLeaderboardRecordList", "struct_nakama_1_1_n_leaderboard_record_list.html", null ],
     [ "Nakama::NLogger", "class_nakama_1_1_n_logger.html", null ],
@@ -34,6 +37,7 @@ var hierarchy =
     [ "Nakama::NNotificationList", "struct_nakama_1_1_n_notification_list.html", null ],
     [ "Nakama::NReadStorageObjectId", "struct_nakama_1_1_n_read_storage_object_id.html", null ],
     [ "Nakama::NRpc", "struct_nakama_1_1_n_rpc.html", null ],
+    [ "Nakama::NRtClientDisconnectInfo", "struct_nakama_1_1_n_rt_client_disconnect_info.html", null ],
     [ "Nakama::NRtClientInterface", "class_nakama_1_1_n_rt_client_interface.html", null ],
     [ "Nakama::NRtClientListenerInterface", "class_nakama_1_1_n_rt_client_listener_interface.html", [
       [ "Nakama::NRtDefaultClientListener", "class_nakama_1_1_n_rt_default_client_listener.html", null ]

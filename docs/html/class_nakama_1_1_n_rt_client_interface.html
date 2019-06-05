@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.3</span>
+   &#160;<span id="projectnumber">2.1.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -112,6 +112,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab4d332c103e2d0a3137d0fe37c7f8d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b90bb506e8f121197e2634671991b65"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a7b90bb506e8f121197e2634671991b65">disconnect</a> ()=0</td></tr>
 <tr class="separator:a7b90bb506e8f121197e2634671991b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a966d630a761509d678d0489922d6dca8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a966d630a761509d678d0489922d6dca8">getTransport</a> () const =0</td></tr>
+<tr class="separator:a966d630a761509d678d0489922d6dca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a76634b3e9b9bc6c1fc968c6942a165"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a0a76634b3e9b9bc6c1fc968c6942a165">joinChat</a> (const std::string &amp;target, NChannelType type, const opt::optional&lt; bool &gt; &amp;persistence=opt::nullopt, const opt::optional&lt; bool &gt; &amp;hidden=opt::nullopt, std::function&lt; void(<a class="el" href="namespace_nakama.html#acf8858344ae8a768a39ff5c1a479cfbe">NChannelPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a0a76634b3e9b9bc6c1fc968c6942a165"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29c646bb9ea9456c947ad721a05b97ae"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a29c646bb9ea9456c947ad721a05b97ae">leaveChat</a> (const std::string &amp;channelId, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
@@ -411,6 +413,32 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a966d630a761509d678d0489922d6dca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a966d630a761509d678d0489922d6dca8">&#9670;&nbsp;</a></span>getTransport()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> Nakama::NRtClientInterface::getTransport </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get websocket transport which RtClient uses. </p>
 
 </div>
 </div>

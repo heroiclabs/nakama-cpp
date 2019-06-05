@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.3</span>
+   &#160;<span id="projectnumber">2.1.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -140,14 +140,17 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:ad9b73ef85799f5fecaa301407db6fe03"><td class="mdescLeft">&#160;</td><td class="mdescRight">The UNIX time when the tournament will be stopped.  <a href="#ad9b73ef85799f5fecaa301407db6fe03">More...</a><br /></td></tr>
 <tr class="separator:ad9b73ef85799f5fecaa301407db6fe03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b733fdd0b71605ecf652cdbc03df4c1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_tournament.html#a6b733fdd0b71605ecf652cdbc03df4c1">endActive</a> = 0</td></tr>
-<tr class="memdesc:a6b733fdd0b71605ecf652cdbc03df4c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The UNIX timestamp when the tournament stops being active until next reset. A computed value.  <a href="#a6b733fdd0b71605ecf652cdbc03df4c1">More...</a><br /></td></tr>
+<tr class="memdesc:a6b733fdd0b71605ecf652cdbc03df4c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The UNIX time when the tournament stops being active until next reset. A computed value.  <a href="#a6b733fdd0b71605ecf652cdbc03df4c1">More...</a><br /></td></tr>
 <tr class="separator:a6b733fdd0b71605ecf652cdbc03df4c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a239a53c51dc4a9f89aec7a328df2aa"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_tournament.html#a9a239a53c51dc4a9f89aec7a328df2aa">nextReset</a> = 0</td></tr>
-<tr class="memdesc:a9a239a53c51dc4a9f89aec7a328df2aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">The UNIX timestamp when the tournament is next playable. A computed value.  <a href="#a9a239a53c51dc4a9f89aec7a328df2aa">More...</a><br /></td></tr>
+<tr class="memdesc:a9a239a53c51dc4a9f89aec7a328df2aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">The UNIX time when the tournament is next playable. A computed value.  <a href="#a9a239a53c51dc4a9f89aec7a328df2aa">More...</a><br /></td></tr>
 <tr class="separator:a9a239a53c51dc4a9f89aec7a328df2aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2ec859b5cb956487fedaa1eb0812adb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_tournament.html#aa2ec859b5cb956487fedaa1eb0812adb">duration</a> = 0</td></tr>
-<tr class="memdesc:aa2ec859b5cb956487fedaa1eb0812adb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The UNIX timestamp for duration of a tournament.  <a href="#aa2ec859b5cb956487fedaa1eb0812adb">More...</a><br /></td></tr>
+<tr class="memdesc:aa2ec859b5cb956487fedaa1eb0812adb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Duration of the tournament in seconds.  <a href="#aa2ec859b5cb956487fedaa1eb0812adb">More...</a><br /></td></tr>
 <tr class="separator:aa2ec859b5cb956487fedaa1eb0812adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dac1e7bc1acd4c315498ceaf3378424"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_tournament.html#a3dac1e7bc1acd4c315498ceaf3378424">startActive</a> = 0</td></tr>
+<tr class="memdesc:a3dac1e7bc1acd4c315498ceaf3378424"><td class="mdescLeft">&#160;</td><td class="mdescRight">The UNIX time when the tournament start being active. A computed value.  <a href="#a3dac1e7bc1acd4c315498ceaf3378424">More...</a><br /></td></tr>
+<tr class="separator:a3dac1e7bc1acd4c315498ceaf3378424"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61069724e8d9f4b1a6f2675d98a6393b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_tournament.html#a61069724e8d9f4b1a6f2675d98a6393b">metadata</a></td></tr>
 <tr class="memdesc:a61069724e8d9f4b1a6f2675d98a6393b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Additional information stored as a JSON object.  <a href="#a61069724e8d9f4b1a6f2675d98a6393b">More...</a><br /></td></tr>
 <tr class="separator:a61069724e8d9f4b1a6f2675d98a6393b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -231,7 +234,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The UNIX timestamp for duration of a tournament. </p>
+<p>Duration of the tournament in seconds. </p>
 
 </div>
 </div>
@@ -247,7 +250,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The UNIX timestamp when the tournament stops being active until next reset. A computed value. </p>
+<p>The UNIX time when the tournament stops being active until next reset. A computed value. </p>
 
 </div>
 </div>
@@ -343,7 +346,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The UNIX timestamp when the tournament is next playable. A computed value. </p>
+<p>The UNIX time when the tournament is next playable. A computed value. </p>
 
 </div>
 </div>
@@ -376,6 +379,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>ASC or DESC sort mode of scores in the tournament. </p>
+
+</div>
+</div>
+<a id="a3dac1e7bc1acd4c315498ceaf3378424"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dac1e7bc1acd4c315498ceaf3378424">&#9670;&nbsp;</a></span>startActive</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Nakama::NTournament::startActive = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The UNIX time when the tournament start being active. A computed value. </p>
 
 </div>
 </div>

@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.3</span>
+   &#160;<span id="projectnumber">2.1.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -103,9 +103,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ad83a79905aade5a8a1c5a0ca28b6b847"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_rt_client_parameters.html#ad83a79905aade5a8a1c5a0ca28b6b847">host</a> = &quot;127.0.0.1&quot;</td></tr>
 <tr class="memdesc:ad83a79905aade5a8a1c5a0ca28b6b847"><td class="mdescLeft">&#160;</td><td class="mdescRight">The host address of the server. Defaults to "127.0.0.1".  <a href="#ad83a79905aade5a8a1c5a0ca28b6b847">More...</a><br /></td></tr>
 <tr class="separator:ad83a79905aade5a8a1c5a0ca28b6b847"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15f258509f4131e3378f255678cbfca3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_rt_client_parameters.html#a15f258509f4131e3378f255678cbfca3">port</a> = 7350</td></tr>
-<tr class="memdesc:a15f258509f4131e3378f255678cbfca3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The port number of the server. Defaults to 7350.  <a href="#a15f258509f4131e3378f255678cbfca3">More...</a><br /></td></tr>
-<tr class="separator:a15f258509f4131e3378f255678cbfca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a507d05bb0a0f0f4929f25558dced13a2"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_rt_client_parameters.html#a507d05bb0a0f0f4929f25558dced13a2">port</a> = DEFAULT_PORT</td></tr>
+<tr class="separator:a507d05bb0a0f0f4929f25558dced13a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc6b029681605665007c948b627d1434"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_rt_client_parameters.html#abc6b029681605665007c948b627d1434">ssl</a> = false</td></tr>
 <tr class="separator:abc6b029681605665007c948b627d1434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -126,19 +125,18 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a15f258509f4131e3378f255678cbfca3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15f258509f4131e3378f255678cbfca3">&#9670;&nbsp;</a></span>port</h2>
+<a id="a507d05bb0a0f0f4929f25558dced13a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a507d05bb0a0f0f4929f25558dced13a2">&#9670;&nbsp;</a></span>port</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Nakama::RtClientParameters::port = 7350</td>
+          <td class="memname">int32_t Nakama::RtClientParameters::port = DEFAULT_PORT</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>The port number of the server. Defaults to 7350. </p>
+<p>The port number of the server. Default is 7350 for non-SSL connection, 443 for SSL. </p>
 
 </div>
 </div>

@@ -5,6 +5,7 @@ var searchData=
   ['addmatchmaker',['addMatchmaker',['../class_nakama_1_1_n_rt_client_interface.html#a83e13ecc802ef83be63b906899050244',1,'Nakama::NRtClientInterface']]],
   ['admin',['ADMIN',['../_n_types_8h.html#a6bfc500738d8e9d168cd0a2024c94f5a',1,'NTypes.h']]],
   ['alreadyexists',['AlreadyExists',['../_n_error_8h.html#ae4bdc1a54131de1240c10218da6afa9a',1,'NError.h']]],
+  ['android_2eh',['android.h',['../android_8h.html',1,'']]],
   ['authenticatecustom',['authenticateCustom',['../class_nakama_1_1_n_client_interface.html#ade35ba502ff097d368b0129ba4baf183',1,'Nakama::NClientInterface']]],
   ['authenticatedevice',['authenticateDevice',['../class_nakama_1_1_n_client_interface.html#a56bcdc6384e71876637e21d152cba402',1,'Nakama::NClientInterface']]],
   ['authenticateemail',['authenticateEmail',['../class_nakama_1_1_n_client_interface.html#a8d55766f5b59e66ca87c3ccd86d22f3f',1,'Nakama::NClientInterface']]],

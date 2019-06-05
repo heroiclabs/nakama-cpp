@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.3</span>
+   &#160;<span id="projectnumber">2.1.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 : <a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a45a5667f2efbc7199d4ea73dc4c71ef3">Nakama::NRtClientInterface</a>
 </li>
 <li>createRtClient()
-: <a class="el" href="class_nakama_1_1_n_client_interface.html#ae63e5b2ab63edac8b077c7b891b333a0">Nakama::NClientInterface</a>
+: <a class="el" href="class_nakama_1_1_n_client_interface.html#aa538b162595ecf523a657ed8db21fe4d">Nakama::NClientInterface</a>
 </li>
 </ul>
 
@@ -186,6 +186,18 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>Fatal()
 : <a class="el" href="class_nakama_1_1_n_logger.html#a868fcb6f424243403dc8c2dd696a2eed">Nakama::NLogger</a>
 </li>
+<li>fireOnConnected()
+: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#ae8f538e9aa3bc5841fec3776bd158844">Nakama::NRtTransportInterface</a>
+</li>
+<li>fireOnDisconnected()
+: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#ad3f75a38513ce58490fa9833d2b0c846">Nakama::NRtTransportInterface</a>
+</li>
+<li>fireOnError()
+: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a61f8c49e9b0920cb30598913059038b7">Nakama::NRtTransportInterface</a>
+</li>
+<li>fireOnMessage()
+: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#af5827550386435549fd2dadbb30d69c0">Nakama::NRtTransportInterface</a>
+</li>
 <li>flush()
 : <a class="el" href="class_nakama_1_1_n_console_log_sink.html#a8ac4e101ca5d2606bfa263eff29cf749">Nakama::NConsoleLogSink</a>
 , <a class="el" href="class_nakama_1_1_n_log_sink_interface.html#a90efd7bb7de3e6f6f01c59c2b0f5280e">Nakama::NLogSinkInterface</a>
@@ -203,6 +215,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>getAccount()
 : <a class="el" href="class_nakama_1_1_n_client_interface.html#ab3f75133e69f43bccdc9a82280642a11">Nakama::NClientInterface</a>
 </li>
+<li>getActivityTimeout()
+: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a5d1b4430e4e1d55f94d92843e8f75ef7">Nakama::NRtTransportInterface</a>
+</li>
 <li>getAuthToken()
 : <a class="el" href="class_nakama_1_1_n_session_interface.html#aa73428a0627701142a5367d96c095d22">Nakama::NSessionInterface</a>
 </li>
@@ -217,6 +232,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>getSink()
 : <a class="el" href="class_nakama_1_1_n_logger.html#a80e75f91ace060c41a663ace047d26ed">Nakama::NLogger</a>
+</li>
+<li>getTransport()
+: <a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a966d630a761509d678d0489922d6dca8">Nakama::NRtClientInterface</a>
 </li>
 <li>getUserId()
 : <a class="el" href="class_nakama_1_1_n_session_interface.html#a60fdb5f5e74d84e31f5b49707a09dd2d">Nakama::NSessionInterface</a>
@@ -374,6 +392,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>NLogSinkInterface()
 : <a class="el" href="class_nakama_1_1_n_log_sink_interface.html#ae21e32b05b3c5d3c0227141e1069e1e8">Nakama::NLogSinkInterface</a>
 </li>
+<li>NRtError()
+: <a class="el" href="struct_nakama_1_1_n_rt_error.html#a6bdb710e225a501de28d04f6ec14b49d">Nakama::NRtError</a>
+</li>
 </ul>
 
 
@@ -390,20 +411,13 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 : <a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a25f010dd109174a9126a5a5d3e79495a">Nakama::NRtClientListenerInterface</a>
 , <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a266e4cd174c94717d2e462aa68658e57">Nakama::NRtDefaultClientListener</a>
 </li>
-<li>onConnected()
-: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a54a4f88bdc5cdf3600969fa6eb4a5edd">Nakama::NRtTransportInterface</a>
-</li>
 <li>onDisconnect()
-: <a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a8b252739802c1263bb0914ed0ba0490b">Nakama::NRtClientListenerInterface</a>
-, <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ab7f1646324f511a50c4784806d14b668">Nakama::NRtDefaultClientListener</a>
-</li>
-<li>onDisconnected()
-: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a1395faf53d3925ed2c916154a0dd7bf7">Nakama::NRtTransportInterface</a>
+: <a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a53436bd6ff96758bf2523da61ab9f5c1">Nakama::NRtClientListenerInterface</a>
+, <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ad2dd97dec36ccfdc0f8431616e88afa8">Nakama::NRtDefaultClientListener</a>
 </li>
 <li>onError()
 : <a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#a1403d84a76c637a6d424abb4cf357e51">Nakama::NRtClientListenerInterface</a>
 , <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a87c4b89a79449eb9a1847fa9a22fd81c">Nakama::NRtDefaultClientListener</a>
-, <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#acd1af50dc66e7296fbf39a5aac51dcb5">Nakama::NRtTransportInterface</a>
 </li>
 <li>onMatchData()
 : <a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#aae3a08a0db8688b517fe58663390b952">Nakama::NRtClientListenerInterface</a>
@@ -416,9 +430,6 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>onMatchPresence()
 : <a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#adb23076d079b5fed8ceab71dfd4cbc27">Nakama::NRtClientListenerInterface</a>
 , <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#a1c87c612d9291d2738ea6f1aaf9e4158">Nakama::NRtDefaultClientListener</a>
-</li>
-<li>onMessage()
-: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a505c3953b0093f40c2b17b829d94dc73">Nakama::NRtTransportInterface</a>
 </li>
 <li>onNotifications()
 : <a class="el" href="class_nakama_1_1_n_rt_client_listener_interface.html#ad320a898ab3d4e7fa125e9f1c3325965">Nakama::NRtClientListenerInterface</a>
@@ -456,6 +467,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>removeMatchmaker()
 : <a class="el" href="class_nakama_1_1_n_rt_client_interface.html#aaec88763e5ad31459e0d2a5b27a9f8a8">Nakama::NRtClientInterface</a>
 </li>
+<li>request()
+: <a class="el" href="class_nakama_1_1_n_http_transport_interface.html#aa654b47d624863f56b2c60e2b9853036">Nakama::NHttpTransportInterface</a>
+</li>
 <li>rpc()
 : <a class="el" href="class_nakama_1_1_n_client_interface.html#a5913e7a61cdcbffe921b241725960960">Nakama::NClientInterface</a>
 , <a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a82f516a67fa5cbdc6087584c581eeb83">Nakama::NRtClientInterface</a>
@@ -465,10 +479,16 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>send()
-: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a15673ad23d6423f11e4ce93624d8066d">Nakama::NRtTransportInterface</a>
+: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a32b8ecab84e4db1f3cab0866cbf051e7">Nakama::NRtTransportInterface</a>
 </li>
 <li>sendMatchData()
 : <a class="el" href="class_nakama_1_1_n_rt_client_interface.html#aba3433a278145e867e8217c74179a3b7">Nakama::NRtClientInterface</a>
+</li>
+<li>setActivityTimeout()
+: <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a352f9c10b62adbb400ae27aa1c48871a">Nakama::NRtTransportInterface</a>
+</li>
+<li>setBaseUri()
+: <a class="el" href="class_nakama_1_1_n_http_transport_interface.html#a1fa048b8fd4fb74b28274fee64e4f340">Nakama::NHttpTransportInterface</a>
 </li>
 <li>setChannelMessageCallback()
 : <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#ae2953ec2fb3dabcc84a6e765d6235d37">Nakama::NRtDefaultClientListener</a>
@@ -485,7 +505,8 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 , <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a2a20473a76192e6b6a2c0952a8642c3c">Nakama::NRtTransportInterface</a>
 </li>
 <li>setErrorCallback()
-: <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#af00e4f9c5e1db3b766d15eb05391da89">Nakama::NRtDefaultClientListener</a>
+: <a class="el" href="class_nakama_1_1_n_client_interface.html#a1b650856c9045f7ff6deba5b3542937e">Nakama::NClientInterface</a>
+, <a class="el" href="class_nakama_1_1_n_rt_default_client_listener.html#af00e4f9c5e1db3b766d15eb05391da89">Nakama::NRtDefaultClientListener</a>
 , <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#a467bf624b78914310d5fc0b7b3096540">Nakama::NRtTransportInterface</a>
 </li>
 <li>setLevel()
@@ -531,6 +552,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <h3><a id="index_t"></a>- t -</h3><ul>
 <li>tick()
 : <a class="el" href="class_nakama_1_1_n_client_interface.html#a33e9be3acbcf4e738323231efb00f538">Nakama::NClientInterface</a>
+, <a class="el" href="class_nakama_1_1_n_http_transport_interface.html#a95fa7008a49d86deb2045a650f32dcc5">Nakama::NHttpTransportInterface</a>
 , <a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a40f04f1a92b89bbe81e35e32721b5734">Nakama::NRtClientInterface</a>
 , <a class="el" href="class_nakama_1_1_n_rt_transport_interface.html#ac2d9f8d4595971dff7880b65b5d83065">Nakama::NRtTransportInterface</a>
 </li>
@@ -602,6 +624,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>~NConsoleLogSink()
 : <a class="el" href="class_nakama_1_1_n_console_log_sink.html#a2d6cba67f7ff265c4e28e967eb9fae3b">Nakama::NConsoleLogSink</a>
+</li>
+<li>~NHttpTransportInterface()
+: <a class="el" href="class_nakama_1_1_n_http_transport_interface.html#a292df21f77b0b4b878ea741e145a8c25">Nakama::NHttpTransportInterface</a>
 </li>
 <li>~NLogSinkInterface()
 : <a class="el" href="class_nakama_1_1_n_log_sink_interface.html#a96fab2ac2fe0aaafd2fc6f2bfe3290f5">Nakama::NLogSinkInterface</a>

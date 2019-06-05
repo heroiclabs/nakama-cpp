@@ -6,6 +6,7 @@ var class_nakama_1_1_n_rt_client_interface =
     [ "createMatch", "class_nakama_1_1_n_rt_client_interface.html#a45a5667f2efbc7199d4ea73dc4c71ef3", null ],
     [ "disconnect", "class_nakama_1_1_n_rt_client_interface.html#a7b90bb506e8f121197e2634671991b65", null ],
     [ "followUsers", "class_nakama_1_1_n_rt_client_interface.html#ab4cca77cc7910e5bbc8a658ffa901f51", null ],
+    [ "getTransport", "class_nakama_1_1_n_rt_client_interface.html#a966d630a761509d678d0489922d6dca8", null ],
     [ "isConnected", "class_nakama_1_1_n_rt_client_interface.html#ab4d332c103e2d0a3137d0fe37c7f8d8a", null ],
     [ "joinChat", "class_nakama_1_1_n_rt_client_interface.html#a0a76634b3e9b9bc6c1fc968c6942a165", null ],
     [ "joinMatch", "class_nakama_1_1_n_rt_client_interface.html#a2fb511bf30ddd144ed558ec3a793fdc3", null ],

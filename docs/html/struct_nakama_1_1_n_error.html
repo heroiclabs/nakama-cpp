@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.0.3</span>
+   &#160;<span id="projectnumber">2.1.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -105,6 +105,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa19dd1d820ccb3afd078030baaaf6763"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a319b1c0dd5f22d590253e838c2de3c3e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_error.html#a319b1c0dd5f22d590253e838c2de3c3e">NError</a> (const std::string &amp;<a class="el" href="struct_nakama_1_1_n_error.html#aafdc8614f81d9bd6a955853c25a53cd8">message</a>, ErrorCode <a class="el" href="struct_nakama_1_1_n_error.html#a0313bda926f07ca2b6f6d1db1711cd11">code</a>=<a class="el" href="_n_error_8h.html#a915d220aba4527d1e33010bdfcbc6855">ErrorCode::Unknown</a>)</td></tr>
 <tr class="separator:a319b1c0dd5f22d590253e838c2de3c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7e529d53f7f850c5fa5e87762af1917"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_error.html#af7e529d53f7f850c5fa5e87762af1917">NError</a> (std::string &amp;&amp;<a class="el" href="struct_nakama_1_1_n_error.html#aafdc8614f81d9bd6a955853c25a53cd8">message</a>, ErrorCode <a class="el" href="struct_nakama_1_1_n_error.html#a0313bda926f07ca2b6f6d1db1711cd11">code</a>=<a class="el" href="_n_error_8h.html#a915d220aba4527d1e33010bdfcbc6855">ErrorCode::Unknown</a>)</td></tr>
+<tr class="separator:af7e529d53f7f850c5fa5e87762af1917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -115,7 +117,7 @@ Public Attributes</h2></td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa19dd1d820ccb3afd078030baaaf6763"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa19dd1d820ccb3afd078030baaaf6763">&#9670;&nbsp;</a></span>NError() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa19dd1d820ccb3afd078030baaaf6763">&#9670;&nbsp;</a></span>NError() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -140,7 +142,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a319b1c0dd5f22d590253e838c2de3c3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a319b1c0dd5f22d590253e838c2de3c3e">&#9670;&nbsp;</a></span>NError() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a319b1c0dd5f22d590253e838c2de3c3e">&#9670;&nbsp;</a></span>NError() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,6 +154,42 @@ Public Attributes</h2></td></tr>
           <td class="memname">Nakama::NError::NError </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ErrorCode&#160;</td>
+          <td class="paramname"><em>code</em> = <code><a class="el" href="_n_error_8h.html#a915d220aba4527d1e33010bdfcbc6855">ErrorCode::Unknown</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af7e529d53f7f850c5fa5e87762af1917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7e529d53f7f850c5fa5e87762af1917">&#9670;&nbsp;</a></span>NError() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Nakama::NError::NError </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&amp;&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>

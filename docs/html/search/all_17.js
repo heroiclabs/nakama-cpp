@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['_7enclientinterface',['~NClientInterface',['../class_nakama_1_1_n_client_interface.html#a1c14715908a83e5876c882f824479fe0',1,'Nakama::NClientInterface']]],
-  ['_7enconsolelogsink',['~NConsoleLogSink',['../class_nakama_1_1_n_console_log_sink.html#a2d6cba67f7ff265c4e28e967eb9fae3b',1,'Nakama::NConsoleLogSink']]],
-  ['_7enlogsinkinterface',['~NLogSinkInterface',['../class_nakama_1_1_n_log_sink_interface.html#a96fab2ac2fe0aaafd2fc6f2bfe3290f5',1,'Nakama::NLogSinkInterface']]],
-  ['_7enrtclientinterface',['~NRtClientInterface',['../class_nakama_1_1_n_rt_client_interface.html#a73853ed63355f7100e9f37b532167303',1,'Nakama::NRtClientInterface']]],
-  ['_7enrtclientlistenerinterface',['~NRtClientListenerInterface',['../class_nakama_1_1_n_rt_client_listener_interface.html#ac579a6c4c7c830f1ddeb3535206c4d87',1,'Nakama::NRtClientListenerInterface']]],
-  ['_7enrttransportinterface',['~NRtTransportInterface',['../class_nakama_1_1_n_rt_transport_interface.html#a460754ca41c8e6deafcf1736ce284ea1',1,'Nakama::NRtTransportInterface']]],
-  ['_7ensessioninterface',['~NSessionInterface',['../class_nakama_1_1_n_session_interface.html#a44cb711023c24f9d0615fb870eb62745',1,'Nakama::NSessionInterface']]]
+  ['wallet',['wallet',['../struct_nakama_1_1_n_account.html#a0e0bc2183cb81f56929ad0c3b59f9f17',1,'Nakama::NAccount']]],
+  ['warn',['Warn',['../class_nakama_1_1_n_logger.html#a66b37f206abdd9c290575947d802a49a',1,'Nakama::NLogger::Warn()'],['../_n_log_sink_interface_8h.html#a6bb05f2a83393f9bf65e5a59e7d5f5e1',1,'Warn():&#160;NLogSinkInterface.h']]],
+  ['writechatmessage',['writeChatMessage',['../class_nakama_1_1_n_rt_client_interface.html#a94a66e715a51a8d9c6ed802c069ae9b4',1,'Nakama::NRtClientInterface']]],
+  ['writeleaderboardrecord',['writeLeaderboardRecord',['../class_nakama_1_1_n_client_interface.html#a365f616b567d7263eb866a88bfb09845',1,'Nakama::NClientInterface']]],
+  ['writestorageobjects',['writeStorageObjects',['../class_nakama_1_1_n_client_interface.html#a97d6c0c1dd43fe738a5b05d11a2d1966',1,'Nakama::NClientInterface']]],
+  ['writetournamentrecord',['writeTournamentRecord',['../class_nakama_1_1_n_client_interface.html#afe505f46bfc3e55a9a2655457ab94ad6',1,'Nakama::NClientInterface']]]
 ];

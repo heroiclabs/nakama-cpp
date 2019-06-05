@@ -1,6 +1,5 @@
 var namespace_nakama =
 [
-    [ "DefaultClientParameters", "struct_nakama_1_1_default_client_parameters.html", "struct_nakama_1_1_default_client_parameters" ],
     [ "NAccount", "struct_nakama_1_1_n_account.html", "struct_nakama_1_1_n_account" ],
     [ "NAccountDevice", "struct_nakama_1_1_n_account_device.html", "struct_nakama_1_1_n_account_device" ],
     [ "NChannel", "struct_nakama_1_1_n_channel.html", "struct_nakama_1_1_n_channel" ],
@@ -9,6 +8,7 @@ var namespace_nakama =
     [ "NChannelMessageList", "struct_nakama_1_1_n_channel_message_list.html", "struct_nakama_1_1_n_channel_message_list" ],
     [ "NChannelPresenceEvent", "struct_nakama_1_1_n_channel_presence_event.html", "struct_nakama_1_1_n_channel_presence_event" ],
     [ "NClientInterface", "class_nakama_1_1_n_client_interface.html", "class_nakama_1_1_n_client_interface" ],
+    [ "NClientParameters", "struct_nakama_1_1_n_client_parameters.html", "struct_nakama_1_1_n_client_parameters" ],
     [ "NConsoleLogSink", "class_nakama_1_1_n_console_log_sink.html", "class_nakama_1_1_n_console_log_sink" ],
     [ "NDeleteStorageObjectId", "struct_nakama_1_1_n_delete_storage_object_id.html", "struct_nakama_1_1_n_delete_storage_object_id" ],
     [ "NError", "struct_nakama_1_1_n_error.html", "struct_nakama_1_1_n_error" ],
@@ -18,6 +18,9 @@ var namespace_nakama =
     [ "NGroupList", "struct_nakama_1_1_n_group_list.html", "struct_nakama_1_1_n_group_list" ],
     [ "NGroupUser", "struct_nakama_1_1_n_group_user.html", "struct_nakama_1_1_n_group_user" ],
     [ "NGroupUserList", "struct_nakama_1_1_n_group_user_list.html", "struct_nakama_1_1_n_group_user_list" ],
+    [ "NHttpRequest", "struct_nakama_1_1_n_http_request.html", "struct_nakama_1_1_n_http_request" ],
+    [ "NHttpResponse", "struct_nakama_1_1_n_http_response.html", "struct_nakama_1_1_n_http_response" ],
+    [ "NHttpTransportInterface", "class_nakama_1_1_n_http_transport_interface.html", "class_nakama_1_1_n_http_transport_interface" ],
     [ "NLeaderboardRecord", "struct_nakama_1_1_n_leaderboard_record.html", "struct_nakama_1_1_n_leaderboard_record" ],
     [ "NLeaderboardRecordList", "struct_nakama_1_1_n_leaderboard_record_list.html", "struct_nakama_1_1_n_leaderboard_record_list" ],
     [ "NLogger", "class_nakama_1_1_n_logger.html", null ],
@@ -33,6 +36,7 @@ var namespace_nakama =
     [ "NNotificationList", "struct_nakama_1_1_n_notification_list.html", "struct_nakama_1_1_n_notification_list" ],
     [ "NReadStorageObjectId", "struct_nakama_1_1_n_read_storage_object_id.html", "struct_nakama_1_1_n_read_storage_object_id" ],
     [ "NRpc", "struct_nakama_1_1_n_rpc.html", "struct_nakama_1_1_n_rpc" ],
+    [ "NRtClientDisconnectInfo", "struct_nakama_1_1_n_rt_client_disconnect_info.html", "struct_nakama_1_1_n_rt_client_disconnect_info" ],
     [ "NRtClientInterface", "class_nakama_1_1_n_rt_client_interface.html", "class_nakama_1_1_n_rt_client_interface" ],
     [ "NRtClientListenerInterface", "class_nakama_1_1_n_rt_client_listener_interface.html", "class_nakama_1_1_n_rt_client_listener_interface" ],
     [ "NRtDefaultClientListener", "class_nakama_1_1_n_rt_default_client_listener.html", "class_nakama_1_1_n_rt_default_client_listener" ],
