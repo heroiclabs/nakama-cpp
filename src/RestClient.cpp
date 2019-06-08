@@ -25,14 +25,16 @@
 #include "DataHelper.h"
 #include "DefaultSession.h"
 #include "google/rpc/status.pb.h"
+#include "google/protobuf/util/json_util.h"
 #include "grpc/include/grpcpp/impl/codegen/status_code_enum.h"
-#include "CppRestUtils.h"
-#include "cpprest/json.h"
+
+#define RAPIDJSON_HAS_STDSTRING 1
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
 
 #undef NMODULE_NAME
 #define NMODULE_NAME "Nakama::RestClient"
-
-#include "google/protobuf/util/json_util.h"
 
 using namespace std;
 
@@ -41,6 +43,14 @@ namespace Nakama {
 void AddBoolArg(NHttpQueryArgs& args, string&& name, bool value)
 {
     value ? args.emplace(name, "true") : args.emplace(name, "false");
+}
+
+string jsonDocToStr(rapidjson::Document& document)
+{
+    rapidjson::StringBuffer buffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+    document.Accept(writer);
+    return buffer.GetString();
 }
 
 RestClient::RestClient(const NClientParameters& parameters, NHttpTransportPtr httpClient)
@@ -207,34 +217,41 @@ void RestClient::onResponse(RestReqContext* reqContext, NHttpResponsePtr respons
             else if (!response->body.empty() && response->body[0] == '{') // have to be JSON
             {
                 try {
-                    utility::stringstream_t ss;
-                    ss << FROM_STD_STR(response->body);
-                    web::json::value jsonRoot = web::json::value::parse(ss);
-                    web::json::value jsonMessage = jsonRoot.at(FROM_STD_STR("message"));
-                    web::json::value jsonCode = jsonRoot.at(FROM_STD_STR("code"));
+                    rapidjson::Document document;
 
-                    if (jsonMessage.is_string())
+                    if (document.Parse(response->body).HasParseError())
                     {
-                        errMessage.append("message: ").append(TO_STD_STR(jsonMessage.as_string()));
+                        errMessage = "Parse JSON failed: " + response->body;
+                        code = ErrorCode::InternalError;
                     }
-
-                    if (jsonCode.is_integer())
+                    else
                     {
-                        int serverErrCode = jsonCode.as_integer();
+                        auto& jsonMessage = document["message"];
+                        auto& jsonCode    = document["code"];
 
-                        switch (serverErrCode)
+                        if (jsonMessage.IsString())
                         {
-                        case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
-                        case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
-                        case grpc::StatusCode::NOT_FOUND        : code = ErrorCode::NotFound; break;
-                        case grpc::StatusCode::ALREADY_EXISTS   : code = ErrorCode::AlreadyExists; break;
-                        case grpc::StatusCode::INVALID_ARGUMENT : code = ErrorCode::InvalidArgument; break;
-                        case grpc::StatusCode::UNAUTHENTICATED  : code = ErrorCode::Unauthenticated; break;
-                        case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
+                            errMessage.append("message: ").append(jsonMessage.GetString());
+                        }
 
-                        default:
-                            errMessage.append("\ncode: ").append(std::to_string(serverErrCode));
-                            break;
+                        if (jsonCode.IsNumber())
+                        {
+                            int serverErrCode = jsonCode.GetInt();
+
+                            switch (serverErrCode)
+                            {
+                            case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
+                            case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
+                            case grpc::StatusCode::NOT_FOUND        : code = ErrorCode::NotFound; break;
+                            case grpc::StatusCode::ALREADY_EXISTS   : code = ErrorCode::AlreadyExists; break;
+                            case grpc::StatusCode::INVALID_ARGUMENT : code = ErrorCode::InvalidArgument; break;
+                            case grpc::StatusCode::UNAUTHENTICATED  : code = ErrorCode::Unauthenticated; break;
+                            case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
+
+                            default:
+                                errMessage.append("\ncode: ").append(std::to_string(serverErrCode));
+                                break;
+                            }
                         }
                     }
                 }
@@ -315,14 +332,12 @@ void RestClient::authenticateDevice(
             AddBoolArg(args, "create", *create);
         }
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
+        document.AddMember("id", id, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/device", std::move(body), std::move(args));
     }
@@ -362,15 +377,13 @@ void RestClient::authenticateEmail(
         args.emplace("username", username);
         AddBoolArg(args, "create", create);
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("email")] = web::json::value(FROM_STD_STR(email));
-        jsonRoot[FROM_STD_STR("password")] = web::json::value(FROM_STD_STR(password));
+        document.AddMember("email", email, document.GetAllocator());
+        document.AddMember("password", password, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/email", std::move(body), std::move(args));
     }
@@ -411,14 +424,12 @@ void RestClient::authenticateFacebook(
         AddBoolArg(args, "create", create);
         AddBoolArg(args, "import", importFriends);
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
+        document.AddMember("token", accessToken, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/facebook", std::move(body), std::move(args));
     }
@@ -457,14 +468,12 @@ void RestClient::authenticateGoogle(
         args.emplace("username", username);
         AddBoolArg(args, "create", create);
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
+        document.AddMember("token", accessToken, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/google", std::move(body), std::move(args));
     }
@@ -508,19 +517,17 @@ void RestClient::authenticateGameCenter(
         args.emplace("username", username);
         AddBoolArg(args, "create", create);
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("player_id")] = web::json::value(FROM_STD_STR(playerId));
-        jsonRoot[FROM_STD_STR("bundle_id")] = web::json::value(FROM_STD_STR(bundleId));
-        jsonRoot[FROM_STD_STR("timestamp_seconds")] = web::json::value(timestampSeconds);
-        jsonRoot[FROM_STD_STR("salt")] = web::json::value(FROM_STD_STR(salt));
-        jsonRoot[FROM_STD_STR("signature")] = web::json::value(FROM_STD_STR(signature));
-        jsonRoot[FROM_STD_STR("public_key_url")] = web::json::value(FROM_STD_STR(publicKeyUrl));
+        document.AddMember("player_id", playerId, document.GetAllocator());
+        document.AddMember("bundle_id", bundleId, document.GetAllocator());
+        document.AddMember("timestamp_seconds", timestampSeconds, document.GetAllocator());
+        document.AddMember("salt", salt, document.GetAllocator());
+        document.AddMember("signature", signature, document.GetAllocator());
+        document.AddMember("public_key_url", publicKeyUrl, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/gamecenter", std::move(body), std::move(args));
     }
@@ -559,14 +566,12 @@ void RestClient::authenticateCustom(
         args.emplace("username", username);
         AddBoolArg(args, "create", create);
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
+        document.AddMember("id", id, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/custom", std::move(body), std::move(args));
     }
@@ -605,14 +610,12 @@ void RestClient::authenticateSteam(
         args.emplace("username", username);
         AddBoolArg(args, "create", create);
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(token));
+        document.AddMember("token", token, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/authenticate/steam", std::move(body), std::move(args));
     }
@@ -640,14 +643,12 @@ void RestClient::linkFacebook(
 
         if (importFriends) AddBoolArg(args, "import", *importFriends);
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
+        document.AddMember("token", accessToken, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/facebook", std::move(body), std::move(args));
     }
@@ -671,15 +672,13 @@ void RestClient::linkEmail(
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("email")] = web::json::value(FROM_STD_STR(email));
-        jsonRoot[FROM_STD_STR("password")] = web::json::value(FROM_STD_STR(password));
+        document.AddMember("email", email, document.GetAllocator());
+        document.AddMember("password", password, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/email", std::move(body));
     }
@@ -702,14 +701,12 @@ void RestClient::linkDevice(
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
+        document.AddMember("id", id, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/device", std::move(body));
     }
@@ -732,14 +729,12 @@ void RestClient::linkGoogle(
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
+        document.AddMember("token", accessToken, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/google", std::move(body));
     }
@@ -767,19 +762,17 @@ void RestClient::linkGameCenter(
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("player_id")] = web::json::value(FROM_STD_STR(playerId));
-        jsonRoot[FROM_STD_STR("bundle_id")] = web::json::value(FROM_STD_STR(bundleId));
-        jsonRoot[FROM_STD_STR("timestamp_seconds")] = web::json::value(timestampSeconds);
-        jsonRoot[FROM_STD_STR("salt")] = web::json::value(FROM_STD_STR(salt));
-        jsonRoot[FROM_STD_STR("signature")] = web::json::value(FROM_STD_STR(signature));
-        jsonRoot[FROM_STD_STR("public_key_url")] = web::json::value(FROM_STD_STR(publicKeyUrl));
+        document.AddMember("player_id", playerId, document.GetAllocator());
+        document.AddMember("bundle_id", bundleId, document.GetAllocator());
+        document.AddMember("timestamp_seconds", timestampSeconds, document.GetAllocator());
+        document.AddMember("salt", salt, document.GetAllocator());
+        document.AddMember("signature", signature, document.GetAllocator());
+        document.AddMember("public_key_url", publicKeyUrl, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/gamecenter", std::move(body));
     }
@@ -802,14 +795,12 @@ void RestClient::linkSteam(
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(token));
+        document.AddMember("token", token, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/steam", std::move(body));
     }
@@ -829,14 +820,12 @@ void RestClient::linkCustom(NSessionPtr session, const std::string & id, std::fu
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
+        document.AddMember("id", id, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/custom", std::move(body));
     }
@@ -856,14 +845,12 @@ void RestClient::unlinkFacebook(NSessionPtr session, const std::string & accessT
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
+        document.AddMember("token", accessToken, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/facebook", std::move(body));
     }
@@ -883,15 +870,13 @@ void RestClient::unlinkEmail(NSessionPtr session, const std::string & email, con
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("email")] = web::json::value(FROM_STD_STR(email));
-        jsonRoot[FROM_STD_STR("password")] = web::json::value(FROM_STD_STR(password));
+        document.AddMember("email", email, document.GetAllocator());
+        document.AddMember("password", password, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/email", std::move(body));
     }
@@ -911,14 +896,12 @@ void RestClient::unlinkGoogle(NSessionPtr session, const std::string & accessTok
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(accessToken));
+        document.AddMember("token", accessToken, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/google", std::move(body));
     }
@@ -945,19 +928,17 @@ void RestClient::unlinkGameCenter(NSessionPtr session,
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("player_id")] = web::json::value(FROM_STD_STR(playerId));
-        jsonRoot[FROM_STD_STR("bundle_id")] = web::json::value(FROM_STD_STR(bundleId));
-        jsonRoot[FROM_STD_STR("timestamp_seconds")] = web::json::value(timestampSeconds);
-        jsonRoot[FROM_STD_STR("salt")] = web::json::value(FROM_STD_STR(salt));
-        jsonRoot[FROM_STD_STR("signature")] = web::json::value(FROM_STD_STR(signature));
-        jsonRoot[FROM_STD_STR("public_key_url")] = web::json::value(FROM_STD_STR(publicKeyUrl));
+        document.AddMember("player_id", playerId, document.GetAllocator());
+        document.AddMember("bundle_id", bundleId, document.GetAllocator());
+        document.AddMember("timestamp_seconds", timestampSeconds, document.GetAllocator());
+        document.AddMember("salt", salt, document.GetAllocator());
+        document.AddMember("signature", signature, document.GetAllocator());
+        document.AddMember("public_key_url", publicKeyUrl, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/gamecenter", std::move(body));
     }
@@ -977,14 +958,12 @@ void RestClient::unlinkSteam(NSessionPtr session, const std::string & token, std
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(token));
+        document.AddMember("token", token, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/steam", std::move(body));
     }
@@ -1004,14 +983,12 @@ void RestClient::unlinkDevice(NSessionPtr session, const std::string & id, std::
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
+        document.AddMember("id", id, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/device", std::move(body));
     }
@@ -1031,14 +1008,12 @@ void RestClient::unlinkCustom(NSessionPtr session, const std::string & id, std::
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("id")] = web::json::value(FROM_STD_STR(id));
+        document.AddMember("id", id, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/account/unlink/custom", std::move(body));
     }
@@ -1066,14 +1041,12 @@ void RestClient::importFacebookFriends(
 
         if (reset) AddBoolArg(args, "reset", *reset);
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("token")] = web::json::value(FROM_STD_STR(token));
+        document.AddMember("token", token, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/friend/facebook", std::move(body), std::move(args));
     }
@@ -1086,8 +1059,7 @@ void RestClient::importFacebookFriends(
 void RestClient::getAccount(
     NSessionPtr session,
     std::function<void(const NAccount&)> successCallback,
-    ErrorCallback errorCallback
-)
+    ErrorCallback errorCallback)
 {
     try {
         NLOG_INFO("...");
@@ -1132,19 +1104,17 @@ void RestClient::updateAccount(
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        if (username) jsonRoot[FROM_STD_STR("username")] = web::json::value(FROM_STD_STR(*username));
-        if (displayName) jsonRoot[FROM_STD_STR("display_name")] = web::json::value(FROM_STD_STR(*displayName));
-        if (avatarUrl) jsonRoot[FROM_STD_STR("avatar_url")] = web::json::value(FROM_STD_STR(*avatarUrl));
-        if (langTag) jsonRoot[FROM_STD_STR("lang_tag")] = web::json::value(FROM_STD_STR(*langTag));
-        if (location) jsonRoot[FROM_STD_STR("location")] = web::json::value(FROM_STD_STR(*location));
-        if (timezone) jsonRoot[FROM_STD_STR("timezone")] = web::json::value(FROM_STD_STR(*timezone));
+        if (username) document.AddMember("username", *username, document.GetAllocator());
+        if (displayName) document.AddMember("display_name", *displayName, document.GetAllocator());
+        if (avatarUrl) document.AddMember("avatar_url", *avatarUrl, document.GetAllocator());
+        if (langTag) document.AddMember("lang_tag", *langTag, document.GetAllocator());
+        if (location) document.AddMember("location", *location, document.GetAllocator());
+        if (timezone) document.AddMember("timezone", *timezone, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::PUT, "/v2/account", std::move(body));
     }
@@ -1363,18 +1333,16 @@ void RestClient::createGroup(
         }
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("name")] = web::json::value(FROM_STD_STR(name));
-        jsonRoot[FROM_STD_STR("description")] = web::json::value(FROM_STD_STR(description));
-        jsonRoot[FROM_STD_STR("avatar_url")] = web::json::value(FROM_STD_STR(avatarUrl));
-        jsonRoot[FROM_STD_STR("lang_tag")] = web::json::value(FROM_STD_STR(langTag));
-        jsonRoot[FROM_STD_STR("open")] = web::json::value(open);
+        document.AddMember("name", name, document.GetAllocator());
+        document.AddMember("description", description, document.GetAllocator());
+        document.AddMember("avatar_url", avatarUrl, document.GetAllocator());
+        document.AddMember("lang_tag", langTag, document.GetAllocator());
+        document.AddMember("open", open, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/group", std::move(body));
     }
@@ -1647,20 +1615,17 @@ void RestClient::updateGroup(
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("group_id")] = web::json::value(FROM_STD_STR(groupId));
+        document.AddMember("group_id", groupId, document.GetAllocator());
+        if (name) document.AddMember("name", *name, document.GetAllocator());
+        if (description) document.AddMember("description", *description, document.GetAllocator());
+        if (avatarUrl) document.AddMember("avatar_url", *avatarUrl, document.GetAllocator());
+        if (langTag) document.AddMember("lang_tag", *langTag, document.GetAllocator());
+        if (open) document.AddMember("open", *open, document.GetAllocator());
 
-        if (name) jsonRoot[FROM_STD_STR("name")] = web::json::value(FROM_STD_STR(*name));
-        if (description) jsonRoot[FROM_STD_STR("description")] = web::json::value(FROM_STD_STR(*description));
-        if (avatarUrl) jsonRoot[FROM_STD_STR("avatar_url")] = web::json::value(FROM_STD_STR(*avatarUrl));
-        if (langTag) jsonRoot[FROM_STD_STR("lang_tag")] = web::json::value(FROM_STD_STR(*langTag));
-        if (open) jsonRoot[FROM_STD_STR("open")] = web::json::value(*open);
-
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::PUT, "/v2/group/" + groupId, std::move(body));
     }
@@ -1774,16 +1739,14 @@ void RestClient::writeLeaderboardRecord(
         }
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("score")] = web::json::value(FROM_STD_STR(std::to_string(score)));
-        if (subscore) jsonRoot[FROM_STD_STR("subscore")] = web::json::value(FROM_STD_STR(std::to_string(*subscore)));
-        if (metadata) jsonRoot[FROM_STD_STR("metadata")] = web::json::value(FROM_STD_STR(*metadata));
+        document.AddMember("score", std::to_string(score), document.GetAllocator());
+        if (subscore) document.AddMember("subscore", std::to_string(*subscore), document.GetAllocator());
+        if (metadata) document.AddMember("metadata", *metadata, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/leaderboard/" + leaderboardId, std::move(body));
     }
@@ -1818,16 +1781,14 @@ void RestClient::writeTournamentRecord(
         }
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
+        rapidjson::Document document;
+        document.SetObject();
 
-        jsonRoot[FROM_STD_STR("score")] = web::json::value(FROM_STD_STR(std::to_string(score)));
-        if (subscore) jsonRoot[FROM_STD_STR("subscore")] = web::json::value(FROM_STD_STR(std::to_string(*subscore)));
-        if (metadata) jsonRoot[FROM_STD_STR("metadata")] = web::json::value(FROM_STD_STR(*metadata));
+        document.AddMember("score", std::to_string(score), document.GetAllocator());
+        if (subscore) document.AddMember("subscore", std::to_string(*subscore), document.GetAllocator());
+        if (metadata) document.AddMember("metadata", *metadata, document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::PUT, "/v2/tournament/" + tournamentId, std::move(body));
     }
@@ -2242,33 +2203,33 @@ void RestClient::writeStorageObjects(
         }
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
-        web::json::value jsonObjects = web::json::value::array();
+        rapidjson::Document document;
+        document.SetObject();
+        rapidjson::Value jsonObjects;
+        jsonObjects.SetArray();
 
         for (auto& obj : objects)
         {
-            web::json::value jsonObj = web::json::value::object();
+            rapidjson::Value jsonObj;
+            jsonObj.SetObject();
 
-            jsonObj[FROM_STD_STR("collection")] = web::json::value(FROM_STD_STR(obj.collection));
-            jsonObj[FROM_STD_STR("key")] = web::json::value(FROM_STD_STR(obj.key));
-            jsonObj[FROM_STD_STR("value")] = web::json::value(FROM_STD_STR(obj.value));
-            jsonObj[FROM_STD_STR("version")] = web::json::value(FROM_STD_STR(obj.version));
+            jsonObj.AddMember("collection", obj.collection, document.GetAllocator());
+            jsonObj.AddMember("key", obj.key, document.GetAllocator());
+            jsonObj.AddMember("value", obj.value, document.GetAllocator());
+            jsonObj.AddMember("version", obj.version, document.GetAllocator());
 
             if (obj.permissionRead)
-                jsonObj[FROM_STD_STR("permission_read")] = web::json::value(static_cast<int32_t>(*obj.permissionRead));
+                jsonObj.AddMember("permission_read", static_cast<int32_t>(*obj.permissionRead), document.GetAllocator());
 
             if (obj.permissionWrite)
-                jsonObj[FROM_STD_STR("permission_write")] = web::json::value(static_cast<int32_t>(*obj.permissionWrite));
+                jsonObj.AddMember("permission_write", static_cast<int32_t>(*obj.permissionWrite), document.GetAllocator());
 
-            jsonObjects[jsonObjects.size()] = std::move(jsonObj);
+            jsonObjects.PushBack(std::move(jsonObj), document.GetAllocator());
         }
 
-        jsonRoot[FROM_STD_STR("objects")] = std::move(jsonObjects);
+        document.AddMember("objects", std::move(jsonObjects), document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::PUT, "/v2/storage", std::move(body));
     }
@@ -2300,26 +2261,26 @@ void RestClient::readStorageObjects(
         }
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
-        web::json::value jsonObjects = web::json::value::array();
+        rapidjson::Document document;
+        document.SetObject();
+        rapidjson::Value jsonObjects;
+        jsonObjects.SetArray();
 
         for (auto& obj : objectIds)
         {
-            web::json::value jsonObj = web::json::value::object();
+            rapidjson::Value jsonObj;
+            jsonObj.SetObject();
 
-            jsonObj[FROM_STD_STR("collection")] = web::json::value(FROM_STD_STR(obj.collection));
-            jsonObj[FROM_STD_STR("key")] = web::json::value(FROM_STD_STR(obj.key));
-            jsonObj[FROM_STD_STR("user_id")] = web::json::value(FROM_STD_STR(obj.userId));
+            jsonObj.AddMember("collection", obj.collection, document.GetAllocator());
+            jsonObj.AddMember("key", obj.key, document.GetAllocator());
+            jsonObj.AddMember("user_id", obj.userId, document.GetAllocator());
 
-            jsonObjects[jsonObjects.size()] = std::move(jsonObj);
+            jsonObjects.PushBack(std::move(jsonObj), document.GetAllocator());
         }
 
-        jsonRoot[FROM_STD_STR("object_ids")] = std::move(jsonObjects);
+        document.AddMember("object_ids", std::move(jsonObjects), document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::POST, "/v2/storage", std::move(body));
     }
@@ -2339,26 +2300,26 @@ void RestClient::deleteStorageObjects(NSessionPtr session, const std::vector<NDe
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        utility::stringstream_t ss;
-        web::json::value jsonRoot = web::json::value::object();
-        web::json::value jsonObjects = web::json::value::array();
+        rapidjson::Document document;
+        document.SetObject();
+        rapidjson::Value jsonObjects;
+        jsonObjects.SetArray();
 
         for (auto& obj : objectIds)
         {
-            web::json::value jsonObj = web::json::value::object();
+            rapidjson::Value jsonObj;
+            jsonObj.SetObject();
 
-            jsonObj[FROM_STD_STR("collection")] = web::json::value(FROM_STD_STR(obj.collection));
-            jsonObj[FROM_STD_STR("key")] = web::json::value(FROM_STD_STR(obj.key));
-            jsonObj[FROM_STD_STR("version")] = web::json::value(FROM_STD_STR(obj.version));
+            jsonObj.AddMember("collection", obj.collection, document.GetAllocator());
+            jsonObj.AddMember("key", obj.key, document.GetAllocator());
+            jsonObj.AddMember("version", obj.version, document.GetAllocator());
 
-            jsonObjects[jsonObjects.size()] = std::move(jsonObj);
+            jsonObjects.PushBack(std::move(jsonObj), document.GetAllocator());
         }
 
-        jsonRoot[FROM_STD_STR("object_ids")] = std::move(jsonObjects);
+        document.AddMember("object_ids", std::move(jsonObjects), document.GetAllocator());
 
-        jsonRoot.serialize(ss);
-
-        string body = TO_STD_STR(ss.str());
+        string body = jsonDocToStr(document);
 
         sendReq(ctx, NHttpReqMethod::PUT, "/v2/storage/delete", std::move(body));
     }
