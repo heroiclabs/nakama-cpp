@@ -79,7 +79,7 @@ if(BUILD_REST_CLIENT)
     target_compile_definitions(nakama-cpp PRIVATE BUILD_REST_CLIENT)
 endif(BUILD_REST_CLIENT)
 
-if(BUILD_REST_CLIENT OR BUILD_WEBSOCKET_CPPREST)
+if(BUILD_HTTP_CPPREST OR BUILD_WEBSOCKET_CPPREST)
     target_link_libraries(nakama-cpp PUBLIC cpprest)
     target_compile_definitions(nakama-cpp PRIVATE _TURN_OFF_PLATFORM_STRING)
 endif()
