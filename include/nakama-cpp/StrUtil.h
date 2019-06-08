@@ -40,17 +40,6 @@ namespace Nakama {
     NAKAMA_API Base64Buffer base64Decode(const std::string& base64str);
 
     /**
-     * Get the field value from json string
-     * 
-     * Supports only simple field types: number, string, boolean and null
-     * 
-     * @param json the json string
-     * @param field_name name of field
-     * @return std::string value of specified field
-     */
-    NAKAMA_API std::string getJsonFieldValue(const std::string& json, const std::string& field_name);
-
-    /**
      * Encode string to allow use it in an URL
      * 
      * @param str string to encode

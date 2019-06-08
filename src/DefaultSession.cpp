@@ -17,6 +17,13 @@
 #include "DefaultSession.h"
 #include "nakama-cpp/StrUtil.h"
 #include "nakama-cpp/NUtils.h"
+#include "nakama-cpp/log/NLogger.h"
+
+#define RAPIDJSON_HAS_STDSTRING 1
+#include "rapidjson/document.h"
+
+#undef NMODULE_NAME
+#define NMODULE_NAME "Nakama::DefaultSession"
 
 namespace Nakama {
 
@@ -43,16 +50,28 @@ DefaultSession::DefaultSession(const std::string & token, bool created)
             // the segment is base64 encoded, so decode it...
             std::string json = base64Decode(payload);
 
+            rapidjson::Document document;
+
             // now we have some json to parse.
             // e.g.: {"exp":1489862293,"uid":"3c01e3ee-878a-4ec4-8923-40d51a86f91f"}
-            string exp_str = getJsonFieldValue(json, "exp");
-            if (!exp_str.empty())
+            if (document.Parse(json).HasParseError())
             {
-                _expire_time = ((NTimestamp)std::atol(exp_str.c_str())) * 1000ULL;
+                NLOG_ERROR("Parse JSON failed");
             }
+            else
+            {
+                auto& jsonExp = document["exp"];
+                auto& jsonUsn = document["usn"];
+                auto& jsonUid = document["uid"];
 
-            _username = getJsonFieldValue(json, "usn");
-            _user_id = getJsonFieldValue(json, "uid");
+                if (jsonExp.IsNumber())
+                {
+                    _expire_time = (jsonExp.GetUint64()) * 1000ULL;
+                }
+
+                if (jsonUsn.IsString()) _username = jsonUsn.GetString();
+                if (jsonUid.IsString()) _user_id = jsonUid.GetString();
+            }
         }
     }
 }
