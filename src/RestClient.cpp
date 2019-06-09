@@ -27,9 +27,7 @@
 #include "google/rpc/status.pb.h"
 #include "google/protobuf/util/json_util.h"
 #include "grpc/include/grpcpp/impl/codegen/status_code_enum.h"
-
-#define RAPIDJSON_HAS_STDSTRING 1
-#include "rapidjson/document.h"
+#include "RapidjsonHelper.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 
