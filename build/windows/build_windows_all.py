@@ -18,6 +18,8 @@ import os
 import sys
 import subprocess
 
+execfile('../build_config.py')
+
 modes_list    = ['Release', 'Debug']
 arch_list     = ['x86', 'x64']
 toolsets_list = ['v140', 'v141', 'v142']
@@ -27,16 +29,18 @@ def call(command):
     if res != 0:
         sys.exit(-1)
 
-# static libs
-for toolset in toolsets_list:
-    for arch in arch_list:
-        for mode in modes_list:
-            call(['python', 'build_windows.py', '-a', arch, '-m', mode, '-t', toolset])
+if BUILD_NAKAMA_STATIC:
+    # static libs
+    for toolset in toolsets_list:
+        for arch in arch_list:
+            for mode in modes_list:
+                call(['python', 'build_windows.py', '-a', arch, '-m', mode, '-t', toolset])
 
-# DLLs
-for toolset in toolsets_list:
-    for arch in arch_list:
-        for mode in modes_list:
-            call(['python', 'build_windows.py', '-a', arch, '-m', mode, '-t', toolset, '--dll'])
+if BUILD_NAKAMA_SHARED:
+    # DLLs
+    for toolset in toolsets_list:
+        for arch in arch_list:
+            for mode in modes_list:
+                call(['python', 'build_windows.py', '-a', arch, '-m', mode, '-t', toolset, '--dll'])
 
 print 'done.'

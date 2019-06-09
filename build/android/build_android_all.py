@@ -17,6 +17,8 @@
 import sys
 import subprocess
 
+execfile('../build_config.py')
+
 abi_list = ['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']
 
 def call(command):
@@ -25,9 +27,11 @@ def call(command):
         sys.exit(-1)
 
 # static libs
-for abi in abi_list:
-    call(['python', 'build_android.py', abi])
+if BUILD_NAKAMA_STATIC:
+    for abi in abi_list:
+        call(['python', 'build_android.py', abi])
 
 # shared libs
-for abi in abi_list:
-    call(['python', 'build_android.py', abi, '--so'])
+if BUILD_NAKAMA_SHARED:
+    for abi in abi_list:
+        call(['python', 'build_android.py', abi, '--so'])

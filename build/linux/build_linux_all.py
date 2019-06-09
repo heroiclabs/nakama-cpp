@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #
 # Copyright 2019 The Nakama Authors
 #
@@ -13,21 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import sys
+import subprocess
 
-# Build REST (HTTP/1.1) client
-BUILD_REST_CLIENT = True
+execfile('../build_config.py')
 
-# Build gRPC client
-BUILD_GRPC_CLIENT = False
+def call(command):
+    res = subprocess.call(command, shell=False)
+    if res != 0:
+        sys.exit(-1)
 
-# Build HTTP transport using C++ REST SDK
-BUILD_HTTP_CPPREST = True
+if BUILD_NAKAMA_STATIC:
+    call(['python', 'build_linux.py'])
 
-# Build Websocket transport using C++ REST SDK
-BUILD_WEBSOCKET_CPPREST = True
-
-# Build static libs
-BUILD_NAKAMA_STATIC = True
-
-# Build shared libs (DLL)
-BUILD_NAKAMA_SHARED = True
+if BUILD_NAKAMA_SHARED:
+    call(['python', 'build_linux.py', '--so'])

@@ -17,10 +17,15 @@
 import sys
 import subprocess
 
+execfile('../build_config.py')
+
 def call(command):
     res = subprocess.call(command, shell=False)
     if res != 0:
         sys.exit(-1)
 
-call(['python', 'build_mac.py'])
-call(['python', 'build_mac.py', '--dylib'])
+if BUILD_NAKAMA_STATIC:
+    call(['python', 'build_mac.py'])
+
+if BUILD_NAKAMA_SHARED:
+    call(['python', 'build_mac.py', '--dylib'])
