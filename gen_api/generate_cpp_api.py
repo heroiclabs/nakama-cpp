@@ -37,7 +37,7 @@ def getArgOrEnvVar(env_var_name, arg_value):
     else:
         value = getEnvVar(env_var_name)
         if not value:
-            print 'Error: missing "' + env_var_name + '" env variable'
+            print('Error: missing "' + env_var_name + '" env variable')
             sys.exit(-1)
 
     return value
@@ -79,8 +79,8 @@ def find_grpc_cpp_plugin():
             grpc_cpp_plugin = path(NAKAMA_CPP + 'Debug/third_party/grpc/grpc_cpp_plugin')
 
     if not os.path.exists(grpc_cpp_plugin):
-        print 'grpc_cpp_plugin not found'
-        print 'Please build for desktop OS first'
+        print('grpc_cpp_plugin not found')
+        print('Please build for desktop OS first')
         sys.exit(-1)
     
     return grpc_cpp_plugin
@@ -96,21 +96,21 @@ def find_protoc():
             protoc = path(build_dir + '/Debug/third_party/grpc/third_party/protobuf/protoc')
 
     if not os.path.exists(protoc):
-        print 'protoc not found'
-        print 'Please build for desktop OS first'
+        print('protoc not found')
+        print('Please build for desktop OS first')
         sys.exit(-1)
     
     return protoc
 
 def call(commands, shell=False):
-    #print 'call', str(commands)
+    #print('call', str(commands))
     res = subprocess.call(commands, shell=shell)
     if res != 0:
         sys.exit(-1)
 
 def check_required_folder(folder):
     if not os.path.exists(folder):
-        print 'ERROR: not exist', folder
+        print('ERROR: not exist', folder)
         sys.exit(-1)
 
 def makedirs(path):
@@ -148,7 +148,7 @@ mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama/api/api.proto'), path(NAKAM
 mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama/apigrpc/apigrpc.proto'), path(NAKAMA + '/apigrpc/apigrpc.proto'))
 mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama/rtapi/realtime.proto'), path(NAKAMA + '/rtapi/realtime.proto'))
 
-print 'generating apigrpc'
+print('generating apigrpc')
 
 call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--grpc_out=' + OUT, '--plugin=protoc-gen-grpc=' + GRPC_CPP_PLUGIN, path('github.com/heroiclabs/nakama/apigrpc/apigrpc.proto')])
 call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path('github.com/heroiclabs/nakama/apigrpc/apigrpc.proto')])
@@ -168,8 +168,8 @@ os.chdir(CUR_DIR)
 call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path(GRPC_GATEWAY + '/protoc-gen-swagger/options/annotations.proto')])
 call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path(GRPC_GATEWAY + '/protoc-gen-swagger/options/openapiv2.proto')])
 
-print 'generating rtapi'
+print('generating rtapi')
 
 call([PROTOC, '-I.', '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path('github.com/heroiclabs/nakama/rtapi/realtime.proto')])
 
-print 'done.'
+print('done.')

@@ -23,8 +23,8 @@ USE_CPPREST = False
 
 def init_common(build_common_path):
     if build_common_path.find(' ') >= 0:
-        print 'Error: space foud in path:', build_common_path
-        print 'please remove spaces from path and try again'
+        print('Error: space foud in path:', build_common_path)
+        print('please remove spaces from path and try again')
         sys.exit(-1)
 
     execfile(os.path.join(build_common_path, 'build_config.py'), globals())
@@ -33,13 +33,13 @@ def init_common(build_common_path):
     USE_CPPREST = BUILD_HTTP_CPPREST or BUILD_WEBSOCKET_CPPREST
 
     print
-    print 'BUILD_REST_CLIENT =', str(BUILD_REST_CLIENT)
-    print 'BUILD_GRPC_CLIENT =', str(BUILD_GRPC_CLIENT)
-    print 'BUILD_HTTP_CPPREST =', str(BUILD_HTTP_CPPREST)
-    print 'BUILD_WEBSOCKET_CPPREST =', str(BUILD_WEBSOCKET_CPPREST)
+    print('BUILD_REST_CLIENT =', str(BUILD_REST_CLIENT))
+    print('BUILD_GRPC_CLIENT =', str(BUILD_GRPC_CLIENT))
+    print('BUILD_HTTP_CPPREST =', str(BUILD_HTTP_CPPREST))
+    print('BUILD_WEBSOCKET_CPPREST =', str(BUILD_WEBSOCKET_CPPREST))
 
 def call(command, shell=False):
-    print 'calling:', str(command)
+    print('calling:', str(command))
     res = subprocess.call(command, shell=shell)
     if res != 0:
         sys.exit(-1)
@@ -72,11 +72,11 @@ def bool2cmake(bVal):
 
 def copy_file(src, dest):
     shutil.copy(src, dest)
-    print 'copied', os.path.basename(src)
+    print('copied', os.path.basename(src))
 
 def copy_libs():
     print
-    print 'copying to release folder...'
+    print('copying to release folder...')
 
     copy_nakama_lib()
 

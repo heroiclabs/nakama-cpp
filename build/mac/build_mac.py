@@ -31,9 +31,9 @@ SHARED_LIB = args.dylib
 
 print
 if SHARED_LIB:
-    print 'Building dynamic lib'
+    print('Building dynamic lib')
 else:
-    print 'Building static lib'
+    print('Building static lib')
 print
 
 build_dir = os.path.abspath('build/' + BUILD_MODE)
@@ -46,7 +46,7 @@ else:
 makedirs(build_dir)
 
 def build(target):
-    print 'building ' + target + '...'
+    print('building ' + target + '...')
     call('cmake --build . --target ' + target + ' --config ' + BUILD_MODE, shell=True)
 
 def copy_nakama_lib():
@@ -74,7 +74,7 @@ def copy_shared_lib(dest):
     dylib_in_build = build_dir + '/src/libnakama-cpp.dylib'
     call(['install_name_tool', '-id', '@executable_path/libnakama-cpp.dylib', dylib_in_build])
     print
-    print 'copying to release folder...'
+    print('copying to release folder...')
     copy_file(dylib_in_build, dest)
 
 os.chdir(build_dir)

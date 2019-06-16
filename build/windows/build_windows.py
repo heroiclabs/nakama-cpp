@@ -39,7 +39,7 @@ if args.mode:
     if args.mode in valid_modes:
         BUILD_MODE = args.mode
     else:
-        print 'Not valid mode. Supported values:', str(valid_modes)
+        print('Not valid mode. Supported values:', str(valid_modes))
         sys.exit(-1)
 
 if args.arch:
@@ -47,7 +47,7 @@ if args.arch:
     if args.arch in valid_archs:
         ARCH = args.arch
     else:
-        print 'Not valid architecture. Supported values:', str(valid_archs)
+        print('Not valid architecture. Supported values:', str(valid_archs))
         sys.exit(-1)
 
 if BUILD_MODE == 'Debug':
@@ -56,7 +56,7 @@ else:
     libs_postfix = ''
 
 def build(target):
-    print 'building ' + target + ' for ' + BUILD_MODE + '...'
+    print('building ' + target + ' for ' + BUILD_MODE + '...')
     call('cmake --build ' + build_dir + ' --target ' + target + ' --config ' + BUILD_MODE)
 
 def copy_nakama_lib():
@@ -82,7 +82,7 @@ def copy_rest_lib():
 
 def copy_dll(dest):
     print
-    print 'copying to release folder...'
+    print('copying to release folder...')
     copy_file(build_dir + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.lib', dest)
     copy_file(build_dir + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.dll', dest)
 
@@ -101,7 +101,7 @@ build_dir = os.path.abspath('build\\' + TOOLSET + '_' + ARCH)
 makedirs(build_dir)
 
 print
-print 'Building for Arch:', ARCH + ', Toolset:', TOOLSET + ', Mode:', BUILD_MODE + ', DLL:', str(DLL)
+print('Building for Arch:', ARCH + ', Toolset:', TOOLSET + ', Mode:', BUILD_MODE + ', DLL:', str(DLL))
 print
 
 if ARCH == 'x64':
@@ -143,7 +143,7 @@ else:
     release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/libs/' + arch_folder + '/' + TOOLSET + '/' + BUILD_MODE)
 
 makedirs(release_libs_path)
-print 'release_libs_path:', release_libs_path
+print('release_libs_path:', release_libs_path)
 
 if DLL:
     copy_dll(release_libs_path)

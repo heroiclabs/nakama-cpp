@@ -31,8 +31,8 @@ else:
 BUILD_MODE = 'Release'
 build_dir = os.path.abspath('build/' + BUILD_MODE + '_' + ARCH)
 
-print 'Architecture:', ARCH
-print 'Build mode  :', BUILD_MODE
+print('Architecture:', ARCH)
+print('Build mode  :', BUILD_MODE)
 
 def makedirs(dir):
     if not os.path.isdir(dir):
@@ -44,7 +44,7 @@ def call(command, shell=False):
         sys.exit(-1)
 
 def build(target):
-    print 'building ' + target + '...'
+    print('building ' + target + '...')
     call('cmake --build . --target ' + target, shell=True)
 
 makedirs(build_dir)

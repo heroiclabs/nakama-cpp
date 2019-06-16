@@ -35,7 +35,7 @@ def create_universal_lib(libs):
         return
 
     name = os.path.basename(libs[0])
-    print 'creating universal library', name + ' ...'
+    print('creating universal library', name + ' ...')
     lipo_commands = ['lipo', '-create']
     for lib in libs:
         lipo_commands.append(lib)
@@ -127,4 +127,4 @@ if BUILD_NAKAMA_SHARED:
         makedirs(dest_dir)
         copy_file(dylib_in_build, dest_dir)
 
-print 'done.'
+print('done.')
