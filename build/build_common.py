@@ -27,7 +27,11 @@ def init_common(build_common_path):
         print('please remove spaces from path and try again')
         sys.exit(-1)
 
-    execfile(os.path.join(build_common_path, 'build_config.py'), globals())
+    filename = os.path.join(build_common_path, 'build_config.py')
+    if sys.version_info[0] <= 2:
+        execfile(filename, globals())
+    else:
+        exec(compile(open(filename, "rb").read(), filename, 'exec'), globals())
 
     global USE_CPPREST
     USE_CPPREST = BUILD_HTTP_CPPREST or BUILD_WEBSOCKET_CPPREST

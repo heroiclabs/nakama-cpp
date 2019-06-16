@@ -363,7 +363,7 @@ Change submodule branch:
 ### Build Prerequisites
 
 - git
-- python 2.7
+- python 2.7 or 3.x
 - cmake 3.10+
 - go
 - perl

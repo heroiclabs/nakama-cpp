@@ -18,7 +18,11 @@ import sys
 import os
 import argparse
 
-execfile('../build_common.py')
+filename = '../build_common.py'
+if sys.version_info[0] <= 2:
+    execfile(filename)
+else:
+    exec(compile(open(filename, "rb").read(), filename, 'exec'))
 init_common(os.path.abspath('..'))
 
 parser = argparse.ArgumentParser(description='builder for iOS')

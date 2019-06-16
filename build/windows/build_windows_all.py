@@ -18,7 +18,11 @@ import os
 import sys
 import subprocess
 
-execfile('../build_config.py')
+filename = '../build_config.py'
+if sys.version_info[0] <= 2:
+    execfile(filename)
+else:
+    exec(compile(open(filename, "rb").read(), filename, 'exec'))
 
 modes_list    = ['Release', 'Debug']
 arch_list     = ['x86', 'x64']
