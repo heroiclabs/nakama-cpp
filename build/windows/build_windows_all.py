@@ -43,4 +43,4 @@ if BUILD_NAKAMA_SHARED:
             for mode in modes_list:
                 call(['python', 'build_windows.py', '-a', arch, '-m', mode, '-t', toolset, '--dll'])
 
-print 'done.'
+print('done.')

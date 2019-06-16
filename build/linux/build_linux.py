@@ -46,12 +46,12 @@ if SO:
 else:
     release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/libs/linux/' + ARCH)
 
-print 'Architecture:', ARCH
-print 'Build mode  :', BUILD_MODE
-print 'Shared object:', str(SO)
+print('Architecture:', ARCH)
+print('Build mode  :', BUILD_MODE)
+print('Shared object:', str(SO))
 
 def build(target):
-    print 'building ' + target + '...'
+    print('building ' + target + '...')
     call('cmake --build . --target ' + target, shell=True)
 
 def copy_nakama_lib():
@@ -77,7 +77,7 @@ def copy_rest_lib():
 
 def copy_so(dest):
     print
-    print 'copying to release folder...'
+    print('copying to release folder...')
     copy_file(build_dir + '/src/libnakama-cpp.so', dest)
 
 makedirs(build_dir)

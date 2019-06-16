@@ -32,7 +32,7 @@ SHARED_LIB = args.dylib
 BUILD_MODE = 'Release'
 
 print
-print 'Building for', ARCH + ', dylib:', str(SHARED_LIB)
+print('Building for', ARCH + ', dylib:', str(SHARED_LIB))
 print
 
 build_dir = './build/' + BUILD_MODE + '/' + ARCH
@@ -47,7 +47,7 @@ cwd = os.getcwd()
 makedirs(build_dir)
 
 def build(target):
-    print 'building ' + target + '...'
+    print('building ' + target + '...')
     call(['cmake',
           '--build',
           build_dir,

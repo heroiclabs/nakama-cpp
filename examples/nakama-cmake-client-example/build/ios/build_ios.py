@@ -19,8 +19,8 @@ import subprocess
 import os
 
 if len(sys.argv) < 2:
-    print "Pass ARCH parameter."
-    print "e.g. arm64 armv7 armv7s x86_64"
+    print("Pass ARCH parameter.")
+    print("e.g. arm64 armv7 armv7s x86_64")
     sys.exit(-1)
 
 ARCH = sys.argv[1]
@@ -41,7 +41,7 @@ def call(command):
         sys.exit(-1)
 
 def build(target):
-    print 'building ' + target + '...'
+    print('building ' + target + '...')
     call(['cmake',
           '--build',
           build_dir,

@@ -21,8 +21,8 @@ import shutil
 
 cur_dir = os.path.abspath('.')
 if cur_dir.find(' ') >= 0:
-    print 'Error: space foud in path:', cur_dir
-    print 'please remove spaces from path and try again'
+    print('Error: space foud in path:', cur_dir)
+    print('please remove spaces from path and try again')
     sys.exit(-1)
 
 parser = argparse.ArgumentParser(description='builder for Windows')
@@ -43,7 +43,7 @@ if args.mode:
     if args.mode in valid_modes:
         BUILD_MODE = args.mode
     else:
-        print 'Not valid mode. Supported values:', str(valid_modes)
+        print('Not valid mode. Supported values:', str(valid_modes))
         sys.exit(-1)
 
 if args.arch:
@@ -51,7 +51,7 @@ if args.arch:
     if args.arch in valid_archs:
         ARCH = args.arch
     else:
-        print 'Not valid architecture. Supported values:', str(valid_archs)
+        print('Not valid architecture. Supported values:', str(valid_archs))
         sys.exit(-1)
 
 def makedirs(dir):
@@ -64,7 +64,7 @@ def call(command):
         sys.exit(-1)
 
 def build(target):
-    print 'building ' + target + ' for ' + BUILD_MODE + '...'
+    print('building ' + target + ' for ' + BUILD_MODE + '...')
     call('cmake --build ' + build_dir + ' --target ' + target + ' --config ' + BUILD_MODE)
 
 
@@ -88,7 +88,7 @@ build_dir = os.path.abspath('build\\' + TOOLSET + '_' + ARCH)
 makedirs(build_dir)
 
 print
-print 'Building for Arch:', ARCH + ', Toolset:', TOOLSET + ', Mode:', BUILD_MODE + ', DLL:', str(DLL)
+print('Building for Arch:', ARCH + ', Toolset:', TOOLSET + ', Mode:', BUILD_MODE + ', DLL:', str(DLL))
 print
 
 cmake_cmd = ['cmake',

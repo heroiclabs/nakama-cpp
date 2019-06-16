@@ -30,7 +30,7 @@ def call(command):
         sys.exit(-1)
 
 def build(target):
-    print 'building ' + target + '...'
+    print('building ' + target + '...')
     call('cmake --build . --target ' + target + ' --config ' + BUILD_MODE)
 
 os.chdir(build_dir)

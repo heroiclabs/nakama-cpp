@@ -28,8 +28,8 @@ parser.add_argument('--so',  help='build shared object', action='store_true')
 args = parser.parse_args()
 
 if len(sys.argv) < 2:
-    print "Pass ABI parameter."
-    print ""
+    print("Pass ABI parameter.")
+    print
     sys.exit(-1)
 
 ABI = args.arch
@@ -37,14 +37,14 @@ SHARED_LIB = args.so
 BUILD_MODE = 'Release'
 
 print
-print 'Building for arch:', ABI + ', so:', str(SHARED_LIB)
+print('Building for arch:', ABI + ', so:', str(SHARED_LIB))
 print
 
 ANDROID_NDK = getEnvVar('ANDROID_NDK')
 if not ANDROID_NDK:
     ANDROID_NDK = getEnvVar('NDK_ROOT')
     if not ANDROID_NDK:
-        print "Error: no ANDROID_NDK or NDK_ROOT environment variable"
+        print("Error: no ANDROID_NDK or NDK_ROOT environment variable")
         sys.exit(-1)
 
 build_dir = os.path.abspath('build/' + ABI + '/' + BUILD_MODE)
@@ -78,10 +78,10 @@ def copy_rest_lib():
 
 def copy_shared_lib(dest):
     print
-    print 'copying to release folder...'
+    print('copying to release folder...')
     copy_file(build_dir + '/src/libnakama-cpp.so', dest)
 
-print 'ANDROID_NDK=' + ANDROID_NDK
+print('ANDROID_NDK=' + ANDROID_NDK)
 
 makedirs(build_dir)
 
