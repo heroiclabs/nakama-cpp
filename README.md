@@ -40,10 +40,14 @@ We don't recommend to copy Nakama C++ SDK to your project because it's quite big
 ### Setup for Mac and iOS projects
 
 1. Add `NAKAMA_CPP_SDK/include` in `Build Settings > Header Search Paths`
+
 2. Add libs folder in `Build Settings > Library Search Paths`:
     - `NAKAMA_CPP_SDK/libs/ios` - for iOS
     - `NAKAMA_CPP_SDK/libs/mac` - for Mac
-3. Add all `.a` files located in libs folder and `libresolv.9.tbd` in `General > Linked Frameworks and Libraries`
+
+3. In `General > Linked Frameworks and Libraries` add following:
+    - all `.a` files located in libs folder
+    - `foundation` and `security` frameworks
 
 ### Setup for Android projects
 
@@ -131,10 +135,6 @@ In `Project Settings` add following:
 - add include directory: `$(NAKAMA_CPP_SDK)/include`
 - add link directory: `$(NAKAMA_CPP_SDK)/libs/{platform}/{ABI}`
 - add all libraries for linking from link directory
-
-For Mac and iOS:
-
-- Add `libresolv.9.tbd` system library
 
 ## Threading model
 
