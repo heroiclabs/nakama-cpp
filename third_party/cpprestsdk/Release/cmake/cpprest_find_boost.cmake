@@ -52,8 +52,10 @@ function(cpprest_find_boost)
     set(Boost_LIBRARIES "" CACHE INTERNAL "")
     set(Boost_INCLUDE_DIR "${BOOST_DIR}/include/boost-1_69" CACHE INTERNAL "")
   elseif(UNIX)
+    set(Boost_USE_STATIC_LIBS ON)  # only find static libs
     find_package(Boost REQUIRED COMPONENTS system thread chrono)
   else()
+    set(Boost_USE_STATIC_LIBS ON)  # only find static libs
     find_package(Boost REQUIRED COMPONENTS system date_time regex)
   endif()
 
