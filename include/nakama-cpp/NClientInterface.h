@@ -42,7 +42,7 @@
 #include "nakama-cpp/data/NStorageObjectId.h"
 #include "nakama-cpp/data/NRpc.h"
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     using ErrorCallback = std::function<void(const NError&)>;
 
@@ -1088,4 +1088,5 @@ namespace Nakama {
     };
 
     using NClientPtr = std::shared_ptr<NClientInterface>;
-}
+
+NAKAMA_NAMESPACE_END

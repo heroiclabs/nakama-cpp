@@ -19,7 +19,7 @@
 #include "nakama-cpp/realtime/rtdata/NUserPresence.h"
 #include <vector>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// A set of joins and leaves on a particular channel.
     struct NAKAMA_API NChannelPresenceEvent
@@ -32,4 +32,5 @@ namespace Nakama {
         std::string userIdOne;                   ///< The ID of the first DM user, or an empty string if this message was not sent through a DM chat.
         std::string userIdTwo;                   ///< The ID of the second DM user, or an empty string if this message was not sent through a DM chat.
     };
-}
+
+NAKAMA_NAMESPACE_END

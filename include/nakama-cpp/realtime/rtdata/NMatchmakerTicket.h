@@ -18,11 +18,12 @@
 
 #include <string>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// A ticket representing a new matchmaking process.
     struct NAKAMA_API NMatchmakerTicket
     {
         std::string ticket;      ///< The ticket that can be used to cancel matchmaking.
     };
-}
+
+NAKAMA_NAMESPACE_END

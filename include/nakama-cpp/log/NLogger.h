@@ -42,7 +42,7 @@
     #define NLOG(level, format,...)   do {} while (0)
 #endif // NLOGS_ENABLED
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// Logger
     class NAKAMA_API NLogger
@@ -84,4 +84,4 @@ namespace Nakama {
         void operator=(const NLogger&) = delete;
     };
 
-}
+NAKAMA_NAMESPACE_END

@@ -19,11 +19,12 @@
 #include "nakama-cpp/realtime/rtdata/NUserPresence.h"
 #include <vector>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// A snapshot of statuses for some set of users.
     struct NAKAMA_API NStatus
     {
         std::vector<NUserPresence> presences;   ///< User statuses.
     };
-}
+
+NAKAMA_NAMESPACE_END

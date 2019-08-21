@@ -18,7 +18,7 @@
 
 #include <string>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// Represents identifying information for a stream.
     struct NAKAMA_API NStream
@@ -28,4 +28,5 @@ namespace Nakama {
         std::string subcontext;         ///< Subcontext is a secondary identifier, if any.
         std::string label;              ///< The label is an arbitrary identifying string, if the stream has one.
     };
-}
+
+NAKAMA_NAMESPACE_END

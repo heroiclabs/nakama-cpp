@@ -19,7 +19,7 @@
 #include "nakama-cpp/realtime/NRtClientListenerInterface.h"
 #include <functional>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /**
      * A default listener for receiving <c>NRtClientInterface</c> events.
@@ -82,4 +82,5 @@ namespace Nakama {
         StreamPresenceCallback _streamPresenceCallback;
         StreamDataCallback _streamDataCallback;
     };
-}
+
+NAKAMA_NAMESPACE_END

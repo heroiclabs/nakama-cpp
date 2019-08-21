@@ -19,7 +19,7 @@
 #include "nakama-cpp/realtime/rtdata/NUserPresence.h"
 #include "nakama-cpp/NTypes.h"
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// Realtime match data received from the server.
     struct NAKAMA_API NMatchData
@@ -29,4 +29,5 @@ namespace Nakama {
         int64_t opCode;            ///< Op code value.
         NBytes data;               ///< Data payload, if any.
     };
-}
+
+NAKAMA_NAMESPACE_END

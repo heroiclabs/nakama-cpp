@@ -19,7 +19,7 @@
 #include "nakama-cpp/realtime/rtdata/NUserPresence.h"
 #include "nakama-cpp/realtime/rtdata/NStream.h"
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// A data message delivered over a stream.
     struct NAKAMA_API NStreamData
@@ -28,4 +28,5 @@ namespace Nakama {
         NUserPresence sender;    ///< The sender, if any.
         std::string data;        ///< Arbitrary contents of the data message.
     };
-}
+
+NAKAMA_NAMESPACE_END

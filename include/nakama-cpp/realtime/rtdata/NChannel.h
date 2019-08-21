@@ -20,7 +20,7 @@
 #include <vector>
 #include <memory>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// A realtime chat channel.
     struct NAKAMA_API NChannel
@@ -35,4 +35,5 @@ namespace Nakama {
     };
 
     using NChannelPtr = std::shared_ptr<NChannel>;
-}
+
+NAKAMA_NAMESPACE_END

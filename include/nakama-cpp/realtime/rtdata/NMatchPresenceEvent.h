@@ -19,7 +19,7 @@
 #include "nakama-cpp/realtime/rtdata/NUserPresence.h"
 #include <vector>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// A set of joins and leaves on a particular realtime match.
     struct NAKAMA_API NMatchPresenceEvent
@@ -28,4 +28,5 @@ namespace Nakama {
         std::vector<NUserPresence> joins;    /// User presences that have just joined the match.
         std::vector<NUserPresence> leaves;   /// User presences that have just left the match.
     };
-}
+
+NAKAMA_NAMESPACE_END

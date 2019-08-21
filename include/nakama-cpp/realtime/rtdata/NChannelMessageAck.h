@@ -19,7 +19,7 @@
 #include "nakama-cpp/NTypes.h"
 #include <string>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// A receipt reply from a channel message send operation.
     struct NAKAMA_API NChannelMessageAck
@@ -36,4 +36,5 @@ namespace Nakama {
         std::string userIdOne;          ///< The ID of the first DM user, or an empty string if this message was not sent through a DM chat.
         std::string userIdTwo;          ///< The ID of the second DM user, or an empty string if this message was not sent through a DM chat.
     };
-}
+
+NAKAMA_NAMESPACE_END

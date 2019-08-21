@@ -19,7 +19,7 @@
 #include "nakama-cpp/realtime/rtdata/NUserPresence.h"
 #include <vector>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// A batch of status updates for a given user.
     struct NAKAMA_API NStatusPresenceEvent
@@ -27,4 +27,5 @@ namespace Nakama {
         std::vector<NUserPresence> joins;    ///< New statuses for the user.
         std::vector<NUserPresence> leaves;   ///< Previous statuses for the user.
     };
-}
+
+NAKAMA_NAMESPACE_END

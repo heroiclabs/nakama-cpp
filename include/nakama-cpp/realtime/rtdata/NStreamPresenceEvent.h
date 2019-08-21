@@ -20,7 +20,7 @@
 #include "nakama-cpp/realtime/rtdata/NStream.h"
 #include <vector>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// A set of joins and leaves on a particular stream.
     struct NAKAMA_API NStreamPresenceEvent
@@ -29,4 +29,5 @@ namespace Nakama {
         std::vector<NUserPresence> joins;    ///< Presences joining the stream as part of this event, if any.
         std::vector<NUserPresence> leaves;   ///< Presences leaving the stream as part of this event, if any.
     };
-}
+
+NAKAMA_NAMESPACE_END

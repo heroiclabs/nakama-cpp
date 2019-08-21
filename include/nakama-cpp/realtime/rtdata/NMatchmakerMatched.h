@@ -21,7 +21,7 @@
 #include <vector>
 #include <memory>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     struct NAKAMA_API NMatchmakerUser
     {
@@ -42,4 +42,5 @@ namespace Nakama {
     };
 
     using NMatchmakerMatchedPtr = std::shared_ptr<NMatchmakerMatched>;
-}
+
+NAKAMA_NAMESPACE_END

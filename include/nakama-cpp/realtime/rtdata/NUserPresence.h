@@ -18,7 +18,7 @@
 
 #include <string>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /// A user session associated to a stream, usually through a list operation or a join/leave event.
     struct NAKAMA_API NUserPresence
@@ -29,4 +29,5 @@ namespace Nakama {
         bool persistence = false;       ///< Whether this presence generates persistent data/messages, if applicable for the stream type.
         std::string status;             ///< A user-set status message for this stream, if applicable.
     };
-}
+
+NAKAMA_NAMESPACE_END

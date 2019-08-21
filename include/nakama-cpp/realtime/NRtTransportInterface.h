@@ -22,7 +22,7 @@
 #include <memory>
 #include <vector>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     enum class NAKAMA_API NRtTransportType
     {
@@ -77,21 +77,21 @@ namespace Nakama {
         virtual void connect(const std::string& url, NRtTransportType type) = 0;
 
         /**
-        * @return True if connected to server.
-        */
+         * @return True if connected to server.
+         */
         virtual bool isConnected() const { return _connected; }
 
         /**
-        * Close the connection with the server.
-        */
+         * Close the connection with the server.
+         */
         virtual void disconnect() = 0;
 
         /**
-        * Send bytes data to the server.
-        *
-        * @param data The byte data to send.
-        * @return True if sent successfully.
-        */
+         * Send bytes data to the server.
+         *
+         * @param data The byte data to send.
+         * @return True if sent successfully.
+         */
         virtual bool send(const NBytes& data) = 0;
 
     protected:
@@ -109,4 +109,5 @@ namespace Nakama {
     };
 
     using NRtTransportPtr = std::shared_ptr<NRtTransportInterface>;
-}
+
+NAKAMA_NAMESPACE_END

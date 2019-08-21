@@ -19,7 +19,7 @@
 #include "nakama-cpp/NExport.h"
 #include <jni.h>
 
-namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
     /*
      * Initialize SDK with JVM (on Android only)
@@ -30,6 +30,6 @@ namespace Nakama {
      */
     NAKAMA_API void init(JavaVM* vm);
 
-}
+NAKAMA_NAMESPACE_END
 
 #endif // __ANDROID__
