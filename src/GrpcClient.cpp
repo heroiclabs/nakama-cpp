@@ -17,8 +17,6 @@
 #ifdef BUILD_GRPC_CLIENT
 
 #include "GrpcClient.h"
-#include "realtime/NRtClient.h"
-#include "nakama-cpp/realtime/NWebsocketsFactory.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/StrUtil.h"
 #include "nakama-cpp/NakamaVersion.h"
@@ -38,10 +36,11 @@ using namespace std;
 namespace Nakama {
 
 GrpcClient::GrpcClient(const NClientParameters& parameters)
-    : _host(parameters.host)
-    , _ssl(parameters.ssl)
 {
     NLOG(NLogLevel::Info, "Created. NakamaSdkVersion: %s", getNakamaSdkVersion());
+
+    _host = parameters.host;
+    _ssl = parameters.ssl;
 
     int32_t port = parameters.port;
 
@@ -133,34 +132,6 @@ void GrpcClient::tick()
             break;
         }
     } while (continueLoop);
-}
-
-NRtClientPtr GrpcClient::createRtClient(int32_t port, NRtTransportPtr transport)
-{
-    RtClientParameters parameters;
-    
-    parameters.host = _host;
-    parameters.port = port;
-    parameters.ssl  = _ssl;
-
-    return createRtClient(parameters, transport);
-}
-
-NRtClientPtr GrpcClient::createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport)
-{
-    if (!transport)
-    {
-        transport = createDefaultWebsocket();
-
-        if (!transport)
-        {
-            NLOG_ERROR("No default websockets transport available. Please set transport.");
-            return nullptr;
-        }
-    }
-
-    NRtClientPtr client(new NRtClient(transport, parameters.host, parameters.port, parameters.ssl));
-    return client;
 }
 
 ReqContext * GrpcClient::createReqContext(NSessionPtr session)

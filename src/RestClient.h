@@ -16,8 +16,7 @@
 
 #pragma once
 
-#include "nakama-cpp/NClientInterface.h"
-#include "nakama-cpp/ClientFactory.h"
+#include "BaseClient.h"
 #include "google/protobuf/message.h"
 #include <set>
 
@@ -35,21 +34,15 @@ namespace Nakama {
      * REST client (HTTP/1.1) to interact with Nakama server.
      * Don't use it directly, use `createRestClient` instead.
      */
-    class RestClient : public NClientInterface
+    class RestClient : public BaseClient
     {
     public:
         explicit RestClient(const NClientParameters& parameters, NHttpTransportPtr httpClient);
         ~RestClient();
 
-        void setErrorCallback(ErrorCallback errorCallback) override { _defaultErrorCallback = errorCallback; }
-
         void disconnect() override;
 
         void tick() override;
-
-        NRtClientPtr createRtClient(int32_t port, NRtTransportPtr transport) override;
-        
-        NRtClientPtr createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport) override;
 
         void authenticateDevice(
             const std::string& id,
@@ -589,11 +582,7 @@ namespace Nakama {
         void reqError(RestReqContext* reqContext, const NError& error);
 
     private:
-        std::string _host;
-        bool _ssl = false;
-        std::string _basicAuthMetadata;
         std::set<RestReqContext*> _reqContexts;
-        ErrorCallback _defaultErrorCallback;
         NHttpTransportPtr _httpClient;
     };
 }
