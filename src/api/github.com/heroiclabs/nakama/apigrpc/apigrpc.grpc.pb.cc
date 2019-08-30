@@ -663,20 +663,20 @@ void Nakama::Stub::experimental_async::ListChannelMessages(::grpc::ClientContext
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::ChannelMessageList>::Create(channel_.get(), cq, rpcmethod_ListChannelMessages_, context, request, false);
 }
 
-::grpc::Status Nakama::Stub::ListFriends(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::nakama::api::Friends* response) {
+::grpc::Status Nakama::Stub::ListFriends(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::nakama::api::FriendList* response) {
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_ListFriends_, context, request, response);
 }
 
-void Nakama::Stub::experimental_async::ListFriends(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response, std::function<void(::grpc::Status)> f) {
+void Nakama::Stub::experimental_async::ListFriends(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response, std::function<void(::grpc::Status)> f) {
   return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_ListFriends_, context, request, response, std::move(f));
 }
 
-::grpc::ClientAsyncResponseReader< ::nakama::api::Friends>* Nakama::Stub::AsyncListFriendsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::Friends>::Create(channel_.get(), cq, rpcmethod_ListFriends_, context, request, true);
+::grpc::ClientAsyncResponseReader< ::nakama::api::FriendList>* Nakama::Stub::AsyncListFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::FriendList>::Create(channel_.get(), cq, rpcmethod_ListFriends_, context, request, true);
 }
 
-::grpc::ClientAsyncResponseReader< ::nakama::api::Friends>* Nakama::Stub::PrepareAsyncListFriendsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::Friends>::Create(channel_.get(), cq, rpcmethod_ListFriends_, context, request, false);
+::grpc::ClientAsyncResponseReader< ::nakama::api::FriendList>* Nakama::Stub::PrepareAsyncListFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::FriendList>::Create(channel_.get(), cq, rpcmethod_ListFriends_, context, request, false);
 }
 
 ::grpc::Status Nakama::Stub::ListGroups(::grpc::ClientContext* context, const ::nakama::api::ListGroupsRequest& request, ::nakama::api::GroupList* response) {
@@ -1259,7 +1259,7 @@ Nakama::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Nakama_method_names[32],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::google::protobuf::Empty, ::nakama::api::Friends>(
+      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListFriendsRequest, ::nakama::api::FriendList>(
           std::mem_fn(&Nakama::Service::ListFriends), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Nakama_method_names[33],
@@ -1620,7 +1620,7 @@ Nakama::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Nakama::Service::ListFriends(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response) {
+::grpc::Status Nakama::Service::ListFriends(::grpc::ServerContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response) {
   (void) context;
   (void) request;
   (void) response;

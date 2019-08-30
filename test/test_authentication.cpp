@@ -33,7 +33,7 @@ void test_authenticateDevice()
         test.stopTest(session->getAuthToken().empty() == false);
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
     test.runTest();
 }
@@ -50,7 +50,11 @@ void test_authenticateDevice2()
         test.stopTest(session->getAuthToken().empty() == false);
     };
 
-    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback);
+    NStringMap vars;
+
+    vars.emplace("param1", "test value");
+
+    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, vars, successCallback);
 
     test.runTest();
 }

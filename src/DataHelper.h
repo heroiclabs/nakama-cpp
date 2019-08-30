@@ -22,7 +22,7 @@
 #include "nakama-cpp/data/NGroupUserList.h"
 #include "nakama-cpp/data/NUsers.h"
 #include "nakama-cpp/data/NUserGroupList.h"
-#include "nakama-cpp/data/NFriends.h"
+#include "nakama-cpp/data/NFriendList.h"
 #include "nakama-cpp/data/NLeaderboardRecordList.h"
 #include "nakama-cpp/data/NMatchList.h"
 #include "nakama-cpp/data/NNotificationList.h"
@@ -67,7 +67,7 @@ namespace Nakama {
     void assign(NUserGroupList& users, const nakama::api::UserGroupList& data);
     void assign(NUsers& users, const nakama::api::Users& data);
     void assign(NFriend& afriend, const nakama::api::Friend& data);
-    void assign(NFriends& friends, const nakama::api::Friends& data);
+    void assign(NFriendList& friends, const nakama::api::FriendList& data);
     void assign(NLeaderboardRecordList& list, const nakama::api::LeaderboardRecordList& data);
     void assign(NLeaderboardRecord& record, const nakama::api::LeaderboardRecord& data);
     void assign(NMatchList& list, const nakama::api::MatchList& data);

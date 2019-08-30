@@ -44,7 +44,7 @@ namespace protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[85];
+  static const ::google::protobuf::internal::ParseTable schema[93];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -59,24 +59,45 @@ extern AccountDefaultTypeInternal _Account_default_instance_;
 class AccountCustom;
 class AccountCustomDefaultTypeInternal;
 extern AccountCustomDefaultTypeInternal _AccountCustom_default_instance_;
+class AccountCustom_VarsEntry_DoNotUse;
+class AccountCustom_VarsEntry_DoNotUseDefaultTypeInternal;
+extern AccountCustom_VarsEntry_DoNotUseDefaultTypeInternal _AccountCustom_VarsEntry_DoNotUse_default_instance_;
 class AccountDevice;
 class AccountDeviceDefaultTypeInternal;
 extern AccountDeviceDefaultTypeInternal _AccountDevice_default_instance_;
+class AccountDevice_VarsEntry_DoNotUse;
+class AccountDevice_VarsEntry_DoNotUseDefaultTypeInternal;
+extern AccountDevice_VarsEntry_DoNotUseDefaultTypeInternal _AccountDevice_VarsEntry_DoNotUse_default_instance_;
 class AccountEmail;
 class AccountEmailDefaultTypeInternal;
 extern AccountEmailDefaultTypeInternal _AccountEmail_default_instance_;
+class AccountEmail_VarsEntry_DoNotUse;
+class AccountEmail_VarsEntry_DoNotUseDefaultTypeInternal;
+extern AccountEmail_VarsEntry_DoNotUseDefaultTypeInternal _AccountEmail_VarsEntry_DoNotUse_default_instance_;
 class AccountFacebook;
 class AccountFacebookDefaultTypeInternal;
 extern AccountFacebookDefaultTypeInternal _AccountFacebook_default_instance_;
+class AccountFacebook_VarsEntry_DoNotUse;
+class AccountFacebook_VarsEntry_DoNotUseDefaultTypeInternal;
+extern AccountFacebook_VarsEntry_DoNotUseDefaultTypeInternal _AccountFacebook_VarsEntry_DoNotUse_default_instance_;
 class AccountGameCenter;
 class AccountGameCenterDefaultTypeInternal;
 extern AccountGameCenterDefaultTypeInternal _AccountGameCenter_default_instance_;
+class AccountGameCenter_VarsEntry_DoNotUse;
+class AccountGameCenter_VarsEntry_DoNotUseDefaultTypeInternal;
+extern AccountGameCenter_VarsEntry_DoNotUseDefaultTypeInternal _AccountGameCenter_VarsEntry_DoNotUse_default_instance_;
 class AccountGoogle;
 class AccountGoogleDefaultTypeInternal;
 extern AccountGoogleDefaultTypeInternal _AccountGoogle_default_instance_;
+class AccountGoogle_VarsEntry_DoNotUse;
+class AccountGoogle_VarsEntry_DoNotUseDefaultTypeInternal;
+extern AccountGoogle_VarsEntry_DoNotUseDefaultTypeInternal _AccountGoogle_VarsEntry_DoNotUse_default_instance_;
 class AccountSteam;
 class AccountSteamDefaultTypeInternal;
 extern AccountSteamDefaultTypeInternal _AccountSteam_default_instance_;
+class AccountSteam_VarsEntry_DoNotUse;
+class AccountSteam_VarsEntry_DoNotUseDefaultTypeInternal;
+extern AccountSteam_VarsEntry_DoNotUseDefaultTypeInternal _AccountSteam_VarsEntry_DoNotUse_default_instance_;
 class AddFriendsRequest;
 class AddFriendsRequestDefaultTypeInternal;
 extern AddFriendsRequestDefaultTypeInternal _AddFriendsRequest_default_instance_;
@@ -143,9 +164,9 @@ extern Event_PropertiesEntry_DoNotUseDefaultTypeInternal _Event_PropertiesEntry_
 class Friend;
 class FriendDefaultTypeInternal;
 extern FriendDefaultTypeInternal _Friend_default_instance_;
-class Friends;
-class FriendsDefaultTypeInternal;
-extern FriendsDefaultTypeInternal _Friends_default_instance_;
+class FriendList;
+class FriendListDefaultTypeInternal;
+extern FriendListDefaultTypeInternal _FriendList_default_instance_;
 class GetUsersRequest;
 class GetUsersRequestDefaultTypeInternal;
 extern GetUsersRequestDefaultTypeInternal _GetUsersRequest_default_instance_;
@@ -188,6 +209,9 @@ extern LinkFacebookRequestDefaultTypeInternal _LinkFacebookRequest_default_insta
 class ListChannelMessagesRequest;
 class ListChannelMessagesRequestDefaultTypeInternal;
 extern ListChannelMessagesRequestDefaultTypeInternal _ListChannelMessagesRequest_default_instance_;
+class ListFriendsRequest;
+class ListFriendsRequestDefaultTypeInternal;
+extern ListFriendsRequestDefaultTypeInternal _ListFriendsRequest_default_instance_;
 class ListGroupUsersRequest;
 class ListGroupUsersRequestDefaultTypeInternal;
 extern ListGroupUsersRequestDefaultTypeInternal _ListGroupUsersRequest_default_instance_;
@@ -314,12 +338,19 @@ namespace google {
 namespace protobuf {
 template<> ::nakama::api::Account* Arena::CreateMaybeMessage<::nakama::api::Account>(Arena*);
 template<> ::nakama::api::AccountCustom* Arena::CreateMaybeMessage<::nakama::api::AccountCustom>(Arena*);
+template<> ::nakama::api::AccountCustom_VarsEntry_DoNotUse* Arena::CreateMaybeMessage<::nakama::api::AccountCustom_VarsEntry_DoNotUse>(Arena*);
 template<> ::nakama::api::AccountDevice* Arena::CreateMaybeMessage<::nakama::api::AccountDevice>(Arena*);
+template<> ::nakama::api::AccountDevice_VarsEntry_DoNotUse* Arena::CreateMaybeMessage<::nakama::api::AccountDevice_VarsEntry_DoNotUse>(Arena*);
 template<> ::nakama::api::AccountEmail* Arena::CreateMaybeMessage<::nakama::api::AccountEmail>(Arena*);
+template<> ::nakama::api::AccountEmail_VarsEntry_DoNotUse* Arena::CreateMaybeMessage<::nakama::api::AccountEmail_VarsEntry_DoNotUse>(Arena*);
 template<> ::nakama::api::AccountFacebook* Arena::CreateMaybeMessage<::nakama::api::AccountFacebook>(Arena*);
+template<> ::nakama::api::AccountFacebook_VarsEntry_DoNotUse* Arena::CreateMaybeMessage<::nakama::api::AccountFacebook_VarsEntry_DoNotUse>(Arena*);
 template<> ::nakama::api::AccountGameCenter* Arena::CreateMaybeMessage<::nakama::api::AccountGameCenter>(Arena*);
+template<> ::nakama::api::AccountGameCenter_VarsEntry_DoNotUse* Arena::CreateMaybeMessage<::nakama::api::AccountGameCenter_VarsEntry_DoNotUse>(Arena*);
 template<> ::nakama::api::AccountGoogle* Arena::CreateMaybeMessage<::nakama::api::AccountGoogle>(Arena*);
+template<> ::nakama::api::AccountGoogle_VarsEntry_DoNotUse* Arena::CreateMaybeMessage<::nakama::api::AccountGoogle_VarsEntry_DoNotUse>(Arena*);
 template<> ::nakama::api::AccountSteam* Arena::CreateMaybeMessage<::nakama::api::AccountSteam>(Arena*);
+template<> ::nakama::api::AccountSteam_VarsEntry_DoNotUse* Arena::CreateMaybeMessage<::nakama::api::AccountSteam_VarsEntry_DoNotUse>(Arena*);
 template<> ::nakama::api::AddFriendsRequest* Arena::CreateMaybeMessage<::nakama::api::AddFriendsRequest>(Arena*);
 template<> ::nakama::api::AddGroupUsersRequest* Arena::CreateMaybeMessage<::nakama::api::AddGroupUsersRequest>(Arena*);
 template<> ::nakama::api::AuthenticateCustomRequest* Arena::CreateMaybeMessage<::nakama::api::AuthenticateCustomRequest>(Arena*);
@@ -342,7 +373,7 @@ template<> ::nakama::api::DeleteStorageObjectsRequest* Arena::CreateMaybeMessage
 template<> ::nakama::api::Event* Arena::CreateMaybeMessage<::nakama::api::Event>(Arena*);
 template<> ::nakama::api::Event_PropertiesEntry_DoNotUse* Arena::CreateMaybeMessage<::nakama::api::Event_PropertiesEntry_DoNotUse>(Arena*);
 template<> ::nakama::api::Friend* Arena::CreateMaybeMessage<::nakama::api::Friend>(Arena*);
-template<> ::nakama::api::Friends* Arena::CreateMaybeMessage<::nakama::api::Friends>(Arena*);
+template<> ::nakama::api::FriendList* Arena::CreateMaybeMessage<::nakama::api::FriendList>(Arena*);
 template<> ::nakama::api::GetUsersRequest* Arena::CreateMaybeMessage<::nakama::api::GetUsersRequest>(Arena*);
 template<> ::nakama::api::Group* Arena::CreateMaybeMessage<::nakama::api::Group>(Arena*);
 template<> ::nakama::api::GroupList* Arena::CreateMaybeMessage<::nakama::api::GroupList>(Arena*);
@@ -357,6 +388,7 @@ template<> ::nakama::api::LeaderboardRecordList* Arena::CreateMaybeMessage<::nak
 template<> ::nakama::api::LeaveGroupRequest* Arena::CreateMaybeMessage<::nakama::api::LeaveGroupRequest>(Arena*);
 template<> ::nakama::api::LinkFacebookRequest* Arena::CreateMaybeMessage<::nakama::api::LinkFacebookRequest>(Arena*);
 template<> ::nakama::api::ListChannelMessagesRequest* Arena::CreateMaybeMessage<::nakama::api::ListChannelMessagesRequest>(Arena*);
+template<> ::nakama::api::ListFriendsRequest* Arena::CreateMaybeMessage<::nakama::api::ListFriendsRequest>(Arena*);
 template<> ::nakama::api::ListGroupUsersRequest* Arena::CreateMaybeMessage<::nakama::api::ListGroupUsersRequest>(Arena*);
 template<> ::nakama::api::ListGroupsRequest* Arena::CreateMaybeMessage<::nakama::api::ListGroupsRequest>(Arena*);
 template<> ::nakama::api::ListLeaderboardRecordsAroundOwnerRequest* Arena::CreateMaybeMessage<::nakama::api::ListLeaderboardRecordsAroundOwnerRequest>(Arena*);
@@ -653,6 +685,27 @@ class Account : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 };
 // -------------------------------------------------------------------
 
+class AccountCustom_VarsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<AccountCustom_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<AccountCustom_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > SuperType;
+  AccountCustom_VarsEntry_DoNotUse();
+  AccountCustom_VarsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const AccountCustom_VarsEntry_DoNotUse& other);
+  static const AccountCustom_VarsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const AccountCustom_VarsEntry_DoNotUse*>(&_AccountCustom_VarsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
+// -------------------------------------------------------------------
+
 class AccountCustom : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.AccountCustom) */ {
  public:
   AccountCustom();
@@ -688,7 +741,7 @@ class AccountCustom : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_AccountCustom_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   void Swap(AccountCustom* other);
   friend void swap(AccountCustom& a, AccountCustom& b) {
@@ -738,7 +791,17 @@ class AccountCustom : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
+
+  // map<string, string> vars = 2;
+  int vars_size() const;
+  void clear_vars();
+  static const int kVarsFieldNumber = 2;
+  const ::google::protobuf::Map< ::std::string, ::std::string >&
+      vars() const;
+  ::google::protobuf::Map< ::std::string, ::std::string >*
+      mutable_vars();
 
   // string id = 1;
   void clear_id();
@@ -758,10 +821,37 @@ class AccountCustom : public ::google::protobuf::Message /* @@protoc_insertion_p
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      AccountCustom_VarsEntry_DoNotUse,
+      ::std::string, ::std::string,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      0 > vars_;
   ::google::protobuf::internal::ArenaStringPtr id_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class AccountDevice_VarsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<AccountDevice_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<AccountDevice_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > SuperType;
+  AccountDevice_VarsEntry_DoNotUse();
+  AccountDevice_VarsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const AccountDevice_VarsEntry_DoNotUse& other);
+  static const AccountDevice_VarsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const AccountDevice_VarsEntry_DoNotUse*>(&_AccountDevice_VarsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
 // -------------------------------------------------------------------
 
 class AccountDevice : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.AccountDevice) */ {
@@ -799,7 +889,7 @@ class AccountDevice : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_AccountDevice_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    4;
 
   void Swap(AccountDevice* other);
   friend void swap(AccountDevice& a, AccountDevice& b) {
@@ -849,7 +939,17 @@ class AccountDevice : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
+
+  // map<string, string> vars = 2;
+  int vars_size() const;
+  void clear_vars();
+  static const int kVarsFieldNumber = 2;
+  const ::google::protobuf::Map< ::std::string, ::std::string >&
+      vars() const;
+  ::google::protobuf::Map< ::std::string, ::std::string >*
+      mutable_vars();
 
   // string id = 1;
   void clear_id();
@@ -869,10 +969,37 @@ class AccountDevice : public ::google::protobuf::Message /* @@protoc_insertion_p
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      AccountDevice_VarsEntry_DoNotUse,
+      ::std::string, ::std::string,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      0 > vars_;
   ::google::protobuf::internal::ArenaStringPtr id_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class AccountEmail_VarsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<AccountEmail_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<AccountEmail_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > SuperType;
+  AccountEmail_VarsEntry_DoNotUse();
+  AccountEmail_VarsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const AccountEmail_VarsEntry_DoNotUse& other);
+  static const AccountEmail_VarsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const AccountEmail_VarsEntry_DoNotUse*>(&_AccountEmail_VarsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
 // -------------------------------------------------------------------
 
 class AccountEmail : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.AccountEmail) */ {
@@ -910,7 +1037,7 @@ class AccountEmail : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_AccountEmail_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    6;
 
   void Swap(AccountEmail* other);
   friend void swap(AccountEmail& a, AccountEmail& b) {
@@ -960,7 +1087,17 @@ class AccountEmail : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
+
+  // map<string, string> vars = 3;
+  int vars_size() const;
+  void clear_vars();
+  static const int kVarsFieldNumber = 3;
+  const ::google::protobuf::Map< ::std::string, ::std::string >&
+      vars() const;
+  ::google::protobuf::Map< ::std::string, ::std::string >*
+      mutable_vars();
 
   // string email = 1;
   void clear_email();
@@ -994,11 +1131,38 @@ class AccountEmail : public ::google::protobuf::Message /* @@protoc_insertion_po
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      AccountEmail_VarsEntry_DoNotUse,
+      ::std::string, ::std::string,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      0 > vars_;
   ::google::protobuf::internal::ArenaStringPtr email_;
   ::google::protobuf::internal::ArenaStringPtr password_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class AccountFacebook_VarsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<AccountFacebook_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<AccountFacebook_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > SuperType;
+  AccountFacebook_VarsEntry_DoNotUse();
+  AccountFacebook_VarsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const AccountFacebook_VarsEntry_DoNotUse& other);
+  static const AccountFacebook_VarsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const AccountFacebook_VarsEntry_DoNotUse*>(&_AccountFacebook_VarsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
 // -------------------------------------------------------------------
 
 class AccountFacebook : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.AccountFacebook) */ {
@@ -1036,7 +1200,7 @@ class AccountFacebook : public ::google::protobuf::Message /* @@protoc_insertion
                &_AccountFacebook_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    8;
 
   void Swap(AccountFacebook* other);
   friend void swap(AccountFacebook& a, AccountFacebook& b) {
@@ -1086,7 +1250,17 @@ class AccountFacebook : public ::google::protobuf::Message /* @@protoc_insertion
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
+
+  // map<string, string> vars = 2;
+  int vars_size() const;
+  void clear_vars();
+  static const int kVarsFieldNumber = 2;
+  const ::google::protobuf::Map< ::std::string, ::std::string >&
+      vars() const;
+  ::google::protobuf::Map< ::std::string, ::std::string >*
+      mutable_vars();
 
   // string token = 1;
   void clear_token();
@@ -1106,10 +1280,37 @@ class AccountFacebook : public ::google::protobuf::Message /* @@protoc_insertion
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      AccountFacebook_VarsEntry_DoNotUse,
+      ::std::string, ::std::string,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      0 > vars_;
   ::google::protobuf::internal::ArenaStringPtr token_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class AccountGameCenter_VarsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<AccountGameCenter_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<AccountGameCenter_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > SuperType;
+  AccountGameCenter_VarsEntry_DoNotUse();
+  AccountGameCenter_VarsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const AccountGameCenter_VarsEntry_DoNotUse& other);
+  static const AccountGameCenter_VarsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const AccountGameCenter_VarsEntry_DoNotUse*>(&_AccountGameCenter_VarsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
 // -------------------------------------------------------------------
 
 class AccountGameCenter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.AccountGameCenter) */ {
@@ -1147,7 +1348,7 @@ class AccountGameCenter : public ::google::protobuf::Message /* @@protoc_inserti
                &_AccountGameCenter_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    10;
 
   void Swap(AccountGameCenter* other);
   friend void swap(AccountGameCenter& a, AccountGameCenter& b) {
@@ -1197,7 +1398,17 @@ class AccountGameCenter : public ::google::protobuf::Message /* @@protoc_inserti
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
+
+  // map<string, string> vars = 7;
+  int vars_size() const;
+  void clear_vars();
+  static const int kVarsFieldNumber = 7;
+  const ::google::protobuf::Map< ::std::string, ::std::string >&
+      vars() const;
+  ::google::protobuf::Map< ::std::string, ::std::string >*
+      mutable_vars();
 
   // string player_id = 1;
   void clear_player_id();
@@ -1279,6 +1490,12 @@ class AccountGameCenter : public ::google::protobuf::Message /* @@protoc_inserti
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      AccountGameCenter_VarsEntry_DoNotUse,
+      ::std::string, ::std::string,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      0 > vars_;
   ::google::protobuf::internal::ArenaStringPtr player_id_;
   ::google::protobuf::internal::ArenaStringPtr bundle_id_;
   ::google::protobuf::internal::ArenaStringPtr salt_;
@@ -1288,6 +1505,27 @@ class AccountGameCenter : public ::google::protobuf::Message /* @@protoc_inserti
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class AccountGoogle_VarsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<AccountGoogle_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<AccountGoogle_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > SuperType;
+  AccountGoogle_VarsEntry_DoNotUse();
+  AccountGoogle_VarsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const AccountGoogle_VarsEntry_DoNotUse& other);
+  static const AccountGoogle_VarsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const AccountGoogle_VarsEntry_DoNotUse*>(&_AccountGoogle_VarsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
 // -------------------------------------------------------------------
 
 class AccountGoogle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.AccountGoogle) */ {
@@ -1325,7 +1563,7 @@ class AccountGoogle : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_AccountGoogle_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    12;
 
   void Swap(AccountGoogle* other);
   friend void swap(AccountGoogle& a, AccountGoogle& b) {
@@ -1375,7 +1613,17 @@ class AccountGoogle : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
+
+  // map<string, string> vars = 2;
+  int vars_size() const;
+  void clear_vars();
+  static const int kVarsFieldNumber = 2;
+  const ::google::protobuf::Map< ::std::string, ::std::string >&
+      vars() const;
+  ::google::protobuf::Map< ::std::string, ::std::string >*
+      mutable_vars();
 
   // string token = 1;
   void clear_token();
@@ -1395,10 +1643,37 @@ class AccountGoogle : public ::google::protobuf::Message /* @@protoc_insertion_p
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      AccountGoogle_VarsEntry_DoNotUse,
+      ::std::string, ::std::string,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      0 > vars_;
   ::google::protobuf::internal::ArenaStringPtr token_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class AccountSteam_VarsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<AccountSteam_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<AccountSteam_VarsEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > SuperType;
+  AccountSteam_VarsEntry_DoNotUse();
+  AccountSteam_VarsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const AccountSteam_VarsEntry_DoNotUse& other);
+  static const AccountSteam_VarsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const AccountSteam_VarsEntry_DoNotUse*>(&_AccountSteam_VarsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
 // -------------------------------------------------------------------
 
 class AccountSteam : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.AccountSteam) */ {
@@ -1436,7 +1711,7 @@ class AccountSteam : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_AccountSteam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    14;
 
   void Swap(AccountSteam* other);
   friend void swap(AccountSteam& a, AccountSteam& b) {
@@ -1486,7 +1761,17 @@ class AccountSteam : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
+
+  // map<string, string> vars = 2;
+  int vars_size() const;
+  void clear_vars();
+  static const int kVarsFieldNumber = 2;
+  const ::google::protobuf::Map< ::std::string, ::std::string >&
+      vars() const;
+  ::google::protobuf::Map< ::std::string, ::std::string >*
+      mutable_vars();
 
   // string token = 1;
   void clear_token();
@@ -1506,6 +1791,12 @@ class AccountSteam : public ::google::protobuf::Message /* @@protoc_insertion_po
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      AccountSteam_VarsEntry_DoNotUse,
+      ::std::string, ::std::string,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      0 > vars_;
   ::google::protobuf::internal::ArenaStringPtr token_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
@@ -1547,7 +1838,7 @@ class AddFriendsRequest : public ::google::protobuf::Message /* @@protoc_inserti
                &_AddFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    15;
 
   void Swap(AddFriendsRequest* other);
   friend void swap(AddFriendsRequest& a, AddFriendsRequest& b) {
@@ -1689,7 +1980,7 @@ class AddGroupUsersRequest : public ::google::protobuf::Message /* @@protoc_inse
                &_AddGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    16;
 
   void Swap(AddGroupUsersRequest* other);
   friend void swap(AddGroupUsersRequest& a, AddGroupUsersRequest& b) {
@@ -1823,7 +2114,7 @@ class AuthenticateCustomRequest : public ::google::protobuf::Message /* @@protoc
                &_AuthenticateCustomRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    17;
 
   void Swap(AuthenticateCustomRequest* other);
   friend void swap(AuthenticateCustomRequest& a, AuthenticateCustomRequest& b) {
@@ -1960,7 +2251,7 @@ class AuthenticateDeviceRequest : public ::google::protobuf::Message /* @@protoc
                &_AuthenticateDeviceRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    18;
 
   void Swap(AuthenticateDeviceRequest* other);
   friend void swap(AuthenticateDeviceRequest& a, AuthenticateDeviceRequest& b) {
@@ -2097,7 +2388,7 @@ class AuthenticateEmailRequest : public ::google::protobuf::Message /* @@protoc_
                &_AuthenticateEmailRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    19;
 
   void Swap(AuthenticateEmailRequest* other);
   friend void swap(AuthenticateEmailRequest& a, AuthenticateEmailRequest& b) {
@@ -2234,7 +2525,7 @@ class AuthenticateFacebookRequest : public ::google::protobuf::Message /* @@prot
                &_AuthenticateFacebookRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    20;
 
   void Swap(AuthenticateFacebookRequest* other);
   friend void swap(AuthenticateFacebookRequest& a, AuthenticateFacebookRequest& b) {
@@ -2384,7 +2675,7 @@ class AuthenticateGameCenterRequest : public ::google::protobuf::Message /* @@pr
                &_AuthenticateGameCenterRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    21;
 
   void Swap(AuthenticateGameCenterRequest* other);
   friend void swap(AuthenticateGameCenterRequest& a, AuthenticateGameCenterRequest& b) {
@@ -2521,7 +2812,7 @@ class AuthenticateGoogleRequest : public ::google::protobuf::Message /* @@protoc
                &_AuthenticateGoogleRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    22;
 
   void Swap(AuthenticateGoogleRequest* other);
   friend void swap(AuthenticateGoogleRequest& a, AuthenticateGoogleRequest& b) {
@@ -2658,7 +2949,7 @@ class AuthenticateSteamRequest : public ::google::protobuf::Message /* @@protoc_
                &_AuthenticateSteamRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    23;
 
   void Swap(AuthenticateSteamRequest* other);
   friend void swap(AuthenticateSteamRequest& a, AuthenticateSteamRequest& b) {
@@ -2795,7 +3086,7 @@ class BlockFriendsRequest : public ::google::protobuf::Message /* @@protoc_inser
                &_BlockFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    24;
 
   void Swap(BlockFriendsRequest* other);
   friend void swap(BlockFriendsRequest& a, BlockFriendsRequest& b) {
@@ -2937,7 +3228,7 @@ class ChannelMessage : public ::google::protobuf::Message /* @@protoc_insertion_
                &_ChannelMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    25;
 
   void Swap(ChannelMessage* other);
   friend void swap(ChannelMessage& a, ChannelMessage& b) {
@@ -3059,6 +3350,62 @@ class ChannelMessage : public ::google::protobuf::Message /* @@protoc_insertion_
   ::std::string* release_content();
   void set_allocated_content(::std::string* content);
 
+  // string room_name = 10;
+  void clear_room_name();
+  static const int kRoomNameFieldNumber = 10;
+  const ::std::string& room_name() const;
+  void set_room_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_room_name(::std::string&& value);
+  #endif
+  void set_room_name(const char* value);
+  void set_room_name(const char* value, size_t size);
+  ::std::string* mutable_room_name();
+  ::std::string* release_room_name();
+  void set_allocated_room_name(::std::string* room_name);
+
+  // string group_id = 11;
+  void clear_group_id();
+  static const int kGroupIdFieldNumber = 11;
+  const ::std::string& group_id() const;
+  void set_group_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_group_id(::std::string&& value);
+  #endif
+  void set_group_id(const char* value);
+  void set_group_id(const char* value, size_t size);
+  ::std::string* mutable_group_id();
+  ::std::string* release_group_id();
+  void set_allocated_group_id(::std::string* group_id);
+
+  // string user_id_one = 12;
+  void clear_user_id_one();
+  static const int kUserIdOneFieldNumber = 12;
+  const ::std::string& user_id_one() const;
+  void set_user_id_one(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_one(::std::string&& value);
+  #endif
+  void set_user_id_one(const char* value);
+  void set_user_id_one(const char* value, size_t size);
+  ::std::string* mutable_user_id_one();
+  ::std::string* release_user_id_one();
+  void set_allocated_user_id_one(::std::string* user_id_one);
+
+  // string user_id_two = 13;
+  void clear_user_id_two();
+  static const int kUserIdTwoFieldNumber = 13;
+  const ::std::string& user_id_two() const;
+  void set_user_id_two(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_two(::std::string&& value);
+  #endif
+  void set_user_id_two(const char* value);
+  void set_user_id_two(const char* value, size_t size);
+  ::std::string* mutable_user_id_two();
+  ::std::string* release_user_id_two();
+  void set_allocated_user_id_two(::std::string* user_id_two);
+
   // .google.protobuf.Int32Value code = 3;
   bool has_code() const;
   void clear_code();
@@ -3116,6 +3463,10 @@ class ChannelMessage : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::ArenaStringPtr sender_id_;
   ::google::protobuf::internal::ArenaStringPtr username_;
   ::google::protobuf::internal::ArenaStringPtr content_;
+  ::google::protobuf::internal::ArenaStringPtr room_name_;
+  ::google::protobuf::internal::ArenaStringPtr group_id_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_one_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_two_;
   ::google::protobuf::Int32Value* code_;
   ::google::protobuf::Timestamp* create_time_;
   ::google::protobuf::Timestamp* update_time_;
@@ -3160,7 +3511,7 @@ class ChannelMessageList : public ::google::protobuf::Message /* @@protoc_insert
                &_ChannelMessageList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    26;
 
   void Swap(ChannelMessageList* other);
   friend void swap(ChannelMessageList& a, ChannelMessageList& b) {
@@ -3299,7 +3650,7 @@ class CreateGroupRequest : public ::google::protobuf::Message /* @@protoc_insert
                &_CreateGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    27;
 
   void Swap(CreateGroupRequest* other);
   friend void swap(CreateGroupRequest& a, CreateGroupRequest& b) {
@@ -3413,6 +3764,12 @@ class CreateGroupRequest : public ::google::protobuf::Message /* @@protoc_insert
   bool open() const;
   void set_open(bool value);
 
+  // int32 max_count = 6;
+  void clear_max_count();
+  static const int kMaxCountFieldNumber = 6;
+  ::google::protobuf::int32 max_count() const;
+  void set_max_count(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:nakama.api.CreateGroupRequest)
  private:
 
@@ -3422,6 +3779,7 @@ class CreateGroupRequest : public ::google::protobuf::Message /* @@protoc_insert
   ::google::protobuf::internal::ArenaStringPtr lang_tag_;
   ::google::protobuf::internal::ArenaStringPtr avatar_url_;
   bool open_;
+  ::google::protobuf::int32 max_count_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -3462,7 +3820,7 @@ class DeleteFriendsRequest : public ::google::protobuf::Message /* @@protoc_inse
                &_DeleteFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    28;
 
   void Swap(DeleteFriendsRequest* other);
   friend void swap(DeleteFriendsRequest& a, DeleteFriendsRequest& b) {
@@ -3604,7 +3962,7 @@ class DeleteGroupRequest : public ::google::protobuf::Message /* @@protoc_insert
                &_DeleteGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    22;
+    29;
 
   void Swap(DeleteGroupRequest* other);
   friend void swap(DeleteGroupRequest& a, DeleteGroupRequest& b) {
@@ -3715,7 +4073,7 @@ class DeleteLeaderboardRecordRequest : public ::google::protobuf::Message /* @@p
                &_DeleteLeaderboardRecordRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    23;
+    30;
 
   void Swap(DeleteLeaderboardRecordRequest* other);
   friend void swap(DeleteLeaderboardRecordRequest& a, DeleteLeaderboardRecordRequest& b) {
@@ -3826,7 +4184,7 @@ class DeleteNotificationsRequest : public ::google::protobuf::Message /* @@proto
                &_DeleteNotificationsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    24;
+    31;
 
   void Swap(DeleteNotificationsRequest* other);
   friend void swap(DeleteNotificationsRequest& a, DeleteNotificationsRequest& b) {
@@ -3945,7 +4303,7 @@ class DeleteStorageObjectId : public ::google::protobuf::Message /* @@protoc_ins
                &_DeleteStorageObjectId_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    25;
+    32;
 
   void Swap(DeleteStorageObjectId* other);
   friend void swap(DeleteStorageObjectId& a, DeleteStorageObjectId& b) {
@@ -4086,7 +4444,7 @@ class DeleteStorageObjectsRequest : public ::google::protobuf::Message /* @@prot
                &_DeleteStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    33;
 
   void Swap(DeleteStorageObjectsRequest* other);
   friend void swap(DeleteStorageObjectsRequest& a, DeleteStorageObjectsRequest& b) {
@@ -4216,7 +4574,7 @@ class Event : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
                &_Event_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    28;
+    35;
 
   void Swap(Event* other);
   friend void swap(Event& a, Event& b) {
@@ -4356,7 +4714,7 @@ class Friend : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
                &_Friend_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    29;
+    36;
 
   void Swap(Friend* other);
   friend void swap(Friend& a, Friend& b) {
@@ -4473,24 +4831,24 @@ class Friend : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 };
 // -------------------------------------------------------------------
 
-class Friends : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.Friends) */ {
+class FriendList : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.FriendList) */ {
  public:
-  Friends();
-  virtual ~Friends();
+  FriendList();
+  virtual ~FriendList();
 
-  Friends(const Friends& from);
+  FriendList(const FriendList& from);
 
-  inline Friends& operator=(const Friends& from) {
+  inline FriendList& operator=(const FriendList& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  Friends(Friends&& from) noexcept
-    : Friends() {
+  FriendList(FriendList&& from) noexcept
+    : FriendList() {
     *this = ::std::move(from);
   }
 
-  inline Friends& operator=(Friends&& from) noexcept {
+  inline FriendList& operator=(FriendList&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -4500,34 +4858,34 @@ class Friends : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Friends& default_instance();
+  static const FriendList& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Friends* internal_default_instance() {
-    return reinterpret_cast<const Friends*>(
-               &_Friends_default_instance_);
+  static inline const FriendList* internal_default_instance() {
+    return reinterpret_cast<const FriendList*>(
+               &_FriendList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    30;
+    37;
 
-  void Swap(Friends* other);
-  friend void swap(Friends& a, Friends& b) {
+  void Swap(FriendList* other);
+  friend void swap(FriendList& a, FriendList& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Friends* New() const final {
-    return CreateMaybeMessage<Friends>(NULL);
+  inline FriendList* New() const final {
+    return CreateMaybeMessage<FriendList>(NULL);
   }
 
-  Friends* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<Friends>(arena);
+  FriendList* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<FriendList>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const Friends& from);
-  void MergeFrom(const Friends& from);
+  void CopyFrom(const FriendList& from);
+  void MergeFrom(const FriendList& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -4544,7 +4902,7 @@ class Friends : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(Friends* other);
+  void InternalSwap(FriendList* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -4572,11 +4930,26 @@ class Friends : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   const ::google::protobuf::RepeatedPtrField< ::nakama::api::Friend >&
       friends() const;
 
-  // @@protoc_insertion_point(class_scope:nakama.api.Friends)
+  // string cursor = 2;
+  void clear_cursor();
+  static const int kCursorFieldNumber = 2;
+  const ::std::string& cursor() const;
+  void set_cursor(const ::std::string& value);
+  #if LANG_CXX11
+  void set_cursor(::std::string&& value);
+  #endif
+  void set_cursor(const char* value);
+  void set_cursor(const char* value, size_t size);
+  ::std::string* mutable_cursor();
+  ::std::string* release_cursor();
+  void set_allocated_cursor(::std::string* cursor);
+
+  // @@protoc_insertion_point(class_scope:nakama.api.FriendList)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::nakama::api::Friend > friends_;
+  ::google::protobuf::internal::ArenaStringPtr cursor_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -4617,7 +4990,7 @@ class GetUsersRequest : public ::google::protobuf::Message /* @@protoc_insertion
                &_GetUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    31;
+    38;
 
   void Swap(GetUsersRequest* other);
   friend void swap(GetUsersRequest& a, GetUsersRequest& b) {
@@ -4782,7 +5155,7 @@ class Group : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
                &_Group_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    32;
+    39;
 
   void Swap(Group* other);
   friend void swap(Group& a, Group& b) {
@@ -5036,7 +5409,7 @@ class GroupList : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_GroupList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    33;
+    40;
 
   void Swap(GroupList* other);
   friend void swap(GroupList& a, GroupList& b) {
@@ -5160,7 +5533,7 @@ class GroupUserList_GroupUser : public ::google::protobuf::Message /* @@protoc_i
                &_GroupUserList_GroupUser_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    34;
+    41;
 
   void Swap(GroupUserList_GroupUser* other);
   friend void swap(GroupUserList_GroupUser& a, GroupUserList_GroupUser& b) {
@@ -5312,7 +5685,7 @@ class GroupUserList : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_GroupUserList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    35;
+    42;
 
   void Swap(GroupUserList* other);
   friend void swap(GroupUserList& a, GroupUserList& b) {
@@ -5378,11 +5751,26 @@ class GroupUserList : public ::google::protobuf::Message /* @@protoc_insertion_p
   const ::google::protobuf::RepeatedPtrField< ::nakama::api::GroupUserList_GroupUser >&
       group_users() const;
 
+  // string cursor = 2;
+  void clear_cursor();
+  static const int kCursorFieldNumber = 2;
+  const ::std::string& cursor() const;
+  void set_cursor(const ::std::string& value);
+  #if LANG_CXX11
+  void set_cursor(::std::string&& value);
+  #endif
+  void set_cursor(const char* value);
+  void set_cursor(const char* value, size_t size);
+  ::std::string* mutable_cursor();
+  ::std::string* release_cursor();
+  void set_allocated_cursor(::std::string* cursor);
+
   // @@protoc_insertion_point(class_scope:nakama.api.GroupUserList)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::nakama::api::GroupUserList_GroupUser > group_users_;
+  ::google::protobuf::internal::ArenaStringPtr cursor_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -5423,7 +5811,7 @@ class ImportFacebookFriendsRequest : public ::google::protobuf::Message /* @@pro
                &_ImportFacebookFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    36;
+    43;
 
   void Swap(ImportFacebookFriendsRequest* other);
   friend void swap(ImportFacebookFriendsRequest& a, ImportFacebookFriendsRequest& b) {
@@ -5545,7 +5933,7 @@ class JoinGroupRequest : public ::google::protobuf::Message /* @@protoc_insertio
                &_JoinGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    37;
+    44;
 
   void Swap(JoinGroupRequest* other);
   friend void swap(JoinGroupRequest& a, JoinGroupRequest& b) {
@@ -5656,7 +6044,7 @@ class JoinTournamentRequest : public ::google::protobuf::Message /* @@protoc_ins
                &_JoinTournamentRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    38;
+    45;
 
   void Swap(JoinTournamentRequest* other);
   friend void swap(JoinTournamentRequest& a, JoinTournamentRequest& b) {
@@ -5767,7 +6155,7 @@ class KickGroupUsersRequest : public ::google::protobuf::Message /* @@protoc_ins
                &_KickGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    39;
+    46;
 
   void Swap(KickGroupUsersRequest* other);
   friend void swap(KickGroupUsersRequest& a, KickGroupUsersRequest& b) {
@@ -5901,7 +6289,7 @@ class LeaderboardRecord : public ::google::protobuf::Message /* @@protoc_inserti
                &_LeaderboardRecord_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    40;
+    47;
 
   void Swap(LeaderboardRecord* other);
   friend void swap(LeaderboardRecord& a, LeaderboardRecord& b) {
@@ -6129,7 +6517,7 @@ class LeaderboardRecordList : public ::google::protobuf::Message /* @@protoc_ins
                &_LeaderboardRecordList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    41;
+    48;
 
   void Swap(LeaderboardRecordList* other);
   friend void swap(LeaderboardRecordList& a, LeaderboardRecordList& b) {
@@ -6281,7 +6669,7 @@ class LeaveGroupRequest : public ::google::protobuf::Message /* @@protoc_inserti
                &_LeaveGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    42;
+    49;
 
   void Swap(LeaveGroupRequest* other);
   friend void swap(LeaveGroupRequest& a, LeaveGroupRequest& b) {
@@ -6392,7 +6780,7 @@ class LinkFacebookRequest : public ::google::protobuf::Message /* @@protoc_inser
                &_LinkFacebookRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    43;
+    50;
 
   void Swap(LinkFacebookRequest* other);
   friend void swap(LinkFacebookRequest& a, LinkFacebookRequest& b) {
@@ -6514,7 +6902,7 @@ class ListChannelMessagesRequest : public ::google::protobuf::Message /* @@proto
                &_ListChannelMessagesRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    44;
+    51;
 
   void Swap(ListChannelMessagesRequest* other);
   friend void swap(ListChannelMessagesRequest& a, ListChannelMessagesRequest& b) {
@@ -6631,6 +7019,143 @@ class ListChannelMessagesRequest : public ::google::protobuf::Message /* @@proto
 };
 // -------------------------------------------------------------------
 
+class ListFriendsRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.ListFriendsRequest) */ {
+ public:
+  ListFriendsRequest();
+  virtual ~ListFriendsRequest();
+
+  ListFriendsRequest(const ListFriendsRequest& from);
+
+  inline ListFriendsRequest& operator=(const ListFriendsRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ListFriendsRequest(ListFriendsRequest&& from) noexcept
+    : ListFriendsRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline ListFriendsRequest& operator=(ListFriendsRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ListFriendsRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ListFriendsRequest* internal_default_instance() {
+    return reinterpret_cast<const ListFriendsRequest*>(
+               &_ListFriendsRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    52;
+
+  void Swap(ListFriendsRequest* other);
+  friend void swap(ListFriendsRequest& a, ListFriendsRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ListFriendsRequest* New() const final {
+    return CreateMaybeMessage<ListFriendsRequest>(NULL);
+  }
+
+  ListFriendsRequest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ListFriendsRequest>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ListFriendsRequest& from);
+  void MergeFrom(const ListFriendsRequest& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ListFriendsRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string cursor = 3;
+  void clear_cursor();
+  static const int kCursorFieldNumber = 3;
+  const ::std::string& cursor() const;
+  void set_cursor(const ::std::string& value);
+  #if LANG_CXX11
+  void set_cursor(::std::string&& value);
+  #endif
+  void set_cursor(const char* value);
+  void set_cursor(const char* value, size_t size);
+  ::std::string* mutable_cursor();
+  ::std::string* release_cursor();
+  void set_allocated_cursor(::std::string* cursor);
+
+  // .google.protobuf.Int32Value limit = 1;
+  bool has_limit() const;
+  void clear_limit();
+  static const int kLimitFieldNumber = 1;
+  private:
+  const ::google::protobuf::Int32Value& _internal_limit() const;
+  public:
+  const ::google::protobuf::Int32Value& limit() const;
+  ::google::protobuf::Int32Value* release_limit();
+  ::google::protobuf::Int32Value* mutable_limit();
+  void set_allocated_limit(::google::protobuf::Int32Value* limit);
+
+  // .google.protobuf.Int32Value state = 2;
+  bool has_state() const;
+  void clear_state();
+  static const int kStateFieldNumber = 2;
+  private:
+  const ::google::protobuf::Int32Value& _internal_state() const;
+  public:
+  const ::google::protobuf::Int32Value& state() const;
+  ::google::protobuf::Int32Value* release_state();
+  ::google::protobuf::Int32Value* mutable_state();
+  void set_allocated_state(::google::protobuf::Int32Value* state);
+
+  // @@protoc_insertion_point(class_scope:nakama.api.ListFriendsRequest)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr cursor_;
+  ::google::protobuf::Int32Value* limit_;
+  ::google::protobuf::Int32Value* state_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class ListGroupsRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.api.ListGroupsRequest) */ {
  public:
   ListGroupsRequest();
@@ -6666,7 +7191,7 @@ class ListGroupsRequest : public ::google::protobuf::Message /* @@protoc_inserti
                &_ListGroupsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    45;
+    53;
 
   void Swap(ListGroupsRequest* other);
   friend void swap(ListGroupsRequest& a, ListGroupsRequest& b) {
@@ -6805,7 +7330,7 @@ class ListGroupUsersRequest : public ::google::protobuf::Message /* @@protoc_ins
                &_ListGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    46;
+    54;
 
   void Swap(ListGroupUsersRequest* other);
   friend void swap(ListGroupUsersRequest& a, ListGroupUsersRequest& b) {
@@ -6871,11 +7396,52 @@ class ListGroupUsersRequest : public ::google::protobuf::Message /* @@protoc_ins
   ::std::string* release_group_id();
   void set_allocated_group_id(::std::string* group_id);
 
+  // string cursor = 4;
+  void clear_cursor();
+  static const int kCursorFieldNumber = 4;
+  const ::std::string& cursor() const;
+  void set_cursor(const ::std::string& value);
+  #if LANG_CXX11
+  void set_cursor(::std::string&& value);
+  #endif
+  void set_cursor(const char* value);
+  void set_cursor(const char* value, size_t size);
+  ::std::string* mutable_cursor();
+  ::std::string* release_cursor();
+  void set_allocated_cursor(::std::string* cursor);
+
+  // .google.protobuf.Int32Value limit = 2;
+  bool has_limit() const;
+  void clear_limit();
+  static const int kLimitFieldNumber = 2;
+  private:
+  const ::google::protobuf::Int32Value& _internal_limit() const;
+  public:
+  const ::google::protobuf::Int32Value& limit() const;
+  ::google::protobuf::Int32Value* release_limit();
+  ::google::protobuf::Int32Value* mutable_limit();
+  void set_allocated_limit(::google::protobuf::Int32Value* limit);
+
+  // .google.protobuf.Int32Value state = 3;
+  bool has_state() const;
+  void clear_state();
+  static const int kStateFieldNumber = 3;
+  private:
+  const ::google::protobuf::Int32Value& _internal_state() const;
+  public:
+  const ::google::protobuf::Int32Value& state() const;
+  ::google::protobuf::Int32Value* release_state();
+  ::google::protobuf::Int32Value* mutable_state();
+  void set_allocated_state(::google::protobuf::Int32Value* state);
+
   // @@protoc_insertion_point(class_scope:nakama.api.ListGroupUsersRequest)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr group_id_;
+  ::google::protobuf::internal::ArenaStringPtr cursor_;
+  ::google::protobuf::Int32Value* limit_;
+  ::google::protobuf::Int32Value* state_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -6916,7 +7482,7 @@ class ListLeaderboardRecordsAroundOwnerRequest : public ::google::protobuf::Mess
                &_ListLeaderboardRecordsAroundOwnerRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    47;
+    55;
 
   void Swap(ListLeaderboardRecordsAroundOwnerRequest* other);
   friend void swap(ListLeaderboardRecordsAroundOwnerRequest& a, ListLeaderboardRecordsAroundOwnerRequest& b) {
@@ -7008,6 +7574,18 @@ class ListLeaderboardRecordsAroundOwnerRequest : public ::google::protobuf::Mess
   ::google::protobuf::UInt32Value* mutable_limit();
   void set_allocated_limit(::google::protobuf::UInt32Value* limit);
 
+  // .google.protobuf.Int64Value expiry = 4;
+  bool has_expiry() const;
+  void clear_expiry();
+  static const int kExpiryFieldNumber = 4;
+  private:
+  const ::google::protobuf::Int64Value& _internal_expiry() const;
+  public:
+  const ::google::protobuf::Int64Value& expiry() const;
+  ::google::protobuf::Int64Value* release_expiry();
+  ::google::protobuf::Int64Value* mutable_expiry();
+  void set_allocated_expiry(::google::protobuf::Int64Value* expiry);
+
   // @@protoc_insertion_point(class_scope:nakama.api.ListLeaderboardRecordsAroundOwnerRequest)
  private:
 
@@ -7015,6 +7593,7 @@ class ListLeaderboardRecordsAroundOwnerRequest : public ::google::protobuf::Mess
   ::google::protobuf::internal::ArenaStringPtr leaderboard_id_;
   ::google::protobuf::internal::ArenaStringPtr owner_id_;
   ::google::protobuf::UInt32Value* limit_;
+  ::google::protobuf::Int64Value* expiry_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -7055,7 +7634,7 @@ class ListLeaderboardRecordsRequest : public ::google::protobuf::Message /* @@pr
                &_ListLeaderboardRecordsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    48;
+    56;
 
   void Swap(ListLeaderboardRecordsRequest* other);
   friend void swap(ListLeaderboardRecordsRequest& a, ListLeaderboardRecordsRequest& b) {
@@ -7169,6 +7748,18 @@ class ListLeaderboardRecordsRequest : public ::google::protobuf::Message /* @@pr
   ::google::protobuf::Int32Value* mutable_limit();
   void set_allocated_limit(::google::protobuf::Int32Value* limit);
 
+  // .google.protobuf.Int64Value expiry = 5;
+  bool has_expiry() const;
+  void clear_expiry();
+  static const int kExpiryFieldNumber = 5;
+  private:
+  const ::google::protobuf::Int64Value& _internal_expiry() const;
+  public:
+  const ::google::protobuf::Int64Value& expiry() const;
+  ::google::protobuf::Int64Value* release_expiry();
+  ::google::protobuf::Int64Value* mutable_expiry();
+  void set_allocated_expiry(::google::protobuf::Int64Value* expiry);
+
   // @@protoc_insertion_point(class_scope:nakama.api.ListLeaderboardRecordsRequest)
  private:
 
@@ -7177,6 +7768,7 @@ class ListLeaderboardRecordsRequest : public ::google::protobuf::Message /* @@pr
   ::google::protobuf::internal::ArenaStringPtr leaderboard_id_;
   ::google::protobuf::internal::ArenaStringPtr cursor_;
   ::google::protobuf::Int32Value* limit_;
+  ::google::protobuf::Int64Value* expiry_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -7217,7 +7809,7 @@ class ListMatchesRequest : public ::google::protobuf::Message /* @@protoc_insert
                &_ListMatchesRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    49;
+    57;
 
   void Swap(ListMatchesRequest* other);
   friend void swap(ListMatchesRequest& a, ListMatchesRequest& b) {
@@ -7391,7 +7983,7 @@ class ListNotificationsRequest : public ::google::protobuf::Message /* @@protoc_
                &_ListNotificationsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    50;
+    58;
 
   void Swap(ListNotificationsRequest* other);
   friend void swap(ListNotificationsRequest& a, ListNotificationsRequest& b) {
@@ -7515,7 +8107,7 @@ class ListStorageObjectsRequest : public ::google::protobuf::Message /* @@protoc
                &_ListStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    51;
+    59;
 
   void Swap(ListStorageObjectsRequest* other);
   friend void swap(ListStorageObjectsRequest& a, ListStorageObjectsRequest& b) {
@@ -7669,7 +8261,7 @@ class ListTournamentRecordsAroundOwnerRequest : public ::google::protobuf::Messa
                &_ListTournamentRecordsAroundOwnerRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    52;
+    60;
 
   void Swap(ListTournamentRecordsAroundOwnerRequest* other);
   friend void swap(ListTournamentRecordsAroundOwnerRequest& a, ListTournamentRecordsAroundOwnerRequest& b) {
@@ -7761,6 +8353,18 @@ class ListTournamentRecordsAroundOwnerRequest : public ::google::protobuf::Messa
   ::google::protobuf::UInt32Value* mutable_limit();
   void set_allocated_limit(::google::protobuf::UInt32Value* limit);
 
+  // .google.protobuf.Int64Value expiry = 4;
+  bool has_expiry() const;
+  void clear_expiry();
+  static const int kExpiryFieldNumber = 4;
+  private:
+  const ::google::protobuf::Int64Value& _internal_expiry() const;
+  public:
+  const ::google::protobuf::Int64Value& expiry() const;
+  ::google::protobuf::Int64Value* release_expiry();
+  ::google::protobuf::Int64Value* mutable_expiry();
+  void set_allocated_expiry(::google::protobuf::Int64Value* expiry);
+
   // @@protoc_insertion_point(class_scope:nakama.api.ListTournamentRecordsAroundOwnerRequest)
  private:
 
@@ -7768,6 +8372,7 @@ class ListTournamentRecordsAroundOwnerRequest : public ::google::protobuf::Messa
   ::google::protobuf::internal::ArenaStringPtr tournament_id_;
   ::google::protobuf::internal::ArenaStringPtr owner_id_;
   ::google::protobuf::UInt32Value* limit_;
+  ::google::protobuf::Int64Value* expiry_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -7808,7 +8413,7 @@ class ListTournamentRecordsRequest : public ::google::protobuf::Message /* @@pro
                &_ListTournamentRecordsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    53;
+    61;
 
   void Swap(ListTournamentRecordsRequest* other);
   friend void swap(ListTournamentRecordsRequest& a, ListTournamentRecordsRequest& b) {
@@ -7922,6 +8527,18 @@ class ListTournamentRecordsRequest : public ::google::protobuf::Message /* @@pro
   ::google::protobuf::Int32Value* mutable_limit();
   void set_allocated_limit(::google::protobuf::Int32Value* limit);
 
+  // .google.protobuf.Int64Value expiry = 5;
+  bool has_expiry() const;
+  void clear_expiry();
+  static const int kExpiryFieldNumber = 5;
+  private:
+  const ::google::protobuf::Int64Value& _internal_expiry() const;
+  public:
+  const ::google::protobuf::Int64Value& expiry() const;
+  ::google::protobuf::Int64Value* release_expiry();
+  ::google::protobuf::Int64Value* mutable_expiry();
+  void set_allocated_expiry(::google::protobuf::Int64Value* expiry);
+
   // @@protoc_insertion_point(class_scope:nakama.api.ListTournamentRecordsRequest)
  private:
 
@@ -7930,6 +8547,7 @@ class ListTournamentRecordsRequest : public ::google::protobuf::Message /* @@pro
   ::google::protobuf::internal::ArenaStringPtr tournament_id_;
   ::google::protobuf::internal::ArenaStringPtr cursor_;
   ::google::protobuf::Int32Value* limit_;
+  ::google::protobuf::Int64Value* expiry_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -7970,7 +8588,7 @@ class ListTournamentsRequest : public ::google::protobuf::Message /* @@protoc_in
                &_ListTournamentsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    54;
+    62;
 
   void Swap(ListTournamentsRequest* other);
   friend void swap(ListTournamentsRequest& a, ListTournamentsRequest& b) {
@@ -8146,7 +8764,7 @@ class ListUserGroupsRequest : public ::google::protobuf::Message /* @@protoc_ins
                &_ListUserGroupsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    55;
+    63;
 
   void Swap(ListUserGroupsRequest* other);
   friend void swap(ListUserGroupsRequest& a, ListUserGroupsRequest& b) {
@@ -8212,11 +8830,52 @@ class ListUserGroupsRequest : public ::google::protobuf::Message /* @@protoc_ins
   ::std::string* release_user_id();
   void set_allocated_user_id(::std::string* user_id);
 
+  // string cursor = 4;
+  void clear_cursor();
+  static const int kCursorFieldNumber = 4;
+  const ::std::string& cursor() const;
+  void set_cursor(const ::std::string& value);
+  #if LANG_CXX11
+  void set_cursor(::std::string&& value);
+  #endif
+  void set_cursor(const char* value);
+  void set_cursor(const char* value, size_t size);
+  ::std::string* mutable_cursor();
+  ::std::string* release_cursor();
+  void set_allocated_cursor(::std::string* cursor);
+
+  // .google.protobuf.Int32Value limit = 2;
+  bool has_limit() const;
+  void clear_limit();
+  static const int kLimitFieldNumber = 2;
+  private:
+  const ::google::protobuf::Int32Value& _internal_limit() const;
+  public:
+  const ::google::protobuf::Int32Value& limit() const;
+  ::google::protobuf::Int32Value* release_limit();
+  ::google::protobuf::Int32Value* mutable_limit();
+  void set_allocated_limit(::google::protobuf::Int32Value* limit);
+
+  // .google.protobuf.Int32Value state = 3;
+  bool has_state() const;
+  void clear_state();
+  static const int kStateFieldNumber = 3;
+  private:
+  const ::google::protobuf::Int32Value& _internal_state() const;
+  public:
+  const ::google::protobuf::Int32Value& state() const;
+  ::google::protobuf::Int32Value* release_state();
+  ::google::protobuf::Int32Value* mutable_state();
+  void set_allocated_state(::google::protobuf::Int32Value* state);
+
   // @@protoc_insertion_point(class_scope:nakama.api.ListUserGroupsRequest)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr user_id_;
+  ::google::protobuf::internal::ArenaStringPtr cursor_;
+  ::google::protobuf::Int32Value* limit_;
+  ::google::protobuf::Int32Value* state_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -8257,7 +8916,7 @@ class Match : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
                &_Match_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    56;
+    64;
 
   void Swap(Match* other);
   friend void swap(Match& a, Match& b) {
@@ -8395,7 +9054,7 @@ class MatchList : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_MatchList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    57;
+    65;
 
   void Swap(MatchList* other);
   friend void swap(MatchList& a, MatchList& b) {
@@ -8504,7 +9163,7 @@ class Notification : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_Notification_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    58;
+    66;
 
   void Swap(Notification* other);
   friend void swap(Notification& a, Notification& b) {
@@ -8687,7 +9346,7 @@ class NotificationList : public ::google::protobuf::Message /* @@protoc_insertio
                &_NotificationList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    59;
+    67;
 
   void Swap(NotificationList* other);
   friend void swap(NotificationList& a, NotificationList& b) {
@@ -8811,7 +9470,7 @@ class PromoteGroupUsersRequest : public ::google::protobuf::Message /* @@protoc_
                &_PromoteGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    60;
+    68;
 
   void Swap(PromoteGroupUsersRequest* other);
   friend void swap(PromoteGroupUsersRequest& a, PromoteGroupUsersRequest& b) {
@@ -8945,7 +9604,7 @@ class ReadStorageObjectId : public ::google::protobuf::Message /* @@protoc_inser
                &_ReadStorageObjectId_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    61;
+    69;
 
   void Swap(ReadStorageObjectId* other);
   friend void swap(ReadStorageObjectId& a, ReadStorageObjectId& b) {
@@ -9086,7 +9745,7 @@ class ReadStorageObjectsRequest : public ::google::protobuf::Message /* @@protoc
                &_ReadStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    62;
+    70;
 
   void Swap(ReadStorageObjectsRequest* other);
   friend void swap(ReadStorageObjectsRequest& a, ReadStorageObjectsRequest& b) {
@@ -9195,7 +9854,7 @@ class Rpc : public ::google::protobuf::Message /* @@protoc_insertion_point(class
                &_Rpc_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    63;
+    71;
 
   void Swap(Rpc* other);
   friend void swap(Rpc& a, Rpc& b) {
@@ -9336,7 +9995,7 @@ class Session : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_Session_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    64;
+    72;
 
   void Swap(Session* other);
   friend void swap(Session& a, Session& b) {
@@ -9402,20 +10061,6 @@ class Session : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::std::string* release_token();
   void set_allocated_token(::std::string* token);
 
-  // string udp_token = 3;
-  void clear_udp_token();
-  static const int kUdpTokenFieldNumber = 3;
-  const ::std::string& udp_token() const;
-  void set_udp_token(const ::std::string& value);
-  #if LANG_CXX11
-  void set_udp_token(::std::string&& value);
-  #endif
-  void set_udp_token(const char* value);
-  void set_udp_token(const char* value, size_t size);
-  ::std::string* mutable_udp_token();
-  ::std::string* release_udp_token();
-  void set_allocated_udp_token(::std::string* udp_token);
-
   // bool created = 1;
   void clear_created();
   static const int kCreatedFieldNumber = 1;
@@ -9427,7 +10072,6 @@ class Session : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr token_;
-  ::google::protobuf::internal::ArenaStringPtr udp_token_;
   bool created_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
@@ -9469,7 +10113,7 @@ class StorageObject : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_StorageObject_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    65;
+    73;
 
   void Swap(StorageObject* other);
   friend void swap(StorageObject& a, StorageObject& b) {
@@ -9680,7 +10324,7 @@ class StorageObjectAck : public ::google::protobuf::Message /* @@protoc_insertio
                &_StorageObjectAck_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    66;
+    74;
 
   void Swap(StorageObjectAck* other);
   friend void swap(StorageObjectAck& a, StorageObjectAck& b) {
@@ -9836,7 +10480,7 @@ class StorageObjectAcks : public ::google::protobuf::Message /* @@protoc_inserti
                &_StorageObjectAcks_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    67;
+    75;
 
   void Swap(StorageObjectAcks* other);
   friend void swap(StorageObjectAcks& a, StorageObjectAcks& b) {
@@ -9945,7 +10589,7 @@ class StorageObjects : public ::google::protobuf::Message /* @@protoc_insertion_
                &_StorageObjects_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    68;
+    76;
 
   void Swap(StorageObjects* other);
   friend void swap(StorageObjects& a, StorageObjects& b) {
@@ -10054,7 +10698,7 @@ class StorageObjectList : public ::google::protobuf::Message /* @@protoc_inserti
                &_StorageObjectList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    69;
+    77;
 
   void Swap(StorageObjectList* other);
   friend void swap(StorageObjectList& a, StorageObjectList& b) {
@@ -10178,7 +10822,7 @@ class Tournament : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_Tournament_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    70;
+    78;
 
   void Swap(Tournament* other);
   friend void swap(Tournament& a, Tournament& b) {
@@ -10443,7 +11087,7 @@ class TournamentList : public ::google::protobuf::Message /* @@protoc_insertion_
                &_TournamentList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    71;
+    79;
 
   void Swap(TournamentList* other);
   friend void swap(TournamentList& a, TournamentList& b) {
@@ -10567,7 +11211,7 @@ class TournamentRecordList : public ::google::protobuf::Message /* @@protoc_inse
                &_TournamentRecordList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    72;
+    80;
 
   void Swap(TournamentRecordList* other);
   friend void swap(TournamentRecordList& a, TournamentRecordList& b) {
@@ -10719,7 +11363,7 @@ class UpdateAccountRequest : public ::google::protobuf::Message /* @@protoc_inse
                &_UpdateAccountRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    73;
+    81;
 
   void Swap(UpdateAccountRequest* other);
   friend void swap(UpdateAccountRequest& a, UpdateAccountRequest& b) {
@@ -10893,7 +11537,7 @@ class UpdateGroupRequest : public ::google::protobuf::Message /* @@protoc_insert
                &_UpdateGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    74;
+    82;
 
   void Swap(UpdateGroupRequest* other);
   friend void swap(UpdateGroupRequest& a, UpdateGroupRequest& b) {
@@ -11069,7 +11713,7 @@ class User : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
                &_User_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    75;
+    83;
 
   void Swap(User* other);
   friend void swap(User& a, User& b) {
@@ -11385,7 +12029,7 @@ class UserGroupList_UserGroup : public ::google::protobuf::Message /* @@protoc_i
                &_UserGroupList_UserGroup_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    76;
+    84;
 
   void Swap(UserGroupList_UserGroup* other);
   friend void swap(UserGroupList_UserGroup& a, UserGroupList_UserGroup& b) {
@@ -11537,7 +12181,7 @@ class UserGroupList : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_UserGroupList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    77;
+    85;
 
   void Swap(UserGroupList* other);
   friend void swap(UserGroupList& a, UserGroupList& b) {
@@ -11603,11 +12247,26 @@ class UserGroupList : public ::google::protobuf::Message /* @@protoc_insertion_p
   const ::google::protobuf::RepeatedPtrField< ::nakama::api::UserGroupList_UserGroup >&
       user_groups() const;
 
+  // string cursor = 2;
+  void clear_cursor();
+  static const int kCursorFieldNumber = 2;
+  const ::std::string& cursor() const;
+  void set_cursor(const ::std::string& value);
+  #if LANG_CXX11
+  void set_cursor(::std::string&& value);
+  #endif
+  void set_cursor(const char* value);
+  void set_cursor(const char* value, size_t size);
+  ::std::string* mutable_cursor();
+  ::std::string* release_cursor();
+  void set_allocated_cursor(::std::string* cursor);
+
   // @@protoc_insertion_point(class_scope:nakama.api.UserGroupList)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::nakama::api::UserGroupList_UserGroup > user_groups_;
+  ::google::protobuf::internal::ArenaStringPtr cursor_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::TableStruct;
 };
@@ -11648,7 +12307,7 @@ class Users : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
                &_Users_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    78;
+    86;
 
   void Swap(Users* other);
   friend void swap(Users& a, Users& b) {
@@ -11757,7 +12416,7 @@ class WriteLeaderboardRecordRequest_LeaderboardRecordWrite : public ::google::pr
                &_WriteLeaderboardRecordRequest_LeaderboardRecordWrite_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    79;
+    87;
 
   void Swap(WriteLeaderboardRecordRequest_LeaderboardRecordWrite* other);
   friend void swap(WriteLeaderboardRecordRequest_LeaderboardRecordWrite& a, WriteLeaderboardRecordRequest_LeaderboardRecordWrite& b) {
@@ -11882,7 +12541,7 @@ class WriteLeaderboardRecordRequest : public ::google::protobuf::Message /* @@pr
                &_WriteLeaderboardRecordRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    80;
+    88;
 
   void Swap(WriteLeaderboardRecordRequest* other);
   friend void swap(WriteLeaderboardRecordRequest& a, WriteLeaderboardRecordRequest& b) {
@@ -12008,7 +12667,7 @@ class WriteStorageObject : public ::google::protobuf::Message /* @@protoc_insert
                &_WriteStorageObject_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    81;
+    89;
 
   void Swap(WriteStorageObject* other);
   friend void swap(WriteStorageObject& a, WriteStorageObject& b) {
@@ -12190,7 +12849,7 @@ class WriteStorageObjectsRequest : public ::google::protobuf::Message /* @@proto
                &_WriteStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    82;
+    90;
 
   void Swap(WriteStorageObjectsRequest* other);
   friend void swap(WriteStorageObjectsRequest& a, WriteStorageObjectsRequest& b) {
@@ -12299,7 +12958,7 @@ class WriteTournamentRecordRequest_TournamentRecordWrite : public ::google::prot
                &_WriteTournamentRecordRequest_TournamentRecordWrite_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    83;
+    91;
 
   void Swap(WriteTournamentRecordRequest_TournamentRecordWrite* other);
   friend void swap(WriteTournamentRecordRequest_TournamentRecordWrite& a, WriteTournamentRecordRequest_TournamentRecordWrite& b) {
@@ -12424,7 +13083,7 @@ class WriteTournamentRecordRequest : public ::google::protobuf::Message /* @@pro
                &_WriteTournamentRecordRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    84;
+    92;
 
   void Swap(WriteTournamentRecordRequest* other);
   friend void swap(WriteTournamentRecordRequest& a, WriteTournamentRecordRequest& b) {
@@ -12818,6 +13477,8 @@ inline void Account::set_allocated_verify_time(::google::protobuf::Timestamp* ve
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
 // AccountCustom
 
 // string id = 1;
@@ -12872,6 +13533,26 @@ inline void AccountCustom::set_allocated_id(::std::string* id) {
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
   // @@protoc_insertion_point(field_set_allocated:nakama.api.AccountCustom.id)
 }
+
+// map<string, string> vars = 2;
+inline int AccountCustom::vars_size() const {
+  return vars_.size();
+}
+inline void AccountCustom::clear_vars() {
+  vars_.Clear();
+}
+inline const ::google::protobuf::Map< ::std::string, ::std::string >&
+AccountCustom::vars() const {
+  // @@protoc_insertion_point(field_map:nakama.api.AccountCustom.vars)
+  return vars_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::std::string >*
+AccountCustom::mutable_vars() {
+  // @@protoc_insertion_point(field_mutable_map:nakama.api.AccountCustom.vars)
+  return vars_.MutableMap();
+}
+
+// -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
 
@@ -12929,6 +13610,26 @@ inline void AccountDevice::set_allocated_id(::std::string* id) {
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
   // @@protoc_insertion_point(field_set_allocated:nakama.api.AccountDevice.id)
 }
+
+// map<string, string> vars = 2;
+inline int AccountDevice::vars_size() const {
+  return vars_.size();
+}
+inline void AccountDevice::clear_vars() {
+  vars_.Clear();
+}
+inline const ::google::protobuf::Map< ::std::string, ::std::string >&
+AccountDevice::vars() const {
+  // @@protoc_insertion_point(field_map:nakama.api.AccountDevice.vars)
+  return vars_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::std::string >*
+AccountDevice::mutable_vars() {
+  // @@protoc_insertion_point(field_mutable_map:nakama.api.AccountDevice.vars)
+  return vars_.MutableMap();
+}
+
+// -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
 
@@ -13040,6 +13741,26 @@ inline void AccountEmail::set_allocated_password(::std::string* password) {
   // @@protoc_insertion_point(field_set_allocated:nakama.api.AccountEmail.password)
 }
 
+// map<string, string> vars = 3;
+inline int AccountEmail::vars_size() const {
+  return vars_.size();
+}
+inline void AccountEmail::clear_vars() {
+  vars_.Clear();
+}
+inline const ::google::protobuf::Map< ::std::string, ::std::string >&
+AccountEmail::vars() const {
+  // @@protoc_insertion_point(field_map:nakama.api.AccountEmail.vars)
+  return vars_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::std::string >*
+AccountEmail::mutable_vars() {
+  // @@protoc_insertion_point(field_mutable_map:nakama.api.AccountEmail.vars)
+  return vars_.MutableMap();
+}
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // AccountFacebook
@@ -13096,6 +13817,26 @@ inline void AccountFacebook::set_allocated_token(::std::string* token) {
   token_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), token);
   // @@protoc_insertion_point(field_set_allocated:nakama.api.AccountFacebook.token)
 }
+
+// map<string, string> vars = 2;
+inline int AccountFacebook::vars_size() const {
+  return vars_.size();
+}
+inline void AccountFacebook::clear_vars() {
+  vars_.Clear();
+}
+inline const ::google::protobuf::Map< ::std::string, ::std::string >&
+AccountFacebook::vars() const {
+  // @@protoc_insertion_point(field_map:nakama.api.AccountFacebook.vars)
+  return vars_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::std::string >*
+AccountFacebook::mutable_vars() {
+  // @@protoc_insertion_point(field_mutable_map:nakama.api.AccountFacebook.vars)
+  return vars_.MutableMap();
+}
+
+// -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
 
@@ -13380,6 +14121,26 @@ inline void AccountGameCenter::set_allocated_public_key_url(::std::string* publi
   // @@protoc_insertion_point(field_set_allocated:nakama.api.AccountGameCenter.public_key_url)
 }
 
+// map<string, string> vars = 7;
+inline int AccountGameCenter::vars_size() const {
+  return vars_.size();
+}
+inline void AccountGameCenter::clear_vars() {
+  vars_.Clear();
+}
+inline const ::google::protobuf::Map< ::std::string, ::std::string >&
+AccountGameCenter::vars() const {
+  // @@protoc_insertion_point(field_map:nakama.api.AccountGameCenter.vars)
+  return vars_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::std::string >*
+AccountGameCenter::mutable_vars() {
+  // @@protoc_insertion_point(field_mutable_map:nakama.api.AccountGameCenter.vars)
+  return vars_.MutableMap();
+}
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // AccountGoogle
@@ -13437,6 +14198,26 @@ inline void AccountGoogle::set_allocated_token(::std::string* token) {
   // @@protoc_insertion_point(field_set_allocated:nakama.api.AccountGoogle.token)
 }
 
+// map<string, string> vars = 2;
+inline int AccountGoogle::vars_size() const {
+  return vars_.size();
+}
+inline void AccountGoogle::clear_vars() {
+  vars_.Clear();
+}
+inline const ::google::protobuf::Map< ::std::string, ::std::string >&
+AccountGoogle::vars() const {
+  // @@protoc_insertion_point(field_map:nakama.api.AccountGoogle.vars)
+  return vars_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::std::string >*
+AccountGoogle::mutable_vars() {
+  // @@protoc_insertion_point(field_mutable_map:nakama.api.AccountGoogle.vars)
+  return vars_.MutableMap();
+}
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // AccountSteam
@@ -13492,6 +14273,24 @@ inline void AccountSteam::set_allocated_token(::std::string* token) {
   }
   token_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), token);
   // @@protoc_insertion_point(field_set_allocated:nakama.api.AccountSteam.token)
+}
+
+// map<string, string> vars = 2;
+inline int AccountSteam::vars_size() const {
+  return vars_.size();
+}
+inline void AccountSteam::clear_vars() {
+  vars_.Clear();
+}
+inline const ::google::protobuf::Map< ::std::string, ::std::string >&
+AccountSteam::vars() const {
+  // @@protoc_insertion_point(field_map:nakama.api.AccountSteam.vars)
+  return vars_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::std::string >*
+AccountSteam::mutable_vars() {
+  // @@protoc_insertion_point(field_mutable_map:nakama.api.AccountSteam.vars)
+  return vars_.MutableMap();
 }
 
 // -------------------------------------------------------------------
@@ -15538,6 +16337,218 @@ inline void ChannelMessage::set_allocated_persistent(::google::protobuf::BoolVal
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ChannelMessage.persistent)
 }
 
+// string room_name = 10;
+inline void ChannelMessage::clear_room_name() {
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessage::room_name() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ChannelMessage.room_name)
+  return room_name_.GetNoArena();
+}
+inline void ChannelMessage::set_room_name(const ::std::string& value) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.api.ChannelMessage.room_name)
+}
+#if LANG_CXX11
+inline void ChannelMessage::set_room_name(::std::string&& value) {
+  
+  room_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ChannelMessage.room_name)
+}
+#endif
+inline void ChannelMessage::set_room_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.api.ChannelMessage.room_name)
+}
+inline void ChannelMessage::set_room_name(const char* value, size_t size) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ChannelMessage.room_name)
+}
+inline ::std::string* ChannelMessage::mutable_room_name() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.api.ChannelMessage.room_name)
+  return room_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessage::release_room_name() {
+  // @@protoc_insertion_point(field_release:nakama.api.ChannelMessage.room_name)
+  
+  return room_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessage::set_allocated_room_name(::std::string* room_name) {
+  if (room_name != NULL) {
+    
+  } else {
+    
+  }
+  room_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_name);
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ChannelMessage.room_name)
+}
+
+// string group_id = 11;
+inline void ChannelMessage::clear_group_id() {
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessage::group_id() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ChannelMessage.group_id)
+  return group_id_.GetNoArena();
+}
+inline void ChannelMessage::set_group_id(const ::std::string& value) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.api.ChannelMessage.group_id)
+}
+#if LANG_CXX11
+inline void ChannelMessage::set_group_id(::std::string&& value) {
+  
+  group_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ChannelMessage.group_id)
+}
+#endif
+inline void ChannelMessage::set_group_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.api.ChannelMessage.group_id)
+}
+inline void ChannelMessage::set_group_id(const char* value, size_t size) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ChannelMessage.group_id)
+}
+inline ::std::string* ChannelMessage::mutable_group_id() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.api.ChannelMessage.group_id)
+  return group_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessage::release_group_id() {
+  // @@protoc_insertion_point(field_release:nakama.api.ChannelMessage.group_id)
+  
+  return group_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessage::set_allocated_group_id(::std::string* group_id) {
+  if (group_id != NULL) {
+    
+  } else {
+    
+  }
+  group_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), group_id);
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ChannelMessage.group_id)
+}
+
+// string user_id_one = 12;
+inline void ChannelMessage::clear_user_id_one() {
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessage::user_id_one() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ChannelMessage.user_id_one)
+  return user_id_one_.GetNoArena();
+}
+inline void ChannelMessage::set_user_id_one(const ::std::string& value) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.api.ChannelMessage.user_id_one)
+}
+#if LANG_CXX11
+inline void ChannelMessage::set_user_id_one(::std::string&& value) {
+  
+  user_id_one_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ChannelMessage.user_id_one)
+}
+#endif
+inline void ChannelMessage::set_user_id_one(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.api.ChannelMessage.user_id_one)
+}
+inline void ChannelMessage::set_user_id_one(const char* value, size_t size) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ChannelMessage.user_id_one)
+}
+inline ::std::string* ChannelMessage::mutable_user_id_one() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.api.ChannelMessage.user_id_one)
+  return user_id_one_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessage::release_user_id_one() {
+  // @@protoc_insertion_point(field_release:nakama.api.ChannelMessage.user_id_one)
+  
+  return user_id_one_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessage::set_allocated_user_id_one(::std::string* user_id_one) {
+  if (user_id_one != NULL) {
+    
+  } else {
+    
+  }
+  user_id_one_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_one);
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ChannelMessage.user_id_one)
+}
+
+// string user_id_two = 13;
+inline void ChannelMessage::clear_user_id_two() {
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessage::user_id_two() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ChannelMessage.user_id_two)
+  return user_id_two_.GetNoArena();
+}
+inline void ChannelMessage::set_user_id_two(const ::std::string& value) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.api.ChannelMessage.user_id_two)
+}
+#if LANG_CXX11
+inline void ChannelMessage::set_user_id_two(::std::string&& value) {
+  
+  user_id_two_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ChannelMessage.user_id_two)
+}
+#endif
+inline void ChannelMessage::set_user_id_two(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.api.ChannelMessage.user_id_two)
+}
+inline void ChannelMessage::set_user_id_two(const char* value, size_t size) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ChannelMessage.user_id_two)
+}
+inline ::std::string* ChannelMessage::mutable_user_id_two() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.api.ChannelMessage.user_id_two)
+  return user_id_two_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessage::release_user_id_two() {
+  // @@protoc_insertion_point(field_release:nakama.api.ChannelMessage.user_id_two)
+  
+  return user_id_two_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessage::set_allocated_user_id_two(::std::string* user_id_two) {
+  if (user_id_two != NULL) {
+    
+  } else {
+    
+  }
+  user_id_two_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_two);
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ChannelMessage.user_id_two)
+}
+
 // -------------------------------------------------------------------
 
 // ChannelMessageList
@@ -15906,6 +16917,20 @@ inline void CreateGroupRequest::set_open(bool value) {
   
   open_ = value;
   // @@protoc_insertion_point(field_set:nakama.api.CreateGroupRequest.open)
+}
+
+// int32 max_count = 6;
+inline void CreateGroupRequest::clear_max_count() {
+  max_count_ = 0;
+}
+inline ::google::protobuf::int32 CreateGroupRequest::max_count() const {
+  // @@protoc_insertion_point(field_get:nakama.api.CreateGroupRequest.max_count)
+  return max_count_;
+}
+inline void CreateGroupRequest::set_max_count(::google::protobuf::int32 value) {
+  
+  max_count_ = value;
+  // @@protoc_insertion_point(field_set:nakama.api.CreateGroupRequest.max_count)
 }
 
 // -------------------------------------------------------------------
@@ -16669,36 +17694,89 @@ inline void Friend::set_allocated_state(::google::protobuf::Int32Value* state) {
 
 // -------------------------------------------------------------------
 
-// Friends
+// FriendList
 
 // repeated .nakama.api.Friend friends = 1;
-inline int Friends::friends_size() const {
+inline int FriendList::friends_size() const {
   return friends_.size();
 }
-inline void Friends::clear_friends() {
+inline void FriendList::clear_friends() {
   friends_.Clear();
 }
-inline ::nakama::api::Friend* Friends::mutable_friends(int index) {
-  // @@protoc_insertion_point(field_mutable:nakama.api.Friends.friends)
+inline ::nakama::api::Friend* FriendList::mutable_friends(int index) {
+  // @@protoc_insertion_point(field_mutable:nakama.api.FriendList.friends)
   return friends_.Mutable(index);
 }
 inline ::google::protobuf::RepeatedPtrField< ::nakama::api::Friend >*
-Friends::mutable_friends() {
-  // @@protoc_insertion_point(field_mutable_list:nakama.api.Friends.friends)
+FriendList::mutable_friends() {
+  // @@protoc_insertion_point(field_mutable_list:nakama.api.FriendList.friends)
   return &friends_;
 }
-inline const ::nakama::api::Friend& Friends::friends(int index) const {
-  // @@protoc_insertion_point(field_get:nakama.api.Friends.friends)
+inline const ::nakama::api::Friend& FriendList::friends(int index) const {
+  // @@protoc_insertion_point(field_get:nakama.api.FriendList.friends)
   return friends_.Get(index);
 }
-inline ::nakama::api::Friend* Friends::add_friends() {
-  // @@protoc_insertion_point(field_add:nakama.api.Friends.friends)
+inline ::nakama::api::Friend* FriendList::add_friends() {
+  // @@protoc_insertion_point(field_add:nakama.api.FriendList.friends)
   return friends_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::nakama::api::Friend >&
-Friends::friends() const {
-  // @@protoc_insertion_point(field_list:nakama.api.Friends.friends)
+FriendList::friends() const {
+  // @@protoc_insertion_point(field_list:nakama.api.FriendList.friends)
   return friends_;
+}
+
+// string cursor = 2;
+inline void FriendList::clear_cursor() {
+  cursor_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& FriendList::cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.FriendList.cursor)
+  return cursor_.GetNoArena();
+}
+inline void FriendList::set_cursor(const ::std::string& value) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.api.FriendList.cursor)
+}
+#if LANG_CXX11
+inline void FriendList::set_cursor(::std::string&& value) {
+  
+  cursor_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.FriendList.cursor)
+}
+#endif
+inline void FriendList::set_cursor(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.api.FriendList.cursor)
+}
+inline void FriendList::set_cursor(const char* value, size_t size) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.FriendList.cursor)
+}
+inline ::std::string* FriendList::mutable_cursor() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.api.FriendList.cursor)
+  return cursor_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* FriendList::release_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.FriendList.cursor)
+  
+  return cursor_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void FriendList::set_allocated_cursor(::std::string* cursor) {
+  if (cursor != NULL) {
+    
+  } else {
+    
+  }
+  cursor_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cursor);
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.FriendList.cursor)
 }
 
 // -------------------------------------------------------------------
@@ -17688,6 +18766,59 @@ inline const ::google::protobuf::RepeatedPtrField< ::nakama::api::GroupUserList_
 GroupUserList::group_users() const {
   // @@protoc_insertion_point(field_list:nakama.api.GroupUserList.group_users)
   return group_users_;
+}
+
+// string cursor = 2;
+inline void GroupUserList::clear_cursor() {
+  cursor_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& GroupUserList::cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.GroupUserList.cursor)
+  return cursor_.GetNoArena();
+}
+inline void GroupUserList::set_cursor(const ::std::string& value) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.api.GroupUserList.cursor)
+}
+#if LANG_CXX11
+inline void GroupUserList::set_cursor(::std::string&& value) {
+  
+  cursor_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.GroupUserList.cursor)
+}
+#endif
+inline void GroupUserList::set_cursor(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.api.GroupUserList.cursor)
+}
+inline void GroupUserList::set_cursor(const char* value, size_t size) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.GroupUserList.cursor)
+}
+inline ::std::string* GroupUserList::mutable_cursor() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.api.GroupUserList.cursor)
+  return cursor_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* GroupUserList::release_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.GroupUserList.cursor)
+  
+  return cursor_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void GroupUserList::set_allocated_cursor(::std::string* cursor) {
+  if (cursor != NULL) {
+    
+  } else {
+    
+  }
+  cursor_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cursor);
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.GroupUserList.cursor)
 }
 
 // -------------------------------------------------------------------
@@ -19010,6 +20141,161 @@ inline void ListChannelMessagesRequest::set_allocated_cursor(::std::string* curs
 
 // -------------------------------------------------------------------
 
+// ListFriendsRequest
+
+// .google.protobuf.Int32Value limit = 1;
+inline bool ListFriendsRequest::has_limit() const {
+  return this != internal_default_instance() && limit_ != NULL;
+}
+inline const ::google::protobuf::Int32Value& ListFriendsRequest::_internal_limit() const {
+  return *limit_;
+}
+inline const ::google::protobuf::Int32Value& ListFriendsRequest::limit() const {
+  const ::google::protobuf::Int32Value* p = limit_;
+  // @@protoc_insertion_point(field_get:nakama.api.ListFriendsRequest.limit)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Int32Value*>(
+      &::google::protobuf::_Int32Value_default_instance_);
+}
+inline ::google::protobuf::Int32Value* ListFriendsRequest::release_limit() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListFriendsRequest.limit)
+  
+  ::google::protobuf::Int32Value* temp = limit_;
+  limit_ = NULL;
+  return temp;
+}
+inline ::google::protobuf::Int32Value* ListFriendsRequest::mutable_limit() {
+  
+  if (limit_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Int32Value>(GetArenaNoVirtual());
+    limit_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListFriendsRequest.limit)
+  return limit_;
+}
+inline void ListFriendsRequest::set_allocated_limit(::google::protobuf::Int32Value* limit) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(limit_);
+  }
+  if (limit) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(limit)->GetArena();
+    if (message_arena != submessage_arena) {
+      limit = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, limit, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  limit_ = limit;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListFriendsRequest.limit)
+}
+
+// .google.protobuf.Int32Value state = 2;
+inline bool ListFriendsRequest::has_state() const {
+  return this != internal_default_instance() && state_ != NULL;
+}
+inline const ::google::protobuf::Int32Value& ListFriendsRequest::_internal_state() const {
+  return *state_;
+}
+inline const ::google::protobuf::Int32Value& ListFriendsRequest::state() const {
+  const ::google::protobuf::Int32Value* p = state_;
+  // @@protoc_insertion_point(field_get:nakama.api.ListFriendsRequest.state)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Int32Value*>(
+      &::google::protobuf::_Int32Value_default_instance_);
+}
+inline ::google::protobuf::Int32Value* ListFriendsRequest::release_state() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListFriendsRequest.state)
+  
+  ::google::protobuf::Int32Value* temp = state_;
+  state_ = NULL;
+  return temp;
+}
+inline ::google::protobuf::Int32Value* ListFriendsRequest::mutable_state() {
+  
+  if (state_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Int32Value>(GetArenaNoVirtual());
+    state_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListFriendsRequest.state)
+  return state_;
+}
+inline void ListFriendsRequest::set_allocated_state(::google::protobuf::Int32Value* state) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(state_);
+  }
+  if (state) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(state)->GetArena();
+    if (message_arena != submessage_arena) {
+      state = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, state, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  state_ = state;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListFriendsRequest.state)
+}
+
+// string cursor = 3;
+inline void ListFriendsRequest::clear_cursor() {
+  cursor_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ListFriendsRequest::cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ListFriendsRequest.cursor)
+  return cursor_.GetNoArena();
+}
+inline void ListFriendsRequest::set_cursor(const ::std::string& value) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.api.ListFriendsRequest.cursor)
+}
+#if LANG_CXX11
+inline void ListFriendsRequest::set_cursor(::std::string&& value) {
+  
+  cursor_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ListFriendsRequest.cursor)
+}
+#endif
+inline void ListFriendsRequest::set_cursor(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.api.ListFriendsRequest.cursor)
+}
+inline void ListFriendsRequest::set_cursor(const char* value, size_t size) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ListFriendsRequest.cursor)
+}
+inline ::std::string* ListFriendsRequest::mutable_cursor() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListFriendsRequest.cursor)
+  return cursor_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ListFriendsRequest::release_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListFriendsRequest.cursor)
+  
+  return cursor_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ListFriendsRequest::set_allocated_cursor(::std::string* cursor) {
+  if (cursor != NULL) {
+    
+  } else {
+    
+  }
+  cursor_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cursor);
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListFriendsRequest.cursor)
+}
+
+// -------------------------------------------------------------------
+
 // ListGroupsRequest
 
 // string name = 1;
@@ -19224,6 +20510,157 @@ inline void ListGroupUsersRequest::set_allocated_group_id(::std::string* group_i
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ListGroupUsersRequest.group_id)
 }
 
+// .google.protobuf.Int32Value limit = 2;
+inline bool ListGroupUsersRequest::has_limit() const {
+  return this != internal_default_instance() && limit_ != NULL;
+}
+inline const ::google::protobuf::Int32Value& ListGroupUsersRequest::_internal_limit() const {
+  return *limit_;
+}
+inline const ::google::protobuf::Int32Value& ListGroupUsersRequest::limit() const {
+  const ::google::protobuf::Int32Value* p = limit_;
+  // @@protoc_insertion_point(field_get:nakama.api.ListGroupUsersRequest.limit)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Int32Value*>(
+      &::google::protobuf::_Int32Value_default_instance_);
+}
+inline ::google::protobuf::Int32Value* ListGroupUsersRequest::release_limit() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListGroupUsersRequest.limit)
+  
+  ::google::protobuf::Int32Value* temp = limit_;
+  limit_ = NULL;
+  return temp;
+}
+inline ::google::protobuf::Int32Value* ListGroupUsersRequest::mutable_limit() {
+  
+  if (limit_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Int32Value>(GetArenaNoVirtual());
+    limit_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListGroupUsersRequest.limit)
+  return limit_;
+}
+inline void ListGroupUsersRequest::set_allocated_limit(::google::protobuf::Int32Value* limit) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(limit_);
+  }
+  if (limit) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(limit)->GetArena();
+    if (message_arena != submessage_arena) {
+      limit = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, limit, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  limit_ = limit;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListGroupUsersRequest.limit)
+}
+
+// .google.protobuf.Int32Value state = 3;
+inline bool ListGroupUsersRequest::has_state() const {
+  return this != internal_default_instance() && state_ != NULL;
+}
+inline const ::google::protobuf::Int32Value& ListGroupUsersRequest::_internal_state() const {
+  return *state_;
+}
+inline const ::google::protobuf::Int32Value& ListGroupUsersRequest::state() const {
+  const ::google::protobuf::Int32Value* p = state_;
+  // @@protoc_insertion_point(field_get:nakama.api.ListGroupUsersRequest.state)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Int32Value*>(
+      &::google::protobuf::_Int32Value_default_instance_);
+}
+inline ::google::protobuf::Int32Value* ListGroupUsersRequest::release_state() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListGroupUsersRequest.state)
+  
+  ::google::protobuf::Int32Value* temp = state_;
+  state_ = NULL;
+  return temp;
+}
+inline ::google::protobuf::Int32Value* ListGroupUsersRequest::mutable_state() {
+  
+  if (state_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Int32Value>(GetArenaNoVirtual());
+    state_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListGroupUsersRequest.state)
+  return state_;
+}
+inline void ListGroupUsersRequest::set_allocated_state(::google::protobuf::Int32Value* state) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(state_);
+  }
+  if (state) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(state)->GetArena();
+    if (message_arena != submessage_arena) {
+      state = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, state, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  state_ = state;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListGroupUsersRequest.state)
+}
+
+// string cursor = 4;
+inline void ListGroupUsersRequest::clear_cursor() {
+  cursor_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ListGroupUsersRequest::cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ListGroupUsersRequest.cursor)
+  return cursor_.GetNoArena();
+}
+inline void ListGroupUsersRequest::set_cursor(const ::std::string& value) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.api.ListGroupUsersRequest.cursor)
+}
+#if LANG_CXX11
+inline void ListGroupUsersRequest::set_cursor(::std::string&& value) {
+  
+  cursor_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ListGroupUsersRequest.cursor)
+}
+#endif
+inline void ListGroupUsersRequest::set_cursor(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.api.ListGroupUsersRequest.cursor)
+}
+inline void ListGroupUsersRequest::set_cursor(const char* value, size_t size) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ListGroupUsersRequest.cursor)
+}
+inline ::std::string* ListGroupUsersRequest::mutable_cursor() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListGroupUsersRequest.cursor)
+  return cursor_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ListGroupUsersRequest::release_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListGroupUsersRequest.cursor)
+  
+  return cursor_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ListGroupUsersRequest::set_allocated_cursor(::std::string* cursor) {
+  if (cursor != NULL) {
+    
+  } else {
+    
+  }
+  cursor_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cursor);
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListGroupUsersRequest.cursor)
+}
+
 // -------------------------------------------------------------------
 
 // ListLeaderboardRecordsAroundOwnerRequest
@@ -19381,6 +20818,55 @@ inline void ListLeaderboardRecordsAroundOwnerRequest::set_allocated_owner_id(::s
   }
   owner_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), owner_id);
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.owner_id)
+}
+
+// .google.protobuf.Int64Value expiry = 4;
+inline bool ListLeaderboardRecordsAroundOwnerRequest::has_expiry() const {
+  return this != internal_default_instance() && expiry_ != NULL;
+}
+inline const ::google::protobuf::Int64Value& ListLeaderboardRecordsAroundOwnerRequest::_internal_expiry() const {
+  return *expiry_;
+}
+inline const ::google::protobuf::Int64Value& ListLeaderboardRecordsAroundOwnerRequest::expiry() const {
+  const ::google::protobuf::Int64Value* p = expiry_;
+  // @@protoc_insertion_point(field_get:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.expiry)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Int64Value*>(
+      &::google::protobuf::_Int64Value_default_instance_);
+}
+inline ::google::protobuf::Int64Value* ListLeaderboardRecordsAroundOwnerRequest::release_expiry() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.expiry)
+  
+  ::google::protobuf::Int64Value* temp = expiry_;
+  expiry_ = NULL;
+  return temp;
+}
+inline ::google::protobuf::Int64Value* ListLeaderboardRecordsAroundOwnerRequest::mutable_expiry() {
+  
+  if (expiry_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Int64Value>(GetArenaNoVirtual());
+    expiry_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.expiry)
+  return expiry_;
+}
+inline void ListLeaderboardRecordsAroundOwnerRequest::set_allocated_expiry(::google::protobuf::Int64Value* expiry) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(expiry_);
+  }
+  if (expiry) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(expiry)->GetArena();
+    if (message_arena != submessage_arena) {
+      expiry = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, expiry, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  expiry_ = expiry;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.expiry)
 }
 
 // -------------------------------------------------------------------
@@ -19609,6 +21095,55 @@ inline void ListLeaderboardRecordsRequest::set_allocated_cursor(::std::string* c
   }
   cursor_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cursor);
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ListLeaderboardRecordsRequest.cursor)
+}
+
+// .google.protobuf.Int64Value expiry = 5;
+inline bool ListLeaderboardRecordsRequest::has_expiry() const {
+  return this != internal_default_instance() && expiry_ != NULL;
+}
+inline const ::google::protobuf::Int64Value& ListLeaderboardRecordsRequest::_internal_expiry() const {
+  return *expiry_;
+}
+inline const ::google::protobuf::Int64Value& ListLeaderboardRecordsRequest::expiry() const {
+  const ::google::protobuf::Int64Value* p = expiry_;
+  // @@protoc_insertion_point(field_get:nakama.api.ListLeaderboardRecordsRequest.expiry)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Int64Value*>(
+      &::google::protobuf::_Int64Value_default_instance_);
+}
+inline ::google::protobuf::Int64Value* ListLeaderboardRecordsRequest::release_expiry() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListLeaderboardRecordsRequest.expiry)
+  
+  ::google::protobuf::Int64Value* temp = expiry_;
+  expiry_ = NULL;
+  return temp;
+}
+inline ::google::protobuf::Int64Value* ListLeaderboardRecordsRequest::mutable_expiry() {
+  
+  if (expiry_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Int64Value>(GetArenaNoVirtual());
+    expiry_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListLeaderboardRecordsRequest.expiry)
+  return expiry_;
+}
+inline void ListLeaderboardRecordsRequest::set_allocated_expiry(::google::protobuf::Int64Value* expiry) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(expiry_);
+  }
+  if (expiry) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(expiry)->GetArena();
+    if (message_arena != submessage_arena) {
+      expiry = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, expiry, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  expiry_ = expiry;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListLeaderboardRecordsRequest.expiry)
 }
 
 // -------------------------------------------------------------------
@@ -20386,6 +21921,55 @@ inline void ListTournamentRecordsAroundOwnerRequest::set_allocated_owner_id(::st
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ListTournamentRecordsAroundOwnerRequest.owner_id)
 }
 
+// .google.protobuf.Int64Value expiry = 4;
+inline bool ListTournamentRecordsAroundOwnerRequest::has_expiry() const {
+  return this != internal_default_instance() && expiry_ != NULL;
+}
+inline const ::google::protobuf::Int64Value& ListTournamentRecordsAroundOwnerRequest::_internal_expiry() const {
+  return *expiry_;
+}
+inline const ::google::protobuf::Int64Value& ListTournamentRecordsAroundOwnerRequest::expiry() const {
+  const ::google::protobuf::Int64Value* p = expiry_;
+  // @@protoc_insertion_point(field_get:nakama.api.ListTournamentRecordsAroundOwnerRequest.expiry)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Int64Value*>(
+      &::google::protobuf::_Int64Value_default_instance_);
+}
+inline ::google::protobuf::Int64Value* ListTournamentRecordsAroundOwnerRequest::release_expiry() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListTournamentRecordsAroundOwnerRequest.expiry)
+  
+  ::google::protobuf::Int64Value* temp = expiry_;
+  expiry_ = NULL;
+  return temp;
+}
+inline ::google::protobuf::Int64Value* ListTournamentRecordsAroundOwnerRequest::mutable_expiry() {
+  
+  if (expiry_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Int64Value>(GetArenaNoVirtual());
+    expiry_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListTournamentRecordsAroundOwnerRequest.expiry)
+  return expiry_;
+}
+inline void ListTournamentRecordsAroundOwnerRequest::set_allocated_expiry(::google::protobuf::Int64Value* expiry) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(expiry_);
+  }
+  if (expiry) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(expiry)->GetArena();
+    if (message_arena != submessage_arena) {
+      expiry = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, expiry, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  expiry_ = expiry;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListTournamentRecordsAroundOwnerRequest.expiry)
+}
+
 // -------------------------------------------------------------------
 
 // ListTournamentRecordsRequest
@@ -20612,6 +22196,55 @@ inline void ListTournamentRecordsRequest::set_allocated_cursor(::std::string* cu
   }
   cursor_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cursor);
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ListTournamentRecordsRequest.cursor)
+}
+
+// .google.protobuf.Int64Value expiry = 5;
+inline bool ListTournamentRecordsRequest::has_expiry() const {
+  return this != internal_default_instance() && expiry_ != NULL;
+}
+inline const ::google::protobuf::Int64Value& ListTournamentRecordsRequest::_internal_expiry() const {
+  return *expiry_;
+}
+inline const ::google::protobuf::Int64Value& ListTournamentRecordsRequest::expiry() const {
+  const ::google::protobuf::Int64Value* p = expiry_;
+  // @@protoc_insertion_point(field_get:nakama.api.ListTournamentRecordsRequest.expiry)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Int64Value*>(
+      &::google::protobuf::_Int64Value_default_instance_);
+}
+inline ::google::protobuf::Int64Value* ListTournamentRecordsRequest::release_expiry() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListTournamentRecordsRequest.expiry)
+  
+  ::google::protobuf::Int64Value* temp = expiry_;
+  expiry_ = NULL;
+  return temp;
+}
+inline ::google::protobuf::Int64Value* ListTournamentRecordsRequest::mutable_expiry() {
+  
+  if (expiry_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Int64Value>(GetArenaNoVirtual());
+    expiry_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListTournamentRecordsRequest.expiry)
+  return expiry_;
+}
+inline void ListTournamentRecordsRequest::set_allocated_expiry(::google::protobuf::Int64Value* expiry) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(expiry_);
+  }
+  if (expiry) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(expiry)->GetArena();
+    if (message_arena != submessage_arena) {
+      expiry = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, expiry, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  expiry_ = expiry;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListTournamentRecordsRequest.expiry)
 }
 
 // -------------------------------------------------------------------
@@ -20971,6 +22604,157 @@ inline void ListUserGroupsRequest::set_allocated_user_id(::std::string* user_id)
   }
   user_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id);
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ListUserGroupsRequest.user_id)
+}
+
+// .google.protobuf.Int32Value limit = 2;
+inline bool ListUserGroupsRequest::has_limit() const {
+  return this != internal_default_instance() && limit_ != NULL;
+}
+inline const ::google::protobuf::Int32Value& ListUserGroupsRequest::_internal_limit() const {
+  return *limit_;
+}
+inline const ::google::protobuf::Int32Value& ListUserGroupsRequest::limit() const {
+  const ::google::protobuf::Int32Value* p = limit_;
+  // @@protoc_insertion_point(field_get:nakama.api.ListUserGroupsRequest.limit)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Int32Value*>(
+      &::google::protobuf::_Int32Value_default_instance_);
+}
+inline ::google::protobuf::Int32Value* ListUserGroupsRequest::release_limit() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListUserGroupsRequest.limit)
+  
+  ::google::protobuf::Int32Value* temp = limit_;
+  limit_ = NULL;
+  return temp;
+}
+inline ::google::protobuf::Int32Value* ListUserGroupsRequest::mutable_limit() {
+  
+  if (limit_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Int32Value>(GetArenaNoVirtual());
+    limit_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListUserGroupsRequest.limit)
+  return limit_;
+}
+inline void ListUserGroupsRequest::set_allocated_limit(::google::protobuf::Int32Value* limit) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(limit_);
+  }
+  if (limit) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(limit)->GetArena();
+    if (message_arena != submessage_arena) {
+      limit = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, limit, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  limit_ = limit;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListUserGroupsRequest.limit)
+}
+
+// .google.protobuf.Int32Value state = 3;
+inline bool ListUserGroupsRequest::has_state() const {
+  return this != internal_default_instance() && state_ != NULL;
+}
+inline const ::google::protobuf::Int32Value& ListUserGroupsRequest::_internal_state() const {
+  return *state_;
+}
+inline const ::google::protobuf::Int32Value& ListUserGroupsRequest::state() const {
+  const ::google::protobuf::Int32Value* p = state_;
+  // @@protoc_insertion_point(field_get:nakama.api.ListUserGroupsRequest.state)
+  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Int32Value*>(
+      &::google::protobuf::_Int32Value_default_instance_);
+}
+inline ::google::protobuf::Int32Value* ListUserGroupsRequest::release_state() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListUserGroupsRequest.state)
+  
+  ::google::protobuf::Int32Value* temp = state_;
+  state_ = NULL;
+  return temp;
+}
+inline ::google::protobuf::Int32Value* ListUserGroupsRequest::mutable_state() {
+  
+  if (state_ == NULL) {
+    auto* p = CreateMaybeMessage<::google::protobuf::Int32Value>(GetArenaNoVirtual());
+    state_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListUserGroupsRequest.state)
+  return state_;
+}
+inline void ListUserGroupsRequest::set_allocated_state(::google::protobuf::Int32Value* state) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(state_);
+  }
+  if (state) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(state)->GetArena();
+    if (message_arena != submessage_arena) {
+      state = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, state, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  state_ = state;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListUserGroupsRequest.state)
+}
+
+// string cursor = 4;
+inline void ListUserGroupsRequest::clear_cursor() {
+  cursor_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ListUserGroupsRequest::cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ListUserGroupsRequest.cursor)
+  return cursor_.GetNoArena();
+}
+inline void ListUserGroupsRequest::set_cursor(const ::std::string& value) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.api.ListUserGroupsRequest.cursor)
+}
+#if LANG_CXX11
+inline void ListUserGroupsRequest::set_cursor(::std::string&& value) {
+  
+  cursor_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ListUserGroupsRequest.cursor)
+}
+#endif
+inline void ListUserGroupsRequest::set_cursor(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.api.ListUserGroupsRequest.cursor)
+}
+inline void ListUserGroupsRequest::set_cursor(const char* value, size_t size) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ListUserGroupsRequest.cursor)
+}
+inline ::std::string* ListUserGroupsRequest::mutable_cursor() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListUserGroupsRequest.cursor)
+  return cursor_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ListUserGroupsRequest::release_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListUserGroupsRequest.cursor)
+  
+  return cursor_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ListUserGroupsRequest::set_allocated_cursor(::std::string* cursor) {
+  if (cursor != NULL) {
+    
+  } else {
+    
+  }
+  cursor_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cursor);
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListUserGroupsRequest.cursor)
 }
 
 // -------------------------------------------------------------------
@@ -22076,59 +23860,6 @@ inline void Session::set_allocated_token(::std::string* token) {
   }
   token_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), token);
   // @@protoc_insertion_point(field_set_allocated:nakama.api.Session.token)
-}
-
-// string udp_token = 3;
-inline void Session::clear_udp_token() {
-  udp_token_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& Session::udp_token() const {
-  // @@protoc_insertion_point(field_get:nakama.api.Session.udp_token)
-  return udp_token_.GetNoArena();
-}
-inline void Session::set_udp_token(const ::std::string& value) {
-  
-  udp_token_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:nakama.api.Session.udp_token)
-}
-#if LANG_CXX11
-inline void Session::set_udp_token(::std::string&& value) {
-  
-  udp_token_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:nakama.api.Session.udp_token)
-}
-#endif
-inline void Session::set_udp_token(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  udp_token_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:nakama.api.Session.udp_token)
-}
-inline void Session::set_udp_token(const char* value, size_t size) {
-  
-  udp_token_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:nakama.api.Session.udp_token)
-}
-inline ::std::string* Session::mutable_udp_token() {
-  
-  // @@protoc_insertion_point(field_mutable:nakama.api.Session.udp_token)
-  return udp_token_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* Session::release_udp_token() {
-  // @@protoc_insertion_point(field_release:nakama.api.Session.udp_token)
-  
-  return udp_token_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void Session::set_allocated_udp_token(::std::string* udp_token) {
-  if (udp_token != NULL) {
-    
-  } else {
-    
-  }
-  udp_token_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), udp_token);
-  // @@protoc_insertion_point(field_set_allocated:nakama.api.Session.udp_token)
 }
 
 // -------------------------------------------------------------------
@@ -25164,6 +26895,59 @@ UserGroupList::user_groups() const {
   return user_groups_;
 }
 
+// string cursor = 2;
+inline void UserGroupList::clear_cursor() {
+  cursor_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& UserGroupList::cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.UserGroupList.cursor)
+  return cursor_.GetNoArena();
+}
+inline void UserGroupList::set_cursor(const ::std::string& value) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.api.UserGroupList.cursor)
+}
+#if LANG_CXX11
+inline void UserGroupList::set_cursor(::std::string&& value) {
+  
+  cursor_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.UserGroupList.cursor)
+}
+#endif
+inline void UserGroupList::set_cursor(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.api.UserGroupList.cursor)
+}
+inline void UserGroupList::set_cursor(const char* value, size_t size) {
+  
+  cursor_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.UserGroupList.cursor)
+}
+inline ::std::string* UserGroupList::mutable_cursor() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.api.UserGroupList.cursor)
+  return cursor_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserGroupList::release_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.UserGroupList.cursor)
+  
+  return cursor_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserGroupList::set_allocated_cursor(::std::string* cursor) {
+  if (cursor != NULL) {
+    
+  } else {
+    
+  }
+  cursor_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cursor);
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.UserGroupList.cursor)
+}
+
 // -------------------------------------------------------------------
 
 // Users
@@ -25941,6 +27725,22 @@ inline void WriteTournamentRecordRequest::set_allocated_record(::nakama::api::Wr
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

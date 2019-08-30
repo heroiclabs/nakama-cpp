@@ -48,7 +48,7 @@ void test_writeStorageInvalidArgument()
         test.client->writeStorageObjects(session, objects, nullptr, errorCallback);
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
     test.runTest();
 }
@@ -96,7 +96,7 @@ void test_writeStorage()
         test.client->writeStorageObjects(session, objects, writeSuccessCallback);
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
     test.runTest();
 }

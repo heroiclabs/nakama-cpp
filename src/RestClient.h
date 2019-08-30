@@ -55,6 +55,7 @@ namespace Nakama {
             const std::string& id,
             const opt::optional<std::string>& username,
             const opt::optional<bool>& create,
+            const NStringMap& vars,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -64,6 +65,7 @@ namespace Nakama {
             const std::string& password,
             const std::string& username,
             bool create,
+            const NStringMap& vars,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -73,6 +75,7 @@ namespace Nakama {
             const std::string& username,
             bool create,
             bool importFriends,
+            const NStringMap& vars,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -81,6 +84,7 @@ namespace Nakama {
             const std::string& accessToken,
             const std::string& username,
             bool create,
+            const NStringMap& vars,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -94,6 +98,7 @@ namespace Nakama {
             const std::string& publicKeyUrl,
             const std::string& username,
             bool create,
+            const NStringMap& vars,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -102,6 +107,7 @@ namespace Nakama {
             const std::string& id,
             const std::string& username,
             bool create,
+            const NStringMap& vars,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -110,6 +116,7 @@ namespace Nakama {
             const std::string& token,
             const std::string& username,
             bool create,
+            const NStringMap& vars,
             std::function<void(NSessionPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -286,7 +293,10 @@ namespace Nakama {
 
         void listFriends(
             NSessionPtr session,
-            std::function<void(NFriendsPtr)> successCallback,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<NFriend::State>& state,
+            const std::string& cursor,
+            std::function<void(NFriendListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
 
@@ -297,6 +307,7 @@ namespace Nakama {
             const std::string& avatarUrl,
             const std::string& langTag,
             bool open,
+            const opt::optional<int32_t>& maxCount,
             std::function<void(const NGroup&)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -319,6 +330,9 @@ namespace Nakama {
         void listGroupUsers(
             NSessionPtr session,
             const std::string& groupId,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<NFriend::State>& state,
+            const std::string& cursor,
             std::function<void(NGroupUserListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -356,6 +370,9 @@ namespace Nakama {
 
         void listUserGroups(
             NSessionPtr session,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<NFriend::State>& state,
+            const std::string& cursor,
             std::function<void(NUserGroupListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -363,6 +380,9 @@ namespace Nakama {
         void listUserGroups(
             NSessionPtr session,
             const std::string& userId,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<NFriend::State>& state,
+            const std::string& cursor,
             std::function<void(NUserGroupListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;

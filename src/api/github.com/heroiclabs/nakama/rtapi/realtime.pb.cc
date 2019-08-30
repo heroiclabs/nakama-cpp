@@ -39,6 +39,8 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2frt
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_MatchmakerRemove;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_MatchmakerTicket;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Ping;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Pong;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_StatusFollow;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_StatusUnfollow;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Stream;
@@ -107,6 +109,8 @@ class EnvelopeDefaultTypeInternal {
   const ::nakama::realtime::StatusUpdate* status_update_;
   const ::nakama::realtime::StreamData* stream_data_;
   const ::nakama::realtime::StreamPresenceEvent* stream_presence_event_;
+  const ::nakama::realtime::Ping* ping_;
+  const ::nakama::realtime::Pong* pong_;
 } _Envelope_default_instance_;
 class ChannelDefaultTypeInternal {
  public:
@@ -252,6 +256,16 @@ class NotificationsDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<Notifications>
       _instance;
 } _Notifications_default_instance_;
+class PingDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Ping>
+      _instance;
+} _Ping_default_instance_;
+class PongDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Pong>
+      _instance;
+} _Pong_default_instance_;
 class StatusDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Status>
@@ -311,8 +325,8 @@ static void InitDefaultsEnvelope() {
   ::nakama::realtime::Envelope::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<30> scc_info_Envelope =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 30, InitDefaultsEnvelope}, {
+::google::protobuf::internal::SCCInfo<32> scc_info_Envelope =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 32, InitDefaultsEnvelope}, {
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_Channel.base,
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_ChannelJoin.base,
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_ChannelLeave.base,
@@ -342,7 +356,9 @@ static void InitDefaultsEnvelope() {
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_StatusUnfollow.base,
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_StatusUpdate.base,
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_StreamData.base,
-      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_StreamPresenceEvent.base,}};
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_StreamPresenceEvent.base,
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_Ping.base,
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_Pong.base,}};
 
 static void InitDefaultsChannel() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -750,6 +766,34 @@ static void InitDefaultsNotifications() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsNotifications}, {
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapi_2fapi_2eproto::scc_info_Notification.base,}};
 
+static void InitDefaultsPing() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Ping_default_instance_;
+    new (ptr) ::nakama::realtime::Ping();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::nakama::realtime::Ping::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_Ping =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsPing}, {}};
+
+static void InitDefaultsPong() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Pong_default_instance_;
+    new (ptr) ::nakama::realtime::Pong();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::nakama::realtime::Pong::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_Pong =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsPong}, {}};
+
 static void InitDefaultsStatus() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -914,6 +958,8 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_MatchmakerRemove.base);
   ::google::protobuf::internal::InitSCC(&scc_info_MatchmakerTicket.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Notifications.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Ping.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Pong.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Status.base);
   ::google::protobuf::internal::InitSCC(&scc_info_StatusFollow.base);
   ::google::protobuf::internal::InitSCC(&scc_info_StatusPresenceEvent.base);
@@ -925,7 +971,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_UserPresence.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[38];
+::google::protobuf::Metadata file_level_metadata[40];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[2];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -965,6 +1011,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   offsetof(::nakama::realtime::EnvelopeDefaultTypeInternal, status_update_),
   offsetof(::nakama::realtime::EnvelopeDefaultTypeInternal, stream_data_),
   offsetof(::nakama::realtime::EnvelopeDefaultTypeInternal, stream_presence_event_),
+  offsetof(::nakama::realtime::EnvelopeDefaultTypeInternal, ping_),
+  offsetof(::nakama::realtime::EnvelopeDefaultTypeInternal, pong_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Envelope, message_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Channel, _internal_metadata_),
@@ -974,6 +1022,10 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Channel, id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Channel, presences_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Channel, self_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Channel, room_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Channel, group_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Channel, user_id_one_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Channel, user_id_two_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelJoin, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1001,6 +1053,10 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageAck, create_time_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageAck, update_time_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageAck, persistent_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageAck, room_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageAck, group_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageAck, user_id_one_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageAck, user_id_two_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageSend, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1016,6 +1072,10 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, channel_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, message_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, content_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, room_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, group_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, user_id_one_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, user_id_two_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1023,6 +1083,10 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, channel_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, message_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, room_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, group_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, user_id_one_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, user_id_two_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelPresenceEvent, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1031,6 +1095,10 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelPresenceEvent, channel_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelPresenceEvent, joins_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelPresenceEvent, leaves_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelPresenceEvent, room_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelPresenceEvent, group_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelPresenceEvent, user_id_one_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelPresenceEvent, user_id_two_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Error_ContextEntry_DoNotUse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Error_ContextEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1073,6 +1141,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchData, presence_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchData, op_code_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchData, data_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchData, reliable_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchDataSend, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1082,6 +1151,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchDataSend, op_code_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchDataSend, data_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchDataSend, presences_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchDataSend, reliable_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchJoin_MetadataEntry_DoNotUse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::MatchJoin_MetadataEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1198,6 +1268,16 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Notifications, notifications_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Ping, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Pong, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::Status, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -1209,6 +1289,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::StatusFollow, user_ids_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::StatusFollow, usernames_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::StatusPresenceEvent, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1245,6 +1326,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::StreamData, stream_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::StreamData, sender_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::StreamData, data_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::StreamData, reliable_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::StreamPresenceEvent, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1266,43 +1348,45 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::nakama::realtime::Envelope)},
-  { 37, -1, sizeof(::nakama::realtime::Channel)},
-  { 45, -1, sizeof(::nakama::realtime::ChannelJoin)},
-  { 54, -1, sizeof(::nakama::realtime::ChannelLeave)},
-  { 60, -1, sizeof(::nakama::realtime::ChannelMessageAck)},
-  { 72, -1, sizeof(::nakama::realtime::ChannelMessageSend)},
-  { 79, -1, sizeof(::nakama::realtime::ChannelMessageUpdate)},
-  { 87, -1, sizeof(::nakama::realtime::ChannelMessageRemove)},
-  { 94, -1, sizeof(::nakama::realtime::ChannelPresenceEvent)},
-  { 102, 109, sizeof(::nakama::realtime::Error_ContextEntry_DoNotUse)},
-  { 111, -1, sizeof(::nakama::realtime::Error)},
-  { 119, -1, sizeof(::nakama::realtime::Match)},
-  { 130, -1, sizeof(::nakama::realtime::MatchCreate)},
-  { 135, -1, sizeof(::nakama::realtime::MatchData)},
-  { 144, -1, sizeof(::nakama::realtime::MatchDataSend)},
-  { 153, 160, sizeof(::nakama::realtime::MatchJoin_MetadataEntry_DoNotUse)},
-  { 162, -1, sizeof(::nakama::realtime::MatchJoin)},
-  { 171, -1, sizeof(::nakama::realtime::MatchLeave)},
-  { 177, -1, sizeof(::nakama::realtime::MatchPresenceEvent)},
-  { 185, 192, sizeof(::nakama::realtime::MatchmakerAdd_StringPropertiesEntry_DoNotUse)},
-  { 194, 201, sizeof(::nakama::realtime::MatchmakerAdd_NumericPropertiesEntry_DoNotUse)},
-  { 203, -1, sizeof(::nakama::realtime::MatchmakerAdd)},
-  { 213, 220, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse)},
-  { 222, 229, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse)},
-  { 231, -1, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser)},
-  { 239, -1, sizeof(::nakama::realtime::MatchmakerMatched)},
-  { 250, -1, sizeof(::nakama::realtime::MatchmakerRemove)},
-  { 256, -1, sizeof(::nakama::realtime::MatchmakerTicket)},
-  { 262, -1, sizeof(::nakama::realtime::Notifications)},
-  { 268, -1, sizeof(::nakama::realtime::Status)},
-  { 274, -1, sizeof(::nakama::realtime::StatusFollow)},
-  { 280, -1, sizeof(::nakama::realtime::StatusPresenceEvent)},
-  { 287, -1, sizeof(::nakama::realtime::StatusUnfollow)},
-  { 293, -1, sizeof(::nakama::realtime::StatusUpdate)},
-  { 299, -1, sizeof(::nakama::realtime::Stream)},
-  { 308, -1, sizeof(::nakama::realtime::StreamData)},
-  { 316, -1, sizeof(::nakama::realtime::StreamPresenceEvent)},
-  { 324, -1, sizeof(::nakama::realtime::UserPresence)},
+  { 39, -1, sizeof(::nakama::realtime::Channel)},
+  { 51, -1, sizeof(::nakama::realtime::ChannelJoin)},
+  { 60, -1, sizeof(::nakama::realtime::ChannelLeave)},
+  { 66, -1, sizeof(::nakama::realtime::ChannelMessageAck)},
+  { 82, -1, sizeof(::nakama::realtime::ChannelMessageSend)},
+  { 89, -1, sizeof(::nakama::realtime::ChannelMessageUpdate)},
+  { 101, -1, sizeof(::nakama::realtime::ChannelMessageRemove)},
+  { 112, -1, sizeof(::nakama::realtime::ChannelPresenceEvent)},
+  { 124, 131, sizeof(::nakama::realtime::Error_ContextEntry_DoNotUse)},
+  { 133, -1, sizeof(::nakama::realtime::Error)},
+  { 141, -1, sizeof(::nakama::realtime::Match)},
+  { 152, -1, sizeof(::nakama::realtime::MatchCreate)},
+  { 157, -1, sizeof(::nakama::realtime::MatchData)},
+  { 167, -1, sizeof(::nakama::realtime::MatchDataSend)},
+  { 177, 184, sizeof(::nakama::realtime::MatchJoin_MetadataEntry_DoNotUse)},
+  { 186, -1, sizeof(::nakama::realtime::MatchJoin)},
+  { 195, -1, sizeof(::nakama::realtime::MatchLeave)},
+  { 201, -1, sizeof(::nakama::realtime::MatchPresenceEvent)},
+  { 209, 216, sizeof(::nakama::realtime::MatchmakerAdd_StringPropertiesEntry_DoNotUse)},
+  { 218, 225, sizeof(::nakama::realtime::MatchmakerAdd_NumericPropertiesEntry_DoNotUse)},
+  { 227, -1, sizeof(::nakama::realtime::MatchmakerAdd)},
+  { 237, 244, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse)},
+  { 246, 253, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse)},
+  { 255, -1, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser)},
+  { 263, -1, sizeof(::nakama::realtime::MatchmakerMatched)},
+  { 274, -1, sizeof(::nakama::realtime::MatchmakerRemove)},
+  { 280, -1, sizeof(::nakama::realtime::MatchmakerTicket)},
+  { 286, -1, sizeof(::nakama::realtime::Notifications)},
+  { 292, -1, sizeof(::nakama::realtime::Ping)},
+  { 297, -1, sizeof(::nakama::realtime::Pong)},
+  { 302, -1, sizeof(::nakama::realtime::Status)},
+  { 308, -1, sizeof(::nakama::realtime::StatusFollow)},
+  { 315, -1, sizeof(::nakama::realtime::StatusPresenceEvent)},
+  { 322, -1, sizeof(::nakama::realtime::StatusUnfollow)},
+  { 328, -1, sizeof(::nakama::realtime::StatusUpdate)},
+  { 334, -1, sizeof(::nakama::realtime::Stream)},
+  { 343, -1, sizeof(::nakama::realtime::StreamData)},
+  { 352, -1, sizeof(::nakama::realtime::StreamPresenceEvent)},
+  { 360, -1, sizeof(::nakama::realtime::UserPresence)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1335,6 +1419,8 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::realtime::_MatchmakerRemove_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::realtime::_MatchmakerTicket_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::realtime::_Notifications_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::realtime::_Ping_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::realtime::_Pong_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::realtime::_Status_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::realtime::_StatusFollow_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::realtime::_StatusPresenceEvent_default_instance_),
@@ -1361,7 +1447,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 38);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 40);
 }
 
 void AddDescriptorsImpl() {
@@ -1371,7 +1457,7 @@ void AddDescriptorsImpl() {
       "ltime.proto\022\017nakama.realtime\032\037google/pro"
       "tobuf/timestamp.proto\032\036google/protobuf/w"
       "rappers.proto\032*github.com/heroiclabs/nak"
-      "ama/api/api.proto\"\345\r\n\010Envelope\022\013\n\003cid\030\001 "
+      "ama/api/api.proto\"\263\016\n\010Envelope\022\013\n\003cid\030\001 "
       "\001(\t\022+\n\007channel\030\002 \001(\0132\030.nakama.realtime.C"
       "hannelH\000\0224\n\014channel_join\030\003 \001(\0132\034.nakama."
       "realtime.ChannelJoinH\000\0226\n\rchannel_leave\030"
@@ -1415,112 +1501,126 @@ void AddDescriptorsImpl() {
       "tusUpdateH\000\0222\n\013stream_data\030\036 \001(\0132\033.nakam"
       "a.realtime.StreamDataH\000\022E\n\025stream_presen"
       "ce_event\030\037 \001(\0132$.nakama.realtime.StreamP"
-      "resenceEventH\000B\t\n\007message\"t\n\007Channel\022\n\n\002"
-      "id\030\001 \001(\t\0220\n\tpresences\030\002 \003(\0132\035.nakama.rea"
-      "ltime.UserPresence\022+\n\004self\030\003 \001(\0132\035.nakam"
-      "a.realtime.UserPresence\"\317\001\n\013ChannelJoin\022"
-      "\016\n\006target\030\001 \001(\t\022\014\n\004type\030\002 \001(\005\022/\n\013persist"
-      "ence\030\003 \001(\0132\032.google.protobuf.BoolValue\022*"
-      "\n\006hidden\030\004 \001(\0132\032.google.protobuf.BoolVal"
-      "ue\"E\n\004Type\022\024\n\020TYPE_UNSPECIFIED\020\000\022\010\n\004ROOM"
-      "\020\001\022\022\n\016DIRECT_MESSAGE\020\002\022\t\n\005GROUP\020\003\"\"\n\014Cha"
-      "nnelLeave\022\022\n\nchannel_id\030\001 \001(\t\"\212\002\n\021Channe"
-      "lMessageAck\022\022\n\nchannel_id\030\001 \001(\t\022\022\n\nmessa"
-      "ge_id\030\002 \001(\t\022)\n\004code\030\003 \001(\0132\033.google.proto"
-      "buf.Int32Value\022\020\n\010username\030\004 \001(\t\022/\n\013crea"
-      "te_time\030\005 \001(\0132\032.google.protobuf.Timestam"
-      "p\022/\n\013update_time\030\006 \001(\0132\032.google.protobuf"
-      ".Timestamp\022.\n\npersistent\030\007 \001(\0132\032.google."
-      "protobuf.BoolValue\"9\n\022ChannelMessageSend"
-      "\022\022\n\nchannel_id\030\001 \001(\t\022\017\n\007content\030\002 \001(\t\"O\n"
-      "\024ChannelMessageUpdate\022\022\n\nchannel_id\030\001 \001("
-      "\t\022\022\n\nmessage_id\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\">"
-      "\n\024ChannelMessageRemove\022\022\n\nchannel_id\030\001 \001"
-      "(\t\022\022\n\nmessage_id\030\002 \001(\t\"\207\001\n\024ChannelPresen"
-      "ceEvent\022\022\n\nchannel_id\030\001 \001(\t\022,\n\005joins\030\002 \003"
-      "(\0132\035.nakama.realtime.UserPresence\022-\n\006lea"
-      "ves\030\003 \003(\0132\035.nakama.realtime.UserPresence"
-      "\"\330\002\n\005Error\022\014\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001("
-      "\t\0224\n\007context\030\003 \003(\0132#.nakama.realtime.Err"
-      "or.ContextEntry\032.\n\014ContextEntry\022\013\n\003key\030\001"
-      " \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\311\001\n\004Code\022\025\n\021RUNT"
-      "IME_EXCEPTION\020\000\022\030\n\024UNRECOGNIZED_PAYLOAD\020"
-      "\001\022\023\n\017MISSING_PAYLOAD\020\002\022\r\n\tBAD_INPUT\020\003\022\023\n"
-      "\017MATCH_NOT_FOUND\020\004\022\027\n\023MATCH_JOIN_REJECTE"
-      "D\020\005\022\036\n\032RUNTIME_FUNCTION_NOT_FOUND\020\006\022\036\n\032R"
-      "UNTIME_FUNCTION_EXCEPTION\020\007\"\312\001\n\005Match\022\020\n"
-      "\010match_id\030\001 \001(\t\022\025\n\rauthoritative\030\002 \001(\010\022+"
-      "\n\005label\030\003 \001(\0132\034.google.protobuf.StringVa"
-      "lue\022\014\n\004size\030\004 \001(\005\0220\n\tpresences\030\005 \003(\0132\035.n"
-      "akama.realtime.UserPresence\022+\n\004self\030\006 \001("
-      "\0132\035.nakama.realtime.UserPresence\"\r\n\013Matc"
-      "hCreate\"m\n\tMatchData\022\020\n\010match_id\030\001 \001(\t\022/"
-      "\n\010presence\030\002 \001(\0132\035.nakama.realtime.UserP"
-      "resence\022\017\n\007op_code\030\003 \001(\003\022\014\n\004data\030\004 \001(\014\"r"
-      "\n\rMatchDataSend\022\020\n\010match_id\030\001 \001(\t\022\017\n\007op_"
-      "code\030\002 \001(\003\022\014\n\004data\030\003 \001(\014\0220\n\tpresences\030\004 "
-      "\003(\0132\035.nakama.realtime.UserPresence\"\243\001\n\tM"
-      "atchJoin\022\022\n\010match_id\030\001 \001(\tH\000\022\017\n\005token\030\002 "
-      "\001(\tH\000\022:\n\010metadata\030\003 \003(\0132(.nakama.realtim"
-      "e.MatchJoin.MetadataEntry\032/\n\rMetadataEnt"
-      "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B\004\n\002id"
-      "\"\036\n\nMatchLeave\022\020\n\010match_id\030\001 \001(\t\"\203\001\n\022Mat"
-      "chPresenceEvent\022\020\n\010match_id\030\001 \001(\t\022,\n\005joi"
-      "ns\030\002 \003(\0132\035.nakama.realtime.UserPresence\022"
-      "-\n\006leaves\030\003 \003(\0132\035.nakama.realtime.UserPr"
-      "esence\"\333\002\n\rMatchmakerAdd\022\021\n\tmin_count\030\001 "
-      "\001(\005\022\021\n\tmax_count\030\002 \001(\005\022\r\n\005query\030\003 \001(\t\022O\n"
-      "\021string_properties\030\004 \003(\01324.nakama.realti"
-      "me.MatchmakerAdd.StringPropertiesEntry\022Q"
-      "\n\022numeric_properties\030\005 \003(\01325.nakama.real"
-      "time.MatchmakerAdd.NumericPropertiesEntr"
-      "y\0327\n\025StringPropertiesEntry\022\013\n\003key\030\001 \001(\t\022"
-      "\r\n\005value\030\002 \001(\t:\0028\001\0328\n\026NumericPropertiesE"
-      "ntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\001:\0028\001\"\322\004\n"
-      "\021MatchmakerMatched\022\016\n\006ticket\030\001 \001(\t\022\022\n\010ma"
-      "tch_id\030\002 \001(\tH\000\022\017\n\005token\030\003 \001(\tH\000\022@\n\005users"
-      "\030\004 \003(\01321.nakama.realtime.MatchmakerMatch"
-      "ed.MatchmakerUser\022\?\n\004self\030\005 \001(\01321.nakama"
+      "resenceEventH\000\022%\n\004ping\030  \001(\0132\025.nakama.re"
+      "altime.PingH\000\022%\n\004pong\030! \001(\0132\025.nakama.rea"
+      "ltime.PongH\000B\t\n\007message\"\303\001\n\007Channel\022\n\n\002i"
+      "d\030\001 \001(\t\0220\n\tpresences\030\002 \003(\0132\035.nakama.real"
+      "time.UserPresence\022+\n\004self\030\003 \001(\0132\035.nakama"
+      ".realtime.UserPresence\022\021\n\troom_name\030\004 \001("
+      "\t\022\020\n\010group_id\030\005 \001(\t\022\023\n\013user_id_one\030\006 \001(\t"
+      "\022\023\n\013user_id_two\030\007 \001(\t\"\317\001\n\013ChannelJoin\022\016\n"
+      "\006target\030\001 \001(\t\022\014\n\004type\030\002 \001(\005\022/\n\013persisten"
+      "ce\030\003 \001(\0132\032.google.protobuf.BoolValue\022*\n\006"
+      "hidden\030\004 \001(\0132\032.google.protobuf.BoolValue"
+      "\"E\n\004Type\022\024\n\020TYPE_UNSPECIFIED\020\000\022\010\n\004ROOM\020\001"
+      "\022\022\n\016DIRECT_MESSAGE\020\002\022\t\n\005GROUP\020\003\"\"\n\014Chann"
+      "elLeave\022\022\n\nchannel_id\030\001 \001(\t\"\331\002\n\021ChannelM"
+      "essageAck\022\022\n\nchannel_id\030\001 \001(\t\022\022\n\nmessage"
+      "_id\030\002 \001(\t\022)\n\004code\030\003 \001(\0132\033.google.protobu"
+      "f.Int32Value\022\020\n\010username\030\004 \001(\t\022/\n\013create"
+      "_time\030\005 \001(\0132\032.google.protobuf.Timestamp\022"
+      "/\n\013update_time\030\006 \001(\0132\032.google.protobuf.T"
+      "imestamp\022.\n\npersistent\030\007 \001(\0132\032.google.pr"
+      "otobuf.BoolValue\022\021\n\troom_name\030\010 \001(\t\022\020\n\010g"
+      "roup_id\030\t \001(\t\022\023\n\013user_id_one\030\n \001(\t\022\023\n\013us"
+      "er_id_two\030\013 \001(\t\"9\n\022ChannelMessageSend\022\022\n"
+      "\nchannel_id\030\001 \001(\t\022\017\n\007content\030\002 \001(\t\"\236\001\n\024C"
+      "hannelMessageUpdate\022\022\n\nchannel_id\030\001 \001(\t\022"
+      "\022\n\nmessage_id\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\022\021\n\t"
+      "room_name\030\004 \001(\t\022\020\n\010group_id\030\005 \001(\t\022\023\n\013use"
+      "r_id_one\030\006 \001(\t\022\023\n\013user_id_two\030\007 \001(\t\"\215\001\n\024"
+      "ChannelMessageRemove\022\022\n\nchannel_id\030\001 \001(\t"
+      "\022\022\n\nmessage_id\030\002 \001(\t\022\021\n\troom_name\030\003 \001(\t\022"
+      "\020\n\010group_id\030\004 \001(\t\022\023\n\013user_id_one\030\005 \001(\t\022\023"
+      "\n\013user_id_two\030\006 \001(\t\"\326\001\n\024ChannelPresenceE"
+      "vent\022\022\n\nchannel_id\030\001 \001(\t\022,\n\005joins\030\002 \003(\0132"
+      "\035.nakama.realtime.UserPresence\022-\n\006leaves"
+      "\030\003 \003(\0132\035.nakama.realtime.UserPresence\022\021\n"
+      "\troom_name\030\004 \001(\t\022\020\n\010group_id\030\005 \001(\t\022\023\n\013us"
+      "er_id_one\030\006 \001(\t\022\023\n\013user_id_two\030\007 \001(\t\"\330\002\n"
+      "\005Error\022\014\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\0224\n"
+      "\007context\030\003 \003(\0132#.nakama.realtime.Error.C"
+      "ontextEntry\032.\n\014ContextEntry\022\013\n\003key\030\001 \001(\t"
+      "\022\r\n\005value\030\002 \001(\t:\0028\001\"\311\001\n\004Code\022\025\n\021RUNTIME_"
+      "EXCEPTION\020\000\022\030\n\024UNRECOGNIZED_PAYLOAD\020\001\022\023\n"
+      "\017MISSING_PAYLOAD\020\002\022\r\n\tBAD_INPUT\020\003\022\023\n\017MAT"
+      "CH_NOT_FOUND\020\004\022\027\n\023MATCH_JOIN_REJECTED\020\005\022"
+      "\036\n\032RUNTIME_FUNCTION_NOT_FOUND\020\006\022\036\n\032RUNTI"
+      "ME_FUNCTION_EXCEPTION\020\007\"\312\001\n\005Match\022\020\n\010mat"
+      "ch_id\030\001 \001(\t\022\025\n\rauthoritative\030\002 \001(\010\022+\n\005la"
+      "bel\030\003 \001(\0132\034.google.protobuf.StringValue\022"
+      "\014\n\004size\030\004 \001(\005\0220\n\tpresences\030\005 \003(\0132\035.nakam"
+      "a.realtime.UserPresence\022+\n\004self\030\006 \001(\0132\035."
+      "nakama.realtime.UserPresence\"\r\n\013MatchCre"
+      "ate\"\177\n\tMatchData\022\020\n\010match_id\030\001 \001(\t\022/\n\010pr"
+      "esence\030\002 \001(\0132\035.nakama.realtime.UserPrese"
+      "nce\022\017\n\007op_code\030\003 \001(\003\022\014\n\004data\030\004 \001(\014\022\020\n\010re"
+      "liable\030\005 \001(\010\"\204\001\n\rMatchDataSend\022\020\n\010match_"
+      "id\030\001 \001(\t\022\017\n\007op_code\030\002 \001(\003\022\014\n\004data\030\003 \001(\014\022"
+      "0\n\tpresences\030\004 \003(\0132\035.nakama.realtime.Use"
+      "rPresence\022\020\n\010reliable\030\005 \001(\010\"\243\001\n\tMatchJoi"
+      "n\022\022\n\010match_id\030\001 \001(\tH\000\022\017\n\005token\030\002 \001(\tH\000\022:"
+      "\n\010metadata\030\003 \003(\0132(.nakama.realtime.Match"
+      "Join.MetadataEntry\032/\n\rMetadataEntry\022\013\n\003k"
+      "ey\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B\004\n\002id\"\036\n\nMat"
+      "chLeave\022\020\n\010match_id\030\001 \001(\t\"\203\001\n\022MatchPrese"
+      "nceEvent\022\020\n\010match_id\030\001 \001(\t\022,\n\005joins\030\002 \003("
+      "\0132\035.nakama.realtime.UserPresence\022-\n\006leav"
+      "es\030\003 \003(\0132\035.nakama.realtime.UserPresence\""
+      "\333\002\n\rMatchmakerAdd\022\021\n\tmin_count\030\001 \001(\005\022\021\n\t"
+      "max_count\030\002 \001(\005\022\r\n\005query\030\003 \001(\t\022O\n\021string"
+      "_properties\030\004 \003(\01324.nakama.realtime.Matc"
+      "hmakerAdd.StringPropertiesEntry\022Q\n\022numer"
+      "ic_properties\030\005 \003(\01325.nakama.realtime.Ma"
+      "tchmakerAdd.NumericPropertiesEntry\0327\n\025St"
+      "ringPropertiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005valu"
+      "e\030\002 \001(\t:\0028\001\0328\n\026NumericPropertiesEntry\022\013\n"
+      "\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\001:\0028\001\"\322\004\n\021Matchm"
+      "akerMatched\022\016\n\006ticket\030\001 \001(\t\022\022\n\010match_id\030"
+      "\002 \001(\tH\000\022\017\n\005token\030\003 \001(\tH\000\022@\n\005users\030\004 \003(\0132"
+      "1.nakama.realtime.MatchmakerMatched.Matc"
+      "hmakerUser\022\?\n\004self\030\005 \001(\01321.nakama.realti"
+      "me.MatchmakerMatched.MatchmakerUser\032\376\002\n\016"
+      "MatchmakerUser\022/\n\010presence\030\001 \001(\0132\035.nakam"
+      "a.realtime.UserPresence\022b\n\021string_proper"
+      "ties\030\005 \003(\0132G.nakama.realtime.MatchmakerM"
+      "atched.MatchmakerUser.StringPropertiesEn"
+      "try\022d\n\022numeric_properties\030\006 \003(\0132H.nakama"
       ".realtime.MatchmakerMatched.MatchmakerUs"
-      "er\032\376\002\n\016MatchmakerUser\022/\n\010presence\030\001 \001(\0132"
-      "\035.nakama.realtime.UserPresence\022b\n\021string"
-      "_properties\030\005 \003(\0132G.nakama.realtime.Matc"
-      "hmakerMatched.MatchmakerUser.StringPrope"
-      "rtiesEntry\022d\n\022numeric_properties\030\006 \003(\0132H"
-      ".nakama.realtime.MatchmakerMatched.Match"
-      "makerUser.NumericPropertiesEntry\0327\n\025Stri"
-      "ngPropertiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030"
-      "\002 \001(\t:\0028\001\0328\n\026NumericPropertiesEntry\022\013\n\003k"
-      "ey\030\001 \001(\t\022\r\n\005value\030\002 \001(\001:\0028\001B\004\n\002id\"\"\n\020Mat"
-      "chmakerRemove\022\016\n\006ticket\030\001 \001(\t\"\"\n\020Matchma"
-      "kerTicket\022\016\n\006ticket\030\001 \001(\t\"@\n\rNotificatio"
-      "ns\022/\n\rnotifications\030\001 \003(\0132\030.nakama.api.N"
-      "otification\":\n\006Status\0220\n\tpresences\030\001 \003(\013"
-      "2\035.nakama.realtime.UserPresence\" \n\014Statu"
-      "sFollow\022\020\n\010user_ids\030\001 \003(\t\"r\n\023StatusPrese"
-      "nceEvent\022,\n\005joins\030\002 \003(\0132\035.nakama.realtim"
-      "e.UserPresence\022-\n\006leaves\030\003 \003(\0132\035.nakama."
-      "realtime.UserPresence\"\"\n\016StatusUnfollow\022"
-      "\020\n\010user_ids\030\001 \003(\t\"<\n\014StatusUpdate\022,\n\006sta"
-      "tus\030\001 \001(\0132\034.google.protobuf.StringValue\""
-      "J\n\006Stream\022\014\n\004mode\030\001 \001(\005\022\017\n\007subject\030\002 \001(\t"
-      "\022\022\n\nsubcontext\030\003 \001(\t\022\r\n\005label\030\004 \001(\t\"r\n\nS"
-      "treamData\022\'\n\006stream\030\001 \001(\0132\027.nakama.realt"
-      "ime.Stream\022-\n\006sender\030\002 \001(\0132\035.nakama.real"
-      "time.UserPresence\022\014\n\004data\030\003 \001(\t\"\233\001\n\023Stre"
-      "amPresenceEvent\022\'\n\006stream\030\001 \001(\0132\027.nakama"
-      ".realtime.Stream\022,\n\005joins\030\002 \003(\0132\035.nakama"
-      ".realtime.UserPresence\022-\n\006leaves\030\003 \003(\0132\035"
-      ".nakama.realtime.UserPresence\"\210\001\n\014UserPr"
-      "esence\022\017\n\007user_id\030\001 \001(\t\022\022\n\nsession_id\030\002 "
-      "\001(\t\022\020\n\010username\030\003 \001(\t\022\023\n\013persistence\030\004 \001"
-      "(\010\022,\n\006status\030\005 \001(\0132\034.google.protobuf.Str"
-      "ingValueBF\n\033com.heroiclabs.nakama.rtapiB"
-      "\016NakamaRealtimeP\001Z\005rtapi\242\002\004NKPB\252\002\006Nakama"
-      "b\006proto3"
+      "er.NumericPropertiesEntry\0327\n\025StringPrope"
+      "rtiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\002"
+      "8\001\0328\n\026NumericPropertiesEntry\022\013\n\003key\030\001 \001("
+      "\t\022\r\n\005value\030\002 \001(\001:\0028\001B\004\n\002id\"\"\n\020Matchmaker"
+      "Remove\022\016\n\006ticket\030\001 \001(\t\"\"\n\020MatchmakerTick"
+      "et\022\016\n\006ticket\030\001 \001(\t\"@\n\rNotifications\022/\n\rn"
+      "otifications\030\001 \003(\0132\030.nakama.api.Notifica"
+      "tion\"\006\n\004Ping\"\006\n\004Pong\":\n\006Status\0220\n\tpresen"
+      "ces\030\001 \003(\0132\035.nakama.realtime.UserPresence"
+      "\"3\n\014StatusFollow\022\020\n\010user_ids\030\001 \003(\t\022\021\n\tus"
+      "ernames\030\002 \003(\t\"r\n\023StatusPresenceEvent\022,\n\005"
+      "joins\030\002 \003(\0132\035.nakama.realtime.UserPresen"
+      "ce\022-\n\006leaves\030\003 \003(\0132\035.nakama.realtime.Use"
+      "rPresence\"\"\n\016StatusUnfollow\022\020\n\010user_ids\030"
+      "\001 \003(\t\"<\n\014StatusUpdate\022,\n\006status\030\001 \001(\0132\034."
+      "google.protobuf.StringValue\"J\n\006Stream\022\014\n"
+      "\004mode\030\001 \001(\005\022\017\n\007subject\030\002 \001(\t\022\022\n\nsubconte"
+      "xt\030\003 \001(\t\022\r\n\005label\030\004 \001(\t\"\204\001\n\nStreamData\022\'"
+      "\n\006stream\030\001 \001(\0132\027.nakama.realtime.Stream\022"
+      "-\n\006sender\030\002 \001(\0132\035.nakama.realtime.UserPr"
+      "esence\022\014\n\004data\030\003 \001(\t\022\020\n\010reliable\030\004 \001(\010\"\233"
+      "\001\n\023StreamPresenceEvent\022\'\n\006stream\030\001 \001(\0132\027"
+      ".nakama.realtime.Stream\022,\n\005joins\030\002 \003(\0132\035"
+      ".nakama.realtime.UserPresence\022-\n\006leaves\030"
+      "\003 \003(\0132\035.nakama.realtime.UserPresence\"\210\001\n"
+      "\014UserPresence\022\017\n\007user_id\030\001 \001(\t\022\022\n\nsessio"
+      "n_id\030\002 \001(\t\022\020\n\010username\030\003 \001(\t\022\023\n\013persiste"
+      "nce\030\004 \001(\010\022,\n\006status\030\005 \001(\0132\034.google.proto"
+      "buf.StringValueBF\n\033com.heroiclabs.nakama"
+      ".rtapiB\016NakamaRealtimeP\001Z\005rtapi\242\002\004NKPB\252\002"
+      "\006Nakamab\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 6008);
+      descriptor, 6575);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "github.com/heroiclabs/nakama/rtapi/realtime.proto", &protobuf_RegisterTypes);
   ::protobuf_google_2fprotobuf_2ftimestamp_2eproto::AddDescriptors();
@@ -1663,6 +1763,10 @@ void Envelope::InitAsDefaultInstance() {
       ::nakama::realtime::StreamData::internal_default_instance());
   ::nakama::realtime::_Envelope_default_instance_.stream_presence_event_ = const_cast< ::nakama::realtime::StreamPresenceEvent*>(
       ::nakama::realtime::StreamPresenceEvent::internal_default_instance());
+  ::nakama::realtime::_Envelope_default_instance_.ping_ = const_cast< ::nakama::realtime::Ping*>(
+      ::nakama::realtime::Ping::internal_default_instance());
+  ::nakama::realtime::_Envelope_default_instance_.pong_ = const_cast< ::nakama::realtime::Pong*>(
+      ::nakama::realtime::Pong::internal_default_instance());
 }
 void Envelope::set_allocated_channel(::nakama::realtime::Channel* channel) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
@@ -2096,6 +2200,34 @@ void Envelope::set_allocated_stream_presence_event(::nakama::realtime::StreamPre
   }
   // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Envelope.stream_presence_event)
 }
+void Envelope::set_allocated_ping(::nakama::realtime::Ping* ping) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  clear_message();
+  if (ping) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      ping = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, ping, submessage_arena);
+    }
+    set_has_ping();
+    message_.ping_ = ping;
+  }
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Envelope.ping)
+}
+void Envelope::set_allocated_pong(::nakama::realtime::Pong* pong) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  clear_message();
+  if (pong) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      pong = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, pong, submessage_arena);
+    }
+    set_has_pong();
+    message_.pong_ = pong;
+  }
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Envelope.pong)
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Envelope::kCidFieldNumber;
 const int Envelope::kChannelFieldNumber;
@@ -2128,6 +2260,8 @@ const int Envelope::kStatusUnfollowFieldNumber;
 const int Envelope::kStatusUpdateFieldNumber;
 const int Envelope::kStreamDataFieldNumber;
 const int Envelope::kStreamPresenceEventFieldNumber;
+const int Envelope::kPingFieldNumber;
+const int Envelope::kPongFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Envelope::Envelope()
@@ -2265,6 +2399,14 @@ Envelope::Envelope(const Envelope& from)
     }
     case kStreamPresenceEvent: {
       mutable_stream_presence_event()->::nakama::realtime::StreamPresenceEvent::MergeFrom(from.stream_presence_event());
+      break;
+    }
+    case kPing: {
+      mutable_ping()->::nakama::realtime::Ping::MergeFrom(from.ping());
+      break;
+    }
+    case kPong: {
+      mutable_pong()->::nakama::realtime::Pong::MergeFrom(from.pong());
       break;
     }
     case MESSAGE_NOT_SET: {
@@ -2426,6 +2568,14 @@ void Envelope::clear_message() {
     }
     case kStreamPresenceEvent: {
       delete message_.stream_presence_event_;
+      break;
+    }
+    case kPing: {
+      delete message_.ping_;
+      break;
+    }
+    case kPong: {
+      delete message_.pong_;
       break;
     }
     case MESSAGE_NOT_SET: {
@@ -2833,6 +2983,30 @@ bool Envelope::MergePartialFromCodedStream(
         break;
       }
 
+      // .nakama.realtime.Ping ping = 32;
+      case 32: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(2u /* 258 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_ping()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .nakama.realtime.Pong pong = 33;
+      case 33: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 266 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_pong()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -3047,6 +3221,18 @@ void Envelope::SerializeWithCachedSizes(
   if (has_stream_presence_event()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       31, this->_internal_stream_presence_event(), output);
+  }
+
+  // .nakama.realtime.Ping ping = 32;
+  if (has_ping()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      32, this->_internal_ping(), output);
+  }
+
+  // .nakama.realtime.Pong pong = 33;
+  if (has_pong()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      33, this->_internal_pong(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -3284,6 +3470,20 @@ void Envelope::SerializeWithCachedSizes(
         31, this->_internal_stream_presence_event(), deterministic, target);
   }
 
+  // .nakama.realtime.Ping ping = 32;
+  if (has_ping()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        32, this->_internal_ping(), deterministic, target);
+  }
+
+  // .nakama.realtime.Pong pong = 33;
+  if (has_pong()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        33, this->_internal_pong(), deterministic, target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -3519,6 +3719,20 @@ size_t Envelope::ByteSizeLong() const {
           *message_.stream_presence_event_);
       break;
     }
+    // .nakama.realtime.Ping ping = 32;
+    case kPing: {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *message_.ping_);
+      break;
+    }
+    // .nakama.realtime.Pong pong = 33;
+    case kPong: {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *message_.pong_);
+      break;
+    }
     case MESSAGE_NOT_SET: {
       break;
     }
@@ -3675,6 +3889,14 @@ void Envelope::MergeFrom(const Envelope& from) {
       mutable_stream_presence_event()->::nakama::realtime::StreamPresenceEvent::MergeFrom(from.stream_presence_event());
       break;
     }
+    case kPing: {
+      mutable_ping()->::nakama::realtime::Ping::MergeFrom(from.ping());
+      break;
+    }
+    case kPong: {
+      mutable_pong()->::nakama::realtime::Pong::MergeFrom(from.pong());
+      break;
+    }
     case MESSAGE_NOT_SET: {
       break;
     }
@@ -3728,6 +3950,10 @@ void Channel::InitAsDefaultInstance() {
 const int Channel::kIdFieldNumber;
 const int Channel::kPresencesFieldNumber;
 const int Channel::kSelfFieldNumber;
+const int Channel::kRoomNameFieldNumber;
+const int Channel::kGroupIdFieldNumber;
+const int Channel::kUserIdOneFieldNumber;
+const int Channel::kUserIdTwoFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Channel::Channel()
@@ -3746,6 +3972,22 @@ Channel::Channel(const Channel& from)
   if (from.id().size() > 0) {
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
+  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.room_name().size() > 0) {
+    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
+  }
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.group_id().size() > 0) {
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.user_id_one().size() > 0) {
+    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
+  }
+  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.user_id_two().size() > 0) {
+    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
+  }
   if (from.has_self()) {
     self_ = new ::nakama::realtime::UserPresence(*from.self_);
   } else {
@@ -3756,6 +3998,10 @@ Channel::Channel(const Channel& from)
 
 void Channel::SharedCtor() {
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   self_ = NULL;
 }
 
@@ -3766,6 +4012,10 @@ Channel::~Channel() {
 
 void Channel::SharedDtor() {
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete self_;
 }
 
@@ -3791,6 +4041,10 @@ void Channel::Clear() {
 
   presences_.Clear();
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == NULL && self_ != NULL) {
     delete self_;
   }
@@ -3848,6 +4102,70 @@ bool Channel::MergePartialFromCodedStream(
         break;
       }
 
+      // string room_name = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_room_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->room_name().data(), static_cast<int>(this->room_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.Channel.room_name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string group_id = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_group_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->group_id().data(), static_cast<int>(this->group_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.Channel.group_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string user_id_one = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id_one()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.Channel.user_id_one"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string user_id_two = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id_two()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.Channel.user_id_two"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -3899,6 +4217,46 @@ void Channel::SerializeWithCachedSizes(
       3, this->_internal_self(), output);
   }
 
+  // string room_name = 4;
+  if (this->room_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->room_name().data(), static_cast<int>(this->room_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.Channel.room_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->room_name(), output);
+  }
+
+  // string group_id = 5;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.Channel.group_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->group_id(), output);
+  }
+
+  // string user_id_one = 6;
+  if (this->user_id_one().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.Channel.user_id_one");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->user_id_one(), output);
+  }
+
+  // string user_id_two = 7;
+  if (this->user_id_two().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.Channel.user_id_two");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      7, this->user_id_two(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -3939,6 +4297,50 @@ void Channel::SerializeWithCachedSizes(
         3, this->_internal_self(), deterministic, target);
   }
 
+  // string room_name = 4;
+  if (this->room_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->room_name().data(), static_cast<int>(this->room_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.Channel.room_name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->room_name(), target);
+  }
+
+  // string group_id = 5;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.Channel.group_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->group_id(), target);
+  }
+
+  // string user_id_one = 6;
+  if (this->user_id_one().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.Channel.user_id_one");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->user_id_one(), target);
+  }
+
+  // string user_id_two = 7;
+  if (this->user_id_two().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.Channel.user_id_two");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        7, this->user_id_two(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -3972,6 +4374,34 @@ size_t Channel::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->id());
+  }
+
+  // string room_name = 4;
+  if (this->room_name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->room_name());
+  }
+
+  // string group_id = 5;
+  if (this->group_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->group_id());
+  }
+
+  // string user_id_one = 6;
+  if (this->user_id_one().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->user_id_one());
+  }
+
+  // string user_id_two = 7;
+  if (this->user_id_two().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->user_id_two());
   }
 
   // .nakama.realtime.UserPresence self = 3;
@@ -4013,6 +4443,22 @@ void Channel::MergeFrom(const Channel& from) {
 
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
+  if (from.room_name().size() > 0) {
+
+    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
+  }
+  if (from.group_id().size() > 0) {
+
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  if (from.user_id_one().size() > 0) {
+
+    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
+  }
+  if (from.user_id_two().size() > 0) {
+
+    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
+  }
   if (from.has_self()) {
     mutable_self()->::nakama::realtime::UserPresence::MergeFrom(from.self());
   }
@@ -4044,6 +4490,14 @@ void Channel::InternalSwap(Channel* other) {
   using std::swap;
   CastToBase(&presences_)->InternalSwap(CastToBase(&other->presences_));
   id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  room_name_.Swap(&other->room_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  group_id_.Swap(&other->group_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  user_id_one_.Swap(&other->user_id_one_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  user_id_two_.Swap(&other->user_id_two_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(self_, other->self_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -4734,6 +5188,10 @@ const int ChannelMessageAck::kUsernameFieldNumber;
 const int ChannelMessageAck::kCreateTimeFieldNumber;
 const int ChannelMessageAck::kUpdateTimeFieldNumber;
 const int ChannelMessageAck::kPersistentFieldNumber;
+const int ChannelMessageAck::kRoomNameFieldNumber;
+const int ChannelMessageAck::kGroupIdFieldNumber;
+const int ChannelMessageAck::kUserIdOneFieldNumber;
+const int ChannelMessageAck::kUserIdTwoFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ChannelMessageAck::ChannelMessageAck()
@@ -4758,6 +5216,22 @@ ChannelMessageAck::ChannelMessageAck(const ChannelMessageAck& from)
   username_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.username().size() > 0) {
     username_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.username_);
+  }
+  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.room_name().size() > 0) {
+    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
+  }
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.group_id().size() > 0) {
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.user_id_one().size() > 0) {
+    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
+  }
+  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.user_id_two().size() > 0) {
+    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
   }
   if (from.has_code()) {
     code_ = new ::google::protobuf::Int32Value(*from.code_);
@@ -4786,6 +5260,10 @@ void ChannelMessageAck::SharedCtor() {
   channel_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   username_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&code_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&persistent_) -
       reinterpret_cast<char*>(&code_)) + sizeof(persistent_));
@@ -4800,6 +5278,10 @@ void ChannelMessageAck::SharedDtor() {
   channel_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   username_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete code_;
   if (this != internal_default_instance()) delete create_time_;
   if (this != internal_default_instance()) delete update_time_;
@@ -4829,6 +5311,10 @@ void ChannelMessageAck::Clear() {
   channel_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   username_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == NULL && code_ != NULL) {
     delete code_;
   }
@@ -4954,6 +5440,70 @@ bool ChannelMessageAck::MergePartialFromCodedStream(
         break;
       }
 
+      // string room_name = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(66u /* 66 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_room_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->room_name().data(), static_cast<int>(this->room_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageAck.room_name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string group_id = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_group_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->group_id().data(), static_cast<int>(this->group_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageAck.group_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string user_id_one = 10;
+      case 10: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(82u /* 82 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id_one()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageAck.user_id_one"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string user_id_two = 11;
+      case 11: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(90u /* 90 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id_two()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageAck.user_id_two"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -5034,6 +5584,46 @@ void ChannelMessageAck::SerializeWithCachedSizes(
       7, this->_internal_persistent(), output);
   }
 
+  // string room_name = 8;
+  if (this->room_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->room_name().data(), static_cast<int>(this->room_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageAck.room_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      8, this->room_name(), output);
+  }
+
+  // string group_id = 9;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageAck.group_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      9, this->group_id(), output);
+  }
+
+  // string user_id_one = 10;
+  if (this->user_id_one().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageAck.user_id_one");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      10, this->user_id_one(), output);
+  }
+
+  // string user_id_two = 11;
+  if (this->user_id_two().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageAck.user_id_two");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      11, this->user_id_two(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -5109,6 +5699,50 @@ void ChannelMessageAck::SerializeWithCachedSizes(
         7, this->_internal_persistent(), deterministic, target);
   }
 
+  // string room_name = 8;
+  if (this->room_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->room_name().data(), static_cast<int>(this->room_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageAck.room_name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        8, this->room_name(), target);
+  }
+
+  // string group_id = 9;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageAck.group_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        9, this->group_id(), target);
+  }
+
+  // string user_id_one = 10;
+  if (this->user_id_one().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageAck.user_id_one");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        10, this->user_id_one(), target);
+  }
+
+  // string user_id_two = 11;
+  if (this->user_id_two().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageAck.user_id_two");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        11, this->user_id_two(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -5145,6 +5779,34 @@ size_t ChannelMessageAck::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->username());
+  }
+
+  // string room_name = 8;
+  if (this->room_name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->room_name());
+  }
+
+  // string group_id = 9;
+  if (this->group_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->group_id());
+  }
+
+  // string user_id_one = 10;
+  if (this->user_id_one().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->user_id_one());
+  }
+
+  // string user_id_two = 11;
+  if (this->user_id_two().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->user_id_two());
   }
 
   // .google.protobuf.Int32Value code = 3;
@@ -5214,6 +5876,22 @@ void ChannelMessageAck::MergeFrom(const ChannelMessageAck& from) {
 
     username_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.username_);
   }
+  if (from.room_name().size() > 0) {
+
+    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
+  }
+  if (from.group_id().size() > 0) {
+
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  if (from.user_id_one().size() > 0) {
+
+    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
+  }
+  if (from.user_id_two().size() > 0) {
+
+    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
+  }
   if (from.has_code()) {
     mutable_code()->::google::protobuf::Int32Value::MergeFrom(from.code());
   }
@@ -5257,6 +5935,14 @@ void ChannelMessageAck::InternalSwap(ChannelMessageAck* other) {
   message_id_.Swap(&other->message_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   username_.Swap(&other->username_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  room_name_.Swap(&other->room_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  group_id_.Swap(&other->group_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  user_id_one_.Swap(&other->user_id_one_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  user_id_two_.Swap(&other->user_id_two_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(code_, other->code_);
   swap(create_time_, other->create_time_);
@@ -5579,6 +6265,10 @@ void ChannelMessageUpdate::InitAsDefaultInstance() {
 const int ChannelMessageUpdate::kChannelIdFieldNumber;
 const int ChannelMessageUpdate::kMessageIdFieldNumber;
 const int ChannelMessageUpdate::kContentFieldNumber;
+const int ChannelMessageUpdate::kRoomNameFieldNumber;
+const int ChannelMessageUpdate::kGroupIdFieldNumber;
+const int ChannelMessageUpdate::kUserIdOneFieldNumber;
+const int ChannelMessageUpdate::kUserIdTwoFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ChannelMessageUpdate::ChannelMessageUpdate()
@@ -5604,6 +6294,22 @@ ChannelMessageUpdate::ChannelMessageUpdate(const ChannelMessageUpdate& from)
   if (from.content().size() > 0) {
     content_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.content_);
   }
+  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.room_name().size() > 0) {
+    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
+  }
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.group_id().size() > 0) {
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.user_id_one().size() > 0) {
+    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
+  }
+  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.user_id_two().size() > 0) {
+    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
+  }
   // @@protoc_insertion_point(copy_constructor:nakama.realtime.ChannelMessageUpdate)
 }
 
@@ -5611,6 +6317,10 @@ void ChannelMessageUpdate::SharedCtor() {
   channel_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 ChannelMessageUpdate::~ChannelMessageUpdate() {
@@ -5622,6 +6332,10 @@ void ChannelMessageUpdate::SharedDtor() {
   channel_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void ChannelMessageUpdate::SetCachedSize(int size) const {
@@ -5647,6 +6361,10 @@ void ChannelMessageUpdate::Clear() {
   channel_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -5702,6 +6420,70 @@ bool ChannelMessageUpdate::MergePartialFromCodedStream(
             this->content().data(), static_cast<int>(this->content().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "nakama.realtime.ChannelMessageUpdate.content"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string room_name = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_room_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->room_name().data(), static_cast<int>(this->room_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageUpdate.room_name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string group_id = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_group_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->group_id().data(), static_cast<int>(this->group_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageUpdate.group_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string user_id_one = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id_one()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageUpdate.user_id_one"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string user_id_two = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id_two()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageUpdate.user_id_two"));
         } else {
           goto handle_unusual;
         }
@@ -5764,6 +6546,46 @@ void ChannelMessageUpdate::SerializeWithCachedSizes(
       3, this->content(), output);
   }
 
+  // string room_name = 4;
+  if (this->room_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->room_name().data(), static_cast<int>(this->room_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageUpdate.room_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->room_name(), output);
+  }
+
+  // string group_id = 5;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageUpdate.group_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->group_id(), output);
+  }
+
+  // string user_id_one = 6;
+  if (this->user_id_one().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageUpdate.user_id_one");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->user_id_one(), output);
+  }
+
+  // string user_id_two = 7;
+  if (this->user_id_two().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageUpdate.user_id_two");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      7, this->user_id_two(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -5811,6 +6633,50 @@ void ChannelMessageUpdate::SerializeWithCachedSizes(
         3, this->content(), target);
   }
 
+  // string room_name = 4;
+  if (this->room_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->room_name().data(), static_cast<int>(this->room_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageUpdate.room_name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->room_name(), target);
+  }
+
+  // string group_id = 5;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageUpdate.group_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->group_id(), target);
+  }
+
+  // string user_id_one = 6;
+  if (this->user_id_one().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageUpdate.user_id_one");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->user_id_one(), target);
+  }
+
+  // string user_id_two = 7;
+  if (this->user_id_two().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageUpdate.user_id_two");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        7, this->user_id_two(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -5847,6 +6713,34 @@ size_t ChannelMessageUpdate::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->content());
+  }
+
+  // string room_name = 4;
+  if (this->room_name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->room_name());
+  }
+
+  // string group_id = 5;
+  if (this->group_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->group_id());
+  }
+
+  // string user_id_one = 6;
+  if (this->user_id_one().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->user_id_one());
+  }
+
+  // string user_id_two = 7;
+  if (this->user_id_two().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->user_id_two());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -5888,6 +6782,22 @@ void ChannelMessageUpdate::MergeFrom(const ChannelMessageUpdate& from) {
 
     content_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.content_);
   }
+  if (from.room_name().size() > 0) {
+
+    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
+  }
+  if (from.group_id().size() > 0) {
+
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  if (from.user_id_one().size() > 0) {
+
+    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
+  }
+  if (from.user_id_two().size() > 0) {
+
+    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
+  }
 }
 
 void ChannelMessageUpdate::CopyFrom(const ::google::protobuf::Message& from) {
@@ -5920,6 +6830,14 @@ void ChannelMessageUpdate::InternalSwap(ChannelMessageUpdate* other) {
     GetArenaNoVirtual());
   content_.Swap(&other->content_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  room_name_.Swap(&other->room_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  group_id_.Swap(&other->group_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  user_id_one_.Swap(&other->user_id_one_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  user_id_two_.Swap(&other->user_id_two_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -5936,6 +6854,10 @@ void ChannelMessageRemove::InitAsDefaultInstance() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ChannelMessageRemove::kChannelIdFieldNumber;
 const int ChannelMessageRemove::kMessageIdFieldNumber;
+const int ChannelMessageRemove::kRoomNameFieldNumber;
+const int ChannelMessageRemove::kGroupIdFieldNumber;
+const int ChannelMessageRemove::kUserIdOneFieldNumber;
+const int ChannelMessageRemove::kUserIdTwoFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ChannelMessageRemove::ChannelMessageRemove()
@@ -5957,12 +6879,32 @@ ChannelMessageRemove::ChannelMessageRemove(const ChannelMessageRemove& from)
   if (from.message_id().size() > 0) {
     message_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.message_id_);
   }
+  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.room_name().size() > 0) {
+    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
+  }
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.group_id().size() > 0) {
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.user_id_one().size() > 0) {
+    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
+  }
+  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.user_id_two().size() > 0) {
+    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
+  }
   // @@protoc_insertion_point(copy_constructor:nakama.realtime.ChannelMessageRemove)
 }
 
 void ChannelMessageRemove::SharedCtor() {
   channel_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 ChannelMessageRemove::~ChannelMessageRemove() {
@@ -5973,6 +6915,10 @@ ChannelMessageRemove::~ChannelMessageRemove() {
 void ChannelMessageRemove::SharedDtor() {
   channel_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void ChannelMessageRemove::SetCachedSize(int size) const {
@@ -5997,6 +6943,10 @@ void ChannelMessageRemove::Clear() {
 
   channel_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -6036,6 +6986,70 @@ bool ChannelMessageRemove::MergePartialFromCodedStream(
             this->message_id().data(), static_cast<int>(this->message_id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "nakama.realtime.ChannelMessageRemove.message_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string room_name = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_room_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->room_name().data(), static_cast<int>(this->room_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageRemove.room_name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string group_id = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_group_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->group_id().data(), static_cast<int>(this->group_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageRemove.group_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string user_id_one = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id_one()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageRemove.user_id_one"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string user_id_two = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id_two()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelMessageRemove.user_id_two"));
         } else {
           goto handle_unusual;
         }
@@ -6088,6 +7102,46 @@ void ChannelMessageRemove::SerializeWithCachedSizes(
       2, this->message_id(), output);
   }
 
+  // string room_name = 3;
+  if (this->room_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->room_name().data(), static_cast<int>(this->room_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageRemove.room_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->room_name(), output);
+  }
+
+  // string group_id = 4;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageRemove.group_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->group_id(), output);
+  }
+
+  // string user_id_one = 5;
+  if (this->user_id_one().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageRemove.user_id_one");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->user_id_one(), output);
+  }
+
+  // string user_id_two = 6;
+  if (this->user_id_two().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageRemove.user_id_two");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->user_id_two(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -6124,6 +7178,50 @@ void ChannelMessageRemove::SerializeWithCachedSizes(
         2, this->message_id(), target);
   }
 
+  // string room_name = 3;
+  if (this->room_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->room_name().data(), static_cast<int>(this->room_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageRemove.room_name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->room_name(), target);
+  }
+
+  // string group_id = 4;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageRemove.group_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->group_id(), target);
+  }
+
+  // string user_id_one = 5;
+  if (this->user_id_one().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageRemove.user_id_one");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->user_id_one(), target);
+  }
+
+  // string user_id_two = 6;
+  if (this->user_id_two().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelMessageRemove.user_id_two");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->user_id_two(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -6153,6 +7251,34 @@ size_t ChannelMessageRemove::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->message_id());
+  }
+
+  // string room_name = 3;
+  if (this->room_name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->room_name());
+  }
+
+  // string group_id = 4;
+  if (this->group_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->group_id());
+  }
+
+  // string user_id_one = 5;
+  if (this->user_id_one().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->user_id_one());
+  }
+
+  // string user_id_two = 6;
+  if (this->user_id_two().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->user_id_two());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -6190,6 +7316,22 @@ void ChannelMessageRemove::MergeFrom(const ChannelMessageRemove& from) {
 
     message_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.message_id_);
   }
+  if (from.room_name().size() > 0) {
+
+    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
+  }
+  if (from.group_id().size() > 0) {
+
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  if (from.user_id_one().size() > 0) {
+
+    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
+  }
+  if (from.user_id_two().size() > 0) {
+
+    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
+  }
 }
 
 void ChannelMessageRemove::CopyFrom(const ::google::protobuf::Message& from) {
@@ -6220,6 +7362,14 @@ void ChannelMessageRemove::InternalSwap(ChannelMessageRemove* other) {
     GetArenaNoVirtual());
   message_id_.Swap(&other->message_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  room_name_.Swap(&other->room_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  group_id_.Swap(&other->group_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  user_id_one_.Swap(&other->user_id_one_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  user_id_two_.Swap(&other->user_id_two_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -6237,6 +7387,10 @@ void ChannelPresenceEvent::InitAsDefaultInstance() {
 const int ChannelPresenceEvent::kChannelIdFieldNumber;
 const int ChannelPresenceEvent::kJoinsFieldNumber;
 const int ChannelPresenceEvent::kLeavesFieldNumber;
+const int ChannelPresenceEvent::kRoomNameFieldNumber;
+const int ChannelPresenceEvent::kGroupIdFieldNumber;
+const int ChannelPresenceEvent::kUserIdOneFieldNumber;
+const int ChannelPresenceEvent::kUserIdTwoFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ChannelPresenceEvent::ChannelPresenceEvent()
@@ -6256,11 +7410,31 @@ ChannelPresenceEvent::ChannelPresenceEvent(const ChannelPresenceEvent& from)
   if (from.channel_id().size() > 0) {
     channel_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.channel_id_);
   }
+  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.room_name().size() > 0) {
+    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
+  }
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.group_id().size() > 0) {
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.user_id_one().size() > 0) {
+    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
+  }
+  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.user_id_two().size() > 0) {
+    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
+  }
   // @@protoc_insertion_point(copy_constructor:nakama.realtime.ChannelPresenceEvent)
 }
 
 void ChannelPresenceEvent::SharedCtor() {
   channel_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 ChannelPresenceEvent::~ChannelPresenceEvent() {
@@ -6270,6 +7444,10 @@ ChannelPresenceEvent::~ChannelPresenceEvent() {
 
 void ChannelPresenceEvent::SharedDtor() {
   channel_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void ChannelPresenceEvent::SetCachedSize(int size) const {
@@ -6295,6 +7473,10 @@ void ChannelPresenceEvent::Clear() {
   joins_.Clear();
   leaves_.Clear();
   channel_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -6342,6 +7524,70 @@ bool ChannelPresenceEvent::MergePartialFromCodedStream(
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                 input, add_leaves()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string room_name = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_room_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->room_name().data(), static_cast<int>(this->room_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelPresenceEvent.room_name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string group_id = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_group_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->group_id().data(), static_cast<int>(this->group_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelPresenceEvent.group_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string user_id_one = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id_one()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelPresenceEvent.user_id_one"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string user_id_two = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id_two()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.ChannelPresenceEvent.user_id_two"));
         } else {
           goto handle_unusual;
         }
@@ -6402,6 +7648,46 @@ void ChannelPresenceEvent::SerializeWithCachedSizes(
       output);
   }
 
+  // string room_name = 4;
+  if (this->room_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->room_name().data(), static_cast<int>(this->room_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelPresenceEvent.room_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->room_name(), output);
+  }
+
+  // string group_id = 5;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelPresenceEvent.group_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->group_id(), output);
+  }
+
+  // string user_id_one = 6;
+  if (this->user_id_one().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelPresenceEvent.user_id_one");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->user_id_one(), output);
+  }
+
+  // string user_id_two = 7;
+  if (this->user_id_two().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelPresenceEvent.user_id_two");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      7, this->user_id_two(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -6441,6 +7727,50 @@ void ChannelPresenceEvent::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
         3, this->leaves(static_cast<int>(i)), deterministic, target);
+  }
+
+  // string room_name = 4;
+  if (this->room_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->room_name().data(), static_cast<int>(this->room_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelPresenceEvent.room_name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->room_name(), target);
+  }
+
+  // string group_id = 5;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelPresenceEvent.group_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->group_id(), target);
+  }
+
+  // string user_id_one = 6;
+  if (this->user_id_one().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelPresenceEvent.user_id_one");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->user_id_one(), target);
+  }
+
+  // string user_id_two = 7;
+  if (this->user_id_two().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.ChannelPresenceEvent.user_id_two");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        7, this->user_id_two(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -6489,6 +7819,34 @@ size_t ChannelPresenceEvent::ByteSizeLong() const {
         this->channel_id());
   }
 
+  // string room_name = 4;
+  if (this->room_name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->room_name());
+  }
+
+  // string group_id = 5;
+  if (this->group_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->group_id());
+  }
+
+  // string user_id_one = 6;
+  if (this->user_id_one().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->user_id_one());
+  }
+
+  // string user_id_two = 7;
+  if (this->user_id_two().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->user_id_two());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -6522,6 +7880,22 @@ void ChannelPresenceEvent::MergeFrom(const ChannelPresenceEvent& from) {
 
     channel_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.channel_id_);
   }
+  if (from.room_name().size() > 0) {
+
+    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
+  }
+  if (from.group_id().size() > 0) {
+
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  if (from.user_id_one().size() > 0) {
+
+    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
+  }
+  if (from.user_id_two().size() > 0) {
+
+    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
+  }
 }
 
 void ChannelPresenceEvent::CopyFrom(const ::google::protobuf::Message& from) {
@@ -6551,6 +7925,14 @@ void ChannelPresenceEvent::InternalSwap(ChannelPresenceEvent* other) {
   CastToBase(&joins_)->InternalSwap(CastToBase(&other->joins_));
   CastToBase(&leaves_)->InternalSwap(CastToBase(&other->leaves_));
   channel_id_.Swap(&other->channel_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  room_name_.Swap(&other->room_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  group_id_.Swap(&other->group_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  user_id_one_.Swap(&other->user_id_one_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  user_id_two_.Swap(&other->user_id_two_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
@@ -7675,6 +9057,7 @@ const int MatchData::kMatchIdFieldNumber;
 const int MatchData::kPresenceFieldNumber;
 const int MatchData::kOpCodeFieldNumber;
 const int MatchData::kDataFieldNumber;
+const int MatchData::kReliableFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 MatchData::MatchData()
@@ -7701,7 +9084,9 @@ MatchData::MatchData(const MatchData& from)
   } else {
     presence_ = NULL;
   }
-  op_code_ = from.op_code_;
+  ::memcpy(&op_code_, &from.op_code_,
+    static_cast<size_t>(reinterpret_cast<char*>(&reliable_) -
+    reinterpret_cast<char*>(&op_code_)) + sizeof(reliable_));
   // @@protoc_insertion_point(copy_constructor:nakama.realtime.MatchData)
 }
 
@@ -7709,8 +9094,8 @@ void MatchData::SharedCtor() {
   match_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&presence_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&op_code_) -
-      reinterpret_cast<char*>(&presence_)) + sizeof(op_code_));
+      reinterpret_cast<char*>(&reliable_) -
+      reinterpret_cast<char*>(&presence_)) + sizeof(reliable_));
 }
 
 MatchData::~MatchData() {
@@ -7750,7 +9135,9 @@ void MatchData::Clear() {
     delete presence_;
   }
   presence_ = NULL;
-  op_code_ = GOOGLE_LONGLONG(0);
+  ::memset(&op_code_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&reliable_) -
+      reinterpret_cast<char*>(&op_code_)) + sizeof(reliable_));
   _internal_metadata_.Clear();
 }
 
@@ -7818,6 +9205,20 @@ bool MatchData::MergePartialFromCodedStream(
         break;
       }
 
+      // bool reliable = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &reliable_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -7871,6 +9272,11 @@ void MatchData::SerializeWithCachedSizes(
       4, this->data(), output);
   }
 
+  // bool reliable = 5;
+  if (this->reliable() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->reliable(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -7913,6 +9319,11 @@ void MatchData::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         4, this->data(), target);
+  }
+
+  // bool reliable = 5;
+  if (this->reliable() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->reliable(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -7960,6 +9371,11 @@ size_t MatchData::ByteSizeLong() const {
         this->op_code());
   }
 
+  // bool reliable = 5;
+  if (this->reliable() != 0) {
+    total_size += 1 + 1;
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -8001,6 +9417,9 @@ void MatchData::MergeFrom(const MatchData& from) {
   if (from.op_code() != 0) {
     set_op_code(from.op_code());
   }
+  if (from.reliable() != 0) {
+    set_reliable(from.reliable());
+  }
 }
 
 void MatchData::CopyFrom(const ::google::protobuf::Message& from) {
@@ -8033,6 +9452,7 @@ void MatchData::InternalSwap(MatchData* other) {
     GetArenaNoVirtual());
   swap(presence_, other->presence_);
   swap(op_code_, other->op_code_);
+  swap(reliable_, other->reliable_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -8051,6 +9471,7 @@ const int MatchDataSend::kMatchIdFieldNumber;
 const int MatchDataSend::kOpCodeFieldNumber;
 const int MatchDataSend::kDataFieldNumber;
 const int MatchDataSend::kPresencesFieldNumber;
+const int MatchDataSend::kReliableFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 MatchDataSend::MatchDataSend()
@@ -8073,14 +9494,18 @@ MatchDataSend::MatchDataSend(const MatchDataSend& from)
   if (from.data().size() > 0) {
     data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data_);
   }
-  op_code_ = from.op_code_;
+  ::memcpy(&op_code_, &from.op_code_,
+    static_cast<size_t>(reinterpret_cast<char*>(&reliable_) -
+    reinterpret_cast<char*>(&op_code_)) + sizeof(reliable_));
   // @@protoc_insertion_point(copy_constructor:nakama.realtime.MatchDataSend)
 }
 
 void MatchDataSend::SharedCtor() {
   match_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  op_code_ = GOOGLE_LONGLONG(0);
+  ::memset(&op_code_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&reliable_) -
+      reinterpret_cast<char*>(&op_code_)) + sizeof(reliable_));
 }
 
 MatchDataSend::~MatchDataSend() {
@@ -8116,7 +9541,9 @@ void MatchDataSend::Clear() {
   presences_.Clear();
   match_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  op_code_ = GOOGLE_LONGLONG(0);
+  ::memset(&op_code_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&reliable_) -
+      reinterpret_cast<char*>(&op_code_)) + sizeof(reliable_));
   _internal_metadata_.Clear();
 }
 
@@ -8184,6 +9611,20 @@ bool MatchDataSend::MergePartialFromCodedStream(
         break;
       }
 
+      // bool reliable = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &reliable_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -8240,6 +9681,11 @@ void MatchDataSend::SerializeWithCachedSizes(
       output);
   }
 
+  // bool reliable = 5;
+  if (this->reliable() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->reliable(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -8283,6 +9729,11 @@ void MatchDataSend::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
         4, this->presences(static_cast<int>(i)), deterministic, target);
+  }
+
+  // bool reliable = 5;
+  if (this->reliable() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->reliable(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -8334,6 +9785,11 @@ size_t MatchDataSend::ByteSizeLong() const {
         this->op_code());
   }
 
+  // bool reliable = 5;
+  if (this->reliable() != 0) {
+    total_size += 1 + 1;
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -8373,6 +9829,9 @@ void MatchDataSend::MergeFrom(const MatchDataSend& from) {
   if (from.op_code() != 0) {
     set_op_code(from.op_code());
   }
+  if (from.reliable() != 0) {
+    set_reliable(from.reliable());
+  }
 }
 
 void MatchDataSend::CopyFrom(const ::google::protobuf::Message& from) {
@@ -8405,6 +9864,7 @@ void MatchDataSend::InternalSwap(MatchDataSend* other) {
   data_.Swap(&other->data_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(op_code_, other->op_code_);
+  swap(reliable_, other->reliable_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -11929,6 +13389,364 @@ void Notifications::InternalSwap(Notifications* other) {
 
 // ===================================================================
 
+void Ping::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+Ping::Ping()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_Ping.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:nakama.realtime.Ping)
+}
+Ping::Ping(const Ping& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:nakama.realtime.Ping)
+}
+
+void Ping::SharedCtor() {
+}
+
+Ping::~Ping() {
+  // @@protoc_insertion_point(destructor:nakama.realtime.Ping)
+  SharedDtor();
+}
+
+void Ping::SharedDtor() {
+}
+
+void Ping::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* Ping::descriptor() {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const Ping& Ping::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_Ping.base);
+  return *internal_default_instance();
+}
+
+
+void Ping::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.realtime.Ping)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _internal_metadata_.Clear();
+}
+
+bool Ping::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:nakama.realtime.Ping)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+  handle_unusual:
+    if (tag == 0) {
+      goto success;
+    }
+    DO_(::google::protobuf::internal::WireFormat::SkipField(
+          input, tag, _internal_metadata_.mutable_unknown_fields()));
+  }
+success:
+  // @@protoc_insertion_point(parse_success:nakama.realtime.Ping)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:nakama.realtime.Ping)
+  return false;
+#undef DO_
+}
+
+void Ping::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:nakama.realtime.Ping)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:nakama.realtime.Ping)
+}
+
+::google::protobuf::uint8* Ping::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.realtime.Ping)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.realtime.Ping)
+  return target;
+}
+
+size_t Ping::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.realtime.Ping)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void Ping::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.realtime.Ping)
+  GOOGLE_DCHECK_NE(&from, this);
+  const Ping* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const Ping>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.realtime.Ping)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.realtime.Ping)
+    MergeFrom(*source);
+  }
+}
+
+void Ping::MergeFrom(const Ping& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.realtime.Ping)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+}
+
+void Ping::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.realtime.Ping)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Ping::CopyFrom(const Ping& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.realtime.Ping)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Ping::IsInitialized() const {
+  return true;
+}
+
+void Ping::Swap(Ping* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Ping::InternalSwap(Ping* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata Ping::GetMetadata() const {
+  protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void Pong::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+Pong::Pong()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_Pong.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:nakama.realtime.Pong)
+}
+Pong::Pong(const Pong& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:nakama.realtime.Pong)
+}
+
+void Pong::SharedCtor() {
+}
+
+Pong::~Pong() {
+  // @@protoc_insertion_point(destructor:nakama.realtime.Pong)
+  SharedDtor();
+}
+
+void Pong::SharedDtor() {
+}
+
+void Pong::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* Pong::descriptor() {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const Pong& Pong::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::scc_info_Pong.base);
+  return *internal_default_instance();
+}
+
+
+void Pong::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.realtime.Pong)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _internal_metadata_.Clear();
+}
+
+bool Pong::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:nakama.realtime.Pong)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+  handle_unusual:
+    if (tag == 0) {
+      goto success;
+    }
+    DO_(::google::protobuf::internal::WireFormat::SkipField(
+          input, tag, _internal_metadata_.mutable_unknown_fields()));
+  }
+success:
+  // @@protoc_insertion_point(parse_success:nakama.realtime.Pong)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:nakama.realtime.Pong)
+  return false;
+#undef DO_
+}
+
+void Pong::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:nakama.realtime.Pong)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:nakama.realtime.Pong)
+}
+
+::google::protobuf::uint8* Pong::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.realtime.Pong)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.realtime.Pong)
+  return target;
+}
+
+size_t Pong::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.realtime.Pong)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void Pong::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.realtime.Pong)
+  GOOGLE_DCHECK_NE(&from, this);
+  const Pong* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const Pong>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.realtime.Pong)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.realtime.Pong)
+    MergeFrom(*source);
+  }
+}
+
+void Pong::MergeFrom(const Pong& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.realtime.Pong)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+}
+
+void Pong::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.realtime.Pong)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Pong::CopyFrom(const Pong& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.realtime.Pong)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Pong::IsInitialized() const {
+  return true;
+}
+
+void Pong::Swap(Pong* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Pong::InternalSwap(Pong* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata Pong::GetMetadata() const {
+  protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 void Status::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -12162,6 +13980,7 @@ void StatusFollow::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int StatusFollow::kUserIdsFieldNumber;
+const int StatusFollow::kUsernamesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 StatusFollow::StatusFollow()
@@ -12174,7 +13993,8 @@ StatusFollow::StatusFollow()
 StatusFollow::StatusFollow(const StatusFollow& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      user_ids_(from.user_ids_) {
+      user_ids_(from.user_ids_),
+      usernames_(from.usernames_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:nakama.realtime.StatusFollow)
 }
@@ -12211,6 +14031,7 @@ void StatusFollow::Clear() {
   (void) cached_has_bits;
 
   user_ids_.Clear();
+  usernames_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -12235,6 +14056,23 @@ bool StatusFollow::MergePartialFromCodedStream(
             static_cast<int>(this->user_ids(this->user_ids_size() - 1).length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "nakama.realtime.StatusFollow.user_ids"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string usernames = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_usernames()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->usernames(this->usernames_size() - 1).data(),
+            static_cast<int>(this->usernames(this->usernames_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.realtime.StatusFollow.usernames"));
         } else {
           goto handle_unusual;
         }
@@ -12277,6 +14115,16 @@ void StatusFollow::SerializeWithCachedSizes(
       1, this->user_ids(i), output);
   }
 
+  // repeated string usernames = 2;
+  for (int i = 0, n = this->usernames_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->usernames(i).data(), static_cast<int>(this->usernames(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.StatusFollow.usernames");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->usernames(i), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -12299,6 +14147,16 @@ void StatusFollow::SerializeWithCachedSizes(
       "nakama.realtime.StatusFollow.user_ids");
     target = ::google::protobuf::internal::WireFormatLite::
       WriteStringToArray(1, this->user_ids(i), target);
+  }
+
+  // repeated string usernames = 2;
+  for (int i = 0, n = this->usernames_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->usernames(i).data(), static_cast<int>(this->usernames(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.StatusFollow.usernames");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(2, this->usernames(i), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -12324,6 +14182,14 @@ size_t StatusFollow::ByteSizeLong() const {
   for (int i = 0, n = this->user_ids_size(); i < n; i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
       this->user_ids(i));
+  }
+
+  // repeated string usernames = 2;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->usernames_size());
+  for (int i = 0, n = this->usernames_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->usernames(i));
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -12354,6 +14220,7 @@ void StatusFollow::MergeFrom(const StatusFollow& from) {
   (void) cached_has_bits;
 
   user_ids_.MergeFrom(from.user_ids_);
+  usernames_.MergeFrom(from.usernames_);
 }
 
 void StatusFollow::CopyFrom(const ::google::protobuf::Message& from) {
@@ -12381,6 +14248,7 @@ void StatusFollow::Swap(StatusFollow* other) {
 void StatusFollow::InternalSwap(StatusFollow* other) {
   using std::swap;
   user_ids_.InternalSwap(CastToBase(&other->user_ids_));
+  usernames_.InternalSwap(CastToBase(&other->usernames_));
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -13547,6 +15415,7 @@ void StreamData::InitAsDefaultInstance() {
 const int StreamData::kStreamFieldNumber;
 const int StreamData::kSenderFieldNumber;
 const int StreamData::kDataFieldNumber;
+const int StreamData::kReliableFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 StreamData::StreamData()
@@ -13574,14 +15443,15 @@ StreamData::StreamData(const StreamData& from)
   } else {
     sender_ = NULL;
   }
+  reliable_ = from.reliable_;
   // @@protoc_insertion_point(copy_constructor:nakama.realtime.StreamData)
 }
 
 void StreamData::SharedCtor() {
   data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&stream_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&sender_) -
-      reinterpret_cast<char*>(&stream_)) + sizeof(sender_));
+      reinterpret_cast<char*>(&reliable_) -
+      reinterpret_cast<char*>(&stream_)) + sizeof(reliable_));
 }
 
 StreamData::~StreamData() {
@@ -13624,6 +15494,7 @@ void StreamData::Clear() {
     delete sender_;
   }
   sender_ = NULL;
+  reliable_ = false;
   _internal_metadata_.Clear();
 }
 
@@ -13671,6 +15542,20 @@ bool StreamData::MergePartialFromCodedStream(
             this->data().data(), static_cast<int>(this->data().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "nakama.realtime.StreamData.data"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool reliable = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &reliable_)));
         } else {
           goto handle_unusual;
         }
@@ -13725,6 +15610,11 @@ void StreamData::SerializeWithCachedSizes(
       3, this->data(), output);
   }
 
+  // bool reliable = 4;
+  if (this->reliable() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->reliable(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -13762,6 +15652,11 @@ void StreamData::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->data(), target);
+  }
+
+  // bool reliable = 4;
+  if (this->reliable() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->reliable(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -13802,6 +15697,11 @@ size_t StreamData::ByteSizeLong() const {
         *sender_);
   }
 
+  // bool reliable = 4;
+  if (this->reliable() != 0) {
+    total_size += 1 + 1;
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -13839,6 +15739,9 @@ void StreamData::MergeFrom(const StreamData& from) {
   if (from.has_sender()) {
     mutable_sender()->::nakama::realtime::UserPresence::MergeFrom(from.sender());
   }
+  if (from.reliable() != 0) {
+    set_reliable(from.reliable());
+  }
 }
 
 void StreamData::CopyFrom(const ::google::protobuf::Message& from) {
@@ -13869,6 +15772,7 @@ void StreamData::InternalSwap(StreamData* other) {
     GetArenaNoVirtual());
   swap(stream_, other->stream_);
   swap(sender_, other->sender_);
+  swap(reliable_, other->reliable_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -14745,6 +16649,12 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::realtime::MatchmakerTick
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::realtime::Notifications* Arena::CreateMaybeMessage< ::nakama::realtime::Notifications >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::realtime::Notifications >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::realtime::Ping* Arena::CreateMaybeMessage< ::nakama::realtime::Ping >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::realtime::Ping >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::realtime::Pong* Arena::CreateMaybeMessage< ::nakama::realtime::Pong >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::realtime::Pong >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::realtime::Status* Arena::CreateMaybeMessage< ::nakama::realtime::Status >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::realtime::Status >(arena);

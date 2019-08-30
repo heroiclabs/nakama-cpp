@@ -121,6 +121,7 @@ void assign(NGroupList & groups, const nakama::api::GroupList & data)
 void assign(NGroupUserList & users, const nakama::api::GroupUserList & data)
 {
     assign(users.groupUsers, data.group_users());
+    assign(users.cursor, data.cursor());
 }
 
 void assign(NGroupUser & user, const nakama::api::GroupUserList_GroupUser & data)
@@ -138,6 +139,7 @@ void assign(NUserGroup & group, const nakama::api::UserGroupList_UserGroup & dat
 void assign(NUserGroupList & users, const nakama::api::UserGroupList & data)
 {
     assign(users.userGroups, data.user_groups());
+    assign(users.cursor, data.cursor());
 }
 
 void assign(NUsers & users, const nakama::api::Users & data)
@@ -151,9 +153,10 @@ void assign(NFriend & afriend, const nakama::api::Friend & data)
     afriend.state = static_cast<NFriend::State>(data.state().value());
 }
 
-void assign(NFriends & friends, const nakama::api::Friends & data)
+void assign(NFriendList & friends, const nakama::api::FriendList & data)
 {
     assign(friends.friends, data.friends());
+    assign(friends.cursor, data.cursor());
 }
 
 void assign(NLeaderboardRecordList & list, const nakama::api::LeaderboardRecordList & data)
@@ -323,6 +326,10 @@ void assign(NChannelMessage & msg, const nakama::api::ChannelMessage & data)
     assign(msg.senderId, data.sender_id());
     assign(msg.updateTime, data.update_time());
     assign(msg.username, data.username());
+    assign(msg.roomName, data.room_name());
+    assign(msg.groupId, data.group_id());
+    assign(msg.userIdOne, data.user_id_one());
+    assign(msg.userIdTwo, data.user_id_two());
 }
 
 void assign(NTournamentList & list, const nakama::api::TournamentList & data)
@@ -413,6 +420,10 @@ void assign(NChannelMessageAck & ack, const::nakama::realtime::ChannelMessageAck
     assign(ack.persistent, data.persistent());
     assign(ack.updateTime, data.update_time());
     assign(ack.username, data.username());
+    assign(ack.roomName, data.room_name());
+    assign(ack.groupId, data.group_id());
+    assign(ack.userIdOne, data.user_id_one());
+    assign(ack.userIdTwo, data.user_id_two());
 }
 
 void assign(NChannel & channel, const::nakama::realtime::Channel & data)
@@ -420,6 +431,10 @@ void assign(NChannel & channel, const::nakama::realtime::Channel & data)
     assign(channel.id, data.id());
     assign(channel.self, data.self());
     assign(channel.presences, data.presences());
+    assign(channel.roomName, data.room_name());
+    assign(channel.groupId, data.group_id());
+    assign(channel.userIdOne, data.user_id_one());
+    assign(channel.userIdTwo, data.user_id_two());
 }
 
 void assign(NChannelPresenceEvent & event, const::nakama::realtime::ChannelPresenceEvent & data)
@@ -427,6 +442,10 @@ void assign(NChannelPresenceEvent & event, const::nakama::realtime::ChannelPrese
     assign(event.channelId, data.channel_id());
     assign(event.joins, data.joins());
     assign(event.leaves, data.leaves());
+    assign(event.roomName, data.room_name());
+    assign(event.groupId, data.group_id());
+    assign(event.userIdOne, data.user_id_one());
+    assign(event.userIdTwo, data.user_id_two());
 }
 
 void assign(NUserPresence & presence, const::nakama::realtime::UserPresence & data)

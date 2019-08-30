@@ -64,7 +64,7 @@ void test_restoreSession()
         }
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
     test.runTest();
 }

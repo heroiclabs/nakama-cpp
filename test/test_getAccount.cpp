@@ -57,7 +57,7 @@ void test_getAccount()
         test.client->getAccount(session, successCallback);
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
     test.runTest();
 }

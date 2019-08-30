@@ -45,7 +45,7 @@ namespace protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[38];
+  static const ::google::protobuf::internal::ParseTable schema[40];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -141,6 +141,12 @@ extern MatchmakerTicketDefaultTypeInternal _MatchmakerTicket_default_instance_;
 class Notifications;
 class NotificationsDefaultTypeInternal;
 extern NotificationsDefaultTypeInternal _Notifications_default_instance_;
+class Ping;
+class PingDefaultTypeInternal;
+extern PingDefaultTypeInternal _Ping_default_instance_;
+class Pong;
+class PongDefaultTypeInternal;
+extern PongDefaultTypeInternal _Pong_default_instance_;
 class Status;
 class StatusDefaultTypeInternal;
 extern StatusDefaultTypeInternal _Status_default_instance_;
@@ -201,6 +207,8 @@ template<> ::nakama::realtime::MatchmakerMatched_MatchmakerUser_StringProperties
 template<> ::nakama::realtime::MatchmakerRemove* Arena::CreateMaybeMessage<::nakama::realtime::MatchmakerRemove>(Arena*);
 template<> ::nakama::realtime::MatchmakerTicket* Arena::CreateMaybeMessage<::nakama::realtime::MatchmakerTicket>(Arena*);
 template<> ::nakama::realtime::Notifications* Arena::CreateMaybeMessage<::nakama::realtime::Notifications>(Arena*);
+template<> ::nakama::realtime::Ping* Arena::CreateMaybeMessage<::nakama::realtime::Ping>(Arena*);
+template<> ::nakama::realtime::Pong* Arena::CreateMaybeMessage<::nakama::realtime::Pong>(Arena*);
 template<> ::nakama::realtime::Status* Arena::CreateMaybeMessage<::nakama::realtime::Status>(Arena*);
 template<> ::nakama::realtime::StatusFollow* Arena::CreateMaybeMessage<::nakama::realtime::StatusFollow>(Arena*);
 template<> ::nakama::realtime::StatusPresenceEvent* Arena::CreateMaybeMessage<::nakama::realtime::StatusPresenceEvent>(Arena*);
@@ -327,6 +335,8 @@ class Envelope : public ::google::protobuf::Message /* @@protoc_insertion_point(
     kStatusUpdate = 29,
     kStreamData = 30,
     kStreamPresenceEvent = 31,
+    kPing = 32,
+    kPong = 33,
     MESSAGE_NOT_SET = 0,
   };
 
@@ -762,6 +772,30 @@ class Envelope : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::nakama::realtime::StreamPresenceEvent* mutable_stream_presence_event();
   void set_allocated_stream_presence_event(::nakama::realtime::StreamPresenceEvent* stream_presence_event);
 
+  // .nakama.realtime.Ping ping = 32;
+  bool has_ping() const;
+  void clear_ping();
+  static const int kPingFieldNumber = 32;
+  private:
+  const ::nakama::realtime::Ping& _internal_ping() const;
+  public:
+  const ::nakama::realtime::Ping& ping() const;
+  ::nakama::realtime::Ping* release_ping();
+  ::nakama::realtime::Ping* mutable_ping();
+  void set_allocated_ping(::nakama::realtime::Ping* ping);
+
+  // .nakama.realtime.Pong pong = 33;
+  bool has_pong() const;
+  void clear_pong();
+  static const int kPongFieldNumber = 33;
+  private:
+  const ::nakama::realtime::Pong& _internal_pong() const;
+  public:
+  const ::nakama::realtime::Pong& pong() const;
+  ::nakama::realtime::Pong* release_pong();
+  ::nakama::realtime::Pong* mutable_pong();
+  void set_allocated_pong(::nakama::realtime::Pong* pong);
+
   void clear_message();
   MessageCase message_case() const;
   // @@protoc_insertion_point(class_scope:nakama.realtime.Envelope)
@@ -796,6 +830,8 @@ class Envelope : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void set_has_status_update();
   void set_has_stream_data();
   void set_has_stream_presence_event();
+  void set_has_ping();
+  void set_has_pong();
 
   inline bool has_message() const;
   inline void clear_has_message();
@@ -834,6 +870,8 @@ class Envelope : public ::google::protobuf::Message /* @@protoc_insertion_point(
     ::nakama::realtime::StatusUpdate* status_update_;
     ::nakama::realtime::StreamData* stream_data_;
     ::nakama::realtime::StreamPresenceEvent* stream_presence_event_;
+    ::nakama::realtime::Ping* ping_;
+    ::nakama::realtime::Pong* pong_;
   } message_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::uint32 _oneof_case_[1];
@@ -955,6 +993,62 @@ class Channel : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
+  // string room_name = 4;
+  void clear_room_name();
+  static const int kRoomNameFieldNumber = 4;
+  const ::std::string& room_name() const;
+  void set_room_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_room_name(::std::string&& value);
+  #endif
+  void set_room_name(const char* value);
+  void set_room_name(const char* value, size_t size);
+  ::std::string* mutable_room_name();
+  ::std::string* release_room_name();
+  void set_allocated_room_name(::std::string* room_name);
+
+  // string group_id = 5;
+  void clear_group_id();
+  static const int kGroupIdFieldNumber = 5;
+  const ::std::string& group_id() const;
+  void set_group_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_group_id(::std::string&& value);
+  #endif
+  void set_group_id(const char* value);
+  void set_group_id(const char* value, size_t size);
+  ::std::string* mutable_group_id();
+  ::std::string* release_group_id();
+  void set_allocated_group_id(::std::string* group_id);
+
+  // string user_id_one = 6;
+  void clear_user_id_one();
+  static const int kUserIdOneFieldNumber = 6;
+  const ::std::string& user_id_one() const;
+  void set_user_id_one(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_one(::std::string&& value);
+  #endif
+  void set_user_id_one(const char* value);
+  void set_user_id_one(const char* value, size_t size);
+  ::std::string* mutable_user_id_one();
+  ::std::string* release_user_id_one();
+  void set_allocated_user_id_one(::std::string* user_id_one);
+
+  // string user_id_two = 7;
+  void clear_user_id_two();
+  static const int kUserIdTwoFieldNumber = 7;
+  const ::std::string& user_id_two() const;
+  void set_user_id_two(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_two(::std::string&& value);
+  #endif
+  void set_user_id_two(const char* value);
+  void set_user_id_two(const char* value, size_t size);
+  ::std::string* mutable_user_id_two();
+  ::std::string* release_user_id_two();
+  void set_allocated_user_id_two(::std::string* user_id_two);
+
   // .nakama.realtime.UserPresence self = 3;
   bool has_self() const;
   void clear_self();
@@ -973,6 +1067,10 @@ class Channel : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::nakama::realtime::UserPresence > presences_;
   ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::internal::ArenaStringPtr room_name_;
+  ::google::protobuf::internal::ArenaStringPtr group_id_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_one_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_two_;
   ::nakama::realtime::UserPresence* self_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::TableStruct;
@@ -1393,6 +1491,62 @@ class ChannelMessageAck : public ::google::protobuf::Message /* @@protoc_inserti
   ::std::string* release_username();
   void set_allocated_username(::std::string* username);
 
+  // string room_name = 8;
+  void clear_room_name();
+  static const int kRoomNameFieldNumber = 8;
+  const ::std::string& room_name() const;
+  void set_room_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_room_name(::std::string&& value);
+  #endif
+  void set_room_name(const char* value);
+  void set_room_name(const char* value, size_t size);
+  ::std::string* mutable_room_name();
+  ::std::string* release_room_name();
+  void set_allocated_room_name(::std::string* room_name);
+
+  // string group_id = 9;
+  void clear_group_id();
+  static const int kGroupIdFieldNumber = 9;
+  const ::std::string& group_id() const;
+  void set_group_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_group_id(::std::string&& value);
+  #endif
+  void set_group_id(const char* value);
+  void set_group_id(const char* value, size_t size);
+  ::std::string* mutable_group_id();
+  ::std::string* release_group_id();
+  void set_allocated_group_id(::std::string* group_id);
+
+  // string user_id_one = 10;
+  void clear_user_id_one();
+  static const int kUserIdOneFieldNumber = 10;
+  const ::std::string& user_id_one() const;
+  void set_user_id_one(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_one(::std::string&& value);
+  #endif
+  void set_user_id_one(const char* value);
+  void set_user_id_one(const char* value, size_t size);
+  ::std::string* mutable_user_id_one();
+  ::std::string* release_user_id_one();
+  void set_allocated_user_id_one(::std::string* user_id_one);
+
+  // string user_id_two = 11;
+  void clear_user_id_two();
+  static const int kUserIdTwoFieldNumber = 11;
+  const ::std::string& user_id_two() const;
+  void set_user_id_two(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_two(::std::string&& value);
+  #endif
+  void set_user_id_two(const char* value);
+  void set_user_id_two(const char* value, size_t size);
+  ::std::string* mutable_user_id_two();
+  ::std::string* release_user_id_two();
+  void set_allocated_user_id_two(::std::string* user_id_two);
+
   // .google.protobuf.Int32Value code = 3;
   bool has_code() const;
   void clear_code();
@@ -1448,6 +1602,10 @@ class ChannelMessageAck : public ::google::protobuf::Message /* @@protoc_inserti
   ::google::protobuf::internal::ArenaStringPtr channel_id_;
   ::google::protobuf::internal::ArenaStringPtr message_id_;
   ::google::protobuf::internal::ArenaStringPtr username_;
+  ::google::protobuf::internal::ArenaStringPtr room_name_;
+  ::google::protobuf::internal::ArenaStringPtr group_id_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_one_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_two_;
   ::google::protobuf::Int32Value* code_;
   ::google::protobuf::Timestamp* create_time_;
   ::google::protobuf::Timestamp* update_time_;
@@ -1712,6 +1870,62 @@ class ChannelMessageUpdate : public ::google::protobuf::Message /* @@protoc_inse
   ::std::string* release_content();
   void set_allocated_content(::std::string* content);
 
+  // string room_name = 4;
+  void clear_room_name();
+  static const int kRoomNameFieldNumber = 4;
+  const ::std::string& room_name() const;
+  void set_room_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_room_name(::std::string&& value);
+  #endif
+  void set_room_name(const char* value);
+  void set_room_name(const char* value, size_t size);
+  ::std::string* mutable_room_name();
+  ::std::string* release_room_name();
+  void set_allocated_room_name(::std::string* room_name);
+
+  // string group_id = 5;
+  void clear_group_id();
+  static const int kGroupIdFieldNumber = 5;
+  const ::std::string& group_id() const;
+  void set_group_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_group_id(::std::string&& value);
+  #endif
+  void set_group_id(const char* value);
+  void set_group_id(const char* value, size_t size);
+  ::std::string* mutable_group_id();
+  ::std::string* release_group_id();
+  void set_allocated_group_id(::std::string* group_id);
+
+  // string user_id_one = 6;
+  void clear_user_id_one();
+  static const int kUserIdOneFieldNumber = 6;
+  const ::std::string& user_id_one() const;
+  void set_user_id_one(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_one(::std::string&& value);
+  #endif
+  void set_user_id_one(const char* value);
+  void set_user_id_one(const char* value, size_t size);
+  ::std::string* mutable_user_id_one();
+  ::std::string* release_user_id_one();
+  void set_allocated_user_id_one(::std::string* user_id_one);
+
+  // string user_id_two = 7;
+  void clear_user_id_two();
+  static const int kUserIdTwoFieldNumber = 7;
+  const ::std::string& user_id_two() const;
+  void set_user_id_two(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_two(::std::string&& value);
+  #endif
+  void set_user_id_two(const char* value);
+  void set_user_id_two(const char* value, size_t size);
+  ::std::string* mutable_user_id_two();
+  ::std::string* release_user_id_two();
+  void set_allocated_user_id_two(::std::string* user_id_two);
+
   // @@protoc_insertion_point(class_scope:nakama.realtime.ChannelMessageUpdate)
  private:
 
@@ -1719,6 +1933,10 @@ class ChannelMessageUpdate : public ::google::protobuf::Message /* @@protoc_inse
   ::google::protobuf::internal::ArenaStringPtr channel_id_;
   ::google::protobuf::internal::ArenaStringPtr message_id_;
   ::google::protobuf::internal::ArenaStringPtr content_;
+  ::google::protobuf::internal::ArenaStringPtr room_name_;
+  ::google::protobuf::internal::ArenaStringPtr group_id_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_one_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_two_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::TableStruct;
 };
@@ -1839,12 +2057,72 @@ class ChannelMessageRemove : public ::google::protobuf::Message /* @@protoc_inse
   ::std::string* release_message_id();
   void set_allocated_message_id(::std::string* message_id);
 
+  // string room_name = 3;
+  void clear_room_name();
+  static const int kRoomNameFieldNumber = 3;
+  const ::std::string& room_name() const;
+  void set_room_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_room_name(::std::string&& value);
+  #endif
+  void set_room_name(const char* value);
+  void set_room_name(const char* value, size_t size);
+  ::std::string* mutable_room_name();
+  ::std::string* release_room_name();
+  void set_allocated_room_name(::std::string* room_name);
+
+  // string group_id = 4;
+  void clear_group_id();
+  static const int kGroupIdFieldNumber = 4;
+  const ::std::string& group_id() const;
+  void set_group_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_group_id(::std::string&& value);
+  #endif
+  void set_group_id(const char* value);
+  void set_group_id(const char* value, size_t size);
+  ::std::string* mutable_group_id();
+  ::std::string* release_group_id();
+  void set_allocated_group_id(::std::string* group_id);
+
+  // string user_id_one = 5;
+  void clear_user_id_one();
+  static const int kUserIdOneFieldNumber = 5;
+  const ::std::string& user_id_one() const;
+  void set_user_id_one(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_one(::std::string&& value);
+  #endif
+  void set_user_id_one(const char* value);
+  void set_user_id_one(const char* value, size_t size);
+  ::std::string* mutable_user_id_one();
+  ::std::string* release_user_id_one();
+  void set_allocated_user_id_one(::std::string* user_id_one);
+
+  // string user_id_two = 6;
+  void clear_user_id_two();
+  static const int kUserIdTwoFieldNumber = 6;
+  const ::std::string& user_id_two() const;
+  void set_user_id_two(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_two(::std::string&& value);
+  #endif
+  void set_user_id_two(const char* value);
+  void set_user_id_two(const char* value, size_t size);
+  ::std::string* mutable_user_id_two();
+  ::std::string* release_user_id_two();
+  void set_allocated_user_id_two(::std::string* user_id_two);
+
   // @@protoc_insertion_point(class_scope:nakama.realtime.ChannelMessageRemove)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr channel_id_;
   ::google::protobuf::internal::ArenaStringPtr message_id_;
+  ::google::protobuf::internal::ArenaStringPtr room_name_;
+  ::google::protobuf::internal::ArenaStringPtr group_id_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_one_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_two_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::TableStruct;
 };
@@ -1975,6 +2253,62 @@ class ChannelPresenceEvent : public ::google::protobuf::Message /* @@protoc_inse
   ::std::string* release_channel_id();
   void set_allocated_channel_id(::std::string* channel_id);
 
+  // string room_name = 4;
+  void clear_room_name();
+  static const int kRoomNameFieldNumber = 4;
+  const ::std::string& room_name() const;
+  void set_room_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_room_name(::std::string&& value);
+  #endif
+  void set_room_name(const char* value);
+  void set_room_name(const char* value, size_t size);
+  ::std::string* mutable_room_name();
+  ::std::string* release_room_name();
+  void set_allocated_room_name(::std::string* room_name);
+
+  // string group_id = 5;
+  void clear_group_id();
+  static const int kGroupIdFieldNumber = 5;
+  const ::std::string& group_id() const;
+  void set_group_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_group_id(::std::string&& value);
+  #endif
+  void set_group_id(const char* value);
+  void set_group_id(const char* value, size_t size);
+  ::std::string* mutable_group_id();
+  ::std::string* release_group_id();
+  void set_allocated_group_id(::std::string* group_id);
+
+  // string user_id_one = 6;
+  void clear_user_id_one();
+  static const int kUserIdOneFieldNumber = 6;
+  const ::std::string& user_id_one() const;
+  void set_user_id_one(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_one(::std::string&& value);
+  #endif
+  void set_user_id_one(const char* value);
+  void set_user_id_one(const char* value, size_t size);
+  ::std::string* mutable_user_id_one();
+  ::std::string* release_user_id_one();
+  void set_allocated_user_id_one(::std::string* user_id_one);
+
+  // string user_id_two = 7;
+  void clear_user_id_two();
+  static const int kUserIdTwoFieldNumber = 7;
+  const ::std::string& user_id_two() const;
+  void set_user_id_two(const ::std::string& value);
+  #if LANG_CXX11
+  void set_user_id_two(::std::string&& value);
+  #endif
+  void set_user_id_two(const char* value);
+  void set_user_id_two(const char* value, size_t size);
+  ::std::string* mutable_user_id_two();
+  ::std::string* release_user_id_two();
+  void set_allocated_user_id_two(::std::string* user_id_two);
+
   // @@protoc_insertion_point(class_scope:nakama.realtime.ChannelPresenceEvent)
  private:
 
@@ -1982,6 +2316,10 @@ class ChannelPresenceEvent : public ::google::protobuf::Message /* @@protoc_inse
   ::google::protobuf::RepeatedPtrField< ::nakama::realtime::UserPresence > joins_;
   ::google::protobuf::RepeatedPtrField< ::nakama::realtime::UserPresence > leaves_;
   ::google::protobuf::internal::ArenaStringPtr channel_id_;
+  ::google::protobuf::internal::ArenaStringPtr room_name_;
+  ::google::protobuf::internal::ArenaStringPtr group_id_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_one_;
+  ::google::protobuf::internal::ArenaStringPtr user_id_two_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::TableStruct;
 };
@@ -2573,6 +2911,12 @@ class MatchData : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::google::protobuf::int64 op_code() const;
   void set_op_code(::google::protobuf::int64 value);
 
+  // bool reliable = 5;
+  void clear_reliable();
+  static const int kReliableFieldNumber = 5;
+  bool reliable() const;
+  void set_reliable(bool value);
+
   // @@protoc_insertion_point(class_scope:nakama.realtime.MatchData)
  private:
 
@@ -2581,6 +2925,7 @@ class MatchData : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::google::protobuf::internal::ArenaStringPtr data_;
   ::nakama::realtime::UserPresence* presence_;
   ::google::protobuf::int64 op_code_;
+  bool reliable_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::TableStruct;
 };
@@ -2719,6 +3064,12 @@ class MatchDataSend : public ::google::protobuf::Message /* @@protoc_insertion_p
   ::google::protobuf::int64 op_code() const;
   void set_op_code(::google::protobuf::int64 value);
 
+  // bool reliable = 5;
+  void clear_reliable();
+  static const int kReliableFieldNumber = 5;
+  bool reliable() const;
+  void set_reliable(bool value);
+
   // @@protoc_insertion_point(class_scope:nakama.realtime.MatchDataSend)
  private:
 
@@ -2727,6 +3078,7 @@ class MatchDataSend : public ::google::protobuf::Message /* @@protoc_insertion_p
   ::google::protobuf::internal::ArenaStringPtr match_id_;
   ::google::protobuf::internal::ArenaStringPtr data_;
   ::google::protobuf::int64 op_code_;
+  bool reliable_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::TableStruct;
 };
@@ -4071,6 +4423,198 @@ class Notifications : public ::google::protobuf::Message /* @@protoc_insertion_p
 };
 // -------------------------------------------------------------------
 
+class Ping : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.realtime.Ping) */ {
+ public:
+  Ping();
+  virtual ~Ping();
+
+  Ping(const Ping& from);
+
+  inline Ping& operator=(const Ping& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Ping(Ping&& from) noexcept
+    : Ping() {
+    *this = ::std::move(from);
+  }
+
+  inline Ping& operator=(Ping&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Ping& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Ping* internal_default_instance() {
+    return reinterpret_cast<const Ping*>(
+               &_Ping_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    29;
+
+  void Swap(Ping* other);
+  friend void swap(Ping& a, Ping& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Ping* New() const final {
+    return CreateMaybeMessage<Ping>(NULL);
+  }
+
+  Ping* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Ping>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const Ping& from);
+  void MergeFrom(const Ping& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Ping* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:nakama.realtime.Ping)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Pong : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.realtime.Pong) */ {
+ public:
+  Pong();
+  virtual ~Pong();
+
+  Pong(const Pong& from);
+
+  inline Pong& operator=(const Pong& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Pong(Pong&& from) noexcept
+    : Pong() {
+    *this = ::std::move(from);
+  }
+
+  inline Pong& operator=(Pong&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Pong& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Pong* internal_default_instance() {
+    return reinterpret_cast<const Pong*>(
+               &_Pong_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    30;
+
+  void Swap(Pong* other);
+  friend void swap(Pong& a, Pong& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Pong* New() const final {
+    return CreateMaybeMessage<Pong>(NULL);
+  }
+
+  Pong* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Pong>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const Pong& from);
+  void MergeFrom(const Pong& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Pong* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:nakama.realtime.Pong)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class Status : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:nakama.realtime.Status) */ {
  public:
   Status();
@@ -4106,7 +4650,7 @@ class Status : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
                &_Status_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    29;
+    31;
 
   void Swap(Status* other);
   friend void swap(Status& a, Status& b) {
@@ -4215,7 +4759,7 @@ class StatusFollow : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_StatusFollow_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    30;
+    32;
 
   void Swap(StatusFollow* other);
   friend void swap(StatusFollow& a, StatusFollow& b) {
@@ -4289,11 +4833,34 @@ class StatusFollow : public ::google::protobuf::Message /* @@protoc_insertion_po
   const ::google::protobuf::RepeatedPtrField< ::std::string>& user_ids() const;
   ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_user_ids();
 
+  // repeated string usernames = 2;
+  int usernames_size() const;
+  void clear_usernames();
+  static const int kUsernamesFieldNumber = 2;
+  const ::std::string& usernames(int index) const;
+  ::std::string* mutable_usernames(int index);
+  void set_usernames(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_usernames(int index, ::std::string&& value);
+  #endif
+  void set_usernames(int index, const char* value);
+  void set_usernames(int index, const char* value, size_t size);
+  ::std::string* add_usernames();
+  void add_usernames(const ::std::string& value);
+  #if LANG_CXX11
+  void add_usernames(::std::string&& value);
+  #endif
+  void add_usernames(const char* value);
+  void add_usernames(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& usernames() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_usernames();
+
   // @@protoc_insertion_point(class_scope:nakama.realtime.StatusFollow)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::std::string> user_ids_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> usernames_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::TableStruct;
 };
@@ -4334,7 +4901,7 @@ class StatusPresenceEvent : public ::google::protobuf::Message /* @@protoc_inser
                &_StatusPresenceEvent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    31;
+    33;
 
   void Swap(StatusPresenceEvent* other);
   friend void swap(StatusPresenceEvent& a, StatusPresenceEvent& b) {
@@ -4456,7 +5023,7 @@ class StatusUnfollow : public ::google::protobuf::Message /* @@protoc_insertion_
                &_StatusUnfollow_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    32;
+    34;
 
   void Swap(StatusUnfollow* other);
   friend void swap(StatusUnfollow& a, StatusUnfollow& b) {
@@ -4575,7 +5142,7 @@ class StatusUpdate : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_StatusUpdate_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    33;
+    35;
 
   void Swap(StatusUpdate* other);
   friend void swap(StatusUpdate& a, StatusUpdate& b) {
@@ -4684,7 +5251,7 @@ class Stream : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
                &_Stream_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    34;
+    36;
 
   void Swap(Stream* other);
   friend void swap(Stream& a, Stream& b) {
@@ -4832,7 +5399,7 @@ class StreamData : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_StreamData_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    35;
+    37;
 
   void Swap(StreamData* other);
   friend void swap(StreamData& a, StreamData& b) {
@@ -4922,6 +5489,12 @@ class StreamData : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::nakama::realtime::UserPresence* mutable_sender();
   void set_allocated_sender(::nakama::realtime::UserPresence* sender);
 
+  // bool reliable = 4;
+  void clear_reliable();
+  static const int kReliableFieldNumber = 4;
+  bool reliable() const;
+  void set_reliable(bool value);
+
   // @@protoc_insertion_point(class_scope:nakama.realtime.StreamData)
  private:
 
@@ -4929,6 +5502,7 @@ class StreamData : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::internal::ArenaStringPtr data_;
   ::nakama::realtime::Stream* stream_;
   ::nakama::realtime::UserPresence* sender_;
+  bool reliable_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2frtapi_2frealtime_2eproto::TableStruct;
 };
@@ -4969,7 +5543,7 @@ class StreamPresenceEvent : public ::google::protobuf::Message /* @@protoc_inser
                &_StreamPresenceEvent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    36;
+    38;
 
   void Swap(StreamPresenceEvent* other);
   friend void swap(StreamPresenceEvent& a, StreamPresenceEvent& b) {
@@ -5104,7 +5678,7 @@ class UserPresence : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_UserPresence_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    37;
+    39;
 
   void Swap(UserPresence* other);
   friend void swap(UserPresence& a, UserPresence& b) {
@@ -6600,6 +7174,94 @@ inline ::nakama::realtime::StreamPresenceEvent* Envelope::mutable_stream_presenc
   return message_.stream_presence_event_;
 }
 
+// .nakama.realtime.Ping ping = 32;
+inline bool Envelope::has_ping() const {
+  return message_case() == kPing;
+}
+inline void Envelope::set_has_ping() {
+  _oneof_case_[0] = kPing;
+}
+inline void Envelope::clear_ping() {
+  if (has_ping()) {
+    delete message_.ping_;
+    clear_has_message();
+  }
+}
+inline const ::nakama::realtime::Ping& Envelope::_internal_ping() const {
+  return *message_.ping_;
+}
+inline ::nakama::realtime::Ping* Envelope::release_ping() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.Envelope.ping)
+  if (has_ping()) {
+    clear_has_message();
+      ::nakama::realtime::Ping* temp = message_.ping_;
+    message_.ping_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline const ::nakama::realtime::Ping& Envelope::ping() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.Envelope.ping)
+  return has_ping()
+      ? *message_.ping_
+      : *reinterpret_cast< ::nakama::realtime::Ping*>(&::nakama::realtime::_Ping_default_instance_);
+}
+inline ::nakama::realtime::Ping* Envelope::mutable_ping() {
+  if (!has_ping()) {
+    clear_message();
+    set_has_ping();
+    message_.ping_ = CreateMaybeMessage< ::nakama::realtime::Ping >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.Envelope.ping)
+  return message_.ping_;
+}
+
+// .nakama.realtime.Pong pong = 33;
+inline bool Envelope::has_pong() const {
+  return message_case() == kPong;
+}
+inline void Envelope::set_has_pong() {
+  _oneof_case_[0] = kPong;
+}
+inline void Envelope::clear_pong() {
+  if (has_pong()) {
+    delete message_.pong_;
+    clear_has_message();
+  }
+}
+inline const ::nakama::realtime::Pong& Envelope::_internal_pong() const {
+  return *message_.pong_;
+}
+inline ::nakama::realtime::Pong* Envelope::release_pong() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.Envelope.pong)
+  if (has_pong()) {
+    clear_has_message();
+      ::nakama::realtime::Pong* temp = message_.pong_;
+    message_.pong_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline const ::nakama::realtime::Pong& Envelope::pong() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.Envelope.pong)
+  return has_pong()
+      ? *message_.pong_
+      : *reinterpret_cast< ::nakama::realtime::Pong*>(&::nakama::realtime::_Pong_default_instance_);
+}
+inline ::nakama::realtime::Pong* Envelope::mutable_pong() {
+  if (!has_pong()) {
+    clear_message();
+    set_has_pong();
+    message_.pong_ = CreateMaybeMessage< ::nakama::realtime::Pong >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.Envelope.pong)
+  return message_.pong_;
+}
+
 inline bool Envelope::has_message() const {
   return message_case() != MESSAGE_NOT_SET;
 }
@@ -6748,6 +7410,218 @@ inline void Channel::set_allocated_self(::nakama::realtime::UserPresence* self) 
   }
   self_ = self;
   // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Channel.self)
+}
+
+// string room_name = 4;
+inline void Channel::clear_room_name() {
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Channel::room_name() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.Channel.room_name)
+  return room_name_.GetNoArena();
+}
+inline void Channel::set_room_name(const ::std::string& value) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.Channel.room_name)
+}
+#if LANG_CXX11
+inline void Channel::set_room_name(::std::string&& value) {
+  
+  room_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.Channel.room_name)
+}
+#endif
+inline void Channel::set_room_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.Channel.room_name)
+}
+inline void Channel::set_room_name(const char* value, size_t size) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.Channel.room_name)
+}
+inline ::std::string* Channel::mutable_room_name() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.Channel.room_name)
+  return room_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Channel::release_room_name() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.Channel.room_name)
+  
+  return room_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Channel::set_allocated_room_name(::std::string* room_name) {
+  if (room_name != NULL) {
+    
+  } else {
+    
+  }
+  room_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_name);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Channel.room_name)
+}
+
+// string group_id = 5;
+inline void Channel::clear_group_id() {
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Channel::group_id() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.Channel.group_id)
+  return group_id_.GetNoArena();
+}
+inline void Channel::set_group_id(const ::std::string& value) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.Channel.group_id)
+}
+#if LANG_CXX11
+inline void Channel::set_group_id(::std::string&& value) {
+  
+  group_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.Channel.group_id)
+}
+#endif
+inline void Channel::set_group_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.Channel.group_id)
+}
+inline void Channel::set_group_id(const char* value, size_t size) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.Channel.group_id)
+}
+inline ::std::string* Channel::mutable_group_id() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.Channel.group_id)
+  return group_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Channel::release_group_id() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.Channel.group_id)
+  
+  return group_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Channel::set_allocated_group_id(::std::string* group_id) {
+  if (group_id != NULL) {
+    
+  } else {
+    
+  }
+  group_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), group_id);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Channel.group_id)
+}
+
+// string user_id_one = 6;
+inline void Channel::clear_user_id_one() {
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Channel::user_id_one() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.Channel.user_id_one)
+  return user_id_one_.GetNoArena();
+}
+inline void Channel::set_user_id_one(const ::std::string& value) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.Channel.user_id_one)
+}
+#if LANG_CXX11
+inline void Channel::set_user_id_one(::std::string&& value) {
+  
+  user_id_one_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.Channel.user_id_one)
+}
+#endif
+inline void Channel::set_user_id_one(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.Channel.user_id_one)
+}
+inline void Channel::set_user_id_one(const char* value, size_t size) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.Channel.user_id_one)
+}
+inline ::std::string* Channel::mutable_user_id_one() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.Channel.user_id_one)
+  return user_id_one_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Channel::release_user_id_one() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.Channel.user_id_one)
+  
+  return user_id_one_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Channel::set_allocated_user_id_one(::std::string* user_id_one) {
+  if (user_id_one != NULL) {
+    
+  } else {
+    
+  }
+  user_id_one_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_one);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Channel.user_id_one)
+}
+
+// string user_id_two = 7;
+inline void Channel::clear_user_id_two() {
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Channel::user_id_two() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.Channel.user_id_two)
+  return user_id_two_.GetNoArena();
+}
+inline void Channel::set_user_id_two(const ::std::string& value) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.Channel.user_id_two)
+}
+#if LANG_CXX11
+inline void Channel::set_user_id_two(::std::string&& value) {
+  
+  user_id_two_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.Channel.user_id_two)
+}
+#endif
+inline void Channel::set_user_id_two(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.Channel.user_id_two)
+}
+inline void Channel::set_user_id_two(const char* value, size_t size) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.Channel.user_id_two)
+}
+inline ::std::string* Channel::mutable_user_id_two() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.Channel.user_id_two)
+  return user_id_two_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Channel::release_user_id_two() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.Channel.user_id_two)
+  
+  return user_id_two_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Channel::set_allocated_user_id_two(::std::string* user_id_two) {
+  if (user_id_two != NULL) {
+    
+  } else {
+    
+  }
+  user_id_two_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_two);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.Channel.user_id_two)
 }
 
 // -------------------------------------------------------------------
@@ -7335,6 +8209,218 @@ inline void ChannelMessageAck::set_allocated_persistent(::google::protobuf::Bool
   // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageAck.persistent)
 }
 
+// string room_name = 8;
+inline void ChannelMessageAck::clear_room_name() {
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageAck::room_name() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageAck.room_name)
+  return room_name_.GetNoArena();
+}
+inline void ChannelMessageAck::set_room_name(const ::std::string& value) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageAck.room_name)
+}
+#if LANG_CXX11
+inline void ChannelMessageAck::set_room_name(::std::string&& value) {
+  
+  room_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageAck.room_name)
+}
+#endif
+inline void ChannelMessageAck::set_room_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageAck.room_name)
+}
+inline void ChannelMessageAck::set_room_name(const char* value, size_t size) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageAck.room_name)
+}
+inline ::std::string* ChannelMessageAck::mutable_room_name() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageAck.room_name)
+  return room_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageAck::release_room_name() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageAck.room_name)
+  
+  return room_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageAck::set_allocated_room_name(::std::string* room_name) {
+  if (room_name != NULL) {
+    
+  } else {
+    
+  }
+  room_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_name);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageAck.room_name)
+}
+
+// string group_id = 9;
+inline void ChannelMessageAck::clear_group_id() {
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageAck::group_id() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageAck.group_id)
+  return group_id_.GetNoArena();
+}
+inline void ChannelMessageAck::set_group_id(const ::std::string& value) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageAck.group_id)
+}
+#if LANG_CXX11
+inline void ChannelMessageAck::set_group_id(::std::string&& value) {
+  
+  group_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageAck.group_id)
+}
+#endif
+inline void ChannelMessageAck::set_group_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageAck.group_id)
+}
+inline void ChannelMessageAck::set_group_id(const char* value, size_t size) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageAck.group_id)
+}
+inline ::std::string* ChannelMessageAck::mutable_group_id() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageAck.group_id)
+  return group_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageAck::release_group_id() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageAck.group_id)
+  
+  return group_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageAck::set_allocated_group_id(::std::string* group_id) {
+  if (group_id != NULL) {
+    
+  } else {
+    
+  }
+  group_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), group_id);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageAck.group_id)
+}
+
+// string user_id_one = 10;
+inline void ChannelMessageAck::clear_user_id_one() {
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageAck::user_id_one() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageAck.user_id_one)
+  return user_id_one_.GetNoArena();
+}
+inline void ChannelMessageAck::set_user_id_one(const ::std::string& value) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageAck.user_id_one)
+}
+#if LANG_CXX11
+inline void ChannelMessageAck::set_user_id_one(::std::string&& value) {
+  
+  user_id_one_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageAck.user_id_one)
+}
+#endif
+inline void ChannelMessageAck::set_user_id_one(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageAck.user_id_one)
+}
+inline void ChannelMessageAck::set_user_id_one(const char* value, size_t size) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageAck.user_id_one)
+}
+inline ::std::string* ChannelMessageAck::mutable_user_id_one() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageAck.user_id_one)
+  return user_id_one_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageAck::release_user_id_one() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageAck.user_id_one)
+  
+  return user_id_one_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageAck::set_allocated_user_id_one(::std::string* user_id_one) {
+  if (user_id_one != NULL) {
+    
+  } else {
+    
+  }
+  user_id_one_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_one);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageAck.user_id_one)
+}
+
+// string user_id_two = 11;
+inline void ChannelMessageAck::clear_user_id_two() {
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageAck::user_id_two() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageAck.user_id_two)
+  return user_id_two_.GetNoArena();
+}
+inline void ChannelMessageAck::set_user_id_two(const ::std::string& value) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageAck.user_id_two)
+}
+#if LANG_CXX11
+inline void ChannelMessageAck::set_user_id_two(::std::string&& value) {
+  
+  user_id_two_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageAck.user_id_two)
+}
+#endif
+inline void ChannelMessageAck::set_user_id_two(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageAck.user_id_two)
+}
+inline void ChannelMessageAck::set_user_id_two(const char* value, size_t size) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageAck.user_id_two)
+}
+inline ::std::string* ChannelMessageAck::mutable_user_id_two() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageAck.user_id_two)
+  return user_id_two_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageAck::release_user_id_two() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageAck.user_id_two)
+  
+  return user_id_two_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageAck::set_allocated_user_id_two(::std::string* user_id_two) {
+  if (user_id_two != NULL) {
+    
+  } else {
+    
+  }
+  user_id_two_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_two);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageAck.user_id_two)
+}
+
 // -------------------------------------------------------------------
 
 // ChannelMessageSend
@@ -7608,6 +8694,218 @@ inline void ChannelMessageUpdate::set_allocated_content(::std::string* content) 
   // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageUpdate.content)
 }
 
+// string room_name = 4;
+inline void ChannelMessageUpdate::clear_room_name() {
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageUpdate::room_name() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageUpdate.room_name)
+  return room_name_.GetNoArena();
+}
+inline void ChannelMessageUpdate::set_room_name(const ::std::string& value) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageUpdate.room_name)
+}
+#if LANG_CXX11
+inline void ChannelMessageUpdate::set_room_name(::std::string&& value) {
+  
+  room_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageUpdate.room_name)
+}
+#endif
+inline void ChannelMessageUpdate::set_room_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageUpdate.room_name)
+}
+inline void ChannelMessageUpdate::set_room_name(const char* value, size_t size) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageUpdate.room_name)
+}
+inline ::std::string* ChannelMessageUpdate::mutable_room_name() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageUpdate.room_name)
+  return room_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageUpdate::release_room_name() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageUpdate.room_name)
+  
+  return room_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageUpdate::set_allocated_room_name(::std::string* room_name) {
+  if (room_name != NULL) {
+    
+  } else {
+    
+  }
+  room_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_name);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageUpdate.room_name)
+}
+
+// string group_id = 5;
+inline void ChannelMessageUpdate::clear_group_id() {
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageUpdate::group_id() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageUpdate.group_id)
+  return group_id_.GetNoArena();
+}
+inline void ChannelMessageUpdate::set_group_id(const ::std::string& value) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageUpdate.group_id)
+}
+#if LANG_CXX11
+inline void ChannelMessageUpdate::set_group_id(::std::string&& value) {
+  
+  group_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageUpdate.group_id)
+}
+#endif
+inline void ChannelMessageUpdate::set_group_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageUpdate.group_id)
+}
+inline void ChannelMessageUpdate::set_group_id(const char* value, size_t size) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageUpdate.group_id)
+}
+inline ::std::string* ChannelMessageUpdate::mutable_group_id() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageUpdate.group_id)
+  return group_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageUpdate::release_group_id() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageUpdate.group_id)
+  
+  return group_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageUpdate::set_allocated_group_id(::std::string* group_id) {
+  if (group_id != NULL) {
+    
+  } else {
+    
+  }
+  group_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), group_id);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageUpdate.group_id)
+}
+
+// string user_id_one = 6;
+inline void ChannelMessageUpdate::clear_user_id_one() {
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageUpdate::user_id_one() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageUpdate.user_id_one)
+  return user_id_one_.GetNoArena();
+}
+inline void ChannelMessageUpdate::set_user_id_one(const ::std::string& value) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageUpdate.user_id_one)
+}
+#if LANG_CXX11
+inline void ChannelMessageUpdate::set_user_id_one(::std::string&& value) {
+  
+  user_id_one_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageUpdate.user_id_one)
+}
+#endif
+inline void ChannelMessageUpdate::set_user_id_one(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageUpdate.user_id_one)
+}
+inline void ChannelMessageUpdate::set_user_id_one(const char* value, size_t size) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageUpdate.user_id_one)
+}
+inline ::std::string* ChannelMessageUpdate::mutable_user_id_one() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageUpdate.user_id_one)
+  return user_id_one_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageUpdate::release_user_id_one() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageUpdate.user_id_one)
+  
+  return user_id_one_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageUpdate::set_allocated_user_id_one(::std::string* user_id_one) {
+  if (user_id_one != NULL) {
+    
+  } else {
+    
+  }
+  user_id_one_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_one);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageUpdate.user_id_one)
+}
+
+// string user_id_two = 7;
+inline void ChannelMessageUpdate::clear_user_id_two() {
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageUpdate::user_id_two() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageUpdate.user_id_two)
+  return user_id_two_.GetNoArena();
+}
+inline void ChannelMessageUpdate::set_user_id_two(const ::std::string& value) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageUpdate.user_id_two)
+}
+#if LANG_CXX11
+inline void ChannelMessageUpdate::set_user_id_two(::std::string&& value) {
+  
+  user_id_two_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageUpdate.user_id_two)
+}
+#endif
+inline void ChannelMessageUpdate::set_user_id_two(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageUpdate.user_id_two)
+}
+inline void ChannelMessageUpdate::set_user_id_two(const char* value, size_t size) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageUpdate.user_id_two)
+}
+inline ::std::string* ChannelMessageUpdate::mutable_user_id_two() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageUpdate.user_id_two)
+  return user_id_two_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageUpdate::release_user_id_two() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageUpdate.user_id_two)
+  
+  return user_id_two_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageUpdate::set_allocated_user_id_two(::std::string* user_id_two) {
+  if (user_id_two != NULL) {
+    
+  } else {
+    
+  }
+  user_id_two_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_two);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageUpdate.user_id_two)
+}
+
 // -------------------------------------------------------------------
 
 // ChannelMessageRemove
@@ -7716,6 +9014,218 @@ inline void ChannelMessageRemove::set_allocated_message_id(::std::string* messag
   }
   message_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), message_id);
   // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageRemove.message_id)
+}
+
+// string room_name = 3;
+inline void ChannelMessageRemove::clear_room_name() {
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageRemove::room_name() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageRemove.room_name)
+  return room_name_.GetNoArena();
+}
+inline void ChannelMessageRemove::set_room_name(const ::std::string& value) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageRemove.room_name)
+}
+#if LANG_CXX11
+inline void ChannelMessageRemove::set_room_name(::std::string&& value) {
+  
+  room_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageRemove.room_name)
+}
+#endif
+inline void ChannelMessageRemove::set_room_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageRemove.room_name)
+}
+inline void ChannelMessageRemove::set_room_name(const char* value, size_t size) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageRemove.room_name)
+}
+inline ::std::string* ChannelMessageRemove::mutable_room_name() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageRemove.room_name)
+  return room_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageRemove::release_room_name() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageRemove.room_name)
+  
+  return room_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageRemove::set_allocated_room_name(::std::string* room_name) {
+  if (room_name != NULL) {
+    
+  } else {
+    
+  }
+  room_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_name);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageRemove.room_name)
+}
+
+// string group_id = 4;
+inline void ChannelMessageRemove::clear_group_id() {
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageRemove::group_id() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageRemove.group_id)
+  return group_id_.GetNoArena();
+}
+inline void ChannelMessageRemove::set_group_id(const ::std::string& value) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageRemove.group_id)
+}
+#if LANG_CXX11
+inline void ChannelMessageRemove::set_group_id(::std::string&& value) {
+  
+  group_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageRemove.group_id)
+}
+#endif
+inline void ChannelMessageRemove::set_group_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageRemove.group_id)
+}
+inline void ChannelMessageRemove::set_group_id(const char* value, size_t size) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageRemove.group_id)
+}
+inline ::std::string* ChannelMessageRemove::mutable_group_id() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageRemove.group_id)
+  return group_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageRemove::release_group_id() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageRemove.group_id)
+  
+  return group_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageRemove::set_allocated_group_id(::std::string* group_id) {
+  if (group_id != NULL) {
+    
+  } else {
+    
+  }
+  group_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), group_id);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageRemove.group_id)
+}
+
+// string user_id_one = 5;
+inline void ChannelMessageRemove::clear_user_id_one() {
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageRemove::user_id_one() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageRemove.user_id_one)
+  return user_id_one_.GetNoArena();
+}
+inline void ChannelMessageRemove::set_user_id_one(const ::std::string& value) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageRemove.user_id_one)
+}
+#if LANG_CXX11
+inline void ChannelMessageRemove::set_user_id_one(::std::string&& value) {
+  
+  user_id_one_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageRemove.user_id_one)
+}
+#endif
+inline void ChannelMessageRemove::set_user_id_one(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageRemove.user_id_one)
+}
+inline void ChannelMessageRemove::set_user_id_one(const char* value, size_t size) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageRemove.user_id_one)
+}
+inline ::std::string* ChannelMessageRemove::mutable_user_id_one() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageRemove.user_id_one)
+  return user_id_one_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageRemove::release_user_id_one() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageRemove.user_id_one)
+  
+  return user_id_one_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageRemove::set_allocated_user_id_one(::std::string* user_id_one) {
+  if (user_id_one != NULL) {
+    
+  } else {
+    
+  }
+  user_id_one_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_one);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageRemove.user_id_one)
+}
+
+// string user_id_two = 6;
+inline void ChannelMessageRemove::clear_user_id_two() {
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelMessageRemove::user_id_two() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelMessageRemove.user_id_two)
+  return user_id_two_.GetNoArena();
+}
+inline void ChannelMessageRemove::set_user_id_two(const ::std::string& value) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelMessageRemove.user_id_two)
+}
+#if LANG_CXX11
+inline void ChannelMessageRemove::set_user_id_two(::std::string&& value) {
+  
+  user_id_two_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelMessageRemove.user_id_two)
+}
+#endif
+inline void ChannelMessageRemove::set_user_id_two(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelMessageRemove.user_id_two)
+}
+inline void ChannelMessageRemove::set_user_id_two(const char* value, size_t size) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelMessageRemove.user_id_two)
+}
+inline ::std::string* ChannelMessageRemove::mutable_user_id_two() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelMessageRemove.user_id_two)
+  return user_id_two_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelMessageRemove::release_user_id_two() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelMessageRemove.user_id_two)
+  
+  return user_id_two_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelMessageRemove::set_allocated_user_id_two(::std::string* user_id_two) {
+  if (user_id_two != NULL) {
+    
+  } else {
+    
+  }
+  user_id_two_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_two);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelMessageRemove.user_id_two)
 }
 
 // -------------------------------------------------------------------
@@ -7833,6 +9343,218 @@ inline const ::google::protobuf::RepeatedPtrField< ::nakama::realtime::UserPrese
 ChannelPresenceEvent::leaves() const {
   // @@protoc_insertion_point(field_list:nakama.realtime.ChannelPresenceEvent.leaves)
   return leaves_;
+}
+
+// string room_name = 4;
+inline void ChannelPresenceEvent::clear_room_name() {
+  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelPresenceEvent::room_name() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelPresenceEvent.room_name)
+  return room_name_.GetNoArena();
+}
+inline void ChannelPresenceEvent::set_room_name(const ::std::string& value) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelPresenceEvent.room_name)
+}
+#if LANG_CXX11
+inline void ChannelPresenceEvent::set_room_name(::std::string&& value) {
+  
+  room_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelPresenceEvent.room_name)
+}
+#endif
+inline void ChannelPresenceEvent::set_room_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelPresenceEvent.room_name)
+}
+inline void ChannelPresenceEvent::set_room_name(const char* value, size_t size) {
+  
+  room_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelPresenceEvent.room_name)
+}
+inline ::std::string* ChannelPresenceEvent::mutable_room_name() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelPresenceEvent.room_name)
+  return room_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelPresenceEvent::release_room_name() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelPresenceEvent.room_name)
+  
+  return room_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelPresenceEvent::set_allocated_room_name(::std::string* room_name) {
+  if (room_name != NULL) {
+    
+  } else {
+    
+  }
+  room_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_name);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelPresenceEvent.room_name)
+}
+
+// string group_id = 5;
+inline void ChannelPresenceEvent::clear_group_id() {
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelPresenceEvent::group_id() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelPresenceEvent.group_id)
+  return group_id_.GetNoArena();
+}
+inline void ChannelPresenceEvent::set_group_id(const ::std::string& value) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelPresenceEvent.group_id)
+}
+#if LANG_CXX11
+inline void ChannelPresenceEvent::set_group_id(::std::string&& value) {
+  
+  group_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelPresenceEvent.group_id)
+}
+#endif
+inline void ChannelPresenceEvent::set_group_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelPresenceEvent.group_id)
+}
+inline void ChannelPresenceEvent::set_group_id(const char* value, size_t size) {
+  
+  group_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelPresenceEvent.group_id)
+}
+inline ::std::string* ChannelPresenceEvent::mutable_group_id() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelPresenceEvent.group_id)
+  return group_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelPresenceEvent::release_group_id() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelPresenceEvent.group_id)
+  
+  return group_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelPresenceEvent::set_allocated_group_id(::std::string* group_id) {
+  if (group_id != NULL) {
+    
+  } else {
+    
+  }
+  group_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), group_id);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelPresenceEvent.group_id)
+}
+
+// string user_id_one = 6;
+inline void ChannelPresenceEvent::clear_user_id_one() {
+  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelPresenceEvent::user_id_one() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelPresenceEvent.user_id_one)
+  return user_id_one_.GetNoArena();
+}
+inline void ChannelPresenceEvent::set_user_id_one(const ::std::string& value) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelPresenceEvent.user_id_one)
+}
+#if LANG_CXX11
+inline void ChannelPresenceEvent::set_user_id_one(::std::string&& value) {
+  
+  user_id_one_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelPresenceEvent.user_id_one)
+}
+#endif
+inline void ChannelPresenceEvent::set_user_id_one(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelPresenceEvent.user_id_one)
+}
+inline void ChannelPresenceEvent::set_user_id_one(const char* value, size_t size) {
+  
+  user_id_one_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelPresenceEvent.user_id_one)
+}
+inline ::std::string* ChannelPresenceEvent::mutable_user_id_one() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelPresenceEvent.user_id_one)
+  return user_id_one_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelPresenceEvent::release_user_id_one() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelPresenceEvent.user_id_one)
+  
+  return user_id_one_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelPresenceEvent::set_allocated_user_id_one(::std::string* user_id_one) {
+  if (user_id_one != NULL) {
+    
+  } else {
+    
+  }
+  user_id_one_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_one);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelPresenceEvent.user_id_one)
+}
+
+// string user_id_two = 7;
+inline void ChannelPresenceEvent::clear_user_id_two() {
+  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ChannelPresenceEvent::user_id_two() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.ChannelPresenceEvent.user_id_two)
+  return user_id_two_.GetNoArena();
+}
+inline void ChannelPresenceEvent::set_user_id_two(const ::std::string& value) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.ChannelPresenceEvent.user_id_two)
+}
+#if LANG_CXX11
+inline void ChannelPresenceEvent::set_user_id_two(::std::string&& value) {
+  
+  user_id_two_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.ChannelPresenceEvent.user_id_two)
+}
+#endif
+inline void ChannelPresenceEvent::set_user_id_two(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.ChannelPresenceEvent.user_id_two)
+}
+inline void ChannelPresenceEvent::set_user_id_two(const char* value, size_t size) {
+  
+  user_id_two_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.ChannelPresenceEvent.user_id_two)
+}
+inline ::std::string* ChannelPresenceEvent::mutable_user_id_two() {
+  
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.ChannelPresenceEvent.user_id_two)
+  return user_id_two_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ChannelPresenceEvent::release_user_id_two() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.ChannelPresenceEvent.user_id_two)
+  
+  return user_id_two_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChannelPresenceEvent::set_allocated_user_id_two(::std::string* user_id_two) {
+  if (user_id_two != NULL) {
+    
+  } else {
+    
+  }
+  user_id_two_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id_two);
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.ChannelPresenceEvent.user_id_two)
 }
 
 // -------------------------------------------------------------------
@@ -8326,6 +10048,20 @@ inline void MatchData::set_allocated_data(::std::string* data) {
   // @@protoc_insertion_point(field_set_allocated:nakama.realtime.MatchData.data)
 }
 
+// bool reliable = 5;
+inline void MatchData::clear_reliable() {
+  reliable_ = false;
+}
+inline bool MatchData::reliable() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.MatchData.reliable)
+  return reliable_;
+}
+inline void MatchData::set_reliable(bool value) {
+  
+  reliable_ = value;
+  // @@protoc_insertion_point(field_set:nakama.realtime.MatchData.reliable)
+}
+
 // -------------------------------------------------------------------
 
 // MatchDataSend
@@ -8478,6 +10214,20 @@ inline const ::google::protobuf::RepeatedPtrField< ::nakama::realtime::UserPrese
 MatchDataSend::presences() const {
   // @@protoc_insertion_point(field_list:nakama.realtime.MatchDataSend.presences)
   return presences_;
+}
+
+// bool reliable = 5;
+inline void MatchDataSend::clear_reliable() {
+  reliable_ = false;
+}
+inline bool MatchDataSend::reliable() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.MatchDataSend.reliable)
+  return reliable_;
+}
+inline void MatchDataSend::set_reliable(bool value) {
+  
+  reliable_ = value;
+  // @@protoc_insertion_point(field_set:nakama.realtime.MatchDataSend.reliable)
 }
 
 // -------------------------------------------------------------------
@@ -9579,6 +11329,14 @@ Notifications::notifications() const {
 
 // -------------------------------------------------------------------
 
+// Ping
+
+// -------------------------------------------------------------------
+
+// Pong
+
+// -------------------------------------------------------------------
+
 // Status
 
 // repeated .nakama.realtime.UserPresence presences = 1;
@@ -9682,6 +11440,75 @@ inline ::google::protobuf::RepeatedPtrField< ::std::string>*
 StatusFollow::mutable_user_ids() {
   // @@protoc_insertion_point(field_mutable_list:nakama.realtime.StatusFollow.user_ids)
   return &user_ids_;
+}
+
+// repeated string usernames = 2;
+inline int StatusFollow::usernames_size() const {
+  return usernames_.size();
+}
+inline void StatusFollow::clear_usernames() {
+  usernames_.Clear();
+}
+inline const ::std::string& StatusFollow::usernames(int index) const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.StatusFollow.usernames)
+  return usernames_.Get(index);
+}
+inline ::std::string* StatusFollow::mutable_usernames(int index) {
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.StatusFollow.usernames)
+  return usernames_.Mutable(index);
+}
+inline void StatusFollow::set_usernames(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:nakama.realtime.StatusFollow.usernames)
+  usernames_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void StatusFollow::set_usernames(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:nakama.realtime.StatusFollow.usernames)
+  usernames_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void StatusFollow::set_usernames(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  usernames_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.StatusFollow.usernames)
+}
+inline void StatusFollow::set_usernames(int index, const char* value, size_t size) {
+  usernames_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.StatusFollow.usernames)
+}
+inline ::std::string* StatusFollow::add_usernames() {
+  // @@protoc_insertion_point(field_add_mutable:nakama.realtime.StatusFollow.usernames)
+  return usernames_.Add();
+}
+inline void StatusFollow::add_usernames(const ::std::string& value) {
+  usernames_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:nakama.realtime.StatusFollow.usernames)
+}
+#if LANG_CXX11
+inline void StatusFollow::add_usernames(::std::string&& value) {
+  usernames_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:nakama.realtime.StatusFollow.usernames)
+}
+#endif
+inline void StatusFollow::add_usernames(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  usernames_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:nakama.realtime.StatusFollow.usernames)
+}
+inline void StatusFollow::add_usernames(const char* value, size_t size) {
+  usernames_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:nakama.realtime.StatusFollow.usernames)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+StatusFollow::usernames() const {
+  // @@protoc_insertion_point(field_list:nakama.realtime.StatusFollow.usernames)
+  return usernames_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+StatusFollow::mutable_usernames() {
+  // @@protoc_insertion_point(field_mutable_list:nakama.realtime.StatusFollow.usernames)
+  return &usernames_;
 }
 
 // -------------------------------------------------------------------
@@ -10216,6 +12043,20 @@ inline void StreamData::set_allocated_data(::std::string* data) {
   // @@protoc_insertion_point(field_set_allocated:nakama.realtime.StreamData.data)
 }
 
+// bool reliable = 4;
+inline void StreamData::clear_reliable() {
+  reliable_ = false;
+}
+inline bool StreamData::reliable() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.StreamData.reliable)
+  return reliable_;
+}
+inline void StreamData::set_reliable(bool value) {
+  
+  reliable_ = value;
+  // @@protoc_insertion_point(field_set:nakama.realtime.StreamData.reliable)
+}
+
 // -------------------------------------------------------------------
 
 // StreamPresenceEvent
@@ -10563,6 +12404,10 @@ inline void UserPresence::set_allocated_status(::google::protobuf::StringValue* 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

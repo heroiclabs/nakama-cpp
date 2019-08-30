@@ -43,7 +43,7 @@ public:
             listGroups();
         };
 
-        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
+        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
         NTest::runTest();
     }
@@ -88,6 +88,7 @@ public:
             "",  // avatar URL
             "en_US",
             true, // open
+            opt::nullopt,
             successCallback);
     }
 

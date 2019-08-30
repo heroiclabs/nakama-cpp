@@ -314,12 +314,12 @@ class Nakama final {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::ChannelMessageList>>(PrepareAsyncListChannelMessagesRaw(context, request, cq));
     }
     // List all friends for the current user.
-    virtual ::grpc::Status ListFriends(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::nakama::api::Friends* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Friends>> AsyncListFriends(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Friends>>(AsyncListFriendsRaw(context, request, cq));
+    virtual ::grpc::Status ListFriends(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::nakama::api::FriendList* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::FriendList>> AsyncListFriends(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::FriendList>>(AsyncListFriendsRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Friends>> PrepareAsyncListFriends(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Friends>>(PrepareAsyncListFriendsRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::FriendList>> PrepareAsyncListFriends(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::FriendList>>(PrepareAsyncListFriendsRaw(context, request, cq));
     }
     // List groups based on given filters.
     virtual ::grpc::Status ListGroups(::grpc::ClientContext* context, const ::nakama::api::ListGroupsRequest& request, ::nakama::api::GroupList* response) = 0;
@@ -597,7 +597,7 @@ class Nakama final {
       // List a channel's message history.
       virtual void ListChannelMessages(::grpc::ClientContext* context, const ::nakama::api::ListChannelMessagesRequest* request, ::nakama::api::ChannelMessageList* response, std::function<void(::grpc::Status)>) = 0;
       // List all friends for the current user.
-      virtual void ListFriends(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void ListFriends(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response, std::function<void(::grpc::Status)>) = 0;
       // List groups based on given filters.
       virtual void ListGroups(::grpc::ClientContext* context, const ::nakama::api::ListGroupsRequest* request, ::nakama::api::GroupList* response, std::function<void(::grpc::Status)>) = 0;
       // List all users that are part of a group.
@@ -717,8 +717,8 @@ class Nakama final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncLinkSteamRaw(::grpc::ClientContext* context, const ::nakama::api::AccountSteam& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::ChannelMessageList>* AsyncListChannelMessagesRaw(::grpc::ClientContext* context, const ::nakama::api::ListChannelMessagesRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::ChannelMessageList>* PrepareAsyncListChannelMessagesRaw(::grpc::ClientContext* context, const ::nakama::api::ListChannelMessagesRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Friends>* AsyncListFriendsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Friends>* PrepareAsyncListFriendsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::FriendList>* AsyncListFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::FriendList>* PrepareAsyncListFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::GroupList>* AsyncListGroupsRaw(::grpc::ClientContext* context, const ::nakama::api::ListGroupsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::GroupList>* PrepareAsyncListGroupsRaw(::grpc::ClientContext* context, const ::nakama::api::ListGroupsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::GroupUserList>* AsyncListGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::ListGroupUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -999,12 +999,12 @@ class Nakama final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::ChannelMessageList>> PrepareAsyncListChannelMessages(::grpc::ClientContext* context, const ::nakama::api::ListChannelMessagesRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::ChannelMessageList>>(PrepareAsyncListChannelMessagesRaw(context, request, cq));
     }
-    ::grpc::Status ListFriends(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::nakama::api::Friends* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Friends>> AsyncListFriends(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Friends>>(AsyncListFriendsRaw(context, request, cq));
+    ::grpc::Status ListFriends(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::nakama::api::FriendList* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::FriendList>> AsyncListFriends(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::FriendList>>(AsyncListFriendsRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Friends>> PrepareAsyncListFriends(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Friends>>(PrepareAsyncListFriendsRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::FriendList>> PrepareAsyncListFriends(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::FriendList>>(PrepareAsyncListFriendsRaw(context, request, cq));
     }
     ::grpc::Status ListGroups(::grpc::ClientContext* context, const ::nakama::api::ListGroupsRequest& request, ::nakama::api::GroupList* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::GroupList>> AsyncListGroups(::grpc::ClientContext* context, const ::nakama::api::ListGroupsRequest& request, ::grpc::CompletionQueue* cq) {
@@ -1223,7 +1223,7 @@ class Nakama final {
       void LinkGoogle(::grpc::ClientContext* context, const ::nakama::api::AccountGoogle* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void LinkSteam(::grpc::ClientContext* context, const ::nakama::api::AccountSteam* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void ListChannelMessages(::grpc::ClientContext* context, const ::nakama::api::ListChannelMessagesRequest* request, ::nakama::api::ChannelMessageList* response, std::function<void(::grpc::Status)>) override;
-      void ListFriends(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response, std::function<void(::grpc::Status)>) override;
+      void ListFriends(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response, std::function<void(::grpc::Status)>) override;
       void ListGroups(::grpc::ClientContext* context, const ::nakama::api::ListGroupsRequest* request, ::nakama::api::GroupList* response, std::function<void(::grpc::Status)>) override;
       void ListGroupUsers(::grpc::ClientContext* context, const ::nakama::api::ListGroupUsersRequest* request, ::nakama::api::GroupUserList* response, std::function<void(::grpc::Status)>) override;
       void ListLeaderboardRecords(::grpc::ClientContext* context, const ::nakama::api::ListLeaderboardRecordsRequest* request, ::nakama::api::LeaderboardRecordList* response, std::function<void(::grpc::Status)>) override;
@@ -1325,8 +1325,8 @@ class Nakama final {
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncLinkSteamRaw(::grpc::ClientContext* context, const ::nakama::api::AccountSteam& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::ChannelMessageList>* AsyncListChannelMessagesRaw(::grpc::ClientContext* context, const ::nakama::api::ListChannelMessagesRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::ChannelMessageList>* PrepareAsyncListChannelMessagesRaw(::grpc::ClientContext* context, const ::nakama::api::ListChannelMessagesRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::nakama::api::Friends>* AsyncListFriendsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::nakama::api::Friends>* PrepareAsyncListFriendsRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::nakama::api::FriendList>* AsyncListFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::nakama::api::FriendList>* PrepareAsyncListFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::ListFriendsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::GroupList>* AsyncListGroupsRaw(::grpc::ClientContext* context, const ::nakama::api::ListGroupsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::GroupList>* PrepareAsyncListGroupsRaw(::grpc::ClientContext* context, const ::nakama::api::ListGroupsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::GroupUserList>* AsyncListGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::ListGroupUsersRequest& request, ::grpc::CompletionQueue* cq) override;
@@ -1510,7 +1510,7 @@ class Nakama final {
     // List a channel's message history.
     virtual ::grpc::Status ListChannelMessages(::grpc::ServerContext* context, const ::nakama::api::ListChannelMessagesRequest* request, ::nakama::api::ChannelMessageList* response);
     // List all friends for the current user.
-    virtual ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response);
+    virtual ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response);
     // List groups based on given filters.
     virtual ::grpc::Status ListGroups(::grpc::ServerContext* context, const ::nakama::api::ListGroupsRequest* request, ::nakama::api::GroupList* response);
     // List all users that are part of a group.
@@ -2216,11 +2216,11 @@ class Nakama final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response) override {
+    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestListFriends(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Friends>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestListFriends(::grpc::ServerContext* context, ::nakama::api::ListFriendsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::FriendList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(32, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -3552,10 +3552,10 @@ class Nakama final {
    public:
     ExperimentalWithCallbackMethod_ListFriends() {
       ::grpc::Service::experimental().MarkMethodCallback(32,
-        new ::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::nakama::api::Friends>(
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListFriendsRequest, ::nakama::api::FriendList>(
           [this](::grpc::ServerContext* context,
-                 const ::google::protobuf::Empty* request,
-                 ::nakama::api::Friends* response,
+                 const ::nakama::api::ListFriendsRequest* request,
+                 ::nakama::api::FriendList* response,
                  ::grpc::experimental::ServerCallbackRpcController* controller) {
                    return this->ListFriends(context, request, response, controller);
                  }));
@@ -3564,11 +3564,11 @@ class Nakama final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response) override {
+    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void ListFriends(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    virtual void ListFriends(::grpc::ServerContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_ListGroups : public BaseClass {
@@ -4777,7 +4777,7 @@ class Nakama final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response) override {
+    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -5876,7 +5876,7 @@ class Nakama final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response) override {
+    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -7223,7 +7223,7 @@ class Nakama final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response) override {
+    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -8526,18 +8526,18 @@ class Nakama final {
    public:
     WithStreamedUnaryMethod_ListFriends() {
       ::grpc::Service::MarkMethodStreamed(32,
-        new ::grpc::internal::StreamedUnaryHandler< ::google::protobuf::Empty, ::nakama::api::Friends>(std::bind(&WithStreamedUnaryMethod_ListFriends<BaseClass>::StreamedListFriends, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListFriendsRequest, ::nakama::api::FriendList>(std::bind(&WithStreamedUnaryMethod_ListFriends<BaseClass>::StreamedListFriends, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListFriends() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Friends* response) override {
+    ::grpc::Status ListFriends(::grpc::ServerContext* context, const ::nakama::api::ListFriendsRequest* request, ::nakama::api::FriendList* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedListFriends(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::google::protobuf::Empty,::nakama::api::Friends>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedListFriends(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::ListFriendsRequest,::nakama::api::FriendList>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_ListGroups : public BaseClass {

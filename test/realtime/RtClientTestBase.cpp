@@ -79,7 +79,7 @@ void NRtClientTest::runTest()
         rtClient->connect(session, true, protocol);
     };
 
-    client->authenticateDevice("mytestdevice0000", opt::nullopt, true, successCallback);
+    client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
     NTest::runTest();
 }

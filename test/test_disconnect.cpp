@@ -42,7 +42,7 @@ void test_connectError()
         test.stopTest(error.code == ErrorCode::ConnectionError);
     };
 
-    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
+    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
 
     test.runTest();
 }
@@ -64,7 +64,7 @@ void test_disconnection()
         test.stopTest(true);
     };
 
-    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, successCallback, errorCallback);
+    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
 
     test.client->disconnect();
 

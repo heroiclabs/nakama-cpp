@@ -51,6 +51,22 @@ string jsonDocToStr(rapidjson::Document& document)
     return buffer.GetString();
 }
 
+void addVarsToJsonDoc(rapidjson::Document& document, const NStringMap& vars)
+{
+    if (!vars.empty())
+    {
+        rapidjson::Value jsonObj;
+        jsonObj.SetObject();
+
+        for (auto& p : vars)
+        {
+            jsonObj.AddMember(rapidjson::Value::StringRefType(p.first.c_str()), p.second, document.GetAllocator());
+        }
+
+        document.AddMember("vars", std::move(jsonObj), document.GetAllocator());
+    }
+}
+
 RestClient::RestClient(const NClientParameters& parameters, NHttpTransportPtr httpClient)
     : _host(parameters.host)
     , _ssl(parameters.ssl)
@@ -300,6 +316,7 @@ void RestClient::authenticateDevice(
     const std::string& id,
     const opt::optional<std::string>& username,
     const opt::optional<bool>& create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -334,6 +351,7 @@ void RestClient::authenticateDevice(
         document.SetObject();
 
         document.AddMember("id", id, document.GetAllocator());
+        addVarsToJsonDoc(document, vars);
 
         string body = jsonDocToStr(document);
 
@@ -350,6 +368,7 @@ void RestClient::authenticateEmail(
     const std::string & password,
     const std::string & username,
     bool create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -380,6 +399,7 @@ void RestClient::authenticateEmail(
 
         document.AddMember("email", email, document.GetAllocator());
         document.AddMember("password", password, document.GetAllocator());
+        addVarsToJsonDoc(document, vars);
 
         string body = jsonDocToStr(document);
 
@@ -396,6 +416,7 @@ void RestClient::authenticateFacebook(
     const std::string & username,
     bool create,
     bool importFriends,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -426,6 +447,7 @@ void RestClient::authenticateFacebook(
         document.SetObject();
 
         document.AddMember("token", accessToken, document.GetAllocator());
+        addVarsToJsonDoc(document, vars);
 
         string body = jsonDocToStr(document);
 
@@ -441,6 +463,7 @@ void RestClient::authenticateGoogle(
     const std::string & accessToken,
     const std::string & username,
     bool create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -470,6 +493,7 @@ void RestClient::authenticateGoogle(
         document.SetObject();
 
         document.AddMember("token", accessToken, document.GetAllocator());
+        addVarsToJsonDoc(document, vars);
 
         string body = jsonDocToStr(document);
 
@@ -490,6 +514,7 @@ void RestClient::authenticateGameCenter(
     const std::string & publicKeyUrl,
     const std::string & username,
     bool create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -524,6 +549,7 @@ void RestClient::authenticateGameCenter(
         document.AddMember("salt", salt, document.GetAllocator());
         document.AddMember("signature", signature, document.GetAllocator());
         document.AddMember("public_key_url", publicKeyUrl, document.GetAllocator());
+        addVarsToJsonDoc(document, vars);
 
         string body = jsonDocToStr(document);
 
@@ -539,6 +565,7 @@ void RestClient::authenticateCustom(
     const std::string & id,
     const std::string & username,
     bool create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -568,6 +595,7 @@ void RestClient::authenticateCustom(
         document.SetObject();
 
         document.AddMember("id", id, document.GetAllocator());
+        addVarsToJsonDoc(document, vars);
 
         string body = jsonDocToStr(document);
 
@@ -583,6 +611,7 @@ void RestClient::authenticateSteam(
     const std::string & token,
     const std::string & username,
     bool create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -612,6 +641,7 @@ void RestClient::authenticateSteam(
         document.SetObject();
 
         document.AddMember("token", token, document.GetAllocator());
+        addVarsToJsonDoc(document, vars);
 
         string body = jsonDocToStr(document);
 
@@ -1277,26 +1307,37 @@ void RestClient::blockFriends(
     }
 }
 
-void RestClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr)> successCallback, ErrorCallback errorCallback)
+void RestClient::listFriends(
+    NSessionPtr session,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<NFriend::State>& state,
+    const std::string& cursor,
+    std::function<void(NFriendListPtr)> successCallback, ErrorCallback errorCallback)
 {
     try {
         NLOG_INFO("...");
 
-        auto data(make_shared<nakama::api::Friends>());
+        auto data(make_shared<nakama::api::FriendList>());
         RestReqContext* ctx = createReqContext(session, data.get());
 
         if (successCallback)
         {
             ctx->successCallback = [data, successCallback]()
             {
-                NFriendsPtr friends(new NFriends());
+                NFriendListPtr friends(new NFriendList());
                 assign(*friends, *data);
                 successCallback(friends);
             };
         }
         ctx->errorCallback = errorCallback;
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/friend", "");
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (state) args.emplace("state", std::to_string((int32_t)*state));
+        if (!cursor.empty()) args.emplace("cursor", cursor);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/friend", "", std::move(args));
     }
     catch (exception& e)
     {
@@ -1311,6 +1352,7 @@ void RestClient::createGroup(
     const std::string & avatarUrl,
     const std::string & langTag,
     bool open,
+    const opt::optional<int32_t>& maxCount,
     std::function<void(const NGroup&)> successCallback,
     ErrorCallback errorCallback)
 {
@@ -1339,6 +1381,7 @@ void RestClient::createGroup(
         document.AddMember("avatar_url", avatarUrl, document.GetAllocator());
         document.AddMember("lang_tag", langTag, document.GetAllocator());
         document.AddMember("open", open, document.GetAllocator());
+        if (maxCount) document.AddMember("max_count", *maxCount, document.GetAllocator());
 
         string body = jsonDocToStr(document);
 
@@ -1402,7 +1445,13 @@ void RestClient::addGroupUsers(
     }
 }
 
-void RestClient::listGroupUsers(NSessionPtr session, const std::string & groupId, std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
+void RestClient::listGroupUsers(
+    NSessionPtr session,
+    const std::string & groupId,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<NFriend::State>& state,
+    const std::string& cursor,
+    std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
 {
     try {
         NLOG_INFO("...");
@@ -1421,7 +1470,13 @@ void RestClient::listGroupUsers(NSessionPtr session, const std::string & groupId
         }
         ctx->errorCallback = errorCallback;
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/group/" + groupId + "/user", "");
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (state) args.emplace("state", std::to_string((int32_t)*state));
+        if (!cursor.empty()) args.emplace("cursor", cursor);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/group/" + groupId + "/user", "", std::move(args));
     }
     catch (exception& e)
     {
@@ -1523,11 +1578,16 @@ void RestClient::listGroups(NSessionPtr session, const std::string & name, int32
     }
 }
 
-void RestClient::listUserGroups(NSessionPtr session, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
+void RestClient::listUserGroups(
+    NSessionPtr session,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<NFriend::State>& state,
+    const std::string& cursor,
+    std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
     if (session)
     {
-        listUserGroups(session, session->getUserId(), successCallback, errorCallback);
+        listUserGroups(session, session->getUserId(), limit, state, cursor, successCallback, errorCallback);
     }
     else
     {
@@ -1542,7 +1602,13 @@ void RestClient::listUserGroups(NSessionPtr session, std::function<void(NUserGro
     }
 }
 
-void RestClient::listUserGroups(NSessionPtr session, const std::string & userId, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
+void RestClient::listUserGroups(
+    NSessionPtr session,
+    const std::string & userId,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<NFriend::State>& state,
+    const std::string& cursor,
+    std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
     try {
         NLOG_INFO("...");
@@ -1561,7 +1627,13 @@ void RestClient::listUserGroups(NSessionPtr session, const std::string & userId,
         }
         ctx->errorCallback = errorCallback;
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/user/" + userId + "/group", "");
+        NHttpQueryArgs args;
+
+        if (limit) args.emplace("limit", std::to_string(*limit));
+        if (state) args.emplace("state", std::to_string((int32_t)*state));
+        if (!cursor.empty()) args.emplace("cursor", cursor);
+
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/user/" + userId + "/group", "", std::move(args));
     }
     catch (exception& e)
     {
