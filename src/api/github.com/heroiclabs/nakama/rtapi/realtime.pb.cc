@@ -1072,10 +1072,6 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, channel_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, message_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, content_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, room_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, group_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, user_id_one_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageUpdate, user_id_two_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1083,10 +1079,6 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, channel_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, message_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, room_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, group_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, user_id_one_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelMessageRemove, user_id_two_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::realtime::ChannelPresenceEvent, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1354,39 +1346,39 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 66, -1, sizeof(::nakama::realtime::ChannelMessageAck)},
   { 82, -1, sizeof(::nakama::realtime::ChannelMessageSend)},
   { 89, -1, sizeof(::nakama::realtime::ChannelMessageUpdate)},
-  { 101, -1, sizeof(::nakama::realtime::ChannelMessageRemove)},
-  { 112, -1, sizeof(::nakama::realtime::ChannelPresenceEvent)},
-  { 124, 131, sizeof(::nakama::realtime::Error_ContextEntry_DoNotUse)},
-  { 133, -1, sizeof(::nakama::realtime::Error)},
-  { 141, -1, sizeof(::nakama::realtime::Match)},
-  { 152, -1, sizeof(::nakama::realtime::MatchCreate)},
-  { 157, -1, sizeof(::nakama::realtime::MatchData)},
-  { 167, -1, sizeof(::nakama::realtime::MatchDataSend)},
-  { 177, 184, sizeof(::nakama::realtime::MatchJoin_MetadataEntry_DoNotUse)},
-  { 186, -1, sizeof(::nakama::realtime::MatchJoin)},
-  { 195, -1, sizeof(::nakama::realtime::MatchLeave)},
-  { 201, -1, sizeof(::nakama::realtime::MatchPresenceEvent)},
-  { 209, 216, sizeof(::nakama::realtime::MatchmakerAdd_StringPropertiesEntry_DoNotUse)},
-  { 218, 225, sizeof(::nakama::realtime::MatchmakerAdd_NumericPropertiesEntry_DoNotUse)},
-  { 227, -1, sizeof(::nakama::realtime::MatchmakerAdd)},
-  { 237, 244, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse)},
-  { 246, 253, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse)},
-  { 255, -1, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser)},
-  { 263, -1, sizeof(::nakama::realtime::MatchmakerMatched)},
-  { 274, -1, sizeof(::nakama::realtime::MatchmakerRemove)},
-  { 280, -1, sizeof(::nakama::realtime::MatchmakerTicket)},
-  { 286, -1, sizeof(::nakama::realtime::Notifications)},
-  { 292, -1, sizeof(::nakama::realtime::Ping)},
-  { 297, -1, sizeof(::nakama::realtime::Pong)},
-  { 302, -1, sizeof(::nakama::realtime::Status)},
-  { 308, -1, sizeof(::nakama::realtime::StatusFollow)},
-  { 315, -1, sizeof(::nakama::realtime::StatusPresenceEvent)},
-  { 322, -1, sizeof(::nakama::realtime::StatusUnfollow)},
-  { 328, -1, sizeof(::nakama::realtime::StatusUpdate)},
-  { 334, -1, sizeof(::nakama::realtime::Stream)},
-  { 343, -1, sizeof(::nakama::realtime::StreamData)},
-  { 352, -1, sizeof(::nakama::realtime::StreamPresenceEvent)},
-  { 360, -1, sizeof(::nakama::realtime::UserPresence)},
+  { 97, -1, sizeof(::nakama::realtime::ChannelMessageRemove)},
+  { 104, -1, sizeof(::nakama::realtime::ChannelPresenceEvent)},
+  { 116, 123, sizeof(::nakama::realtime::Error_ContextEntry_DoNotUse)},
+  { 125, -1, sizeof(::nakama::realtime::Error)},
+  { 133, -1, sizeof(::nakama::realtime::Match)},
+  { 144, -1, sizeof(::nakama::realtime::MatchCreate)},
+  { 149, -1, sizeof(::nakama::realtime::MatchData)},
+  { 159, -1, sizeof(::nakama::realtime::MatchDataSend)},
+  { 169, 176, sizeof(::nakama::realtime::MatchJoin_MetadataEntry_DoNotUse)},
+  { 178, -1, sizeof(::nakama::realtime::MatchJoin)},
+  { 187, -1, sizeof(::nakama::realtime::MatchLeave)},
+  { 193, -1, sizeof(::nakama::realtime::MatchPresenceEvent)},
+  { 201, 208, sizeof(::nakama::realtime::MatchmakerAdd_StringPropertiesEntry_DoNotUse)},
+  { 210, 217, sizeof(::nakama::realtime::MatchmakerAdd_NumericPropertiesEntry_DoNotUse)},
+  { 219, -1, sizeof(::nakama::realtime::MatchmakerAdd)},
+  { 229, 236, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse)},
+  { 238, 245, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse)},
+  { 247, -1, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser)},
+  { 255, -1, sizeof(::nakama::realtime::MatchmakerMatched)},
+  { 266, -1, sizeof(::nakama::realtime::MatchmakerRemove)},
+  { 272, -1, sizeof(::nakama::realtime::MatchmakerTicket)},
+  { 278, -1, sizeof(::nakama::realtime::Notifications)},
+  { 284, -1, sizeof(::nakama::realtime::Ping)},
+  { 289, -1, sizeof(::nakama::realtime::Pong)},
+  { 294, -1, sizeof(::nakama::realtime::Status)},
+  { 300, -1, sizeof(::nakama::realtime::StatusFollow)},
+  { 307, -1, sizeof(::nakama::realtime::StatusPresenceEvent)},
+  { 314, -1, sizeof(::nakama::realtime::StatusUnfollow)},
+  { 320, -1, sizeof(::nakama::realtime::StatusUpdate)},
+  { 326, -1, sizeof(::nakama::realtime::Stream)},
+  { 335, -1, sizeof(::nakama::realtime::StreamData)},
+  { 344, -1, sizeof(::nakama::realtime::StreamPresenceEvent)},
+  { 352, -1, sizeof(::nakama::realtime::UserPresence)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1524,15 +1516,11 @@ void AddDescriptorsImpl() {
       "otobuf.BoolValue\022\021\n\troom_name\030\010 \001(\t\022\020\n\010g"
       "roup_id\030\t \001(\t\022\023\n\013user_id_one\030\n \001(\t\022\023\n\013us"
       "er_id_two\030\013 \001(\t\"9\n\022ChannelMessageSend\022\022\n"
-      "\nchannel_id\030\001 \001(\t\022\017\n\007content\030\002 \001(\t\"\236\001\n\024C"
-      "hannelMessageUpdate\022\022\n\nchannel_id\030\001 \001(\t\022"
-      "\022\n\nmessage_id\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\022\021\n\t"
-      "room_name\030\004 \001(\t\022\020\n\010group_id\030\005 \001(\t\022\023\n\013use"
-      "r_id_one\030\006 \001(\t\022\023\n\013user_id_two\030\007 \001(\t\"\215\001\n\024"
-      "ChannelMessageRemove\022\022\n\nchannel_id\030\001 \001(\t"
-      "\022\022\n\nmessage_id\030\002 \001(\t\022\021\n\troom_name\030\003 \001(\t\022"
-      "\020\n\010group_id\030\004 \001(\t\022\023\n\013user_id_one\030\005 \001(\t\022\023"
-      "\n\013user_id_two\030\006 \001(\t\"\326\001\n\024ChannelPresenceE"
+      "\nchannel_id\030\001 \001(\t\022\017\n\007content\030\002 \001(\t\"O\n\024Ch"
+      "annelMessageUpdate\022\022\n\nchannel_id\030\001 \001(\t\022\022"
+      "\n\nmessage_id\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\">\n\024C"
+      "hannelMessageRemove\022\022\n\nchannel_id\030\001 \001(\t\022"
+      "\022\n\nmessage_id\030\002 \001(\t\"\326\001\n\024ChannelPresenceE"
       "vent\022\022\n\nchannel_id\030\001 \001(\t\022,\n\005joins\030\002 \003(\0132"
       "\035.nakama.realtime.UserPresence\022-\n\006leaves"
       "\030\003 \003(\0132\035.nakama.realtime.UserPresence\022\021\n"
@@ -1620,7 +1608,7 @@ void AddDescriptorsImpl() {
       "\006Nakamab\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 6575);
+      descriptor, 6415);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "github.com/heroiclabs/nakama/rtapi/realtime.proto", &protobuf_RegisterTypes);
   ::protobuf_google_2fprotobuf_2ftimestamp_2eproto::AddDescriptors();
@@ -6265,10 +6253,6 @@ void ChannelMessageUpdate::InitAsDefaultInstance() {
 const int ChannelMessageUpdate::kChannelIdFieldNumber;
 const int ChannelMessageUpdate::kMessageIdFieldNumber;
 const int ChannelMessageUpdate::kContentFieldNumber;
-const int ChannelMessageUpdate::kRoomNameFieldNumber;
-const int ChannelMessageUpdate::kGroupIdFieldNumber;
-const int ChannelMessageUpdate::kUserIdOneFieldNumber;
-const int ChannelMessageUpdate::kUserIdTwoFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ChannelMessageUpdate::ChannelMessageUpdate()
@@ -6294,22 +6278,6 @@ ChannelMessageUpdate::ChannelMessageUpdate(const ChannelMessageUpdate& from)
   if (from.content().size() > 0) {
     content_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.content_);
   }
-  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.room_name().size() > 0) {
-    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
-  }
-  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.group_id().size() > 0) {
-    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
-  }
-  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.user_id_one().size() > 0) {
-    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
-  }
-  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.user_id_two().size() > 0) {
-    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
-  }
   // @@protoc_insertion_point(copy_constructor:nakama.realtime.ChannelMessageUpdate)
 }
 
@@ -6317,10 +6285,6 @@ void ChannelMessageUpdate::SharedCtor() {
   channel_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 ChannelMessageUpdate::~ChannelMessageUpdate() {
@@ -6332,10 +6296,6 @@ void ChannelMessageUpdate::SharedDtor() {
   channel_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  room_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  group_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_one_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_two_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void ChannelMessageUpdate::SetCachedSize(int size) const {
@@ -6361,10 +6321,6 @@ void ChannelMessageUpdate::Clear() {
   channel_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -6420,70 +6376,6 @@ bool ChannelMessageUpdate::MergePartialFromCodedStream(
             this->content().data(), static_cast<int>(this->content().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "nakama.realtime.ChannelMessageUpdate.content"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string room_name = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_room_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->room_name().data(), static_cast<int>(this->room_name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "nakama.realtime.ChannelMessageUpdate.room_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string group_id = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_group_id()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->group_id().data(), static_cast<int>(this->group_id().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "nakama.realtime.ChannelMessageUpdate.group_id"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string user_id_one = 6;
-      case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_user_id_one()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "nakama.realtime.ChannelMessageUpdate.user_id_one"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string user_id_two = 7;
-      case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_user_id_two()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "nakama.realtime.ChannelMessageUpdate.user_id_two"));
         } else {
           goto handle_unusual;
         }
@@ -6546,46 +6438,6 @@ void ChannelMessageUpdate::SerializeWithCachedSizes(
       3, this->content(), output);
   }
 
-  // string room_name = 4;
-  if (this->room_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->room_name().data(), static_cast<int>(this->room_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageUpdate.room_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->room_name(), output);
-  }
-
-  // string group_id = 5;
-  if (this->group_id().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->group_id().data(), static_cast<int>(this->group_id().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageUpdate.group_id");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      5, this->group_id(), output);
-  }
-
-  // string user_id_one = 6;
-  if (this->user_id_one().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageUpdate.user_id_one");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      6, this->user_id_one(), output);
-  }
-
-  // string user_id_two = 7;
-  if (this->user_id_two().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageUpdate.user_id_two");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      7, this->user_id_two(), output);
-  }
-
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -6633,50 +6485,6 @@ void ChannelMessageUpdate::SerializeWithCachedSizes(
         3, this->content(), target);
   }
 
-  // string room_name = 4;
-  if (this->room_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->room_name().data(), static_cast<int>(this->room_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageUpdate.room_name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->room_name(), target);
-  }
-
-  // string group_id = 5;
-  if (this->group_id().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->group_id().data(), static_cast<int>(this->group_id().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageUpdate.group_id");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        5, this->group_id(), target);
-  }
-
-  // string user_id_one = 6;
-  if (this->user_id_one().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageUpdate.user_id_one");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        6, this->user_id_one(), target);
-  }
-
-  // string user_id_two = 7;
-  if (this->user_id_two().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageUpdate.user_id_two");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        7, this->user_id_two(), target);
-  }
-
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -6713,34 +6521,6 @@ size_t ChannelMessageUpdate::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->content());
-  }
-
-  // string room_name = 4;
-  if (this->room_name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->room_name());
-  }
-
-  // string group_id = 5;
-  if (this->group_id().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->group_id());
-  }
-
-  // string user_id_one = 6;
-  if (this->user_id_one().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->user_id_one());
-  }
-
-  // string user_id_two = 7;
-  if (this->user_id_two().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->user_id_two());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -6782,22 +6562,6 @@ void ChannelMessageUpdate::MergeFrom(const ChannelMessageUpdate& from) {
 
     content_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.content_);
   }
-  if (from.room_name().size() > 0) {
-
-    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
-  }
-  if (from.group_id().size() > 0) {
-
-    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
-  }
-  if (from.user_id_one().size() > 0) {
-
-    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
-  }
-  if (from.user_id_two().size() > 0) {
-
-    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
-  }
 }
 
 void ChannelMessageUpdate::CopyFrom(const ::google::protobuf::Message& from) {
@@ -6830,14 +6594,6 @@ void ChannelMessageUpdate::InternalSwap(ChannelMessageUpdate* other) {
     GetArenaNoVirtual());
   content_.Swap(&other->content_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  room_name_.Swap(&other->room_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  group_id_.Swap(&other->group_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  user_id_one_.Swap(&other->user_id_one_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  user_id_two_.Swap(&other->user_id_two_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -6854,10 +6610,6 @@ void ChannelMessageRemove::InitAsDefaultInstance() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ChannelMessageRemove::kChannelIdFieldNumber;
 const int ChannelMessageRemove::kMessageIdFieldNumber;
-const int ChannelMessageRemove::kRoomNameFieldNumber;
-const int ChannelMessageRemove::kGroupIdFieldNumber;
-const int ChannelMessageRemove::kUserIdOneFieldNumber;
-const int ChannelMessageRemove::kUserIdTwoFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ChannelMessageRemove::ChannelMessageRemove()
@@ -6879,32 +6631,12 @@ ChannelMessageRemove::ChannelMessageRemove(const ChannelMessageRemove& from)
   if (from.message_id().size() > 0) {
     message_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.message_id_);
   }
-  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.room_name().size() > 0) {
-    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
-  }
-  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.group_id().size() > 0) {
-    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
-  }
-  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.user_id_one().size() > 0) {
-    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
-  }
-  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.user_id_two().size() > 0) {
-    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
-  }
   // @@protoc_insertion_point(copy_constructor:nakama.realtime.ChannelMessageRemove)
 }
 
 void ChannelMessageRemove::SharedCtor() {
   channel_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  room_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_one_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_two_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 ChannelMessageRemove::~ChannelMessageRemove() {
@@ -6915,10 +6647,6 @@ ChannelMessageRemove::~ChannelMessageRemove() {
 void ChannelMessageRemove::SharedDtor() {
   channel_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  room_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  group_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_one_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_two_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void ChannelMessageRemove::SetCachedSize(int size) const {
@@ -6943,10 +6671,6 @@ void ChannelMessageRemove::Clear() {
 
   channel_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   message_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  room_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_one_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  user_id_two_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -6986,70 +6710,6 @@ bool ChannelMessageRemove::MergePartialFromCodedStream(
             this->message_id().data(), static_cast<int>(this->message_id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "nakama.realtime.ChannelMessageRemove.message_id"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string room_name = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_room_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->room_name().data(), static_cast<int>(this->room_name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "nakama.realtime.ChannelMessageRemove.room_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string group_id = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_group_id()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->group_id().data(), static_cast<int>(this->group_id().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "nakama.realtime.ChannelMessageRemove.group_id"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string user_id_one = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_user_id_one()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "nakama.realtime.ChannelMessageRemove.user_id_one"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string user_id_two = 6;
-      case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_user_id_two()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "nakama.realtime.ChannelMessageRemove.user_id_two"));
         } else {
           goto handle_unusual;
         }
@@ -7102,46 +6762,6 @@ void ChannelMessageRemove::SerializeWithCachedSizes(
       2, this->message_id(), output);
   }
 
-  // string room_name = 3;
-  if (this->room_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->room_name().data(), static_cast<int>(this->room_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageRemove.room_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->room_name(), output);
-  }
-
-  // string group_id = 4;
-  if (this->group_id().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->group_id().data(), static_cast<int>(this->group_id().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageRemove.group_id");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->group_id(), output);
-  }
-
-  // string user_id_one = 5;
-  if (this->user_id_one().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageRemove.user_id_one");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      5, this->user_id_one(), output);
-  }
-
-  // string user_id_two = 6;
-  if (this->user_id_two().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageRemove.user_id_two");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      6, this->user_id_two(), output);
-  }
-
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -7178,50 +6798,6 @@ void ChannelMessageRemove::SerializeWithCachedSizes(
         2, this->message_id(), target);
   }
 
-  // string room_name = 3;
-  if (this->room_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->room_name().data(), static_cast<int>(this->room_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageRemove.room_name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->room_name(), target);
-  }
-
-  // string group_id = 4;
-  if (this->group_id().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->group_id().data(), static_cast<int>(this->group_id().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageRemove.group_id");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->group_id(), target);
-  }
-
-  // string user_id_one = 5;
-  if (this->user_id_one().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->user_id_one().data(), static_cast<int>(this->user_id_one().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageRemove.user_id_one");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        5, this->user_id_one(), target);
-  }
-
-  // string user_id_two = 6;
-  if (this->user_id_two().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->user_id_two().data(), static_cast<int>(this->user_id_two().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "nakama.realtime.ChannelMessageRemove.user_id_two");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        6, this->user_id_two(), target);
-  }
-
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -7251,34 +6827,6 @@ size_t ChannelMessageRemove::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->message_id());
-  }
-
-  // string room_name = 3;
-  if (this->room_name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->room_name());
-  }
-
-  // string group_id = 4;
-  if (this->group_id().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->group_id());
-  }
-
-  // string user_id_one = 5;
-  if (this->user_id_one().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->user_id_one());
-  }
-
-  // string user_id_two = 6;
-  if (this->user_id_two().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->user_id_two());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -7316,22 +6864,6 @@ void ChannelMessageRemove::MergeFrom(const ChannelMessageRemove& from) {
 
     message_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.message_id_);
   }
-  if (from.room_name().size() > 0) {
-
-    room_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_name_);
-  }
-  if (from.group_id().size() > 0) {
-
-    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
-  }
-  if (from.user_id_one().size() > 0) {
-
-    user_id_one_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_one_);
-  }
-  if (from.user_id_two().size() > 0) {
-
-    user_id_two_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_two_);
-  }
 }
 
 void ChannelMessageRemove::CopyFrom(const ::google::protobuf::Message& from) {
@@ -7361,14 +6893,6 @@ void ChannelMessageRemove::InternalSwap(ChannelMessageRemove* other) {
   channel_id_.Swap(&other->channel_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   message_id_.Swap(&other->message_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  room_name_.Swap(&other->room_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  group_id_.Swap(&other->group_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  user_id_one_.Swap(&other->user_id_one_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  user_id_two_.Swap(&other->user_id_two_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
