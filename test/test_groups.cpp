@@ -21,14 +21,14 @@ namespace Test {
 
 using namespace std;
 
-class NGroupsTest : public NTest
+class NGroupsTest : public NCppTest
 {
     const std::string group_name = "We're-Nakama-Lovers";
 
     NSessionPtr session;
 
 public:
-    NGroupsTest(const char* name) : NTest(name) {}
+    NGroupsTest(const char* name) : NCppTest(name) {}
 
     void runTest() override
     {
@@ -45,7 +45,7 @@ public:
 
         client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
-        NTest::runTest();
+        NCppTest::runTest();
     }
 
     void listGroups()

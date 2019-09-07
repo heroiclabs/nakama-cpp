@@ -34,7 +34,6 @@ args = parser.parse_args()
 
 ARCH = args.arch
 SHARED_LIB = args.dylib
-BUILD_MODE = 'Release'
 
 print
 print('Building for', ARCH + ', dylib:', str(SHARED_LIB))
@@ -108,11 +107,10 @@ if is_simulator:
 else:
     cmake_toolchain_path = os.path.abspath('../../cmake/ios.toolchain.cmake')
 
-#generator = 'Xcode'
 generator = 'Unix Makefiles'
 
 # generate projects
-call(['cmake',
+cmake_cmd = ['cmake',
       '-B',
       build_dir,
       '-DCMAKE_OSX_DEPLOYMENT_TARGET=' + deployment_target,
@@ -120,17 +118,14 @@ call(['cmake',
       '-Dprotobuf_BUILD_PROTOC_BINARIES=OFF',
       '-DgRPC_BUILD_CODEGEN=OFF',
       '-DCMAKE_TOOLCHAIN_FILE=' + cmake_toolchain_path,
-      '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
       '-DENABLE_BITCODE=FALSE',
       '-DENABLE_ARC=TRUE',
-      '-DNAKAMA_SHARED_LIBRARY=' + bool2cmake(SHARED_LIB),
-      '-DBUILD_REST_CLIENT=' + bool2cmake(BUILD_REST_CLIENT),
-      '-DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT),
-      '-DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST),
-      '-DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST),
       '-G' + generator,
       '../..'
-      ])
+      ]
+
+cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))
+
+call(cmake_cmd)
 
 build('nakama-cpp')
-

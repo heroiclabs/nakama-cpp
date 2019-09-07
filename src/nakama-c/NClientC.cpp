@@ -1,0 +1,747 @@
+/*
+ * Copyright 2019 The Nakama Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include "nakama-c/NClient.h"
+#include "nakama-c/DataHelperC.h"
+#include "nakama-cpp/NClientInterface.h"
+
+
+NAKAMA_NAMESPACE_BEGIN
+
+void saveSession(NSessionPtr session);
+NSessionPtr getSession(::NSession session);
+NStringMap* findNStringMap(::NStringMap map);
+
+Nakama::ErrorCallback createErrorCallback(NClient client, NClientReqData reqData, NClientErrorCallback errorCallback)
+{
+    if (!errorCallback)
+        return nullptr;
+
+    return [client, reqData, errorCallback](const Nakama::NError& error)
+    {
+        tNError cError;
+        assign(cError, error);
+        errorCallback(client, reqData, &cError);
+    };
+}
+
+std::function<void()> createOkEmptyCallback(NClient client, NClientReqData reqData, NSuccessEmptyCallback okCallback)
+{
+    if (!okCallback)
+        return nullptr;
+
+    return [client, reqData, okCallback]()
+    {
+        okCallback(client, reqData);
+    };
+}
+
+std::function<void(Nakama::NSessionPtr)> createAuthSuccessCallback(NClient client, NClientReqData reqData, NSessionCallback successCallback)
+{
+    return [client, reqData, successCallback](Nakama::NSessionPtr session)
+    {
+        if (successCallback)
+        {
+            saveSession(session);
+            successCallback(client, reqData, session.get());
+        }
+    };
+}
+
+NAKAMA_NAMESPACE_END
+
+extern "C" {
+
+Nakama::NClientInterface* getCppClient(NClient client)
+{
+    return (Nakama::NClientInterface*)client;
+}
+
+void NClient_setErrorCallback(NClient client, NClientDefaultErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+
+    if (errorCallback)
+    {
+        cppClient->setErrorCallback([client, errorCallback](const Nakama::NError& error)
+        {
+            tNError cError;
+            assign(cError, error);
+            errorCallback(client, &cError);
+        });
+    }
+    else
+    {
+        cppClient->setErrorCallback(nullptr);
+    }
+}
+
+void NClient_setUserData(NClient client, void* userData)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+
+    cppClient->setUserData(userData);
+}
+
+void* NClient_getUserData(NClient client)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+
+    return cppClient->getUserData();
+}
+
+void NClient_disconnect(NClient client)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+
+    cppClient->disconnect();
+}
+
+void NClient_tick(NClient client)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+
+    cppClient->tick();
+}
+
+void NClient_authenticateDevice(
+    NClient client,
+    const char* id,
+    const char* username,
+    bool create,
+    NStringMap vars,
+    NClientReqData reqData,
+    NSessionCallback successCallback, NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    Nakama::opt::optional<std::string> usernameOpt;
+    Nakama::NStringMap* cppVars = Nakama::findNStringMap(vars);
+
+    if (username)
+        usernameOpt = std::string(username);
+
+    cppClient->authenticateDevice(
+        id,
+        usernameOpt,
+        create,
+        cppVars ? *cppVars : Nakama::NStringMap(),
+        Nakama::createAuthSuccessCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_authenticateEmail(
+    NClient client,
+    const char* email,
+    const char* password,
+    const char* username,
+    bool create,
+    NStringMap vars,
+    NClientReqData reqData,
+    NSessionCallback successCallback, NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    Nakama::NStringMap* cppVars = Nakama::findNStringMap(vars);
+
+    cppClient->authenticateEmail(
+        email,
+        password,
+        username ? username : "",
+        create,
+        cppVars ? *cppVars : Nakama::NStringMap(),
+        Nakama::createAuthSuccessCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_authenticateFacebook(
+    NClient client,
+    const char* accessToken,
+    const char* username,
+    bool create,
+    bool importFriends,
+    NStringMap vars,
+    NClientReqData reqData,
+    NSessionCallback successCallback, NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    Nakama::NStringMap* cppVars = Nakama::findNStringMap(vars);
+
+    cppClient->authenticateFacebook(
+        accessToken,
+        username ? username : "",
+        create,
+        importFriends,
+        cppVars ? *cppVars : Nakama::NStringMap(),
+        Nakama::createAuthSuccessCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_authenticateGoogle(
+    NClient client,
+    const char* accessToken,
+    const char* username,
+    bool create,
+    NStringMap vars,
+    NClientReqData reqData,
+    NSessionCallback successCallback, NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    Nakama::NStringMap* cppVars = Nakama::findNStringMap(vars);
+
+    cppClient->authenticateGoogle(
+        accessToken,
+        username ? username : "",
+        create,
+        cppVars ? *cppVars : Nakama::NStringMap(),
+        Nakama::createAuthSuccessCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_authenticateGameCenter(
+    NClient client,
+    const char* playerId,
+    const char* bundleId,
+    NTimestamp timestampSeconds,
+    const char* salt,
+    const char* signature,
+    const char* publicKeyUrl,
+    const char* username,
+    bool create,
+    NStringMap vars,
+    NClientReqData reqData,
+    NSessionCallback successCallback, NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    Nakama::NStringMap* cppVars = Nakama::findNStringMap(vars);
+
+    cppClient->authenticateGameCenter(
+        playerId,
+        bundleId,
+        timestampSeconds,
+        salt,
+        signature,
+        publicKeyUrl,
+        username ? username : "",
+        create,
+        cppVars ? *cppVars : Nakama::NStringMap(),
+        Nakama::createAuthSuccessCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_authenticateCustom(
+    NClient client,
+    const char* id,
+    const char* username,
+    bool create,
+    NStringMap vars,
+    NClientReqData reqData,
+    NSessionCallback successCallback, NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    Nakama::NStringMap* cppVars = Nakama::findNStringMap(vars);
+
+    cppClient->authenticateCustom(
+        id,
+        username ? username : "",
+        create,
+        cppVars ? *cppVars : Nakama::NStringMap(),
+        Nakama::createAuthSuccessCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_authenticateSteam(
+    NClient client,
+    const char* token,
+    const char* username,
+    bool create,
+    NStringMap vars,
+    NClientReqData reqData,
+    NSessionCallback successCallback, NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    Nakama::NStringMap* cppVars = Nakama::findNStringMap(vars);
+
+    cppClient->authenticateSteam(
+        token,
+        username ? username : "",
+        create,
+        cppVars ? *cppVars : Nakama::NStringMap(),
+        Nakama::createAuthSuccessCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_linkFacebook(NClient client, NSession session, const char* accessToken, bool importFriends, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->linkFacebook(
+        cppSession,
+        accessToken,
+        importFriends,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_linkEmail(NClient client, NSession session, const char* email, const char* password, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_linkDevice(NClient client, NSession session, const char* id, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_linkGoogle(NClient client, NSession session, const char* accessToken, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_linkGameCenter(NClient client, NSession session, const char* playerId, const char* bundleId, NTimestamp timestampSeconds, const char* salt, const char* signature, const char* publicKeyUrl, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_linkSteam(NClient client, NSession session, const char* token, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_linkCustom(NClient client, NSession session, const char* id, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_unlinkFacebook(NClient client, NSession session, const char* accessToken, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_unlinkEmail(NClient client, NSession session, const char* email, const char* password, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_unlinkGoogle(NClient client, NSession session, const char* accessToken, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_unlinkGameCenter(NClient client, NSession session, const char* playerId, const char* bundleId, NTimestamp timestampSeconds, const char* salt, const char* signature, const char* publicKeyUrl, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_unlinkSteam(NClient client, NSession session, const char* token, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_unlinkDevice(NClient client, NSession session, const char* id, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_unlinkCustom(NClient client, NSession session, const char* id, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_importFacebookFriends(NClient client, NSession session, const char* token, bool reset, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_getAccount(
+    NClient client,
+    NSession session,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNAccount*), NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->getAccount(
+        cppSession,
+        [client, reqData, successCallback](const Nakama::NAccount& account)
+        {
+            if (successCallback)
+            {
+                sNAccount cAccount;
+                assign(cAccount, account);
+                successCallback(client, reqData, &cAccount);
+                Nakama::sNAccount_free(cAccount);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_updateAccount(NClient client, NSession session, const char* username, const char* displayName, const char* avatarUrl, const char* langTag, const char* location, const char* timezone, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_getUsers(
+    NClient client,
+    NSession session,
+    const char** ids,
+    uint16_t idsCount,
+    const char** usernames,
+    uint16_t usernamesCount,
+    const char** facebookIds,
+    uint16_t facebookIdsCount,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNUsers*), NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    std::vector<std::string> cppIds, cppUsernames, cppFacebookIds;
+
+    Nakama::assign(cppIds, ids, idsCount);
+    Nakama::assign(cppUsernames, usernames, usernamesCount);
+    Nakama::assign(cppFacebookIds, facebookIds, facebookIdsCount);
+
+    cppClient->getUsers(
+        cppSession,
+        cppIds,
+        cppUsernames,
+        cppFacebookIds,
+        [client, reqData, successCallback](const Nakama::NUsers& users)
+        {
+            if (successCallback)
+            {
+                sNUsers cUsers;
+                assign(cUsers, users);
+                successCallback(client, reqData, &cUsers);
+                Nakama::sNUsers_free(cUsers);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_addFriends(
+    NClient client,
+    NSession session,
+    const char** ids, uint16_t idsCount,
+    const char** usernames, uint16_t usernamesCount,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_deleteFriends(
+    NClient client,
+    NSession session,
+    const char** ids, uint16_t idsCount,
+    const char** usernames, uint16_t usernamesCount,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_blockFriends(NClient client,
+    NSession session,
+    const char** ids, uint16_t idsCount,
+    const char** usernames, uint16_t usernamesCount,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listFriends(
+    NClient client,
+    NSession session,
+    const int32_t* limit,
+    const eFriendState* state,
+    const char* cursor,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNFriendList*), NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    Nakama::opt::optional<int32_t> cppLimit;
+    Nakama::opt::optional<Nakama::NFriend::State> cppState;
+
+    if (limit) cppLimit = *limit;
+    if (state) cppState = (Nakama::NFriend::State)*state;
+
+    cppClient->listFriends(
+        cppSession,
+        cppLimit,
+        cppState,
+        cursor ? cursor : "",
+        [client, reqData, successCallback](Nakama::NFriendListPtr friends)
+        {
+            if (successCallback)
+            {
+                sNFriendList cFriends;
+                assign(cFriends, *friends);
+                successCallback(client, reqData, &cFriends);
+                Nakama::sNFriendList_free(cFriends);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_createGroup(
+    NClient client,
+    NSession session,
+    const char* name,
+    const char* description,
+    const char* avatarUrl,
+    const char* langTag,
+    bool open,
+    const int32_t* maxCount,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNGroup*), NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    Nakama::opt::optional<int32_t> cppMaxCount;
+
+    if (maxCount) cppMaxCount = *maxCount;
+
+    cppClient->createGroup(
+        cppSession,
+        name,
+        description,
+        avatarUrl,
+        langTag,
+        open,
+        cppMaxCount,
+        [client, reqData, successCallback](const Nakama::NGroup& group)
+        {
+            if (successCallback)
+            {
+                sNGroup cGroup;
+                assign(cGroup, group);
+                successCallback(client, reqData, &cGroup);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_deleteGroup(NClient client, NSession session, const char* groupId, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_addGroupUsers(NClient client, NSession session, const char* groupId, const char** ids, uint16_t idsCount, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listGroupUsers(
+    NClient client,
+    NSession session,
+    const char* groupId,
+    const int32_t* limit,
+    const eFriendState* state,
+    const char* cursor,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNGroupUserList*), NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    Nakama::opt::optional<int32_t> cppLimit;
+    Nakama::opt::optional<Nakama::NFriend::State> cppState;
+
+    if (limit) cppLimit = *limit;
+    if (state) cppState = (Nakama::NFriend::State)(*state);
+
+    cppClient->listGroupUsers(
+        cppSession,
+        groupId,
+        cppLimit,
+        cppState,
+        cursor ? cursor : "",
+        [client, reqData, successCallback](const Nakama::NGroupUserListPtr& groupUserList)
+        {
+            if (successCallback)
+            {
+                sNGroupUserList cGroupUserList;
+                assign(cGroupUserList, *groupUserList);
+                successCallback(client, reqData, &cGroupUserList);
+                Nakama::sNGroupUserList_free(cGroupUserList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_kickGroupUsers(NClient client, NSession session, const char* groupId, const char** ids, uint16_t idsCount, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_joinGroup(NClient client, NSession session, const char* groupId, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_leaveGroup(NClient client, NSession session, const char* groupId, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listGroups(
+    NClient client,
+    NSession session,
+    const char* name,
+    const int32_t* limit,
+    const char* cursor,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNGroupList*), NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->listGroups(
+        cppSession,
+        name,
+        limit ? *limit : 0,
+        cursor ? cursor : "",
+        [client, reqData, successCallback](const Nakama::NGroupListPtr& groupList)
+        {
+            if (successCallback)
+            {
+                sNGroupList cGroupList;
+                assign(cGroupList, *groupList);
+                successCallback(client, reqData, &cGroupList);
+                Nakama::sNGroupList_free(cGroupList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
+void NClient_listOwnUserGroups(NClient client, NSession session, NClientReqData reqData, void(*successCallback)(const sNUserGroupList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listUserGroups(NClient client, NSession session, const char* userId, NClientReqData reqData, void(*successCallback)(const sNUserGroupList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_promoteGroupUsers(NClient client, NSession session, const char* groupId, const char** ids, uint16_t idsCount, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_updateGroup(NClient client, NSession session, const char* groupId, const char* name, const char* description, const char* avatarUrl, const char* langTag, const bool* open, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listLeaderboardRecords(NClient client, NSession session, const char* leaderboardId, const char** ownerIds, int32_t limit, const char* cursor, NClientReqData reqData, void(*successCallback)(const sNLeaderboardRecordList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listLeaderboardRecordsAroundOwner(NClient client, NSession session, const char* leaderboardId, const char* ownerId, int32_t limit, NClientReqData reqData, void(*successCallback)(const sNLeaderboardRecordList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_writeLeaderboardRecord(NClient client, NSession session, const char* leaderboardId, int64_t score, const int64_t subscore, const char* metadata, NClientReqData reqData, void(*successCallback)(const sNLeaderboardRecord*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_writeTournamentRecord(NClient client, NSession session, const char* tournamentId, int64_t score, int64_t subscore, const char* metadata, NClientReqData reqData, void(*successCallback)(const sNLeaderboardRecord*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_deleteLeaderboardRecord(NClient client, NSession session, const char* leaderboardId, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listMatches(NClient client, NSession session, int32_t min_size, int32_t max_size, int32_t limit, const char* label, const bool* authoritative, NClientReqData reqData, void(*successCallback)(const sNMatchList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listNotifications(NClient client, NSession session, int32_t limit, const char* cacheableCursor, NClientReqData reqData, void(*successCallback)(const sNNotificationList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_deleteNotifications(NClient client, NSession session, const char** notificationIds, uint16_t notificationIdsCount, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listChannelMessages(NClient client, NSession session, const char* channelId, int32_t limit, const char* cursor, bool forward, NClientReqData reqData, void(*successCallback)(const sNChannelMessageList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listTournaments(NClient client, NSession session, const uint32_t* categoryStart, const uint32_t* categoryEnd, const uint32_t* startTime, const uint32_t* endTime, int32_t limit, const char* cursor, NClientReqData reqData, void(*successCallback)(const sNTournamentList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listTournamentRecords(NClient client, NSession session, const char* tournamentId, int32_t limit, const char* cursor, const char** ownerIds, uint16_t ownerIdsCount, NClientReqData reqData, void(*successCallback)(const sNTournamentRecordList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listTournamentRecordsAroundOwner(NClient client, NSession session, const char* tournamentId, const char* ownerId, int32_t limit, NClientReqData reqData, void(*successCallback)(const sNTournamentRecordList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_joinTournament(NClient client, NSession session, const char* tournamentId, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listStorageObjects(NClient client, NSession session, const char* collection, int32_t limit, const char* cursor, NClientReqData reqData, void(*successCallback)(const sNStorageObjectList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_listUsersStorageObjects(NClient client, NSession session, const char* collection, const char* userId, int32_t limit, const char* cursor, NClientReqData reqData, void(*successCallback)(const sNStorageObjectList*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_writeStorageObjects(NClient client, NSession session, const tNStorageObjectWrite* objects, uint16_t objectsCount, NClientReqData reqData, void(*successCallback)(const sNStorageObjectAck* acks, uint16_t count), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_readStorageObjects(NClient client, NSession session, const sNReadStorageObjectId* objectIds, uint16_t objectIdsCount, NClientReqData reqData, void(*successCallback)(const sNStorageObject* objects, uint16_t count), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_deleteStorageObjects(NClient client, NSession session, const sNDeleteStorageObjectId* objectIds, uint16_t objectIdsCount, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    
+}
+
+void NClient_rpc(NClient client, NSession session, const char* id, const char* payload, NClientReqData reqData, void(*successCallback)(const sNRpc*), NClientErrorCallback errorCallback)
+{
+    
+}
+
+} // extern "C"

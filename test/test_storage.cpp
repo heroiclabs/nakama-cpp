@@ -23,7 +23,7 @@ using namespace std;
 
 void test_writeStorageInvalidArgument()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 
@@ -55,7 +55,7 @@ void test_writeStorageInvalidArgument()
 
 void test_writeStorage()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 

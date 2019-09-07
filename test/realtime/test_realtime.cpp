@@ -15,6 +15,7 @@
  */
 
 #include "realtime/RtClientTestBase.h"
+#include <thread>
 
 namespace Nakama {
 namespace Test {

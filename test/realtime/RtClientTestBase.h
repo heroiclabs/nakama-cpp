@@ -20,10 +20,10 @@
 namespace Nakama {
 namespace Test {
 
-class NRtClientTest : public NTest
+class NRtClientTest : public NCppTest
 {
 public:
-    NRtClientTest(const char* name) : NTest(name) {}
+    NRtClientTest(const char* name) : NCppTest(name) {}
 
     std::function<void()> onRtConnect;
 

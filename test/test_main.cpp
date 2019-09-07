@@ -17,11 +17,17 @@
 #include "test_main.h"
 #include "test_serverConfig.h"
 
+extern "C"
+{
+    extern void c_test_pure();
+}
+
 namespace Nakama {
 namespace Test {
 
 using namespace std;
 
+// C++ tests
 void test_getAccount();
 void test_authentication();
 void test_errors();
@@ -31,13 +37,12 @@ void test_storage();
 void test_groups();
 void test_realtime();
 
-// currently running tests
-std::vector<NTest*> g_running_tests;
-NTest* g_cur_test = nullptr;
+// C tests
+void ctest_authentication();
 
-// stats
-uint32_t g_runTestsCount = 0;
-uint32_t g_failedTestsCount = 0;
+// wrapper tests
+void wrapper_test_authentication();
+void wrapper_test_account();
 
 void setWorkingClientParameters(NClientParameters& parameters)
 {
@@ -47,163 +52,42 @@ void setWorkingClientParameters(NClientParameters& parameters)
     parameters.ssl       = SERVER_SSL;
 }
 
-void abortCurrentTest(const char* file, int lineno)
-{
-    if (g_running_tests.size() > 1)
-    {
-        cout << g_running_tests.size() << " tests are running, aborting one..." << endl;
-    }
-
-    cout << "TEST ASSERT FAILED!" << endl;
-    cout << file << ":" << lineno << endl;
-    g_cur_test->stopTest();
-}
-
-void addRunningTest(NTest* test)
-{
-    g_running_tests.push_back(test);
-}
-
-void removeRunningTest(NTest* test)
-{
-    for (auto it = g_running_tests.begin(); it != g_running_tests.end(); ++it)
-    {
-        if (*it == test)
-        {
-            g_running_tests.erase(it);
-            break;
-        }
-    }
-}
-
-void runTestsLoop()
-{
-    std::chrono::milliseconds sleep_period(15);
-
-    while (!g_running_tests.empty())
-    {
-        auto running_tests = g_running_tests;
-
-        for (auto test : running_tests)
-        {
-            if (!test->isDone())
-            {
-                test->tick();
-            }
-        }
-
-        std::this_thread::sleep_for(sleep_period);
-    }
-}
-
 // *************************************************************
-
-NTest::NTest(const char * name)
-    : _name(name)
+// NCppTest
+// *************************************************************
+NCppTest::NCppTest(const char* name) : NTest(name)
 {
-    g_cur_test = this;
 }
 
-NTest::~NTest()
+NCppTest::~NCppTest()
 {
-    removeRunningTest(this);
-    g_cur_test = nullptr;
 }
 
-void NTest::createWorkingClient()
+void NCppTest::createWorkingClient()
 {
     NClientParameters parameters;
 
     setWorkingClientParameters(parameters);
 
-    client = createDefaultClient(parameters);
-
-    initClient();
+    createClient(parameters);
 }
 
-void NTest::createClientWithParameters(const NClientParameters& parameters)
+void NCppTest::createClient(const NClientParameters& parameters)
 {
     client = createDefaultClient(parameters);
 
-    initClient();
-}
-
-void NTest::runTest()
-{
-    if (!_continue_loop)
-        return;
-
-    if (g_runTestsCount > 0)
-        cout << endl << endl;
-
-    ++g_runTestsCount;
-
-    addRunningTest(this);
-
-    printTestName("Running");
-
-    if (g_running_tests.size() == 1)
-    {
-        runTestsLoop();
-    }
-}
-
-void NTest::stopTest(bool succeeded)
-{
-    removeRunningTest(this);
-
-    _testSucceeded = succeeded;
-    _continue_loop = false;
-
-    if (succeeded)
-    {
-        printTestName("Succeeded");
-    }
-    else
-    {
-        ++g_failedTestsCount;
-        printTestName("Failed");
-        abort();
-    }
-
-    cout << endl << endl;
-}
-
-void NTest::tick()
-{
-    client->tick();
-}
-
-void NTest::initClient()
-{
     client->setErrorCallback([this](const NError& error)
     {
         stopTest();
     });
 }
 
-void NTest::printTestName(const char* event)
+void NCppTest::tick()
 {
-    cout << "*************************************" << endl;
-    cout << event << " " << _name << endl;
-    cout << "*************************************" << endl;
+    client->tick();
 }
 
 // *************************************************************
-
-ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
-{
-    if (totalCount > 0)
-    {
-        os << count * 100 / totalCount << "%";
-    }
-    else
-    {
-        os << "0%";
-    }
-
-    return os;
-}
 
 int runAllTests()
 {
@@ -218,15 +102,17 @@ int runAllTests()
     test_groups();
     test_realtime();
 
+    ctest_authentication();
+
+    c_test_pure();
+
+    wrapper_test_authentication();
+    wrapper_test_account();
+
     // total stats
-    uint32_t testsPassed = (g_runTestsCount - g_failedTestsCount);
+    printTotalStats();
 
-    cout << endl << endl;
-    cout << "Total tests : " << g_runTestsCount << endl;
-    cout << "Tests passed: " << testsPassed << " ("; printPercent(cout, g_runTestsCount, testsPassed) << ")" << endl;
-    cout << "Tests failed: " << g_failedTestsCount << " ("; printPercent(cout, g_runTestsCount, g_failedTestsCount) << ")" << endl;
-
-    return g_failedTestsCount == 0 ? 0 : -1;
+    return getFailedCount() == 0 ? 0 : -1;
 }
 
 } // namespace Test

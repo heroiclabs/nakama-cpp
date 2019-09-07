@@ -23,13 +23,13 @@ using namespace std;
 
 void test_connectError()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     NClientParameters parameters;
 
     parameters.port = 1111;
 
-    test.createClientWithParameters(parameters);
+    test.createClient(parameters);
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -49,7 +49,7 @@ void test_connectError()
 
 void test_disconnection()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 

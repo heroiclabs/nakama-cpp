@@ -29,7 +29,7 @@ file(
     "${_src_root_path}/*.h*"
 )
 
-set(_include_root_path ${PUBLIC_INCLUDE_DIR}/nakama-cpp)
+set(_include_root_path ${PUBLIC_INCLUDE_DIR})
 
 file(
     GLOB_RECURSE _public_headers_list

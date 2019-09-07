@@ -29,6 +29,9 @@ BUILD_HTTP_CPPREST = True
 # Build Websocket transport using C++ REST SDK
 BUILD_WEBSOCKET_CPPREST = True
 
+# Build C API (support for C language)
+BUILD_C_API = True
+
 # Build static libs
 BUILD_NAKAMA_STATIC = True
 

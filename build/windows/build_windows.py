@@ -117,14 +117,10 @@ else:
 cmake_cmd = ['cmake',
   '-B', build_dir,
   '-G', generator,
-  '-T', TOOLSET,
-  '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
-  '-DNAKAMA_SHARED_LIBRARY=' + bool2cmake(DLL),
-  '-DBUILD_REST_CLIENT=' + bool2cmake(BUILD_REST_CLIENT),
-  '-DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT),
-  '-DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST),
-  '-DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST)
+  '-T', TOOLSET
 ]
+
+cmake_cmd.extend(get_common_cmake_parameters(DLL))
 
 if vs_year >= 2019:
     cmake_cmd.append('-A')
