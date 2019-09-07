@@ -64,6 +64,22 @@ NAKAMA_NAMESPACE_BEGIN
         virtual void setErrorCallback(ErrorCallback errorCallback) = 0;
 
         /**
+         * Set user data.
+         *
+         * Client just holds this data so you can receive it later when you need it.
+         *
+         * @param userData The user data.
+         */
+        virtual void setUserData(void* userData) = 0;
+
+        /**
+         * Get user data.
+         *
+         * @return The user data.
+         */
+        virtual void* getUserData() const = 0;
+
+        /**
          * Disconnects the client. This function kills all outgoing exchanges immediately without waiting.
          */
         virtual void disconnect() = 0;

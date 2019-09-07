@@ -29,6 +29,9 @@ namespace Nakama {
     public:
         void setErrorCallback(ErrorCallback errorCallback) override { _defaultErrorCallback = errorCallback; }
 
+        void setUserData(void* userData) override { _userData = userData; }
+        void* getUserData() const override { return _userData; }
+
         NRtClientPtr createRtClient(int32_t port, NRtTransportPtr transport) override;
         NRtClientPtr createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport) override;
 
