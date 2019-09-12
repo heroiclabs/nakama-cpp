@@ -24,6 +24,8 @@
 namespace Nakama {
 namespace Test {
 
+#define NTEST_ASSERT(cond)  if (!(cond)) { abortCurrentTest(__FILE__, __LINE__); }
+
     class NTest
     {
     public:
@@ -53,6 +55,7 @@ namespace Test {
     };
 
     void setWorkingClientParameters(NClientParameters& parameters);
+    void abortCurrentTest(const char* file, int lineno);
 
 } // namespace Test
 } // namespace Nakama

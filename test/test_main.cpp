@@ -33,6 +33,7 @@ void test_realtime();
 
 // currently running tests
 std::vector<NTest*> g_running_tests;
+NTest* g_cur_test = nullptr;
 
 // stats
 uint32_t g_runTestsCount = 0;
@@ -44,6 +45,18 @@ void setWorkingClientParameters(NClientParameters& parameters)
     parameters.port      = SERVER_GRPC_PORT;
     parameters.serverKey = SERVER_KEY;
     parameters.ssl       = SERVER_SSL;
+}
+
+void abortCurrentTest(const char* file, int lineno)
+{
+    if (g_running_tests.size() > 1)
+    {
+        cout << g_running_tests.size() << " tests are running, aborting one..." << endl;
+    }
+
+    cout << "TEST ASSERT FAILED!" << endl;
+    cout << file << ":" << lineno << endl;
+    g_cur_test->stopTest();
 }
 
 void addRunningTest(NTest* test)
@@ -88,11 +101,13 @@ void runTestsLoop()
 NTest::NTest(const char * name)
     : _name(name)
 {
+    g_cur_test = this;
 }
 
 NTest::~NTest()
 {
     removeRunningTest(this);
+    g_cur_test = nullptr;
 }
 
 void NTest::createWorkingClient()
