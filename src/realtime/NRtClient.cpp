@@ -428,13 +428,22 @@ void NRtClient::createMatch(std::function<void(const NMatch&)> successCallback, 
     send(msg);
 }
 
-void NRtClient::joinMatch(const std::string & matchId, std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback)
+void NRtClient::joinMatch(
+    const std::string & matchId,
+    const NStringMap& metadata,
+    std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
     ::nakama::realtime::Envelope msg;
+    auto match_join = msg.mutable_match_join();
 
-    msg.mutable_match_join()->set_match_id(matchId);
+    match_join->set_match_id(matchId);
+
+    for (auto p : metadata)
+    {
+        match_join->mutable_metadata()->insert({ p.first, p.second });
+    }
 
     RtRequestContext * ctx = createReqContext(msg);
 

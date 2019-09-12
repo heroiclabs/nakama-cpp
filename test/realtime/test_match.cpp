@@ -39,8 +39,13 @@ void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const 
 
     if (!match_id.empty())
     {
+        NStringMap metadata;
+
+        metadata.emplace("key", "value");
+
         test.rtClient->joinMatch(
             match_id,
+            metadata,
             successCallback);
     }
     else
