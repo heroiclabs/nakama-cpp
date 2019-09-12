@@ -28,47 +28,47 @@ namespace Nakama {
         virtual ~NSessionInterface() {}
 
         /**
-        * @return The authentication token used to construct this session.
-        */
+         * @return The authentication token used to construct this session.
+         */
         virtual const std::string& getAuthToken() const = 0;
 
         /**
-        * @return <c>True</c> if the user account for this session was just created.
-        */
+         * @return <c>True</c> if the user account for this session was just created.
+         */
         virtual bool isCreated() const = 0;
 
         /**
-        * @return The username of the user who owns this session.
-        */
+         * @return The username of the user who owns this session.
+         */
         virtual const std::string& getUsername() const = 0;
 
         /**
-        * @return The ID of the user who owns this session.
-        */
+         * @return The ID of the user who owns this session.
+         */
         virtual const std::string& getUserId() const = 0;
 
         /**
-        * @return The timestamp in milliseconds when this session object was created.
-        */
+         * @return The timestamp in milliseconds when this session object was created.
+         */
         virtual NTimestamp getCreateTime() const = 0;
 
         /**
-        * @return The timestamp in milliseconds when this session will expire.
-        */
+         * @return The timestamp in milliseconds when this session will expire.
+         */
         virtual NTimestamp getExpireTime() const = 0;
 
         /**
-        * @return <c>True</c> if the session has expired against the current time.
-        */
+         * @return <c>True</c> if the session has expired against the current time.
+         */
         virtual bool isExpired() const = 0;
 
         /**
-        * Check if the session has expired against the input time.
-        *
-        * @param now The time to compare against the session.
-        *        Use getUnixTimestampMs() to get current time.
-        * @return <c>true</c> if the session has expired.
-        */
+         * Check if the session has expired against the input time.
+         *
+         * @param now The time to compare against the session.
+         *        Use getUnixTimestampMs() to get current time.
+         * @return <c>true</c> if the session has expired.
+         */
         virtual bool isExpired(NTimestamp now) const = 0;
     };
 
