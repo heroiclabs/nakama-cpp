@@ -33,6 +33,8 @@ namespace Nakama {
         NTimestamp getExpireTime() const override;
         bool isExpired() const override;
         bool isExpired(NTimestamp now) const override;
+        const NStringMap& getVariables() const override;
+        std::string getVariable(const std::string& name) const override;
 
     private:
         std::string _token;
@@ -41,6 +43,7 @@ namespace Nakama {
         bool _created = false;
         NTimestamp _create_time = 0;
         NTimestamp _expire_time = 0;
+        NStringMap _variables;
     };
 
 }

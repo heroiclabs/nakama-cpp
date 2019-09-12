@@ -58,17 +58,44 @@ DefaultSession::DefaultSession(const std::string & token, bool created)
             }
             else
             {
-                auto& jsonExp = document["exp"];
-                auto& jsonUsn = document["usn"];
-                auto& jsonUid = document["uid"];
-
-                if (jsonExp.IsNumber())
+                if (document.HasMember("exp"))
                 {
-                    _expire_time = (jsonExp.GetUint64()) * 1000ULL;
+                    auto& jsonExp = document["exp"];
+                    if (jsonExp.IsNumber())
+                    {
+                        _expire_time = (jsonExp.GetUint64()) * 1000ULL;
+                    }
                 }
 
-                if (jsonUsn.IsString()) _username = jsonUsn.GetString();
-                if (jsonUid.IsString()) _user_id = jsonUid.GetString();
+                if (document.HasMember("usn"))
+                {
+                    auto& jsonUsn = document["usn"];
+                    if (jsonUsn.IsString()) _username = jsonUsn.GetString();
+                }
+
+                if (document.HasMember("uid"))
+                {
+                    auto& jsonUid = document["uid"];
+                    if (jsonUid.IsString()) _user_id = jsonUid.GetString();
+                }
+
+                if (document.HasMember("vrs"))
+                {
+                    auto& jsonVrs = document["vrs"];
+                    if (jsonVrs.IsObject())
+                    {
+                        auto object = jsonVrs.GetObject();
+                        for (auto it = object.begin(); it != object.end(); ++it)
+                        {
+                            if (it->value.IsString())
+                                _variables.emplace(it->name.GetString(), it->value.GetString());
+                            else
+                            {
+                                NLOG_WARN("Non-string value is ignored: " + string(it->name.GetString()));
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -112,6 +139,21 @@ bool DefaultSession::isExpired() const
 bool DefaultSession::isExpired(NTimestamp now) const
 {
     return now >= _expire_time;
+}
+
+const NStringMap& DefaultSession::getVariables() const
+{
+    return _variables;
+}
+
+std::string DefaultSession::getVariable(const std::string& name) const
+{
+    auto it = _variables.find(name);
+
+    if (it != _variables.end())
+        return it->second;
+
+    return {};
 }
 
 NSessionPtr restoreSession(const std::string& token)

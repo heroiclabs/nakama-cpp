@@ -70,6 +70,20 @@ namespace Nakama {
          * @return <c>true</c> if the session has expired.
          */
         virtual bool isExpired(NTimestamp now) const = 0;
+
+        /**
+         * Get session variables.
+         *
+         * @return NStringMap.
+         */
+        virtual const NStringMap& getVariables() const = 0;
+
+        /**
+         * Get session variable value by name.
+         *
+         * @return variable value.
+         */
+        virtual std::string getVariable(const std::string& name) const = 0;
     };
 
     using NSessionPtr = std::shared_ptr<NSessionInterface>;
