@@ -30,6 +30,25 @@ void test_restoreSession()
 
     NSessionPtr my_session;
 
+    {
+        string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTY5MTA5NzMsInVpZCI6ImY0MTU4ZjJiLTgwZjMtNDkyNi05NDZiLWE4Y2NmYzE2NTQ5MCIsInVzbiI6InZUR2RHSHl4dmwifQ.gzLaMQPaj5wEKoskOSALIeJLOYXEVFoPx3KY0Jm1EVU";
+        my_session = restoreSession(token);
+        NTEST_ASSERT(my_session->getAuthToken() == token);
+        NTEST_ASSERT(my_session->getVariables().empty());
+    }
+
+    {
+        string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTY5MTA5NzMsInVpZCI6ImY0MTU4ZjJiLTgwZjMtNDkyNi05NDZiLWE4Y2NmYzE2NTQ5MCIsInVzbiI6InZUR2RHSHl4dmwiLCJ2cnMiOnsiazEiOiJ2MSIsImsyIjoidjIifX0.Hs9ltsNmtrTJXi2U21jjuXcd-3DMsyv4W6u1vyDBMTo";
+        my_session = restoreSession(token);
+        NTEST_ASSERT(my_session->getAuthToken() == token);
+        NTEST_ASSERT(my_session->getUsername() == "vTGdGHyxvl");
+        NTEST_ASSERT(my_session->getUserId() == "f4158f2b-80f3-4926-946b-a8ccfc165490");
+        NTEST_ASSERT(my_session->getVariable("k1") == "v1");
+        NTEST_ASSERT(my_session->getVariable("k2") == "v2");
+    }
+
+    my_session.reset();
+
     auto successCallback = [&test, &my_session](NSessionPtr session)
     {
         my_session = restoreSession(session->getAuthToken());

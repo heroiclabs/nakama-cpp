@@ -48,6 +48,7 @@ void test_authenticateDevice2()
     {
         std::cout << "session token: " << session->getAuthToken() << std::endl;
         test.stopTest(session->getAuthToken().empty() == false);
+        NTEST_ASSERT(session->getVariable("param1") == "test value");
     };
 
     NStringMap vars;
