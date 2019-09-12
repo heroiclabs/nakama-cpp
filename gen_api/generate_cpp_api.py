@@ -141,18 +141,18 @@ makedirs(OUT)
 makedirs(path(OUT + '/google/api'))
 makedirs(path(OUT + '/google/rpc'))
 
-makedirs(path(CUR_DIR + '/github.com/heroiclabs/nakama/api'))
+makedirs(path(CUR_DIR + '/github.com/heroiclabs/nakama-common/api'))
 makedirs(path(CUR_DIR + '/github.com/heroiclabs/nakama/apigrpc'))
-makedirs(path(CUR_DIR + '/github.com/heroiclabs/nakama/rtapi'))
-mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama/api/api.proto'), path(NAKAMA + '/api/api.proto'))
+makedirs(path(CUR_DIR + '/github.com/heroiclabs/nakama-common/rtapi'))
+mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama-common/api/api.proto'), path(NAKAMA + '/vendor/github.com/heroiclabs/nakama-common/api/api.proto'))
 mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama/apigrpc/apigrpc.proto'), path(NAKAMA + '/apigrpc/apigrpc.proto'))
-mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama/rtapi/realtime.proto'), path(NAKAMA + '/rtapi/realtime.proto'))
+mklink(path(CUR_DIR + '/github.com/heroiclabs/nakama-common/rtapi/realtime.proto'), path(NAKAMA + '/vendor/github.com/heroiclabs/nakama-common/rtapi/realtime.proto'))
 
 print('generating apigrpc')
 
 call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--grpc_out=' + OUT, '--plugin=protoc-gen-grpc=' + GRPC_CPP_PLUGIN, path('github.com/heroiclabs/nakama/apigrpc/apigrpc.proto')])
 call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path('github.com/heroiclabs/nakama/apigrpc/apigrpc.proto')])
-call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path('github.com/heroiclabs/nakama/api/api.proto')])
+call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path('github.com/heroiclabs/nakama-common/api/api.proto')])
 
 os.chdir(path(GOOGLEAPIS + '/google/rpc'))
 
@@ -170,6 +170,6 @@ call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC
 
 print('generating rtapi')
 
-call([PROTOC, '-I.', '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path('github.com/heroiclabs/nakama/rtapi/realtime.proto')])
+call([PROTOC, '-I.', '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path('github.com/heroiclabs/nakama-common/rtapi/realtime.proto')])
 
 print('done.')
