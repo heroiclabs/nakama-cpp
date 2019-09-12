@@ -17,7 +17,7 @@
 #pragma once
 
 #include "nakama-cpp/realtime/NRtClientInterface.h"
-#include "github.com/heroiclabs/nakama/rtapi/realtime.pb.h"
+#include "github.com/heroiclabs/nakama-common/rtapi/realtime.pb.h"
 #include "realtime/NRtClientProtocolInterface.h"
 #include <map>
 

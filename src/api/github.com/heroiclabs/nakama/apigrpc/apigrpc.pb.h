@@ -31,7 +31,7 @@
 #include "google/api/annotations.pb.h"
 #include <google/protobuf/empty.pb.h>
 #include "protoc-gen-swagger/options/annotations.pb.h"
-#include "github.com/heroiclabs/nakama/api/api.pb.h"
+#include "github.com/heroiclabs/nakama-common/api/api.pb.h"
 // @@protoc_insertion_point(includes)
 #define PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2fapigrpc_2fapigrpc_2eproto 
 

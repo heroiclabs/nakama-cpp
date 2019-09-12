@@ -32,7 +32,7 @@
 #include "nakama-cpp/data/NStorageObjectList.h"
 #include "nakama-cpp/data/NStorageObjectAck.h"
 #include "nakama-cpp/data/NRpc.h"
-#include "api/github.com/heroiclabs/nakama/api/api.pb.h"
+#include "api/github.com/heroiclabs/nakama-common/api/api.pb.h"
 
 #include "nakama-cpp/realtime/rtdata/NChannelMessageAck.h"
 #include "nakama-cpp/realtime/rtdata/NChannel.h"
@@ -46,7 +46,7 @@
 #include "nakama-cpp/realtime/rtdata/NRtError.h"
 #include "nakama-cpp/realtime/rtdata/NStreamData.h"
 #include "nakama-cpp/realtime/rtdata/NStreamPresenceEvent.h"
-#include "github.com/heroiclabs/nakama/rtapi/realtime.pb.h"
+#include "github.com/heroiclabs/nakama-common/rtapi/realtime.pb.h"
 
 namespace Nakama {
 
