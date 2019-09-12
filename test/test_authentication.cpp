@@ -21,6 +21,23 @@ namespace Test {
 
 using namespace std;
 
+void test_authenticateEmail()
+{
+    NTest test(__func__);
+
+    test.createWorkingClient();
+
+    auto successCallback = [&test](NSessionPtr session)
+    {
+        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        test.stopTest(session->getAuthToken().empty() == false);
+    };
+
+    test.client->authenticateEmail("test@mail.com", "12345678", "", true, {}, successCallback);
+
+    test.runTest();
+}
+
 void test_authenticateDevice()
 {
     NTest test(__func__);
@@ -62,6 +79,7 @@ void test_authenticateDevice2()
 
 void test_authentication()
 {
+    test_authenticateEmail();
     test_authenticateDevice();
     test_authenticateDevice2();
 }
