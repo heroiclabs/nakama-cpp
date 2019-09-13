@@ -68,7 +68,7 @@ public:
         {
         };
 
-        _client->authenticateDevice(deviceId, opt::nullopt, opt::nullopt, successCallback, errorCallback);
+        _client->authenticateDevice(deviceId, opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
     }
 
     void tick()
