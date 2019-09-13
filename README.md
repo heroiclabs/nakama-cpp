@@ -197,7 +197,7 @@ auto errorCallback = [](const NError& error)
 {
 };
 
-client->authenticateEmail(email, password, "", false, successCallback, errorCallback);
+client->authenticateEmail(email, password, "", false, {}, successCallback, errorCallback);
 ```
 
 ### Sessions
