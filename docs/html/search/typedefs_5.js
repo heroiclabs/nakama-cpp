@@ -5,7 +5,7 @@ var searchData=
   ['nchannelmessagelistptr',['NChannelMessageListPtr',['../namespace_nakama.html#a311ef1f29f017e0adda960bb30b9f97b',1,'Nakama']]],
   ['nchannelptr',['NChannelPtr',['../namespace_nakama.html#acf8858344ae8a768a39ff5c1a479cfbe',1,'Nakama']]],
   ['nclientptr',['NClientPtr',['../namespace_nakama.html#ad9239c034b2a391b1bf7d9891d8a07ff',1,'Nakama']]],
-  ['nfriendsptr',['NFriendsPtr',['../namespace_nakama.html#a9eb27f64b412dd7c5c627616e0a68175',1,'Nakama']]],
+  ['nfriendlistptr',['NFriendListPtr',['../namespace_nakama.html#a468d863954e73a5798b89ece65bca735',1,'Nakama']]],
   ['ngrouplistptr',['NGroupListPtr',['../namespace_nakama.html#ac3f76e98960a9f7ecaa6f413e8bf0c40',1,'Nakama']]],
   ['ngroupuserlistptr',['NGroupUserListPtr',['../namespace_nakama.html#ab47e3b9910aec2dec5f3d4437cb588fa',1,'Nakama']]],
   ['nhttpheaders',['NHttpHeaders',['../namespace_nakama.html#a65b59ead36a36784cfd73df87b0ab10b',1,'Nakama']]],

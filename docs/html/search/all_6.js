@@ -10,5 +10,5 @@ var searchData=
   ['followusers',['followUsers',['../class_nakama_1_1_n_rt_client_interface.html#ab4cca77cc7910e5bbc8a658ffa901f51',1,'Nakama::NRtClientInterface']]],
   ['format',['Format',['../class_nakama_1_1_n_logger.html#a4645c996448412cac9eaf28935c7e2dd',1,'Nakama::NLogger']]],
   ['friend',['FRIEND',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5ba471e11502a3cc3a519644984935691e8',1,'Nakama::NFriend']]],
-  ['friends',['friends',['../struct_nakama_1_1_n_friends.html#af004a854386a4a94589db4f93dd6c125',1,'Nakama::NFriends']]]
+  ['friends',['friends',['../struct_nakama_1_1_n_friend_list.html#a377b48129d9e18473b0ee5c851342b78',1,'Nakama::NFriendList']]]
 ];

@@ -12,7 +12,7 @@ var hierarchy =
     [ "Nakama::NDeleteStorageObjectId", "struct_nakama_1_1_n_delete_storage_object_id.html", null ],
     [ "Nakama::NError", "struct_nakama_1_1_n_error.html", null ],
     [ "Nakama::NFriend", "struct_nakama_1_1_n_friend.html", null ],
-    [ "Nakama::NFriends", "struct_nakama_1_1_n_friends.html", null ],
+    [ "Nakama::NFriendList", "struct_nakama_1_1_n_friend_list.html", null ],
     [ "Nakama::NGroup", "struct_nakama_1_1_n_group.html", null ],
     [ "Nakama::NGroupList", "struct_nakama_1_1_n_group_list.html", null ],
     [ "Nakama::NGroupUser", "struct_nakama_1_1_n_group_user.html", null ],

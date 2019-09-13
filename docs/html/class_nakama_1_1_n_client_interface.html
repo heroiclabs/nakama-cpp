@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.1.0</span>
+   &#160;<span id="projectnumber">2.2.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -112,20 +112,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa538b162595ecf523a657ed8db21fe4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac14d5f3ff8b3872e774b9b2db924a45a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_nakama.html#a82f80ebd5bda5569e3f2f5c47e658e20">NRtClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ac14d5f3ff8b3872e774b9b2db924a45a">createRtClient</a> (const <a class="el" href="struct_nakama_1_1_rt_client_parameters.html">RtClientParameters</a> &amp;parameters, <a class="el" href="namespace_nakama.html#a782d33954a0ce16c47607f2f7abbc7fe">NRtTransportPtr</a> transport=nullptr)=0</td></tr>
 <tr class="separator:ac14d5f3ff8b3872e774b9b2db924a45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56bcdc6384e71876637e21d152cba402"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a56bcdc6384e71876637e21d152cba402">authenticateDevice</a> (const std::string &amp;id, const opt::optional&lt; std::string &gt; &amp;username=opt::nullopt, const opt::optional&lt; bool &gt; &amp;create=opt::nullopt, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a56bcdc6384e71876637e21d152cba402"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d55766f5b59e66ca87c3ccd86d22f3f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a8d55766f5b59e66ca87c3ccd86d22f3f">authenticateEmail</a> (const std::string &amp;email, const std::string &amp;password, const std::string &amp;username=std::string(), bool create=false, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a8d55766f5b59e66ca87c3ccd86d22f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad79c1b971a48b1d97f84a6a3ae6b8a4a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ad79c1b971a48b1d97f84a6a3ae6b8a4a">authenticateFacebook</a> (const std::string &amp;accessToken, const std::string &amp;username=std::string(), bool create=false, bool importFriends=false, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:ad79c1b971a48b1d97f84a6a3ae6b8a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c82d269f2d41392e2b5ce2f0fc6c806"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a5c82d269f2d41392e2b5ce2f0fc6c806">authenticateGoogle</a> (const std::string &amp;accessToken, const std::string &amp;username=std::string(), bool create=false, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a5c82d269f2d41392e2b5ce2f0fc6c806"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb1e3d1457d25260226477c51abb9880"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#aeb1e3d1457d25260226477c51abb9880">authenticateGameCenter</a> (const std::string &amp;playerId, const std::string &amp;bundleId, <a class="el" href="namespace_nakama.html#a80117c553946865d276bacca06169ed3">NTimestamp</a> timestampSeconds, const std::string &amp;salt, const std::string &amp;signature, const std::string &amp;publicKeyUrl, const std::string &amp;username=std::string(), bool create=false, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:aeb1e3d1457d25260226477c51abb9880"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade35ba502ff097d368b0129ba4baf183"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ade35ba502ff097d368b0129ba4baf183">authenticateCustom</a> (const std::string &amp;id, const std::string &amp;username=std::string(), bool create=false, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:ade35ba502ff097d368b0129ba4baf183"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55a31d693f9df04ae7aabbb8cff93728"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a55a31d693f9df04ae7aabbb8cff93728">authenticateSteam</a> (const std::string &amp;token, const std::string &amp;username=std::string(), bool create=false, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a55a31d693f9df04ae7aabbb8cff93728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75f902149a50d531a3aad2bfc595a3e8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a75f902149a50d531a3aad2bfc595a3e8">authenticateDevice</a> (const std::string &amp;id, const opt::optional&lt; std::string &gt; &amp;username=opt::nullopt, const opt::optional&lt; bool &gt; &amp;create=opt::nullopt, const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;vars={}, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:a75f902149a50d531a3aad2bfc595a3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac16a0008a078dc6afb64285f618a9736"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ac16a0008a078dc6afb64285f618a9736">authenticateEmail</a> (const std::string &amp;email, const std::string &amp;password, const std::string &amp;username=std::string(), bool create=false, const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;vars={}, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:ac16a0008a078dc6afb64285f618a9736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab826826e22027401e81f8aa9bd92ba06"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ab826826e22027401e81f8aa9bd92ba06">authenticateFacebook</a> (const std::string &amp;accessToken, const std::string &amp;username=std::string(), bool create=false, bool importFriends=false, const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;vars={}, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:ab826826e22027401e81f8aa9bd92ba06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad20e7c2483181a0ca479a3bfe49ceb05"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ad20e7c2483181a0ca479a3bfe49ceb05">authenticateGoogle</a> (const std::string &amp;accessToken, const std::string &amp;username=std::string(), bool create=false, const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;vars={}, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:ad20e7c2483181a0ca479a3bfe49ceb05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45ab9c72b9c6c9abfb30a2d7e8f4a01e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a45ab9c72b9c6c9abfb30a2d7e8f4a01e">authenticateGameCenter</a> (const std::string &amp;playerId, const std::string &amp;bundleId, <a class="el" href="namespace_nakama.html#a80117c553946865d276bacca06169ed3">NTimestamp</a> timestampSeconds, const std::string &amp;salt, const std::string &amp;signature, const std::string &amp;publicKeyUrl, const std::string &amp;username=std::string(), bool create=false, const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;vars={}, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:a45ab9c72b9c6c9abfb30a2d7e8f4a01e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefab58f41376d7db28d7a62ee6b471fd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#aefab58f41376d7db28d7a62ee6b471fd">authenticateCustom</a> (const std::string &amp;id, const std::string &amp;username=std::string(), bool create=false, const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;vars={}, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:aefab58f41376d7db28d7a62ee6b471fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c0ed8649421cd88c7c99d409516a332"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a5c0ed8649421cd88c7c99d409516a332">authenticateSteam</a> (const std::string &amp;token, const std::string &amp;username=std::string(), bool create=false, const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;vars={}, std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:a5c0ed8649421cd88c7c99d409516a332"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ecd6f6c9c5e25afd90ef3c28d43cbe7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a3ecd6f6c9c5e25afd90ef3c28d43cbe7">linkFacebook</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;accessToken, const opt::optional&lt; bool &gt; &amp;importFriends=opt::nullopt, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a3ecd6f6c9c5e25afd90ef3c28d43cbe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5946a6cf8a3d3cb349bec70255237466"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a5946a6cf8a3d3cb349bec70255237466">linkEmail</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;email, const std::string &amp;password, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
@@ -168,16 +168,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a84d0477b4ba184fe1e4f5fc2a0beab72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3090c47b7d8083fa8d0b18972faca163"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a3090c47b7d8083fa8d0b18972faca163">blockFriends</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::vector&lt; std::string &gt; &amp;ids, const std::vector&lt; std::string &gt; &amp;usernames={}, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a3090c47b7d8083fa8d0b18972faca163"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98cdaf3b9c1eea17930f907781fa6e17"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a98cdaf3b9c1eea17930f907781fa6e17">listFriends</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, std::function&lt; void(<a class="el" href="namespace_nakama.html#a9eb27f64b412dd7c5c627616e0a68175">NFriendsPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a98cdaf3b9c1eea17930f907781fa6e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4296eccbbaf31b715724c5b6d9e099c3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a4296eccbbaf31b715724c5b6d9e099c3">createGroup</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;name, const std::string &amp;description=&quot;&quot;, const std::string &amp;avatarUrl=&quot;&quot;, const std::string &amp;langTag=&quot;&quot;, bool open=false, std::function&lt; void(const <a class="el" href="struct_nakama_1_1_n_group.html">NGroup</a> &amp;)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a4296eccbbaf31b715724c5b6d9e099c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2686fae38f083838c3693d002836159b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a2686fae38f083838c3693d002836159b">listFriends</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const opt::optional&lt; int32_t &gt; &amp;limit, const opt::optional&lt; <a class="el" href="struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b">NFriend::State</a> &gt; &amp;state, const std::string &amp;cursor=&quot;&quot;, std::function&lt; void(<a class="el" href="namespace_nakama.html#a468d863954e73a5798b89ece65bca735">NFriendListPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:a2686fae38f083838c3693d002836159b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71db81194020aeb6701b953ce4102300"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a71db81194020aeb6701b953ce4102300">createGroup</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;name, const std::string &amp;description=&quot;&quot;, const std::string &amp;avatarUrl=&quot;&quot;, const std::string &amp;langTag=&quot;&quot;, bool open=false, const opt::optional&lt; int32_t &gt; &amp;maxCount={}, std::function&lt; void(const <a class="el" href="struct_nakama_1_1_n_group.html">NGroup</a> &amp;)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:a71db81194020aeb6701b953ce4102300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a065c1f7cc136c61e09d31a138e9f930d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a065c1f7cc136c61e09d31a138e9f930d">deleteGroup</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;groupId, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a065c1f7cc136c61e09d31a138e9f930d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac568e062c22cc8ebd70b7b4f0f1c18b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ac568e062c22cc8ebd70b7b4f0f1c18b1">addGroupUsers</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;groupId, const std::vector&lt; std::string &gt; &amp;ids, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:ac568e062c22cc8ebd70b7b4f0f1c18b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56ac08c4409b76ae0a1682d18d8892f3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a56ac08c4409b76ae0a1682d18d8892f3">listGroupUsers</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;groupId, std::function&lt; void(<a class="el" href="namespace_nakama.html#ab47e3b9910aec2dec5f3d4437cb588fa">NGroupUserListPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a56ac08c4409b76ae0a1682d18d8892f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a81c301c4dd1563e48b810d38c429a2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a4a81c301c4dd1563e48b810d38c429a2">listGroupUsers</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;groupId, const opt::optional&lt; int32_t &gt; &amp;limit, const opt::optional&lt; <a class="el" href="struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b">NFriend::State</a> &gt; &amp;state, const std::string &amp;cursor=&quot;&quot;, std::function&lt; void(<a class="el" href="namespace_nakama.html#ab47e3b9910aec2dec5f3d4437cb588fa">NGroupUserListPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:a4a81c301c4dd1563e48b810d38c429a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a879769a69d9b60fbab47e10e7ff370"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a5a879769a69d9b60fbab47e10e7ff370">kickGroupUsers</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;groupId, const std::vector&lt; std::string &gt; &amp;ids, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a5a879769a69d9b60fbab47e10e7ff370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade8922929b3960ebd1b516fe884d3443"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ade8922929b3960ebd1b516fe884d3443">joinGroup</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;groupId, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
@@ -186,10 +186,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6860640deb23d9b4ef03292a1661655a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac99b4b3de3f8cad77d98ea3d3c1a07bb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ac99b4b3de3f8cad77d98ea3d3c1a07bb">listGroups</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;name, int32_t limit=0, const std::string &amp;cursor=&quot;&quot;, std::function&lt; void(<a class="el" href="namespace_nakama.html#ac3f76e98960a9f7ecaa6f413e8bf0c40">NGroupListPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:ac99b4b3de3f8cad77d98ea3d3c1a07bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c532bf03dfa705c67b2a7fbb8f3c235"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a4c532bf03dfa705c67b2a7fbb8f3c235">listUserGroups</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, std::function&lt; void(<a class="el" href="namespace_nakama.html#a474cfecf792199daaddf3f773445bf60">NUserGroupListPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a4c532bf03dfa705c67b2a7fbb8f3c235"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ad2d9c596fe881d2ff291770aa61e4d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a3ad2d9c596fe881d2ff291770aa61e4d">listUserGroups</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;userId, std::function&lt; void(<a class="el" href="namespace_nakama.html#a474cfecf792199daaddf3f773445bf60">NUserGroupListPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a3ad2d9c596fe881d2ff291770aa61e4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada5130640693814f8d1b8963f5a0e89b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#ada5130640693814f8d1b8963f5a0e89b">listUserGroups</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const opt::optional&lt; int32_t &gt; &amp;limit, const opt::optional&lt; <a class="el" href="struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b">NFriend::State</a> &gt; &amp;state, const std::string &amp;cursor=&quot;&quot;, std::function&lt; void(<a class="el" href="namespace_nakama.html#a474cfecf792199daaddf3f773445bf60">NUserGroupListPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:ada5130640693814f8d1b8963f5a0e89b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61dd7703a7978aeec9327554af79dedd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a61dd7703a7978aeec9327554af79dedd">listUserGroups</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;userId, const opt::optional&lt; int32_t &gt; &amp;limit, const opt::optional&lt; <a class="el" href="struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b">NFriend::State</a> &gt; &amp;state, const std::string &amp;cursor=&quot;&quot;, std::function&lt; void(<a class="el" href="namespace_nakama.html#a474cfecf792199daaddf3f773445bf60">NUserGroupListPtr</a>)&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:a61dd7703a7978aeec9327554af79dedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4c6dd44768528b6fee8208693689ba1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#aa4c6dd44768528b6fee8208693689ba1">promoteGroupUsers</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;groupId, const std::vector&lt; std::string &gt; &amp;ids, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:aa4c6dd44768528b6fee8208693689ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b6daab5436b425193ed2541cdb8412d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html#a5b6daab5436b425193ed2541cdb8412d">updateGroup</a> (<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session, const std::string &amp;groupId, const opt::optional&lt; std::string &gt; &amp;name=opt::nullopt, const opt::optional&lt; std::string &gt; &amp;description=opt::nullopt, const opt::optional&lt; std::string &gt; &amp;avatarUrl=opt::nullopt, const opt::optional&lt; std::string &gt; &amp;langTag=opt::nullopt, const opt::optional&lt; bool &gt; &amp;open=opt::nullopt, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">ErrorCallback</a> errorCallback=nullptr)=0</td></tr>
@@ -388,8 +388,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ade35ba502ff097d368b0129ba4baf183"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade35ba502ff097d368b0129ba4baf183">&#9670;&nbsp;</a></span>authenticateCustom()</h2>
+<a id="aefab58f41376d7db28d7a62ee6b471fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefab58f41376d7db28d7a62ee6b471fd">&#9670;&nbsp;</a></span>authenticateCustom()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -414,6 +414,12 @@ Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>create</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>vars</em> = <code>{}</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -445,14 +451,15 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">id</td><td>A custom identifier usually obtained from an external authentication service. </td></tr>
     <tr><td class="paramname">username</td><td>A username used to create the user. </td></tr>
     <tr><td class="paramname">create</td><td>True if the user should be created when authenticated. </td></tr>
+    <tr><td class="paramname">vars</td><td>Extra information that will be bundled in the session token. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a56bcdc6384e71876637e21d152cba402"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56bcdc6384e71876637e21d152cba402">&#9670;&nbsp;</a></span>authenticateDevice()</h2>
+<a id="a75f902149a50d531a3aad2bfc595a3e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75f902149a50d531a3aad2bfc595a3e8">&#9670;&nbsp;</a></span>authenticateDevice()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -477,6 +484,12 @@ Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">const opt::optional&lt; bool &gt; &amp;&#160;</td>
           <td class="paramname"><em>create</em> = <code>opt::nullopt</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>vars</em> = <code>{}</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -508,14 +521,15 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">id</td><td>A device identifier usually obtained from a platform API. </td></tr>
     <tr><td class="paramname">username</td><td>A username used to create the user. Defaults to empty string. </td></tr>
     <tr><td class="paramname">create</td><td>True if the user should be created when authenticated. Defaults to false. </td></tr>
+    <tr><td class="paramname">vars</td><td>Extra information that will be bundled in the session token. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a8d55766f5b59e66ca87c3ccd86d22f3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d55766f5b59e66ca87c3ccd86d22f3f">&#9670;&nbsp;</a></span>authenticateEmail()</h2>
+<a id="ac16a0008a078dc6afb64285f618a9736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac16a0008a078dc6afb64285f618a9736">&#9670;&nbsp;</a></span>authenticateEmail()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -550,6 +564,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>vars</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt;&#160;</td>
           <td class="paramname"><em>successCallback</em> = <code>nullptr</code>, </td>
         </tr>
@@ -578,14 +598,15 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">password</td><td>The password for the user. </td></tr>
     <tr><td class="paramname">username</td><td>A username used to create the user. </td></tr>
     <tr><td class="paramname">create</td><td>True if the user should be created when authenticated. </td></tr>
+    <tr><td class="paramname">vars</td><td>Extra information that will be bundled in the session token. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ad79c1b971a48b1d97f84a6a3ae6b8a4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad79c1b971a48b1d97f84a6a3ae6b8a4a">&#9670;&nbsp;</a></span>authenticateFacebook()</h2>
+<a id="ab826826e22027401e81f8aa9bd92ba06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab826826e22027401e81f8aa9bd92ba06">&#9670;&nbsp;</a></span>authenticateFacebook()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -620,6 +641,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>vars</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt;&#160;</td>
           <td class="paramname"><em>successCallback</em> = <code>nullptr</code>, </td>
         </tr>
@@ -648,14 +675,15 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">username</td><td>A username used to create the user. </td></tr>
     <tr><td class="paramname">create</td><td>True if the user should be created when authenticated. </td></tr>
     <tr><td class="paramname">importFriends</td><td>True if the Facebook friends should be imported. </td></tr>
+    <tr><td class="paramname">vars</td><td>Extra information that will be bundled in the session token. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="aeb1e3d1457d25260226477c51abb9880"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb1e3d1457d25260226477c51abb9880">&#9670;&nbsp;</a></span>authenticateGameCenter()</h2>
+<a id="a45ab9c72b9c6c9abfb30a2d7e8f4a01e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45ab9c72b9c6c9abfb30a2d7e8f4a01e">&#9670;&nbsp;</a></span>authenticateGameCenter()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -714,6 +742,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>vars</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::function&lt; void(<a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>)&gt;&#160;</td>
           <td class="paramname"><em>successCallback</em> = <code>nullptr</code>, </td>
         </tr>
@@ -746,14 +780,15 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">publicKeyUrl</td><td>The URL for the public encryption key. </td></tr>
     <tr><td class="paramname">create</td><td>True if the user should be created when authenticated. </td></tr>
     <tr><td class="paramname">username</td><td>A username used to create the user. </td></tr>
+    <tr><td class="paramname">vars</td><td>Extra information that will be bundled in the session token. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a5c82d269f2d41392e2b5ce2f0fc6c806"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c82d269f2d41392e2b5ce2f0fc6c806">&#9670;&nbsp;</a></span>authenticateGoogle()</h2>
+<a id="ad20e7c2483181a0ca479a3bfe49ceb05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad20e7c2483181a0ca479a3bfe49ceb05">&#9670;&nbsp;</a></span>authenticateGoogle()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -778,6 +813,12 @@ Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>create</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>vars</em> = <code>{}</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -809,14 +850,15 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">accessToken</td><td>An OAuth access token from the Google SDK. </td></tr>
     <tr><td class="paramname">username</td><td>A username used to create the user. </td></tr>
     <tr><td class="paramname">create</td><td>True if the user should be created when authenticated. </td></tr>
+    <tr><td class="paramname">vars</td><td>Extra information that will be bundled in the session token. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a55a31d693f9df04ae7aabbb8cff93728"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55a31d693f9df04ae7aabbb8cff93728">&#9670;&nbsp;</a></span>authenticateSteam()</h2>
+<a id="a5c0ed8649421cd88c7c99d409516a332"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c0ed8649421cd88c7c99d409516a332">&#9670;&nbsp;</a></span>authenticateSteam()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -841,6 +883,12 @@ Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>create</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>vars</em> = <code>{}</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -872,6 +920,7 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">token</td><td>An authentication token from the Steam network. </td></tr>
     <tr><td class="paramname">username</td><td>A username used to create the user. </td></tr>
     <tr><td class="paramname">create</td><td>True if the user should be created when authenticated. </td></tr>
+    <tr><td class="paramname">vars</td><td>Extra information that will be bundled in the session token. </td></tr>
   </table>
   </dd>
 </dl>
@@ -941,8 +990,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4296eccbbaf31b715724c5b6d9e099c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4296eccbbaf31b715724c5b6d9e099c3">&#9670;&nbsp;</a></span>createGroup()</h2>
+<a id="a71db81194020aeb6701b953ce4102300"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71db81194020aeb6701b953ce4102300">&#9670;&nbsp;</a></span>createGroup()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -989,6 +1038,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const opt::optional&lt; int32_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>maxCount</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::function&lt; void(const <a class="el" href="struct_nakama_1_1_n_group.html">NGroup</a> &amp;)&gt;&#160;</td>
           <td class="paramname"><em>successCallback</em> = <code>nullptr</code>, </td>
         </tr>
@@ -1019,6 +1074,7 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">avatarUrl</td><td>An avatar url for the group. </td></tr>
     <tr><td class="paramname">langTag</td><td>A language tag in BCP-47 format for the group. </td></tr>
     <tr><td class="paramname">open</td><td>True if the group should have open membership. </td></tr>
+    <tr><td class="paramname">maxCount</td><td>Maximum number of group members. </td></tr>
   </table>
   </dd>
 </dl>
@@ -2360,8 +2416,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a98cdaf3b9c1eea17930f907781fa6e17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98cdaf3b9c1eea17930f907781fa6e17">&#9670;&nbsp;</a></span>listFriends()</h2>
+<a id="a2686fae38f083838c3693d002836159b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2686fae38f083838c3693d002836159b">&#9670;&nbsp;</a></span>listFriends()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2378,7 +2434,25 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(<a class="el" href="namespace_nakama.html#a9eb27f64b412dd7c5c627616e0a68175">NFriendsPtr</a>)&gt;&#160;</td>
+          <td class="paramtype">const opt::optional&lt; int32_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>limit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const opt::optional&lt; <a class="el" href="struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b">NFriend::State</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>cursor</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="namespace_nakama.html#a468d863954e73a5798b89ece65bca735">NFriendListPtr</a>)&gt;&#160;</td>
           <td class="paramname"><em>successCallback</em> = <code>nullptr</code>, </td>
         </tr>
         <tr>
@@ -2403,6 +2477,9 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">session</td><td>The session of the user. </td></tr>
+    <tr><td class="paramname">limit</td><td>The max number of records to return. Between 1 and 100. </td></tr>
+    <tr><td class="paramname">state</td><td>The friend state to list. </td></tr>
+    <tr><td class="paramname">cursor</td><td>An optional next page cursor. </td></tr>
   </table>
   </dd>
 </dl>
@@ -2479,8 +2556,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a56ac08c4409b76ae0a1682d18d8892f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56ac08c4409b76ae0a1682d18d8892f3">&#9670;&nbsp;</a></span>listGroupUsers()</h2>
+<a id="a4a81c301c4dd1563e48b810d38c429a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a81c301c4dd1563e48b810d38c429a2">&#9670;&nbsp;</a></span>listGroupUsers()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2499,6 +2576,24 @@ Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>groupId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const opt::optional&lt; int32_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>limit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const opt::optional&lt; <a class="el" href="struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b">NFriend::State</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>cursor</em> = <code>&quot;&quot;</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2529,6 +2624,9 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">session</td><td>The session of the user. </td></tr>
     <tr><td class="paramname">groupId</td><td>The id of the group. </td></tr>
+    <tr><td class="paramname">limit</td><td>The max number of records to return. Between 1 and 100. </td></tr>
+    <tr><td class="paramname">state</td><td>The friend state to list. </td></tr>
+    <tr><td class="paramname">cursor</td><td>An optional next page cursor. </td></tr>
   </table>
   </dd>
 </dl>
@@ -3137,8 +3235,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4c532bf03dfa705c67b2a7fbb8f3c235"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c532bf03dfa705c67b2a7fbb8f3c235">&#9670;&nbsp;</a></span>listUserGroups() <span class="overload">[1/2]</span></h2>
+<a id="ada5130640693814f8d1b8963f5a0e89b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada5130640693814f8d1b8963f5a0e89b">&#9670;&nbsp;</a></span>listUserGroups() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3151,6 +3249,24 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a>&#160;</td>
           <td class="paramname"><em>session</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const opt::optional&lt; int32_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>limit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const opt::optional&lt; <a class="el" href="struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b">NFriend::State</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>cursor</em> = <code>&quot;&quot;</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -3180,14 +3296,17 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">session</td><td>The session of the user. </td></tr>
+    <tr><td class="paramname">limit</td><td>The max number of records to return. Between 1 and 100. </td></tr>
+    <tr><td class="paramname">state</td><td>The friend state to list. </td></tr>
+    <tr><td class="paramname">cursor</td><td>An optional next page cursor. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a3ad2d9c596fe881d2ff291770aa61e4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ad2d9c596fe881d2ff291770aa61e4d">&#9670;&nbsp;</a></span>listUserGroups() <span class="overload">[2/2]</span></h2>
+<a id="a61dd7703a7978aeec9327554af79dedd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61dd7703a7978aeec9327554af79dedd">&#9670;&nbsp;</a></span>listUserGroups() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3206,6 +3325,24 @@ Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>userId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const opt::optional&lt; int32_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>limit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const opt::optional&lt; <a class="el" href="struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5b">NFriend::State</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>cursor</em> = <code>&quot;&quot;</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -3236,6 +3373,9 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">session</td><td>The session of the user. </td></tr>
     <tr><td class="paramname">userId</td><td>The id of the user whose groups to list. </td></tr>
+    <tr><td class="paramname">limit</td><td>The max number of records to return. Between 1 and 100. </td></tr>
+    <tr><td class="paramname">state</td><td>The friend state to list. </td></tr>
+    <tr><td class="paramname">cursor</td><td>An optional next page cursor. </td></tr>
   </table>
   </dd>
 </dl>

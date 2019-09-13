@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.1.0</span>
+   &#160;<span id="projectnumber">2.2.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -141,8 +141,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_friend.html">NFriend</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A friend of a user.  <a href="struct_nakama_1_1_n_friend.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_friends.html">NFriends</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; A collection of zero or more friends of the user.  <a href="struct_nakama_1_1_n_friends.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_friend_list.html">NFriendList</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; A collection of zero or more friends of the user.  <a href="struct_nakama_1_1_n_friend_list.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_group.html">NGroup</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A group in the server.  <a href="struct_nakama_1_1_n_group.html#details">More...</a><br /></td></tr>
@@ -283,8 +283,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:a497fb71f312a593906cce9d3b0ae224a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a311ef1f29f017e0adda960bb30b9f97b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a311ef1f29f017e0adda960bb30b9f97b">NChannelMessageListPtr</a> = std::shared_ptr&lt; <a class="el" href="struct_nakama_1_1_n_channel_message_list.html">NChannelMessageList</a> &gt;</td></tr>
 <tr class="separator:a311ef1f29f017e0adda960bb30b9f97b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9eb27f64b412dd7c5c627616e0a68175"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a9eb27f64b412dd7c5c627616e0a68175">NFriendsPtr</a> = std::shared_ptr&lt; <a class="el" href="struct_nakama_1_1_n_friends.html">NFriends</a> &gt;</td></tr>
-<tr class="separator:a9eb27f64b412dd7c5c627616e0a68175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a468d863954e73a5798b89ece65bca735"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a468d863954e73a5798b89ece65bca735">NFriendListPtr</a> = std::shared_ptr&lt; <a class="el" href="struct_nakama_1_1_n_friend_list.html">NFriendList</a> &gt;</td></tr>
+<tr class="separator:a468d863954e73a5798b89ece65bca735"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3f76e98960a9f7ecaa6f413e8bf0c40"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ac3f76e98960a9f7ecaa6f413e8bf0c40">NGroupListPtr</a> = std::shared_ptr&lt; <a class="el" href="struct_nakama_1_1_n_group_list.html">NGroupList</a> &gt;</td></tr>
 <tr class="separator:ac3f76e98960a9f7ecaa6f413e8bf0c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab47e3b9910aec2dec5f3d4437cb588fa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ab47e3b9910aec2dec5f3d4437cb588fa">NGroupUserListPtr</a> = std::shared_ptr&lt; <a class="el" href="struct_nakama_1_1_n_group_user_list.html">NGroupUserList</a> &gt;</td></tr>
@@ -382,8 +382,6 @@ Functions</h2></td></tr>
 <tr class="separator:a9f29cba66f3f6f263c2c8748bfa50d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42a2ade68904f33bbf88fb82c8be70c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d">Base64Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a42a2ade68904f33bbf88fb82c8be70c6">base64Decode</a> (const std::string &amp;base64str)</td></tr>
 <tr class="separator:a42a2ade68904f33bbf88fb82c8be70c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f648530320bc960dd74aaf669687763"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a2f648530320bc960dd74aaf669687763">getJsonFieldValue</a> (const std::string &amp;json, const std::string &amp;field_name)</td></tr>
-<tr class="separator:a2f648530320bc960dd74aaf669687763"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a542fbdc2815ad8fb102ad0bd9e578c77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a542fbdc2815ad8fb102ad0bd9e578c77">urlEncode</a> (const std::string &amp;str)</td></tr>
 <tr class="separator:a542fbdc2815ad8fb102ad0bd9e578c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af96810e8851a3d4c03f086dfef16259c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#af96810e8851a3d4c03f086dfef16259c">isStringStartsWith</a> (const std::string &amp;str, const std::string &amp;prefix)</td></tr>
@@ -506,14 +504,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9eb27f64b412dd7c5c627616e0a68175"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9eb27f64b412dd7c5c627616e0a68175">&#9670;&nbsp;</a></span>NFriendsPtr</h2>
+<a id="a468d863954e73a5798b89ece65bca735"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a468d863954e73a5798b89ece65bca735">&#9670;&nbsp;</a></span>NFriendListPtr</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespace_nakama.html#a9eb27f64b412dd7c5c627616e0a68175">Nakama::NFriendsPtr</a> = typedef std::shared_ptr&lt;<a class="el" href="struct_nakama_1_1_n_friends.html">NFriends</a>&gt;</td>
+          <td class="memname">using <a class="el" href="namespace_nakama.html#a468d863954e73a5798b89ece65bca735">Nakama::NFriendListPtr</a> = typedef std::shared_ptr&lt;<a class="el" href="struct_nakama_1_1_n_friend_list.html">NFriendList</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1079,44 +1077,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Create Websocket transport using cpprest SDK.</p>
 <p>Check out README for supported platforms. </p>
-
-</div>
-</div>
-<a id="a2f648530320bc960dd74aaf669687763"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f648530320bc960dd74aaf669687763">&#9670;&nbsp;</a></span>getJsonFieldValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string Nakama::getJsonFieldValue </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>json</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>field_name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Get the field value from json string</p>
-<p>Supports only simple field types: number, string, boolean and null</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">json</td><td>the json string </td></tr>
-    <tr><td class="paramname">field_name</td><td>name of field </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>std::string value of specified field </dd></dl>
 
 </div>
 </div>

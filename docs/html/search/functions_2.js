@@ -4,7 +4,7 @@ var searchData=
   ['createdefaultclient',['createDefaultClient',['../namespace_nakama.html#aad4f44dbe04ecccf870fc5cb42ae0228',1,'Nakama']]],
   ['createdefaulthttptransport',['createDefaultHttpTransport',['../namespace_nakama.html#ada5f05096c01b149f9ee84f5ce3413cf',1,'Nakama']]],
   ['createdefaultwebsocket',['createDefaultWebsocket',['../namespace_nakama.html#aba619ae3fe00bc936164bdd4bba1be37',1,'Nakama']]],
-  ['creategroup',['createGroup',['../class_nakama_1_1_n_client_interface.html#a4296eccbbaf31b715724c5b6d9e099c3',1,'Nakama::NClientInterface']]],
+  ['creategroup',['createGroup',['../class_nakama_1_1_n_client_interface.html#a71db81194020aeb6701b953ce4102300',1,'Nakama::NClientInterface']]],
   ['creategrpcclient',['createGrpcClient',['../namespace_nakama.html#a59cb1826c5a28cdac3c64f7b2c76a601',1,'Nakama']]],
   ['creatematch',['createMatch',['../class_nakama_1_1_n_rt_client_interface.html#a45a5667f2efbc7199d4ea73dc4c71ef3',1,'Nakama::NRtClientInterface']]],
   ['createrestclient',['createRestClient',['../namespace_nakama.html#ae187b63b6433fdb8e0917d48bb84e1fb',1,'Nakama']]],

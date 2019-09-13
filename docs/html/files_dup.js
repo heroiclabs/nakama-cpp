@@ -28,7 +28,7 @@ var files_dup =
     [ "NFriend.h", "_n_friend_8h.html", [
       [ "NFriend", "struct_nakama_1_1_n_friend.html", "struct_nakama_1_1_n_friend" ]
     ] ],
-    [ "NFriends.h", "_n_friends_8h.html", "_n_friends_8h" ],
+    [ "NFriendList.h", "_n_friend_list_8h.html", "_n_friend_list_8h" ],
     [ "NGroup.h", "_n_group_8h.html", [
       [ "NGroup", "struct_nakama_1_1_n_group.html", "struct_nakama_1_1_n_group" ]
     ] ],

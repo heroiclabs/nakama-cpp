@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.1.0</span>
+   &#160;<span id="projectnumber">2.2.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -126,8 +126,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a532680c08ef7ba0f405ef1c5ab110d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45a5667f2efbc7199d4ea73dc4c71ef3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a45a5667f2efbc7199d4ea73dc4c71ef3">createMatch</a> (std::function&lt; void(const <a class="el" href="struct_nakama_1_1_n_match.html">NMatch</a> &amp;)&gt; successCallback, <a class="el" href="namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a45a5667f2efbc7199d4ea73dc4c71ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fb511bf30ddd144ed558ec3a793fdc3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a2fb511bf30ddd144ed558ec3a793fdc3">joinMatch</a> (const std::string &amp;matchId, std::function&lt; void(const <a class="el" href="struct_nakama_1_1_n_match.html">NMatch</a> &amp;)&gt; successCallback, <a class="el" href="namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a2fb511bf30ddd144ed558ec3a793fdc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc3e5db14702cf4b31027adc42addf63"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#adc3e5db14702cf4b31027adc42addf63">joinMatch</a> (const std::string &amp;matchId, const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;metadata, std::function&lt; void(const <a class="el" href="struct_nakama_1_1_n_match.html">NMatch</a> &amp;)&gt; successCallback, <a class="el" href="namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:adc3e5db14702cf4b31027adc42addf63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8491324322b2a847351bd157b45e7c0a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#a8491324322b2a847351bd157b45e7c0a">joinMatchByToken</a> (const std::string &amp;token, std::function&lt; void(const <a class="el" href="struct_nakama_1_1_n_match.html">NMatch</a> &amp;)&gt; successCallback, <a class="el" href="namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a8491324322b2a847351bd157b45e7c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa7a59aef733fceb3a535bb740b79ac3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_rt_client_interface.html#aaa7a59aef733fceb3a535bb740b79ac3">leaveMatch</a> (const std::string &amp;matchId, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="namespace_nakama.html#ac51065b9c2ee161a8676e37f1188c5dd">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
@@ -538,8 +538,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2fb511bf30ddd144ed558ec3a793fdc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2fb511bf30ddd144ed558ec3a793fdc3">&#9670;&nbsp;</a></span>joinMatch()</h2>
+<a id="adc3e5db14702cf4b31027adc42addf63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc3e5db14702cf4b31027adc42addf63">&#9670;&nbsp;</a></span>joinMatch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -552,6 +552,12 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>matchId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_nakama.html#af5bc2b81dde0b3ada693748e8c1ee337">NStringMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>metadata</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

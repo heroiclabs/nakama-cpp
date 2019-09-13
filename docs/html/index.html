@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.1.0</span>
+   &#160;<span id="projectnumber">2.2.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -127,7 +127,11 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li><code>NAKAMA_CPP_SDK/libs/mac</code> - for Mac</li>
 </ul>
 </li>
-<li>Add all <code>.a</code> files located in libs folder and <code>libresolv.9.tbd</code> in <code>General &gt; Linked Frameworks and Libraries</code></li>
+<li>In <code>General &gt; Linked Frameworks and Libraries</code> add following:<ul>
+<li>all <code>.a</code> files located in libs folder</li>
+<li><code>foundation</code> and <code>security</code> frameworks</li>
+</ul>
+</li>
 </ol>
 <h3>Setup for Android projects</h3>
 <p>If you use <code>CMake</code> then see <a href="#setup-for-cmake-projects">Setup for CMake projects</a> section.</p>
@@ -168,10 +172,6 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>add link directory: <code>/Users/dimo4eg/dev/nakama-cpp/release/nakama-cpp-sdk/libs/{platform}/{ABI}</code></li>
 <li>add all libraries for linking from link directory</li>
 </ul>
-<p>For Mac and iOS:</p>
-<ul>
-<li>Add <code>libresolv.9.tbd</code> system library</li>
-</ul>
 <h2>Threading model</h2>
 <p><a class="el" href="namespace_nakama.html">Nakama</a> C++ is designed to use in one thread only.</p>
 <h2>Usage</h2>
@@ -185,7 +185,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="fragment"><div class="line">client-&gt;tick();</div><div class="line"><span class="keywordflow">if</span> (rtClient)</div><div class="line">    rtClient-&gt;tick();</div></div><!-- fragment --><p>Without this the default client and realtime client will not work, and you will not receive responses from the server.</p>
 <h3>Authenticate</h3>
 <p>There's a variety of ways to <a href="https://heroiclabs.com/docs/authentication">authenticate</a> with the server. Authentication can create a user if they don't already exist with those credentials. It's also easy to authenticate with a social profile from Google Play Games, Facebook, Game Center, etc.</p>
-<div class="fragment"><div class="line"><span class="keywordtype">string</span> email = <span class="stringliteral">&quot;super@heroes.com&quot;</span>;</div><div class="line"><span class="keywordtype">string</span> password = <span class="stringliteral">&quot;batsignal&quot;</span>;</div><div class="line"></div><div class="line"><span class="keyword">auto</span> successCallback = [](<a class="code" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session)</div><div class="line">{</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;session token: &quot;</span> &lt;&lt; session-&gt;getAuthToken() &lt;&lt; std::endl;</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">auto</span> errorCallback = [](<span class="keyword">const</span> NError&amp; error)</div><div class="line">{</div><div class="line">};</div><div class="line"></div><div class="line">client-&gt;authenticateEmail(email, password, <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">false</span>, successCallback, errorCallback);</div></div><!-- fragment --><h3>Sessions</h3>
+<div class="fragment"><div class="line"><span class="keywordtype">string</span> email = <span class="stringliteral">&quot;super@heroes.com&quot;</span>;</div><div class="line"><span class="keywordtype">string</span> password = <span class="stringliteral">&quot;batsignal&quot;</span>;</div><div class="line"></div><div class="line"><span class="keyword">auto</span> successCallback = [](<a class="code" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session)</div><div class="line">{</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;session token: &quot;</span> &lt;&lt; session-&gt;getAuthToken() &lt;&lt; std::endl;</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">auto</span> errorCallback = [](<span class="keyword">const</span> NError&amp; error)</div><div class="line">{</div><div class="line">};</div><div class="line"></div><div class="line">client-&gt;authenticateEmail(email, password, <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">false</span>, {}, successCallback, errorCallback);</div></div><!-- fragment --><h3>Sessions</h3>
 <p>When authenticated the server responds with an auth token (JWT) which contains useful properties and gets deserialized into a <code>NSession</code> object.</p>
 <div class="fragment"><div class="line">std::cout &lt;&lt; session-&gt;getAuthToken() &lt;&lt; std::endl; <span class="comment">// raw JWT token</span></div><div class="line">std::cout &lt;&lt; session-&gt;getUserId() &lt;&lt; std::endl;</div><div class="line">std::cout &lt;&lt; session-&gt;getUsername() &lt;&lt; std::endl;</div><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Session has expired: &quot;</span> &lt;&lt; session-&gt;isExpired() &lt;&lt; std::endl;</div><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Session expires at: &quot;</span> &lt;&lt; session-&gt;getExpireTime() &lt;&lt; std::endl;</div></div><!-- fragment --><p>It is recommended to store the auth token from the session and check at startup if it has expired. If the token has expired you must reauthenticate. The expiry time of the token can be changed as a setting in the server.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">string</span> authtoken = <span class="stringliteral">&quot;restored from somewhere&quot;</span>;</div><div class="line"><a class="code" href="namespace_nakama.html#a55e9fe9af0eac6d21d2a6653480cc4ea">NSessionPtr</a> session = <a class="code" href="namespace_nakama.html#a8d3e611f5b0d24a6afc98af3fab2617e">restoreSession</a>(authtoken);</div><div class="line"><span class="keywordflow">if</span> (session-&gt;isExpired()) {</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Session has expired. Must reauthenticate!&quot;</span> &lt;&lt; std::endl;</div><div class="line">}</div></div><!-- fragment --><h3>Requests</h3>
@@ -226,7 +226,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="fragment"><div class="line">rtClient-&gt;getTransport()-&gt;setActivityTimeout(20000); <span class="comment">// 20 sec</span></div></div><!-- fragment --><p>You can change ping period on server - <code>ping_period_ms</code> parameter:</p>
 <p><a href="https://heroiclabs.com/docs/install-configuration/#socket">https://heroiclabs.com/docs/install-configuration/#socket</a></p>
 <h2>Contribute</h2>
-<p>The development roadmap is managed as GitHub issues and pull requests are welcome. If you're interested to enhance the code please open an issue to discuss the changes or drop in and discuss it in the <a href="https://gitter.im/heroiclabs/nakama">community chat</a>.</p>
+<p>The development roadmap is managed as GitHub issues and pull requests are welcome. If you're interested to enhance the code please open an issue to discuss the changes or drop in and discuss it in the <a href="https://forum.heroiclabs.com">community forum</a>.</p>
 <h2>Source Builds</h2>
 <p>Clone the <a class="el" href="namespace_nakama.html">Nakama</a> C++ repository:</p>
 <p><code>git clone --recurse-submodules -j8 git://github.com/heroiclabs/nakama-cpp.git</code></p>
@@ -240,7 +240,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <h3>Build Prerequisites</h3>
 <ul>
 <li>git</li>
-<li>python 2.7</li>
+<li>python 2.7 or 3.x</li>
 <li>cmake 3.10+</li>
 <li>go</li>
 <li>perl</li>

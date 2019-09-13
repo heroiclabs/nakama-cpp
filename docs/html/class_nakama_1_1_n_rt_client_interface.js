@@ -9,7 +9,7 @@ var class_nakama_1_1_n_rt_client_interface =
     [ "getTransport", "class_nakama_1_1_n_rt_client_interface.html#a966d630a761509d678d0489922d6dca8", null ],
     [ "isConnected", "class_nakama_1_1_n_rt_client_interface.html#ab4d332c103e2d0a3137d0fe37c7f8d8a", null ],
     [ "joinChat", "class_nakama_1_1_n_rt_client_interface.html#a0a76634b3e9b9bc6c1fc968c6942a165", null ],
-    [ "joinMatch", "class_nakama_1_1_n_rt_client_interface.html#a2fb511bf30ddd144ed558ec3a793fdc3", null ],
+    [ "joinMatch", "class_nakama_1_1_n_rt_client_interface.html#adc3e5db14702cf4b31027adc42addf63", null ],
     [ "joinMatchByToken", "class_nakama_1_1_n_rt_client_interface.html#a8491324322b2a847351bd157b45e7c0a", null ],
     [ "leaveChat", "class_nakama_1_1_n_rt_client_interface.html#a29c646bb9ea9456c947ad721a05b97ae", null ],
     [ "leaveMatch", "class_nakama_1_1_n_rt_client_interface.html#aaa7a59aef733fceb3a535bb740b79ac3", null ],

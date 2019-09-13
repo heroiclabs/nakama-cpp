@@ -13,7 +13,7 @@ var namespace_nakama =
     [ "NDeleteStorageObjectId", "struct_nakama_1_1_n_delete_storage_object_id.html", "struct_nakama_1_1_n_delete_storage_object_id" ],
     [ "NError", "struct_nakama_1_1_n_error.html", "struct_nakama_1_1_n_error" ],
     [ "NFriend", "struct_nakama_1_1_n_friend.html", "struct_nakama_1_1_n_friend" ],
-    [ "NFriends", "struct_nakama_1_1_n_friends.html", "struct_nakama_1_1_n_friends" ],
+    [ "NFriendList", "struct_nakama_1_1_n_friend_list.html", "struct_nakama_1_1_n_friend_list" ],
     [ "NGroup", "struct_nakama_1_1_n_group.html", "struct_nakama_1_1_n_group" ],
     [ "NGroupList", "struct_nakama_1_1_n_group_list.html", "struct_nakama_1_1_n_group_list" ],
     [ "NGroupUser", "struct_nakama_1_1_n_group_user.html", "struct_nakama_1_1_n_group_user" ],

@@ -58,9 +58,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_client_factory_8h.html",
-"class_nakama_1_1_n_client_interface.html#a5a879769a69d9b60fbab47e10e7ff370",
-"namespacemembers_type.html",
-"struct_nakama_1_1_n_user.html#a92e9cc8b330d9dcde6872fe1f95849cf"
+"class_nakama_1_1_n_client_interface.html#a6822a722b242dbcd060159cf3d46a4b9",
+"namespacemembers_func.html",
+"struct_nakama_1_1_n_tournament.html#a97bb05e0735753295fff252ba15687e7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

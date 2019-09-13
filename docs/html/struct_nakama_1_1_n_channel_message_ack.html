@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.1.0</span>
+   &#160;<span id="projectnumber">2.2.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -124,6 +124,18 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ab64e5e5c834e402ce0f3b1e3a814fb75"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_channel_message_ack.html#ab64e5e5c834e402ce0f3b1e3a814fb75">persistent</a> = false</td></tr>
 <tr class="memdesc:ab64e5e5c834e402ce0f3b1e3a814fb75"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the message was persisted to the channel's history, false otherwise.  <a href="#ab64e5e5c834e402ce0f3b1e3a814fb75">More...</a><br /></td></tr>
 <tr class="separator:ab64e5e5c834e402ce0f3b1e3a814fb75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac33f03c41fc944c8d8588dc46c1911b0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_channel_message_ack.html#ac33f03c41fc944c8d8588dc46c1911b0">roomName</a></td></tr>
+<tr class="memdesc:ac33f03c41fc944c8d8588dc46c1911b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the chat room, or an empty string if this message was not sent through a chat room.  <a href="#ac33f03c41fc944c8d8588dc46c1911b0">More...</a><br /></td></tr>
+<tr class="separator:ac33f03c41fc944c8d8588dc46c1911b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a427cec6c7f0b199b369ae64196e11e5d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_channel_message_ack.html#a427cec6c7f0b199b369ae64196e11e5d">groupId</a></td></tr>
+<tr class="memdesc:a427cec6c7f0b199b369ae64196e11e5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ID of the group, or an empty string if this message was not sent through a group channel.  <a href="#a427cec6c7f0b199b369ae64196e11e5d">More...</a><br /></td></tr>
+<tr class="separator:a427cec6c7f0b199b369ae64196e11e5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4a14d328ff95ffe4181d8ad602891ab"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_channel_message_ack.html#ab4a14d328ff95ffe4181d8ad602891ab">userIdOne</a></td></tr>
+<tr class="memdesc:ab4a14d328ff95ffe4181d8ad602891ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ID of the first DM user, or an empty string if this message was not sent through a DM chat.  <a href="#ab4a14d328ff95ffe4181d8ad602891ab">More...</a><br /></td></tr>
+<tr class="separator:ab4a14d328ff95ffe4181d8ad602891ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1263c2aa1abd016266a2b3e428122011"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_channel_message_ack.html#a1263c2aa1abd016266a2b3e428122011">userIdTwo</a></td></tr>
+<tr class="memdesc:a1263c2aa1abd016266a2b3e428122011"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ID of the second DM user, or an empty string if this message was not sent through a DM chat.  <a href="#a1263c2aa1abd016266a2b3e428122011">More...</a><br /></td></tr>
+<tr class="separator:a1263c2aa1abd016266a2b3e428122011"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A receipt reply from a channel message send operation. </p>
@@ -176,6 +188,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a427cec6c7f0b199b369ae64196e11e5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a427cec6c7f0b199b369ae64196e11e5d">&#9670;&nbsp;</a></span>groupId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Nakama::NChannelMessageAck::groupId</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The ID of the group, or an empty string if this message was not sent through a group channel. </p>
+
+</div>
+</div>
 <a id="af4a8dc7deee1c1b1c90a9e976ce669a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af4a8dc7deee1c1b1c90a9e976ce669a8">&#9670;&nbsp;</a></span>messageId</h2>
 
@@ -208,6 +236,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac33f03c41fc944c8d8588dc46c1911b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac33f03c41fc944c8d8588dc46c1911b0">&#9670;&nbsp;</a></span>roomName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Nakama::NChannelMessageAck::roomName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The name of the chat room, or an empty string if this message was not sent through a chat room. </p>
+
+</div>
+</div>
 <a id="a06dcd90202068bbe3470c6f9c3f04444"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a06dcd90202068bbe3470c6f9c3f04444">&#9670;&nbsp;</a></span>updateTime</h2>
 
@@ -221,6 +265,38 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The UNIX time when the message was last updated. </p>
+
+</div>
+</div>
+<a id="ab4a14d328ff95ffe4181d8ad602891ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4a14d328ff95ffe4181d8ad602891ab">&#9670;&nbsp;</a></span>userIdOne</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Nakama::NChannelMessageAck::userIdOne</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The ID of the first DM user, or an empty string if this message was not sent through a DM chat. </p>
+
+</div>
+</div>
+<a id="a1263c2aa1abd016266a2b3e428122011"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1263c2aa1abd016266a2b3e428122011">&#9670;&nbsp;</a></span>userIdTwo</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Nakama::NChannelMessageAck::userIdTwo</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The ID of the second DM user, or an empty string if this message was not sent through a DM chat. </p>
 
 </div>
 </div>

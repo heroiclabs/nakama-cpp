@@ -13,7 +13,7 @@ var searchData=
   ['ndeletestorageobjectid',['NDeleteStorageObjectId',['../struct_nakama_1_1_n_delete_storage_object_id.html',1,'Nakama']]],
   ['nerror',['NError',['../struct_nakama_1_1_n_error.html',1,'Nakama']]],
   ['nfriend',['NFriend',['../struct_nakama_1_1_n_friend.html',1,'Nakama']]],
-  ['nfriends',['NFriends',['../struct_nakama_1_1_n_friends.html',1,'Nakama']]],
+  ['nfriendlist',['NFriendList',['../struct_nakama_1_1_n_friend_list.html',1,'Nakama']]],
   ['ngroup',['NGroup',['../struct_nakama_1_1_n_group.html',1,'Nakama']]],
   ['ngrouplist',['NGroupList',['../struct_nakama_1_1_n_group_list.html',1,'Nakama']]],
   ['ngroupuser',['NGroupUser',['../struct_nakama_1_1_n_group_user.html',1,'Nakama']]],

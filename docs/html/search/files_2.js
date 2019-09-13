@@ -14,7 +14,7 @@ var searchData=
   ['nerror_2eh',['NError.h',['../_n_error_8h.html',1,'']]],
   ['nexport_2eh',['NExport.h',['../_n_export_8h.html',1,'']]],
   ['nfriend_2eh',['NFriend.h',['../_n_friend_8h.html',1,'']]],
-  ['nfriends_2eh',['NFriends.h',['../_n_friends_8h.html',1,'']]],
+  ['nfriendlist_2eh',['NFriendList.h',['../_n_friend_list_8h.html',1,'']]],
   ['ngroup_2eh',['NGroup.h',['../_n_group_8h.html',1,'']]],
   ['ngrouplist_2eh',['NGroupList.h',['../_n_group_list_8h.html',1,'']]],
   ['ngroupuser_2eh',['NGroupUser.h',['../_n_group_user_8h.html',1,'']]],
