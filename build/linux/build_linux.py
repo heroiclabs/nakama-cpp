@@ -26,7 +26,7 @@ if sys.version_info[0] <= 2:
     execfile(filename)
 else:
     exec(compile(open(filename, "rb").read(), filename, 'exec'))
-init_common(os.path.abspath('..'))
+init_common(os.path.abspath('..'), 'linux')
 
 parser = argparse.ArgumentParser(description='builder for Windows')
 parser.add_argument('--so', help='build shared object', action='store_true')

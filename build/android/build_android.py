@@ -24,7 +24,7 @@ if sys.version_info[0] <= 2:
     execfile(filename)
 else:
     exec(compile(open(filename, "rb").read(), filename, 'exec'))
-init_common(os.path.abspath('..'))
+init_common(os.path.abspath('..'), 'android')
 
 parser = argparse.ArgumentParser(description='builder for Windows')
 parser.add_argument('arch', help='architecture e.g. armeabi-v7a, arm64-v8a, x86, x86_64')

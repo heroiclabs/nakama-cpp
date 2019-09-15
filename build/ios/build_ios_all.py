@@ -23,7 +23,7 @@ if sys.version_info[0] <= 2:
     execfile(filename)
 else:
     exec(compile(open(filename, "rb").read(), filename, 'exec'))
-init_common(os.path.abspath('..'))
+init_common(os.path.abspath('..'), 'ios')
 
 BUILD_MODE = 'Release'
 
@@ -120,16 +120,25 @@ if BUILD_NAKAMA_SHARED:
     # dynamic libs
     release_libs_dir = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/ios')
 
+    nakama_cpp_libs = []
+
     for arch in arch_list:
         call(['python', 'build_ios.py', '--dylib', arch])
         
         build_arch_dir = build_dir + arch
-        dest_dir = release_libs_dir + '/' + arch
-
         dylib_in_build = build_arch_dir + '/src/libnakama-cpp.dylib'
-        call(['install_name_tool', '-id', '@executable_path/libnakama-cpp.dylib', dylib_in_build])
-        
-        makedirs(dest_dir)
-        copy_file(dylib_in_build, dest_dir)
+
+        if IOS_UNIVERSAL_SHARED_LIB:
+            nakama_cpp_libs.append(dylib_in_build)
+        else:
+            dest_dir = release_libs_dir + '/' + arch
+            makedirs(dest_dir)
+            copy_file(dylib_in_build, dest_dir)
+            set_install_name(dest_dir + '/libnakama-cpp.dylib')
+
+    if IOS_UNIVERSAL_SHARED_LIB:
+        makedirs(release_libs_dir)
+        create_universal_lib(nakama_cpp_libs)
+        set_install_name(release_libs_dir + '/libnakama-cpp.dylib')
 
 print('done.')

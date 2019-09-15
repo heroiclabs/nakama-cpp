@@ -24,7 +24,7 @@ if sys.version_info[0] <= 2:
     execfile(filename)
 else:
     exec(compile(open(filename, "rb").read(), filename, 'exec'))
-init_common(os.path.abspath('..'))
+init_common(os.path.abspath('..'), 'mac')
 
 parser = argparse.ArgumentParser(description='builder for Mac')
 parser.add_argument('--dylib',  help='build DynamicLib', action='store_true')
@@ -34,12 +34,12 @@ args = parser.parse_args()
 BUILD_MODE = 'Release'
 SHARED_LIB = args.dylib
 
-print
+print('')
 if SHARED_LIB:
     print('Building dynamic lib')
 else:
     print('Building static lib')
-print
+print('')
 
 build_dir = os.path.abspath('build/' + BUILD_MODE)
 
@@ -77,8 +77,8 @@ def copy_rest_lib():
 
 def copy_shared_lib(dest):
     dylib_in_build = build_dir + '/src/libnakama-cpp.dylib'
-    call(['install_name_tool', '-id', '@executable_path/libnakama-cpp.dylib', dylib_in_build])
-    print
+    set_install_name(dylib_in_build)
+    print('')
     print('copying to release folder...')
     copy_file(dylib_in_build, dest)
 

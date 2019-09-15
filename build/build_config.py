@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+'''
+All platforms
+'''
 # Build REST (HTTP/1.1) client
 BUILD_REST_CLIENT = True
 
@@ -27,7 +30,18 @@ BUILD_HTTP_CPPREST = True
 BUILD_WEBSOCKET_CPPREST = True
 
 # Build static libs
-BUILD_NAKAMA_STATIC = True
+BUILD_NAKAMA_STATIC = False
 
 # Build shared libs (DLL)
 BUILD_NAKAMA_SHARED = True
+
+'''
+iOS
+'''
+IOS_UNIVERSAL_SHARED_LIB = False
+IOS_RPATH_ENABLE = False
+
+'''
+Mac
+'''
+MAC_RPATH_ENABLE = False

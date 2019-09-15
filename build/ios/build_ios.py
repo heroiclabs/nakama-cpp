@@ -24,7 +24,7 @@ if sys.version_info[0] <= 2:
     execfile(filename)
 else:
     exec(compile(open(filename, "rb").read(), filename, 'exec'))
-init_common(os.path.abspath('..'))
+init_common(os.path.abspath('..'), 'ios')
 
 parser = argparse.ArgumentParser(description='builder for iOS')
 parser.add_argument('arch',     help='architecture e.g. arm64 armv7 armv7s x86_64')

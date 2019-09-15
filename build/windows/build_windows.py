@@ -24,7 +24,7 @@ if sys.version_info[0] <= 2:
     execfile(filename)
 else:
     exec(compile(open(filename, "rb").read(), filename, 'exec'))
-init_common(os.path.abspath('..'))
+init_common(os.path.abspath('..'), 'windows')
 
 parser = argparse.ArgumentParser(description='builder for Windows')
 parser.add_argument('-m', '--mode', help='build mode: Debug or Release')

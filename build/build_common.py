@@ -20,8 +20,9 @@ import shutil
 import subprocess
 
 USE_CPPREST = False
+TARGET_PLATFORM = '' # mac, ios, android, windows, linux
 
-def init_common(build_common_path):
+def init_common(build_common_path, target_platform):
     if build_common_path.find(' ') >= 0:
         print('Error: space foud in path:', build_common_path)
         print('please remove spaces from path and try again')
@@ -33,8 +34,9 @@ def init_common(build_common_path):
     else:
         exec(compile(open(filename, "rb").read(), filename, 'exec'), globals())
 
-    global USE_CPPREST
+    global USE_CPPREST, TARGET_PLATFORM
     USE_CPPREST = BUILD_HTTP_CPPREST or BUILD_WEBSOCKET_CPPREST
+    TARGET_PLATFORM = target_platform
 
     print
     print('BUILD_REST_CLIENT =', str(BUILD_REST_CLIENT))
@@ -95,3 +97,10 @@ def copy_libs():
 
     if USE_CPPREST:
         copy_rest_lib()
+
+def set_install_name(dylib_path):
+    if (IOS_RPATH_ENABLE and TARGET_PLATFORM == 'ios') or (MAC_RPATH_ENABLE and TARGET_PLATFORM == 'mac'):
+        path = '@rpath'
+    else:
+        path = '@executable_path'
+    call(['install_name_tool', '-id', path + '/libnakama-cpp.dylib', dylib_path])
