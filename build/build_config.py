@@ -30,7 +30,7 @@ BUILD_HTTP_CPPREST = True
 BUILD_WEBSOCKET_CPPREST = True
 
 # Build static libs
-BUILD_NAKAMA_STATIC = False
+BUILD_NAKAMA_STATIC = True
 
 # Build shared libs (DLL)
 BUILD_NAKAMA_SHARED = True
