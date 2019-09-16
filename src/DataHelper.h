@@ -127,7 +127,7 @@ namespace Nakama {
     {
         b.clear();
 
-        for (auto it : data)
+        for (auto& it : data)
         {
             b.emplace(it.first, it.second);
         }
