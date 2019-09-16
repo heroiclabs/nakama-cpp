@@ -47,6 +47,10 @@ def move_folder(src, dest):
     if os.path.exists(src):
         shutil.move(src, dest)
 
+def remove_file(src):
+    if os.path.exists(src):
+        os.remove(src)
+
 def move_platform_to_temp(platform):
     src = os.path.join(libs_path, platform)
     dest = os.path.join(tmp_libs_path, platform)
@@ -77,7 +81,7 @@ def release_platform(platform):
     if platform != 'android':
         ignore_list = ['nakama-cpp-android']
     out_arch = 'nakama-cpp-sdk_{version}_{platform}.7z'.format(version=version, platform=platform)
-    os.remove(out_arch)
+    remove_file(out_arch)
     archive7zip(sdk_path, out_arch, ignore_list)
 
 def detect_sdk_version():
