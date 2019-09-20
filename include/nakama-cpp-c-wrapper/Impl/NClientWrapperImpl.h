@@ -20,7 +20,7 @@
 #include "nakama-c/ClientFactory.h"
 #include "nakama-cpp-c-wrapper/Impl/NSessionWrapperImpl.h"
 #include "nakama-cpp-c-wrapper/Impl/NDataHelperWrapperImpl.h"
-#include <unordered_map>
+#include <map>
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -2102,19 +2102,19 @@ NAKAMA_NAMESPACE_BEGIN
         ErrorCallback _defaultErrorCallback;
         void* _userData = nullptr;
         uintptr_t _curReqId = (uintptr_t)INVALID_REQ_ID;
-        std::unordered_map<NClientReqData, std::function<void(NSessionPtr)>> _authSuccessCallbacks;
-        std::unordered_map<NClientReqData, ErrorCallback> _reqErrorCallbacks;
-        std::unordered_map<NClientReqData, std::function<void()>> _reqOkEmptyCallbacks;
-        std::unordered_map<NClientReqData, std::function<void(const NAccount&)>> _reqOkAccountCallbacks;
-        std::unordered_map<NClientReqData, std::function<void(const NUsers&)>> _reqOkUsersCallbacks;
-        std::unordered_map<NClientReqData, std::function<void(NFriendListPtr)>> _reqOkFriendListCallbacks;
-        std::unordered_map<NClientReqData, std::function<void(const NGroup&)>> _reqOkGroupCallbacks;
-        std::unordered_map<NClientReqData, std::function<void(NGroupUserListPtr)>> _reqOkGroupUserListCallbacks;
-        std::unordered_map<NClientReqData, std::function<void(NGroupListPtr)>> _reqOkGroupListCallbacks;
-        std::unordered_map<NClientReqData, std::function<void(NUserGroupListPtr)>> _reqOkUserGroupListCallbacks;
-        std::unordered_map<NClientReqData, std::function<void(NLeaderboardRecordListPtr)>> _reqOkLeaderboardRecordListCallbacks;
-        std::unordered_map<NClientReqData, std::function<void(const NLeaderboardRecord&)>> _reqOkLeaderboardRecordCallbacks;
-        std::unordered_map<NClientReqData, std::function<void(NMatchListPtr)>> _reqOkMatchListCallbacks;
+        std::map<NClientReqData, std::function<void(NSessionPtr)>> _authSuccessCallbacks;
+        std::map<NClientReqData, ErrorCallback> _reqErrorCallbacks;
+        std::map<NClientReqData, std::function<void()>> _reqOkEmptyCallbacks;
+        std::map<NClientReqData, std::function<void(const NAccount&)>> _reqOkAccountCallbacks;
+        std::map<NClientReqData, std::function<void(const NUsers&)>> _reqOkUsersCallbacks;
+        std::map<NClientReqData, std::function<void(NFriendListPtr)>> _reqOkFriendListCallbacks;
+        std::map<NClientReqData, std::function<void(const NGroup&)>> _reqOkGroupCallbacks;
+        std::map<NClientReqData, std::function<void(NGroupUserListPtr)>> _reqOkGroupUserListCallbacks;
+        std::map<NClientReqData, std::function<void(NGroupListPtr)>> _reqOkGroupListCallbacks;
+        std::map<NClientReqData, std::function<void(NUserGroupListPtr)>> _reqOkUserGroupListCallbacks;
+        std::map<NClientReqData, std::function<void(NLeaderboardRecordListPtr)>> _reqOkLeaderboardRecordListCallbacks;
+        std::map<NClientReqData, std::function<void(const NLeaderboardRecord&)>> _reqOkLeaderboardRecordCallbacks;
+        std::map<NClientReqData, std::function<void(NMatchListPtr)>> _reqOkMatchListCallbacks;
     };
 
 NAKAMA_NAMESPACE_END
