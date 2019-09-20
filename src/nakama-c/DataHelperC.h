@@ -49,6 +49,7 @@ void assign(sNGroupUserList& cGroupUserList, const Nakama::NGroupUserList& group
 void assign(sNUserGroup& cGroup, const Nakama::NUserGroup& group);
 void assign(sNUserGroupList& cGroupList, const Nakama::NUserGroupList& groupList);
 void assign(sNGroupList& cGroupList, const Nakama::NGroupList& groupList);
+void assign(sNLeaderboardRecord& cRecord, const Nakama::NLeaderboardRecord& recordList);
 void assign(sNLeaderboardRecordList& cRecordList, const Nakama::NLeaderboardRecordList& recordList);
 
 void sNAccountDevice_free(sNAccountDevice& cDevice);

@@ -1714,6 +1714,26 @@ NAKAMA_NAMESPACE_BEGIN
                 &NClientWrapper::reqErrorStatic);
         }
 
+        static void reqOkLeaderboardRecordStatic(::NClient cClient, ::NClientReqData reqData, const sNLeaderboardRecord* cRecord)
+        {
+            getWrapper(cClient)->reqOkLeaderboardRecord(reqData, cRecord);
+        }
+
+        void reqOkLeaderboardRecord(::NClientReqData reqData, const sNLeaderboardRecord* cRecord)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkLeaderboardRecordCallbacks.find(reqData);
+                if (it != _reqOkLeaderboardRecordCallbacks.end())
+                {
+                    NLeaderboardRecord record;
+                    assign(record, cRecord);
+                    it->second(record);
+                    _reqOkLeaderboardRecordCallbacks.erase(it);
+                }
+            }
+        }
+
         void writeLeaderboardRecord(
             NSessionPtr session,
             const std::string& leaderboardId,
@@ -1724,7 +1744,24 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkLeaderboardRecordCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_writeLeaderboardRecord(_cClient,
+                getCSession(session),
+                leaderboardId.c_str(),
+                score,
+                subscore ? &(*subscore) : nullptr,
+                metadata ? (*metadata).c_str() : nullptr,
+                reqId,
+                &NClientWrapper::reqOkLeaderboardRecordStatic,
+                &NClientWrapper::reqErrorStatic);
         }
 
         void writeTournamentRecord(
@@ -2021,6 +2058,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::unordered_map<NClientReqData, std::function<void(NGroupListPtr)>> _reqOkGroupListCallbacks;
         std::unordered_map<NClientReqData, std::function<void(NUserGroupListPtr)>> _reqOkUserGroupListCallbacks;
         std::unordered_map<NClientReqData, std::function<void(NLeaderboardRecordListPtr)>> _reqOkLeaderboardRecordListCallbacks;
+        std::unordered_map<NClientReqData, std::function<void(const NLeaderboardRecord&)>> _reqOkLeaderboardRecordCallbacks;
     };
 
 NAKAMA_NAMESPACE_END
