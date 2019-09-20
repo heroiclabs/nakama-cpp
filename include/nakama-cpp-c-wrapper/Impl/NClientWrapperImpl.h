@@ -1621,6 +1621,26 @@ NAKAMA_NAMESPACE_BEGIN
                 &NClientWrapper::reqErrorStatic);
         }
 
+        static void reqOkLeaderboardRecordListStatic(::NClient cClient, ::NClientReqData reqData, const sNLeaderboardRecordList* cList)
+        {
+            getWrapper(cClient)->reqOkLeaderboardRecordList(reqData, cList);
+        }
+
+        void reqOkLeaderboardRecordList(::NClientReqData reqData, const sNLeaderboardRecordList* cList)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkLeaderboardRecordListCallbacks.find(reqData);
+                if (it != _reqOkLeaderboardRecordListCallbacks.end())
+                {
+                    NLeaderboardRecordListPtr list(new NLeaderboardRecordList());
+                    assign(*list, cList);
+                    it->second(list);
+                    _reqOkLeaderboardRecordListCallbacks.erase(it);
+                }
+            }
+        }
+
         void listLeaderboardRecords(
             NSessionPtr session,
             const std::string& leaderboardId,
@@ -1631,7 +1651,39 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkLeaderboardRecordListCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            const char** ownerIdsArray = nullptr;
+
+            if (ownerIds.size() > 0)
+            {
+                ownerIdsArray = new const char* [ownerIds.size()];
+
+                for (size_t i = 0; i < ownerIds.size(); ++i)
+                {
+                    ownerIdsArray[i] = ownerIds[i].c_str();
+                }
+            }
+
+            ::NClient_listLeaderboardRecords(_cClient,
+                getCSession(session),
+                leaderboardId.c_str(),
+                ownerIdsArray,
+                (uint16_t)ownerIds.size(),
+                limit ? *limit : 0,
+                cursor ? (*cursor).c_str() : nullptr,
+                reqId,
+                &NClientWrapper::reqOkLeaderboardRecordListStatic,
+                &NClientWrapper::reqErrorStatic);
+
+            delete[] ownerIdsArray;
         }
 
         void listLeaderboardRecordsAroundOwner(
@@ -1952,6 +2004,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::unordered_map<NClientReqData, std::function<void(NGroupUserListPtr)>> _reqOkGroupUserListCallbacks;
         std::unordered_map<NClientReqData, std::function<void(NGroupListPtr)>> _reqOkGroupListCallbacks;
         std::unordered_map<NClientReqData, std::function<void(NUserGroupListPtr)>> _reqOkUserGroupListCallbacks;
+        std::unordered_map<NClientReqData, std::function<void(NLeaderboardRecordListPtr)>> _reqOkLeaderboardRecordListCallbacks;
     };
 
 NAKAMA_NAMESPACE_END

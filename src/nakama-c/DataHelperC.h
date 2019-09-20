@@ -24,6 +24,7 @@
 #include "nakama-c/data/NGroupUserList.h"
 #include "nakama-c/data/NUserGroupList.h"
 #include "nakama-c/data/NGroupList.h"
+#include "nakama-c/data/NLeaderboardRecordList.h"
 
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
@@ -33,6 +34,7 @@
 #include "nakama-cpp/data/NGroupUserList.h"
 #include "nakama-cpp/data/NUserGroupList.h"
 #include "nakama-cpp/data/NGroupList.h"
+#include "nakama-cpp/data/NLeaderboardRecordList.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -47,6 +49,7 @@ void assign(sNGroupUserList& cGroupUserList, const Nakama::NGroupUserList& group
 void assign(sNUserGroup& cGroup, const Nakama::NUserGroup& group);
 void assign(sNUserGroupList& cGroupList, const Nakama::NUserGroupList& groupList);
 void assign(sNGroupList& cGroupList, const Nakama::NGroupList& groupList);
+void assign(sNLeaderboardRecordList& cRecordList, const Nakama::NLeaderboardRecordList& recordList);
 
 void sNAccountDevice_free(sNAccountDevice& cDevice);
 void sNAccount_free(sNAccount& cAccount);
@@ -55,5 +58,6 @@ void sNFriendList_free(sNFriendList& cFriends);
 void sNGroupUserList_free(sNGroupUserList& cGroupUserList);
 void sNUserGroupList_free(sNUserGroupList& cUserGroupList);
 void sNGroupList_free(sNGroupList& cGroupList);
+void sNLeaderboardRecordList_free(sNLeaderboardRecordList& cRecordList);
 
 NAKAMA_NAMESPACE_END

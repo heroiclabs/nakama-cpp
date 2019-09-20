@@ -212,6 +212,52 @@ void assign(sNGroupList& cGroupList, const Nakama::NGroupList& groupList)
     }
 }
 
+void assign(sNLeaderboardRecord& cRecord, const Nakama::NLeaderboardRecord& recordList)
+{
+    cRecord.leaderboardId = recordList.leaderboardId.c_str();
+    cRecord.ownerId = recordList.ownerId.c_str();
+    cRecord.username = recordList.username.c_str();
+    cRecord.score = recordList.score;
+    cRecord.subscore = recordList.subscore;
+    cRecord.numScore = recordList.numScore;
+    cRecord.maxNumScore = recordList.maxNumScore;
+    cRecord.metadata = recordList.metadata.c_str();
+    cRecord.createTime = recordList.createTime;
+    cRecord.updateTime = recordList.updateTime;
+    cRecord.expiryTime = recordList.expiryTime;
+    cRecord.rank = recordList.rank;
+}
+
+void assign(sNLeaderboardRecordList& cRecordList, const Nakama::NLeaderboardRecordList& recordList)
+{
+    cRecordList.prevCursor = recordList.prevCursor.c_str();
+    cRecordList.nextCursor = recordList.nextCursor.c_str();
+    cRecordList.ownerRecords = nullptr;
+    cRecordList.records = nullptr;
+    cRecordList.recordsCount = (uint16_t)recordList.records.size();
+    cRecordList.ownerRecordsCount = (uint16_t)recordList.ownerRecords.size();
+    
+    if (cRecordList.recordsCount > 0)
+    {
+        cRecordList.records = new sNLeaderboardRecord[cRecordList.recordsCount];
+
+        for (uint16_t i = 0; i < cRecordList.recordsCount; ++i)
+        {
+            assign(cRecordList.records[i], recordList.records[i]);
+        }
+    }
+
+    if (cRecordList.ownerRecordsCount > 0)
+    {
+        cRecordList.ownerRecords = new sNLeaderboardRecord[cRecordList.ownerRecordsCount];
+
+        for (uint16_t i = 0; i < cRecordList.ownerRecordsCount; ++i)
+        {
+            assign(cRecordList.ownerRecords[i], recordList.ownerRecords[i]);
+        }
+    }
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }
@@ -252,6 +298,12 @@ void sNUserGroupList_free(sNUserGroupList& cUserGroupList)
 void sNGroupList_free(sNGroupList& cGroupList)
 {
     delete[] cGroupList.groups;
+}
+
+void sNLeaderboardRecordList_free(sNLeaderboardRecordList& cRecordList)
+{
+    delete[] cRecordList.records;
+    delete[] cRecordList.ownerRecords;
 }
 
 NAKAMA_NAMESPACE_END

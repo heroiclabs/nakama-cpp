@@ -25,9 +25,9 @@ extern "C" {
 /// A set of leaderboard records, may be part of a leaderboard records page or a batch of individual records.
 typedef struct NAKAMA_API NLeaderboardRecordList
 {
-    const sNLeaderboardRecord* records;          ///< A list of leaderboard records.
+    sNLeaderboardRecord* records;                ///< A list of leaderboard records.
     uint16_t recordsCount;
-    const sNLeaderboardRecord* ownerRecords;     ///< A batched set of leaderboard records belonging to specified owners.
+    sNLeaderboardRecord* ownerRecords;           ///< A batched set of leaderboard records belonging to specified owners.
     uint16_t ownerRecordsCount;
     const char* nextCursor;                      ///< The cursor to send when retrieving the next page, if any.
     const char* prevCursor;                      ///< The cursor to send when retrieving the previous page, if any.

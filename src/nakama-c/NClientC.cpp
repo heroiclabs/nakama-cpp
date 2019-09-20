@@ -683,9 +683,41 @@ void NClient_updateGroup(NClient client, NSession session, const char* groupId, 
     
 }
 
-void NClient_listLeaderboardRecords(NClient client, NSession session, const char* leaderboardId, const char** ownerIds, int32_t limit, const char* cursor, NClientReqData reqData, void(*successCallback)(const sNLeaderboardRecordList*), NClientErrorCallback errorCallback)
+void NClient_listLeaderboardRecords(
+    NClient client,
+    NSession session,
+    const char* leaderboardId,
+    const char** ownerIds,
+    uint16_t ownerIdsCount,
+    int32_t limit,
+    const char* cursor,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNLeaderboardRecordList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    std::vector<std::string> cppOwnerIds;
+    std::string cppCursor(cursor ? cursor : "");
+
+    Nakama::assign(cppOwnerIds, ownerIds, ownerIdsCount);
+
+    cppClient->listLeaderboardRecords(
+        cppSession,
+        leaderboardId,
+        cppOwnerIds,
+        limit,
+        cppCursor,
+        [client, reqData, successCallback](const Nakama::NLeaderboardRecordListPtr& recordList)
+        {
+            if (successCallback)
+            {
+                sNLeaderboardRecordList cRecordList;
+                Nakama::assign(cRecordList, *recordList);
+                successCallback(client, reqData, &cRecordList);
+                Nakama::sNLeaderboardRecordList_free(cRecordList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_listLeaderboardRecordsAroundOwner(NClient client, NSession session, const char* leaderboardId, const char* ownerId, int32_t limit, NClientReqData reqData, void(*successCallback)(const sNLeaderboardRecordList*), NClientErrorCallback errorCallback)

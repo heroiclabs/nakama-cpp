@@ -866,11 +866,12 @@ extern "C" {
         NClient client,
         NSession session,
         const char* leaderboardId,
-        const char** ownerIds, // optional, pass NULL
-        int32_t limit, // optional, pass 0
-        const char* cursor, // optional, pass NULL
+        const char** ownerIds,             // optional, pass NULL
+        uint16_t ownerIdsCount,
+        int32_t limit,                     // optional, pass 0
+        const char* cursor,                // optional, pass NULL
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNLeaderboardRecordList*),
+        void (*successCallback)(NClient, NClientReqData, const sNLeaderboardRecordList*),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 

@@ -225,4 +225,38 @@ void assign(NUserGroupList& userGroupList, const sNUserGroupList* cUserGroupList
     }
 }
 
+void assign(NLeaderboardRecord& record, const sNLeaderboardRecord* cRecord)
+{
+    record.leaderboardId = cRecord->leaderboardId;
+    record.ownerId = cRecord->ownerId;
+    record.username = cRecord->username;
+    record.score = cRecord->score;
+    record.subscore = cRecord->subscore;
+    record.numScore = cRecord->numScore;
+    record.maxNumScore = cRecord->maxNumScore;
+    record.metadata = cRecord->metadata;
+    record.createTime = cRecord->createTime;
+    record.updateTime = cRecord->updateTime;
+    record.expiryTime = cRecord->expiryTime;
+    record.rank = cRecord->rank;
+}
+
+void assign(NLeaderboardRecordList& list, const sNLeaderboardRecordList* cList)
+{
+    list.prevCursor = cList->prevCursor;
+    list.nextCursor = cList->nextCursor;
+    list.records.resize(cList->recordsCount);
+    list.ownerRecords.resize(cList->ownerRecordsCount);
+
+    for (uint16_t i = 0; i < cList->recordsCount; ++i)
+    {
+        assign(list.records[i], &cList->records[i]);
+    }
+
+    for (uint16_t i = 0; i < cList->ownerRecordsCount; ++i)
+    {
+        assign(list.ownerRecords[i], &cList->ownerRecords[i]);
+    }
+}
+
 NAKAMA_NAMESPACE_END
