@@ -25,7 +25,7 @@ extern "C" {
 /// A list of groups belonging to a user, along with the user's role in each group.
 typedef struct NAKAMA_API NUserGroupList
 {
-    const sNUserGroup* userGroups;     ///< Group-role pairs for a user.
+    sNUserGroup* userGroups;           ///< Group-role pairs for a user.
     uint16_t userGroupsCount;
     const char* cursor;                ///< Cursor for the next page of results, if any.
 } sNUserGroupList;

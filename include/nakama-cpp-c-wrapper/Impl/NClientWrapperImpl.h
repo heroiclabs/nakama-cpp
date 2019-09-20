@@ -1484,6 +1484,26 @@ NAKAMA_NAMESPACE_BEGIN
                 &NClientWrapper::reqErrorStatic);
         }
 
+        static void reqOkUserGroupListStatic(::NClient cClient, ::NClientReqData reqData, const sNUserGroupList* cUserGroupList)
+        {
+            getWrapper(cClient)->reqOkUserGroupList(reqData, cUserGroupList);
+        }
+
+        void reqOkUserGroupList(::NClientReqData reqData, const sNUserGroupList* cUserGroupList)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkUserGroupListCallbacks.find(reqData);
+                if (it != _reqOkUserGroupListCallbacks.end())
+                {
+                    NUserGroupListPtr userGroupList(new NUserGroupList());
+                    assign(*userGroupList, cUserGroupList);
+                    it->second(userGroupList);
+                    _reqOkUserGroupListCallbacks.erase(it);
+                }
+            }
+        }
+
         void listUserGroups(
             NSessionPtr session,
             const opt::optional<int32_t>& limit,
@@ -1493,7 +1513,7 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            this->listUserGroups(session, "", limit, state, cursor, successCallback, errorCallback);
         }
 
         void listUserGroups(
@@ -1506,7 +1526,24 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkUserGroupListCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_listUserGroups(_cClient,
+                getCSession(session),
+                userId.empty() ? nullptr : userId.c_str(),
+                limit ? &(*limit) : nullptr,
+                state ? (const eFriendState*) & (*state) : nullptr,
+                cursor.empty() ? nullptr : cursor.c_str(),
+                reqId,
+                &NClientWrapper::reqOkUserGroupListStatic,
+                &NClientWrapper::reqErrorStatic);
         }
 
         void promoteGroupUsers(
@@ -1914,6 +1951,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::unordered_map<NClientReqData, std::function<void(const NGroup&)>> _reqOkGroupCallbacks;
         std::unordered_map<NClientReqData, std::function<void(NGroupUserListPtr)>> _reqOkGroupUserListCallbacks;
         std::unordered_map<NClientReqData, std::function<void(NGroupListPtr)>> _reqOkGroupListCallbacks;
+        std::unordered_map<NClientReqData, std::function<void(NUserGroupListPtr)>> _reqOkUserGroupListCallbacks;
     };
 
 NAKAMA_NAMESPACE_END

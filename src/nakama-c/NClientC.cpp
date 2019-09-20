@@ -634,9 +634,43 @@ void NClient_listOwnUserGroups(NClient client, NSession session, NClientReqData 
     
 }
 
-void NClient_listUserGroups(NClient client, NSession session, const char* userId, NClientReqData reqData, void(*successCallback)(const sNUserGroupList*), NClientErrorCallback errorCallback)
+void NClient_listUserGroups(
+    NClient client,
+    NSession session,
+    const char* userId,
+    const int32_t* limit,
+    const eFriendState* state,
+    const char* cursor,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNUserGroupList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    std::string cppUserId(userId ? userId : cppSession->getUserId());
+    std::string cppCursor(cursor ? cursor : "");
+    Nakama::opt::optional<int32_t> cppLimit;
+    Nakama::opt::optional<Nakama::NFriend::State> cppState;
+
+    if (limit) cppLimit = *limit;
+    if (state) cppState = (Nakama::NFriend::State)*state;
+
+    cppClient->listUserGroups(
+        cppSession,
+        cppUserId,
+        cppLimit,
+        cppState,
+        cppCursor,
+        [client, reqData, successCallback](const Nakama::NUserGroupListPtr& groupList)
+        {
+            if (successCallback)
+            {
+                sNUserGroupList cGroupList;
+                assign(cGroupList, *groupList);
+                successCallback(client, reqData, &cGroupList);
+                Nakama::sNUserGroupList_free(cGroupList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_promoteGroupUsers(NClient client, NSession session, const char* groupId, const char** ids, uint16_t idsCount, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)

@@ -172,6 +172,29 @@ void assign(sNGroupUserList& cGroupUserList, const Nakama::NGroupUserList& group
     }
 }
 
+void assign(sNUserGroup& cGroup, const Nakama::NUserGroup& group)
+{
+    assign(cGroup.group, group.group);
+    cGroup.state = (eNUserGroupState)group.state;
+}
+
+void assign(sNUserGroupList& cGroupList, const Nakama::NUserGroupList& groupList)
+{
+    cGroupList.cursor = groupList.cursor.c_str();
+    cGroupList.userGroupsCount = (uint16_t)groupList.userGroups.size();
+    cGroupList.userGroups = nullptr;
+
+    if (cGroupList.userGroupsCount > 0)
+    {
+        cGroupList.userGroups = new sNUserGroup[cGroupList.userGroupsCount];
+
+        for (uint16_t i = 0; i < cGroupList.userGroupsCount; ++i)
+        {
+            assign(cGroupList.userGroups[i], groupList.userGroups[i]);
+        }
+    }
+}
+
 void assign(sNGroupList& cGroupList, const Nakama::NGroupList& groupList)
 {
     cGroupList.cursor = groupList.cursor.c_str();
@@ -219,6 +242,11 @@ void sNFriendList_free(sNFriendList& cFriends)
 void sNGroupUserList_free(sNGroupUserList& cGroupUserList)
 {
     delete[] cGroupUserList.groupUsers;
+}
+
+void sNUserGroupList_free(sNUserGroupList& cUserGroupList)
+{
+    delete[] cUserGroupList.userGroups;
 }
 
 void sNGroupList_free(sNGroupList& cGroupList)

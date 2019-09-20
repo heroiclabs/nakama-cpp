@@ -208,4 +208,21 @@ void assign(NGroupList& groupList, const sNGroupList* cGroupList)
     }
 }
 
+void assign(NUserGroup& userGroup, const sNUserGroup* cUserGroup)
+{
+    assign(userGroup.group, &cUserGroup->group);
+    userGroup.state = (NUserGroupState)cUserGroup->state;
+}
+
+void assign(NUserGroupList& userGroupList, const sNUserGroupList* cUserGroupList)
+{
+    userGroupList.cursor = cUserGroupList->cursor;
+    userGroupList.userGroups.resize(cUserGroupList->userGroupsCount);
+
+    for (uint16_t i = 0; i < cUserGroupList->userGroupsCount; ++i)
+    {
+        assign(userGroupList.userGroups[i], &cUserGroupList->userGroups[i]);
+    }
+}
+
 NAKAMA_NAMESPACE_END
