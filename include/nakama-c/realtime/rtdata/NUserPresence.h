@@ -30,7 +30,7 @@ typedef struct NAKAMA_API NUserPresence
     const char* username;           ///< The username for display purposes.
     bool persistence;               ///< Whether this presence generates persistent data/messages, if applicable for the stream type.
     const char* status;             ///< A user-set status message for this stream, if applicable.
-} tNUserPresence;
+} sNUserPresence;
 
 #ifdef __cplusplus
 }

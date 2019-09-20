@@ -259,4 +259,43 @@ void assign(NLeaderboardRecordList& list, const sNLeaderboardRecordList* cList)
     }
 }
 
+void assign(NUserPresence& presence, const sNUserPresence* cPresence)
+{
+    presence.userId = cPresence->userId;
+    presence.sessionId = cPresence->sessionId;
+    presence.username = cPresence->username;
+    presence.persistence = cPresence->persistence;
+    presence.status = cPresence->status;
+}
+
+void assign(std::vector<NUserPresence>& presences, const sNUserPresence* cPresences, uint16_t presencesCount)
+{
+    presences.resize(presencesCount);
+
+    for (uint16_t i = 0; i < presencesCount; ++i)
+    {
+        assign(presences[i], &cPresences[i]);
+    }
+}
+
+void assign(NMatch& match, const sNMatch* cMatch)
+{
+    match.matchId = cMatch->matchId;
+    match.authoritative = cMatch->authoritative;
+    match.label = cMatch->label;
+    match.size = cMatch->size;
+    assign(match.self, &cMatch->self);
+    assign(match.presences, cMatch->presences, cMatch->presencesCount);
+}
+
+void assign(NMatchList& matchList, const sNMatchList* cMatchList)
+{
+    matchList.matches.resize(cMatchList->matchesCount);
+
+    for (uint16_t i = 0; i < cMatchList->matchesCount; ++i)
+    {
+        assign(matchList.matches[i], &cMatchList->matches[i]);
+    }
+}
+
 NAKAMA_NAMESPACE_END

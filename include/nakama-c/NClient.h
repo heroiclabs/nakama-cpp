@@ -964,13 +964,13 @@ extern "C" {
     NAKAMA_API void NClient_listMatches(
         NClient client,
         NSession session,
-        int32_t min_size,// optional, pass 0
-        int32_t max_size,// optional, pass 0
-        int32_t limit,// optional, pass 0
-        const char* label,// optional, pass NULL
-        const bool* authoritative,// optional, pass NULL
+        int32_t min_size,                  // optional, pass 0
+        int32_t max_size,                  // optional, pass 0
+        int32_t limit,                     // optional, pass 0
+        const char* label,                 // optional, pass NULL
+        bool authoritative,
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNMatchList*),
+        void (*successCallback)(NClient, NClientReqData, const sNMatchList*),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 

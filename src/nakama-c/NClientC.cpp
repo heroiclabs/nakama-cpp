@@ -830,9 +830,38 @@ void NClient_deleteLeaderboardRecord(NClient client, NSession session, const cha
     
 }
 
-void NClient_listMatches(NClient client, NSession session, int32_t min_size, int32_t max_size, int32_t limit, const char* label, const bool* authoritative, NClientReqData reqData, void(*successCallback)(const sNMatchList*), NClientErrorCallback errorCallback)
+void NClient_listMatches(
+    NClient client,
+    NSession session,
+    int32_t min_size,
+    int32_t max_size,
+    int32_t limit,
+    const char* label,
+    bool authoritative,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNMatchList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->listMatches(
+        cppSession,
+        min_size ? Nakama::opt::optional<int32_t>(min_size) : Nakama::opt::nullopt,
+        max_size ? Nakama::opt::optional<int32_t>(max_size) : Nakama::opt::nullopt,
+        limit ? Nakama::opt::optional<int32_t>(limit) : Nakama::opt::nullopt,
+        label ? Nakama::opt::optional<std::string>(label) : Nakama::opt::nullopt,
+        authoritative,
+        [client, reqData, successCallback](const Nakama::NMatchListPtr& matchList)
+        {
+            if (successCallback)
+            {
+                sNMatchList cMatchList;
+                Nakama::assign(cMatchList, *matchList);
+                successCallback(client, reqData, &cMatchList);
+                Nakama::sNMatchList_free(cMatchList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_listNotifications(NClient client, NSession session, int32_t limit, const char* cacheableCursor, NClientReqData reqData, void(*successCallback)(const sNNotificationList*), NClientErrorCallback errorCallback)

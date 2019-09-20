@@ -258,6 +258,57 @@ void assign(sNLeaderboardRecordList& cRecordList, const Nakama::NLeaderboardReco
     }
 }
 
+void assign(sNUserPresence& cPresence, const NUserPresence& presence)
+{
+    cPresence.userId = presence.userId.c_str();
+    cPresence.sessionId = presence.sessionId.c_str();
+    cPresence.username = presence.username.c_str();
+    cPresence.persistence = presence.persistence;
+    cPresence.status = presence.status.c_str();
+}
+
+void assign(sNUserPresence*& cPresences, uint16_t& cPresencesCount, const std::vector<NUserPresence>& presences)
+{
+    cPresences = nullptr;
+    cPresencesCount = (uint16_t)presences.size();
+
+    if (cPresencesCount > 0)
+    {
+        cPresences = new sNUserPresence[cPresencesCount];
+
+        for (uint16_t i=0; i < cPresencesCount; ++i)
+        {
+            assign(cPresences[i], presences[i]);
+        }
+    }
+}
+
+void assign(sNMatch& cMatch, const Nakama::NMatch& match)
+{
+    cMatch.matchId = match.matchId.c_str();
+    cMatch.authoritative = match.authoritative;
+    cMatch.label = match.label.c_str();
+    cMatch.size = match.size;
+    assign(cMatch.presences, cMatch.presencesCount, match.presences);
+    assign(cMatch.self, match.self);
+}
+
+void assign(sNMatchList& cMatchList, const Nakama::NMatchList& matchList)
+{
+    cMatchList.matches = nullptr;
+    cMatchList.matchesCount = (uint16_t)matchList.matches.size();
+
+    if (cMatchList.matchesCount > 0)
+    {
+        cMatchList.matches = new sNMatch[cMatchList.matchesCount];
+
+        for (uint16_t i = 0; i < cMatchList.matchesCount; ++i)
+        {
+            assign(cMatchList.matches[i], matchList.matches[i]);
+        }
+    }
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }
@@ -304,6 +355,24 @@ void sNLeaderboardRecordList_free(sNLeaderboardRecordList& cRecordList)
 {
     delete[] cRecordList.records;
     delete[] cRecordList.ownerRecords;
+}
+
+void sNMatch_free(sNMatch& cMatch)
+{
+    delete[] cMatch.presences;
+}
+
+void sNMatchList_free(sNMatchList& cMatchList)
+{
+    if (cMatchList.matchesCount > 0)
+    {
+        for (uint16_t i = 0; i < cMatchList.matchesCount; ++i)
+        {
+            sNMatch_free(cMatchList.matches[i]);
+        }
+
+        delete[] cMatchList.matches;
+    }
 }
 
 NAKAMA_NAMESPACE_END

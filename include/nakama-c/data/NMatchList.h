@@ -25,7 +25,7 @@ extern "C" {
 /// A list of realtime matches.
 typedef struct NAKAMA_API NMatchList
 {
-    const sNMatch* matches;   ///< A number of matches corresponding to a list operation.
+    sNMatch* matches;           ///< A number of matches corresponding to a list operation.
     uint16_t matchesCount;
 } sNMatchList;
 

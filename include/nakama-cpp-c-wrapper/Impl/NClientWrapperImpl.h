@@ -1818,6 +1818,26 @@ NAKAMA_NAMESPACE_BEGIN
                 &NClientWrapper::reqErrorStatic);
         }
 
+        static void reqOkMatchListStatic(::NClient cClient, ::NClientReqData reqData, const sNMatchList* cMatchList)
+        {
+            getWrapper(cClient)->reqOkMatchList(reqData, cMatchList);
+        }
+
+        void reqOkMatchList(::NClientReqData reqData, const sNMatchList* cMatchList)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkMatchListCallbacks.find(reqData);
+                if (it != _reqOkMatchListCallbacks.end())
+                {
+                    NMatchListPtr matchList(new NMatchList());
+                    assign(*matchList, cMatchList);
+                    it->second(matchList);
+                    _reqOkMatchListCallbacks.erase(it);
+                }
+            }
+        }
+
         void listMatches(
             NSessionPtr session,
             const opt::optional<int32_t>& min_size,
@@ -1829,7 +1849,25 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkMatchListCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_listMatches(_cClient,
+                getCSession(session),
+                min_size ? *min_size : 0,
+                max_size ? *max_size : 0,
+                limit ? *limit : 0,
+                label ? (*label).c_str() : nullptr,
+                authoritative ? *authoritative : false,
+                reqId,
+                &NClientWrapper::reqOkMatchListStatic,
+                &NClientWrapper::reqErrorStatic);
         }
 
         void listNotifications(
@@ -2076,6 +2114,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::unordered_map<NClientReqData, std::function<void(NUserGroupListPtr)>> _reqOkUserGroupListCallbacks;
         std::unordered_map<NClientReqData, std::function<void(NLeaderboardRecordListPtr)>> _reqOkLeaderboardRecordListCallbacks;
         std::unordered_map<NClientReqData, std::function<void(const NLeaderboardRecord&)>> _reqOkLeaderboardRecordCallbacks;
+        std::unordered_map<NClientReqData, std::function<void(NMatchListPtr)>> _reqOkMatchListCallbacks;
     };
 
 NAKAMA_NAMESPACE_END
