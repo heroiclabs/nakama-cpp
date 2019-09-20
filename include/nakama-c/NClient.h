@@ -929,10 +929,10 @@ extern "C" {
         NSession session,
         const char* tournamentId,
         int64_t score,
-        int64_t subscore, // optional, pass 0
-        const char* metadata, // optional, pass NULL
+        const int64_t* subscore,           // optional, pass NULL
+        const char* metadata,              // optional, pass NULL
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNLeaderboardRecord*),
+        void (*successCallback)(NClient, NClientReqData, const sNLeaderboardRecord*),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 

@@ -1774,7 +1774,24 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkLeaderboardRecordCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_writeTournamentRecord(_cClient,
+                getCSession(session),
+                tournamentId.c_str(),
+                score,
+                subscore ? &(*subscore) : nullptr,
+                metadata ? (*metadata).c_str() : nullptr,
+                reqId,
+                &NClientWrapper::reqOkLeaderboardRecordStatic,
+                &NClientWrapper::reqErrorStatic);
         }
 
         void deleteLeaderboardRecord(

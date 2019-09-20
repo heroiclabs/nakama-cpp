@@ -789,9 +789,40 @@ void NClient_writeLeaderboardRecord(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
-void NClient_writeTournamentRecord(NClient client, NSession session, const char* tournamentId, int64_t score, int64_t subscore, const char* metadata, NClientReqData reqData, void(*successCallback)(const sNLeaderboardRecord*), NClientErrorCallback errorCallback)
+void NClient_writeTournamentRecord(
+    NClient client,
+    NSession session,
+    const char* tournamentId,
+    int64_t score,
+    const int64_t* subscore,
+    const char* metadata,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNLeaderboardRecord*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    Nakama::opt::optional<int64_t> cppSubscore;
+    Nakama::opt::optional<std::string> cppMetadata;
+
+    if (subscore) cppSubscore = *subscore;
+    if (metadata) cppMetadata = metadata;
+
+    cppClient->writeTournamentRecord(
+        cppSession,
+        tournamentId,
+        score,
+        cppSubscore,
+        cppMetadata,
+        [client, reqData, successCallback](const Nakama::NLeaderboardRecord& record)
+        {
+            if (successCallback)
+            {
+                sNLeaderboardRecord cRecord;
+                Nakama::assign(cRecord, record);
+                successCallback(client, reqData, &cRecord);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_deleteLeaderboardRecord(NClient client, NSession session, const char* leaderboardId, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
