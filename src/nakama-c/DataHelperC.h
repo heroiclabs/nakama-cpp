@@ -26,6 +26,7 @@
 #include "nakama-c/data/NGroupList.h"
 #include "nakama-c/data/NLeaderboardRecordList.h"
 #include "nakama-c/data/NMatchList.h"
+#include "nakama-c/data/NRpc.h"
 
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
@@ -37,6 +38,7 @@
 #include "nakama-cpp/data/NGroupList.h"
 #include "nakama-cpp/data/NLeaderboardRecordList.h"
 #include "nakama-cpp/data/NMatchList.h"
+#include "nakama-cpp/data/NRpc.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -55,6 +57,7 @@ void assign(sNLeaderboardRecord& cRecord, const Nakama::NLeaderboardRecord& reco
 void assign(sNLeaderboardRecordList& cRecordList, const Nakama::NLeaderboardRecordList& recordList);
 void assign(sNMatch& cMatch, const Nakama::NMatch& match);
 void assign(sNMatchList& cMatchList, const Nakama::NMatchList& matchList);
+void assign(sNRpc& cRpc, const Nakama::NRpc& rpc);
 
 void sNAccountDevice_free(sNAccountDevice& cDevice);
 void sNAccount_free(sNAccount& cAccount);

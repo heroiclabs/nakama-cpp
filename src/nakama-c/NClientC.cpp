@@ -924,9 +924,31 @@ void NClient_deleteStorageObjects(NClient client, NSession session, const sNDele
     
 }
 
-void NClient_rpc(NClient client, NSession session, const char* id, const char* payload, NClientReqData reqData, void(*successCallback)(const sNRpc*), NClientErrorCallback errorCallback)
+void NClient_rpc(
+    NClient client,
+    NSession session,
+    const char* id,
+    const char* payload,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNRpc*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->rpc(
+        cppSession,
+        id,
+        payload ? Nakama::opt::optional<std::string>(payload) : Nakama::opt::nullopt,
+        [client, reqData, successCallback](const Nakama::NRpc& rpc)
+        {
+            if (successCallback)
+            {
+                sNRpc cRpc;
+                Nakama::assign(cRpc, rpc);
+                successCallback(client, reqData, &cRpc);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 } // extern "C"

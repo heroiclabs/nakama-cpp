@@ -2084,6 +2084,26 @@ NAKAMA_NAMESPACE_BEGIN
             delete[] objectIdsArray;
         }
 
+        static void reqOkRpcStatic(::NClient cClient, ::NClientReqData reqData, const sNRpc* cRpc)
+        {
+            getWrapper(cClient)->reqOkRpc(reqData, cRpc);
+        }
+
+        void reqOkRpc(::NClientReqData reqData, const sNRpc* cRpc)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkRpcCallbacks.find(reqData);
+                if (it != _reqOkRpcCallbacks.end())
+                {
+                    NRpc rpc;
+                    assign(rpc, cRpc);
+                    it->second(rpc);
+                    _reqOkRpcCallbacks.erase(it);
+                }
+            }
+        }
+
         void rpc(
             NSessionPtr session,
             const std::string& id,
@@ -2092,7 +2112,22 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkRpcCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_rpc(_cClient,
+                getCSession(session),
+                id.c_str(),
+                payload ? payload.value().c_str() : nullptr,
+                reqId,
+                &NClientWrapper::reqOkRpcStatic,
+                &NClientWrapper::reqErrorStatic);
         }
 
     protected:
@@ -2115,6 +2150,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::map<NClientReqData, std::function<void(NLeaderboardRecordListPtr)>> _reqOkLeaderboardRecordListCallbacks;
         std::map<NClientReqData, std::function<void(const NLeaderboardRecord&)>> _reqOkLeaderboardRecordCallbacks;
         std::map<NClientReqData, std::function<void(NMatchListPtr)>> _reqOkMatchListCallbacks;
+        std::map<NClientReqData, std::function<void(const NRpc&)>> _reqOkRpcCallbacks;
     };
 
 NAKAMA_NAMESPACE_END

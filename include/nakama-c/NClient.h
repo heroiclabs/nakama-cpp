@@ -1208,9 +1208,9 @@ extern "C" {
         NClient client,
         NSession session,
         const char* id,
-        const char* payload, // optional, pass NULL
+        const char* payload,               // optional, pass NULL
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNRpc*),
+        void (*successCallback)(NClient, NClientReqData, const sNRpc*),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 

@@ -309,6 +309,13 @@ void assign(sNMatchList& cMatchList, const Nakama::NMatchList& matchList)
     }
 }
 
+void assign(sNRpc& cRpc, const Nakama::NRpc& rpc)
+{
+    cRpc.id = rpc.id.c_str();
+    cRpc.payload = rpc.payload.c_str();
+    cRpc.httpKey = rpc.httpKey.c_str();
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }

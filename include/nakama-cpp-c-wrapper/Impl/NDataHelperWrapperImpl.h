@@ -298,4 +298,11 @@ void assign(NMatchList& matchList, const sNMatchList* cMatchList)
     }
 }
 
+void assign(NRpc& rpc, const sNRpc* cRpc)
+{
+    rpc.id = cRpc->id;
+    rpc.payload = cRpc->payload;
+    rpc.httpKey = cRpc->httpKey;
+}
+
 NAKAMA_NAMESPACE_END
