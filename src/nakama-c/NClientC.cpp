@@ -720,9 +720,37 @@ void NClient_listLeaderboardRecords(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
-void NClient_listLeaderboardRecordsAroundOwner(NClient client, NSession session, const char* leaderboardId, const char* ownerId, int32_t limit, NClientReqData reqData, void(*successCallback)(const sNLeaderboardRecordList*), NClientErrorCallback errorCallback)
+void NClient_listLeaderboardRecordsAroundOwner(
+    NClient client,
+    NSession session,
+    const char* leaderboardId,
+    const char* ownerId,
+    int32_t limit,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNLeaderboardRecordList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    Nakama::opt::optional<int32_t> cppLimit;
+
+    if (limit) cppLimit = limit;
+
+    cppClient->listLeaderboardRecordsAroundOwner(
+        cppSession,
+        leaderboardId,
+        ownerId,
+        cppLimit,
+        [client, reqData, successCallback](const Nakama::NLeaderboardRecordListPtr& recordList)
+        {
+            if (successCallback)
+            {
+                sNLeaderboardRecordList cRecordList;
+                Nakama::assign(cRecordList, *recordList);
+                successCallback(client, reqData, &cRecordList);
+                Nakama::sNLeaderboardRecordList_free(cRecordList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_writeLeaderboardRecord(NClient client, NSession session, const char* leaderboardId, int64_t score, const int64_t subscore, const char* metadata, NClientReqData reqData, void(*successCallback)(const sNLeaderboardRecord*), NClientErrorCallback errorCallback)

@@ -1695,7 +1695,23 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkLeaderboardRecordListCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_listLeaderboardRecordsAroundOwner(_cClient,
+                getCSession(session),
+                leaderboardId.c_str(),
+                ownerId.c_str(),
+                limit ? *limit : 0,
+                reqId,
+                &NClientWrapper::reqOkLeaderboardRecordListStatic,
+                &NClientWrapper::reqErrorStatic);
         }
 
         void writeLeaderboardRecord(
