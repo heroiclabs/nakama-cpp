@@ -241,22 +241,22 @@ void assign(NLeaderboardRecord& record, const sNLeaderboardRecord* cRecord)
     record.rank = cRecord->rank;
 }
 
+void assign(std::vector<NLeaderboardRecord>& records, const sNLeaderboardRecord* cRecords, uint16_t count)
+{
+    records.resize(count);
+
+    for (uint16_t i = 0; i < count; ++i)
+    {
+        assign(records[i], &cRecords[i]);
+    }
+}
+
 void assign(NLeaderboardRecordList& list, const sNLeaderboardRecordList* cList)
 {
     list.prevCursor = cList->prevCursor;
     list.nextCursor = cList->nextCursor;
-    list.records.resize(cList->recordsCount);
-    list.ownerRecords.resize(cList->ownerRecordsCount);
-
-    for (uint16_t i = 0; i < cList->recordsCount; ++i)
-    {
-        assign(list.records[i], &cList->records[i]);
-    }
-
-    for (uint16_t i = 0; i < cList->ownerRecordsCount; ++i)
-    {
-        assign(list.ownerRecords[i], &cList->ownerRecords[i]);
-    }
+    assign(list.records, cList->records, cList->recordsCount);
+    assign(list.ownerRecords, cList->ownerRecords, cList->ownerRecordsCount);
 }
 
 void assign(NUserPresence& presence, const sNUserPresence* cPresence)
@@ -450,6 +450,14 @@ void assign(NStorageObjectList& objList, const sNStorageObjectList* cObjList)
     {
         assign(objList.objects[i], &cObjList->objects[i]);
     }
+}
+
+void assign(NTournamentRecordList& recordList, const sNTournamentRecordList* cRecordList)
+{
+    assign(recordList.records, cRecordList->records, cRecordList->recordsCount);
+    assign(recordList.ownerRecords, cRecordList->ownerRecords, cRecordList->ownerRecordsCount);
+    recordList.nextCursor = cRecordList->nextCursor;
+    recordList.prevCursor = cRecordList->prevCursor;
 }
 
 void NReadStorageObjectId_free(sNReadStorageObjectId* objectIdsArray)

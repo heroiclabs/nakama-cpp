@@ -25,9 +25,9 @@ extern "C" {
 /// A set of tournament records which may be part of a tournament records page or a batch of individual records.
 typedef struct NAKAMA_API NTournamentRecordList
 {
-    const sNLeaderboardRecord* records;           ///< A list of tournament records.
+    sNLeaderboardRecord* records;                ///< A list of tournament records.
     uint16_t recordsCount;
-    const sNLeaderboardRecord* ownerRecords;      ///< A batched set of tournament records belonging to specified owners.
+    sNLeaderboardRecord* ownerRecords;           ///< A batched set of tournament records belonging to specified owners.
     uint16_t ownerRecordsCount;
     const char* nextCursor;                      ///< The cursor to send when retireving the next page, if any.
     const char* prevCursor;                      ///< The cursor to send when retrieving the previous page, if any.

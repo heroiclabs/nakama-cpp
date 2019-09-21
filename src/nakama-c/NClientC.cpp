@@ -889,9 +889,34 @@ void NClient_listTournamentRecords(NClient client, NSession session, const char*
     
 }
 
-void NClient_listTournamentRecordsAroundOwner(NClient client, NSession session, const char* tournamentId, const char* ownerId, int32_t limit, NClientReqData reqData, void(*successCallback)(const sNTournamentRecordList*), NClientErrorCallback errorCallback)
+void NClient_listTournamentRecordsAroundOwner(
+    NClient client,
+    NSession session,
+    const char* tournamentId,
+    const char* ownerId,
+    int32_t limit,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNTournamentRecordList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->listTournamentRecordsAroundOwner(
+        cppSession,
+        tournamentId,
+        ownerId,
+        limit,
+        [client, reqData, successCallback](const Nakama::NTournamentRecordListPtr& recordList)
+        {
+            if (successCallback)
+            {
+                sNTournamentRecordList cRecordList;
+                Nakama::assign(cRecordList, *recordList);
+                successCallback(client, reqData, &cRecordList);
+                Nakama::sNTournamentRecordList_free(cRecordList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_joinTournament(NClient client, NSession session, const char* tournamentId, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)

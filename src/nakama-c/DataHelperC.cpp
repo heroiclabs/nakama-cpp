@@ -283,34 +283,28 @@ void assign(sNLeaderboardRecord& cRecord, const Nakama::NLeaderboardRecord& reco
     cRecord.rank = recordList.rank;
 }
 
+void assign(sNLeaderboardRecord*& cRecords, uint16_t& count, const std::vector<Nakama::NLeaderboardRecord>& records)
+{
+    count = (uint16_t)records.size();
+    cRecords = nullptr;
+
+    if (count > 0)
+    {
+        cRecords = new sNLeaderboardRecord[count];
+
+        for (uint16_t i = 0; i < count; ++i)
+        {
+            assign(cRecords[i], records[i]);
+        }
+    }
+}
+
 void assign(sNLeaderboardRecordList& cRecordList, const Nakama::NLeaderboardRecordList& recordList)
 {
     cRecordList.prevCursor = recordList.prevCursor.c_str();
     cRecordList.nextCursor = recordList.nextCursor.c_str();
-    cRecordList.ownerRecords = nullptr;
-    cRecordList.records = nullptr;
-    cRecordList.recordsCount = (uint16_t)recordList.records.size();
-    cRecordList.ownerRecordsCount = (uint16_t)recordList.ownerRecords.size();
-    
-    if (cRecordList.recordsCount > 0)
-    {
-        cRecordList.records = new sNLeaderboardRecord[cRecordList.recordsCount];
-
-        for (uint16_t i = 0; i < cRecordList.recordsCount; ++i)
-        {
-            assign(cRecordList.records[i], recordList.records[i]);
-        }
-    }
-
-    if (cRecordList.ownerRecordsCount > 0)
-    {
-        cRecordList.ownerRecords = new sNLeaderboardRecord[cRecordList.ownerRecordsCount];
-
-        for (uint16_t i = 0; i < cRecordList.ownerRecordsCount; ++i)
-        {
-            assign(cRecordList.ownerRecords[i], recordList.ownerRecords[i]);
-        }
-    }
+    assign(cRecordList.records, cRecordList.recordsCount, recordList.records);
+    assign(cRecordList.ownerRecords, cRecordList.ownerRecordsCount, recordList.ownerRecords);
 }
 
 void assign(sNUserPresence& cPresence, const Nakama::NUserPresence& presence)
@@ -440,6 +434,14 @@ void assign(sNStorageObjectList& cObjList, const Nakama::NStorageObjectList& obj
     }
 }
 
+void assign(sNTournamentRecordList& cRecordList, const Nakama::NTournamentRecordList& recordList)
+{
+    cRecordList.nextCursor = recordList.nextCursor.c_str();
+    cRecordList.prevCursor = recordList.prevCursor.c_str();
+    assign(cRecordList.records, cRecordList.recordsCount, recordList.records);
+    assign(cRecordList.ownerRecords, cRecordList.ownerRecordsCount, recordList.ownerRecords);
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }
@@ -529,6 +531,12 @@ void sNStorageObjectList_free(sNStorageObjectList* cObjList)
 {
     delete[] cObjList->objects;
     cObjList->objects = nullptr;
+}
+
+void sNTournamentRecordList_free(sNTournamentRecordList& cRecordList)
+{
+    delete[] cRecordList.records;
+    delete[] cRecordList.ownerRecords;
 }
 
 NAKAMA_NAMESPACE_END

@@ -1961,6 +1961,26 @@ NAKAMA_NAMESPACE_BEGIN
             NOT_IMPLEMENTED
         }
 
+        static void reqOkTournamentRecordListStatic(::NClient cClient, ::NClientReqData reqData, const sNTournamentRecordList* cRecordList)
+        {
+            getWrapper(cClient)->reqOkTournamentRecordList(reqData, cRecordList);
+        }
+
+        void reqOkTournamentRecordList(::NClientReqData reqData, const sNTournamentRecordList* cRecordList)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkTournamentRecordListCallbacks.find(reqData);
+                if (it != _reqOkTournamentRecordListCallbacks.end())
+                {
+                    NTournamentRecordListPtr recordList(new NTournamentRecordList());
+                    assign(*recordList, cRecordList);
+                    it->second(recordList);
+                    _reqOkTournamentRecordListCallbacks.erase(it);
+                }
+            }
+        }
+
         void listTournamentRecordsAroundOwner(
             NSessionPtr session,
             const std::string& tournamentId,
@@ -1970,7 +1990,23 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkTournamentRecordListCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_listTournamentRecordsAroundOwner(_cClient,
+                getCSession(session),
+                tournamentId.c_str(),
+                ownerId.c_str(),
+                limit ? *limit : 0,
+                reqId,
+                &NClientWrapper::reqOkTournamentRecordListStatic,
+                &NClientWrapper::reqErrorStatic);
         }
 
         void joinTournament(
@@ -2289,6 +2325,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::map<NClientReqData, std::function<void(const NStorageObjects&)>> _reqOkStorageObjectsCallbacks;
         std::map<NClientReqData, std::function<void(const NStorageObjectAcks&)>> _reqOkStorageObjectAcksCallbacks;
         std::map<NClientReqData, std::function<void(NStorageObjectListPtr)>> _reqOkStorageObjectListCallbacks;
+        std::map<NClientReqData, std::function<void(NTournamentRecordListPtr)>> _reqOkTournamentRecordListCallbacks;
     };
 
 NAKAMA_NAMESPACE_END
