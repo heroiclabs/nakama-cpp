@@ -909,9 +909,34 @@ void NClient_listUsersStorageObjects(NClient client, NSession session, const cha
     
 }
 
-void NClient_writeStorageObjects(NClient client, NSession session, const tNStorageObjectWrite* objects, uint16_t objectsCount, NClientReqData reqData, void(*successCallback)(const sNStorageObjectAck* acks, uint16_t count), NClientErrorCallback errorCallback)
+void NClient_writeStorageObjects(
+    NClient client,
+    NSession session,
+    const sNStorageObjectWrite* objects, uint16_t objectsCount,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNStorageObjectAck* acks, uint16_t count), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    std::vector<Nakama::NStorageObjectWrite> cppObjects;
+
+    assign(cppObjects, objects, objectsCount);
+
+    cppClient->writeStorageObjects(
+        cppSession,
+        cppObjects,
+        [client, reqData, successCallback](const Nakama::NStorageObjectAcks& acks)
+        {
+            if (successCallback)
+            {
+                sNStorageObjectAck* cAcks;
+                uint16_t count;
+                Nakama::assign(cAcks, count, acks);
+                successCallback(client, reqData, cAcks, count);
+                Nakama::sNStorageObjectAcks_free(cAcks);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_readStorageObjects(

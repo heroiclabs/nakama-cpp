@@ -29,6 +29,8 @@
 #include "nakama-c/data/NRpc.h"
 #include "nakama-c/data/NStorageObjectId.h"
 #include "nakama-c/data/NStorageObject.h"
+#include "nakama-c/data/NStorageObjectWrite.h"
+#include "nakama-c/data/NStorageObjectAck.h"
 
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
@@ -43,6 +45,8 @@
 #include "nakama-cpp/data/NRpc.h"
 #include "nakama-cpp/data/NStorageObjectId.h"
 #include "nakama-cpp/data/NStorageObject.h"
+#include "nakama-cpp/data/NStorageObjectWrite.h"
+#include "nakama-cpp/data/NStorageObjectAck.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -50,6 +54,8 @@ void assign(std::vector<std::string>& strings, const char** cStrings, uint16_t c
 void assign(std::vector<Nakama::NDeleteStorageObjectId>& objectIds, const sNDeleteStorageObjectId* cObjectIds, uint16_t count);
 void assign(std::vector<Nakama::NReadStorageObjectId>& objectIds, const sNReadStorageObjectId* cObjectIds, uint16_t count);
 void assign(Nakama::NDeleteStorageObjectId& objectId, const sNDeleteStorageObjectId& cObjectId);
+void assign(Nakama::NStorageObjectWrite& cppObject, const sNStorageObjectWrite* object);
+void assign(std::vector<Nakama::NStorageObjectWrite>& cppObjects, const sNStorageObjectWrite* objects, uint16_t objectsCount);
 
 void assign(tNError& cError, const Nakama::NError& error);
 void assign(sNAccount& cAccount, const Nakama::NAccount& account);
@@ -68,6 +74,8 @@ void assign(sNRpc& cRpc, const Nakama::NRpc& rpc);
 void assign(sNReadStorageObjectId& cObjectId, const Nakama::NReadStorageObjectId& objectId);
 void assign(sNStorageObject* cObject, const NStorageObject& object);
 void assign(sNStorageObject*& cObjects, uint16_t& count, const Nakama::NStorageObjects& objects);
+void assign(sNStorageObjectAck* cAck, const Nakama::NStorageObjectAck& ack);
+void assign(sNStorageObjectAck*& cAcks, uint16_t& count, const Nakama::NStorageObjectAcks& acks);
 
 void sNAccountDevice_free(sNAccountDevice& cDevice);
 void sNAccount_free(sNAccount& cAccount);
@@ -80,5 +88,6 @@ void sNLeaderboardRecordList_free(sNLeaderboardRecordList& cRecordList);
 void sNMatch_free(sNMatch& cMatch);
 void sNMatchList_free(sNMatchList& cMatchList);
 void sNStorageObject_free(sNStorageObject* cObjects);
+void sNStorageObjectAcks_free(sNStorageObjectAck* cAcks);
 
 NAKAMA_NAMESPACE_END

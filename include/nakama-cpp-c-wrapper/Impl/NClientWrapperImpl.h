@@ -2022,6 +2022,26 @@ NAKAMA_NAMESPACE_BEGIN
             NOT_IMPLEMENTED
         }
 
+        static void reqOkStorageObjectAcksStatic(::NClient cClient, ::NClientReqData reqData, const sNStorageObjectAck* cAcks, uint16_t count)
+        {
+            getWrapper(cClient)->reqOkStorageObjectAcks(reqData, cAcks, count);
+        }
+
+        void reqOkStorageObjectAcks(::NClientReqData reqData, const sNStorageObjectAck* cAcks, uint16_t count)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkStorageObjectAcksCallbacks.find(reqData);
+                if (it != _reqOkStorageObjectAcksCallbacks.end())
+                {
+                    NStorageObjectAcks objectAcks;
+                    assign(objectAcks, cAcks, count);
+                    it->second(objectAcks);
+                    _reqOkStorageObjectAcksCallbacks.erase(it);
+                }
+            }
+        }
+
         void writeStorageObjects(
             NSessionPtr session,
             const std::vector<NStorageObjectWrite>& objects,
@@ -2029,7 +2049,28 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkStorageObjectAcksCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::sNStorageObjectWrite* objectArray = nullptr;
+            uint16_t objectsCount = 0;
+            assign(objectArray, objectsCount, objects);
+
+            ::NClient_writeStorageObjects(_cClient,
+                getCSession(session),
+                objectArray,
+                (uint16_t)objects.size(),
+                reqId,
+                &NClientWrapper::reqOkStorageObjectAcksStatic,
+                &NClientWrapper::reqErrorStatic);
+
+            NStorageObjectWrite_free(objectArray);
         }
 
         static void reqOkStorageObjectsStatic(::NClient cClient, ::NClientReqData reqData, const sNStorageObject* cObjects, uint16_t count)
@@ -2193,6 +2234,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::map<NClientReqData, std::function<void(NMatchListPtr)>> _reqOkMatchListCallbacks;
         std::map<NClientReqData, std::function<void(const NRpc&)>> _reqOkRpcCallbacks;
         std::map<NClientReqData, std::function<void(const NStorageObjects&)>> _reqOkStorageObjectsCallbacks;
+        std::map<NClientReqData, std::function<void(const NStorageObjectAcks&)>> _reqOkStorageObjectAcksCallbacks;
     };
 
 NAKAMA_NAMESPACE_END

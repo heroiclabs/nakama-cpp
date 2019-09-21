@@ -1158,10 +1158,10 @@ extern "C" {
     NAKAMA_API void NClient_writeStorageObjects(
         NClient client,
         NSession session,
-        const tNStorageObjectWrite* objects,
+        const sNStorageObjectWrite* objects,
         uint16_t objectsCount,
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNStorageObjectAck* acks, uint16_t count),
+        void (*successCallback)(NClient, NClientReqData, const sNStorageObjectAck* acks, uint16_t count),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 

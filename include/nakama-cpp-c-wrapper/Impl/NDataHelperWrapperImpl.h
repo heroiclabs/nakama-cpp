@@ -394,9 +394,61 @@ void assign(sNReadStorageObjectId*& objectIdsArray, uint16_t& count, const std::
     }
 }
 
+void assign(sNStorageObjectWrite* cObject, const NStorageObjectWrite& object)
+{
+    cObject->collection = object.collection.c_str();
+    cObject->key = object.key.c_str();
+    cObject->value = object.value.c_str();
+    cObject->version = object.version.c_str();
+    cObject->permissionRead = nullptr;
+    cObject->permissionWrite = nullptr;
+
+    if (object.permissionRead) cObject->permissionRead = (eNStoragePermissionRead*)&(object.permissionRead.value());
+    if (object.permissionWrite) cObject->permissionWrite = (eNStoragePermissionWrite*) & (object.permissionWrite.value());
+}
+
+void assign(sNStorageObjectWrite*& objectArray, uint16_t& count, const std::vector<NStorageObjectWrite>& objects)
+{
+    count = (uint16_t)objects.size();
+    objectArray = nullptr;
+
+    if (count > 0)
+    {
+        objectArray = new sNStorageObjectWrite[count];
+
+        for (uint16_t i = 0; i < count; ++i)
+        {
+            assign(&objectArray[i], objects[i]);
+        }
+    }
+}
+
+void assign(NStorageObjectAck& ack, const sNStorageObjectAck* cAck)
+{
+    ack.collection = cAck->collection;
+    ack.key = cAck->key;
+    ack.version = cAck->version;
+    ack.userId = cAck->userId;
+}
+
+void assign(NStorageObjectAcks& acks, const sNStorageObjectAck* cAcks, uint16_t count)
+{
+    acks.resize(count);
+
+    for (uint16_t i = 0; i < count; ++i)
+    {
+        assign(acks[i], &cAcks[i]);
+    }
+}
+
 void NReadStorageObjectId_free(sNReadStorageObjectId* objectIdsArray)
 {
     delete[] objectIdsArray;
+}
+
+void NStorageObjectWrite_free(sNStorageObjectWrite* objectArray)
+{
+    delete[] objectArray;
 }
 
 NAKAMA_NAMESPACE_END

@@ -51,6 +51,27 @@ void assign(Nakama::NDeleteStorageObjectId& objectId, const sNDeleteStorageObjec
     objectId.version = cObjectId.version;
 }
 
+void assign(Nakama::NStorageObjectWrite& cppObject, const sNStorageObjectWrite* object)
+{
+    cppObject.collection = object->collection;
+    cppObject.key = object->key;
+    cppObject.value = object->value;
+    cppObject.version = object->version;
+
+    if (object->permissionRead) cppObject.permissionRead = (Nakama::NStoragePermissionRead) (*object->permissionRead);
+    if (object->permissionWrite) cppObject.permissionWrite = (Nakama::NStoragePermissionWrite) (*object->permissionWrite);
+}
+
+void assign(std::vector<Nakama::NStorageObjectWrite>& cppObjects, const sNStorageObjectWrite* objects, uint16_t objectsCount)
+{
+    cppObjects.resize(objectsCount);
+
+    for (uint16_t i=0; i < objectsCount; ++i)
+    {
+        assign(cppObjects[i], &objects[i]);
+    }
+}
+
 void assign(std::vector<Nakama::NDeleteStorageObjectId>& objectIds, const sNDeleteStorageObjectId* cObjectIds, uint16_t count)
 {
     objectIds.resize(count);
@@ -379,6 +400,30 @@ void assign(sNStorageObject*& cObjects, uint16_t& count, const Nakama::NStorageO
     }
 }
 
+void assign(sNStorageObjectAck* cAck, const Nakama::NStorageObjectAck& ack)
+{
+    cAck->collection = ack.collection.c_str();
+    cAck->key = ack.key.c_str();
+    cAck->version = ack.version.c_str();
+    cAck->userId = ack.userId.c_str();
+}
+
+void assign(sNStorageObjectAck*& cAcks, uint16_t& count, const Nakama::NStorageObjectAcks& acks)
+{
+    cAcks = nullptr;
+    count = (uint16_t)acks.size();
+
+    if (count > 0)
+    {
+        cAcks = new sNStorageObjectAck[count];
+
+        for (uint16_t i = 0; i < count; ++i)
+        {
+            assign(&cAcks[i], acks[i]);
+        }
+    }
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }
@@ -448,6 +493,11 @@ void sNMatchList_free(sNMatchList& cMatchList)
 void sNStorageObject_free(sNStorageObject* cObjects)
 {
     delete[] cObjects;
+}
+
+void sNStorageObjectAcks_free(sNStorageObjectAck* cAcks)
+{
+    delete[] cAcks;
 }
 
 NAKAMA_NAMESPACE_END

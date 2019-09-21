@@ -30,9 +30,9 @@ typedef struct NAKAMA_API NStorageObjectWrite
     const char* key;                                          ///< The key of the object within the collection.
     const char* value;                                        ///< The value of the object. Must be JSON
     const char* version;                                      ///< The version hash of the object to check. Possible values are: ["", "*", "#hash#"].
-    eNStoragePermissionRead permissionRead;                   ///< The read access permissions for the object.
-    eNStoragePermissionWrite permissionWrite;                 ///< The write access permissions for the object.
-} tNStorageObjectWrite;
+    const eNStoragePermissionRead* permissionRead;            ///< The read access permissions for the object. Optional.
+    const eNStoragePermissionWrite* permissionWrite;          ///< The write access permissions for the object. Optional.
+} sNStorageObjectWrite;
 
 #ifdef __cplusplus
 }
