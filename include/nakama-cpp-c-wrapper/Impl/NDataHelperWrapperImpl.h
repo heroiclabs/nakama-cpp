@@ -441,6 +441,17 @@ void assign(NStorageObjectAcks& acks, const sNStorageObjectAck* cAcks, uint16_t 
     }
 }
 
+void assign(NStorageObjectList& objList, const sNStorageObjectList* cObjList)
+{
+    objList.cursor = cObjList->cursor;
+    objList.objects.resize(cObjList->objectsCount);
+
+    for (uint16_t i=0; i < cObjList->objectsCount; ++i)
+    {
+        assign(objList.objects[i], &cObjList->objects[i]);
+    }
+}
+
 void NReadStorageObjectId_free(sNReadStorageObjectId* objectIdsArray)
 {
     delete[] objectIdsArray;

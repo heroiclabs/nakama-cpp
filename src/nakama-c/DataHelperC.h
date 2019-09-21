@@ -31,6 +31,7 @@
 #include "nakama-c/data/NStorageObject.h"
 #include "nakama-c/data/NStorageObjectWrite.h"
 #include "nakama-c/data/NStorageObjectAck.h"
+#include "nakama-c/data/NStorageObjectList.h"
 
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
@@ -47,6 +48,7 @@
 #include "nakama-cpp/data/NStorageObject.h"
 #include "nakama-cpp/data/NStorageObjectWrite.h"
 #include "nakama-cpp/data/NStorageObjectAck.h"
+#include "nakama-cPP/data/NStorageObjectList.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -76,6 +78,8 @@ void assign(sNStorageObject* cObject, const NStorageObject& object);
 void assign(sNStorageObject*& cObjects, uint16_t& count, const Nakama::NStorageObjects& objects);
 void assign(sNStorageObjectAck* cAck, const Nakama::NStorageObjectAck& ack);
 void assign(sNStorageObjectAck*& cAcks, uint16_t& count, const Nakama::NStorageObjectAcks& acks);
+void assign(sNStorageObject* cObject, const Nakama::NStorageObject& object);
+void assign(sNStorageObjectList& cObjList, const Nakama::NStorageObjectList& objList);
 
 void sNAccountDevice_free(sNAccountDevice& cDevice);
 void sNAccount_free(sNAccount& cAccount);
@@ -87,7 +91,8 @@ void sNGroupList_free(sNGroupList& cGroupList);
 void sNLeaderboardRecordList_free(sNLeaderboardRecordList& cRecordList);
 void sNMatch_free(sNMatch& cMatch);
 void sNMatchList_free(sNMatchList& cMatchList);
-void sNStorageObject_free(sNStorageObject* cObjects);
+void sNStorageObjects_free(sNStorageObject* cObjects);
 void sNStorageObjectAcks_free(sNStorageObjectAck* cAcks);
+void sNStorageObjectList_free(sNStorageObjectList* cObjList);
 
 NAKAMA_NAMESPACE_END

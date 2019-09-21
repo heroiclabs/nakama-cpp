@@ -424,6 +424,22 @@ void assign(sNStorageObjectAck*& cAcks, uint16_t& count, const Nakama::NStorageO
     }
 }
 
+void assign(sNStorageObjectList& cObjList, const Nakama::NStorageObjectList& objList)
+{
+    cObjList.objects = nullptr;
+    cObjList.objectsCount = (uint16_t)objList.objects.size();
+
+    if (cObjList.objectsCount > 0)
+    {
+        cObjList.objects = new sNStorageObject[cObjList.objectsCount];
+
+        for (uint16_t i = 0; i < cObjList.objectsCount; ++i)
+        {
+            assign(&cObjList.objects[i], objList.objects[i]);
+        }
+    }
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }
@@ -438,38 +454,46 @@ void sNAccount_free(sNAccount& cAccount)
         }
 
         delete[] cAccount.devices;
+        cAccount.devices = nullptr;
     }
 }
 
 void sNUsers_free(sNUsers& cUsers)
 {
     delete[] cUsers.users;
+    cUsers.users = nullptr;
 }
 
 void sNFriendList_free(sNFriendList& cFriends)
 {
     delete[] cFriends.friends;
+    cFriends.friends = nullptr;
 }
 
 void sNGroupUserList_free(sNGroupUserList& cGroupUserList)
 {
     delete[] cGroupUserList.groupUsers;
+    cGroupUserList.groupUsers = nullptr;
 }
 
 void sNUserGroupList_free(sNUserGroupList& cUserGroupList)
 {
     delete[] cUserGroupList.userGroups;
+    cUserGroupList.userGroups = nullptr;
 }
 
 void sNGroupList_free(sNGroupList& cGroupList)
 {
     delete[] cGroupList.groups;
+    cGroupList.groups = nullptr;
 }
 
 void sNLeaderboardRecordList_free(sNLeaderboardRecordList& cRecordList)
 {
     delete[] cRecordList.records;
     delete[] cRecordList.ownerRecords;
+    cRecordList.records = nullptr;
+    cRecordList.ownerRecords = nullptr;
 }
 
 void sNMatch_free(sNMatch& cMatch)
@@ -487,10 +511,11 @@ void sNMatchList_free(sNMatchList& cMatchList)
         }
 
         delete[] cMatchList.matches;
+        cMatchList.matches = nullptr;
     }
 }
 
-void sNStorageObject_free(sNStorageObject* cObjects)
+void sNStorageObjects_free(sNStorageObject* cObjects)
 {
     delete[] cObjects;
 }
@@ -498,6 +523,12 @@ void sNStorageObject_free(sNStorageObject* cObjects)
 void sNStorageObjectAcks_free(sNStorageObjectAck* cAcks)
 {
     delete[] cAcks;
+}
+
+void sNStorageObjectList_free(sNStorageObjectList* cObjList)
+{
+    delete[] cObjList->objects;
+    cObjList->objects = nullptr;
 }
 
 NAKAMA_NAMESPACE_END

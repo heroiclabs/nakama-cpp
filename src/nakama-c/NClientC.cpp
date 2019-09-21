@@ -904,9 +904,36 @@ void NClient_listStorageObjects(NClient client, NSession session, const char* co
     
 }
 
-void NClient_listUsersStorageObjects(NClient client, NSession session, const char* collection, const char* userId, int32_t limit, const char* cursor, NClientReqData reqData, void(*successCallback)(const sNStorageObjectList*), NClientErrorCallback errorCallback)
+void NClient_listUsersStorageObjects(
+    NClient client,
+    NSession session,
+    const char* collection,
+    const char* userId,
+    int32_t limit,
+    const char* cursor,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNStorageObjectList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->listUsersStorageObjects(
+        cppSession,
+        collection,
+        userId,
+        limit,
+        cursor ? cursor : "",
+        [client, reqData, successCallback](const Nakama::NStorageObjectListPtr& objList)
+        {
+            if (successCallback)
+            {
+                sNStorageObjectList cObjList;
+                Nakama::assign(cObjList, *objList);
+                successCallback(client, reqData, &cObjList);
+                Nakama::sNStorageObjectList_free(&cObjList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_writeStorageObjects(
@@ -964,7 +991,7 @@ void NClient_readStorageObjects(
                 uint16_t count;
                 Nakama::assign(cObjects, count, objects);
                 successCallback(client, reqData, cObjects, count);
-                Nakama::sNStorageObject_free(cObjects);
+                Nakama::sNStorageObjects_free(cObjects);
             }
         },
         Nakama::createErrorCallback(client, reqData, errorCallback));

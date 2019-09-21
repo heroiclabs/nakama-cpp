@@ -25,7 +25,7 @@ extern "C" {
 /// List of storage objects.
 typedef struct NAKAMA_API NStorageObjectList
 {
-    const sNStorageObject* objects;        ///< The list of storage objects.
+    sNStorageObject* objects;              ///< The list of storage objects.
     uint16_t objectsCount;
     const char* cursor;                    ///< The cursor for the next page of results, if any.
 } sNStorageObjectList;
