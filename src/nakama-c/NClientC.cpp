@@ -884,9 +884,39 @@ void NClient_listTournaments(NClient client, NSession session, const uint32_t* c
     
 }
 
-void NClient_listTournamentRecords(NClient client, NSession session, const char* tournamentId, int32_t limit, const char* cursor, const char** ownerIds, uint16_t ownerIdsCount, NClientReqData reqData, void(*successCallback)(const sNTournamentRecordList*), NClientErrorCallback errorCallback)
+void NClient_listTournamentRecords(
+    NClient client,
+    NSession session,
+    const char* tournamentId,
+    int32_t limit,
+    const char* cursor,
+    const char** ownerIds, uint16_t ownerIdsCount,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNTournamentRecordList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    std::vector<std::string> cppOwnerIds;
+
+    Nakama::assign(cppOwnerIds, ownerIds, ownerIdsCount);
+
+    cppClient->listTournamentRecords(
+        cppSession,
+        tournamentId,
+        limit,
+        cursor ? Nakama::opt::optional<std::string>(cursor) : Nakama::opt::nullopt,
+        cppOwnerIds,
+        [client, reqData, successCallback](const Nakama::NTournamentRecordListPtr& recordList)
+        {
+            if (successCallback)
+            {
+                sNTournamentRecordList cRecordList;
+                Nakama::assign(cRecordList, *recordList);
+                successCallback(client, reqData, &cRecordList);
+                Nakama::sNTournamentRecordList_free(cRecordList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_listTournamentRecordsAroundOwner(

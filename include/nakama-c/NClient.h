@@ -1066,12 +1066,12 @@ extern "C" {
         NClient client,
         NSession session,
         const char* tournamentId,
-        int32_t limit, // optional, pass 0
-        const char* cursor, // optional, pass NULL
-        const char** ownerIds, // optional, pass NULL
+        int32_t limit,                     // optional, pass 0
+        const char* cursor,                // optional, pass NULL
+        const char** ownerIds,             // optional, pass NULL
         uint16_t ownerIdsCount,
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNTournamentRecordList*),
+        void (*successCallback)(NClient, NClientReqData, const sNTournamentRecordList*),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 

@@ -1958,7 +1958,39 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkTournamentRecordListCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            const char** idsArray = nullptr;
+
+            if (ownerIds.size() > 0)
+            {
+                idsArray = new const char* [ownerIds.size()];
+
+                for (size_t i = 0; i < ownerIds.size(); ++i)
+                {
+                    idsArray[i] = ownerIds[i].c_str();
+                }
+            }
+
+            ::NClient_listTournamentRecords(_cClient,
+                getCSession(session),
+                tournamentId.c_str(),
+                limit ? *limit : 0,
+                cursor ? cursor.value().c_str() : nullptr,
+                idsArray,
+                (uint16_t)ownerIds.size(),
+                reqId,
+                &NClientWrapper::reqOkTournamentRecordListStatic,
+                &NClientWrapper::reqErrorStatic);
+
+            delete[] idsArray;
         }
 
         static void reqOkTournamentRecordListStatic(::NClient cClient, ::NClientReqData reqData, const sNTournamentRecordList* cRecordList)
