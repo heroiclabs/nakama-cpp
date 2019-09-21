@@ -1177,7 +1177,7 @@ extern "C" {
         const sNReadStorageObjectId* objectIds,
         uint16_t objectIdsCount,
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNStorageObject* objects, uint16_t count),
+        void (*successCallback)(NClient, NClientReqData, const sNStorageObject* objects, uint16_t count),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 

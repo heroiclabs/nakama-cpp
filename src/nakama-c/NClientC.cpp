@@ -914,14 +914,55 @@ void NClient_writeStorageObjects(NClient client, NSession session, const tNStora
     
 }
 
-void NClient_readStorageObjects(NClient client, NSession session, const sNReadStorageObjectId* objectIds, uint16_t objectIdsCount, NClientReqData reqData, void(*successCallback)(const sNStorageObject* objects, uint16_t count), NClientErrorCallback errorCallback)
+void NClient_readStorageObjects(
+    NClient client,
+    NSession session,
+    const sNReadStorageObjectId* objectIds,
+    uint16_t objectIdsCount,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNStorageObject* objects, uint16_t count), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    std::vector<Nakama::NReadStorageObjectId> cppObjectIds;
+
+    assign(cppObjectIds, objectIds, objectIdsCount);
+
+    cppClient->readStorageObjects(
+        cppSession,
+        cppObjectIds,
+        [client, reqData, successCallback](const Nakama::NStorageObjects& objects)
+        {
+            if (successCallback)
+            {
+                sNStorageObject* cObjects;
+                uint16_t count;
+                Nakama::assign(cObjects, count, objects);
+                successCallback(client, reqData, cObjects, count);
+                Nakama::sNStorageObject_free(cObjects);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
-void NClient_deleteStorageObjects(NClient client, NSession session, const sNDeleteStorageObjectId* objectIds, uint16_t objectIdsCount, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+void NClient_deleteStorageObjects(
+    NClient client,
+    NSession session,
+    const sNDeleteStorageObjectId* objectIds, uint16_t objectIdsCount,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    std::vector<Nakama::NDeleteStorageObjectId> cppObjectIds;
+
+    assign(cppObjectIds, objectIds, objectIdsCount);
+
+    cppClient->deleteStorageObjects(
+        cppSession,
+        cppObjectIds,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_rpc(

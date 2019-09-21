@@ -2032,6 +2032,26 @@ NAKAMA_NAMESPACE_BEGIN
             NOT_IMPLEMENTED
         }
 
+        static void reqOkStorageObjectsStatic(::NClient cClient, ::NClientReqData reqData, const sNStorageObject* cObjects, uint16_t count)
+        {
+            getWrapper(cClient)->reqOkStorageObjects(reqData, cObjects, count);
+        }
+
+        void reqOkStorageObjects(::NClientReqData reqData, const sNStorageObject* cObjects, uint16_t count)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkStorageObjectsCallbacks.find(reqData);
+                if (it != _reqOkStorageObjectsCallbacks.end())
+                {
+                    NStorageObjects objects;
+                    assign(objects, cObjects, count);
+                    it->second(objects);
+                    _reqOkStorageObjectsCallbacks.erase(it);
+                }
+            }
+        }
+
         void readStorageObjects(
             NSessionPtr session,
             const std::vector<NReadStorageObjectId>& objectIds,
@@ -2039,7 +2059,28 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkStorageObjectsCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::sNReadStorageObjectId* objectIdsArray = nullptr;
+            uint16_t objectsCount = 0;
+            assign(objectIdsArray, objectsCount, objectIds);
+
+            ::NClient_readStorageObjects(_cClient,
+                getCSession(session),
+                objectIdsArray,
+                (uint16_t)objectIds.size(),
+                reqId,
+                &NClientWrapper::reqOkStorageObjectsStatic,
+                &NClientWrapper::reqErrorStatic);
+
+            NReadStorageObjectId_free(objectIdsArray);
         }
 
         void deleteStorageObjects(
@@ -2151,6 +2192,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::map<NClientReqData, std::function<void(const NLeaderboardRecord&)>> _reqOkLeaderboardRecordCallbacks;
         std::map<NClientReqData, std::function<void(NMatchListPtr)>> _reqOkMatchListCallbacks;
         std::map<NClientReqData, std::function<void(const NRpc&)>> _reqOkRpcCallbacks;
+        std::map<NClientReqData, std::function<void(const NStorageObjects&)>> _reqOkStorageObjectsCallbacks;
     };
 
 NAKAMA_NAMESPACE_END

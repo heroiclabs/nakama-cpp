@@ -27,6 +27,8 @@
 #include "nakama-c/data/NLeaderboardRecordList.h"
 #include "nakama-c/data/NMatchList.h"
 #include "nakama-c/data/NRpc.h"
+#include "nakama-c/data/NStorageObjectId.h"
+#include "nakama-c/data/NStorageObject.h"
 
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
@@ -39,10 +41,15 @@
 #include "nakama-cpp/data/NLeaderboardRecordList.h"
 #include "nakama-cpp/data/NMatchList.h"
 #include "nakama-cpp/data/NRpc.h"
+#include "nakama-cpp/data/NStorageObjectId.h"
+#include "nakama-cpp/data/NStorageObject.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
 void assign(std::vector<std::string>& strings, const char** cStrings, uint16_t count);
+void assign(std::vector<Nakama::NDeleteStorageObjectId>& objectIds, const sNDeleteStorageObjectId* cObjectIds, uint16_t count);
+void assign(std::vector<Nakama::NReadStorageObjectId>& objectIds, const sNReadStorageObjectId* cObjectIds, uint16_t count);
+void assign(Nakama::NDeleteStorageObjectId& objectId, const sNDeleteStorageObjectId& cObjectId);
 
 void assign(tNError& cError, const Nakama::NError& error);
 void assign(sNAccount& cAccount, const Nakama::NAccount& account);
@@ -58,6 +65,9 @@ void assign(sNLeaderboardRecordList& cRecordList, const Nakama::NLeaderboardReco
 void assign(sNMatch& cMatch, const Nakama::NMatch& match);
 void assign(sNMatchList& cMatchList, const Nakama::NMatchList& matchList);
 void assign(sNRpc& cRpc, const Nakama::NRpc& rpc);
+void assign(sNReadStorageObjectId& cObjectId, const Nakama::NReadStorageObjectId& objectId);
+void assign(sNStorageObject* cObject, const NStorageObject& object);
+void assign(sNStorageObject*& cObjects, uint16_t& count, const Nakama::NStorageObjects& objects);
 
 void sNAccountDevice_free(sNAccountDevice& cDevice);
 void sNAccount_free(sNAccount& cAccount);
@@ -69,5 +79,6 @@ void sNGroupList_free(sNGroupList& cGroupList);
 void sNLeaderboardRecordList_free(sNLeaderboardRecordList& cRecordList);
 void sNMatch_free(sNMatch& cMatch);
 void sNMatchList_free(sNMatchList& cMatchList);
+void sNStorageObject_free(sNStorageObject* cObjects);
 
 NAKAMA_NAMESPACE_END

@@ -305,4 +305,98 @@ void assign(NRpc& rpc, const sNRpc* cRpc)
     rpc.httpKey = cRpc->httpKey;
 }
 
+void assign(NReadStorageObjectId& objId, const sNReadStorageObjectId* cObjId)
+{
+    objId.collection = cObjId->collection;
+    objId.key = cObjId->key;
+    objId.userId = cObjId->userId;
+}
+
+void assign(NDeleteStorageObjectId& objId, const sNDeleteStorageObjectId* cObjId)
+{
+    objId.collection = cObjId->collection;
+    objId.key = cObjId->key;
+    objId.version = cObjId->version;
+}
+
+void assign(NStorageObject& object, const sNStorageObject* cObject)
+{
+    object.collection = cObject->collection;
+    object.key = cObject->key;
+    object.userId = cObject->userId;
+    object.value = cObject->value;
+    object.version = cObject->version;
+    object.permissionRead = (NStoragePermissionRead)cObject->permissionRead;
+    object.permissionWrite = (NStoragePermissionWrite)cObject->permissionWrite;
+    object.createTime = cObject->createTime;
+    object.updateTime = cObject->updateTime;
+}
+
+void assign(sNStorageObject* cObject, const NStorageObject& object)
+{
+    cObject->collection = object.collection.c_str();
+    cObject->key = object.key.c_str();
+    cObject->userId = object.userId.c_str();
+    cObject->value = object.value.c_str();
+    cObject->version = object.version.c_str();
+    cObject->permissionRead = (eNStoragePermissionRead)object.permissionRead;
+    cObject->permissionWrite = (eNStoragePermissionWrite)object.permissionWrite;
+    cObject->createTime = object.createTime;
+    cObject->updateTime = object.updateTime;
+}
+
+void assign(NStorageObjects& objects, const sNStorageObject* cObjects, uint16_t count)
+{
+    objects.resize(count);
+
+    for (uint16_t i=0; i < count; ++i)
+    {
+        assign(objects[i], &cObjects[i]);
+    }
+}
+
+void assign(sNReadStorageObjectId& cObjectId, const NReadStorageObjectId& objectId)
+{
+    cObjectId.collection = objectId.collection.c_str();
+    cObjectId.key = objectId.key.c_str();
+    cObjectId.userId = objectId.userId.c_str();
+}
+
+void assign(sNStorageObject*& cObjects, uint16_t& count, const NStorageObjects& objects)
+{
+    cObjects = nullptr;
+    count = (uint16_t)objects.size();
+
+    if (count > 0)
+    {
+        cObjects = new sNStorageObject[count];
+
+        for (uint16_t i=0; i < count; ++i)
+        {
+            assign(&cObjects[i], objects[i]);
+        }
+    }
+}
+
+void assign(sNReadStorageObjectId*& objectIdsArray, uint16_t& count, const std::vector<NReadStorageObjectId>& objectIds)
+{
+    count = (uint16_t)objectIds.size();
+    objectIdsArray = nullptr;
+
+    if (count > 0)
+    {
+        objectIdsArray = new sNReadStorageObjectId[count];
+
+        for (uint16_t i=0; i < count; ++i)
+        {
+            assign(objectIdsArray[i], objectIds[i]);
+        }
+    }
+}
+
+void NReadStorageObjectId_free(sNReadStorageObjectId* objectIdsArray)
+{
+    delete[] objectIdsArray;
+}
+
 NAKAMA_NAMESPACE_END

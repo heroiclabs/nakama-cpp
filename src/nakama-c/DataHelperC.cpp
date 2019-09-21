@@ -37,6 +37,40 @@ void assign(std::vector<std::string>& strings, const char** cStrings, uint16_t c
     }
 }
 
+void assign(Nakama::NReadStorageObjectId& objectId, const sNReadStorageObjectId& cObjectId)
+{
+    objectId.collection = cObjectId.collection;
+    objectId.key = cObjectId.key;
+    objectId.userId = cObjectId.userId;
+}
+
+void assign(Nakama::NDeleteStorageObjectId& objectId, const sNDeleteStorageObjectId& cObjectId)
+{
+    objectId.collection = cObjectId.collection;
+    objectId.key = cObjectId.key;
+    objectId.version = cObjectId.version;
+}
+
+void assign(std::vector<Nakama::NDeleteStorageObjectId>& objectIds, const sNDeleteStorageObjectId* cObjectIds, uint16_t count)
+{
+    objectIds.resize(count);
+
+    for (uint16_t i=0; i < count; ++i)
+    {
+        assign(objectIds[i], cObjectIds[i]);
+    }
+}
+
+void assign(std::vector<Nakama::NReadStorageObjectId>& objectIds, const sNReadStorageObjectId* cObjectIds, uint16_t count)
+{
+    objectIds.resize(count);
+
+    for (uint16_t i = 0; i < count; ++i)
+    {
+        assign(objectIds[i], cObjectIds[i]);
+    }
+}
+
 void assign(tNError& cError, const Nakama::NError& error)
 {
     cError.code = (tNErrorCode)error.code;
@@ -258,7 +292,7 @@ void assign(sNLeaderboardRecordList& cRecordList, const Nakama::NLeaderboardReco
     }
 }
 
-void assign(sNUserPresence& cPresence, const NUserPresence& presence)
+void assign(sNUserPresence& cPresence, const Nakama::NUserPresence& presence)
 {
     cPresence.userId = presence.userId.c_str();
     cPresence.sessionId = presence.sessionId.c_str();
@@ -267,7 +301,7 @@ void assign(sNUserPresence& cPresence, const NUserPresence& presence)
     cPresence.status = presence.status.c_str();
 }
 
-void assign(sNUserPresence*& cPresences, uint16_t& cPresencesCount, const std::vector<NUserPresence>& presences)
+void assign(sNUserPresence*& cPresences, uint16_t& cPresencesCount, const std::vector<Nakama::NUserPresence>& presences)
 {
     cPresences = nullptr;
     cPresencesCount = (uint16_t)presences.size();
@@ -314,6 +348,35 @@ void assign(sNRpc& cRpc, const Nakama::NRpc& rpc)
     cRpc.id = rpc.id.c_str();
     cRpc.payload = rpc.payload.c_str();
     cRpc.httpKey = rpc.httpKey.c_str();
+}
+
+void assign(sNStorageObject* cObject, const NStorageObject& object)
+{
+    cObject->collection = object.collection.c_str();
+    cObject->key = object.key.c_str();
+    cObject->userId = object.userId.c_str();
+    cObject->value = object.value.c_str();
+    cObject->version = object.version.c_str();
+    cObject->permissionRead = (eNStoragePermissionRead)object.permissionRead;
+    cObject->permissionWrite = (eNStoragePermissionWrite)object.permissionWrite;
+    cObject->createTime = object.createTime;
+    cObject->updateTime = object.updateTime;
+}
+
+void assign(sNStorageObject*& cObjects, uint16_t& count, const Nakama::NStorageObjects& objects)
+{
+    cObjects = nullptr;
+    count = (uint16_t)objects.size();
+
+    if (count > 0)
+    {
+        cObjects = new sNStorageObject[count];
+
+        for (uint16_t i = 0; i < count; ++i)
+        {
+            assign(&cObjects[i], objects[i]);
+        }
+    }
 }
 
 void sNAccountDevice_free(sNAccountDevice& cDevice)
@@ -380,6 +443,11 @@ void sNMatchList_free(sNMatchList& cMatchList)
 
         delete[] cMatchList.matches;
     }
+}
+
+void sNStorageObject_free(sNStorageObject* cObjects)
+{
+    delete[] cObjects;
 }
 
 NAKAMA_NAMESPACE_END
