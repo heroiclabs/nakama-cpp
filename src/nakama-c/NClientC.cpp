@@ -899,9 +899,34 @@ void NClient_joinTournament(NClient client, NSession session, const char* tourna
     
 }
 
-void NClient_listStorageObjects(NClient client, NSession session, const char* collection, int32_t limit, const char* cursor, NClientReqData reqData, void(*successCallback)(const sNStorageObjectList*), NClientErrorCallback errorCallback)
+void NClient_listStorageObjects(
+    NClient client,
+    NSession session,
+    const char* collection,
+    int32_t limit,
+    const char* cursor,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNStorageObjectList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->listStorageObjects(
+        cppSession,
+        collection,
+        limit,
+        cursor ? cursor : "",
+        [client, reqData, successCallback](const Nakama::NStorageObjectListPtr& objList)
+        {
+            if (successCallback)
+            {
+                sNStorageObjectList cObjList;
+                Nakama::assign(cObjList, *objList);
+                successCallback(client, reqData, &cObjList);
+                Nakama::sNStorageObjectList_free(&cObjList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_listUsersStorageObjects(

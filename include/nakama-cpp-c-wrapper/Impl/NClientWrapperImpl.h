@@ -2006,7 +2006,23 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkStorageObjectListCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_listStorageObjects(_cClient,
+                getCSession(session),
+                collection.c_str(),
+                limit ? *limit : 0,
+                cursor ? cursor.value().c_str() : nullptr,
+                reqId,
+                &NClientWrapper::reqOkStorageObjectListStatic,
+                &NClientWrapper::reqErrorStatic);
         }
 
         static void reqOkStorageObjectListStatic(::NClient cClient, ::NClientReqData reqData, const sNStorageObjectList* cObjList)

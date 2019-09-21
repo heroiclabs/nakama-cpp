@@ -1124,7 +1124,7 @@ extern "C" {
         int32_t limit, // optional, pass 0
         const char* cursor, // optional, pass NULL
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNStorageObjectList*),
+        void (*successCallback)(NClient, NClientReqData, const sNStorageObjectList*),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 
