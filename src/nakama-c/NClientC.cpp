@@ -892,9 +892,24 @@ void NClient_listNotifications(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
-void NClient_deleteNotifications(NClient client, NSession session, const char** notificationIds, uint16_t notificationIdsCount, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+void NClient_deleteNotifications(
+    NClient client,
+    NSession session,
+    const char** notificationIds, uint16_t notificationIdsCount,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    std::vector<std::string> cppNotificationIds;
+
+    Nakama::assign(cppNotificationIds, notificationIds, notificationIdsCount);
+
+    cppClient->deleteNotifications(
+        cppSession,
+        cppNotificationIds,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_listChannelMessages(
