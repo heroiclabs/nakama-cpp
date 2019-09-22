@@ -389,9 +389,31 @@ void NClient_getAccount(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
-void NClient_updateAccount(NClient client, NSession session, const char* username, const char* displayName, const char* avatarUrl, const char* langTag, const char* location, const char* timezone, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+void NClient_updateAccount(
+    NClient client,
+    NSession session,
+    const char* username,
+    const char* displayName,
+    const char* avatarUrl,
+    const char* langTag,
+    const char* location,
+    const char* timezone,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->updateAccount(
+        cppSession,
+        username ? Nakama::opt::optional<std::string>(username) : Nakama::opt::nullopt,
+        displayName ? Nakama::opt::optional<std::string>(displayName) : Nakama::opt::nullopt,
+        avatarUrl ? Nakama::opt::optional<std::string>(avatarUrl) : Nakama::opt::nullopt,
+        langTag ? Nakama::opt::optional<std::string>(langTag) : Nakama::opt::nullopt,
+        location ? Nakama::opt::optional<std::string>(location) : Nakama::opt::nullopt,
+        timezone ? Nakama::opt::optional<std::string>(timezone) : Nakama::opt::nullopt,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_getUsers(
