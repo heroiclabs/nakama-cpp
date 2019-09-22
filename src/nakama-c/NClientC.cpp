@@ -332,7 +332,15 @@ void NClient_unlinkFacebook(NClient client, NSession session, const char* access
 
 void NClient_unlinkEmail(NClient client, NSession session, const char* email, const char* password, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->unlinkEmail(
+        cppSession,
+        email,
+        password,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_unlinkGoogle(NClient client, NSession session, const char* accessToken, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
