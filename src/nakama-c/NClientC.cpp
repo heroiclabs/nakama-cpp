@@ -451,7 +451,19 @@ void NClient_deleteFriends(
     NClientReqData reqData,
     void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    std::vector<std::string> cppIds, cppUsernames;
+
+    Nakama::assign(cppIds, ids, idsCount);
+    Nakama::assign(cppUsernames, usernames, usernamesCount);
+
+    cppClient->deleteFriends(
+        cppSession,
+        cppIds,
+        cppUsernames,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_blockFriends(NClient client,
