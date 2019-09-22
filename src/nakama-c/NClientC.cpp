@@ -589,9 +589,21 @@ void NClient_kickGroupUsers(NClient client, NSession session, const char* groupI
     
 }
 
-void NClient_joinGroup(NClient client, NSession session, const char* groupId, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+void NClient_joinGroup(
+    NClient client,
+    NSession session,
+    const char* groupId,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->joinGroup(
+        cppSession,
+        groupId,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_leaveGroup(
