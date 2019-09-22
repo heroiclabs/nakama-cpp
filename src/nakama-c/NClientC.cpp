@@ -678,9 +678,31 @@ void NClient_promoteGroupUsers(NClient client, NSession session, const char* gro
     
 }
 
-void NClient_updateGroup(NClient client, NSession session, const char* groupId, const char* name, const char* description, const char* avatarUrl, const char* langTag, const bool* open, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+void NClient_updateGroup(
+    NClient client,
+    NSession session,
+    const char* groupId,
+    const char* name,
+    const char* description,
+    const char* avatarUrl,
+    const char* langTag,
+    const bool* open,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->updateGroup(
+        cppSession,
+        groupId,
+        name ? Nakama::opt::optional<std::string>(name) : Nakama::opt::nullopt,
+        description ? Nakama::opt::optional<std::string>(description) : Nakama::opt::nullopt,
+        avatarUrl ? Nakama::opt::optional<std::string>(avatarUrl) : Nakama::opt::nullopt,
+        langTag ? Nakama::opt::optional<std::string>(langTag) : Nakama::opt::nullopt,
+        open ? Nakama::opt::optional<bool>(*open) : Nakama::opt::nullopt,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_listLeaderboardRecords(
