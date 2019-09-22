@@ -340,9 +340,30 @@ void NClient_unlinkGoogle(NClient client, NSession session, const char* accessTo
     
 }
 
-void NClient_unlinkGameCenter(NClient client, NSession session, const char* playerId, const char* bundleId, NTimestamp timestampSeconds, const char* salt, const char* signature, const char* publicKeyUrl, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+void NClient_unlinkGameCenter(
+    NClient client,
+    NSession session,
+    const char* playerId,
+    const char* bundleId,
+    NTimestamp timestampSeconds,
+    const char* salt,
+    const char* signature,
+    const char* publicKeyUrl,
+    NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->unlinkGameCenter(
+        cppSession,
+        playerId,
+        bundleId,
+        timestampSeconds,
+        salt,
+        signature,
+        publicKeyUrl,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_unlinkSteam(NClient client, NSession session, const char* token, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
