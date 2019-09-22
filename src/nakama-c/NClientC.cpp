@@ -864,9 +864,32 @@ void NClient_listMatches(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
-void NClient_listNotifications(NClient client, NSession session, int32_t limit, const char* cacheableCursor, NClientReqData reqData, void(*successCallback)(const sNNotificationList*), NClientErrorCallback errorCallback)
+void NClient_listNotifications(
+    NClient client,
+    NSession session,
+    int32_t limit,
+    const char* cacheableCursor,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNNotificationList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->listNotifications(
+        cppSession,
+        limit ? Nakama::opt::optional<uint32_t>(limit) : Nakama::opt::nullopt,
+        cacheableCursor ? Nakama::opt::optional<std::string>(cacheableCursor) : Nakama::opt::nullopt,
+        [client, reqData, successCallback](const Nakama::NNotificationListPtr& list)
+        {
+            if (successCallback)
+            {
+                sNNotificationList cList;
+                Nakama::assign(cList, *list);
+                successCallback(client, reqData, &cList);
+                Nakama::sNNotificationList_free(cList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_deleteNotifications(NClient client, NSession session, const char** notificationIds, uint16_t notificationIdsCount, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)

@@ -1870,6 +1870,26 @@ NAKAMA_NAMESPACE_BEGIN
                 &NClientWrapper::reqErrorStatic);
         }
 
+        static void reqOkNotificationListStatic(::NClient cClient, ::NClientReqData reqData, const sNNotificationList* cList)
+        {
+            getWrapper(cClient)->reqOkNotificationList(reqData, cList);
+        }
+
+        void reqOkNotificationList(::NClientReqData reqData, const sNNotificationList* cList)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkNotificationListCallbacks.find(reqData);
+                if (it != _reqOkNotificationListCallbacks.end())
+                {
+                    NNotificationListPtr list(new NNotificationList());
+                    assign(*list, cList);
+                    it->second(list);
+                    _reqOkNotificationListCallbacks.erase(it);
+                }
+            }
+        }
+
         void listNotifications(
             NSessionPtr session,
             const opt::optional<int32_t>& limit,
@@ -1878,7 +1898,22 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkNotificationListCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_listNotifications(_cClient,
+                getCSession(session),
+                limit ? limit.value() : 0,
+                cacheableCursor ? cacheableCursor.value().c_str() : nullptr,
+                reqId,
+                &NClientWrapper::reqOkNotificationListStatic,
+                &NClientWrapper::reqErrorStatic);
         }
 
         void deleteNotifications(
@@ -2398,6 +2433,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::map<NClientReqData, std::function<void(NStorageObjectListPtr)>> _reqOkStorageObjectListCallbacks;
         std::map<NClientReqData, std::function<void(NTournamentRecordListPtr)>> _reqOkTournamentRecordListCallbacks;
         std::map<NClientReqData, std::function<void(NTournamentListPtr)>> _reqOkTournamentListCallbacks;
+        std::map<NClientReqData, std::function<void(NNotificationListPtr)>> _reqOkNotificationListCallbacks;
     };
 
 NAKAMA_NAMESPACE_END

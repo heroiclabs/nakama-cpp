@@ -485,6 +485,34 @@ void assign(sNTournamentList& cList, const Nakama::NTournamentList& list)
     assign(cList.tournaments, cList.tournamentsCount, list.tournaments);
 }
 
+void assign(sNNotification* cN, const Nakama::NNotification& n)
+{
+    cN->id = n.id.c_str();
+    cN->subject = n.subject.c_str();
+    cN->content = n.content.c_str();
+    cN->code = n.code;
+    cN->senderId = n.senderId.c_str();
+    cN->createTime = n.createTime;
+    cN->persistent = n.persistent;
+}
+
+void assign(sNNotificationList& cList, const Nakama::NNotificationList& list)
+{
+    cList.cacheableCursor = list.cacheableCursor.c_str();
+    cList.notificationsCount = (uint16_t)list.notifications.size();
+    cList.notifications = nullptr;
+
+    if (cList.notificationsCount > 0)
+    {
+        cList.notifications = new sNNotification[cList.notificationsCount];
+
+        for (uint16_t i=0; i < cList.notificationsCount; ++i)
+        {
+            assign(&cList.notifications[i], list.notifications[i]);
+        }
+    }
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }
@@ -588,6 +616,12 @@ void sNTournamentList_free(sNTournamentList& cList)
 {
     delete[] cList.tournaments;
     cList.tournaments = nullptr;
+}
+
+void sNNotificationList_free(sNNotificationList& cList)
+{
+    delete[] cList.notifications;
+    cList.notifications = nullptr;
 }
 
 NAKAMA_NAMESPACE_END

@@ -492,6 +492,28 @@ void assign(NTournamentList& list, const sNTournamentList* cList)
     }
 }
 
+void assign(NNotification& n, const sNNotification* cN)
+{
+    n.id = cN->id;
+    n.subject = cN->subject;
+    n.content = cN->content;
+    n.code = cN->code;
+    n.senderId = cN->senderId;
+    n.createTime = cN->createTime;
+    n.persistent = cN->persistent;
+}
+
+void assign(NNotificationList& list, const sNNotificationList* cList)
+{
+    list.cacheableCursor = cList->cacheableCursor;
+    list.notifications.resize(cList->notificationsCount);
+
+    for (uint16_t i = 0; i < cList->notificationsCount; ++i)
+    {
+        assign(list.notifications[i], &cList->notifications[i]);
+    }
+}
+
 void NReadStorageObjectId_free(sNReadStorageObjectId* objectIdsArray)
 {
     delete[] objectIdsArray;

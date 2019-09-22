@@ -25,7 +25,7 @@ extern "C" {
 /// A collection of zero or more notifications.
 typedef struct NAKAMA_API NNotificationList
 {
-    const sNNotification* notifications;      ///< Collection of notifications.
+    sNNotification* notifications;            ///< Collection of notifications.
     uint16_t notificationsCount;
     const char* cacheableCursor;              ///< Use this cursor to paginate notifications. Cache this to catch up to new notifications.
 } sNNotificationList;

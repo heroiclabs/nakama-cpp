@@ -987,7 +987,7 @@ extern "C" {
         int32_t limit,// optional, pass 0
         const char* cacheableCursor,// optional, pass NULL
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNNotificationList*),
+        void (*successCallback)(NClient, NClientReqData, const sNNotificationList*),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 
