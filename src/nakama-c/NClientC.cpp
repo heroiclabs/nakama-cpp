@@ -825,9 +825,21 @@ void NClient_writeTournamentRecord(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
-void NClient_deleteLeaderboardRecord(NClient client, NSession session, const char* leaderboardId, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+void NClient_deleteLeaderboardRecord(
+    NClient client,
+    NSession session,
+    const char* leaderboardId,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->deleteLeaderboardRecord(
+        cppSession,
+        leaderboardId,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_listMatches(
