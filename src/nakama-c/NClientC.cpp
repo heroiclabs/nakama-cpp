@@ -297,7 +297,15 @@ void NClient_linkFacebook(NClient client, NSession session, const char* accessTo
 
 void NClient_linkEmail(NClient client, NSession session, const char* email, const char* password, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->linkEmail(
+        cppSession,
+        email,
+        password,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_linkDevice(NClient client, NSession session, const char* id, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
