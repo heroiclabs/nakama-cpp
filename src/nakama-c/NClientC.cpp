@@ -357,7 +357,14 @@ void NClient_unlinkDevice(NClient client, NSession session, const char* id, NCli
 
 void NClient_unlinkCustom(NClient client, NSession session, const char* id, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->unlinkCustom(
+        cppSession,
+        id,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_importFacebookFriends(
