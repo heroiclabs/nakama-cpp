@@ -307,7 +307,14 @@ void NClient_linkDevice(NClient client, NSession session, const char* id, NClien
 
 void NClient_linkGoogle(NClient client, NSession session, const char* accessToken, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->linkGoogle(
+        cppSession,
+        accessToken,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_linkGameCenter(NClient client, NSession session, const char* playerId, const char* bundleId, NTimestamp timestampSeconds, const char* salt, const char* signature, const char* publicKeyUrl, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
