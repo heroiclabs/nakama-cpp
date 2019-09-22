@@ -36,7 +36,7 @@ typedef struct NAKAMA_API NChannelMessageAck
     const char* groupId;            ///< The ID of the group, or an empty string if this message was not sent through a group channel.
     const char* userIdOne;          ///< The ID of the first DM user, or an empty string if this message was not sent through a DM chat.
     const char* userIdTwo;          ///< The ID of the second DM user, or an empty string if this message was not sent through a DM chat.
-} tNChannelMessageAck;
+} sNChannelMessageAck;
 
 #ifdef __cplusplus
 }

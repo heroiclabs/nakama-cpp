@@ -24,7 +24,7 @@ extern "C" {
 typedef struct NAKAMA_API NMatchmakerTicket
 {
     const char* ticket;      ///< The ticket that can be used to cancel matchmaking.
-} tNMatchmakerTicket;
+} sNMatchmakerTicket;
 
 #ifdef __cplusplus
 }

@@ -52,7 +52,11 @@ typedef uint64_t NTimestamp;
 #endif
 
 /// array of bytes
-//using NBytes = std::string;
+typedef struct NBytes
+{
+    uint8_t* bytes;
+    uint16_t size;
+} sNBytes;
 
 /// Constant for defaut port.
 /// This is not valid port, actual port will be selected automatically.

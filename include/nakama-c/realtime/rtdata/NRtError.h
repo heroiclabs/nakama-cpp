@@ -17,13 +17,14 @@
 #pragma once
 
 #include "nakama-c/NTypes.h"
+#include "nakama-c/NStringMap.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /// The selection of possible error codes.
-enum NAKAMA_API RtErrorCode
+typedef enum NAKAMA_API RtErrorCode
 {
     // client side errors
     RtErrorCode_CONNECT_ERROR                 = -1,           ///< Connect has failed.
@@ -38,18 +39,17 @@ enum NAKAMA_API RtErrorCode
     RtErrorCode_MATCH_JOIN_REJECTED           = 5,            ///< The match join was rejected.
     RtErrorCode_RUNTIME_FUNCTION_NOT_FOUND    = 6,            ///< The runtime function does not exist on the server.
     RtErrorCode_RUNTIME_FUNCTION_EXCEPTION    = 7             ///< The runtime function executed with an error.
-};
+} eRtErrorCode;
 
 /// A logical error which may occur on the server.
 typedef struct NAKAMA_API NRtError
 {
-    RtErrorCode code;                             ///< The error code
+    eRtErrorCode code;                            ///< The error code
     const char* message;                          ///< A message in English to help developers debug the response.
     NStringMap context;                           ///< Additional error details which may be different for each response.
-} tNRtError;
+} sNRtError;
 
-NAKAMA_API const char* toString(RtErrorCode code);
-NAKAMA_API void toString(const tNRtError* error, char* outString, uint16_t bufferSize);
+NAKAMA_API const char* RtErrorCode_toString(eRtErrorCode code);
 
 #ifdef __cplusplus
 }

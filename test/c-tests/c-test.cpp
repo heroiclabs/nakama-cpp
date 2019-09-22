@@ -25,7 +25,7 @@ namespace Test {
         destroyNakamaClient(client);
     }
 
-    static void TestErrorCallback(NClient client, const tNError*)
+    static void TestErrorCallback(NClient client, const sNError*)
     {
         stopCTest(client);
     }

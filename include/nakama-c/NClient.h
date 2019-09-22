@@ -37,6 +37,7 @@
 #include "nakama-c/data/NStorageObjectId.h"
 #include "nakama-c/data/NRpc.h"
 #include "nakama-c/NStringMap.h"
+#include "nakama-c/realtime/NRtClient.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,8 +45,8 @@ extern "C" {
 
     typedef void* NClient;
     typedef void* NClientReqData;
-    typedef void (*NClientDefaultErrorCallback)(NClient client, const tNError*);
-    typedef void (*NClientErrorCallback)(NClient client, NClientReqData reqData, const tNError*);
+    typedef void (*NClientDefaultErrorCallback)(NClient client, const sNError*);
+    typedef void (*NClientErrorCallback)(NClient client, NClientReqData reqData, const sNError*);
     typedef void (*NSessionCallback)(NClient client, NClientReqData reqData, NSession);
     typedef void (*NSuccessEmptyCallback)(NClient client, NClientReqData reqData);
 
@@ -93,10 +94,10 @@ extern "C" {
      * Create a new real-time client with parameters from client.
      *
      * @param port The port number of the server.
-     *        Default is 7350 for non-SSL connection, 443 for SSL.
+     *        Set NDEFAULT_PORT then: 7350 for non-SSL connection, 443 for SSL.
      * @return a new NRtClient instance.
      */
-    //NRtClientPtr NClient_createRtClient(NClient client, int32_t port = DEFAULT_PORT);
+    NAKAMA_API NRtClient NClient_createRtClient(NClient client, int32_t port);
     
     /**
      * Create a new real-time client with custom parameters.
@@ -104,7 +105,7 @@ extern "C" {
      * @param parameters The real-time client parameters.
      * @return a new NRtClient instance.
      */
-    //NRtClientPtr NClient_createRtClient(NClient client, const RtClientParameters& parameters);
+    NAKAMA_API NRtClient NClient_createRtClientEx(NClient client, const sRtClientParameters* parameters);
 
     /**
      * Authenticate a user with a device id.

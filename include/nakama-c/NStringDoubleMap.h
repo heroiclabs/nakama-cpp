@@ -22,47 +22,48 @@
 extern "C" {
 #endif
 
-    typedef void* NStringMap;
+    typedef void* NStringDoubleMap;
 
     /**
      * Creates string map.
      *
-     * @return NStringMap.
+     * @return NStringDoubleMap.
      */
-    NAKAMA_API NStringMap NStringMap_create();
+    NAKAMA_API NStringDoubleMap NStringDoubleMap_create();
 
     /**
      * @param map The string map.
      * @param key The key. The key value will be overwritten if it already exists.
      * @param value The value of a key.
      */
-    NAKAMA_API void NStringMap_setValue(NStringMap map, const char* key, const char* value);
+    NAKAMA_API void NStringDoubleMap_setValue(NStringDoubleMap map, const char* key, double value);
 
     /**
      * @param map The string map.
      * @param key The key to receive value for.
-     * @return value of the key. NULL is key was not found.
+     * @param value The returned value of the key.
+     * @return true if value found.
      */
-    NAKAMA_API const char* NStringMap_getValue(NStringMap map, const char* key);
+    NAKAMA_API bool NStringDoubleMap_getValue(NStringDoubleMap map, const char* key, double* value);
 
     /**
      * @param map The string map.
      * @param keysArray The output keys array. Allocate first.
      */
-    NAKAMA_API void NStringMap_getKeys(NStringMap map, const char** keysArray);
+    NAKAMA_API void NStringDoubleMap_getKeys(NStringDoubleMap map, const char** keysArray);
 
     /**
      * @param map The string map.
      * @return size of the map.
      */
-    NAKAMA_API uint16_t NStringMap_getSize(NStringMap map);
+    NAKAMA_API uint16_t NStringDoubleMap_getSize(NStringDoubleMap map);
 
     /**
      * Destroy a string map.
      *
      * @param map The string map.
      */
-    NAKAMA_API void NStringMap_destroy(NStringMap map);
+    NAKAMA_API void NStringDoubleMap_destroy(NStringDoubleMap map);
 
 #ifdef __cplusplus
 }

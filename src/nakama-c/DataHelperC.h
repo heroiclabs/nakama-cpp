@@ -36,6 +36,8 @@
 #include "nakama-c/data/NTournamentList.h"
 #include "nakama-c/data/NNotificationList.h"
 #include "nakama-c/data/NChannelMessageList.h"
+#include "nakama-c/realtime/rtdata/NRtError.h"
+#include "nakama-c/realtime/rtdata/NChannel.h"
 
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
@@ -57,6 +59,8 @@
 #include "nakama-cpp/data/NTournamentList.h"
 #include "nakama-cpp/data/NNotificationList.h"
 #include "nakama-cpp/data/NChannelMessageList.h"
+#include "nakama-cpp/realtime/rtdata/NRtError.h"
+#include "nakama-cpp/realtime/rtdata/NChannel.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -67,7 +71,8 @@ void assign(Nakama::NDeleteStorageObjectId& objectId, const sNDeleteStorageObjec
 void assign(Nakama::NStorageObjectWrite& cppObject, const sNStorageObjectWrite* object);
 void assign(std::vector<Nakama::NStorageObjectWrite>& cppObjects, const sNStorageObjectWrite* objects, uint16_t objectsCount);
 
-void assign(tNError& cError, const Nakama::NError& error);
+void assign(::NStringMap& cMap, const Nakama::NStringMap& map);
+void assign(sNError& cError, const Nakama::NError& error);
 void assign(sNAccount& cAccount, const Nakama::NAccount& account);
 void assign(sNUsers& cUsers, const Nakama::NUsers& users);
 void assign(sNFriendList& cFriends, const Nakama::NFriendList& friends);
@@ -94,6 +99,8 @@ void assign(sNNotification* cN, const Nakama::NNotification& n);
 void assign(sNNotificationList& cList, const Nakama::NNotificationList& list);
 void assign(sNChannelMessage& cMsg, const Nakama::NChannelMessage& msg);
 void assign(sNChannelMessageList& cList, const Nakama::NChannelMessageList& list);
+void assign(sNRtError& cError, const NRtError& error);
+void assign(sNChannel& cChannel, const NChannel& channel);
 
 void sNAccountDevice_free(sNAccountDevice& cDevice);
 void sNAccount_free(sNAccount& cAccount);
@@ -112,5 +119,6 @@ void sNTournamentRecordList_free(sNTournamentRecordList& cRecordList);
 void sNTournamentList_free(sNTournamentList& cList);
 void sNNotificationList_free(sNNotificationList& cList);
 void sNChannelMessageList_free(sNChannelMessageList& cList);
+void sNChannel_free(sNChannel& cChannel);
 
 NAKAMA_NAMESPACE_END

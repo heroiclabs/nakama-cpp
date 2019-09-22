@@ -55,12 +55,12 @@ NAKAMA_NAMESPACE_BEGIN
             return ((NSessionWrapper*)session.get())->getCSession();
         }
 
-        static void OnDefaultErrorStatic(::NClient cClient, const tNError* cError)
+        static void OnDefaultErrorStatic(::NClient cClient, const sNError* cError)
         {
             getWrapper(cClient)->OnDefaultError(cError);
         }
 
-        void OnDefaultError(const tNError* cError)
+        void OnDefaultError(const sNError* cError)
         {
             if (_defaultErrorCallback)
             {
@@ -132,12 +132,12 @@ NAKAMA_NAMESPACE_BEGIN
             }
         }
 
-        static void reqErrorStatic(::NClient cClient, ::NClientReqData reqData, const ::tNError* cError)
+        static void reqErrorStatic(::NClient cClient, ::NClientReqData reqData, const ::sNError* cError)
         {
             getWrapper(cClient)->reqError(reqData, cError);
         }
 
-        void reqError(::NClientReqData reqData, const ::tNError* cError)
+        void reqError(::NClientReqData reqData, const ::sNError* cError)
         {
             if (reqData != INVALID_REQ_ID)
             {

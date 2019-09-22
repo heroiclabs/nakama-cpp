@@ -24,15 +24,16 @@ NAKAMA_NAMESPACE_BEGIN
 void saveSession(NSessionPtr session);
 NSessionPtr getSession(::NSession session);
 NStringMap* findNStringMap(::NStringMap map);
+::NRtClient saveRtClient(NRtClientPtr client);
 
-Nakama::ErrorCallback createErrorCallback(NClient client, NClientReqData reqData, NClientErrorCallback errorCallback)
+Nakama::ErrorCallback createErrorCallback(NClient client, NClientReqData reqData, ::NClientErrorCallback errorCallback)
 {
     if (!errorCallback)
         return nullptr;
 
     return [client, reqData, errorCallback](const Nakama::NError& error)
     {
-        tNError cError;
+        sNError cError;
         assign(cError, error);
         errorCallback(client, reqData, &cError);
     };
@@ -78,7 +79,7 @@ void NClient_setErrorCallback(NClient client, NClientDefaultErrorCallback errorC
     {
         cppClient->setErrorCallback([client, errorCallback](const Nakama::NError& error)
         {
-            tNError cError;
+            sNError cError;
             assign(cError, error);
             errorCallback(client, &cError);
         });
@@ -115,6 +116,29 @@ void NClient_tick(NClient client)
     Nakama::NClientInterface* cppClient = getCppClient(client);
 
     cppClient->tick();
+}
+
+NRtClient NClient_createRtClient(NClient client, int32_t port)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+
+    auto cppRtClient = cppClient->createRtClient(port);
+
+    return Nakama::saveRtClient(cppRtClient);
+}
+
+NRtClient NClient_createRtClientEx(NClient client, const sRtClientParameters* parameters)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    Nakama::RtClientParameters cppParameters;
+
+    cppParameters.host = parameters->host;
+    cppParameters.port = parameters->port;
+    cppParameters.ssl  = parameters->ssl;
+
+    auto cppRtClient = cppClient->createRtClient(cppParameters);
+
+    return Nakama::saveRtClient(cppRtClient);
 }
 
 void NClient_authenticateDevice(

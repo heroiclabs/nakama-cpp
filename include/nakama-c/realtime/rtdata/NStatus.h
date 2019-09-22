@@ -25,9 +25,9 @@ extern "C" {
 /// A snapshot of statuses for some set of users.
 typedef struct NAKAMA_API NStatus
 {
-    const NUserPresence* presences;   ///< User statuses.
+    sNUserPresence* presences;          ///< User statuses.
     uint16_t presencesCount;
-} tNStatus;
+} sNStatus;
 
 #ifdef __cplusplus
 }

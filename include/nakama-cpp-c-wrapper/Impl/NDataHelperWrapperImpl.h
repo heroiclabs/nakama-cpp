@@ -81,7 +81,7 @@ NStringMap toCppNStringMap(::NStringMap map)
     return cMap;
 }
 
-void assign(NError& error, const tNError* cError)
+void assign(NError& error, const sNError* cError)
 {
     error.code = (ErrorCode)cError->code;
     error.message = cError->message;

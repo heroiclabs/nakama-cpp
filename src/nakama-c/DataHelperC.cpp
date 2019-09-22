@@ -92,7 +92,12 @@ void assign(std::vector<Nakama::NReadStorageObjectId>& objectIds, const sNReadSt
     }
 }
 
-void assign(tNError& cError, const Nakama::NError& error)
+void assign(::NStringMap& cMap, const Nakama::NStringMap& map)
+{
+    cMap = map.empty() ? nullptr : Nakama::saveNStringMap(map);
+}
+
+void assign(sNError& cError, const Nakama::NError& error)
 {
     cError.code = (tNErrorCode)error.code;
     assign(cError.message, error.message);
@@ -548,6 +553,24 @@ void assign(sNChannelMessageList& cList, const Nakama::NChannelMessageList& list
     cList.prevCursor = list.prevCursor.c_str();
 }
 
+void assign(sNRtError& cError, const NRtError& error)
+{
+    cError.code = (eRtErrorCode)error.code;
+    cError.message = error.message.c_str();
+    assign(cError.context, error.context);
+}
+
+void assign(sNChannel& cChannel, const NChannel& channel)
+{
+    cChannel.id = channel.id.c_str();
+    assign(cChannel.presences, cChannel.presencesCount, channel.presences);
+    assign(cChannel.self, channel.self);
+    cChannel.roomName = channel.roomName.c_str();
+    cChannel.groupId = channel.groupId.c_str();
+    cChannel.userIdOne = channel.userIdOne.c_str();
+    cChannel.userIdTwo = channel.userIdTwo.c_str();
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }
@@ -663,6 +686,12 @@ void sNChannelMessageList_free(sNChannelMessageList& cList)
 {
     delete[] cList.messages;
     cList.messages = nullptr;
+}
+
+void sNChannel_free(sNChannel& cChannel)
+{
+    delete[] cChannel.presences;
+    cChannel.presences = nullptr;
 }
 
 NAKAMA_NAMESPACE_END

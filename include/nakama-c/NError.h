@@ -61,10 +61,10 @@ extern "C" {
     {
         const char* message;
         tNErrorCode code;
-    } tNError;
+    } sNError;
 
-    NAKAMA_API const char* toString(tNErrorCode code);
-//    NAKAMA_API std::string toString(const NError& error);
+    NAKAMA_API const char* NErrorCode_toString(tNErrorCode code);
+    NAKAMA_API const char* NError_toString(const sNError* error);
 
 #ifdef __cplusplus
 }

@@ -20,7 +20,7 @@
 
 static bool stopTest = false;
 
-static void TestErrorCallback(NClient client, const tNError* error)
+static void TestErrorCallback(NClient client, const sNError* error)
 {
     // stop test
     printf("Failed\n");
