@@ -785,8 +785,11 @@ extern "C" {
     NAKAMA_API void NClient_listOwnUserGroups(
         NClient client,
         NSession session,
+        const int32_t* limit,              // optional, pass NULL
+        const eFriendState* state,         // optional, pass NULL
+        const char* cursor,                // optional, pass NULL
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNUserGroupList*),
+        void (*successCallback)(NClient, NClientReqData, const sNUserGroupList*),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 

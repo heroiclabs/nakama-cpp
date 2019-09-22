@@ -629,9 +629,16 @@ void NClient_listGroups(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
-void NClient_listOwnUserGroups(NClient client, NSession session, NClientReqData reqData, void(*successCallback)(const sNUserGroupList*), NClientErrorCallback errorCallback)
+void NClient_listOwnUserGroups(
+    NClient client,
+    NSession session,
+    const int32_t* limit,
+    const eFriendState* state,
+    const char* cursor,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNUserGroupList*), NClientErrorCallback errorCallback)
 {
-    
+    ::NClient_listUserGroups(client, session, ::NSession_getUserId(session), limit, state, cursor, reqData, successCallback, errorCallback);
 }
 
 void NClient_listUserGroups(
