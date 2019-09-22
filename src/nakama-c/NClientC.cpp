@@ -673,9 +673,26 @@ void NClient_listUserGroups(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
-void NClient_promoteGroupUsers(NClient client, NSession session, const char* groupId, const char** ids, uint16_t idsCount, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+void NClient_promoteGroupUsers(
+    NClient client,
+    NSession session,
+    const char* groupId,
+    const char** ids, uint16_t idsCount,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+    std::vector<std::string> cppIds;
+
+    Nakama::assign(cppIds, ids, idsCount);
+
+    cppClient->promoteGroupUsers(
+        cppSession,
+        groupId,
+        cppIds,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_updateGroup(
