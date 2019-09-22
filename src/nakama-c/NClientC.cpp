@@ -879,9 +879,40 @@ void NClient_listChannelMessages(NClient client, NSession session, const char* c
     
 }
 
-void NClient_listTournaments(NClient client, NSession session, const uint32_t* categoryStart, const uint32_t* categoryEnd, const uint32_t* startTime, const uint32_t* endTime, int32_t limit, const char* cursor, NClientReqData reqData, void(*successCallback)(const sNTournamentList*), NClientErrorCallback errorCallback)
+void NClient_listTournaments(
+    NClient client,
+    NSession session,
+    const uint32_t* categoryStart,
+    const uint32_t* categoryEnd,
+    const uint32_t* startTime,
+    const uint32_t* endTime,
+    int32_t limit,
+    const char* cursor,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNTournamentList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->listTournaments(
+        cppSession,
+        categoryStart ? Nakama::opt::optional<uint32_t>(*categoryStart) : Nakama::opt::nullopt,
+        categoryEnd ? Nakama::opt::optional<uint32_t>(*categoryEnd) : Nakama::opt::nullopt,
+        startTime ? Nakama::opt::optional<uint32_t>(*startTime) : Nakama::opt::nullopt,
+        endTime ? Nakama::opt::optional<uint32_t>(*endTime) : Nakama::opt::nullopt,
+        limit,
+        cursor ? Nakama::opt::optional<std::string>(cursor) : Nakama::opt::nullopt,
+        [client, reqData, successCallback](const Nakama::NTournamentListPtr& list)
+        {
+            if (successCallback)
+            {
+                sNTournamentList cList;
+                Nakama::assign(cList, *list);
+                successCallback(client, reqData, &cList);
+                Nakama::sNTournamentList_free(cList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_listTournamentRecords(

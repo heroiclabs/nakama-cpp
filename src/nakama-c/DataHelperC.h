@@ -33,6 +33,7 @@
 #include "nakama-c/data/NStorageObjectAck.h"
 #include "nakama-c/data/NStorageObjectList.h"
 #include "nakama-c/data/NTournamentRecordList.h"
+#include "nakama-c/data/NTournamentList.h"
 
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
@@ -51,6 +52,7 @@
 #include "nakama-cpp/data/NStorageObjectAck.h"
 #include "nakama-cpp/data/NStorageObjectList.h"
 #include "nakama-cpp/data/NTournamentRecordList.h"
+#include "nakama-cpp/data/NTournamentList.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -83,6 +85,7 @@ void assign(sNStorageObjectAck*& cAcks, uint16_t& count, const Nakama::NStorageO
 void assign(sNStorageObject* cObject, const Nakama::NStorageObject& object);
 void assign(sNStorageObjectList& cObjList, const Nakama::NStorageObjectList& objList);
 void assign(sNTournamentRecordList& cRecordList, const Nakama::NTournamentRecordList& recordList);
+void assign(sNTournamentList& cList, const Nakama::NTournamentList& list);
 
 void sNAccountDevice_free(sNAccountDevice& cDevice);
 void sNAccount_free(sNAccount& cAccount);
@@ -98,5 +101,6 @@ void sNStorageObjects_free(sNStorageObject* cObjects);
 void sNStorageObjectAcks_free(sNStorageObjectAck* cAcks);
 void sNStorageObjectList_free(sNStorageObjectList* cObjList);
 void sNTournamentRecordList_free(sNTournamentRecordList& cRecordList);
+void sNTournamentList_free(sNTournamentList& cList);
 
 NAKAMA_NAMESPACE_END

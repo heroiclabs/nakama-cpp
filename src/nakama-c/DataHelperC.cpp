@@ -442,6 +442,49 @@ void assign(sNTournamentRecordList& cRecordList, const Nakama::NTournamentRecord
     assign(cRecordList.ownerRecords, cRecordList.ownerRecordsCount, recordList.ownerRecords);
 }
 
+void assign(sNTournament* cT, const NTournament& t)
+{
+    cT->id = t.id.c_str();
+    cT->title = t.title.c_str();
+    cT->description = t.description.c_str();
+    cT->category = t.category;
+    cT->sortOrder = t.sortOrder;
+    cT->size = t.size;
+    cT->maxSize = t.maxSize;
+    cT->maxNumScore = t.maxNumScore;
+    cT->canEnter = t.canEnter;
+    cT->createTime = t.createTime;
+    cT->startTime = t.startTime;
+    cT->endTime = t.endTime;
+    cT->endActive = t.endActive;
+    cT->nextReset = t.nextReset;
+    cT->duration = t.duration;
+    cT->startActive = t.startActive;
+    cT->metadata = t.metadata.c_str();
+}
+
+void assign(sNTournament*& cList, uint16_t& count, const std::vector<Nakama::NTournament>& list)
+{
+    cList = nullptr;
+    count = (uint16_t)list.size();
+
+    if (count > 0)
+    {
+        cList = new sNTournament[count];
+
+        for (uint16_t i=0; i < count; ++i)
+        {
+            assign(&cList[i], list[i]);
+        }
+    }
+}
+
+void assign(sNTournamentList& cList, const Nakama::NTournamentList& list)
+{
+    cList.cursor = list.cursor.c_str();
+    assign(cList.tournaments, cList.tournamentsCount, list.tournaments);
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }
@@ -537,6 +580,14 @@ void sNTournamentRecordList_free(sNTournamentRecordList& cRecordList)
 {
     delete[] cRecordList.records;
     delete[] cRecordList.ownerRecords;
+    cRecordList.records = nullptr;
+    cRecordList.ownerRecords = nullptr;
+}
+
+void sNTournamentList_free(sNTournamentList& cList)
+{
+    delete[] cList.tournaments;
+    cList.tournaments = nullptr;
 }
 
 NAKAMA_NAMESPACE_END

@@ -25,7 +25,7 @@ extern "C" {
 /// A list of tournaments.
 typedef struct NAKAMA_API NTournamentList
 {
-    const sNTournament* tournaments;     ///< The list of tournaments returned.
+    sNTournament* tournaments;          ///< The list of tournaments returned.
     uint16_t tournamentsCount;
     const char* cursor;                 ///< A pagination cursor (optional).
 } sNTournamentList;

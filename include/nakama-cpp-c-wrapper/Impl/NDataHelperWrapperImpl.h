@@ -460,6 +460,38 @@ void assign(NTournamentRecordList& recordList, const sNTournamentRecordList* cRe
     recordList.prevCursor = cRecordList->prevCursor;
 }
 
+void assign(NTournament& t, const sNTournament* cT)
+{
+    t.id = cT->id;
+    t.title = cT->title;
+    t.description = cT->description;
+    t.category = cT->category;
+    t.sortOrder = cT->sortOrder;
+    t.size = cT->size;
+    t.maxSize = cT->maxSize;
+    t.maxNumScore = cT->maxNumScore;
+    t.canEnter = cT->canEnter;
+    t.createTime = cT->createTime;
+    t.startTime = cT->startTime;
+    t.endTime = cT->endTime;
+    t.endActive = cT->endActive;
+    t.nextReset = cT->nextReset;
+    t.duration = cT->duration;
+    t.startActive = cT->startActive;
+    t.metadata = cT->metadata;
+}
+
+void assign(NTournamentList& list, const sNTournamentList* cList)
+{
+    list.cursor = cList->cursor;
+    list.tournaments.resize(cList->tournamentsCount);
+
+    for (uint16_t i=0; i < cList->tournamentsCount; ++i)
+    {
+        assign(list.tournaments[i], &cList->tournaments[i]);
+    }
+}
+
 void NReadStorageObjectId_free(sNReadStorageObjectId* objectIdsArray)
 {
     delete[] objectIdsArray;
