@@ -337,7 +337,14 @@ void NClient_unlinkEmail(NClient client, NSession session, const char* email, co
 
 void NClient_unlinkGoogle(NClient client, NSession session, const char* accessToken, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->unlinkGoogle(
+        cppSession,
+        accessToken,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_unlinkGameCenter(
