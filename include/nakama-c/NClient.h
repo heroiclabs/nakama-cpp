@@ -1020,11 +1020,11 @@ extern "C" {
         NClient client,
         NSession session,
         const char* channelId,
-        int32_t limit,// optional, pass 0
-        const char* cursor,// optional, pass NULL
+        int32_t limit,                     // optional, pass 0
+        const char* cursor,                // optional, pass NULL
         bool forward,
         NClientReqData reqData,            // optional, pass NULL
-        void (*successCallback)(const sNChannelMessageList*),
+        void (*successCallback)(NClient, NClientReqData, const sNChannelMessageList*),
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 

@@ -25,7 +25,7 @@ extern "C" {
 /// A list of channel messages, usually a result of a list operation.
 typedef struct NAKAMA_API NChannelMessageList
 {
-    const sNChannelMessage* messages;            ///< A list of messages.
+    sNChannelMessage* messages;                  ///< A list of messages.
     uint16_t messagesCount;                      ///< Messages count.
     const char* nextCursor;                      ///< The cursor to send when retireving the next page, if any.
     const char* prevCursor;                      ///< The cursor to send when retrieving the previous page, if any.

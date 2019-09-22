@@ -1955,6 +1955,26 @@ NAKAMA_NAMESPACE_BEGIN
             delete[] notificationIdsArray;
         }
 
+        static void reqOkChannelMessageListStatic(::NClient cClient, ::NClientReqData reqData, const sNChannelMessageList* cList)
+        {
+            getWrapper(cClient)->reqOkChannelMessageList(reqData, cList);
+        }
+
+        void reqOkChannelMessageList(::NClientReqData reqData, const sNChannelMessageList* cList)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkChannelMessageListCallbacks.find(reqData);
+                if (it != _reqOkChannelMessageListCallbacks.end())
+                {
+                    NChannelMessageListPtr list(new NChannelMessageList());
+                    assign(*list, cList);
+                    it->second(list);
+                    _reqOkChannelMessageListCallbacks.erase(it);
+                }
+            }
+        }
+
         void listChannelMessages(
             NSessionPtr session,
             const std::string& channelId,
@@ -1965,7 +1985,24 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback
         ) override
         {
-            NOT_IMPLEMENTED
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkChannelMessageListCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_listChannelMessages(_cClient,
+                getCSession(session),
+                channelId.c_str(),
+                limit ? limit.value() : 0,
+                cursor ? cursor.value().c_str() : nullptr,
+                forward ? *forward : true,
+                reqId,
+                &NClientWrapper::reqOkChannelMessageListStatic,
+                &NClientWrapper::reqErrorStatic);
         }
 
         static void reqOkTournamentListStatic(::NClient cClient, ::NClientReqData reqData, const sNTournamentList* cList)
@@ -2434,6 +2471,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::map<NClientReqData, std::function<void(NTournamentRecordListPtr)>> _reqOkTournamentRecordListCallbacks;
         std::map<NClientReqData, std::function<void(NTournamentListPtr)>> _reqOkTournamentListCallbacks;
         std::map<NClientReqData, std::function<void(NNotificationListPtr)>> _reqOkNotificationListCallbacks;
+        std::map<NClientReqData, std::function<void(NChannelMessageListPtr)>> _reqOkChannelMessageListCallbacks;
     };
 
 NAKAMA_NAMESPACE_END

@@ -514,6 +514,35 @@ void assign(NNotificationList& list, const sNNotificationList* cList)
     }
 }
 
+void assign(NChannelMessage& msg, const sNChannelMessage* cMsg)
+{
+    msg.channelId = cMsg->channelId;
+    msg.messageId = cMsg->messageId;
+    msg.code = cMsg->code;
+    msg.senderId = cMsg->senderId;
+    msg.username = cMsg->username;
+    msg.content = cMsg->content;
+    msg.createTime = cMsg->createTime;
+    msg.updateTime = cMsg->updateTime;
+    msg.persistent = cMsg->persistent;
+    msg.roomName = cMsg->roomName;
+    msg.groupId = cMsg->groupId;
+    msg.userIdOne = cMsg->userIdOne;
+    msg.userIdTwo = cMsg->userIdTwo;
+}
+
+void assign(NChannelMessageList& list, const sNChannelMessageList* cList)
+{
+    list.messages.resize(cList->messagesCount);
+    for (uint16_t i=0; i < cList->messagesCount; ++i)
+    {
+        assign(list.messages[i], &cList->messages[i]);
+    }
+
+    list.nextCursor = cList->nextCursor;
+    list.prevCursor = cList->prevCursor;
+}
+
 void NReadStorageObjectId_free(sNReadStorageObjectId* objectIdsArray)
 {
     delete[] objectIdsArray;

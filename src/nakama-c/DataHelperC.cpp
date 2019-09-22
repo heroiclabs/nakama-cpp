@@ -513,6 +513,41 @@ void assign(sNNotificationList& cList, const Nakama::NNotificationList& list)
     }
 }
 
+void assign(sNChannelMessage& cMsg, const Nakama::NChannelMessage& msg)
+{
+    cMsg.channelId = msg.channelId.c_str();
+    cMsg.messageId = msg.messageId.c_str();
+    cMsg.code = msg.code;
+    cMsg.senderId = msg.senderId.c_str();
+    cMsg.username = msg.username.c_str();
+    cMsg.content = msg.content.c_str();
+    cMsg.createTime = msg.createTime;
+    cMsg.updateTime = msg.updateTime;
+    cMsg.persistent = msg.persistent;
+    cMsg.roomName = msg.roomName.c_str();
+    cMsg.groupId = msg.groupId.c_str();
+    cMsg.userIdOne = msg.userIdOne.c_str();
+    cMsg.userIdTwo = msg.userIdTwo.c_str();
+}
+
+void assign(sNChannelMessageList& cList, const Nakama::NChannelMessageList& list)
+{
+    cList.messages = nullptr;
+    cList.messagesCount = (uint16_t)list.messages.size();
+    if (cList.messagesCount > 0)
+    {
+        cList.messages = new sNChannelMessage[cList.messagesCount];
+
+        for (uint16_t i=0; i < cList.messagesCount; ++i)
+        {
+            assign(cList.messages[i], list.messages[i]);
+        }
+    }
+
+    cList.nextCursor = list.nextCursor.c_str();
+    cList.prevCursor = list.prevCursor.c_str();
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }
@@ -622,6 +657,12 @@ void sNNotificationList_free(sNNotificationList& cList)
 {
     delete[] cList.notifications;
     cList.notifications = nullptr;
+}
+
+void sNChannelMessageList_free(sNChannelMessageList& cList)
+{
+    delete[] cList.messages;
+    cList.messages = nullptr;
 }
 
 NAKAMA_NAMESPACE_END

@@ -35,6 +35,7 @@
 #include "nakama-c/data/NTournamentRecordList.h"
 #include "nakama-c/data/NTournamentList.h"
 #include "nakama-c/data/NNotificationList.h"
+#include "nakama-c/data/NChannelMessageList.h"
 
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
@@ -55,6 +56,7 @@
 #include "nakama-cpp/data/NTournamentRecordList.h"
 #include "nakama-cpp/data/NTournamentList.h"
 #include "nakama-cpp/data/NNotificationList.h"
+#include "nakama-cpp/data/NChannelMessageList.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -90,6 +92,8 @@ void assign(sNTournamentRecordList& cRecordList, const Nakama::NTournamentRecord
 void assign(sNTournamentList& cList, const Nakama::NTournamentList& list);
 void assign(sNNotification* cN, const Nakama::NNotification& n);
 void assign(sNNotificationList& cList, const Nakama::NNotificationList& list);
+void assign(sNChannelMessage& cMsg, const Nakama::NChannelMessage& msg);
+void assign(sNChannelMessageList& cList, const Nakama::NChannelMessageList& list);
 
 void sNAccountDevice_free(sNAccountDevice& cDevice);
 void sNAccount_free(sNAccount& cAccount);
@@ -107,5 +111,6 @@ void sNStorageObjectList_free(sNStorageObjectList* cObjList);
 void sNTournamentRecordList_free(sNTournamentRecordList& cRecordList);
 void sNTournamentList_free(sNTournamentList& cList);
 void sNNotificationList_free(sNNotificationList& cList);
+void sNChannelMessageList_free(sNChannelMessageList& cList);
 
 NAKAMA_NAMESPACE_END

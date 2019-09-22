@@ -897,9 +897,36 @@ void NClient_deleteNotifications(NClient client, NSession session, const char** 
     
 }
 
-void NClient_listChannelMessages(NClient client, NSession session, const char* channelId, int32_t limit, const char* cursor, bool forward, NClientReqData reqData, void(*successCallback)(const sNChannelMessageList*), NClientErrorCallback errorCallback)
+void NClient_listChannelMessages(
+    NClient client,
+    NSession session,
+    const char* channelId,
+    int32_t limit,
+    const char* cursor,
+    bool forward,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNChannelMessageList*), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->listChannelMessages(
+        cppSession,
+        channelId,
+        limit ? Nakama::opt::optional<uint32_t>(limit) : Nakama::opt::nullopt,
+        cursor ? Nakama::opt::optional<std::string>(cursor) : Nakama::opt::nullopt,
+        forward,
+        [client, reqData, successCallback](const Nakama::NChannelMessageListPtr& list)
+        {
+            if (successCallback)
+            {
+                sNChannelMessageList cList;
+                Nakama::assign(cList, *list);
+                successCallback(client, reqData, &cList);
+                Nakama::sNChannelMessageList_free(cList);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_listTournaments(
