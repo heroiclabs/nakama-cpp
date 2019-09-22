@@ -360,9 +360,23 @@ void NClient_unlinkCustom(NClient client, NSession session, const char* id, NCli
     
 }
 
-void NClient_importFacebookFriends(NClient client, NSession session, const char* token, bool reset, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+void NClient_importFacebookFriends(
+    NClient client,
+    NSession session,
+    const char* token,
+    bool reset,
+    NClientReqData reqData,
+    void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
-    
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->importFacebookFriends(
+        cppSession,
+        token,
+        reset,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NClient_getAccount(
