@@ -17,6 +17,8 @@
 #pragma once
 
 #include "nakama-c/NError.h"
+#include "nakama-c/NStringMap.h"
+#include "nakama-c/NStringDoubleMap.h"
 #include "nakama-c/data/NAccount.h"
 #include "nakama-c/data/NUsers.h"
 #include "nakama-c/data/NFriendList.h"
@@ -38,6 +40,17 @@
 #include "nakama-c/data/NChannelMessageList.h"
 #include "nakama-c/realtime/rtdata/NRtError.h"
 #include "nakama-c/realtime/rtdata/NChannel.h"
+#include "nakama-c/realtime/rtdata/NStatus.h"
+#include "nakama-c/realtime/rtdata/NMatchmakerTicket.h"
+#include "nakama-c/realtime/rtdata/NChannelMessageAck.h"
+#include "nakama-c/realtime/rtdata/NChannelPresenceEvent.h"
+#include "nakama-c/realtime/rtdata/NMatchmakerMatched.h"
+#include "nakama-c/realtime/rtdata/NMatchData.h"
+#include "nakama-c/realtime/rtdata/NMatchPresenceEvent.h"
+#include "nakama-c/realtime/rtdata/NStatusPresenceEvent.h"
+#include "nakama-c/realtime/rtdata/NStreamPresenceEvent.h"
+#include "nakama-c/realtime/rtdata/NStreamData.h"
+#include "nakama-c/realtime/NRtClientDisconnectInfo.h"
 
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
@@ -61,6 +74,17 @@
 #include "nakama-cpp/data/NChannelMessageList.h"
 #include "nakama-cpp/realtime/rtdata/NRtError.h"
 #include "nakama-cpp/realtime/rtdata/NChannel.h"
+#include "nakama-cpp/realtime/rtdata/NStatus.h"
+#include "nakama-cpp/realtime/rtdata/NMatchmakerTicket.h"
+#include "nakama-cpp/realtime/rtdata/NChannelMessageAck.h"
+#include "nakama-cpp/realtime/rtdata/NChannelPresenceEvent.h"
+#include "nakama-cpp/realtime/rtdata/NMatchmakerMatched.h"
+#include "nakama-cpp/realtime/rtdata/NMatchData.h"
+#include "nakama-cpp/realtime/rtdata/NMatchPresenceEvent.h"
+#include "nakama-cpp/realtime/rtdata/NStatusPresenceEvent.h"
+#include "nakama-cpp/realtime/rtdata/NStreamPresenceEvent.h"
+#include "nakama-cpp/realtime/rtdata/NStreamData.h"
+#include "nakama-cpp/realtime/NRtClientDisconnectInfo.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -70,8 +94,15 @@ void assign(std::vector<Nakama::NReadStorageObjectId>& objectIds, const sNReadSt
 void assign(Nakama::NDeleteStorageObjectId& objectId, const sNDeleteStorageObjectId& cObjectId);
 void assign(Nakama::NStorageObjectWrite& cppObject, const sNStorageObjectWrite* object);
 void assign(std::vector<Nakama::NStorageObjectWrite>& cppObjects, const sNStorageObjectWrite* objects, uint16_t objectsCount);
+void assign(std::vector<Nakama::NUserPresence>& presences, const sNUserPresence* cPresences, uint16_t count);
+void assign(Nakama::NUserPresence& presence, const sNUserPresence& cPresence);
+void assign(Nakama::NBytes& data, const sNBytes* cData);
+void assign(Nakama::NStringMap& map, ::NStringMap cMap);
+void assign(Nakama::NStringDoubleMap& map, ::NStringDoubleMap cMap);
 
 void assign(::NStringMap& cMap, const Nakama::NStringMap& map);
+void assign(::NStringDoubleMap& cMap, const Nakama::NStringDoubleMap& map);
+void assign(sNBytes& cData, const Nakama::NBytes& data);
 void assign(sNError& cError, const Nakama::NError& error);
 void assign(sNAccount& cAccount, const Nakama::NAccount& account);
 void assign(sNUsers& cUsers, const Nakama::NUsers& users);
@@ -101,7 +132,24 @@ void assign(sNChannelMessage& cMsg, const Nakama::NChannelMessage& msg);
 void assign(sNChannelMessageList& cList, const Nakama::NChannelMessageList& list);
 void assign(sNRtError& cError, const NRtError& error);
 void assign(sNChannel& cChannel, const NChannel& channel);
+void assign(sNRtClientDisconnectInfo& cInfo, const Nakama::NRtClientDisconnectInfo& info);
+void assign(sNStatus& cStatus, const Nakama::NStatus& status);
+void assign(sNUserPresence& cPresence, const Nakama::NUserPresence& presence);
+void assign(sNUserPresence*& cPresences, uint16_t& cPresencesCount, const std::vector<Nakama::NUserPresence>& presences);
+void assign(sNMatchmakerTicket& cTicket, const Nakama::NMatchmakerTicket& ticket);
+void assign(sNChannelMessageAck& cAck, const Nakama::NChannelMessageAck& ack);
+void assign(sNChannelPresenceEvent& cPresence, const Nakama::NChannelPresenceEvent& presence);
+void assign(sNMatchmakerUser& cUser, const Nakama::NMatchmakerUser& user);
+void assign(sNMatchmakerUser*& cUsers, uint16_t& count, const std::vector<Nakama::NMatchmakerUser>& users);
+void assign(sNMatchmakerMatched& cMatched, const Nakama::NMatchmakerMatched& matched);
+void assign(sNMatchData& cData, const Nakama::NMatchData& data);
+void assign(sNMatchPresenceEvent& cEvent, const Nakama::NMatchPresenceEvent& event);
+void assign(sNStatusPresenceEvent& cEvent, const Nakama::NStatusPresenceEvent& event);
+void assign(sNStream& cStream, const Nakama::NStream& stream);
+void assign(sNStreamPresenceEvent& cEvent, const Nakama::NStreamPresenceEvent& event);
+void assign(sNStreamData& cData, const Nakama::NStreamData& data);
 
+void sNRtError_free(sNRtError& cError);
 void sNAccountDevice_free(sNAccountDevice& cDevice);
 void sNAccount_free(sNAccount& cAccount);
 void sNUsers_free(sNUsers& cUsers);
@@ -120,5 +168,12 @@ void sNTournamentList_free(sNTournamentList& cList);
 void sNNotificationList_free(sNNotificationList& cList);
 void sNChannelMessageList_free(sNChannelMessageList& cList);
 void sNChannel_free(sNChannel& cChannel);
+void sNStatus_free(sNStatus& cStatus);
+void sNChannelPresenceEvent_free(sNChannelPresenceEvent& cPresence);
+void sNMatchmakerUser_free(sNMatchmakerUser& user);
+void sNMatchmakerMatched_free(sNMatchmakerMatched& cMatched);
+void sNMatchPresenceEvent_free(sNMatchPresenceEvent& cEvent);
+void sNStatusPresenceEvent_free(sNStatusPresenceEvent& cEvent);
+void sNStreamPresenceEvent_free(sNStreamPresenceEvent& cEvent);
 
 NAKAMA_NAMESPACE_END

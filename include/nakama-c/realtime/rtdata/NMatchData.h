@@ -27,10 +27,10 @@ extern "C" {
 typedef struct NAKAMA_API NMatchData
 {
     const char* matchId;       ///< The match unique ID.
-    NUserPresence presence;    ///< A reference to the user presence that sent this data, if any.
+    sNUserPresence presence;   ///< A reference to the user presence that sent this data, if any.
     int64_t opCode;            ///< Op code value.
-    NBytes data;               ///< Data payload, if any.
-} tNMatchData;
+    sNBytes data;              ///< Data payload, if any.
+} sNMatchData;
 
 #ifdef __cplusplus
 }

@@ -21,6 +21,7 @@
 NAKAMA_NAMESPACE_BEGIN
 
 ::NStringMap saveNStringMap(const NStringMap& map);
+::NStringDoubleMap saveNStringDoubleMap(const NStringDoubleMap& map);
 
 void assign(const char*& s, const std::string& str)
 {
@@ -72,6 +73,96 @@ void assign(std::vector<Nakama::NStorageObjectWrite>& cppObjects, const sNStorag
     }
 }
 
+void assign(std::vector<Nakama::NUserPresence>& presences, const sNUserPresence* cPresences, uint16_t count)
+{
+    presences.resize(count);
+
+    for (uint16_t i=0; i < count; ++i)
+    {
+        assign(presences[i], cPresences[i]);
+    }
+}
+
+void assign(Nakama::NBytes& data, const sNBytes* cData)
+{
+    if (cData)
+    {
+        data.resize(cData->size);
+        for (uint16_t i=0; i < cData->size; ++i)
+        {
+            data[i] = cData->bytes[i];
+        }
+    }
+}
+
+void assign(sNBytes& cData, const Nakama::NBytes& data)
+{
+    cData.bytes = (uint8_t*)data.data();
+    cData.size = (uint16_t)data.size();
+}
+
+NStringMap toCppNStringMap(::NStringMap map)
+{
+    NStringMap cppMap;
+
+    if (map)
+    {
+        auto size = ::NStringMap_getSize(map);
+
+        if (size > 0)
+        {
+            const char** keys = new const char* [size];
+            ::NStringMap_getKeys(map, keys);
+
+            for (uint16_t i = 0; i < size; ++i)
+            {
+                cppMap.emplace(keys[i], ::NStringMap_getValue(map, keys[i]));
+            }
+
+            delete[] keys;
+        }
+    }
+
+    return cppMap;
+}
+
+NStringDoubleMap toCppNStringDoubleMap(::NStringDoubleMap map)
+{
+    NStringDoubleMap cppMap;
+
+    if (map)
+    {
+        auto size = ::NStringDoubleMap_getSize(map);
+
+        if (size > 0)
+        {
+            double value = 0;
+            const char** keys = new const char* [size];
+            ::NStringDoubleMap_getKeys(map, keys);
+
+            for (uint16_t i = 0; i < size; ++i)
+            {
+                if (::NStringDoubleMap_getValue(map, keys[i], &value))
+                    cppMap.emplace(keys[i], value);
+            }
+
+            delete[] keys;
+        }
+    }
+
+    return cppMap;
+}
+
+void assign(Nakama::NStringMap& map, const ::NStringMap cMap)
+{
+    map = toCppNStringMap(cMap);
+}
+
+void assign(Nakama::NStringDoubleMap& map, ::NStringDoubleMap cMap)
+{
+    map = toCppNStringDoubleMap(cMap);
+}
+
 void assign(std::vector<Nakama::NDeleteStorageObjectId>& objectIds, const sNDeleteStorageObjectId* cObjectIds, uint16_t count)
 {
     objectIds.resize(count);
@@ -95,6 +186,11 @@ void assign(std::vector<Nakama::NReadStorageObjectId>& objectIds, const sNReadSt
 void assign(::NStringMap& cMap, const Nakama::NStringMap& map)
 {
     cMap = map.empty() ? nullptr : Nakama::saveNStringMap(map);
+}
+
+void assign(::NStringDoubleMap& cMap, const Nakama::NStringDoubleMap& map)
+{
+    cMap = map.empty() ? nullptr : Nakama::saveNStringDoubleMap(map);
 }
 
 void assign(sNError& cError, const Nakama::NError& error)
@@ -312,6 +408,15 @@ void assign(sNLeaderboardRecordList& cRecordList, const Nakama::NLeaderboardReco
     assign(cRecordList.ownerRecords, cRecordList.ownerRecordsCount, recordList.ownerRecords);
 }
 
+void assign(Nakama::NUserPresence& presence, const sNUserPresence& cPresence)
+{
+    presence.userId = cPresence.userId;
+    presence.sessionId = cPresence.sessionId;
+    presence.username = cPresence.username;
+    presence.persistence = cPresence.persistence;
+    presence.status = cPresence.status;
+}
+
 void assign(sNUserPresence& cPresence, const Nakama::NUserPresence& presence)
 {
     cPresence.userId = presence.userId.c_str();
@@ -319,6 +424,112 @@ void assign(sNUserPresence& cPresence, const Nakama::NUserPresence& presence)
     cPresence.username = presence.username.c_str();
     cPresence.persistence = presence.persistence;
     cPresence.status = presence.status.c_str();
+}
+
+void assign(sNMatchmakerTicket& cTicket, const Nakama::NMatchmakerTicket& ticket)
+{
+    cTicket.ticket = ticket.ticket.c_str();
+}
+
+void assign(sNChannelMessageAck& cAck, const Nakama::NChannelMessageAck& ack)
+{
+    cAck.channelId = ack.channelId.c_str();
+    cAck.messageId = ack.messageId.c_str();
+    cAck.username = ack.username.c_str();
+    cAck.code = ack.code;
+    cAck.createTime = ack.createTime;
+    cAck.updateTime = ack.updateTime;
+    cAck.persistent = ack.persistent;
+    cAck.roomName = ack.roomName.c_str();
+    cAck.groupId = ack.groupId.c_str();
+    cAck.userIdOne = ack.userIdOne.c_str();
+    cAck.userIdTwo = ack.userIdTwo.c_str();
+}
+
+void assign(sNChannelPresenceEvent& cPresence, const Nakama::NChannelPresenceEvent& presence)
+{
+    cPresence.channelId = presence.channelId.c_str();
+    assign(cPresence.joins, cPresence.joinsCount, presence.joins);
+    assign(cPresence.leaves, cPresence.leavesCount, presence.leaves);
+    cPresence.roomName  = presence.roomName.c_str();
+    cPresence.groupId   = presence.groupId.c_str();
+    cPresence.userIdOne = presence.userIdOne.c_str();
+    cPresence.userIdTwo = presence.userIdTwo.c_str();
+}
+
+void assign(sNMatchmakerUser& cUser, const Nakama::NMatchmakerUser& user)
+{
+    assign(cUser.presence, user.presence);
+    assign(cUser.stringProperties, user.stringProperties);
+    assign(cUser.numericProperties, user.numericProperties);
+}
+
+void assign(sNMatchmakerUser*& cUsers, uint16_t& count, const std::vector<Nakama::NMatchmakerUser>& users)
+{
+    cUsers = nullptr;
+    count = (uint16_t)users.size();
+
+    if (count > 0)
+    {
+        cUsers = new sNMatchmakerUser[count];
+
+        for (uint16_t i=0; i < count; ++i)
+        {
+            assign(cUsers[i], users[i]);
+        }
+    }
+}
+
+void assign(sNMatchmakerMatched& cMatched, const Nakama::NMatchmakerMatched& matched)
+{
+    cMatched.ticket  = matched.ticket.c_str();
+    cMatched.matchId = matched.matchId.c_str();
+    cMatched.token   = matched.token.c_str();
+    assign(cMatched.users, cMatched.usersCount, matched.users);
+    assign(cMatched.self, matched.self);
+}
+
+void assign(sNMatchData& cData, const Nakama::NMatchData& data)
+{
+    cData.matchId = data.matchId.c_str();
+    assign(cData.presence, data.presence);
+    cData.opCode = data.opCode;
+    assign(cData.data, data.data);
+}
+
+void assign(sNMatchPresenceEvent& cEvent, const Nakama::NMatchPresenceEvent& event)
+{
+    cEvent.matchId = event.matchId.c_str();
+    assign(cEvent.joins, cEvent.joinsCount, event.joins);
+    assign(cEvent.leaves, cEvent.leavesCount, event.leaves);
+}
+
+void assign(sNStatusPresenceEvent& cEvent, const Nakama::NStatusPresenceEvent& event)
+{
+    assign(cEvent.joins, cEvent.joinsCount, event.joins);
+    assign(cEvent.leaves, cEvent.leavesCount, event.leaves);
+}
+
+void assign(sNStream& cStream, const Nakama::NStream& stream)
+{
+    cStream.mode = stream.mode;
+    cStream.subject = stream.subject.c_str();
+    cStream.subcontext = stream.subcontext.c_str();
+    cStream.label = stream.label.c_str();
+}
+
+void assign(sNStreamPresenceEvent& cEvent, const Nakama::NStreamPresenceEvent& event)
+{
+    assign(cEvent.stream, event.stream);
+    assign(cEvent.joins, cEvent.joinsCount, event.joins);
+    assign(cEvent.leaves, cEvent.leavesCount, event.leaves);
+}
+
+void assign(sNStreamData& cData, const Nakama::NStreamData& data)
+{
+    assign(cData.stream, data.stream);
+    assign(cData.sender, data.sender);
+    cData.data = data.data.c_str();
 }
 
 void assign(sNUserPresence*& cPresences, uint16_t& cPresencesCount, const std::vector<Nakama::NUserPresence>& presences)
@@ -571,6 +782,24 @@ void assign(sNChannel& cChannel, const NChannel& channel)
     cChannel.userIdTwo = channel.userIdTwo.c_str();
 }
 
+void assign(sNRtClientDisconnectInfo& cInfo, const Nakama::NRtClientDisconnectInfo& info)
+{
+    cInfo.code = info.code;
+    cInfo.reason = info.reason.c_str();
+    cInfo.remote = info.remote;
+}
+
+void assign(sNStatus& cStatus, const Nakama::NStatus& status)
+{
+    assign(cStatus.presences, cStatus.presencesCount, status.presences);
+}
+
+void sNRtError_free(sNRtError& cError)
+{
+    ::NStringMap_destroy(cError.context);
+    cError.context = nullptr;
+}
+
 void sNAccountDevice_free(sNAccountDevice& cDevice)
 {
 }
@@ -692,6 +921,63 @@ void sNChannel_free(sNChannel& cChannel)
 {
     delete[] cChannel.presences;
     cChannel.presences = nullptr;
+}
+
+void sNStatus_free(sNStatus& cStatus)
+{
+    delete[] cStatus.presences;
+    cStatus.presences = nullptr;
+}
+
+void sNChannelPresenceEvent_free(sNChannelPresenceEvent& cPresence)
+{
+    delete[] cPresence.joins;
+    delete[] cPresence.leaves;
+    cPresence.joins  = nullptr;
+    cPresence.leaves = nullptr;
+}
+
+void sNMatchmakerUser_free(sNMatchmakerUser& user)
+{
+    NStringMap_destroy(user.stringProperties);
+    NStringDoubleMap_destroy(user.numericProperties);
+}
+
+void sNMatchmakerMatched_free(sNMatchmakerMatched& cMatched)
+{
+    for (uint16_t i = 0; i < cMatched.usersCount; ++i)
+    {
+        sNMatchmakerUser_free(cMatched.users[i]);
+    }
+
+    sNMatchmakerUser_free(cMatched.self);
+
+    delete[] cMatched.users;
+    cMatched.users = nullptr;
+}
+
+void sNMatchPresenceEvent_free(sNMatchPresenceEvent& cEvent)
+{
+    delete[] cEvent.joins;
+    delete[] cEvent.leaves;
+    cEvent.joins = nullptr;
+    cEvent.leaves = nullptr;
+}
+
+void sNStatusPresenceEvent_free(sNStatusPresenceEvent& cEvent)
+{
+    delete[] cEvent.joins;
+    delete[] cEvent.leaves;
+    cEvent.joins = nullptr;
+    cEvent.leaves = nullptr;
+}
+
+void sNStreamPresenceEvent_free(sNStreamPresenceEvent& cEvent)
+{
+    delete[] cEvent.joins;
+    delete[] cEvent.leaves;
+    cEvent.joins = nullptr;
+    cEvent.leaves = nullptr;
 }
 
 NAKAMA_NAMESPACE_END

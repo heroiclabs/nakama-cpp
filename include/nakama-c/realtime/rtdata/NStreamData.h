@@ -26,10 +26,10 @@ extern "C" {
 /// A data message delivered over a stream.
 typedef struct NAKAMA_API NStreamData
 {
-    NStream stream;          ///< The stream this data message relates to.
-    NUserPresence sender;    ///< The sender, if any.
+    sNStream stream;         ///< The stream this data message relates to.
+    sNUserPresence sender;   ///< The sender, if any.
     const char* data;        ///< Arbitrary contents of the data message.
-} tNStreamData;
+} sNStreamData;
 
 #ifdef __cplusplus
 }

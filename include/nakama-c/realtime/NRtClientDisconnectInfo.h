@@ -16,21 +16,25 @@
 
 #pragma once
 
-#include "nakama-cpp/NTypes.h"
+#include "nakama-c/NTypes.h"
 
-NAKAMA_NAMESPACE_BEGIN
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-    struct NAKAMA_API NRtClientDisconnectInfo
+    typedef struct NAKAMA_API NRtClientDisconnectInfo
     {
         /// close code.
         /// https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent
-        uint16_t code = 0;
+        uint16_t code;
 
         /// close reason. Optional.
-        std::string reason;
+        const char* reason;
 
         /// true if close was initiated by server.
-        bool remote = false;
-    };
+        bool remote;
+    } sNRtClientDisconnectInfo;
 
-NAKAMA_NAMESPACE_END
+#ifdef __cplusplus
+}
+#endif

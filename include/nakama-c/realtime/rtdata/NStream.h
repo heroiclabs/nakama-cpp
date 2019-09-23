@@ -29,7 +29,7 @@ typedef struct NAKAMA_API NStream
     const char* subject;            ///< Subject is the primary identifier, if any.
     const char* subcontext;         ///< Subcontext is a secondary identifier, if any.
     const char* label;              ///< The label is an arbitrary identifying string, if the stream has one.
-} tNStream;
+} sNStream;
 
 #ifdef __cplusplus
 }

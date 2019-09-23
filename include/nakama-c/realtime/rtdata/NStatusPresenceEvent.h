@@ -25,11 +25,11 @@ extern "C" {
 /// A batch of status updates for a given user.
 typedef struct NAKAMA_API NStatusPresenceEvent
 {
-    const NUserPresence* joins;    ///< New statuses for the user.
+    sNUserPresence* joins;         ///< New statuses for the user.
     uint16_t joinsCount;
-    const NUserPresence* leaves;   ///< Previous statuses for the user.
+    sNUserPresence* leaves;        ///< Previous statuses for the user.
     uint16_t leavesCount;
-} tNStatusPresenceEvent;
+} sNStatusPresenceEvent;
 
 #ifdef __cplusplus
 }

@@ -26,12 +26,12 @@ extern "C" {
 /// A set of joins and leaves on a particular stream.
 typedef struct NAKAMA_API NStreamPresenceEvent
 {
-    NStream stream;                      ///< The stream this event relates to.
-    const NUserPresence* joins;          ///< Presences joining the stream as part of this event, if any.
+    sNStream stream;                     ///< The stream this event relates to.
+    sNUserPresence* joins;               ///< Presences joining the stream as part of this event, if any.
     uint16_t joinsCount;
-    const NUserPresence* leaves;         ///< Presences leaving the stream as part of this event, if any.
+    sNUserPresence* leaves;              ///< Presences leaving the stream as part of this event, if any.
     uint16_t leavesCount;
-} tNStreamPresenceEvent;
+} sNStreamPresenceEvent;
 
 #ifdef __cplusplus
 }

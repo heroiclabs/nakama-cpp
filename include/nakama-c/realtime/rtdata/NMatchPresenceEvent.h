@@ -25,12 +25,12 @@ extern "C" {
 /// A set of joins and leaves on a particular realtime match.
 typedef struct NAKAMA_API NMatchPresenceEvent
 {
-    const char* matchId;                 /// The match unique ID.
-    const NUserPresence* joins;    /// User presences that have just joined the match.
+    const char* matchId;         /// The match unique ID.
+    sNUserPresence* joins;       /// User presences that have just joined the match.
     uint16_t joinsCount;
-    const NUserPresence* leaves;   /// User presences that have just left the match.
+    sNUserPresence* leaves;      /// User presences that have just left the match.
     uint16_t leavesCount;
-} tNMatchPresenceEvent;
+} sNMatchPresenceEvent;
 
 #ifdef __cplusplus
 }

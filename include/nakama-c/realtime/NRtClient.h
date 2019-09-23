@@ -19,7 +19,8 @@
 #include "nakama-c/NSession.h"
 #include "nakama-c/data/NMatch.h"
 #include "nakama-c/data/NRpc.h"
-//#include "nakama-c/realtime/NRtClientListenerInterface.h"
+#include "nakama-c/data/NChannelMessage.h"
+#include "nakama-c/data/NNotificationList.h"
 //#include "nakama-c/realtime/NRtTransportInterface.h"
 #include "nakama-c/realtime/rtdata/NRtError.h"
 #include "nakama-c/realtime/rtdata/NChannel.h"
@@ -27,13 +28,22 @@
 #include "nakama-c/realtime/rtdata/NMatchmakerTicket.h"
 #include "nakama-c/realtime/rtdata/NUserPresence.h"
 #include "nakama-c/realtime/rtdata/NStatus.h"
+#include "nakama-c/realtime/rtdata/NRtError.h"
+#include "nakama-c/realtime/rtdata/NChannelPresenceEvent.h"
+#include "nakama-c/realtime/rtdata/NMatchmakerMatched.h"
+#include "nakama-c/realtime/rtdata/NMatchData.h"
+#include "nakama-c/realtime/rtdata/NMatchPresenceEvent.h"
+#include "nakama-c/realtime/rtdata/NStatusPresenceEvent.h"
+#include "nakama-c/realtime/rtdata/NStreamPresenceEvent.h"
+#include "nakama-c/realtime/rtdata/NStreamData.h"
+#include "nakama-c/realtime/NRtClientDisconnectInfo.h"
 #include "nakama-c/NStringDoubleMap.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-    typedef void* NRtClient;
+    typedef struct NAKAMA_API NRtClient_ { char c; }* NRtClient;
     typedef void* NRtClientReqData;
     typedef void (*NRtClientErrorCallback)(NRtClient client, NRtClientReqData reqData, const sNRtError*);
     
@@ -74,13 +84,6 @@ extern "C" {
      * Call it periodically, each 50 ms is ok.
      */
     NAKAMA_API void NRtClient_tick(NRtClient client);
-
-    /**
-     * Set events listener
-     *
-     * @param listener The listener of client events.
-     */
-    //NAKAMA_API void NRtClient_setListener(NRtClient client, NRtClientListenerInterface* listener);
 
     /**
      * Connect to the server.
@@ -203,6 +206,7 @@ extern "C" {
     NAKAMA_API void NRtClient_joinMatch(
         NRtClient client,
         const char* matchId,
+        NStringMap metadata,    // optional, pass NULL
         NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData, const sNMatch*),
         NRtClientErrorCallback errorCallback
@@ -342,6 +346,66 @@ extern "C" {
         void (*successCallback)(NRtClient, NRtClientReqData, const sNRpc*),
         NRtClientErrorCallback errorCallback
     );
+
+    /**
+     * Called when the client socket has been connected.
+     */
+    NAKAMA_API void NRtClient_setConnectCallback(NRtClient client, void (*callback)(NRtClient));
+
+    /**
+     * Called when the client socket disconnects.
+     */
+    NAKAMA_API void NRtClient_setDisconnectCallback(NRtClient client, void (*callback)(NRtClient, const sNRtClientDisconnectInfo* info));
+
+    /**
+     * Called when the client receives an error.
+     */
+    NAKAMA_API void NRtClient_setErrorCallback(NRtClient client, void (*callback)(NRtClient, const sNRtError* error));
+
+    /**
+     * Called when a new channel message has been received.
+     */
+    NAKAMA_API void NRtClient_setChannelMessageCallback(NRtClient client, void (*callback)(NRtClient, const sNChannelMessage* message));
+
+    /**
+     * Called when a new channel presence update has been received.
+     */
+    NAKAMA_API void NRtClient_setChannelPresenceCallback(NRtClient client, void (*callback)(NRtClient, const sNChannelPresenceEvent* presence));
+
+    /**
+     * Called when a matchmaking has found a match.
+     */
+    NAKAMA_API void NRtClient_setMatchmakerMatchedCallback(NRtClient client, void (*callback)(NRtClient, const sNMatchmakerMatched* matched));
+
+    /**
+     * Called when a new match data is received.
+     */
+    NAKAMA_API void NRtClient_setMatchDataCallback(NRtClient client, void (*callback)(NRtClient, const sNMatchData* matchData));
+
+    /**
+     * Called when a new match presence update is received.
+     */
+    NAKAMA_API void NRtClient_setMatchPresenceCallback(NRtClient client, void (*callback)(NRtClient, const sNMatchPresenceEvent* matchPresence));
+
+    /**
+     * Called when the client receives new notifications.
+     */
+    NAKAMA_API void NRtClient_setNotificationsCallback(NRtClient client, void (*callback)(NRtClient, const sNNotificationList* notifications));
+
+    /**
+     * Called when the client receives status presence updates.
+     */
+    NAKAMA_API void NRtClient_setStatusPresenceCallback(NRtClient client, void (*callback)(NRtClient, const sNStatusPresenceEvent* presence));
+
+    /**
+     * Called when the client receives stream presence updates.
+     */
+    NAKAMA_API void NRtClient_setStreamPresenceCallback(NRtClient client, void (*callback)(NRtClient, const sNStreamPresenceEvent* presence));
+
+    /**
+     * Called when the client receives stream data.
+     */
+    NAKAMA_API void NRtClient_setStreamDataCallback(NRtClient client, void (*callback)(NRtClient, const sNStreamData* data));
 
     /**
      * Destroys a realtime client.

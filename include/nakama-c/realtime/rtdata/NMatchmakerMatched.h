@@ -18,6 +18,7 @@
 
 #include "nakama-c/realtime/rtdata/NUserPresence.h"
 #include "nakama-c/NTypes.h"
+#include "nakama-c/NStringDoubleMap.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,10 +26,10 @@ extern "C" {
 
 typedef struct NAKAMA_API NMatchmakerUser
 {
-    NUserPresence presence;                  ///< User info.
+    sNUserPresence presence;                 ///< User info.
     NStringMap stringProperties;             ///< String properties.
     NStringDoubleMap numericProperties;      ///< Numeric properties.
-} tNMatchmakerUser;
+} sNMatchmakerUser;
 
 /// A successful matchmaking result.
 typedef struct NAKAMA_API NMatchmakerMatched
@@ -37,10 +38,10 @@ typedef struct NAKAMA_API NMatchmakerMatched
                                          ///< The match token or match ID to join.
     const char* matchId;                 ///< Match ID.
     const char* token;                   ///< Match join token.
-    const NMatchmakerUser* users;        ///< The users that have been matched together, and information about their matchmaking data.
+    sNMatchmakerUser* users;             ///< The users that have been matched together, and information about their matchmaking data.
     uint16_t usersCount;
-    NMatchmakerUser self;                ///< A reference to the current user and their properties.
-} tNMatchmakerMatched;
+    sNMatchmakerUser self;               ///< A reference to the current user and their properties.
+} sNMatchmakerMatched;
 
 #ifdef __cplusplus
 }

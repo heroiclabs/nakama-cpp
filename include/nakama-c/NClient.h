@@ -43,7 +43,7 @@
 extern "C" {
 #endif
 
-    typedef void* NClient;
+    typedef struct NAKAMA_API NClient_ { char c; }* NClient;
     typedef void* NClientReqData;
     typedef void (*NClientDefaultErrorCallback)(NClient client, const sNError*);
     typedef void (*NClientErrorCallback)(NClient client, NClientReqData reqData, const sNError*);

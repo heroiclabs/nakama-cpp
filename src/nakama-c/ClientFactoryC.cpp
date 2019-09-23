@@ -17,7 +17,7 @@
 #include "nakama-c/ClientFactory.h"
 #include "nakama-cpp/ClientFactory.h"
 
-//namespace Nakama {
+NAKAMA_NAMESPACE_BEGIN
 
 static std::vector<Nakama::NClientPtr> g_clients;
 
@@ -37,12 +37,14 @@ static NClient createClient(const tNClientParameters* parameters, std::function<
         g_clients.push_back(cppClient);
     }
 
-    return cppClient.get();
+    return (NClient)cppClient.get();
 }
 
-//}
+NAKAMA_NAMESPACE_END
 
 extern "C" {
+
+using namespace NAKAMA_NAMESPACE;
 
 NClient createDefaultNakamaClient(const tNClientParameters* parameters)
 {
@@ -65,7 +67,7 @@ void destroyNakamaClient(NClient client)
     {
         for (auto it = g_clients.begin(); it != g_clients.end(); ++it)
         {
-            if (it->get() == client)
+            if ((NClient)it->get() == client)
             {
                 g_clients.erase(it);
                 break;
