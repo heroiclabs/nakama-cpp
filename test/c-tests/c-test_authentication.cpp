@@ -29,7 +29,7 @@ static void successCallback(NClient client, NClientReqData reqData, NSession ses
 
     stopCTest(client, token[0] != 0);
 
-    destroyNakamaSession(session);
+    NSession_destroy(session);
 }
 
 void ctest_authenticateDevice()

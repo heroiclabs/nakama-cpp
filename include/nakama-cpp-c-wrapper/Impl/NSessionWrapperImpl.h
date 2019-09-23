@@ -26,7 +26,7 @@ NAKAMA_NAMESPACE_BEGIN
     {
     public:
         NSessionWrapper(::NSession cSession) : _cSession(cSession) {}
-        ~NSessionWrapper() { destroyNakamaSession(_cSession); }
+        ~NSessionWrapper() { NSession_destroy(_cSession); }
 
         const std::string& getAuthToken() const override
         {

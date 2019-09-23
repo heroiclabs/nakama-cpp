@@ -35,7 +35,7 @@ static void SessionSuccessCallback(NClient client, NClientReqData reqData, NSess
 
     // stop test
 
-    destroyNakamaSession(session);
+    NSession_destroy(session);
     stopTest = true;
 }
 

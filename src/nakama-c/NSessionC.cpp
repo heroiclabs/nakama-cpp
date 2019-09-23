@@ -117,7 +117,7 @@ NSession restoreNakamaSession(const char* token)
     return session.get();
 }
 
-void destroyNakamaSession(NSession session)
+void NSession_destroy(NSession session)
 {
     using namespace Nakama;
 

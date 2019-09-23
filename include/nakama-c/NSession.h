@@ -106,7 +106,7 @@ extern "C" {
      *
      * @param session The session.
      */
-    NAKAMA_API void destroyNakamaSession(NSession session);
+    NAKAMA_API void NSession_destroy(NSession session);
 
 #ifdef __cplusplus
 }
