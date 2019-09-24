@@ -27,7 +27,7 @@ static void successCallback(NClient client, NClientReqData reqData, NSession ses
 
     std::cout << "session token: " << token << std::endl;
 
-    stopCTest(client, strlen(token) > 0);
+    stopCTest(client, token[0] != 0);
 
     destroyNakamaSession(session);
 }
