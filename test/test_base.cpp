@@ -79,6 +79,11 @@ void abortCurrentTest(const char* file, int lineno)
     g_cur_test->stopTest();
 }
 
+NTest* getCurTest()
+{
+    return g_cur_test;
+}
+
 void sleep(uint32_t ms)
 {
     std::chrono::milliseconds sleep_period(ms);

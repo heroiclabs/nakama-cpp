@@ -51,6 +51,7 @@ namespace Test {
     void printTotalStats();
     int getFailedCount();
     void abortCurrentTest(const char* file, int lineno);
+    NTest* getCurTest();
 
 } // namespace Test
 } // namespace Nakama

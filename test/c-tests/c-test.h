@@ -29,9 +29,11 @@ namespace Test {
         void createWorkingClient() override;
         void tick() override;
 
-        NClient client;
+        NClient client = nullptr;
+        NRtClient rtClient = nullptr;
     };
 
+    CTest* getCurCTest();
     void stopCTest(NClient client, bool succeeded = false);
 
 } // namespace Test

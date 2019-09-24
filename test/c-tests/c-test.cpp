@@ -48,6 +48,13 @@ namespace Test {
     void CTest::tick()
     {
         NClient_tick(client);
+        if (rtClient)
+            NRtClient_tick(rtClient);
+    }
+
+    CTest* getCurCTest()
+    {
+        return (CTest*)getCurTest();
     }
 
     void stopCTest(NClient client, bool succeeded)

@@ -39,6 +39,7 @@ void test_realtime();
 
 // C tests
 void ctest_authentication();
+void ctest_realtime();
 
 // wrapper tests
 void wrapper_test_authentication();
@@ -103,6 +104,7 @@ int runAllTests()
     test_realtime();
 
     ctest_authentication();
+    ctest_realtime();
 
     c_test_pure();
 
