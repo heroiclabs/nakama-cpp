@@ -16,7 +16,7 @@
 
 #ifdef __ANDROID__
 
-#include "nakama-cpp/NExport.h"
+#include "nakama-cpp/NTypes.h"
 #include <jni.h>
 
 NAKAMA_NAMESPACE_BEGIN
