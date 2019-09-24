@@ -97,7 +97,7 @@ cmake_cmd = ['cmake',
 
 cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))
 
-call(cmake_cmd, shell=True)
+call(cmake_cmd)
 
 build('grpc_cpp_plugin')
 build('protoc')
