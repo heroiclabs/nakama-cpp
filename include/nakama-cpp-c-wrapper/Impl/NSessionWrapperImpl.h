@@ -74,13 +74,13 @@ NAKAMA_NAMESPACE_BEGIN
             return NSession_isExpiredByTime(_cSession, now);
         }
 
-        const NStringMap& getVariables() const
+        const NStringMap& getVariables() const override
         {
             updateVariables();
             return _variables;
         }
 
-        std::string getVariable(const std::string& name) const
+        std::string getVariable(const std::string& name) const override
         {
             updateVariables();
             auto it = _variables.find(name);
