@@ -33,8 +33,9 @@ static std::vector<RtClientData> g_clients;
 
 ::NRtClient saveRtClient(NRtClientPtr client)
 {
-    g_clients.push_back({ client, std::make_unique<NRtDefaultClientListener>() });
-    client->setListener(g_clients.back().listener.get());
+    NRtDefaultClientListener* listener = new NRtDefaultClientListener();
+    g_clients.push_back({ client, std::unique_ptr<NRtDefaultClientListener>(listener) });
+    client->setListener(listener);
     return (::NRtClient)client.get();
 }
 
