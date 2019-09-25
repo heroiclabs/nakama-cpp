@@ -28,9 +28,9 @@ static std::unordered_map<::NStringDoubleMap, NStringDoubleMapPtr> g_maps;
 {
     NStringDoubleMapPtr map_ptr(new NStringDoubleMap(map));
 
-    g_maps.emplace(map_ptr.get(), map_ptr);
+    g_maps.emplace((::NStringDoubleMap)map_ptr.get(), map_ptr);
 
-    return map_ptr.get();
+    return (::NStringDoubleMap)map_ptr.get();
 }
 
 NStringDoubleMap* findNStringDoubleMap(::NStringDoubleMap map)

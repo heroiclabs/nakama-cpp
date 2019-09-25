@@ -28,9 +28,9 @@ static std::unordered_map<::NStringMap, NStringMapPtr> g_maps;
 {
     NStringMapPtr map_ptr(new NStringMap(map));
 
-    g_maps.emplace(map_ptr.get(), map_ptr);
+    g_maps.emplace((::NStringMap)map_ptr.get(), map_ptr);
 
-    return map_ptr.get();
+    return (::NStringMap)map_ptr.get();
 }
 
 NStringMap* findNStringMap(::NStringMap map)

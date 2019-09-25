@@ -22,7 +22,7 @@
 extern "C" {
 #endif
 
-    typedef void* NStringMap;
+    typedef struct NAKAMA_API NStringMap_ { char c; }* NStringMap;
 
     /**
      * Creates string map.
