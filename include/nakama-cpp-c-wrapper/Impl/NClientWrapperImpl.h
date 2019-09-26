@@ -18,13 +18,10 @@
 
 #include "nakama-cpp/NClientInterface.h"
 #include "nakama-c/ClientFactory.h"
-#include "nakama-cpp-c-wrapper/Impl/NSessionWrapperImpl.h"
-#include "nakama-cpp-c-wrapper/Impl/NDataHelperWrapperImpl.h"
+#include "nakama-cpp-c-wrapper/Impl/NRtClientWrapperImpl.h"
 #include <map>
 
 NAKAMA_NAMESPACE_BEGIN
-
-#define NOT_IMPLEMENTED
 
     /**
      * C++ wrapper for C client.
@@ -48,11 +45,6 @@ NAKAMA_NAMESPACE_BEGIN
         static NClientWrapper* getWrapper(::NClient cClient)
         {
             return (NClientWrapper*)NClient_getUserData(cClient);
-        }
-
-        static ::NSession getCSession(const NSessionPtr& session)
-        {
-            return ((NSessionWrapper*)session.get())->getCSession();
         }
 
         static void OnDefaultErrorStatic(::NClient cClient, const sNError* cError)
@@ -109,8 +101,17 @@ NAKAMA_NAMESPACE_BEGIN
         
         NRtClientPtr createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport) override
         {
-            NOT_IMPLEMENTED
-            return nullptr;
+            ::sRtClientParameters cParameters;
+
+            cParameters.host = parameters.host.c_str();
+            cParameters.port = parameters.port;
+            cParameters.ssl = parameters.ssl;
+
+            NRtClient cRtClient = ::NClient_createRtClientEx(_cClient, &cParameters);
+            if (!cRtClient)
+                return nullptr;
+
+            return NRtClientPtr(new NRtClientWrapper(cRtClient));
         }
 
         static void authenticateOkStatic(::NClient cClient, ::NClientReqData reqData, ::NSession cSession)
@@ -165,6 +166,7 @@ NAKAMA_NAMESPACE_BEGIN
                 if (it != _reqOkEmptyCallbacks.end())
                 {
                     it->second();
+                    _reqOkEmptyCallbacks.erase(it);
                 }
             }
         }

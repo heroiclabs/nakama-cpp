@@ -106,6 +106,16 @@ void NRtClient_tick(NRtClient client)
     getCppRtClient(client)->tick();
 }
 
+void NRtClient_setUserData(NRtClient client, void* userData)
+{
+    getCppRtClient(client)->setUserData(userData);
+}
+
+void* NRtClient_getUserData(NRtClient client)
+{
+    return getCppRtClient(client)->getUserData();
+}
+
 void NRtClient_connect(NRtClient client, NSession session, bool createStatus, eNRtClientProtocol protocol)
 {
     auto cppSession = Nakama::getSession(session);

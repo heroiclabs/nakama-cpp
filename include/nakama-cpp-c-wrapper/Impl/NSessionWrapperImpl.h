@@ -118,6 +118,11 @@ NAKAMA_NAMESPACE_BEGIN
         mutable NStringMap _variables;
     };
 
+    ::NSession getCSession(const NSessionPtr& session)
+    {
+        return ((NSessionWrapper*)session.get())->getCSession();
+    }
+
     /*NSessionPtr restoreSession(const std::string& token)
     {
         ::NSessionPtr cSession = restoreNakamaSession(token.c_str());

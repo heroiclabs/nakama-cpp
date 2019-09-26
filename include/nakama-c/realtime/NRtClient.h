@@ -86,6 +86,22 @@ extern "C" {
     NAKAMA_API void NRtClient_tick(NRtClient client);
 
     /**
+     * Set user data.
+     *
+     * Client just holds this data so you can receive it later when you need it.
+     *
+     * @param userData The user data.
+     */
+    NAKAMA_API void NRtClient_setUserData(NRtClient client, void* userData);
+
+    /**
+     * Get user data.
+     *
+     * @return The user data.
+     */
+    NAKAMA_API void* NRtClient_getUserData(NRtClient client);
+
+    /**
      * Connect to the server.
      *
      * @param session The session of the user.

@@ -43,6 +43,9 @@ namespace Nakama {
 
         void setListener(NRtClientListenerInterface* listener) override;
 
+        void setUserData(void* userData) override { _userData = userData; }
+        void* getUserData() const override { return _userData; }
+
         void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
 
         bool isConnected() const override;
@@ -179,6 +182,7 @@ namespace Nakama {
             NRtClientProtocolPtr _protocol;
             std::map<int32_t, std::unique_ptr<RtRequestContext>> _reqContexts;
             int32_t _nextCid = 0;
+            void* _userData = nullptr;
     };
 
 }

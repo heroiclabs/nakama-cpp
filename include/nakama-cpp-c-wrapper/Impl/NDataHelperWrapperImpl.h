@@ -64,7 +64,36 @@ NStringMap toCppNStringMap(::NStringMap map)
     return cppMap;
 }
 
-::NStringMap toCNStringMap(NStringMap map)
+NStringDoubleMap toCppNStringDoubleMap(::NStringDoubleMap map)
+{
+    NStringDoubleMap cppMap;
+
+    if (map)
+    {
+        auto size = ::NStringDoubleMap_getSize(map);
+
+        if (size > 0)
+        {
+            const char** keys = new const char* [size];
+            ::NStringDoubleMap_getKeys(map, keys);
+            double value = 0;
+
+            for (uint16_t i = 0; i < size; ++i)
+            {
+                if (::NStringDoubleMap_getValue(map, keys[i], &value))
+                {
+                    cppMap.emplace(keys[i], value);
+                }
+            }
+
+            delete[] keys;
+        }
+    }
+
+    return cppMap;
+}
+
+::NStringMap toCNStringMap(const NStringMap& map)
 {
     ::NStringMap cMap = nullptr;
 
@@ -81,6 +110,34 @@ NStringMap toCppNStringMap(::NStringMap map)
     return cMap;
 }
 
+::NStringDoubleMap toCNStringDoubleMap(const NStringDoubleMap& map)
+{
+    ::NStringDoubleMap cMap = nullptr;
+
+    if (map.size() > 0)
+    {
+        cMap = ::NStringDoubleMap_create();
+
+        for (auto it : map)
+        {
+            ::NStringDoubleMap_setValue(cMap, it.first.c_str(), it.second);
+        }
+    }
+
+    return cMap;
+}
+
+void assign(sNBytes& cData, const NBytes& data)
+{
+    cData.bytes = (uint8_t*)data.data();
+    cData.size = (uint16_t)data.size();
+}
+
+void assign(NBytes& data, const sNBytes* cData)
+{
+    data.assign((const char*)cData->bytes, cData->size);
+}
+
 void assign(NError& error, const sNError* cError)
 {
     error.code = (ErrorCode)cError->code;
@@ -90,6 +147,11 @@ void assign(NError& error, const sNError* cError)
 void assign(NStringMap& map, const ::NStringMap cMap)
 {
     map = toCppNStringMap(cMap);
+}
+
+void assign(NStringDoubleMap& map, const ::NStringDoubleMap cMap)
+{
+    map = toCppNStringDoubleMap(cMap);
 }
 
 void assign(NAccountDevice& device, const sNAccountDevice* cDevice)
@@ -257,6 +319,15 @@ void assign(NLeaderboardRecordList& list, const sNLeaderboardRecordList* cList)
     list.nextCursor = cList->nextCursor;
     assign(list.records, cList->records, cList->recordsCount);
     assign(list.ownerRecords, cList->ownerRecords, cList->ownerRecordsCount);
+}
+
+void assign(sNUserPresence& cPresence, const NUserPresence& presence)
+{
+    cPresence.userId = presence.userId.c_str();
+    cPresence.sessionId = presence.sessionId.c_str();
+    cPresence.username = presence.username.c_str();
+    cPresence.persistence = presence.persistence;
+    cPresence.status = presence.status.c_str();
 }
 
 void assign(NUserPresence& presence, const sNUserPresence* cPresence)
@@ -541,6 +612,136 @@ void assign(NChannelMessageList& list, const sNChannelMessageList* cList)
 
     list.nextCursor = cList->nextCursor;
     list.prevCursor = cList->prevCursor;
+}
+
+void assign(NRtError& error, const ::sNRtError* cError)
+{
+    error.code = (RtErrorCode)cError->code;
+    error.message = cError->message;
+    assign(error.context, cError->context);
+}
+
+void assign(NChannel& channel, const ::sNChannel* cChannel)
+{
+    channel.id = cChannel->id;
+    assign(channel.presences, cChannel->presences, cChannel->presencesCount);
+    assign(channel.self, &cChannel->self);
+    channel.roomName = cChannel->roomName;
+    channel.groupId = cChannel->groupId;
+    channel.userIdOne = cChannel->userIdOne;
+    channel.userIdTwo = cChannel->userIdTwo;
+}
+
+void assign(NStatus& status, const ::sNStatus* cStatus)
+{
+    assign(status.presences, cStatus->presences, cStatus->presencesCount);
+}
+
+void assign(NChannelMessageAck& ack, const ::sNChannelMessageAck* cAck)
+{
+    ack.channelId = cAck->channelId;
+    ack.messageId = cAck->messageId;
+    ack.username = cAck->username;
+    ack.code = cAck->code;
+    ack.createTime = cAck->createTime;
+    ack.updateTime = cAck->updateTime;
+    ack.persistent = cAck->persistent;
+    ack.roomName = cAck->roomName;
+    ack.groupId = cAck->groupId;
+    ack.userIdOne = cAck->userIdOne;
+    ack.userIdTwo = cAck->userIdTwo;
+}
+
+void assign(NMatchmakerTicket& ticket, const sNMatchmakerTicket* cTicket)
+{
+    ticket.ticket = cTicket->ticket;
+}
+
+void assign(NRtClientDisconnectInfo& info, const sNRtClientDisconnectInfo* cInfo)
+{
+    info.code = cInfo->code;
+    info.reason = cInfo->reason;
+    info.remote = cInfo->remote;
+}
+
+void assign(NChannelPresenceEvent& presence, const sNChannelPresenceEvent* cPresence)
+{
+    presence.channelId = cPresence->channelId;
+    assign(presence.joins, cPresence->joins, cPresence->joinsCount);
+    assign(presence.leaves, cPresence->leaves, cPresence->leavesCount);
+    presence.roomName = cPresence->roomName;
+    presence.groupId = cPresence->groupId;
+    presence.userIdOne = cPresence->userIdOne;
+    presence.userIdTwo = cPresence->userIdTwo;
+}
+
+void assign(NMatchmakerUser& user, const sNMatchmakerUser* cUser)
+{
+    assign(user.presence, &cUser->presence);
+    assign(user.stringProperties, cUser->stringProperties);
+    assign(user.numericProperties, cUser->numericProperties);
+}
+
+void assign(std::vector<NMatchmakerUser>& users, const sNMatchmakerUser* cUsers, uint16_t count)
+{
+    users.resize(count);
+
+    for (uint16_t i = 0; i < count; ++i)
+    {
+        assign(users[i], &cUsers[i]);
+    }
+}
+
+void assign(NMatchmakerMatched& matched, const sNMatchmakerMatched* cMatched)
+{
+    matched.ticket = cMatched->ticket;
+    matched.matchId = cMatched->matchId;
+    matched.token = cMatched->token;
+    assign(matched.users, cMatched->users, cMatched->usersCount);
+    assign(matched.self, &cMatched->self);
+}
+
+void assign(NMatchData& matchData, const sNMatchData* cMatchData)
+{
+    matchData.matchId = cMatchData->matchId;
+    assign(matchData.presence, &cMatchData->presence);
+    matchData.opCode = cMatchData->opCode;
+    assign(matchData.data, &cMatchData->data);
+}
+
+void assign(NMatchPresenceEvent& matchPresence, const sNMatchPresenceEvent* cMatchPresence)
+{
+    matchPresence.matchId = cMatchPresence->matchId;
+    assign(matchPresence.joins, cMatchPresence->joins, cMatchPresence->joinsCount);
+    assign(matchPresence.leaves, cMatchPresence->leaves, cMatchPresence->leavesCount);
+}
+
+void assign(NStatusPresenceEvent& presence, const sNStatusPresenceEvent* cPresence)
+{
+    assign(presence.joins, cPresence->joins, cPresence->joinsCount);
+    assign(presence.leaves, cPresence->leaves, cPresence->leavesCount);
+}
+
+void assign(NStream& stream, const sNStream* cStream)
+{
+    stream.mode = cStream->mode;
+    stream.subject = cStream->subject;
+    stream.subcontext = cStream->subcontext;
+    stream.label = cStream->label;
+}
+
+void assign(NStreamPresenceEvent& presence, const sNStreamPresenceEvent* cPresence)
+{
+    assign(presence.stream, &cPresence->stream);
+    assign(presence.joins, cPresence->joins, cPresence->joinsCount);
+    assign(presence.leaves, cPresence->leaves, cPresence->leavesCount);
+}
+
+void assign(NStreamData& data, const sNStreamData* cData)
+{
+    assign(data.stream, &cData->stream);
+    assign(data.sender, &cData->sender);
+    data.data = cData->data;
 }
 
 void NReadStorageObjectId_free(sNReadStorageObjectId* objectIdsArray)

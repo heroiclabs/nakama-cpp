@@ -55,18 +55,18 @@ NAKAMA_NAMESPACE_BEGIN
         void setStreamDataCallback(StreamDataCallback callback) { _streamDataCallback = callback; }
 
     protected:
-        void onConnect() override;
-        void onDisconnect(const NRtClientDisconnectInfo& info) override;
-        void onError(const NRtError& error) override;
-        void onChannelMessage(const NChannelMessage& message) override;
-        void onChannelPresence(const NChannelPresenceEvent& presence) override;
-        void onMatchmakerMatched(NMatchmakerMatchedPtr matched) override;
-        void onMatchData(const NMatchData& matchData) override;
-        void onMatchPresence(const NMatchPresenceEvent& matchPresence) override;
-        void onNotifications(const NNotificationList& notifications) override;
-        void onStatusPresence(const NStatusPresenceEvent& presence) override;
-        void onStreamPresence(const NStreamPresenceEvent& presence) override;
-        void onStreamData(const NStreamData& data) override;
+        void onConnect() override { if (_connectCallback) _connectCallback(); }
+        void onDisconnect(const NRtClientDisconnectInfo& info) override { if (_disconnectCallback) _disconnectCallback(info); }
+        void onError(const NRtError& error) override { if (_errorCallback) _errorCallback(error); }
+        void onChannelMessage(const NChannelMessage& message) override { if (_channelMessageCallback) _channelMessageCallback(message); }
+        void onChannelPresence(const NChannelPresenceEvent& presence) override { if (_channelPresenceCallback) _channelPresenceCallback(presence); }
+        void onMatchmakerMatched(NMatchmakerMatchedPtr matched) override { if (_matchmakerMatchedCallback) _matchmakerMatchedCallback(matched); }
+        void onMatchData(const NMatchData& matchData) override { if (_matchDataCallback) _matchDataCallback(matchData); }
+        void onMatchPresence(const NMatchPresenceEvent& matchPresence) override { if (_matchPresenceCallback) _matchPresenceCallback(matchPresence); }
+        void onNotifications(const NNotificationList& notifications) override { if (_notificationsCallback) _notificationsCallback(notifications); }
+        void onStatusPresence(const NStatusPresenceEvent& presence) override { if (_statusPresenceCallback) _statusPresenceCallback(presence); }
+        void onStreamPresence(const NStreamPresenceEvent& presence) override { if (_streamPresenceCallback) _streamPresenceCallback(presence); }
+        void onStreamData(const NStreamData& data) override { if (_streamDataCallback) _streamDataCallback(data); }
 
     protected:
         ConnectCallback _connectCallback;
