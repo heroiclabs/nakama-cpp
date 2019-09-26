@@ -23,9 +23,10 @@ static std::vector<Nakama::NSessionPtr> g_sessions;
 
 ::NStringMap saveNStringMap(const NStringMap& map);
 
-void saveSession(NSessionPtr session)
+NSession saveSession(NSessionPtr session)
 {
     g_sessions.emplace_back(std::move(session));
+    return (NSession)session.get();
 }
 
 NSessionPtr getSession(NSession session)
@@ -34,7 +35,7 @@ NSessionPtr getSession(NSession session)
 
     for (auto it = g_sessions.begin(); it != g_sessions.end(); ++it)
     {
-        if (it->get() == session)
+        if ((NSession)it->get() == session)
         {
             return *it;
         }
@@ -113,8 +114,7 @@ const char* NSession_getVariable(NSession session, const char* name)
 NSession restoreNakamaSession(const char* token)
 {
     auto session = Nakama::restoreSession(token);
-    Nakama::saveSession(session);
-    return session.get();
+    return Nakama::saveSession(session);
 }
 
 void NSession_destroy(NSession session)
@@ -123,7 +123,7 @@ void NSession_destroy(NSession session)
 
     for (auto it = g_sessions.begin(); it != g_sessions.end(); ++it)
     {
-        if (it->get() == session)
+        if ((NSession)it->get() == session)
         {
             g_sessions.erase(it);
             break;

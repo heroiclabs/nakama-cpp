@@ -21,7 +21,7 @@
 
 NAKAMA_NAMESPACE_BEGIN
 
-void saveSession(NSessionPtr session);
+NSession saveSession(NSessionPtr session);
 NSessionPtr getSession(::NSession session);
 NStringMap* findNStringMap(::NStringMap map);
 ::NRtClient saveRtClient(NRtClientPtr client);
@@ -56,8 +56,7 @@ std::function<void(Nakama::NSessionPtr)> createAuthSuccessCallback(NClient clien
     {
         if (successCallback)
         {
-            saveSession(session);
-            successCallback(client, reqData, session.get());
+            successCallback(client, reqData, saveSession(session));
         }
     };
 }

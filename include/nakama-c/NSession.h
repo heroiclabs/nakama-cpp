@@ -23,7 +23,7 @@
 extern "C" {
 #endif
 
-    typedef void* NSession;
+    typedef struct NAKAMA_API NSession_ { char c; }* NSession;
 
     /**
      * @param session The session.
