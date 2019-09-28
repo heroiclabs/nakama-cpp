@@ -15,17 +15,47 @@
  */
 
 #include "c-test.h"
+#include "test_serverConfig.h"
 
 namespace Nakama {
 namespace Test {
 
 using namespace std;
 
+static void channelMessageCallback(NRtClient, const sNChannelMessage* message)
+{
+    std::cout << "channel message received: " << message->content << std::endl;
+    stopCTest(getCurCTest()->client, true);
+}
+
+static void writeChatMessageCallback(NRtClient client, NRtClientReqData, const sNChannelMessageAck* ack)
+{
+    std::cout << "message sent successfuly. msg id: " << ack->messageId << std::endl;
+}
+
+static void joinChatCallback(NRtClient client, NRtClientReqData, const sNChannel* channel)
+{
+    std::cout << "joined chat: " << channel->id << std::endl;
+
+    NRtClient_setChannelMessageCallback(client, channelMessageCallback);
+
+    // data must be JSON
+    const char* json_data = "{\"msg\":\"Hello there!\"}";
+
+    NRtClient_writeChatMessage(client,
+        channel->id,
+        json_data,
+        0,
+        writeChatMessageCallback,
+        NULL
+    );
+}
+
 static void connectCallback(NRtClient client)
 {
     std::cout << "connected" << std::endl;
 
-    stopCTest(getCurCTest()->client, true);
+    NRtClient_joinChat(client, "my-chat", NChannelType_ROOM, false, true, 0, joinChatCallback, NULL);
 }
 
 static void successCallback(NClient client, NClientReqData reqData, NSession session)
@@ -34,7 +64,7 @@ static void successCallback(NClient client, NClientReqData reqData, NSession ses
 
     std::cout << "session token: " << token << std::endl;
 
-    NRtClient rtClient = NClient_createRtClient(client, NDEFAULT_PORT);
+    NRtClient rtClient = NClient_createRtClient(client, SERVER_HTTP_PORT);
     getCurCTest()->rtClient = rtClient;
 
     NRtClient_setConnectCallback(rtClient, connectCallback);
@@ -44,7 +74,7 @@ static void successCallback(NClient client, NClientReqData reqData, NSession ses
     NSession_destroy(session);
 }
 
-void ctest_realtime_connect()
+void ctest_realtime_joinChat()
 {
     CTest test(__func__);
 
@@ -68,7 +98,7 @@ void ctest_realtime_connect()
 
 void ctest_realtime()
 {
-    ctest_realtime_connect();
+    ctest_realtime_joinChat();
 }
 
 } // namespace Test
