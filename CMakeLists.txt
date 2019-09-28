@@ -16,7 +16,7 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-project(nakama-cpp-all)
+project(nakama-cpp)
 
 cmake_policy(SET CMP0042 NEW)
 cmake_policy(SET CMP0048 NEW)
