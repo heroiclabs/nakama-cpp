@@ -16,21 +16,17 @@
 
 #ifdef __ANDROID__
 
-#include "nakama-cpp/NExport.h"
-#include <jni.h>
+#include "nakama-c/platform/android/android.h"
+#include "nakama-cpp/platform/android/android.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/*
- * Initialize SDK with JVM (on Android only)
- * 
- * @param vm the pointer Java Virtual Machine
- *
- * Note: If you do not do this, your application will terminate upon attempting to create a Client.
- */
-NAKAMA_API void NakamaAndroidInit(JavaVM* vm);
+void NakamaAndroidInit(JavaVM* vm)
+{
+    Nakama::init(vm);
+}
 
 #ifdef __cplusplus
 }
