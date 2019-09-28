@@ -44,6 +44,7 @@ void ctest_realtime();
 // wrapper tests
 void wrapper_test_authentication();
 void wrapper_test_account();
+void wrapper_test_realtime();
 
 void setWorkingClientParameters(NClientParameters& parameters)
 {
@@ -110,6 +111,7 @@ int runAllTests()
 
     wrapper_test_authentication();
     wrapper_test_account();
+    wrapper_test_realtime();
 
     // total stats
     printTotalStats();

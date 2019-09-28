@@ -31,9 +31,13 @@ namespace Test {
         static void setWorkingClientParameters(NClientParameters& parameters);
         void createWorkingClient() override;
         void createClient(const NClientParameters& parameters);
+        void connect(std::function<void()> callback);
         void tick() override;
 
-        NClientPtr client = nullptr;
+        NClientPtr client;
+        NRtClientPtr rtClient;
+        NRtDefaultClientListener listener;
+        NSessionPtr session;
     };
 
 } // namespace Test

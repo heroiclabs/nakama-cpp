@@ -52,10 +52,27 @@ namespace Test {
         });
     }
 
+    void WrapperTest::connect(std::function<void()> callback)
+    {
+        listener.setConnectCallback([=]()
+        {
+            std::cout << "connected" << std::endl;
+            callback();
+        });
+
+        rtClient = client->createRtClient(SERVER_HTTP_PORT);
+
+        rtClient->setListener(&listener);
+
+        rtClient->connect(session, true);
+    }
+
     void WrapperTest::tick()
     {
         if (client)
             client->tick();
+        if (rtClient)
+            rtClient->tick();
     }
 
 } // namespace Test
