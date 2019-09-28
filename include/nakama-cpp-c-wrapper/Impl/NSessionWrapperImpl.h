@@ -123,11 +123,11 @@ NAKAMA_NAMESPACE_BEGIN
         return ((NSessionWrapper*)session.get())->getCSession();
     }
 
-    /*NSessionPtr restoreSession(const std::string& token)
+    NSessionPtr restoreSession(const std::string& token)
     {
-        ::NSessionPtr cSession = restoreNakamaSession(token.c_str());
+        ::NSession cSession = ::restoreNakamaSession(token.c_str());
 
         return NSessionWrapper::create(cSession);
-    }*/
+    }
 
 NAKAMA_NAMESPACE_END
