@@ -17,4 +17,5 @@
 #pragma once
 
 #include "nakama-c/ClientFactory.h"
+#include "nakama-c/log/NLogger.h"
 #include "nakama-c/NakamaVersion.h"

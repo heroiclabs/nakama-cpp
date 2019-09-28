@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "nakama-c/ClientFactory.h"
+#include "nakama-c/Nakama.h"
 #include "test_serverConfig.h"
 #include <stdio.h>
 
@@ -39,8 +39,15 @@ static void SessionSuccessCallback(NClient client, NClientReqData reqData, NSess
     stopTest = true;
 }
 
+static void logSink(eNLogLevel level, const char* message, const char* func)
+{
+    printf("%s: %s\n", func, message);
+}
+
 void c_test_pure()
 {
+    NLogger_init(logSink, NLogLevel_Debug);
+
     NClient client;
     tNClientParameters cParameters;
 
