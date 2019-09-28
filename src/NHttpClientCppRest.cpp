@@ -85,14 +85,14 @@ void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCal
 
     http_request request;
 
-    request.set_request_uri(builder.to_string());
-    request.set_body(FROM_STD_STR(req.body));
-    request.set_method(theMethod);
-
     for (auto p : req.headers)
     {
         request.headers().add(FROM_STD_STR(p.first), FROM_STD_STR(p.second));
     }
+
+    request.set_request_uri(builder.to_string());
+    request.set_body(FROM_STD_STR(req.body));
+    request.set_method(theMethod);
 
     auto task = _client->request(request);
     // Task-based continuation

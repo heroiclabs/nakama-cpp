@@ -180,6 +180,7 @@ void RestClient::sendReq(
     req.queryArgs = std::move(args);
 
     req.headers.emplace("Accept", "application/json");
+    req.headers.emplace("Content-Type", "application/json");
     req.headers.emplace("Authorization", std::move(ctx->auth));
 
     _httpClient->request(req, [this, ctx](NHttpResponsePtr response)
