@@ -25,7 +25,7 @@ static std::vector<Nakama::NSessionPtr> g_sessions;
 
 NSession saveSession(NSessionPtr session)
 {
-    g_sessions.emplace_back(std::move(session));
+    g_sessions.emplace_back(session);
     return (NSession)session.get();
 }
 
