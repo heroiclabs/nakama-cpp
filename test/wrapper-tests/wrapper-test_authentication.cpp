@@ -84,8 +84,21 @@ void wrapper_test_authenticateDevice2()
     test.runTest();
 }
 
+class MyLogger : public NLogSinkInterface
+{
+public:
+    void log(NLogLevel level, const std::string& message, const char* func = nullptr) override
+    {
+        std::cout << func << ": " << message << std::endl;
+    }
+
+    void flush() override {}
+};
+
 void wrapper_test_authentication()
 {
+    NLogger::init(NLogSinkPtr(new MyLogger()), NLogLevel::Debug);
+
     wrapper_test_authenticateEmail();
     wrapper_test_authenticateDevice();
     wrapper_test_authenticateDevice2();
