@@ -16,16 +16,14 @@
 
 #pragma once
 
-///
-/// Nakama Wrapper is C++ wrapper to use Nakama C API from shared library (DLL)
-///
+#include "nakama-c/NTypes.h"
 
-#define NAKAMA_NAMESPACE        NakamaWrapper
-#define NAKAMA_NAMESPACE_BEGIN  namespace NAKAMA_NAMESPACE {
-#define NAKAMA_NAMESPACE_END    }
-#undef NAKAMA_SHARED_LIBRARY
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#include "nakama-cpp/ClientFactory.h"
-#include "nakama-cpp/realtime/NRtDefaultClientListener.h"
-//#include "nakama-cpp/log/NLogger.h"
-#include "nakama-cpp/NakamaVersion.h"
+NAKAMA_API const char* getNakamaSdkVersion();
+
+#ifdef __cplusplus
+}
+#endif

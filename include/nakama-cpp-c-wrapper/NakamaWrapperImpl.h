@@ -20,3 +20,12 @@
 #include "nakama-cpp-c-wrapper/Impl/ClientFactoryWrapperImpl.h"
 #include "nakama-cpp-c-wrapper/Impl/NClientWrapperImpl.h"
 #include "nakama-cpp-c-wrapper/Impl/NSessionWrapperImpl.h"
+
+NAKAMA_NAMESPACE_BEGIN
+
+const char* getNakamaSdkVersion()
+{
+    return ::getNakamaSdkVersion();
+}
+
+NAKAMA_NAMESPACE_END

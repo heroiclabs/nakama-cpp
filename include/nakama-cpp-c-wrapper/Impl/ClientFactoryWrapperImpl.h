@@ -18,7 +18,7 @@
 
 #include "nakama-cpp-c-wrapper/NakamaWrapper.h"
 #include "nakama-cpp-c-wrapper/Impl/NClientWrapperImpl.h"
-#include "nakama-c/ClientFactory.h"
+#include "nakama-c/Nakama.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
