@@ -23,7 +23,7 @@ using namespace std;
 
 void test_error_NotFound()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 
@@ -45,7 +45,7 @@ void test_error_NotFound()
 
 void test_error_InvalidArgument()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 
@@ -67,7 +67,7 @@ void test_error_InvalidArgument()
 
 void test_error_InvalidArgument2()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 
@@ -89,7 +89,7 @@ void test_error_InvalidArgument2()
 
 void test_error_Unauthenticated()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 

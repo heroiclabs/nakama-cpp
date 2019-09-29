@@ -23,7 +23,7 @@ using namespace std;
 
 void test_authenticateEmail()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 
@@ -40,7 +40,7 @@ void test_authenticateEmail()
 
 void test_authenticateDevice()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 
@@ -57,7 +57,7 @@ void test_authenticateDevice()
 
 void test_authenticateDevice2()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 

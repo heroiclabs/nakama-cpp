@@ -32,7 +32,7 @@ parser = argparse.ArgumentParser(description='builder for Windows')
 parser.add_argument('--so', help='build shared object', action='store_true')
 
 args = parser.parse_args()
-SO = args.so
+SHARED_LIB = args.so
 
 bits, linkage = platform.architecture()
 
@@ -43,17 +43,16 @@ elif bits == '32bit':
 else:
     ARCH = bits
 
-BUILD_MODE = 'Release'
 build_dir = os.path.abspath('build/' + BUILD_MODE + '_' + ARCH)
 
-if SO:
+if SHARED_LIB:
     release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/linux/' + ARCH)
 else:
     release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/libs/linux/' + ARCH)
 
 print('Architecture:', ARCH)
 print('Build mode  :', BUILD_MODE)
-print('Shared object:', str(SO))
+print('Shared object:', str(SHARED_LIB))
 
 def build(target):
     print('building ' + target + '...')
@@ -91,22 +90,20 @@ makedirs(release_libs_path)
 os.chdir(build_dir)
 
 # generate projects
-call([
+cmake_cmd = [
   'cmake',
-  '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
-  '-DNAKAMA_SHARED_LIBRARY=' + bool2cmake(SO),
-  '-DBUILD_REST_CLIENT=' + bool2cmake(BUILD_REST_CLIENT),
-  '-DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT),
-  '-DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST),
-  '-DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST),
   '../../../..'
-])
+]
+
+cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))
+
+call(cmake_cmd)
 
 build('grpc_cpp_plugin')
 build('protoc')
 build('nakama-cpp')
 
-if SO:
+if SHARED_LIB:
     copy_so(release_libs_path)
 else:
     copy_libs()

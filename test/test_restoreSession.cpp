@@ -24,7 +24,7 @@ using namespace std;
 
 void test_restoreSession()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 

@@ -29,7 +29,7 @@ file(
     "${_src_root_path}/*.h*"
 )
 
-set(_include_root_path ${PUBLIC_INCLUDE_DIR}/nakama-cpp)
+set(_include_root_path ${PUBLIC_INCLUDE_DIR})
 
 file(
     GLOB_RECURSE _public_headers_list
@@ -93,6 +93,10 @@ endif(NAKAMA_SSL_ENABLED)
 if(BUILD_GRPC_CLIENT)
     target_link_libraries(nakama-cpp PUBLIC grpc++)
     target_compile_definitions(nakama-cpp PRIVATE BUILD_GRPC_CLIENT)
+endif()
+
+if(BUILD_C_API)
+    target_compile_definitions(nakama-cpp PRIVATE BUILD_C_API)
 endif()
 
 target_link_libraries(nakama-cpp PUBLIC libprotobuf)

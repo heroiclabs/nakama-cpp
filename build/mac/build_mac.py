@@ -31,7 +31,6 @@ parser.add_argument('--dylib',  help='build DynamicLib', action='store_true')
 
 args = parser.parse_args()
 
-BUILD_MODE = 'Release'
 SHARED_LIB = args.dylib
 
 print('')
@@ -88,17 +87,17 @@ os.chdir(build_dir)
 generator = 'Ninja'
 
 # generate projects
-call('cmake' +
- ' -DCMAKE_OSX_DEPLOYMENT_TARGET=10.10' +
- ' -DENABLE_BITCODE=FALSE' +
- ' -DENABLE_ARC=TRUE' +
- ' -DNAKAMA_SHARED_LIBRARY=' + bool2cmake(SHARED_LIB) +
- ' -DBUILD_REST_CLIENT=' + bool2cmake(BUILD_REST_CLIENT) +
- ' -DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT) +
- ' -DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST) +
- ' -DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST) +
- ' -G' + generator +
- ' ../../../..', shell=True)
+cmake_cmd = ['cmake',
+ '-DCMAKE_OSX_DEPLOYMENT_TARGET=10.10',
+ '-DENABLE_BITCODE=FALSE',
+ '-DENABLE_ARC=TRUE',
+ '-G' + generator,
+ '../../../..'
+]
+
+cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))
+
+call(cmake_cmd)
 
 build('grpc_cpp_plugin')
 build('protoc')

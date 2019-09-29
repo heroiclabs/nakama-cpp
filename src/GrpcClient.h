@@ -16,8 +16,7 @@
 
 #pragma once
 
-#include "nakama-cpp/NClientInterface.h"
-#include "nakama-cpp/ClientFactory.h"
+#include "BaseClient.h"
 #include "github.com/heroiclabs/nakama/apigrpc/apigrpc.grpc.pb.h"
 #include <set>
 
@@ -35,21 +34,15 @@ namespace Nakama {
      * gRPC client to interact with Nakama server.
      * Don't use it directly, use `createGrpcClient` instead.
      */
-    class GrpcClient : public NClientInterface
+    class GrpcClient : public BaseClient
     {
     public:
         explicit GrpcClient(const NClientParameters& parameters);
         ~GrpcClient();
 
-        void setErrorCallback(ErrorCallback errorCallback) override { _defaultErrorCallback = errorCallback; }
-
         void disconnect() override;
 
         void tick() override;
-
-        NRtClientPtr createRtClient(int32_t port, NRtTransportPtr transport) override;
-        
-        NRtClientPtr createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport) override;
 
         void authenticateDevice(
             const std::string& id,
@@ -561,13 +554,9 @@ namespace Nakama {
         void reqError(ReqContext* reqContext, const NError& error);
 
     private:
-        std::string _host;
-        bool _ssl = false;
         std::unique_ptr<nakama::api::Nakama::Stub> _stub;
         grpc::CompletionQueue _cq;
-        std::string _basicAuthMetadata;
         std::set<ReqContext*> _reqContexts;
         google::protobuf::Empty _emptyData;
-        ErrorCallback _defaultErrorCallback;
     };
 }

@@ -81,12 +81,12 @@ void NRtClientTest::runTest()
 
     client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
-    NTest::runTest();
+    NCppTest::runTest();
 }
 
 void NRtClientTest::tick()
 {
-    NTest::tick();
+    NCppTest::tick();
 
     if (rtClient)
     {

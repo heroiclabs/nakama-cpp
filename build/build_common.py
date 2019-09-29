@@ -20,6 +20,7 @@ import shutil
 import subprocess
 
 USE_CPPREST = False
+BUILD_MODE = 'Release'
 TARGET_PLATFORM = '' # mac, ios, android, windows, linux
 
 def init_common(build_common_path, target_platform):
@@ -43,6 +44,18 @@ def init_common(build_common_path, target_platform):
     print('BUILD_GRPC_CLIENT =', str(BUILD_GRPC_CLIENT))
     print('BUILD_HTTP_CPPREST =', str(BUILD_HTTP_CPPREST))
     print('BUILD_WEBSOCKET_CPPREST =', str(BUILD_WEBSOCKET_CPPREST))
+    print('BUILD_C_API =', str(BUILD_C_API))
+
+def get_common_cmake_parameters(is_shared):
+    return [
+      '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
+      '-DNAKAMA_SHARED_LIBRARY=' + bool2cmake(is_shared),
+      '-DBUILD_REST_CLIENT=' + bool2cmake(BUILD_REST_CLIENT),
+      '-DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT),
+      '-DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST),
+      '-DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST),
+      '-DBUILD_C_API=' + bool2cmake(BUILD_C_API)
+    ]
 
 def call(command, shell=False):
     print('calling:', str(command))

@@ -16,46 +16,26 @@
 
 #pragma once
 
-#include <chrono>
-#include <thread>
-#include <iostream>
+#include "test_base.h"
 #include "nakama-cpp/Nakama.h"
 
 namespace Nakama {
 namespace Test {
 
-#define NTEST_ASSERT(cond)  if (!(cond)) { abortCurrentTest(__FILE__, __LINE__); }
-
-    class NTest
+    class NCppTest : public NTest
     {
     public:
-        NTest(const char* name);
-        ~NTest();
+        NCppTest(const char* name);
+        ~NCppTest();
 
-        virtual void createWorkingClient();
-        virtual void createClientWithParameters(const NClientParameters& parameters);
-        virtual void initClient();
-
-        virtual void runTest();
-        virtual void stopTest(bool succeeded = false);
+        void createWorkingClient() override;
+        void createClient(const NClientParameters& parameters);
+        void tick() override;
 
         NClientPtr client;
-
-        virtual void tick();
-        bool isDone() const { return !_continue_loop; }
-        bool isSucceeded() const { return _testSucceeded; }
-
-    protected:
-        void printTestName(const char* event);
-
-    protected:
-        bool _continue_loop = true;
-        bool _testSucceeded = false;
-        std::string _name;
     };
 
     void setWorkingClientParameters(NClientParameters& parameters);
-    void abortCurrentTest(const char* file, int lineno);
 
 } // namespace Test
 } // namespace Nakama

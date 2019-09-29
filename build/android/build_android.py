@@ -39,7 +39,6 @@ if len(sys.argv) < 2:
 
 ABI = args.arch
 SHARED_LIB = args.so
-BUILD_MODE = 'Release'
 
 print
 print('Building for arch:', ABI + ', so:', str(SHARED_LIB))
@@ -126,25 +125,21 @@ if USE_CPPREST:
             ])
         os.chdir(cwd)
 
-cmake_args = [
+cmake_cmd = [
               'cmake',
               '-DANDROID_ABI=' + ABI,
               '-DCMAKE_TOOLCHAIN_FILE=' + ANDROID_NDK + '/build/cmake/android.toolchain.cmake',
-              '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
               '-DANDROID_NATIVE_API_LEVEL=16',
-              '-DNAKAMA_SHARED_LIBRARY=' + bool2cmake(SHARED_LIB),
-              '-DBUILD_REST_CLIENT=' + bool2cmake(BUILD_REST_CLIENT),
-              '-DBUILD_GRPC_CLIENT=' + bool2cmake(BUILD_GRPC_CLIENT),
-              '-DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST),
-              '-DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST),
               '-B',
               build_dir,
               '-GNinja',
               '../..'
               ]
 
+cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))
+
 # generate projects
-call(cmake_args)
+call(cmake_cmd)
 
 # build
 call(['ninja', '-C', build_dir, 'nakama-cpp'])

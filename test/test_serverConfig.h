@@ -14,16 +14,8 @@
  * limitations under the License.
  */
 
-#include <string>
-
-namespace Nakama {
-namespace Test {
-
-    static const std::string SERVER_KEY     = "defaultkey";
-    static const std::string SERVER_HOST    = "127.0.0.1";
-    static const int32_t SERVER_GRPC_PORT   = 7349;          // gRPC API server port
-    static const int32_t SERVER_HTTP_PORT   = 7350;          // HTTP API server port
-    static const bool SERVER_SSL            = false;
-
-} // namespace Test
-} // namespace Nakama
+#define SERVER_KEY           "defaultkey"
+#define SERVER_HOST          "127.0.0.1"
+#define SERVER_GRPC_PORT     7349
+#define SERVER_HTTP_PORT     7350
+#define SERVER_SSL           false

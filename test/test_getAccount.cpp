@@ -23,7 +23,7 @@ using namespace std;
 
 void test_getAccount()
 {
-    NTest test(__func__);
+    NCppTest test(__func__);
 
     test.createWorkingClient();
 

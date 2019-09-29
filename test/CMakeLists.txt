@@ -15,7 +15,7 @@
 #
 cmake_minimum_required(VERSION 3.13)
 
-project(nakama-test CXX)
+project(nakama-test C CXX)
 
 include(windows_support)
 

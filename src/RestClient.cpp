@@ -68,11 +68,12 @@ void addVarsToJsonDoc(rapidjson::Document& document, const NStringMap& vars)
 }
 
 RestClient::RestClient(const NClientParameters& parameters, NHttpTransportPtr httpClient)
-    : _host(parameters.host)
-    , _ssl(parameters.ssl)
-    , _httpClient(httpClient)
+    : _httpClient(std::move(httpClient))
 {
     NLOG(NLogLevel::Info, "Created. NakamaSdkVersion: %s", getNakamaSdkVersion());
+
+    _host = parameters.host;
+    _ssl = parameters.ssl;
 
     std::string baseUrl;
 
@@ -116,34 +117,6 @@ void RestClient::disconnect()
 void RestClient::tick()
 {
     _httpClient->tick();
-}
-
-NRtClientPtr RestClient::createRtClient(int32_t port, NRtTransportPtr transport)
-{
-    RtClientParameters parameters;
-    
-    parameters.host = _host;
-    parameters.port = port;
-    parameters.ssl  = _ssl;
-
-    return createRtClient(parameters, transport);
-}
-
-NRtClientPtr RestClient::createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport)
-{
-    if (!transport)
-    {
-        transport = createDefaultWebsocket();
-
-        if (!transport)
-        {
-            NLOG_ERROR("No default websockets transport available. Please set transport.");
-            return nullptr;
-        }
-    }
-
-    NRtClientPtr client(new NRtClient(transport, parameters.host, parameters.port, parameters.ssl));
-    return client;
 }
 
 RestReqContext * RestClient::createReqContext(NSessionPtr session, google::protobuf::Message* data)
