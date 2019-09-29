@@ -21,6 +21,7 @@
 #include "nakama-cpp/log/NLogSinkInterface.h"
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/realtime/rtdata/NRtError.h"
+#include <cstdarg>
 
 #ifndef NMODULE_NAME
     #define NMODULE_NAME ""
@@ -65,7 +66,6 @@ NAKAMA_NAMESPACE_BEGIN
         static NLogSinkPtr getSink();
         static void setSink(NLogSinkPtr sink);
         static void setLevel(NLogLevel level);
-        static bool shouldLog(NLogLevel level);
 
         static void Debug(const std::string& message, const char* module_name, const char* func = nullptr);
         static void Info (const std::string& message, const char* module_name, const char* func = nullptr);
@@ -74,6 +74,7 @@ NAKAMA_NAMESPACE_BEGIN
         static void Fatal(const std::string& message, const char* module_name, const char* func = nullptr);
         static void Log(NLogLevel level, const std::string& message, const char* module_name, const char* func = nullptr);
         static void Format(NLogLevel level, const char* module_name, const char* func, const char* format, ...);
+        static void vFormat(NLogLevel level, const char* module_name, const char* func, const char* format, va_list args);
         static void Error(const NError& error, const char* module_name, const char* func = nullptr);
         static void Error(const NRtError& error, const char* module_name, const char* func = nullptr);
 

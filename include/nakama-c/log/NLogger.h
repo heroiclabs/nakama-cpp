@@ -51,6 +51,8 @@ NAKAMA_API void NLogger_initWithConsoleSink(eNLogLevel level);
 NAKAMA_API void NLogger_init(NLogSink sink, eNLogLevel level);
 NAKAMA_API void NLogger_setSink(NLogSink sink);
 NAKAMA_API void NLogger_setLevel(eNLogLevel level);
+NAKAMA_API void NLogger_log(eNLogLevel level, const char* message, const char* module_name, const char* func);
+NAKAMA_API void NLogger_vformat(eNLogLevel level, const char* module_name, const char* func, const char* format, va_list args);
 
 #ifdef __cplusplus
 }

@@ -16,11 +16,15 @@
 
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/log/NConsoleLogSink.h"
-#include <cstdarg>
 
 namespace Nakama {
 
 static NLogSinkPtr _sink;
+
+static bool shouldLog(NLogLevel level)
+{
+    return _sink && _sink->getLevel() <= level;
+}
 
 void NLogger::initWithConsoleSink(NLogLevel level)
 {
@@ -59,11 +63,6 @@ void NLogger::setLevel(NLogLevel level)
     {
         _sink->setLevel(level);
     }
-}
-
-bool NLogger::shouldLog(NLogLevel level)
-{
-    return _sink && _sink->getLevel() <= level;
 }
 
 void NLogger::Debug(const std::string& message, const char* module_name, const char* func)
@@ -119,9 +118,19 @@ void NLogger::Format(NLogLevel level, const char* module_name, const char* func,
 {
     if (shouldLog(level))
     {
-        va_list args, argsCpy;
-
+        va_list args;
         va_start(args, format);
+        NLogger::vFormat(level, module_name, func, format, args);
+        va_end(args);
+    }
+}
+
+void NLogger::vFormat(NLogLevel level, const char* module_name, const char* func, const char* format, va_list args)
+{
+    if (shouldLog(level))
+    {
+        va_list argsCpy;
+
         va_copy(argsCpy, args);
         size_t len = std::vsnprintf(nullptr, 0, format, argsCpy);
         va_end(argsCpy);
@@ -137,8 +146,6 @@ void NLogger::Format(NLogLevel level, const char* module_name, const char* func,
                 NLogger::Log(level, str, module_name, func);
             }
         }
-
-        va_end(args);
     }
 }
 

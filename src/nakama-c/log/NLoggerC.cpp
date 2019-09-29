@@ -70,4 +70,14 @@ void NLogger_setLevel(eNLogLevel level)
     Nakama::NLogger::setLevel((Nakama::NLogLevel)level);
 }
 
+void NLogger_log(eNLogLevel level, const char* message, const char* module_name, const char* func)
+{
+    Nakama::NLogger::Log((Nakama::NLogLevel)level, message, module_name, func);
+}
+
+void NLogger_vformat(eNLogLevel level, const char* module_name, const char* func, const char* format, va_list args)
+{
+    Nakama::NLogger::vFormat((Nakama::NLogLevel)level, module_name, func, format, args);
+}
+
 } // extern "C"

@@ -20,6 +20,7 @@
 
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-c/log/NLogger.h"
+#include <cstdarg>
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -57,37 +58,47 @@ void NLogger::setLevel(NLogLevel level)
     ::NLogger_setSink(logSink);
 }
 
-bool NLogger::shouldLog(NLogLevel level)
-{
-    return true;
-}
-
 void NLogger::Debug(const std::string& message, const char* module_name, const char* func)
 {
+    ::NLogger_log(NLogLevel_Debug, message.c_str(), module_name, func);
 }
 
 void NLogger::Info(const std::string& message, const char* module_name, const char* func)
 {
+    ::NLogger_log(NLogLevel_Info, message.c_str(), module_name, func);
 }
 
 void NLogger::Warn(const std::string& message, const char* module_name, const char* func)
 {
+    ::NLogger_log(NLogLevel_Warn, message.c_str(), module_name, func);
 }
 
 void NLogger::Error(const std::string& message, const char* module_name, const char* func)
 {
+    ::NLogger_log(NLogLevel_Error, message.c_str(), module_name, func);
 }
 
 void NLogger::Fatal(const std::string& message, const char* module_name, const char* func)
 {
+    ::NLogger_log(NLogLevel_Fatal, message.c_str(), module_name, func);
 }
 
 void NLogger::Log(NLogLevel level, const std::string& message, const char* module_name, const char* func)
 {
+    ::NLogger_log((eNLogLevel)level, message.c_str(), module_name, func);
 }
 
 void NLogger::Format(NLogLevel level, const char* module_name, const char* func, const char* format, ...)
 {
+    va_list args;
+    va_start(args, format);
+    ::NLogger_vformat((eNLogLevel)level, module_name, func, format, args);
+    va_end(args);
+}
+
+void NLogger::vFormat(NLogLevel level, const char* module_name, const char* func, const char* format, va_list args)
+{
+    ::NLogger_vformat((eNLogLevel)level, module_name, func, format, args);
 }
 
 void NLogger::Error(const NError& error, const char* module_name, const char* func)
