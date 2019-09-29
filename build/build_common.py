@@ -45,6 +45,7 @@ def init_common(build_common_path, target_platform):
     print('BUILD_HTTP_CPPREST =', str(BUILD_HTTP_CPPREST))
     print('BUILD_WEBSOCKET_CPPREST =', str(BUILD_WEBSOCKET_CPPREST))
     print('BUILD_C_API =', str(BUILD_C_API))
+    print('BUILD_NAKAMA_TESTS =', str(BUILD_NAKAMA_TESTS))
 
 def get_common_cmake_parameters(is_shared):
     return [

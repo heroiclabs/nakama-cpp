@@ -38,6 +38,9 @@ BUILD_NAKAMA_STATIC = True
 # Build shared libs (DLL)
 BUILD_NAKAMA_SHARED = True
 
+# Build tests
+BUILD_NAKAMA_TESTS = True
+
 '''
 iOS
 '''

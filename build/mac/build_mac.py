@@ -110,4 +110,5 @@ if SHARED_LIB:
 else:
     copy_libs()
 
-build('nakama-test')
+if BUILD_NAKAMA_TESTS:
+    build('nakama-test')
