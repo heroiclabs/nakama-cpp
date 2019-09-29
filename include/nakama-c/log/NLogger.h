@@ -19,6 +19,12 @@
 #include "nakama-c/NTypes.h"
 
 #ifdef __cplusplus
+    #include <cstdarg>
+#else
+    #include <stdarg.h>
+#endif
+
+#ifdef __cplusplus
 extern "C" {
 #endif
 
