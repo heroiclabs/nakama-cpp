@@ -32,9 +32,9 @@ NAKAMA_NAMESPACE_BEGIN
         const NClientReqData INVALID_REQ_ID = 0;
 
         NClientWrapper(::NClient cClient, const NClientParameters& parameters)
-            : _cClient(cClient), _host(parameters.host), _ssl(parameters.ssl)
+            : _host(parameters.host), _ssl(parameters.ssl), _cClient(cClient)
         {
-            NClient_setUserData(cClient, this);
+            ::NClient_setUserData(cClient, this);
         }
 
         ~NClientWrapper()
@@ -44,7 +44,7 @@ NAKAMA_NAMESPACE_BEGIN
 
         static NClientWrapper* getWrapper(::NClient cClient)
         {
-            return (NClientWrapper*)NClient_getUserData(cClient);
+            return (NClientWrapper*)::NClient_getUserData(cClient);
         }
 
         static void OnDefaultErrorStatic(::NClient cClient, const sNError* cError)
