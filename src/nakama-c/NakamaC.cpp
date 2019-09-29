@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "nakama-c/NakamaVersion.h"
 #include "nakama-cpp/NakamaVersion.h"
 
@@ -25,3 +27,5 @@ const char* getNakamaSdkVersion()
 }
 
 } // extern "C"
+
+#endif // BUILD_C_API

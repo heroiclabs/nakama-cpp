@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "nakama-c/log/NLogger.h"
 #include "nakama-cpp/log/NLogger.h"
 
@@ -81,3 +83,5 @@ void NLogger_vformat(eNLogLevel level, const char* module_name, const char* func
 }
 
 } // extern "C"
+
+#endif // BUILD_C_API

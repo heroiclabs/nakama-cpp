@@ -95,6 +95,10 @@ if(BUILD_GRPC_CLIENT)
     target_compile_definitions(nakama-cpp PRIVATE BUILD_GRPC_CLIENT)
 endif()
 
+if(BUILD_C_API)
+    target_compile_definitions(nakama-cpp PRIVATE BUILD_C_API)
+endif()
+
 target_link_libraries(nakama-cpp PUBLIC libprotobuf)
 
 if(ANDROID)

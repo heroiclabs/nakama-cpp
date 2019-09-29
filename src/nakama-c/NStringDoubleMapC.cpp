@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "nakama-c/NStringDoubleMap.h"
 #include "nakama-cpp/NTypes.h"
 #include <memory>
@@ -102,3 +104,5 @@ void NStringDoubleMap_destroy(NStringDoubleMap map)
 }
 
 } // extern "C"
+
+#endif // BUILD_C_API

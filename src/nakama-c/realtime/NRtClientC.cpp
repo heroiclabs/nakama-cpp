@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "nakama-c/realtime/NRtClient.h"
 #include "nakama-c/DataHelperC.h"
 #include "nakama-cpp/realtime/NRtClientInterface.h"
@@ -695,3 +697,5 @@ void NRtClient_destroy(NRtClient client)
 }
 
 } // extern "C"
+
+#endif // BUILD_C_API

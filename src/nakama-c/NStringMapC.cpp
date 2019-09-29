@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "nakama-c/NStringMap.h"
 #include "nakama-cpp/NTypes.h"
 #include <memory>
@@ -101,3 +103,5 @@ void NStringMap_destroy(NStringMap map)
 }
 
 } // extern "C"
+
+#endif // BUILD_C_API

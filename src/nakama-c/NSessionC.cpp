@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "nakama-c/NSession.h"
 #include "nakama-cpp/NSessionInterface.h"
 
@@ -132,3 +134,5 @@ void NSession_destroy(NSession session)
 }
 
 } // extern "C"
+
+#endif // BUILD_C_API

@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "nakama-c/ClientFactory.h"
 #include "nakama-cpp/ClientFactory.h"
 
@@ -77,3 +79,5 @@ void destroyNakamaClient(NClient client)
 }
 
 } // extern "C"
+
+#endif // BUILD_C_API

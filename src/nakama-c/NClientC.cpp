@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "nakama-c/NClient.h"
 #include "nakama-c/DataHelperC.h"
 #include "nakama-cpp/NClientInterface.h"
@@ -1568,3 +1570,5 @@ void NClient_rpc(
 }
 
 } // extern "C"
+
+#endif // BUILD_C_API

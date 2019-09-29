@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "nakama-c/DataHelperC.h"
 #include "nakama-c/NStringMap.h"
 
@@ -981,3 +983,5 @@ void sNStreamPresenceEvent_free(sNStreamPresenceEvent& cEvent)
 }
 
 NAKAMA_NAMESPACE_END
+
+#endif // BUILD_C_API

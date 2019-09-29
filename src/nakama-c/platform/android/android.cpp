@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#ifdef __ANDROID__
+#if defined(__ANDROID__) && defined(BUILD_C_API)
 
 #include "nakama-c/platform/android/android.h"
 #include "nakama-cpp/platform/android/android.h"
@@ -32,4 +32,4 @@ void NakamaAndroidInit(JavaVM* vm)
 }
 #endif
 
-#endif // __ANDROID__
+#endif // __ANDROID__ && BUILD_C_API
