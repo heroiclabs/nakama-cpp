@@ -2400,10 +2400,17 @@ void RestClient::rpc(
 
         path.append(id);
 
-        if (payload)
+        if (payload && !payload.value().empty())
+        {
             body = *payload;
-
-        sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body));
+            sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body));
+        }
+        else
+        {
+            NHttpQueryArgs args;
+            args.emplace("id", id);
+            sendReq(ctx, NHttpReqMethod::GET, std::move(path), std::move(body), std::move(args));
+        }
     }
     catch (exception& e)
     {
