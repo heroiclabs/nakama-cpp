@@ -368,14 +368,15 @@ Change submodule branch:
 - go
 - perl
 - Visual Studio 2015, 2017 or 2019 - for Windows only
-- boost 1.69 - for Windows, Mac and Linux, used by `cpprest` library
 
 Third party libraries:
 
-- boost - must be installed in system and set path to `BOOST_ROOT` system variable.
+- boost 1.69 - must be installed in system and set path to `BOOST_ROOT` system variable.
+  Used by `cpprest` library on Windows, Mac and Linux.
 - grpc - in source control as git submodule
 - optional-lite - in source control
 - cpprestsdk - in source control
+- rapidjson - in source control
 
 ### Build Configuration
 
