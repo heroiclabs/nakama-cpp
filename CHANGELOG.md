@@ -5,12 +5,13 @@ All notable changes to this project are documented below.
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- C API.
+- Support iOS SDK 13
+
 ### Fixed
 - RPC call fails when body is empty.
 - optional_HAVE_INITIALIZER_LIST is undefined.
-
-### Added
-- C API.
 
 ## [2.2.0] - 2019-09-14
 ### Added

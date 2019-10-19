@@ -364,7 +364,7 @@ Change submodule branch:
 
 - git
 - python 2.7 or 3.x
-- cmake 3.10+
+- cmake 3.14+
 - go
 - perl
 - Visual Studio 2015, 2017 or 2019 - for Windows only
@@ -489,7 +489,7 @@ Prerequisites:
 
   `export BOOST_ROOT={path to boost}`
 
-- download `cmake` 3.10+ sources and build them:
+- download `cmake` 3.14+ sources and build them:
 
   `./bootstrap && make && make install`
 
@@ -562,5 +562,3 @@ This project is licensed under the [Apache-2 License](https://github.com/heroicl
 ## Special Thanks
 
 Thanks to [@dimon4eg](https://github.com/dimon4eg) for this excellent support on developing Nakama C++, Cocos2d-x and Unreal client libraries.
-
-Thanks to [@thewtex](https://github.com/thewtex) for his excellent work on [iOS CMake Toolchain](https://github.com/thewtex/cmake-ios-toolchain) project.

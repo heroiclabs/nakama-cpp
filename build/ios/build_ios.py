@@ -102,22 +102,19 @@ if USE_CPPREST:
         mklink(link=target_boost_lib_path, target=boost_universal_libs_path)
         mklink(link=target_boost_inc_path, target=os.path.join(Apple_Boost_BuildScript_Path, 'build/boost/' + boost_version + '/ios/prefix/include'))
 
-if is_simulator:
-    cmake_toolchain_path = os.path.abspath('../../cmake/ios.simulator.toolchain.cmake')
-else:
-    cmake_toolchain_path = os.path.abspath('../../cmake/ios.toolchain.cmake')
-
 generator = 'Unix Makefiles'
 
 # generate projects
 cmake_cmd = ['cmake',
       '-B',
       build_dir,
+      '-DCMAKE_SYSTEM_NAME=iOS',
+      '-DAPPLE_IOS=YES',
       '-DCMAKE_OSX_DEPLOYMENT_TARGET=' + deployment_target,
       '-DCMAKE_OSX_ARCHITECTURES=' + ARCH,
       '-Dprotobuf_BUILD_PROTOC_BINARIES=OFF',
       '-DgRPC_BUILD_CODEGEN=OFF',
-      '-DCMAKE_TOOLCHAIN_FILE=' + cmake_toolchain_path,
+      '-DCARES_INSTALL=OFF',
       '-DENABLE_BITCODE=FALSE',
       '-DENABLE_ARC=TRUE',
       '-G' + generator,
@@ -125,6 +122,9 @@ cmake_cmd = ['cmake',
       ]
 
 cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))
+
+if ARCH == 'x86_64':   # Simulator
+    cmake_cmd.append('-DCMAKE_OSX_SYSROOT=iphonesimulator')
 
 call(cmake_cmd)
 
