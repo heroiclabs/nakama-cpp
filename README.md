@@ -1,6 +1,10 @@
 Nakama C++ Client SDK
 =============
 
+[![GitHub release](https://img.shields.io/github/release/heroiclabs/nakama-cpp.svg)](https://github.com/heroiclabs/nakama-cpp/releases/latest)
+[![Forum](https://img.shields.io/badge/forum-online-success.svg)](https://forum.heroiclabs.com)
+[![License](https://img.shields.io/github/license/heroiclabs/nakama.svg)](https://github.com/heroiclabs/nakama/blob/master/LICENSE)
+
 > General C++ client for Nakama server.
 
 [Nakama](https://github.com/heroiclabs/nakama) is an open-source server designed to power modern games and apps. Features include user accounts, chat, social, matchmaker, realtime multiplayer, and much [more](https://heroiclabs.com).
