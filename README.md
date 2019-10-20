@@ -3,6 +3,9 @@ Nakama C++ Client SDK
 
 [![GitHub release](https://img.shields.io/github/release/heroiclabs/nakama-cpp.svg)](https://github.com/heroiclabs/nakama-cpp/releases/latest)
 [![Forum](https://img.shields.io/badge/forum-online-success.svg)](https://forum.heroiclabs.com)
+[![Client guide](https://img.shields.io/badge/client_guide-online-brightgreen)](https://heroiclabs.com/docs/cpp-client-guide)
+[![Reference](https://img.shields.io/badge/reference-online-brightgreen)](https://heroiclabs.github.io/nakama-cpp/html/index.html)
+[![Github all releases](https://img.shields.io/github/downloads/heroiclabs/nakama-cpp/total.svg)](https://github.com/heroiclabs/nakama-cpp/releases/)
 [![License](https://img.shields.io/github/license/heroiclabs/nakama.svg)](https://github.com/heroiclabs/nakama/blob/master/LICENSE)
 
 > General C++ client for Nakama server.
