@@ -1,4 +1,4 @@
-Nakama C++ Client SDK
+Nakama C/C++ Client SDK
 =============
 
 [![GitHub release](https://img.shields.io/github/release/heroiclabs/nakama-cpp.svg)](https://github.com/heroiclabs/nakama-cpp/releases/latest)
@@ -8,11 +8,11 @@ Nakama C++ Client SDK
 [![Github all releases](https://img.shields.io/github/downloads/heroiclabs/nakama-cpp/total.svg)](https://github.com/heroiclabs/nakama-cpp/releases/)
 [![License](https://img.shields.io/github/license/heroiclabs/nakama.svg)](https://github.com/heroiclabs/nakama/blob/master/LICENSE)
 
-> General C++ client for Nakama server.
+> General C/C++ client for Nakama server.
 
 [Nakama](https://github.com/heroiclabs/nakama) is an open-source server designed to power modern games and apps. Features include user accounts, chat, social, matchmaker, realtime multiplayer, and much [more](https://heroiclabs.com).
 
-This client implements the full API and socket options with the server. It's written in C++ with minimal dependencies to support Cocos2d-x, Unreal and other custom engines and frameworks.
+This client implements the full API and socket options with the server. It's written in C and C++11 with minimal dependencies to support Cocos2d-x, Unreal and other custom engines and frameworks.
 
 If you experience any issues with the client, it can be useful to enable debug logs (see [Logging](#logging) section) and [open an issue](https://github.com/heroiclabs/nakama-cpp/issues).
 
@@ -24,7 +24,7 @@ You'll need to setup the server and database before you can connect with the cli
 
 1. Install and run the servers. Follow these [instructions](https://heroiclabs.com/docs/install-docker-quickstart).
 
-2. Nakama C++ SDK is released with prebuilt libraries for following platforms and architectures:
+2. Nakama C/C++ SDK is released with prebuilt libraries for following platforms and architectures:
 
 - Windows - Visual Studio 2015, 2017, 2019 (x86, x64, Debug, Release)
 - Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86, x86_64)
@@ -127,12 +127,12 @@ In `Project Settings` add following:
 
 1. Add `NAKAMA_CPP_SDK/include` in `C/C++ > General > Additional Include Directories`
 2. Add libs folder in `Linker > General > Additional Library Directories`:
-    - `NAKAMA_COCOS2D_SDK/libs/win32/v140` - for VS 2015 x86
-    - `NAKAMA_COCOS2D_SDK/libs/win64/v140` - for VS 2015 x64
-    - `NAKAMA_COCOS2D_SDK/libs/win32/v141` - for VS 2017 x86
-    - `NAKAMA_COCOS2D_SDK/libs/win64/v141` - for VS 2017 x64
-    - `NAKAMA_COCOS2D_SDK/libs/win32/v142` - for VS 2019 x86
-    - `NAKAMA_COCOS2D_SDK/libs/win64/v142` - for VS 2019 x64
+    - `NAKAMA_CPP_SDK/libs/win32/v140` - for VS 2015 x86
+    - `NAKAMA_CPP_SDK/libs/win64/v140` - for VS 2015 x64
+    - `NAKAMA_CPP_SDK/libs/win32/v141` - for VS 2017 x86
+    - `NAKAMA_CPP_SDK/libs/win64/v141` - for VS 2017 x64
+    - `NAKAMA_CPP_SDK/libs/win32/v142` - for VS 2019 x86
+    - `NAKAMA_CPP_SDK/libs/win64/v142` - for VS 2019 x64
 3. Add all `.lib` files located in libs folder in `Linker > Input > Additional Dependencies`
 
 ### Custom setup
@@ -175,7 +175,7 @@ NClientPtr client = createDefaultClient(parameters);
 
 The `createDefaultClient` will create HTTP/1.1 client to use REST API.
 
-## Tick
+### Tick
 
 The `tick` method pumps requests queue and executes callbacks in your thread. You must call it periodically (recommended every 50ms) in your thread.
 
@@ -551,6 +551,10 @@ build/{platform}/build/test/Debug/nakama-test
 
 You can find the C++ Client example [here](https://github.com/heroiclabs/nakama-cpp/tree/master/examples/nakama-cmake-client-example)
 
+## C language support
+
+Please follow README-C.md
+
 ## Generating Docs
 
 Prerequisites: `doxygen`
@@ -568,4 +572,4 @@ This project is licensed under the [Apache-2 License](https://github.com/heroicl
 
 ## Special Thanks
 
-Thanks to [@dimon4eg](https://github.com/dimon4eg) for this excellent support on developing Nakama C++, Cocos2d-x and Unreal client libraries.
+Thanks to [@dimon4eg](https://github.com/dimon4eg) for this excellent support on developing Nakama C/C++, Cocos2d-x and Unreal client libraries.
