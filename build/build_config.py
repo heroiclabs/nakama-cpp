@@ -30,7 +30,7 @@ BUILD_HTTP_CPPREST = True
 BUILD_WEBSOCKET_CPPREST = True
 
 # Build C API (support for C language)
-BUILD_C_API = True
+BUILD_C_API = False
 
 # Build static libs
 BUILD_NAKAMA_STATIC = True
