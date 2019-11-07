@@ -25,6 +25,7 @@ using namespace std;
 void test_rt_match();
 void test_notifications();
 void test_authoritative_match();
+void test_tournament();
 
 void test_rt_joinChat()
 {
@@ -86,6 +87,7 @@ void run_realtime_tests()
     test_rt_match();
     test_notifications();
     test_authoritative_match();
+    test_tournament();
 }
 
 void test_realtime()
