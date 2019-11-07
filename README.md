@@ -541,7 +541,15 @@ Tests are built when you build Nakama C++ SDK for desktop OS (Windows, Mac or Li
 By default tests connect to local server by `127.0.0.1`.
 To use another IP of your server, edit `test/test_serverConfig.h` file.
 
-Run tests (console application):
+### Prerequisites
+
+Tests reqire lua modules: download them from https://github.com/heroiclabs/nakama/tree/master/data/modules and put to `<nakama-server>/data/modules`.
+
+Restart server.
+
+### Run tests (console application)
+
+Run tests executable (console application):
 
 ```bash
 build/{platform}/build/test/Debug/nakama-test
