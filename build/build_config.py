@@ -30,13 +30,13 @@ BUILD_HTTP_CPPREST = True
 BUILD_WEBSOCKET_CPPREST = True
 
 # Build C API (support for C language)
-BUILD_C_API = False
+BUILD_C_API = True
 
 # Build static libs
 BUILD_NAKAMA_STATIC = True
 
 # Build shared libs (DLL)
-BUILD_NAKAMA_SHARED = True
+BUILD_NAKAMA_SHARED = False
 
 # Build tests
 BUILD_NAKAMA_TESTS = True
