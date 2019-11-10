@@ -28,7 +28,7 @@ You'll need to setup the server and database before you can connect with the cli
 
 - Windows - Visual Studio 2015, 2017, 2019 (x86, x64, Debug, Release)
 - Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86, x86_64)
-- Linux - Ubuntu 14.04.5 (x86, x64)
+- Linux - Ubuntu 18.04 x64
 - Mac - 10.10+
 - iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off
 
@@ -479,9 +479,7 @@ It builds in `Release` mode, creates universal libraries and copies them to rele
 
 ### Building for Linux
 
-To build for x86 architecture use x86 linux distro (we use Ubuntu 14.04.5 i386)
-
-To build for x64 architecture use x64 linux distro (we use Ubuntu 14.04.5 amd64)
+We use Ubuntu 18.04 amd64.
 
 Prerequisites:
 
