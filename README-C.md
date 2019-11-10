@@ -6,7 +6,7 @@ The C client is just wrapper on top of C++ client.
 
 Here is described only C client usage.
 
-For other information please follow main README.md.
+For other information please follow main [README](README.md).
 
 ## Usage
 

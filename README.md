@@ -401,6 +401,10 @@ There are following components:
 * gRPC client
 * HTTP transport using C++ REST SDK
 * Websocket transport using C++ REST SDK
+* C API
+* Tests
+
+In the config you can also set whenever you need to build `nakama-cpp` as static, dynamic library or both version.
 
 ### Building for Windows
 
@@ -442,7 +446,7 @@ brew install cmake ninja boost
 Build:
 
 ```bash
-cd build\mac
+cd build/mac
 python build_mac.py --dylib
 ```
 
@@ -455,7 +459,7 @@ It builds in `Release` mode and copies nakama lib to release folder.
 To build for one architecture:
 
 ```bash
-cd build\ios
+cd build/ios
 python build_ios.py Arch --dylib
 ```
 Where `Arch` is architecture: `arm64`, `armv7`, `armv7s` or `x86_64`.
@@ -467,7 +471,7 @@ It builds in `Release` mode.
 To build for all architectures `arm64`, `armv7`, `armv7s` and `x86_64`:
 
 ```bash
-cd build\ios
+cd build/ios
 python build_ios_all.py
 ```
 
@@ -501,7 +505,7 @@ Prerequisites:
   `./bootstrap && make && make install`
 
 ```bash
-cd build\linux
+cd build/linux
 python build_linux.py --so
 ```
 
@@ -547,7 +551,7 @@ Tests reqire lua modules: download them from https://github.com/heroiclabs/nakam
 
 Restart server.
 
-### Run tests (console application)
+### Run tests
 
 Run tests executable (console application):
 
@@ -561,7 +565,7 @@ You can find the C++ Client example [here](https://github.com/heroiclabs/nakama-
 
 ## C language support
 
-Please follow README-C.md
+Please follow [README-C](README-C.md)
 
 ## Generating Docs
 
