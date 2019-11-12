@@ -7,11 +7,14 @@ The format is based on [keep a changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 ### Added
 - C API.
-- Support iOS SDK 13
+- Support iOS SDK 13.
 
 ### Fixed
 - RPC call fails when body is empty.
 - optional_HAVE_INITIALIZER_LIST is undefined.
+
+### Changed
+- Release for Ubuntu 18.04 x64 only (previously was Ubuntu 14.04.5 x86, x64).
 
 ## [2.2.0] - 2019-09-14
 ### Added
