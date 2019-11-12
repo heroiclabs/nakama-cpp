@@ -2405,7 +2405,7 @@ void RestClient::rpc(
             rapidjson::StringBuffer buffer;
             rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
             rapidjson::Value jsonString;
-            jsonString.SetString(payload.value().c_str(), payload.value().size());
+            jsonString.SetString(payload.value().c_str(), (rapidjson::SizeType)payload.value().size());
             jsonString.Accept(writer);
             body = buffer.GetString();
             sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body));
