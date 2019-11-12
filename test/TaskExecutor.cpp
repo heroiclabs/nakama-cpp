@@ -28,12 +28,12 @@ TaskExecutor& TaskExecutor::instance()
 
 void TaskExecutor::addTask(TaskFunc&& task)
 {
-    _tasks.emplace_back(TaskData({ std::move(task) }));
+    _tasks.emplace_back(TaskData(std::move(task)));
 }
 
 void TaskExecutor::addTask(const TaskFunc& task)
 {
-    _tasks.emplace_back(TaskData({ task }));
+    _tasks.emplace_back(TaskData(TaskFunc(task)));
 }
 
 void TaskExecutor::currentTaskCompleted()

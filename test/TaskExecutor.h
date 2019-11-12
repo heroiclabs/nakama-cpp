@@ -40,6 +40,8 @@ private:
 private:
     struct TaskData
     {
+        TaskData(TaskFunc&& func) : func(func) {}
+
         TaskFunc func;
         bool inProgress = false;
     };
