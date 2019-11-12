@@ -44,6 +44,7 @@ endif()
 
 target_include_directories(nakama-test
     PRIVATE .
+    PRIVATE ${THIRD_PARTY_DIR}
 )
 
 foreach(_source IN ITEMS ${_source_list})
