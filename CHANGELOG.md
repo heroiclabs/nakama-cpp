@@ -11,6 +11,7 @@ The format is based on [keep a changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 - RPC call fails when body is empty.
+- RPC payload differences between Rest and RT clients.
 - optional_HAVE_INITIALIZER_LIST is undefined.
 
 ### Changed

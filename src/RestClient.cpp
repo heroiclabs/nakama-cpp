@@ -181,7 +181,7 @@ void RestClient::onResponse(RestReqContext* reqContext, NHttpResponsePtr respons
 
                     if (!ok)
                     {
-                        reqError(reqContext, NError("Parse JSON failed. HTTP body: " + response->body, ErrorCode::InternalError));
+                        reqError(reqContext, NError("Parse JSON failed. HTTP body: " + response->body + " error: " + status.ToString(), ErrorCode::InternalError));
                     }
                 }
 
@@ -2402,7 +2402,12 @@ void RestClient::rpc(
 
         if (payload && !payload.value().empty())
         {
-            body = *payload;
+            rapidjson::StringBuffer buffer;
+            rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+            rapidjson::Value jsonString;
+            jsonString.SetString(payload.value().c_str(), payload.value().size());
+            jsonString.Accept(writer);
+            body = buffer.GetString();
             sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body));
         }
         else
