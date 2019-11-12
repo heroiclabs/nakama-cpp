@@ -16,6 +16,7 @@
 
 #include "test_main.h"
 #include "test_serverConfig.h"
+#include "TaskExecutor.h"
 
 extern "C"
 {
@@ -87,6 +88,7 @@ void NCppTest::createClient(const NClientParameters& parameters)
 void NCppTest::tick()
 {
     client->tick();
+    TaskExecutor::instance().tick();
 }
 
 // *************************************************************
