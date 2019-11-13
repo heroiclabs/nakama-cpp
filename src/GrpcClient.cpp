@@ -235,6 +235,7 @@ void GrpcClient::authenticateDevice(
     const std::string& id,
     const opt::optional<std::string>& username,
     const opt::optional<bool>& create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -256,13 +257,15 @@ void GrpcClient::authenticateDevice(
 
     nakama::api::AuthenticateDeviceRequest req;
 
-    req.mutable_account()->set_id(id);
+    auto* account = req.mutable_account();
+    account->set_id(id);
+    if (username) req.set_username(*username);
+    if (create) req.mutable_create()->set_value(*create);
 
-    if (username)
-        req.set_username(*username);
-
-    if (create)
-        req.mutable_create()->set_value(*create);
+    for (auto& p : vars)
+    {
+        (*account->mutable_vars())[p.first] = p.second;
+    }
 
     auto responseReader = _stub->AsyncAuthenticateDevice(&ctx->context, req, &_cq);
 
@@ -270,10 +273,11 @@ void GrpcClient::authenticateDevice(
 }
 
 void GrpcClient::authenticateEmail(
-    const std::string & email,
-    const std::string & password,
-    const std::string & username,
+    const std::string& email,
+    const std::string& password,
+    const std::string& username,
     bool create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -295,15 +299,16 @@ void GrpcClient::authenticateEmail(
 
     nakama::api::AuthenticateEmailRequest req;
 
-    if (!email.empty())
-        req.mutable_account()->set_email(email);
-
-    req.mutable_account()->set_password(password);
-
-    if (!username.empty())
-        req.set_username(username);
-
+    auto* account = req.mutable_account();
+    account->set_email(email);
+    account->set_password(password);
+    if (!username.empty()) req.set_username(username);
     req.mutable_create()->set_value(create);
+
+    for (auto& p : vars)
+    {
+        (*account->mutable_vars())[p.first] = p.second;
+    }
 
     auto responseReader = _stub->AsyncAuthenticateEmail(&ctx->context, req, &_cq);
 
@@ -315,6 +320,7 @@ void GrpcClient::authenticateFacebook(
     const std::string & username,
     bool create,
     bool importFriends,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -336,13 +342,16 @@ void GrpcClient::authenticateFacebook(
 
     nakama::api::AuthenticateFacebookRequest req;
 
-    req.mutable_account()->set_token(accessToken);
-
-    if (!username.empty())
-        req.set_username(username);
-
+    auto* account = req.mutable_account();
+    account->set_token(accessToken);
+    if (!username.empty()) req.set_username(username);
     req.mutable_create()->set_value(create);
     req.mutable_sync()->set_value(importFriends);
+
+    for (auto& p : vars)
+    {
+        (*account->mutable_vars())[p.first] = p.second;
+    }
 
     auto responseReader = _stub->AsyncAuthenticateFacebook(&ctx->context, req, &_cq);
 
@@ -353,6 +362,7 @@ void GrpcClient::authenticateGoogle(
     const std::string & accessToken,
     const std::string & username,
     bool create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -374,12 +384,15 @@ void GrpcClient::authenticateGoogle(
 
     nakama::api::AuthenticateGoogleRequest req;
 
-    req.mutable_account()->set_token(accessToken);
-
-    if (!username.empty())
-        req.set_username(username);
-
+    auto* account = req.mutable_account();
+    account->set_token(accessToken);
+    if (!username.empty()) req.set_username(username);
     req.mutable_create()->set_value(create);
+
+    for (auto& p : vars)
+    {
+        (*account->mutable_vars())[p.first] = p.second;
+    }
 
     auto responseReader = _stub->AsyncAuthenticateGoogle(&ctx->context, req, &_cq);
 
@@ -395,6 +408,7 @@ void GrpcClient::authenticateGameCenter(
     const std::string & publicKeyUrl,
     const std::string & username,
     bool create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -425,6 +439,11 @@ void GrpcClient::authenticateGameCenter(
         account->set_salt(salt);
         account->set_signature(signature);
         account->set_public_key_url(publicKeyUrl);
+
+        for (auto& p : vars)
+        {
+            (*account->mutable_vars())[p.first] = p.second;
+        }
     }
 
     if (!username.empty())
@@ -441,6 +460,7 @@ void GrpcClient::authenticateCustom(
     const std::string & id,
     const std::string & username,
     bool create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -462,12 +482,15 @@ void GrpcClient::authenticateCustom(
 
     nakama::api::AuthenticateCustomRequest req;
 
-    req.mutable_account()->set_id(id);
-
-    if (!username.empty())
-        req.set_username(username);
-
+    auto* account = req.mutable_account();
+    account->set_id(id);
+    if (!username.empty()) req.set_username(username);
     req.mutable_create()->set_value(create);
+
+    for (auto& p : vars)
+    {
+        (*account->mutable_vars())[p.first] = p.second;
+    }
 
     auto responseReader = _stub->AsyncAuthenticateCustom(&ctx->context, req, &_cq);
 
@@ -478,6 +501,7 @@ void GrpcClient::authenticateSteam(
     const std::string & token,
     const std::string & username,
     bool create,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback
 )
@@ -499,12 +523,15 @@ void GrpcClient::authenticateSteam(
 
     nakama::api::AuthenticateSteamRequest req;
 
-    req.mutable_account()->set_token(token);
-
-    if (!username.empty())
-        req.set_username(username);
-
+    auto* account = req.mutable_account();
+    account->set_token(token);
+    if (!username.empty()) req.set_username(username);
     req.mutable_create()->set_value(create);
+
+    for (auto& p : vars)
+    {
+        (*account->mutable_vars())[p.first] = p.second;
+    }
 
     auto responseReader = _stub->AsyncAuthenticateSteam(&ctx->context, req, &_cq);
 
@@ -1024,25 +1051,37 @@ void GrpcClient::blockFriends(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void GrpcClient::listFriends(NSessionPtr session, std::function<void(NFriendsPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listFriends(
+    NSessionPtr session,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<NFriend::State>& state,
+    const std::string& cursor,
+    std::function<void(NFriendListPtr)> successCallback,
+    ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
     ReqContext* ctx = createReqContext(session);
-    auto data(make_shared<nakama::api::Friends>());
+    auto data(make_shared<nakama::api::FriendList>());
 
     if (successCallback)
     {
         ctx->successCallback = [data, successCallback]()
         {
-            NFriendsPtr friends(new NFriends());
+            NFriendListPtr friends(new NFriendList());
             assign(*friends, *data);
             successCallback(friends);
         };
     }
     ctx->errorCallback = errorCallback;
 
-    auto responseReader = _stub->AsyncListFriends(&ctx->context, {}, &_cq);
+    nakama::api::ListFriendsRequest req;
+
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (state) req.mutable_state()->set_value((google::protobuf::int32)*state);
+    if (!cursor.empty()) req.set_cursor(cursor);
+
+    auto responseReader = _stub->AsyncListFriends(&ctx->context, req, &_cq);
 
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
@@ -1054,6 +1093,7 @@ void GrpcClient::createGroup(
     const std::string & avatarUrl,
     const std::string & langTag,
     bool open,
+    const opt::optional<int32_t>& maxCount,
     std::function<void(const NGroup&)> successCallback,
     ErrorCallback errorCallback
 )
@@ -1077,16 +1117,10 @@ void GrpcClient::createGroup(
     nakama::api::CreateGroupRequest req;
 
     req.set_name(name);
-
-    if (!description.empty())
-        req.set_description(description);
-
-    if (!avatarUrl.empty())
-        req.set_avatar_url(avatarUrl);
-
-    if (!langTag.empty())
-        req.set_lang_tag(langTag);
-
+    if (!description.empty()) req.set_description(description);
+    if (!avatarUrl.empty()) req.set_avatar_url(avatarUrl);
+    if (!langTag.empty()) req.set_lang_tag(langTag);
+    if (maxCount) req.set_max_count(*maxCount);
     req.set_open(open);
 
     auto responseReader = _stub->AsyncCreateGroup(&ctx->context, req, &_cq);
@@ -1146,7 +1180,15 @@ void GrpcClient::addGroupUsers(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void GrpcClient::listGroupUsers(NSessionPtr session, const std::string & groupId, std::function<void(NGroupUserListPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listGroupUsers(
+    NSessionPtr session,
+    const std::string& groupId,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<NFriend::State>& state,
+    const std::string& cursor,
+    std::function<void(NGroupUserListPtr)> successCallback,
+    ErrorCallback errorCallback
+)
 {
     NLOG_INFO("...");
 
@@ -1167,6 +1209,9 @@ void GrpcClient::listGroupUsers(NSessionPtr session, const std::string & groupId
     nakama::api::ListGroupUsersRequest req;
 
     req.set_group_id(groupId);
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (state) req.mutable_state()->set_value((google::protobuf::int32)*state);
+    if (!cursor.empty()) req.set_cursor(cursor);
 
     auto responseReader = _stub->AsyncListGroupUsers(&ctx->context, req, &_cq);
 
@@ -1265,11 +1310,18 @@ void GrpcClient::listGroups(NSessionPtr session, const std::string & name, int32
     responseReader->Finish(&(*groupData), &ctx->status, (void*)ctx);
 }
 
-void GrpcClient::listUserGroups(NSessionPtr session, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listUserGroups(
+    NSessionPtr session,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<NFriend::State>& state,
+    const std::string& cursor,
+    std::function<void(NUserGroupListPtr)> successCallback,
+    ErrorCallback errorCallback
+)
 {
     if (session)
     {
-        listUserGroups(session, session->getUserId(), successCallback, errorCallback);
+        listUserGroups(session, session->getUserId(), limit, state, cursor, successCallback, errorCallback);
     }
     else
     {
@@ -1284,7 +1336,15 @@ void GrpcClient::listUserGroups(NSessionPtr session, std::function<void(NUserGro
     }
 }
 
-void GrpcClient::listUserGroups(NSessionPtr session, const std::string & userId, std::function<void(NUserGroupListPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listUserGroups(
+    NSessionPtr session,
+    const std::string& userId,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<NFriend::State>& state,
+    const std::string& cursor,
+    std::function<void(NUserGroupListPtr)> successCallback,
+    ErrorCallback errorCallback
+)
 {
     NLOG_INFO("...");
 
@@ -1305,6 +1365,9 @@ void GrpcClient::listUserGroups(NSessionPtr session, const std::string & userId,
     nakama::api::ListUserGroupsRequest req;
 
     req.set_user_id(userId);
+    if (limit) req.mutable_limit()->set_value(*limit);
+    if (state) req.mutable_state()->set_value((google::protobuf::int32)*state);
+    if (!cursor.empty()) req.set_cursor(cursor);
 
     auto responseReader = _stub->AsyncListUserGroups(&ctx->context, req, &_cq);
 
