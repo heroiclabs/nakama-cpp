@@ -149,19 +149,36 @@ Nakama C++ is designed to use in one thread only.
 
 ## Usage
 
-The client object has many methods to execute various features in the server or open realtime socket connections with the server.
+### Use as static library
 
-Include nakama header.
+Include nakama header and use nakama namespace.
 
 ```cpp
 #include "nakama-cpp/Nakama.h"
+
+using namespace NAKAMA_NAMESPACE;
 ```
 
-Use nakama namespace.
+### Use as dynamic library
+
+Include nakama header and use nakama namespace.
 
 ```cpp
-using namespace Nakama;
+#include "nakama-cpp-c-wrapper/NakamaWrapper.h"
+
+using namespace NAKAMA_NAMESPACE;
 ```
+
+Include following header only once in some source file e.g. in `main.cpp`:
+```cpp
+#include "nakama-cpp-c-wrapper/NakamaWrapperImpl.h"
+```
+
+This header includes implementation of Nakama C++ wrapper. It uses C interface to communicate with Nakama shared library (DLL).
+
+### Client
+
+The client object has many methods to execute various features in the server or open realtime socket connections with the server.
 
 Use the connection credentials to build a client object.
 

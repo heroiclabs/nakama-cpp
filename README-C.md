@@ -175,10 +175,6 @@ NLogger_init(logSink, NLogLevel_Debug);
 
 ## Build
 
-We don't distribute releases with C language support, so you have to build it by self.
-
-Do not worry, it's not that hard.
-
 Please follow build section from main README.md and edit `build/build_config.py`:
 
 ```py
