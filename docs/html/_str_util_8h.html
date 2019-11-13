@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.2.3</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -89,39 +89,164 @@ $(document).ready(function(){initNavTree('_str_util_8h.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">StrUtil.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_n_export_8h_source.html">nakama-cpp/NExport.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_n_types_8h_source.html">nakama-cpp/NTypes.h</a>&quot;</code><br />
 <code>#include &lt;string&gt;</code><br />
 </div>
 <p><a href="_str_util_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespace_nakama"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html">Nakama</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:afb460f98d3c2b0f0987df12333d3c47d"><td class="memItemLeft" align="right" valign="top">typedef std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d">Nakama::Base64Buffer</a></td></tr>
-<tr class="separator:afb460f98d3c2b0f0987df12333d3c47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9f29cba66f3f6f263c2c8748bfa50d83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a9f29cba66f3f6f263c2c8748bfa50d83">Nakama::base64Encode</a> (const Base64Buffer &amp;buffer)</td></tr>
-<tr class="separator:a9f29cba66f3f6f263c2c8748bfa50d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42a2ade68904f33bbf88fb82c8be70c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> Base64Buffer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a42a2ade68904f33bbf88fb82c8be70c6">Nakama::base64Decode</a> (const std::string &amp;base64str)</td></tr>
-<tr class="separator:a42a2ade68904f33bbf88fb82c8be70c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a542fbdc2815ad8fb102ad0bd9e578c77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a542fbdc2815ad8fb102ad0bd9e578c77">Nakama::urlEncode</a> (const std::string &amp;str)</td></tr>
-<tr class="separator:a542fbdc2815ad8fb102ad0bd9e578c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af96810e8851a3d4c03f086dfef16259c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#af96810e8851a3d4c03f086dfef16259c">Nakama::isStringStartsWith</a> (const std::string &amp;str, const std::string &amp;prefix)</td></tr>
-<tr class="separator:af96810e8851a3d4c03f086dfef16259c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7b4afeaab025e620a35fdc960ffe18a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_str_util_8h.html#aa7b4afeaab025e620a35fdc960ffe18a">base64Encode</a> (const <a class="el" href="_str_util_8h.html#a0bfa42b3f6013572619454b71a7200ca">Base64Buffer</a> &amp;buffer)</td></tr>
+<tr class="separator:aa7b4afeaab025e620a35fdc960ffe18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff5802b3671710f34e625b75ad1f42c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="_str_util_8h.html#a0bfa42b3f6013572619454b71a7200ca">Base64Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_str_util_8h.html#aff5802b3671710f34e625b75ad1f42c5">base64Decode</a> (const std::string &amp;base64str)</td></tr>
+<tr class="separator:aff5802b3671710f34e625b75ad1f42c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a806d637faf957e6073493043fd510305"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_str_util_8h.html#a806d637faf957e6073493043fd510305">urlEncode</a> (const std::string &amp;str)</td></tr>
+<tr class="separator:a806d637faf957e6073493043fd510305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee5b72490be10cbf735a1d6c32599c95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_str_util_8h.html#aee5b72490be10cbf735a1d6c32599c95">isStringStartsWith</a> (const std::string &amp;str, const std::string &amp;prefix)</td></tr>
+<tr class="separator:aee5b72490be10cbf735a1d6c32599c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a0bfa42b3f6013572619454b71a7200ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_types_8h.html#a43b64873d86a21be893013ac5ad17ceb">NAKAMA_NAMESPACE_BEGIN</a> typedef std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_str_util_8h.html#a0bfa42b3f6013572619454b71a7200ca">Base64Buffer</a></td></tr>
+<tr class="separator:a0bfa42b3f6013572619454b71a7200ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="aff5802b3671710f34e625b75ad1f42c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff5802b3671710f34e625b75ad1f42c5">&#9670;&nbsp;</a></span>base64Decode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="_str_util_8h.html#a0bfa42b3f6013572619454b71a7200ca">Base64Buffer</a> base64Decode </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>base64str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Decode <code>base64</code> string</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">base64str</td><td><code>base64</code> string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Base64Buffer byte buffer </dd></dl>
+
+</div>
+</div>
+<a id="aa7b4afeaab025e620a35fdc960ffe18a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7b4afeaab025e620a35fdc960ffe18a">&#9670;&nbsp;</a></span>base64Encode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string base64Encode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="_str_util_8h.html#a0bfa42b3f6013572619454b71a7200ca">Base64Buffer</a> &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Encode bytes buffer using <code>base64</code> algorithm</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>byte buffer to encode </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::string encoded <code>base64</code> string </dd></dl>
+
+</div>
+</div>
+<a id="aee5b72490be10cbf735a1d6c32599c95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee5b72490be10cbf735a1d6c32599c95">&#9670;&nbsp;</a></span>isStringStartsWith()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> bool isStringStartsWith </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>prefix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>returns true if a string starts with the specified prefix</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>The string </td></tr>
+    <tr><td class="paramname">prefix</td><td>The prefix to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool </dd></dl>
+
+</div>
+</div>
+<a id="a806d637faf957e6073493043fd510305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a806d637faf957e6073493043fd510305">&#9670;&nbsp;</a></span>urlEncode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> std::string urlEncode </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Encode string to allow use it in an URL</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>string to encode </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::string encoded string </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a0bfa42b3f6013572619454b71a7200ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bfa42b3f6013572619454b71a7200ca">&#9670;&nbsp;</a></span>Base64Buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_n_types_8h.html#a43b64873d86a21be893013ac5ad17ceb">NAKAMA_NAMESPACE_BEGIN</a> typedef std::string Base64Buffer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

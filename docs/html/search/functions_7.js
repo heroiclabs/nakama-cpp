@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['importfacebookfriends',['importFacebookFriends',['../class_nakama_1_1_n_client_interface.html#a11402011feba26ec66327612de573730',1,'Nakama::NClientInterface']]],
-  ['info',['Info',['../class_nakama_1_1_n_logger.html#ad01e9084d437afd8a2805970de3f22c4',1,'Nakama::NLogger']]],
-  ['init',['init',['../class_nakama_1_1_n_logger.html#acb2e3c9adc556f6e03b6d42b00fb9fa2',1,'Nakama::NLogger']]],
-  ['initwithconsolesink',['initWithConsoleSink',['../class_nakama_1_1_n_logger.html#ae17f0e86967698dfb7b960e6f301b167',1,'Nakama::NLogger']]],
-  ['isconnected',['isConnected',['../class_nakama_1_1_n_rt_client_interface.html#ab4d332c103e2d0a3137d0fe37c7f8d8a',1,'Nakama::NRtClientInterface::isConnected()'],['../class_nakama_1_1_n_rt_transport_interface.html#ab1b6801fa9b1eeea540eca95f9630628',1,'Nakama::NRtTransportInterface::isConnected()']]],
-  ['iscreated',['isCreated',['../class_nakama_1_1_n_session_interface.html#aebe0af7a7e55022af0aeb589d8ce3b38',1,'Nakama::NSessionInterface']]],
-  ['isexpired',['isExpired',['../class_nakama_1_1_n_session_interface.html#a741d13b0f877c4e167c0786341570f42',1,'Nakama::NSessionInterface::isExpired() const =0'],['../class_nakama_1_1_n_session_interface.html#aa8512c4741147d0ae23b4b2efb726994',1,'Nakama::NSessionInterface::isExpired(NTimestamp now) const =0']]],
-  ['isstringstartswith',['isStringStartsWith',['../namespace_nakama.html#af96810e8851a3d4c03f086dfef16259c',1,'Nakama']]]
+  ['importfacebookfriends',['importFacebookFriends',['../class_n_client_interface.html#aa6d8bfea1cf897df33cfd7251daf0ba1',1,'NClientInterface']]],
+  ['info',['Info',['../class_n_logger.html#ac25b2c20dd7f573c4fe11c7369ed787c',1,'NLogger']]],
+  ['init',['init',['../class_n_logger.html#a5bfa83ab682374082b2d48bede762498',1,'NLogger']]],
+  ['initwithconsolesink',['initWithConsoleSink',['../class_n_logger.html#a4a1f2cc09aba071995e42770400a074b',1,'NLogger']]],
+  ['isconnected',['isConnected',['../class_n_rt_client_interface.html#a04f3bebebd2afe326d6ce72f32ab5c78',1,'NRtClientInterface::isConnected()'],['../class_n_rt_transport_interface.html#afea63aa0164357e2d45dc42aaba3b390',1,'NRtTransportInterface::isConnected()']]],
+  ['iscreated',['isCreated',['../class_n_session_interface.html#af299d4da015fc05beed2c89e58e51f2b',1,'NSessionInterface']]],
+  ['isexpired',['isExpired',['../class_n_session_interface.html#abded9ae5c663d2cac4865acdd733bc69',1,'NSessionInterface::isExpired() const =0'],['../class_n_session_interface.html#afb229755c1d00ad8b9843a77cc28ff79',1,'NSessionInterface::isExpired(NTimestamp now) const =0']]],
+  ['isstringstartswith',['isStringStartsWith',['../_str_util_8h.html#aee5b72490be10cbf735a1d6c32599c95',1,'StrUtil.h']]]
 ];

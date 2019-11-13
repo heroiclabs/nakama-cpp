@@ -1,11 +1,11 @@
 var searchData=
 [
   ['bad_5finput',['BAD_INPUT',['../_n_rt_error_8h.html#aa0776189cdd951acffba66ccff48bf3d',1,'NRtError.h']]],
-  ['base64buffer',['Base64Buffer',['../namespace_nakama.html#afb460f98d3c2b0f0987df12333d3c47d',1,'Nakama']]],
-  ['base64decode',['base64Decode',['../namespace_nakama.html#a42a2ade68904f33bbf88fb82c8be70c6',1,'Nakama']]],
-  ['base64encode',['base64Encode',['../namespace_nakama.html#a9f29cba66f3f6f263c2c8748bfa50d83',1,'Nakama']]],
+  ['base64buffer',['Base64Buffer',['../_str_util_8h.html#a0bfa42b3f6013572619454b71a7200ca',1,'StrUtil.h']]],
+  ['base64decode',['base64Decode',['../_str_util_8h.html#aff5802b3671710f34e625b75ad1f42c5',1,'StrUtil.h']]],
+  ['base64encode',['base64Encode',['../_str_util_8h.html#aa7b4afeaab025e620a35fdc960ffe18a',1,'StrUtil.h']]],
   ['binary',['Binary',['../_n_rt_transport_interface_8h.html#adfad08373e37ddf3708906a4b066e846',1,'NRtTransportInterface.h']]],
-  ['blocked',['BLOCKED',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5baeecba0068950a2df17c47e851e1eef14',1,'Nakama::NFriend']]],
-  ['blockfriends',['blockFriends',['../class_nakama_1_1_n_client_interface.html#a3090c47b7d8083fa8d0b18972faca163',1,'Nakama::NClientInterface']]],
-  ['body',['body',['../struct_nakama_1_1_n_http_request.html#aedaacc159f9643edd4a082776475e1c4',1,'Nakama::NHttpRequest::body()'],['../struct_nakama_1_1_n_http_response.html#af51152b276cc52c9861497f69b395376',1,'Nakama::NHttpResponse::body()']]]
+  ['blocked',['BLOCKED',['../struct_n_friend.html#af008208878241dd9eedde4a78dad29c4aeecba0068950a2df17c47e851e1eef14',1,'NFriend']]],
+  ['blockfriends',['blockFriends',['../class_n_client_interface.html#aac18802e78713b010ad54fa121420f25',1,'NClientInterface']]],
+  ['body',['body',['../struct_n_http_request.html#a685864354edc65a5786691f0ed234c68',1,'NHttpRequest::body()'],['../struct_n_http_response.html#a76502459a345edd60e18aede403fd6f2',1,'NHttpResponse::body()']]]
 ];

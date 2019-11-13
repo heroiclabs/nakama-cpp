@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['readstorageobjects',['readStorageObjects',['../class_nakama_1_1_n_client_interface.html#af7a9b6570dd6a124e27f0d874b7953c4',1,'Nakama::NClientInterface']]],
-  ['removechatmessage',['removeChatMessage',['../class_nakama_1_1_n_rt_client_interface.html#a532680c08ef7ba0f405ef1c5ab110d7f',1,'Nakama::NRtClientInterface']]],
-  ['removematchmaker',['removeMatchmaker',['../class_nakama_1_1_n_rt_client_interface.html#aaec88763e5ad31459e0d2a5b27a9f8a8',1,'Nakama::NRtClientInterface']]],
-  ['request',['request',['../class_nakama_1_1_n_http_transport_interface.html#aa654b47d624863f56b2c60e2b9853036',1,'Nakama::NHttpTransportInterface']]],
-  ['restoresession',['restoreSession',['../namespace_nakama.html#a8d3e611f5b0d24a6afc98af3fab2617e',1,'Nakama']]],
-  ['rpc',['rpc',['../class_nakama_1_1_n_client_interface.html#a5913e7a61cdcbffe921b241725960960',1,'Nakama::NClientInterface::rpc()'],['../class_nakama_1_1_n_rt_client_interface.html#a82f516a67fa5cbdc6087584c581eeb83',1,'Nakama::NRtClientInterface::rpc()']]]
+  ['readstorageobjects',['readStorageObjects',['../class_n_client_interface.html#a1ead9ca384d04f84a64e9ef62efc3765',1,'NClientInterface']]],
+  ['removechatmessage',['removeChatMessage',['../class_n_rt_client_interface.html#ae2d0cc4f310ba133ff6a5771e008c22e',1,'NRtClientInterface']]],
+  ['removematchmaker',['removeMatchmaker',['../class_n_rt_client_interface.html#a1de69eeaa0dfab3f8933b768ffe3641e',1,'NRtClientInterface']]],
+  ['request',['request',['../class_n_http_transport_interface.html#a085c54bc18fe127cc07d4e151d43c6d6',1,'NHttpTransportInterface']]],
+  ['restoresession',['restoreSession',['../_n_session_interface_8h.html#ade4e04eb1ab8435da83082fcaa0e40bb',1,'NSessionInterface.h']]],
+  ['rpc',['rpc',['../class_n_client_interface.html#a70805cf5bc4c2b9119af59a679f37617',1,'NClientInterface::rpc()'],['../class_n_rt_client_interface.html#a434b8e8c5d421b23d9c051c4b6c5cb62',1,'NRtClientInterface::rpc()']]]
 ];

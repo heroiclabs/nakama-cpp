@@ -1,5 +1,5 @@
 var _n_notification_list_8h =
 [
-    [ "NNotificationList", "struct_nakama_1_1_n_notification_list.html", "struct_nakama_1_1_n_notification_list" ],
-    [ "NNotificationListPtr", "_n_notification_list_8h.html#a4001c54f92db8f9af472a59ebb28ef57", null ]
+    [ "NNotificationList", "struct_n_notification_list.html", "struct_n_notification_list" ],
+    [ "NNotificationListPtr", "_n_notification_list_8h.html#a1f3719b38a350543b6615ec61909eaf8", null ]
 ];

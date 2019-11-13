@@ -1,19 +1,19 @@
 var searchData=
 [
-  ['data',['data',['../struct_nakama_1_1_n_match_data.html#ac324baf44b46ffd30e8a23fa3f86ccf4',1,'Nakama::NMatchData::data()'],['../struct_nakama_1_1_n_stream_data.html#a2a61434f12edc08503649c11b6ae3d0d',1,'Nakama::NStreamData::data()']]],
-  ['debug',['Debug',['../class_nakama_1_1_n_logger.html#a59675ee3d74cf72715b6604695f46506',1,'Nakama::NLogger::Debug()'],['../_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8',1,'Debug():&#160;NLogSinkInterface.h']]],
-  ['defaultclientparameters',['DefaultClientParameters',['../namespace_nakama.html#a723b297c02497273ffd694f456310232',1,'Nakama']]],
+  ['data',['data',['../struct_n_match_data.html#a9ce71b719f2fd8dbe667cb24379ad0f4',1,'NMatchData::data()'],['../struct_n_stream_data.html#a614abf6422192f427669e573cdbc49f1',1,'NStreamData::data()']]],
+  ['debug',['Debug',['../class_n_logger.html#a1de032d925957249243e1c2b97c49bfb',1,'NLogger::Debug()'],['../_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8',1,'Debug():&#160;NLogSinkInterface.h']]],
+  ['defaultclientparameters',['DefaultClientParameters',['../_client_factory_8h.html#a08dd09a51555411aea8ead86a8094f94',1,'ClientFactory.h']]],
   ['del',['DEL',['../_n_http_transport_interface_8h.html#afb2a5705dcefcdaed77cea817ced1008',1,'NHttpTransportInterface.h']]],
-  ['deletefriends',['deleteFriends',['../class_nakama_1_1_n_client_interface.html#a84d0477b4ba184fe1e4f5fc2a0beab72',1,'Nakama::NClientInterface']]],
-  ['deletegroup',['deleteGroup',['../class_nakama_1_1_n_client_interface.html#a065c1f7cc136c61e09d31a138e9f930d',1,'Nakama::NClientInterface']]],
-  ['deleteleaderboardrecord',['deleteLeaderboardRecord',['../class_nakama_1_1_n_client_interface.html#adc915791d1ce9c1d87c8c0dec5980e06',1,'Nakama::NClientInterface']]],
-  ['deletenotifications',['deleteNotifications',['../class_nakama_1_1_n_client_interface.html#ae148ccf223dd5eb3d4546f60bfac4e02',1,'Nakama::NClientInterface']]],
-  ['deletestorageobjects',['deleteStorageObjects',['../class_nakama_1_1_n_client_interface.html#a36da11d27e9a3f4d268908ab190b5834',1,'Nakama::NClientInterface']]],
-  ['description',['description',['../struct_nakama_1_1_n_group.html#a7354ee5c48a28dac5cf3874aa5ab917b',1,'Nakama::NGroup::description()'],['../struct_nakama_1_1_n_tournament.html#a74f4a074b8ec4fb2131cca9a4f53736d',1,'Nakama::NTournament::description()']]],
-  ['devices',['devices',['../struct_nakama_1_1_n_account.html#aa7305ec7e297227d75e16e961d729af8',1,'Nakama::NAccount']]],
+  ['deletefriends',['deleteFriends',['../class_n_client_interface.html#a1fa83da3644eba9e2df69c61da36c761',1,'NClientInterface']]],
+  ['deletegroup',['deleteGroup',['../class_n_client_interface.html#a92243d08eb9c0b97c90e7695ebfaf329',1,'NClientInterface']]],
+  ['deleteleaderboardrecord',['deleteLeaderboardRecord',['../class_n_client_interface.html#abc2b8a86d77213c2cb54a64e6d0dd653',1,'NClientInterface']]],
+  ['deletenotifications',['deleteNotifications',['../class_n_client_interface.html#acc439b7fd2edfb82d10e5a2ab0f44a6d',1,'NClientInterface']]],
+  ['deletestorageobjects',['deleteStorageObjects',['../class_n_client_interface.html#ace5743e2ec117991668ffc1491052d90',1,'NClientInterface']]],
+  ['description',['description',['../struct_n_group.html#a2ebde0c4f3b9c40f9ba60b73a299a899',1,'NGroup::description()'],['../struct_n_tournament.html#a364ac3bb13d927ca2771fa0e98fca49e',1,'NTournament::description()']]],
+  ['devices',['devices',['../struct_n_account.html#a7c46fe412e769194cb4287c9a62b266b',1,'NAccount']]],
   ['direct_5fmessage',['DIRECT_MESSAGE',['../_n_types_8h.html#a01cd7fde59423eaae6ea390a392991b1',1,'NTypes.h']]],
-  ['disconnect',['disconnect',['../class_nakama_1_1_n_client_interface.html#a217ad64ed97973e9d56b91dfbea6ca59',1,'Nakama::NClientInterface::disconnect()'],['../class_nakama_1_1_n_rt_client_interface.html#a7b90bb506e8f121197e2634671991b65',1,'Nakama::NRtClientInterface::disconnect()'],['../class_nakama_1_1_n_rt_transport_interface.html#a3225896854f1a40bca3d91ce8fa762ce',1,'Nakama::NRtTransportInterface::disconnect()']]],
-  ['disconnectcallback',['DisconnectCallback',['../class_nakama_1_1_n_rt_default_client_listener.html#a9839f0c80ec59dc1986087252582ec69',1,'Nakama::NRtDefaultClientListener::DisconnectCallback()'],['../class_nakama_1_1_n_rt_transport_interface.html#ab426526aae40cd4c65f3bab802a6d995',1,'Nakama::NRtTransportInterface::DisconnectCallback()']]],
-  ['displayname',['displayName',['../struct_nakama_1_1_n_user.html#a1bdb25fe20dc54b8472ded0cd3df11de',1,'Nakama::NUser']]],
-  ['duration',['duration',['../struct_nakama_1_1_n_tournament.html#aa2ec859b5cb956487fedaa1eb0812adb',1,'Nakama::NTournament']]]
+  ['disconnect',['disconnect',['../class_n_client_interface.html#a3165805b05d106591e29a82c6841baad',1,'NClientInterface::disconnect()'],['../class_n_rt_client_interface.html#a4eb84bea7692bfa05fcba983e5fc8989',1,'NRtClientInterface::disconnect()'],['../class_n_rt_transport_interface.html#a2e2760ef3ee76af2195ed4a6a1b79cfa',1,'NRtTransportInterface::disconnect()']]],
+  ['disconnectcallback',['DisconnectCallback',['../class_n_rt_default_client_listener.html#a9ae861478d033aa4cdbb2aadde977686',1,'NRtDefaultClientListener::DisconnectCallback()'],['../class_n_rt_transport_interface.html#a14fe3ec5b7f8ab927910c904bc22184b',1,'NRtTransportInterface::DisconnectCallback()']]],
+  ['displayname',['displayName',['../struct_n_user.html#a3f0040c972621cfd60a14a3b83ff0227',1,'NUser']]],
+  ['duration',['duration',['../struct_n_tournament.html#acee2bc403f384c38fc3a842e0e75d6ac',1,'NTournament']]]
 ];

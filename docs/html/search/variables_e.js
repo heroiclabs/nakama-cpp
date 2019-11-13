@@ -1,12 +1,20 @@
 var searchData=
 [
-  ['name',['name',['../struct_nakama_1_1_n_group.html#ac34c53f4a433ee538ff38414ba6af3a7',1,'Nakama::NGroup']]],
-  ['nextcursor',['nextCursor',['../struct_nakama_1_1_n_channel_message_list.html#a3d25bced825ad0198984cb611f0cc456',1,'Nakama::NChannelMessageList::nextCursor()'],['../struct_nakama_1_1_n_leaderboard_record_list.html#a584764a8ed7743866238527f39aaf8c3',1,'Nakama::NLeaderboardRecordList::nextCursor()'],['../struct_nakama_1_1_n_tournament_record_list.html#a96387f2706b2aba2ab97880254dc6e0b',1,'Nakama::NTournamentRecordList::nextCursor()']]],
-  ['nextreset',['nextReset',['../struct_nakama_1_1_n_tournament.html#a9a239a53c51dc4a9f89aec7a328df2aa',1,'Nakama::NTournament']]],
+  ['name',['name',['../struct_n_group.html#a4066dda2daeeedae02919bfcaad7a8e1',1,'NGroup']]],
+  ['nchanneltype',['NChannelType',['../_n_types_8h.html#a8b723d9b918a6de34dd5dad97fec036b',1,'NTypes.h']]],
+  ['nextcursor',['nextCursor',['../struct_n_channel_message_list.html#aacd8914ccbfc6d7726d9da813ab70d34',1,'NChannelMessageList::nextCursor()'],['../struct_n_leaderboard_record_list.html#a45a8bf67da22c5d34f0d288491de2fc9',1,'NLeaderboardRecordList::nextCursor()'],['../struct_n_tournament_record_list.html#a5c4389462d089cd3896b76299c75e682',1,'NTournamentRecordList::nextCursor()']]],
+  ['nextreset',['nextReset',['../struct_n_tournament.html#a2c1405bd90893b89d77d49d123d56700',1,'NTournament']]],
+  ['nhttpreqmethod',['NHttpReqMethod',['../_n_http_transport_interface_8h.html#a2d5ca2c95ed16e9a7282093e02d328e3',1,'NHttpTransportInterface.h']]],
+  ['nloglevel',['NLogLevel',['../_n_log_sink_interface_8h.html#ae71424969c416adf1fa96167a3f4b3f4',1,'NLogSinkInterface.h']]],
   ['no_5fread',['NO_READ',['../_n_storage_permissions_8h.html#abe6811a72a8d8afab5d4fce81f22c325',1,'NStoragePermissions.h']]],
   ['no_5fwrite',['NO_WRITE',['../_n_storage_permissions_8h.html#a59cc7d84ea01bfbb63938e597186dc40',1,'NStoragePermissions.h']]],
   ['notfound',['NotFound',['../_n_error_8h.html#a0cfc295e037d42309933d7471dcfd28e',1,'NError.h']]],
-  ['notifications',['notifications',['../struct_nakama_1_1_n_notification_list.html#a4cdba3e8df23ef50e0c49533d2883fea',1,'Nakama::NNotificationList']]],
-  ['numericproperties',['numericProperties',['../struct_nakama_1_1_n_matchmaker_user.html#a9f49e97fefd1a4a315b7435402468b67',1,'Nakama::NMatchmakerUser']]],
-  ['numscore',['numScore',['../struct_nakama_1_1_n_leaderboard_record.html#a9fe665e87b63711ad4f032d4a33bc94a',1,'Nakama::NLeaderboardRecord']]]
+  ['notifications',['notifications',['../struct_n_notification_list.html#a5ea2f68a5f9878cb3a6abfb4e6c7d7a2',1,'NNotificationList']]],
+  ['nrtclientprotocol',['NRtClientProtocol',['../_n_rt_client_interface_8h.html#a8133d4305a85df686a51189aadc1cebd',1,'NRtClientInterface.h']]],
+  ['nrttransporttype',['NRtTransportType',['../_n_rt_transport_interface_8h.html#a27ea0a85f3df8893a86703e625312ae4',1,'NRtTransportInterface.h']]],
+  ['nstoragepermissionread',['NStoragePermissionRead',['../_n_storage_permissions_8h.html#a59ea6072edbeec580480afeeb17a9e06',1,'NStoragePermissions.h']]],
+  ['nstoragepermissionwrite',['NStoragePermissionWrite',['../_n_storage_permissions_8h.html#a7d4d7f2a9bf00f9f25c6a1b1ecac5814',1,'NStoragePermissions.h']]],
+  ['numericproperties',['numericProperties',['../struct_n_matchmaker_user.html#ae17d6b2651a9436ccfcd4136efe24f80',1,'NMatchmakerUser']]],
+  ['numscore',['numScore',['../struct_n_leaderboard_record.html#ae29645dad04026e236528d98563fe41b',1,'NLeaderboardRecord']]],
+  ['nusergroupstate',['NUserGroupState',['../_n_types_8h.html#a172e36c18090c151a69677b171f2de50',1,'NTypes.h']]]
 ];

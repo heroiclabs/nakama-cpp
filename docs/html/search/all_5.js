@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['edgecount',['edgeCount',['../struct_nakama_1_1_n_group.html#ac39abd088c28b9c1396149776bf5c78a',1,'Nakama::NGroup::edgeCount()'],['../struct_nakama_1_1_n_user.html#a92e9cc8b330d9dcde6872fe1f95849cf',1,'Nakama::NUser::edgeCount()']]],
-  ['email',['email',['../struct_nakama_1_1_n_account.html#a2c1965d4ec6ad1069dce9a2f897ee6c8',1,'Nakama::NAccount']]],
-  ['endactive',['endActive',['../struct_nakama_1_1_n_tournament.html#a6b733fdd0b71605ecf652cdbc03df4c1',1,'Nakama::NTournament']]],
-  ['endtime',['endTime',['../struct_nakama_1_1_n_tournament.html#ad9b73ef85799f5fecaa301407db6fe03',1,'Nakama::NTournament']]],
-  ['error',['Error',['../class_nakama_1_1_n_logger.html#a63213baa3577cc45952de76d006acbf9',1,'Nakama::NLogger::Error(const std::string &amp;message, const char *module_name, const char *func=nullptr)'],['../class_nakama_1_1_n_logger.html#afb6e774ed571c2ffe5296e42ed8981a3',1,'Nakama::NLogger::Error(const NError &amp;error, const char *module_name, const char *func=nullptr)'],['../class_nakama_1_1_n_logger.html#a3260d3d7333293f49932ceca334ac32b',1,'Nakama::NLogger::Error(const NRtError &amp;error, const char *module_name, const char *func=nullptr)'],['../_n_log_sink_interface_8h.html#a2c3e4bb40f36b262a5214e2da2bca9c5',1,'Error():&#160;NLogSinkInterface.h']]],
-  ['errorcallback',['ErrorCallback',['../class_nakama_1_1_n_rt_default_client_listener.html#ada59f557b46a3ad71dbc948ef3f0c0d2',1,'Nakama::NRtDefaultClientListener::ErrorCallback()'],['../class_nakama_1_1_n_rt_transport_interface.html#a93bbaa30d99c2804d6da651dcffa3190',1,'Nakama::NRtTransportInterface::ErrorCallback()'],['../namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8',1,'Nakama::ErrorCallback()']]],
-  ['errormessage',['errorMessage',['../struct_nakama_1_1_n_http_response.html#a652ab1f04d64a315e9fe484e1708d09e',1,'Nakama::NHttpResponse']]],
-  ['expirytime',['expiryTime',['../struct_nakama_1_1_n_leaderboard_record.html#a9d42dde3b488863e0ee06d6d9b72a240',1,'Nakama::NLeaderboardRecord']]]
+  ['edgecount',['edgeCount',['../struct_n_group.html#a83a55e1b373f1e3ec3e28f5c664a087b',1,'NGroup::edgeCount()'],['../struct_n_user.html#aed414ae49238de839c22d92fc0e0f88d',1,'NUser::edgeCount()']]],
+  ['email',['email',['../struct_n_account.html#aee834e4317f33e0708dfe893ff772faa',1,'NAccount']]],
+  ['endactive',['endActive',['../struct_n_tournament.html#af18849b9e668b4d29f05a077e19c5d68',1,'NTournament']]],
+  ['endtime',['endTime',['../struct_n_tournament.html#aafbf7d42ed2eed8dd7ab7c7adf07ed6f',1,'NTournament']]],
+  ['error',['Error',['../class_n_logger.html#a8bfe312628f4e1e1b243aba0a43014ba',1,'NLogger::Error(const std::string &amp;message, const char *module_name, const char *func=nullptr)'],['../class_n_logger.html#ade2f61de4a1985cd8cab1167509f3337',1,'NLogger::Error(const NError &amp;error, const char *module_name, const char *func=nullptr)'],['../class_n_logger.html#a0d8a81a132c8acfc40011d2f8333492b',1,'NLogger::Error(const NRtError &amp;error, const char *module_name, const char *func=nullptr)'],['../_n_log_sink_interface_8h.html#a2c3e4bb40f36b262a5214e2da2bca9c5',1,'Error():&#160;NLogSinkInterface.h']]],
+  ['errorcallback',['ErrorCallback',['../class_n_rt_default_client_listener.html#aec6c14bd188a58eb3b963f69198e9491',1,'NRtDefaultClientListener::ErrorCallback()'],['../class_n_rt_transport_interface.html#a9d3102c9b5034a592b6a20f815a5a776',1,'NRtTransportInterface::ErrorCallback()'],['../_n_client_interface_8h.html#a79df7304e5fe40f1a2d778961ca1c0cb',1,'ErrorCallback():&#160;NClientInterface.h']]],
+  ['errorcode',['ErrorCode',['../_n_error_8h.html#aa342c0aeed428aeb7236a5637f7aad9a',1,'NError.h']]],
+  ['errormessage',['errorMessage',['../struct_n_http_response.html#a0d11279af00b994dbda6f4612f9e84e8',1,'NHttpResponse']]],
+  ['expirytime',['expiryTime',['../struct_n_leaderboard_record.html#a77318a892950a832b107daa6ff318440',1,'NLeaderboardRecord']]]
 ];

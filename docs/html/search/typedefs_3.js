@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['errorcallback',['ErrorCallback',['../class_nakama_1_1_n_rt_default_client_listener.html#ada59f557b46a3ad71dbc948ef3f0c0d2',1,'Nakama::NRtDefaultClientListener::ErrorCallback()'],['../class_nakama_1_1_n_rt_transport_interface.html#a93bbaa30d99c2804d6da651dcffa3190',1,'Nakama::NRtTransportInterface::ErrorCallback()'],['../namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8',1,'Nakama::ErrorCallback()']]]
+  ['matchdatacallback',['MatchDataCallback',['../class_n_rt_default_client_listener.html#ad104416f7fd2e17f3492b4edee8bec7b',1,'NRtDefaultClientListener']]],
+  ['matchmakermatchedcallback',['MatchmakerMatchedCallback',['../class_n_rt_default_client_listener.html#a4f09e4b4b497d30fd82db845140a2caa',1,'NRtDefaultClientListener']]],
+  ['matchpresencecallback',['MatchPresenceCallback',['../class_n_rt_default_client_listener.html#a6f612a7a110e334f3a4ee8b192936f25',1,'NRtDefaultClientListener']]],
+  ['messagecallback',['MessageCallback',['../class_n_rt_transport_interface.html#a87bb96ee99df92b01230745f40cdc63a',1,'NRtTransportInterface']]]
 ];

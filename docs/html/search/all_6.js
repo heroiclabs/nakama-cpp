@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['facebookid',['facebookId',['../struct_nakama_1_1_n_user.html#a54b22c5fb7ce0b01162b3ee129a59c28',1,'Nakama::NUser']]],
-  ['fatal',['Fatal',['../class_nakama_1_1_n_logger.html#a868fcb6f424243403dc8c2dd696a2eed',1,'Nakama::NLogger']]],
-  ['fireonconnected',['fireOnConnected',['../class_nakama_1_1_n_rt_transport_interface.html#ae8f538e9aa3bc5841fec3776bd158844',1,'Nakama::NRtTransportInterface']]],
-  ['fireondisconnected',['fireOnDisconnected',['../class_nakama_1_1_n_rt_transport_interface.html#ad3f75a38513ce58490fa9833d2b0c846',1,'Nakama::NRtTransportInterface']]],
-  ['fireonerror',['fireOnError',['../class_nakama_1_1_n_rt_transport_interface.html#a61f8c49e9b0920cb30598913059038b7',1,'Nakama::NRtTransportInterface']]],
-  ['fireonmessage',['fireOnMessage',['../class_nakama_1_1_n_rt_transport_interface.html#af5827550386435549fd2dadbb30d69c0',1,'Nakama::NRtTransportInterface']]],
-  ['flush',['flush',['../class_nakama_1_1_n_console_log_sink.html#a8ac4e101ca5d2606bfa263eff29cf749',1,'Nakama::NConsoleLogSink::flush()'],['../class_nakama_1_1_n_log_sink_interface.html#a90efd7bb7de3e6f6f01c59c2b0f5280e',1,'Nakama::NLogSinkInterface::flush()']]],
-  ['followusers',['followUsers',['../class_nakama_1_1_n_rt_client_interface.html#ab4cca77cc7910e5bbc8a658ffa901f51',1,'Nakama::NRtClientInterface']]],
-  ['format',['Format',['../class_nakama_1_1_n_logger.html#a4645c996448412cac9eaf28935c7e2dd',1,'Nakama::NLogger']]],
-  ['friend',['FRIEND',['../struct_nakama_1_1_n_friend.html#a867678e2a625f5a902ef5d465afe5e5ba471e11502a3cc3a519644984935691e8',1,'Nakama::NFriend']]],
-  ['friends',['friends',['../struct_nakama_1_1_n_friend_list.html#a377b48129d9e18473b0ee5c851342b78',1,'Nakama::NFriendList']]]
+  ['facebookid',['facebookId',['../struct_n_user.html#ae4eff5ecdfaaa8a7d332401c2dded0b5',1,'NUser']]],
+  ['fatal',['Fatal',['../class_n_logger.html#aac7e5ba61c919c2efa2e3cdb810875cc',1,'NLogger']]],
+  ['fireonconnected',['fireOnConnected',['../class_n_rt_transport_interface.html#a4c9282f283ebb64baa08729c247ee8cd',1,'NRtTransportInterface']]],
+  ['fireondisconnected',['fireOnDisconnected',['../class_n_rt_transport_interface.html#a6625de94427118848d51d416c6753275',1,'NRtTransportInterface']]],
+  ['fireonerror',['fireOnError',['../class_n_rt_transport_interface.html#a03c9a625fdb35eaa021b31bceb3ceb8f',1,'NRtTransportInterface']]],
+  ['fireonmessage',['fireOnMessage',['../class_n_rt_transport_interface.html#a28697930574157beb1efae8abddefaa8',1,'NRtTransportInterface']]],
+  ['flush',['flush',['../class_n_console_log_sink.html#a007dd8eda4cdefbd81eecda23f270560',1,'NConsoleLogSink::flush()'],['../class_n_log_sink_interface.html#a213aec93d459babe93d50e49ac51308d',1,'NLogSinkInterface::flush()']]],
+  ['followusers',['followUsers',['../class_n_rt_client_interface.html#a539c6b5adcd7b3f25bf01a771ac805df',1,'NRtClientInterface']]],
+  ['format',['Format',['../class_n_logger.html#ab5386c18f1ea3c71ee2fedfd81316923',1,'NLogger']]],
+  ['friend',['FRIEND',['../struct_n_friend.html#af008208878241dd9eedde4a78dad29c4a471e11502a3cc3a519644984935691e8',1,'NFriend']]],
+  ['friends',['friends',['../struct_n_friend_list.html#af4d59c7f0e9c9902475a027208583ccb',1,'NFriendList']]]
 ];

@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['ticket',['ticket',['../struct_nakama_1_1_n_matchmaker_matched.html#a7c048c7677dfc71baac8b3800e07117b',1,'Nakama::NMatchmakerMatched::ticket()'],['../struct_nakama_1_1_n_matchmaker_ticket.html#af3520e6ab63e8c48d3aa5178a928b0d0',1,'Nakama::NMatchmakerTicket::ticket()']]],
-  ['timezone',['timeZone',['../struct_nakama_1_1_n_user.html#af6d3021912bb642bb52c0ecbe60f37a8',1,'Nakama::NUser']]],
-  ['title',['title',['../struct_nakama_1_1_n_tournament.html#a1fbca0dee25321555d10b56af9d35d5a',1,'Nakama::NTournament']]],
-  ['token',['token',['../struct_nakama_1_1_n_matchmaker_matched.html#a185431d3fe6f10e265429a04c3e91b20',1,'Nakama::NMatchmakerMatched']]],
-  ['tournaments',['tournaments',['../struct_nakama_1_1_n_tournament_list.html#ae3b243d66dcfcc537c9a7ecd97df8446',1,'Nakama::NTournamentList']]],
+  ['ticket',['ticket',['../struct_n_matchmaker_matched.html#a05c71bf1200d8fa70e72a943f532a51f',1,'NMatchmakerMatched::ticket()'],['../struct_n_matchmaker_ticket.html#a48af9c555d3054437e7e4369bfae6e65',1,'NMatchmakerTicket::ticket()']]],
+  ['timezone',['timeZone',['../struct_n_user.html#ab805c6e67ed590680cb43c540a2fbf53',1,'NUser']]],
+  ['title',['title',['../struct_n_tournament.html#ab80f808b8f1406cd54f74d7097ad166e',1,'NTournament']]],
+  ['token',['token',['../struct_n_matchmaker_matched.html#a324f42f864cb071a195a8cae11508320',1,'NMatchmakerMatched']]],
+  ['tournaments',['tournaments',['../struct_n_tournament_list.html#aa4e941040d9a5f0d5552cbe6af239443',1,'NTournamentList']]],
   ['transport_5ferror',['TRANSPORT_ERROR',['../_n_rt_error_8h.html#a89ecb927f24940781d6cf815a4ee6996',1,'NRtError.h']]]
 ];

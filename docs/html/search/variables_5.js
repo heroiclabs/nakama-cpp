@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['edgecount',['edgeCount',['../struct_nakama_1_1_n_group.html#ac39abd088c28b9c1396149776bf5c78a',1,'Nakama::NGroup::edgeCount()'],['../struct_nakama_1_1_n_user.html#a92e9cc8b330d9dcde6872fe1f95849cf',1,'Nakama::NUser::edgeCount()']]],
-  ['email',['email',['../struct_nakama_1_1_n_account.html#a2c1965d4ec6ad1069dce9a2f897ee6c8',1,'Nakama::NAccount']]],
-  ['endactive',['endActive',['../struct_nakama_1_1_n_tournament.html#a6b733fdd0b71605ecf652cdbc03df4c1',1,'Nakama::NTournament']]],
-  ['endtime',['endTime',['../struct_nakama_1_1_n_tournament.html#ad9b73ef85799f5fecaa301407db6fe03',1,'Nakama::NTournament']]],
+  ['edgecount',['edgeCount',['../struct_n_group.html#a83a55e1b373f1e3ec3e28f5c664a087b',1,'NGroup::edgeCount()'],['../struct_n_user.html#aed414ae49238de839c22d92fc0e0f88d',1,'NUser::edgeCount()']]],
+  ['email',['email',['../struct_n_account.html#aee834e4317f33e0708dfe893ff772faa',1,'NAccount']]],
+  ['endactive',['endActive',['../struct_n_tournament.html#af18849b9e668b4d29f05a077e19c5d68',1,'NTournament']]],
+  ['endtime',['endTime',['../struct_n_tournament.html#aafbf7d42ed2eed8dd7ab7c7adf07ed6f',1,'NTournament']]],
   ['error',['Error',['../_n_log_sink_interface_8h.html#a2c3e4bb40f36b262a5214e2da2bca9c5',1,'NLogSinkInterface.h']]],
-  ['errormessage',['errorMessage',['../struct_nakama_1_1_n_http_response.html#a652ab1f04d64a315e9fe484e1708d09e',1,'Nakama::NHttpResponse']]],
-  ['expirytime',['expiryTime',['../struct_nakama_1_1_n_leaderboard_record.html#a9d42dde3b488863e0ee06d6d9b72a240',1,'Nakama::NLeaderboardRecord']]]
+  ['errorcode',['ErrorCode',['../_n_error_8h.html#aa342c0aeed428aeb7236a5637f7aad9a',1,'NError.h']]],
+  ['errormessage',['errorMessage',['../struct_n_http_response.html#a0d11279af00b994dbda6f4612f9e84e8',1,'NHttpResponse']]],
+  ['expirytime',['expiryTime',['../struct_n_leaderboard_record.html#a77318a892950a832b107daa6ff318440',1,'NLeaderboardRecord']]]
 ];

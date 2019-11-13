@@ -1,5 +1,5 @@
 var _n_user_group_list_8h =
 [
-    [ "NUserGroupList", "struct_nakama_1_1_n_user_group_list.html", "struct_nakama_1_1_n_user_group_list" ],
-    [ "NUserGroupListPtr", "_n_user_group_list_8h.html#a474cfecf792199daaddf3f773445bf60", null ]
+    [ "NUserGroupList", "struct_n_user_group_list.html", "struct_n_user_group_list" ],
+    [ "NUserGroupListPtr", "_n_user_group_list_8h.html#ac697daac945d75323bd69c88e2c8330c", null ]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['key',['key',['../struct_nakama_1_1_n_storage_object.html#a88553302e52fc34dc6e1d06b77350b98',1,'Nakama::NStorageObject::key()'],['../struct_nakama_1_1_n_storage_object_ack.html#af3b8670dd32283b94ef3bebc36ba4c52',1,'Nakama::NStorageObjectAck::key()'],['../struct_nakama_1_1_n_read_storage_object_id.html#acbfe127acb15f9c3720c67e5096b01d0',1,'Nakama::NReadStorageObjectId::key()'],['../struct_nakama_1_1_n_delete_storage_object_id.html#a1fef6dd10d2700f8a638e95e37cea6ba',1,'Nakama::NDeleteStorageObjectId::key()'],['../struct_nakama_1_1_n_storage_object_write.html#a57e49e6260192a32477ff0036f49d441',1,'Nakama::NStorageObjectWrite::key()']]],
-  ['kickgroupusers',['kickGroupUsers',['../class_nakama_1_1_n_client_interface.html#a5a879769a69d9b60fbab47e10e7ff370',1,'Nakama::NClientInterface']]]
+  ['key',['key',['../struct_n_storage_object.html#a8ce9f018bd5244fe562750b9fb81b786',1,'NStorageObject::key()'],['../struct_n_storage_object_ack.html#ab07b1bd68b57732730cb16bcd27f9ff7',1,'NStorageObjectAck::key()'],['../struct_n_read_storage_object_id.html#a60e00051bad6aadcf93ead8657ad7d6a',1,'NReadStorageObjectId::key()'],['../struct_n_delete_storage_object_id.html#a8998f572807e2753ea9a506b8216a352',1,'NDeleteStorageObjectId::key()'],['../struct_n_storage_object_write.html#aac98f9124efc0f26db9f24b9cd4d02d3',1,'NStorageObjectWrite::key()']]],
+  ['kickgroupusers',['kickGroupUsers',['../class_n_client_interface.html#aa7c5ac85ca8e952352c66899a40036a7',1,'NClientInterface']]]
 ];

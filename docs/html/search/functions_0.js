@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['addfriends',['addFriends',['../class_nakama_1_1_n_client_interface.html#ac0fcea244e4af8331be4c4be81c826eb',1,'Nakama::NClientInterface']]],
-  ['addgroupusers',['addGroupUsers',['../class_nakama_1_1_n_client_interface.html#ac568e062c22cc8ebd70b7b4f0f1c18b1',1,'Nakama::NClientInterface']]],
-  ['addmatchmaker',['addMatchmaker',['../class_nakama_1_1_n_rt_client_interface.html#a83e13ecc802ef83be63b906899050244',1,'Nakama::NRtClientInterface']]],
-  ['authenticatecustom',['authenticateCustom',['../class_nakama_1_1_n_client_interface.html#aefab58f41376d7db28d7a62ee6b471fd',1,'Nakama::NClientInterface']]],
-  ['authenticatedevice',['authenticateDevice',['../class_nakama_1_1_n_client_interface.html#a75f902149a50d531a3aad2bfc595a3e8',1,'Nakama::NClientInterface']]],
-  ['authenticateemail',['authenticateEmail',['../class_nakama_1_1_n_client_interface.html#ac16a0008a078dc6afb64285f618a9736',1,'Nakama::NClientInterface']]],
-  ['authenticatefacebook',['authenticateFacebook',['../class_nakama_1_1_n_client_interface.html#ab826826e22027401e81f8aa9bd92ba06',1,'Nakama::NClientInterface']]],
-  ['authenticategamecenter',['authenticateGameCenter',['../class_nakama_1_1_n_client_interface.html#a45ab9c72b9c6c9abfb30a2d7e8f4a01e',1,'Nakama::NClientInterface']]],
-  ['authenticategoogle',['authenticateGoogle',['../class_nakama_1_1_n_client_interface.html#ad20e7c2483181a0ca479a3bfe49ceb05',1,'Nakama::NClientInterface']]],
-  ['authenticatesteam',['authenticateSteam',['../class_nakama_1_1_n_client_interface.html#a5c0ed8649421cd88c7c99d409516a332',1,'Nakama::NClientInterface']]]
+  ['addfriends',['addFriends',['../class_n_client_interface.html#a9d9ef9749f0dbc79fb48cbf1640caf19',1,'NClientInterface']]],
+  ['addgroupusers',['addGroupUsers',['../class_n_client_interface.html#a4e66cb6d178340c1a4d7db19b8d03450',1,'NClientInterface']]],
+  ['addmatchmaker',['addMatchmaker',['../class_n_rt_client_interface.html#acd4a2b6ad15a1c9d1aa0ced3895d8975',1,'NRtClientInterface']]],
+  ['authenticatecustom',['authenticateCustom',['../class_n_client_interface.html#a9a22eaeab28982e797575514fb48ab8d',1,'NClientInterface']]],
+  ['authenticatedevice',['authenticateDevice',['../class_n_client_interface.html#a427e720d802bec426ca034f203823a14',1,'NClientInterface']]],
+  ['authenticateemail',['authenticateEmail',['../class_n_client_interface.html#ae919a3db76fd0bd82fd39b98b1f184dc',1,'NClientInterface']]],
+  ['authenticatefacebook',['authenticateFacebook',['../class_n_client_interface.html#adc02e82a4f75c6dbeffdf4dc64a0dd23',1,'NClientInterface']]],
+  ['authenticategamecenter',['authenticateGameCenter',['../class_n_client_interface.html#a122cf869e15022b74167130680371834',1,'NClientInterface']]],
+  ['authenticategoogle',['authenticateGoogle',['../class_n_client_interface.html#a23c7541feee6b6d15cd2b117345461eb',1,'NClientInterface']]],
+  ['authenticatesteam',['authenticateSteam',['../class_n_client_interface.html#a5d4fbdccc49098cdabbdff45c91c2477',1,'NClientInterface']]]
 ];

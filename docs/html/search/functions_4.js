@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['error',['Error',['../class_nakama_1_1_n_logger.html#a63213baa3577cc45952de76d006acbf9',1,'Nakama::NLogger::Error(const std::string &amp;message, const char *module_name, const char *func=nullptr)'],['../class_nakama_1_1_n_logger.html#afb6e774ed571c2ffe5296e42ed8981a3',1,'Nakama::NLogger::Error(const NError &amp;error, const char *module_name, const char *func=nullptr)'],['../class_nakama_1_1_n_logger.html#a3260d3d7333293f49932ceca334ac32b',1,'Nakama::NLogger::Error(const NRtError &amp;error, const char *module_name, const char *func=nullptr)']]]
+  ['error',['Error',['../class_n_logger.html#a8bfe312628f4e1e1b243aba0a43014ba',1,'NLogger::Error(const std::string &amp;message, const char *module_name, const char *func=nullptr)'],['../class_n_logger.html#ade2f61de4a1985cd8cab1167509f3337',1,'NLogger::Error(const NError &amp;error, const char *module_name, const char *func=nullptr)'],['../class_n_logger.html#a0d8a81a132c8acfc40011d2f8333492b',1,'NLogger::Error(const NRtError &amp;error, const char *module_name, const char *func=nullptr)']]]
 ];

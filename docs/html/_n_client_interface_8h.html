@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.2.3</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -90,7 +90,6 @@ $(document).ready(function(){initNavTree('_n_client_interface_8h.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">NClientInterface.h File Reference</div>  </div>
@@ -126,21 +125,45 @@ $(document).ready(function(){initNavTree('_n_client_interface_8h.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_client_interface.html">Nakama::NClientInterface</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespace_nakama"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html">Nakama</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_client_interface.html">NClientInterface</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ad5e0f639c6f155b179aca2f409e7a1a8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ad5e0f639c6f155b179aca2f409e7a1a8">Nakama::ErrorCallback</a> = std::function&lt; void(const NError &amp;)&gt;</td></tr>
-<tr class="separator:ad5e0f639c6f155b179aca2f409e7a1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9239c034b2a391b1bf7d9891d8a07ff"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ad9239c034b2a391b1bf7d9891d8a07ff">Nakama::NClientPtr</a> = std::shared_ptr&lt; NClientInterface &gt;</td></tr>
-<tr class="separator:ad9239c034b2a391b1bf7d9891d8a07ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79df7304e5fe40f1a2d778961ca1c0cb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_client_interface_8h.html#a79df7304e5fe40f1a2d778961ca1c0cb">ErrorCallback</a> = std::function&lt; void(const <a class="el" href="struct_n_error.html">NError</a> &amp;)&gt;</td></tr>
+<tr class="separator:a79df7304e5fe40f1a2d778961ca1c0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40e31a5fd57f6847ff83dbcea2cb5233"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_client_interface_8h.html#a40e31a5fd57f6847ff83dbcea2cb5233">NClientPtr</a> = std::shared_ptr&lt; <a class="el" href="class_n_client_interface.html">NClientInterface</a> &gt;</td></tr>
+<tr class="separator:a40e31a5fd57f6847ff83dbcea2cb5233"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a79df7304e5fe40f1a2d778961ca1c0cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79df7304e5fe40f1a2d778961ca1c0cb">&#9670;&nbsp;</a></span>ErrorCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="_n_client_interface_8h.html#a79df7304e5fe40f1a2d778961ca1c0cb">ErrorCallback</a> =  std::function&lt;void(const <a class="el" href="struct_n_error.html">NError</a>&amp;)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a40e31a5fd57f6847ff83dbcea2cb5233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40e31a5fd57f6847ff83dbcea2cb5233">&#9670;&nbsp;</a></span>NClientPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="_n_client_interface_8h.html#a40e31a5fd57f6847ff83dbcea2cb5233">NClientPtr</a> =  std::shared_ptr&lt;<a class="el" href="class_n_client_interface.html">NClientInterface</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

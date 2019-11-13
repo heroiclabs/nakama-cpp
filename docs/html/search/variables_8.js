@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['headers',['headers',['../struct_nakama_1_1_n_http_request.html#af7449a9de8d4d4b129b83f35dbcf375a',1,'Nakama::NHttpRequest']]],
-  ['host',['host',['../struct_nakama_1_1_n_client_parameters.html#aca424cc4778252712d953a433cd54504',1,'Nakama::NClientParameters::host()'],['../struct_nakama_1_1_rt_client_parameters.html#ad83a79905aade5a8a1c5a0ca28b6b847',1,'Nakama::RtClientParameters::host()']]],
-  ['httpkey',['httpKey',['../struct_nakama_1_1_n_rpc.html#ae5a08f727cdde7a9be8222ee12287e3a',1,'Nakama::NRpc']]]
+  ['headers',['headers',['../struct_n_http_request.html#ae31e885e202b94c4e883816527069e4b',1,'NHttpRequest']]],
+  ['host',['host',['../struct_n_client_parameters.html#a06dcd02f2435e993cc02f43e16119d2a',1,'NClientParameters::host()'],['../struct_rt_client_parameters.html#ac8e31d83c0f9c6ded17c5bf24ff1fdaa',1,'RtClientParameters::host()']]],
+  ['httpkey',['httpKey',['../struct_n_rpc.html#af651c002c23099ae0b6f58cd564fbae7',1,'NRpc']]]
 ];

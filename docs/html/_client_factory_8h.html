@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.2.3</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -90,7 +90,6 @@ $(document).ready(function(){initNavTree('_client_factory_8h.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -104,31 +103,148 @@ $(document).ready(function(){initNavTree('_client_factory_8h.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_nakama_1_1_n_client_parameters.html">Nakama::NClientParameters</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespace_nakama"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html">Nakama</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_n_client_parameters.html">NClientParameters</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a723b297c02497273ffd694f456310232"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a723b297c02497273ffd694f456310232">Nakama::DefaultClientParameters</a> = NClientParameters</td></tr>
-<tr class="memdesc:a723b297c02497273ffd694f456310232"><td class="mdescLeft">&#160;</td><td class="mdescRight">DefaultClientParameters is deprectaed, use <a class="el" href="struct_nakama_1_1_n_client_parameters.html">NClientParameters</a> instead.  <a href="namespace_nakama.html#a723b297c02497273ffd694f456310232">More...</a><br /></td></tr>
-<tr class="separator:a723b297c02497273ffd694f456310232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08dd09a51555411aea8ead86a8094f94"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_client_factory_8h.html#a08dd09a51555411aea8ead86a8094f94">DefaultClientParameters</a> = <a class="el" href="struct_n_client_parameters.html">NClientParameters</a></td></tr>
+<tr class="memdesc:a08dd09a51555411aea8ead86a8094f94"><td class="mdescLeft">&#160;</td><td class="mdescRight">DefaultClientParameters is deprectaed, use <a class="el" href="struct_n_client_parameters.html">NClientParameters</a> instead.  <a href="#a08dd09a51555411aea8ead86a8094f94">More...</a><br /></td></tr>
+<tr class="separator:a08dd09a51555411aea8ead86a8094f94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aad4f44dbe04ecccf870fc5cb42ae0228"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> NClientPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#aad4f44dbe04ecccf870fc5cb42ae0228">Nakama::createDefaultClient</a> (const NClientParameters &amp;parameters)</td></tr>
-<tr class="separator:aad4f44dbe04ecccf870fc5cb42ae0228"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59cb1826c5a28cdac3c64f7b2c76a601"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> NClientPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#a59cb1826c5a28cdac3c64f7b2c76a601">Nakama::createGrpcClient</a> (const NClientParameters &amp;parameters)</td></tr>
-<tr class="separator:a59cb1826c5a28cdac3c64f7b2c76a601"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae187b63b6433fdb8e0917d48bb84e1fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> NClientPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ae187b63b6433fdb8e0917d48bb84e1fb">Nakama::createRestClient</a> (const NClientParameters &amp;parameters, NHttpTransportPtr httpTransport=nullptr)</td></tr>
-<tr class="separator:ae187b63b6433fdb8e0917d48bb84e1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada5f05096c01b149f9ee84f5ce3413cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> NHttpTransportPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html#ada5f05096c01b149f9ee84f5ce3413cf">Nakama::createDefaultHttpTransport</a> ()</td></tr>
-<tr class="separator:ada5f05096c01b149f9ee84f5ce3413cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22585cf95dc129ab8da7cb0f8eaf764d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="_n_client_interface_8h.html#a40e31a5fd57f6847ff83dbcea2cb5233">NClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_client_factory_8h.html#a22585cf95dc129ab8da7cb0f8eaf764d">createDefaultClient</a> (const <a class="el" href="struct_n_client_parameters.html">NClientParameters</a> &amp;parameters)</td></tr>
+<tr class="separator:a22585cf95dc129ab8da7cb0f8eaf764d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6a65c8cb59421e13d84688390855266"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="_n_client_interface_8h.html#a40e31a5fd57f6847ff83dbcea2cb5233">NClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_client_factory_8h.html#af6a65c8cb59421e13d84688390855266">createGrpcClient</a> (const <a class="el" href="struct_n_client_parameters.html">NClientParameters</a> &amp;parameters)</td></tr>
+<tr class="separator:af6a65c8cb59421e13d84688390855266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c659e24ba85b51304e45e75bbef4893"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="_n_client_interface_8h.html#a40e31a5fd57f6847ff83dbcea2cb5233">NClientPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_client_factory_8h.html#a5c659e24ba85b51304e45e75bbef4893">createRestClient</a> (const <a class="el" href="struct_n_client_parameters.html">NClientParameters</a> &amp;parameters, <a class="el" href="_n_http_transport_interface_8h.html#ad9ace7733f6622016b61705de7e37740">NHttpTransportPtr</a> httpTransport=nullptr)</td></tr>
+<tr class="separator:a5c659e24ba85b51304e45e75bbef4893"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc861f9695b70fcf05a379a9d0ecc1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="_n_http_transport_interface_8h.html#ad9ace7733f6622016b61705de7e37740">NHttpTransportPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_client_factory_8h.html#a8bc861f9695b70fcf05a379a9d0ecc1b">createDefaultHttpTransport</a> ()</td></tr>
+<tr class="separator:a8bc861f9695b70fcf05a379a9d0ecc1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a08dd09a51555411aea8ead86a8094f94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08dd09a51555411aea8ead86a8094f94">&#9670;&nbsp;</a></span>DefaultClientParameters</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="_client_factory_8h.html#a08dd09a51555411aea8ead86a8094f94">DefaultClientParameters</a> =  <a class="el" href="struct_n_client_parameters.html">NClientParameters</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>DefaultClientParameters is deprectaed, use <a class="el" href="struct_n_client_parameters.html">NClientParameters</a> instead. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a22585cf95dc129ab8da7cb0f8eaf764d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22585cf95dc129ab8da7cb0f8eaf764d">&#9670;&nbsp;</a></span>createDefaultClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="_n_client_interface_8h.html#a40e31a5fd57f6847ff83dbcea2cb5233">NClientPtr</a> createDefaultClient </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_n_client_parameters.html">NClientParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>parameters</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Creates a default client to interact with Nakama server.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameters</td><td>the client parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8bc861f9695b70fcf05a379a9d0ecc1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bc861f9695b70fcf05a379a9d0ecc1b">&#9670;&nbsp;</a></span>createDefaultHttpTransport()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="_n_http_transport_interface_8h.html#ad9ace7733f6622016b61705de7e37740">NHttpTransportPtr</a> createDefaultHttpTransport </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Creates default HTTP transport using C++ REST SDK. </p>
+
+</div>
+</div>
+<a id="af6a65c8cb59421e13d84688390855266"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6a65c8cb59421e13d84688390855266">&#9670;&nbsp;</a></span>createGrpcClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="_n_client_interface_8h.html#a40e31a5fd57f6847ff83dbcea2cb5233">NClientPtr</a> createGrpcClient </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_n_client_parameters.html">NClientParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>parameters</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Creates the gRPC client to interact with Nakama server.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameters</td><td>the client parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5c659e24ba85b51304e45e75bbef4893"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c659e24ba85b51304e45e75bbef4893">&#9670;&nbsp;</a></span>createRestClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a> <a class="el" href="_n_client_interface_8h.html#a40e31a5fd57f6847ff83dbcea2cb5233">NClientPtr</a> createRestClient </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_n_client_parameters.html">NClientParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_n_http_transport_interface_8h.html#ad9ace7733f6622016b61705de7e37740">NHttpTransportPtr</a>&#160;</td>
+          <td class="paramname"><em>httpTransport</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Creates the REST client (HTTP/1.1) to interact with Nakama server.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameters</td><td>the client parameters </td></tr>
+    <tr><td class="paramname">httpTransport</td><td>optional, the HTTP client. If not set then default HTTP transport will be used. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

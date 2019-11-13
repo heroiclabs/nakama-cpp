@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['value',['value',['../struct_nakama_1_1_n_storage_object.html#af7212014878046409a0d4f30e8330078',1,'Nakama::NStorageObject::value()'],['../struct_nakama_1_1_n_storage_object_write.html#aa1d96c633e3b2063f3d01f9871de74b2',1,'Nakama::NStorageObjectWrite::value()']]],
-  ['vars',['vars',['../struct_nakama_1_1_n_account_device.html#aad4429d110907b4affe044c0f07b08b0',1,'Nakama::NAccountDevice']]],
-  ['verifytime',['verifyTime',['../struct_nakama_1_1_n_account.html#a06c2377c3ce1d4d78b43ee6090fcf979',1,'Nakama::NAccount']]],
-  ['version',['version',['../struct_nakama_1_1_n_storage_object.html#af1e96d670afb28b48a7a058a81a1a2e9',1,'Nakama::NStorageObject::version()'],['../struct_nakama_1_1_n_storage_object_ack.html#a443d912650a9e4460be221f05f4f92a7',1,'Nakama::NStorageObjectAck::version()'],['../struct_nakama_1_1_n_delete_storage_object_id.html#a7a662beaf92fbad4b5ea05dbd5e8f01d',1,'Nakama::NDeleteStorageObjectId::version()'],['../struct_nakama_1_1_n_storage_object_write.html#a8368356da0d9bff03d820509b9def4ca',1,'Nakama::NStorageObjectWrite::version()']]]
+  ['value',['value',['../struct_n_storage_object.html#a2f910c338906181ec239d1c39ca68e7b',1,'NStorageObject::value()'],['../struct_n_storage_object_write.html#a35ad4e60f846e18a082e0cdc67ddf0e4',1,'NStorageObjectWrite::value()']]],
+  ['vars',['vars',['../struct_n_account_device.html#a8adfdba59acff8af18b712838e69cd54',1,'NAccountDevice']]],
+  ['verifytime',['verifyTime',['../struct_n_account.html#abaa43d3d1dbbd9c6e7e722ff0196fe27',1,'NAccount']]],
+  ['version',['version',['../struct_n_storage_object.html#a464c152e2c3527d43a6e4da7671999d4',1,'NStorageObject::version()'],['../struct_n_storage_object_ack.html#ab82f7b69ea5f779dd3602ec6f7b21743',1,'NStorageObjectAck::version()'],['../struct_n_delete_storage_object_id.html#ae982141fd27123882b25918f743a2790',1,'NDeleteStorageObjectId::version()'],['../struct_n_storage_object_write.html#ae3f7454f0f0f06e28614ded914c6b9bc',1,'NStorageObjectWrite::version()']]]
 ];

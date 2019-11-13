@@ -1,5 +1,5 @@
 var _n_storage_object_list_8h =
 [
-    [ "NStorageObjectList", "struct_nakama_1_1_n_storage_object_list.html", "struct_nakama_1_1_n_storage_object_list" ],
-    [ "NStorageObjectListPtr", "_n_storage_object_list_8h.html#a6e06067eb80a550f6101ac51625e6403", null ]
+    [ "NStorageObjectList", "struct_n_storage_object_list.html", "struct_n_storage_object_list" ],
+    [ "NStorageObjectListPtr", "_n_storage_object_list_8h.html#ad85bee26ea0b0721be2b23aae02541c9", null ]
 ];

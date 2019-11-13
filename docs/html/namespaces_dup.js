@@ -1,4 +1,4 @@
 var namespaces_dup =
 [
-    [ "Nakama", "namespace_nakama.html", "namespace_nakama" ]
+    [ "InternalStatusCodes", "namespace_internal_status_codes.html", null ]
 ];

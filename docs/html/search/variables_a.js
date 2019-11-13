@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['joins',['joins',['../struct_nakama_1_1_n_channel_presence_event.html#a63790a6d85d09e03d3b643a56a87fb28',1,'Nakama::NChannelPresenceEvent::joins()'],['../struct_nakama_1_1_n_match_presence_event.html#a51b52f1647dc03b04a5a944da980a9c7',1,'Nakama::NMatchPresenceEvent::joins()'],['../struct_nakama_1_1_n_status_presence_event.html#ad3096f6a0cfd4b3b3d4691a8abd81985',1,'Nakama::NStatusPresenceEvent::joins()'],['../struct_nakama_1_1_n_stream_presence_event.html#a7a51bd1084c4c9a6ee0185d97b336473',1,'Nakama::NStreamPresenceEvent::joins()']]]
+  ['joins',['joins',['../struct_n_channel_presence_event.html#ae2b0fb45035d45f5a5830fb5aba4e6ad',1,'NChannelPresenceEvent::joins()'],['../struct_n_match_presence_event.html#aabf61071489623c442ae355f4ff81f7c',1,'NMatchPresenceEvent::joins()'],['../struct_n_status_presence_event.html#a5f5d9bb554e5ec8bf5311435935500fe',1,'NStatusPresenceEvent::joins()'],['../struct_n_stream_presence_event.html#aa9abf78c72b1036465615aeab3d0c6b0',1,'NStreamPresenceEvent::joins()']]]
 ];

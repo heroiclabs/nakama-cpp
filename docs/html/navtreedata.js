@@ -24,13 +24,9 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "Nakama C++ Client SDK", "index.html", [
+    [ "Nakama C/C++ Client SDK", "index.html", null ],
     [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
-      [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ],
-        [ "Typedefs", "namespacemembers_type.html", null ]
-      ] ]
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -48,7 +44,9 @@ var NAVTREE =
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -58,9 +56,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_client_factory_8h.html",
-"class_nakama_1_1_n_client_interface.html#a6822a722b242dbcd060159cf3d46a4b9",
-"namespacemembers_func.html",
-"struct_nakama_1_1_n_tournament.html#a97bb05e0735753295fff252ba15687e7"
+"class_n_client_interface.html#a30c2295052e18912547cc9cbca35497f",
+"functions_vars_q.html",
+"struct_n_stream_data.html#ac92d1b02455e65d0c0069eeb32c78d30"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

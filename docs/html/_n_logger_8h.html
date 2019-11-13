@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.2.0</span>
+   &#160;<span id="projectnumber">2.2.3</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -90,7 +90,6 @@ $(document).ready(function(){initNavTree('_n_logger_8h.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">NLogger.h File Reference</div>  </div>
@@ -99,35 +98,31 @@ $(document).ready(function(){initNavTree('_n_logger_8h.html','');});
 <div class="textblock"><code>#include &quot;<a class="el" href="_n_log_sink_interface_8h_source.html">nakama-cpp/log/NLogSinkInterface.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_n_error_8h_source.html">nakama-cpp/NError.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_n_rt_error_8h_source.html">nakama-cpp/realtime/rtdata/NRtError.h</a>&quot;</code><br />
+<code>#include &lt;cstdarg&gt;</code><br />
 </div>
 <p><a href="_n_logger_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nakama_1_1_n_logger.html">Nakama::NLogger</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logger.  <a href="class_nakama_1_1_n_logger.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespace_nakama"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_nakama.html">Nakama</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_logger.html">NLogger</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logger.  <a href="class_n_logger.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ae6abef7329087b07d5a07be7604a90d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>&#160;&#160;&#160;&quot;&quot;</td></tr>
 <tr class="separator:ae6abef7329087b07d5a07be7604a90d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae9f1a8851bba98c0c5b21c62e752641"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#aae9f1a8851bba98c0c5b21c62e752641">NLOG_DEBUG</a>(msg)&#160;&#160;&#160;<a class="el" href="_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8">NLogger::Debug</a> (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td></tr>
+<tr class="memitem:aae9f1a8851bba98c0c5b21c62e752641"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#aae9f1a8851bba98c0c5b21c62e752641">NLOG_DEBUG</a>(msg)&#160;&#160;&#160;<a class="el" href="class_n_logger.html#a1de032d925957249243e1c2b97c49bfb">NLogger::Debug</a> (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td></tr>
 <tr class="separator:aae9f1a8851bba98c0c5b21c62e752641"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac369e9e76433b1faf4d1a72ea724ca72"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#ac369e9e76433b1faf4d1a72ea724ca72">NLOG_INFO</a>(msg)&#160;&#160;&#160;<a class="el" href="_n_log_sink_interface_8h.html#a10e136332d6dc091c13986d59367f7a1">NLogger::Info</a>  (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td></tr>
+<tr class="memitem:ac369e9e76433b1faf4d1a72ea724ca72"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#ac369e9e76433b1faf4d1a72ea724ca72">NLOG_INFO</a>(msg)&#160;&#160;&#160;<a class="el" href="class_n_logger.html#ac25b2c20dd7f573c4fe11c7369ed787c">NLogger::Info</a>  (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td></tr>
 <tr class="separator:ac369e9e76433b1faf4d1a72ea724ca72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaadc2287858c6b7efe7e1310076b2a09"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#aaadc2287858c6b7efe7e1310076b2a09">NLOG_WARN</a>(msg)&#160;&#160;&#160;<a class="el" href="_n_log_sink_interface_8h.html#a6bb05f2a83393f9bf65e5a59e7d5f5e1">NLogger::Warn</a>  (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td></tr>
+<tr class="memitem:aaadc2287858c6b7efe7e1310076b2a09"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#aaadc2287858c6b7efe7e1310076b2a09">NLOG_WARN</a>(msg)&#160;&#160;&#160;<a class="el" href="class_n_logger.html#aa16040bd9b395d14bdc7d6c0b27be6d5">NLogger::Warn</a>  (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td></tr>
 <tr class="separator:aaadc2287858c6b7efe7e1310076b2a09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54a2b56a21f90cc8e900c2230b3544dd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#a54a2b56a21f90cc8e900c2230b3544dd">NLOG_ERROR</a>(msg)&#160;&#160;&#160;<a class="el" href="_n_log_sink_interface_8h.html#a2c3e4bb40f36b262a5214e2da2bca9c5">NLogger::Error</a> (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td></tr>
+<tr class="memitem:a54a2b56a21f90cc8e900c2230b3544dd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#a54a2b56a21f90cc8e900c2230b3544dd">NLOG_ERROR</a>(msg)&#160;&#160;&#160;<a class="el" href="class_n_logger.html#a8bfe312628f4e1e1b243aba0a43014ba">NLogger::Error</a> (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td></tr>
 <tr class="separator:a54a2b56a21f90cc8e900c2230b3544dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af72a254d24735799bad5ff0acf46f37f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#af72a254d24735799bad5ff0acf46f37f">NLOG_FATAL</a>(msg)&#160;&#160;&#160;NLogger::Fatal (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td></tr>
+<tr class="memitem:af72a254d24735799bad5ff0acf46f37f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#af72a254d24735799bad5ff0acf46f37f">NLOG_FATAL</a>(msg)&#160;&#160;&#160;<a class="el" href="class_n_logger.html#aac7e5ba61c919c2efa2e3cdb810875cc">NLogger::Fatal</a> (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td></tr>
 <tr class="separator:af72a254d24735799bad5ff0acf46f37f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e92fa90be3846f1a4fd1bf9e696e547"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#a0e92fa90be3846f1a4fd1bf9e696e547">NLOG</a>(level,  format, ...)&#160;&#160;&#160;NLogger::Format(level, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__, format, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a0e92fa90be3846f1a4fd1bf9e696e547"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_logger_8h.html#a0e92fa90be3846f1a4fd1bf9e696e547">NLOG</a>(level,  format, ...)&#160;&#160;&#160;<a class="el" href="class_n_logger.html#ab5386c18f1ea3c71ee2fedfd81316923">NLogger::Format</a>(level, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__, format, ##__VA_ARGS__)</td></tr>
 <tr class="separator:a0e92fa90be3846f1a4fd1bf9e696e547"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -158,7 +153,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;NLogger::Format(level, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__, format, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="class_n_logger.html#ab5386c18f1ea3c71ee2fedfd81316923">NLogger::Format</a>(level, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__, format, ##__VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -176,7 +171,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">msg</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="_n_log_sink_interface_8h.html#a1fe7e5b2fb92e38e924e9c5783e3eaf8">NLogger::Debug</a> (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_n_logger.html#a1de032d925957249243e1c2b97c49bfb">NLogger::Debug</a> (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -194,7 +189,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">msg</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="_n_log_sink_interface_8h.html#a2c3e4bb40f36b262a5214e2da2bca9c5">NLogger::Error</a> (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_n_logger.html#a8bfe312628f4e1e1b243aba0a43014ba">NLogger::Error</a> (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -212,7 +207,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">msg</td><td>)</td>
-          <td>&#160;&#160;&#160;NLogger::Fatal (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_n_logger.html#aac7e5ba61c919c2efa2e3cdb810875cc">NLogger::Fatal</a> (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -230,7 +225,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">msg</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="_n_log_sink_interface_8h.html#a10e136332d6dc091c13986d59367f7a1">NLogger::Info</a>  (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_n_logger.html#ac25b2c20dd7f573c4fe11c7369ed787c">NLogger::Info</a>  (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -248,7 +243,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">msg</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="_n_log_sink_interface_8h.html#a6bb05f2a83393f9bf65e5a59e7d5f5e1">NLogger::Warn</a>  (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_n_logger.html#aa16040bd9b395d14bdc7d6c0b27be6d5">NLogger::Warn</a>  (msg, <a class="el" href="_n_logger_8h.html#ae6abef7329087b07d5a07be7604a90d9">NMODULE_NAME</a>, __func__)</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -1,6 +1,6 @@
 var _n_client_interface_8h =
 [
-    [ "NClientInterface", "class_nakama_1_1_n_client_interface.html", "class_nakama_1_1_n_client_interface" ],
-    [ "ErrorCallback", "_n_client_interface_8h.html#ad5e0f639c6f155b179aca2f409e7a1a8", null ],
-    [ "NClientPtr", "_n_client_interface_8h.html#ad9239c034b2a391b1bf7d9891d8a07ff", null ]
+    [ "NClientInterface", "class_n_client_interface.html", "class_n_client_interface" ],
+    [ "ErrorCallback", "_n_client_interface_8h.html#a79df7304e5fe40f1a2d778961ca1c0cb", null ],
+    [ "NClientPtr", "_n_client_interface_8h.html#a40e31a5fd57f6847ff83dbcea2cb5233", null ]
 ];
