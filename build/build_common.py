@@ -47,6 +47,15 @@ def init_common(build_common_path, target_platform):
     print('BUILD_C_API =', str(BUILD_C_API))
     print('BUILD_NAKAMA_TESTS =', str(BUILD_NAKAMA_TESTS))
 
+    src_include = os.path.realpath(os.path.join(build_common_path, '..', 'include'))
+    src_third_party = os.path.realpath(os.path.join(build_common_path, '..', 'third_party'))
+    dest_include = os.path.realpath(os.path.join(build_common_path, '..', 'release', 'nakama-cpp-sdk', 'include'))
+    copy_folder(os.path.join(src_include, 'nakama-cpp'), dest_include)
+    copy_folder(os.path.join(src_third_party, 'nonstd'), dest_include)
+    if BUILD_C_API:
+        copy_folder(os.path.join(src_include, 'nakama-c'), dest_include)
+        copy_folder(os.path.join(src_include, 'nakama-cpp-c-wrapper'), dest_include)
+
 def get_common_cmake_parameters(is_shared):
     return [
       '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
@@ -92,6 +101,16 @@ def bool2cmake(bVal):
 
 def copy_file(src, dest):
     shutil.copy(src, dest)
+    print('copied', os.path.basename(src))
+
+def copy_folder(src, dest, replace=True):
+    folder_name = os.path.basename(src)
+    dest_full_path = os.path.join(dest, folder_name)
+    if replace:
+        if os.path.exists(dest_full_path):
+            shutil.rmtree(dest_full_path)
+
+    shutil.copytree(src, dest_full_path)
     print('copied', os.path.basename(src))
 
 def copy_libs():
