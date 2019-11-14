@@ -249,7 +249,7 @@ void AddDescriptorsImpl() {
       descriptor, 7605);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "github.com/heroiclabs/nakama/apigrpc/apigrpc.proto", &protobuf_RegisterTypes);
-  ::protobuf_google_2fapi_2fannotations_2eproto::AddDescriptors();
+  ::protobuf_annotations_2eproto::AddDescriptors();
   ::protobuf_google_2fprotobuf_2fempty_2eproto::AddDescriptors();
   ::protobuf_protoc_2dgen_2dswagger_2foptions_2fannotations_2eproto::AddDescriptors();
   ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::AddDescriptors();
