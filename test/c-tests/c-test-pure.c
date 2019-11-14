@@ -54,11 +54,14 @@ void c_test_pure()
     printf("running pure C test\n\n");
 
     cParameters.host = SERVER_HOST;
-    cParameters.port = SERVER_HTTP_PORT;
+    cParameters.port = SERVER_PORT;
     cParameters.serverKey = SERVER_KEY;
     cParameters.ssl = SERVER_SSL;
 
-    client = createDefaultNakamaClient(&cParameters);
+    if (getClientType() == ClientType_Grpc)
+        client = createGrpcNakamaClient(&cParameters);
+    else
+        client = createRestNakamaClient(&cParameters);
 
     NClient_setErrorCallback(client, TestErrorCallback);
 

@@ -28,7 +28,7 @@ namespace Test {
     void WrapperTest::setWorkingClientParameters(NAKAMA_NAMESPACE::NClientParameters& parameters)
     {
         parameters.host = SERVER_HOST;
-        parameters.port = SERVER_GRPC_PORT;
+        parameters.port = SERVER_PORT;
         parameters.serverKey = SERVER_KEY;
         parameters.ssl = SERVER_SSL;
     }
@@ -44,7 +44,10 @@ namespace Test {
 
     void WrapperTest::createClient(const NAKAMA_NAMESPACE::NClientParameters& parameters)
     {
-        client = createDefaultClient(parameters);
+        if (getClientType() == ClientType_Grpc)
+            client = createGrpcClient(parameters);
+        else
+            client = createRestClient(parameters);
 
         client->setErrorCallback([this](const NAKAMA_NAMESPACE::NError& error)
         {

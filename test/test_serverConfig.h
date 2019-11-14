@@ -14,8 +14,27 @@
  * limitations under the License.
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define SERVER_KEY           "defaultkey"
 #define SERVER_HOST          "127.0.0.1"
 #define SERVER_GRPC_PORT     7349
 #define SERVER_HTTP_PORT     7350
 #define SERVER_SSL           false
+
+typedef enum
+{
+    ClientType_Unknown,
+    ClientType_Rest,
+    ClientType_Grpc
+} eClientType;
+
+eClientType getClientType(void);
+
+#define SERVER_PORT    getClientType() == ClientType_Grpc ? SERVER_GRPC_PORT : SERVER_HTTP_PORT
+
+#ifdef __cplusplus
+}
+#endif

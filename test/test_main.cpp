@@ -18,9 +18,16 @@
 #include "test_serverConfig.h"
 #include "TaskExecutor.h"
 
+eClientType g_clientType = ClientType_Unknown;
+
 extern "C"
 {
     extern void c_test_pure();
+
+    eClientType getClientType(void)
+    {
+        return g_clientType;
+    }
 }
 
 namespace Nakama {
@@ -50,7 +57,7 @@ void wrapper_test_realtime();
 void setWorkingClientParameters(NClientParameters& parameters)
 {
     parameters.host      = SERVER_HOST;
-    parameters.port      = SERVER_GRPC_PORT;
+    parameters.port      = SERVER_PORT;
     parameters.serverKey = SERVER_KEY;
     parameters.ssl       = SERVER_SSL;
 }
@@ -77,7 +84,10 @@ void NCppTest::createWorkingClient()
 
 void NCppTest::createClient(const NClientParameters& parameters)
 {
-    client = createDefaultClient(parameters);
+    if (getClientType() == ClientType_Grpc)
+        client = createGrpcClient(parameters);
+    else
+        client = createRestClient(parameters);
 
     client->setErrorCallback([this](const NError& error)
     {
@@ -126,5 +136,23 @@ int runAllTests()
 
 int main()
 {
-    return Nakama::Test::runAllTests();
+    int res = 0;
+
+    // REST client tests
+    if (Nakama::createRestClient({}))
+    {
+        g_clientType = ClientType_Rest;
+        res = Nakama::Test::runAllTests();
+        if (res != 0)
+            return res;
+    }
+
+    // gRPC client tests
+    if (Nakama::createGrpcClient({}))
+    {
+        g_clientType = ClientType_Grpc;
+        res = Nakama::Test::runAllTests();
+    }
+
+    return res;
 }
