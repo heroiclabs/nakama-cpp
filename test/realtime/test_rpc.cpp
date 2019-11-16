@@ -40,6 +40,22 @@ void test_rpc()
         /////////////////////////////////////////////////////////////////
         taskExecutor.addTask([&test]()
         {
+            auto successCallback = [&test](const NRpc& rpc)
+            {
+                std::cout << "rpc response: " << rpc.payload << std::endl;
+                NTEST_ASSERT(rpc.payload.empty());
+                TaskExecutor::instance().currentTaskCompleted();
+            };
+
+            test.client->rpc(
+                test.session,
+                "clientrpc.rpc",
+                opt::nullopt,
+                successCallback);
+        });
+
+        taskExecutor.addTask([&test]()
+        {
             string json = "{\"user_id\":\"" + test.session->getUserId() + "\"}";
 
             auto successCallback = [&test, json](const NRpc& rpc)
@@ -113,6 +129,21 @@ void test_rpc()
         /////////////////////////////////////////////////////////////////
         // real-time rpc tests
         /////////////////////////////////////////////////////////////////
+        taskExecutor.addTask([&test]()
+        {
+            auto successCallback = [&test](const NRpc& rpc)
+            {
+                std::cout << "rpc response: " << rpc.payload << std::endl;
+                NTEST_ASSERT(rpc.payload.empty());
+                TaskExecutor::instance().currentTaskCompleted();
+            };
+
+            test.rtClient->rpc(
+                "clientrpc.rpc",
+                opt::nullopt,
+                successCallback);
+        });
+
         taskExecutor.addTask([&test]()
         {
             string json = "{\"user_id\":\"" + test.session->getUserId() + "\"}";
