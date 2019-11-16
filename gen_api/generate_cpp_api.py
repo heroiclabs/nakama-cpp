@@ -52,6 +52,17 @@ GRPC_GATEWAY = getArgOrEnvVar('GRPC_GATEWAY', args.gateway)
 def path(p):
     return os.path.normpath(p)
 
+def get_host_arch():
+    import platform
+    bits, _ = platform.architecture()
+    if bits == '64bit':
+        arch = 'x64'
+    elif bits == '32bit':
+        arch = 'x86'
+    else:
+        arch = bits
+    return arch
+
 NAKAMA_CPP      = os.path.abspath('./..')
 GRPC            = path(NAKAMA_CPP + '/third_party/grpc')
 GOOGLEAPIS      = path(GRPC_GATEWAY + '/third_party/googleapis')
@@ -64,10 +75,13 @@ is_mac     = platform.system() == 'Darwin'
 if is_windows:
     build_dir = NAKAMA_CPP + '/build/windows/build/v142_x86'
 elif is_mac:
-    build_dir = NAKAMA_CPP + '/build/mac/build'
+    build_dir_debug = NAKAMA_CPP + '/build/mac/build/Debug'
+    build_dir_release = NAKAMA_CPP + '/build/mac/build/Release'
 else:
     # linux
-    build_dir = NAKAMA_CPP + '/build/linux/build'
+    arch = get_host_arch()
+    build_dir_debug = NAKAMA_CPP + '/build/linux/build/Debug_' + arch
+    build_dir_release = NAKAMA_CPP + '/build/linux/build/Release_' + arch
 
 def find_grpc_cpp_plugin():
     if is_windows:
@@ -75,9 +89,9 @@ def find_grpc_cpp_plugin():
         if not os.path.exists(grpc_cpp_plugin):
             grpc_cpp_plugin = path(build_dir + '/third_party/grpc/Release/grpc_cpp_plugin.exe')
     else:
-        grpc_cpp_plugin = path(build_dir + '/Release/third_party/grpc/grpc_cpp_plugin')
+        grpc_cpp_plugin = path(build_dir_release + '/third_party/grpc/grpc_cpp_plugin')
         if not os.path.exists(grpc_cpp_plugin):
-            grpc_cpp_plugin = path(NAKAMA_CPP + 'Debug/third_party/grpc/grpc_cpp_plugin')
+            grpc_cpp_plugin = path(build_dir_debug + '/third_party/grpc/grpc_cpp_plugin')
 
     if not os.path.exists(grpc_cpp_plugin):
         print('grpc_cpp_plugin not found')
@@ -92,9 +106,9 @@ def find_protoc():
         if not os.path.exists(protoc):
             protoc = path(build_dir + '/third_party/grpc/third_party/protobuf/Release/protoc.exe')
     else:
-        protoc = path(build_dir + '/Release/third_party/grpc/third_party/protobuf/protoc')
+        protoc = path(build_dir_release + '/third_party/grpc/third_party/protobuf/protoc')
         if not os.path.exists(protoc):
-            protoc = path(build_dir + '/Debug/third_party/grpc/third_party/protobuf/protoc')
+            protoc = path(build_dir_debug + '/third_party/grpc/third_party/protobuf/protoc')
 
     if not os.path.exists(protoc):
         print('protoc not found')
