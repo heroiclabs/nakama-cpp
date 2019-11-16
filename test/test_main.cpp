@@ -30,10 +30,10 @@ extern "C"
     }
 }
 
+using namespace std;
+
 namespace Nakama {
 namespace Test {
-
-using namespace std;
 
 // C++ tests
 void test_getAccount();
@@ -137,6 +137,16 @@ int runAllTests()
 int main()
 {
     int res = 0;
+
+    cout << "running nakama tests..." << endl;
+    cout << endl;
+    cout << "server config:" << endl;
+    cout << "host     : " << SERVER_HOST << endl;
+    cout << "gRPC port: " << SERVER_GRPC_PORT << endl;
+    cout << "HTTP port: " << SERVER_HTTP_PORT << endl;
+    cout << "key      : " << SERVER_KEY << endl;
+    cout << "ssl      : " << (SERVER_SSL ? "true" : "false") << endl;
+    cout << endl;
 
     // REST client tests
     if (Nakama::createRestClient({}))
