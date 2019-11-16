@@ -22,7 +22,7 @@
 // @@protoc_insertion_point(includes)
 
 namespace protobuf_google_2fapi_2fhttp_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_annotations_2eproto::google::protobuf::internal::SCCInfo<1> scc_info_HttpRule;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_http_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_HttpRule;
 }  // namespace protobuf_google_2fapi_2fhttp_2eproto
 namespace google {
 namespace api {
@@ -68,7 +68,7 @@ void AddDescriptorsImpl() {
       descriptor, 279);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "annotations.proto", &protobuf_RegisterTypes);
-  ::protobuf_annotations_2eproto::AddDescriptors();
+  ::protobuf_http_2eproto::AddDescriptors();
   ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::AddDescriptors();
 }
 
