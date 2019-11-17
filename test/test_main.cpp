@@ -17,6 +17,7 @@
 #include "test_main.h"
 #include "test_serverConfig.h"
 #include "TaskExecutor.h"
+#include "nakama-cpp/NUtils.h"
 
 eClientType g_clientType = ClientType_Unknown;
 
@@ -105,8 +106,6 @@ void NCppTest::tick()
 
 int runAllTests()
 {
-    NLogger::initWithConsoleSink(NLogLevel::Debug);
-
     test_authentication();
     test_getAccount();
     test_disconnect();
@@ -131,6 +130,51 @@ int runAllTests()
     return getFailedCount() == 0 ? 0 : -1;
 }
 
+// will try to connect to server until connected
+class NConnectTest : public NCppTest
+{
+public:
+    NConnectTest() : NCppTest("NConnectTest") {}
+
+    void connect(uint32_t retryPeriodMs)
+    {
+        createWorkingClient();
+        client->setErrorCallback([this, retryPeriodMs](const NError& error)
+        {
+            cout << "Not connected. Will retry in " << retryPeriodMs << " msec..." << endl;
+            _retryAt = getUnixTimestampMs() + retryPeriodMs;
+        });
+        auth();
+        runTest();
+    }
+
+    void auth()
+    {
+        cout << "Connecting..." << endl;
+
+        auto successCallback = [this](NSessionPtr session)
+        {
+            cout << "Connected" << endl;
+            stopTest(true);
+        };
+        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
+    }
+
+    void tick() override
+    {
+        NCppTest::tick();
+
+        if (_retryAt != 0 && getUnixTimestampMs() >= _retryAt)
+        {
+            _retryAt = 0;
+            auth();
+        }
+    }
+
+private:
+    NTimestamp _retryAt = 0;
+};
+
 } // namespace Test
 } // namespace Nakama
 
@@ -147,6 +191,11 @@ int main()
     cout << "key      : " << SERVER_KEY << endl;
     cout << "ssl      : " << (SERVER_SSL ? "true" : "false") << endl;
     cout << endl;
+
+    Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
+
+    Nakama::Test::NConnectTest connectTest;
+    connectTest.connect(2000);
 
     // REST client tests
     if (Nakama::createRestClient({}))
