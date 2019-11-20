@@ -14,10 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import print_function
 import sys
 import subprocess
 import os
+import argparse
 import platform
+
+parser = argparse.ArgumentParser(description='builder for Linux')
+parser.add_argument('--so', help='use nakama-cpp as shared object', action='store_true')
+
+args = parser.parse_args()
+SHARED_LIB = args.so
 
 bits, linkage = platform.architecture()
 
@@ -33,6 +41,7 @@ build_dir = os.path.abspath('build/' + BUILD_MODE + '_' + ARCH)
 
 print('Architecture:', ARCH)
 print('Build mode  :', BUILD_MODE)
+print('Shared object:', str(SHARED_LIB))
 
 def makedirs(dir):
     if not os.path.isdir(dir):
@@ -52,10 +61,16 @@ makedirs(build_dir)
 os.chdir(build_dir)
 
 # generate projects
-call([
- 'cmake',
- '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
- '../../../..'
-])
+cmake_cmd = [
+    'cmake',
+    '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
+]
+
+if SHARED_LIB:
+    cmake_cmd.append('-DNAKAMA_SHARED_LIBRARY=YES')
+
+cmake_cmd.append('../../../..')
+
+call(cmake_cmd)
 
 build('nakama-cmake-client-example')
