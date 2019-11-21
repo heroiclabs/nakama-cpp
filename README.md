@@ -500,11 +500,21 @@ We use Ubuntu 18.04 amd64.
 
 Prerequisites:
 
+To automatically install all dependencies call:
+
+```bash
+build/linux/install_deps.sh
+```
+
+It will install all needed packages, will download and build boost and CMake.
+
+Execute command which will be printed at end.
+
+To manually install dependencies:
+
 - `sudo apt-get install build-essential autoconf libtool pkg-config`
 - `sudo apt-get install libgflags-dev libgtest-dev`
-- `sudo apt-get install clang libc++-dev`
-- `sudo apt-get install golang`
-- `sudo apt-get install perl`
+- `sudo apt-get install clang libc++-dev golang perl`
 - download `boost` 1.69 sources and build them:
 
   `./bootstrap.sh --with-libraries=system,chrono,thread`
@@ -518,6 +528,8 @@ Prerequisites:
 - download `cmake` 3.14+ sources and build them:
 
   `./bootstrap && make && make install`
+
+To build nakama-cpp:
 
 ```bash
 cd build/linux
