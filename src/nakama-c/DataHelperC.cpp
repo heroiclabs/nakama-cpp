@@ -90,7 +90,7 @@ void assign(Nakama::NBytes& data, const sNBytes* cData)
     if (cData)
     {
         data.resize(cData->size);
-        for (uint16_t i=0; i < cData->size; ++i)
+        for (uint32_t i=0; i < cData->size; ++i)
         {
             data[i] = cData->bytes[i];
         }
@@ -100,7 +100,7 @@ void assign(Nakama::NBytes& data, const sNBytes* cData)
 void assign(sNBytes& cData, const Nakama::NBytes& data)
 {
     cData.bytes = (uint8_t*)data.data();
-    cData.size = (uint16_t)data.size();
+    cData.size = (uint32_t)data.size();
 }
 
 NStringMap toCppNStringMap(::NStringMap map)
