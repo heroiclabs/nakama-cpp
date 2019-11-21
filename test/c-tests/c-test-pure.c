@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "nakama-c/Nakama.h"
 #include "test_serverConfig.h"
 #include <stdio.h>
@@ -82,3 +84,5 @@ void c_test_pure()
 
     destroyNakamaClient(client);
 }
+
+#endif // BUILD_C_API

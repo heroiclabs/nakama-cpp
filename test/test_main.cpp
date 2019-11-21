@@ -115,6 +115,7 @@ int runAllTests()
     test_groups();
     test_realtime();
 
+#ifdef BUILD_C_API
     ctest_authentication();
     ctest_realtime();
 
@@ -123,6 +124,7 @@ int runAllTests()
     wrapper_test_authentication();
     wrapper_test_account();
     wrapper_test_realtime();
+#endif // BUILD_C_API
 
     // total stats
     printTotalStats();

@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "c-test.h"
 
 namespace Nakama {
@@ -78,3 +80,5 @@ void ctest_authentication()
 
 } // namespace Test
 } // namespace Nakama
+
+#endif // BUILD_C_API

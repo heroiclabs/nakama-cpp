@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "c-test.h"
 #include "test_serverConfig.h"
 
@@ -69,3 +71,5 @@ namespace Test {
 
 } // namespace Test
 } // namespace Nakama
+
+#endif // BUILD_C_API

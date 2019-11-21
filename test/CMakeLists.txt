@@ -47,6 +47,10 @@ target_include_directories(nakama-test
     PRIVATE ${THIRD_PARTY_DIR}
 )
 
+if(BUILD_C_API)
+    target_compile_definitions(nakama-test PRIVATE BUILD_C_API)
+endif()
+
 foreach(_source IN ITEMS ${_source_list})
     get_filename_component(_source_path "${_source}" PATH)
     file(RELATIVE_PATH _source_path_rel "${_src_root_path}" "${_source_path}")

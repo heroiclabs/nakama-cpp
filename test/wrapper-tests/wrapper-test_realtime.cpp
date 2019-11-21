@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifdef BUILD_C_API
+
 #include "wrapper-test.h"
 
 namespace Nakama {
@@ -80,3 +82,5 @@ void wrapper_test_realtime()
 
 } // namespace Test
 } // namespace Nakama
+
+#endif // BUILD_C_API
