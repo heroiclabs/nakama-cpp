@@ -4,6 +4,15 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+## [2.2.4] - 2019-11-21
+### Added
+- install_deps.sh for linux to install dependencies
+
+### Fixed
+- fix uint16_t is too small for our match data (#25)
+- fix getUsername and getUserId in session wrapper
+- fix build tests if BUILD_C_API is off
+
 ## [2.2.3] - 2019-11-13
 ### Added
 - C API.
