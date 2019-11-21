@@ -30,9 +30,12 @@ void wrapper_test_authenticateEmail()
     auto successCallback = [&test](NSessionPtr session)
     {
         std::cout << "session token: " << session->getAuthToken() << std::endl;
-        test.stopTest(session->getAuthToken().empty() == false);
+        NTEST_ASSERT(!session->getAuthToken().empty());
+        NTEST_ASSERT(!session->getUserId().empty());
+        NTEST_ASSERT(!session->getUsername().empty());
         NTEST_ASSERT(session->getVariable("param1") == "test value");
         NTEST_ASSERT(session->getVariable("param2") == "");
+        test.stopTest(true);
     };
 
     NStringMap vars;
