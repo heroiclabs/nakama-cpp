@@ -14,25 +14,34 @@
  * limitations under the License.
  */
 
-#include "realtime/RtClientTestBase.h"
+#ifdef BUILD_C_API
+
+#include "wrapper-test.h"
 
 namespace Nakama {
 namespace Test {
 
 using namespace std;
 
-void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const std::string& match_token = "")
+void wrapper_test_rt_match_join(WrapperTest& test, const std::string& match_id, const std::string& match_token = "")
 {
-    auto successCallback = [&test](const NMatch& match)
+    std::shared_ptr<std::string> payload(new std::string());
+    payload->resize(1024);
+    char next = 1;
+    for (char& c : *payload)
+    {
+        c = next;
+        next++;
+    }
+
+    auto successCallback = [&test, payload](const NMatch& match)
     {
         std::cout << "joined match: " << match.matchId << std::endl;
-
-        std::string payload = "How are you?";
 
         test.rtClient->sendMatchData(
             match.matchId,
             1, // op code
-            payload,
+            *payload,
             {}
         );
     };
@@ -55,46 +64,45 @@ void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const 
             successCallback);
     }
 
-    test.listener.setMatchDataCallback([&test](const NMatchData& data)
+    test.listener.setMatchDataCallback([&test, payload](const NMatchData& data)
     {
-        std::cout << "match data: " << data.data << std::endl;
+        std::cout << "match data size: " << data.data.size() << std::endl;
+        NTEST_ASSERT(*payload == data.data);
         test.stopTest(true);
     });
 }
 
-void test_rt_create_match()
+void wrapper_test_rt_create_match()
 {
-    NRtClientTest test1(__func__);
-    NRtClientTest test2("test_rt_match_join");
+    WrapperTest test1(__func__);
+    WrapperTest test2("test_rt_match_join");
 
-    test1.onRtConnect = [&test1, &test2]()
+    test1.connect([&test1, &test2]()
     {
         auto successCallback = [&test1, &test2](const NMatch& match)
         {
             std::cout << "created match: " << match.matchId << std::endl;
 
-            test2.onRtConnect = [&test2, match]()
+            test2.connect([&test2, match]()
             {
-                test_rt_match_join(test2, match.matchId);
-            };
+                wrapper_test_rt_match_join(test2, match.matchId);
+            });
 
             test2.runTest();
         };
 
         test1.rtClient->createMatch(
             successCallback);
-    };
+    });
 
     test1.listener.setMatchDataCallback([&test1](const NMatchData& data)
     {
-        std::cout << "match data: " << data.data << std::endl;
-
-        std::string payload = "I'm fine";
+        std::cout << "match data size: " << data.data.size() << std::endl;
 
         test1.rtClient->sendMatchData(
             data.matchId,
             1, // op code
-            payload,
+            data.data,
             {}
         );
 
@@ -104,9 +112,9 @@ void test_rt_create_match()
     test1.runTest();
 }
 
-void test_rt_matchmaker2(NRtClientTest& test2)
+void wrapper_test_rt_matchmaker2(WrapperTest& test2)
 {
-    test2.onRtConnect = [&test2]()
+    test2.connect([&test2]()
     {
         auto successCallback = [&test2](const NMatchmakerTicket& ticket)
         {
@@ -121,13 +129,13 @@ void test_rt_matchmaker2(NRtClientTest& test2)
             {},
             {},
             successCallback);
-    };
+    });
 
     test2.listener.setMatchmakerMatchedCallback([&test2](NMatchmakerMatchedPtr matched)
     {
         std::cout << "matched token: " << matched->token << std::endl;
 
-        test_rt_match_join(test2, "", matched->token);
+        wrapper_test_rt_match_join(test2, "", matched->token);
     });
 
     test2.listener.setMatchDataCallback([&test2](const NMatchData& data)
@@ -149,15 +157,15 @@ void test_rt_matchmaker2(NRtClientTest& test2)
     test2.runTest();
 }
 
-void test_rt_matchmaker()
+void wrapper_test_rt_matchmaker()
 {
-    NRtClientTest test1(__func__);
-    NRtClientTest test2("test_rt_matchmake2");
+    WrapperTest test1(__func__);
+    WrapperTest test2("test_rt_matchmake2");
 
-    test1.onRtConnect = [&test1, &test2]()
+    test1.connect([&test1, &test2]()
     {
         // run second test
-        test_rt_matchmaker2(test2);
+        wrapper_test_rt_matchmaker2(test2);
 
         auto successCallback = [&test1, &test2](const NMatchmakerTicket& ticket)
         {
@@ -172,13 +180,13 @@ void test_rt_matchmaker()
             {},
             {},
             successCallback);
-    };
+    });
 
     test1.listener.setMatchmakerMatchedCallback([&test1](NMatchmakerMatchedPtr matched)
     {
         std::cout << "matched token: " << matched->token << std::endl;
 
-        test_rt_match_join(test1, "", matched->token);
+        wrapper_test_rt_match_join(test1, "", matched->token);
     });
 
     test1.listener.setMatchDataCallback([&test1](const NMatchData& data)
@@ -200,11 +208,13 @@ void test_rt_matchmaker()
     test1.runTest();
 }
 
-void test_rt_match()
+void wrapper_test_rt_match()
 {
-    test_rt_create_match();
-    test_rt_matchmaker();
+    wrapper_test_rt_create_match();
+    wrapper_test_rt_matchmaker();
 }
 
 } // namespace Test
 } // namespace Nakama
+
+#endif // BUILD_C_API

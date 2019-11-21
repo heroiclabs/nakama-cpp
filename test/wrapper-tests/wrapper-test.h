@@ -31,6 +31,7 @@ namespace Test {
         static void setWorkingClientParameters(NClientParameters& parameters);
         void createWorkingClient() override;
         void createClient(const NClientParameters& parameters);
+        void authenticate(std::function<void()> callback);
         void connect(std::function<void()> callback);
         void tick() override;
 

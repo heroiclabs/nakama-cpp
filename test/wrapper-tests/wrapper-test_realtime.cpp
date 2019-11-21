@@ -23,6 +23,8 @@ namespace Test {
 
 using namespace std;
 
+void wrapper_test_rt_match();
+
 void wrapper_test_realtime_joinChat()
 {
     WrapperTest test(__func__);
@@ -78,6 +80,7 @@ void wrapper_test_realtime_joinChat()
 void wrapper_test_realtime()
 {
     wrapper_test_realtime_joinChat();
+    wrapper_test_rt_match();
 }
 
 } // namespace Test

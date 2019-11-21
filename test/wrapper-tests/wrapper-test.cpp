@@ -57,8 +57,32 @@ namespace Test {
         });
     }
 
+    void WrapperTest::authenticate(std::function<void()> callback)
+    {
+        auto successCallback = [this, callback](NSessionPtr session)
+        {
+            this->session = session;
+
+            std::cout << "session token: " << session->getAuthToken() << std::endl;
+
+            callback();
+        };
+
+        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
+    }
+
     void WrapperTest::connect(std::function<void()> callback)
     {
+        if (!client)
+        {
+            createWorkingClient();
+            authenticate([this, callback]()
+            {
+                connect(callback);
+            });
+            return;
+        }
+
         listener.setConnectCallback([=]()
         {
             std::cout << "connected" << std::endl;
