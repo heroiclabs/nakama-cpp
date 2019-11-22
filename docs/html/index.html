@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.2.3</span>
+   &#160;<span id="projectnumber">2.2.4</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -308,12 +308,14 @@ $(document).ready(function(){initNavTree('index.html','');});
 <h3>Building for Linux</h3>
 <p>We use Ubuntu 18.04 amd64.</p>
 <p>Prerequisites:</p>
+<p>To automatically install all dependencies call:</p>
+<div class="fragment"><div class="line">build/linux/install_deps.sh</div></div><!-- fragment --><p>It will install all needed packages, will download and build boost and CMake.</p>
+<p>Execute command which will be printed at end.</p>
+<p>To manually install dependencies:</p>
 <ul>
 <li><code>sudo apt-get install build-essential autoconf libtool pkg-config</code></li>
 <li><code>sudo apt-get install libgflags-dev libgtest-dev</code></li>
-<li><code>sudo apt-get install clang libc++-dev</code></li>
-<li><code>sudo apt-get install golang</code></li>
-<li><code>sudo apt-get install perl</code></li>
+<li><code>sudo apt-get install clang libc++-dev golang perl</code></li>
 <li><p class="startli">download <code>boost</code> 1.69 sources and build them:</p>
 <p class="startli"><code>./bootstrap.sh --with-libraries=system,chrono,thread</code></p>
 <p class="startli"><code>./b2</code></p>
@@ -324,6 +326,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p class="startli"><code>./bootstrap &amp;&amp; make &amp;&amp; make install</code></p>
 </li>
 </ul>
+<p>To build nakama-cpp:</p>
 <div class="fragment"><div class="line">cd build/linux</div><div class="line">python build_linux.py --so</div></div><!-- fragment --><p><code>--so</code> is optional parameter. If set then Nakama will be built as shared library otherwise as static.</p>
 <p>It builds in <code>Release</code> mode and copies nakama lib to release folder.</p>
 <h3>Building for Android</h3>
