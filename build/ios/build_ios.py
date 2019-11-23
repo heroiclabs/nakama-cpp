@@ -123,7 +123,7 @@ cmake_cmd = ['cmake',
 
 cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))
 
-if ARCH == 'x86_64':   # Simulator
+if is_simulator:
     cmake_cmd.append('-DCMAKE_OSX_SYSROOT=iphonesimulator')
 
 call(cmake_cmd)

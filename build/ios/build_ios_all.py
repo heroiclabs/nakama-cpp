@@ -25,8 +25,6 @@ else:
     exec(compile(open(filename, "rb").read(), filename, 'exec'))
 init_common(os.path.abspath('..'), 'ios')
 
-BUILD_MODE = 'Release'
-
 arch_list = ['arm64',
             'armv7',
             'armv7s',
