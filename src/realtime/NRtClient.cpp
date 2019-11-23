@@ -27,10 +27,10 @@
 namespace Nakama {
 
 NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int32_t port, bool ssl)
-    : _transport(transport)
-    , _host(host)
+    : _host(host)
     , _port(port)
     , _ssl(ssl)
+    , _transport(transport)
 {
     NLOG_INFO("Created");
 
@@ -768,8 +768,6 @@ void NRtClient::reqInternalError(int32_t cid, const NRtError & error)
 
 void NRtClient::send(const ::nakama::realtime::Envelope & msg)
 {
-    bool res = false;
-
     if (isConnected())
     {
         NBytes bytes;

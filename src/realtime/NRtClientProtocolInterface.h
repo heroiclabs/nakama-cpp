@@ -24,6 +24,8 @@ namespace Nakama {
     class NRtClientProtocolInterface
     {
     public:
+        virtual ~NRtClientProtocolInterface() {}
+
         virtual bool serialize(const google::protobuf::Message& message, NBytes& output) = 0;
         virtual bool parse(const NBytes& input, google::protobuf::Message& message) = 0;
     };
