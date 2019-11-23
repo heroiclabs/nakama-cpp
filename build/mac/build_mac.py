@@ -99,8 +99,10 @@ cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))
 
 call(cmake_cmd)
 
-build('grpc_cpp_plugin')
-build('protoc')
+if BUILD_GRPC_CLIENT:
+    build('grpc_cpp_plugin')
+    build('protoc')
+
 build('nakama-cpp')
 
 makedirs(release_libs_path)

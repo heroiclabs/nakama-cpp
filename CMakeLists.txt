@@ -30,7 +30,7 @@ cmake_policy(SET CMP0077 NEW)
 #set(CMAKE_VISIBILITY_INLINES_HIDDEN TRUE)
 
 if(NOT WIN32)
-  add_compile_options(-fvisibility=hidden -fPIC)
+    add_compile_options(-fvisibility=hidden -fPIC)
 endif()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
@@ -59,9 +59,19 @@ set(PUBLIC_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(THIRD_PARTY_DIR ${PROJECT_SOURCE_DIR}/third_party)
 
 add_subdirectory(src)
-add_subdirectory(${THIRD_PARTY_DIR}/grpc)
 
 if(BUILD_HTTP_CPPREST OR BUILD_WEBSOCKET_CPPREST)
+    set(USE_CPPREST TRUE)
+endif()
+
+if(BUILD_GRPC_CLIENT)
+    add_subdirectory(${THIRD_PARTY_DIR}/grpc)
+elseif(USE_CPPREST)
+    add_subdirectory(${THIRD_PARTY_DIR}/grpc/third_party/boringssl)
+    add_subdirectory(${THIRD_PARTY_DIR}/grpc/third_party/protobuf/cmake)
+endif()
+
+if(USE_CPPREST)
     set(OPENSSL_INCLUDE_DIR ${THIRD_PARTY_DIR}/grpc/third_party/boringssl/include)
     set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
     set(BUILD_SAMPLES OFF CACHE BOOL "" FORCE)
