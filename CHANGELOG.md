@@ -4,6 +4,10 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Support tvOS (AppleTV)
+
 ## [2.3.0] - [2020-02-29]
 ### Added
 - support Windows 10 SDK
