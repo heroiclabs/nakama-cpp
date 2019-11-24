@@ -33,6 +33,7 @@ You'll need to setup the server and database before you can connect with the cli
 - Linux - Ubuntu 18.04 x64
 - Mac - 10.10+
 - iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off
+- tvOS - 10.0 (arm64, x86_64), Bitcode is on
 
 In theory any platform that meets the requirement for `cpprest` and `boost` is also supported. The client is compiled with C++11.
 
@@ -46,16 +47,17 @@ When you've downloaded the Nakama C++ archive and extracted it to `NAKAMA_CPP_SD
 
 We don't recommend to copy Nakama C++ SDK to your project because it's quite big in size (~1 Gb).
 
-### Setup for Mac and iOS projects
+### Setup for Mac, iOS and tvOS projects
 
-1. Add `NAKAMA_CPP_SDK/include` in `Build Settings > Header Search Paths`
+1. Add `NAKAMA_CPP_SDK/include` to `Build Settings > Header Search Paths`.
 
-2. Add libs folder in `Build Settings > Library Search Paths`:
-    - `NAKAMA_CPP_SDK/libs/ios` - for iOS
+2. Add libs folder to `Build Settings > Library Search Paths`:
     - `NAKAMA_CPP_SDK/libs/mac` - for Mac
+    - `NAKAMA_CPP_SDK/libs/ios` - for iOS
+    - `NAKAMA_CPP_SDK/libs/tvos` - for tvOS
 
-3. In `General > Linked Frameworks and Libraries` add following:
-    - all `.a` files located in libs folder
+3. In `General > Frameworks, Libraries, and Embedded Content` add following:
+    - all `.a` files located in libs folder for your OS and architecture
     - `foundation` and `security` frameworks
 
 ### Setup for Android projects
@@ -492,6 +494,29 @@ To build for all architectures `arm64`, `armv7`, `armv7s` and `x86_64`:
 ```bash
 cd build/ios
 python build_ios_all.py
+```
+
+It builds in `Release` mode, creates universal libraries and copies them to release folder.
+
+### Building for tvOS (AppleTV)
+
+To build for one architecture:
+
+```bash
+cd build/tvos
+python build_tvos.py Arch --dylib
+```
+Where `Arch` is architecture: `arm64` or `x86_64`.
+
+`--dylib` is optional parameter. If set then Nakama will be built as dynamic library otherwise as static.
+
+It builds in `Release` mode.
+
+To build for all architectures:
+
+```bash
+cd build/tvos
+python build_tvos_all.py
 ```
 
 It builds in `Release` mode, creates universal libraries and copies them to release folder.
