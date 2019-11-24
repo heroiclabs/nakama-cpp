@@ -23,7 +23,7 @@ import shutil
 _7zip_path = 'c:\\Program Files\\7-Zip\\7z.exe'
 sdk_path = './nakama-cpp-sdk'
 tmp_path = './_tmp'
-platforms = ['win32', 'win64', 'mac', 'ios', 'android', 'linux']
+platforms = ['win32', 'win64', 'mac', 'ios', 'tvos', 'android', 'linux']
 libs_path = os.path.join(sdk_path, 'libs')
 shared_libs_path = os.path.join(sdk_path, 'shared-libs')
 tmp_libs_path = os.path.join(tmp_path, 'libs')
