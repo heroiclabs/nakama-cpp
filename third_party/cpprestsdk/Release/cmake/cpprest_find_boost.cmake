@@ -23,10 +23,16 @@ function(cpprest_find_boost)
     return()
   endif()
 
-  if(IOS)
-    if (EXISTS "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
+  if(IOS OR APPLE_TVOS)
+    if(APPLE_TVOS AND EXISTS "${PROJECT_SOURCE_DIR}/../Build_tvOS/boost")
+      set(BOOST_DIR "${PROJECT_SOURCE_DIR}/../Build_tvOS/boost")
+    elseif(IOS AND EXISTS "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
       set(BOOST_DIR "${PROJECT_SOURCE_DIR}/../Build_iOS/boost")
+    else()
+      message(FATAL_ERROR "boost not found")
+    endif()
 
+    if (BOOST_DIR)
       project(ext_boost_thread)
       add_library(ext_boost_thread STATIC IMPORTED GLOBAL)
       set_target_properties(ext_boost_thread PROPERTIES

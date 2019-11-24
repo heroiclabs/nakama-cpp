@@ -74,3 +74,4 @@ Build_android/Boost-for-Android/
 Generated Files/
 # Ignore iOS temp build directories
 Build_iOS/Apple-Boost-BuildScript
+Build_tvOS
