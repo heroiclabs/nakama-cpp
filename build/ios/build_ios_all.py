@@ -75,9 +75,12 @@ if BUILD_NAKAMA_STATIC:
         cares_libs          .append(build_arch_dir + '/third_party/grpc/third_party/cares/cares/lib/libcares.a')
         crypto_libs         .append(build_arch_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a')
         ssl_libs            .append(build_arch_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a')
-        protobuf_libs       .append(build_arch_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a')
         z_libs              .append(build_arch_dir + '/third_party/grpc/third_party/zlib/libz.a')
         cpprest_libs        .append(build_arch_dir + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a')
+        protobuf_lib = build_arch_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a'
+        if not os.path.exists(protobuf_lib):
+            protobuf_lib = build_arch_dir + '/third_party/grpc/third_party/protobuf/cmake/libprotobuf.a'
+        protobuf_libs.append(protobuf_lib)
 
     make_universal_list = []
 
