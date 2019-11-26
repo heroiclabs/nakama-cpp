@@ -57,7 +57,10 @@ def copy_nakama_lib():
     copy_file(build_dir + '/src/libnakama-cpp.a', release_libs_path)
 
 def copy_protobuf_lib():
-    copy_file(build_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a', release_libs_path)
+    copy_one_file_from([
+        build_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a',
+        build_dir + '/third_party/grpc/third_party/protobuf/cmake/libprotobuf.a',
+    ], release_libs_path)
 
 def copy_ssl_lib():
     copy_file(build_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', release_libs_path)
