@@ -388,7 +388,7 @@ Change submodule branch:
 
 - git
 - python 2.7 or 3.x
-- cmake 3.14+
+- CMake 3.15+
 - go
 - perl
 - Visual Studio 2015, 2017 or 2019 - for Windows only
@@ -525,7 +525,7 @@ To manually install dependencies:
 
   `export BOOST_ROOT={path to boost}`
 
-- download `cmake` 3.14+ sources and build them:
+- download `CMake` 3.15+ sources and build them:
 
   `./bootstrap && make && make install`
 

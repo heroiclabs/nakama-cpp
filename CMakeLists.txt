@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
 
 project(nakama-cpp)
 
@@ -24,6 +24,7 @@ cmake_policy(SET CMP0054 NEW)
 cmake_policy(SET CMP0063 NEW)
 cmake_policy(SET CMP0074 NEW)
 cmake_policy(SET CMP0077 NEW)
+cmake_policy(SET CMP0091 NEW)
 
 #set(CMAKE_C_VISIBILITY_PRESET hidden)
 #set(CMAKE_CXX_VISIBILITY_PRESET hidden)
