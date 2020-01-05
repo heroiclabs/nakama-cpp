@@ -43,7 +43,7 @@ elif bits == '32bit':
 else:
     ARCH = bits
 
-build_dir = os.path.abspath('build/' + BUILD_MODE + '_' + ARCH)
+set_build_folder_name(BUILD_MODE + '_' + ARCH)
 
 if SHARED_LIB:
     release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/shared-libs/linux/' + ARCH)
@@ -54,48 +54,42 @@ print('Architecture:', ARCH)
 print('Build mode  :', BUILD_MODE)
 print('Shared object:', str(SHARED_LIB))
 
-def build(target):
-    print('building ' + target + '...')
-    call('cmake --build . --target ' + target, shell=True)
-
 def copy_nakama_lib():
-    copy_file(build_dir + '/src/libnakama-cpp.a', release_libs_path)
+    copy_file(BUILD_DIR + '/src/libnakama-cpp.a', release_libs_path)
 
 def copy_protobuf_lib():
     copy_one_file_from([
-        build_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a',
-        build_dir + '/third_party/grpc/third_party/protobuf/cmake/libprotobuf.a',
+        BUILD_DIR + '/third_party/grpc/third_party/protobuf/libprotobuf.a',
+        BUILD_DIR + '/third_party/grpc/third_party/protobuf/cmake/libprotobuf.a',
     ], release_libs_path)
 
 def copy_ssl_lib():
-    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', release_libs_path)
 
 def copy_grpc_lib():
-    copy_file(build_dir + '/third_party/grpc/libaddress_sorting.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/libgpr.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/libgrpc++.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/libgrpc.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/third_party/cares/cares/lib/libcares.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/third_party/zlib/libz.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/libaddress_sorting.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/libgpr.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/libgrpc++.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/libgrpc.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/third_party/cares/cares/lib/libcares.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/third_party/zlib/libz.a', release_libs_path)
 
 def copy_rest_lib():
-    copy_file(build_dir + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a', release_libs_path)
 
 def copy_so(dest):
     print
     print('copying to release folder...')
-    copy_file(build_dir + '/src/libnakama-cpp.so', dest)
+    copy_file(BUILD_DIR + '/src/libnakama-cpp.so', dest)
 
-makedirs(build_dir)
 makedirs(release_libs_path)
-
-os.chdir(build_dir)
 
 # generate projects
 cmake_cmd = [
   'cmake',
-  '../../../..'
+  '-B', BUILD_DIR,
+  '../..'
 ]
 
 cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))

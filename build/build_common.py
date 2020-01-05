@@ -18,9 +18,11 @@ import os
 import sys
 import shutil
 import subprocess
+import multiprocessing
 
 USE_CPPREST = False
 BUILD_MODE = 'Release'
+BUILD_DIR = ''
 TARGET_PLATFORM = '' # mac, ios, android, windows, linux
 
 def init_common(build_common_path, target_platform):
@@ -76,6 +78,21 @@ def call(command, shell=False):
 def is_windows():
     import platform
     return platform.system() == 'Windows'
+
+def set_build_folder_name(name):
+    global BUILD_DIR
+    BUILD_DIR = os.path.abspath(os.path.join('build', name))
+    makedirs(BUILD_DIR)
+
+def build(target):
+    print()
+    print('building ' + target + '...')
+    call(['cmake',
+        '--build', BUILD_DIR,
+        '--target', target,
+        '--config', BUILD_MODE,
+        '--parallel', str(multiprocessing.cpu_count())
+    ], shell=False)
 
 def makedirs(dir):
     if not os.path.isdir(dir):
