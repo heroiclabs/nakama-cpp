@@ -60,39 +60,35 @@ if BUILD_MODE == 'Debug':
 else:
     libs_postfix = ''
 
-def build(target):
-    print('building ' + target + ' for ' + BUILD_MODE + '...')
-    call('cmake --build ' + build_dir + ' --target ' + target + ' --config ' + BUILD_MODE)
-
 def copy_nakama_lib():
-    copy_file(build_dir + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.lib', release_libs_path)
 
 def copy_protobuf_lib():
     copy_one_file_from([
-        build_dir + '\\third_party\\grpc\\third_party\\protobuf\\' + BUILD_MODE + '\\libprotobuf' + libs_postfix + '.lib',
-        build_dir + '\\third_party\\grpc\\third_party\\protobuf\\cmake\\' + BUILD_MODE + '\\libprotobuf' + libs_postfix + '.lib'
+        BUILD_DIR + '\\third_party\\grpc\\third_party\\protobuf\\' + BUILD_MODE + '\\libprotobuf' + libs_postfix + '.lib',
+        BUILD_DIR + '\\third_party\\grpc\\third_party\\protobuf\\cmake\\' + BUILD_MODE + '\\libprotobuf' + libs_postfix + '.lib'
      ], release_libs_path)
 
 def copy_ssl_lib():
-    copy_file(build_dir + '\\third_party\\grpc\\third_party\\boringssl\\ssl\\' + BUILD_MODE + '\\ssl' + libs_postfix + '.lib', release_libs_path)
-    copy_file(build_dir + '\\third_party\\grpc\\third_party\\boringssl\\crypto\\' + BUILD_MODE + '\\crypto' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\third_party\\grpc\\third_party\\boringssl\\ssl\\' + BUILD_MODE + '\\ssl' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\third_party\\grpc\\third_party\\boringssl\\crypto\\' + BUILD_MODE + '\\crypto' + libs_postfix + '.lib', release_libs_path)
 
 def copy_grpc_lib():
-    copy_file(build_dir + '\\third_party\\grpc\\' + BUILD_MODE + '\\address_sorting' + libs_postfix + '.lib', release_libs_path)
-    copy_file(build_dir + '\\third_party\\grpc\\' + BUILD_MODE + '\\gpr' + libs_postfix + '.lib', release_libs_path)
-    copy_file(build_dir + '\\third_party\\grpc\\' + BUILD_MODE + '\\grpc++' + libs_postfix + '.lib', release_libs_path)
-    copy_file(build_dir + '\\third_party\\grpc\\' + BUILD_MODE + '\\grpc' + libs_postfix + '.lib', release_libs_path)
-    copy_file(build_dir + '\\third_party\\grpc\\third_party\\cares\\cares\\lib\\' + BUILD_MODE + '\\cares' + libs_postfix + '.lib', release_libs_path)
-    copy_file(build_dir + '\\third_party\\grpc\\third_party\\zlib\\' + BUILD_MODE + '\\zlibstatic' + libs_postfix + '.lib', release_libs_path + '\\zlib' + libs_postfix + '.lib')
+    copy_file(BUILD_DIR + '\\third_party\\grpc\\' + BUILD_MODE + '\\address_sorting' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\third_party\\grpc\\' + BUILD_MODE + '\\gpr' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\third_party\\grpc\\' + BUILD_MODE + '\\grpc++' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\third_party\\grpc\\' + BUILD_MODE + '\\grpc' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\third_party\\grpc\\third_party\\cares\\cares\\lib\\' + BUILD_MODE + '\\cares' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\third_party\\grpc\\third_party\\zlib\\' + BUILD_MODE + '\\zlibstatic' + libs_postfix + '.lib', release_libs_path + '\\zlib' + libs_postfix + '.lib')
 
 def copy_rest_lib():
-    copy_file(build_dir + '\\third_party\\cpprestsdk\\Release\\Binaries\\' + BUILD_MODE + '\\cpprest' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\third_party\\cpprestsdk\\Release\\Binaries\\' + BUILD_MODE + '\\cpprest' + libs_postfix + '.lib', release_libs_path)
 
 def copy_dll(dest):
     print
     print('copying to release folder...')
-    copy_file(build_dir + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.lib', dest)
-    copy_file(build_dir + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.dll', dest)
+    copy_file(BUILD_DIR + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.lib', dest)
+    copy_file(BUILD_DIR + '\\src\\' + BUILD_MODE + '\\nakama-cpp' + libs_postfix + '.dll', dest)
 
 # generate Visual Studio projects
 #generator, vs_year, default_toolset = 'Visual Studio 14 2015', 2015, 'v140'
@@ -105,8 +101,7 @@ if ARCH == 'x64' and vs_year < 2019:
 if not TOOLSET:
     TOOLSET = default_toolset
 
-build_dir = os.path.abspath('build\\' + TOOLSET + '_' + ARCH)
-makedirs(build_dir)
+set_build_folder_name(TOOLSET + '_' + ARCH)
 
 print
 print('Building for Arch:', ARCH + ', Toolset:', TOOLSET + ', Mode:', BUILD_MODE + ', DLL:', str(DLL))
@@ -126,7 +121,7 @@ else:
 SYSTEM_VERSION = '6.1'
 
 cmake_cmd = ['cmake',
-  '-B', build_dir,
+  '-B', BUILD_DIR,
   '-G', generator,
   '-T', TOOLSET,
   '-DCMAKE_SYSTEM_VERSION=' + SYSTEM_VERSION

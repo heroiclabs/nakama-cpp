@@ -39,7 +39,7 @@ print
 print('Building for', ARCH + ', dylib:', str(SHARED_LIB))
 print
 
-build_dir = './build/' + BUILD_MODE + '/' + ARCH
+set_build_folder_name(BUILD_MODE + '/' + ARCH)
 
 if ARCH == 'x86_64':
     is_simulator = True
@@ -47,17 +47,6 @@ else:
     is_simulator = False
 
 cwd = os.getcwd()
-
-makedirs(build_dir)
-
-def build(target):
-    print('building ' + target + '...')
-    call(['cmake',
-          '--build',
-          build_dir,
-          '--target',
-          target
-          ])
 
 deployment_target = '8.0'
 
@@ -107,7 +96,7 @@ generator = 'Unix Makefiles'
 # generate projects
 cmake_cmd = ['cmake',
       '-B',
-      build_dir,
+      BUILD_DIR,
       '-DCMAKE_SYSTEM_NAME=iOS',
       '-DAPPLE_IOS=YES',
       '-DCMAKE_OSX_DEPLOYMENT_TARGET=' + deployment_target,

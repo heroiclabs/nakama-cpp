@@ -51,7 +51,7 @@ if not ANDROID_NDK:
         print("Error: no ANDROID_NDK or NDK_ROOT environment variable")
         sys.exit(-1)
 
-build_dir = os.path.abspath('build/' + ABI + '/' + BUILD_MODE)
+set_build_folder_name(ABI + '/' + BUILD_MODE)
 cwd = os.getcwd()
 
 if SHARED_LIB:
@@ -60,37 +60,35 @@ else:
     release_libs_path = os.path.abspath('../../release/nakama-cpp-sdk/libs/android/' + ABI)
 
 def copy_nakama_lib():
-    copy_file(build_dir + '/src/libnakama-cpp.a', release_libs_path)
+    copy_file(BUILD_DIR + '/src/libnakama-cpp.a', release_libs_path)
 
 def copy_protobuf_lib():
     copy_one_file_from([
-        build_dir + '/third_party/grpc/third_party/protobuf/libprotobuf.a',
-        build_dir + '/third_party/grpc/third_party/protobuf/cmake/libprotobuf.a',
+        BUILD_DIR + '/third_party/grpc/third_party/protobuf/libprotobuf.a',
+        BUILD_DIR + '/third_party/grpc/third_party/protobuf/cmake/libprotobuf.a',
     ], release_libs_path)
 
 def copy_ssl_lib():
-    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', release_libs_path)
 
 def copy_grpc_lib():
-    copy_file(build_dir + '/third_party/grpc/libaddress_sorting.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/libgpr.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/libgrpc++.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/libgrpc.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/third_party/cares/cares/lib/libcares.a', release_libs_path)
-    copy_file(build_dir + '/third_party/grpc/third_party/zlib/libz.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/libaddress_sorting.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/libgpr.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/libgrpc++.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/libgrpc.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/third_party/cares/cares/lib/libcares.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/third_party/zlib/libz.a', release_libs_path)
 
 def copy_rest_lib():
-    copy_file(build_dir + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/cpprestsdk/' + BUILD_MODE + '/Binaries/libcpprest.a', release_libs_path)
 
 def copy_shared_lib(dest):
     print
     print('copying to release folder...')
-    copy_file(build_dir + '/src/libnakama-cpp.so', dest)
+    copy_file(BUILD_DIR + '/src/libnakama-cpp.so', dest)
 
 print('ANDROID_NDK=' + ANDROID_NDK)
-
-makedirs(build_dir)
 
 if USE_CPPREST:
     boost_version = '1.69.0'
@@ -134,7 +132,7 @@ cmake_cmd = [
               '-DCMAKE_TOOLCHAIN_FILE=' + ANDROID_NDK + '/build/cmake/android.toolchain.cmake',
               '-DANDROID_NATIVE_API_LEVEL=16',
               '-B',
-              build_dir,
+              BUILD_DIR,
               '-GNinja',
               '../..'
               ]
@@ -145,7 +143,7 @@ cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))
 call(cmake_cmd)
 
 # build
-call(['ninja', '-C', build_dir, 'nakama-cpp'])
+build('nakama-cpp')
 
 makedirs(release_libs_path)
 
