@@ -117,10 +117,19 @@ if ARCH == 'x64':
 else:
     arch_folder = 'win32'
 
+# Windows ver | SYSTEM_VERSION
+# ----------------------------
+# Windows 7   | 6.1
+# Windows 8   | 6.2
+# Windows 8.1 | 6.3
+# Windows 10  | 10.0
+SYSTEM_VERSION = '6.1'
+
 cmake_cmd = ['cmake',
   '-B', build_dir,
   '-G', generator,
-  '-T', TOOLSET
+  '-T', TOOLSET,
+  '-DCMAKE_SYSTEM_VERSION=' + SYSTEM_VERSION
 ]
 
 cmake_cmd.extend(get_common_cmake_parameters(DLL))

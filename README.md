@@ -26,7 +26,7 @@ You'll need to setup the server and database before you can connect with the cli
 
 2. Nakama C/C++ SDK is released with prebuilt libraries for following platforms and architectures:
 
-- Windows - Visual Studio 2015, 2017, 2019 (x86, x64, Debug, Release)
+- Windows - 7+, Visual Studio 2015, 2017, 2019 (x86, x64, Debug, Release)
 - Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86, x86_64)
 - Linux - Ubuntu 18.04 x64
 - Mac - 10.10+
