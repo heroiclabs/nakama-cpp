@@ -120,13 +120,6 @@ def copy_file(src, dest):
     shutil.copy(src, dest)
     print('copied', os.path.basename(src))
 
-def copy_one_file_from(src_list, dest):
-    for src in src_list:
-        if os.path.exists(src):
-            copy_file(src, dest)
-            return
-    raise Exception("Nothing copied from " + str(src_list))
-
 def copy_folder(src, dest, replace=True):
     folder_name = os.path.basename(src)
     dest_full_path = os.path.join(dest, folder_name)
