@@ -97,12 +97,12 @@ if USE_CPPREST:
     if not os.path.exists(Android_Boost_BuildScript_Path):
         # clone Boost-for-Android
         call([
-            'git', 'clone', 'https://github.com/moritz-wundke/Boost-for-Android',
+            'git', 'clone', '--depth', '1', 'https://github.com/moritz-wundke/Boost-for-Android',
             Android_Boost_BuildScript_Path
         ])
-        os.chdir(Android_Boost_BuildScript_Path)
-        call(['git', 'checkout', 'b1e2cb397d3ec573f1cfdf4f4d965766204c53f1'])
-        os.chdir(cwd)
+        #os.chdir(Android_Boost_BuildScript_Path)
+        #call(['git', 'checkout', 'b1e2cb397d3ec573f1cfdf4f4d965766204c53f1'])
+        #os.chdir(cwd)
 
     boost_build_path = os.path.join(Android_Boost_BuildScript_Path, "build")
     if not os.path.exists(boost_build_path):
@@ -128,11 +128,12 @@ cmake_cmd = [
               '-DANDROID_ABI=' + ABI,
               '-DCMAKE_TOOLCHAIN_FILE=' + ANDROID_NDK + '/build/cmake/android.toolchain.cmake',
               '-DANDROID_NATIVE_API_LEVEL=16',
-              '-B',
-              BUILD_DIR,
-              '-GNinja',
+              '-B', BUILD_DIR,
               '../..'
               ]
+
+if is_windows():
+    cmake_cmd.append('-GNinja')
 
 cmake_cmd.extend(get_common_cmake_parameters(SHARED_LIB))
 
