@@ -23,6 +23,7 @@ import platform
 
 parser = argparse.ArgumentParser(description='builder for Linux')
 parser.add_argument('--so', help='use nakama-cpp as shared object', action='store_true')
+parser.add_argument('--sdk', help='path to nakama-cpp SDK')
 
 args = parser.parse_args()
 SHARED_LIB = args.so
@@ -68,6 +69,9 @@ cmake_cmd = [
 
 if SHARED_LIB:
     cmake_cmd.append('-DNAKAMA_SHARED_LIBRARY=YES')
+
+if args.sdk:
+    cmake_cmd.append('-DNAKAMA_CPP_SDK_PATH=' + args.sdk)
 
 cmake_cmd.append('../../../..')
 

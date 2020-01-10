@@ -17,7 +17,9 @@ cmake_minimum_required(VERSION 3.10)
 
 project(nakama-cmake-client-example CXX)
 
-add_subdirectory(../../release/nakama-cpp-sdk ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp)
+set(NAKAMA_CPP_SDK_PATH ../../release/nakama-cpp-sdk CACHE STRING "Path to nakama-cpp SDK")
+
+add_subdirectory(${NAKAMA_CPP_SDK_PATH} ${CMAKE_CURRENT_BINARY_DIR}/nakama-cpp)
 
 add_executable(nakama-cmake-client-example nakama-cmake-client-example.cpp)
 target_compile_features(nakama-cmake-client-example PRIVATE cxx_std_11)
