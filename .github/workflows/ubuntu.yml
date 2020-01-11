@@ -1,0 +1,107 @@
+name: Ubuntu 18.04
+
+on: [push]
+
+jobs:
+  build_nakama-cpp:
+    runs-on: ubuntu-18.04
+    
+    container: dimon4eg/ubuntu_nakama_base:u1804_b169_c3155
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: recursive
+#        fetch-depth: 1
+
+    - name: build static
+      run: cd build/linux && ./build_linux.py
+    
+    - name: upload static test binary
+      uses: actions/upload-artifact@v1
+      with:
+        name: nakama-test
+        path: build/linux/build/Release_x64/test/nakama-test
+
+    - name: build shared
+      run: cd build/linux && ./build_linux.py --so
+
+    - name: upload nakama-cpp-sdk
+      uses: actions/upload-artifact@v1
+      with:
+        name: nakama-cpp-sdk
+        path: release/nakama-cpp-sdk
+
+    - name: upload shared test binary
+      uses: actions/upload-artifact@v1
+      with:
+        name: nakama-test-so
+        path: build/linux/build/Release_x64/test
+
+    - name: upload example sources
+      uses: actions/upload-artifact@v1
+      with:
+        name: nakama-cmake-client-example
+        path: examples/nakama-cmake-client-example
+
+  build_example:
+    runs-on: ubuntu-18.04
+    needs: [build_nakama-cpp]
+    
+    container: dimon4eg/ubuntu_nakama_base:u1804_b169_c3155
+
+    steps:
+    - name: download nakama-cpp-sdk
+      uses: actions/download-artifact@v1
+      with:
+        name: nakama-cpp-sdk
+
+    - name: download nakama-cmake-client-example
+      uses: actions/download-artifact@v1
+      with:
+        name: nakama-cmake-client-example
+
+    - name: chmod
+      run: chmod u=rwx nakama-cmake-client-example/build/linux/build_linux.py
+
+    - name: build example with shared lib
+      run: cd nakama-cmake-client-example/build/linux && ./build_linux.py --so --sdk $GITHUB_WORKSPACE/nakama-cpp-sdk
+
+  test:
+    runs-on: ubuntu-16.04
+    needs: [build_nakama-cpp]
+
+    steps:
+    - name: download static test binary
+      uses: actions/download-artifact@v1
+      with:
+        name: nakama-test
+
+    - name: download shared test binary
+      uses: actions/download-artifact@v1
+      with:
+        name: nakama-test-so
+
+    - name: get docker-compose.yml
+      run: wget https://raw.githubusercontent.com/heroiclabs/nakama-cpp/master/ci-cd/docker-compose.yml
+
+    - name: chmod static
+      run: chmod u=rwx nakama-test/nakama-test
+
+    - name: chmod so
+      run: chmod u=rwx nakama-test-so/nakama-test
+
+    - name: ls cur dir
+      run: echo $PWD && ls -l
+
+    - name: print docker-compose.yml
+      run: cat docker-compose.yml
+
+    - name: start nakama-server
+      run: docker-compose -f docker-compose.yml up -d
+
+    - name: run tests (static)
+      run: cd nakama-test && ./nakama-test
+
+    - name: run tests (shared)
+      run: cd nakama-test-so && export LD_LIBRARY_PATH=. && ./nakama-test
