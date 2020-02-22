@@ -90,4 +90,5 @@ set(CMAKE_FOLDER)
 # only build tests for desktop OS
 if(NOT CMAKE_CROSSCOMPILING)
     add_subdirectory(test)
+    set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT nakama-test)
 endif()
