@@ -55,6 +55,7 @@ set(RUN_HAVE_STD_REGEX 0)
 set(RUN_HAVE_POSIX_REGEX 0)
 set(RUN_HAVE_GNU_POSIX_REGEX 0)
 set(RUN_HAVE_STEADY_CLOCK 0)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(PUBLIC_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(THIRD_PARTY_DIR ${PROJECT_SOURCE_DIR}/third_party)
@@ -64,6 +65,8 @@ add_subdirectory(src)
 if(BUILD_HTTP_CPPREST OR BUILD_WEBSOCKET_CPPREST)
     set(USE_CPPREST TRUE)
 endif()
+
+set(CMAKE_FOLDER third_party)
 
 if(BUILD_GRPC_CLIENT)
     add_subdirectory(${THIRD_PARTY_DIR}/grpc)
@@ -81,6 +84,8 @@ if(USE_CPPREST)
     set(CPPREST_ABI_TAG "" CACHE STRING "" FORCE)
     add_subdirectory(${THIRD_PARTY_DIR}/cpprestsdk)
 endif()
+
+set(CMAKE_FOLDER)
 
 # only build tests for desktop OS
 if(NOT CMAKE_CROSSCOMPILING)
