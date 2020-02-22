@@ -8,7 +8,7 @@ Nakama C/C++ Client SDK
 [![Github all releases](https://img.shields.io/github/downloads/heroiclabs/nakama-cpp/total.svg)](https://github.com/heroiclabs/nakama-cpp/releases/)
 [![License](https://img.shields.io/github/license/heroiclabs/nakama.svg)](https://github.com/heroiclabs/nakama/blob/master/LICENSE)
 
-![](https://github.com/heroiclabs/nakama-cpp/workflows/Ubuntu%2018.04/badge.svg)
+[![Build & tests on Ubuntu 18.04](https://github.com/heroiclabs/nakama-cpp/workflows/Ubuntu%2018.04/badge.svg)](https://github.com/heroiclabs/nakama-cpp/actions?query=workflow%3A%22Ubuntu+18.04%22)
 
 > General C/C++ client for Nakama server.
 
