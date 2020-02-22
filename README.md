@@ -531,7 +531,7 @@ To manually install dependencies:
 
   `./bootstrap && make && make install`
 
-To build nakama-cpp:
+To build as static or shared object library:
 
 ```bash
 cd build/linux
@@ -542,9 +542,16 @@ python build_linux.py --so
 
 It builds in `Release` mode and copies nakama lib to release folder.
 
+To build both static and shared object library (see [Build Configuration](#build-configuration)):
+
+```bash
+cd build/linux
+python build_linux_all.py
+```
+
 ### Building for Android
 
-Currently buid for Android is supported from Mac OS.
+Currently buid for Android is supported on Mac OS and Linux.
 
 Set `ANDROID_NDK` or `NDK_ROOT` system variable to Android NDK folder.
 
@@ -576,7 +583,7 @@ To use another IP of your server, edit `test/test_serverConfig.h` file.
 
 ### Prerequisites
 
-Tests reqire lua modules: download them from https://github.com/heroiclabs/nakama/tree/master/data/modules and put to `<nakama-server>/data/modules`.
+Tests require lua modules: download them from https://github.com/heroiclabs/nakama/tree/master/data/modules and put to `<nakama-server>/data/modules`.
 
 Restart server.
 
