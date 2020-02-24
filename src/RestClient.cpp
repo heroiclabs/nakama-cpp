@@ -112,6 +112,7 @@ RestClient::~RestClient()
 
 void RestClient::disconnect()
 {
+    _httpClient->cancelAllRequests();
 }
 
 void RestClient::tick()
@@ -199,6 +200,11 @@ void RestClient::onResponse(RestReqContext* reqContext, NHttpResponsePtr respons
             if (response->statusCode == InternalStatusCodes::CONNECTION_ERROR)
             {
                 code = ErrorCode::ConnectionError;
+                errMessage.append("message: ").append(response->errorMessage);
+            }
+            else if (response->statusCode == InternalStatusCodes::CANCELLED_BY_USER)
+            {
+                code = ErrorCode::CancelledByUser;
                 errMessage.append("message: ").append(response->errorMessage);
             }
             else if (!response->body.empty() && response->body[0] == '{') // have to be JSON

@@ -29,6 +29,8 @@ namespace Nakama {
     class NHttpClientCppRest : public NHttpTransportInterface
     {
     public:
+        using ReqId = uint64_t;
+
         ~NHttpClientCppRest();
 
         void setBaseUri(const std::string& uri) override;
@@ -37,9 +39,14 @@ namespace Nakama {
 
         void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) override;
 
+        void cancelAllRequests() override;
+
     protected:
         struct ReqContext
         {
+            ReqContext(ReqId _id) : id(_id) {}
+
+            ReqId id;
             NHttpResponseCallback callback;
             NHttpResponsePtr response;
         };
@@ -47,9 +54,9 @@ namespace Nakama {
         using ReqContextPtr = std::unique_ptr<ReqContext>;
 
         ReqContext* createReqContext();
-        void finishReq(ReqContext* ctx, NHttpResponsePtr response);
-        void finishReqWithError(ReqContext* ctx, int statusCode, std::string&& reason);
-        void removePendingReq(ReqContext* ctx);
+        void finishReq(ReqId id, NHttpResponsePtr response);
+        void finishReqWithError(ReqId id, int statusCode, std::string&& reason);
+        void removePendingReq(ReqId id);
         ReqContextPtr popFinishedReq();
 
     protected:
@@ -57,6 +64,7 @@ namespace Nakama {
         std::mutex _mutex;
         std::list<ReqContextPtr> _pendingRequests;
         std::list<ReqContextPtr> _finishedRequests;
+        utility::string_t _baseUri;
     };
 
 }

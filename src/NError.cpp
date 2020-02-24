@@ -30,6 +30,7 @@ const char * toString(ErrorCode code)
     case ErrorCode::InternalError:           return "InternalError";
     case ErrorCode::Unauthenticated:         return "Unauthenticated";
     case ErrorCode::PermissionDenied:        return "PermissionDenied";
+    case ErrorCode::CancelledByUser:         return "CancelledByUser";
     default:
         break;
     }
