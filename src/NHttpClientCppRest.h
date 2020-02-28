@@ -23,6 +23,8 @@
 
 namespace Nakama {
 
+    class NHttpClientCppRestContext;
+
     /**
      * HTTP client using C++ REST SDK (https://github.com/microsoft/cpprestsdk)
      */
@@ -31,6 +33,7 @@ namespace Nakama {
     public:
         using ReqId = uint64_t;
 
+        NHttpClientCppRest();
         ~NHttpClientCppRest();
 
         void setBaseUri(const std::string& uri) override;
@@ -42,6 +45,8 @@ namespace Nakama {
         void cancelAllRequests() override;
 
     protected:
+        friend class NHttpClientCppRestContext;
+
         struct ReqContext
         {
             ReqContext(ReqId _id) : id(_id) {}
@@ -60,8 +65,8 @@ namespace Nakama {
         ReqContextPtr popFinishedReq();
 
     protected:
+        std::shared_ptr<NHttpClientCppRestContext> _context;
         std::unique_ptr<web::http::client::http_client> _client;
-        std::mutex _mutex;
         std::list<ReqContextPtr> _pendingRequests;
         std::list<ReqContextPtr> _finishedRequests;
         utility::string_t _baseUri;

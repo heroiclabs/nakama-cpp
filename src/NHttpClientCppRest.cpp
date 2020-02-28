@@ -24,10 +24,51 @@ namespace Nakama {
 using namespace web::http;                  // Common HTTP functionality
 using namespace web::http::client;          // HTTP client features
 
-static NHttpClientCppRest::ReqId g_nextReqId = 1;
+class NHttpClientCppRestContext
+{
+public:
+    NHttpClientCppRestContext(NHttpClientCppRest& c) : client(c) {}
+
+    void finishReq(NHttpClientCppRest::ReqId id, NHttpResponsePtr response)
+    {
+        std::lock_guard<std::mutex> guard(mutex);
+        if (alive)
+            client.finishReq(id, response);
+    }
+
+    void finishReqWithError(NHttpClientCppRest::ReqId id, int statusCode, std::string&& reason)
+    {
+        std::lock_guard<std::mutex> guard(mutex);
+        if (alive)
+            client.finishReqWithError(id, statusCode, std::move(reason));
+    }
+
+    void removePendingReq(NHttpClientCppRest::ReqId id)
+    {
+        std::lock_guard<std::mutex> guard(mutex);
+        if (alive)
+            client.removePendingReq(id);
+    }
+
+    NHttpClientCppRest& client;
+    NHttpClientCppRest::ReqId nextReqId = 1;
+    std::mutex mutex;
+    bool alive = true;
+};
+
+///////////////////////////////////////////////////////////////
+NHttpClientCppRest::NHttpClientCppRest()
+    : _context(std::make_shared<NHttpClientCppRestContext>(*this))
+{
+}
 
 NHttpClientCppRest::~NHttpClientCppRest()
 {
+    {
+        std::lock_guard<std::mutex> guard(_context->mutex);
+        _context->alive = false;
+    }
+
     _client.reset();
 }
 
@@ -67,7 +108,7 @@ void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCal
     {
         if (_baseUri.empty())
         {
-            finishReqWithError(reqId, InternalStatusCodes::NOT_INITIALIZED_ERROR, "[NHttpClientCppRest::request] base uri is not set");
+            _context->finishReqWithError(reqId, InternalStatusCodes::NOT_INITIALIZED_ERROR, "[NHttpClientCppRest::request] base uri is not set");
             return;
         }
 
@@ -103,9 +144,11 @@ void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCal
     request.set_body(FROM_STD_STR(req.body));
     request.set_method(theMethod);
 
+    std::weak_ptr<NHttpClientCppRestContext> context_wptr(_context);
+
     auto task = _client->request(request);
     // Task-based continuation
-    (void) task.then([this, reqId, hasCallback](pplx::task<http_response> previousTask)
+    (void) task.then([context_wptr, reqId, hasCallback](pplx::task<http_response> previousTask)
     {
         try
         {
@@ -124,23 +167,29 @@ void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCal
 
                 responsePtr->body = response.extract_utf8string().get();
 
-                finishReq(reqId, responsePtr);
+                auto context = context_wptr.lock();
+                if (context)
+                    context->finishReq(reqId, responsePtr);
             }
             else
             {
-                removePendingReq(reqId);
+                auto context = context_wptr.lock();
+                if (context)
+                    context->removePendingReq(reqId);
             }
         }
         catch (const std::exception & e)
         {
-            finishReqWithError(reqId, InternalStatusCodes::CONNECTION_ERROR, "[NHttpClientCppRest::request] exception: " + std::string(e.what()));
+            auto context = context_wptr.lock();
+            if (context)
+                context->finishReqWithError(reqId, InternalStatusCodes::CONNECTION_ERROR, "[NHttpClientCppRest::request] exception: " + std::string(e.what()));
         }
     });
 }
 
 void NHttpClientCppRest::cancelAllRequests()
 {
-    std::lock_guard<std::mutex> guard(_mutex);
+    std::lock_guard<std::mutex> guard(_context->mutex);
 
     _client.reset();
 
@@ -163,9 +212,9 @@ void NHttpClientCppRest::cancelAllRequests()
 
 NHttpClientCppRest::ReqContext* NHttpClientCppRest::createReqContext()
 {
-    ReqContext* ctx = new ReqContext(g_nextReqId++);
+    ReqContext* ctx = new ReqContext(_context->nextReqId++);
 
-    std::lock_guard<std::mutex> guard(_mutex);
+    std::lock_guard<std::mutex> guard(_context->mutex);
     _pendingRequests.emplace_back(ReqContextPtr(ctx));
 
     return ctx;
@@ -173,8 +222,6 @@ NHttpClientCppRest::ReqContext* NHttpClientCppRest::createReqContext()
 
 void NHttpClientCppRest::finishReq(ReqId id, NHttpResponsePtr response)
 {
-    std::lock_guard<std::mutex> guard(_mutex);
-
     for (auto it = _pendingRequests.begin(); it != _pendingRequests.end(); ++it)
     {
         if (it->get()->id == id)
@@ -199,8 +246,6 @@ void NHttpClientCppRest::finishReqWithError(ReqId id, int statusCode, std::strin
 
 void NHttpClientCppRest::removePendingReq(ReqId id)
 {
-    std::lock_guard<std::mutex> guard(_mutex);
-
     for (auto it = _pendingRequests.begin(); it != _pendingRequests.end(); ++it)
     {
         if (it->get()->id == id)
@@ -213,7 +258,7 @@ void NHttpClientCppRest::removePendingReq(ReqId id)
 
 NHttpClientCppRest::ReqContextPtr NHttpClientCppRest::popFinishedReq()
 {
-    std::lock_guard<std::mutex> guard(_mutex);
+    std::lock_guard<std::mutex> guard(_context->mutex);
 
     if (_finishedRequests.empty())
         return nullptr;
