@@ -47,6 +47,32 @@ void test_connectError()
     test.runTest();
 }
 
+void test_connectErrorAndDestroy()
+{
+    NCppTest test(__func__);
+
+    NClientParameters parameters;
+
+    parameters.port = 1111;
+
+    test.createClient(parameters);
+
+    auto successCallback = [&test](NSessionPtr session)
+    {
+        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        test.stopTest();
+    };
+
+    auto errorCallback = [&test](const NError& error)
+    {
+        test.stopTest(error.code == ErrorCode::ConnectionError || error.code == ErrorCode::CancelledByUser);
+    };
+
+    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
+
+    test.client.reset();
+}
+
 void test_disconnection()
 {
     NCppTest test(__func__);
@@ -74,6 +100,7 @@ void test_disconnection()
 void test_disconnect()
 {
     test_connectError();
+    test_connectErrorAndDestroy();
     test_disconnection();
 }
 
