@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.2.4</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -108,6 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7572b03170bfba05aa013efa7a2c6c5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a085c54bc18fe127cc07d4e151d43c6d6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_http_transport_interface.html#a085c54bc18fe127cc07d4e151d43c6d6">request</a> (const <a class="el" href="struct_n_http_request.html">NHttpRequest</a> &amp;req, const <a class="el" href="_n_http_transport_interface_8h.html#ac81948bad3e6eeda8e29c7e1751a7876">NHttpResponseCallback</a> &amp;callback=nullptr)=0</td></tr>
 <tr class="separator:a085c54bc18fe127cc07d4e151d43c6d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa273a2bf10d3d8fcbc6139dbed442606"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_http_transport_interface.html#aa273a2bf10d3d8fcbc6139dbed442606">cancelAllRequests</a> ()=0</td></tr>
+<tr class="separator:aa273a2bf10d3d8fcbc6139dbed442606"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>HTTP transport interface </p>
@@ -138,6 +140,33 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa273a2bf10d3d8fcbc6139dbed442606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa273a2bf10d3d8fcbc6139dbed442606">&#9670;&nbsp;</a></span>cancelAllRequests()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void NHttpTransportInterface::cancelAllRequests </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Cancel all requests</p>
+<p>Note: this doesn't guarantee server will not receive or not received any currently pending request </p>
+
+</div>
+</div>
 <a id="a085c54bc18fe127cc07d4e151d43c6d6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a085c54bc18fe127cc07d4e151d43c6d6">&#9670;&nbsp;</a></span>request()</h2>
 

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['cancelallrequests',['cancelAllRequests',['../class_n_http_transport_interface.html#aa273a2bf10d3d8fcbc6139dbed442606',1,'NHttpTransportInterface']]],
   ['connect',['connect',['../class_n_rt_client_interface.html#a932d415c9c717b03f4a7c28360b6d8d6',1,'NRtClientInterface::connect()'],['../class_n_rt_transport_interface.html#a17edb9e8e25d72a7b3469a34cf82488d',1,'NRtTransportInterface::connect()']]],
   ['createdefaultclient',['createDefaultClient',['../_client_factory_8h.html#a22585cf95dc129ab8da7cb0f8eaf764d',1,'ClientFactory.h']]],
   ['createdefaulthttptransport',['createDefaultHttpTransport',['../_client_factory_8h.html#a8bc861f9695b70fcf05a379a9d0ecc1b',1,'ClientFactory.h']]],

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['cacheablecursor',['cacheableCursor',['../struct_n_notification_list.html#af81f0a68577d4324a935bfc73978fabb',1,'NNotificationList']]],
+  ['cancelallrequests',['cancelAllRequests',['../class_n_http_transport_interface.html#aa273a2bf10d3d8fcbc6139dbed442606',1,'NHttpTransportInterface']]],
   ['canenter',['canEnter',['../struct_n_tournament.html#a8e1fa0c3792e19b495dbe8f361299ef0',1,'NTournament']]],
   ['category',['category',['../struct_n_tournament.html#a1b0318f9c22dab21a1404c6be1709fea',1,'NTournament']]],
   ['channelid',['channelId',['../struct_n_channel_message.html#a0138b44f8ecc6937e8ce6ee14d4d8ed5',1,'NChannelMessage::channelId()'],['../struct_n_channel_message_ack.html#aba2b591400c325ac5cbfab1da16891fd',1,'NChannelMessageAck::channelId()'],['../struct_n_channel_presence_event.html#a4b48816139ce344928de396e55fba927',1,'NChannelPresenceEvent::channelId()']]],

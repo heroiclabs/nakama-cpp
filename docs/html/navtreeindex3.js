@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"struct_n_stream_data.html#a2d837bc0aaba9b583efd2f076fa6fd68":[2,0,50,2],
+"struct_n_stream_data.html#a614abf6422192f427669e573cdbc49f1":[2,0,50,0],
 "struct_n_stream_data.html#ac92d1b02455e65d0c0069eeb32c78d30":[2,0,50,1],
 "struct_n_stream_presence_event.html":[2,0,51],
 "struct_n_stream_presence_event.html#a12fd51f6549c68d7b3e937e8d06b4cf1":[2,0,51,1],

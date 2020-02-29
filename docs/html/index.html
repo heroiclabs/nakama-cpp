@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.2.4</span>
+   &#160;<span id="projectnumber">2.3.0</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -103,6 +103,9 @@ $(document).ready(function(){initNavTree('index.html','');});
 </a> <a href="https://github.com/heroiclabs/nakama/blob/master/LICENSE"><object type="image/svg+xml" data="https://img.shields.io/github/license/heroiclabs/nakama.svg" alt="License"></object>
 />
 </a></p>
+<p><a href="https://github.com/heroiclabs/nakama-cpp/actions?query=workflow%3A%22Ubuntu+18.04%22"><object type="image/svg+xml" data="https://github.com/heroiclabs/nakama-cpp/workflows/Ubuntu%2018.04/badge.svg" alt="Build &amp; tests on Ubuntu 18.04"></object>
+/>
+</a></p>
 <blockquote class="doxtable">
 <p>General C/C++ client for Nakama server. </p>
 </blockquote>
@@ -117,7 +120,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>Nakama C/C++ SDK is released with prebuilt libraries for following platforms and architectures:</li>
 </ol>
 <ul>
-<li>Windows - Visual Studio 2015, 2017, 2019 (x86, x64, Debug, Release)</li>
+<li>Windows - 7+, Visual Studio 2015, 2017, 2019 (x86, x64, Debug, Release)</li>
 <li>Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86, x86_64)</li>
 <li>Linux - Ubuntu 18.04 x64</li>
 <li>Mac - 10.10+</li>
@@ -256,7 +259,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <ul>
 <li>git</li>
 <li>python 2.7 or 3.x</li>
-<li>cmake 3.14+</li>
+<li>CMake 3.15+</li>
 <li>go</li>
 <li>perl</li>
 <li>Visual Studio 2015, 2017 or 2019 - for Windows only</li>
@@ -322,15 +325,16 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p class="startli">set <code>BOOST_ROOT</code> env var to <code>boost</code> folder:</p>
 <p class="startli"><code>export BOOST_ROOT={path to boost}</code></p>
 </li>
-<li><p class="startli">download <code>cmake</code> 3.14+ sources and build them:</p>
+<li><p class="startli">download <code>CMake</code> 3.15+ sources and build them:</p>
 <p class="startli"><code>./bootstrap &amp;&amp; make &amp;&amp; make install</code></p>
 </li>
 </ul>
-<p>To build nakama-cpp:</p>
+<p>To build as static or shared object library:</p>
 <div class="fragment"><div class="line">cd build/linux</div><div class="line">python build_linux.py --so</div></div><!-- fragment --><p><code>--so</code> is optional parameter. If set then Nakama will be built as shared library otherwise as static.</p>
 <p>It builds in <code>Release</code> mode and copies nakama lib to release folder.</p>
-<h3>Building for Android</h3>
-<p>Currently buid for Android is supported from Mac OS.</p>
+<p>To build both static and shared object library (see <a href="#build-configuration">Build Configuration</a>):</p>
+<div class="fragment"><div class="line">cd build/linux</div><div class="line">python build_linux_all.py</div></div><!-- fragment --><h3>Building for Android</h3>
+<p>Currently buid for Android is supported on Mac OS and Linux.</p>
 <p>Set <code>ANDROID_NDK</code> or <code>NDK_ROOT</code> system variable to Android NDK folder.</p>
 <p>To build for one ABI:</p>
 <div class="fragment"><div class="line">cd build/android</div><div class="line">python build_android.py ABI --so</div></div><!-- fragment --><p> Where <code>ABI</code> is Android ABI e.g. <code>armeabi-v7a</code>, <code>arm64-v8a</code>, <code>x86</code> or <code>x86_64</code></p>
@@ -341,7 +345,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p>Tests are built when you build Nakama C++ SDK for desktop OS (Windows, Mac or Linux).</p>
 <p>By default tests connect to local server by <code>127.0.0.1</code>. To use another IP of your server, edit <code>test/test_serverConfig.h</code> file.</p>
 <h3>Prerequisites</h3>
-<p>Tests reqire lua modules: download them from <a href="https://github.com/heroiclabs/nakama/tree/master/data/modules">https://github.com/heroiclabs/nakama/tree/master/data/modules</a> and put to <code>&lt;nakama-server&gt;/data/modules</code>.</p>
+<p>Tests require lua modules: download them from <a href="https://github.com/heroiclabs/nakama/tree/master/data/modules">https://github.com/heroiclabs/nakama/tree/master/data/modules</a> and put to <code>&lt;nakama-server&gt;/data/modules</code>.</p>
 <p>Restart server.</p>
 <h3>Run tests</h3>
 <p>Run tests executable (console application):</p>

@@ -5,6 +5,7 @@ var searchData=
   ['info',['Info',['../class_n_logger.html#ac25b2c20dd7f573c4fe11c7369ed787c',1,'NLogger::Info()'],['../_n_log_sink_interface_8h.html#a10e136332d6dc091c13986d59367f7a1',1,'Info():&#160;NLogSinkInterface.h']]],
   ['init',['init',['../class_n_logger.html#a5bfa83ab682374082b2d48bede762498',1,'NLogger']]],
   ['initwithconsolesink',['initWithConsoleSink',['../class_n_logger.html#a4a1f2cc09aba071995e42770400a074b',1,'NLogger']]],
+  ['internalerror',['InternalError',['../_n_error_8h.html#a1f0406b8f433c179ac8d144e46068d1e',1,'NError.h']]],
   ['internalstatuscodes',['InternalStatusCodes',['../namespace_internal_status_codes.html',1,'']]],
   ['invalidargument',['InvalidArgument',['../_n_error_8h.html#abf26e50538c1d0f6e2658a1830c31dc8',1,'NError.h']]],
   ['invite_5freceived',['INVITE_RECEIVED',['../struct_n_friend.html#af008208878241dd9eedde4a78dad29c4a20a5b72a2207dd32155dfe4e08c80203',1,'NFriend']]],
