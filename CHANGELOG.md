@@ -4,6 +4,18 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+## [2.3.0] - [2020-02-29]
+### Added
+- support Windows 10 SDK
+- support build for android on linux
+
+### Fixed
+- fix crash when response is received after NClient was deleted
+- fix build with CMake 3.15+ on Windows 10
+
+### Changed
+- speedup build for Linux
+
 ## [2.2.4] - 2019-11-21
 ### Added
 - install_deps.sh for linux to install dependencies
