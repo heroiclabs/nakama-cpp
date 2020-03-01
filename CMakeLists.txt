@@ -70,8 +70,10 @@ set(CMAKE_FOLDER third_party)
 
 if(BUILD_GRPC_CLIENT)
     add_subdirectory(${THIRD_PARTY_DIR}/grpc)
-elseif(USE_CPPREST)
-    add_subdirectory(${THIRD_PARTY_DIR}/grpc/third_party/boringssl)
+else()
+    if(USE_CPPREST)
+        add_subdirectory(${THIRD_PARTY_DIR}/grpc/third_party/boringssl)
+    endif()
     add_subdirectory(${THIRD_PARTY_DIR}/grpc/third_party/protobuf/cmake ${CMAKE_CURRENT_BINARY_DIR}/third_party/grpc/third_party/protobuf)
 endif()
 
