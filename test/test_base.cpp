@@ -15,6 +15,7 @@
  */
 
 #include "test_base.h"
+#include "nakama-cpp/NUtils.h"
 #include <chrono>
 #include <thread>
 #include <vector>
@@ -88,6 +89,11 @@ void sleep(uint32_t ms)
 {
     std::chrono::milliseconds sleep_period(ms);
     std::this_thread::sleep_for(sleep_period);
+}
+
+uint64_t getUnixTimestampMs()
+{
+    return Nakama::getUnixTimestampMs();
 }
 
 // *************************************************************

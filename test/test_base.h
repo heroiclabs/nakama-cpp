@@ -49,6 +49,7 @@ namespace Test {
     };
 
     void sleep(uint32_t ms);
+    uint64_t getUnixTimestampMs();
     void printTotalStats();
     int getFailedCount();
     void abortCurrentTest(const char* file, int lineno);

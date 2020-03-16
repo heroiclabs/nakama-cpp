@@ -77,10 +77,84 @@ void wrapper_test_realtime_joinChat()
     test.runTest();
 }
 
+void wrapper_test_realtime_buffered_sends()
+{
+    WrapperTest test(__func__);
+
+    test.createWorkingClient();
+
+    // data must be JSON
+    std::string json_data = "{\"msg\":\"Hey there!\"}";
+    NTimestamp sendDelay = 500; // ms
+    NTimestamp sentTime = 0;
+    bool first = true;
+
+    test.listener.setChannelMessageCallback([&](const NChannelMessage& msg)
+        {
+            NTEST_ASSERT(msg.content == json_data);
+            NTEST_ASSERT(test.rtClient->isEnabledBufferedSends() == first);
+            if (first)
+            {
+                NTEST_ASSERT(getUnixTimestampMs() - sentTime >= sendDelay);
+                test.rtClient->disableBufferedSends();
+                test.rtClient->writeChatMessage(
+                    msg.channelId,
+                    json_data
+                );
+                first = false;
+            }
+            else
+            {
+                test.stopTest(true);
+            }
+        });
+
+    auto successCallback = [&](NSessionPtr session)
+    {
+        test.session = session;
+
+        std::cout << "session token: " << session->getAuthToken() << std::endl;
+
+        test.connect([&]()
+            {
+                test.rtClient->enableBufferedSends({ 1024, sendDelay });
+
+                auto successCallback = [&](NChannelPtr channel)
+                {
+                    std::cout << "joined chat: " << channel->id << std::endl;
+
+                    auto ackCallback = [&test](const NChannelMessageAck& ack)
+                    {
+                        std::cout << "message sent successfuly. msg id: " << ack.messageId << std::endl;
+                    };
+
+                    sentTime = getUnixTimestampMs();
+                    test.rtClient->writeChatMessage(
+                        channel->id,
+                        json_data,
+                        ackCallback
+                    );
+                };
+
+                test.rtClient->joinChat(
+                    "chat",
+                    NChannelType::ROOM,
+                    {},
+                    {},
+                    successCallback);
+            });
+    };
+
+    test.client->authenticateEmail("test@mail.com", "12345678", "", true, {}, successCallback);
+
+    test.runTest();
+}
+
 void wrapper_test_realtime()
 {
     wrapper_test_realtime_joinChat();
     wrapper_test_rt_match();
+    wrapper_test_realtime_buffered_sends();
 }
 
 } // namespace Test

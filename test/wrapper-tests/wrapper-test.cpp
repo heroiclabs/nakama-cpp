@@ -89,6 +89,19 @@ namespace Test {
             callback();
         });
 
+        listener.setDisconnectCallback([this](const NAKAMA_NAMESPACE::NRtClientDisconnectInfo& info)
+        {
+            if (!isDone())
+            {
+                stopTest();
+            }
+        });
+
+        listener.setErrorCallback([this](const NAKAMA_NAMESPACE::NRtError& error)
+        {
+            stopTest();
+        });
+
         rtClient = client->createRtClient(SERVER_HTTP_PORT);
 
         rtClient->setListener(&listener);
