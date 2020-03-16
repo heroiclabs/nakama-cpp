@@ -234,6 +234,34 @@ NAKAMA_NAMESPACE_BEGIN
             return nullptr;
         }
 
+        bool enableBufferedSends(const RtClientBufferedSendsParameters& params) override
+        {
+            sRtClientBufferedSendsParameters cParams;
+            cParams.bufferSize = params.bufferSize;
+            cParams.maxRetentionPeriodMs = params.maxRetentionPeriodMs;
+            return ::NRtClient_enableBufferedSends(_cClient, &cParams);
+        }
+
+        void disableBufferedSends() override
+        {
+            ::NRtClient_disableBufferedSends(_cClient);
+        }
+
+        bool isEnabledBufferedSends() const override
+        {
+            return ::NRtClient_isEnabledBufferedSends(_cClient);
+        }
+
+        bool sendBufferedMessages() override
+        {
+            return ::NRtClient_sendBufferedMessages(_cClient);
+        }
+
+        void clearBufferedMessages() override
+        {
+            ::NRtClient_clearBufferedMessages(_cClient);
+        }
+
         static NRtClientWrapper* getWrapper(::NRtClient cClient)
         {
             return (NRtClientWrapper*)NRtClient_getUserData(cClient);

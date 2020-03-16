@@ -29,6 +29,7 @@ typedef enum NAKAMA_API RtErrorCode
     // client side errors
     RtErrorCode_CONNECT_ERROR                 = -1,           ///< Connect has failed.
     RtErrorCode_TRANSPORT_ERROR               = -2,           ///< Transport error.
+    RtErrorCode_DISCARDED_BY_USER             = -3,           ///< Message is not sent and discarded by user.
     
     // server side errors
     RtErrorCode_RUNTIME_EXCEPTION             = 0,            ///< An unexpected result from the server.

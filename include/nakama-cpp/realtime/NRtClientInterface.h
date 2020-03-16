@@ -52,6 +52,15 @@ NAKAMA_NAMESPACE_BEGIN
         bool ssl = false;
     };
 
+    struct NAKAMA_API RtClientBufferedSendsParameters
+    {
+        /// Buffer size, bytes.
+        uint32_t bufferSize = 1024;
+
+        /// Maximum buffer retention period, milliseconds.
+        NTimestamp maxRetentionPeriodMs = 5;
+    };
+
     enum class NAKAMA_API NRtClientProtocol
     {
         /// Protobuf binary protocol. It is recommented to use for production
@@ -123,6 +132,39 @@ NAKAMA_NAMESPACE_BEGIN
          * Get websocket transport which RtClient uses.
          */
         virtual NRtTransportPtr getTransport() const = 0;
+
+        /**
+         * Enable "Buffered Sends".
+         *
+         * When send is called it would accumulate the message contents before its flushed
+         * when the message accumulate trips the threshold to send.
+         * If individual large messages are sent over the socket that already exceed the buffer
+         * size or cause the buffer to be exceeded it will just flush the message immediately.
+         * We will also make sure that the buffer is flushed if new messages are not accumulated
+         * after configured delay.
+         * Disabled by default.
+         */
+        virtual bool enableBufferedSends(const RtClientBufferedSendsParameters& params) = 0;
+
+        /**
+         * Disable "Buffered Sends".
+         */
+        virtual void disableBufferedSends() = 0;
+
+        /**
+         * @return True if "Buffered Sends" is enabled.
+         */
+        virtual bool isEnabledBufferedSends() const = 0;
+
+        /**
+         * Send buffered messages.
+         */
+        virtual bool sendBufferedMessages() = 0;
+
+        /**
+         * Clear buffered messages without sending.
+         */
+        virtual void clearBufferedMessages() = 0;
 
         /**
          * Join a chat channel on the server.

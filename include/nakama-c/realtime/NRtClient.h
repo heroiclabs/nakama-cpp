@@ -21,7 +21,6 @@
 #include "nakama-c/data/NRpc.h"
 #include "nakama-c/data/NChannelMessage.h"
 #include "nakama-c/data/NNotificationList.h"
-//#include "nakama-c/realtime/NRtTransportInterface.h"
 #include "nakama-c/realtime/rtdata/NRtError.h"
 #include "nakama-c/realtime/rtdata/NChannel.h"
 #include "nakama-c/realtime/rtdata/NChannelMessageAck.h"
@@ -63,6 +62,15 @@ extern "C" {
         /// See the server documentation for more information.
         bool ssl;
     } sRtClientParameters;
+
+    typedef struct NAKAMA_API RtClientBufferedSendsParameters
+    {
+        /// Buffer size, bytes.
+        uint32_t bufferSize;
+
+        /// Maximum buffer retention period, milliseconds.
+        NTimestamp maxRetentionPeriodMs;
+    } sRtClientBufferedSendsParameters;
 
     typedef enum NAKAMA_API NRtClientProtocol
     {
@@ -119,6 +127,39 @@ extern "C" {
      * Close the connection with the server.
      */
     NAKAMA_API void NRtClient_disconnect(NRtClient client);
+
+    /**
+     * Enable "Buffered Sends".
+     *
+     * When send is called it would accumulate the message contents before its flushed
+     * when the message accumulate trips the threshold to send.
+     * If individual large messages are sent over the socket that already exceed the buffer
+     * size or cause the buffer to be exceeded it will just flush the message immediately.
+     * We will also make sure that the buffer is flushed if new messages are not accumulated
+     * after configured delay.
+     * Disabled by default.
+     */
+    NAKAMA_API bool NRtClient_enableBufferedSends(NRtClient client, const sRtClientBufferedSendsParameters* params);
+
+    /**
+     * Disable "Buffered Sends".
+     */
+    NAKAMA_API void NRtClient_disableBufferedSends(NRtClient client);
+
+    /**
+     * @return True if "Buffered Sends" is enabled.
+     */
+    NAKAMA_API bool NRtClient_isEnabledBufferedSends(NRtClient client);
+
+    /**
+     * Send buffered messages.
+     */
+    NAKAMA_API bool NRtClient_sendBufferedMessages(NRtClient client);
+
+    /**
+     * Clear buffered messages without sending.
+     */
+    NAKAMA_API void NRtClient_clearBufferedMessages(NRtClient client);
 
     /**
      * Get websocket transport which RtClient uses.

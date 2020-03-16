@@ -135,6 +135,34 @@ void NRtClient_disconnect(NRtClient client)
     getCppRtClient(client)->disconnect();
 }
 
+bool NRtClient_enableBufferedSends(NRtClient client, const sRtClientBufferedSendsParameters* params)
+{
+    Nakama::RtClientBufferedSendsParameters cppParams;
+    cppParams.bufferSize = params->bufferSize;
+    cppParams.maxRetentionPeriodMs = params->maxRetentionPeriodMs;
+    return getCppRtClient(client)->enableBufferedSends(cppParams);
+}
+
+void NRtClient_disableBufferedSends(NRtClient client)
+{
+    getCppRtClient(client)->disableBufferedSends();
+}
+
+bool NRtClient_isEnabledBufferedSends(NRtClient client)
+{
+    return getCppRtClient(client)->isEnabledBufferedSends();
+}
+
+bool NRtClient_sendBufferedMessages(NRtClient client)
+{
+    return getCppRtClient(client)->sendBufferedMessages();
+}
+
+void NRtClient_clearBufferedMessages(NRtClient client)
+{
+    getCppRtClient(client)->clearBufferedMessages();
+}
+
 //NRtTransportPtr NRtClient_getTransport(NRtClient client);
 
 void NRtClient_joinChat(

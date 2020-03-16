@@ -24,6 +24,7 @@ namespace Nakama {
         {
         case Nakama::RtErrorCode::CONNECT_ERROR             : return "CONNECT_ERROR";
         case Nakama::RtErrorCode::TRANSPORT_ERROR           : return "TRANSPORT_ERROR";
+        case Nakama::RtErrorCode::DISCARDED_BY_USER         : return "DISCARDED_BY_USER";
         case Nakama::RtErrorCode::RUNTIME_EXCEPTION         : return "RUNTIME_EXCEPTION";
         case Nakama::RtErrorCode::UNRECOGNIZED_PAYLOAD      : return "UNRECOGNIZED_PAYLOAD";
         case Nakama::RtErrorCode::MISSING_PAYLOAD           : return "MISSING_PAYLOAD";

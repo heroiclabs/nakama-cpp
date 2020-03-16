@@ -28,6 +28,7 @@ NAKAMA_NAMESPACE_BEGIN
         // client side errors
         CONNECT_ERROR                 = -1,           ///< Connect has failed.
         TRANSPORT_ERROR               = -2,           ///< Transport error.
+        DISCARDED_BY_USER             = -3,           ///< Message is not sent and discarded by user.
         
         // server side errors
         RUNTIME_EXCEPTION             = 0,            ///< An unexpected result from the server.

@@ -19,12 +19,17 @@
 #include "nakama-cpp/realtime/NRtClientInterface.h"
 #include "github.com/heroiclabs/nakama-common/rtapi/realtime.pb.h"
 #include "realtime/NRtClientProtocolInterface.h"
+#include <list>
 #include <map>
 
 namespace Nakama {
 
+    using RtReqId = int32_t;
+
     struct RtRequestContext
     {
+        RtRequestContext(RtReqId id) : id(id) {}
+        RtReqId id;
         std::function<void(::nakama::realtime::Envelope&)> successCallback;
         RtErrorCallback errorCallback;
     };
@@ -51,6 +56,13 @@ namespace Nakama {
         bool isConnected() const override;
 
         void disconnect() override;
+
+        // "Buffered Sends" API
+        bool enableBufferedSends(const RtClientBufferedSendsParameters& params) override;
+        void disableBufferedSends() override;
+        bool isEnabledBufferedSends() const override { return _bufferedSends != nullptr; }
+        bool sendBufferedMessages() override;
+        void clearBufferedMessages() override;
 
         NRtTransportPtr getTransport() const override { return _transport; }
 
@@ -168,21 +180,32 @@ namespace Nakama {
             void onTransportError(const std::string& description);
             void onTransportMessage(const NBytes& data);
 
-            void reqInternalError(int32_t cid, const NRtError& error);
+            void reqInternalError(RtReqId rid, const NRtError& error);
 
             RtRequestContext* createReqContext(::nakama::realtime::Envelope& msg);
-            void send(const ::nakama::realtime::Envelope& msg);
+            void send(RtReqId rid, const ::nakama::realtime::Envelope& msg);
+            bool send(RtReqId rid, const NBytes& data, bool triggerErrorOnFail);
 
         protected:
+            struct BufferedMessage
+            {
+                RtReqId rid = 0;
+                NBytes data;
+            };
+
             std::string _host;
             int32_t _port = 0;
             bool _ssl = false;
             NRtClientListenerInterface* _listener = nullptr;
             NRtTransportPtr _transport;
             NRtClientProtocolPtr _protocol;
-            std::map<int32_t, std::unique_ptr<RtRequestContext>> _reqContexts;
-            int32_t _nextCid = 0;
+            std::map<RtReqId, std::unique_ptr<RtRequestContext>> _reqContexts;
+            RtReqId _nextReqId = 0;
             void* _userData = nullptr;
+            std::unique_ptr<RtClientBufferedSendsParameters> _bufferedSends;
+            std::list<BufferedMessage> _bufferedMessages;
+            size_t _bufferedMessagesSize = 0;
+            NTimestamp _flushedTimestamp = 0;
     };
 
 }

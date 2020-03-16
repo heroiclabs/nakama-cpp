@@ -16,6 +16,7 @@
 
 #include "NRtClient.h"
 #include "DataHelper.h"
+#include "nakama-cpp/NUtils.h"
 #include "nakama-cpp/StrUtil.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "realtime/NRtClientProtocol_Protobuf.h"
@@ -25,6 +26,8 @@
 #define NMODULE_NAME "NRtClient"
 
 namespace Nakama {
+
+const RtReqId INVALID_REQ_ID = -1;
 
 NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int32_t port, bool ssl)
     : _host(host)
@@ -58,6 +61,13 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int32_t
 
 NRtClient::~NRtClient()
 {
+    sendBufferedMessages();
+
+    if (_bufferedMessages.size() > 0)
+    {
+        NLOG(NLogLevel::Warn, "Not sent %u realtime buffered messages detected.", _bufferedMessages.size());
+    }
+
     if (_reqContexts.size() > 0)
     {
         NLOG(NLogLevel::Warn, "Not handled %u realtime requests detected.", _reqContexts.size());
@@ -66,6 +76,13 @@ NRtClient::~NRtClient()
 
 void NRtClient::tick()
 {
+    if (_bufferedMessagesSize > 0 &&
+        isEnabledBufferedSends() &&
+        getUnixTimestampMs() >= (_flushedTimestamp + _bufferedSends->maxRetentionPeriodMs))
+    {
+        sendBufferedMessages();
+    }
+
     _transport->tick();
 }
 
@@ -112,7 +129,79 @@ bool NRtClient::isConnected() const
 
 void NRtClient::disconnect()
 {
+    sendBufferedMessages();
+
     _transport->disconnect();
+}
+
+bool NRtClient::enableBufferedSends(const RtClientBufferedSendsParameters& params)
+{
+    if (params.bufferSize == 0)
+    {
+        NLOG_ERROR("Bad argument: bufferSize = 0");
+        return false;
+    }
+
+    if (params.maxRetentionPeriodMs == 0)
+    {
+        NLOG_ERROR("Bad argument: maxRetentionPeriodMs = 0");
+        return false;
+    }
+
+    NLOG_INFO("");
+
+    if (_bufferedSends)
+    {
+        *_bufferedSends = params;
+    }
+    else
+    {
+        _bufferedSends.reset(new RtClientBufferedSendsParameters(params));
+        _flushedTimestamp = getUnixTimestampMs();
+    }
+    return true;
+}
+
+void NRtClient::disableBufferedSends()
+{
+    NLOG_INFO("");
+    sendBufferedMessages();
+    _bufferedSends.reset();
+}
+
+bool NRtClient::sendBufferedMessages()
+{
+    if (isConnected() && !_bufferedMessages.empty())
+    {
+        while (!_bufferedMessages.empty())
+        {
+            auto& msg = _bufferedMessages.front();
+            if (!send(msg.rid, msg.data, false))
+            {
+                return false;
+            }
+
+            _bufferedMessagesSize -= msg.data.size();
+            _bufferedMessages.pop_front();
+        }
+
+        assert(_bufferedMessagesSize == 0);
+        _bufferedMessagesSize = 0;
+        _flushedTimestamp = getUnixTimestampMs();
+        return true;
+    }
+    return false;
+}
+
+void NRtClient::clearBufferedMessages()
+{
+    auto requests = std::move(_bufferedMessages);
+
+    while (!requests.empty())
+    {
+        reqInternalError(requests.front().rid, NRtError(RtErrorCode::DISCARDED_BY_USER, ""));
+        requests.pop_front();
+    }
 }
 
 void NRtClient::onTransportDisconnected(const NRtClientDisconnectInfo& info)
@@ -233,8 +322,8 @@ void NRtClient::onTransportMessage(const NBytes & data)
     }
     else
     {
-        int32_t cid = std::stoi(msg.cid());
-        auto it = _reqContexts.find(cid);
+        RtReqId rid = std::stoi(msg.cid());
+        auto it = _reqContexts.find(rid);
 
         if (it != _reqContexts.end())
         {
@@ -299,7 +388,7 @@ void NRtClient::joinChat(
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::leaveChat(const std::string & channelId, std::function<void()> successCallback, RtErrorCallback errorCallback)
@@ -321,7 +410,7 @@ void NRtClient::leaveChat(const std::string & channelId, std::function<void()> s
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::writeChatMessage(const std::string & channelId, const std::string & content, std::function<void(const NChannelMessageAck&)> successCallback, RtErrorCallback errorCallback)
@@ -346,7 +435,7 @@ void NRtClient::writeChatMessage(const std::string & channelId, const std::strin
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::updateChatMessage(const std::string & channelId, const std::string & messageId, const std::string & content, std::function<void(const NChannelMessageAck&)> successCallback, RtErrorCallback errorCallback)
@@ -376,7 +465,7 @@ void NRtClient::updateChatMessage(const std::string & channelId, const std::stri
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::removeChatMessage(const std::string & channelId, const std::string & messageId, std::function<void(const NChannelMessageAck&)> successCallback, RtErrorCallback errorCallback)
@@ -401,7 +490,7 @@ void NRtClient::removeChatMessage(const std::string & channelId, const std::stri
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::createMatch(std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback)
@@ -425,7 +514,7 @@ void NRtClient::createMatch(std::function<void(const NMatch&)> successCallback, 
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::joinMatch(
@@ -458,7 +547,7 @@ void NRtClient::joinMatch(
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::joinMatchByToken(const std::string & token, std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback)
@@ -482,7 +571,7 @@ void NRtClient::joinMatchByToken(const std::string & token, std::function<void(c
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::leaveMatch(const std::string & matchId, std::function<void()> successCallback, RtErrorCallback errorCallback)
@@ -504,7 +593,7 @@ void NRtClient::leaveMatch(const std::string & matchId, std::function<void()> su
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::addMatchmaker(
@@ -548,7 +637,7 @@ void NRtClient::addMatchmaker(
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::removeMatchmaker(const std::string & ticket, std::function<void()> successCallback, RtErrorCallback errorCallback)
@@ -570,7 +659,7 @@ void NRtClient::removeMatchmaker(const std::string & ticket, std::function<void(
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::sendMatchData(const std::string & matchId, int64_t opCode, const NBytes & data, const std::vector<NUserPresence>& presences)
@@ -612,7 +701,9 @@ void NRtClient::sendMatchData(const std::string & matchId, int64_t opCode, const
         presenceData->set_persistence(presence.persistence);
     }
 
-    send(msg);
+    // this message is without response
+    // so we don't need request context
+    send(INVALID_REQ_ID, msg);
 }
 
 void NRtClient::followUsers(const std::vector<std::string>& userIds, std::function<void(const NStatus&)> successCallback, RtErrorCallback errorCallback)
@@ -640,7 +731,7 @@ void NRtClient::followUsers(const std::vector<std::string>& userIds, std::functi
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::unfollowUsers(const std::vector<std::string>& userIds, std::function<void()> successCallback, RtErrorCallback errorCallback)
@@ -666,7 +757,7 @@ void NRtClient::unfollowUsers(const std::vector<std::string>& userIds, std::func
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::updateStatus(const std::string & status, std::function<void()> successCallback, RtErrorCallback errorCallback)
@@ -688,7 +779,7 @@ void NRtClient::updateStatus(const std::string & status, std::function<void()> s
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 void NRtClient::rpc(const std::string & id, const opt::optional<std::string>& payload, std::function<void(const NRpc&)> successCallback, RtErrorCallback errorCallback)
@@ -716,32 +807,35 @@ void NRtClient::rpc(const std::string & id, const opt::optional<std::string>& pa
     }
     ctx->errorCallback = errorCallback;
 
-    send(msg);
+    send(ctx->id, msg);
 }
 
 RtRequestContext * NRtClient::createReqContext(::nakama::realtime::Envelope& msg)
 {
-    if (_reqContexts.empty() && _nextCid > 9)
+    if (_reqContexts.empty() && _nextReqId > 9)
     {
         // reset just to be one digit
-        // we can reset because there are no pendig requests
-        _nextCid = 0;
+        // we can reset because there are no pending requests
+        _nextReqId = 0;
     }
 
-    RtRequestContext * ctx = new RtRequestContext();
-    int32_t cid = _nextCid++;
+    RtReqId rid = _nextReqId++;
+    RtRequestContext * ctx = new RtRequestContext(rid);
 
-    _reqContexts.emplace(cid, std::unique_ptr<RtRequestContext>(ctx));
-    msg.set_cid(std::to_string(cid));
+    _reqContexts.emplace(rid, std::unique_ptr<RtRequestContext>(ctx));
+    msg.set_cid(std::to_string(rid));
 
     return ctx;
 }
 
-void NRtClient::reqInternalError(int32_t cid, const NRtError & error)
+void NRtClient::reqInternalError(RtReqId rid, const NRtError & error)
 {
     NLOG_ERROR(toString(error));
 
-    auto it = _reqContexts.find(cid);
+    if (rid == INVALID_REQ_ID)
+        return;
+
+    auto it = _reqContexts.find(rid);
 
     if (it != _reqContexts.end())
     {
@@ -762,11 +856,11 @@ void NRtClient::reqInternalError(int32_t cid, const NRtError & error)
     }
     else
     {
-        NLOG(NLogLevel::Error, "request context not found. cid: %d", cid);
+        NLOG(NLogLevel::Error, "request context not found. id: %d", rid);
     }
 }
 
-void NRtClient::send(const ::nakama::realtime::Envelope & msg)
+void NRtClient::send(RtReqId rid, const ::nakama::realtime::Envelope & msg)
 {
     if (isConnected())
     {
@@ -774,22 +868,46 @@ void NRtClient::send(const ::nakama::realtime::Envelope & msg)
 
         if (_protocol->serialize(msg, bytes))
         {
-            if (!_transport->send(bytes))
+            if (isEnabledBufferedSends())
             {
-                reqInternalError(std::stoi(msg.cid()), NRtError(RtErrorCode::TRANSPORT_ERROR, "Send message failed"));
+                if (_bufferedMessagesSize + bytes.size() > _bufferedSends->bufferSize)
+                {
+                    sendBufferedMessages();
+                }
 
-                _transport->disconnect();
+                _bufferedMessagesSize += bytes.size();
+                _bufferedMessages.push_back({ rid, std::move(bytes) });
+
+                if (_bufferedMessagesSize >= _bufferedSends->bufferSize)
+                {
+                    sendBufferedMessages();
+                }
             }
+            else
+                send(rid, bytes, true);
         }
         else
         {
-            reqInternalError(std::stoi(msg.cid()), NRtError(RtErrorCode::TRANSPORT_ERROR, "Serialize message failed"));
+            reqInternalError(rid, NRtError(RtErrorCode::TRANSPORT_ERROR, "Serialize message failed"));
         }
     }
     else
     {
-        reqInternalError(std::stoi(msg.cid()), NRtError(RtErrorCode::CONNECT_ERROR, "Not connected"));
+        reqInternalError(rid, NRtError(RtErrorCode::CONNECT_ERROR, "Not connected"));
     }
+}
+
+bool NRtClient::send(RtReqId rid, const NBytes& data, bool triggerErrorOnFail)
+{
+    if (!_transport->send(data))
+    {
+        if (triggerErrorOnFail)
+            reqInternalError(rid, NRtError(RtErrorCode::TRANSPORT_ERROR, "Send message failed"));
+        disconnect();
+        return false;
+    }
+
+    return true;
 }
 
 }
