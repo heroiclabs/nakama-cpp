@@ -83,7 +83,7 @@ jobs:
         name: nakama-test-so
 
     - name: get docker-compose.yml
-      run: wget https://raw.githubusercontent.com/heroiclabs/nakama-cpp/master/ci-cd/docker-compose.yml
+      run: wget https://raw.githubusercontent.com/heroiclabs/nakama-cpp/${GITHUB_REF##*/}/ci-cd/docker-compose.yml
 
     - name: chmod static
       run: chmod u=rwx nakama-test/nakama-test
