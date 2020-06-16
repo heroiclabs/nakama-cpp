@@ -54,7 +54,7 @@ We don't recommend to copy Nakama C++ SDK to your project because it's quite big
     - `NAKAMA_CPP_SDK/libs/ios` - for iOS
     - `NAKAMA_CPP_SDK/libs/mac` - for Mac
 
-3. In `General > Linked Frameworks and Libraries` add following:
+3. In `General > Frameworks, Libraries, and Embedded Content` add following:
     - all `.a` files located in libs folder
     - `foundation` and `security` frameworks
 
