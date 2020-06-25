@@ -19,6 +19,7 @@ extern "C" {
 #endif
 
 #define SERVER_KEY           "defaultkey"
+#define SERVER_HTTP_KEY      "defaulthttpkey"
 #define SERVER_HOST          "127.0.0.1"
 #define SERVER_GRPC_PORT     7349
 #define SERVER_HTTP_PORT     7350
