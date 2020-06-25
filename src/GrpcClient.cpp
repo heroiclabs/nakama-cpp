@@ -2124,6 +2124,41 @@ void GrpcClient::rpc(
     responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
 }
 
+void GrpcClient::rpc(
+    const std::string& http_key,
+    const std::string& id,
+    const opt::optional<std::string>& payload,
+    std::function<void(const NRpc&)> successCallback, ErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ReqContext* ctx = createReqContext();
+    auto data(make_shared<nakama::api::Rpc>());
+
+    if (successCallback)
+    {
+        ctx->successCallback = [data, successCallback]()
+        {
+            NRpc rpc;
+            assign(rpc, *data);
+            successCallback(rpc);
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    nakama::api::Rpc req;
+
+    req.set_id(id);
+    req.set_http_key(http_key);
+
+    if (payload)
+        req.set_payload(*payload);
+
+    auto responseReader = _stub->AsyncRpcFunc(&ctx->context, req, &_cq);
+
+    responseReader->Finish(&(*data), &ctx->status, (void*)ctx);
+}
+
 } // namespace Nakama
 
 #endif // BUILD_GRPC_CLIENT

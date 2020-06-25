@@ -2460,31 +2460,67 @@ void RestClient::rpc(
         }
         ctx->errorCallback = errorCallback;
 
-        string body;
-        string path("/v2/rpc/");
-
-        path.append(id);
-
-        if (payload && !payload.value().empty())
-        {
-            rapidjson::StringBuffer buffer;
-            rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-            rapidjson::Value jsonString;
-            jsonString.SetString(payload.value().c_str(), (rapidjson::SizeType)payload.value().size());
-            jsonString.Accept(writer);
-            body = buffer.GetString();
-            sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body));
-        }
-        else
-        {
-            NHttpQueryArgs args;
-            args.emplace("id", id);
-            sendReq(ctx, NHttpReqMethod::GET, std::move(path), std::move(body), std::move(args));
-        }
+        sendRpc(ctx, id, payload, {});
     }
     catch (exception& e)
     {
         NLOG_ERROR("exception: " + string(e.what()));
+    }
+}
+
+void RestClient::rpc(
+    const std::string& http_key,
+    const std::string& id,
+    const opt::optional<std::string>& payload,
+    std::function<void(const NRpc&)> successCallback, ErrorCallback errorCallback)
+{
+    try {
+        NLOG_INFO("...");
+
+        auto data(make_shared<nakama::api::Rpc>());
+        RestReqContext* ctx = createReqContext(data.get());
+
+        if (successCallback)
+        {
+            ctx->successCallback = [data, successCallback]()
+            {
+                NRpc rpc;
+                assign(rpc, *data);
+                successCallback(rpc);
+            };
+        }
+        ctx->errorCallback = errorCallback;
+
+        NHttpQueryArgs args;
+        args.emplace("http_key", http_key);
+
+        sendRpc(ctx, id, payload, std::move(args));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
+}
+
+void RestClient::sendRpc(RestReqContext* ctx, const std::string& id, const opt::optional<std::string>& payload, NHttpQueryArgs&& args)
+{
+    string path("/v2/rpc/");
+    path.append(id);
+
+    if (payload && !payload.value().empty())
+    {
+        rapidjson::StringBuffer buffer;
+        rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+        rapidjson::Value jsonString;
+        jsonString.SetString(payload.value().c_str(), (rapidjson::SizeType)payload.value().size());
+        jsonString.Accept(writer);
+        string body = buffer.GetString();
+        sendReq(ctx, NHttpReqMethod::POST, std::move(path), std::move(body), std::move(args));
+    }
+    else
+    {
+        args.emplace("id", id);
+        sendReq(ctx, NHttpReqMethod::GET, std::move(path), {}, std::move(args));
     }
 }
 

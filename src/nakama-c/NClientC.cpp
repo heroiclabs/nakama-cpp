@@ -1569,6 +1569,32 @@ void NClient_rpc(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
+void NClient_rpc_with_http_key(
+    NClient client,
+    const char* http_key,
+    const char* id,
+    const char* payload,
+    NClientReqData reqData,
+    void(*successCallback)(NClient, NClientReqData, const sNRpc*), NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+
+    cppClient->rpc(
+        http_key,
+        id,
+        payload ? Nakama::opt::optional<std::string>(payload) : Nakama::opt::nullopt,
+        [client, reqData, successCallback](const Nakama::NRpc& rpc)
+        {
+            if (successCallback)
+            {
+                sNRpc cRpc;
+                Nakama::assign(cRpc, rpc);
+                successCallback(client, reqData, &cRpc);
+            }
+        },
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
 } // extern "C"
 
 #endif // BUILD_C_API

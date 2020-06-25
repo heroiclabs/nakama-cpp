@@ -2446,6 +2446,31 @@ NAKAMA_NAMESPACE_BEGIN
                 &NClientWrapper::reqErrorStatic);
         }
 
+        void rpc(
+            const std::string& http_key,
+            const std::string& id,
+            const opt::optional<std::string>& payload,
+            std::function<void(const NRpc&)> successCallback,
+            ErrorCallback errorCallback) override
+        {
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkRpcCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_rpc_with_http_key(_cClient,
+                http_key.c_str(),
+                id.c_str(),
+                payload ? payload.value().c_str() : nullptr,
+                reqId,
+                &NClientWrapper::reqOkRpcStatic,
+                &NClientWrapper::reqErrorStatic);
+        }
+
     protected:
         std::string _host;
         bool _ssl;

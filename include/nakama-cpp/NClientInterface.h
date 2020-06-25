@@ -1101,6 +1101,21 @@ NAKAMA_NAMESPACE_BEGIN
             std::function<void(const NRpc&)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
+
+        /**
+         * Execute a Lua function with an input payload on the server.
+         *
+         * @param http_key The server's runtime HTTP key.
+         * @param id The id of the function to execute on the server.
+         * @param payload The payload to send with the function call.
+         */
+        virtual void rpc(
+            const std::string& http_key,
+            const std::string& id,
+            const opt::optional<std::string>& payload = opt::nullopt,
+            std::function<void(const NRpc&)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
     };
 
     using NClientPtr = std::shared_ptr<NClientInterface>;

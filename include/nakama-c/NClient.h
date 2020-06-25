@@ -1218,6 +1218,23 @@ extern "C" {
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 
+    /**
+     * Execute a Lua function with an input payload on the server.
+     *
+     * @param http_key The server's runtime HTTP key.
+     * @param id The id of the function to execute on the server.
+     * @param payload The payload to send with the function call.
+     */
+    NAKAMA_API void NClient_rpc_with_http_key(
+        NClient client,
+        const char* http_key,
+        const char* id,
+        const char* payload,               // optional, pass NULL
+        NClientReqData reqData,            // optional, pass NULL
+        void (*successCallback)(NClient, NClientReqData, const sNRpc*),
+        NClientErrorCallback errorCallback // optional, pass NULL
+    );
+
 #ifdef __cplusplus
 }
 #endif

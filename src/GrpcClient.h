@@ -568,6 +568,14 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void rpc(
+            const std::string& http_key,
+            const std::string& id,
+            const opt::optional<std::string>& payload,
+            std::function<void(const NRpc&)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         ReqContext* createReqContext();
         void setBasicAuth(ReqContext* ctx);

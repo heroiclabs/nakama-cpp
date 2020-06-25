@@ -568,6 +568,14 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void rpc(
+            const std::string& http_key,
+            const std::string& id,
+            const opt::optional<std::string>& payload,
+            std::function<void(const NRpc&)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
     private:
         RestReqContext* createReqContext(google::protobuf::Message* data);
         void setBasicAuth(RestReqContext* ctx);
@@ -579,6 +587,13 @@ namespace Nakama {
             std::string&& path,
             std::string&& body,
             NHttpQueryArgs&& args = NHttpQueryArgs());
+
+        void sendRpc(
+            RestReqContext* ctx,
+            const std::string& id,
+            const opt::optional<std::string>& payload,
+            NHttpQueryArgs&& args
+        );
 
         void onResponse(RestReqContext* reqContext, NHttpResponsePtr response);
         void reqError(RestReqContext* reqContext, const NError& error);
