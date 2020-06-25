@@ -569,7 +569,9 @@ namespace Nakama {
         ) override;
 
     private:
-        ReqContext* createReqContext(NSessionPtr session);
+        ReqContext* createReqContext();
+        void setBasicAuth(ReqContext* ctx);
+        void setSessionAuth(ReqContext* ctx, NSessionPtr session);
         void onResponse(void* tag, bool ok);
         void reqError(ReqContext* reqContext, const NError& error);
 

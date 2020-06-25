@@ -569,7 +569,9 @@ namespace Nakama {
         ) override;
 
     private:
-        RestReqContext* createReqContext(NSessionPtr session, google::protobuf::Message* data);
+        RestReqContext* createReqContext(google::protobuf::Message* data);
+        void setBasicAuth(RestReqContext* ctx);
+        void setSessionAuth(RestReqContext* ctx, NSessionPtr session);
 
         void sendReq(
             RestReqContext* ctx,
