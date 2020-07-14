@@ -112,16 +112,5 @@ target_include_directories(nakama-cpp
     PRIVATE ${THIRD_PARTY_DIR}/grpc/third_party/protobuf/src
 )
 
-foreach(_source IN ITEMS ${_source_list})
-    get_filename_component(_source_path "${_source}" PATH)
-    file(RELATIVE_PATH _source_path_rel "${_src_root_path}" "${_source_path}")
-    string(REPLACE "/" "\\" _group_path "${_source_path_rel}")
-    source_group("src\\${_group_path}" FILES "${_source}")
-endforeach()
-
-foreach(_header IN ITEMS ${_public_headers_list})
-    get_filename_component(_header_path "${_header}" PATH)
-    file(RELATIVE_PATH _header_path_rel "${_include_root_path}" "${_header_path}")
-    string(REPLACE "/" "\\" _group_path "${_header_path_rel}")
-    source_group("include\\${_group_path}" FILES "${_header}")
-endforeach()
+source_group(TREE ${PUBLIC_INCLUDE_DIR}       PREFIX include FILES ${_public_headers_list})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX src     FILES ${_source_list})
