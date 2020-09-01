@@ -20,6 +20,7 @@ import sys
 import subprocess
 import argparse
 import platform
+import shutil
 
 def getEnvVar(name):
     if name in os.environ:
@@ -68,6 +69,7 @@ GRPC            = path(NAKAMA_CPP + '/third_party/grpc')
 GOOGLEAPIS      = path(GRPC_GATEWAY + '/third_party/googleapis')
 PROTOBUF_SRC    = path(GRPC + '/third_party/protobuf/src')
 OUT             = os.path.abspath('cppout')
+API_DESTINATION = os.path.abspath('./../src/api')
 
 is_windows = platform.system() == 'Windows'
 is_mac     = platform.system() == 'Darwin'
@@ -187,4 +189,12 @@ print('generating rtapi')
 
 call([PROTOC, '-I.', '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path('github.com/heroiclabs/nakama-common/rtapi/realtime.proto')])
 
+# copy API
+root, dirs, files = next(os.walk(OUT))
+for folder in dirs:
+    dest = os.path.join(API_DESTINATION, folder)
+    shutil.rmtree(dest)
+    shutil.copytree(os.path.join(root, folder), dest)
+
+print('copied to', API_DESTINATION)
 print('done.')
