@@ -1477,6 +1477,35 @@ void GrpcClient::promoteGroupUsers(NSessionPtr session, const std::string & grou
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
+void GrpcClient::demoteGroupUsers(
+    NSessionPtr session,
+    const std::string& groupId,
+    const std::vector<std::string>& ids,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ReqContext* ctx = createReqContext();
+    setSessionAuth(ctx, session);
+
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
+
+    nakama::api::DemoteGroupUsersRequest req;
+
+    req.set_group_id(groupId);
+
+    for (auto& id : ids)
+    {
+        req.add_user_ids(id);
+    }
+
+    auto responseReader = _stub->AsyncDemoteGroupUsers(&ctx->context, req, &_cq);
+
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+}
+
 void GrpcClient::updateGroup(
     NSessionPtr session,
     const std::string & groupId,

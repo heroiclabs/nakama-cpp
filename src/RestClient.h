@@ -397,6 +397,14 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void demoteGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
         void updateGroup(
             NSessionPtr session,
             const std::string& groupId,

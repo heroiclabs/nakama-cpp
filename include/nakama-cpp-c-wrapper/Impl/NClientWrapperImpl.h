@@ -1621,6 +1621,47 @@ NAKAMA_NAMESPACE_BEGIN
             delete[] idsArray;
         }
 
+        void demoteGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override
+        {
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkEmptyCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            const char** idsArray = nullptr;
+
+            if (ids.size() > 0)
+            {
+                idsArray = new const char* [ids.size()];
+
+                for (size_t i = 0; i < ids.size(); ++i)
+                {
+                    idsArray[i] = ids[i].c_str();
+                }
+            }
+
+            ::NClient_demoteGroupUsers(_cClient,
+                getCSession(session),
+                groupId.c_str(),
+                idsArray,
+                (uint16_t)ids.size(),
+                reqId,
+                &NClientWrapper::reqOkEmptyStatic,
+                &NClientWrapper::reqErrorStatic);
+
+            delete[] idsArray;
+        }
+
         void updateGroup(
             NSessionPtr session,
             const std::string& groupId,

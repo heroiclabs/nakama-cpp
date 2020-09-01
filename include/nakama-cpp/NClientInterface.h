@@ -763,13 +763,28 @@ NAKAMA_NAMESPACE_BEGIN
         ) = 0;
 
         /**
-         * Promote one or more users in the group.
+         * Promote a set of users in a group to the next role up.
          *
          * @param session The session of the user.
-         * @param groupId The id of the group to promote users into.
+         * @param groupId The group ID to promote in.
          * @param ids The ids of the users to promote.
          */
         virtual void promoteGroupUsers(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Demote a set of users in a group to the next role down.
+         *
+         * @param session The session of the user.
+         * @param groupId The group ID to demote in.
+         * @param ids The ids of the users to demote.
+         */
+        virtual void demoteGroupUsers(
             NSessionPtr session,
             const std::string& groupId,
             const std::vector<std::string>& ids,

@@ -850,6 +850,24 @@ extern "C" {
     );
 
     /**
+     * Demote a set of users in a group to the next role down.
+     *
+     * @param session The session of the user.
+     * @param groupId The group ID to demote in.
+     * @param ids The ids of the users to demote.
+     */
+    NAKAMA_API void NClient_demoteGroupUsers(
+        NClient client,
+        NSession session,
+        const char* groupId,
+        const char** ids,
+        uint16_t idsCount,
+        NClientReqData reqData,            // optional, pass NULL
+        void (*successCallback)(NClient, NClientReqData), // optional, pass NULL
+        NClientErrorCallback errorCallback // optional, pass NULL
+    );
+
+    /**
      * Update a group.
      *
      * The user must have the correct access permissions for the group.
