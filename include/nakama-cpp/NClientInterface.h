@@ -190,8 +190,8 @@ NAKAMA_NAMESPACE_BEGIN
          * @param salt A random <c>NSString</c> used to compute the hash and keep it randomized.
          * @param signature The verification signature data generated.
          * @param publicKeyUrl The URL for the public encryption key.
-         * @param create True if the user should be created when authenticated.
          * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
          * @param vars Extra information that will be bundled in the session token.
          */
         virtual void authenticateGameCenter(
@@ -201,6 +201,23 @@ NAKAMA_NAMESPACE_BEGIN
             const std::string& salt,
             const std::string& signature,
             const std::string& publicKeyUrl,
+            const std::string& username = std::string(),
+            bool create = false,
+            const NStringMap& vars = {},
+            std::function<void(NSessionPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
+         * Authenticate a user with Apple Sign In.
+         *
+         * @param token The ID token received from Apple to validate.
+         * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
+         * @param vars Extra information that will be bundled in the session token.
+         */
+        virtual void authenticateApple(
+            const std::string& token,
             const std::string& username = std::string(),
             bool create = false,
             const NStringMap& vars = {},

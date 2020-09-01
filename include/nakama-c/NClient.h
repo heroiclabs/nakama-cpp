@@ -211,7 +211,26 @@ extern "C" {
         NClientErrorCallback errorCallback // optional, pass NULL
     );
 
-	/**
+    /**
+     * Authenticate a user with Apple Sign In.
+     *
+     * @param token The ID token received from Apple to validate.
+     * @param username A username used to create the user.
+     * @param create True if the user should be created when authenticated.
+     * @param vars Extra information that will be bundled in the session token.
+     */
+    NAKAMA_API void NClient_authenticateApple(
+        NClient client,
+        const char* token,
+        const char* username,              // optional, pass NULL
+        bool create,
+        NStringMap vars,                   // optional, pass NULL
+        NClientReqData reqData,            // optional, pass NULL
+        NSessionCallback successCallback,  // optional, pass NULL
+        NClientErrorCallback errorCallback // optional, pass NULL
+    );
+
+    /**
      * Authenticate a user with a custom id.
      *
      * @param id A custom identifier usually obtained from an external authentication service.

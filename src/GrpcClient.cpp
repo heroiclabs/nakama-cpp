@@ -461,6 +461,47 @@ void GrpcClient::authenticateGameCenter(
     responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
+void GrpcClient::authenticateApple(
+    const std::string& token,
+    const std::string& username,
+    bool create,
+    const NStringMap& vars,
+    std::function<void(NSessionPtr)> successCallback,
+    ErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ReqContext* ctx = createReqContext();
+    setBasicAuth(ctx);
+    auto sessionData(make_shared<nakama::api::Session>());
+
+    if (successCallback)
+    {
+        ctx->successCallback = [sessionData, successCallback]()
+        {
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->created()));
+            successCallback(session);
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    nakama::api::AuthenticateAppleRequest req;
+
+    auto* account = req.mutable_account();
+    account->set_token(token);
+    if (!username.empty()) req.set_username(username);
+    req.mutable_create()->set_value(create);
+
+    for (auto& p : vars)
+    {
+        (*account->mutable_vars())[p.first] = p.second;
+    }
+
+    auto responseReader = _stub->AsyncAuthenticateApple(&ctx->context, req, &_cq);
+
+    responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
+}
+
 void GrpcClient::authenticateCustom(
     const std::string & id,
     const std::string & username,

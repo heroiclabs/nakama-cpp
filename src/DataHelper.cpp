@@ -85,6 +85,7 @@ void assign(NUser& user, const nakama::api::User& data)
     assign(user.facebookId, data.facebook_id());
     assign(user.googleId, data.google_id());
     assign(user.gameCenterId, data.gamecenter_id());
+    assign(user.appleId, data.apple_id());
     assign(user.steamId, data.steam_id());
     assign(user.online, data.online());
     assign(user.edgeCount, data.edge_count());

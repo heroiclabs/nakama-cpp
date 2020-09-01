@@ -353,6 +353,38 @@ NAKAMA_NAMESPACE_BEGIN
             ::NStringMap_destroy(cVars);
         }
 
+        void authenticateApple(
+            const std::string& token,
+            const std::string& username,
+            bool create,
+            const NStringMap& vars,
+            std::function<void(NSessionPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override
+        {
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _authSuccessCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NStringMap cVars = toCNStringMap(vars);
+
+            ::NClient_authenticateApple(_cClient,
+                token.c_str(),
+                !username.empty() ? username.c_str() : nullptr,
+                create,
+                cVars,
+                reqId,
+                &NClientWrapper::authenticateOkStatic,
+                &NClientWrapper::reqErrorStatic);
+
+            ::NStringMap_destroy(cVars);
+        }
+
         void authenticateCustom(
             const std::string& id,
             const std::string& username,

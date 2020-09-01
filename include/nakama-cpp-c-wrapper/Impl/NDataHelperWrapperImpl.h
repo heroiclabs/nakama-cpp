@@ -182,6 +182,7 @@ void assign(NUser& user, const sNUser* cUser)
     user.facebookId   = cUser->facebookId;
     user.googleId     = cUser->googleId;
     user.gameCenterId = cUser->gameCenterId;
+    user.appleId      = cUser->appleId;
     user.steamId      = cUser->steamId;
     user.online       = cUser->online;
     user.edgeCount    = cUser->edgeCount;

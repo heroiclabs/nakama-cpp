@@ -96,6 +96,15 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void authenticateApple(
+            const std::string& token,
+            const std::string& username,
+            bool create,
+            const NStringMap& vars,
+            std::function<void(NSessionPtr)> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
         void authenticateCustom(
             const std::string& id,
             const std::string& username,

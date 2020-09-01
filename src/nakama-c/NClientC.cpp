@@ -265,6 +265,28 @@ void NClient_authenticateGameCenter(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
+void NClient_authenticateApple(
+    NClient client,
+    const char* token,
+    const char* username,
+    bool create,
+    NStringMap vars,
+    NClientReqData reqData,
+    NSessionCallback successCallback,
+    NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    Nakama::NStringMap* cppVars = Nakama::findNStringMap(vars);
+
+    cppClient->authenticateApple(
+        token,
+        username ? username : "",
+        create,
+        cppVars ? *cppVars : Nakama::NStringMap(),
+        Nakama::createAuthSuccessCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
 void NClient_authenticateCustom(
     NClient client,
     const char* id,

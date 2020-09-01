@@ -214,6 +214,7 @@ void assign(sNUser& cUser, const Nakama::NUser& user)
     assign(cUser.facebookId, user.facebookId);
     assign(cUser.googleId, user.googleId);
     assign(cUser.gameCenterId , user.gameCenterId);
+    assign(cUser.appleId, user.appleId);
     assign(cUser.steamId, user.steamId);
     cUser.online = user.online;
     cUser.edgeCount = user.edgeCount;
