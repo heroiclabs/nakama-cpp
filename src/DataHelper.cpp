@@ -63,9 +63,10 @@ void assign(NBytes & bytes, const std::string & str)
 void assign(NAccount& account, const nakama::api::Account& data)
 {
     assign(account.user.id, data.user().id());
-    assign(account.custom_id, data.custom_id());
+    assign(account.customId, data.custom_id());
     assign(account.email, data.email());
     assign(account.verifyTime, data.verify_time());
+    assign(account.disableTime, data.disable_time());
     assign(account.wallet, data.wallet());
     assign(account.user, data.user());
     assign(account.devices, data.devices());

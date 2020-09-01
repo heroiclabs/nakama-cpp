@@ -248,8 +248,9 @@ void assign(sNAccount& cAccount, const Nakama::NAccount& account)
     assign(cAccount.wallet, account.wallet);
     assign(cAccount.email, account.email);
     assign(cAccount.devices, cAccount.devicesCount, account.devices);
-    assign(cAccount.custom_id, account.custom_id);
+    assign(cAccount.customId, account.customId);
     cAccount.verifyTime = account.verifyTime;
+    cAccount.disableTime = account.disableTime;
 }
 
 void assign(sNUsers& cUsers, const Nakama::NUsers& users)

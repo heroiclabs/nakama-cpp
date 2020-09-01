@@ -195,8 +195,9 @@ void assign(NAccount& account, const sNAccount* cAccount)
     account.wallet = cAccount->wallet;
     account.email = cAccount->email;
     assign(account.devices, cAccount->devices, cAccount->devicesCount);
-    account.custom_id = cAccount->custom_id;
+    account.customId = cAccount->customId;
     account.verifyTime = cAccount->verifyTime;
+    account.disableTime = cAccount->disableTime;
 }
 
 void assign(NUsers& users, const sNUsers* cUsers)
