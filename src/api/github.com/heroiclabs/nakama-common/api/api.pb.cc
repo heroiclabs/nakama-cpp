@@ -20,9 +20,11 @@
 // @@protoc_insertion_point(includes)
 
 namespace protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_AccountApple_VarsEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_AccountCustom_VarsEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_AccountDevice_VarsEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_AccountEmail_VarsEntry_DoNotUse;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_AccountFacebookInstantGame_VarsEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_AccountFacebook_VarsEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_AccountGameCenter_VarsEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_AccountGoogle_VarsEntry_DoNotUse;
@@ -33,10 +35,12 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dco
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_StorageObjectAck;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_WriteLeaderboardRecordRequest_LeaderboardRecordWrite;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_WriteTournamentRecordRequest_TournamentRecordWrite;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AccountApple;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AccountCustom;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AccountDevice;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AccountEmail;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AccountFacebook;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AccountFacebookInstantGame;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AccountGameCenter;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AccountGoogle;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AccountSteam;
@@ -46,12 +50,12 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dco
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Tournament;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_User;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_WriteStorageObject;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_Friend;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_Group;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_GroupUserList_GroupUser;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_LeaderboardRecord;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_UserGroupList_UserGroup;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<3> scc_info_ChannelMessage;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::google::protobuf::internal::SCCInfo<3> scc_info_Friend;
 }  // namespace protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto
 namespace protobuf_google_2fprotobuf_2ftimestamp_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_google_2fprotobuf_2ftimestamp_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Timestamp;
@@ -70,6 +74,16 @@ class AccountDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<Account>
       _instance;
 } _Account_default_instance_;
+class AccountApple_VarsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<AccountApple_VarsEntry_DoNotUse>
+      _instance;
+} _AccountApple_VarsEntry_DoNotUse_default_instance_;
+class AccountAppleDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<AccountApple>
+      _instance;
+} _AccountApple_default_instance_;
 class AccountCustom_VarsEntry_DoNotUseDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<AccountCustom_VarsEntry_DoNotUse>
@@ -110,6 +124,16 @@ class AccountFacebookDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<AccountFacebook>
       _instance;
 } _AccountFacebook_default_instance_;
+class AccountFacebookInstantGame_VarsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<AccountFacebookInstantGame_VarsEntry_DoNotUse>
+      _instance;
+} _AccountFacebookInstantGame_VarsEntry_DoNotUse_default_instance_;
+class AccountFacebookInstantGameDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<AccountFacebookInstantGame>
+      _instance;
+} _AccountFacebookInstantGame_default_instance_;
 class AccountGameCenter_VarsEntry_DoNotUseDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<AccountGameCenter_VarsEntry_DoNotUse>
@@ -150,6 +174,11 @@ class AddGroupUsersRequestDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<AddGroupUsersRequest>
       _instance;
 } _AddGroupUsersRequest_default_instance_;
+class AuthenticateAppleRequestDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<AuthenticateAppleRequest>
+      _instance;
+} _AuthenticateAppleRequest_default_instance_;
 class AuthenticateCustomRequestDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<AuthenticateCustomRequest>
@@ -170,6 +199,11 @@ class AuthenticateFacebookRequestDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<AuthenticateFacebookRequest>
       _instance;
 } _AuthenticateFacebookRequest_default_instance_;
+class AuthenticateFacebookInstantGameRequestDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<AuthenticateFacebookInstantGameRequest>
+      _instance;
+} _AuthenticateFacebookInstantGameRequest_default_instance_;
 class AuthenticateGameCenterRequestDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<AuthenticateGameCenterRequest>
@@ -185,6 +219,11 @@ class AuthenticateSteamRequestDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<AuthenticateSteamRequest>
       _instance;
 } _AuthenticateSteamRequest_default_instance_;
+class BanGroupUsersRequestDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<BanGroupUsersRequest>
+      _instance;
+} _BanGroupUsersRequest_default_instance_;
 class BlockFriendsRequestDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<BlockFriendsRequest>
@@ -410,6 +449,11 @@ class PromoteGroupUsersRequestDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<PromoteGroupUsersRequest>
       _instance;
 } _PromoteGroupUsersRequest_default_instance_;
+class DemoteGroupUsersRequestDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<DemoteGroupUsersRequest>
+      _instance;
+} _DemoteGroupUsersRequest_default_instance_;
 class ReadStorageObjectIdDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ReadStorageObjectId>
@@ -550,6 +594,34 @@ static void InitDefaultsAccount() {
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountDevice.base,
       &protobuf_google_2fprotobuf_2ftimestamp_2eproto::scc_info_Timestamp.base,}};
 
+static void InitDefaultsAccountApple_VarsEntry_DoNotUse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_AccountApple_VarsEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::api::AccountApple_VarsEntry_DoNotUse();
+  }
+  ::nakama::api::AccountApple_VarsEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_AccountApple_VarsEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsAccountApple_VarsEntry_DoNotUse}, {}};
+
+static void InitDefaultsAccountApple() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_AccountApple_default_instance_;
+    new (ptr) ::nakama::api::AccountApple();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::nakama::api::AccountApple::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_AccountApple =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAccountApple}, {
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountApple_VarsEntry_DoNotUse.base,}};
+
 static void InitDefaultsAccountCustom_VarsEntry_DoNotUse() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -661,6 +733,34 @@ static void InitDefaultsAccountFacebook() {
 ::google::protobuf::internal::SCCInfo<1> scc_info_AccountFacebook =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAccountFacebook}, {
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountFacebook_VarsEntry_DoNotUse.base,}};
+
+static void InitDefaultsAccountFacebookInstantGame_VarsEntry_DoNotUse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_AccountFacebookInstantGame_VarsEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::api::AccountFacebookInstantGame_VarsEntry_DoNotUse();
+  }
+  ::nakama::api::AccountFacebookInstantGame_VarsEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_AccountFacebookInstantGame_VarsEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsAccountFacebookInstantGame_VarsEntry_DoNotUse}, {}};
+
+static void InitDefaultsAccountFacebookInstantGame() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_AccountFacebookInstantGame_default_instance_;
+    new (ptr) ::nakama::api::AccountFacebookInstantGame();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::nakama::api::AccountFacebookInstantGame::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_AccountFacebookInstantGame =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAccountFacebookInstantGame}, {
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountFacebookInstantGame_VarsEntry_DoNotUse.base,}};
 
 static void InitDefaultsAccountGameCenter_VarsEntry_DoNotUse() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -774,6 +874,22 @@ static void InitDefaultsAddGroupUsersRequest() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_AddGroupUsersRequest =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsAddGroupUsersRequest}, {}};
 
+static void InitDefaultsAuthenticateAppleRequest() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_AuthenticateAppleRequest_default_instance_;
+    new (ptr) ::nakama::api::AuthenticateAppleRequest();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::nakama::api::AuthenticateAppleRequest::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<2> scc_info_AuthenticateAppleRequest =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsAuthenticateAppleRequest}, {
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountApple.base,
+      &protobuf_google_2fprotobuf_2fwrappers_2eproto::scc_info_BoolValue.base,}};
+
 static void InitDefaultsAuthenticateCustomRequest() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -838,6 +954,22 @@ static void InitDefaultsAuthenticateFacebookRequest() {
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountFacebook.base,
       &protobuf_google_2fprotobuf_2fwrappers_2eproto::scc_info_BoolValue.base,}};
 
+static void InitDefaultsAuthenticateFacebookInstantGameRequest() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_AuthenticateFacebookInstantGameRequest_default_instance_;
+    new (ptr) ::nakama::api::AuthenticateFacebookInstantGameRequest();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::nakama::api::AuthenticateFacebookInstantGameRequest::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<2> scc_info_AuthenticateFacebookInstantGameRequest =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsAuthenticateFacebookInstantGameRequest}, {
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountFacebookInstantGame.base,
+      &protobuf_google_2fprotobuf_2fwrappers_2eproto::scc_info_BoolValue.base,}};
+
 static void InitDefaultsAuthenticateGameCenterRequest() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -885,6 +1017,20 @@ static void InitDefaultsAuthenticateSteamRequest() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsAuthenticateSteamRequest}, {
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountSteam.base,
       &protobuf_google_2fprotobuf_2fwrappers_2eproto::scc_info_BoolValue.base,}};
+
+static void InitDefaultsBanGroupUsersRequest() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_BanGroupUsersRequest_default_instance_;
+    new (ptr) ::nakama::api::BanGroupUsersRequest();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::nakama::api::BanGroupUsersRequest::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_BanGroupUsersRequest =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsBanGroupUsersRequest}, {}};
 
 static void InitDefaultsBlockFriendsRequest() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1071,10 +1217,11 @@ static void InitDefaultsFriend() {
   ::nakama::api::Friend::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<2> scc_info_Friend =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsFriend}, {
+::google::protobuf::internal::SCCInfo<3> scc_info_Friend =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 3, InitDefaultsFriend}, {
       &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_User.base,
-      &protobuf_google_2fprotobuf_2fwrappers_2eproto::scc_info_Int32Value.base,}};
+      &protobuf_google_2fprotobuf_2fwrappers_2eproto::scc_info_Int32Value.base,
+      &protobuf_google_2fprotobuf_2ftimestamp_2eproto::scc_info_Timestamp.base,}};
 
 static void InitDefaultsFriendList() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1563,6 +1710,20 @@ static void InitDefaultsPromoteGroupUsersRequest() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_PromoteGroupUsersRequest =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsPromoteGroupUsersRequest}, {}};
 
+static void InitDefaultsDemoteGroupUsersRequest() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_DemoteGroupUsersRequest_default_instance_;
+    new (ptr) ::nakama::api::DemoteGroupUsersRequest();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::nakama::api::DemoteGroupUsersRequest::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_DemoteGroupUsersRequest =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsDemoteGroupUsersRequest}, {}};
+
 static void InitDefaultsReadStorageObjectId() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -1921,6 +2082,8 @@ static void InitDefaultsWriteTournamentRecordRequest() {
 
 void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_Account.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_AccountApple_VarsEntry_DoNotUse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_AccountApple.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AccountCustom_VarsEntry_DoNotUse.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AccountCustom.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AccountDevice_VarsEntry_DoNotUse.base);
@@ -1929,6 +2092,8 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_AccountEmail.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AccountFacebook_VarsEntry_DoNotUse.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AccountFacebook.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_AccountFacebookInstantGame_VarsEntry_DoNotUse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_AccountFacebookInstantGame.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AccountGameCenter_VarsEntry_DoNotUse.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AccountGameCenter.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AccountGoogle_VarsEntry_DoNotUse.base);
@@ -1937,13 +2102,16 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_AccountSteam.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AddFriendsRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AddGroupUsersRequest.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_AuthenticateAppleRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AuthenticateCustomRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AuthenticateDeviceRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AuthenticateEmailRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AuthenticateFacebookRequest.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_AuthenticateFacebookInstantGameRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AuthenticateGameCenterRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AuthenticateGoogleRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AuthenticateSteamRequest.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_BanGroupUsersRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_BlockFriendsRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ChannelMessage.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ChannelMessageList.base);
@@ -1989,6 +2157,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_Notification.base);
   ::google::protobuf::internal::InitSCC(&scc_info_NotificationList.base);
   ::google::protobuf::internal::InitSCC(&scc_info_PromoteGroupUsersRequest.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_DemoteGroupUsersRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReadStorageObjectId.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReadStorageObjectsRequest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Rpc.base);
@@ -2015,7 +2184,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_WriteTournamentRecordRequest.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[93];
+::google::protobuf::Metadata file_level_metadata[101];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[3];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -2030,6 +2199,23 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Account, devices_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Account, custom_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Account, verify_time_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Account, disable_time_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountApple_VarsEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountApple_VarsEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountApple_VarsEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountApple_VarsEntry_DoNotUse, value_),
+  0,
+  1,
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountApple, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountApple, token_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountApple, vars_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountCustom_VarsEntry_DoNotUse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountCustom_VarsEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2095,6 +2281,22 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountFacebook, token_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountFacebook, vars_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountFacebookInstantGame_VarsEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountFacebookInstantGame_VarsEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountFacebookInstantGame_VarsEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountFacebookInstantGame_VarsEntry_DoNotUse, value_),
+  0,
+  1,
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountFacebookInstantGame, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountFacebookInstantGame, signed_player_info_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountFacebookInstantGame, vars_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountGameCenter_VarsEntry_DoNotUse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AccountGameCenter_VarsEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2163,6 +2365,14 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AddGroupUsersRequest, group_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AddGroupUsersRequest, user_ids_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateAppleRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateAppleRequest, account_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateAppleRequest, create_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateAppleRequest, username_),
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateCustomRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -2196,6 +2406,14 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookRequest, username_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookRequest, sync_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookInstantGameRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookInstantGameRequest, account_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookInstantGameRequest, create_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateFacebookInstantGameRequest, username_),
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateGameCenterRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -2219,6 +2437,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateSteamRequest, account_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateSteamRequest, create_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::AuthenticateSteamRequest, username_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::BanGroupUsersRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::BanGroupUsersRequest, group_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::BanGroupUsersRequest, user_ids_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::BlockFriendsRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2319,6 +2544,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event, name_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event, properties_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event, timestamp_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Event, external_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Friend, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2326,6 +2552,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Friend, user_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Friend, state_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::Friend, update_time_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::FriendList, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2605,6 +2832,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::PromoteGroupUsersRequest, group_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::PromoteGroupUsersRequest, user_ids_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::DemoteGroupUsersRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::DemoteGroupUsersRequest, group_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::DemoteGroupUsersRequest, user_ids_),
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::ReadStorageObjectId, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -2756,6 +2990,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::User, edge_count_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::User, create_time_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::User, update_time_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::User, facebook_instant_game_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::User, apple_id_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::nakama::api::UserGroupList_UserGroup, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2826,102 +3062,112 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::nakama::api::Account)},
-  { 11, 18, sizeof(::nakama::api::AccountCustom_VarsEntry_DoNotUse)},
-  { 20, -1, sizeof(::nakama::api::AccountCustom)},
-  { 27, 34, sizeof(::nakama::api::AccountDevice_VarsEntry_DoNotUse)},
-  { 36, -1, sizeof(::nakama::api::AccountDevice)},
-  { 43, 50, sizeof(::nakama::api::AccountEmail_VarsEntry_DoNotUse)},
-  { 52, -1, sizeof(::nakama::api::AccountEmail)},
-  { 60, 67, sizeof(::nakama::api::AccountFacebook_VarsEntry_DoNotUse)},
-  { 69, -1, sizeof(::nakama::api::AccountFacebook)},
-  { 76, 83, sizeof(::nakama::api::AccountGameCenter_VarsEntry_DoNotUse)},
-  { 85, -1, sizeof(::nakama::api::AccountGameCenter)},
-  { 97, 104, sizeof(::nakama::api::AccountGoogle_VarsEntry_DoNotUse)},
-  { 106, -1, sizeof(::nakama::api::AccountGoogle)},
-  { 113, 120, sizeof(::nakama::api::AccountSteam_VarsEntry_DoNotUse)},
-  { 122, -1, sizeof(::nakama::api::AccountSteam)},
-  { 129, -1, sizeof(::nakama::api::AddFriendsRequest)},
-  { 136, -1, sizeof(::nakama::api::AddGroupUsersRequest)},
-  { 143, -1, sizeof(::nakama::api::AuthenticateCustomRequest)},
-  { 151, -1, sizeof(::nakama::api::AuthenticateDeviceRequest)},
-  { 159, -1, sizeof(::nakama::api::AuthenticateEmailRequest)},
-  { 167, -1, sizeof(::nakama::api::AuthenticateFacebookRequest)},
-  { 176, -1, sizeof(::nakama::api::AuthenticateGameCenterRequest)},
-  { 184, -1, sizeof(::nakama::api::AuthenticateGoogleRequest)},
-  { 192, -1, sizeof(::nakama::api::AuthenticateSteamRequest)},
-  { 200, -1, sizeof(::nakama::api::BlockFriendsRequest)},
-  { 207, -1, sizeof(::nakama::api::ChannelMessage)},
-  { 225, -1, sizeof(::nakama::api::ChannelMessageList)},
-  { 233, -1, sizeof(::nakama::api::CreateGroupRequest)},
-  { 244, -1, sizeof(::nakama::api::DeleteFriendsRequest)},
-  { 251, -1, sizeof(::nakama::api::DeleteGroupRequest)},
-  { 257, -1, sizeof(::nakama::api::DeleteLeaderboardRecordRequest)},
-  { 263, -1, sizeof(::nakama::api::DeleteNotificationsRequest)},
-  { 269, -1, sizeof(::nakama::api::DeleteStorageObjectId)},
-  { 277, -1, sizeof(::nakama::api::DeleteStorageObjectsRequest)},
-  { 283, 290, sizeof(::nakama::api::Event_PropertiesEntry_DoNotUse)},
-  { 292, -1, sizeof(::nakama::api::Event)},
-  { 300, -1, sizeof(::nakama::api::Friend)},
-  { 307, -1, sizeof(::nakama::api::FriendList)},
-  { 314, -1, sizeof(::nakama::api::GetUsersRequest)},
-  { 322, -1, sizeof(::nakama::api::Group)},
-  { 339, -1, sizeof(::nakama::api::GroupList)},
-  { 346, -1, sizeof(::nakama::api::GroupUserList_GroupUser)},
-  { 353, -1, sizeof(::nakama::api::GroupUserList)},
-  { 360, -1, sizeof(::nakama::api::ImportFacebookFriendsRequest)},
-  { 367, -1, sizeof(::nakama::api::JoinGroupRequest)},
-  { 373, -1, sizeof(::nakama::api::JoinTournamentRequest)},
-  { 379, -1, sizeof(::nakama::api::KickGroupUsersRequest)},
-  { 386, -1, sizeof(::nakama::api::LeaderboardRecord)},
-  { 403, -1, sizeof(::nakama::api::LeaderboardRecordList)},
-  { 412, -1, sizeof(::nakama::api::LeaveGroupRequest)},
-  { 418, -1, sizeof(::nakama::api::LinkFacebookRequest)},
-  { 425, -1, sizeof(::nakama::api::ListChannelMessagesRequest)},
-  { 434, -1, sizeof(::nakama::api::ListFriendsRequest)},
-  { 442, -1, sizeof(::nakama::api::ListGroupsRequest)},
-  { 450, -1, sizeof(::nakama::api::ListGroupUsersRequest)},
-  { 459, -1, sizeof(::nakama::api::ListLeaderboardRecordsAroundOwnerRequest)},
-  { 468, -1, sizeof(::nakama::api::ListLeaderboardRecordsRequest)},
-  { 478, -1, sizeof(::nakama::api::ListMatchesRequest)},
-  { 489, -1, sizeof(::nakama::api::ListNotificationsRequest)},
-  { 496, -1, sizeof(::nakama::api::ListStorageObjectsRequest)},
-  { 505, -1, sizeof(::nakama::api::ListTournamentRecordsAroundOwnerRequest)},
-  { 514, -1, sizeof(::nakama::api::ListTournamentRecordsRequest)},
-  { 524, -1, sizeof(::nakama::api::ListTournamentsRequest)},
-  { 535, -1, sizeof(::nakama::api::ListUserGroupsRequest)},
-  { 544, -1, sizeof(::nakama::api::Match)},
-  { 553, -1, sizeof(::nakama::api::MatchList)},
-  { 559, -1, sizeof(::nakama::api::Notification)},
-  { 571, -1, sizeof(::nakama::api::NotificationList)},
-  { 578, -1, sizeof(::nakama::api::PromoteGroupUsersRequest)},
-  { 585, -1, sizeof(::nakama::api::ReadStorageObjectId)},
-  { 593, -1, sizeof(::nakama::api::ReadStorageObjectsRequest)},
-  { 599, -1, sizeof(::nakama::api::Rpc)},
-  { 607, -1, sizeof(::nakama::api::Session)},
-  { 614, -1, sizeof(::nakama::api::StorageObject)},
-  { 628, -1, sizeof(::nakama::api::StorageObjectAck)},
-  { 637, -1, sizeof(::nakama::api::StorageObjectAcks)},
-  { 643, -1, sizeof(::nakama::api::StorageObjects)},
-  { 649, -1, sizeof(::nakama::api::StorageObjectList)},
-  { 656, -1, sizeof(::nakama::api::Tournament)},
-  { 678, -1, sizeof(::nakama::api::TournamentList)},
-  { 685, -1, sizeof(::nakama::api::TournamentRecordList)},
-  { 694, -1, sizeof(::nakama::api::UpdateAccountRequest)},
-  { 705, -1, sizeof(::nakama::api::UpdateGroupRequest)},
-  { 716, -1, sizeof(::nakama::api::User)},
-  { 737, -1, sizeof(::nakama::api::UserGroupList_UserGroup)},
-  { 744, -1, sizeof(::nakama::api::UserGroupList)},
-  { 751, -1, sizeof(::nakama::api::Users)},
-  { 757, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite)},
-  { 765, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest)},
-  { 772, -1, sizeof(::nakama::api::WriteStorageObject)},
-  { 783, -1, sizeof(::nakama::api::WriteStorageObjectsRequest)},
-  { 789, -1, sizeof(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite)},
-  { 797, -1, sizeof(::nakama::api::WriteTournamentRecordRequest)},
+  { 12, 19, sizeof(::nakama::api::AccountApple_VarsEntry_DoNotUse)},
+  { 21, -1, sizeof(::nakama::api::AccountApple)},
+  { 28, 35, sizeof(::nakama::api::AccountCustom_VarsEntry_DoNotUse)},
+  { 37, -1, sizeof(::nakama::api::AccountCustom)},
+  { 44, 51, sizeof(::nakama::api::AccountDevice_VarsEntry_DoNotUse)},
+  { 53, -1, sizeof(::nakama::api::AccountDevice)},
+  { 60, 67, sizeof(::nakama::api::AccountEmail_VarsEntry_DoNotUse)},
+  { 69, -1, sizeof(::nakama::api::AccountEmail)},
+  { 77, 84, sizeof(::nakama::api::AccountFacebook_VarsEntry_DoNotUse)},
+  { 86, -1, sizeof(::nakama::api::AccountFacebook)},
+  { 93, 100, sizeof(::nakama::api::AccountFacebookInstantGame_VarsEntry_DoNotUse)},
+  { 102, -1, sizeof(::nakama::api::AccountFacebookInstantGame)},
+  { 109, 116, sizeof(::nakama::api::AccountGameCenter_VarsEntry_DoNotUse)},
+  { 118, -1, sizeof(::nakama::api::AccountGameCenter)},
+  { 130, 137, sizeof(::nakama::api::AccountGoogle_VarsEntry_DoNotUse)},
+  { 139, -1, sizeof(::nakama::api::AccountGoogle)},
+  { 146, 153, sizeof(::nakama::api::AccountSteam_VarsEntry_DoNotUse)},
+  { 155, -1, sizeof(::nakama::api::AccountSteam)},
+  { 162, -1, sizeof(::nakama::api::AddFriendsRequest)},
+  { 169, -1, sizeof(::nakama::api::AddGroupUsersRequest)},
+  { 176, -1, sizeof(::nakama::api::AuthenticateAppleRequest)},
+  { 184, -1, sizeof(::nakama::api::AuthenticateCustomRequest)},
+  { 192, -1, sizeof(::nakama::api::AuthenticateDeviceRequest)},
+  { 200, -1, sizeof(::nakama::api::AuthenticateEmailRequest)},
+  { 208, -1, sizeof(::nakama::api::AuthenticateFacebookRequest)},
+  { 217, -1, sizeof(::nakama::api::AuthenticateFacebookInstantGameRequest)},
+  { 225, -1, sizeof(::nakama::api::AuthenticateGameCenterRequest)},
+  { 233, -1, sizeof(::nakama::api::AuthenticateGoogleRequest)},
+  { 241, -1, sizeof(::nakama::api::AuthenticateSteamRequest)},
+  { 249, -1, sizeof(::nakama::api::BanGroupUsersRequest)},
+  { 256, -1, sizeof(::nakama::api::BlockFriendsRequest)},
+  { 263, -1, sizeof(::nakama::api::ChannelMessage)},
+  { 281, -1, sizeof(::nakama::api::ChannelMessageList)},
+  { 289, -1, sizeof(::nakama::api::CreateGroupRequest)},
+  { 300, -1, sizeof(::nakama::api::DeleteFriendsRequest)},
+  { 307, -1, sizeof(::nakama::api::DeleteGroupRequest)},
+  { 313, -1, sizeof(::nakama::api::DeleteLeaderboardRecordRequest)},
+  { 319, -1, sizeof(::nakama::api::DeleteNotificationsRequest)},
+  { 325, -1, sizeof(::nakama::api::DeleteStorageObjectId)},
+  { 333, -1, sizeof(::nakama::api::DeleteStorageObjectsRequest)},
+  { 339, 346, sizeof(::nakama::api::Event_PropertiesEntry_DoNotUse)},
+  { 348, -1, sizeof(::nakama::api::Event)},
+  { 357, -1, sizeof(::nakama::api::Friend)},
+  { 365, -1, sizeof(::nakama::api::FriendList)},
+  { 372, -1, sizeof(::nakama::api::GetUsersRequest)},
+  { 380, -1, sizeof(::nakama::api::Group)},
+  { 397, -1, sizeof(::nakama::api::GroupList)},
+  { 404, -1, sizeof(::nakama::api::GroupUserList_GroupUser)},
+  { 411, -1, sizeof(::nakama::api::GroupUserList)},
+  { 418, -1, sizeof(::nakama::api::ImportFacebookFriendsRequest)},
+  { 425, -1, sizeof(::nakama::api::JoinGroupRequest)},
+  { 431, -1, sizeof(::nakama::api::JoinTournamentRequest)},
+  { 437, -1, sizeof(::nakama::api::KickGroupUsersRequest)},
+  { 444, -1, sizeof(::nakama::api::LeaderboardRecord)},
+  { 461, -1, sizeof(::nakama::api::LeaderboardRecordList)},
+  { 470, -1, sizeof(::nakama::api::LeaveGroupRequest)},
+  { 476, -1, sizeof(::nakama::api::LinkFacebookRequest)},
+  { 483, -1, sizeof(::nakama::api::ListChannelMessagesRequest)},
+  { 492, -1, sizeof(::nakama::api::ListFriendsRequest)},
+  { 500, -1, sizeof(::nakama::api::ListGroupsRequest)},
+  { 508, -1, sizeof(::nakama::api::ListGroupUsersRequest)},
+  { 517, -1, sizeof(::nakama::api::ListLeaderboardRecordsAroundOwnerRequest)},
+  { 526, -1, sizeof(::nakama::api::ListLeaderboardRecordsRequest)},
+  { 536, -1, sizeof(::nakama::api::ListMatchesRequest)},
+  { 547, -1, sizeof(::nakama::api::ListNotificationsRequest)},
+  { 554, -1, sizeof(::nakama::api::ListStorageObjectsRequest)},
+  { 563, -1, sizeof(::nakama::api::ListTournamentRecordsAroundOwnerRequest)},
+  { 572, -1, sizeof(::nakama::api::ListTournamentRecordsRequest)},
+  { 582, -1, sizeof(::nakama::api::ListTournamentsRequest)},
+  { 593, -1, sizeof(::nakama::api::ListUserGroupsRequest)},
+  { 602, -1, sizeof(::nakama::api::Match)},
+  { 611, -1, sizeof(::nakama::api::MatchList)},
+  { 617, -1, sizeof(::nakama::api::Notification)},
+  { 629, -1, sizeof(::nakama::api::NotificationList)},
+  { 636, -1, sizeof(::nakama::api::PromoteGroupUsersRequest)},
+  { 643, -1, sizeof(::nakama::api::DemoteGroupUsersRequest)},
+  { 650, -1, sizeof(::nakama::api::ReadStorageObjectId)},
+  { 658, -1, sizeof(::nakama::api::ReadStorageObjectsRequest)},
+  { 664, -1, sizeof(::nakama::api::Rpc)},
+  { 672, -1, sizeof(::nakama::api::Session)},
+  { 679, -1, sizeof(::nakama::api::StorageObject)},
+  { 693, -1, sizeof(::nakama::api::StorageObjectAck)},
+  { 702, -1, sizeof(::nakama::api::StorageObjectAcks)},
+  { 708, -1, sizeof(::nakama::api::StorageObjects)},
+  { 714, -1, sizeof(::nakama::api::StorageObjectList)},
+  { 721, -1, sizeof(::nakama::api::Tournament)},
+  { 743, -1, sizeof(::nakama::api::TournamentList)},
+  { 750, -1, sizeof(::nakama::api::TournamentRecordList)},
+  { 759, -1, sizeof(::nakama::api::UpdateAccountRequest)},
+  { 770, -1, sizeof(::nakama::api::UpdateGroupRequest)},
+  { 781, -1, sizeof(::nakama::api::User)},
+  { 804, -1, sizeof(::nakama::api::UserGroupList_UserGroup)},
+  { 811, -1, sizeof(::nakama::api::UserGroupList)},
+  { 818, -1, sizeof(::nakama::api::Users)},
+  { 824, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite)},
+  { 832, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest)},
+  { 839, -1, sizeof(::nakama::api::WriteStorageObject)},
+  { 850, -1, sizeof(::nakama::api::WriteStorageObjectsRequest)},
+  { 856, -1, sizeof(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite)},
+  { 864, -1, sizeof(::nakama::api::WriteTournamentRecordRequest)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_Account_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountApple_VarsEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountApple_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountCustom_VarsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountCustom_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountDevice_VarsEntry_DoNotUse_default_instance_),
@@ -2930,6 +3176,8 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountEmail_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountFacebook_VarsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountFacebook_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountFacebookInstantGame_VarsEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountFacebookInstantGame_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountGameCenter_VarsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountGameCenter_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountGoogle_VarsEntry_DoNotUse_default_instance_),
@@ -2938,13 +3186,16 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AccountSteam_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AddFriendsRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AddGroupUsersRequest_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AuthenticateAppleRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AuthenticateCustomRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AuthenticateDeviceRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AuthenticateEmailRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AuthenticateFacebookRequest_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AuthenticateFacebookInstantGameRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AuthenticateGameCenterRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AuthenticateGoogleRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_AuthenticateSteamRequest_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_BanGroupUsersRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_BlockFriendsRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_ChannelMessage_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_ChannelMessageList_default_instance_),
@@ -2990,6 +3241,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_Notification_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_NotificationList_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_PromoteGroupUsersRequest_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_DemoteGroupUsersRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_ReadStorageObjectId_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_ReadStorageObjectsRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::nakama::api::_Rpc_default_instance_),
@@ -3031,7 +3283,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 93);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 101);
 }
 
 void AddDescriptorsImpl() {
@@ -3040,55 +3292,71 @@ void AddDescriptorsImpl() {
       "\n1github.com/heroiclabs/nakama-common/ap"
       "i/api.proto\022\nnakama.api\032\037google/protobuf"
       "/timestamp.proto\032\036google/protobuf/wrappe"
-      "rs.proto\"\270\001\n\007Account\022\036\n\004user\030\001 \001(\0132\020.nak"
+      "rs.proto\"\352\001\n\007Account\022\036\n\004user\030\001 \001(\0132\020.nak"
       "ama.api.User\022\016\n\006wallet\030\002 \001(\t\022\r\n\005email\030\003 "
       "\001(\t\022*\n\007devices\030\004 \003(\0132\031.nakama.api.Accoun"
       "tDevice\022\021\n\tcustom_id\030\005 \001(\t\022/\n\013verify_tim"
-      "e\030\006 \001(\0132\032.google.protobuf.Timestamp\"{\n\rA"
-      "ccountCustom\022\n\n\002id\030\001 \001(\t\0221\n\004vars\030\002 \003(\0132#"
-      ".nakama.api.AccountCustom.VarsEntry\032+\n\tV"
-      "arsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001"
-      "\"{\n\rAccountDevice\022\n\n\002id\030\001 \001(\t\0221\n\004vars\030\002 "
-      "\003(\0132#.nakama.api.AccountDevice.VarsEntry"
+      "e\030\006 \001(\0132\032.google.protobuf.Timestamp\0220\n\014d"
+      "isable_time\030\007 \001(\0132\032.google.protobuf.Time"
+      "stamp\"|\n\014AccountApple\022\r\n\005token\030\001 \001(\t\0220\n\004"
+      "vars\030\002 \003(\0132\".nakama.api.AccountApple.Var"
+      "sEntry\032+\n\tVarsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005valu"
+      "e\030\002 \001(\t:\0028\001\"{\n\rAccountCustom\022\n\n\002id\030\001 \001(\t"
+      "\0221\n\004vars\030\002 \003(\0132#.nakama.api.AccountCusto"
+      "m.VarsEntry\032+\n\tVarsEntry\022\013\n\003key\030\001 \001(\t\022\r\n"
+      "\005value\030\002 \001(\t:\0028\001\"{\n\rAccountDevice\022\n\n\002id\030"
+      "\001 \001(\t\0221\n\004vars\030\002 \003(\0132#.nakama.api.Account"
+      "Device.VarsEntry\032+\n\tVarsEntry\022\013\n\003key\030\001 \001"
+      "(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\216\001\n\014AccountEmail\022\r"
+      "\n\005email\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\0220\n\004vars\030"
+      "\003 \003(\0132\".nakama.api.AccountEmail.VarsEntr"
+      "y\032+\n\tVarsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001"
+      "(\t:\0028\001\"\202\001\n\017AccountFacebook\022\r\n\005token\030\001 \001("
+      "\t\0223\n\004vars\030\002 \003(\0132%.nakama.api.AccountFace"
+      "book.VarsEntry\032+\n\tVarsEntry\022\013\n\003key\030\001 \001(\t"
+      "\022\r\n\005value\030\002 \001(\t:\0028\001\"\245\001\n\032AccountFacebookI"
+      "nstantGame\022\032\n\022signed_player_info\030\001 \001(\t\022>"
+      "\n\004vars\030\002 \003(\01320.nakama.api.AccountFaceboo"
+      "kInstantGame.VarsEntry\032+\n\tVarsEntry\022\013\n\003k"
+      "ey\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\361\001\n\021AccountG"
+      "ameCenter\022\021\n\tplayer_id\030\001 \001(\t\022\021\n\tbundle_i"
+      "d\030\002 \001(\t\022\031\n\021timestamp_seconds\030\003 \001(\003\022\014\n\004sa"
+      "lt\030\004 \001(\t\022\021\n\tsignature\030\005 \001(\t\022\026\n\016public_ke"
+      "y_url\030\006 \001(\t\0225\n\004vars\030\007 \003(\0132\'.nakama.api.A"
+      "ccountGameCenter.VarsEntry\032+\n\tVarsEntry\022"
+      "\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"~\n\rAccou"
+      "ntGoogle\022\r\n\005token\030\001 \001(\t\0221\n\004vars\030\002 \003(\0132#."
+      "nakama.api.AccountGoogle.VarsEntry\032+\n\tVa"
+      "rsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\""
+      "|\n\014AccountSteam\022\r\n\005token\030\001 \001(\t\0220\n\004vars\030\002"
+      " \003(\0132\".nakama.api.AccountSteam.VarsEntry"
       "\032+\n\tVarsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001("
-      "\t:\0028\001\"\216\001\n\014AccountEmail\022\r\n\005email\030\001 \001(\t\022\020\n"
-      "\010password\030\002 \001(\t\0220\n\004vars\030\003 \003(\0132\".nakama.a"
-      "pi.AccountEmail.VarsEntry\032+\n\tVarsEntry\022\013"
-      "\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\202\001\n\017Accou"
-      "ntFacebook\022\r\n\005token\030\001 \001(\t\0223\n\004vars\030\002 \003(\0132"
-      "%.nakama.api.AccountFacebook.VarsEntry\032+"
-      "\n\tVarsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:"
-      "\0028\001\"\361\001\n\021AccountGameCenter\022\021\n\tplayer_id\030\001"
-      " \001(\t\022\021\n\tbundle_id\030\002 \001(\t\022\031\n\021timestamp_sec"
-      "onds\030\003 \001(\003\022\014\n\004salt\030\004 \001(\t\022\021\n\tsignature\030\005 "
-      "\001(\t\022\026\n\016public_key_url\030\006 \001(\t\0225\n\004vars\030\007 \003("
-      "\0132\'.nakama.api.AccountGameCenter.VarsEnt"
-      "ry\032+\n\tVarsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 "
-      "\001(\t:\0028\001\"~\n\rAccountGoogle\022\r\n\005token\030\001 \001(\t\022"
-      "1\n\004vars\030\002 \003(\0132#.nakama.api.AccountGoogle"
-      ".VarsEntry\032+\n\tVarsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005"
-      "value\030\002 \001(\t:\0028\001\"|\n\014AccountSteam\022\r\n\005token"
-      "\030\001 \001(\t\0220\n\004vars\030\002 \003(\0132\".nakama.api.Accoun"
-      "tSteam.VarsEntry\032+\n\tVarsEntry\022\013\n\003key\030\001 \001"
-      "(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"3\n\021AddFriendsReque"
-      "st\022\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\":\n\024Ad"
-      "dGroupUsersRequest\022\020\n\010group_id\030\001 \001(\t\022\020\n\010"
-      "user_ids\030\002 \003(\t\"\205\001\n\031AuthenticateCustomReq"
-      "uest\022*\n\007account\030\001 \001(\0132\031.nakama.api.Accou"
-      "ntCustom\022*\n\006create\030\002 \001(\0132\032.google.protob"
-      "uf.BoolValue\022\020\n\010username\030\003 \001(\t\"\205\001\n\031Authe"
-      "nticateDeviceRequest\022*\n\007account\030\001 \001(\0132\031."
-      "nakama.api.AccountDevice\022*\n\006create\030\002 \001(\013"
-      "2\032.google.protobuf.BoolValue\022\020\n\010username"
-      "\030\003 \001(\t\"\203\001\n\030AuthenticateEmailRequest\022)\n\007a"
-      "ccount\030\001 \001(\0132\030.nakama.api.AccountEmail\022*"
-      "\n\006create\030\002 \001(\0132\032.google.protobuf.BoolVal"
-      "ue\022\020\n\010username\030\003 \001(\t\"\263\001\n\033AuthenticateFac"
-      "ebookRequest\022,\n\007account\030\001 \001(\0132\033.nakama.a"
-      "pi.AccountFacebook\022*\n\006create\030\002 \001(\0132\032.goo"
-      "gle.protobuf.BoolValue\022\020\n\010username\030\003 \001(\t"
-      "\022(\n\004sync\030\004 \001(\0132\032.google.protobuf.BoolVal"
-      "ue\"\215\001\n\035AuthenticateGameCenterRequest\022.\n\007"
+      "\t:\0028\001\"3\n\021AddFriendsRequest\022\013\n\003ids\030\001 \003(\t\022"
+      "\021\n\tusernames\030\002 \003(\t\":\n\024AddGroupUsersReque"
+      "st\022\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"\203"
+      "\001\n\030AuthenticateAppleRequest\022)\n\007account\030\001"
+      " \001(\0132\030.nakama.api.AccountApple\022*\n\006create"
+      "\030\002 \001(\0132\032.google.protobuf.BoolValue\022\020\n\010us"
+      "ername\030\003 \001(\t\"\205\001\n\031AuthenticateCustomReque"
+      "st\022*\n\007account\030\001 \001(\0132\031.nakama.api.Account"
+      "Custom\022*\n\006create\030\002 \001(\0132\032.google.protobuf"
+      ".BoolValue\022\020\n\010username\030\003 \001(\t\"\205\001\n\031Authent"
+      "icateDeviceRequest\022*\n\007account\030\001 \001(\0132\031.na"
+      "kama.api.AccountDevice\022*\n\006create\030\002 \001(\0132\032"
+      ".google.protobuf.BoolValue\022\020\n\010username\030\003"
+      " \001(\t\"\203\001\n\030AuthenticateEmailRequest\022)\n\007acc"
+      "ount\030\001 \001(\0132\030.nakama.api.AccountEmail\022*\n\006"
+      "create\030\002 \001(\0132\032.google.protobuf.BoolValue"
+      "\022\020\n\010username\030\003 \001(\t\"\263\001\n\033AuthenticateFaceb"
+      "ookRequest\022,\n\007account\030\001 \001(\0132\033.nakama.api"
+      ".AccountFacebook\022*\n\006create\030\002 \001(\0132\032.googl"
+      "e.protobuf.BoolValue\022\020\n\010username\030\003 \001(\t\022("
+      "\n\004sync\030\004 \001(\0132\032.google.protobuf.BoolValue"
+      "\"\237\001\n&AuthenticateFacebookInstantGameRequ"
+      "est\0227\n\007account\030\001 \001(\0132&.nakama.api.Accoun"
+      "tFacebookInstantGame\022*\n\006create\030\002 \001(\0132\032.g"
+      "oogle.protobuf.BoolValue\022\020\n\010username\030\003 \001"
+      "(\t\"\215\001\n\035AuthenticateGameCenterRequest\022.\n\007"
       "account\030\001 \001(\0132\035.nakama.api.AccountGameCe"
       "nter\022*\n\006create\030\002 \001(\0132\032.google.protobuf.B"
       "oolValue\022\020\n\010username\030\003 \001(\t\"\205\001\n\031Authentic"
@@ -3098,241 +3366,247 @@ void AddDescriptorsImpl() {
       "(\t\"\203\001\n\030AuthenticateSteamRequest\022)\n\007accou"
       "nt\030\001 \001(\0132\030.nakama.api.AccountSteam\022*\n\006cr"
       "eate\030\002 \001(\0132\032.google.protobuf.BoolValue\022\020"
-      "\n\010username\030\003 \001(\t\"5\n\023BlockFriendsRequest\022"
-      "\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\"\372\002\n\016Chan"
-      "nelMessage\022\022\n\nchannel_id\030\001 \001(\t\022\022\n\nmessag"
-      "e_id\030\002 \001(\t\022)\n\004code\030\003 \001(\0132\033.google.protob"
-      "uf.Int32Value\022\021\n\tsender_id\030\004 \001(\t\022\020\n\010user"
-      "name\030\005 \001(\t\022\017\n\007content\030\006 \001(\t\022/\n\013create_ti"
-      "me\030\007 \001(\0132\032.google.protobuf.Timestamp\022/\n\013"
-      "update_time\030\010 \001(\0132\032.google.protobuf.Time"
-      "stamp\022.\n\npersistent\030\t \001(\0132\032.google.proto"
-      "buf.BoolValue\022\021\n\troom_name\030\n \001(\t\022\020\n\010grou"
-      "p_id\030\013 \001(\t\022\023\n\013user_id_one\030\014 \001(\t\022\023\n\013user_"
-      "id_two\030\r \001(\t\"l\n\022ChannelMessageList\022,\n\010me"
-      "ssages\030\001 \003(\0132\032.nakama.api.ChannelMessage"
-      "\022\023\n\013next_cursor\030\002 \001(\t\022\023\n\013prev_cursor\030\003 \001"
-      "(\t\"~\n\022CreateGroupRequest\022\014\n\004name\030\001 \001(\t\022\023"
-      "\n\013description\030\002 \001(\t\022\020\n\010lang_tag\030\003 \001(\t\022\022\n"
-      "\navatar_url\030\004 \001(\t\022\014\n\004open\030\005 \001(\010\022\021\n\tmax_c"
-      "ount\030\006 \001(\005\"6\n\024DeleteFriendsRequest\022\013\n\003id"
-      "s\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\"&\n\022DeleteGrou"
-      "pRequest\022\020\n\010group_id\030\001 \001(\t\"8\n\036DeleteLead"
-      "erboardRecordRequest\022\026\n\016leaderboard_id\030\001"
-      " \001(\t\")\n\032DeleteNotificationsRequest\022\013\n\003id"
-      "s\030\001 \003(\t\"I\n\025DeleteStorageObjectId\022\022\n\ncoll"
-      "ection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007version\030\003 \001"
-      "(\t\"T\n\033DeleteStorageObjectsRequest\0225\n\nobj"
-      "ect_ids\030\001 \003(\0132!.nakama.api.DeleteStorage"
-      "ObjectId\"\256\001\n\005Event\022\014\n\004name\030\001 \001(\t\0225\n\nprop"
-      "erties\030\002 \003(\0132!.nakama.api.Event.Properti"
-      "esEntry\022-\n\ttimestamp\030\003 \001(\0132\032.google.prot"
-      "obuf.Timestamp\0321\n\017PropertiesEntry\022\013\n\003key"
-      "\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\234\001\n\006Friend\022\036\n\004"
-      "user\030\001 \001(\0132\020.nakama.api.User\022*\n\005state\030\002 "
-      "\001(\0132\033.google.protobuf.Int32Value\"F\n\005Stat"
-      "e\022\n\n\006FRIEND\020\000\022\017\n\013INVITE_SENT\020\001\022\023\n\017INVITE"
-      "_RECEIVED\020\002\022\013\n\007BLOCKED\020\003\"A\n\nFriendList\022#"
-      "\n\007friends\030\001 \003(\0132\022.nakama.api.Friend\022\016\n\006c"
-      "ursor\030\002 \001(\t\"G\n\017GetUsersRequest\022\013\n\003ids\030\001 "
-      "\003(\t\022\021\n\tusernames\030\002 \003(\t\022\024\n\014facebook_ids\030\003"
-      " \003(\t\"\265\002\n\005Group\022\n\n\002id\030\001 \001(\t\022\022\n\ncreator_id"
-      "\030\002 \001(\t\022\014\n\004name\030\003 \001(\t\022\023\n\013description\030\004 \001("
-      "\t\022\020\n\010lang_tag\030\005 \001(\t\022\020\n\010metadata\030\006 \001(\t\022\022\n"
-      "\navatar_url\030\007 \001(\t\022(\n\004open\030\010 \001(\0132\032.google"
-      ".protobuf.BoolValue\022\022\n\nedge_count\030\t \001(\005\022"
-      "\021\n\tmax_count\030\n \001(\005\022/\n\013create_time\030\013 \001(\0132"
-      "\032.google.protobuf.Timestamp\022/\n\013update_ti"
-      "me\030\014 \001(\0132\032.google.protobuf.Timestamp\">\n\t"
-      "GroupList\022!\n\006groups\030\001 \003(\0132\021.nakama.api.G"
-      "roup\022\016\n\006cursor\030\002 \001(\t\"\365\001\n\rGroupUserList\0228"
-      "\n\013group_users\030\001 \003(\0132#.nakama.api.GroupUs"
-      "erList.GroupUser\022\016\n\006cursor\030\002 \001(\t\032\231\001\n\tGro"
-      "upUser\022\036\n\004user\030\001 \001(\0132\020.nakama.api.User\022*"
-      "\n\005state\030\002 \001(\0132\033.google.protobuf.Int32Val"
-      "ue\"@\n\005State\022\016\n\nSUPERADMIN\020\000\022\t\n\005ADMIN\020\001\022\n"
-      "\n\006MEMBER\020\002\022\020\n\014JOIN_REQUEST\020\003\"w\n\034ImportFa"
-      "cebookFriendsRequest\022,\n\007account\030\001 \001(\0132\033."
-      "nakama.api.AccountFacebook\022)\n\005reset\030\002 \001("
-      "\0132\032.google.protobuf.BoolValue\"$\n\020JoinGro"
-      "upRequest\022\020\n\010group_id\030\001 \001(\t\".\n\025JoinTourn"
-      "amentRequest\022\025\n\rtournament_id\030\001 \001(\t\";\n\025K"
-      "ickGroupUsersRequest\022\020\n\010group_id\030\001 \001(\t\022\020"
-      "\n\010user_ids\030\002 \003(\t\"\353\002\n\021LeaderboardRecord\022\026"
-      "\n\016leaderboard_id\030\001 \001(\t\022\020\n\010owner_id\030\002 \001(\t"
-      "\022.\n\010username\030\003 \001(\0132\034.google.protobuf.Str"
-      "ingValue\022\r\n\005score\030\004 \001(\003\022\020\n\010subscore\030\005 \001("
-      "\003\022\021\n\tnum_score\030\006 \001(\005\022\020\n\010metadata\030\007 \001(\t\022/"
-      "\n\013create_time\030\010 \001(\0132\032.google.protobuf.Ti"
-      "mestamp\022/\n\013update_time\030\t \001(\0132\032.google.pr"
-      "otobuf.Timestamp\022/\n\013expiry_time\030\n \001(\0132\032."
-      "google.protobuf.Timestamp\022\014\n\004rank\030\013 \001(\003\022"
-      "\025\n\rmax_num_score\030\014 \001(\r\"\247\001\n\025LeaderboardRe"
-      "cordList\022.\n\007records\030\001 \003(\0132\035.nakama.api.L"
-      "eaderboardRecord\0224\n\rowner_records\030\002 \003(\0132"
-      "\035.nakama.api.LeaderboardRecord\022\023\n\013next_c"
-      "ursor\030\003 \001(\t\022\023\n\013prev_cursor\030\004 \001(\t\"%\n\021Leav"
-      "eGroupRequest\022\020\n\010group_id\030\001 \001(\t\"m\n\023LinkF"
-      "acebookRequest\022,\n\007account\030\001 \001(\0132\033.nakama"
-      ".api.AccountFacebook\022(\n\004sync\030\004 \001(\0132\032.goo"
-      "gle.protobuf.BoolValue\"\231\001\n\032ListChannelMe"
-      "ssagesRequest\022\022\n\nchannel_id\030\001 \001(\t\022*\n\005lim"
-      "it\030\002 \001(\0132\033.google.protobuf.Int32Value\022+\n"
-      "\007forward\030\003 \001(\0132\032.google.protobuf.BoolVal"
-      "ue\022\016\n\006cursor\030\004 \001(\t\"|\n\022ListFriendsRequest"
-      "\022*\n\005limit\030\001 \001(\0132\033.google.protobuf.Int32V"
-      "alue\022*\n\005state\030\002 \001(\0132\033.google.protobuf.In"
-      "t32Value\022\016\n\006cursor\030\003 \001(\t\"]\n\021ListGroupsRe"
-      "quest\022\014\n\004name\030\001 \001(\t\022\016\n\006cursor\030\002 \001(\t\022*\n\005l"
-      "imit\030\003 \001(\0132\033.google.protobuf.Int32Value\""
-      "\221\001\n\025ListGroupUsersRequest\022\020\n\010group_id\030\001 "
-      "\001(\t\022*\n\005limit\030\002 \001(\0132\033.google.protobuf.Int"
-      "32Value\022*\n\005state\030\003 \001(\0132\033.google.protobuf"
-      ".Int32Value\022\016\n\006cursor\030\004 \001(\t\"\256\001\n(ListLead"
-      "erboardRecordsAroundOwnerRequest\022\026\n\016lead"
-      "erboard_id\030\001 \001(\t\022+\n\005limit\030\002 \001(\0132\034.google"
-      ".protobuf.UInt32Value\022\020\n\010owner_id\030\003 \001(\t\022"
-      "+\n\006expiry\030\004 \001(\0132\033.google.protobuf.Int64V"
-      "alue\"\263\001\n\035ListLeaderboardRecordsRequest\022\026"
-      "\n\016leaderboard_id\030\001 \001(\t\022\021\n\towner_ids\030\002 \003("
-      "\t\022*\n\005limit\030\003 \001(\0132\033.google.protobuf.Int32"
-      "Value\022\016\n\006cursor\030\004 \001(\t\022+\n\006expiry\030\005 \001(\0132\033."
-      "google.protobuf.Int64Value\"\253\002\n\022ListMatch"
-      "esRequest\022*\n\005limit\030\001 \001(\0132\033.google.protob"
-      "uf.Int32Value\0221\n\rauthoritative\030\002 \001(\0132\032.g"
-      "oogle.protobuf.BoolValue\022+\n\005label\030\003 \001(\0132"
-      "\034.google.protobuf.StringValue\022-\n\010min_siz"
-      "e\030\004 \001(\0132\033.google.protobuf.Int32Value\022-\n\010"
-      "max_size\030\005 \001(\0132\033.google.protobuf.Int32Va"
-      "lue\022+\n\005query\030\006 \001(\0132\034.google.protobuf.Str"
-      "ingValue\"`\n\030ListNotificationsRequest\022*\n\005"
-      "limit\030\001 \001(\0132\033.google.protobuf.Int32Value"
-      "\022\030\n\020cacheable_cursor\030\002 \001(\t\"|\n\031ListStorag"
-      "eObjectsRequest\022\017\n\007user_id\030\001 \001(\t\022\022\n\ncoll"
-      "ection\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.google.pro"
-      "tobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\254\001\n\'Lis"
-      "tTournamentRecordsAroundOwnerRequest\022\025\n\r"
-      "tournament_id\030\001 \001(\t\022+\n\005limit\030\002 \001(\0132\034.goo"
-      "gle.protobuf.UInt32Value\022\020\n\010owner_id\030\003 \001"
-      "(\t\022+\n\006expiry\030\004 \001(\0132\033.google.protobuf.Int"
-      "64Value\"\261\001\n\034ListTournamentRecordsRequest"
-      "\022\025\n\rtournament_id\030\001 \001(\t\022\021\n\towner_ids\030\002 \003"
+      "\n\010username\030\003 \001(\t\":\n\024BanGroupUsersRequest"
+      "\022\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"5\n\023"
+      "BlockFriendsRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tuser"
+      "names\030\002 \003(\t\"\372\002\n\016ChannelMessage\022\022\n\nchanne"
+      "l_id\030\001 \001(\t\022\022\n\nmessage_id\030\002 \001(\t\022)\n\004code\030\003"
+      " \001(\0132\033.google.protobuf.Int32Value\022\021\n\tsen"
+      "der_id\030\004 \001(\t\022\020\n\010username\030\005 \001(\t\022\017\n\007conten"
+      "t\030\006 \001(\t\022/\n\013create_time\030\007 \001(\0132\032.google.pr"
+      "otobuf.Timestamp\022/\n\013update_time\030\010 \001(\0132\032."
+      "google.protobuf.Timestamp\022.\n\npersistent\030"
+      "\t \001(\0132\032.google.protobuf.BoolValue\022\021\n\troo"
+      "m_name\030\n \001(\t\022\020\n\010group_id\030\013 \001(\t\022\023\n\013user_i"
+      "d_one\030\014 \001(\t\022\023\n\013user_id_two\030\r \001(\t\"l\n\022Chan"
+      "nelMessageList\022,\n\010messages\030\001 \003(\0132\032.nakam"
+      "a.api.ChannelMessage\022\023\n\013next_cursor\030\002 \001("
+      "\t\022\023\n\013prev_cursor\030\003 \001(\t\"~\n\022CreateGroupReq"
+      "uest\022\014\n\004name\030\001 \001(\t\022\023\n\013description\030\002 \001(\t\022"
+      "\020\n\010lang_tag\030\003 \001(\t\022\022\n\navatar_url\030\004 \001(\t\022\014\n"
+      "\004open\030\005 \001(\010\022\021\n\tmax_count\030\006 \001(\005\"6\n\024Delete"
+      "FriendsRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tusernames"
+      "\030\002 \003(\t\"&\n\022DeleteGroupRequest\022\020\n\010group_id"
+      "\030\001 \001(\t\"8\n\036DeleteLeaderboardRecordRequest"
+      "\022\026\n\016leaderboard_id\030\001 \001(\t\")\n\032DeleteNotifi"
+      "cationsRequest\022\013\n\003ids\030\001 \003(\t\"I\n\025DeleteSto"
+      "rageObjectId\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030"
+      "\002 \001(\t\022\017\n\007version\030\003 \001(\t\"T\n\033DeleteStorageO"
+      "bjectsRequest\0225\n\nobject_ids\030\001 \003(\0132!.naka"
+      "ma.api.DeleteStorageObjectId\"\300\001\n\005Event\022\014"
+      "\n\004name\030\001 \001(\t\0225\n\nproperties\030\002 \003(\0132!.nakam"
+      "a.api.Event.PropertiesEntry\022-\n\ttimestamp"
+      "\030\003 \001(\0132\032.google.protobuf.Timestamp\022\020\n\010ex"
+      "ternal\030\004 \001(\010\0321\n\017PropertiesEntry\022\013\n\003key\030\001"
+      " \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\315\001\n\006Friend\022\036\n\004us"
+      "er\030\001 \001(\0132\020.nakama.api.User\022*\n\005state\030\002 \001("
+      "\0132\033.google.protobuf.Int32Value\022/\n\013update"
+      "_time\030\003 \001(\0132\032.google.protobuf.Timestamp\""
+      "F\n\005State\022\n\n\006FRIEND\020\000\022\017\n\013INVITE_SENT\020\001\022\023\n"
+      "\017INVITE_RECEIVED\020\002\022\013\n\007BLOCKED\020\003\"A\n\nFrien"
+      "dList\022#\n\007friends\030\001 \003(\0132\022.nakama.api.Frie"
+      "nd\022\016\n\006cursor\030\002 \001(\t\"G\n\017GetUsersRequest\022\013\n"
+      "\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\022\024\n\014faceboo"
+      "k_ids\030\003 \003(\t\"\265\002\n\005Group\022\n\n\002id\030\001 \001(\t\022\022\n\ncre"
+      "ator_id\030\002 \001(\t\022\014\n\004name\030\003 \001(\t\022\023\n\013descripti"
+      "on\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001(\t\022\020\n\010metadata\030\006"
+      " \001(\t\022\022\n\navatar_url\030\007 \001(\t\022(\n\004open\030\010 \001(\0132\032"
+      ".google.protobuf.BoolValue\022\022\n\nedge_count"
+      "\030\t \001(\005\022\021\n\tmax_count\030\n \001(\005\022/\n\013create_time"
+      "\030\013 \001(\0132\032.google.protobuf.Timestamp\022/\n\013up"
+      "date_time\030\014 \001(\0132\032.google.protobuf.Timest"
+      "amp\">\n\tGroupList\022!\n\006groups\030\001 \003(\0132\021.nakam"
+      "a.api.Group\022\016\n\006cursor\030\002 \001(\t\"\365\001\n\rGroupUse"
+      "rList\0228\n\013group_users\030\001 \003(\0132#.nakama.api."
+      "GroupUserList.GroupUser\022\016\n\006cursor\030\002 \001(\t\032"
+      "\231\001\n\tGroupUser\022\036\n\004user\030\001 \001(\0132\020.nakama.api"
+      ".User\022*\n\005state\030\002 \001(\0132\033.google.protobuf.I"
+      "nt32Value\"@\n\005State\022\016\n\nSUPERADMIN\020\000\022\t\n\005AD"
+      "MIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN_REQUEST\020\003\"w\n\034I"
+      "mportFacebookFriendsRequest\022,\n\007account\030\001"
+      " \001(\0132\033.nakama.api.AccountFacebook\022)\n\005res"
+      "et\030\002 \001(\0132\032.google.protobuf.BoolValue\"$\n\020"
+      "JoinGroupRequest\022\020\n\010group_id\030\001 \001(\t\".\n\025Jo"
+      "inTournamentRequest\022\025\n\rtournament_id\030\001 \001"
+      "(\t\";\n\025KickGroupUsersRequest\022\020\n\010group_id\030"
+      "\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"\353\002\n\021LeaderboardR"
+      "ecord\022\026\n\016leaderboard_id\030\001 \001(\t\022\020\n\010owner_i"
+      "d\030\002 \001(\t\022.\n\010username\030\003 \001(\0132\034.google.proto"
+      "buf.StringValue\022\r\n\005score\030\004 \001(\003\022\020\n\010subsco"
+      "re\030\005 \001(\003\022\021\n\tnum_score\030\006 \001(\005\022\020\n\010metadata\030"
+      "\007 \001(\t\022/\n\013create_time\030\010 \001(\0132\032.google.prot"
+      "obuf.Timestamp\022/\n\013update_time\030\t \001(\0132\032.go"
+      "ogle.protobuf.Timestamp\022/\n\013expiry_time\030\n"
+      " \001(\0132\032.google.protobuf.Timestamp\022\014\n\004rank"
+      "\030\013 \001(\003\022\025\n\rmax_num_score\030\014 \001(\r\"\247\001\n\025Leader"
+      "boardRecordList\022.\n\007records\030\001 \003(\0132\035.nakam"
+      "a.api.LeaderboardRecord\0224\n\rowner_records"
+      "\030\002 \003(\0132\035.nakama.api.LeaderboardRecord\022\023\n"
+      "\013next_cursor\030\003 \001(\t\022\023\n\013prev_cursor\030\004 \001(\t\""
+      "%\n\021LeaveGroupRequest\022\020\n\010group_id\030\001 \001(\t\"m"
+      "\n\023LinkFacebookRequest\022,\n\007account\030\001 \001(\0132\033"
+      ".nakama.api.AccountFacebook\022(\n\004sync\030\004 \001("
+      "\0132\032.google.protobuf.BoolValue\"\231\001\n\032ListCh"
+      "annelMessagesRequest\022\022\n\nchannel_id\030\001 \001(\t"
+      "\022*\n\005limit\030\002 \001(\0132\033.google.protobuf.Int32V"
+      "alue\022+\n\007forward\030\003 \001(\0132\032.google.protobuf."
+      "BoolValue\022\016\n\006cursor\030\004 \001(\t\"|\n\022ListFriends"
+      "Request\022*\n\005limit\030\001 \001(\0132\033.google.protobuf"
+      ".Int32Value\022*\n\005state\030\002 \001(\0132\033.google.prot"
+      "obuf.Int32Value\022\016\n\006cursor\030\003 \001(\t\"]\n\021ListG"
+      "roupsRequest\022\014\n\004name\030\001 \001(\t\022\016\n\006cursor\030\002 \001"
       "(\t\022*\n\005limit\030\003 \001(\0132\033.google.protobuf.Int3"
-      "2Value\022\016\n\006cursor\030\004 \001(\t\022+\n\006expiry\030\005 \001(\0132\033"
-      ".google.protobuf.Int64Value\"\240\002\n\026ListTour"
-      "namentsRequest\0224\n\016category_start\030\001 \001(\0132\034"
-      ".google.protobuf.UInt32Value\0222\n\014category"
-      "_end\030\002 \001(\0132\034.google.protobuf.UInt32Value"
-      "\0220\n\nstart_time\030\003 \001(\0132\034.google.protobuf.U"
-      "Int32Value\022.\n\010end_time\030\004 \001(\0132\034.google.pr"
-      "otobuf.UInt32Value\022*\n\005limit\030\006 \001(\0132\033.goog"
-      "le.protobuf.Int32Value\022\016\n\006cursor\030\010 \001(\t\"\220"
-      "\001\n\025ListUserGroupsRequest\022\017\n\007user_id\030\001 \001("
-      "\t\022*\n\005limit\030\002 \001(\0132\033.google.protobuf.Int32"
-      "Value\022*\n\005state\030\003 \001(\0132\033.google.protobuf.I"
-      "nt32Value\022\016\n\006cursor\030\004 \001(\t\"k\n\005Match\022\020\n\010ma"
-      "tch_id\030\001 \001(\t\022\025\n\rauthoritative\030\002 \001(\010\022+\n\005l"
-      "abel\030\003 \001(\0132\034.google.protobuf.StringValue"
-      "\022\014\n\004size\030\004 \001(\005\"/\n\tMatchList\022\"\n\007matches\030\001"
-      " \003(\0132\021.nakama.api.Match\"\242\001\n\014Notification"
-      "\022\n\n\002id\030\001 \001(\t\022\017\n\007subject\030\002 \001(\t\022\017\n\007content"
-      "\030\003 \001(\t\022\014\n\004code\030\004 \001(\005\022\021\n\tsender_id\030\005 \001(\t\022"
-      "/\n\013create_time\030\006 \001(\0132\032.google.protobuf.T"
-      "imestamp\022\022\n\npersistent\030\007 \001(\010\"]\n\020Notifica"
-      "tionList\022/\n\rnotifications\030\001 \003(\0132\030.nakama"
-      ".api.Notification\022\030\n\020cacheable_cursor\030\002 "
-      "\001(\t\">\n\030PromoteGroupUsersRequest\022\020\n\010group"
-      "_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"G\n\023ReadStora"
-      "geObjectId\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 "
-      "\001(\t\022\017\n\007user_id\030\003 \001(\t\"P\n\031ReadStorageObjec"
-      "tsRequest\0223\n\nobject_ids\030\001 \003(\0132\037.nakama.a"
-      "pi.ReadStorageObjectId\"4\n\003Rpc\022\n\n\002id\030\001 \001("
-      "\t\022\017\n\007payload\030\002 \001(\t\022\020\n\010http_key\030\003 \001(\t\")\n\007"
-      "Session\022\017\n\007created\030\001 \001(\010\022\r\n\005token\030\002 \001(\t\""
-      "\366\001\n\rStorageObject\022\022\n\ncollection\030\001 \001(\t\022\013\n"
-      "\003key\030\002 \001(\t\022\017\n\007user_id\030\003 \001(\t\022\r\n\005value\030\004 \001"
-      "(\t\022\017\n\007version\030\005 \001(\t\022\027\n\017permission_read\030\006"
-      " \001(\005\022\030\n\020permission_write\030\007 \001(\005\022/\n\013create"
-      "_time\030\010 \001(\0132\032.google.protobuf.Timestamp\022"
-      "/\n\013update_time\030\t \001(\0132\032.google.protobuf.T"
-      "imestamp\"U\n\020StorageObjectAck\022\022\n\ncollecti"
-      "on\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007version\030\003 \001(\t\022\017"
-      "\n\007user_id\030\004 \001(\t\"\?\n\021StorageObjectAcks\022*\n\004"
-      "acks\030\001 \003(\0132\034.nakama.api.StorageObjectAck"
-      "\"<\n\016StorageObjects\022*\n\007objects\030\001 \003(\0132\031.na"
-      "kama.api.StorageObject\"O\n\021StorageObjectL"
-      "ist\022*\n\007objects\030\001 \003(\0132\031.nakama.api.Storag"
-      "eObject\022\016\n\006cursor\030\002 \001(\t\"\235\003\n\nTournament\022\n"
-      "\n\002id\030\001 \001(\t\022\r\n\005title\030\002 \001(\t\022\023\n\013description"
-      "\030\003 \001(\t\022\020\n\010category\030\004 \001(\r\022\022\n\nsort_order\030\005"
-      " \001(\r\022\014\n\004size\030\006 \001(\r\022\020\n\010max_size\030\007 \001(\r\022\025\n\r"
-      "max_num_score\030\010 \001(\r\022\021\n\tcan_enter\030\t \001(\010\022\022"
-      "\n\nend_active\030\n \001(\r\022\022\n\nnext_reset\030\013 \001(\r\022\020"
-      "\n\010metadata\030\014 \001(\t\022/\n\013create_time\030\r \001(\0132\032."
-      "google.protobuf.Timestamp\022.\n\nstart_time\030"
-      "\016 \001(\0132\032.google.protobuf.Timestamp\022,\n\010end"
-      "_time\030\017 \001(\0132\032.google.protobuf.Timestamp\022"
-      "\020\n\010duration\030\020 \001(\r\022\024\n\014start_active\030\021 \001(\r\""
-      "M\n\016TournamentList\022+\n\013tournaments\030\001 \003(\0132\026"
-      ".nakama.api.Tournament\022\016\n\006cursor\030\002 \001(\t\"\246"
-      "\001\n\024TournamentRecordList\022.\n\007records\030\001 \003(\013"
-      "2\035.nakama.api.LeaderboardRecord\0224\n\rowner"
-      "_records\030\002 \003(\0132\035.nakama.api.LeaderboardR"
-      "ecord\022\023\n\013next_cursor\030\003 \001(\t\022\023\n\013prev_curso"
-      "r\030\004 \001(\t\"\274\002\n\024UpdateAccountRequest\022.\n\010user"
-      "name\030\001 \001(\0132\034.google.protobuf.StringValue"
-      "\0222\n\014display_name\030\002 \001(\0132\034.google.protobuf"
-      ".StringValue\0220\n\navatar_url\030\003 \001(\0132\034.googl"
-      "e.protobuf.StringValue\022.\n\010lang_tag\030\004 \001(\013"
-      "2\034.google.protobuf.StringValue\022.\n\010locati"
-      "on\030\005 \001(\0132\034.google.protobuf.StringValue\022."
-      "\n\010timezone\030\006 \001(\0132\034.google.protobuf.Strin"
-      "gValue\"\221\002\n\022UpdateGroupRequest\022\020\n\010group_i"
-      "d\030\001 \001(\t\022*\n\004name\030\002 \001(\0132\034.google.protobuf."
-      "StringValue\0221\n\013description\030\003 \001(\0132\034.googl"
-      "e.protobuf.StringValue\022.\n\010lang_tag\030\004 \001(\013"
-      "2\034.google.protobuf.StringValue\0220\n\navatar"
-      "_url\030\005 \001(\0132\034.google.protobuf.StringValue"
-      "\022(\n\004open\030\006 \001(\0132\032.google.protobuf.BoolVal"
-      "ue\"\355\002\n\004User\022\n\n\002id\030\001 \001(\t\022\020\n\010username\030\002 \001("
-      "\t\022\024\n\014display_name\030\003 \001(\t\022\022\n\navatar_url\030\004 "
-      "\001(\t\022\020\n\010lang_tag\030\005 \001(\t\022\020\n\010location\030\006 \001(\t\022"
-      "\020\n\010timezone\030\007 \001(\t\022\020\n\010metadata\030\010 \001(\t\022\023\n\013f"
-      "acebook_id\030\t \001(\t\022\021\n\tgoogle_id\030\n \001(\t\022\025\n\rg"
-      "amecenter_id\030\013 \001(\t\022\020\n\010steam_id\030\014 \001(\t\022\016\n\006"
-      "online\030\r \001(\010\022\022\n\nedge_count\030\016 \001(\005\022/\n\013crea"
-      "te_time\030\017 \001(\0132\032.google.protobuf.Timestam"
-      "p\022/\n\013update_time\030\020 \001(\0132\032.google.protobuf"
-      ".Timestamp\"\367\001\n\rUserGroupList\0228\n\013user_gro"
-      "ups\030\001 \003(\0132#.nakama.api.UserGroupList.Use"
-      "rGroup\022\016\n\006cursor\030\002 \001(\t\032\233\001\n\tUserGroup\022 \n\005"
-      "group\030\001 \001(\0132\021.nakama.api.Group\022*\n\005state\030"
-      "\002 \001(\0132\033.google.protobuf.Int32Value\"@\n\005St"
-      "ate\022\016\n\nSUPERADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER"
-      "\020\002\022\020\n\014JOIN_REQUEST\020\003\"(\n\005Users\022\037\n\005users\030\001"
-      " \003(\0132\020.nakama.api.User\"\326\001\n\035WriteLeaderbo"
-      "ardRecordRequest\022\026\n\016leaderboard_id\030\001 \001(\t"
-      "\022P\n\006record\030\002 \001(\0132@.nakama.api.WriteLeade"
-      "rboardRecordRequest.LeaderboardRecordWri"
-      "te\032K\n\026LeaderboardRecordWrite\022\r\n\005score\030\001 "
-      "\001(\003\022\020\n\010subscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\t\""
-      "\302\001\n\022WriteStorageObject\022\022\n\ncollection\030\001 \001"
-      "(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\022\017\n\007versio"
-      "n\030\004 \001(\t\0224\n\017permission_read\030\005 \001(\0132\033.googl"
-      "e.protobuf.Int32Value\0225\n\020permission_writ"
-      "e\030\006 \001(\0132\033.google.protobuf.Int32Value\"M\n\032"
-      "WriteStorageObjectsRequest\022/\n\007objects\030\001 "
-      "\003(\0132\036.nakama.api.WriteStorageObject\"\321\001\n\034"
-      "WriteTournamentRecordRequest\022\025\n\rtourname"
-      "nt_id\030\001 \001(\t\022N\n\006record\030\002 \001(\0132>.nakama.api"
-      ".WriteTournamentRecordRequest.Tournament"
-      "RecordWrite\032J\n\025TournamentRecordWrite\022\r\n\005"
-      "score\030\001 \001(\003\022\020\n\010subscore\030\002 \001(\003\022\020\n\010metadat"
-      "a\030\003 \001(\tB=\n\031com.heroiclabs.nakama.apiB\tNa"
-      "kamaApiP\001Z\003api\242\002\004NKPB\252\002\006Nakamab\006proto3"
+      "2Value\"\221\001\n\025ListGroupUsersRequest\022\020\n\010grou"
+      "p_id\030\001 \001(\t\022*\n\005limit\030\002 \001(\0132\033.google.proto"
+      "buf.Int32Value\022*\n\005state\030\003 \001(\0132\033.google.p"
+      "rotobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\256\001\n(L"
+      "istLeaderboardRecordsAroundOwnerRequest\022"
+      "\026\n\016leaderboard_id\030\001 \001(\t\022+\n\005limit\030\002 \001(\0132\034"
+      ".google.protobuf.UInt32Value\022\020\n\010owner_id"
+      "\030\003 \001(\t\022+\n\006expiry\030\004 \001(\0132\033.google.protobuf"
+      ".Int64Value\"\263\001\n\035ListLeaderboardRecordsRe"
+      "quest\022\026\n\016leaderboard_id\030\001 \001(\t\022\021\n\towner_i"
+      "ds\030\002 \003(\t\022*\n\005limit\030\003 \001(\0132\033.google.protobu"
+      "f.Int32Value\022\016\n\006cursor\030\004 \001(\t\022+\n\006expiry\030\005"
+      " \001(\0132\033.google.protobuf.Int64Value\"\253\002\n\022Li"
+      "stMatchesRequest\022*\n\005limit\030\001 \001(\0132\033.google"
+      ".protobuf.Int32Value\0221\n\rauthoritative\030\002 "
+      "\001(\0132\032.google.protobuf.BoolValue\022+\n\005label"
+      "\030\003 \001(\0132\034.google.protobuf.StringValue\022-\n\010"
+      "min_size\030\004 \001(\0132\033.google.protobuf.Int32Va"
+      "lue\022-\n\010max_size\030\005 \001(\0132\033.google.protobuf."
+      "Int32Value\022+\n\005query\030\006 \001(\0132\034.google.proto"
+      "buf.StringValue\"`\n\030ListNotificationsRequ"
+      "est\022*\n\005limit\030\001 \001(\0132\033.google.protobuf.Int"
+      "32Value\022\030\n\020cacheable_cursor\030\002 \001(\t\"|\n\031Lis"
+      "tStorageObjectsRequest\022\017\n\007user_id\030\001 \001(\t\022"
+      "\022\n\ncollection\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.goo"
+      "gle.protobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\""
+      "\254\001\n\'ListTournamentRecordsAroundOwnerRequ"
+      "est\022\025\n\rtournament_id\030\001 \001(\t\022+\n\005limit\030\002 \001("
+      "\0132\034.google.protobuf.UInt32Value\022\020\n\010owner"
+      "_id\030\003 \001(\t\022+\n\006expiry\030\004 \001(\0132\033.google.proto"
+      "buf.Int64Value\"\261\001\n\034ListTournamentRecords"
+      "Request\022\025\n\rtournament_id\030\001 \001(\t\022\021\n\towner_"
+      "ids\030\002 \003(\t\022*\n\005limit\030\003 \001(\0132\033.google.protob"
+      "uf.Int32Value\022\016\n\006cursor\030\004 \001(\t\022+\n\006expiry\030"
+      "\005 \001(\0132\033.google.protobuf.Int64Value\"\240\002\n\026L"
+      "istTournamentsRequest\0224\n\016category_start\030"
+      "\001 \001(\0132\034.google.protobuf.UInt32Value\0222\n\014c"
+      "ategory_end\030\002 \001(\0132\034.google.protobuf.UInt"
+      "32Value\0220\n\nstart_time\030\003 \001(\0132\034.google.pro"
+      "tobuf.UInt32Value\022.\n\010end_time\030\004 \001(\0132\034.go"
+      "ogle.protobuf.UInt32Value\022*\n\005limit\030\006 \001(\013"
+      "2\033.google.protobuf.Int32Value\022\016\n\006cursor\030"
+      "\010 \001(\t\"\220\001\n\025ListUserGroupsRequest\022\017\n\007user_"
+      "id\030\001 \001(\t\022*\n\005limit\030\002 \001(\0132\033.google.protobu"
+      "f.Int32Value\022*\n\005state\030\003 \001(\0132\033.google.pro"
+      "tobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"k\n\005Matc"
+      "h\022\020\n\010match_id\030\001 \001(\t\022\025\n\rauthoritative\030\002 \001"
+      "(\010\022+\n\005label\030\003 \001(\0132\034.google.protobuf.Stri"
+      "ngValue\022\014\n\004size\030\004 \001(\005\"/\n\tMatchList\022\"\n\007ma"
+      "tches\030\001 \003(\0132\021.nakama.api.Match\"\242\001\n\014Notif"
+      "ication\022\n\n\002id\030\001 \001(\t\022\017\n\007subject\030\002 \001(\t\022\017\n\007"
+      "content\030\003 \001(\t\022\014\n\004code\030\004 \001(\005\022\021\n\tsender_id"
+      "\030\005 \001(\t\022/\n\013create_time\030\006 \001(\0132\032.google.pro"
+      "tobuf.Timestamp\022\022\n\npersistent\030\007 \001(\010\"]\n\020N"
+      "otificationList\022/\n\rnotifications\030\001 \003(\0132\030"
+      ".nakama.api.Notification\022\030\n\020cacheable_cu"
+      "rsor\030\002 \001(\t\">\n\030PromoteGroupUsersRequest\022\020"
+      "\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"=\n\027De"
+      "moteGroupUsersRequest\022\020\n\010group_id\030\001 \001(\t\022"
+      "\020\n\010user_ids\030\002 \003(\t\"G\n\023ReadStorageObjectId"
+      "\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007use"
+      "r_id\030\003 \001(\t\"P\n\031ReadStorageObjectsRequest\022"
+      "3\n\nobject_ids\030\001 \003(\0132\037.nakama.api.ReadSto"
+      "rageObjectId\"4\n\003Rpc\022\n\n\002id\030\001 \001(\t\022\017\n\007paylo"
+      "ad\030\002 \001(\t\022\020\n\010http_key\030\003 \001(\t\")\n\007Session\022\017\n"
+      "\007created\030\001 \001(\010\022\r\n\005token\030\002 \001(\t\"\366\001\n\rStorag"
+      "eObject\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t"
+      "\022\017\n\007user_id\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\022\017\n\007vers"
+      "ion\030\005 \001(\t\022\027\n\017permission_read\030\006 \001(\005\022\030\n\020pe"
+      "rmission_write\030\007 \001(\005\022/\n\013create_time\030\010 \001("
+      "\0132\032.google.protobuf.Timestamp\022/\n\013update_"
+      "time\030\t \001(\0132\032.google.protobuf.Timestamp\"U"
+      "\n\020StorageObjectAck\022\022\n\ncollection\030\001 \001(\t\022\013"
+      "\n\003key\030\002 \001(\t\022\017\n\007version\030\003 \001(\t\022\017\n\007user_id\030"
+      "\004 \001(\t\"\?\n\021StorageObjectAcks\022*\n\004acks\030\001 \003(\013"
+      "2\034.nakama.api.StorageObjectAck\"<\n\016Storag"
+      "eObjects\022*\n\007objects\030\001 \003(\0132\031.nakama.api.S"
+      "torageObject\"O\n\021StorageObjectList\022*\n\007obj"
+      "ects\030\001 \003(\0132\031.nakama.api.StorageObject\022\016\n"
+      "\006cursor\030\002 \001(\t\"\235\003\n\nTournament\022\n\n\002id\030\001 \001(\t"
+      "\022\r\n\005title\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010"
+      "category\030\004 \001(\r\022\022\n\nsort_order\030\005 \001(\r\022\014\n\004si"
+      "ze\030\006 \001(\r\022\020\n\010max_size\030\007 \001(\r\022\025\n\rmax_num_sc"
+      "ore\030\010 \001(\r\022\021\n\tcan_enter\030\t \001(\010\022\022\n\nend_acti"
+      "ve\030\n \001(\r\022\022\n\nnext_reset\030\013 \001(\r\022\020\n\010metadata"
+      "\030\014 \001(\t\022/\n\013create_time\030\r \001(\0132\032.google.pro"
+      "tobuf.Timestamp\022.\n\nstart_time\030\016 \001(\0132\032.go"
+      "ogle.protobuf.Timestamp\022,\n\010end_time\030\017 \001("
+      "\0132\032.google.protobuf.Timestamp\022\020\n\010duratio"
+      "n\030\020 \001(\r\022\024\n\014start_active\030\021 \001(\r\"M\n\016Tournam"
+      "entList\022+\n\013tournaments\030\001 \003(\0132\026.nakama.ap"
+      "i.Tournament\022\016\n\006cursor\030\002 \001(\t\"\246\001\n\024Tournam"
+      "entRecordList\022.\n\007records\030\001 \003(\0132\035.nakama."
+      "api.LeaderboardRecord\0224\n\rowner_records\030\002"
+      " \003(\0132\035.nakama.api.LeaderboardRecord\022\023\n\013n"
+      "ext_cursor\030\003 \001(\t\022\023\n\013prev_cursor\030\004 \001(\t\"\274\002"
+      "\n\024UpdateAccountRequest\022.\n\010username\030\001 \001(\013"
+      "2\034.google.protobuf.StringValue\0222\n\014displa"
+      "y_name\030\002 \001(\0132\034.google.protobuf.StringVal"
+      "ue\0220\n\navatar_url\030\003 \001(\0132\034.google.protobuf"
+      ".StringValue\022.\n\010lang_tag\030\004 \001(\0132\034.google."
+      "protobuf.StringValue\022.\n\010location\030\005 \001(\0132\034"
+      ".google.protobuf.StringValue\022.\n\010timezone"
+      "\030\006 \001(\0132\034.google.protobuf.StringValue\"\221\002\n"
+      "\022UpdateGroupRequest\022\020\n\010group_id\030\001 \001(\t\022*\n"
+      "\004name\030\002 \001(\0132\034.google.protobuf.StringValu"
+      "e\0221\n\013description\030\003 \001(\0132\034.google.protobuf"
+      ".StringValue\022.\n\010lang_tag\030\004 \001(\0132\034.google."
+      "protobuf.StringValue\0220\n\navatar_url\030\005 \001(\013"
+      "2\034.google.protobuf.StringValue\022(\n\004open\030\006"
+      " \001(\0132\032.google.protobuf.BoolValue\"\241\003\n\004Use"
+      "r\022\n\n\002id\030\001 \001(\t\022\020\n\010username\030\002 \001(\t\022\024\n\014displ"
+      "ay_name\030\003 \001(\t\022\022\n\navatar_url\030\004 \001(\t\022\020\n\010lan"
+      "g_tag\030\005 \001(\t\022\020\n\010location\030\006 \001(\t\022\020\n\010timezon"
+      "e\030\007 \001(\t\022\020\n\010metadata\030\010 \001(\t\022\023\n\013facebook_id"
+      "\030\t \001(\t\022\021\n\tgoogle_id\030\n \001(\t\022\025\n\rgamecenter_"
+      "id\030\013 \001(\t\022\020\n\010steam_id\030\014 \001(\t\022\016\n\006online\030\r \001"
+      "(\010\022\022\n\nedge_count\030\016 \001(\005\022/\n\013create_time\030\017 "
+      "\001(\0132\032.google.protobuf.Timestamp\022/\n\013updat"
+      "e_time\030\020 \001(\0132\032.google.protobuf.Timestamp"
+      "\022 \n\030facebook_instant_game_id\030\021 \001(\t\022\020\n\010ap"
+      "ple_id\030\022 \001(\t\"\367\001\n\rUserGroupList\0228\n\013user_g"
+      "roups\030\001 \003(\0132#.nakama.api.UserGroupList.U"
+      "serGroup\022\016\n\006cursor\030\002 \001(\t\032\233\001\n\tUserGroup\022 "
+      "\n\005group\030\001 \001(\0132\021.nakama.api.Group\022*\n\005stat"
+      "e\030\002 \001(\0132\033.google.protobuf.Int32Value\"@\n\005"
+      "State\022\016\n\nSUPERADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMB"
+      "ER\020\002\022\020\n\014JOIN_REQUEST\020\003\"(\n\005Users\022\037\n\005users"
+      "\030\001 \003(\0132\020.nakama.api.User\"\326\001\n\035WriteLeader"
+      "boardRecordRequest\022\026\n\016leaderboard_id\030\001 \001"
+      "(\t\022P\n\006record\030\002 \001(\0132@.nakama.api.WriteLea"
+      "derboardRecordRequest.LeaderboardRecordW"
+      "rite\032K\n\026LeaderboardRecordWrite\022\r\n\005score\030"
+      "\001 \001(\003\022\020\n\010subscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001("
+      "\t\"\302\001\n\022WriteStorageObject\022\022\n\ncollection\030\001"
+      " \001(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\022\017\n\007vers"
+      "ion\030\004 \001(\t\0224\n\017permission_read\030\005 \001(\0132\033.goo"
+      "gle.protobuf.Int32Value\0225\n\020permission_wr"
+      "ite\030\006 \001(\0132\033.google.protobuf.Int32Value\"M"
+      "\n\032WriteStorageObjectsRequest\022/\n\007objects\030"
+      "\001 \003(\0132\036.nakama.api.WriteStorageObject\"\321\001"
+      "\n\034WriteTournamentRecordRequest\022\025\n\rtourna"
+      "ment_id\030\001 \001(\t\022N\n\006record\030\002 \001(\0132>.nakama.a"
+      "pi.WriteTournamentRecordRequest.Tourname"
+      "ntRecordWrite\032J\n\025TournamentRecordWrite\022\r"
+      "\n\005score\030\001 \001(\003\022\020\n\010subscore\030\002 \001(\003\022\020\n\010metad"
+      "ata\030\003 \001(\tB=\n\031com.heroiclabs.nakama.apiB\t"
+      "NakamaApiP\001Z\003api\242\002\004NKPB\252\002\006Nakamab\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 11718);
+      descriptor, 12600);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "github.com/heroiclabs/nakama-common/api/api.proto", &protobuf_RegisterTypes);
   ::protobuf_google_2fprotobuf_2ftimestamp_2eproto::AddDescriptors();
@@ -3435,12 +3709,20 @@ void Account::InitAsDefaultInstance() {
       ::nakama::api::User::internal_default_instance());
   ::nakama::api::_Account_default_instance_._instance.get_mutable()->verify_time_ = const_cast< ::google::protobuf::Timestamp*>(
       ::google::protobuf::Timestamp::internal_default_instance());
+  ::nakama::api::_Account_default_instance_._instance.get_mutable()->disable_time_ = const_cast< ::google::protobuf::Timestamp*>(
+      ::google::protobuf::Timestamp::internal_default_instance());
 }
 void Account::clear_verify_time() {
   if (GetArenaNoVirtual() == NULL && verify_time_ != NULL) {
     delete verify_time_;
   }
   verify_time_ = NULL;
+}
+void Account::clear_disable_time() {
+  if (GetArenaNoVirtual() == NULL && disable_time_ != NULL) {
+    delete disable_time_;
+  }
+  disable_time_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Account::kUserFieldNumber;
@@ -3449,6 +3731,7 @@ const int Account::kEmailFieldNumber;
 const int Account::kDevicesFieldNumber;
 const int Account::kCustomIdFieldNumber;
 const int Account::kVerifyTimeFieldNumber;
+const int Account::kDisableTimeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Account::Account()
@@ -3485,6 +3768,11 @@ Account::Account(const Account& from)
   } else {
     verify_time_ = NULL;
   }
+  if (from.has_disable_time()) {
+    disable_time_ = new ::google::protobuf::Timestamp(*from.disable_time_);
+  } else {
+    disable_time_ = NULL;
+  }
   // @@protoc_insertion_point(copy_constructor:nakama.api.Account)
 }
 
@@ -3493,8 +3781,8 @@ void Account::SharedCtor() {
   email_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   custom_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&user_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&verify_time_) -
-      reinterpret_cast<char*>(&user_)) + sizeof(verify_time_));
+      reinterpret_cast<char*>(&disable_time_) -
+      reinterpret_cast<char*>(&user_)) + sizeof(disable_time_));
 }
 
 Account::~Account() {
@@ -3508,6 +3796,7 @@ void Account::SharedDtor() {
   custom_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete user_;
   if (this != internal_default_instance()) delete verify_time_;
+  if (this != internal_default_instance()) delete disable_time_;
 }
 
 void Account::SetCachedSize(int size) const {
@@ -3542,6 +3831,10 @@ void Account::Clear() {
     delete verify_time_;
   }
   verify_time_ = NULL;
+  if (GetArenaNoVirtual() == NULL && disable_time_ != NULL) {
+    delete disable_time_;
+  }
+  disable_time_ = NULL;
   _internal_metadata_.Clear();
 }
 
@@ -3639,6 +3932,18 @@ bool Account::MergePartialFromCodedStream(
         break;
       }
 
+      // .google.protobuf.Timestamp disable_time = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_disable_time()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -3716,6 +4021,12 @@ void Account::SerializeWithCachedSizes(
       6, this->_internal_verify_time(), output);
   }
 
+  // .google.protobuf.Timestamp disable_time = 7;
+  if (this->has_disable_time()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->_internal_disable_time(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -3785,6 +4096,13 @@ void Account::SerializeWithCachedSizes(
         6, this->_internal_verify_time(), deterministic, target);
   }
 
+  // .google.protobuf.Timestamp disable_time = 7;
+  if (this->has_disable_time()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        7, this->_internal_disable_time(), deterministic, target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -3848,6 +4166,13 @@ size_t Account::ByteSizeLong() const {
         *verify_time_);
   }
 
+  // .google.protobuf.Timestamp disable_time = 7;
+  if (this->has_disable_time()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *disable_time_);
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -3894,6 +4219,9 @@ void Account::MergeFrom(const Account& from) {
   if (from.has_verify_time()) {
     mutable_verify_time()->::google::protobuf::Timestamp::MergeFrom(from.verify_time());
   }
+  if (from.has_disable_time()) {
+    mutable_disable_time()->::google::protobuf::Timestamp::MergeFrom(from.disable_time());
+  }
 }
 
 void Account::CopyFrom(const ::google::protobuf::Message& from) {
@@ -3929,10 +4257,426 @@ void Account::InternalSwap(Account* other) {
     GetArenaNoVirtual());
   swap(user_, other->user_);
   swap(verify_time_, other->verify_time_);
+  swap(disable_time_, other->disable_time_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
 ::google::protobuf::Metadata Account::GetMetadata() const {
+  protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+AccountApple_VarsEntry_DoNotUse::AccountApple_VarsEntry_DoNotUse() {}
+AccountApple_VarsEntry_DoNotUse::AccountApple_VarsEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
+void AccountApple_VarsEntry_DoNotUse::MergeFrom(const AccountApple_VarsEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::google::protobuf::Metadata AccountApple_VarsEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[1];
+}
+void AccountApple_VarsEntry_DoNotUse::MergeFrom(
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
+void AccountApple::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int AccountApple::kTokenFieldNumber;
+const int AccountApple::kVarsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+AccountApple::AccountApple()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountApple.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:nakama.api.AccountApple)
+}
+AccountApple::AccountApple(const AccountApple& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  vars_.MergeFrom(from.vars_);
+  token_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.token().size() > 0) {
+    token_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.token_);
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.AccountApple)
+}
+
+void AccountApple::SharedCtor() {
+  token_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+AccountApple::~AccountApple() {
+  // @@protoc_insertion_point(destructor:nakama.api.AccountApple)
+  SharedDtor();
+}
+
+void AccountApple::SharedDtor() {
+  token_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void AccountApple::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* AccountApple::descriptor() {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const AccountApple& AccountApple::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountApple.base);
+  return *internal_default_instance();
+}
+
+
+void AccountApple::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.AccountApple)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  vars_.Clear();
+  token_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+bool AccountApple::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:nakama.api.AccountApple)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string token = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_token()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->token().data(), static_cast<int>(this->token().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.AccountApple.token"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // map<string, string> vars = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          AccountApple_VarsEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              AccountApple_VarsEntry_DoNotUse,
+              ::std::string, ::std::string,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::std::string > > parser(&vars_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.AccountApple.VarsEntry.key"));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.value().data(), static_cast<int>(parser.value().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.AccountApple.VarsEntry.value"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:nakama.api.AccountApple)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:nakama.api.AccountApple)
+  return false;
+#undef DO_
+}
+
+void AccountApple::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:nakama.api.AccountApple)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->token().data(), static_cast<int>(this->token().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.AccountApple.token");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->token(), output);
+  }
+
+  // map<string, string> vars = 2;
+  if (!this->vars().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::std::string >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.AccountApple.VarsEntry.key");
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->second.data(), static_cast<int>(p->second.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.AccountApple.VarsEntry.value");
+      }
+    };
+
+    if (output->IsSerializationDeterministic() &&
+        this->vars().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->vars().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::std::string >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->vars().begin();
+          it != this->vars().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<AccountApple_VarsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(vars_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            2, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<AccountApple_VarsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->vars().begin();
+          it != this->vars().end(); ++it) {
+        entry.reset(vars_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            2, *entry, output);
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:nakama.api.AccountApple)
+}
+
+::google::protobuf::uint8* AccountApple::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.AccountApple)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->token().data(), static_cast<int>(this->token().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.AccountApple.token");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->token(), target);
+  }
+
+  // map<string, string> vars = 2;
+  if (!this->vars().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::std::string >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.AccountApple.VarsEntry.key");
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->second.data(), static_cast<int>(p->second.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.AccountApple.VarsEntry.value");
+      }
+    };
+
+    if (deterministic &&
+        this->vars().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->vars().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::std::string >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->vars().begin();
+          it != this->vars().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<AccountApple_VarsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(vars_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       2, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<AccountApple_VarsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->vars().begin();
+          it != this->vars().end(); ++it) {
+        entry.reset(vars_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       2, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.AccountApple)
+  return target;
+}
+
+size_t AccountApple::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.AccountApple)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // map<string, string> vars = 2;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->vars_size());
+  {
+    ::std::unique_ptr<AccountApple_VarsEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+        it = this->vars().begin();
+        it != this->vars().end(); ++it) {
+      entry.reset(vars_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
+  }
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->token());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void AccountApple::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.AccountApple)
+  GOOGLE_DCHECK_NE(&from, this);
+  const AccountApple* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const AccountApple>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.AccountApple)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.AccountApple)
+    MergeFrom(*source);
+  }
+}
+
+void AccountApple::MergeFrom(const AccountApple& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.AccountApple)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  vars_.MergeFrom(from.vars_);
+  if (from.token().size() > 0) {
+
+    token_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.token_);
+  }
+}
+
+void AccountApple::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.AccountApple)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AccountApple::CopyFrom(const AccountApple& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.AccountApple)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AccountApple::IsInitialized() const {
+  return true;
+}
+
+void AccountApple::Swap(AccountApple* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void AccountApple::InternalSwap(AccountApple* other) {
+  using std::swap;
+  vars_.Swap(&other->vars_);
+  token_.Swap(&other->token_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata AccountApple::GetMetadata() const {
   protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -3947,7 +4691,7 @@ void AccountCustom_VarsEntry_DoNotUse::MergeFrom(const AccountCustom_VarsEntry_D
 }
 ::google::protobuf::Metadata AccountCustom_VarsEntry_DoNotUse::GetMetadata() const {
   ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[1];
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[3];
 }
 void AccountCustom_VarsEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -4362,7 +5106,7 @@ void AccountDevice_VarsEntry_DoNotUse::MergeFrom(const AccountDevice_VarsEntry_D
 }
 ::google::protobuf::Metadata AccountDevice_VarsEntry_DoNotUse::GetMetadata() const {
   ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[3];
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[5];
 }
 void AccountDevice_VarsEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -4777,7 +5521,7 @@ void AccountEmail_VarsEntry_DoNotUse::MergeFrom(const AccountEmail_VarsEntry_DoN
 }
 ::google::protobuf::Metadata AccountEmail_VarsEntry_DoNotUse::GetMetadata() const {
   ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[5];
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[7];
 }
 void AccountEmail_VarsEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -5250,7 +5994,7 @@ void AccountFacebook_VarsEntry_DoNotUse::MergeFrom(const AccountFacebook_VarsEnt
 }
 ::google::protobuf::Metadata AccountFacebook_VarsEntry_DoNotUse::GetMetadata() const {
   ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[7];
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[9];
 }
 void AccountFacebook_VarsEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -5658,6 +6402,421 @@ void AccountFacebook::InternalSwap(AccountFacebook* other) {
 
 // ===================================================================
 
+AccountFacebookInstantGame_VarsEntry_DoNotUse::AccountFacebookInstantGame_VarsEntry_DoNotUse() {}
+AccountFacebookInstantGame_VarsEntry_DoNotUse::AccountFacebookInstantGame_VarsEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
+void AccountFacebookInstantGame_VarsEntry_DoNotUse::MergeFrom(const AccountFacebookInstantGame_VarsEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::google::protobuf::Metadata AccountFacebookInstantGame_VarsEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[11];
+}
+void AccountFacebookInstantGame_VarsEntry_DoNotUse::MergeFrom(
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
+void AccountFacebookInstantGame::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int AccountFacebookInstantGame::kSignedPlayerInfoFieldNumber;
+const int AccountFacebookInstantGame::kVarsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+AccountFacebookInstantGame::AccountFacebookInstantGame()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountFacebookInstantGame.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:nakama.api.AccountFacebookInstantGame)
+}
+AccountFacebookInstantGame::AccountFacebookInstantGame(const AccountFacebookInstantGame& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  vars_.MergeFrom(from.vars_);
+  signed_player_info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.signed_player_info().size() > 0) {
+    signed_player_info_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.signed_player_info_);
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.AccountFacebookInstantGame)
+}
+
+void AccountFacebookInstantGame::SharedCtor() {
+  signed_player_info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+AccountFacebookInstantGame::~AccountFacebookInstantGame() {
+  // @@protoc_insertion_point(destructor:nakama.api.AccountFacebookInstantGame)
+  SharedDtor();
+}
+
+void AccountFacebookInstantGame::SharedDtor() {
+  signed_player_info_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void AccountFacebookInstantGame::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* AccountFacebookInstantGame::descriptor() {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const AccountFacebookInstantGame& AccountFacebookInstantGame::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AccountFacebookInstantGame.base);
+  return *internal_default_instance();
+}
+
+
+void AccountFacebookInstantGame::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.AccountFacebookInstantGame)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  vars_.Clear();
+  signed_player_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+bool AccountFacebookInstantGame::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:nakama.api.AccountFacebookInstantGame)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string signed_player_info = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_signed_player_info()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->signed_player_info().data(), static_cast<int>(this->signed_player_info().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.AccountFacebookInstantGame.signed_player_info"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // map<string, string> vars = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          AccountFacebookInstantGame_VarsEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              AccountFacebookInstantGame_VarsEntry_DoNotUse,
+              ::std::string, ::std::string,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::std::string > > parser(&vars_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.AccountFacebookInstantGame.VarsEntry.key"));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.value().data(), static_cast<int>(parser.value().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.AccountFacebookInstantGame.VarsEntry.value"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:nakama.api.AccountFacebookInstantGame)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:nakama.api.AccountFacebookInstantGame)
+  return false;
+#undef DO_
+}
+
+void AccountFacebookInstantGame::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:nakama.api.AccountFacebookInstantGame)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string signed_player_info = 1;
+  if (this->signed_player_info().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->signed_player_info().data(), static_cast<int>(this->signed_player_info().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.AccountFacebookInstantGame.signed_player_info");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->signed_player_info(), output);
+  }
+
+  // map<string, string> vars = 2;
+  if (!this->vars().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::std::string >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.AccountFacebookInstantGame.VarsEntry.key");
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->second.data(), static_cast<int>(p->second.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.AccountFacebookInstantGame.VarsEntry.value");
+      }
+    };
+
+    if (output->IsSerializationDeterministic() &&
+        this->vars().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->vars().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::std::string >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->vars().begin();
+          it != this->vars().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<AccountFacebookInstantGame_VarsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(vars_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            2, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<AccountFacebookInstantGame_VarsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->vars().begin();
+          it != this->vars().end(); ++it) {
+        entry.reset(vars_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            2, *entry, output);
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:nakama.api.AccountFacebookInstantGame)
+}
+
+::google::protobuf::uint8* AccountFacebookInstantGame::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.AccountFacebookInstantGame)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string signed_player_info = 1;
+  if (this->signed_player_info().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->signed_player_info().data(), static_cast<int>(this->signed_player_info().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.AccountFacebookInstantGame.signed_player_info");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->signed_player_info(), target);
+  }
+
+  // map<string, string> vars = 2;
+  if (!this->vars().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::std::string >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.AccountFacebookInstantGame.VarsEntry.key");
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->second.data(), static_cast<int>(p->second.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "nakama.api.AccountFacebookInstantGame.VarsEntry.value");
+      }
+    };
+
+    if (deterministic &&
+        this->vars().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->vars().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::std::string >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->vars().begin();
+          it != this->vars().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<AccountFacebookInstantGame_VarsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(vars_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       2, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<AccountFacebookInstantGame_VarsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->vars().begin();
+          it != this->vars().end(); ++it) {
+        entry.reset(vars_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       2, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.AccountFacebookInstantGame)
+  return target;
+}
+
+size_t AccountFacebookInstantGame::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.AccountFacebookInstantGame)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // map<string, string> vars = 2;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->vars_size());
+  {
+    ::std::unique_ptr<AccountFacebookInstantGame_VarsEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+        it = this->vars().begin();
+        it != this->vars().end(); ++it) {
+      entry.reset(vars_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
+  }
+
+  // string signed_player_info = 1;
+  if (this->signed_player_info().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->signed_player_info());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void AccountFacebookInstantGame::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.AccountFacebookInstantGame)
+  GOOGLE_DCHECK_NE(&from, this);
+  const AccountFacebookInstantGame* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const AccountFacebookInstantGame>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.AccountFacebookInstantGame)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.AccountFacebookInstantGame)
+    MergeFrom(*source);
+  }
+}
+
+void AccountFacebookInstantGame::MergeFrom(const AccountFacebookInstantGame& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.AccountFacebookInstantGame)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  vars_.MergeFrom(from.vars_);
+  if (from.signed_player_info().size() > 0) {
+
+    signed_player_info_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.signed_player_info_);
+  }
+}
+
+void AccountFacebookInstantGame::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.AccountFacebookInstantGame)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AccountFacebookInstantGame::CopyFrom(const AccountFacebookInstantGame& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.AccountFacebookInstantGame)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AccountFacebookInstantGame::IsInitialized() const {
+  return true;
+}
+
+void AccountFacebookInstantGame::Swap(AccountFacebookInstantGame* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void AccountFacebookInstantGame::InternalSwap(AccountFacebookInstantGame* other) {
+  using std::swap;
+  vars_.Swap(&other->vars_);
+  signed_player_info_.Swap(&other->signed_player_info_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata AccountFacebookInstantGame::GetMetadata() const {
+  protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 AccountGameCenter_VarsEntry_DoNotUse::AccountGameCenter_VarsEntry_DoNotUse() {}
 AccountGameCenter_VarsEntry_DoNotUse::AccountGameCenter_VarsEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
 void AccountGameCenter_VarsEntry_DoNotUse::MergeFrom(const AccountGameCenter_VarsEntry_DoNotUse& other) {
@@ -5665,7 +6824,7 @@ void AccountGameCenter_VarsEntry_DoNotUse::MergeFrom(const AccountGameCenter_Var
 }
 ::google::protobuf::Metadata AccountGameCenter_VarsEntry_DoNotUse::GetMetadata() const {
   ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[9];
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[13];
 }
 void AccountGameCenter_VarsEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -6351,7 +7510,7 @@ void AccountGoogle_VarsEntry_DoNotUse::MergeFrom(const AccountGoogle_VarsEntry_D
 }
 ::google::protobuf::Metadata AccountGoogle_VarsEntry_DoNotUse::GetMetadata() const {
   ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[11];
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[15];
 }
 void AccountGoogle_VarsEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -6766,7 +7925,7 @@ void AccountSteam_VarsEntry_DoNotUse::MergeFrom(const AccountSteam_VarsEntry_DoN
 }
 ::google::protobuf::Metadata AccountSteam_VarsEntry_DoNotUse::GetMetadata() const {
   ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[13];
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[17];
 }
 void AccountSteam_VarsEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -7743,6 +8902,355 @@ void AddGroupUsersRequest::InternalSwap(AddGroupUsersRequest* other) {
 }
 
 ::google::protobuf::Metadata AddGroupUsersRequest::GetMetadata() const {
+  protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void AuthenticateAppleRequest::InitAsDefaultInstance() {
+  ::nakama::api::_AuthenticateAppleRequest_default_instance_._instance.get_mutable()->account_ = const_cast< ::nakama::api::AccountApple*>(
+      ::nakama::api::AccountApple::internal_default_instance());
+  ::nakama::api::_AuthenticateAppleRequest_default_instance_._instance.get_mutable()->create_ = const_cast< ::google::protobuf::BoolValue*>(
+      ::google::protobuf::BoolValue::internal_default_instance());
+}
+void AuthenticateAppleRequest::clear_create() {
+  if (GetArenaNoVirtual() == NULL && create_ != NULL) {
+    delete create_;
+  }
+  create_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int AuthenticateAppleRequest::kAccountFieldNumber;
+const int AuthenticateAppleRequest::kCreateFieldNumber;
+const int AuthenticateAppleRequest::kUsernameFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+AuthenticateAppleRequest::AuthenticateAppleRequest()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AuthenticateAppleRequest.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:nakama.api.AuthenticateAppleRequest)
+}
+AuthenticateAppleRequest::AuthenticateAppleRequest(const AuthenticateAppleRequest& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  username_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.username().size() > 0) {
+    username_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.username_);
+  }
+  if (from.has_account()) {
+    account_ = new ::nakama::api::AccountApple(*from.account_);
+  } else {
+    account_ = NULL;
+  }
+  if (from.has_create()) {
+    create_ = new ::google::protobuf::BoolValue(*from.create_);
+  } else {
+    create_ = NULL;
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.AuthenticateAppleRequest)
+}
+
+void AuthenticateAppleRequest::SharedCtor() {
+  username_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&account_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&create_) -
+      reinterpret_cast<char*>(&account_)) + sizeof(create_));
+}
+
+AuthenticateAppleRequest::~AuthenticateAppleRequest() {
+  // @@protoc_insertion_point(destructor:nakama.api.AuthenticateAppleRequest)
+  SharedDtor();
+}
+
+void AuthenticateAppleRequest::SharedDtor() {
+  username_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete account_;
+  if (this != internal_default_instance()) delete create_;
+}
+
+void AuthenticateAppleRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* AuthenticateAppleRequest::descriptor() {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const AuthenticateAppleRequest& AuthenticateAppleRequest::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AuthenticateAppleRequest.base);
+  return *internal_default_instance();
+}
+
+
+void AuthenticateAppleRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.AuthenticateAppleRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  username_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && account_ != NULL) {
+    delete account_;
+  }
+  account_ = NULL;
+  if (GetArenaNoVirtual() == NULL && create_ != NULL) {
+    delete create_;
+  }
+  create_ = NULL;
+  _internal_metadata_.Clear();
+}
+
+bool AuthenticateAppleRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:nakama.api.AuthenticateAppleRequest)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .nakama.api.AccountApple account = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_account()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .google.protobuf.BoolValue create = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_create()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string username = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_username()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->username().data(), static_cast<int>(this->username().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.AuthenticateAppleRequest.username"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:nakama.api.AuthenticateAppleRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:nakama.api.AuthenticateAppleRequest)
+  return false;
+#undef DO_
+}
+
+void AuthenticateAppleRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:nakama.api.AuthenticateAppleRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .nakama.api.AccountApple account = 1;
+  if (this->has_account()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->_internal_account(), output);
+  }
+
+  // .google.protobuf.BoolValue create = 2;
+  if (this->has_create()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->_internal_create(), output);
+  }
+
+  // string username = 3;
+  if (this->username().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->username().data(), static_cast<int>(this->username().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.AuthenticateAppleRequest.username");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->username(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:nakama.api.AuthenticateAppleRequest)
+}
+
+::google::protobuf::uint8* AuthenticateAppleRequest::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.AuthenticateAppleRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .nakama.api.AccountApple account = 1;
+  if (this->has_account()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->_internal_account(), deterministic, target);
+  }
+
+  // .google.protobuf.BoolValue create = 2;
+  if (this->has_create()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        2, this->_internal_create(), deterministic, target);
+  }
+
+  // string username = 3;
+  if (this->username().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->username().data(), static_cast<int>(this->username().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.AuthenticateAppleRequest.username");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->username(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.AuthenticateAppleRequest)
+  return target;
+}
+
+size_t AuthenticateAppleRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.AuthenticateAppleRequest)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // string username = 3;
+  if (this->username().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->username());
+  }
+
+  // .nakama.api.AccountApple account = 1;
+  if (this->has_account()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *account_);
+  }
+
+  // .google.protobuf.BoolValue create = 2;
+  if (this->has_create()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *create_);
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void AuthenticateAppleRequest::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.AuthenticateAppleRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const AuthenticateAppleRequest* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const AuthenticateAppleRequest>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.AuthenticateAppleRequest)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.AuthenticateAppleRequest)
+    MergeFrom(*source);
+  }
+}
+
+void AuthenticateAppleRequest::MergeFrom(const AuthenticateAppleRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.AuthenticateAppleRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.username().size() > 0) {
+
+    username_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.username_);
+  }
+  if (from.has_account()) {
+    mutable_account()->::nakama::api::AccountApple::MergeFrom(from.account());
+  }
+  if (from.has_create()) {
+    mutable_create()->::google::protobuf::BoolValue::MergeFrom(from.create());
+  }
+}
+
+void AuthenticateAppleRequest::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.AuthenticateAppleRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AuthenticateAppleRequest::CopyFrom(const AuthenticateAppleRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.AuthenticateAppleRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AuthenticateAppleRequest::IsInitialized() const {
+  return true;
+}
+
+void AuthenticateAppleRequest::Swap(AuthenticateAppleRequest* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void AuthenticateAppleRequest::InternalSwap(AuthenticateAppleRequest* other) {
+  using std::swap;
+  username_.Swap(&other->username_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(account_, other->account_);
+  swap(create_, other->create_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata AuthenticateAppleRequest::GetMetadata() const {
   protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -9201,6 +10709,355 @@ void AuthenticateFacebookRequest::InternalSwap(AuthenticateFacebookRequest* othe
 
 // ===================================================================
 
+void AuthenticateFacebookInstantGameRequest::InitAsDefaultInstance() {
+  ::nakama::api::_AuthenticateFacebookInstantGameRequest_default_instance_._instance.get_mutable()->account_ = const_cast< ::nakama::api::AccountFacebookInstantGame*>(
+      ::nakama::api::AccountFacebookInstantGame::internal_default_instance());
+  ::nakama::api::_AuthenticateFacebookInstantGameRequest_default_instance_._instance.get_mutable()->create_ = const_cast< ::google::protobuf::BoolValue*>(
+      ::google::protobuf::BoolValue::internal_default_instance());
+}
+void AuthenticateFacebookInstantGameRequest::clear_create() {
+  if (GetArenaNoVirtual() == NULL && create_ != NULL) {
+    delete create_;
+  }
+  create_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int AuthenticateFacebookInstantGameRequest::kAccountFieldNumber;
+const int AuthenticateFacebookInstantGameRequest::kCreateFieldNumber;
+const int AuthenticateFacebookInstantGameRequest::kUsernameFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+AuthenticateFacebookInstantGameRequest::AuthenticateFacebookInstantGameRequest()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AuthenticateFacebookInstantGameRequest.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:nakama.api.AuthenticateFacebookInstantGameRequest)
+}
+AuthenticateFacebookInstantGameRequest::AuthenticateFacebookInstantGameRequest(const AuthenticateFacebookInstantGameRequest& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  username_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.username().size() > 0) {
+    username_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.username_);
+  }
+  if (from.has_account()) {
+    account_ = new ::nakama::api::AccountFacebookInstantGame(*from.account_);
+  } else {
+    account_ = NULL;
+  }
+  if (from.has_create()) {
+    create_ = new ::google::protobuf::BoolValue(*from.create_);
+  } else {
+    create_ = NULL;
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.AuthenticateFacebookInstantGameRequest)
+}
+
+void AuthenticateFacebookInstantGameRequest::SharedCtor() {
+  username_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&account_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&create_) -
+      reinterpret_cast<char*>(&account_)) + sizeof(create_));
+}
+
+AuthenticateFacebookInstantGameRequest::~AuthenticateFacebookInstantGameRequest() {
+  // @@protoc_insertion_point(destructor:nakama.api.AuthenticateFacebookInstantGameRequest)
+  SharedDtor();
+}
+
+void AuthenticateFacebookInstantGameRequest::SharedDtor() {
+  username_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete account_;
+  if (this != internal_default_instance()) delete create_;
+}
+
+void AuthenticateFacebookInstantGameRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* AuthenticateFacebookInstantGameRequest::descriptor() {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const AuthenticateFacebookInstantGameRequest& AuthenticateFacebookInstantGameRequest::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_AuthenticateFacebookInstantGameRequest.base);
+  return *internal_default_instance();
+}
+
+
+void AuthenticateFacebookInstantGameRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.AuthenticateFacebookInstantGameRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  username_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && account_ != NULL) {
+    delete account_;
+  }
+  account_ = NULL;
+  if (GetArenaNoVirtual() == NULL && create_ != NULL) {
+    delete create_;
+  }
+  create_ = NULL;
+  _internal_metadata_.Clear();
+}
+
+bool AuthenticateFacebookInstantGameRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:nakama.api.AuthenticateFacebookInstantGameRequest)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .nakama.api.AccountFacebookInstantGame account = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_account()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .google.protobuf.BoolValue create = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_create()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string username = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_username()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->username().data(), static_cast<int>(this->username().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.AuthenticateFacebookInstantGameRequest.username"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:nakama.api.AuthenticateFacebookInstantGameRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:nakama.api.AuthenticateFacebookInstantGameRequest)
+  return false;
+#undef DO_
+}
+
+void AuthenticateFacebookInstantGameRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:nakama.api.AuthenticateFacebookInstantGameRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .nakama.api.AccountFacebookInstantGame account = 1;
+  if (this->has_account()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->_internal_account(), output);
+  }
+
+  // .google.protobuf.BoolValue create = 2;
+  if (this->has_create()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->_internal_create(), output);
+  }
+
+  // string username = 3;
+  if (this->username().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->username().data(), static_cast<int>(this->username().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.AuthenticateFacebookInstantGameRequest.username");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->username(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:nakama.api.AuthenticateFacebookInstantGameRequest)
+}
+
+::google::protobuf::uint8* AuthenticateFacebookInstantGameRequest::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.AuthenticateFacebookInstantGameRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .nakama.api.AccountFacebookInstantGame account = 1;
+  if (this->has_account()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->_internal_account(), deterministic, target);
+  }
+
+  // .google.protobuf.BoolValue create = 2;
+  if (this->has_create()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        2, this->_internal_create(), deterministic, target);
+  }
+
+  // string username = 3;
+  if (this->username().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->username().data(), static_cast<int>(this->username().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.AuthenticateFacebookInstantGameRequest.username");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->username(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.AuthenticateFacebookInstantGameRequest)
+  return target;
+}
+
+size_t AuthenticateFacebookInstantGameRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.AuthenticateFacebookInstantGameRequest)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // string username = 3;
+  if (this->username().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->username());
+  }
+
+  // .nakama.api.AccountFacebookInstantGame account = 1;
+  if (this->has_account()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *account_);
+  }
+
+  // .google.protobuf.BoolValue create = 2;
+  if (this->has_create()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *create_);
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void AuthenticateFacebookInstantGameRequest::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.AuthenticateFacebookInstantGameRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const AuthenticateFacebookInstantGameRequest* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const AuthenticateFacebookInstantGameRequest>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.AuthenticateFacebookInstantGameRequest)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.AuthenticateFacebookInstantGameRequest)
+    MergeFrom(*source);
+  }
+}
+
+void AuthenticateFacebookInstantGameRequest::MergeFrom(const AuthenticateFacebookInstantGameRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.AuthenticateFacebookInstantGameRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.username().size() > 0) {
+
+    username_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.username_);
+  }
+  if (from.has_account()) {
+    mutable_account()->::nakama::api::AccountFacebookInstantGame::MergeFrom(from.account());
+  }
+  if (from.has_create()) {
+    mutable_create()->::google::protobuf::BoolValue::MergeFrom(from.create());
+  }
+}
+
+void AuthenticateFacebookInstantGameRequest::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.AuthenticateFacebookInstantGameRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AuthenticateFacebookInstantGameRequest::CopyFrom(const AuthenticateFacebookInstantGameRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.AuthenticateFacebookInstantGameRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AuthenticateFacebookInstantGameRequest::IsInitialized() const {
+  return true;
+}
+
+void AuthenticateFacebookInstantGameRequest::Swap(AuthenticateFacebookInstantGameRequest* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void AuthenticateFacebookInstantGameRequest::InternalSwap(AuthenticateFacebookInstantGameRequest* other) {
+  using std::swap;
+  username_.Swap(&other->username_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(account_, other->account_);
+  swap(create_, other->create_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata AuthenticateFacebookInstantGameRequest::GetMetadata() const {
+  protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 void AuthenticateGameCenterRequest::InitAsDefaultInstance() {
   ::nakama::api::_AuthenticateGameCenterRequest_default_instance_._instance.get_mutable()->account_ = const_cast< ::nakama::api::AccountGameCenter*>(
       ::nakama::api::AccountGameCenter::internal_default_instance());
@@ -10241,6 +12098,298 @@ void AuthenticateSteamRequest::InternalSwap(AuthenticateSteamRequest* other) {
 }
 
 ::google::protobuf::Metadata AuthenticateSteamRequest::GetMetadata() const {
+  protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void BanGroupUsersRequest::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int BanGroupUsersRequest::kGroupIdFieldNumber;
+const int BanGroupUsersRequest::kUserIdsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+BanGroupUsersRequest::BanGroupUsersRequest()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_BanGroupUsersRequest.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:nakama.api.BanGroupUsersRequest)
+}
+BanGroupUsersRequest::BanGroupUsersRequest(const BanGroupUsersRequest& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      user_ids_(from.user_ids_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.group_id().size() > 0) {
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.BanGroupUsersRequest)
+}
+
+void BanGroupUsersRequest::SharedCtor() {
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+BanGroupUsersRequest::~BanGroupUsersRequest() {
+  // @@protoc_insertion_point(destructor:nakama.api.BanGroupUsersRequest)
+  SharedDtor();
+}
+
+void BanGroupUsersRequest::SharedDtor() {
+  group_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void BanGroupUsersRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* BanGroupUsersRequest::descriptor() {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const BanGroupUsersRequest& BanGroupUsersRequest::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_BanGroupUsersRequest.base);
+  return *internal_default_instance();
+}
+
+
+void BanGroupUsersRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.BanGroupUsersRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  user_ids_.Clear();
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+bool BanGroupUsersRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:nakama.api.BanGroupUsersRequest)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string group_id = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_group_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->group_id().data(), static_cast<int>(this->group_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.BanGroupUsersRequest.group_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string user_ids = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_user_ids()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_ids(this->user_ids_size() - 1).data(),
+            static_cast<int>(this->user_ids(this->user_ids_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.BanGroupUsersRequest.user_ids"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:nakama.api.BanGroupUsersRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:nakama.api.BanGroupUsersRequest)
+  return false;
+#undef DO_
+}
+
+void BanGroupUsersRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:nakama.api.BanGroupUsersRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string group_id = 1;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.BanGroupUsersRequest.group_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->group_id(), output);
+  }
+
+  // repeated string user_ids = 2;
+  for (int i = 0, n = this->user_ids_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_ids(i).data(), static_cast<int>(this->user_ids(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.BanGroupUsersRequest.user_ids");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->user_ids(i), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:nakama.api.BanGroupUsersRequest)
+}
+
+::google::protobuf::uint8* BanGroupUsersRequest::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.BanGroupUsersRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string group_id = 1;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.BanGroupUsersRequest.group_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->group_id(), target);
+  }
+
+  // repeated string user_ids = 2;
+  for (int i = 0, n = this->user_ids_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_ids(i).data(), static_cast<int>(this->user_ids(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.BanGroupUsersRequest.user_ids");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(2, this->user_ids(i), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.BanGroupUsersRequest)
+  return target;
+}
+
+size_t BanGroupUsersRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.BanGroupUsersRequest)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated string user_ids = 2;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->user_ids_size());
+  for (int i = 0, n = this->user_ids_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->user_ids(i));
+  }
+
+  // string group_id = 1;
+  if (this->group_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->group_id());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void BanGroupUsersRequest::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.BanGroupUsersRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const BanGroupUsersRequest* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const BanGroupUsersRequest>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.BanGroupUsersRequest)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.BanGroupUsersRequest)
+    MergeFrom(*source);
+  }
+}
+
+void BanGroupUsersRequest::MergeFrom(const BanGroupUsersRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.BanGroupUsersRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  user_ids_.MergeFrom(from.user_ids_);
+  if (from.group_id().size() > 0) {
+
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+}
+
+void BanGroupUsersRequest::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.BanGroupUsersRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void BanGroupUsersRequest::CopyFrom(const BanGroupUsersRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.BanGroupUsersRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool BanGroupUsersRequest::IsInitialized() const {
+  return true;
+}
+
+void BanGroupUsersRequest::Swap(BanGroupUsersRequest* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void BanGroupUsersRequest::InternalSwap(BanGroupUsersRequest* other) {
+  using std::swap;
+  user_ids_.InternalSwap(CastToBase(&other->user_ids_));
+  group_id_.Swap(&other->group_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata BanGroupUsersRequest::GetMetadata() const {
   protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -13897,7 +16046,7 @@ void Event_PropertiesEntry_DoNotUse::MergeFrom(const Event_PropertiesEntry_DoNot
 }
 ::google::protobuf::Metadata Event_PropertiesEntry_DoNotUse::GetMetadata() const {
   ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[34];
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[41];
 }
 void Event_PropertiesEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -13921,6 +16070,7 @@ void Event::clear_timestamp() {
 const int Event::kNameFieldNumber;
 const int Event::kPropertiesFieldNumber;
 const int Event::kTimestampFieldNumber;
+const int Event::kExternalFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Event::Event()
@@ -13944,12 +16094,15 @@ Event::Event(const Event& from)
   } else {
     timestamp_ = NULL;
   }
+  external_ = from.external_;
   // @@protoc_insertion_point(copy_constructor:nakama.api.Event)
 }
 
 void Event::SharedCtor() {
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  timestamp_ = NULL;
+  ::memset(&timestamp_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&external_) -
+      reinterpret_cast<char*>(&timestamp_)) + sizeof(external_));
 }
 
 Event::~Event() {
@@ -13988,6 +16141,7 @@ void Event::Clear() {
     delete timestamp_;
   }
   timestamp_ = NULL;
+  external_ = false;
   _internal_metadata_.Clear();
 }
 
@@ -14050,6 +16204,20 @@ bool Event::MergePartialFromCodedStream(
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_timestamp()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool external = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &external_)));
         } else {
           goto handle_unusual;
         }
@@ -14151,6 +16319,11 @@ void Event::SerializeWithCachedSizes(
       3, this->_internal_timestamp(), output);
   }
 
+  // bool external = 4;
+  if (this->external() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->external(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -14240,6 +16413,11 @@ void Event::SerializeWithCachedSizes(
         3, this->_internal_timestamp(), deterministic, target);
   }
 
+  // bool external = 4;
+  if (this->external() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->external(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -14285,6 +16463,11 @@ size_t Event::ByteSizeLong() const {
         *timestamp_);
   }
 
+  // bool external = 4;
+  if (this->external() != 0) {
+    total_size += 1 + 1;
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -14320,6 +16503,9 @@ void Event::MergeFrom(const Event& from) {
   if (from.has_timestamp()) {
     mutable_timestamp()->::google::protobuf::Timestamp::MergeFrom(from.timestamp());
   }
+  if (from.external() != 0) {
+    set_external(from.external());
+  }
 }
 
 void Event::CopyFrom(const ::google::protobuf::Message& from) {
@@ -14350,6 +16536,7 @@ void Event::InternalSwap(Event* other) {
   name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(timestamp_, other->timestamp_);
+  swap(external_, other->external_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -14366,6 +16553,8 @@ void Friend::InitAsDefaultInstance() {
       ::nakama::api::User::internal_default_instance());
   ::nakama::api::_Friend_default_instance_._instance.get_mutable()->state_ = const_cast< ::google::protobuf::Int32Value*>(
       ::google::protobuf::Int32Value::internal_default_instance());
+  ::nakama::api::_Friend_default_instance_._instance.get_mutable()->update_time_ = const_cast< ::google::protobuf::Timestamp*>(
+      ::google::protobuf::Timestamp::internal_default_instance());
 }
 void Friend::clear_state() {
   if (GetArenaNoVirtual() == NULL && state_ != NULL) {
@@ -14373,9 +16562,16 @@ void Friend::clear_state() {
   }
   state_ = NULL;
 }
+void Friend::clear_update_time() {
+  if (GetArenaNoVirtual() == NULL && update_time_ != NULL) {
+    delete update_time_;
+  }
+  update_time_ = NULL;
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Friend::kUserFieldNumber;
 const int Friend::kStateFieldNumber;
+const int Friend::kUpdateTimeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Friend::Friend()
@@ -14399,13 +16595,18 @@ Friend::Friend(const Friend& from)
   } else {
     state_ = NULL;
   }
+  if (from.has_update_time()) {
+    update_time_ = new ::google::protobuf::Timestamp(*from.update_time_);
+  } else {
+    update_time_ = NULL;
+  }
   // @@protoc_insertion_point(copy_constructor:nakama.api.Friend)
 }
 
 void Friend::SharedCtor() {
   ::memset(&user_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&state_) -
-      reinterpret_cast<char*>(&user_)) + sizeof(state_));
+      reinterpret_cast<char*>(&update_time_) -
+      reinterpret_cast<char*>(&user_)) + sizeof(update_time_));
 }
 
 Friend::~Friend() {
@@ -14416,6 +16617,7 @@ Friend::~Friend() {
 void Friend::SharedDtor() {
   if (this != internal_default_instance()) delete user_;
   if (this != internal_default_instance()) delete state_;
+  if (this != internal_default_instance()) delete update_time_;
 }
 
 void Friend::SetCachedSize(int size) const {
@@ -14446,6 +16648,10 @@ void Friend::Clear() {
     delete state_;
   }
   state_ = NULL;
+  if (GetArenaNoVirtual() == NULL && update_time_ != NULL) {
+    delete update_time_;
+  }
+  update_time_ = NULL;
   _internal_metadata_.Clear();
 }
 
@@ -14477,6 +16683,18 @@ bool Friend::MergePartialFromCodedStream(
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_state()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .google.protobuf.Timestamp update_time = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_update_time()));
         } else {
           goto handle_unusual;
         }
@@ -14521,6 +16739,12 @@ void Friend::SerializeWithCachedSizes(
       2, this->_internal_state(), output);
   }
 
+  // .google.protobuf.Timestamp update_time = 3;
+  if (this->has_update_time()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->_internal_update_time(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -14547,6 +16771,13 @@ void Friend::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, this->_internal_state(), deterministic, target);
+  }
+
+  // .google.protobuf.Timestamp update_time = 3;
+  if (this->has_update_time()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->_internal_update_time(), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -14578,6 +16809,13 @@ size_t Friend::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *state_);
+  }
+
+  // .google.protobuf.Timestamp update_time = 3;
+  if (this->has_update_time()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *update_time_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -14613,6 +16851,9 @@ void Friend::MergeFrom(const Friend& from) {
   if (from.has_state()) {
     mutable_state()->::google::protobuf::Int32Value::MergeFrom(from.state());
   }
+  if (from.has_update_time()) {
+    mutable_update_time()->::google::protobuf::Timestamp::MergeFrom(from.update_time());
+  }
 }
 
 void Friend::CopyFrom(const ::google::protobuf::Message& from) {
@@ -14641,6 +16882,7 @@ void Friend::InternalSwap(Friend* other) {
   using std::swap;
   swap(user_, other->user_);
   swap(state_, other->state_);
+  swap(update_time_, other->update_time_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -26916,6 +29158,298 @@ void PromoteGroupUsersRequest::InternalSwap(PromoteGroupUsersRequest* other) {
 
 // ===================================================================
 
+void DemoteGroupUsersRequest::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int DemoteGroupUsersRequest::kGroupIdFieldNumber;
+const int DemoteGroupUsersRequest::kUserIdsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+DemoteGroupUsersRequest::DemoteGroupUsersRequest()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_DemoteGroupUsersRequest.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:nakama.api.DemoteGroupUsersRequest)
+}
+DemoteGroupUsersRequest::DemoteGroupUsersRequest(const DemoteGroupUsersRequest& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      user_ids_(from.user_ids_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.group_id().size() > 0) {
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.DemoteGroupUsersRequest)
+}
+
+void DemoteGroupUsersRequest::SharedCtor() {
+  group_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+DemoteGroupUsersRequest::~DemoteGroupUsersRequest() {
+  // @@protoc_insertion_point(destructor:nakama.api.DemoteGroupUsersRequest)
+  SharedDtor();
+}
+
+void DemoteGroupUsersRequest::SharedDtor() {
+  group_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void DemoteGroupUsersRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* DemoteGroupUsersRequest::descriptor() {
+  ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const DemoteGroupUsersRequest& DemoteGroupUsersRequest::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::scc_info_DemoteGroupUsersRequest.base);
+  return *internal_default_instance();
+}
+
+
+void DemoteGroupUsersRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.DemoteGroupUsersRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  user_ids_.Clear();
+  group_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+bool DemoteGroupUsersRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:nakama.api.DemoteGroupUsersRequest)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string group_id = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_group_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->group_id().data(), static_cast<int>(this->group_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.DemoteGroupUsersRequest.group_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string user_ids = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_user_ids()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_ids(this->user_ids_size() - 1).data(),
+            static_cast<int>(this->user_ids(this->user_ids_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.DemoteGroupUsersRequest.user_ids"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:nakama.api.DemoteGroupUsersRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:nakama.api.DemoteGroupUsersRequest)
+  return false;
+#undef DO_
+}
+
+void DemoteGroupUsersRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:nakama.api.DemoteGroupUsersRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string group_id = 1;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.DemoteGroupUsersRequest.group_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->group_id(), output);
+  }
+
+  // repeated string user_ids = 2;
+  for (int i = 0, n = this->user_ids_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_ids(i).data(), static_cast<int>(this->user_ids(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.DemoteGroupUsersRequest.user_ids");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->user_ids(i), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:nakama.api.DemoteGroupUsersRequest)
+}
+
+::google::protobuf::uint8* DemoteGroupUsersRequest::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.DemoteGroupUsersRequest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string group_id = 1;
+  if (this->group_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->group_id().data(), static_cast<int>(this->group_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.DemoteGroupUsersRequest.group_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->group_id(), target);
+  }
+
+  // repeated string user_ids = 2;
+  for (int i = 0, n = this->user_ids_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_ids(i).data(), static_cast<int>(this->user_ids(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.DemoteGroupUsersRequest.user_ids");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(2, this->user_ids(i), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.DemoteGroupUsersRequest)
+  return target;
+}
+
+size_t DemoteGroupUsersRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.DemoteGroupUsersRequest)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated string user_ids = 2;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->user_ids_size());
+  for (int i = 0, n = this->user_ids_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->user_ids(i));
+  }
+
+  // string group_id = 1;
+  if (this->group_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->group_id());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void DemoteGroupUsersRequest::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.DemoteGroupUsersRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const DemoteGroupUsersRequest* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const DemoteGroupUsersRequest>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.DemoteGroupUsersRequest)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.DemoteGroupUsersRequest)
+    MergeFrom(*source);
+  }
+}
+
+void DemoteGroupUsersRequest::MergeFrom(const DemoteGroupUsersRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.DemoteGroupUsersRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  user_ids_.MergeFrom(from.user_ids_);
+  if (from.group_id().size() > 0) {
+
+    group_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.group_id_);
+  }
+}
+
+void DemoteGroupUsersRequest::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.DemoteGroupUsersRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void DemoteGroupUsersRequest::CopyFrom(const DemoteGroupUsersRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.DemoteGroupUsersRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool DemoteGroupUsersRequest::IsInitialized() const {
+  return true;
+}
+
+void DemoteGroupUsersRequest::Swap(DemoteGroupUsersRequest* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void DemoteGroupUsersRequest::InternalSwap(DemoteGroupUsersRequest* other) {
+  using std::swap;
+  user_ids_.InternalSwap(CastToBase(&other->user_ids_));
+  group_id_.Swap(&other->group_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata DemoteGroupUsersRequest::GetMetadata() const {
+  protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 void ReadStorageObjectId::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -32663,6 +35197,8 @@ const int User::kOnlineFieldNumber;
 const int User::kEdgeCountFieldNumber;
 const int User::kCreateTimeFieldNumber;
 const int User::kUpdateTimeFieldNumber;
+const int User::kFacebookInstantGameIdFieldNumber;
+const int User::kAppleIdFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 User::User()
@@ -32724,6 +35260,14 @@ User::User(const User& from)
   if (from.steam_id().size() > 0) {
     steam_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.steam_id_);
   }
+  facebook_instant_game_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.facebook_instant_game_id().size() > 0) {
+    facebook_instant_game_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.facebook_instant_game_id_);
+  }
+  apple_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.apple_id().size() > 0) {
+    apple_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.apple_id_);
+  }
   if (from.has_create_time()) {
     create_time_ = new ::google::protobuf::Timestamp(*from.create_time_);
   } else {
@@ -32753,6 +35297,8 @@ void User::SharedCtor() {
   google_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   gamecenter_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   steam_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  facebook_instant_game_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  apple_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&create_time_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&edge_count_) -
       reinterpret_cast<char*>(&create_time_)) + sizeof(edge_count_));
@@ -32776,6 +35322,8 @@ void User::SharedDtor() {
   google_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   gamecenter_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   steam_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  facebook_instant_game_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  apple_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete create_time_;
   if (this != internal_default_instance()) delete update_time_;
 }
@@ -32812,6 +35360,8 @@ void User::Clear() {
   google_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   gamecenter_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   steam_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  facebook_instant_game_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  apple_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == NULL && create_time_ != NULL) {
     delete create_time_;
   }
@@ -33080,6 +35630,38 @@ bool User::MergePartialFromCodedStream(
         break;
       }
 
+      // string facebook_instant_game_id = 17;
+      case 17: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(138u /* 138 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_facebook_instant_game_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->facebook_instant_game_id().data(), static_cast<int>(this->facebook_instant_game_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.User.facebook_instant_game_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string apple_id = 18;
+      case 18: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(146u /* 146 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_apple_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->apple_id().data(), static_cast<int>(this->apple_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "nakama.api.User.apple_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -33246,6 +35828,26 @@ void User::SerializeWithCachedSizes(
   if (this->has_update_time()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       16, this->_internal_update_time(), output);
+  }
+
+  // string facebook_instant_game_id = 17;
+  if (this->facebook_instant_game_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->facebook_instant_game_id().data(), static_cast<int>(this->facebook_instant_game_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.User.facebook_instant_game_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      17, this->facebook_instant_game_id(), output);
+  }
+
+  // string apple_id = 18;
+  if (this->apple_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->apple_id().data(), static_cast<int>(this->apple_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.User.apple_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      18, this->apple_id(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -33418,6 +36020,28 @@ void User::SerializeWithCachedSizes(
         16, this->_internal_update_time(), deterministic, target);
   }
 
+  // string facebook_instant_game_id = 17;
+  if (this->facebook_instant_game_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->facebook_instant_game_id().data(), static_cast<int>(this->facebook_instant_game_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.User.facebook_instant_game_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        17, this->facebook_instant_game_id(), target);
+  }
+
+  // string apple_id = 18;
+  if (this->apple_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->apple_id().data(), static_cast<int>(this->apple_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.User.apple_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        18, this->apple_id(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -33517,6 +36141,20 @@ size_t User::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->steam_id());
+  }
+
+  // string facebook_instant_game_id = 17;
+  if (this->facebook_instant_game_id().size() > 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->facebook_instant_game_id());
+  }
+
+  // string apple_id = 18;
+  if (this->apple_id().size() > 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->apple_id());
   }
 
   // .google.protobuf.Timestamp create_time = 15;
@@ -33620,6 +36258,14 @@ void User::MergeFrom(const User& from) {
 
     steam_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.steam_id_);
   }
+  if (from.facebook_instant_game_id().size() > 0) {
+
+    facebook_instant_game_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.facebook_instant_game_id_);
+  }
+  if (from.apple_id().size() > 0) {
+
+    apple_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.apple_id_);
+  }
   if (from.has_create_time()) {
     mutable_create_time()->::google::protobuf::Timestamp::MergeFrom(from.create_time());
   }
@@ -33681,6 +36327,10 @@ void User::InternalSwap(User* other) {
   gamecenter_id_.Swap(&other->gamecenter_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   steam_id_.Swap(&other->steam_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  facebook_instant_game_id_.Swap(&other->facebook_instant_game_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  apple_id_.Swap(&other->apple_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(create_time_, other->create_time_);
   swap(update_time_, other->update_time_);
@@ -36498,6 +39148,12 @@ namespace protobuf {
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::Account* Arena::CreateMaybeMessage< ::nakama::api::Account >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::Account >(arena);
 }
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AccountApple_VarsEntry_DoNotUse* Arena::CreateMaybeMessage< ::nakama::api::AccountApple_VarsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::api::AccountApple_VarsEntry_DoNotUse >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AccountApple* Arena::CreateMaybeMessage< ::nakama::api::AccountApple >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::api::AccountApple >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AccountCustom_VarsEntry_DoNotUse* Arena::CreateMaybeMessage< ::nakama::api::AccountCustom_VarsEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::AccountCustom_VarsEntry_DoNotUse >(arena);
 }
@@ -36521,6 +39177,12 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AccountFacebook_Var
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AccountFacebook* Arena::CreateMaybeMessage< ::nakama::api::AccountFacebook >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::AccountFacebook >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AccountFacebookInstantGame_VarsEntry_DoNotUse* Arena::CreateMaybeMessage< ::nakama::api::AccountFacebookInstantGame_VarsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::api::AccountFacebookInstantGame_VarsEntry_DoNotUse >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AccountFacebookInstantGame* Arena::CreateMaybeMessage< ::nakama::api::AccountFacebookInstantGame >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::api::AccountFacebookInstantGame >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AccountGameCenter_VarsEntry_DoNotUse* Arena::CreateMaybeMessage< ::nakama::api::AccountGameCenter_VarsEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::AccountGameCenter_VarsEntry_DoNotUse >(arena);
@@ -36546,6 +39208,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AddFriendsRequest* 
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AddGroupUsersRequest* Arena::CreateMaybeMessage< ::nakama::api::AddGroupUsersRequest >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::AddGroupUsersRequest >(arena);
 }
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AuthenticateAppleRequest* Arena::CreateMaybeMessage< ::nakama::api::AuthenticateAppleRequest >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::api::AuthenticateAppleRequest >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AuthenticateCustomRequest* Arena::CreateMaybeMessage< ::nakama::api::AuthenticateCustomRequest >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::AuthenticateCustomRequest >(arena);
 }
@@ -36558,6 +39223,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AuthenticateEmailRe
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AuthenticateFacebookRequest* Arena::CreateMaybeMessage< ::nakama::api::AuthenticateFacebookRequest >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::AuthenticateFacebookRequest >(arena);
 }
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AuthenticateFacebookInstantGameRequest* Arena::CreateMaybeMessage< ::nakama::api::AuthenticateFacebookInstantGameRequest >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::api::AuthenticateFacebookInstantGameRequest >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AuthenticateGameCenterRequest* Arena::CreateMaybeMessage< ::nakama::api::AuthenticateGameCenterRequest >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::AuthenticateGameCenterRequest >(arena);
 }
@@ -36566,6 +39234,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AuthenticateGoogleR
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::AuthenticateSteamRequest* Arena::CreateMaybeMessage< ::nakama::api::AuthenticateSteamRequest >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::AuthenticateSteamRequest >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::BanGroupUsersRequest* Arena::CreateMaybeMessage< ::nakama::api::BanGroupUsersRequest >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::api::BanGroupUsersRequest >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::BlockFriendsRequest* Arena::CreateMaybeMessage< ::nakama::api::BlockFriendsRequest >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::BlockFriendsRequest >(arena);
@@ -36701,6 +39372,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::NotificationList* A
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::PromoteGroupUsersRequest* Arena::CreateMaybeMessage< ::nakama::api::PromoteGroupUsersRequest >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::PromoteGroupUsersRequest >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::DemoteGroupUsersRequest* Arena::CreateMaybeMessage< ::nakama::api::DemoteGroupUsersRequest >(Arena* arena) {
+  return Arena::CreateInternal< ::nakama::api::DemoteGroupUsersRequest >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::nakama::api::ReadStorageObjectId* Arena::CreateMaybeMessage< ::nakama::api::ReadStorageObjectId >(Arena* arena) {
   return Arena::CreateInternal< ::nakama::api::ReadStorageObjectId >(arena);

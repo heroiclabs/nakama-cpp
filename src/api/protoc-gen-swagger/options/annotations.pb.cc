@@ -24,9 +24,9 @@
 namespace protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_JSONSchema;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Tag;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<3> scc_info_Operation;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<3> scc_info_Schema;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<5> scc_info_Swagger;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<4> scc_info_Operation;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<6> scc_info_Swagger;
 }  // namespace protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto
 namespace grpc {
 namespace gateway {
@@ -66,8 +66,8 @@ void AddDescriptorsImpl() {
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n,protoc-gen-swagger/options/annotations"
       ".proto\022\'grpc.gateway.protoc_gen_swagger."
-      "options\032*protoc-gen-swagger/options/open"
-      "apiv2.proto\032 google/protobuf/descriptor."
+      "options\032 google/protobuf/descriptor.prot"
+      "o\032*protoc-gen-swagger/options/openapiv2."
       "proto:j\n\021openapiv2_swagger\022\034.google.prot"
       "obuf.FileOptions\030\222\010 \001(\01320.grpc.gateway.p"
       "rotoc_gen_swagger.options.Swagger:p\n\023ope"
@@ -89,8 +89,8 @@ void AddDescriptorsImpl() {
       descriptor, 786);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protoc-gen-swagger/options/annotations.proto", &protobuf_RegisterTypes);
-  ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::AddDescriptors();
   ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::AddDescriptors();
+  ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::AddDescriptors();
 }
 
 void AddDescriptors() {

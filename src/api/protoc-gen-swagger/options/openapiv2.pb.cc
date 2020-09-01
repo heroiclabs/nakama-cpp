@@ -24,23 +24,32 @@
 namespace protobuf_google_2fprotobuf_2fany_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_google_2fprotobuf_2fany_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Any;
 }  // namespace protobuf_google_2fprotobuf_2fany_2eproto
+namespace protobuf_google_2fprotobuf_2fstruct_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_google_2fprotobuf_2fstruct_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ListValue;
+}  // namespace protobuf_google_2fprotobuf_2fstruct_2eproto
 namespace protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Contact;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ExternalDocumentation;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_JSONSchema;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_License;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Response_ExamplesEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Scopes_ScopeEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_SecurityRequirement_SecurityRequirementValue;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Info_ExtensionsEntry_DoNotUse;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Operation_ExtensionsEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Operation_ResponsesEntry_DoNotUse;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Response;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Response_ExtensionsEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Scopes;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_SecurityDefinitions;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_SecurityDefinitions_SecurityEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_SecurityRequirement;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_SecurityRequirement_SecurityRequirementEntry_DoNotUse;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_SecurityScheme;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_SecurityScheme_ExtensionsEntry_DoNotUse;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Swagger_ExtensionsEntry_DoNotUse;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_Swagger_ResponsesEntry_DoNotUse;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_Info;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_SecurityScheme;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<3> scc_info_Info;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<3> scc_info_Response;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto ::google::protobuf::internal::SCCInfo<3> scc_info_Schema;
 }  // namespace protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto
 namespace grpc {
@@ -52,6 +61,11 @@ class Swagger_ResponsesEntry_DoNotUseDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<Swagger_ResponsesEntry_DoNotUse>
       _instance;
 } _Swagger_ResponsesEntry_DoNotUse_default_instance_;
+class Swagger_ExtensionsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Swagger_ExtensionsEntry_DoNotUse>
+      _instance;
+} _Swagger_ExtensionsEntry_DoNotUse_default_instance_;
 class SwaggerDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Swagger>
@@ -62,16 +76,36 @@ class Operation_ResponsesEntry_DoNotUseDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<Operation_ResponsesEntry_DoNotUse>
       _instance;
 } _Operation_ResponsesEntry_DoNotUse_default_instance_;
+class Operation_ExtensionsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Operation_ExtensionsEntry_DoNotUse>
+      _instance;
+} _Operation_ExtensionsEntry_DoNotUse_default_instance_;
 class OperationDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Operation>
       _instance;
 } _Operation_default_instance_;
+class Response_ExamplesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Response_ExamplesEntry_DoNotUse>
+      _instance;
+} _Response_ExamplesEntry_DoNotUse_default_instance_;
+class Response_ExtensionsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Response_ExtensionsEntry_DoNotUse>
+      _instance;
+} _Response_ExtensionsEntry_DoNotUse_default_instance_;
 class ResponseDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Response>
       _instance;
 } _Response_default_instance_;
+class Info_ExtensionsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Info_ExtensionsEntry_DoNotUse>
+      _instance;
+} _Info_ExtensionsEntry_DoNotUse_default_instance_;
 class InfoDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Info>
@@ -117,6 +151,11 @@ class SecurityDefinitionsDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<SecurityDefinitions>
       _instance;
 } _SecurityDefinitions_default_instance_;
+class SecurityScheme_ExtensionsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<SecurityScheme_ExtensionsEntry_DoNotUse>
+      _instance;
+} _SecurityScheme_ExtensionsEntry_DoNotUse_default_instance_;
 class SecuritySchemeDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<SecurityScheme>
@@ -166,6 +205,20 @@ static void InitDefaultsSwagger_ResponsesEntry_DoNotUse() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSwagger_ResponsesEntry_DoNotUse}, {
       &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Response.base,}};
 
+static void InitDefaultsSwagger_ExtensionsEntry_DoNotUse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_swagger::options::_Swagger_ExtensionsEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse();
+  }
+  ::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_Swagger_ExtensionsEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSwagger_ExtensionsEntry_DoNotUse}, {
+      &protobuf_google_2fprotobuf_2fstruct_2eproto::scc_info_ListValue.base,}};
+
 static void InitDefaultsSwagger() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -177,13 +230,14 @@ static void InitDefaultsSwagger() {
   ::grpc::gateway::protoc_gen_swagger::options::Swagger::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<5> scc_info_Swagger =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 5, InitDefaultsSwagger}, {
+::google::protobuf::internal::SCCInfo<6> scc_info_Swagger =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 6, InitDefaultsSwagger}, {
       &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Info.base,
       &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Swagger_ResponsesEntry_DoNotUse.base,
       &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_SecurityDefinitions.base,
       &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_SecurityRequirement.base,
-      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_ExternalDocumentation.base,}};
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_ExternalDocumentation.base,
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Swagger_ExtensionsEntry_DoNotUse.base,}};
 
 static void InitDefaultsOperation_ResponsesEntry_DoNotUse() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -199,6 +253,20 @@ static void InitDefaultsOperation_ResponsesEntry_DoNotUse() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsOperation_ResponsesEntry_DoNotUse}, {
       &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Response.base,}};
 
+static void InitDefaultsOperation_ExtensionsEntry_DoNotUse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_swagger::options::_Operation_ExtensionsEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse();
+  }
+  ::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_Operation_ExtensionsEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsOperation_ExtensionsEntry_DoNotUse}, {
+      &protobuf_google_2fprotobuf_2fstruct_2eproto::scc_info_ListValue.base,}};
+
 static void InitDefaultsOperation() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -210,11 +278,39 @@ static void InitDefaultsOperation() {
   ::grpc::gateway::protoc_gen_swagger::options::Operation::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<3> scc_info_Operation =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 3, InitDefaultsOperation}, {
+::google::protobuf::internal::SCCInfo<4> scc_info_Operation =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 4, InitDefaultsOperation}, {
       &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_ExternalDocumentation.base,
       &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Operation_ResponsesEntry_DoNotUse.base,
-      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_SecurityRequirement.base,}};
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_SecurityRequirement.base,
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Operation_ExtensionsEntry_DoNotUse.base,}};
+
+static void InitDefaultsResponse_ExamplesEntry_DoNotUse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_swagger::options::_Response_ExamplesEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse();
+  }
+  ::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_Response_ExamplesEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsResponse_ExamplesEntry_DoNotUse}, {}};
+
+static void InitDefaultsResponse_ExtensionsEntry_DoNotUse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_swagger::options::_Response_ExtensionsEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse();
+  }
+  ::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_Response_ExtensionsEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsResponse_ExtensionsEntry_DoNotUse}, {
+      &protobuf_google_2fprotobuf_2fstruct_2eproto::scc_info_ListValue.base,}};
 
 static void InitDefaultsResponse() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -227,9 +323,25 @@ static void InitDefaultsResponse() {
   ::grpc::gateway::protoc_gen_swagger::options::Response::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<1> scc_info_Response =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsResponse}, {
-      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Schema.base,}};
+::google::protobuf::internal::SCCInfo<3> scc_info_Response =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 3, InitDefaultsResponse}, {
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Schema.base,
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Response_ExamplesEntry_DoNotUse.base,
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Response_ExtensionsEntry_DoNotUse.base,}};
+
+static void InitDefaultsInfo_ExtensionsEntry_DoNotUse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_swagger::options::_Info_ExtensionsEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse();
+  }
+  ::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_Info_ExtensionsEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsInfo_ExtensionsEntry_DoNotUse}, {
+      &protobuf_google_2fprotobuf_2fstruct_2eproto::scc_info_ListValue.base,}};
 
 static void InitDefaultsInfo() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -242,10 +354,11 @@ static void InitDefaultsInfo() {
   ::grpc::gateway::protoc_gen_swagger::options::Info::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<2> scc_info_Info =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsInfo}, {
+::google::protobuf::internal::SCCInfo<3> scc_info_Info =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 3, InitDefaultsInfo}, {
       &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Contact.base,
-      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_License.base,}};
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_License.base,
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Info_ExtensionsEntry_DoNotUse.base,}};
 
 static void InitDefaultsContact() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -364,6 +477,20 @@ static void InitDefaultsSecurityDefinitions() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSecurityDefinitions}, {
       &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_SecurityDefinitions_SecurityEntry_DoNotUse.base,}};
 
+static void InitDefaultsSecurityScheme_ExtensionsEntry_DoNotUse() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_swagger::options::_SecurityScheme_ExtensionsEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse();
+  }
+  ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<1> scc_info_SecurityScheme_ExtensionsEntry_DoNotUse =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSecurityScheme_ExtensionsEntry_DoNotUse}, {
+      &protobuf_google_2fprotobuf_2fstruct_2eproto::scc_info_ListValue.base,}};
+
 static void InitDefaultsSecurityScheme() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -375,9 +502,10 @@ static void InitDefaultsSecurityScheme() {
   ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<1> scc_info_SecurityScheme =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSecurityScheme}, {
-      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Scopes.base,}};
+::google::protobuf::internal::SCCInfo<2> scc_info_SecurityScheme =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsSecurityScheme}, {
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_Scopes.base,
+      &protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::scc_info_SecurityScheme_ExtensionsEntry_DoNotUse.base,}};
 
 static void InitDefaultsSecurityRequirement_SecurityRequirementValue() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -452,10 +580,15 @@ static void InitDefaultsScopes() {
 
 void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_Swagger_ResponsesEntry_DoNotUse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Swagger_ExtensionsEntry_DoNotUse.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Swagger.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Operation_ResponsesEntry_DoNotUse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Operation_ExtensionsEntry_DoNotUse.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Operation.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Response_ExamplesEntry_DoNotUse.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Response_ExtensionsEntry_DoNotUse.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Response.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Info_ExtensionsEntry_DoNotUse.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Info.base);
   ::google::protobuf::internal::InitSCC(&scc_info_Contact.base);
   ::google::protobuf::internal::InitSCC(&scc_info_License.base);
@@ -465,6 +598,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_Tag.base);
   ::google::protobuf::internal::InitSCC(&scc_info_SecurityDefinitions_SecurityEntry_DoNotUse.base);
   ::google::protobuf::internal::InitSCC(&scc_info_SecurityDefinitions.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SecurityScheme_ExtensionsEntry_DoNotUse.base);
   ::google::protobuf::internal::InitSCC(&scc_info_SecurityScheme.base);
   ::google::protobuf::internal::InitSCC(&scc_info_SecurityRequirement_SecurityRequirementValue.base);
   ::google::protobuf::internal::InitSCC(&scc_info_SecurityRequirement_SecurityRequirementEntry_DoNotUse.base);
@@ -473,7 +607,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_Scopes.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[20];
+::google::protobuf::Metadata file_level_metadata[26];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[5];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -484,6 +618,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Swagger_ResponsesEntry_DoNotUse, key_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Swagger_ResponsesEntry_DoNotUse, value_),
+  0,
+  1,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse, value_),
   0,
   1,
   ~0u,  // no _has_bits_
@@ -502,6 +645,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Swagger, security_definitions_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Swagger, security_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Swagger, external_docs_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Swagger, extensions_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -509,6 +653,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse, key_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse, value_),
+  0,
+  1,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse, value_),
   0,
   1,
   ~0u,  // no _has_bits_
@@ -527,6 +680,25 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation, schemes_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation, deprecated_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation, security_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Operation, extensions_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse, value_),
+  0,
+  1,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse, value_),
+  0,
+  1,
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -534,6 +706,17 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response, description_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response, schema_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response, examples_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Response, extensions_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse, value_),
+  0,
+  1,
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Info, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -545,6 +728,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Info, contact_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Info, license_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Info, version_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Info, extensions_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::Contact, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -625,6 +809,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions, security_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse, key_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse, value_),
+  0,
+  1,
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -638,6 +831,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme, authorization_url_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme, token_url_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme, scopes_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme, extensions_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementValue, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -677,33 +871,44 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 7, sizeof(::grpc::gateway::protoc_gen_swagger::options::Swagger_ResponsesEntry_DoNotUse)},
-  { 9, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Swagger)},
-  { 25, 32, sizeof(::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse)},
-  { 34, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Operation)},
-  { 50, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Response)},
-  { 57, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Info)},
-  { 68, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Contact)},
-  { 76, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::License)},
-  { 83, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::ExternalDocumentation)},
-  { 90, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Schema)},
-  { 100, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::JSONSchema)},
-  { 126, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Tag)},
-  { 133, 140, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions_SecurityEntry_DoNotUse)},
-  { 142, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions)},
-  { 148, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme)},
-  { 161, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementValue)},
-  { 167, 174, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementEntry_DoNotUse)},
-  { 176, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement)},
-  { 182, 189, sizeof(::grpc::gateway::protoc_gen_swagger::options::Scopes_ScopeEntry_DoNotUse)},
-  { 191, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Scopes)},
+  { 9, 16, sizeof(::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse)},
+  { 18, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Swagger)},
+  { 35, 42, sizeof(::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse)},
+  { 44, 51, sizeof(::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse)},
+  { 53, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Operation)},
+  { 70, 77, sizeof(::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse)},
+  { 79, 86, sizeof(::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse)},
+  { 88, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Response)},
+  { 97, 104, sizeof(::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse)},
+  { 106, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Info)},
+  { 118, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Contact)},
+  { 126, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::License)},
+  { 133, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::ExternalDocumentation)},
+  { 140, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Schema)},
+  { 150, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::JSONSchema)},
+  { 176, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Tag)},
+  { 183, 190, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions_SecurityEntry_DoNotUse)},
+  { 192, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions)},
+  { 198, 205, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse)},
+  { 207, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityScheme)},
+  { 221, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementValue)},
+  { 227, 234, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementEntry_DoNotUse)},
+  { 236, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement)},
+  { 242, 249, sizeof(::grpc::gateway::protoc_gen_swagger::options::Scopes_ScopeEntry_DoNotUse)},
+  { 251, -1, sizeof(::grpc::gateway::protoc_gen_swagger::options::Scopes)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Swagger_ResponsesEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Swagger_ExtensionsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Swagger_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Operation_ResponsesEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Operation_ExtensionsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Operation_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Response_ExamplesEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Response_ExtensionsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Response_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Info_ExtensionsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Info_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Contact_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_License_default_instance_),
@@ -713,6 +918,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_Tag_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_SecurityDefinitions_SecurityEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_SecurityDefinitions_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_SecurityScheme_ExtensionsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_SecurityScheme_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_SecurityRequirement_SecurityRequirementValue_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::grpc::gateway::protoc_gen_swagger::options::_SecurityRequirement_SecurityRequirementEntry_DoNotUse_default_instance_),
@@ -736,7 +942,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 20);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 26);
 }
 
 void AddDescriptorsImpl() {
@@ -744,119 +950,145 @@ void AddDescriptorsImpl() {
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n*protoc-gen-swagger/options/openapiv2.p"
       "roto\022\'grpc.gateway.protoc_gen_swagger.op"
-      "tions\032\031google/protobuf/any.proto\"\377\005\n\007Swa"
-      "gger\022\017\n\007swagger\030\001 \001(\t\022;\n\004info\030\002 \001(\0132-.gr"
-      "pc.gateway.protoc_gen_swagger.options.In"
-      "fo\022\014\n\004host\030\003 \001(\t\022\021\n\tbase_path\030\004 \001(\t\022O\n\007s"
-      "chemes\030\005 \003(\0162>.grpc.gateway.protoc_gen_s"
-      "wagger.options.Swagger.SwaggerScheme\022\020\n\010"
-      "consumes\030\006 \003(\t\022\020\n\010produces\030\007 \003(\t\022R\n\tresp"
-      "onses\030\n \003(\0132\?.grpc.gateway.protoc_gen_sw"
-      "agger.options.Swagger.ResponsesEntry\022Z\n\024"
-      "security_definitions\030\013 \001(\0132<.grpc.gatewa"
-      "y.protoc_gen_swagger.options.SecurityDef"
-      "initions\022N\n\010security\030\014 \003(\0132<.grpc.gatewa"
-      "y.protoc_gen_swagger.options.SecurityReq"
-      "uirement\022U\n\rexternal_docs\030\016 \001(\0132>.grpc.g"
-      "ateway.protoc_gen_swagger.options.Extern"
-      "alDocumentation\032c\n\016ResponsesEntry\022\013\n\003key"
+      "tions\032\031google/protobuf/any.proto\032\034google"
+      "/protobuf/struct.proto\"\240\007\n\007Swagger\022\017\n\007sw"
+      "agger\030\001 \001(\t\022;\n\004info\030\002 \001(\0132-.grpc.gateway"
+      ".protoc_gen_swagger.options.Info\022\014\n\004host"
+      "\030\003 \001(\t\022\021\n\tbase_path\030\004 \001(\t\022O\n\007schemes\030\005 \003"
+      "(\0162>.grpc.gateway.protoc_gen_swagger.opt"
+      "ions.Swagger.SwaggerScheme\022\020\n\010consumes\030\006"
+      " \003(\t\022\020\n\010produces\030\007 \003(\t\022R\n\tresponses\030\n \003("
+      "\0132\?.grpc.gateway.protoc_gen_swagger.opti"
+      "ons.Swagger.ResponsesEntry\022Z\n\024security_d"
+      "efinitions\030\013 \001(\0132<.grpc.gateway.protoc_g"
+      "en_swagger.options.SecurityDefinitions\022N"
+      "\n\010security\030\014 \003(\0132<.grpc.gateway.protoc_g"
+      "en_swagger.options.SecurityRequirement\022U"
+      "\n\rexternal_docs\030\016 \001(\0132>.grpc.gateway.pro"
+      "toc_gen_swagger.options.ExternalDocument"
+      "ation\022T\n\nextensions\030\017 \003(\0132@.grpc.gateway"
+      ".protoc_gen_swagger.options.Swagger.Exte"
+      "nsionsEntry\032c\n\016ResponsesEntry\022\013\n\003key\030\001 \001"
+      "(\t\022@\n\005value\030\002 \001(\01321.grpc.gateway.protoc_"
+      "gen_swagger.options.Response:\0028\001\032I\n\017Exte"
+      "nsionsEntry\022\013\n\003key\030\001 \001(\t\022%\n\005value\030\002 \001(\0132"
+      "\026.google.protobuf.Value:\0028\001\"B\n\rSwaggerSc"
+      "heme\022\013\n\007UNKNOWN\020\000\022\010\n\004HTTP\020\001\022\t\n\005HTTPS\020\002\022\006"
+      "\n\002WS\020\003\022\007\n\003WSS\020\004J\004\010\010\020\tJ\004\010\t\020\nJ\004\010\r\020\016\"\251\005\n\tOp"
+      "eration\022\014\n\004tags\030\001 \003(\t\022\017\n\007summary\030\002 \001(\t\022\023"
+      "\n\013description\030\003 \001(\t\022U\n\rexternal_docs\030\004 \001"
+      "(\0132>.grpc.gateway.protoc_gen_swagger.opt"
+      "ions.ExternalDocumentation\022\024\n\014operation_"
+      "id\030\005 \001(\t\022\020\n\010consumes\030\006 \003(\t\022\020\n\010produces\030\007"
+      " \003(\t\022T\n\tresponses\030\t \003(\0132A.grpc.gateway.p"
+      "rotoc_gen_swagger.options.Operation.Resp"
+      "onsesEntry\022\017\n\007schemes\030\n \003(\t\022\022\n\ndeprecate"
+      "d\030\013 \001(\010\022N\n\010security\030\014 \003(\0132<.grpc.gateway"
+      ".protoc_gen_swagger.options.SecurityRequ"
+      "irement\022V\n\nextensions\030\r \003(\0132B.grpc.gatew"
+      "ay.protoc_gen_swagger.options.Operation."
+      "ExtensionsEntry\032c\n\016ResponsesEntry\022\013\n\003key"
       "\030\001 \001(\t\022@\n\005value\030\002 \001(\01321.grpc.gateway.pro"
-      "toc_gen_swagger.options.Response:\0028\001\"B\n\r"
-      "SwaggerScheme\022\013\n\007UNKNOWN\020\000\022\010\n\004HTTP\020\001\022\t\n\005"
-      "HTTPS\020\002\022\006\n\002WS\020\003\022\007\n\003WSS\020\004J\004\010\010\020\tJ\004\010\t\020\nJ\004\010\r"
-      "\020\016\"\206\004\n\tOperation\022\014\n\004tags\030\001 \003(\t\022\017\n\007summar"
-      "y\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022U\n\rexternal"
-      "_docs\030\004 \001(\0132>.grpc.gateway.protoc_gen_sw"
-      "agger.options.ExternalDocumentation\022\024\n\014o"
-      "peration_id\030\005 \001(\t\022\020\n\010consumes\030\006 \003(\t\022\020\n\010p"
-      "roduces\030\007 \003(\t\022T\n\tresponses\030\t \003(\0132A.grpc."
-      "gateway.protoc_gen_swagger.options.Opera"
-      "tion.ResponsesEntry\022\017\n\007schemes\030\n \003(\t\022\022\n\n"
-      "deprecated\030\013 \001(\010\022N\n\010security\030\014 \003(\0132<.grp"
-      "c.gateway.protoc_gen_swagger.options.Sec"
-      "urityRequirement\032c\n\016ResponsesEntry\022\013\n\003ke"
-      "y\030\001 \001(\t\022@\n\005value\030\002 \001(\01321.grpc.gateway.pr"
-      "otoc_gen_swagger.options.Response:\0028\001J\004\010"
-      "\010\020\t\"l\n\010Response\022\023\n\013description\030\001 \001(\t\022\?\n\006"
-      "schema\030\002 \001(\0132/.grpc.gateway.protoc_gen_s"
-      "wagger.options.SchemaJ\004\010\003\020\004J\004\010\004\020\005\"\333\001\n\004In"
-      "fo\022\r\n\005title\030\001 \001(\t\022\023\n\013description\030\002 \001(\t\022\030"
-      "\n\020terms_of_service\030\003 \001(\t\022A\n\007contact\030\004 \001("
-      "\01320.grpc.gateway.protoc_gen_swagger.opti"
-      "ons.Contact\022A\n\007license\030\005 \001(\01320.grpc.gate"
-      "way.protoc_gen_swagger.options.License\022\017"
-      "\n\007version\030\006 \001(\t\"3\n\007Contact\022\014\n\004name\030\001 \001(\t"
-      "\022\013\n\003url\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\"$\n\007License\022"
-      "\014\n\004name\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\"9\n\025ExternalDo"
-      "cumentation\022\023\n\013description\030\001 \001(\t\022\013\n\003url\030"
-      "\002 \001(\t\"\200\002\n\006Schema\022H\n\013json_schema\030\001 \001(\01323."
-      "grpc.gateway.protoc_gen_swagger.options."
-      "JSONSchema\022\025\n\rdiscriminator\030\002 \001(\t\022\021\n\trea"
-      "d_only\030\003 \001(\010\022U\n\rexternal_docs\030\005 \001(\0132>.gr"
-      "pc.gateway.protoc_gen_swagger.options.Ex"
-      "ternalDocumentation\022%\n\007example\030\006 \001(\0132\024.g"
-      "oogle.protobuf.AnyJ\004\010\004\020\005\"\272\005\n\nJSONSchema\022"
-      "\013\n\003ref\030\003 \001(\t\022\r\n\005title\030\005 \001(\t\022\023\n\013descripti"
-      "on\030\006 \001(\t\022\017\n\007default\030\007 \001(\t\022\021\n\tread_only\030\010"
-      " \001(\010\022\023\n\013multiple_of\030\n \001(\001\022\017\n\007maximum\030\013 \001"
-      "(\001\022\031\n\021exclusive_maximum\030\014 \001(\010\022\017\n\007minimum"
-      "\030\r \001(\001\022\031\n\021exclusive_minimum\030\016 \001(\010\022\022\n\nmax"
-      "_length\030\017 \001(\004\022\022\n\nmin_length\030\020 \001(\004\022\017\n\007pat"
-      "tern\030\021 \001(\t\022\021\n\tmax_items\030\024 \001(\004\022\021\n\tmin_ite"
-      "ms\030\025 \001(\004\022\024\n\014unique_items\030\026 \001(\010\022\026\n\016max_pr"
-      "operties\030\030 \001(\004\022\026\n\016min_properties\030\031 \001(\004\022\020"
-      "\n\010required\030\032 \003(\t\022\r\n\005array\030\" \003(\t\022W\n\004type\030"
-      "# \003(\0162I.grpc.gateway.protoc_gen_swagger."
-      "options.JSONSchema.JSONSchemaSimpleTypes"
-      "\"w\n\025JSONSchemaSimpleTypes\022\013\n\007UNKNOWN\020\000\022\t"
-      "\n\005ARRAY\020\001\022\013\n\007BOOLEAN\020\002\022\013\n\007INTEGER\020\003\022\010\n\004N"
-      "ULL\020\004\022\n\n\006NUMBER\020\005\022\n\n\006OBJECT\020\006\022\n\n\006STRING\020"
-      "\007J\004\010\001\020\002J\004\010\002\020\003J\004\010\004\020\005J\004\010\t\020\nJ\004\010\022\020\023J\004\010\023\020\024J\004\010"
-      "\027\020\030J\004\010\033\020\034J\004\010\034\020\035J\004\010\035\020\036J\004\010\036\020\"J\004\010$\020*J\004\010*\020+J"
-      "\004\010+\020.\"w\n\003Tag\022\023\n\013description\030\002 \001(\t\022U\n\rext"
-      "ernal_docs\030\003 \001(\0132>.grpc.gateway.protoc_g"
-      "en_swagger.options.ExternalDocumentation"
-      "J\004\010\001\020\002\"\335\001\n\023SecurityDefinitions\022\\\n\010securi"
-      "ty\030\001 \003(\0132J.grpc.gateway.protoc_gen_swagg"
-      "er.options.SecurityDefinitions.SecurityE"
-      "ntry\032h\n\rSecurityEntry\022\013\n\003key\030\001 \001(\t\022F\n\005va"
-      "lue\030\002 \001(\01327.grpc.gateway.protoc_gen_swag"
-      "ger.options.SecurityScheme:\0028\001\"\356\004\n\016Secur"
-      "ityScheme\022J\n\004type\030\001 \001(\0162<.grpc.gateway.p"
-      "rotoc_gen_swagger.options.SecurityScheme"
-      ".Type\022\023\n\013description\030\002 \001(\t\022\014\n\004name\030\003 \001(\t"
-      "\022F\n\002in\030\004 \001(\0162:.grpc.gateway.protoc_gen_s"
-      "wagger.options.SecurityScheme.In\022J\n\004flow"
-      "\030\005 \001(\0162<.grpc.gateway.protoc_gen_swagger"
-      ".options.SecurityScheme.Flow\022\031\n\021authoriz"
-      "ation_url\030\006 \001(\t\022\021\n\ttoken_url\030\007 \001(\t\022\?\n\006sc"
-      "opes\030\010 \001(\0132/.grpc.gateway.protoc_gen_swa"
-      "gger.options.Scopes\"K\n\004Type\022\020\n\014TYPE_INVA"
-      "LID\020\000\022\016\n\nTYPE_BASIC\020\001\022\020\n\014TYPE_API_KEY\020\002\022"
-      "\017\n\013TYPE_OAUTH2\020\003\"1\n\002In\022\016\n\nIN_INVALID\020\000\022\014"
-      "\n\010IN_QUERY\020\001\022\r\n\tIN_HEADER\020\002\"j\n\004Flow\022\020\n\014F"
-      "LOW_INVALID\020\000\022\021\n\rFLOW_IMPLICIT\020\001\022\021\n\rFLOW"
-      "_PASSWORD\020\002\022\024\n\020FLOW_APPLICATION\020\003\022\024\n\020FLO"
-      "W_ACCESS_CODE\020\004\"\311\002\n\023SecurityRequirement\022"
-      "s\n\024security_requirement\030\001 \003(\0132U.grpc.gat"
-      "eway.protoc_gen_swagger.options.Security"
-      "Requirement.SecurityRequirementEntry\032)\n\030"
-      "SecurityRequirementValue\022\r\n\005scope\030\001 \003(\t\032"
-      "\221\001\n\030SecurityRequirementEntry\022\013\n\003key\030\001 \001("
-      "\t\022d\n\005value\030\002 \001(\0132U.grpc.gateway.protoc_g"
-      "en_swagger.options.SecurityRequirement.S"
-      "ecurityRequirementValue:\0028\001\"\201\001\n\006Scopes\022I"
-      "\n\005scope\030\001 \003(\0132:.grpc.gateway.protoc_gen_"
-      "swagger.options.Scopes.ScopeEntry\032,\n\nSco"
-      "peEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B"
-      "CZAgithub.com/grpc-ecosystem/grpc-gatewa"
-      "y/protoc-gen-swagger/optionsb\006proto3"
+      "toc_gen_swagger.options.Response:\0028\001\032I\n\017"
+      "ExtensionsEntry\022\013\n\003key\030\001 \001(\t\022%\n\005value\030\002 "
+      "\001(\0132\026.google.protobuf.Value:\0028\001J\004\010\010\020\t\"\214\003"
+      "\n\010Response\022\023\n\013description\030\001 \001(\t\022\?\n\006schem"
+      "a\030\002 \001(\0132/.grpc.gateway.protoc_gen_swagge"
+      "r.options.Schema\022Q\n\010examples\030\004 \003(\0132\?.grp"
+      "c.gateway.protoc_gen_swagger.options.Res"
+      "ponse.ExamplesEntry\022U\n\nextensions\030\005 \003(\0132"
+      "A.grpc.gateway.protoc_gen_swagger.option"
+      "s.Response.ExtensionsEntry\032/\n\rExamplesEn"
+      "try\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032I\n\017E"
+      "xtensionsEntry\022\013\n\003key\030\001 \001(\t\022%\n\005value\030\002 \001"
+      "(\0132\026.google.protobuf.Value:\0028\001J\004\010\003\020\004\"\371\002\n"
+      "\004Info\022\r\n\005title\030\001 \001(\t\022\023\n\013description\030\002 \001("
+      "\t\022\030\n\020terms_of_service\030\003 \001(\t\022A\n\007contact\030\004"
+      " \001(\01320.grpc.gateway.protoc_gen_swagger.o"
+      "ptions.Contact\022A\n\007license\030\005 \001(\01320.grpc.g"
+      "ateway.protoc_gen_swagger.options.Licens"
+      "e\022\017\n\007version\030\006 \001(\t\022Q\n\nextensions\030\007 \003(\0132="
+      ".grpc.gateway.protoc_gen_swagger.options"
+      ".Info.ExtensionsEntry\032I\n\017ExtensionsEntry"
+      "\022\013\n\003key\030\001 \001(\t\022%\n\005value\030\002 \001(\0132\026.google.pr"
+      "otobuf.Value:\0028\001\"3\n\007Contact\022\014\n\004name\030\001 \001("
+      "\t\022\013\n\003url\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\"$\n\007License"
+      "\022\014\n\004name\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\"9\n\025ExternalD"
+      "ocumentation\022\023\n\013description\030\001 \001(\t\022\013\n\003url"
+      "\030\002 \001(\t\"\200\002\n\006Schema\022H\n\013json_schema\030\001 \001(\01323"
+      ".grpc.gateway.protoc_gen_swagger.options"
+      ".JSONSchema\022\025\n\rdiscriminator\030\002 \001(\t\022\021\n\tre"
+      "ad_only\030\003 \001(\010\022U\n\rexternal_docs\030\005 \001(\0132>.g"
+      "rpc.gateway.protoc_gen_swagger.options.E"
+      "xternalDocumentation\022%\n\007example\030\006 \001(\0132\024."
+      "google.protobuf.AnyJ\004\010\004\020\005\"\272\005\n\nJSONSchema"
+      "\022\013\n\003ref\030\003 \001(\t\022\r\n\005title\030\005 \001(\t\022\023\n\013descript"
+      "ion\030\006 \001(\t\022\017\n\007default\030\007 \001(\t\022\021\n\tread_only\030"
+      "\010 \001(\010\022\023\n\013multiple_of\030\n \001(\001\022\017\n\007maximum\030\013 "
+      "\001(\001\022\031\n\021exclusive_maximum\030\014 \001(\010\022\017\n\007minimu"
+      "m\030\r \001(\001\022\031\n\021exclusive_minimum\030\016 \001(\010\022\022\n\nma"
+      "x_length\030\017 \001(\004\022\022\n\nmin_length\030\020 \001(\004\022\017\n\007pa"
+      "ttern\030\021 \001(\t\022\021\n\tmax_items\030\024 \001(\004\022\021\n\tmin_it"
+      "ems\030\025 \001(\004\022\024\n\014unique_items\030\026 \001(\010\022\026\n\016max_p"
+      "roperties\030\030 \001(\004\022\026\n\016min_properties\030\031 \001(\004\022"
+      "\020\n\010required\030\032 \003(\t\022\r\n\005array\030\" \003(\t\022W\n\004type"
+      "\030# \003(\0162I.grpc.gateway.protoc_gen_swagger"
+      ".options.JSONSchema.JSONSchemaSimpleType"
+      "s\"w\n\025JSONSchemaSimpleTypes\022\013\n\007UNKNOWN\020\000\022"
+      "\t\n\005ARRAY\020\001\022\013\n\007BOOLEAN\020\002\022\013\n\007INTEGER\020\003\022\010\n\004"
+      "NULL\020\004\022\n\n\006NUMBER\020\005\022\n\n\006OBJECT\020\006\022\n\n\006STRING"
+      "\020\007J\004\010\001\020\002J\004\010\002\020\003J\004\010\004\020\005J\004\010\t\020\nJ\004\010\022\020\023J\004\010\023\020\024J\004"
+      "\010\027\020\030J\004\010\033\020\034J\004\010\034\020\035J\004\010\035\020\036J\004\010\036\020\"J\004\010$\020*J\004\010*\020+"
+      "J\004\010+\020.\"w\n\003Tag\022\023\n\013description\030\002 \001(\t\022U\n\rex"
+      "ternal_docs\030\003 \001(\0132>.grpc.gateway.protoc_"
+      "gen_swagger.options.ExternalDocumentatio"
+      "nJ\004\010\001\020\002\"\335\001\n\023SecurityDefinitions\022\\\n\010secur"
+      "ity\030\001 \003(\0132J.grpc.gateway.protoc_gen_swag"
+      "ger.options.SecurityDefinitions.Security"
+      "Entry\032h\n\rSecurityEntry\022\013\n\003key\030\001 \001(\t\022F\n\005v"
+      "alue\030\002 \001(\01327.grpc.gateway.protoc_gen_swa"
+      "gger.options.SecurityScheme:\0028\001\"\226\006\n\016Secu"
+      "rityScheme\022J\n\004type\030\001 \001(\0162<.grpc.gateway."
+      "protoc_gen_swagger.options.SecuritySchem"
+      "e.Type\022\023\n\013description\030\002 \001(\t\022\014\n\004name\030\003 \001("
+      "\t\022F\n\002in\030\004 \001(\0162:.grpc.gateway.protoc_gen_"
+      "swagger.options.SecurityScheme.In\022J\n\004flo"
+      "w\030\005 \001(\0162<.grpc.gateway.protoc_gen_swagge"
+      "r.options.SecurityScheme.Flow\022\031\n\021authori"
+      "zation_url\030\006 \001(\t\022\021\n\ttoken_url\030\007 \001(\t\022\?\n\006s"
+      "copes\030\010 \001(\0132/.grpc.gateway.protoc_gen_sw"
+      "agger.options.Scopes\022[\n\nextensions\030\t \003(\013"
+      "2G.grpc.gateway.protoc_gen_swagger.optio"
+      "ns.SecurityScheme.ExtensionsEntry\032I\n\017Ext"
+      "ensionsEntry\022\013\n\003key\030\001 \001(\t\022%\n\005value\030\002 \001(\013"
+      "2\026.google.protobuf.Value:\0028\001\"K\n\004Type\022\020\n\014"
+      "TYPE_INVALID\020\000\022\016\n\nTYPE_BASIC\020\001\022\020\n\014TYPE_A"
+      "PI_KEY\020\002\022\017\n\013TYPE_OAUTH2\020\003\"1\n\002In\022\016\n\nIN_IN"
+      "VALID\020\000\022\014\n\010IN_QUERY\020\001\022\r\n\tIN_HEADER\020\002\"j\n\004"
+      "Flow\022\020\n\014FLOW_INVALID\020\000\022\021\n\rFLOW_IMPLICIT\020"
+      "\001\022\021\n\rFLOW_PASSWORD\020\002\022\024\n\020FLOW_APPLICATION"
+      "\020\003\022\024\n\020FLOW_ACCESS_CODE\020\004\"\311\002\n\023SecurityReq"
+      "uirement\022s\n\024security_requirement\030\001 \003(\0132U"
+      ".grpc.gateway.protoc_gen_swagger.options"
+      ".SecurityRequirement.SecurityRequirement"
+      "Entry\032)\n\030SecurityRequirementValue\022\r\n\005sco"
+      "pe\030\001 \003(\t\032\221\001\n\030SecurityRequirementEntry\022\013\n"
+      "\003key\030\001 \001(\t\022d\n\005value\030\002 \001(\0132U.grpc.gateway"
+      ".protoc_gen_swagger.options.SecurityRequ"
+      "irement.SecurityRequirementValue:\0028\001\"\201\001\n"
+      "\006Scopes\022I\n\005scope\030\001 \003(\0132:.grpc.gateway.pr"
+      "otoc_gen_swagger.options.Scopes.ScopeEnt"
+      "ry\032,\n\nScopeEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002"
+      " \001(\t:\0028\001BCZAgithub.com/grpc-ecosystem/gr"
+      "pc-gateway/protoc-gen-swagger/optionsb\006p"
+      "roto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 4356);
+      descriptor, 5325);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protoc-gen-swagger/options/openapiv2.proto", &protobuf_RegisterTypes);
   ::protobuf_google_2fprotobuf_2fany_2eproto::AddDescriptors();
+  ::protobuf_google_2fprotobuf_2fstruct_2eproto::AddDescriptors();
 }
 
 void AddDescriptors() {
@@ -1029,6 +1261,23 @@ void Swagger_ResponsesEntry_DoNotUse::MergeFrom(
 
 // ===================================================================
 
+Swagger_ExtensionsEntry_DoNotUse::Swagger_ExtensionsEntry_DoNotUse() {}
+Swagger_ExtensionsEntry_DoNotUse::Swagger_ExtensionsEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
+void Swagger_ExtensionsEntry_DoNotUse::MergeFrom(const Swagger_ExtensionsEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::google::protobuf::Metadata Swagger_ExtensionsEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[1];
+}
+void Swagger_ExtensionsEntry_DoNotUse::MergeFrom(
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
 void Swagger::InitAsDefaultInstance() {
   ::grpc::gateway::protoc_gen_swagger::options::_Swagger_default_instance_._instance.get_mutable()->info_ = const_cast< ::grpc::gateway::protoc_gen_swagger::options::Info*>(
       ::grpc::gateway::protoc_gen_swagger::options::Info::internal_default_instance());
@@ -1036,6 +1285,9 @@ void Swagger::InitAsDefaultInstance() {
       ::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions::internal_default_instance());
   ::grpc::gateway::protoc_gen_swagger::options::_Swagger_default_instance_._instance.get_mutable()->external_docs_ = const_cast< ::grpc::gateway::protoc_gen_swagger::options::ExternalDocumentation*>(
       ::grpc::gateway::protoc_gen_swagger::options::ExternalDocumentation::internal_default_instance());
+}
+void Swagger::clear_extensions() {
+  extensions_.Clear();
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Swagger::kSwaggerFieldNumber;
@@ -1049,6 +1301,7 @@ const int Swagger::kResponsesFieldNumber;
 const int Swagger::kSecurityDefinitionsFieldNumber;
 const int Swagger::kSecurityFieldNumber;
 const int Swagger::kExternalDocsFieldNumber;
+const int Swagger::kExtensionsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Swagger::Swagger()
@@ -1067,6 +1320,7 @@ Swagger::Swagger(const Swagger& from)
       security_(from.security_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   responses_.MergeFrom(from.responses_);
+  extensions_.MergeFrom(from.extensions_);
   swagger_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.swagger().size() > 0) {
     swagger_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.swagger_);
@@ -1145,6 +1399,7 @@ void Swagger::Clear() {
   produces_.Clear();
   responses_.Clear();
   security_.Clear();
+  extensions_.Clear();
   swagger_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   host_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   base_path_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1355,6 +1610,29 @@ bool Swagger::MergePartialFromCodedStream(
         break;
       }
 
+      // map<string, .google.protobuf.Value> extensions = 15;
+      case 15: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(122u /* 122 & 0xFF */)) {
+          Swagger_ExtensionsEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              Swagger_ExtensionsEntry_DoNotUse,
+              ::std::string, ::google::protobuf::Value,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::google::protobuf::Value > > parser(&extensions_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "grpc.gateway.protoc_gen_swagger.options.Swagger.ExtensionsEntry.key"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -1521,6 +1799,55 @@ void Swagger::SerializeWithCachedSizes(
       14, this->_internal_external_docs(), output);
   }
 
+  // map<string, .google.protobuf.Value> extensions = 15;
+  if (!this->extensions().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Swagger.ExtensionsEntry.key");
+      }
+    };
+
+    if (output->IsSerializationDeterministic() &&
+        this->extensions().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->extensions().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Swagger_ExtensionsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(extensions_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            15, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Swagger_ExtensionsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it) {
+        entry.reset(extensions_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            15, *entry, output);
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -1682,6 +2009,59 @@ void Swagger::SerializeWithCachedSizes(
         14, this->_internal_external_docs(), deterministic, target);
   }
 
+  // map<string, .google.protobuf.Value> extensions = 15;
+  if (!this->extensions().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Swagger.ExtensionsEntry.key");
+      }
+    };
+
+    if (deterministic &&
+        this->extensions().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->extensions().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Swagger_ExtensionsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(extensions_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       15, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Swagger_ExtensionsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it) {
+        entry.reset(extensions_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       15, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -1759,6 +2139,20 @@ size_t Swagger::ByteSizeLong() const {
     }
   }
 
+  // map<string, .google.protobuf.Value> extensions = 15;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->extensions_size());
+  {
+    ::std::unique_ptr<Swagger_ExtensionsEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+        it = this->extensions().begin();
+        it != this->extensions().end(); ++it) {
+      entry.reset(extensions_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
+  }
+
   // string swagger = 1;
   if (this->swagger().size() > 0) {
     total_size += 1 +
@@ -1833,6 +2227,7 @@ void Swagger::MergeFrom(const Swagger& from) {
   produces_.MergeFrom(from.produces_);
   responses_.MergeFrom(from.responses_);
   security_.MergeFrom(from.security_);
+  extensions_.MergeFrom(from.extensions_);
   if (from.swagger().size() > 0) {
 
     swagger_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.swagger_);
@@ -1885,6 +2280,7 @@ void Swagger::InternalSwap(Swagger* other) {
   produces_.InternalSwap(CastToBase(&other->produces_));
   responses_.Swap(&other->responses_);
   CastToBase(&security_)->InternalSwap(CastToBase(&other->security_));
+  extensions_.Swap(&other->extensions_);
   swagger_.Swap(&other->swagger_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   host_.Swap(&other->host_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
@@ -1912,9 +2308,26 @@ void Operation_ResponsesEntry_DoNotUse::MergeFrom(const Operation_ResponsesEntry
 }
 ::google::protobuf::Metadata Operation_ResponsesEntry_DoNotUse::GetMetadata() const {
   ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[2];
+  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[3];
 }
 void Operation_ResponsesEntry_DoNotUse::MergeFrom(
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
+Operation_ExtensionsEntry_DoNotUse::Operation_ExtensionsEntry_DoNotUse() {}
+Operation_ExtensionsEntry_DoNotUse::Operation_ExtensionsEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
+void Operation_ExtensionsEntry_DoNotUse::MergeFrom(const Operation_ExtensionsEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::google::protobuf::Metadata Operation_ExtensionsEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[4];
+}
+void Operation_ExtensionsEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
   ::google::protobuf::Message::MergeFrom(other);
 }
@@ -1925,6 +2338,9 @@ void Operation_ResponsesEntry_DoNotUse::MergeFrom(
 void Operation::InitAsDefaultInstance() {
   ::grpc::gateway::protoc_gen_swagger::options::_Operation_default_instance_._instance.get_mutable()->external_docs_ = const_cast< ::grpc::gateway::protoc_gen_swagger::options::ExternalDocumentation*>(
       ::grpc::gateway::protoc_gen_swagger::options::ExternalDocumentation::internal_default_instance());
+}
+void Operation::clear_extensions() {
+  extensions_.Clear();
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Operation::kTagsFieldNumber;
@@ -1938,6 +2354,7 @@ const int Operation::kResponsesFieldNumber;
 const int Operation::kSchemesFieldNumber;
 const int Operation::kDeprecatedFieldNumber;
 const int Operation::kSecurityFieldNumber;
+const int Operation::kExtensionsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Operation::Operation()
@@ -1957,6 +2374,7 @@ Operation::Operation(const Operation& from)
       security_(from.security_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   responses_.MergeFrom(from.responses_);
+  extensions_.MergeFrom(from.extensions_);
   summary_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.summary().size() > 0) {
     summary_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.summary_);
@@ -2025,6 +2443,7 @@ void Operation::Clear() {
   responses_.Clear();
   schemes_.Clear();
   security_.Clear();
+  extensions_.Clear();
   summary_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   operation_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -2223,6 +2642,29 @@ bool Operation::MergePartialFromCodedStream(
         break;
       }
 
+      // map<string, .google.protobuf.Value> extensions = 13;
+      case 13: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(106u /* 106 & 0xFF */)) {
+          Operation_ExtensionsEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              Operation_ExtensionsEntry_DoNotUse,
+              ::std::string, ::google::protobuf::Value,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::google::protobuf::Value > > parser(&extensions_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "grpc.gateway.protoc_gen_swagger.options.Operation.ExtensionsEntry.key"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -2388,6 +2830,55 @@ void Operation::SerializeWithCachedSizes(
       output);
   }
 
+  // map<string, .google.protobuf.Value> extensions = 13;
+  if (!this->extensions().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Operation.ExtensionsEntry.key");
+      }
+    };
+
+    if (output->IsSerializationDeterministic() &&
+        this->extensions().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->extensions().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Operation_ExtensionsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(extensions_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            13, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Operation_ExtensionsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it) {
+        entry.reset(extensions_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            13, *entry, output);
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -2548,6 +3039,59 @@ void Operation::SerializeWithCachedSizes(
         12, this->security(static_cast<int>(i)), deterministic, target);
   }
 
+  // map<string, .google.protobuf.Value> extensions = 13;
+  if (!this->extensions().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Operation.ExtensionsEntry.key");
+      }
+    };
+
+    if (deterministic &&
+        this->extensions().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->extensions().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Operation_ExtensionsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(extensions_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       13, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Operation_ExtensionsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it) {
+        entry.reset(extensions_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       13, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -2622,6 +3166,20 @@ size_t Operation::ByteSizeLong() const {
     }
   }
 
+  // map<string, .google.protobuf.Value> extensions = 13;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->extensions_size());
+  {
+    ::std::unique_ptr<Operation_ExtensionsEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+        it = this->extensions().begin();
+        it != this->extensions().end(); ++it) {
+      entry.reset(extensions_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
+  }
+
   // string summary = 2;
   if (this->summary().size() > 0) {
     total_size += 1 +
@@ -2688,6 +3246,7 @@ void Operation::MergeFrom(const Operation& from) {
   responses_.MergeFrom(from.responses_);
   schemes_.MergeFrom(from.schemes_);
   security_.MergeFrom(from.security_);
+  extensions_.MergeFrom(from.extensions_);
   if (from.summary().size() > 0) {
 
     summary_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.summary_);
@@ -2738,6 +3297,7 @@ void Operation::InternalSwap(Operation* other) {
   responses_.Swap(&other->responses_);
   schemes_.InternalSwap(CastToBase(&other->schemes_));
   CastToBase(&security_)->InternalSwap(CastToBase(&other->security_));
+  extensions_.Swap(&other->extensions_);
   summary_.Swap(&other->summary_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   description_.Swap(&other->description_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
@@ -2757,13 +3317,52 @@ void Operation::InternalSwap(Operation* other) {
 
 // ===================================================================
 
+Response_ExamplesEntry_DoNotUse::Response_ExamplesEntry_DoNotUse() {}
+Response_ExamplesEntry_DoNotUse::Response_ExamplesEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
+void Response_ExamplesEntry_DoNotUse::MergeFrom(const Response_ExamplesEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::google::protobuf::Metadata Response_ExamplesEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[6];
+}
+void Response_ExamplesEntry_DoNotUse::MergeFrom(
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
+Response_ExtensionsEntry_DoNotUse::Response_ExtensionsEntry_DoNotUse() {}
+Response_ExtensionsEntry_DoNotUse::Response_ExtensionsEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
+void Response_ExtensionsEntry_DoNotUse::MergeFrom(const Response_ExtensionsEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::google::protobuf::Metadata Response_ExtensionsEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[7];
+}
+void Response_ExtensionsEntry_DoNotUse::MergeFrom(
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
 void Response::InitAsDefaultInstance() {
   ::grpc::gateway::protoc_gen_swagger::options::_Response_default_instance_._instance.get_mutable()->schema_ = const_cast< ::grpc::gateway::protoc_gen_swagger::options::Schema*>(
       ::grpc::gateway::protoc_gen_swagger::options::Schema::internal_default_instance());
 }
+void Response::clear_extensions() {
+  extensions_.Clear();
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Response::kDescriptionFieldNumber;
 const int Response::kSchemaFieldNumber;
+const int Response::kExamplesFieldNumber;
+const int Response::kExtensionsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Response::Response()
@@ -2777,6 +3376,8 @@ Response::Response(const Response& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  examples_.MergeFrom(from.examples_);
+  extensions_.MergeFrom(from.extensions_);
   description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.description().size() > 0) {
     description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.description_);
@@ -2824,6 +3425,8 @@ void Response::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  examples_.Clear();
+  extensions_.Clear();
   description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == NULL && schema_ != NULL) {
     delete schema_;
@@ -2864,6 +3467,56 @@ bool Response::MergePartialFromCodedStream(
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_schema()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // map<string, string> examples = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          Response_ExamplesEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              Response_ExamplesEntry_DoNotUse,
+              ::std::string, ::std::string,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::std::string > > parser(&examples_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "grpc.gateway.protoc_gen_swagger.options.Response.ExamplesEntry.key"));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.value().data(), static_cast<int>(parser.value().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "grpc.gateway.protoc_gen_swagger.options.Response.ExamplesEntry.value"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // map<string, .google.protobuf.Value> extensions = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+          Response_ExtensionsEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              Response_ExtensionsEntry_DoNotUse,
+              ::std::string, ::google::protobuf::Value,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::google::protobuf::Value > > parser(&extensions_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "grpc.gateway.protoc_gen_swagger.options.Response.ExtensionsEntry.key"));
         } else {
           goto handle_unusual;
         }
@@ -2912,6 +3565,108 @@ void Response::SerializeWithCachedSizes(
       2, this->_internal_schema(), output);
   }
 
+  // map<string, string> examples = 4;
+  if (!this->examples().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::std::string >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Response.ExamplesEntry.key");
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->second.data(), static_cast<int>(p->second.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Response.ExamplesEntry.value");
+      }
+    };
+
+    if (output->IsSerializationDeterministic() &&
+        this->examples().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->examples().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::std::string >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->examples().begin();
+          it != this->examples().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Response_ExamplesEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(examples_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            4, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Response_ExamplesEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->examples().begin();
+          it != this->examples().end(); ++it) {
+        entry.reset(examples_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            4, *entry, output);
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  // map<string, .google.protobuf.Value> extensions = 5;
+  if (!this->extensions().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Response.ExtensionsEntry.key");
+      }
+    };
+
+    if (output->IsSerializationDeterministic() &&
+        this->extensions().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->extensions().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Response_ExtensionsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(extensions_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            5, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Response_ExtensionsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it) {
+        entry.reset(extensions_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            5, *entry, output);
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -2944,6 +3699,116 @@ void Response::SerializeWithCachedSizes(
         2, this->_internal_schema(), deterministic, target);
   }
 
+  // map<string, string> examples = 4;
+  if (!this->examples().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::std::string >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Response.ExamplesEntry.key");
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->second.data(), static_cast<int>(p->second.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Response.ExamplesEntry.value");
+      }
+    };
+
+    if (deterministic &&
+        this->examples().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->examples().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::std::string >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->examples().begin();
+          it != this->examples().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Response_ExamplesEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(examples_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       4, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Response_ExamplesEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+          it = this->examples().begin();
+          it != this->examples().end(); ++it) {
+        entry.reset(examples_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       4, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
+  // map<string, .google.protobuf.Value> extensions = 5;
+  if (!this->extensions().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Response.ExtensionsEntry.key");
+      }
+    };
+
+    if (deterministic &&
+        this->extensions().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->extensions().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Response_ExtensionsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(extensions_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       5, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Response_ExtensionsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it) {
+        entry.reset(extensions_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       5, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -2961,6 +3826,34 @@ size_t Response::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
+  // map<string, string> examples = 4;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->examples_size());
+  {
+    ::std::unique_ptr<Response_ExamplesEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::std::string >::const_iterator
+        it = this->examples().begin();
+        it != this->examples().end(); ++it) {
+      entry.reset(examples_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
+  }
+
+  // map<string, .google.protobuf.Value> extensions = 5;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->extensions_size());
+  {
+    ::std::unique_ptr<Response_ExtensionsEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+        it = this->extensions().begin();
+        it != this->extensions().end(); ++it) {
+      entry.reset(extensions_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
+  }
+
   // string description = 1;
   if (this->description().size() > 0) {
     total_size += 1 +
@@ -3002,6 +3895,8 @@ void Response::MergeFrom(const Response& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  examples_.MergeFrom(from.examples_);
+  extensions_.MergeFrom(from.extensions_);
   if (from.description().size() > 0) {
 
     description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.description_);
@@ -3035,6 +3930,8 @@ void Response::Swap(Response* other) {
 }
 void Response::InternalSwap(Response* other) {
   using std::swap;
+  examples_.Swap(&other->examples_);
+  extensions_.Swap(&other->extensions_);
   description_.Swap(&other->description_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(schema_, other->schema_);
@@ -3049,11 +3946,31 @@ void Response::InternalSwap(Response* other) {
 
 // ===================================================================
 
+Info_ExtensionsEntry_DoNotUse::Info_ExtensionsEntry_DoNotUse() {}
+Info_ExtensionsEntry_DoNotUse::Info_ExtensionsEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
+void Info_ExtensionsEntry_DoNotUse::MergeFrom(const Info_ExtensionsEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::google::protobuf::Metadata Info_ExtensionsEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[9];
+}
+void Info_ExtensionsEntry_DoNotUse::MergeFrom(
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
 void Info::InitAsDefaultInstance() {
   ::grpc::gateway::protoc_gen_swagger::options::_Info_default_instance_._instance.get_mutable()->contact_ = const_cast< ::grpc::gateway::protoc_gen_swagger::options::Contact*>(
       ::grpc::gateway::protoc_gen_swagger::options::Contact::internal_default_instance());
   ::grpc::gateway::protoc_gen_swagger::options::_Info_default_instance_._instance.get_mutable()->license_ = const_cast< ::grpc::gateway::protoc_gen_swagger::options::License*>(
       ::grpc::gateway::protoc_gen_swagger::options::License::internal_default_instance());
+}
+void Info::clear_extensions() {
+  extensions_.Clear();
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Info::kTitleFieldNumber;
@@ -3062,6 +3979,7 @@ const int Info::kTermsOfServiceFieldNumber;
 const int Info::kContactFieldNumber;
 const int Info::kLicenseFieldNumber;
 const int Info::kVersionFieldNumber;
+const int Info::kExtensionsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Info::Info()
@@ -3075,6 +3993,7 @@ Info::Info(const Info& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  extensions_.MergeFrom(from.extensions_);
   title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.title().size() > 0) {
     title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
@@ -3148,6 +4067,7 @@ void Info::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  extensions_.Clear();
   title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   terms_of_service_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -3261,6 +4181,29 @@ bool Info::MergePartialFromCodedStream(
         break;
       }
 
+      // map<string, .google.protobuf.Value> extensions = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
+          Info_ExtensionsEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              Info_ExtensionsEntry_DoNotUse,
+              ::std::string, ::google::protobuf::Value,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::google::protobuf::Value > > parser(&extensions_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "grpc.gateway.protoc_gen_swagger.options.Info.ExtensionsEntry.key"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -3339,6 +4282,55 @@ void Info::SerializeWithCachedSizes(
       6, this->version(), output);
   }
 
+  // map<string, .google.protobuf.Value> extensions = 7;
+  if (!this->extensions().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Info.ExtensionsEntry.key");
+      }
+    };
+
+    if (output->IsSerializationDeterministic() &&
+        this->extensions().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->extensions().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Info_ExtensionsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(extensions_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            7, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Info_ExtensionsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it) {
+        entry.reset(extensions_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            7, *entry, output);
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -3411,6 +4403,59 @@ void Info::SerializeWithCachedSizes(
         6, this->version(), target);
   }
 
+  // map<string, .google.protobuf.Value> extensions = 7;
+  if (!this->extensions().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.Info.ExtensionsEntry.key");
+      }
+    };
+
+    if (deterministic &&
+        this->extensions().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->extensions().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<Info_ExtensionsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(extensions_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       7, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<Info_ExtensionsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it) {
+        entry.reset(extensions_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       7, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -3428,6 +4473,20 @@ size_t Info::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
+  // map<string, .google.protobuf.Value> extensions = 7;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->extensions_size());
+  {
+    ::std::unique_ptr<Info_ExtensionsEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+        it = this->extensions().begin();
+        it != this->extensions().end(); ++it) {
+      entry.reset(extensions_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
+  }
+
   // string title = 1;
   if (this->title().size() > 0) {
     total_size += 1 +
@@ -3497,6 +4556,7 @@ void Info::MergeFrom(const Info& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  extensions_.MergeFrom(from.extensions_);
   if (from.title().size() > 0) {
 
     title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
@@ -3545,6 +4605,7 @@ void Info::Swap(Info* other) {
 }
 void Info::InternalSwap(Info* other) {
   using std::swap;
+  extensions_.Swap(&other->extensions_);
   title_.Swap(&other->title_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   description_.Swap(&other->description_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
@@ -6373,7 +7434,7 @@ void SecurityDefinitions_SecurityEntry_DoNotUse::MergeFrom(const SecurityDefinit
 }
 ::google::protobuf::Metadata SecurityDefinitions_SecurityEntry_DoNotUse::GetMetadata() const {
   ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[12];
+  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[17];
 }
 void SecurityDefinitions_SecurityEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -6711,9 +7772,29 @@ void SecurityDefinitions::InternalSwap(SecurityDefinitions* other) {
 
 // ===================================================================
 
+SecurityScheme_ExtensionsEntry_DoNotUse::SecurityScheme_ExtensionsEntry_DoNotUse() {}
+SecurityScheme_ExtensionsEntry_DoNotUse::SecurityScheme_ExtensionsEntry_DoNotUse(::google::protobuf::Arena* arena) : SuperType(arena) {}
+void SecurityScheme_ExtensionsEntry_DoNotUse::MergeFrom(const SecurityScheme_ExtensionsEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::google::protobuf::Metadata SecurityScheme_ExtensionsEntry_DoNotUse::GetMetadata() const {
+  ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[19];
+}
+void SecurityScheme_ExtensionsEntry_DoNotUse::MergeFrom(
+    const ::google::protobuf::Message& other) {
+  ::google::protobuf::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
 void SecurityScheme::InitAsDefaultInstance() {
   ::grpc::gateway::protoc_gen_swagger::options::_SecurityScheme_default_instance_._instance.get_mutable()->scopes_ = const_cast< ::grpc::gateway::protoc_gen_swagger::options::Scopes*>(
       ::grpc::gateway::protoc_gen_swagger::options::Scopes::internal_default_instance());
+}
+void SecurityScheme::clear_extensions() {
+  extensions_.Clear();
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int SecurityScheme::kTypeFieldNumber;
@@ -6724,6 +7805,7 @@ const int SecurityScheme::kFlowFieldNumber;
 const int SecurityScheme::kAuthorizationUrlFieldNumber;
 const int SecurityScheme::kTokenUrlFieldNumber;
 const int SecurityScheme::kScopesFieldNumber;
+const int SecurityScheme::kExtensionsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 SecurityScheme::SecurityScheme()
@@ -6737,6 +7819,7 @@ SecurityScheme::SecurityScheme(const SecurityScheme& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  extensions_.MergeFrom(from.extensions_);
   description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.description().size() > 0) {
     description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.description_);
@@ -6807,6 +7890,7 @@ void SecurityScheme::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  extensions_.Clear();
   description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   authorization_url_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -6952,6 +8036,29 @@ bool SecurityScheme::MergePartialFromCodedStream(
         break;
       }
 
+      // map<string, .google.protobuf.Value> extensions = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
+          SecurityScheme_ExtensionsEntry_DoNotUse::Parser< ::google::protobuf::internal::MapField<
+              SecurityScheme_ExtensionsEntry_DoNotUse,
+              ::std::string, ::google::protobuf::Value,
+              ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+              ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+              0 >,
+            ::google::protobuf::Map< ::std::string, ::google::protobuf::Value > > parser(&extensions_);
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+              input, &parser));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            parser.key().data(), static_cast<int>(parser.key().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "grpc.gateway.protoc_gen_swagger.options.SecurityScheme.ExtensionsEntry.key"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -7042,6 +8149,55 @@ void SecurityScheme::SerializeWithCachedSizes(
       8, this->_internal_scopes(), output);
   }
 
+  // map<string, .google.protobuf.Value> extensions = 9;
+  if (!this->extensions().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.SecurityScheme.ExtensionsEntry.key");
+      }
+    };
+
+    if (output->IsSerializationDeterministic() &&
+        this->extensions().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->extensions().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<SecurityScheme_ExtensionsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(extensions_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            9, *entry, output);
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<SecurityScheme_ExtensionsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it) {
+        entry.reset(extensions_.NewEntryWrapper(
+            it->first, it->second));
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            9, *entry, output);
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -7125,6 +8281,59 @@ void SecurityScheme::SerializeWithCachedSizes(
         8, this->_internal_scopes(), deterministic, target);
   }
 
+  // map<string, .google.protobuf.Value> extensions = 9;
+  if (!this->extensions().empty()) {
+    typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::google::protobuf::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+          "grpc.gateway.protoc_gen_swagger.options.SecurityScheme.ExtensionsEntry.key");
+      }
+    };
+
+    if (deterministic &&
+        this->extensions().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->extensions().size()]);
+      typedef ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::size_type size_type;
+      size_type n = 0;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      ::std::unique_ptr<SecurityScheme_ExtensionsEntry_DoNotUse> entry;
+      for (size_type i = 0; i < n; i++) {
+        entry.reset(extensions_.NewEntryWrapper(
+            items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       9, *entry, deterministic, target);
+;
+        Utf8Check::Check(items[static_cast<ptrdiff_t>(i)]);
+      }
+    } else {
+      ::std::unique_ptr<SecurityScheme_ExtensionsEntry_DoNotUse> entry;
+      for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+          it = this->extensions().begin();
+          it != this->extensions().end(); ++it) {
+        entry.reset(extensions_.NewEntryWrapper(
+            it->first, it->second));
+        target = ::google::protobuf::internal::WireFormatLite::
+                   InternalWriteMessageNoVirtualToArray(
+                       9, *entry, deterministic, target);
+;
+        Utf8Check::Check(&*it);
+      }
+    }
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -7142,6 +8351,20 @@ size_t SecurityScheme::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
+  // map<string, .google.protobuf.Value> extensions = 9;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->extensions_size());
+  {
+    ::std::unique_ptr<SecurityScheme_ExtensionsEntry_DoNotUse> entry;
+    for (::google::protobuf::Map< ::std::string, ::google::protobuf::Value >::const_iterator
+        it = this->extensions().begin();
+        it != this->extensions().end(); ++it) {
+      entry.reset(extensions_.NewEntryWrapper(it->first, it->second));
+      total_size += ::google::protobuf::internal::WireFormatLite::
+          MessageSizeNoVirtual(*entry);
+    }
+  }
+
   // string description = 2;
   if (this->description().size() > 0) {
     total_size += 1 +
@@ -7222,6 +8445,7 @@ void SecurityScheme::MergeFrom(const SecurityScheme& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  extensions_.MergeFrom(from.extensions_);
   if (from.description().size() > 0) {
 
     description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.description_);
@@ -7276,6 +8500,7 @@ void SecurityScheme::Swap(SecurityScheme* other) {
 }
 void SecurityScheme::InternalSwap(SecurityScheme* other) {
   using std::swap;
+  extensions_.Swap(&other->extensions_);
   description_.Swap(&other->description_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
@@ -7540,7 +8765,7 @@ void SecurityRequirement_SecurityRequirementEntry_DoNotUse::MergeFrom(const Secu
 }
 ::google::protobuf::Metadata SecurityRequirement_SecurityRequirementEntry_DoNotUse::GetMetadata() const {
   ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[16];
+  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[22];
 }
 void SecurityRequirement_SecurityRequirementEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -7885,7 +9110,7 @@ void Scopes_ScopeEntry_DoNotUse::MergeFrom(const Scopes_ScopeEntry_DoNotUse& oth
 }
 ::google::protobuf::Metadata Scopes_ScopeEntry_DoNotUse::GetMetadata() const {
   ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[18];
+  return ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::file_level_metadata[24];
 }
 void Scopes_ScopeEntry_DoNotUse::MergeFrom(
     const ::google::protobuf::Message& other) {
@@ -8243,17 +9468,32 @@ namespace protobuf {
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Swagger_ResponsesEntry_DoNotUse* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Swagger_ResponsesEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Swagger_ResponsesEntry_DoNotUse >(arena);
 }
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Swagger* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Swagger >(Arena* arena) {
   return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Swagger >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse >(arena);
 }
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Operation* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Operation >(Arena* arena) {
   return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Operation >(arena);
 }
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Response* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Response >(Arena* arena) {
   return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Response >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::Info* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::Info >(Arena* arena) {
   return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::Info >(arena);
@@ -8281,6 +9521,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagge
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions >(Arena* arena) {
   return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::SecurityDefinitions >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme* Arena::CreateMaybeMessage< ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme >(Arena* arena) {
   return Arena::CreateInternal< ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme >(arena);

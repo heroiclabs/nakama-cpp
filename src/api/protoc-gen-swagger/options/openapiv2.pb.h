@@ -35,6 +35,7 @@
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include <google/protobuf/any.pb.h>
+#include <google/protobuf/struct.pb.h>
 // @@protoc_insertion_point(includes)
 #define PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto 
 
@@ -43,7 +44,7 @@ namespace protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[20];
+  static const ::google::protobuf::internal::ParseTable schema[26];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -63,6 +64,9 @@ extern ExternalDocumentationDefaultTypeInternal _ExternalDocumentation_default_i
 class Info;
 class InfoDefaultTypeInternal;
 extern InfoDefaultTypeInternal _Info_default_instance_;
+class Info_ExtensionsEntry_DoNotUse;
+class Info_ExtensionsEntry_DoNotUseDefaultTypeInternal;
+extern Info_ExtensionsEntry_DoNotUseDefaultTypeInternal _Info_ExtensionsEntry_DoNotUse_default_instance_;
 class JSONSchema;
 class JSONSchemaDefaultTypeInternal;
 extern JSONSchemaDefaultTypeInternal _JSONSchema_default_instance_;
@@ -72,12 +76,21 @@ extern LicenseDefaultTypeInternal _License_default_instance_;
 class Operation;
 class OperationDefaultTypeInternal;
 extern OperationDefaultTypeInternal _Operation_default_instance_;
+class Operation_ExtensionsEntry_DoNotUse;
+class Operation_ExtensionsEntry_DoNotUseDefaultTypeInternal;
+extern Operation_ExtensionsEntry_DoNotUseDefaultTypeInternal _Operation_ExtensionsEntry_DoNotUse_default_instance_;
 class Operation_ResponsesEntry_DoNotUse;
 class Operation_ResponsesEntry_DoNotUseDefaultTypeInternal;
 extern Operation_ResponsesEntry_DoNotUseDefaultTypeInternal _Operation_ResponsesEntry_DoNotUse_default_instance_;
 class Response;
 class ResponseDefaultTypeInternal;
 extern ResponseDefaultTypeInternal _Response_default_instance_;
+class Response_ExamplesEntry_DoNotUse;
+class Response_ExamplesEntry_DoNotUseDefaultTypeInternal;
+extern Response_ExamplesEntry_DoNotUseDefaultTypeInternal _Response_ExamplesEntry_DoNotUse_default_instance_;
+class Response_ExtensionsEntry_DoNotUse;
+class Response_ExtensionsEntry_DoNotUseDefaultTypeInternal;
+extern Response_ExtensionsEntry_DoNotUseDefaultTypeInternal _Response_ExtensionsEntry_DoNotUse_default_instance_;
 class Schema;
 class SchemaDefaultTypeInternal;
 extern SchemaDefaultTypeInternal _Schema_default_instance_;
@@ -105,9 +118,15 @@ extern SecurityRequirement_SecurityRequirementValueDefaultTypeInternal _Security
 class SecurityScheme;
 class SecuritySchemeDefaultTypeInternal;
 extern SecuritySchemeDefaultTypeInternal _SecurityScheme_default_instance_;
+class SecurityScheme_ExtensionsEntry_DoNotUse;
+class SecurityScheme_ExtensionsEntry_DoNotUseDefaultTypeInternal;
+extern SecurityScheme_ExtensionsEntry_DoNotUseDefaultTypeInternal _SecurityScheme_ExtensionsEntry_DoNotUse_default_instance_;
 class Swagger;
 class SwaggerDefaultTypeInternal;
 extern SwaggerDefaultTypeInternal _Swagger_default_instance_;
+class Swagger_ExtensionsEntry_DoNotUse;
+class Swagger_ExtensionsEntry_DoNotUseDefaultTypeInternal;
+extern Swagger_ExtensionsEntry_DoNotUseDefaultTypeInternal _Swagger_ExtensionsEntry_DoNotUse_default_instance_;
 class Swagger_ResponsesEntry_DoNotUse;
 class Swagger_ResponsesEntry_DoNotUseDefaultTypeInternal;
 extern Swagger_ResponsesEntry_DoNotUseDefaultTypeInternal _Swagger_ResponsesEntry_DoNotUse_default_instance_;
@@ -123,11 +142,15 @@ namespace protobuf {
 template<> ::grpc::gateway::protoc_gen_swagger::options::Contact* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Contact>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::ExternalDocumentation* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::ExternalDocumentation>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::Info* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Info>(Arena*);
+template<> ::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Info_ExtensionsEntry_DoNotUse>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::JSONSchema* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::JSONSchema>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::License* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::License>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::Operation* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Operation>(Arena*);
+template<> ::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Operation_ExtensionsEntry_DoNotUse>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Operation_ResponsesEntry_DoNotUse>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::Response* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Response>(Arena*);
+template<> ::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Response_ExamplesEntry_DoNotUse>(Arena*);
+template<> ::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Response_ExtensionsEntry_DoNotUse>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::Schema* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Schema>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::Scopes* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Scopes>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::Scopes_ScopeEntry_DoNotUse* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Scopes_ScopeEntry_DoNotUse>(Arena*);
@@ -137,7 +160,9 @@ template<> ::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement* Ar
 template<> ::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementEntry_DoNotUse* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementEntry_DoNotUse>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementValue* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement_SecurityRequirementValue>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::SecurityScheme>(Arena*);
+template<> ::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::SecurityScheme_ExtensionsEntry_DoNotUse>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::Swagger* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Swagger>(Arena*);
+template<> ::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Swagger_ExtensionsEntry_DoNotUse>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::Swagger_ResponsesEntry_DoNotUse* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Swagger_ResponsesEntry_DoNotUse>(Arena*);
 template<> ::grpc::gateway::protoc_gen_swagger::options::Tag* Arena::CreateMaybeMessage<::grpc::gateway::protoc_gen_swagger::options::Tag>(Arena*);
 }  // namespace protobuf
@@ -290,6 +315,27 @@ public:
 
 // -------------------------------------------------------------------
 
+class Swagger_ExtensionsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<Swagger_ExtensionsEntry_DoNotUse, 
+    ::std::string, ::google::protobuf::Value,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<Swagger_ExtensionsEntry_DoNotUse, 
+    ::std::string, ::google::protobuf::Value,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > SuperType;
+  Swagger_ExtensionsEntry_DoNotUse();
+  Swagger_ExtensionsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const Swagger_ExtensionsEntry_DoNotUse& other);
+  static const Swagger_ExtensionsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Swagger_ExtensionsEntry_DoNotUse*>(&_Swagger_ExtensionsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
+// -------------------------------------------------------------------
+
 class Swagger : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:grpc.gateway.protoc_gen_swagger.options.Swagger) */ {
  public:
   Swagger();
@@ -325,7 +371,7 @@ class Swagger : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_Swagger_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   void Swap(Swagger* other);
   friend void swap(Swagger& a, Swagger& b) {
@@ -485,6 +531,15 @@ class Swagger : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   const ::google::protobuf::RepeatedPtrField< ::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement >&
       security() const;
 
+  // map<string, .google.protobuf.Value> extensions = 15;
+  int extensions_size() const;
+  void clear_extensions();
+  static const int kExtensionsFieldNumber = 15;
+  const ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >&
+      extensions() const;
+  ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >*
+      mutable_extensions();
+
   // string swagger = 1;
   void clear_swagger();
   static const int kSwaggerFieldNumber = 1;
@@ -578,6 +633,12 @@ class Swagger : public ::google::protobuf::Message /* @@protoc_insertion_point(c
       ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
       0 > responses_;
   ::google::protobuf::RepeatedPtrField< ::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement > security_;
+  ::google::protobuf::internal::MapField<
+      Swagger_ExtensionsEntry_DoNotUse,
+      ::std::string, ::google::protobuf::Value,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+      0 > extensions_;
   ::google::protobuf::internal::ArenaStringPtr swagger_;
   ::google::protobuf::internal::ArenaStringPtr host_;
   ::google::protobuf::internal::ArenaStringPtr base_path_;
@@ -604,6 +665,27 @@ public:
   Operation_ResponsesEntry_DoNotUse(::google::protobuf::Arena* arena);
   void MergeFrom(const Operation_ResponsesEntry_DoNotUse& other);
   static const Operation_ResponsesEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Operation_ResponsesEntry_DoNotUse*>(&_Operation_ResponsesEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
+// -------------------------------------------------------------------
+
+class Operation_ExtensionsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<Operation_ExtensionsEntry_DoNotUse, 
+    ::std::string, ::google::protobuf::Value,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<Operation_ExtensionsEntry_DoNotUse, 
+    ::std::string, ::google::protobuf::Value,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > SuperType;
+  Operation_ExtensionsEntry_DoNotUse();
+  Operation_ExtensionsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const Operation_ExtensionsEntry_DoNotUse& other);
+  static const Operation_ExtensionsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Operation_ExtensionsEntry_DoNotUse*>(&_Operation_ExtensionsEntry_DoNotUse_default_instance_); }
   void MergeFrom(const ::google::protobuf::Message& other) final;
   ::google::protobuf::Metadata GetMetadata() const;
 };
@@ -645,7 +727,7 @@ class Operation : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_Operation_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    5;
 
   void Swap(Operation* other);
   friend void swap(Operation& a, Operation& b) {
@@ -807,6 +889,15 @@ class Operation : public ::google::protobuf::Message /* @@protoc_insertion_point
   const ::google::protobuf::RepeatedPtrField< ::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement >&
       security() const;
 
+  // map<string, .google.protobuf.Value> extensions = 13;
+  int extensions_size() const;
+  void clear_extensions();
+  static const int kExtensionsFieldNumber = 13;
+  const ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >&
+      extensions() const;
+  ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >*
+      mutable_extensions();
+
   // string summary = 2;
   void clear_summary();
   static const int kSummaryFieldNumber = 2;
@@ -882,6 +973,12 @@ class Operation : public ::google::protobuf::Message /* @@protoc_insertion_point
       0 > responses_;
   ::google::protobuf::RepeatedPtrField< ::std::string> schemes_;
   ::google::protobuf::RepeatedPtrField< ::grpc::gateway::protoc_gen_swagger::options::SecurityRequirement > security_;
+  ::google::protobuf::internal::MapField<
+      Operation_ExtensionsEntry_DoNotUse,
+      ::std::string, ::google::protobuf::Value,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+      0 > extensions_;
   ::google::protobuf::internal::ArenaStringPtr summary_;
   ::google::protobuf::internal::ArenaStringPtr description_;
   ::google::protobuf::internal::ArenaStringPtr operation_id_;
@@ -890,6 +987,48 @@ class Operation : public ::google::protobuf::Message /* @@protoc_insertion_point
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class Response_ExamplesEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<Response_ExamplesEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<Response_ExamplesEntry_DoNotUse, 
+    ::std::string, ::std::string,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    0 > SuperType;
+  Response_ExamplesEntry_DoNotUse();
+  Response_ExamplesEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const Response_ExamplesEntry_DoNotUse& other);
+  static const Response_ExamplesEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Response_ExamplesEntry_DoNotUse*>(&_Response_ExamplesEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
+// -------------------------------------------------------------------
+
+class Response_ExtensionsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<Response_ExtensionsEntry_DoNotUse, 
+    ::std::string, ::google::protobuf::Value,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<Response_ExtensionsEntry_DoNotUse, 
+    ::std::string, ::google::protobuf::Value,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > SuperType;
+  Response_ExtensionsEntry_DoNotUse();
+  Response_ExtensionsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const Response_ExtensionsEntry_DoNotUse& other);
+  static const Response_ExtensionsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Response_ExtensionsEntry_DoNotUse*>(&_Response_ExtensionsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
 // -------------------------------------------------------------------
 
 class Response : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:grpc.gateway.protoc_gen_swagger.options.Response) */ {
@@ -927,7 +1066,7 @@ class Response : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_Response_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    8;
 
   void Swap(Response* other);
   friend void swap(Response& a, Response& b) {
@@ -977,7 +1116,26 @@ class Response : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
+
+  // map<string, string> examples = 4;
+  int examples_size() const;
+  void clear_examples();
+  static const int kExamplesFieldNumber = 4;
+  const ::google::protobuf::Map< ::std::string, ::std::string >&
+      examples() const;
+  ::google::protobuf::Map< ::std::string, ::std::string >*
+      mutable_examples();
+
+  // map<string, .google.protobuf.Value> extensions = 5;
+  int extensions_size() const;
+  void clear_extensions();
+  static const int kExtensionsFieldNumber = 5;
+  const ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >&
+      extensions() const;
+  ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >*
+      mutable_extensions();
 
   // string description = 1;
   void clear_description();
@@ -1009,11 +1167,44 @@ class Response : public ::google::protobuf::Message /* @@protoc_insertion_point(
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      Response_ExamplesEntry_DoNotUse,
+      ::std::string, ::std::string,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      0 > examples_;
+  ::google::protobuf::internal::MapField<
+      Response_ExtensionsEntry_DoNotUse,
+      ::std::string, ::google::protobuf::Value,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+      0 > extensions_;
   ::google::protobuf::internal::ArenaStringPtr description_;
   ::grpc::gateway::protoc_gen_swagger::options::Schema* schema_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_protoc_2dgen_2dswagger_2foptions_2fopenapiv2_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class Info_ExtensionsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<Info_ExtensionsEntry_DoNotUse, 
+    ::std::string, ::google::protobuf::Value,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<Info_ExtensionsEntry_DoNotUse, 
+    ::std::string, ::google::protobuf::Value,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > SuperType;
+  Info_ExtensionsEntry_DoNotUse();
+  Info_ExtensionsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const Info_ExtensionsEntry_DoNotUse& other);
+  static const Info_ExtensionsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Info_ExtensionsEntry_DoNotUse*>(&_Info_ExtensionsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
 // -------------------------------------------------------------------
 
 class Info : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:grpc.gateway.protoc_gen_swagger.options.Info) */ {
@@ -1051,7 +1242,7 @@ class Info : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
                &_Info_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    10;
 
   void Swap(Info* other);
   friend void swap(Info& a, Info& b) {
@@ -1101,7 +1292,17 @@ class Info : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
+
+  // map<string, .google.protobuf.Value> extensions = 7;
+  int extensions_size() const;
+  void clear_extensions();
+  static const int kExtensionsFieldNumber = 7;
+  const ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >&
+      extensions() const;
+  ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >*
+      mutable_extensions();
 
   // string title = 1;
   void clear_title();
@@ -1187,6 +1388,12 @@ class Info : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      Info_ExtensionsEntry_DoNotUse,
+      ::std::string, ::google::protobuf::Value,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+      0 > extensions_;
   ::google::protobuf::internal::ArenaStringPtr title_;
   ::google::protobuf::internal::ArenaStringPtr description_;
   ::google::protobuf::internal::ArenaStringPtr terms_of_service_;
@@ -1233,7 +1440,7 @@ class Contact : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_Contact_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    11;
 
   void Swap(Contact* other);
   friend void swap(Contact& a, Contact& b) {
@@ -1374,7 +1581,7 @@ class License : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_License_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    12;
 
   void Swap(License* other);
   friend void swap(License& a, License& b) {
@@ -1500,7 +1707,7 @@ class ExternalDocumentation : public ::google::protobuf::Message /* @@protoc_ins
                &_ExternalDocumentation_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    13;
 
   void Swap(ExternalDocumentation* other);
   friend void swap(ExternalDocumentation& a, ExternalDocumentation& b) {
@@ -1626,7 +1833,7 @@ class Schema : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
                &_Schema_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    14;
 
   void Swap(Schema* other);
   friend void swap(Schema& a, Schema& b) {
@@ -1783,7 +1990,7 @@ class JSONSchema : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_JSONSchema_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    15;
 
   void Swap(JSONSchema* other);
   friend void swap(JSONSchema& a, JSONSchema& b) {
@@ -2141,7 +2348,7 @@ class Tag : public ::google::protobuf::Message /* @@protoc_insertion_point(class
                &_Tag_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    16;
 
   void Swap(Tag* other);
   friend void swap(Tag& a, Tag& b) {
@@ -2286,7 +2493,7 @@ class SecurityDefinitions : public ::google::protobuf::Message /* @@protoc_inser
                &_SecurityDefinitions_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    18;
 
   void Swap(SecurityDefinitions* other);
   friend void swap(SecurityDefinitions& a, SecurityDefinitions& b) {
@@ -2363,6 +2570,27 @@ class SecurityDefinitions : public ::google::protobuf::Message /* @@protoc_inser
 };
 // -------------------------------------------------------------------
 
+class SecurityScheme_ExtensionsEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<SecurityScheme_ExtensionsEntry_DoNotUse, 
+    ::std::string, ::google::protobuf::Value,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<SecurityScheme_ExtensionsEntry_DoNotUse, 
+    ::std::string, ::google::protobuf::Value,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > SuperType;
+  SecurityScheme_ExtensionsEntry_DoNotUse();
+  SecurityScheme_ExtensionsEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const SecurityScheme_ExtensionsEntry_DoNotUse& other);
+  static const SecurityScheme_ExtensionsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const SecurityScheme_ExtensionsEntry_DoNotUse*>(&_SecurityScheme_ExtensionsEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
+// -------------------------------------------------------------------
+
 class SecurityScheme : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:grpc.gateway.protoc_gen_swagger.options.SecurityScheme) */ {
  public:
   SecurityScheme();
@@ -2398,7 +2626,7 @@ class SecurityScheme : public ::google::protobuf::Message /* @@protoc_insertion_
                &_SecurityScheme_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    20;
 
   void Swap(SecurityScheme* other);
   friend void swap(SecurityScheme& a, SecurityScheme& b) {
@@ -2447,6 +2675,7 @@ class SecurityScheme : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
+
 
   typedef SecurityScheme_Type Type;
   static const Type TYPE_INVALID =
@@ -2540,6 +2769,15 @@ class SecurityScheme : public ::google::protobuf::Message /* @@protoc_insertion_
 
   // accessors -------------------------------------------------------
 
+  // map<string, .google.protobuf.Value> extensions = 9;
+  int extensions_size() const;
+  void clear_extensions();
+  static const int kExtensionsFieldNumber = 9;
+  const ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >&
+      extensions() const;
+  ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >*
+      mutable_extensions();
+
   // string description = 2;
   void clear_description();
   static const int kDescriptionFieldNumber = 2;
@@ -2630,6 +2868,12 @@ class SecurityScheme : public ::google::protobuf::Message /* @@protoc_insertion_
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      SecurityScheme_ExtensionsEntry_DoNotUse,
+      ::std::string, ::google::protobuf::Value,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+      0 > extensions_;
   ::google::protobuf::internal::ArenaStringPtr description_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr authorization_url_;
@@ -2678,7 +2922,7 @@ class SecurityRequirement_SecurityRequirementValue : public ::google::protobuf::
                &_SecurityRequirement_SecurityRequirementValue_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    21;
 
   void Swap(SecurityRequirement_SecurityRequirementValue* other);
   friend void swap(SecurityRequirement_SecurityRequirementValue& a, SecurityRequirement_SecurityRequirementValue& b) {
@@ -2818,7 +3062,7 @@ class SecurityRequirement : public ::google::protobuf::Message /* @@protoc_inser
                &_SecurityRequirement_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    23;
 
   void Swap(SecurityRequirement* other);
   friend void swap(SecurityRequirement& a, SecurityRequirement& b) {
@@ -2952,7 +3196,7 @@ class Scopes : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
                &_Scopes_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    25;
 
   void Swap(Scopes* other);
   friend void swap(Scopes& a, Scopes& b) {
@@ -3036,6 +3280,8 @@ class Scopes : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // Swagger
@@ -3576,6 +3822,23 @@ inline void Swagger::set_allocated_external_docs(::grpc::gateway::protoc_gen_swa
   external_docs_ = external_docs;
   // @@protoc_insertion_point(field_set_allocated:grpc.gateway.protoc_gen_swagger.options.Swagger.external_docs)
 }
+
+// map<string, .google.protobuf.Value> extensions = 15;
+inline int Swagger::extensions_size() const {
+  return extensions_.size();
+}
+inline const ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >&
+Swagger::extensions() const {
+  // @@protoc_insertion_point(field_map:grpc.gateway.protoc_gen_swagger.options.Swagger.extensions)
+  return extensions_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >*
+Swagger::mutable_extensions() {
+  // @@protoc_insertion_point(field_mutable_map:grpc.gateway.protoc_gen_swagger.options.Swagger.extensions)
+  return extensions_.MutableMap();
+}
+
+// -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
 
@@ -4134,6 +4397,25 @@ Operation::security() const {
   return security_;
 }
 
+// map<string, .google.protobuf.Value> extensions = 13;
+inline int Operation::extensions_size() const {
+  return extensions_.size();
+}
+inline const ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >&
+Operation::extensions() const {
+  // @@protoc_insertion_point(field_map:grpc.gateway.protoc_gen_swagger.options.Operation.extensions)
+  return extensions_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >*
+Operation::mutable_extensions() {
+  // @@protoc_insertion_point(field_mutable_map:grpc.gateway.protoc_gen_swagger.options.Operation.extensions)
+  return extensions_.MutableMap();
+}
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // Response
@@ -4244,6 +4526,41 @@ inline void Response::set_allocated_schema(::grpc::gateway::protoc_gen_swagger::
   schema_ = schema;
   // @@protoc_insertion_point(field_set_allocated:grpc.gateway.protoc_gen_swagger.options.Response.schema)
 }
+
+// map<string, string> examples = 4;
+inline int Response::examples_size() const {
+  return examples_.size();
+}
+inline void Response::clear_examples() {
+  examples_.Clear();
+}
+inline const ::google::protobuf::Map< ::std::string, ::std::string >&
+Response::examples() const {
+  // @@protoc_insertion_point(field_map:grpc.gateway.protoc_gen_swagger.options.Response.examples)
+  return examples_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::std::string >*
+Response::mutable_examples() {
+  // @@protoc_insertion_point(field_mutable_map:grpc.gateway.protoc_gen_swagger.options.Response.examples)
+  return examples_.MutableMap();
+}
+
+// map<string, .google.protobuf.Value> extensions = 5;
+inline int Response::extensions_size() const {
+  return extensions_.size();
+}
+inline const ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >&
+Response::extensions() const {
+  // @@protoc_insertion_point(field_map:grpc.gateway.protoc_gen_swagger.options.Response.extensions)
+  return extensions_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >*
+Response::mutable_extensions() {
+  // @@protoc_insertion_point(field_mutable_map:grpc.gateway.protoc_gen_swagger.options.Response.extensions)
+  return extensions_.MutableMap();
+}
+
+// -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
 
@@ -4567,6 +4884,21 @@ inline void Info::set_allocated_version(::std::string* version) {
   }
   version_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), version);
   // @@protoc_insertion_point(field_set_allocated:grpc.gateway.protoc_gen_swagger.options.Info.version)
+}
+
+// map<string, .google.protobuf.Value> extensions = 7;
+inline int Info::extensions_size() const {
+  return extensions_.size();
+}
+inline const ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >&
+Info::extensions() const {
+  // @@protoc_insertion_point(field_map:grpc.gateway.protoc_gen_swagger.options.Info.extensions)
+  return extensions_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >*
+Info::mutable_extensions() {
+  // @@protoc_insertion_point(field_mutable_map:grpc.gateway.protoc_gen_swagger.options.Info.extensions)
+  return extensions_.MutableMap();
 }
 
 // -------------------------------------------------------------------
@@ -5935,6 +6267,8 @@ SecurityDefinitions::mutable_security() {
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
 // SecurityScheme
 
 // .grpc.gateway.protoc_gen_swagger.options.SecurityScheme.Type type = 1;
@@ -6245,6 +6579,21 @@ inline void SecurityScheme::set_allocated_scopes(::grpc::gateway::protoc_gen_swa
   // @@protoc_insertion_point(field_set_allocated:grpc.gateway.protoc_gen_swagger.options.SecurityScheme.scopes)
 }
 
+// map<string, .google.protobuf.Value> extensions = 9;
+inline int SecurityScheme::extensions_size() const {
+  return extensions_.size();
+}
+inline const ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >&
+SecurityScheme::extensions() const {
+  // @@protoc_insertion_point(field_map:grpc.gateway.protoc_gen_swagger.options.SecurityScheme.extensions)
+  return extensions_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::google::protobuf::Value >*
+SecurityScheme::mutable_extensions() {
+  // @@protoc_insertion_point(field_mutable_map:grpc.gateway.protoc_gen_swagger.options.SecurityScheme.extensions)
+  return extensions_.MutableMap();
+}
+
 // -------------------------------------------------------------------
 
 // SecurityRequirement_SecurityRequirementValue
@@ -6369,6 +6718,18 @@ Scopes::mutable_scope() {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

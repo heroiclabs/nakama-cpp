@@ -28,8 +28,8 @@
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include "protoc-gen-swagger/options/openapiv2.pb.h"
 #include <google/protobuf/descriptor.pb.h>
+#include "protoc-gen-swagger/options/openapiv2.pb.h"
 // @@protoc_insertion_point(includes)
 #define PROTOBUF_INTERNAL_EXPORT_protobuf_protoc_2dgen_2dswagger_2foptions_2fannotations_2eproto 
 

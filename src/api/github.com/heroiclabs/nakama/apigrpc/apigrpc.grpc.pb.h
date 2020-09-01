@@ -73,6 +73,14 @@ class Nakama final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncAddGroupUsers(::grpc::ClientContext* context, const ::nakama::api::AddGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncAddGroupUsersRaw(context, request, cq));
     }
+    // Authenticate a user with an Apple ID against the server.
+    virtual ::grpc::Status AuthenticateApple(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::nakama::api::Session* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>> AsyncAuthenticateApple(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>>(AsyncAuthenticateAppleRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>> PrepareAsyncAuthenticateApple(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>>(PrepareAsyncAuthenticateAppleRaw(context, request, cq));
+    }
     // Authenticate a user with a custom id against the server.
     virtual ::grpc::Status AuthenticateCustom(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest& request, ::nakama::api::Session* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>> AsyncAuthenticateCustom(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest& request, ::grpc::CompletionQueue* cq) {
@@ -105,6 +113,14 @@ class Nakama final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>> PrepareAsyncAuthenticateFacebook(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>>(PrepareAsyncAuthenticateFacebookRaw(context, request, cq));
     }
+    // Authenticate a user with a Facebook Instant Game token against the server.
+    virtual ::grpc::Status AuthenticateFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::nakama::api::Session* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>> AsyncAuthenticateFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>>(AsyncAuthenticateFacebookInstantGameRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>> PrepareAsyncAuthenticateFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>>(PrepareAsyncAuthenticateFacebookInstantGameRaw(context, request, cq));
+    }
     // Authenticate a user with Apple's GameCenter against the server.
     virtual ::grpc::Status AuthenticateGameCenter(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest& request, ::nakama::api::Session* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>> AsyncAuthenticateGameCenter(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest& request, ::grpc::CompletionQueue* cq) {
@@ -128,6 +144,14 @@ class Nakama final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>> PrepareAsyncAuthenticateSteam(::grpc::ClientContext* context, const ::nakama::api::AuthenticateSteamRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>>(PrepareAsyncAuthenticateSteamRaw(context, request, cq));
+    }
+    // Ban a set of users from a group.
+    virtual ::grpc::Status BanGroupUsers(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::google::protobuf::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> AsyncBanGroupUsers(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(AsyncBanGroupUsersRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncBanGroupUsers(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncBanGroupUsersRaw(context, request, cq));
     }
     // Block one or more users by ID or username.
     virtual ::grpc::Status BlockFriends(::grpc::ClientContext* context, const ::nakama::api::BlockFriendsRequest& request, ::google::protobuf::Empty* response) = 0;
@@ -184,6 +208,14 @@ class Nakama final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncDeleteStorageObjects(::grpc::ClientContext* context, const ::nakama::api::DeleteStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncDeleteStorageObjectsRaw(context, request, cq));
+    }
+    // Submit an event for processing in the server's registered runtime custom events handler.
+    virtual ::grpc::Status Event(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::google::protobuf::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> AsyncEvent(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(AsyncEventRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncEvent(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncEventRaw(context, request, cq));
     }
     // Fetch the current user's account.
     virtual ::grpc::Status GetAccount(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::nakama::api::Account* response) = 0;
@@ -249,6 +281,14 @@ class Nakama final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncLeaveGroup(::grpc::ClientContext* context, const ::nakama::api::LeaveGroupRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncLeaveGroupRaw(context, request, cq));
     }
+    // Add an Apple ID to the social profiles on the current user's account.
+    virtual ::grpc::Status LinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::google::protobuf::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> AsyncLinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(AsyncLinkAppleRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncLinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncLinkAppleRaw(context, request, cq));
+    }
     // Add a custom ID to the social profiles on the current user's account.
     virtual ::grpc::Status LinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::google::protobuf::Empty* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> AsyncLinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) {
@@ -280,6 +320,14 @@ class Nakama final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncLinkFacebook(::grpc::ClientContext* context, const ::nakama::api::LinkFacebookRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncLinkFacebookRaw(context, request, cq));
+    }
+    // Add Facebook Instant Game to the social profiles on the current user's account.
+    virtual ::grpc::Status LinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::google::protobuf::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> AsyncLinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(AsyncLinkFacebookInstantGameRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncLinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncLinkFacebookInstantGameRaw(context, request, cq));
     }
     // Add Apple's GameCenter to the social profiles on the current user's account.
     virtual ::grpc::Status LinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::google::protobuf::Empty* response) = 0;
@@ -417,6 +465,14 @@ class Nakama final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncPromoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::PromoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncPromoteGroupUsersRaw(context, request, cq));
     }
+    // Demote a set of users in a group to the next role down.
+    virtual ::grpc::Status DemoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::google::protobuf::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> AsyncDemoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(AsyncDemoteGroupUsersRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncDemoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncDemoteGroupUsersRaw(context, request, cq));
+    }
     // Get storage objects.
     virtual ::grpc::Status ReadStorageObjects(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest& request, ::nakama::api::StorageObjects* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::StorageObjects>> AsyncReadStorageObjects(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) {
@@ -432,6 +488,14 @@ class Nakama final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Rpc>> PrepareAsyncRpcFunc(::grpc::ClientContext* context, const ::nakama::api::Rpc& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Rpc>>(PrepareAsyncRpcFuncRaw(context, request, cq));
+    }
+    // Remove the Apple ID from the social profiles on the current user's account.
+    virtual ::grpc::Status UnlinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::google::protobuf::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> AsyncUnlinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(AsyncUnlinkAppleRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncUnlinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncUnlinkAppleRaw(context, request, cq));
     }
     // Remove the custom ID from the social profiles on the current user's account.
     virtual ::grpc::Status UnlinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::google::protobuf::Empty* response) = 0;
@@ -464,6 +528,14 @@ class Nakama final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncUnlinkFacebook(::grpc::ClientContext* context, const ::nakama::api::AccountFacebook& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncUnlinkFacebookRaw(context, request, cq));
+    }
+    // Remove Facebook Instant Game profile from the social profiles on the current user's account.
+    virtual ::grpc::Status UnlinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::google::protobuf::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> AsyncUnlinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(AsyncUnlinkFacebookInstantGameRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncUnlinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncUnlinkFacebookInstantGameRaw(context, request, cq));
     }
     // Remove Apple's GameCenter from the social profiles on the current user's account.
     virtual ::grpc::Status UnlinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::google::protobuf::Empty* response) = 0;
@@ -536,6 +608,8 @@ class Nakama final {
       virtual void AddFriends(::grpc::ClientContext* context, const ::nakama::api::AddFriendsRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Add users to a group.
       virtual void AddGroupUsers(::grpc::ClientContext* context, const ::nakama::api::AddGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
+      // Authenticate a user with an Apple ID against the server.
+      virtual void AuthenticateApple(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) = 0;
       // Authenticate a user with a custom id against the server.
       virtual void AuthenticateCustom(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) = 0;
       // Authenticate a user with a device id against the server.
@@ -544,12 +618,16 @@ class Nakama final {
       virtual void AuthenticateEmail(::grpc::ClientContext* context, const ::nakama::api::AuthenticateEmailRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) = 0;
       // Authenticate a user with a Facebook OAuth token against the server.
       virtual void AuthenticateFacebook(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) = 0;
+      // Authenticate a user with a Facebook Instant Game token against the server.
+      virtual void AuthenticateFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) = 0;
       // Authenticate a user with Apple's GameCenter against the server.
       virtual void AuthenticateGameCenter(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) = 0;
       // Authenticate a user with Google against the server.
       virtual void AuthenticateGoogle(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGoogleRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) = 0;
       // Authenticate a user with Steam against the server.
       virtual void AuthenticateSteam(::grpc::ClientContext* context, const ::nakama::api::AuthenticateSteamRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) = 0;
+      // Ban a set of users from a group.
+      virtual void BanGroupUsers(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Block one or more users by ID or username.
       virtual void BlockFriends(::grpc::ClientContext* context, const ::nakama::api::BlockFriendsRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Create a new group with the current user as the owner.
@@ -564,6 +642,8 @@ class Nakama final {
       virtual void DeleteNotifications(::grpc::ClientContext* context, const ::nakama::api::DeleteNotificationsRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Delete one or more objects by ID or username.
       virtual void DeleteStorageObjects(::grpc::ClientContext* context, const ::nakama::api::DeleteStorageObjectsRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
+      // Submit an event for processing in the server's registered runtime custom events handler.
+      virtual void Event(::grpc::ClientContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Fetch the current user's account.
       virtual void GetAccount(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Account* response, std::function<void(::grpc::Status)>) = 0;
       // Fetch zero or more users by ID and/or username.
@@ -580,6 +660,8 @@ class Nakama final {
       virtual void KickGroupUsers(::grpc::ClientContext* context, const ::nakama::api::KickGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Leave a group the user is a member of.
       virtual void LeaveGroup(::grpc::ClientContext* context, const ::nakama::api::LeaveGroupRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
+      // Add an Apple ID to the social profiles on the current user's account.
+      virtual void LinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Add a custom ID to the social profiles on the current user's account.
       virtual void LinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Add a device ID to the social profiles on the current user's account.
@@ -588,6 +670,8 @@ class Nakama final {
       virtual void LinkEmail(::grpc::ClientContext* context, const ::nakama::api::AccountEmail* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Add Facebook to the social profiles on the current user's account.
       virtual void LinkFacebook(::grpc::ClientContext* context, const ::nakama::api::LinkFacebookRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
+      // Add Facebook Instant Game to the social profiles on the current user's account.
+      virtual void LinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Add Apple's GameCenter to the social profiles on the current user's account.
       virtual void LinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Add Google to the social profiles on the current user's account.
@@ -622,10 +706,14 @@ class Nakama final {
       virtual void ListUserGroups(::grpc::ClientContext* context, const ::nakama::api::ListUserGroupsRequest* request, ::nakama::api::UserGroupList* response, std::function<void(::grpc::Status)>) = 0;
       // Promote a set of users in a group to the next role up.
       virtual void PromoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::PromoteGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
+      // Demote a set of users in a group to the next role down.
+      virtual void DemoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Get storage objects.
       virtual void ReadStorageObjects(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest* request, ::nakama::api::StorageObjects* response, std::function<void(::grpc::Status)>) = 0;
       // Execute a Lua function on the server.
       virtual void RpcFunc(::grpc::ClientContext* context, const ::nakama::api::Rpc* request, ::nakama::api::Rpc* response, std::function<void(::grpc::Status)>) = 0;
+      // Remove the Apple ID from the social profiles on the current user's account.
+      virtual void UnlinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Remove the custom ID from the social profiles on the current user's account.
       virtual void UnlinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Remove the device ID from the social profiles on the current user's account.
@@ -634,6 +722,8 @@ class Nakama final {
       virtual void UnlinkEmail(::grpc::ClientContext* context, const ::nakama::api::AccountEmail* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Remove Facebook from the social profiles on the current user's account.
       virtual void UnlinkFacebook(::grpc::ClientContext* context, const ::nakama::api::AccountFacebook* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
+      // Remove Facebook Instant Game profile from the social profiles on the current user's account.
+      virtual void UnlinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Remove Apple's GameCenter from the social profiles on the current user's account.
       virtual void UnlinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
       // Remove Google from the social profiles on the current user's account.
@@ -657,6 +747,8 @@ class Nakama final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncAddFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::AddFriendsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncAddGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::AddGroupUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncAddGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::AddGroupUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* AsyncAuthenticateAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* PrepareAsyncAuthenticateAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* AsyncAuthenticateCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* PrepareAsyncAuthenticateCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* AsyncAuthenticateDeviceRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateDeviceRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -665,12 +757,16 @@ class Nakama final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* PrepareAsyncAuthenticateEmailRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateEmailRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* AsyncAuthenticateFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* PrepareAsyncAuthenticateFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* AsyncAuthenticateFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* PrepareAsyncAuthenticateFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* AsyncAuthenticateGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* PrepareAsyncAuthenticateGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* AsyncAuthenticateGoogleRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGoogleRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* PrepareAsyncAuthenticateGoogleRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGoogleRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* AsyncAuthenticateSteamRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateSteamRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Session>* PrepareAsyncAuthenticateSteamRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateSteamRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncBanGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncBanGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncBlockFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::BlockFriendsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncBlockFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::BlockFriendsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Group>* AsyncCreateGroupRaw(::grpc::ClientContext* context, const ::nakama::api::CreateGroupRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -685,6 +781,8 @@ class Nakama final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncDeleteNotificationsRaw(::grpc::ClientContext* context, const ::nakama::api::DeleteNotificationsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncDeleteStorageObjectsRaw(::grpc::ClientContext* context, const ::nakama::api::DeleteStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncDeleteStorageObjectsRaw(::grpc::ClientContext* context, const ::nakama::api::DeleteStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncEventRaw(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncEventRaw(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Account>* AsyncGetAccountRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Account>* PrepareAsyncGetAccountRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Users>* AsyncGetUsersRaw(::grpc::ClientContext* context, const ::nakama::api::GetUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -701,6 +799,8 @@ class Nakama final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncKickGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::KickGroupUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncLeaveGroupRaw(::grpc::ClientContext* context, const ::nakama::api::LeaveGroupRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncLeaveGroupRaw(::grpc::ClientContext* context, const ::nakama::api::LeaveGroupRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncLinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncLinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncLinkCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncLinkCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncLinkDeviceRaw(::grpc::ClientContext* context, const ::nakama::api::AccountDevice& request, ::grpc::CompletionQueue* cq) = 0;
@@ -709,6 +809,8 @@ class Nakama final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncLinkEmailRaw(::grpc::ClientContext* context, const ::nakama::api::AccountEmail& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncLinkFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::LinkFacebookRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncLinkFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::LinkFacebookRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncLinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncLinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncLinkGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncLinkGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncLinkGoogleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGoogle& request, ::grpc::CompletionQueue* cq) = 0;
@@ -743,10 +845,14 @@ class Nakama final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::UserGroupList>* PrepareAsyncListUserGroupsRaw(::grpc::ClientContext* context, const ::nakama::api::ListUserGroupsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncPromoteGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::PromoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncPromoteGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::PromoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncDemoteGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncDemoteGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::StorageObjects>* AsyncReadStorageObjectsRaw(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::StorageObjects>* PrepareAsyncReadStorageObjectsRaw(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Rpc>* AsyncRpcFuncRaw(::grpc::ClientContext* context, const ::nakama::api::Rpc& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::nakama::api::Rpc>* PrepareAsyncRpcFuncRaw(::grpc::ClientContext* context, const ::nakama::api::Rpc& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncUnlinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncUnlinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncUnlinkCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncUnlinkCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncUnlinkDeviceRaw(::grpc::ClientContext* context, const ::nakama::api::AccountDevice& request, ::grpc::CompletionQueue* cq) = 0;
@@ -755,6 +861,8 @@ class Nakama final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncUnlinkEmailRaw(::grpc::ClientContext* context, const ::nakama::api::AccountEmail& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncUnlinkFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebook& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncUnlinkFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebook& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncUnlinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncUnlinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncUnlinkGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncUnlinkGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncUnlinkGoogleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGoogle& request, ::grpc::CompletionQueue* cq) = 0;
@@ -789,6 +897,13 @@ class Nakama final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncAddGroupUsers(::grpc::ClientContext* context, const ::nakama::api::AddGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncAddGroupUsersRaw(context, request, cq));
     }
+    ::grpc::Status AuthenticateApple(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::nakama::api::Session* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>> AsyncAuthenticateApple(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>>(AsyncAuthenticateAppleRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>> PrepareAsyncAuthenticateApple(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>>(PrepareAsyncAuthenticateAppleRaw(context, request, cq));
+    }
     ::grpc::Status AuthenticateCustom(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest& request, ::nakama::api::Session* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>> AsyncAuthenticateCustom(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>>(AsyncAuthenticateCustomRaw(context, request, cq));
@@ -817,6 +932,13 @@ class Nakama final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>> PrepareAsyncAuthenticateFacebook(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>>(PrepareAsyncAuthenticateFacebookRaw(context, request, cq));
     }
+    ::grpc::Status AuthenticateFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::nakama::api::Session* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>> AsyncAuthenticateFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>>(AsyncAuthenticateFacebookInstantGameRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>> PrepareAsyncAuthenticateFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>>(PrepareAsyncAuthenticateFacebookInstantGameRaw(context, request, cq));
+    }
     ::grpc::Status AuthenticateGameCenter(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest& request, ::nakama::api::Session* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>> AsyncAuthenticateGameCenter(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>>(AsyncAuthenticateGameCenterRaw(context, request, cq));
@@ -837,6 +959,13 @@ class Nakama final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>> PrepareAsyncAuthenticateSteam(::grpc::ClientContext* context, const ::nakama::api::AuthenticateSteamRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>>(PrepareAsyncAuthenticateSteamRaw(context, request, cq));
+    }
+    ::grpc::Status BanGroupUsers(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::google::protobuf::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncBanGroupUsers(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(AsyncBanGroupUsersRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncBanGroupUsers(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncBanGroupUsersRaw(context, request, cq));
     }
     ::grpc::Status BlockFriends(::grpc::ClientContext* context, const ::nakama::api::BlockFriendsRequest& request, ::google::protobuf::Empty* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncBlockFriends(::grpc::ClientContext* context, const ::nakama::api::BlockFriendsRequest& request, ::grpc::CompletionQueue* cq) {
@@ -886,6 +1015,13 @@ class Nakama final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncDeleteStorageObjects(::grpc::ClientContext* context, const ::nakama::api::DeleteStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncDeleteStorageObjectsRaw(context, request, cq));
+    }
+    ::grpc::Status Event(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::google::protobuf::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncEvent(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(AsyncEventRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncEvent(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncEventRaw(context, request, cq));
     }
     ::grpc::Status GetAccount(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::nakama::api::Account* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Account>> AsyncGetAccount(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
@@ -943,6 +1079,13 @@ class Nakama final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncLeaveGroup(::grpc::ClientContext* context, const ::nakama::api::LeaveGroupRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncLeaveGroupRaw(context, request, cq));
     }
+    ::grpc::Status LinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::google::protobuf::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncLinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(AsyncLinkAppleRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncLinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncLinkAppleRaw(context, request, cq));
+    }
     ::grpc::Status LinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::google::protobuf::Empty* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncLinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(AsyncLinkCustomRaw(context, request, cq));
@@ -970,6 +1113,13 @@ class Nakama final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncLinkFacebook(::grpc::ClientContext* context, const ::nakama::api::LinkFacebookRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncLinkFacebookRaw(context, request, cq));
+    }
+    ::grpc::Status LinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::google::protobuf::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncLinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(AsyncLinkFacebookInstantGameRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncLinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncLinkFacebookInstantGameRaw(context, request, cq));
     }
     ::grpc::Status LinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::google::protobuf::Empty* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncLinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::grpc::CompletionQueue* cq) {
@@ -1090,6 +1240,13 @@ class Nakama final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncPromoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::PromoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncPromoteGroupUsersRaw(context, request, cq));
     }
+    ::grpc::Status DemoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::google::protobuf::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncDemoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(AsyncDemoteGroupUsersRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncDemoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncDemoteGroupUsersRaw(context, request, cq));
+    }
     ::grpc::Status ReadStorageObjects(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest& request, ::nakama::api::StorageObjects* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::StorageObjects>> AsyncReadStorageObjects(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::StorageObjects>>(AsyncReadStorageObjectsRaw(context, request, cq));
@@ -1103,6 +1260,13 @@ class Nakama final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Rpc>> PrepareAsyncRpcFunc(::grpc::ClientContext* context, const ::nakama::api::Rpc& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::nakama::api::Rpc>>(PrepareAsyncRpcFuncRaw(context, request, cq));
+    }
+    ::grpc::Status UnlinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::google::protobuf::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncUnlinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(AsyncUnlinkAppleRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncUnlinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncUnlinkAppleRaw(context, request, cq));
     }
     ::grpc::Status UnlinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::google::protobuf::Empty* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncUnlinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) {
@@ -1131,6 +1295,13 @@ class Nakama final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncUnlinkFacebook(::grpc::ClientContext* context, const ::nakama::api::AccountFacebook& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncUnlinkFacebookRaw(context, request, cq));
+    }
+    ::grpc::Status UnlinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::google::protobuf::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncUnlinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(AsyncUnlinkFacebookInstantGameRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncUnlinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncUnlinkFacebookInstantGameRaw(context, request, cq));
     }
     ::grpc::Status UnlinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::google::protobuf::Empty* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncUnlinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::grpc::CompletionQueue* cq) {
@@ -1193,13 +1364,16 @@ class Nakama final {
      public:
       void AddFriends(::grpc::ClientContext* context, const ::nakama::api::AddFriendsRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void AddGroupUsers(::grpc::ClientContext* context, const ::nakama::api::AddGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
+      void AuthenticateApple(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) override;
       void AuthenticateCustom(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) override;
       void AuthenticateDevice(::grpc::ClientContext* context, const ::nakama::api::AuthenticateDeviceRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) override;
       void AuthenticateEmail(::grpc::ClientContext* context, const ::nakama::api::AuthenticateEmailRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) override;
       void AuthenticateFacebook(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) override;
+      void AuthenticateFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) override;
       void AuthenticateGameCenter(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) override;
       void AuthenticateGoogle(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGoogleRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) override;
       void AuthenticateSteam(::grpc::ClientContext* context, const ::nakama::api::AuthenticateSteamRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)>) override;
+      void BanGroupUsers(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void BlockFriends(::grpc::ClientContext* context, const ::nakama::api::BlockFriendsRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void CreateGroup(::grpc::ClientContext* context, const ::nakama::api::CreateGroupRequest* request, ::nakama::api::Group* response, std::function<void(::grpc::Status)>) override;
       void DeleteFriends(::grpc::ClientContext* context, const ::nakama::api::DeleteFriendsRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
@@ -1207,6 +1381,7 @@ class Nakama final {
       void DeleteLeaderboardRecord(::grpc::ClientContext* context, const ::nakama::api::DeleteLeaderboardRecordRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void DeleteNotifications(::grpc::ClientContext* context, const ::nakama::api::DeleteNotificationsRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void DeleteStorageObjects(::grpc::ClientContext* context, const ::nakama::api::DeleteStorageObjectsRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
+      void Event(::grpc::ClientContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void GetAccount(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Account* response, std::function<void(::grpc::Status)>) override;
       void GetUsers(::grpc::ClientContext* context, const ::nakama::api::GetUsersRequest* request, ::nakama::api::Users* response, std::function<void(::grpc::Status)>) override;
       void Healthcheck(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
@@ -1215,10 +1390,12 @@ class Nakama final {
       void JoinTournament(::grpc::ClientContext* context, const ::nakama::api::JoinTournamentRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void KickGroupUsers(::grpc::ClientContext* context, const ::nakama::api::KickGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void LeaveGroup(::grpc::ClientContext* context, const ::nakama::api::LeaveGroupRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
+      void LinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void LinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void LinkDevice(::grpc::ClientContext* context, const ::nakama::api::AccountDevice* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void LinkEmail(::grpc::ClientContext* context, const ::nakama::api::AccountEmail* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void LinkFacebook(::grpc::ClientContext* context, const ::nakama::api::LinkFacebookRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
+      void LinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void LinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void LinkGoogle(::grpc::ClientContext* context, const ::nakama::api::AccountGoogle* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void LinkSteam(::grpc::ClientContext* context, const ::nakama::api::AccountSteam* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
@@ -1236,12 +1413,15 @@ class Nakama final {
       void ListTournamentRecordsAroundOwner(::grpc::ClientContext* context, const ::nakama::api::ListTournamentRecordsAroundOwnerRequest* request, ::nakama::api::TournamentRecordList* response, std::function<void(::grpc::Status)>) override;
       void ListUserGroups(::grpc::ClientContext* context, const ::nakama::api::ListUserGroupsRequest* request, ::nakama::api::UserGroupList* response, std::function<void(::grpc::Status)>) override;
       void PromoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::PromoteGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
+      void DemoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void ReadStorageObjects(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest* request, ::nakama::api::StorageObjects* response, std::function<void(::grpc::Status)>) override;
       void RpcFunc(::grpc::ClientContext* context, const ::nakama::api::Rpc* request, ::nakama::api::Rpc* response, std::function<void(::grpc::Status)>) override;
+      void UnlinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void UnlinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void UnlinkDevice(::grpc::ClientContext* context, const ::nakama::api::AccountDevice* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void UnlinkEmail(::grpc::ClientContext* context, const ::nakama::api::AccountEmail* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void UnlinkFacebook(::grpc::ClientContext* context, const ::nakama::api::AccountFacebook* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
+      void UnlinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void UnlinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void UnlinkGoogle(::grpc::ClientContext* context, const ::nakama::api::AccountGoogle* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
       void UnlinkSteam(::grpc::ClientContext* context, const ::nakama::api::AccountSteam* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
@@ -1265,6 +1445,8 @@ class Nakama final {
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncAddFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::AddFriendsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncAddGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::AddGroupUsersRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncAddGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::AddGroupUsersRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* AsyncAuthenticateAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* PrepareAsyncAuthenticateAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* AsyncAuthenticateCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* PrepareAsyncAuthenticateCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* AsyncAuthenticateDeviceRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateDeviceRequest& request, ::grpc::CompletionQueue* cq) override;
@@ -1273,12 +1455,16 @@ class Nakama final {
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* PrepareAsyncAuthenticateEmailRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateEmailRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* AsyncAuthenticateFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* PrepareAsyncAuthenticateFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* AsyncAuthenticateFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* PrepareAsyncAuthenticateFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* AsyncAuthenticateGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* PrepareAsyncAuthenticateGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* AsyncAuthenticateGoogleRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGoogleRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* PrepareAsyncAuthenticateGoogleRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGoogleRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* AsyncAuthenticateSteamRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateSteamRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* PrepareAsyncAuthenticateSteamRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateSteamRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncBanGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncBanGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncBlockFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::BlockFriendsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncBlockFriendsRaw(::grpc::ClientContext* context, const ::nakama::api::BlockFriendsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Group>* AsyncCreateGroupRaw(::grpc::ClientContext* context, const ::nakama::api::CreateGroupRequest& request, ::grpc::CompletionQueue* cq) override;
@@ -1293,6 +1479,8 @@ class Nakama final {
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncDeleteNotificationsRaw(::grpc::ClientContext* context, const ::nakama::api::DeleteNotificationsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncDeleteStorageObjectsRaw(::grpc::ClientContext* context, const ::nakama::api::DeleteStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncDeleteStorageObjectsRaw(::grpc::ClientContext* context, const ::nakama::api::DeleteStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncEventRaw(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncEventRaw(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Account>* AsyncGetAccountRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Account>* PrepareAsyncGetAccountRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Users>* AsyncGetUsersRaw(::grpc::ClientContext* context, const ::nakama::api::GetUsersRequest& request, ::grpc::CompletionQueue* cq) override;
@@ -1309,6 +1497,8 @@ class Nakama final {
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncKickGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::KickGroupUsersRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncLeaveGroupRaw(::grpc::ClientContext* context, const ::nakama::api::LeaveGroupRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncLeaveGroupRaw(::grpc::ClientContext* context, const ::nakama::api::LeaveGroupRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncLinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncLinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncLinkCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncLinkCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncLinkDeviceRaw(::grpc::ClientContext* context, const ::nakama::api::AccountDevice& request, ::grpc::CompletionQueue* cq) override;
@@ -1317,6 +1507,8 @@ class Nakama final {
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncLinkEmailRaw(::grpc::ClientContext* context, const ::nakama::api::AccountEmail& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncLinkFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::LinkFacebookRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncLinkFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::LinkFacebookRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncLinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncLinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncLinkGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncLinkGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncLinkGoogleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGoogle& request, ::grpc::CompletionQueue* cq) override;
@@ -1351,10 +1543,14 @@ class Nakama final {
     ::grpc::ClientAsyncResponseReader< ::nakama::api::UserGroupList>* PrepareAsyncListUserGroupsRaw(::grpc::ClientContext* context, const ::nakama::api::ListUserGroupsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncPromoteGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::PromoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncPromoteGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::PromoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncDemoteGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncDemoteGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::StorageObjects>* AsyncReadStorageObjectsRaw(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::StorageObjects>* PrepareAsyncReadStorageObjectsRaw(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Rpc>* AsyncRpcFuncRaw(::grpc::ClientContext* context, const ::nakama::api::Rpc& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::nakama::api::Rpc>* PrepareAsyncRpcFuncRaw(::grpc::ClientContext* context, const ::nakama::api::Rpc& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncUnlinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncUnlinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncUnlinkCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncUnlinkCustomRaw(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncUnlinkDeviceRaw(::grpc::ClientContext* context, const ::nakama::api::AccountDevice& request, ::grpc::CompletionQueue* cq) override;
@@ -1363,6 +1559,8 @@ class Nakama final {
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncUnlinkEmailRaw(::grpc::ClientContext* context, const ::nakama::api::AccountEmail& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncUnlinkFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebook& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncUnlinkFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebook& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncUnlinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncUnlinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncUnlinkGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncUnlinkGameCenterRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncUnlinkGoogleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountGoogle& request, ::grpc::CompletionQueue* cq) override;
@@ -1381,13 +1579,16 @@ class Nakama final {
     ::grpc::ClientAsyncResponseReader< ::nakama::api::LeaderboardRecord>* PrepareAsyncWriteTournamentRecordRaw(::grpc::ClientContext* context, const ::nakama::api::WriteTournamentRecordRequest& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_AddFriends_;
     const ::grpc::internal::RpcMethod rpcmethod_AddGroupUsers_;
+    const ::grpc::internal::RpcMethod rpcmethod_AuthenticateApple_;
     const ::grpc::internal::RpcMethod rpcmethod_AuthenticateCustom_;
     const ::grpc::internal::RpcMethod rpcmethod_AuthenticateDevice_;
     const ::grpc::internal::RpcMethod rpcmethod_AuthenticateEmail_;
     const ::grpc::internal::RpcMethod rpcmethod_AuthenticateFacebook_;
+    const ::grpc::internal::RpcMethod rpcmethod_AuthenticateFacebookInstantGame_;
     const ::grpc::internal::RpcMethod rpcmethod_AuthenticateGameCenter_;
     const ::grpc::internal::RpcMethod rpcmethod_AuthenticateGoogle_;
     const ::grpc::internal::RpcMethod rpcmethod_AuthenticateSteam_;
+    const ::grpc::internal::RpcMethod rpcmethod_BanGroupUsers_;
     const ::grpc::internal::RpcMethod rpcmethod_BlockFriends_;
     const ::grpc::internal::RpcMethod rpcmethod_CreateGroup_;
     const ::grpc::internal::RpcMethod rpcmethod_DeleteFriends_;
@@ -1395,6 +1596,7 @@ class Nakama final {
     const ::grpc::internal::RpcMethod rpcmethod_DeleteLeaderboardRecord_;
     const ::grpc::internal::RpcMethod rpcmethod_DeleteNotifications_;
     const ::grpc::internal::RpcMethod rpcmethod_DeleteStorageObjects_;
+    const ::grpc::internal::RpcMethod rpcmethod_Event_;
     const ::grpc::internal::RpcMethod rpcmethod_GetAccount_;
     const ::grpc::internal::RpcMethod rpcmethod_GetUsers_;
     const ::grpc::internal::RpcMethod rpcmethod_Healthcheck_;
@@ -1403,10 +1605,12 @@ class Nakama final {
     const ::grpc::internal::RpcMethod rpcmethod_JoinTournament_;
     const ::grpc::internal::RpcMethod rpcmethod_KickGroupUsers_;
     const ::grpc::internal::RpcMethod rpcmethod_LeaveGroup_;
+    const ::grpc::internal::RpcMethod rpcmethod_LinkApple_;
     const ::grpc::internal::RpcMethod rpcmethod_LinkCustom_;
     const ::grpc::internal::RpcMethod rpcmethod_LinkDevice_;
     const ::grpc::internal::RpcMethod rpcmethod_LinkEmail_;
     const ::grpc::internal::RpcMethod rpcmethod_LinkFacebook_;
+    const ::grpc::internal::RpcMethod rpcmethod_LinkFacebookInstantGame_;
     const ::grpc::internal::RpcMethod rpcmethod_LinkGameCenter_;
     const ::grpc::internal::RpcMethod rpcmethod_LinkGoogle_;
     const ::grpc::internal::RpcMethod rpcmethod_LinkSteam_;
@@ -1424,12 +1628,15 @@ class Nakama final {
     const ::grpc::internal::RpcMethod rpcmethod_ListTournamentRecordsAroundOwner_;
     const ::grpc::internal::RpcMethod rpcmethod_ListUserGroups_;
     const ::grpc::internal::RpcMethod rpcmethod_PromoteGroupUsers_;
+    const ::grpc::internal::RpcMethod rpcmethod_DemoteGroupUsers_;
     const ::grpc::internal::RpcMethod rpcmethod_ReadStorageObjects_;
     const ::grpc::internal::RpcMethod rpcmethod_RpcFunc_;
+    const ::grpc::internal::RpcMethod rpcmethod_UnlinkApple_;
     const ::grpc::internal::RpcMethod rpcmethod_UnlinkCustom_;
     const ::grpc::internal::RpcMethod rpcmethod_UnlinkDevice_;
     const ::grpc::internal::RpcMethod rpcmethod_UnlinkEmail_;
     const ::grpc::internal::RpcMethod rpcmethod_UnlinkFacebook_;
+    const ::grpc::internal::RpcMethod rpcmethod_UnlinkFacebookInstantGame_;
     const ::grpc::internal::RpcMethod rpcmethod_UnlinkGameCenter_;
     const ::grpc::internal::RpcMethod rpcmethod_UnlinkGoogle_;
     const ::grpc::internal::RpcMethod rpcmethod_UnlinkSteam_;
@@ -1449,6 +1656,8 @@ class Nakama final {
     virtual ::grpc::Status AddFriends(::grpc::ServerContext* context, const ::nakama::api::AddFriendsRequest* request, ::google::protobuf::Empty* response);
     // Add users to a group.
     virtual ::grpc::Status AddGroupUsers(::grpc::ServerContext* context, const ::nakama::api::AddGroupUsersRequest* request, ::google::protobuf::Empty* response);
+    // Authenticate a user with an Apple ID against the server.
+    virtual ::grpc::Status AuthenticateApple(::grpc::ServerContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response);
     // Authenticate a user with a custom id against the server.
     virtual ::grpc::Status AuthenticateCustom(::grpc::ServerContext* context, const ::nakama::api::AuthenticateCustomRequest* request, ::nakama::api::Session* response);
     // Authenticate a user with a device id against the server.
@@ -1457,12 +1666,16 @@ class Nakama final {
     virtual ::grpc::Status AuthenticateEmail(::grpc::ServerContext* context, const ::nakama::api::AuthenticateEmailRequest* request, ::nakama::api::Session* response);
     // Authenticate a user with a Facebook OAuth token against the server.
     virtual ::grpc::Status AuthenticateFacebook(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookRequest* request, ::nakama::api::Session* response);
+    // Authenticate a user with a Facebook Instant Game token against the server.
+    virtual ::grpc::Status AuthenticateFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response);
     // Authenticate a user with Apple's GameCenter against the server.
     virtual ::grpc::Status AuthenticateGameCenter(::grpc::ServerContext* context, const ::nakama::api::AuthenticateGameCenterRequest* request, ::nakama::api::Session* response);
     // Authenticate a user with Google against the server.
     virtual ::grpc::Status AuthenticateGoogle(::grpc::ServerContext* context, const ::nakama::api::AuthenticateGoogleRequest* request, ::nakama::api::Session* response);
     // Authenticate a user with Steam against the server.
     virtual ::grpc::Status AuthenticateSteam(::grpc::ServerContext* context, const ::nakama::api::AuthenticateSteamRequest* request, ::nakama::api::Session* response);
+    // Ban a set of users from a group.
+    virtual ::grpc::Status BanGroupUsers(::grpc::ServerContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response);
     // Block one or more users by ID or username.
     virtual ::grpc::Status BlockFriends(::grpc::ServerContext* context, const ::nakama::api::BlockFriendsRequest* request, ::google::protobuf::Empty* response);
     // Create a new group with the current user as the owner.
@@ -1477,6 +1690,8 @@ class Nakama final {
     virtual ::grpc::Status DeleteNotifications(::grpc::ServerContext* context, const ::nakama::api::DeleteNotificationsRequest* request, ::google::protobuf::Empty* response);
     // Delete one or more objects by ID or username.
     virtual ::grpc::Status DeleteStorageObjects(::grpc::ServerContext* context, const ::nakama::api::DeleteStorageObjectsRequest* request, ::google::protobuf::Empty* response);
+    // Submit an event for processing in the server's registered runtime custom events handler.
+    virtual ::grpc::Status Event(::grpc::ServerContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response);
     // Fetch the current user's account.
     virtual ::grpc::Status GetAccount(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::nakama::api::Account* response);
     // Fetch zero or more users by ID and/or username.
@@ -1493,6 +1708,8 @@ class Nakama final {
     virtual ::grpc::Status KickGroupUsers(::grpc::ServerContext* context, const ::nakama::api::KickGroupUsersRequest* request, ::google::protobuf::Empty* response);
     // Leave a group the user is a member of.
     virtual ::grpc::Status LeaveGroup(::grpc::ServerContext* context, const ::nakama::api::LeaveGroupRequest* request, ::google::protobuf::Empty* response);
+    // Add an Apple ID to the social profiles on the current user's account.
+    virtual ::grpc::Status LinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response);
     // Add a custom ID to the social profiles on the current user's account.
     virtual ::grpc::Status LinkCustom(::grpc::ServerContext* context, const ::nakama::api::AccountCustom* request, ::google::protobuf::Empty* response);
     // Add a device ID to the social profiles on the current user's account.
@@ -1501,6 +1718,8 @@ class Nakama final {
     virtual ::grpc::Status LinkEmail(::grpc::ServerContext* context, const ::nakama::api::AccountEmail* request, ::google::protobuf::Empty* response);
     // Add Facebook to the social profiles on the current user's account.
     virtual ::grpc::Status LinkFacebook(::grpc::ServerContext* context, const ::nakama::api::LinkFacebookRequest* request, ::google::protobuf::Empty* response);
+    // Add Facebook Instant Game to the social profiles on the current user's account.
+    virtual ::grpc::Status LinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response);
     // Add Apple's GameCenter to the social profiles on the current user's account.
     virtual ::grpc::Status LinkGameCenter(::grpc::ServerContext* context, const ::nakama::api::AccountGameCenter* request, ::google::protobuf::Empty* response);
     // Add Google to the social profiles on the current user's account.
@@ -1535,10 +1754,14 @@ class Nakama final {
     virtual ::grpc::Status ListUserGroups(::grpc::ServerContext* context, const ::nakama::api::ListUserGroupsRequest* request, ::nakama::api::UserGroupList* response);
     // Promote a set of users in a group to the next role up.
     virtual ::grpc::Status PromoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::PromoteGroupUsersRequest* request, ::google::protobuf::Empty* response);
+    // Demote a set of users in a group to the next role down.
+    virtual ::grpc::Status DemoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response);
     // Get storage objects.
     virtual ::grpc::Status ReadStorageObjects(::grpc::ServerContext* context, const ::nakama::api::ReadStorageObjectsRequest* request, ::nakama::api::StorageObjects* response);
     // Execute a Lua function on the server.
     virtual ::grpc::Status RpcFunc(::grpc::ServerContext* context, const ::nakama::api::Rpc* request, ::nakama::api::Rpc* response);
+    // Remove the Apple ID from the social profiles on the current user's account.
+    virtual ::grpc::Status UnlinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response);
     // Remove the custom ID from the social profiles on the current user's account.
     virtual ::grpc::Status UnlinkCustom(::grpc::ServerContext* context, const ::nakama::api::AccountCustom* request, ::google::protobuf::Empty* response);
     // Remove the device ID from the social profiles on the current user's account.
@@ -1547,6 +1770,8 @@ class Nakama final {
     virtual ::grpc::Status UnlinkEmail(::grpc::ServerContext* context, const ::nakama::api::AccountEmail* request, ::google::protobuf::Empty* response);
     // Remove Facebook from the social profiles on the current user's account.
     virtual ::grpc::Status UnlinkFacebook(::grpc::ServerContext* context, const ::nakama::api::AccountFacebook* request, ::google::protobuf::Empty* response);
+    // Remove Facebook Instant Game profile from the social profiles on the current user's account.
+    virtual ::grpc::Status UnlinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response);
     // Remove Apple's GameCenter from the social profiles on the current user's account.
     virtual ::grpc::Status UnlinkGameCenter(::grpc::ServerContext* context, const ::nakama::api::AccountGameCenter* request, ::google::protobuf::Empty* response);
     // Remove Google from the social profiles on the current user's account.
@@ -1605,12 +1830,32 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithAsyncMethod_AuthenticateApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_AuthenticateApple() {
+      ::grpc::Service::MarkMethodAsync(2);
+    }
+    ~WithAsyncMethod_AuthenticateApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AuthenticateApple(::grpc::ServerContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestAuthenticateApple(::grpc::ServerContext* context, ::nakama::api::AuthenticateAppleRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Session>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithAsyncMethod_AuthenticateCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AuthenticateCustom() {
-      ::grpc::Service::MarkMethodAsync(2);
+      ::grpc::Service::MarkMethodAsync(3);
     }
     ~WithAsyncMethod_AuthenticateCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1621,7 +1866,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateCustom(::grpc::ServerContext* context, ::nakama::api::AuthenticateCustomRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Session>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1630,7 +1875,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AuthenticateDevice() {
-      ::grpc::Service::MarkMethodAsync(3);
+      ::grpc::Service::MarkMethodAsync(4);
     }
     ~WithAsyncMethod_AuthenticateDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1641,7 +1886,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateDevice(::grpc::ServerContext* context, ::nakama::api::AuthenticateDeviceRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Session>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1650,7 +1895,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AuthenticateEmail() {
-      ::grpc::Service::MarkMethodAsync(4);
+      ::grpc::Service::MarkMethodAsync(5);
     }
     ~WithAsyncMethod_AuthenticateEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1661,7 +1906,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateEmail(::grpc::ServerContext* context, ::nakama::api::AuthenticateEmailRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Session>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1670,7 +1915,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AuthenticateFacebook() {
-      ::grpc::Service::MarkMethodAsync(5);
+      ::grpc::Service::MarkMethodAsync(6);
     }
     ~WithAsyncMethod_AuthenticateFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1681,7 +1926,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateFacebook(::grpc::ServerContext* context, ::nakama::api::AuthenticateFacebookRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Session>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_AuthenticateFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_AuthenticateFacebookInstantGame() {
+      ::grpc::Service::MarkMethodAsync(7);
+    }
+    ~WithAsyncMethod_AuthenticateFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AuthenticateFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestAuthenticateFacebookInstantGame(::grpc::ServerContext* context, ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Session>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1690,7 +1955,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AuthenticateGameCenter() {
-      ::grpc::Service::MarkMethodAsync(6);
+      ::grpc::Service::MarkMethodAsync(8);
     }
     ~WithAsyncMethod_AuthenticateGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1701,7 +1966,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateGameCenter(::grpc::ServerContext* context, ::nakama::api::AuthenticateGameCenterRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Session>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(8, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1710,7 +1975,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AuthenticateGoogle() {
-      ::grpc::Service::MarkMethodAsync(7);
+      ::grpc::Service::MarkMethodAsync(9);
     }
     ~WithAsyncMethod_AuthenticateGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1721,7 +1986,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateGoogle(::grpc::ServerContext* context, ::nakama::api::AuthenticateGoogleRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Session>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(9, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1730,7 +1995,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AuthenticateSteam() {
-      ::grpc::Service::MarkMethodAsync(8);
+      ::grpc::Service::MarkMethodAsync(10);
     }
     ~WithAsyncMethod_AuthenticateSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1741,7 +2006,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateSteam(::grpc::ServerContext* context, ::nakama::api::AuthenticateSteamRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Session>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(8, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(10, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_BanGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_BanGroupUsers() {
+      ::grpc::Service::MarkMethodAsync(11);
+    }
+    ~WithAsyncMethod_BanGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status BanGroupUsers(::grpc::ServerContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestBanGroupUsers(::grpc::ServerContext* context, ::nakama::api::BanGroupUsersRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(11, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1750,7 +2035,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_BlockFriends() {
-      ::grpc::Service::MarkMethodAsync(9);
+      ::grpc::Service::MarkMethodAsync(12);
     }
     ~WithAsyncMethod_BlockFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1761,7 +2046,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestBlockFriends(::grpc::ServerContext* context, ::nakama::api::BlockFriendsRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(9, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(12, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1770,7 +2055,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_CreateGroup() {
-      ::grpc::Service::MarkMethodAsync(10);
+      ::grpc::Service::MarkMethodAsync(13);
     }
     ~WithAsyncMethod_CreateGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1781,7 +2066,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCreateGroup(::grpc::ServerContext* context, ::nakama::api::CreateGroupRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Group>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(10, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(13, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1790,7 +2075,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_DeleteFriends() {
-      ::grpc::Service::MarkMethodAsync(11);
+      ::grpc::Service::MarkMethodAsync(14);
     }
     ~WithAsyncMethod_DeleteFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1801,7 +2086,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeleteFriends(::grpc::ServerContext* context, ::nakama::api::DeleteFriendsRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(11, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(14, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1810,7 +2095,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_DeleteGroup() {
-      ::grpc::Service::MarkMethodAsync(12);
+      ::grpc::Service::MarkMethodAsync(15);
     }
     ~WithAsyncMethod_DeleteGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1821,7 +2106,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeleteGroup(::grpc::ServerContext* context, ::nakama::api::DeleteGroupRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(12, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(15, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1830,7 +2115,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_DeleteLeaderboardRecord() {
-      ::grpc::Service::MarkMethodAsync(13);
+      ::grpc::Service::MarkMethodAsync(16);
     }
     ~WithAsyncMethod_DeleteLeaderboardRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1841,7 +2126,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeleteLeaderboardRecord(::grpc::ServerContext* context, ::nakama::api::DeleteLeaderboardRecordRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(13, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(16, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1850,7 +2135,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_DeleteNotifications() {
-      ::grpc::Service::MarkMethodAsync(14);
+      ::grpc::Service::MarkMethodAsync(17);
     }
     ~WithAsyncMethod_DeleteNotifications() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1861,7 +2146,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeleteNotifications(::grpc::ServerContext* context, ::nakama::api::DeleteNotificationsRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(14, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(17, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1870,7 +2155,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_DeleteStorageObjects() {
-      ::grpc::Service::MarkMethodAsync(15);
+      ::grpc::Service::MarkMethodAsync(18);
     }
     ~WithAsyncMethod_DeleteStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1881,7 +2166,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeleteStorageObjects(::grpc::ServerContext* context, ::nakama::api::DeleteStorageObjectsRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(15, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(18, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_Event : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_Event() {
+      ::grpc::Service::MarkMethodAsync(19);
+    }
+    ~WithAsyncMethod_Event() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Event(::grpc::ServerContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestEvent(::grpc::ServerContext* context, ::nakama::api::Event* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(19, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1890,7 +2195,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_GetAccount() {
-      ::grpc::Service::MarkMethodAsync(16);
+      ::grpc::Service::MarkMethodAsync(20);
     }
     ~WithAsyncMethod_GetAccount() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1901,7 +2206,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetAccount(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Account>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(16, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(20, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1910,7 +2215,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_GetUsers() {
-      ::grpc::Service::MarkMethodAsync(17);
+      ::grpc::Service::MarkMethodAsync(21);
     }
     ~WithAsyncMethod_GetUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1921,7 +2226,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetUsers(::grpc::ServerContext* context, ::nakama::api::GetUsersRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Users>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(17, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(21, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1930,7 +2235,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_Healthcheck() {
-      ::grpc::Service::MarkMethodAsync(18);
+      ::grpc::Service::MarkMethodAsync(22);
     }
     ~WithAsyncMethod_Healthcheck() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1941,7 +2246,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestHealthcheck(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(18, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(22, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1950,7 +2255,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ImportFacebookFriends() {
-      ::grpc::Service::MarkMethodAsync(19);
+      ::grpc::Service::MarkMethodAsync(23);
     }
     ~WithAsyncMethod_ImportFacebookFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1961,7 +2266,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestImportFacebookFriends(::grpc::ServerContext* context, ::nakama::api::ImportFacebookFriendsRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(19, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(23, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1970,7 +2275,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_JoinGroup() {
-      ::grpc::Service::MarkMethodAsync(20);
+      ::grpc::Service::MarkMethodAsync(24);
     }
     ~WithAsyncMethod_JoinGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1981,7 +2286,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestJoinGroup(::grpc::ServerContext* context, ::nakama::api::JoinGroupRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(20, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(24, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1990,7 +2295,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_JoinTournament() {
-      ::grpc::Service::MarkMethodAsync(21);
+      ::grpc::Service::MarkMethodAsync(25);
     }
     ~WithAsyncMethod_JoinTournament() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2001,7 +2306,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestJoinTournament(::grpc::ServerContext* context, ::nakama::api::JoinTournamentRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(21, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(25, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2010,7 +2315,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_KickGroupUsers() {
-      ::grpc::Service::MarkMethodAsync(22);
+      ::grpc::Service::MarkMethodAsync(26);
     }
     ~WithAsyncMethod_KickGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2021,7 +2326,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestKickGroupUsers(::grpc::ServerContext* context, ::nakama::api::KickGroupUsersRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(22, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(26, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2030,7 +2335,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_LeaveGroup() {
-      ::grpc::Service::MarkMethodAsync(23);
+      ::grpc::Service::MarkMethodAsync(27);
     }
     ~WithAsyncMethod_LeaveGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2041,7 +2346,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLeaveGroup(::grpc::ServerContext* context, ::nakama::api::LeaveGroupRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(23, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(27, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_LinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_LinkApple() {
+      ::grpc::Service::MarkMethodAsync(28);
+    }
+    ~WithAsyncMethod_LinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status LinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestLinkApple(::grpc::ServerContext* context, ::nakama::api::AccountApple* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(28, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2050,7 +2375,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_LinkCustom() {
-      ::grpc::Service::MarkMethodAsync(24);
+      ::grpc::Service::MarkMethodAsync(29);
     }
     ~WithAsyncMethod_LinkCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2061,7 +2386,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkCustom(::grpc::ServerContext* context, ::nakama::api::AccountCustom* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(24, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(29, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2070,7 +2395,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_LinkDevice() {
-      ::grpc::Service::MarkMethodAsync(25);
+      ::grpc::Service::MarkMethodAsync(30);
     }
     ~WithAsyncMethod_LinkDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2081,7 +2406,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkDevice(::grpc::ServerContext* context, ::nakama::api::AccountDevice* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(25, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(30, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2090,7 +2415,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_LinkEmail() {
-      ::grpc::Service::MarkMethodAsync(26);
+      ::grpc::Service::MarkMethodAsync(31);
     }
     ~WithAsyncMethod_LinkEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2101,7 +2426,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkEmail(::grpc::ServerContext* context, ::nakama::api::AccountEmail* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(26, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(31, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2110,7 +2435,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_LinkFacebook() {
-      ::grpc::Service::MarkMethodAsync(27);
+      ::grpc::Service::MarkMethodAsync(32);
     }
     ~WithAsyncMethod_LinkFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2121,7 +2446,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkFacebook(::grpc::ServerContext* context, ::nakama::api::LinkFacebookRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(27, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(32, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_LinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_LinkFacebookInstantGame() {
+      ::grpc::Service::MarkMethodAsync(33);
+    }
+    ~WithAsyncMethod_LinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status LinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestLinkFacebookInstantGame(::grpc::ServerContext* context, ::nakama::api::AccountFacebookInstantGame* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(33, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2130,7 +2475,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_LinkGameCenter() {
-      ::grpc::Service::MarkMethodAsync(28);
+      ::grpc::Service::MarkMethodAsync(34);
     }
     ~WithAsyncMethod_LinkGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2141,7 +2486,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkGameCenter(::grpc::ServerContext* context, ::nakama::api::AccountGameCenter* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(28, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(34, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2150,7 +2495,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_LinkGoogle() {
-      ::grpc::Service::MarkMethodAsync(29);
+      ::grpc::Service::MarkMethodAsync(35);
     }
     ~WithAsyncMethod_LinkGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2161,7 +2506,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkGoogle(::grpc::ServerContext* context, ::nakama::api::AccountGoogle* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(29, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(35, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2170,7 +2515,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_LinkSteam() {
-      ::grpc::Service::MarkMethodAsync(30);
+      ::grpc::Service::MarkMethodAsync(36);
     }
     ~WithAsyncMethod_LinkSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2181,7 +2526,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkSteam(::grpc::ServerContext* context, ::nakama::api::AccountSteam* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(30, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(36, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2190,7 +2535,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListChannelMessages() {
-      ::grpc::Service::MarkMethodAsync(31);
+      ::grpc::Service::MarkMethodAsync(37);
     }
     ~WithAsyncMethod_ListChannelMessages() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2201,7 +2546,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListChannelMessages(::grpc::ServerContext* context, ::nakama::api::ListChannelMessagesRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::ChannelMessageList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(31, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(37, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2210,7 +2555,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListFriends() {
-      ::grpc::Service::MarkMethodAsync(32);
+      ::grpc::Service::MarkMethodAsync(38);
     }
     ~WithAsyncMethod_ListFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2221,7 +2566,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListFriends(::grpc::ServerContext* context, ::nakama::api::ListFriendsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::FriendList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(32, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(38, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2230,7 +2575,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListGroups() {
-      ::grpc::Service::MarkMethodAsync(33);
+      ::grpc::Service::MarkMethodAsync(39);
     }
     ~WithAsyncMethod_ListGroups() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2241,7 +2586,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListGroups(::grpc::ServerContext* context, ::nakama::api::ListGroupsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::GroupList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(33, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(39, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2250,7 +2595,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListGroupUsers() {
-      ::grpc::Service::MarkMethodAsync(34);
+      ::grpc::Service::MarkMethodAsync(40);
     }
     ~WithAsyncMethod_ListGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2261,7 +2606,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListGroupUsers(::grpc::ServerContext* context, ::nakama::api::ListGroupUsersRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::GroupUserList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(34, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(40, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2270,7 +2615,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListLeaderboardRecords() {
-      ::grpc::Service::MarkMethodAsync(35);
+      ::grpc::Service::MarkMethodAsync(41);
     }
     ~WithAsyncMethod_ListLeaderboardRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2281,7 +2626,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListLeaderboardRecords(::grpc::ServerContext* context, ::nakama::api::ListLeaderboardRecordsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::LeaderboardRecordList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(35, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(41, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2290,7 +2635,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListLeaderboardRecordsAroundOwner() {
-      ::grpc::Service::MarkMethodAsync(36);
+      ::grpc::Service::MarkMethodAsync(42);
     }
     ~WithAsyncMethod_ListLeaderboardRecordsAroundOwner() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2301,7 +2646,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListLeaderboardRecordsAroundOwner(::grpc::ServerContext* context, ::nakama::api::ListLeaderboardRecordsAroundOwnerRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::LeaderboardRecordList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(36, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(42, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2310,7 +2655,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListMatches() {
-      ::grpc::Service::MarkMethodAsync(37);
+      ::grpc::Service::MarkMethodAsync(43);
     }
     ~WithAsyncMethod_ListMatches() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2321,7 +2666,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListMatches(::grpc::ServerContext* context, ::nakama::api::ListMatchesRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::MatchList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(37, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(43, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2330,7 +2675,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListNotifications() {
-      ::grpc::Service::MarkMethodAsync(38);
+      ::grpc::Service::MarkMethodAsync(44);
     }
     ~WithAsyncMethod_ListNotifications() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2341,7 +2686,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListNotifications(::grpc::ServerContext* context, ::nakama::api::ListNotificationsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::NotificationList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(38, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(44, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2350,7 +2695,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListStorageObjects() {
-      ::grpc::Service::MarkMethodAsync(39);
+      ::grpc::Service::MarkMethodAsync(45);
     }
     ~WithAsyncMethod_ListStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2361,7 +2706,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListStorageObjects(::grpc::ServerContext* context, ::nakama::api::ListStorageObjectsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::StorageObjectList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(39, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(45, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2370,7 +2715,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListTournaments() {
-      ::grpc::Service::MarkMethodAsync(40);
+      ::grpc::Service::MarkMethodAsync(46);
     }
     ~WithAsyncMethod_ListTournaments() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2381,7 +2726,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListTournaments(::grpc::ServerContext* context, ::nakama::api::ListTournamentsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::TournamentList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(40, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(46, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2390,7 +2735,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListTournamentRecords() {
-      ::grpc::Service::MarkMethodAsync(41);
+      ::grpc::Service::MarkMethodAsync(47);
     }
     ~WithAsyncMethod_ListTournamentRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2401,7 +2746,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListTournamentRecords(::grpc::ServerContext* context, ::nakama::api::ListTournamentRecordsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::TournamentRecordList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(41, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(47, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2410,7 +2755,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListTournamentRecordsAroundOwner() {
-      ::grpc::Service::MarkMethodAsync(42);
+      ::grpc::Service::MarkMethodAsync(48);
     }
     ~WithAsyncMethod_ListTournamentRecordsAroundOwner() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2421,7 +2766,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListTournamentRecordsAroundOwner(::grpc::ServerContext* context, ::nakama::api::ListTournamentRecordsAroundOwnerRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::TournamentRecordList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(42, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(48, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2430,7 +2775,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ListUserGroups() {
-      ::grpc::Service::MarkMethodAsync(43);
+      ::grpc::Service::MarkMethodAsync(49);
     }
     ~WithAsyncMethod_ListUserGroups() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2441,7 +2786,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListUserGroups(::grpc::ServerContext* context, ::nakama::api::ListUserGroupsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::UserGroupList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(43, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(49, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2450,7 +2795,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_PromoteGroupUsers() {
-      ::grpc::Service::MarkMethodAsync(44);
+      ::grpc::Service::MarkMethodAsync(50);
     }
     ~WithAsyncMethod_PromoteGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2461,7 +2806,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestPromoteGroupUsers(::grpc::ServerContext* context, ::nakama::api::PromoteGroupUsersRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(44, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(50, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_DemoteGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_DemoteGroupUsers() {
+      ::grpc::Service::MarkMethodAsync(51);
+    }
+    ~WithAsyncMethod_DemoteGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DemoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDemoteGroupUsers(::grpc::ServerContext* context, ::nakama::api::DemoteGroupUsersRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(51, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2470,7 +2835,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_ReadStorageObjects() {
-      ::grpc::Service::MarkMethodAsync(45);
+      ::grpc::Service::MarkMethodAsync(52);
     }
     ~WithAsyncMethod_ReadStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2481,7 +2846,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestReadStorageObjects(::grpc::ServerContext* context, ::nakama::api::ReadStorageObjectsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::StorageObjects>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(45, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(52, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2490,7 +2855,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_RpcFunc() {
-      ::grpc::Service::MarkMethodAsync(46);
+      ::grpc::Service::MarkMethodAsync(53);
     }
     ~WithAsyncMethod_RpcFunc() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2501,7 +2866,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestRpcFunc(::grpc::ServerContext* context, ::nakama::api::Rpc* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::Rpc>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(46, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(53, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_UnlinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_UnlinkApple() {
+      ::grpc::Service::MarkMethodAsync(54);
+    }
+    ~WithAsyncMethod_UnlinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UnlinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestUnlinkApple(::grpc::ServerContext* context, ::nakama::api::AccountApple* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(54, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2510,7 +2895,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UnlinkCustom() {
-      ::grpc::Service::MarkMethodAsync(47);
+      ::grpc::Service::MarkMethodAsync(55);
     }
     ~WithAsyncMethod_UnlinkCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2521,7 +2906,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkCustom(::grpc::ServerContext* context, ::nakama::api::AccountCustom* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(47, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(55, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2530,7 +2915,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UnlinkDevice() {
-      ::grpc::Service::MarkMethodAsync(48);
+      ::grpc::Service::MarkMethodAsync(56);
     }
     ~WithAsyncMethod_UnlinkDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2541,7 +2926,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkDevice(::grpc::ServerContext* context, ::nakama::api::AccountDevice* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(48, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(56, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2550,7 +2935,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UnlinkEmail() {
-      ::grpc::Service::MarkMethodAsync(49);
+      ::grpc::Service::MarkMethodAsync(57);
     }
     ~WithAsyncMethod_UnlinkEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2561,7 +2946,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkEmail(::grpc::ServerContext* context, ::nakama::api::AccountEmail* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(49, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(57, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2570,7 +2955,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UnlinkFacebook() {
-      ::grpc::Service::MarkMethodAsync(50);
+      ::grpc::Service::MarkMethodAsync(58);
     }
     ~WithAsyncMethod_UnlinkFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2581,7 +2966,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkFacebook(::grpc::ServerContext* context, ::nakama::api::AccountFacebook* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(50, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(58, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_UnlinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_UnlinkFacebookInstantGame() {
+      ::grpc::Service::MarkMethodAsync(59);
+    }
+    ~WithAsyncMethod_UnlinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UnlinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestUnlinkFacebookInstantGame(::grpc::ServerContext* context, ::nakama::api::AccountFacebookInstantGame* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(59, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2590,7 +2995,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UnlinkGameCenter() {
-      ::grpc::Service::MarkMethodAsync(51);
+      ::grpc::Service::MarkMethodAsync(60);
     }
     ~WithAsyncMethod_UnlinkGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2601,7 +3006,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkGameCenter(::grpc::ServerContext* context, ::nakama::api::AccountGameCenter* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(51, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(60, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2610,7 +3015,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UnlinkGoogle() {
-      ::grpc::Service::MarkMethodAsync(52);
+      ::grpc::Service::MarkMethodAsync(61);
     }
     ~WithAsyncMethod_UnlinkGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2621,7 +3026,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkGoogle(::grpc::ServerContext* context, ::nakama::api::AccountGoogle* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(52, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(61, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2630,7 +3035,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UnlinkSteam() {
-      ::grpc::Service::MarkMethodAsync(53);
+      ::grpc::Service::MarkMethodAsync(62);
     }
     ~WithAsyncMethod_UnlinkSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2641,7 +3046,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkSteam(::grpc::ServerContext* context, ::nakama::api::AccountSteam* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(53, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(62, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2650,7 +3055,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UpdateAccount() {
-      ::grpc::Service::MarkMethodAsync(54);
+      ::grpc::Service::MarkMethodAsync(63);
     }
     ~WithAsyncMethod_UpdateAccount() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2661,7 +3066,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUpdateAccount(::grpc::ServerContext* context, ::nakama::api::UpdateAccountRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(54, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(63, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2670,7 +3075,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UpdateGroup() {
-      ::grpc::Service::MarkMethodAsync(55);
+      ::grpc::Service::MarkMethodAsync(64);
     }
     ~WithAsyncMethod_UpdateGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2681,7 +3086,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUpdateGroup(::grpc::ServerContext* context, ::nakama::api::UpdateGroupRequest* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(55, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(64, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2690,7 +3095,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_WriteLeaderboardRecord() {
-      ::grpc::Service::MarkMethodAsync(56);
+      ::grpc::Service::MarkMethodAsync(65);
     }
     ~WithAsyncMethod_WriteLeaderboardRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2701,7 +3106,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestWriteLeaderboardRecord(::grpc::ServerContext* context, ::nakama::api::WriteLeaderboardRecordRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::LeaderboardRecord>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(56, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(65, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2710,7 +3115,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_WriteStorageObjects() {
-      ::grpc::Service::MarkMethodAsync(57);
+      ::grpc::Service::MarkMethodAsync(66);
     }
     ~WithAsyncMethod_WriteStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2721,7 +3126,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestWriteStorageObjects(::grpc::ServerContext* context, ::nakama::api::WriteStorageObjectsRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::StorageObjectAcks>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(57, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(66, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -2730,7 +3135,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_WriteTournamentRecord() {
-      ::grpc::Service::MarkMethodAsync(58);
+      ::grpc::Service::MarkMethodAsync(67);
     }
     ~WithAsyncMethod_WriteTournamentRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -2741,10 +3146,10 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestWriteTournamentRecord(::grpc::ServerContext* context, ::nakama::api::WriteTournamentRecordRequest* request, ::grpc::ServerAsyncResponseWriter< ::nakama::api::LeaderboardRecord>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(58, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(67, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_AddFriends<WithAsyncMethod_AddGroupUsers<WithAsyncMethod_AuthenticateCustom<WithAsyncMethod_AuthenticateDevice<WithAsyncMethod_AuthenticateEmail<WithAsyncMethod_AuthenticateFacebook<WithAsyncMethod_AuthenticateGameCenter<WithAsyncMethod_AuthenticateGoogle<WithAsyncMethod_AuthenticateSteam<WithAsyncMethod_BlockFriends<WithAsyncMethod_CreateGroup<WithAsyncMethod_DeleteFriends<WithAsyncMethod_DeleteGroup<WithAsyncMethod_DeleteLeaderboardRecord<WithAsyncMethod_DeleteNotifications<WithAsyncMethod_DeleteStorageObjects<WithAsyncMethod_GetAccount<WithAsyncMethod_GetUsers<WithAsyncMethod_Healthcheck<WithAsyncMethod_ImportFacebookFriends<WithAsyncMethod_JoinGroup<WithAsyncMethod_JoinTournament<WithAsyncMethod_KickGroupUsers<WithAsyncMethod_LeaveGroup<WithAsyncMethod_LinkCustom<WithAsyncMethod_LinkDevice<WithAsyncMethod_LinkEmail<WithAsyncMethod_LinkFacebook<WithAsyncMethod_LinkGameCenter<WithAsyncMethod_LinkGoogle<WithAsyncMethod_LinkSteam<WithAsyncMethod_ListChannelMessages<WithAsyncMethod_ListFriends<WithAsyncMethod_ListGroups<WithAsyncMethod_ListGroupUsers<WithAsyncMethod_ListLeaderboardRecords<WithAsyncMethod_ListLeaderboardRecordsAroundOwner<WithAsyncMethod_ListMatches<WithAsyncMethod_ListNotifications<WithAsyncMethod_ListStorageObjects<WithAsyncMethod_ListTournaments<WithAsyncMethod_ListTournamentRecords<WithAsyncMethod_ListTournamentRecordsAroundOwner<WithAsyncMethod_ListUserGroups<WithAsyncMethod_PromoteGroupUsers<WithAsyncMethod_ReadStorageObjects<WithAsyncMethod_RpcFunc<WithAsyncMethod_UnlinkCustom<WithAsyncMethod_UnlinkDevice<WithAsyncMethod_UnlinkEmail<WithAsyncMethod_UnlinkFacebook<WithAsyncMethod_UnlinkGameCenter<WithAsyncMethod_UnlinkGoogle<WithAsyncMethod_UnlinkSteam<WithAsyncMethod_UpdateAccount<WithAsyncMethod_UpdateGroup<WithAsyncMethod_WriteLeaderboardRecord<WithAsyncMethod_WriteStorageObjects<WithAsyncMethod_WriteTournamentRecord<Service > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > AsyncService;
+  typedef WithAsyncMethod_AddFriends<WithAsyncMethod_AddGroupUsers<WithAsyncMethod_AuthenticateApple<WithAsyncMethod_AuthenticateCustom<WithAsyncMethod_AuthenticateDevice<WithAsyncMethod_AuthenticateEmail<WithAsyncMethod_AuthenticateFacebook<WithAsyncMethod_AuthenticateFacebookInstantGame<WithAsyncMethod_AuthenticateGameCenter<WithAsyncMethod_AuthenticateGoogle<WithAsyncMethod_AuthenticateSteam<WithAsyncMethod_BanGroupUsers<WithAsyncMethod_BlockFriends<WithAsyncMethod_CreateGroup<WithAsyncMethod_DeleteFriends<WithAsyncMethod_DeleteGroup<WithAsyncMethod_DeleteLeaderboardRecord<WithAsyncMethod_DeleteNotifications<WithAsyncMethod_DeleteStorageObjects<WithAsyncMethod_Event<WithAsyncMethod_GetAccount<WithAsyncMethod_GetUsers<WithAsyncMethod_Healthcheck<WithAsyncMethod_ImportFacebookFriends<WithAsyncMethod_JoinGroup<WithAsyncMethod_JoinTournament<WithAsyncMethod_KickGroupUsers<WithAsyncMethod_LeaveGroup<WithAsyncMethod_LinkApple<WithAsyncMethod_LinkCustom<WithAsyncMethod_LinkDevice<WithAsyncMethod_LinkEmail<WithAsyncMethod_LinkFacebook<WithAsyncMethod_LinkFacebookInstantGame<WithAsyncMethod_LinkGameCenter<WithAsyncMethod_LinkGoogle<WithAsyncMethod_LinkSteam<WithAsyncMethod_ListChannelMessages<WithAsyncMethod_ListFriends<WithAsyncMethod_ListGroups<WithAsyncMethod_ListGroupUsers<WithAsyncMethod_ListLeaderboardRecords<WithAsyncMethod_ListLeaderboardRecordsAroundOwner<WithAsyncMethod_ListMatches<WithAsyncMethod_ListNotifications<WithAsyncMethod_ListStorageObjects<WithAsyncMethod_ListTournaments<WithAsyncMethod_ListTournamentRecords<WithAsyncMethod_ListTournamentRecordsAroundOwner<WithAsyncMethod_ListUserGroups<WithAsyncMethod_PromoteGroupUsers<WithAsyncMethod_DemoteGroupUsers<WithAsyncMethod_ReadStorageObjects<WithAsyncMethod_RpcFunc<WithAsyncMethod_UnlinkApple<WithAsyncMethod_UnlinkCustom<WithAsyncMethod_UnlinkDevice<WithAsyncMethod_UnlinkEmail<WithAsyncMethod_UnlinkFacebook<WithAsyncMethod_UnlinkFacebookInstantGame<WithAsyncMethod_UnlinkGameCenter<WithAsyncMethod_UnlinkGoogle<WithAsyncMethod_UnlinkSteam<WithAsyncMethod_UpdateAccount<WithAsyncMethod_UpdateGroup<WithAsyncMethod_WriteLeaderboardRecord<WithAsyncMethod_WriteStorageObjects<WithAsyncMethod_WriteTournamentRecord<Service > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > AsyncService;
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_AddFriends : public BaseClass {
    private:
@@ -2796,12 +3201,37 @@ class Nakama final {
     virtual void AddGroupUsers(::grpc::ServerContext* context, const ::nakama::api::AddGroupUsersRequest* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_AuthenticateApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_AuthenticateApple() {
+      ::grpc::Service::experimental().MarkMethodCallback(2,
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateAppleRequest, ::nakama::api::Session>(
+          [this](::grpc::ServerContext* context,
+                 const ::nakama::api::AuthenticateAppleRequest* request,
+                 ::nakama::api::Session* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->AuthenticateApple(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_AuthenticateApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AuthenticateApple(::grpc::ServerContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void AuthenticateApple(::grpc::ServerContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_AuthenticateCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_AuthenticateCustom() {
-      ::grpc::Service::experimental().MarkMethodCallback(2,
+      ::grpc::Service::experimental().MarkMethodCallback(3,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateCustomRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateCustomRequest* request,
@@ -2826,7 +3256,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_AuthenticateDevice() {
-      ::grpc::Service::experimental().MarkMethodCallback(3,
+      ::grpc::Service::experimental().MarkMethodCallback(4,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateDeviceRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateDeviceRequest* request,
@@ -2851,7 +3281,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_AuthenticateEmail() {
-      ::grpc::Service::experimental().MarkMethodCallback(4,
+      ::grpc::Service::experimental().MarkMethodCallback(5,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateEmailRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateEmailRequest* request,
@@ -2876,7 +3306,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_AuthenticateFacebook() {
-      ::grpc::Service::experimental().MarkMethodCallback(5,
+      ::grpc::Service::experimental().MarkMethodCallback(6,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateFacebookRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateFacebookRequest* request,
@@ -2896,12 +3326,37 @@ class Nakama final {
     virtual void AuthenticateFacebook(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookRequest* request, ::nakama::api::Session* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_AuthenticateFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_AuthenticateFacebookInstantGame() {
+      ::grpc::Service::experimental().MarkMethodCallback(7,
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateFacebookInstantGameRequest, ::nakama::api::Session>(
+          [this](::grpc::ServerContext* context,
+                 const ::nakama::api::AuthenticateFacebookInstantGameRequest* request,
+                 ::nakama::api::Session* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->AuthenticateFacebookInstantGame(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_AuthenticateFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AuthenticateFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void AuthenticateFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_AuthenticateGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_AuthenticateGameCenter() {
-      ::grpc::Service::experimental().MarkMethodCallback(6,
+      ::grpc::Service::experimental().MarkMethodCallback(8,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateGameCenterRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateGameCenterRequest* request,
@@ -2926,7 +3381,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_AuthenticateGoogle() {
-      ::grpc::Service::experimental().MarkMethodCallback(7,
+      ::grpc::Service::experimental().MarkMethodCallback(9,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateGoogleRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateGoogleRequest* request,
@@ -2951,7 +3406,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_AuthenticateSteam() {
-      ::grpc::Service::experimental().MarkMethodCallback(8,
+      ::grpc::Service::experimental().MarkMethodCallback(10,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AuthenticateSteamRequest, ::nakama::api::Session>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AuthenticateSteamRequest* request,
@@ -2971,12 +3426,37 @@ class Nakama final {
     virtual void AuthenticateSteam(::grpc::ServerContext* context, const ::nakama::api::AuthenticateSteamRequest* request, ::nakama::api::Session* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_BanGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_BanGroupUsers() {
+      ::grpc::Service::experimental().MarkMethodCallback(11,
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::BanGroupUsersRequest, ::google::protobuf::Empty>(
+          [this](::grpc::ServerContext* context,
+                 const ::nakama::api::BanGroupUsersRequest* request,
+                 ::google::protobuf::Empty* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->BanGroupUsers(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_BanGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status BanGroupUsers(::grpc::ServerContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void BanGroupUsers(::grpc::ServerContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_BlockFriends : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_BlockFriends() {
-      ::grpc::Service::experimental().MarkMethodCallback(9,
+      ::grpc::Service::experimental().MarkMethodCallback(12,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::BlockFriendsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::BlockFriendsRequest* request,
@@ -3001,7 +3481,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_CreateGroup() {
-      ::grpc::Service::experimental().MarkMethodCallback(10,
+      ::grpc::Service::experimental().MarkMethodCallback(13,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::CreateGroupRequest, ::nakama::api::Group>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::CreateGroupRequest* request,
@@ -3026,7 +3506,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_DeleteFriends() {
-      ::grpc::Service::experimental().MarkMethodCallback(11,
+      ::grpc::Service::experimental().MarkMethodCallback(14,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DeleteFriendsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::DeleteFriendsRequest* request,
@@ -3051,7 +3531,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_DeleteGroup() {
-      ::grpc::Service::experimental().MarkMethodCallback(12,
+      ::grpc::Service::experimental().MarkMethodCallback(15,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DeleteGroupRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::DeleteGroupRequest* request,
@@ -3076,7 +3556,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_DeleteLeaderboardRecord() {
-      ::grpc::Service::experimental().MarkMethodCallback(13,
+      ::grpc::Service::experimental().MarkMethodCallback(16,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DeleteLeaderboardRecordRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::DeleteLeaderboardRecordRequest* request,
@@ -3101,7 +3581,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_DeleteNotifications() {
-      ::grpc::Service::experimental().MarkMethodCallback(14,
+      ::grpc::Service::experimental().MarkMethodCallback(17,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DeleteNotificationsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::DeleteNotificationsRequest* request,
@@ -3126,7 +3606,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_DeleteStorageObjects() {
-      ::grpc::Service::experimental().MarkMethodCallback(15,
+      ::grpc::Service::experimental().MarkMethodCallback(18,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DeleteStorageObjectsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::DeleteStorageObjectsRequest* request,
@@ -3146,12 +3626,37 @@ class Nakama final {
     virtual void DeleteStorageObjects(::grpc::ServerContext* context, const ::nakama::api::DeleteStorageObjectsRequest* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_Event : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_Event() {
+      ::grpc::Service::experimental().MarkMethodCallback(19,
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::Event, ::google::protobuf::Empty>(
+          [this](::grpc::ServerContext* context,
+                 const ::nakama::api::Event* request,
+                 ::google::protobuf::Empty* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->Event(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_Event() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Event(::grpc::ServerContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void Event(::grpc::ServerContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_GetAccount : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_GetAccount() {
-      ::grpc::Service::experimental().MarkMethodCallback(16,
+      ::grpc::Service::experimental().MarkMethodCallback(20,
         new ::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::nakama::api::Account>(
           [this](::grpc::ServerContext* context,
                  const ::google::protobuf::Empty* request,
@@ -3176,7 +3681,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_GetUsers() {
-      ::grpc::Service::experimental().MarkMethodCallback(17,
+      ::grpc::Service::experimental().MarkMethodCallback(21,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::GetUsersRequest, ::nakama::api::Users>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::GetUsersRequest* request,
@@ -3201,7 +3706,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_Healthcheck() {
-      ::grpc::Service::experimental().MarkMethodCallback(18,
+      ::grpc::Service::experimental().MarkMethodCallback(22,
         new ::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::google::protobuf::Empty* request,
@@ -3226,7 +3731,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ImportFacebookFriends() {
-      ::grpc::Service::experimental().MarkMethodCallback(19,
+      ::grpc::Service::experimental().MarkMethodCallback(23,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ImportFacebookFriendsRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ImportFacebookFriendsRequest* request,
@@ -3251,7 +3756,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_JoinGroup() {
-      ::grpc::Service::experimental().MarkMethodCallback(20,
+      ::grpc::Service::experimental().MarkMethodCallback(24,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::JoinGroupRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::JoinGroupRequest* request,
@@ -3276,7 +3781,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_JoinTournament() {
-      ::grpc::Service::experimental().MarkMethodCallback(21,
+      ::grpc::Service::experimental().MarkMethodCallback(25,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::JoinTournamentRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::JoinTournamentRequest* request,
@@ -3301,7 +3806,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_KickGroupUsers() {
-      ::grpc::Service::experimental().MarkMethodCallback(22,
+      ::grpc::Service::experimental().MarkMethodCallback(26,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::KickGroupUsersRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::KickGroupUsersRequest* request,
@@ -3326,7 +3831,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_LeaveGroup() {
-      ::grpc::Service::experimental().MarkMethodCallback(23,
+      ::grpc::Service::experimental().MarkMethodCallback(27,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::LeaveGroupRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::LeaveGroupRequest* request,
@@ -3346,12 +3851,37 @@ class Nakama final {
     virtual void LeaveGroup(::grpc::ServerContext* context, const ::nakama::api::LeaveGroupRequest* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_LinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_LinkApple() {
+      ::grpc::Service::experimental().MarkMethodCallback(28,
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountApple, ::google::protobuf::Empty>(
+          [this](::grpc::ServerContext* context,
+                 const ::nakama::api::AccountApple* request,
+                 ::google::protobuf::Empty* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->LinkApple(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_LinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status LinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void LinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_LinkCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_LinkCustom() {
-      ::grpc::Service::experimental().MarkMethodCallback(24,
+      ::grpc::Service::experimental().MarkMethodCallback(29,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountCustom, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountCustom* request,
@@ -3376,7 +3906,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_LinkDevice() {
-      ::grpc::Service::experimental().MarkMethodCallback(25,
+      ::grpc::Service::experimental().MarkMethodCallback(30,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountDevice, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountDevice* request,
@@ -3401,7 +3931,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_LinkEmail() {
-      ::grpc::Service::experimental().MarkMethodCallback(26,
+      ::grpc::Service::experimental().MarkMethodCallback(31,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountEmail, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountEmail* request,
@@ -3426,7 +3956,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_LinkFacebook() {
-      ::grpc::Service::experimental().MarkMethodCallback(27,
+      ::grpc::Service::experimental().MarkMethodCallback(32,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::LinkFacebookRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::LinkFacebookRequest* request,
@@ -3446,12 +3976,37 @@ class Nakama final {
     virtual void LinkFacebook(::grpc::ServerContext* context, const ::nakama::api::LinkFacebookRequest* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_LinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_LinkFacebookInstantGame() {
+      ::grpc::Service::experimental().MarkMethodCallback(33,
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountFacebookInstantGame, ::google::protobuf::Empty>(
+          [this](::grpc::ServerContext* context,
+                 const ::nakama::api::AccountFacebookInstantGame* request,
+                 ::google::protobuf::Empty* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->LinkFacebookInstantGame(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_LinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status LinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void LinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_LinkGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_LinkGameCenter() {
-      ::grpc::Service::experimental().MarkMethodCallback(28,
+      ::grpc::Service::experimental().MarkMethodCallback(34,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountGameCenter, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountGameCenter* request,
@@ -3476,7 +4031,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_LinkGoogle() {
-      ::grpc::Service::experimental().MarkMethodCallback(29,
+      ::grpc::Service::experimental().MarkMethodCallback(35,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountGoogle, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountGoogle* request,
@@ -3501,7 +4056,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_LinkSteam() {
-      ::grpc::Service::experimental().MarkMethodCallback(30,
+      ::grpc::Service::experimental().MarkMethodCallback(36,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountSteam, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountSteam* request,
@@ -3526,7 +4081,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListChannelMessages() {
-      ::grpc::Service::experimental().MarkMethodCallback(31,
+      ::grpc::Service::experimental().MarkMethodCallback(37,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListChannelMessagesRequest, ::nakama::api::ChannelMessageList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListChannelMessagesRequest* request,
@@ -3551,7 +4106,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListFriends() {
-      ::grpc::Service::experimental().MarkMethodCallback(32,
+      ::grpc::Service::experimental().MarkMethodCallback(38,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListFriendsRequest, ::nakama::api::FriendList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListFriendsRequest* request,
@@ -3576,7 +4131,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListGroups() {
-      ::grpc::Service::experimental().MarkMethodCallback(33,
+      ::grpc::Service::experimental().MarkMethodCallback(39,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListGroupsRequest, ::nakama::api::GroupList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListGroupsRequest* request,
@@ -3601,7 +4156,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListGroupUsers() {
-      ::grpc::Service::experimental().MarkMethodCallback(34,
+      ::grpc::Service::experimental().MarkMethodCallback(40,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListGroupUsersRequest, ::nakama::api::GroupUserList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListGroupUsersRequest* request,
@@ -3626,7 +4181,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListLeaderboardRecords() {
-      ::grpc::Service::experimental().MarkMethodCallback(35,
+      ::grpc::Service::experimental().MarkMethodCallback(41,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListLeaderboardRecordsRequest, ::nakama::api::LeaderboardRecordList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListLeaderboardRecordsRequest* request,
@@ -3651,7 +4206,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListLeaderboardRecordsAroundOwner() {
-      ::grpc::Service::experimental().MarkMethodCallback(36,
+      ::grpc::Service::experimental().MarkMethodCallback(42,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListLeaderboardRecordsAroundOwnerRequest, ::nakama::api::LeaderboardRecordList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListLeaderboardRecordsAroundOwnerRequest* request,
@@ -3676,7 +4231,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListMatches() {
-      ::grpc::Service::experimental().MarkMethodCallback(37,
+      ::grpc::Service::experimental().MarkMethodCallback(43,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListMatchesRequest, ::nakama::api::MatchList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListMatchesRequest* request,
@@ -3701,7 +4256,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListNotifications() {
-      ::grpc::Service::experimental().MarkMethodCallback(38,
+      ::grpc::Service::experimental().MarkMethodCallback(44,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListNotificationsRequest, ::nakama::api::NotificationList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListNotificationsRequest* request,
@@ -3726,7 +4281,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListStorageObjects() {
-      ::grpc::Service::experimental().MarkMethodCallback(39,
+      ::grpc::Service::experimental().MarkMethodCallback(45,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListStorageObjectsRequest, ::nakama::api::StorageObjectList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListStorageObjectsRequest* request,
@@ -3751,7 +4306,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListTournaments() {
-      ::grpc::Service::experimental().MarkMethodCallback(40,
+      ::grpc::Service::experimental().MarkMethodCallback(46,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListTournamentsRequest, ::nakama::api::TournamentList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListTournamentsRequest* request,
@@ -3776,7 +4331,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListTournamentRecords() {
-      ::grpc::Service::experimental().MarkMethodCallback(41,
+      ::grpc::Service::experimental().MarkMethodCallback(47,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListTournamentRecordsRequest, ::nakama::api::TournamentRecordList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListTournamentRecordsRequest* request,
@@ -3801,7 +4356,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListTournamentRecordsAroundOwner() {
-      ::grpc::Service::experimental().MarkMethodCallback(42,
+      ::grpc::Service::experimental().MarkMethodCallback(48,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListTournamentRecordsAroundOwnerRequest, ::nakama::api::TournamentRecordList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListTournamentRecordsAroundOwnerRequest* request,
@@ -3826,7 +4381,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ListUserGroups() {
-      ::grpc::Service::experimental().MarkMethodCallback(43,
+      ::grpc::Service::experimental().MarkMethodCallback(49,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ListUserGroupsRequest, ::nakama::api::UserGroupList>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ListUserGroupsRequest* request,
@@ -3851,7 +4406,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_PromoteGroupUsers() {
-      ::grpc::Service::experimental().MarkMethodCallback(44,
+      ::grpc::Service::experimental().MarkMethodCallback(50,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::PromoteGroupUsersRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::PromoteGroupUsersRequest* request,
@@ -3871,12 +4426,37 @@ class Nakama final {
     virtual void PromoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::PromoteGroupUsersRequest* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_DemoteGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_DemoteGroupUsers() {
+      ::grpc::Service::experimental().MarkMethodCallback(51,
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::DemoteGroupUsersRequest, ::google::protobuf::Empty>(
+          [this](::grpc::ServerContext* context,
+                 const ::nakama::api::DemoteGroupUsersRequest* request,
+                 ::google::protobuf::Empty* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->DemoteGroupUsers(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_DemoteGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DemoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void DemoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_ReadStorageObjects : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_ReadStorageObjects() {
-      ::grpc::Service::experimental().MarkMethodCallback(45,
+      ::grpc::Service::experimental().MarkMethodCallback(52,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::ReadStorageObjectsRequest, ::nakama::api::StorageObjects>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::ReadStorageObjectsRequest* request,
@@ -3901,7 +4481,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_RpcFunc() {
-      ::grpc::Service::experimental().MarkMethodCallback(46,
+      ::grpc::Service::experimental().MarkMethodCallback(53,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::Rpc, ::nakama::api::Rpc>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::Rpc* request,
@@ -3921,12 +4501,37 @@ class Nakama final {
     virtual void RpcFunc(::grpc::ServerContext* context, const ::nakama::api::Rpc* request, ::nakama::api::Rpc* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_UnlinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_UnlinkApple() {
+      ::grpc::Service::experimental().MarkMethodCallback(54,
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountApple, ::google::protobuf::Empty>(
+          [this](::grpc::ServerContext* context,
+                 const ::nakama::api::AccountApple* request,
+                 ::google::protobuf::Empty* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->UnlinkApple(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_UnlinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UnlinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void UnlinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_UnlinkCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_UnlinkCustom() {
-      ::grpc::Service::experimental().MarkMethodCallback(47,
+      ::grpc::Service::experimental().MarkMethodCallback(55,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountCustom, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountCustom* request,
@@ -3951,7 +4556,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_UnlinkDevice() {
-      ::grpc::Service::experimental().MarkMethodCallback(48,
+      ::grpc::Service::experimental().MarkMethodCallback(56,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountDevice, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountDevice* request,
@@ -3976,7 +4581,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_UnlinkEmail() {
-      ::grpc::Service::experimental().MarkMethodCallback(49,
+      ::grpc::Service::experimental().MarkMethodCallback(57,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountEmail, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountEmail* request,
@@ -4001,7 +4606,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_UnlinkFacebook() {
-      ::grpc::Service::experimental().MarkMethodCallback(50,
+      ::grpc::Service::experimental().MarkMethodCallback(58,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountFacebook, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountFacebook* request,
@@ -4021,12 +4626,37 @@ class Nakama final {
     virtual void UnlinkFacebook(::grpc::ServerContext* context, const ::nakama::api::AccountFacebook* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_UnlinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_UnlinkFacebookInstantGame() {
+      ::grpc::Service::experimental().MarkMethodCallback(59,
+        new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountFacebookInstantGame, ::google::protobuf::Empty>(
+          [this](::grpc::ServerContext* context,
+                 const ::nakama::api::AccountFacebookInstantGame* request,
+                 ::google::protobuf::Empty* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->UnlinkFacebookInstantGame(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_UnlinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UnlinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void UnlinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_UnlinkGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_UnlinkGameCenter() {
-      ::grpc::Service::experimental().MarkMethodCallback(51,
+      ::grpc::Service::experimental().MarkMethodCallback(60,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountGameCenter, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountGameCenter* request,
@@ -4051,7 +4681,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_UnlinkGoogle() {
-      ::grpc::Service::experimental().MarkMethodCallback(52,
+      ::grpc::Service::experimental().MarkMethodCallback(61,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountGoogle, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountGoogle* request,
@@ -4076,7 +4706,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_UnlinkSteam() {
-      ::grpc::Service::experimental().MarkMethodCallback(53,
+      ::grpc::Service::experimental().MarkMethodCallback(62,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::AccountSteam, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::AccountSteam* request,
@@ -4101,7 +4731,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_UpdateAccount() {
-      ::grpc::Service::experimental().MarkMethodCallback(54,
+      ::grpc::Service::experimental().MarkMethodCallback(63,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::UpdateAccountRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::UpdateAccountRequest* request,
@@ -4126,7 +4756,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_UpdateGroup() {
-      ::grpc::Service::experimental().MarkMethodCallback(55,
+      ::grpc::Service::experimental().MarkMethodCallback(64,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::UpdateGroupRequest, ::google::protobuf::Empty>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::UpdateGroupRequest* request,
@@ -4151,7 +4781,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_WriteLeaderboardRecord() {
-      ::grpc::Service::experimental().MarkMethodCallback(56,
+      ::grpc::Service::experimental().MarkMethodCallback(65,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::WriteLeaderboardRecordRequest, ::nakama::api::LeaderboardRecord>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::WriteLeaderboardRecordRequest* request,
@@ -4176,7 +4806,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_WriteStorageObjects() {
-      ::grpc::Service::experimental().MarkMethodCallback(57,
+      ::grpc::Service::experimental().MarkMethodCallback(66,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::WriteStorageObjectsRequest, ::nakama::api::StorageObjectAcks>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::WriteStorageObjectsRequest* request,
@@ -4201,7 +4831,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_WriteTournamentRecord() {
-      ::grpc::Service::experimental().MarkMethodCallback(58,
+      ::grpc::Service::experimental().MarkMethodCallback(67,
         new ::grpc::internal::CallbackUnaryHandler< ::nakama::api::WriteTournamentRecordRequest, ::nakama::api::LeaderboardRecord>(
           [this](::grpc::ServerContext* context,
                  const ::nakama::api::WriteTournamentRecordRequest* request,
@@ -4220,7 +4850,7 @@ class Nakama final {
     }
     virtual void WriteTournamentRecord(::grpc::ServerContext* context, const ::nakama::api::WriteTournamentRecordRequest* request, ::nakama::api::LeaderboardRecord* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
-  typedef ExperimentalWithCallbackMethod_AddFriends<ExperimentalWithCallbackMethod_AddGroupUsers<ExperimentalWithCallbackMethod_AuthenticateCustom<ExperimentalWithCallbackMethod_AuthenticateDevice<ExperimentalWithCallbackMethod_AuthenticateEmail<ExperimentalWithCallbackMethod_AuthenticateFacebook<ExperimentalWithCallbackMethod_AuthenticateGameCenter<ExperimentalWithCallbackMethod_AuthenticateGoogle<ExperimentalWithCallbackMethod_AuthenticateSteam<ExperimentalWithCallbackMethod_BlockFriends<ExperimentalWithCallbackMethod_CreateGroup<ExperimentalWithCallbackMethod_DeleteFriends<ExperimentalWithCallbackMethod_DeleteGroup<ExperimentalWithCallbackMethod_DeleteLeaderboardRecord<ExperimentalWithCallbackMethod_DeleteNotifications<ExperimentalWithCallbackMethod_DeleteStorageObjects<ExperimentalWithCallbackMethod_GetAccount<ExperimentalWithCallbackMethod_GetUsers<ExperimentalWithCallbackMethod_Healthcheck<ExperimentalWithCallbackMethod_ImportFacebookFriends<ExperimentalWithCallbackMethod_JoinGroup<ExperimentalWithCallbackMethod_JoinTournament<ExperimentalWithCallbackMethod_KickGroupUsers<ExperimentalWithCallbackMethod_LeaveGroup<ExperimentalWithCallbackMethod_LinkCustom<ExperimentalWithCallbackMethod_LinkDevice<ExperimentalWithCallbackMethod_LinkEmail<ExperimentalWithCallbackMethod_LinkFacebook<ExperimentalWithCallbackMethod_LinkGameCenter<ExperimentalWithCallbackMethod_LinkGoogle<ExperimentalWithCallbackMethod_LinkSteam<ExperimentalWithCallbackMethod_ListChannelMessages<ExperimentalWithCallbackMethod_ListFriends<ExperimentalWithCallbackMethod_ListGroups<ExperimentalWithCallbackMethod_ListGroupUsers<ExperimentalWithCallbackMethod_ListLeaderboardRecords<ExperimentalWithCallbackMethod_ListLeaderboardRecordsAroundOwner<ExperimentalWithCallbackMethod_ListMatches<ExperimentalWithCallbackMethod_ListNotifications<ExperimentalWithCallbackMethod_ListStorageObjects<ExperimentalWithCallbackMethod_ListTournaments<ExperimentalWithCallbackMethod_ListTournamentRecords<ExperimentalWithCallbackMethod_ListTournamentRecordsAroundOwner<ExperimentalWithCallbackMethod_ListUserGroups<ExperimentalWithCallbackMethod_PromoteGroupUsers<ExperimentalWithCallbackMethod_ReadStorageObjects<ExperimentalWithCallbackMethod_RpcFunc<ExperimentalWithCallbackMethod_UnlinkCustom<ExperimentalWithCallbackMethod_UnlinkDevice<ExperimentalWithCallbackMethod_UnlinkEmail<ExperimentalWithCallbackMethod_UnlinkFacebook<ExperimentalWithCallbackMethod_UnlinkGameCenter<ExperimentalWithCallbackMethod_UnlinkGoogle<ExperimentalWithCallbackMethod_UnlinkSteam<ExperimentalWithCallbackMethod_UpdateAccount<ExperimentalWithCallbackMethod_UpdateGroup<ExperimentalWithCallbackMethod_WriteLeaderboardRecord<ExperimentalWithCallbackMethod_WriteStorageObjects<ExperimentalWithCallbackMethod_WriteTournamentRecord<Service > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > ExperimentalCallbackService;
+  typedef ExperimentalWithCallbackMethod_AddFriends<ExperimentalWithCallbackMethod_AddGroupUsers<ExperimentalWithCallbackMethod_AuthenticateApple<ExperimentalWithCallbackMethod_AuthenticateCustom<ExperimentalWithCallbackMethod_AuthenticateDevice<ExperimentalWithCallbackMethod_AuthenticateEmail<ExperimentalWithCallbackMethod_AuthenticateFacebook<ExperimentalWithCallbackMethod_AuthenticateFacebookInstantGame<ExperimentalWithCallbackMethod_AuthenticateGameCenter<ExperimentalWithCallbackMethod_AuthenticateGoogle<ExperimentalWithCallbackMethod_AuthenticateSteam<ExperimentalWithCallbackMethod_BanGroupUsers<ExperimentalWithCallbackMethod_BlockFriends<ExperimentalWithCallbackMethod_CreateGroup<ExperimentalWithCallbackMethod_DeleteFriends<ExperimentalWithCallbackMethod_DeleteGroup<ExperimentalWithCallbackMethod_DeleteLeaderboardRecord<ExperimentalWithCallbackMethod_DeleteNotifications<ExperimentalWithCallbackMethod_DeleteStorageObjects<ExperimentalWithCallbackMethod_Event<ExperimentalWithCallbackMethod_GetAccount<ExperimentalWithCallbackMethod_GetUsers<ExperimentalWithCallbackMethod_Healthcheck<ExperimentalWithCallbackMethod_ImportFacebookFriends<ExperimentalWithCallbackMethod_JoinGroup<ExperimentalWithCallbackMethod_JoinTournament<ExperimentalWithCallbackMethod_KickGroupUsers<ExperimentalWithCallbackMethod_LeaveGroup<ExperimentalWithCallbackMethod_LinkApple<ExperimentalWithCallbackMethod_LinkCustom<ExperimentalWithCallbackMethod_LinkDevice<ExperimentalWithCallbackMethod_LinkEmail<ExperimentalWithCallbackMethod_LinkFacebook<ExperimentalWithCallbackMethod_LinkFacebookInstantGame<ExperimentalWithCallbackMethod_LinkGameCenter<ExperimentalWithCallbackMethod_LinkGoogle<ExperimentalWithCallbackMethod_LinkSteam<ExperimentalWithCallbackMethod_ListChannelMessages<ExperimentalWithCallbackMethod_ListFriends<ExperimentalWithCallbackMethod_ListGroups<ExperimentalWithCallbackMethod_ListGroupUsers<ExperimentalWithCallbackMethod_ListLeaderboardRecords<ExperimentalWithCallbackMethod_ListLeaderboardRecordsAroundOwner<ExperimentalWithCallbackMethod_ListMatches<ExperimentalWithCallbackMethod_ListNotifications<ExperimentalWithCallbackMethod_ListStorageObjects<ExperimentalWithCallbackMethod_ListTournaments<ExperimentalWithCallbackMethod_ListTournamentRecords<ExperimentalWithCallbackMethod_ListTournamentRecordsAroundOwner<ExperimentalWithCallbackMethod_ListUserGroups<ExperimentalWithCallbackMethod_PromoteGroupUsers<ExperimentalWithCallbackMethod_DemoteGroupUsers<ExperimentalWithCallbackMethod_ReadStorageObjects<ExperimentalWithCallbackMethod_RpcFunc<ExperimentalWithCallbackMethod_UnlinkApple<ExperimentalWithCallbackMethod_UnlinkCustom<ExperimentalWithCallbackMethod_UnlinkDevice<ExperimentalWithCallbackMethod_UnlinkEmail<ExperimentalWithCallbackMethod_UnlinkFacebook<ExperimentalWithCallbackMethod_UnlinkFacebookInstantGame<ExperimentalWithCallbackMethod_UnlinkGameCenter<ExperimentalWithCallbackMethod_UnlinkGoogle<ExperimentalWithCallbackMethod_UnlinkSteam<ExperimentalWithCallbackMethod_UpdateAccount<ExperimentalWithCallbackMethod_UpdateGroup<ExperimentalWithCallbackMethod_WriteLeaderboardRecord<ExperimentalWithCallbackMethod_WriteStorageObjects<ExperimentalWithCallbackMethod_WriteTournamentRecord<Service > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_AddFriends : public BaseClass {
    private:
@@ -4256,12 +4886,29 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_AuthenticateApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_AuthenticateApple() {
+      ::grpc::Service::MarkMethodGeneric(2);
+    }
+    ~WithGenericMethod_AuthenticateApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AuthenticateApple(::grpc::ServerContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_AuthenticateCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AuthenticateCustom() {
-      ::grpc::Service::MarkMethodGeneric(2);
+      ::grpc::Service::MarkMethodGeneric(3);
     }
     ~WithGenericMethod_AuthenticateCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4278,7 +4925,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AuthenticateDevice() {
-      ::grpc::Service::MarkMethodGeneric(3);
+      ::grpc::Service::MarkMethodGeneric(4);
     }
     ~WithGenericMethod_AuthenticateDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4295,7 +4942,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AuthenticateEmail() {
-      ::grpc::Service::MarkMethodGeneric(4);
+      ::grpc::Service::MarkMethodGeneric(5);
     }
     ~WithGenericMethod_AuthenticateEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4312,7 +4959,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AuthenticateFacebook() {
-      ::grpc::Service::MarkMethodGeneric(5);
+      ::grpc::Service::MarkMethodGeneric(6);
     }
     ~WithGenericMethod_AuthenticateFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4324,12 +4971,29 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_AuthenticateFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_AuthenticateFacebookInstantGame() {
+      ::grpc::Service::MarkMethodGeneric(7);
+    }
+    ~WithGenericMethod_AuthenticateFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AuthenticateFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_AuthenticateGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AuthenticateGameCenter() {
-      ::grpc::Service::MarkMethodGeneric(6);
+      ::grpc::Service::MarkMethodGeneric(8);
     }
     ~WithGenericMethod_AuthenticateGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4346,7 +5010,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AuthenticateGoogle() {
-      ::grpc::Service::MarkMethodGeneric(7);
+      ::grpc::Service::MarkMethodGeneric(9);
     }
     ~WithGenericMethod_AuthenticateGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4363,7 +5027,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AuthenticateSteam() {
-      ::grpc::Service::MarkMethodGeneric(8);
+      ::grpc::Service::MarkMethodGeneric(10);
     }
     ~WithGenericMethod_AuthenticateSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4375,12 +5039,29 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_BanGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_BanGroupUsers() {
+      ::grpc::Service::MarkMethodGeneric(11);
+    }
+    ~WithGenericMethod_BanGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status BanGroupUsers(::grpc::ServerContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_BlockFriends : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_BlockFriends() {
-      ::grpc::Service::MarkMethodGeneric(9);
+      ::grpc::Service::MarkMethodGeneric(12);
     }
     ~WithGenericMethod_BlockFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4397,7 +5078,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_CreateGroup() {
-      ::grpc::Service::MarkMethodGeneric(10);
+      ::grpc::Service::MarkMethodGeneric(13);
     }
     ~WithGenericMethod_CreateGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4414,7 +5095,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_DeleteFriends() {
-      ::grpc::Service::MarkMethodGeneric(11);
+      ::grpc::Service::MarkMethodGeneric(14);
     }
     ~WithGenericMethod_DeleteFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4431,7 +5112,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_DeleteGroup() {
-      ::grpc::Service::MarkMethodGeneric(12);
+      ::grpc::Service::MarkMethodGeneric(15);
     }
     ~WithGenericMethod_DeleteGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4448,7 +5129,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_DeleteLeaderboardRecord() {
-      ::grpc::Service::MarkMethodGeneric(13);
+      ::grpc::Service::MarkMethodGeneric(16);
     }
     ~WithGenericMethod_DeleteLeaderboardRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4465,7 +5146,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_DeleteNotifications() {
-      ::grpc::Service::MarkMethodGeneric(14);
+      ::grpc::Service::MarkMethodGeneric(17);
     }
     ~WithGenericMethod_DeleteNotifications() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4482,7 +5163,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_DeleteStorageObjects() {
-      ::grpc::Service::MarkMethodGeneric(15);
+      ::grpc::Service::MarkMethodGeneric(18);
     }
     ~WithGenericMethod_DeleteStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4494,12 +5175,29 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_Event : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_Event() {
+      ::grpc::Service::MarkMethodGeneric(19);
+    }
+    ~WithGenericMethod_Event() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Event(::grpc::ServerContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_GetAccount : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_GetAccount() {
-      ::grpc::Service::MarkMethodGeneric(16);
+      ::grpc::Service::MarkMethodGeneric(20);
     }
     ~WithGenericMethod_GetAccount() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4516,7 +5214,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_GetUsers() {
-      ::grpc::Service::MarkMethodGeneric(17);
+      ::grpc::Service::MarkMethodGeneric(21);
     }
     ~WithGenericMethod_GetUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4533,7 +5231,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_Healthcheck() {
-      ::grpc::Service::MarkMethodGeneric(18);
+      ::grpc::Service::MarkMethodGeneric(22);
     }
     ~WithGenericMethod_Healthcheck() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4550,7 +5248,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ImportFacebookFriends() {
-      ::grpc::Service::MarkMethodGeneric(19);
+      ::grpc::Service::MarkMethodGeneric(23);
     }
     ~WithGenericMethod_ImportFacebookFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4567,7 +5265,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_JoinGroup() {
-      ::grpc::Service::MarkMethodGeneric(20);
+      ::grpc::Service::MarkMethodGeneric(24);
     }
     ~WithGenericMethod_JoinGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4584,7 +5282,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_JoinTournament() {
-      ::grpc::Service::MarkMethodGeneric(21);
+      ::grpc::Service::MarkMethodGeneric(25);
     }
     ~WithGenericMethod_JoinTournament() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4601,7 +5299,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_KickGroupUsers() {
-      ::grpc::Service::MarkMethodGeneric(22);
+      ::grpc::Service::MarkMethodGeneric(26);
     }
     ~WithGenericMethod_KickGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4618,7 +5316,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_LeaveGroup() {
-      ::grpc::Service::MarkMethodGeneric(23);
+      ::grpc::Service::MarkMethodGeneric(27);
     }
     ~WithGenericMethod_LeaveGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4630,12 +5328,29 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_LinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_LinkApple() {
+      ::grpc::Service::MarkMethodGeneric(28);
+    }
+    ~WithGenericMethod_LinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status LinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_LinkCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_LinkCustom() {
-      ::grpc::Service::MarkMethodGeneric(24);
+      ::grpc::Service::MarkMethodGeneric(29);
     }
     ~WithGenericMethod_LinkCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4652,7 +5367,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_LinkDevice() {
-      ::grpc::Service::MarkMethodGeneric(25);
+      ::grpc::Service::MarkMethodGeneric(30);
     }
     ~WithGenericMethod_LinkDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4669,7 +5384,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_LinkEmail() {
-      ::grpc::Service::MarkMethodGeneric(26);
+      ::grpc::Service::MarkMethodGeneric(31);
     }
     ~WithGenericMethod_LinkEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4686,7 +5401,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_LinkFacebook() {
-      ::grpc::Service::MarkMethodGeneric(27);
+      ::grpc::Service::MarkMethodGeneric(32);
     }
     ~WithGenericMethod_LinkFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4698,12 +5413,29 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_LinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_LinkFacebookInstantGame() {
+      ::grpc::Service::MarkMethodGeneric(33);
+    }
+    ~WithGenericMethod_LinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status LinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_LinkGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_LinkGameCenter() {
-      ::grpc::Service::MarkMethodGeneric(28);
+      ::grpc::Service::MarkMethodGeneric(34);
     }
     ~WithGenericMethod_LinkGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4720,7 +5452,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_LinkGoogle() {
-      ::grpc::Service::MarkMethodGeneric(29);
+      ::grpc::Service::MarkMethodGeneric(35);
     }
     ~WithGenericMethod_LinkGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4737,7 +5469,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_LinkSteam() {
-      ::grpc::Service::MarkMethodGeneric(30);
+      ::grpc::Service::MarkMethodGeneric(36);
     }
     ~WithGenericMethod_LinkSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4754,7 +5486,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListChannelMessages() {
-      ::grpc::Service::MarkMethodGeneric(31);
+      ::grpc::Service::MarkMethodGeneric(37);
     }
     ~WithGenericMethod_ListChannelMessages() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4771,7 +5503,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListFriends() {
-      ::grpc::Service::MarkMethodGeneric(32);
+      ::grpc::Service::MarkMethodGeneric(38);
     }
     ~WithGenericMethod_ListFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4788,7 +5520,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListGroups() {
-      ::grpc::Service::MarkMethodGeneric(33);
+      ::grpc::Service::MarkMethodGeneric(39);
     }
     ~WithGenericMethod_ListGroups() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4805,7 +5537,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListGroupUsers() {
-      ::grpc::Service::MarkMethodGeneric(34);
+      ::grpc::Service::MarkMethodGeneric(40);
     }
     ~WithGenericMethod_ListGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4822,7 +5554,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListLeaderboardRecords() {
-      ::grpc::Service::MarkMethodGeneric(35);
+      ::grpc::Service::MarkMethodGeneric(41);
     }
     ~WithGenericMethod_ListLeaderboardRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4839,7 +5571,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListLeaderboardRecordsAroundOwner() {
-      ::grpc::Service::MarkMethodGeneric(36);
+      ::grpc::Service::MarkMethodGeneric(42);
     }
     ~WithGenericMethod_ListLeaderboardRecordsAroundOwner() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4856,7 +5588,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListMatches() {
-      ::grpc::Service::MarkMethodGeneric(37);
+      ::grpc::Service::MarkMethodGeneric(43);
     }
     ~WithGenericMethod_ListMatches() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4873,7 +5605,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListNotifications() {
-      ::grpc::Service::MarkMethodGeneric(38);
+      ::grpc::Service::MarkMethodGeneric(44);
     }
     ~WithGenericMethod_ListNotifications() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4890,7 +5622,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListStorageObjects() {
-      ::grpc::Service::MarkMethodGeneric(39);
+      ::grpc::Service::MarkMethodGeneric(45);
     }
     ~WithGenericMethod_ListStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4907,7 +5639,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListTournaments() {
-      ::grpc::Service::MarkMethodGeneric(40);
+      ::grpc::Service::MarkMethodGeneric(46);
     }
     ~WithGenericMethod_ListTournaments() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4924,7 +5656,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListTournamentRecords() {
-      ::grpc::Service::MarkMethodGeneric(41);
+      ::grpc::Service::MarkMethodGeneric(47);
     }
     ~WithGenericMethod_ListTournamentRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4941,7 +5673,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListTournamentRecordsAroundOwner() {
-      ::grpc::Service::MarkMethodGeneric(42);
+      ::grpc::Service::MarkMethodGeneric(48);
     }
     ~WithGenericMethod_ListTournamentRecordsAroundOwner() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4958,7 +5690,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ListUserGroups() {
-      ::grpc::Service::MarkMethodGeneric(43);
+      ::grpc::Service::MarkMethodGeneric(49);
     }
     ~WithGenericMethod_ListUserGroups() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4975,7 +5707,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_PromoteGroupUsers() {
-      ::grpc::Service::MarkMethodGeneric(44);
+      ::grpc::Service::MarkMethodGeneric(50);
     }
     ~WithGenericMethod_PromoteGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -4987,12 +5719,29 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_DemoteGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_DemoteGroupUsers() {
+      ::grpc::Service::MarkMethodGeneric(51);
+    }
+    ~WithGenericMethod_DemoteGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DemoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_ReadStorageObjects : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_ReadStorageObjects() {
-      ::grpc::Service::MarkMethodGeneric(45);
+      ::grpc::Service::MarkMethodGeneric(52);
     }
     ~WithGenericMethod_ReadStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5009,7 +5758,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_RpcFunc() {
-      ::grpc::Service::MarkMethodGeneric(46);
+      ::grpc::Service::MarkMethodGeneric(53);
     }
     ~WithGenericMethod_RpcFunc() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5021,12 +5770,29 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_UnlinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_UnlinkApple() {
+      ::grpc::Service::MarkMethodGeneric(54);
+    }
+    ~WithGenericMethod_UnlinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UnlinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_UnlinkCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UnlinkCustom() {
-      ::grpc::Service::MarkMethodGeneric(47);
+      ::grpc::Service::MarkMethodGeneric(55);
     }
     ~WithGenericMethod_UnlinkCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5043,7 +5809,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UnlinkDevice() {
-      ::grpc::Service::MarkMethodGeneric(48);
+      ::grpc::Service::MarkMethodGeneric(56);
     }
     ~WithGenericMethod_UnlinkDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5060,7 +5826,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UnlinkEmail() {
-      ::grpc::Service::MarkMethodGeneric(49);
+      ::grpc::Service::MarkMethodGeneric(57);
     }
     ~WithGenericMethod_UnlinkEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5077,7 +5843,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UnlinkFacebook() {
-      ::grpc::Service::MarkMethodGeneric(50);
+      ::grpc::Service::MarkMethodGeneric(58);
     }
     ~WithGenericMethod_UnlinkFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5089,12 +5855,29 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_UnlinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_UnlinkFacebookInstantGame() {
+      ::grpc::Service::MarkMethodGeneric(59);
+    }
+    ~WithGenericMethod_UnlinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UnlinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_UnlinkGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UnlinkGameCenter() {
-      ::grpc::Service::MarkMethodGeneric(51);
+      ::grpc::Service::MarkMethodGeneric(60);
     }
     ~WithGenericMethod_UnlinkGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5111,7 +5894,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UnlinkGoogle() {
-      ::grpc::Service::MarkMethodGeneric(52);
+      ::grpc::Service::MarkMethodGeneric(61);
     }
     ~WithGenericMethod_UnlinkGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5128,7 +5911,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UnlinkSteam() {
-      ::grpc::Service::MarkMethodGeneric(53);
+      ::grpc::Service::MarkMethodGeneric(62);
     }
     ~WithGenericMethod_UnlinkSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5145,7 +5928,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UpdateAccount() {
-      ::grpc::Service::MarkMethodGeneric(54);
+      ::grpc::Service::MarkMethodGeneric(63);
     }
     ~WithGenericMethod_UpdateAccount() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5162,7 +5945,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UpdateGroup() {
-      ::grpc::Service::MarkMethodGeneric(55);
+      ::grpc::Service::MarkMethodGeneric(64);
     }
     ~WithGenericMethod_UpdateGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5179,7 +5962,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_WriteLeaderboardRecord() {
-      ::grpc::Service::MarkMethodGeneric(56);
+      ::grpc::Service::MarkMethodGeneric(65);
     }
     ~WithGenericMethod_WriteLeaderboardRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5196,7 +5979,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_WriteStorageObjects() {
-      ::grpc::Service::MarkMethodGeneric(57);
+      ::grpc::Service::MarkMethodGeneric(66);
     }
     ~WithGenericMethod_WriteStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5213,7 +5996,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_WriteTournamentRecord() {
-      ::grpc::Service::MarkMethodGeneric(58);
+      ::grpc::Service::MarkMethodGeneric(67);
     }
     ~WithGenericMethod_WriteTournamentRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5265,12 +6048,32 @@ class Nakama final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_AuthenticateApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_AuthenticateApple() {
+      ::grpc::Service::MarkMethodRaw(2);
+    }
+    ~WithRawMethod_AuthenticateApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AuthenticateApple(::grpc::ServerContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestAuthenticateApple(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawMethod_AuthenticateCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_AuthenticateCustom() {
-      ::grpc::Service::MarkMethodRaw(2);
+      ::grpc::Service::MarkMethodRaw(3);
     }
     ~WithRawMethod_AuthenticateCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5281,7 +6084,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateCustom(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5290,7 +6093,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_AuthenticateDevice() {
-      ::grpc::Service::MarkMethodRaw(3);
+      ::grpc::Service::MarkMethodRaw(4);
     }
     ~WithRawMethod_AuthenticateDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5301,7 +6104,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateDevice(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5310,7 +6113,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_AuthenticateEmail() {
-      ::grpc::Service::MarkMethodRaw(4);
+      ::grpc::Service::MarkMethodRaw(5);
     }
     ~WithRawMethod_AuthenticateEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5321,7 +6124,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateEmail(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5330,7 +6133,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_AuthenticateFacebook() {
-      ::grpc::Service::MarkMethodRaw(5);
+      ::grpc::Service::MarkMethodRaw(6);
     }
     ~WithRawMethod_AuthenticateFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5341,7 +6144,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateFacebook(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_AuthenticateFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_AuthenticateFacebookInstantGame() {
+      ::grpc::Service::MarkMethodRaw(7);
+    }
+    ~WithRawMethod_AuthenticateFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AuthenticateFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestAuthenticateFacebookInstantGame(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5350,7 +6173,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_AuthenticateGameCenter() {
-      ::grpc::Service::MarkMethodRaw(6);
+      ::grpc::Service::MarkMethodRaw(8);
     }
     ~WithRawMethod_AuthenticateGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5361,7 +6184,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateGameCenter(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(8, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5370,7 +6193,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_AuthenticateGoogle() {
-      ::grpc::Service::MarkMethodRaw(7);
+      ::grpc::Service::MarkMethodRaw(9);
     }
     ~WithRawMethod_AuthenticateGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5381,7 +6204,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateGoogle(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(9, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5390,7 +6213,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_AuthenticateSteam() {
-      ::grpc::Service::MarkMethodRaw(8);
+      ::grpc::Service::MarkMethodRaw(10);
     }
     ~WithRawMethod_AuthenticateSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5401,7 +6224,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAuthenticateSteam(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(8, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(10, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_BanGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_BanGroupUsers() {
+      ::grpc::Service::MarkMethodRaw(11);
+    }
+    ~WithRawMethod_BanGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status BanGroupUsers(::grpc::ServerContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestBanGroupUsers(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(11, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5410,7 +6253,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_BlockFriends() {
-      ::grpc::Service::MarkMethodRaw(9);
+      ::grpc::Service::MarkMethodRaw(12);
     }
     ~WithRawMethod_BlockFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5421,7 +6264,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestBlockFriends(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(9, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(12, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5430,7 +6273,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_CreateGroup() {
-      ::grpc::Service::MarkMethodRaw(10);
+      ::grpc::Service::MarkMethodRaw(13);
     }
     ~WithRawMethod_CreateGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5441,7 +6284,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCreateGroup(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(10, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(13, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5450,7 +6293,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_DeleteFriends() {
-      ::grpc::Service::MarkMethodRaw(11);
+      ::grpc::Service::MarkMethodRaw(14);
     }
     ~WithRawMethod_DeleteFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5461,7 +6304,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeleteFriends(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(11, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(14, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5470,7 +6313,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_DeleteGroup() {
-      ::grpc::Service::MarkMethodRaw(12);
+      ::grpc::Service::MarkMethodRaw(15);
     }
     ~WithRawMethod_DeleteGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5481,7 +6324,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeleteGroup(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(12, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(15, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5490,7 +6333,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_DeleteLeaderboardRecord() {
-      ::grpc::Service::MarkMethodRaw(13);
+      ::grpc::Service::MarkMethodRaw(16);
     }
     ~WithRawMethod_DeleteLeaderboardRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5501,7 +6344,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeleteLeaderboardRecord(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(13, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(16, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5510,7 +6353,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_DeleteNotifications() {
-      ::grpc::Service::MarkMethodRaw(14);
+      ::grpc::Service::MarkMethodRaw(17);
     }
     ~WithRawMethod_DeleteNotifications() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5521,7 +6364,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeleteNotifications(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(14, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(17, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5530,7 +6373,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_DeleteStorageObjects() {
-      ::grpc::Service::MarkMethodRaw(15);
+      ::grpc::Service::MarkMethodRaw(18);
     }
     ~WithRawMethod_DeleteStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5541,7 +6384,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeleteStorageObjects(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(15, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(18, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_Event : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_Event() {
+      ::grpc::Service::MarkMethodRaw(19);
+    }
+    ~WithRawMethod_Event() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Event(::grpc::ServerContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestEvent(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(19, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5550,7 +6413,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_GetAccount() {
-      ::grpc::Service::MarkMethodRaw(16);
+      ::grpc::Service::MarkMethodRaw(20);
     }
     ~WithRawMethod_GetAccount() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5561,7 +6424,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetAccount(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(16, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(20, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5570,7 +6433,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_GetUsers() {
-      ::grpc::Service::MarkMethodRaw(17);
+      ::grpc::Service::MarkMethodRaw(21);
     }
     ~WithRawMethod_GetUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5581,7 +6444,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestGetUsers(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(17, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(21, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5590,7 +6453,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_Healthcheck() {
-      ::grpc::Service::MarkMethodRaw(18);
+      ::grpc::Service::MarkMethodRaw(22);
     }
     ~WithRawMethod_Healthcheck() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5601,7 +6464,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestHealthcheck(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(18, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(22, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5610,7 +6473,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ImportFacebookFriends() {
-      ::grpc::Service::MarkMethodRaw(19);
+      ::grpc::Service::MarkMethodRaw(23);
     }
     ~WithRawMethod_ImportFacebookFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5621,7 +6484,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestImportFacebookFriends(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(19, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(23, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5630,7 +6493,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_JoinGroup() {
-      ::grpc::Service::MarkMethodRaw(20);
+      ::grpc::Service::MarkMethodRaw(24);
     }
     ~WithRawMethod_JoinGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5641,7 +6504,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestJoinGroup(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(20, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(24, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5650,7 +6513,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_JoinTournament() {
-      ::grpc::Service::MarkMethodRaw(21);
+      ::grpc::Service::MarkMethodRaw(25);
     }
     ~WithRawMethod_JoinTournament() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5661,7 +6524,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestJoinTournament(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(21, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(25, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5670,7 +6533,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_KickGroupUsers() {
-      ::grpc::Service::MarkMethodRaw(22);
+      ::grpc::Service::MarkMethodRaw(26);
     }
     ~WithRawMethod_KickGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5681,7 +6544,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestKickGroupUsers(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(22, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(26, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5690,7 +6553,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_LeaveGroup() {
-      ::grpc::Service::MarkMethodRaw(23);
+      ::grpc::Service::MarkMethodRaw(27);
     }
     ~WithRawMethod_LeaveGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5701,7 +6564,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLeaveGroup(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(23, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(27, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_LinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_LinkApple() {
+      ::grpc::Service::MarkMethodRaw(28);
+    }
+    ~WithRawMethod_LinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status LinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestLinkApple(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(28, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5710,7 +6593,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_LinkCustom() {
-      ::grpc::Service::MarkMethodRaw(24);
+      ::grpc::Service::MarkMethodRaw(29);
     }
     ~WithRawMethod_LinkCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5721,7 +6604,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkCustom(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(24, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(29, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5730,7 +6613,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_LinkDevice() {
-      ::grpc::Service::MarkMethodRaw(25);
+      ::grpc::Service::MarkMethodRaw(30);
     }
     ~WithRawMethod_LinkDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5741,7 +6624,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkDevice(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(25, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(30, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5750,7 +6633,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_LinkEmail() {
-      ::grpc::Service::MarkMethodRaw(26);
+      ::grpc::Service::MarkMethodRaw(31);
     }
     ~WithRawMethod_LinkEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5761,7 +6644,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkEmail(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(26, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(31, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5770,7 +6653,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_LinkFacebook() {
-      ::grpc::Service::MarkMethodRaw(27);
+      ::grpc::Service::MarkMethodRaw(32);
     }
     ~WithRawMethod_LinkFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5781,7 +6664,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkFacebook(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(27, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(32, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_LinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_LinkFacebookInstantGame() {
+      ::grpc::Service::MarkMethodRaw(33);
+    }
+    ~WithRawMethod_LinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status LinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestLinkFacebookInstantGame(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(33, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5790,7 +6693,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_LinkGameCenter() {
-      ::grpc::Service::MarkMethodRaw(28);
+      ::grpc::Service::MarkMethodRaw(34);
     }
     ~WithRawMethod_LinkGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5801,7 +6704,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkGameCenter(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(28, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(34, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5810,7 +6713,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_LinkGoogle() {
-      ::grpc::Service::MarkMethodRaw(29);
+      ::grpc::Service::MarkMethodRaw(35);
     }
     ~WithRawMethod_LinkGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5821,7 +6724,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkGoogle(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(29, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(35, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5830,7 +6733,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_LinkSteam() {
-      ::grpc::Service::MarkMethodRaw(30);
+      ::grpc::Service::MarkMethodRaw(36);
     }
     ~WithRawMethod_LinkSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5841,7 +6744,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestLinkSteam(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(30, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(36, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5850,7 +6753,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListChannelMessages() {
-      ::grpc::Service::MarkMethodRaw(31);
+      ::grpc::Service::MarkMethodRaw(37);
     }
     ~WithRawMethod_ListChannelMessages() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5861,7 +6764,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListChannelMessages(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(31, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(37, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5870,7 +6773,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListFriends() {
-      ::grpc::Service::MarkMethodRaw(32);
+      ::grpc::Service::MarkMethodRaw(38);
     }
     ~WithRawMethod_ListFriends() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5881,7 +6784,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListFriends(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(32, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(38, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5890,7 +6793,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListGroups() {
-      ::grpc::Service::MarkMethodRaw(33);
+      ::grpc::Service::MarkMethodRaw(39);
     }
     ~WithRawMethod_ListGroups() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5901,7 +6804,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListGroups(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(33, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(39, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5910,7 +6813,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListGroupUsers() {
-      ::grpc::Service::MarkMethodRaw(34);
+      ::grpc::Service::MarkMethodRaw(40);
     }
     ~WithRawMethod_ListGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5921,7 +6824,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListGroupUsers(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(34, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(40, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5930,7 +6833,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListLeaderboardRecords() {
-      ::grpc::Service::MarkMethodRaw(35);
+      ::grpc::Service::MarkMethodRaw(41);
     }
     ~WithRawMethod_ListLeaderboardRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5941,7 +6844,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListLeaderboardRecords(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(35, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(41, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5950,7 +6853,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListLeaderboardRecordsAroundOwner() {
-      ::grpc::Service::MarkMethodRaw(36);
+      ::grpc::Service::MarkMethodRaw(42);
     }
     ~WithRawMethod_ListLeaderboardRecordsAroundOwner() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5961,7 +6864,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListLeaderboardRecordsAroundOwner(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(36, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(42, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5970,7 +6873,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListMatches() {
-      ::grpc::Service::MarkMethodRaw(37);
+      ::grpc::Service::MarkMethodRaw(43);
     }
     ~WithRawMethod_ListMatches() override {
       BaseClassMustBeDerivedFromService(this);
@@ -5981,7 +6884,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListMatches(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(37, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(43, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -5990,7 +6893,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListNotifications() {
-      ::grpc::Service::MarkMethodRaw(38);
+      ::grpc::Service::MarkMethodRaw(44);
     }
     ~WithRawMethod_ListNotifications() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6001,7 +6904,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListNotifications(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(38, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(44, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6010,7 +6913,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListStorageObjects() {
-      ::grpc::Service::MarkMethodRaw(39);
+      ::grpc::Service::MarkMethodRaw(45);
     }
     ~WithRawMethod_ListStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6021,7 +6924,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListStorageObjects(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(39, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(45, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6030,7 +6933,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListTournaments() {
-      ::grpc::Service::MarkMethodRaw(40);
+      ::grpc::Service::MarkMethodRaw(46);
     }
     ~WithRawMethod_ListTournaments() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6041,7 +6944,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListTournaments(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(40, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(46, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6050,7 +6953,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListTournamentRecords() {
-      ::grpc::Service::MarkMethodRaw(41);
+      ::grpc::Service::MarkMethodRaw(47);
     }
     ~WithRawMethod_ListTournamentRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6061,7 +6964,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListTournamentRecords(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(41, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(47, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6070,7 +6973,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListTournamentRecordsAroundOwner() {
-      ::grpc::Service::MarkMethodRaw(42);
+      ::grpc::Service::MarkMethodRaw(48);
     }
     ~WithRawMethod_ListTournamentRecordsAroundOwner() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6081,7 +6984,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListTournamentRecordsAroundOwner(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(42, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(48, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6090,7 +6993,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ListUserGroups() {
-      ::grpc::Service::MarkMethodRaw(43);
+      ::grpc::Service::MarkMethodRaw(49);
     }
     ~WithRawMethod_ListUserGroups() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6101,7 +7004,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestListUserGroups(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(43, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(49, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6110,7 +7013,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_PromoteGroupUsers() {
-      ::grpc::Service::MarkMethodRaw(44);
+      ::grpc::Service::MarkMethodRaw(50);
     }
     ~WithRawMethod_PromoteGroupUsers() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6121,7 +7024,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestPromoteGroupUsers(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(44, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(50, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_DemoteGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_DemoteGroupUsers() {
+      ::grpc::Service::MarkMethodRaw(51);
+    }
+    ~WithRawMethod_DemoteGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DemoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDemoteGroupUsers(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(51, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6130,7 +7053,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_ReadStorageObjects() {
-      ::grpc::Service::MarkMethodRaw(45);
+      ::grpc::Service::MarkMethodRaw(52);
     }
     ~WithRawMethod_ReadStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6141,7 +7064,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestReadStorageObjects(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(45, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(52, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6150,7 +7073,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_RpcFunc() {
-      ::grpc::Service::MarkMethodRaw(46);
+      ::grpc::Service::MarkMethodRaw(53);
     }
     ~WithRawMethod_RpcFunc() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6161,7 +7084,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestRpcFunc(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(46, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(53, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_UnlinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_UnlinkApple() {
+      ::grpc::Service::MarkMethodRaw(54);
+    }
+    ~WithRawMethod_UnlinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UnlinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestUnlinkApple(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(54, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6170,7 +7113,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_UnlinkCustom() {
-      ::grpc::Service::MarkMethodRaw(47);
+      ::grpc::Service::MarkMethodRaw(55);
     }
     ~WithRawMethod_UnlinkCustom() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6181,7 +7124,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkCustom(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(47, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(55, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6190,7 +7133,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_UnlinkDevice() {
-      ::grpc::Service::MarkMethodRaw(48);
+      ::grpc::Service::MarkMethodRaw(56);
     }
     ~WithRawMethod_UnlinkDevice() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6201,7 +7144,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkDevice(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(48, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(56, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6210,7 +7153,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_UnlinkEmail() {
-      ::grpc::Service::MarkMethodRaw(49);
+      ::grpc::Service::MarkMethodRaw(57);
     }
     ~WithRawMethod_UnlinkEmail() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6221,7 +7164,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkEmail(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(49, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(57, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6230,7 +7173,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_UnlinkFacebook() {
-      ::grpc::Service::MarkMethodRaw(50);
+      ::grpc::Service::MarkMethodRaw(58);
     }
     ~WithRawMethod_UnlinkFacebook() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6241,7 +7184,27 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkFacebook(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(50, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(58, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_UnlinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_UnlinkFacebookInstantGame() {
+      ::grpc::Service::MarkMethodRaw(59);
+    }
+    ~WithRawMethod_UnlinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UnlinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestUnlinkFacebookInstantGame(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(59, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6250,7 +7213,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_UnlinkGameCenter() {
-      ::grpc::Service::MarkMethodRaw(51);
+      ::grpc::Service::MarkMethodRaw(60);
     }
     ~WithRawMethod_UnlinkGameCenter() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6261,7 +7224,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkGameCenter(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(51, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(60, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6270,7 +7233,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_UnlinkGoogle() {
-      ::grpc::Service::MarkMethodRaw(52);
+      ::grpc::Service::MarkMethodRaw(61);
     }
     ~WithRawMethod_UnlinkGoogle() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6281,7 +7244,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkGoogle(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(52, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(61, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6290,7 +7253,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_UnlinkSteam() {
-      ::grpc::Service::MarkMethodRaw(53);
+      ::grpc::Service::MarkMethodRaw(62);
     }
     ~WithRawMethod_UnlinkSteam() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6301,7 +7264,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUnlinkSteam(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(53, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(62, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6310,7 +7273,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_UpdateAccount() {
-      ::grpc::Service::MarkMethodRaw(54);
+      ::grpc::Service::MarkMethodRaw(63);
     }
     ~WithRawMethod_UpdateAccount() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6321,7 +7284,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUpdateAccount(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(54, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(63, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6330,7 +7293,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_UpdateGroup() {
-      ::grpc::Service::MarkMethodRaw(55);
+      ::grpc::Service::MarkMethodRaw(64);
     }
     ~WithRawMethod_UpdateGroup() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6341,7 +7304,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestUpdateGroup(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(55, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(64, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6350,7 +7313,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_WriteLeaderboardRecord() {
-      ::grpc::Service::MarkMethodRaw(56);
+      ::grpc::Service::MarkMethodRaw(65);
     }
     ~WithRawMethod_WriteLeaderboardRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6361,7 +7324,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestWriteLeaderboardRecord(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(56, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(65, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6370,7 +7333,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_WriteStorageObjects() {
-      ::grpc::Service::MarkMethodRaw(57);
+      ::grpc::Service::MarkMethodRaw(66);
     }
     ~WithRawMethod_WriteStorageObjects() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6381,7 +7344,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestWriteStorageObjects(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(57, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(66, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6390,7 +7353,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_WriteTournamentRecord() {
-      ::grpc::Service::MarkMethodRaw(58);
+      ::grpc::Service::MarkMethodRaw(67);
     }
     ~WithRawMethod_WriteTournamentRecord() override {
       BaseClassMustBeDerivedFromService(this);
@@ -6401,7 +7364,7 @@ class Nakama final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestWriteTournamentRecord(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(58, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(67, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -6455,12 +7418,37 @@ class Nakama final {
     virtual void AddGroupUsers(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_AuthenticateApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_AuthenticateApple() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(2,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->AuthenticateApple(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_AuthenticateApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AuthenticateApple(::grpc::ServerContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void AuthenticateApple(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_AuthenticateCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateCustom() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(2,
+      ::grpc::Service::experimental().MarkMethodRawCallback(3,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6485,7 +7473,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateDevice() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(3,
+      ::grpc::Service::experimental().MarkMethodRawCallback(4,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6510,7 +7498,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateEmail() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(4,
+      ::grpc::Service::experimental().MarkMethodRawCallback(5,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6535,7 +7523,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateFacebook() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(5,
+      ::grpc::Service::experimental().MarkMethodRawCallback(6,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6555,12 +7543,37 @@ class Nakama final {
     virtual void AuthenticateFacebook(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_AuthenticateFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_AuthenticateFacebookInstantGame() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(7,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->AuthenticateFacebookInstantGame(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_AuthenticateFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AuthenticateFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void AuthenticateFacebookInstantGame(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_AuthenticateGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateGameCenter() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(6,
+      ::grpc::Service::experimental().MarkMethodRawCallback(8,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6585,7 +7598,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateGoogle() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(7,
+      ::grpc::Service::experimental().MarkMethodRawCallback(9,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6610,7 +7623,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_AuthenticateSteam() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(8,
+      ::grpc::Service::experimental().MarkMethodRawCallback(10,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6630,12 +7643,37 @@ class Nakama final {
     virtual void AuthenticateSteam(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_BanGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_BanGroupUsers() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(11,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->BanGroupUsers(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_BanGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status BanGroupUsers(::grpc::ServerContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void BanGroupUsers(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_BlockFriends : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_BlockFriends() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(9,
+      ::grpc::Service::experimental().MarkMethodRawCallback(12,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6660,7 +7698,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_CreateGroup() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(10,
+      ::grpc::Service::experimental().MarkMethodRawCallback(13,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6685,7 +7723,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_DeleteFriends() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(11,
+      ::grpc::Service::experimental().MarkMethodRawCallback(14,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6710,7 +7748,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_DeleteGroup() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(12,
+      ::grpc::Service::experimental().MarkMethodRawCallback(15,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6735,7 +7773,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_DeleteLeaderboardRecord() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(13,
+      ::grpc::Service::experimental().MarkMethodRawCallback(16,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6760,7 +7798,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_DeleteNotifications() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(14,
+      ::grpc::Service::experimental().MarkMethodRawCallback(17,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6785,7 +7823,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_DeleteStorageObjects() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(15,
+      ::grpc::Service::experimental().MarkMethodRawCallback(18,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6805,12 +7843,37 @@ class Nakama final {
     virtual void DeleteStorageObjects(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_Event : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_Event() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(19,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->Event(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_Event() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Event(::grpc::ServerContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void Event(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_GetAccount : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_GetAccount() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(16,
+      ::grpc::Service::experimental().MarkMethodRawCallback(20,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6835,7 +7898,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_GetUsers() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(17,
+      ::grpc::Service::experimental().MarkMethodRawCallback(21,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6860,7 +7923,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_Healthcheck() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(18,
+      ::grpc::Service::experimental().MarkMethodRawCallback(22,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6885,7 +7948,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ImportFacebookFriends() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(19,
+      ::grpc::Service::experimental().MarkMethodRawCallback(23,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6910,7 +7973,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_JoinGroup() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(20,
+      ::grpc::Service::experimental().MarkMethodRawCallback(24,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6935,7 +7998,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_JoinTournament() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(21,
+      ::grpc::Service::experimental().MarkMethodRawCallback(25,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6960,7 +8023,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_KickGroupUsers() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(22,
+      ::grpc::Service::experimental().MarkMethodRawCallback(26,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -6985,7 +8048,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_LeaveGroup() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(23,
+      ::grpc::Service::experimental().MarkMethodRawCallback(27,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7005,12 +8068,37 @@ class Nakama final {
     virtual void LeaveGroup(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_LinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_LinkApple() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(28,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->LinkApple(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_LinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status LinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void LinkApple(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_LinkCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_LinkCustom() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(24,
+      ::grpc::Service::experimental().MarkMethodRawCallback(29,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7035,7 +8123,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_LinkDevice() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(25,
+      ::grpc::Service::experimental().MarkMethodRawCallback(30,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7060,7 +8148,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_LinkEmail() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(26,
+      ::grpc::Service::experimental().MarkMethodRawCallback(31,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7085,7 +8173,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_LinkFacebook() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(27,
+      ::grpc::Service::experimental().MarkMethodRawCallback(32,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7105,12 +8193,37 @@ class Nakama final {
     virtual void LinkFacebook(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_LinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_LinkFacebookInstantGame() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(33,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->LinkFacebookInstantGame(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_LinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status LinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void LinkFacebookInstantGame(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_LinkGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_LinkGameCenter() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(28,
+      ::grpc::Service::experimental().MarkMethodRawCallback(34,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7135,7 +8248,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_LinkGoogle() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(29,
+      ::grpc::Service::experimental().MarkMethodRawCallback(35,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7160,7 +8273,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_LinkSteam() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(30,
+      ::grpc::Service::experimental().MarkMethodRawCallback(36,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7185,7 +8298,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListChannelMessages() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(31,
+      ::grpc::Service::experimental().MarkMethodRawCallback(37,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7210,7 +8323,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListFriends() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(32,
+      ::grpc::Service::experimental().MarkMethodRawCallback(38,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7235,7 +8348,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListGroups() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(33,
+      ::grpc::Service::experimental().MarkMethodRawCallback(39,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7260,7 +8373,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListGroupUsers() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(34,
+      ::grpc::Service::experimental().MarkMethodRawCallback(40,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7285,7 +8398,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListLeaderboardRecords() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(35,
+      ::grpc::Service::experimental().MarkMethodRawCallback(41,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7310,7 +8423,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListLeaderboardRecordsAroundOwner() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(36,
+      ::grpc::Service::experimental().MarkMethodRawCallback(42,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7335,7 +8448,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListMatches() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(37,
+      ::grpc::Service::experimental().MarkMethodRawCallback(43,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7360,7 +8473,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListNotifications() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(38,
+      ::grpc::Service::experimental().MarkMethodRawCallback(44,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7385,7 +8498,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListStorageObjects() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(39,
+      ::grpc::Service::experimental().MarkMethodRawCallback(45,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7410,7 +8523,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListTournaments() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(40,
+      ::grpc::Service::experimental().MarkMethodRawCallback(46,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7435,7 +8548,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListTournamentRecords() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(41,
+      ::grpc::Service::experimental().MarkMethodRawCallback(47,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7460,7 +8573,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListTournamentRecordsAroundOwner() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(42,
+      ::grpc::Service::experimental().MarkMethodRawCallback(48,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7485,7 +8598,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ListUserGroups() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(43,
+      ::grpc::Service::experimental().MarkMethodRawCallback(49,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7510,7 +8623,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_PromoteGroupUsers() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(44,
+      ::grpc::Service::experimental().MarkMethodRawCallback(50,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7530,12 +8643,37 @@ class Nakama final {
     virtual void PromoteGroupUsers(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_DemoteGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_DemoteGroupUsers() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(51,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->DemoteGroupUsers(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_DemoteGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DemoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void DemoteGroupUsers(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_ReadStorageObjects : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_ReadStorageObjects() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(45,
+      ::grpc::Service::experimental().MarkMethodRawCallback(52,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7560,7 +8698,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_RpcFunc() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(46,
+      ::grpc::Service::experimental().MarkMethodRawCallback(53,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7580,12 +8718,37 @@ class Nakama final {
     virtual void RpcFunc(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_UnlinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_UnlinkApple() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(54,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->UnlinkApple(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_UnlinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UnlinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void UnlinkApple(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_UnlinkCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_UnlinkCustom() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(47,
+      ::grpc::Service::experimental().MarkMethodRawCallback(55,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7610,7 +8773,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_UnlinkDevice() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(48,
+      ::grpc::Service::experimental().MarkMethodRawCallback(56,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7635,7 +8798,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_UnlinkEmail() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(49,
+      ::grpc::Service::experimental().MarkMethodRawCallback(57,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7660,7 +8823,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_UnlinkFacebook() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(50,
+      ::grpc::Service::experimental().MarkMethodRawCallback(58,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7680,12 +8843,37 @@ class Nakama final {
     virtual void UnlinkFacebook(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_UnlinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_UnlinkFacebookInstantGame() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(59,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->UnlinkFacebookInstantGame(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_UnlinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UnlinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void UnlinkFacebookInstantGame(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_UnlinkGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_UnlinkGameCenter() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(51,
+      ::grpc::Service::experimental().MarkMethodRawCallback(60,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7710,7 +8898,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_UnlinkGoogle() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(52,
+      ::grpc::Service::experimental().MarkMethodRawCallback(61,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7735,7 +8923,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_UnlinkSteam() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(53,
+      ::grpc::Service::experimental().MarkMethodRawCallback(62,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7760,7 +8948,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_UpdateAccount() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(54,
+      ::grpc::Service::experimental().MarkMethodRawCallback(63,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7785,7 +8973,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_UpdateGroup() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(55,
+      ::grpc::Service::experimental().MarkMethodRawCallback(64,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7810,7 +8998,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_WriteLeaderboardRecord() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(56,
+      ::grpc::Service::experimental().MarkMethodRawCallback(65,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7835,7 +9023,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_WriteStorageObjects() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(57,
+      ::grpc::Service::experimental().MarkMethodRawCallback(66,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7860,7 +9048,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_WriteTournamentRecord() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(58,
+      ::grpc::Service::experimental().MarkMethodRawCallback(67,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -7920,12 +9108,32 @@ class Nakama final {
     virtual ::grpc::Status StreamedAddGroupUsers(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::AddGroupUsersRequest,::google::protobuf::Empty>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_AuthenticateApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_AuthenticateApple() {
+      ::grpc::Service::MarkMethodStreamed(2,
+        new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AuthenticateAppleRequest, ::nakama::api::Session>(std::bind(&WithStreamedUnaryMethod_AuthenticateApple<BaseClass>::StreamedAuthenticateApple, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_AuthenticateApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status AuthenticateApple(::grpc::ServerContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedAuthenticateApple(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::AuthenticateAppleRequest,::nakama::api::Session>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_AuthenticateCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_AuthenticateCustom() {
-      ::grpc::Service::MarkMethodStreamed(2,
+      ::grpc::Service::MarkMethodStreamed(3,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AuthenticateCustomRequest, ::nakama::api::Session>(std::bind(&WithStreamedUnaryMethod_AuthenticateCustom<BaseClass>::StreamedAuthenticateCustom, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_AuthenticateCustom() override {
@@ -7945,7 +9153,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_AuthenticateDevice() {
-      ::grpc::Service::MarkMethodStreamed(3,
+      ::grpc::Service::MarkMethodStreamed(4,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AuthenticateDeviceRequest, ::nakama::api::Session>(std::bind(&WithStreamedUnaryMethod_AuthenticateDevice<BaseClass>::StreamedAuthenticateDevice, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_AuthenticateDevice() override {
@@ -7965,7 +9173,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_AuthenticateEmail() {
-      ::grpc::Service::MarkMethodStreamed(4,
+      ::grpc::Service::MarkMethodStreamed(5,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AuthenticateEmailRequest, ::nakama::api::Session>(std::bind(&WithStreamedUnaryMethod_AuthenticateEmail<BaseClass>::StreamedAuthenticateEmail, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_AuthenticateEmail() override {
@@ -7985,7 +9193,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_AuthenticateFacebook() {
-      ::grpc::Service::MarkMethodStreamed(5,
+      ::grpc::Service::MarkMethodStreamed(6,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AuthenticateFacebookRequest, ::nakama::api::Session>(std::bind(&WithStreamedUnaryMethod_AuthenticateFacebook<BaseClass>::StreamedAuthenticateFacebook, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_AuthenticateFacebook() override {
@@ -8000,12 +9208,32 @@ class Nakama final {
     virtual ::grpc::Status StreamedAuthenticateFacebook(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::AuthenticateFacebookRequest,::nakama::api::Session>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_AuthenticateFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_AuthenticateFacebookInstantGame() {
+      ::grpc::Service::MarkMethodStreamed(7,
+        new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AuthenticateFacebookInstantGameRequest, ::nakama::api::Session>(std::bind(&WithStreamedUnaryMethod_AuthenticateFacebookInstantGame<BaseClass>::StreamedAuthenticateFacebookInstantGame, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_AuthenticateFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status AuthenticateFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedAuthenticateFacebookInstantGame(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::AuthenticateFacebookInstantGameRequest,::nakama::api::Session>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_AuthenticateGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_AuthenticateGameCenter() {
-      ::grpc::Service::MarkMethodStreamed(6,
+      ::grpc::Service::MarkMethodStreamed(8,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AuthenticateGameCenterRequest, ::nakama::api::Session>(std::bind(&WithStreamedUnaryMethod_AuthenticateGameCenter<BaseClass>::StreamedAuthenticateGameCenter, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_AuthenticateGameCenter() override {
@@ -8025,7 +9253,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_AuthenticateGoogle() {
-      ::grpc::Service::MarkMethodStreamed(7,
+      ::grpc::Service::MarkMethodStreamed(9,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AuthenticateGoogleRequest, ::nakama::api::Session>(std::bind(&WithStreamedUnaryMethod_AuthenticateGoogle<BaseClass>::StreamedAuthenticateGoogle, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_AuthenticateGoogle() override {
@@ -8045,7 +9273,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_AuthenticateSteam() {
-      ::grpc::Service::MarkMethodStreamed(8,
+      ::grpc::Service::MarkMethodStreamed(10,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AuthenticateSteamRequest, ::nakama::api::Session>(std::bind(&WithStreamedUnaryMethod_AuthenticateSteam<BaseClass>::StreamedAuthenticateSteam, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_AuthenticateSteam() override {
@@ -8060,12 +9288,32 @@ class Nakama final {
     virtual ::grpc::Status StreamedAuthenticateSteam(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::AuthenticateSteamRequest,::nakama::api::Session>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_BanGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_BanGroupUsers() {
+      ::grpc::Service::MarkMethodStreamed(11,
+        new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::BanGroupUsersRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_BanGroupUsers<BaseClass>::StreamedBanGroupUsers, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_BanGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status BanGroupUsers(::grpc::ServerContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedBanGroupUsers(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::BanGroupUsersRequest,::google::protobuf::Empty>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_BlockFriends : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_BlockFriends() {
-      ::grpc::Service::MarkMethodStreamed(9,
+      ::grpc::Service::MarkMethodStreamed(12,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::BlockFriendsRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_BlockFriends<BaseClass>::StreamedBlockFriends, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_BlockFriends() override {
@@ -8085,7 +9333,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_CreateGroup() {
-      ::grpc::Service::MarkMethodStreamed(10,
+      ::grpc::Service::MarkMethodStreamed(13,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::CreateGroupRequest, ::nakama::api::Group>(std::bind(&WithStreamedUnaryMethod_CreateGroup<BaseClass>::StreamedCreateGroup, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_CreateGroup() override {
@@ -8105,7 +9353,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_DeleteFriends() {
-      ::grpc::Service::MarkMethodStreamed(11,
+      ::grpc::Service::MarkMethodStreamed(14,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::DeleteFriendsRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_DeleteFriends<BaseClass>::StreamedDeleteFriends, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_DeleteFriends() override {
@@ -8125,7 +9373,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_DeleteGroup() {
-      ::grpc::Service::MarkMethodStreamed(12,
+      ::grpc::Service::MarkMethodStreamed(15,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::DeleteGroupRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_DeleteGroup<BaseClass>::StreamedDeleteGroup, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_DeleteGroup() override {
@@ -8145,7 +9393,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_DeleteLeaderboardRecord() {
-      ::grpc::Service::MarkMethodStreamed(13,
+      ::grpc::Service::MarkMethodStreamed(16,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::DeleteLeaderboardRecordRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_DeleteLeaderboardRecord<BaseClass>::StreamedDeleteLeaderboardRecord, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_DeleteLeaderboardRecord() override {
@@ -8165,7 +9413,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_DeleteNotifications() {
-      ::grpc::Service::MarkMethodStreamed(14,
+      ::grpc::Service::MarkMethodStreamed(17,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::DeleteNotificationsRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_DeleteNotifications<BaseClass>::StreamedDeleteNotifications, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_DeleteNotifications() override {
@@ -8185,7 +9433,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_DeleteStorageObjects() {
-      ::grpc::Service::MarkMethodStreamed(15,
+      ::grpc::Service::MarkMethodStreamed(18,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::DeleteStorageObjectsRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_DeleteStorageObjects<BaseClass>::StreamedDeleteStorageObjects, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_DeleteStorageObjects() override {
@@ -8200,12 +9448,32 @@ class Nakama final {
     virtual ::grpc::Status StreamedDeleteStorageObjects(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::DeleteStorageObjectsRequest,::google::protobuf::Empty>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_Event : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_Event() {
+      ::grpc::Service::MarkMethodStreamed(19,
+        new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::Event, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_Event<BaseClass>::StreamedEvent, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_Event() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status Event(::grpc::ServerContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedEvent(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::Event,::google::protobuf::Empty>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_GetAccount : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_GetAccount() {
-      ::grpc::Service::MarkMethodStreamed(16,
+      ::grpc::Service::MarkMethodStreamed(20,
         new ::grpc::internal::StreamedUnaryHandler< ::google::protobuf::Empty, ::nakama::api::Account>(std::bind(&WithStreamedUnaryMethod_GetAccount<BaseClass>::StreamedGetAccount, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_GetAccount() override {
@@ -8225,7 +9493,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_GetUsers() {
-      ::grpc::Service::MarkMethodStreamed(17,
+      ::grpc::Service::MarkMethodStreamed(21,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::GetUsersRequest, ::nakama::api::Users>(std::bind(&WithStreamedUnaryMethod_GetUsers<BaseClass>::StreamedGetUsers, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_GetUsers() override {
@@ -8245,7 +9513,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_Healthcheck() {
-      ::grpc::Service::MarkMethodStreamed(18,
+      ::grpc::Service::MarkMethodStreamed(22,
         new ::grpc::internal::StreamedUnaryHandler< ::google::protobuf::Empty, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_Healthcheck<BaseClass>::StreamedHealthcheck, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_Healthcheck() override {
@@ -8265,7 +9533,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ImportFacebookFriends() {
-      ::grpc::Service::MarkMethodStreamed(19,
+      ::grpc::Service::MarkMethodStreamed(23,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ImportFacebookFriendsRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_ImportFacebookFriends<BaseClass>::StreamedImportFacebookFriends, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ImportFacebookFriends() override {
@@ -8285,7 +9553,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_JoinGroup() {
-      ::grpc::Service::MarkMethodStreamed(20,
+      ::grpc::Service::MarkMethodStreamed(24,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::JoinGroupRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_JoinGroup<BaseClass>::StreamedJoinGroup, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_JoinGroup() override {
@@ -8305,7 +9573,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_JoinTournament() {
-      ::grpc::Service::MarkMethodStreamed(21,
+      ::grpc::Service::MarkMethodStreamed(25,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::JoinTournamentRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_JoinTournament<BaseClass>::StreamedJoinTournament, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_JoinTournament() override {
@@ -8325,7 +9593,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_KickGroupUsers() {
-      ::grpc::Service::MarkMethodStreamed(22,
+      ::grpc::Service::MarkMethodStreamed(26,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::KickGroupUsersRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_KickGroupUsers<BaseClass>::StreamedKickGroupUsers, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_KickGroupUsers() override {
@@ -8345,7 +9613,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_LeaveGroup() {
-      ::grpc::Service::MarkMethodStreamed(23,
+      ::grpc::Service::MarkMethodStreamed(27,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::LeaveGroupRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_LeaveGroup<BaseClass>::StreamedLeaveGroup, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_LeaveGroup() override {
@@ -8360,12 +9628,32 @@ class Nakama final {
     virtual ::grpc::Status StreamedLeaveGroup(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::LeaveGroupRequest,::google::protobuf::Empty>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_LinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_LinkApple() {
+      ::grpc::Service::MarkMethodStreamed(28,
+        new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountApple, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_LinkApple<BaseClass>::StreamedLinkApple, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_LinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status LinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedLinkApple(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::AccountApple,::google::protobuf::Empty>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_LinkCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_LinkCustom() {
-      ::grpc::Service::MarkMethodStreamed(24,
+      ::grpc::Service::MarkMethodStreamed(29,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountCustom, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_LinkCustom<BaseClass>::StreamedLinkCustom, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_LinkCustom() override {
@@ -8385,7 +9673,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_LinkDevice() {
-      ::grpc::Service::MarkMethodStreamed(25,
+      ::grpc::Service::MarkMethodStreamed(30,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountDevice, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_LinkDevice<BaseClass>::StreamedLinkDevice, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_LinkDevice() override {
@@ -8405,7 +9693,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_LinkEmail() {
-      ::grpc::Service::MarkMethodStreamed(26,
+      ::grpc::Service::MarkMethodStreamed(31,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountEmail, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_LinkEmail<BaseClass>::StreamedLinkEmail, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_LinkEmail() override {
@@ -8425,7 +9713,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_LinkFacebook() {
-      ::grpc::Service::MarkMethodStreamed(27,
+      ::grpc::Service::MarkMethodStreamed(32,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::LinkFacebookRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_LinkFacebook<BaseClass>::StreamedLinkFacebook, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_LinkFacebook() override {
@@ -8440,12 +9728,32 @@ class Nakama final {
     virtual ::grpc::Status StreamedLinkFacebook(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::LinkFacebookRequest,::google::protobuf::Empty>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_LinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_LinkFacebookInstantGame() {
+      ::grpc::Service::MarkMethodStreamed(33,
+        new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountFacebookInstantGame, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_LinkFacebookInstantGame<BaseClass>::StreamedLinkFacebookInstantGame, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_LinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status LinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedLinkFacebookInstantGame(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::AccountFacebookInstantGame,::google::protobuf::Empty>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_LinkGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_LinkGameCenter() {
-      ::grpc::Service::MarkMethodStreamed(28,
+      ::grpc::Service::MarkMethodStreamed(34,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountGameCenter, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_LinkGameCenter<BaseClass>::StreamedLinkGameCenter, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_LinkGameCenter() override {
@@ -8465,7 +9773,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_LinkGoogle() {
-      ::grpc::Service::MarkMethodStreamed(29,
+      ::grpc::Service::MarkMethodStreamed(35,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountGoogle, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_LinkGoogle<BaseClass>::StreamedLinkGoogle, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_LinkGoogle() override {
@@ -8485,7 +9793,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_LinkSteam() {
-      ::grpc::Service::MarkMethodStreamed(30,
+      ::grpc::Service::MarkMethodStreamed(36,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountSteam, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_LinkSteam<BaseClass>::StreamedLinkSteam, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_LinkSteam() override {
@@ -8505,7 +9813,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListChannelMessages() {
-      ::grpc::Service::MarkMethodStreamed(31,
+      ::grpc::Service::MarkMethodStreamed(37,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListChannelMessagesRequest, ::nakama::api::ChannelMessageList>(std::bind(&WithStreamedUnaryMethod_ListChannelMessages<BaseClass>::StreamedListChannelMessages, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListChannelMessages() override {
@@ -8525,7 +9833,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListFriends() {
-      ::grpc::Service::MarkMethodStreamed(32,
+      ::grpc::Service::MarkMethodStreamed(38,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListFriendsRequest, ::nakama::api::FriendList>(std::bind(&WithStreamedUnaryMethod_ListFriends<BaseClass>::StreamedListFriends, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListFriends() override {
@@ -8545,7 +9853,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListGroups() {
-      ::grpc::Service::MarkMethodStreamed(33,
+      ::grpc::Service::MarkMethodStreamed(39,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListGroupsRequest, ::nakama::api::GroupList>(std::bind(&WithStreamedUnaryMethod_ListGroups<BaseClass>::StreamedListGroups, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListGroups() override {
@@ -8565,7 +9873,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListGroupUsers() {
-      ::grpc::Service::MarkMethodStreamed(34,
+      ::grpc::Service::MarkMethodStreamed(40,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListGroupUsersRequest, ::nakama::api::GroupUserList>(std::bind(&WithStreamedUnaryMethod_ListGroupUsers<BaseClass>::StreamedListGroupUsers, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListGroupUsers() override {
@@ -8585,7 +9893,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListLeaderboardRecords() {
-      ::grpc::Service::MarkMethodStreamed(35,
+      ::grpc::Service::MarkMethodStreamed(41,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListLeaderboardRecordsRequest, ::nakama::api::LeaderboardRecordList>(std::bind(&WithStreamedUnaryMethod_ListLeaderboardRecords<BaseClass>::StreamedListLeaderboardRecords, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListLeaderboardRecords() override {
@@ -8605,7 +9913,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListLeaderboardRecordsAroundOwner() {
-      ::grpc::Service::MarkMethodStreamed(36,
+      ::grpc::Service::MarkMethodStreamed(42,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListLeaderboardRecordsAroundOwnerRequest, ::nakama::api::LeaderboardRecordList>(std::bind(&WithStreamedUnaryMethod_ListLeaderboardRecordsAroundOwner<BaseClass>::StreamedListLeaderboardRecordsAroundOwner, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListLeaderboardRecordsAroundOwner() override {
@@ -8625,7 +9933,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListMatches() {
-      ::grpc::Service::MarkMethodStreamed(37,
+      ::grpc::Service::MarkMethodStreamed(43,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListMatchesRequest, ::nakama::api::MatchList>(std::bind(&WithStreamedUnaryMethod_ListMatches<BaseClass>::StreamedListMatches, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListMatches() override {
@@ -8645,7 +9953,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListNotifications() {
-      ::grpc::Service::MarkMethodStreamed(38,
+      ::grpc::Service::MarkMethodStreamed(44,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListNotificationsRequest, ::nakama::api::NotificationList>(std::bind(&WithStreamedUnaryMethod_ListNotifications<BaseClass>::StreamedListNotifications, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListNotifications() override {
@@ -8665,7 +9973,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListStorageObjects() {
-      ::grpc::Service::MarkMethodStreamed(39,
+      ::grpc::Service::MarkMethodStreamed(45,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListStorageObjectsRequest, ::nakama::api::StorageObjectList>(std::bind(&WithStreamedUnaryMethod_ListStorageObjects<BaseClass>::StreamedListStorageObjects, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListStorageObjects() override {
@@ -8685,7 +9993,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListTournaments() {
-      ::grpc::Service::MarkMethodStreamed(40,
+      ::grpc::Service::MarkMethodStreamed(46,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListTournamentsRequest, ::nakama::api::TournamentList>(std::bind(&WithStreamedUnaryMethod_ListTournaments<BaseClass>::StreamedListTournaments, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListTournaments() override {
@@ -8705,7 +10013,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListTournamentRecords() {
-      ::grpc::Service::MarkMethodStreamed(41,
+      ::grpc::Service::MarkMethodStreamed(47,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListTournamentRecordsRequest, ::nakama::api::TournamentRecordList>(std::bind(&WithStreamedUnaryMethod_ListTournamentRecords<BaseClass>::StreamedListTournamentRecords, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListTournamentRecords() override {
@@ -8725,7 +10033,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListTournamentRecordsAroundOwner() {
-      ::grpc::Service::MarkMethodStreamed(42,
+      ::grpc::Service::MarkMethodStreamed(48,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListTournamentRecordsAroundOwnerRequest, ::nakama::api::TournamentRecordList>(std::bind(&WithStreamedUnaryMethod_ListTournamentRecordsAroundOwner<BaseClass>::StreamedListTournamentRecordsAroundOwner, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListTournamentRecordsAroundOwner() override {
@@ -8745,7 +10053,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ListUserGroups() {
-      ::grpc::Service::MarkMethodStreamed(43,
+      ::grpc::Service::MarkMethodStreamed(49,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ListUserGroupsRequest, ::nakama::api::UserGroupList>(std::bind(&WithStreamedUnaryMethod_ListUserGroups<BaseClass>::StreamedListUserGroups, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListUserGroups() override {
@@ -8765,7 +10073,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_PromoteGroupUsers() {
-      ::grpc::Service::MarkMethodStreamed(44,
+      ::grpc::Service::MarkMethodStreamed(50,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::PromoteGroupUsersRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_PromoteGroupUsers<BaseClass>::StreamedPromoteGroupUsers, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_PromoteGroupUsers() override {
@@ -8780,12 +10088,32 @@ class Nakama final {
     virtual ::grpc::Status StreamedPromoteGroupUsers(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::PromoteGroupUsersRequest,::google::protobuf::Empty>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_DemoteGroupUsers : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_DemoteGroupUsers() {
+      ::grpc::Service::MarkMethodStreamed(51,
+        new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::DemoteGroupUsersRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_DemoteGroupUsers<BaseClass>::StreamedDemoteGroupUsers, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_DemoteGroupUsers() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status DemoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedDemoteGroupUsers(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::DemoteGroupUsersRequest,::google::protobuf::Empty>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_ReadStorageObjects : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_ReadStorageObjects() {
-      ::grpc::Service::MarkMethodStreamed(45,
+      ::grpc::Service::MarkMethodStreamed(52,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::ReadStorageObjectsRequest, ::nakama::api::StorageObjects>(std::bind(&WithStreamedUnaryMethod_ReadStorageObjects<BaseClass>::StreamedReadStorageObjects, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ReadStorageObjects() override {
@@ -8805,7 +10133,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_RpcFunc() {
-      ::grpc::Service::MarkMethodStreamed(46,
+      ::grpc::Service::MarkMethodStreamed(53,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::Rpc, ::nakama::api::Rpc>(std::bind(&WithStreamedUnaryMethod_RpcFunc<BaseClass>::StreamedRpcFunc, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_RpcFunc() override {
@@ -8820,12 +10148,32 @@ class Nakama final {
     virtual ::grpc::Status StreamedRpcFunc(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::Rpc,::nakama::api::Rpc>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_UnlinkApple : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_UnlinkApple() {
+      ::grpc::Service::MarkMethodStreamed(54,
+        new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountApple, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UnlinkApple<BaseClass>::StreamedUnlinkApple, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_UnlinkApple() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status UnlinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedUnlinkApple(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::AccountApple,::google::protobuf::Empty>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_UnlinkCustom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_UnlinkCustom() {
-      ::grpc::Service::MarkMethodStreamed(47,
+      ::grpc::Service::MarkMethodStreamed(55,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountCustom, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UnlinkCustom<BaseClass>::StreamedUnlinkCustom, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_UnlinkCustom() override {
@@ -8845,7 +10193,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_UnlinkDevice() {
-      ::grpc::Service::MarkMethodStreamed(48,
+      ::grpc::Service::MarkMethodStreamed(56,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountDevice, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UnlinkDevice<BaseClass>::StreamedUnlinkDevice, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_UnlinkDevice() override {
@@ -8865,7 +10213,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_UnlinkEmail() {
-      ::grpc::Service::MarkMethodStreamed(49,
+      ::grpc::Service::MarkMethodStreamed(57,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountEmail, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UnlinkEmail<BaseClass>::StreamedUnlinkEmail, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_UnlinkEmail() override {
@@ -8885,7 +10233,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_UnlinkFacebook() {
-      ::grpc::Service::MarkMethodStreamed(50,
+      ::grpc::Service::MarkMethodStreamed(58,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountFacebook, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UnlinkFacebook<BaseClass>::StreamedUnlinkFacebook, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_UnlinkFacebook() override {
@@ -8900,12 +10248,32 @@ class Nakama final {
     virtual ::grpc::Status StreamedUnlinkFacebook(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::AccountFacebook,::google::protobuf::Empty>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_UnlinkFacebookInstantGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_UnlinkFacebookInstantGame() {
+      ::grpc::Service::MarkMethodStreamed(59,
+        new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountFacebookInstantGame, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UnlinkFacebookInstantGame<BaseClass>::StreamedUnlinkFacebookInstantGame, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_UnlinkFacebookInstantGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status UnlinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedUnlinkFacebookInstantGame(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::AccountFacebookInstantGame,::google::protobuf::Empty>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_UnlinkGameCenter : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_UnlinkGameCenter() {
-      ::grpc::Service::MarkMethodStreamed(51,
+      ::grpc::Service::MarkMethodStreamed(60,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountGameCenter, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UnlinkGameCenter<BaseClass>::StreamedUnlinkGameCenter, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_UnlinkGameCenter() override {
@@ -8925,7 +10293,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_UnlinkGoogle() {
-      ::grpc::Service::MarkMethodStreamed(52,
+      ::grpc::Service::MarkMethodStreamed(61,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountGoogle, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UnlinkGoogle<BaseClass>::StreamedUnlinkGoogle, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_UnlinkGoogle() override {
@@ -8945,7 +10313,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_UnlinkSteam() {
-      ::grpc::Service::MarkMethodStreamed(53,
+      ::grpc::Service::MarkMethodStreamed(62,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::AccountSteam, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UnlinkSteam<BaseClass>::StreamedUnlinkSteam, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_UnlinkSteam() override {
@@ -8965,7 +10333,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_UpdateAccount() {
-      ::grpc::Service::MarkMethodStreamed(54,
+      ::grpc::Service::MarkMethodStreamed(63,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::UpdateAccountRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UpdateAccount<BaseClass>::StreamedUpdateAccount, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_UpdateAccount() override {
@@ -8985,7 +10353,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_UpdateGroup() {
-      ::grpc::Service::MarkMethodStreamed(55,
+      ::grpc::Service::MarkMethodStreamed(64,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::UpdateGroupRequest, ::google::protobuf::Empty>(std::bind(&WithStreamedUnaryMethod_UpdateGroup<BaseClass>::StreamedUpdateGroup, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_UpdateGroup() override {
@@ -9005,7 +10373,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_WriteLeaderboardRecord() {
-      ::grpc::Service::MarkMethodStreamed(56,
+      ::grpc::Service::MarkMethodStreamed(65,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::WriteLeaderboardRecordRequest, ::nakama::api::LeaderboardRecord>(std::bind(&WithStreamedUnaryMethod_WriteLeaderboardRecord<BaseClass>::StreamedWriteLeaderboardRecord, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_WriteLeaderboardRecord() override {
@@ -9025,7 +10393,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_WriteStorageObjects() {
-      ::grpc::Service::MarkMethodStreamed(57,
+      ::grpc::Service::MarkMethodStreamed(66,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::WriteStorageObjectsRequest, ::nakama::api::StorageObjectAcks>(std::bind(&WithStreamedUnaryMethod_WriteStorageObjects<BaseClass>::StreamedWriteStorageObjects, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_WriteStorageObjects() override {
@@ -9045,7 +10413,7 @@ class Nakama final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_WriteTournamentRecord() {
-      ::grpc::Service::MarkMethodStreamed(58,
+      ::grpc::Service::MarkMethodStreamed(67,
         new ::grpc::internal::StreamedUnaryHandler< ::nakama::api::WriteTournamentRecordRequest, ::nakama::api::LeaderboardRecord>(std::bind(&WithStreamedUnaryMethod_WriteTournamentRecord<BaseClass>::StreamedWriteTournamentRecord, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_WriteTournamentRecord() override {
@@ -9059,9 +10427,9 @@ class Nakama final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedWriteTournamentRecord(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::nakama::api::WriteTournamentRecordRequest,::nakama::api::LeaderboardRecord>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_AddFriends<WithStreamedUnaryMethod_AddGroupUsers<WithStreamedUnaryMethod_AuthenticateCustom<WithStreamedUnaryMethod_AuthenticateDevice<WithStreamedUnaryMethod_AuthenticateEmail<WithStreamedUnaryMethod_AuthenticateFacebook<WithStreamedUnaryMethod_AuthenticateGameCenter<WithStreamedUnaryMethod_AuthenticateGoogle<WithStreamedUnaryMethod_AuthenticateSteam<WithStreamedUnaryMethod_BlockFriends<WithStreamedUnaryMethod_CreateGroup<WithStreamedUnaryMethod_DeleteFriends<WithStreamedUnaryMethod_DeleteGroup<WithStreamedUnaryMethod_DeleteLeaderboardRecord<WithStreamedUnaryMethod_DeleteNotifications<WithStreamedUnaryMethod_DeleteStorageObjects<WithStreamedUnaryMethod_GetAccount<WithStreamedUnaryMethod_GetUsers<WithStreamedUnaryMethod_Healthcheck<WithStreamedUnaryMethod_ImportFacebookFriends<WithStreamedUnaryMethod_JoinGroup<WithStreamedUnaryMethod_JoinTournament<WithStreamedUnaryMethod_KickGroupUsers<WithStreamedUnaryMethod_LeaveGroup<WithStreamedUnaryMethod_LinkCustom<WithStreamedUnaryMethod_LinkDevice<WithStreamedUnaryMethod_LinkEmail<WithStreamedUnaryMethod_LinkFacebook<WithStreamedUnaryMethod_LinkGameCenter<WithStreamedUnaryMethod_LinkGoogle<WithStreamedUnaryMethod_LinkSteam<WithStreamedUnaryMethod_ListChannelMessages<WithStreamedUnaryMethod_ListFriends<WithStreamedUnaryMethod_ListGroups<WithStreamedUnaryMethod_ListGroupUsers<WithStreamedUnaryMethod_ListLeaderboardRecords<WithStreamedUnaryMethod_ListLeaderboardRecordsAroundOwner<WithStreamedUnaryMethod_ListMatches<WithStreamedUnaryMethod_ListNotifications<WithStreamedUnaryMethod_ListStorageObjects<WithStreamedUnaryMethod_ListTournaments<WithStreamedUnaryMethod_ListTournamentRecords<WithStreamedUnaryMethod_ListTournamentRecordsAroundOwner<WithStreamedUnaryMethod_ListUserGroups<WithStreamedUnaryMethod_PromoteGroupUsers<WithStreamedUnaryMethod_ReadStorageObjects<WithStreamedUnaryMethod_RpcFunc<WithStreamedUnaryMethod_UnlinkCustom<WithStreamedUnaryMethod_UnlinkDevice<WithStreamedUnaryMethod_UnlinkEmail<WithStreamedUnaryMethod_UnlinkFacebook<WithStreamedUnaryMethod_UnlinkGameCenter<WithStreamedUnaryMethod_UnlinkGoogle<WithStreamedUnaryMethod_UnlinkSteam<WithStreamedUnaryMethod_UpdateAccount<WithStreamedUnaryMethod_UpdateGroup<WithStreamedUnaryMethod_WriteLeaderboardRecord<WithStreamedUnaryMethod_WriteStorageObjects<WithStreamedUnaryMethod_WriteTournamentRecord<Service > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_AddFriends<WithStreamedUnaryMethod_AddGroupUsers<WithStreamedUnaryMethod_AuthenticateApple<WithStreamedUnaryMethod_AuthenticateCustom<WithStreamedUnaryMethod_AuthenticateDevice<WithStreamedUnaryMethod_AuthenticateEmail<WithStreamedUnaryMethod_AuthenticateFacebook<WithStreamedUnaryMethod_AuthenticateFacebookInstantGame<WithStreamedUnaryMethod_AuthenticateGameCenter<WithStreamedUnaryMethod_AuthenticateGoogle<WithStreamedUnaryMethod_AuthenticateSteam<WithStreamedUnaryMethod_BanGroupUsers<WithStreamedUnaryMethod_BlockFriends<WithStreamedUnaryMethod_CreateGroup<WithStreamedUnaryMethod_DeleteFriends<WithStreamedUnaryMethod_DeleteGroup<WithStreamedUnaryMethod_DeleteLeaderboardRecord<WithStreamedUnaryMethod_DeleteNotifications<WithStreamedUnaryMethod_DeleteStorageObjects<WithStreamedUnaryMethod_Event<WithStreamedUnaryMethod_GetAccount<WithStreamedUnaryMethod_GetUsers<WithStreamedUnaryMethod_Healthcheck<WithStreamedUnaryMethod_ImportFacebookFriends<WithStreamedUnaryMethod_JoinGroup<WithStreamedUnaryMethod_JoinTournament<WithStreamedUnaryMethod_KickGroupUsers<WithStreamedUnaryMethod_LeaveGroup<WithStreamedUnaryMethod_LinkApple<WithStreamedUnaryMethod_LinkCustom<WithStreamedUnaryMethod_LinkDevice<WithStreamedUnaryMethod_LinkEmail<WithStreamedUnaryMethod_LinkFacebook<WithStreamedUnaryMethod_LinkFacebookInstantGame<WithStreamedUnaryMethod_LinkGameCenter<WithStreamedUnaryMethod_LinkGoogle<WithStreamedUnaryMethod_LinkSteam<WithStreamedUnaryMethod_ListChannelMessages<WithStreamedUnaryMethod_ListFriends<WithStreamedUnaryMethod_ListGroups<WithStreamedUnaryMethod_ListGroupUsers<WithStreamedUnaryMethod_ListLeaderboardRecords<WithStreamedUnaryMethod_ListLeaderboardRecordsAroundOwner<WithStreamedUnaryMethod_ListMatches<WithStreamedUnaryMethod_ListNotifications<WithStreamedUnaryMethod_ListStorageObjects<WithStreamedUnaryMethod_ListTournaments<WithStreamedUnaryMethod_ListTournamentRecords<WithStreamedUnaryMethod_ListTournamentRecordsAroundOwner<WithStreamedUnaryMethod_ListUserGroups<WithStreamedUnaryMethod_PromoteGroupUsers<WithStreamedUnaryMethod_DemoteGroupUsers<WithStreamedUnaryMethod_ReadStorageObjects<WithStreamedUnaryMethod_RpcFunc<WithStreamedUnaryMethod_UnlinkApple<WithStreamedUnaryMethod_UnlinkCustom<WithStreamedUnaryMethod_UnlinkDevice<WithStreamedUnaryMethod_UnlinkEmail<WithStreamedUnaryMethod_UnlinkFacebook<WithStreamedUnaryMethod_UnlinkFacebookInstantGame<WithStreamedUnaryMethod_UnlinkGameCenter<WithStreamedUnaryMethod_UnlinkGoogle<WithStreamedUnaryMethod_UnlinkSteam<WithStreamedUnaryMethod_UpdateAccount<WithStreamedUnaryMethod_UpdateGroup<WithStreamedUnaryMethod_WriteLeaderboardRecord<WithStreamedUnaryMethod_WriteStorageObjects<WithStreamedUnaryMethod_WriteTournamentRecord<Service > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_AddFriends<WithStreamedUnaryMethod_AddGroupUsers<WithStreamedUnaryMethod_AuthenticateCustom<WithStreamedUnaryMethod_AuthenticateDevice<WithStreamedUnaryMethod_AuthenticateEmail<WithStreamedUnaryMethod_AuthenticateFacebook<WithStreamedUnaryMethod_AuthenticateGameCenter<WithStreamedUnaryMethod_AuthenticateGoogle<WithStreamedUnaryMethod_AuthenticateSteam<WithStreamedUnaryMethod_BlockFriends<WithStreamedUnaryMethod_CreateGroup<WithStreamedUnaryMethod_DeleteFriends<WithStreamedUnaryMethod_DeleteGroup<WithStreamedUnaryMethod_DeleteLeaderboardRecord<WithStreamedUnaryMethod_DeleteNotifications<WithStreamedUnaryMethod_DeleteStorageObjects<WithStreamedUnaryMethod_GetAccount<WithStreamedUnaryMethod_GetUsers<WithStreamedUnaryMethod_Healthcheck<WithStreamedUnaryMethod_ImportFacebookFriends<WithStreamedUnaryMethod_JoinGroup<WithStreamedUnaryMethod_JoinTournament<WithStreamedUnaryMethod_KickGroupUsers<WithStreamedUnaryMethod_LeaveGroup<WithStreamedUnaryMethod_LinkCustom<WithStreamedUnaryMethod_LinkDevice<WithStreamedUnaryMethod_LinkEmail<WithStreamedUnaryMethod_LinkFacebook<WithStreamedUnaryMethod_LinkGameCenter<WithStreamedUnaryMethod_LinkGoogle<WithStreamedUnaryMethod_LinkSteam<WithStreamedUnaryMethod_ListChannelMessages<WithStreamedUnaryMethod_ListFriends<WithStreamedUnaryMethod_ListGroups<WithStreamedUnaryMethod_ListGroupUsers<WithStreamedUnaryMethod_ListLeaderboardRecords<WithStreamedUnaryMethod_ListLeaderboardRecordsAroundOwner<WithStreamedUnaryMethod_ListMatches<WithStreamedUnaryMethod_ListNotifications<WithStreamedUnaryMethod_ListStorageObjects<WithStreamedUnaryMethod_ListTournaments<WithStreamedUnaryMethod_ListTournamentRecords<WithStreamedUnaryMethod_ListTournamentRecordsAroundOwner<WithStreamedUnaryMethod_ListUserGroups<WithStreamedUnaryMethod_PromoteGroupUsers<WithStreamedUnaryMethod_ReadStorageObjects<WithStreamedUnaryMethod_RpcFunc<WithStreamedUnaryMethod_UnlinkCustom<WithStreamedUnaryMethod_UnlinkDevice<WithStreamedUnaryMethod_UnlinkEmail<WithStreamedUnaryMethod_UnlinkFacebook<WithStreamedUnaryMethod_UnlinkGameCenter<WithStreamedUnaryMethod_UnlinkGoogle<WithStreamedUnaryMethod_UnlinkSteam<WithStreamedUnaryMethod_UpdateAccount<WithStreamedUnaryMethod_UpdateGroup<WithStreamedUnaryMethod_WriteLeaderboardRecord<WithStreamedUnaryMethod_WriteStorageObjects<WithStreamedUnaryMethod_WriteTournamentRecord<Service > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_AddFriends<WithStreamedUnaryMethod_AddGroupUsers<WithStreamedUnaryMethod_AuthenticateApple<WithStreamedUnaryMethod_AuthenticateCustom<WithStreamedUnaryMethod_AuthenticateDevice<WithStreamedUnaryMethod_AuthenticateEmail<WithStreamedUnaryMethod_AuthenticateFacebook<WithStreamedUnaryMethod_AuthenticateFacebookInstantGame<WithStreamedUnaryMethod_AuthenticateGameCenter<WithStreamedUnaryMethod_AuthenticateGoogle<WithStreamedUnaryMethod_AuthenticateSteam<WithStreamedUnaryMethod_BanGroupUsers<WithStreamedUnaryMethod_BlockFriends<WithStreamedUnaryMethod_CreateGroup<WithStreamedUnaryMethod_DeleteFriends<WithStreamedUnaryMethod_DeleteGroup<WithStreamedUnaryMethod_DeleteLeaderboardRecord<WithStreamedUnaryMethod_DeleteNotifications<WithStreamedUnaryMethod_DeleteStorageObjects<WithStreamedUnaryMethod_Event<WithStreamedUnaryMethod_GetAccount<WithStreamedUnaryMethod_GetUsers<WithStreamedUnaryMethod_Healthcheck<WithStreamedUnaryMethod_ImportFacebookFriends<WithStreamedUnaryMethod_JoinGroup<WithStreamedUnaryMethod_JoinTournament<WithStreamedUnaryMethod_KickGroupUsers<WithStreamedUnaryMethod_LeaveGroup<WithStreamedUnaryMethod_LinkApple<WithStreamedUnaryMethod_LinkCustom<WithStreamedUnaryMethod_LinkDevice<WithStreamedUnaryMethod_LinkEmail<WithStreamedUnaryMethod_LinkFacebook<WithStreamedUnaryMethod_LinkFacebookInstantGame<WithStreamedUnaryMethod_LinkGameCenter<WithStreamedUnaryMethod_LinkGoogle<WithStreamedUnaryMethod_LinkSteam<WithStreamedUnaryMethod_ListChannelMessages<WithStreamedUnaryMethod_ListFriends<WithStreamedUnaryMethod_ListGroups<WithStreamedUnaryMethod_ListGroupUsers<WithStreamedUnaryMethod_ListLeaderboardRecords<WithStreamedUnaryMethod_ListLeaderboardRecordsAroundOwner<WithStreamedUnaryMethod_ListMatches<WithStreamedUnaryMethod_ListNotifications<WithStreamedUnaryMethod_ListStorageObjects<WithStreamedUnaryMethod_ListTournaments<WithStreamedUnaryMethod_ListTournamentRecords<WithStreamedUnaryMethod_ListTournamentRecordsAroundOwner<WithStreamedUnaryMethod_ListUserGroups<WithStreamedUnaryMethod_PromoteGroupUsers<WithStreamedUnaryMethod_DemoteGroupUsers<WithStreamedUnaryMethod_ReadStorageObjects<WithStreamedUnaryMethod_RpcFunc<WithStreamedUnaryMethod_UnlinkApple<WithStreamedUnaryMethod_UnlinkCustom<WithStreamedUnaryMethod_UnlinkDevice<WithStreamedUnaryMethod_UnlinkEmail<WithStreamedUnaryMethod_UnlinkFacebook<WithStreamedUnaryMethod_UnlinkFacebookInstantGame<WithStreamedUnaryMethod_UnlinkGameCenter<WithStreamedUnaryMethod_UnlinkGoogle<WithStreamedUnaryMethod_UnlinkSteam<WithStreamedUnaryMethod_UpdateAccount<WithStreamedUnaryMethod_UpdateGroup<WithStreamedUnaryMethod_WriteLeaderboardRecord<WithStreamedUnaryMethod_WriteStorageObjects<WithStreamedUnaryMethod_WriteTournamentRecord<Service > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > StreamedService;
 };
 
 }  // namespace api

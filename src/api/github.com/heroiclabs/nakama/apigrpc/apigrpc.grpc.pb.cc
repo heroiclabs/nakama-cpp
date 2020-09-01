@@ -24,13 +24,16 @@ namespace api {
 static const char* Nakama_method_names[] = {
   "/nakama.api.Nakama/AddFriends",
   "/nakama.api.Nakama/AddGroupUsers",
+  "/nakama.api.Nakama/AuthenticateApple",
   "/nakama.api.Nakama/AuthenticateCustom",
   "/nakama.api.Nakama/AuthenticateDevice",
   "/nakama.api.Nakama/AuthenticateEmail",
   "/nakama.api.Nakama/AuthenticateFacebook",
+  "/nakama.api.Nakama/AuthenticateFacebookInstantGame",
   "/nakama.api.Nakama/AuthenticateGameCenter",
   "/nakama.api.Nakama/AuthenticateGoogle",
   "/nakama.api.Nakama/AuthenticateSteam",
+  "/nakama.api.Nakama/BanGroupUsers",
   "/nakama.api.Nakama/BlockFriends",
   "/nakama.api.Nakama/CreateGroup",
   "/nakama.api.Nakama/DeleteFriends",
@@ -38,6 +41,7 @@ static const char* Nakama_method_names[] = {
   "/nakama.api.Nakama/DeleteLeaderboardRecord",
   "/nakama.api.Nakama/DeleteNotifications",
   "/nakama.api.Nakama/DeleteStorageObjects",
+  "/nakama.api.Nakama/Event",
   "/nakama.api.Nakama/GetAccount",
   "/nakama.api.Nakama/GetUsers",
   "/nakama.api.Nakama/Healthcheck",
@@ -46,10 +50,12 @@ static const char* Nakama_method_names[] = {
   "/nakama.api.Nakama/JoinTournament",
   "/nakama.api.Nakama/KickGroupUsers",
   "/nakama.api.Nakama/LeaveGroup",
+  "/nakama.api.Nakama/LinkApple",
   "/nakama.api.Nakama/LinkCustom",
   "/nakama.api.Nakama/LinkDevice",
   "/nakama.api.Nakama/LinkEmail",
   "/nakama.api.Nakama/LinkFacebook",
+  "/nakama.api.Nakama/LinkFacebookInstantGame",
   "/nakama.api.Nakama/LinkGameCenter",
   "/nakama.api.Nakama/LinkGoogle",
   "/nakama.api.Nakama/LinkSteam",
@@ -67,12 +73,15 @@ static const char* Nakama_method_names[] = {
   "/nakama.api.Nakama/ListTournamentRecordsAroundOwner",
   "/nakama.api.Nakama/ListUserGroups",
   "/nakama.api.Nakama/PromoteGroupUsers",
+  "/nakama.api.Nakama/DemoteGroupUsers",
   "/nakama.api.Nakama/ReadStorageObjects",
   "/nakama.api.Nakama/RpcFunc",
+  "/nakama.api.Nakama/UnlinkApple",
   "/nakama.api.Nakama/UnlinkCustom",
   "/nakama.api.Nakama/UnlinkDevice",
   "/nakama.api.Nakama/UnlinkEmail",
   "/nakama.api.Nakama/UnlinkFacebook",
+  "/nakama.api.Nakama/UnlinkFacebookInstantGame",
   "/nakama.api.Nakama/UnlinkGameCenter",
   "/nakama.api.Nakama/UnlinkGoogle",
   "/nakama.api.Nakama/UnlinkSteam",
@@ -92,63 +101,72 @@ std::unique_ptr< Nakama::Stub> Nakama::NewStub(const std::shared_ptr< ::grpc::Ch
 Nakama::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
   : channel_(channel), rpcmethod_AddFriends_(Nakama_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_AddGroupUsers_(Nakama_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AuthenticateCustom_(Nakama_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AuthenticateDevice_(Nakama_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AuthenticateEmail_(Nakama_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AuthenticateFacebook_(Nakama_method_names[5], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AuthenticateGameCenter_(Nakama_method_names[6], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AuthenticateGoogle_(Nakama_method_names[7], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AuthenticateSteam_(Nakama_method_names[8], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_BlockFriends_(Nakama_method_names[9], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CreateGroup_(Nakama_method_names[10], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_DeleteFriends_(Nakama_method_names[11], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_DeleteGroup_(Nakama_method_names[12], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_DeleteLeaderboardRecord_(Nakama_method_names[13], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_DeleteNotifications_(Nakama_method_names[14], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_DeleteStorageObjects_(Nakama_method_names[15], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_GetAccount_(Nakama_method_names[16], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_GetUsers_(Nakama_method_names[17], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_Healthcheck_(Nakama_method_names[18], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ImportFacebookFriends_(Nakama_method_names[19], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_JoinGroup_(Nakama_method_names[20], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_JoinTournament_(Nakama_method_names[21], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_KickGroupUsers_(Nakama_method_names[22], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_LeaveGroup_(Nakama_method_names[23], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_LinkCustom_(Nakama_method_names[24], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_LinkDevice_(Nakama_method_names[25], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_LinkEmail_(Nakama_method_names[26], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_LinkFacebook_(Nakama_method_names[27], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_LinkGameCenter_(Nakama_method_names[28], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_LinkGoogle_(Nakama_method_names[29], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_LinkSteam_(Nakama_method_names[30], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListChannelMessages_(Nakama_method_names[31], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListFriends_(Nakama_method_names[32], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListGroups_(Nakama_method_names[33], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListGroupUsers_(Nakama_method_names[34], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListLeaderboardRecords_(Nakama_method_names[35], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListLeaderboardRecordsAroundOwner_(Nakama_method_names[36], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListMatches_(Nakama_method_names[37], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListNotifications_(Nakama_method_names[38], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListStorageObjects_(Nakama_method_names[39], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListTournaments_(Nakama_method_names[40], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListTournamentRecords_(Nakama_method_names[41], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListTournamentRecordsAroundOwner_(Nakama_method_names[42], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ListUserGroups_(Nakama_method_names[43], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_PromoteGroupUsers_(Nakama_method_names[44], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ReadStorageObjects_(Nakama_method_names[45], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_RpcFunc_(Nakama_method_names[46], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UnlinkCustom_(Nakama_method_names[47], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UnlinkDevice_(Nakama_method_names[48], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UnlinkEmail_(Nakama_method_names[49], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UnlinkFacebook_(Nakama_method_names[50], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UnlinkGameCenter_(Nakama_method_names[51], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UnlinkGoogle_(Nakama_method_names[52], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UnlinkSteam_(Nakama_method_names[53], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UpdateAccount_(Nakama_method_names[54], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UpdateGroup_(Nakama_method_names[55], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_WriteLeaderboardRecord_(Nakama_method_names[56], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_WriteStorageObjects_(Nakama_method_names[57], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_WriteTournamentRecord_(Nakama_method_names[58], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AuthenticateApple_(Nakama_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AuthenticateCustom_(Nakama_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AuthenticateDevice_(Nakama_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AuthenticateEmail_(Nakama_method_names[5], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AuthenticateFacebook_(Nakama_method_names[6], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AuthenticateFacebookInstantGame_(Nakama_method_names[7], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AuthenticateGameCenter_(Nakama_method_names[8], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AuthenticateGoogle_(Nakama_method_names[9], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AuthenticateSteam_(Nakama_method_names[10], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_BanGroupUsers_(Nakama_method_names[11], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_BlockFriends_(Nakama_method_names[12], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CreateGroup_(Nakama_method_names[13], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_DeleteFriends_(Nakama_method_names[14], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_DeleteGroup_(Nakama_method_names[15], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_DeleteLeaderboardRecord_(Nakama_method_names[16], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_DeleteNotifications_(Nakama_method_names[17], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_DeleteStorageObjects_(Nakama_method_names[18], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Event_(Nakama_method_names[19], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetAccount_(Nakama_method_names[20], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetUsers_(Nakama_method_names[21], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Healthcheck_(Nakama_method_names[22], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ImportFacebookFriends_(Nakama_method_names[23], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_JoinGroup_(Nakama_method_names[24], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_JoinTournament_(Nakama_method_names[25], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_KickGroupUsers_(Nakama_method_names[26], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LeaveGroup_(Nakama_method_names[27], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LinkApple_(Nakama_method_names[28], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LinkCustom_(Nakama_method_names[29], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LinkDevice_(Nakama_method_names[30], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LinkEmail_(Nakama_method_names[31], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LinkFacebook_(Nakama_method_names[32], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LinkFacebookInstantGame_(Nakama_method_names[33], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LinkGameCenter_(Nakama_method_names[34], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LinkGoogle_(Nakama_method_names[35], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LinkSteam_(Nakama_method_names[36], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListChannelMessages_(Nakama_method_names[37], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListFriends_(Nakama_method_names[38], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListGroups_(Nakama_method_names[39], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListGroupUsers_(Nakama_method_names[40], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListLeaderboardRecords_(Nakama_method_names[41], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListLeaderboardRecordsAroundOwner_(Nakama_method_names[42], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListMatches_(Nakama_method_names[43], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListNotifications_(Nakama_method_names[44], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListStorageObjects_(Nakama_method_names[45], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListTournaments_(Nakama_method_names[46], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListTournamentRecords_(Nakama_method_names[47], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListTournamentRecordsAroundOwner_(Nakama_method_names[48], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ListUserGroups_(Nakama_method_names[49], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_PromoteGroupUsers_(Nakama_method_names[50], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_DemoteGroupUsers_(Nakama_method_names[51], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ReadStorageObjects_(Nakama_method_names[52], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_RpcFunc_(Nakama_method_names[53], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UnlinkApple_(Nakama_method_names[54], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UnlinkCustom_(Nakama_method_names[55], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UnlinkDevice_(Nakama_method_names[56], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UnlinkEmail_(Nakama_method_names[57], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UnlinkFacebook_(Nakama_method_names[58], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UnlinkFacebookInstantGame_(Nakama_method_names[59], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UnlinkGameCenter_(Nakama_method_names[60], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UnlinkGoogle_(Nakama_method_names[61], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UnlinkSteam_(Nakama_method_names[62], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UpdateAccount_(Nakama_method_names[63], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UpdateGroup_(Nakama_method_names[64], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_WriteLeaderboardRecord_(Nakama_method_names[65], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_WriteStorageObjects_(Nakama_method_names[66], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_WriteTournamentRecord_(Nakama_method_names[67], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status Nakama::Stub::AddFriends(::grpc::ClientContext* context, const ::nakama::api::AddFriendsRequest& request, ::google::protobuf::Empty* response) {
@@ -181,6 +199,22 @@ void Nakama::Stub::experimental_async::AddGroupUsers(::grpc::ClientContext* cont
 
 ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncAddGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::AddGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_AddGroupUsers_, context, request, false);
+}
+
+::grpc::Status Nakama::Stub::AuthenticateApple(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::nakama::api::Session* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_AuthenticateApple_, context, request, response);
+}
+
+void Nakama::Stub::experimental_async::AuthenticateApple(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_AuthenticateApple_, context, request, response, std::move(f));
+}
+
+::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* Nakama::Stub::AsyncAuthenticateAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::Session>::Create(channel_.get(), cq, rpcmethod_AuthenticateApple_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* Nakama::Stub::PrepareAsyncAuthenticateAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateAppleRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::Session>::Create(channel_.get(), cq, rpcmethod_AuthenticateApple_, context, request, false);
 }
 
 ::grpc::Status Nakama::Stub::AuthenticateCustom(::grpc::ClientContext* context, const ::nakama::api::AuthenticateCustomRequest& request, ::nakama::api::Session* response) {
@@ -247,6 +281,22 @@ void Nakama::Stub::experimental_async::AuthenticateFacebook(::grpc::ClientContex
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::Session>::Create(channel_.get(), cq, rpcmethod_AuthenticateFacebook_, context, request, false);
 }
 
+::grpc::Status Nakama::Stub::AuthenticateFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::nakama::api::Session* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_AuthenticateFacebookInstantGame_, context, request, response);
+}
+
+void Nakama::Stub::experimental_async::AuthenticateFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_AuthenticateFacebookInstantGame_, context, request, response, std::move(f));
+}
+
+::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* Nakama::Stub::AsyncAuthenticateFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::Session>::Create(channel_.get(), cq, rpcmethod_AuthenticateFacebookInstantGame_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* Nakama::Stub::PrepareAsyncAuthenticateFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::Session>::Create(channel_.get(), cq, rpcmethod_AuthenticateFacebookInstantGame_, context, request, false);
+}
+
 ::grpc::Status Nakama::Stub::AuthenticateGameCenter(::grpc::ClientContext* context, const ::nakama::api::AuthenticateGameCenterRequest& request, ::nakama::api::Session* response) {
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_AuthenticateGameCenter_, context, request, response);
 }
@@ -293,6 +343,22 @@ void Nakama::Stub::experimental_async::AuthenticateSteam(::grpc::ClientContext* 
 
 ::grpc::ClientAsyncResponseReader< ::nakama::api::Session>* Nakama::Stub::PrepareAsyncAuthenticateSteamRaw(::grpc::ClientContext* context, const ::nakama::api::AuthenticateSteamRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::Session>::Create(channel_.get(), cq, rpcmethod_AuthenticateSteam_, context, request, false);
+}
+
+::grpc::Status Nakama::Stub::BanGroupUsers(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::google::protobuf::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_BanGroupUsers_, context, request, response);
+}
+
+void Nakama::Stub::experimental_async::BanGroupUsers(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_BanGroupUsers_, context, request, response, std::move(f));
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::AsyncBanGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_BanGroupUsers_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncBanGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::BanGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_BanGroupUsers_, context, request, false);
 }
 
 ::grpc::Status Nakama::Stub::BlockFriends(::grpc::ClientContext* context, const ::nakama::api::BlockFriendsRequest& request, ::google::protobuf::Empty* response) {
@@ -405,6 +471,22 @@ void Nakama::Stub::experimental_async::DeleteStorageObjects(::grpc::ClientContex
 
 ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncDeleteStorageObjectsRaw(::grpc::ClientContext* context, const ::nakama::api::DeleteStorageObjectsRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_DeleteStorageObjects_, context, request, false);
+}
+
+::grpc::Status Nakama::Stub::Event(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::google::protobuf::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_Event_, context, request, response);
+}
+
+void Nakama::Stub::experimental_async::Event(::grpc::ClientContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Event_, context, request, response, std::move(f));
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::AsyncEventRaw(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_Event_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncEventRaw(::grpc::ClientContext* context, const ::nakama::api::Event& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_Event_, context, request, false);
 }
 
 ::grpc::Status Nakama::Stub::GetAccount(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::nakama::api::Account* response) {
@@ -535,6 +617,22 @@ void Nakama::Stub::experimental_async::LeaveGroup(::grpc::ClientContext* context
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_LeaveGroup_, context, request, false);
 }
 
+::grpc::Status Nakama::Stub::LinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::google::protobuf::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_LinkApple_, context, request, response);
+}
+
+void Nakama::Stub::experimental_async::LinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_LinkApple_, context, request, response, std::move(f));
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::AsyncLinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_LinkApple_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncLinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_LinkApple_, context, request, false);
+}
+
 ::grpc::Status Nakama::Stub::LinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::google::protobuf::Empty* response) {
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_LinkCustom_, context, request, response);
 }
@@ -597,6 +695,22 @@ void Nakama::Stub::experimental_async::LinkFacebook(::grpc::ClientContext* conte
 
 ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncLinkFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::LinkFacebookRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_LinkFacebook_, context, request, false);
+}
+
+::grpc::Status Nakama::Stub::LinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::google::protobuf::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_LinkFacebookInstantGame_, context, request, response);
+}
+
+void Nakama::Stub::experimental_async::LinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_LinkFacebookInstantGame_, context, request, response, std::move(f));
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::AsyncLinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_LinkFacebookInstantGame_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncLinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_LinkFacebookInstantGame_, context, request, false);
 }
 
 ::grpc::Status Nakama::Stub::LinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::google::protobuf::Empty* response) {
@@ -871,6 +985,22 @@ void Nakama::Stub::experimental_async::PromoteGroupUsers(::grpc::ClientContext* 
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_PromoteGroupUsers_, context, request, false);
 }
 
+::grpc::Status Nakama::Stub::DemoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::google::protobuf::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_DemoteGroupUsers_, context, request, response);
+}
+
+void Nakama::Stub::experimental_async::DemoteGroupUsers(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DemoteGroupUsers_, context, request, response, std::move(f));
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::AsyncDemoteGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_DemoteGroupUsers_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncDemoteGroupUsersRaw(::grpc::ClientContext* context, const ::nakama::api::DemoteGroupUsersRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_DemoteGroupUsers_, context, request, false);
+}
+
 ::grpc::Status Nakama::Stub::ReadStorageObjects(::grpc::ClientContext* context, const ::nakama::api::ReadStorageObjectsRequest& request, ::nakama::api::StorageObjects* response) {
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_ReadStorageObjects_, context, request, response);
 }
@@ -901,6 +1031,22 @@ void Nakama::Stub::experimental_async::RpcFunc(::grpc::ClientContext* context, c
 
 ::grpc::ClientAsyncResponseReader< ::nakama::api::Rpc>* Nakama::Stub::PrepareAsyncRpcFuncRaw(::grpc::ClientContext* context, const ::nakama::api::Rpc& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::nakama::api::Rpc>::Create(channel_.get(), cq, rpcmethod_RpcFunc_, context, request, false);
+}
+
+::grpc::Status Nakama::Stub::UnlinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::google::protobuf::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_UnlinkApple_, context, request, response);
+}
+
+void Nakama::Stub::experimental_async::UnlinkApple(::grpc::ClientContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_UnlinkApple_, context, request, response, std::move(f));
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::AsyncUnlinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_UnlinkApple_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncUnlinkAppleRaw(::grpc::ClientContext* context, const ::nakama::api::AccountApple& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_UnlinkApple_, context, request, false);
 }
 
 ::grpc::Status Nakama::Stub::UnlinkCustom(::grpc::ClientContext* context, const ::nakama::api::AccountCustom& request, ::google::protobuf::Empty* response) {
@@ -965,6 +1111,22 @@ void Nakama::Stub::experimental_async::UnlinkFacebook(::grpc::ClientContext* con
 
 ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncUnlinkFacebookRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebook& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_UnlinkFacebook_, context, request, false);
+}
+
+::grpc::Status Nakama::Stub::UnlinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::google::protobuf::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_UnlinkFacebookInstantGame_, context, request, response);
+}
+
+void Nakama::Stub::experimental_async::UnlinkFacebookInstantGame(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_UnlinkFacebookInstantGame_, context, request, response, std::move(f));
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::AsyncUnlinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_UnlinkFacebookInstantGame_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* Nakama::Stub::PrepareAsyncUnlinkFacebookInstantGameRaw(::grpc::ClientContext* context, const ::nakama::api::AccountFacebookInstantGame& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::google::protobuf::Empty>::Create(channel_.get(), cq, rpcmethod_UnlinkFacebookInstantGame_, context, request, false);
 }
 
 ::grpc::Status Nakama::Stub::UnlinkGameCenter(::grpc::ClientContext* context, const ::nakama::api::AccountGameCenter& request, ::google::protobuf::Empty* response) {
@@ -1109,285 +1271,330 @@ Nakama::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Nakama_method_names[2],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AuthenticateAppleRequest, ::nakama::api::Session>(
+          std::mem_fn(&Nakama::Service::AuthenticateApple), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Nakama_method_names[3],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AuthenticateCustomRequest, ::nakama::api::Session>(
           std::mem_fn(&Nakama::Service::AuthenticateCustom), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[3],
+      Nakama_method_names[4],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AuthenticateDeviceRequest, ::nakama::api::Session>(
           std::mem_fn(&Nakama::Service::AuthenticateDevice), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[4],
+      Nakama_method_names[5],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AuthenticateEmailRequest, ::nakama::api::Session>(
           std::mem_fn(&Nakama::Service::AuthenticateEmail), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[5],
+      Nakama_method_names[6],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AuthenticateFacebookRequest, ::nakama::api::Session>(
           std::mem_fn(&Nakama::Service::AuthenticateFacebook), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[6],
+      Nakama_method_names[7],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AuthenticateFacebookInstantGameRequest, ::nakama::api::Session>(
+          std::mem_fn(&Nakama::Service::AuthenticateFacebookInstantGame), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Nakama_method_names[8],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AuthenticateGameCenterRequest, ::nakama::api::Session>(
           std::mem_fn(&Nakama::Service::AuthenticateGameCenter), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[7],
+      Nakama_method_names[9],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AuthenticateGoogleRequest, ::nakama::api::Session>(
           std::mem_fn(&Nakama::Service::AuthenticateGoogle), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[8],
+      Nakama_method_names[10],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AuthenticateSteamRequest, ::nakama::api::Session>(
           std::mem_fn(&Nakama::Service::AuthenticateSteam), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[9],
+      Nakama_method_names[11],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::BanGroupUsersRequest, ::google::protobuf::Empty>(
+          std::mem_fn(&Nakama::Service::BanGroupUsers), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Nakama_method_names[12],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::BlockFriendsRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::BlockFriends), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[10],
+      Nakama_method_names[13],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::CreateGroupRequest, ::nakama::api::Group>(
           std::mem_fn(&Nakama::Service::CreateGroup), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[11],
+      Nakama_method_names[14],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::DeleteFriendsRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::DeleteFriends), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[12],
+      Nakama_method_names[15],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::DeleteGroupRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::DeleteGroup), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[13],
+      Nakama_method_names[16],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::DeleteLeaderboardRecordRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::DeleteLeaderboardRecord), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[14],
+      Nakama_method_names[17],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::DeleteNotificationsRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::DeleteNotifications), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[15],
+      Nakama_method_names[18],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::DeleteStorageObjectsRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::DeleteStorageObjects), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[16],
+      Nakama_method_names[19],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::Event, ::google::protobuf::Empty>(
+          std::mem_fn(&Nakama::Service::Event), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Nakama_method_names[20],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::google::protobuf::Empty, ::nakama::api::Account>(
           std::mem_fn(&Nakama::Service::GetAccount), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[17],
+      Nakama_method_names[21],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::GetUsersRequest, ::nakama::api::Users>(
           std::mem_fn(&Nakama::Service::GetUsers), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[18],
+      Nakama_method_names[22],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::google::protobuf::Empty, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::Healthcheck), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[19],
+      Nakama_method_names[23],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ImportFacebookFriendsRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::ImportFacebookFriends), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[20],
+      Nakama_method_names[24],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::JoinGroupRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::JoinGroup), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[21],
+      Nakama_method_names[25],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::JoinTournamentRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::JoinTournament), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[22],
+      Nakama_method_names[26],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::KickGroupUsersRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::KickGroupUsers), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[23],
+      Nakama_method_names[27],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::LeaveGroupRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::LeaveGroup), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[24],
+      Nakama_method_names[28],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountApple, ::google::protobuf::Empty>(
+          std::mem_fn(&Nakama::Service::LinkApple), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Nakama_method_names[29],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountCustom, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::LinkCustom), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[25],
+      Nakama_method_names[30],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountDevice, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::LinkDevice), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[26],
+      Nakama_method_names[31],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountEmail, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::LinkEmail), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[27],
+      Nakama_method_names[32],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::LinkFacebookRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::LinkFacebook), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[28],
+      Nakama_method_names[33],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountFacebookInstantGame, ::google::protobuf::Empty>(
+          std::mem_fn(&Nakama::Service::LinkFacebookInstantGame), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Nakama_method_names[34],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountGameCenter, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::LinkGameCenter), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[29],
+      Nakama_method_names[35],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountGoogle, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::LinkGoogle), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[30],
+      Nakama_method_names[36],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountSteam, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::LinkSteam), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[31],
+      Nakama_method_names[37],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListChannelMessagesRequest, ::nakama::api::ChannelMessageList>(
           std::mem_fn(&Nakama::Service::ListChannelMessages), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[32],
+      Nakama_method_names[38],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListFriendsRequest, ::nakama::api::FriendList>(
           std::mem_fn(&Nakama::Service::ListFriends), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[33],
+      Nakama_method_names[39],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListGroupsRequest, ::nakama::api::GroupList>(
           std::mem_fn(&Nakama::Service::ListGroups), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[34],
+      Nakama_method_names[40],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListGroupUsersRequest, ::nakama::api::GroupUserList>(
           std::mem_fn(&Nakama::Service::ListGroupUsers), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[35],
+      Nakama_method_names[41],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListLeaderboardRecordsRequest, ::nakama::api::LeaderboardRecordList>(
           std::mem_fn(&Nakama::Service::ListLeaderboardRecords), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[36],
+      Nakama_method_names[42],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListLeaderboardRecordsAroundOwnerRequest, ::nakama::api::LeaderboardRecordList>(
           std::mem_fn(&Nakama::Service::ListLeaderboardRecordsAroundOwner), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[37],
+      Nakama_method_names[43],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListMatchesRequest, ::nakama::api::MatchList>(
           std::mem_fn(&Nakama::Service::ListMatches), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[38],
+      Nakama_method_names[44],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListNotificationsRequest, ::nakama::api::NotificationList>(
           std::mem_fn(&Nakama::Service::ListNotifications), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[39],
+      Nakama_method_names[45],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListStorageObjectsRequest, ::nakama::api::StorageObjectList>(
           std::mem_fn(&Nakama::Service::ListStorageObjects), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[40],
+      Nakama_method_names[46],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListTournamentsRequest, ::nakama::api::TournamentList>(
           std::mem_fn(&Nakama::Service::ListTournaments), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[41],
+      Nakama_method_names[47],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListTournamentRecordsRequest, ::nakama::api::TournamentRecordList>(
           std::mem_fn(&Nakama::Service::ListTournamentRecords), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[42],
+      Nakama_method_names[48],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListTournamentRecordsAroundOwnerRequest, ::nakama::api::TournamentRecordList>(
           std::mem_fn(&Nakama::Service::ListTournamentRecordsAroundOwner), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[43],
+      Nakama_method_names[49],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ListUserGroupsRequest, ::nakama::api::UserGroupList>(
           std::mem_fn(&Nakama::Service::ListUserGroups), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[44],
+      Nakama_method_names[50],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::PromoteGroupUsersRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::PromoteGroupUsers), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[45],
+      Nakama_method_names[51],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::DemoteGroupUsersRequest, ::google::protobuf::Empty>(
+          std::mem_fn(&Nakama::Service::DemoteGroupUsers), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Nakama_method_names[52],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::ReadStorageObjectsRequest, ::nakama::api::StorageObjects>(
           std::mem_fn(&Nakama::Service::ReadStorageObjects), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[46],
+      Nakama_method_names[53],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::Rpc, ::nakama::api::Rpc>(
           std::mem_fn(&Nakama::Service::RpcFunc), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[47],
+      Nakama_method_names[54],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountApple, ::google::protobuf::Empty>(
+          std::mem_fn(&Nakama::Service::UnlinkApple), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Nakama_method_names[55],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountCustom, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::UnlinkCustom), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[48],
+      Nakama_method_names[56],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountDevice, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::UnlinkDevice), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[49],
+      Nakama_method_names[57],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountEmail, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::UnlinkEmail), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[50],
+      Nakama_method_names[58],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountFacebook, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::UnlinkFacebook), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[51],
+      Nakama_method_names[59],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountFacebookInstantGame, ::google::protobuf::Empty>(
+          std::mem_fn(&Nakama::Service::UnlinkFacebookInstantGame), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Nakama_method_names[60],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountGameCenter, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::UnlinkGameCenter), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[52],
+      Nakama_method_names[61],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountGoogle, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::UnlinkGoogle), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[53],
+      Nakama_method_names[62],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::AccountSteam, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::UnlinkSteam), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[54],
+      Nakama_method_names[63],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::UpdateAccountRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::UpdateAccount), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[55],
+      Nakama_method_names[64],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::UpdateGroupRequest, ::google::protobuf::Empty>(
           std::mem_fn(&Nakama::Service::UpdateGroup), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[56],
+      Nakama_method_names[65],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::WriteLeaderboardRecordRequest, ::nakama::api::LeaderboardRecord>(
           std::mem_fn(&Nakama::Service::WriteLeaderboardRecord), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[57],
+      Nakama_method_names[66],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::WriteStorageObjectsRequest, ::nakama::api::StorageObjectAcks>(
           std::mem_fn(&Nakama::Service::WriteStorageObjects), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Nakama_method_names[58],
+      Nakama_method_names[67],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Nakama::Service, ::nakama::api::WriteTournamentRecordRequest, ::nakama::api::LeaderboardRecord>(
           std::mem_fn(&Nakama::Service::WriteTournamentRecord), this)));
@@ -1404,6 +1611,13 @@ Nakama::Service::~Service() {
 }
 
 ::grpc::Status Nakama::Service::AddGroupUsers(::grpc::ServerContext* context, const ::nakama::api::AddGroupUsersRequest* request, ::google::protobuf::Empty* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Nakama::Service::AuthenticateApple(::grpc::ServerContext* context, const ::nakama::api::AuthenticateAppleRequest* request, ::nakama::api::Session* response) {
   (void) context;
   (void) request;
   (void) response;
@@ -1438,6 +1652,13 @@ Nakama::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
+::grpc::Status Nakama::Service::AuthenticateFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AuthenticateFacebookInstantGameRequest* request, ::nakama::api::Session* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
 ::grpc::Status Nakama::Service::AuthenticateGameCenter(::grpc::ServerContext* context, const ::nakama::api::AuthenticateGameCenterRequest* request, ::nakama::api::Session* response) {
   (void) context;
   (void) request;
@@ -1453,6 +1674,13 @@ Nakama::Service::~Service() {
 }
 
 ::grpc::Status Nakama::Service::AuthenticateSteam(::grpc::ServerContext* context, const ::nakama::api::AuthenticateSteamRequest* request, ::nakama::api::Session* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Nakama::Service::BanGroupUsers(::grpc::ServerContext* context, const ::nakama::api::BanGroupUsersRequest* request, ::google::protobuf::Empty* response) {
   (void) context;
   (void) request;
   (void) response;
@@ -1502,6 +1730,13 @@ Nakama::Service::~Service() {
 }
 
 ::grpc::Status Nakama::Service::DeleteStorageObjects(::grpc::ServerContext* context, const ::nakama::api::DeleteStorageObjectsRequest* request, ::google::protobuf::Empty* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Nakama::Service::Event(::grpc::ServerContext* context, const ::nakama::api::Event* request, ::google::protobuf::Empty* response) {
   (void) context;
   (void) request;
   (void) response;
@@ -1564,6 +1799,13 @@ Nakama::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
+::grpc::Status Nakama::Service::LinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
 ::grpc::Status Nakama::Service::LinkCustom(::grpc::ServerContext* context, const ::nakama::api::AccountCustom* request, ::google::protobuf::Empty* response) {
   (void) context;
   (void) request;
@@ -1586,6 +1828,13 @@ Nakama::Service::~Service() {
 }
 
 ::grpc::Status Nakama::Service::LinkFacebook(::grpc::ServerContext* context, const ::nakama::api::LinkFacebookRequest* request, ::google::protobuf::Empty* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Nakama::Service::LinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) {
   (void) context;
   (void) request;
   (void) response;
@@ -1711,6 +1960,13 @@ Nakama::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
+::grpc::Status Nakama::Service::DemoteGroupUsers(::grpc::ServerContext* context, const ::nakama::api::DemoteGroupUsersRequest* request, ::google::protobuf::Empty* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
 ::grpc::Status Nakama::Service::ReadStorageObjects(::grpc::ServerContext* context, const ::nakama::api::ReadStorageObjectsRequest* request, ::nakama::api::StorageObjects* response) {
   (void) context;
   (void) request;
@@ -1719,6 +1975,13 @@ Nakama::Service::~Service() {
 }
 
 ::grpc::Status Nakama::Service::RpcFunc(::grpc::ServerContext* context, const ::nakama::api::Rpc* request, ::nakama::api::Rpc* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Nakama::Service::UnlinkApple(::grpc::ServerContext* context, const ::nakama::api::AccountApple* request, ::google::protobuf::Empty* response) {
   (void) context;
   (void) request;
   (void) response;
@@ -1747,6 +2010,13 @@ Nakama::Service::~Service() {
 }
 
 ::grpc::Status Nakama::Service::UnlinkFacebook(::grpc::ServerContext* context, const ::nakama::api::AccountFacebook* request, ::google::protobuf::Empty* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Nakama::Service::UnlinkFacebookInstantGame(::grpc::ServerContext* context, const ::nakama::api::AccountFacebookInstantGame* request, ::google::protobuf::Empty* response) {
   (void) context;
   (void) request;
   (void) response;
