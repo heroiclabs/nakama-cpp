@@ -847,6 +847,35 @@ void RestClient::linkGameCenter(
     }
 }
 
+void RestClient::linkApple(
+    NSessionPtr session,
+    const std::string& token,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    try {
+        NLOG_INFO("...");
+
+        RestReqContext* ctx = createReqContext(nullptr);
+        setSessionAuth(ctx, session);
+
+        ctx->successCallback = successCallback;
+        ctx->errorCallback = errorCallback;
+
+        rapidjson::Document document;
+        document.SetObject();
+
+        document.AddMember("token", token, document.GetAllocator());
+
+        string body = jsonDocToStr(document);
+
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/account/link/apple", std::move(body));
+    }
+    catch (exception& e)
+    {
+        NLOG_ERROR("exception: " + string(e.what()));
+    }
+}
+
 void RestClient::linkSteam(
     NSessionPtr session,
     const std::string & token,

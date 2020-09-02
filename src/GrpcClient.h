@@ -165,6 +165,13 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void linkApple(
+            NSessionPtr session,
+            const std::string& token,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
         void linkSteam(
             NSessionPtr session,
             const std::string& token,

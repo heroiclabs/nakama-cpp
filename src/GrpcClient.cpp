@@ -710,6 +710,28 @@ void GrpcClient::linkGameCenter(
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
+void GrpcClient::linkApple(
+    NSessionPtr session,
+    const std::string& token,
+    std::function<void()> successCallback, ErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ReqContext* ctx = createReqContext();
+    setSessionAuth(ctx, session);
+
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
+
+    nakama::api::AccountApple req;
+
+    req.set_token(token);
+
+    auto responseReader = _stub->AsyncLinkApple(&ctx->context, req, &_cq);
+
+    responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
+}
+
 void GrpcClient::linkSteam(
     NSessionPtr session,
     const std::string & token,

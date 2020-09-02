@@ -339,6 +339,19 @@ NAKAMA_NAMESPACE_BEGIN
         ) = 0;
 
         /**
+         * Link an Apple ID to the social profiles on the current user's account.
+         *
+         * @param session The session of the user.
+         * @param token The ID token received from Apple.
+         */
+        virtual void linkApple(
+            NSessionPtr session,
+            const std::string& token,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
          * Link a Steam profile to a user account.
          *
          * @param session The session of the user.

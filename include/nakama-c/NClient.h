@@ -356,6 +356,21 @@ extern "C" {
     );
 
     /**
+     * Link an Apple ID to the social profiles on the current user's account.
+     *
+     * @param session The session of the user.
+     * @param token The ID token received from Apple.
+     */
+    NAKAMA_API void NClient_linkApple(
+        NClient client,
+        NSession session,
+        const char* token,
+        NClientReqData reqData,            // optional, pass NULL
+        void (*successCallback)(NClient, NClientReqData), // optional, pass NULL
+        NClientErrorCallback errorCallback // optional, pass NULL
+    );
+
+    /**
      * Link a Steam profile to a user account.
      *
      * @param session The session of the user.
