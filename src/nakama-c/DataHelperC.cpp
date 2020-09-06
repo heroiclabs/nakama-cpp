@@ -273,6 +273,7 @@ void assign(sNUsers& cUsers, const Nakama::NUsers& users)
 void assign(sNFriend& cFriend, const Nakama::NFriend& aFriend)
 {
     cFriend.state = (eFriendState)aFriend.state;
+    cFriend.updateTime = aFriend.updateTime;
     assign(cFriend.user, aFriend.user);
 }
 

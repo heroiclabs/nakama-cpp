@@ -214,6 +214,7 @@ void assign(NUsers& users, const sNUsers* cUsers)
 void assign(NFriend& aFriend, const sNFriend* cFriend)
 {
     aFriend.state = (NFriend::State)cFriend->state;
+    aFriend.updateTime = cFriend->updateTime;
     assign(aFriend.user, &cFriend->user);
 }
 
