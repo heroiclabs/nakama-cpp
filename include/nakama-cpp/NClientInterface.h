@@ -442,6 +442,19 @@ NAKAMA_NAMESPACE_BEGIN
         ) = 0;
 
         /**
+         * Unlink a Apple profile from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param token An Apple authentication token.
+         */
+        virtual void unlinkApple(
+            NSessionPtr session,
+            const std::string& token,
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        ) = 0;
+
+        /**
          * Unlink a Steam profile from the user account owned by the session.
          *
          * @param session The session of the user.

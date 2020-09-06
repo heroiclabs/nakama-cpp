@@ -495,6 +495,18 @@ void NClient_unlinkGameCenter(
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
+void NClient_unlinkApple(NClient client, NSession session, const char* token, NClientReqData reqData, void(*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
+{
+    Nakama::NClientInterface* cppClient = getCppClient(client);
+    auto cppSession = Nakama::getSession(session);
+
+    cppClient->unlinkApple(
+        cppSession,
+        token,
+        Nakama::createOkEmptyCallback(client, reqData, successCallback),
+        Nakama::createErrorCallback(client, reqData, errorCallback));
+}
+
 void NClient_unlinkSteam(NClient client, NSession session, const char* token, NClientReqData reqData, void (*successCallback)(NClient, NClientReqData), NClientErrorCallback errorCallback)
 {
     Nakama::NClientInterface* cppClient = getCppClient(client);

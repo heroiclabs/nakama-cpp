@@ -473,6 +473,21 @@ extern "C" {
     );
 
     /**
+     * Unlink an Apple profile from the user account owned by the session.
+     *
+     * @param session The session of the user.
+     * @param token An Apple authentication token.
+     */
+    NAKAMA_API void NClient_unlinkApple(
+        NClient client,
+        NSession session,
+        const char* token,
+        NClientReqData reqData,            // optional, pass NULL
+        void (*successCallback)(NClient, NClientReqData), // optional, pass NULL
+        NClientErrorCallback errorCallback // optional, pass NULL
+    );
+
+    /**
      * Unlink a Steam profile from the user account owned by the session.
      *
      * @param session The session of the user.

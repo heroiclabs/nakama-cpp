@@ -763,6 +763,30 @@ NAKAMA_NAMESPACE_BEGIN
                 &NClientWrapper::reqErrorStatic);
         }
 
+        void unlinkApple(
+            NSessionPtr session,
+            const std::string& token,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override
+        {
+            NClientReqData reqId = INVALID_REQ_ID;
+
+            if (successCallback || errorCallback)
+            {
+                reqId = getNextReqId();
+                if (successCallback) _reqOkEmptyCallbacks.emplace(reqId, successCallback);
+                if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
+            }
+
+            ::NClient_unlinkApple(_cClient,
+                getCSession(session),
+                token.c_str(),
+                reqId,
+                &NClientWrapper::reqOkEmptyStatic,
+                &NClientWrapper::reqErrorStatic);
+        }
+
         void unlinkSteam(
             NSessionPtr session,
             const std::string& token,

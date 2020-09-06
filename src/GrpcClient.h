@@ -220,6 +220,13 @@ namespace Nakama {
             ErrorCallback errorCallback
         ) override;
 
+        void unlinkApple(
+            NSessionPtr session,
+            const std::string& token,
+            std::function<void()> successCallback,
+            ErrorCallback errorCallback
+        ) override;
+
         void unlinkSteam(
             NSessionPtr session,
             const std::string& token,
