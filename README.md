@@ -32,7 +32,7 @@ You'll need to setup the server and database before you can connect with the cli
 - Android - Android 4.1 (armeabi-v7a, arm64-v8a, x86, x86_64)
 - Linux - Ubuntu 18.04 x64
 - Mac - 10.10+
-- iOS - 5.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off
+- iOS - 8.0+ (arm64, armv7, armv7s, x86_64), Bitcode is off
 
 In theory any platform that meets the requirement for `cpprest` and `boost` is also supported. The client is compiled with C++11.
 
