@@ -28,7 +28,9 @@ bool NRtClientProtocol_Json::serialize(const google::protobuf::Message& message,
 
 bool NRtClientProtocol_Json::parse(const NBytes& input, google::protobuf::Message& message)
 {
-    auto status = google::protobuf::util::JsonStringToMessage(input, &message);
+    google::protobuf::util::JsonParseOptions options;
+    options.ignore_unknown_fields = true;
+    auto status = google::protobuf::util::JsonStringToMessage(input, &message, options);
 
     return status.ok();
 }

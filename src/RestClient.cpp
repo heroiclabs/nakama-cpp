@@ -177,7 +177,9 @@ void RestClient::onResponse(RestReqContext* reqContext, NHttpResponsePtr respons
 
                 if (reqContext->data)
                 {
-                    auto status = google::protobuf::util::JsonStringToMessage(response->body, reqContext->data);
+                    google::protobuf::util::JsonParseOptions options;
+                    options.ignore_unknown_fields = true;
+                    auto status = google::protobuf::util::JsonStringToMessage(response->body, reqContext->data, options);
                     ok = status.ok();
 
                     if (!ok)
