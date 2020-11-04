@@ -1,5 +1,6 @@
 var struct_n_user =
 [
+    [ "appleId", "struct_n_user.html#a57e2be8886edce207ea89a19626f8821", null ],
     [ "avatarUrl", "struct_n_user.html#a4bd809d76b51868374144341f3c8b87f", null ],
     [ "createdAt", "struct_n_user.html#a9b022ec8ea6becaa3937427c0cee9c1c", null ],
     [ "displayName", "struct_n_user.html#a3f0040c972621cfd60a14a3b83ff0227", null ],

@@ -1,8 +1,8 @@
 var _n_rt_error_8h =
 [
     [ "NRtError", "struct_n_rt_error.html", "struct_n_rt_error" ],
-    [ "toString", "_n_rt_error_8h.html#a0754e194cd4ef67ebbb816c1b1e7ca75", null ],
     [ "toString", "_n_rt_error_8h.html#a194be34fb978ded12ba2ac650d9262ca", null ],
+    [ "toString", "_n_rt_error_8h.html#a0754e194cd4ef67ebbb816c1b1e7ca75", null ],
     [ "BAD_INPUT", "_n_rt_error_8h.html#aa0776189cdd951acffba66ccff48bf3d", null ],
     [ "CONNECT_ERROR", "_n_rt_error_8h.html#ad1241dc498924bb0678c370788b83716", null ],
     [ "MATCH_JOIN_REJECTED", "_n_rt_error_8h.html#a8b00f97d4de273d6924e1d4a5a918fef", null ],
