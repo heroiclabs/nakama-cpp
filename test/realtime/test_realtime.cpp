@@ -82,9 +82,57 @@ void test_rt_joinChat()
     test.runTest();
 }
 
+void test_rt_joinGroupChat()
+{
+    NRtClientTest test(__func__);
+
+    thread::id main_thread_id = this_thread::get_id();
+
+    test.onRtConnect = [&test, &main_thread_id]()
+    {
+        if (main_thread_id != this_thread::get_id())
+        {
+            std::cout << "ERROR: onRtConnect executed not from main thread!" << std::endl;
+            test.stopTest();
+            return;
+        }
+
+        auto successCallback = [&test, &main_thread_id](NGroup group)
+        {
+            std::cout << "joined group: " << group.id << std::endl;
+
+            auto joinedChatSucceeded = [&test](NChannelPtr channel)
+            {
+                std::cout << "Group chat joined successfully." << std::endl;
+                test.stopTest(true);
+            };
+
+            auto joinedChatFailed = [&test](const NRtError& err)
+            {
+                std::cout << "Could not join group chat." << std::endl;
+                test.stopTest(false);
+            };
+
+            test.rtClient->joinChat(
+                group.id,
+                NChannelType::GROUP,
+                {},
+                {},
+                joinedChatSucceeded,
+                joinedChatFailed
+            );
+        };
+
+        test.client->createGroup(test.session, "test group", "a group for chatting", "", "", false, {}, successCallback);
+    };
+
+    test.runTest();
+}
+
 void run_realtime_tests()
 {
     test_rt_joinChat();
+    test_rt_joinGroupChat();
     test_rt_match();
     test_notifications();
     test_authoritative_match();
