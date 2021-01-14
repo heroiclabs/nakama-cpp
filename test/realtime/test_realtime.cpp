@@ -123,7 +123,7 @@ void test_rt_joinGroupChat()
             );
         };
 
-        test.client->createGroup(test.session, "test group", "a group for chatting", "", "", false, {}, successCallback);
+        test.client->createGroup(test.session, "group chat " + test.session->getAuthToken(), "a group for chatting", "", "", false, {}, successCallback);
     };
 
     test.runTest();
