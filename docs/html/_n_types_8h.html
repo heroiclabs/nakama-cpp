@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Nakama C++ Client SDK
-   &#160;<span id="projectnumber">2.4.0</span>
+   &#160;<span id="projectnumber">2.4.1</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -139,10 +139,13 @@ Variables</h2></td></tr>
 <tr class="memitem:a8b723d9b918a6de34dd5dad97fec036b"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="_n_export_8h.html#a538cb4d125d8843785ff47eff3de38e0">NAKAMA_API</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#a8b723d9b918a6de34dd5dad97fec036b">NChannelType</a></td></tr>
 <tr class="memdesc:a8b723d9b918a6de34dd5dad97fec036b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The available channel types on the server.  <a href="_n_types_8h.html#a8b723d9b918a6de34dd5dad97fec036b">More...</a><br /></td></tr>
 <tr class="separator:a8b723d9b918a6de34dd5dad97fec036b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76ab038d7eca8b09a85c9646565f276c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#a76ab038d7eca8b09a85c9646565f276c">ROOM</a> = 0</td></tr>
+<tr class="memitem:ac370e7e4773857bdc2f11f751391fe39"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#ac370e7e4773857bdc2f11f751391fe39">TYPE_UNSPECIFIED</a> = 0</td></tr>
+<tr class="memdesc:ac370e7e4773857bdc2f11f751391fe39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default case. Assumed as ROOM type.  <a href="_n_types_8h.html#ac370e7e4773857bdc2f11f751391fe39">More...</a><br /></td></tr>
+<tr class="separator:ac370e7e4773857bdc2f11f751391fe39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76ab038d7eca8b09a85c9646565f276c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#a76ab038d7eca8b09a85c9646565f276c">ROOM</a> = 1</td></tr>
 <tr class="memdesc:a76ab038d7eca8b09a85c9646565f276c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A chat room which can be created dynamically with a name.  <a href="_n_types_8h.html#a76ab038d7eca8b09a85c9646565f276c">More...</a><br /></td></tr>
 <tr class="separator:a76ab038d7eca8b09a85c9646565f276c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01cd7fde59423eaae6ea390a392991b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#a01cd7fde59423eaae6ea390a392991b1">DIRECT_MESSAGE</a> = 1</td></tr>
+<tr class="memitem:a01cd7fde59423eaae6ea390a392991b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_n_types_8h.html#a01cd7fde59423eaae6ea390a392991b1">DIRECT_MESSAGE</a> = 2</td></tr>
 <tr class="memdesc:a01cd7fde59423eaae6ea390a392991b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">A private chat between two users.  <a href="_n_types_8h.html#a01cd7fde59423eaae6ea390a392991b1">More...</a><br /></td></tr>
 <tr class="separator:a01cd7fde59423eaae6ea390a392991b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -273,7 +276,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">DIRECT_MESSAGE = 1</td>
+          <td class="memname">DIRECT_MESSAGE = 2</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -353,7 +356,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ROOM = 0</td>
+          <td class="memname">ROOM = 1</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -375,6 +378,22 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The user is a superadmin with full control of the group. </p>
+
+</div>
+</div>
+<a id="ac370e7e4773857bdc2f11f751391fe39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac370e7e4773857bdc2f11f751391fe39">&#9670;&nbsp;</a></span>TYPE_UNSPECIFIED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TYPE_UNSPECIFIED = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Default case. Assumed as ROOM type. </p>
 
 </div>
 </div>

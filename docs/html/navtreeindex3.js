@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"struct_n_storage_object_write.html#aca863e9ad67e0e6ac48fee4c6055d3f5":[2,0,48,2],
 "struct_n_storage_object_write.html#ae3f7454f0f0f06e28614ded914c6b9bc":[2,0,48,5],
 "struct_n_stream.html":[2,0,49],
 "struct_n_stream.html#a02fcac64556ade7c93ad18d18e8ca9ab":[2,0,49,1],

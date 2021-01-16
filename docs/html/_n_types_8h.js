@@ -13,5 +13,6 @@ var _n_types_8h =
     [ "NChannelType", "_n_types_8h.html#a8b723d9b918a6de34dd5dad97fec036b", null ],
     [ "NUserGroupState", "_n_types_8h.html#a172e36c18090c151a69677b171f2de50", null ],
     [ "ROOM", "_n_types_8h.html#a76ab038d7eca8b09a85c9646565f276c", null ],
-    [ "SUPERADMIN", "_n_types_8h.html#aec1155c650a97a4d09278741d0070265", null ]
+    [ "SUPERADMIN", "_n_types_8h.html#aec1155c650a97a4d09278741d0070265", null ],
+    [ "TYPE_UNSPECIFIED", "_n_types_8h.html#ac370e7e4773857bdc2f11f751391fe39", null ]
 ];

@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"functions_vars_i.html":[2,3,2,9],
 "functions_vars_j.html":[2,3,2,10],
 "functions_vars_k.html":[2,3,2,11],
 "functions_vars_l.html":[2,3,2,12],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "struct_n_storage_object_write.html#a35ad4e60f846e18a082e0cdc67ddf0e4":[2,0,48,4],
 "struct_n_storage_object_write.html#a79bf8f9e26d379f30c937aaf395e3316":[2,0,48,3],
 "struct_n_storage_object_write.html#aa4eedb4128863bd40e471986b8e11ac8":[2,0,48,0],
-"struct_n_storage_object_write.html#aac98f9124efc0f26db9f24b9cd4d02d3":[2,0,48,1],
-"struct_n_storage_object_write.html#aca863e9ad67e0e6ac48fee4c6055d3f5":[2,0,48,2]
+"struct_n_storage_object_write.html#aac98f9124efc0f26db9f24b9cd4d02d3":[2,0,48,1]
 };

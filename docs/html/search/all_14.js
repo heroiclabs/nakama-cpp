@@ -7,5 +7,6 @@ var searchData=
   ['token_492',['token',['../struct_n_matchmaker_matched.html#a324f42f864cb071a195a8cae11508320',1,'NMatchmakerMatched']]],
   ['tostring_493',['toString',['../_n_error_8h.html#a29884cc430af6176c21e0388daa4c354',1,'toString(ErrorCode code):&#160;NError.h'],['../_n_error_8h.html#a1acaa3a17646a6ecc417c1feae01a3fe',1,'toString(const NError &amp;error):&#160;NError.h'],['../_n_rt_error_8h.html#a0754e194cd4ef67ebbb816c1b1e7ca75',1,'toString(RtErrorCode code):&#160;NRtError.h'],['../_n_rt_error_8h.html#a194be34fb978ded12ba2ac650d9262ca',1,'toString(const NRtError &amp;error):&#160;NRtError.h']]],
   ['tournaments_494',['tournaments',['../struct_n_tournament_list.html#aa4e941040d9a5f0d5552cbe6af239443',1,'NTournamentList']]],
-  ['transport_5ferror_495',['TRANSPORT_ERROR',['../_n_rt_error_8h.html#a89ecb927f24940781d6cf815a4ee6996',1,'NRtError.h']]]
+  ['transport_5ferror_495',['TRANSPORT_ERROR',['../_n_rt_error_8h.html#a89ecb927f24940781d6cf815a4ee6996',1,'NRtError.h']]],
+  ['type_5funspecified_496',['TYPE_UNSPECIFIED',['../_n_types_8h.html#ac370e7e4773857bdc2f11f751391fe39',1,'NTypes.h']]]
 ];
