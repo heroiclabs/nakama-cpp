@@ -4,6 +4,10 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+## [2.4.1] - [2021-01-16]
+### Fixed
+- fix join group chat by correcting NChannelType enum values
+
 ## [2.4.0] - [2020-11-01]
 ### Added
 - Support server 2.13.0
