@@ -1,8 +1,8 @@
 version: '3'
 services:
   cockroachdb:
-    image: cockroachdb/cockroach:v19.2.2
-    command: start --insecure --store=attrs=ssd,path=/var/lib/cockroach/
+    image: cockroachdb/cockroach:latest-v20.2
+    command: start-single-node --insecure --store=attrs=ssd,path=/var/lib/cockroach/
     restart: "no"
     volumes:
       - data:/var/lib/cockroach
@@ -13,7 +13,7 @@ services:
       - "26257:26257"
       - "8080:8080"
   nakama:
-    image: heroiclabs/nakama:2.13.0
+    image: heroiclabs/nakama:3.0.0
     entrypoint:
       - "/bin/sh"
       - "-ecx"
@@ -67,6 +67,5 @@ services:
       EOF'
     ports:
       - '9090:9090'
-
 volumes:
   data:
