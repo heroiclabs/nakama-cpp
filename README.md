@@ -135,7 +135,7 @@ In `Project Settings` add following:
     - `NAKAMA_CPP_SDK/libs/win64/v141` - for VS 2017 x64
     - `NAKAMA_CPP_SDK/libs/win32/v142` - for VS 2019 x86
     - `NAKAMA_CPP_SDK/libs/win64/v142` - for VS 2019 x64
-3. Add all `.lib` files located in libs folder in `Linker > Input > Additional Dependencies`
+3. Add the `.lib` files in your Debug libs folder to `Linker > Input > Additional Dependencies` for your Debug configuration. Do the same for your Release libs and configuration.
 
 ### Custom setup
 
