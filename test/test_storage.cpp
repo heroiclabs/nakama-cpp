@@ -101,10 +101,70 @@ void test_writeStorage()
     test.runTest();
 }
 
+
+void test_writeStorageCursor()
+{
+    NCppTest test(__func__);
+
+    test.createWorkingClient();
+
+    auto successCallback = [&test](NSessionPtr session)
+    {
+        int numCandies = 25;
+
+        auto writeSuccessCallback = [&test, session, numCandies](const NStorageObjectAcks& acks)
+        {
+            if (acks.size() == numCandies)
+            {
+                std::cout << "write ok. version: " << acks[0].version << std::endl;
+
+                auto firstListCallback = [&test, session](NStorageObjectListPtr list)
+                {
+                    std::cout << "cursor : " << list->cursor << std::endl;
+
+                    auto secondListCallback = [&test, session](NStorageObjectListPtr list)
+                    {
+                        test.stopTest(list->objects.size() > 0);
+                    };
+
+                    test.client->listUsersStorageObjects(session, "candies", session->getUserId(), 10, list->cursor, secondListCallback);
+                };
+
+                test.client->listUsersStorageObjects(session, "candies", session->getUserId(), 10, {}, firstListCallback);
+            }
+            else
+            {
+                test.stopTest();
+            }
+        };
+
+        std::vector<NStorageObjectWrite> objects;
+
+        for (int i = 0; i < numCandies; i++)
+        {
+            NStorageObjectWrite obj;
+            obj.collection = "candies";
+            obj.key = "Ice cream " + std::to_string(i);
+            obj.value = "{ \"price\": 25 }";
+            obj.permissionRead = NStoragePermissionRead::OWNER_READ;
+            obj.permissionWrite = NStoragePermissionWrite::OWNER_WRITE;
+            objects.push_back(obj);
+        }
+
+        test.client->writeStorageObjects(session, objects, writeSuccessCallback);
+    };
+
+    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
+
+    test.runTest();
+}
+
 void test_storage()
 {
     test_writeStorageInvalidArgument();
     test_writeStorage();
+    test_writeStorageCursor();
+
 }
 
 } // namespace Test
