@@ -182,12 +182,12 @@ call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC
 
 os.chdir(CUR_DIR)
 
-call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path(GRPC_GATEWAY + '/protoc-gen-swagger/options/annotations.proto')])
-call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path(GRPC_GATEWAY + '/protoc-gen-swagger/options/openapiv2.proto')])
+call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path(GRPC_GATEWAY + '/protoc-gen-openapiv2/options/annotations.proto')])
+call([PROTOC, '-I.', '-I' + GRPC_GATEWAY, '-I' + GOOGLEAPIS, '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path(GRPC_GATEWAY + '/protoc-gen-openapiv2/options/openapiv2.proto')])
 
 print('generating rtapi')
 
-call([PROTOC, '-I.', '-I' + PROTOBUF_SRC, '--cpp_out=' + OUT, path('github.com/heroiclabs/nakama-common/rtapi/realtime.proto')])
+call([PROTOC, '-I.', '-I' + PROTOBUF_SRC, '-I.' + '/github.com/heroiclabs/nakama-common/', '--cpp_out=' + OUT, path('github.com/heroiclabs/nakama-common/rtapi/realtime.proto')])
 
 # copy API
 root, dirs, files = next(os.walk(OUT))
