@@ -332,19 +332,6 @@ struct SessionRefreshRequestDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SessionRefreshRequestDefaultTypeInternal _SessionRefreshRequest_default_instance_;
-constexpr SessionLogoutRequest::SessionLogoutRequest(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : token_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , refresh_token_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct SessionLogoutRequestDefaultTypeInternal {
-  constexpr SessionLogoutRequestDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~SessionLogoutRequestDefaultTypeInternal() {}
-  union {
-    SessionLogoutRequest _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SessionLogoutRequestDefaultTypeInternal _SessionLogoutRequest_default_instance_;
 constexpr AuthenticateAppleRequest::AuthenticateAppleRequest(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : username_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
@@ -1549,7 +1536,7 @@ struct WriteTournamentRecordRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT WriteTournamentRecordRequestDefaultTypeInternal _WriteTournamentRecordRequest_default_instance_;
 }  // namespace api
 }  // namespace nakama
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto[108];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto[107];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto[3];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto = nullptr;
 
@@ -1762,13 +1749,6 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::nakama::api::SessionRefreshRequest, token_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::SessionRefreshRequest, vars_),
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::nakama::api::SessionLogoutRequest, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::nakama::api::SessionLogoutRequest, token_),
-  PROTOBUF_FIELD_OFFSET(::nakama::api::SessionLogoutRequest, refresh_token_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::nakama::api::AuthenticateAppleRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2510,89 +2490,88 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 185, -1, sizeof(::nakama::api::AddGroupUsersRequest)},
   { 192, 199, sizeof(::nakama::api::SessionRefreshRequest_VarsEntry_DoNotUse)},
   { 201, -1, sizeof(::nakama::api::SessionRefreshRequest)},
-  { 208, -1, sizeof(::nakama::api::SessionLogoutRequest)},
-  { 215, -1, sizeof(::nakama::api::AuthenticateAppleRequest)},
-  { 223, -1, sizeof(::nakama::api::AuthenticateCustomRequest)},
-  { 231, -1, sizeof(::nakama::api::AuthenticateDeviceRequest)},
-  { 239, -1, sizeof(::nakama::api::AuthenticateEmailRequest)},
-  { 247, -1, sizeof(::nakama::api::AuthenticateFacebookRequest)},
-  { 256, -1, sizeof(::nakama::api::AuthenticateFacebookInstantGameRequest)},
-  { 264, -1, sizeof(::nakama::api::AuthenticateGameCenterRequest)},
-  { 272, -1, sizeof(::nakama::api::AuthenticateGoogleRequest)},
-  { 280, -1, sizeof(::nakama::api::AuthenticateSteamRequest)},
-  { 289, -1, sizeof(::nakama::api::BanGroupUsersRequest)},
-  { 296, -1, sizeof(::nakama::api::BlockFriendsRequest)},
-  { 303, -1, sizeof(::nakama::api::ChannelMessage)},
-  { 321, -1, sizeof(::nakama::api::ChannelMessageList)},
-  { 330, -1, sizeof(::nakama::api::CreateGroupRequest)},
-  { 341, -1, sizeof(::nakama::api::DeleteFriendsRequest)},
-  { 348, -1, sizeof(::nakama::api::DeleteGroupRequest)},
-  { 354, -1, sizeof(::nakama::api::DeleteLeaderboardRecordRequest)},
-  { 360, -1, sizeof(::nakama::api::DeleteNotificationsRequest)},
-  { 366, -1, sizeof(::nakama::api::DeleteStorageObjectId)},
-  { 374, -1, sizeof(::nakama::api::DeleteStorageObjectsRequest)},
-  { 380, 387, sizeof(::nakama::api::Event_PropertiesEntry_DoNotUse)},
-  { 389, -1, sizeof(::nakama::api::Event)},
-  { 398, -1, sizeof(::nakama::api::Friend)},
-  { 406, -1, sizeof(::nakama::api::FriendList)},
-  { 413, -1, sizeof(::nakama::api::GetUsersRequest)},
-  { 421, -1, sizeof(::nakama::api::Group)},
-  { 438, -1, sizeof(::nakama::api::GroupList)},
-  { 445, -1, sizeof(::nakama::api::GroupUserList_GroupUser)},
-  { 452, -1, sizeof(::nakama::api::GroupUserList)},
-  { 459, -1, sizeof(::nakama::api::ImportFacebookFriendsRequest)},
-  { 466, -1, sizeof(::nakama::api::ImportSteamFriendsRequest)},
-  { 473, -1, sizeof(::nakama::api::JoinGroupRequest)},
-  { 479, -1, sizeof(::nakama::api::JoinTournamentRequest)},
-  { 485, -1, sizeof(::nakama::api::KickGroupUsersRequest)},
-  { 492, -1, sizeof(::nakama::api::LeaderboardRecord)},
-  { 509, -1, sizeof(::nakama::api::LeaderboardRecordList)},
-  { 518, -1, sizeof(::nakama::api::LeaveGroupRequest)},
-  { 524, -1, sizeof(::nakama::api::LinkFacebookRequest)},
-  { 531, -1, sizeof(::nakama::api::LinkSteamRequest)},
-  { 538, -1, sizeof(::nakama::api::ListChannelMessagesRequest)},
-  { 547, -1, sizeof(::nakama::api::ListFriendsRequest)},
-  { 555, -1, sizeof(::nakama::api::ListGroupsRequest)},
-  { 563, -1, sizeof(::nakama::api::ListGroupUsersRequest)},
-  { 572, -1, sizeof(::nakama::api::ListLeaderboardRecordsAroundOwnerRequest)},
-  { 581, -1, sizeof(::nakama::api::ListLeaderboardRecordsRequest)},
-  { 591, -1, sizeof(::nakama::api::ListMatchesRequest)},
-  { 602, -1, sizeof(::nakama::api::ListNotificationsRequest)},
-  { 609, -1, sizeof(::nakama::api::ListStorageObjectsRequest)},
-  { 618, -1, sizeof(::nakama::api::ListTournamentRecordsAroundOwnerRequest)},
-  { 627, -1, sizeof(::nakama::api::ListTournamentRecordsRequest)},
-  { 637, -1, sizeof(::nakama::api::ListTournamentsRequest)},
-  { 648, -1, sizeof(::nakama::api::ListUserGroupsRequest)},
-  { 657, -1, sizeof(::nakama::api::Match)},
-  { 668, -1, sizeof(::nakama::api::MatchList)},
-  { 674, -1, sizeof(::nakama::api::Notification)},
-  { 686, -1, sizeof(::nakama::api::NotificationList)},
-  { 693, -1, sizeof(::nakama::api::PromoteGroupUsersRequest)},
-  { 700, -1, sizeof(::nakama::api::DemoteGroupUsersRequest)},
-  { 707, -1, sizeof(::nakama::api::ReadStorageObjectId)},
-  { 715, -1, sizeof(::nakama::api::ReadStorageObjectsRequest)},
-  { 721, -1, sizeof(::nakama::api::Rpc)},
-  { 729, -1, sizeof(::nakama::api::Session)},
-  { 737, -1, sizeof(::nakama::api::StorageObject)},
-  { 751, -1, sizeof(::nakama::api::StorageObjectAck)},
-  { 760, -1, sizeof(::nakama::api::StorageObjectAcks)},
-  { 766, -1, sizeof(::nakama::api::StorageObjects)},
-  { 772, -1, sizeof(::nakama::api::StorageObjectList)},
-  { 779, -1, sizeof(::nakama::api::Tournament)},
-  { 801, -1, sizeof(::nakama::api::TournamentList)},
-  { 808, -1, sizeof(::nakama::api::TournamentRecordList)},
-  { 817, -1, sizeof(::nakama::api::UpdateAccountRequest)},
-  { 828, -1, sizeof(::nakama::api::UpdateGroupRequest)},
-  { 839, -1, sizeof(::nakama::api::User)},
-  { 862, -1, sizeof(::nakama::api::UserGroupList_UserGroup)},
-  { 869, -1, sizeof(::nakama::api::UserGroupList)},
-  { 876, -1, sizeof(::nakama::api::Users)},
-  { 882, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite)},
-  { 890, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest)},
-  { 897, -1, sizeof(::nakama::api::WriteStorageObject)},
-  { 908, -1, sizeof(::nakama::api::WriteStorageObjectsRequest)},
-  { 914, -1, sizeof(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite)},
-  { 922, -1, sizeof(::nakama::api::WriteTournamentRecordRequest)},
+  { 208, -1, sizeof(::nakama::api::AuthenticateAppleRequest)},
+  { 216, -1, sizeof(::nakama::api::AuthenticateCustomRequest)},
+  { 224, -1, sizeof(::nakama::api::AuthenticateDeviceRequest)},
+  { 232, -1, sizeof(::nakama::api::AuthenticateEmailRequest)},
+  { 240, -1, sizeof(::nakama::api::AuthenticateFacebookRequest)},
+  { 249, -1, sizeof(::nakama::api::AuthenticateFacebookInstantGameRequest)},
+  { 257, -1, sizeof(::nakama::api::AuthenticateGameCenterRequest)},
+  { 265, -1, sizeof(::nakama::api::AuthenticateGoogleRequest)},
+  { 273, -1, sizeof(::nakama::api::AuthenticateSteamRequest)},
+  { 282, -1, sizeof(::nakama::api::BanGroupUsersRequest)},
+  { 289, -1, sizeof(::nakama::api::BlockFriendsRequest)},
+  { 296, -1, sizeof(::nakama::api::ChannelMessage)},
+  { 314, -1, sizeof(::nakama::api::ChannelMessageList)},
+  { 323, -1, sizeof(::nakama::api::CreateGroupRequest)},
+  { 334, -1, sizeof(::nakama::api::DeleteFriendsRequest)},
+  { 341, -1, sizeof(::nakama::api::DeleteGroupRequest)},
+  { 347, -1, sizeof(::nakama::api::DeleteLeaderboardRecordRequest)},
+  { 353, -1, sizeof(::nakama::api::DeleteNotificationsRequest)},
+  { 359, -1, sizeof(::nakama::api::DeleteStorageObjectId)},
+  { 367, -1, sizeof(::nakama::api::DeleteStorageObjectsRequest)},
+  { 373, 380, sizeof(::nakama::api::Event_PropertiesEntry_DoNotUse)},
+  { 382, -1, sizeof(::nakama::api::Event)},
+  { 391, -1, sizeof(::nakama::api::Friend)},
+  { 399, -1, sizeof(::nakama::api::FriendList)},
+  { 406, -1, sizeof(::nakama::api::GetUsersRequest)},
+  { 414, -1, sizeof(::nakama::api::Group)},
+  { 431, -1, sizeof(::nakama::api::GroupList)},
+  { 438, -1, sizeof(::nakama::api::GroupUserList_GroupUser)},
+  { 445, -1, sizeof(::nakama::api::GroupUserList)},
+  { 452, -1, sizeof(::nakama::api::ImportFacebookFriendsRequest)},
+  { 459, -1, sizeof(::nakama::api::ImportSteamFriendsRequest)},
+  { 466, -1, sizeof(::nakama::api::JoinGroupRequest)},
+  { 472, -1, sizeof(::nakama::api::JoinTournamentRequest)},
+  { 478, -1, sizeof(::nakama::api::KickGroupUsersRequest)},
+  { 485, -1, sizeof(::nakama::api::LeaderboardRecord)},
+  { 502, -1, sizeof(::nakama::api::LeaderboardRecordList)},
+  { 511, -1, sizeof(::nakama::api::LeaveGroupRequest)},
+  { 517, -1, sizeof(::nakama::api::LinkFacebookRequest)},
+  { 524, -1, sizeof(::nakama::api::LinkSteamRequest)},
+  { 531, -1, sizeof(::nakama::api::ListChannelMessagesRequest)},
+  { 540, -1, sizeof(::nakama::api::ListFriendsRequest)},
+  { 548, -1, sizeof(::nakama::api::ListGroupsRequest)},
+  { 556, -1, sizeof(::nakama::api::ListGroupUsersRequest)},
+  { 565, -1, sizeof(::nakama::api::ListLeaderboardRecordsAroundOwnerRequest)},
+  { 574, -1, sizeof(::nakama::api::ListLeaderboardRecordsRequest)},
+  { 584, -1, sizeof(::nakama::api::ListMatchesRequest)},
+  { 595, -1, sizeof(::nakama::api::ListNotificationsRequest)},
+  { 602, -1, sizeof(::nakama::api::ListStorageObjectsRequest)},
+  { 611, -1, sizeof(::nakama::api::ListTournamentRecordsAroundOwnerRequest)},
+  { 620, -1, sizeof(::nakama::api::ListTournamentRecordsRequest)},
+  { 630, -1, sizeof(::nakama::api::ListTournamentsRequest)},
+  { 641, -1, sizeof(::nakama::api::ListUserGroupsRequest)},
+  { 650, -1, sizeof(::nakama::api::Match)},
+  { 661, -1, sizeof(::nakama::api::MatchList)},
+  { 667, -1, sizeof(::nakama::api::Notification)},
+  { 679, -1, sizeof(::nakama::api::NotificationList)},
+  { 686, -1, sizeof(::nakama::api::PromoteGroupUsersRequest)},
+  { 693, -1, sizeof(::nakama::api::DemoteGroupUsersRequest)},
+  { 700, -1, sizeof(::nakama::api::ReadStorageObjectId)},
+  { 708, -1, sizeof(::nakama::api::ReadStorageObjectsRequest)},
+  { 714, -1, sizeof(::nakama::api::Rpc)},
+  { 722, -1, sizeof(::nakama::api::Session)},
+  { 730, -1, sizeof(::nakama::api::StorageObject)},
+  { 744, -1, sizeof(::nakama::api::StorageObjectAck)},
+  { 753, -1, sizeof(::nakama::api::StorageObjectAcks)},
+  { 759, -1, sizeof(::nakama::api::StorageObjects)},
+  { 765, -1, sizeof(::nakama::api::StorageObjectList)},
+  { 772, -1, sizeof(::nakama::api::Tournament)},
+  { 794, -1, sizeof(::nakama::api::TournamentList)},
+  { 801, -1, sizeof(::nakama::api::TournamentRecordList)},
+  { 810, -1, sizeof(::nakama::api::UpdateAccountRequest)},
+  { 821, -1, sizeof(::nakama::api::UpdateGroupRequest)},
+  { 832, -1, sizeof(::nakama::api::User)},
+  { 855, -1, sizeof(::nakama::api::UserGroupList_UserGroup)},
+  { 862, -1, sizeof(::nakama::api::UserGroupList)},
+  { 869, -1, sizeof(::nakama::api::Users)},
+  { 875, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite)},
+  { 883, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest)},
+  { 890, -1, sizeof(::nakama::api::WriteStorageObject)},
+  { 901, -1, sizeof(::nakama::api::WriteStorageObjectsRequest)},
+  { 907, -1, sizeof(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite)},
+  { 915, -1, sizeof(::nakama::api::WriteTournamentRecordRequest)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -2621,7 +2600,6 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_AddGroupUsersRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_SessionRefreshRequest_VarsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_SessionRefreshRequest_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_SessionLogoutRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_AuthenticateAppleRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_AuthenticateCustomRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_AuthenticateDeviceRequest_default_instance_),
@@ -2758,289 +2736,287 @@ const char descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon
   "ids\030\002 \003(\t\"\216\001\n\025SessionRefreshRequest\022\r\n\005t"
   "oken\030\001 \001(\t\0229\n\004vars\030\002 \003(\0132+.nakama.api.Se"
   "ssionRefreshRequest.VarsEntry\032+\n\tVarsEnt"
-  "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"<\n\024Se"
-  "ssionLogoutRequest\022\r\n\005token\030\001 \001(\t\022\025\n\rref"
-  "resh_token\030\002 \001(\t\"\203\001\n\030AuthenticateAppleRe"
-  "quest\022)\n\007account\030\001 \001(\0132\030.nakama.api.Acco"
-  "untApple\022*\n\006create\030\002 \001(\0132\032.google.protob"
-  "uf.BoolValue\022\020\n\010username\030\003 \001(\t\"\205\001\n\031Authe"
-  "nticateCustomRequest\022*\n\007account\030\001 \001(\0132\031."
-  "nakama.api.AccountCustom\022*\n\006create\030\002 \001(\013"
-  "2\032.google.protobuf.BoolValue\022\020\n\010username"
-  "\030\003 \001(\t\"\205\001\n\031AuthenticateDeviceRequest\022*\n\007"
-  "account\030\001 \001(\0132\031.nakama.api.AccountDevice"
-  "\022*\n\006create\030\002 \001(\0132\032.google.protobuf.BoolV"
-  "alue\022\020\n\010username\030\003 \001(\t\"\203\001\n\030AuthenticateE"
-  "mailRequest\022)\n\007account\030\001 \001(\0132\030.nakama.ap"
-  "i.AccountEmail\022*\n\006create\030\002 \001(\0132\032.google."
-  "protobuf.BoolValue\022\020\n\010username\030\003 \001(\t\"\263\001\n"
-  "\033AuthenticateFacebookRequest\022,\n\007account\030"
-  "\001 \001(\0132\033.nakama.api.AccountFacebook\022*\n\006cr"
-  "eate\030\002 \001(\0132\032.google.protobuf.BoolValue\022\020"
-  "\n\010username\030\003 \001(\t\022(\n\004sync\030\004 \001(\0132\032.google."
-  "protobuf.BoolValue\"\237\001\n&AuthenticateFaceb"
-  "ookInstantGameRequest\0227\n\007account\030\001 \001(\0132&"
-  ".nakama.api.AccountFacebookInstantGame\022*"
-  "\n\006create\030\002 \001(\0132\032.google.protobuf.BoolVal"
-  "ue\022\020\n\010username\030\003 \001(\t\"\215\001\n\035AuthenticateGam"
-  "eCenterRequest\022.\n\007account\030\001 \001(\0132\035.nakama"
-  ".api.AccountGameCenter\022*\n\006create\030\002 \001(\0132\032"
-  ".google.protobuf.BoolValue\022\020\n\010username\030\003"
-  " \001(\t\"\205\001\n\031AuthenticateGoogleRequest\022*\n\007ac"
-  "count\030\001 \001(\0132\031.nakama.api.AccountGoogle\022*"
-  "\n\006create\030\002 \001(\0132\032.google.protobuf.BoolVal"
-  "ue\022\020\n\010username\030\003 \001(\t\"\255\001\n\030AuthenticateSte"
-  "amRequest\022)\n\007account\030\001 \001(\0132\030.nakama.api."
-  "AccountSteam\022*\n\006create\030\002 \001(\0132\032.google.pr"
+  "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\203\001\n\030A"
+  "uthenticateAppleRequest\022)\n\007account\030\001 \001(\013"
+  "2\030.nakama.api.AccountApple\022*\n\006create\030\002 \001"
+  "(\0132\032.google.protobuf.BoolValue\022\020\n\010userna"
+  "me\030\003 \001(\t\"\205\001\n\031AuthenticateCustomRequest\022*"
+  "\n\007account\030\001 \001(\0132\031.nakama.api.AccountCust"
+  "om\022*\n\006create\030\002 \001(\0132\032.google.protobuf.Boo"
+  "lValue\022\020\n\010username\030\003 \001(\t\"\205\001\n\031Authenticat"
+  "eDeviceRequest\022*\n\007account\030\001 \001(\0132\031.nakama"
+  ".api.AccountDevice\022*\n\006create\030\002 \001(\0132\032.goo"
+  "gle.protobuf.BoolValue\022\020\n\010username\030\003 \001(\t"
+  "\"\203\001\n\030AuthenticateEmailRequest\022)\n\007account"
+  "\030\001 \001(\0132\030.nakama.api.AccountEmail\022*\n\006crea"
+  "te\030\002 \001(\0132\032.google.protobuf.BoolValue\022\020\n\010"
+  "username\030\003 \001(\t\"\263\001\n\033AuthenticateFacebookR"
+  "equest\022,\n\007account\030\001 \001(\0132\033.nakama.api.Acc"
+  "ountFacebook\022*\n\006create\030\002 \001(\0132\032.google.pr"
   "otobuf.BoolValue\022\020\n\010username\030\003 \001(\t\022(\n\004sy"
-  "nc\030\004 \001(\0132\032.google.protobuf.BoolValue\":\n\024"
-  "BanGroupUsersRequest\022\020\n\010group_id\030\001 \001(\t\022\020"
-  "\n\010user_ids\030\002 \003(\t\"5\n\023BlockFriendsRequest\022"
-  "\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\"\372\002\n\016Chan"
-  "nelMessage\022\022\n\nchannel_id\030\001 \001(\t\022\022\n\nmessag"
-  "e_id\030\002 \001(\t\022)\n\004code\030\003 \001(\0132\033.google.protob"
-  "uf.Int32Value\022\021\n\tsender_id\030\004 \001(\t\022\020\n\010user"
-  "name\030\005 \001(\t\022\017\n\007content\030\006 \001(\t\022/\n\013create_ti"
-  "me\030\007 \001(\0132\032.google.protobuf.Timestamp\022/\n\013"
-  "update_time\030\010 \001(\0132\032.google.protobuf.Time"
-  "stamp\022.\n\npersistent\030\t \001(\0132\032.google.proto"
-  "buf.BoolValue\022\021\n\troom_name\030\n \001(\t\022\020\n\010grou"
-  "p_id\030\013 \001(\t\022\023\n\013user_id_one\030\014 \001(\t\022\023\n\013user_"
-  "id_two\030\r \001(\t\"\206\001\n\022ChannelMessageList\022,\n\010m"
-  "essages\030\001 \003(\0132\032.nakama.api.ChannelMessag"
-  "e\022\023\n\013next_cursor\030\002 \001(\t\022\023\n\013prev_cursor\030\003 "
-  "\001(\t\022\030\n\020cacheable_cursor\030\004 \001(\t\"~\n\022CreateG"
-  "roupRequest\022\014\n\004name\030\001 \001(\t\022\023\n\013description"
-  "\030\002 \001(\t\022\020\n\010lang_tag\030\003 \001(\t\022\022\n\navatar_url\030\004"
-  " \001(\t\022\014\n\004open\030\005 \001(\010\022\021\n\tmax_count\030\006 \001(\005\"6\n"
-  "\024DeleteFriendsRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tus"
-  "ernames\030\002 \003(\t\"&\n\022DeleteGroupRequest\022\020\n\010g"
-  "roup_id\030\001 \001(\t\"8\n\036DeleteLeaderboardRecord"
-  "Request\022\026\n\016leaderboard_id\030\001 \001(\t\")\n\032Delet"
-  "eNotificationsRequest\022\013\n\003ids\030\001 \003(\t\"I\n\025De"
-  "leteStorageObjectId\022\022\n\ncollection\030\001 \001(\t\022"
-  "\013\n\003key\030\002 \001(\t\022\017\n\007version\030\003 \001(\t\"T\n\033DeleteS"
-  "torageObjectsRequest\0225\n\nobject_ids\030\001 \003(\013"
-  "2!.nakama.api.DeleteStorageObjectId\"\300\001\n\005"
-  "Event\022\014\n\004name\030\001 \001(\t\0225\n\nproperties\030\002 \003(\0132"
-  "!.nakama.api.Event.PropertiesEntry\022-\n\tti"
-  "mestamp\030\003 \001(\0132\032.google.protobuf.Timestam"
-  "p\022\020\n\010external\030\004 \001(\010\0321\n\017PropertiesEntry\022\013"
-  "\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\315\001\n\006Frien"
-  "d\022\036\n\004user\030\001 \001(\0132\020.nakama.api.User\022*\n\005sta"
-  "te\030\002 \001(\0132\033.google.protobuf.Int32Value\022/\n"
-  "\013update_time\030\003 \001(\0132\032.google.protobuf.Tim"
-  "estamp\"F\n\005State\022\n\n\006FRIEND\020\000\022\017\n\013INVITE_SE"
-  "NT\020\001\022\023\n\017INVITE_RECEIVED\020\002\022\013\n\007BLOCKED\020\003\"A"
-  "\n\nFriendList\022#\n\007friends\030\001 \003(\0132\022.nakama.a"
-  "pi.Friend\022\016\n\006cursor\030\002 \001(\t\"G\n\017GetUsersReq"
-  "uest\022\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\022\024\n\014"
-  "facebook_ids\030\003 \003(\t\"\265\002\n\005Group\022\n\n\002id\030\001 \001(\t"
-  "\022\022\n\ncreator_id\030\002 \001(\t\022\014\n\004name\030\003 \001(\t\022\023\n\013de"
-  "scription\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001(\t\022\020\n\010met"
-  "adata\030\006 \001(\t\022\022\n\navatar_url\030\007 \001(\t\022(\n\004open\030"
-  "\010 \001(\0132\032.google.protobuf.BoolValue\022\022\n\nedg"
-  "e_count\030\t \001(\005\022\021\n\tmax_count\030\n \001(\005\022/\n\013crea"
-  "te_time\030\013 \001(\0132\032.google.protobuf.Timestam"
-  "p\022/\n\013update_time\030\014 \001(\0132\032.google.protobuf"
-  ".Timestamp\">\n\tGroupList\022!\n\006groups\030\001 \003(\0132"
-  "\021.nakama.api.Group\022\016\n\006cursor\030\002 \001(\t\"\365\001\n\rG"
-  "roupUserList\0228\n\013group_users\030\001 \003(\0132#.naka"
-  "ma.api.GroupUserList.GroupUser\022\016\n\006cursor"
-  "\030\002 \001(\t\032\231\001\n\tGroupUser\022\036\n\004user\030\001 \001(\0132\020.nak"
-  "ama.api.User\022*\n\005state\030\002 \001(\0132\033.google.pro"
-  "tobuf.Int32Value\"@\n\005State\022\016\n\nSUPERADMIN\020"
-  "\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN_REQUEST"
-  "\020\003\"w\n\034ImportFacebookFriendsRequest\022,\n\007ac"
-  "count\030\001 \001(\0132\033.nakama.api.AccountFacebook"
-  "\022)\n\005reset\030\002 \001(\0132\032.google.protobuf.BoolVa"
-  "lue\"q\n\031ImportSteamFriendsRequest\022)\n\007acco"
-  "unt\030\001 \001(\0132\030.nakama.api.AccountSteam\022)\n\005r"
-  "eset\030\002 \001(\0132\032.google.protobuf.BoolValue\"$"
-  "\n\020JoinGroupRequest\022\020\n\010group_id\030\001 \001(\t\".\n\025"
-  "JoinTournamentRequest\022\025\n\rtournament_id\030\001"
-  " \001(\t\";\n\025KickGroupUsersRequest\022\020\n\010group_i"
-  "d\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"\353\002\n\021Leaderboar"
-  "dRecord\022\026\n\016leaderboard_id\030\001 \001(\t\022\020\n\010owner"
-  "_id\030\002 \001(\t\022.\n\010username\030\003 \001(\0132\034.google.pro"
-  "tobuf.StringValue\022\r\n\005score\030\004 \001(\003\022\020\n\010subs"
-  "core\030\005 \001(\003\022\021\n\tnum_score\030\006 \001(\005\022\020\n\010metadat"
-  "a\030\007 \001(\t\022/\n\013create_time\030\010 \001(\0132\032.google.pr"
-  "otobuf.Timestamp\022/\n\013update_time\030\t \001(\0132\032."
-  "google.protobuf.Timestamp\022/\n\013expiry_time"
-  "\030\n \001(\0132\032.google.protobuf.Timestamp\022\014\n\004ra"
-  "nk\030\013 \001(\003\022\025\n\rmax_num_score\030\014 \001(\r\"\247\001\n\025Lead"
-  "erboardRecordList\022.\n\007records\030\001 \003(\0132\035.nak"
-  "ama.api.LeaderboardRecord\0224\n\rowner_recor"
-  "ds\030\002 \003(\0132\035.nakama.api.LeaderboardRecord\022"
-  "\023\n\013next_cursor\030\003 \001(\t\022\023\n\013prev_cursor\030\004 \001("
-  "\t\"%\n\021LeaveGroupRequest\022\020\n\010group_id\030\001 \001(\t"
-  "\"m\n\023LinkFacebookRequest\022,\n\007account\030\001 \001(\013"
-  "2\033.nakama.api.AccountFacebook\022(\n\004sync\030\002 "
-  "\001(\0132\032.google.protobuf.BoolValue\"g\n\020LinkS"
-  "teamRequest\022)\n\007account\030\001 \001(\0132\030.nakama.ap"
-  "i.AccountSteam\022(\n\004sync\030\002 \001(\0132\032.google.pr"
-  "otobuf.BoolValue\"\231\001\n\032ListChannelMessages"
-  "Request\022\022\n\nchannel_id\030\001 \001(\t\022*\n\005limit\030\002 \001"
-  "(\0132\033.google.protobuf.Int32Value\022+\n\007forwa"
-  "rd\030\003 \001(\0132\032.google.protobuf.BoolValue\022\016\n\006"
-  "cursor\030\004 \001(\t\"|\n\022ListFriendsRequest\022*\n\005li"
-  "mit\030\001 \001(\0132\033.google.protobuf.Int32Value\022*"
-  "\n\005state\030\002 \001(\0132\033.google.protobuf.Int32Val"
-  "ue\022\016\n\006cursor\030\003 \001(\t\"]\n\021ListGroupsRequest\022"
-  "\014\n\004name\030\001 \001(\t\022\016\n\006cursor\030\002 \001(\t\022*\n\005limit\030\003"
-  " \001(\0132\033.google.protobuf.Int32Value\"\221\001\n\025Li"
-  "stGroupUsersRequest\022\020\n\010group_id\030\001 \001(\t\022*\n"
-  "\005limit\030\002 \001(\0132\033.google.protobuf.Int32Valu"
-  "e\022*\n\005state\030\003 \001(\0132\033.google.protobuf.Int32"
-  "Value\022\016\n\006cursor\030\004 \001(\t\"\256\001\n(ListLeaderboar"
-  "dRecordsAroundOwnerRequest\022\026\n\016leaderboar"
-  "d_id\030\001 \001(\t\022+\n\005limit\030\002 \001(\0132\034.google.proto"
-  "buf.UInt32Value\022\020\n\010owner_id\030\003 \001(\t\022+\n\006exp"
-  "iry\030\004 \001(\0132\033.google.protobuf.Int64Value\"\263"
-  "\001\n\035ListLeaderboardRecordsRequest\022\026\n\016lead"
-  "erboard_id\030\001 \001(\t\022\021\n\towner_ids\030\002 \003(\t\022*\n\005l"
-  "imit\030\003 \001(\0132\033.google.protobuf.Int32Value\022"
-  "\016\n\006cursor\030\004 \001(\t\022+\n\006expiry\030\005 \001(\0132\033.google"
-  ".protobuf.Int64Value\"\253\002\n\022ListMatchesRequ"
-  "est\022*\n\005limit\030\001 \001(\0132\033.google.protobuf.Int"
-  "32Value\0221\n\rauthoritative\030\002 \001(\0132\032.google."
-  "protobuf.BoolValue\022+\n\005label\030\003 \001(\0132\034.goog"
-  "le.protobuf.StringValue\022-\n\010min_size\030\004 \001("
-  "\0132\033.google.protobuf.Int32Value\022-\n\010max_si"
-  "ze\030\005 \001(\0132\033.google.protobuf.Int32Value\022+\n"
-  "\005query\030\006 \001(\0132\034.google.protobuf.StringVal"
-  "ue\"`\n\030ListNotificationsRequest\022*\n\005limit\030"
-  "\001 \001(\0132\033.google.protobuf.Int32Value\022\030\n\020ca"
-  "cheable_cursor\030\002 \001(\t\"|\n\031ListStorageObjec"
-  "tsRequest\022\017\n\007user_id\030\001 \001(\t\022\022\n\ncollection"
-  "\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.google.protobuf."
-  "Int32Value\022\016\n\006cursor\030\004 \001(\t\"\254\001\n\'ListTourn"
-  "amentRecordsAroundOwnerRequest\022\025\n\rtourna"
-  "ment_id\030\001 \001(\t\022+\n\005limit\030\002 \001(\0132\034.google.pr"
-  "otobuf.UInt32Value\022\020\n\010owner_id\030\003 \001(\t\022+\n\006"
-  "expiry\030\004 \001(\0132\033.google.protobuf.Int64Valu"
-  "e\"\261\001\n\034ListTournamentRecordsRequest\022\025\n\rto"
-  "urnament_id\030\001 \001(\t\022\021\n\towner_ids\030\002 \003(\t\022*\n\005"
-  "limit\030\003 \001(\0132\033.google.protobuf.Int32Value"
-  "\022\016\n\006cursor\030\004 \001(\t\022+\n\006expiry\030\005 \001(\0132\033.googl"
-  "e.protobuf.Int64Value\"\240\002\n\026ListTournament"
-  "sRequest\0224\n\016category_start\030\001 \001(\0132\034.googl"
-  "e.protobuf.UInt32Value\0222\n\014category_end\030\002"
-  " \001(\0132\034.google.protobuf.UInt32Value\0220\n\nst"
-  "art_time\030\003 \001(\0132\034.google.protobuf.UInt32V"
-  "alue\022.\n\010end_time\030\004 \001(\0132\034.google.protobuf"
-  ".UInt32Value\022*\n\005limit\030\006 \001(\0132\033.google.pro"
-  "tobuf.Int32Value\022\016\n\006cursor\030\010 \001(\t\"\220\001\n\025Lis"
-  "tUserGroupsRequest\022\017\n\007user_id\030\001 \001(\t\022*\n\005l"
-  "imit\030\002 \001(\0132\033.google.protobuf.Int32Value\022"
-  "*\n\005state\030\003 \001(\0132\033.google.protobuf.Int32Va"
-  "lue\022\016\n\006cursor\030\004 \001(\t\"\224\001\n\005Match\022\020\n\010match_i"
-  "d\030\001 \001(\t\022\025\n\rauthoritative\030\002 \001(\010\022+\n\005label\030"
-  "\003 \001(\0132\034.google.protobuf.StringValue\022\014\n\004s"
-  "ize\030\004 \001(\005\022\021\n\ttick_rate\030\005 \001(\005\022\024\n\014handler_"
-  "name\030\006 \001(\t\"/\n\tMatchList\022\"\n\007matches\030\001 \003(\013"
-  "2\021.nakama.api.Match\"\242\001\n\014Notification\022\n\n\002"
-  "id\030\001 \001(\t\022\017\n\007subject\030\002 \001(\t\022\017\n\007content\030\003 \001"
-  "(\t\022\014\n\004code\030\004 \001(\005\022\021\n\tsender_id\030\005 \001(\t\022/\n\013c"
-  "reate_time\030\006 \001(\0132\032.google.protobuf.Times"
-  "tamp\022\022\n\npersistent\030\007 \001(\010\"]\n\020Notification"
-  "List\022/\n\rnotifications\030\001 \003(\0132\030.nakama.api"
-  ".Notification\022\030\n\020cacheable_cursor\030\002 \001(\t\""
-  ">\n\030PromoteGroupUsersRequest\022\020\n\010group_id\030"
-  "\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"=\n\027DemoteGroupUs"
-  "ersRequest\022\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids"
-  "\030\002 \003(\t\"G\n\023ReadStorageObjectId\022\022\n\ncollect"
-  "ion\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007user_id\030\003 \001(\t\""
-  "P\n\031ReadStorageObjectsRequest\0223\n\nobject_i"
-  "ds\030\001 \003(\0132\037.nakama.api.ReadStorageObjectI"
-  "d\"4\n\003Rpc\022\n\n\002id\030\001 \001(\t\022\017\n\007payload\030\002 \001(\t\022\020\n"
-  "\010http_key\030\003 \001(\t\"@\n\007Session\022\017\n\007created\030\001 "
-  "\001(\010\022\r\n\005token\030\002 \001(\t\022\025\n\rrefresh_token\030\003 \001("
-  "\t\"\366\001\n\rStorageObject\022\022\n\ncollection\030\001 \001(\t\022"
-  "\013\n\003key\030\002 \001(\t\022\017\n\007user_id\030\003 \001(\t\022\r\n\005value\030\004"
-  " \001(\t\022\017\n\007version\030\005 \001(\t\022\027\n\017permission_read"
-  "\030\006 \001(\005\022\030\n\020permission_write\030\007 \001(\005\022/\n\013crea"
-  "te_time\030\010 \001(\0132\032.google.protobuf.Timestam"
-  "p\022/\n\013update_time\030\t \001(\0132\032.google.protobuf"
-  ".Timestamp\"U\n\020StorageObjectAck\022\022\n\ncollec"
-  "tion\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007version\030\003 \001(\t"
-  "\022\017\n\007user_id\030\004 \001(\t\"\?\n\021StorageObjectAcks\022*"
-  "\n\004acks\030\001 \003(\0132\034.nakama.api.StorageObjectA"
-  "ck\"<\n\016StorageObjects\022*\n\007objects\030\001 \003(\0132\031."
-  "nakama.api.StorageObject\"O\n\021StorageObjec"
-  "tList\022*\n\007objects\030\001 \003(\0132\031.nakama.api.Stor"
-  "ageObject\022\016\n\006cursor\030\002 \001(\t\"\235\003\n\nTournament"
-  "\022\n\n\002id\030\001 \001(\t\022\r\n\005title\030\002 \001(\t\022\023\n\013descripti"
-  "on\030\003 \001(\t\022\020\n\010category\030\004 \001(\r\022\022\n\nsort_order"
-  "\030\005 \001(\r\022\014\n\004size\030\006 \001(\r\022\020\n\010max_size\030\007 \001(\r\022\025"
-  "\n\rmax_num_score\030\010 \001(\r\022\021\n\tcan_enter\030\t \001(\010"
-  "\022\022\n\nend_active\030\n \001(\r\022\022\n\nnext_reset\030\013 \001(\r"
-  "\022\020\n\010metadata\030\014 \001(\t\022/\n\013create_time\030\r \001(\0132"
-  "\032.google.protobuf.Timestamp\022.\n\nstart_tim"
-  "e\030\016 \001(\0132\032.google.protobuf.Timestamp\022,\n\010e"
-  "nd_time\030\017 \001(\0132\032.google.protobuf.Timestam"
-  "p\022\020\n\010duration\030\020 \001(\r\022\024\n\014start_active\030\021 \001("
-  "\r\"M\n\016TournamentList\022+\n\013tournaments\030\001 \003(\013"
-  "2\026.nakama.api.Tournament\022\016\n\006cursor\030\002 \001(\t"
-  "\"\246\001\n\024TournamentRecordList\022.\n\007records\030\001 \003"
-  "(\0132\035.nakama.api.LeaderboardRecord\0224\n\rown"
-  "er_records\030\002 \003(\0132\035.nakama.api.Leaderboar"
-  "dRecord\022\023\n\013next_cursor\030\003 \001(\t\022\023\n\013prev_cur"
-  "sor\030\004 \001(\t\"\274\002\n\024UpdateAccountRequest\022.\n\010us"
-  "ername\030\001 \001(\0132\034.google.protobuf.StringVal"
-  "ue\0222\n\014display_name\030\002 \001(\0132\034.google.protob"
-  "uf.StringValue\0220\n\navatar_url\030\003 \001(\0132\034.goo"
-  "gle.protobuf.StringValue\022.\n\010lang_tag\030\004 \001"
-  "(\0132\034.google.protobuf.StringValue\022.\n\010loca"
-  "tion\030\005 \001(\0132\034.google.protobuf.StringValue"
-  "\022.\n\010timezone\030\006 \001(\0132\034.google.protobuf.Str"
-  "ingValue\"\221\002\n\022UpdateGroupRequest\022\020\n\010group"
-  "_id\030\001 \001(\t\022*\n\004name\030\002 \001(\0132\034.google.protobu"
-  "f.StringValue\0221\n\013description\030\003 \001(\0132\034.goo"
-  "gle.protobuf.StringValue\022.\n\010lang_tag\030\004 \001"
+  "nc\030\004 \001(\0132\032.google.protobuf.BoolValue\"\237\001\n"
+  "&AuthenticateFacebookInstantGameRequest\022"
+  "7\n\007account\030\001 \001(\0132&.nakama.api.AccountFac"
+  "ebookInstantGame\022*\n\006create\030\002 \001(\0132\032.googl"
+  "e.protobuf.BoolValue\022\020\n\010username\030\003 \001(\t\"\215"
+  "\001\n\035AuthenticateGameCenterRequest\022.\n\007acco"
+  "unt\030\001 \001(\0132\035.nakama.api.AccountGameCenter"
+  "\022*\n\006create\030\002 \001(\0132\032.google.protobuf.BoolV"
+  "alue\022\020\n\010username\030\003 \001(\t\"\205\001\n\031AuthenticateG"
+  "oogleRequest\022*\n\007account\030\001 \001(\0132\031.nakama.a"
+  "pi.AccountGoogle\022*\n\006create\030\002 \001(\0132\032.googl"
+  "e.protobuf.BoolValue\022\020\n\010username\030\003 \001(\t\"\255"
+  "\001\n\030AuthenticateSteamRequest\022)\n\007account\030\001"
+  " \001(\0132\030.nakama.api.AccountSteam\022*\n\006create"
+  "\030\002 \001(\0132\032.google.protobuf.BoolValue\022\020\n\010us"
+  "ername\030\003 \001(\t\022(\n\004sync\030\004 \001(\0132\032.google.prot"
+  "obuf.BoolValue\":\n\024BanGroupUsersRequest\022\020"
+  "\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"5\n\023Bl"
+  "ockFriendsRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tuserna"
+  "mes\030\002 \003(\t\"\372\002\n\016ChannelMessage\022\022\n\nchannel_"
+  "id\030\001 \001(\t\022\022\n\nmessage_id\030\002 \001(\t\022)\n\004code\030\003 \001"
+  "(\0132\033.google.protobuf.Int32Value\022\021\n\tsende"
+  "r_id\030\004 \001(\t\022\020\n\010username\030\005 \001(\t\022\017\n\007content\030"
+  "\006 \001(\t\022/\n\013create_time\030\007 \001(\0132\032.google.prot"
+  "obuf.Timestamp\022/\n\013update_time\030\010 \001(\0132\032.go"
+  "ogle.protobuf.Timestamp\022.\n\npersistent\030\t "
+  "\001(\0132\032.google.protobuf.BoolValue\022\021\n\troom_"
+  "name\030\n \001(\t\022\020\n\010group_id\030\013 \001(\t\022\023\n\013user_id_"
+  "one\030\014 \001(\t\022\023\n\013user_id_two\030\r \001(\t\"\206\001\n\022Chann"
+  "elMessageList\022,\n\010messages\030\001 \003(\0132\032.nakama"
+  ".api.ChannelMessage\022\023\n\013next_cursor\030\002 \001(\t"
+  "\022\023\n\013prev_cursor\030\003 \001(\t\022\030\n\020cacheable_curso"
+  "r\030\004 \001(\t\"~\n\022CreateGroupRequest\022\014\n\004name\030\001 "
+  "\001(\t\022\023\n\013description\030\002 \001(\t\022\020\n\010lang_tag\030\003 \001"
+  "(\t\022\022\n\navatar_url\030\004 \001(\t\022\014\n\004open\030\005 \001(\010\022\021\n\t"
+  "max_count\030\006 \001(\005\"6\n\024DeleteFriendsRequest\022"
+  "\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\"&\n\022Delet"
+  "eGroupRequest\022\020\n\010group_id\030\001 \001(\t\"8\n\036Delet"
+  "eLeaderboardRecordRequest\022\026\n\016leaderboard"
+  "_id\030\001 \001(\t\")\n\032DeleteNotificationsRequest\022"
+  "\013\n\003ids\030\001 \003(\t\"I\n\025DeleteStorageObjectId\022\022\n"
+  "\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007versio"
+  "n\030\003 \001(\t\"T\n\033DeleteStorageObjectsRequest\0225"
+  "\n\nobject_ids\030\001 \003(\0132!.nakama.api.DeleteSt"
+  "orageObjectId\"\300\001\n\005Event\022\014\n\004name\030\001 \001(\t\0225\n"
+  "\nproperties\030\002 \003(\0132!.nakama.api.Event.Pro"
+  "pertiesEntry\022-\n\ttimestamp\030\003 \001(\0132\032.google"
+  ".protobuf.Timestamp\022\020\n\010external\030\004 \001(\010\0321\n"
+  "\017PropertiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002"
+  " \001(\t:\0028\001\"\315\001\n\006Friend\022\036\n\004user\030\001 \001(\0132\020.naka"
+  "ma.api.User\022*\n\005state\030\002 \001(\0132\033.google.prot"
+  "obuf.Int32Value\022/\n\013update_time\030\003 \001(\0132\032.g"
+  "oogle.protobuf.Timestamp\"F\n\005State\022\n\n\006FRI"
+  "END\020\000\022\017\n\013INVITE_SENT\020\001\022\023\n\017INVITE_RECEIVE"
+  "D\020\002\022\013\n\007BLOCKED\020\003\"A\n\nFriendList\022#\n\007friend"
+  "s\030\001 \003(\0132\022.nakama.api.Friend\022\016\n\006cursor\030\002 "
+  "\001(\t\"G\n\017GetUsersRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tu"
+  "sernames\030\002 \003(\t\022\024\n\014facebook_ids\030\003 \003(\t\"\265\002\n"
+  "\005Group\022\n\n\002id\030\001 \001(\t\022\022\n\ncreator_id\030\002 \001(\t\022\014"
+  "\n\004name\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\020\n\010lan"
+  "g_tag\030\005 \001(\t\022\020\n\010metadata\030\006 \001(\t\022\022\n\navatar_"
+  "url\030\007 \001(\t\022(\n\004open\030\010 \001(\0132\032.google.protobu"
+  "f.BoolValue\022\022\n\nedge_count\030\t \001(\005\022\021\n\tmax_c"
+  "ount\030\n \001(\005\022/\n\013create_time\030\013 \001(\0132\032.google"
+  ".protobuf.Timestamp\022/\n\013update_time\030\014 \001(\013"
+  "2\032.google.protobuf.Timestamp\">\n\tGroupLis"
+  "t\022!\n\006groups\030\001 \003(\0132\021.nakama.api.Group\022\016\n\006"
+  "cursor\030\002 \001(\t\"\365\001\n\rGroupUserList\0228\n\013group_"
+  "users\030\001 \003(\0132#.nakama.api.GroupUserList.G"
+  "roupUser\022\016\n\006cursor\030\002 \001(\t\032\231\001\n\tGroupUser\022\036"
+  "\n\004user\030\001 \001(\0132\020.nakama.api.User\022*\n\005state\030"
+  "\002 \001(\0132\033.google.protobuf.Int32Value\"@\n\005St"
+  "ate\022\016\n\nSUPERADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER"
+  "\020\002\022\020\n\014JOIN_REQUEST\020\003\"w\n\034ImportFacebookFr"
+  "iendsRequest\022,\n\007account\030\001 \001(\0132\033.nakama.a"
+  "pi.AccountFacebook\022)\n\005reset\030\002 \001(\0132\032.goog"
+  "le.protobuf.BoolValue\"q\n\031ImportSteamFrie"
+  "ndsRequest\022)\n\007account\030\001 \001(\0132\030.nakama.api"
+  ".AccountSteam\022)\n\005reset\030\002 \001(\0132\032.google.pr"
+  "otobuf.BoolValue\"$\n\020JoinGroupRequest\022\020\n\010"
+  "group_id\030\001 \001(\t\".\n\025JoinTournamentRequest\022"
+  "\025\n\rtournament_id\030\001 \001(\t\";\n\025KickGroupUsers"
+  "Request\022\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 "
+  "\003(\t\"\353\002\n\021LeaderboardRecord\022\026\n\016leaderboard"
+  "_id\030\001 \001(\t\022\020\n\010owner_id\030\002 \001(\t\022.\n\010username\030"
+  "\003 \001(\0132\034.google.protobuf.StringValue\022\r\n\005s"
+  "core\030\004 \001(\003\022\020\n\010subscore\030\005 \001(\003\022\021\n\tnum_scor"
+  "e\030\006 \001(\005\022\020\n\010metadata\030\007 \001(\t\022/\n\013create_time"
+  "\030\010 \001(\0132\032.google.protobuf.Timestamp\022/\n\013up"
+  "date_time\030\t \001(\0132\032.google.protobuf.Timest"
+  "amp\022/\n\013expiry_time\030\n \001(\0132\032.google.protob"
+  "uf.Timestamp\022\014\n\004rank\030\013 \001(\003\022\025\n\rmax_num_sc"
+  "ore\030\014 \001(\r\"\247\001\n\025LeaderboardRecordList\022.\n\007r"
+  "ecords\030\001 \003(\0132\035.nakama.api.LeaderboardRec"
+  "ord\0224\n\rowner_records\030\002 \003(\0132\035.nakama.api."
+  "LeaderboardRecord\022\023\n\013next_cursor\030\003 \001(\t\022\023"
+  "\n\013prev_cursor\030\004 \001(\t\"%\n\021LeaveGroupRequest"
+  "\022\020\n\010group_id\030\001 \001(\t\"m\n\023LinkFacebookReques"
+  "t\022,\n\007account\030\001 \001(\0132\033.nakama.api.AccountF"
+  "acebook\022(\n\004sync\030\002 \001(\0132\032.google.protobuf."
+  "BoolValue\"g\n\020LinkSteamRequest\022)\n\007account"
+  "\030\001 \001(\0132\030.nakama.api.AccountSteam\022(\n\004sync"
+  "\030\002 \001(\0132\032.google.protobuf.BoolValue\"\231\001\n\032L"
+  "istChannelMessagesRequest\022\022\n\nchannel_id\030"
+  "\001 \001(\t\022*\n\005limit\030\002 \001(\0132\033.google.protobuf.I"
+  "nt32Value\022+\n\007forward\030\003 \001(\0132\032.google.prot"
+  "obuf.BoolValue\022\016\n\006cursor\030\004 \001(\t\"|\n\022ListFr"
+  "iendsRequest\022*\n\005limit\030\001 \001(\0132\033.google.pro"
+  "tobuf.Int32Value\022*\n\005state\030\002 \001(\0132\033.google"
+  ".protobuf.Int32Value\022\016\n\006cursor\030\003 \001(\t\"]\n\021"
+  "ListGroupsRequest\022\014\n\004name\030\001 \001(\t\022\016\n\006curso"
+  "r\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.google.protobuf"
+  ".Int32Value\"\221\001\n\025ListGroupUsersRequest\022\020\n"
+  "\010group_id\030\001 \001(\t\022*\n\005limit\030\002 \001(\0132\033.google."
+  "protobuf.Int32Value\022*\n\005state\030\003 \001(\0132\033.goo"
+  "gle.protobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\""
+  "\256\001\n(ListLeaderboardRecordsAroundOwnerReq"
+  "uest\022\026\n\016leaderboard_id\030\001 \001(\t\022+\n\005limit\030\002 "
+  "\001(\0132\034.google.protobuf.UInt32Value\022\020\n\010own"
+  "er_id\030\003 \001(\t\022+\n\006expiry\030\004 \001(\0132\033.google.pro"
+  "tobuf.Int64Value\"\263\001\n\035ListLeaderboardReco"
+  "rdsRequest\022\026\n\016leaderboard_id\030\001 \001(\t\022\021\n\tow"
+  "ner_ids\030\002 \003(\t\022*\n\005limit\030\003 \001(\0132\033.google.pr"
+  "otobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\022+\n\006exp"
+  "iry\030\005 \001(\0132\033.google.protobuf.Int64Value\"\253"
+  "\002\n\022ListMatchesRequest\022*\n\005limit\030\001 \001(\0132\033.g"
+  "oogle.protobuf.Int32Value\0221\n\rauthoritati"
+  "ve\030\002 \001(\0132\032.google.protobuf.BoolValue\022+\n\005"
+  "label\030\003 \001(\0132\034.google.protobuf.StringValu"
+  "e\022-\n\010min_size\030\004 \001(\0132\033.google.protobuf.In"
+  "t32Value\022-\n\010max_size\030\005 \001(\0132\033.google.prot"
+  "obuf.Int32Value\022+\n\005query\030\006 \001(\0132\034.google."
+  "protobuf.StringValue\"`\n\030ListNotification"
+  "sRequest\022*\n\005limit\030\001 \001(\0132\033.google.protobu"
+  "f.Int32Value\022\030\n\020cacheable_cursor\030\002 \001(\t\"|"
+  "\n\031ListStorageObjectsRequest\022\017\n\007user_id\030\001"
+  " \001(\t\022\022\n\ncollection\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132"
+  "\033.google.protobuf.Int32Value\022\016\n\006cursor\030\004"
+  " \001(\t\"\254\001\n\'ListTournamentRecordsAroundOwne"
+  "rRequest\022\025\n\rtournament_id\030\001 \001(\t\022+\n\005limit"
+  "\030\002 \001(\0132\034.google.protobuf.UInt32Value\022\020\n\010"
+  "owner_id\030\003 \001(\t\022+\n\006expiry\030\004 \001(\0132\033.google."
+  "protobuf.Int64Value\"\261\001\n\034ListTournamentRe"
+  "cordsRequest\022\025\n\rtournament_id\030\001 \001(\t\022\021\n\to"
+  "wner_ids\030\002 \003(\t\022*\n\005limit\030\003 \001(\0132\033.google.p"
+  "rotobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\022+\n\006ex"
+  "piry\030\005 \001(\0132\033.google.protobuf.Int64Value\""
+  "\240\002\n\026ListTournamentsRequest\0224\n\016category_s"
+  "tart\030\001 \001(\0132\034.google.protobuf.UInt32Value"
+  "\0222\n\014category_end\030\002 \001(\0132\034.google.protobuf"
+  ".UInt32Value\0220\n\nstart_time\030\003 \001(\0132\034.googl"
+  "e.protobuf.UInt32Value\022.\n\010end_time\030\004 \001(\013"
+  "2\034.google.protobuf.UInt32Value\022*\n\005limit\030"
+  "\006 \001(\0132\033.google.protobuf.Int32Value\022\016\n\006cu"
+  "rsor\030\010 \001(\t\"\220\001\n\025ListUserGroupsRequest\022\017\n\007"
+  "user_id\030\001 \001(\t\022*\n\005limit\030\002 \001(\0132\033.google.pr"
+  "otobuf.Int32Value\022*\n\005state\030\003 \001(\0132\033.googl"
+  "e.protobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\224\001"
+  "\n\005Match\022\020\n\010match_id\030\001 \001(\t\022\025\n\rauthoritati"
+  "ve\030\002 \001(\010\022+\n\005label\030\003 \001(\0132\034.google.protobu"
+  "f.StringValue\022\014\n\004size\030\004 \001(\005\022\021\n\ttick_rate"
+  "\030\005 \001(\005\022\024\n\014handler_name\030\006 \001(\t\"/\n\tMatchLis"
+  "t\022\"\n\007matches\030\001 \003(\0132\021.nakama.api.Match\"\242\001"
+  "\n\014Notification\022\n\n\002id\030\001 \001(\t\022\017\n\007subject\030\002 "
+  "\001(\t\022\017\n\007content\030\003 \001(\t\022\014\n\004code\030\004 \001(\005\022\021\n\tse"
+  "nder_id\030\005 \001(\t\022/\n\013create_time\030\006 \001(\0132\032.goo"
+  "gle.protobuf.Timestamp\022\022\n\npersistent\030\007 \001"
+  "(\010\"]\n\020NotificationList\022/\n\rnotifications\030"
+  "\001 \003(\0132\030.nakama.api.Notification\022\030\n\020cache"
+  "able_cursor\030\002 \001(\t\">\n\030PromoteGroupUsersRe"
+  "quest\022\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003("
+  "\t\"=\n\027DemoteGroupUsersRequest\022\020\n\010group_id"
+  "\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"G\n\023ReadStorageO"
+  "bjectId\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t"
+  "\022\017\n\007user_id\030\003 \001(\t\"P\n\031ReadStorageObjectsR"
+  "equest\0223\n\nobject_ids\030\001 \003(\0132\037.nakama.api."
+  "ReadStorageObjectId\"4\n\003Rpc\022\n\n\002id\030\001 \001(\t\022\017"
+  "\n\007payload\030\002 \001(\t\022\020\n\010http_key\030\003 \001(\t\"@\n\007Ses"
+  "sion\022\017\n\007created\030\001 \001(\010\022\r\n\005token\030\002 \001(\t\022\025\n\r"
+  "refresh_token\030\003 \001(\t\"\366\001\n\rStorageObject\022\022\n"
+  "\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007user_i"
+  "d\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\022\017\n\007version\030\005 \001(\t\022"
+  "\027\n\017permission_read\030\006 \001(\005\022\030\n\020permission_w"
+  "rite\030\007 \001(\005\022/\n\013create_time\030\010 \001(\0132\032.google"
+  ".protobuf.Timestamp\022/\n\013update_time\030\t \001(\013"
+  "2\032.google.protobuf.Timestamp\"U\n\020StorageO"
+  "bjectAck\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001("
+  "\t\022\017\n\007version\030\003 \001(\t\022\017\n\007user_id\030\004 \001(\t\"\?\n\021S"
+  "torageObjectAcks\022*\n\004acks\030\001 \003(\0132\034.nakama."
+  "api.StorageObjectAck\"<\n\016StorageObjects\022*"
+  "\n\007objects\030\001 \003(\0132\031.nakama.api.StorageObje"
+  "ct\"O\n\021StorageObjectList\022*\n\007objects\030\001 \003(\013"
+  "2\031.nakama.api.StorageObject\022\016\n\006cursor\030\002 "
+  "\001(\t\"\235\003\n\nTournament\022\n\n\002id\030\001 \001(\t\022\r\n\005title\030"
+  "\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010category\030\004"
+  " \001(\r\022\022\n\nsort_order\030\005 \001(\r\022\014\n\004size\030\006 \001(\r\022\020"
+  "\n\010max_size\030\007 \001(\r\022\025\n\rmax_num_score\030\010 \001(\r\022"
+  "\021\n\tcan_enter\030\t \001(\010\022\022\n\nend_active\030\n \001(\r\022\022"
+  "\n\nnext_reset\030\013 \001(\r\022\020\n\010metadata\030\014 \001(\t\022/\n\013"
+  "create_time\030\r \001(\0132\032.google.protobuf.Time"
+  "stamp\022.\n\nstart_time\030\016 \001(\0132\032.google.proto"
+  "buf.Timestamp\022,\n\010end_time\030\017 \001(\0132\032.google"
+  ".protobuf.Timestamp\022\020\n\010duration\030\020 \001(\r\022\024\n"
+  "\014start_active\030\021 \001(\r\"M\n\016TournamentList\022+\n"
+  "\013tournaments\030\001 \003(\0132\026.nakama.api.Tourname"
+  "nt\022\016\n\006cursor\030\002 \001(\t\"\246\001\n\024TournamentRecordL"
+  "ist\022.\n\007records\030\001 \003(\0132\035.nakama.api.Leader"
+  "boardRecord\0224\n\rowner_records\030\002 \003(\0132\035.nak"
+  "ama.api.LeaderboardRecord\022\023\n\013next_cursor"
+  "\030\003 \001(\t\022\023\n\013prev_cursor\030\004 \001(\t\"\274\002\n\024UpdateAc"
+  "countRequest\022.\n\010username\030\001 \001(\0132\034.google."
+  "protobuf.StringValue\0222\n\014display_name\030\002 \001"
   "(\0132\034.google.protobuf.StringValue\0220\n\navat"
-  "ar_url\030\005 \001(\0132\034.google.protobuf.StringVal"
-  "ue\022(\n\004open\030\006 \001(\0132\032.google.protobuf.BoolV"
-  "alue\"\241\003\n\004User\022\n\n\002id\030\001 \001(\t\022\020\n\010username\030\002 "
-  "\001(\t\022\024\n\014display_name\030\003 \001(\t\022\022\n\navatar_url\030"
-  "\004 \001(\t\022\020\n\010lang_tag\030\005 \001(\t\022\020\n\010location\030\006 \001("
-  "\t\022\020\n\010timezone\030\007 \001(\t\022\020\n\010metadata\030\010 \001(\t\022\023\n"
-  "\013facebook_id\030\t \001(\t\022\021\n\tgoogle_id\030\n \001(\t\022\025\n"
-  "\rgamecenter_id\030\013 \001(\t\022\020\n\010steam_id\030\014 \001(\t\022\016"
-  "\n\006online\030\r \001(\010\022\022\n\nedge_count\030\016 \001(\005\022/\n\013cr"
-  "eate_time\030\017 \001(\0132\032.google.protobuf.Timest"
-  "amp\022/\n\013update_time\030\020 \001(\0132\032.google.protob"
-  "uf.Timestamp\022 \n\030facebook_instant_game_id"
-  "\030\021 \001(\t\022\020\n\010apple_id\030\022 \001(\t\"\367\001\n\rUserGroupLi"
-  "st\0228\n\013user_groups\030\001 \003(\0132#.nakama.api.Use"
-  "rGroupList.UserGroup\022\016\n\006cursor\030\002 \001(\t\032\233\001\n"
-  "\tUserGroup\022 \n\005group\030\001 \001(\0132\021.nakama.api.G"
-  "roup\022*\n\005state\030\002 \001(\0132\033.google.protobuf.In"
-  "t32Value\"@\n\005State\022\016\n\nSUPERADMIN\020\000\022\t\n\005ADM"
-  "IN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN_REQUEST\020\003\"(\n\005Us"
-  "ers\022\037\n\005users\030\001 \003(\0132\020.nakama.api.User\"\326\001\n"
-  "\035WriteLeaderboardRecordRequest\022\026\n\016leader"
-  "board_id\030\001 \001(\t\022P\n\006record\030\002 \001(\0132@.nakama."
-  "api.WriteLeaderboardRecordRequest.Leader"
-  "boardRecordWrite\032K\n\026LeaderboardRecordWri"
-  "te\022\r\n\005score\030\001 \001(\003\022\020\n\010subscore\030\002 \001(\003\022\020\n\010m"
-  "etadata\030\003 \001(\t\"\302\001\n\022WriteStorageObject\022\022\n\n"
-  "collection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005value\030\003"
-  " \001(\t\022\017\n\007version\030\004 \001(\t\0224\n\017permission_read"
-  "\030\005 \001(\0132\033.google.protobuf.Int32Value\0225\n\020p"
-  "ermission_write\030\006 \001(\0132\033.google.protobuf."
-  "Int32Value\"M\n\032WriteStorageObjectsRequest"
-  "\022/\n\007objects\030\001 \003(\0132\036.nakama.api.WriteStor"
-  "ageObject\"\321\001\n\034WriteTournamentRecordReque"
-  "st\022\025\n\rtournament_id\030\001 \001(\t\022N\n\006record\030\002 \001("
-  "\0132>.nakama.api.WriteTournamentRecordRequ"
-  "est.TournamentRecordWrite\032J\n\025TournamentR"
-  "ecordWrite\022\r\n\005score\030\001 \001(\003\022\020\n\010subscore\030\002 "
-  "\001(\003\022\020\n\010metadata\030\003 \001(\tBc\n\031com.heroiclabs."
-  "nakama.apiB\tNakamaApiP\001Z\'github.com/hero"
-  "iclabs/nakama-common/api\252\002\017Nakama.Protob"
-  "ufb\006proto3"
+  "ar_url\030\003 \001(\0132\034.google.protobuf.StringVal"
+  "ue\022.\n\010lang_tag\030\004 \001(\0132\034.google.protobuf.S"
+  "tringValue\022.\n\010location\030\005 \001(\0132\034.google.pr"
+  "otobuf.StringValue\022.\n\010timezone\030\006 \001(\0132\034.g"
+  "oogle.protobuf.StringValue\"\221\002\n\022UpdateGro"
+  "upRequest\022\020\n\010group_id\030\001 \001(\t\022*\n\004name\030\002 \001("
+  "\0132\034.google.protobuf.StringValue\0221\n\013descr"
+  "iption\030\003 \001(\0132\034.google.protobuf.StringVal"
+  "ue\022.\n\010lang_tag\030\004 \001(\0132\034.google.protobuf.S"
+  "tringValue\0220\n\navatar_url\030\005 \001(\0132\034.google."
+  "protobuf.StringValue\022(\n\004open\030\006 \001(\0132\032.goo"
+  "gle.protobuf.BoolValue\"\241\003\n\004User\022\n\n\002id\030\001 "
+  "\001(\t\022\020\n\010username\030\002 \001(\t\022\024\n\014display_name\030\003 "
+  "\001(\t\022\022\n\navatar_url\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001("
+  "\t\022\020\n\010location\030\006 \001(\t\022\020\n\010timezone\030\007 \001(\t\022\020\n"
+  "\010metadata\030\010 \001(\t\022\023\n\013facebook_id\030\t \001(\t\022\021\n\t"
+  "google_id\030\n \001(\t\022\025\n\rgamecenter_id\030\013 \001(\t\022\020"
+  "\n\010steam_id\030\014 \001(\t\022\016\n\006online\030\r \001(\010\022\022\n\nedge"
+  "_count\030\016 \001(\005\022/\n\013create_time\030\017 \001(\0132\032.goog"
+  "le.protobuf.Timestamp\022/\n\013update_time\030\020 \001"
+  "(\0132\032.google.protobuf.Timestamp\022 \n\030facebo"
+  "ok_instant_game_id\030\021 \001(\t\022\020\n\010apple_id\030\022 \001"
+  "(\t\"\367\001\n\rUserGroupList\0228\n\013user_groups\030\001 \003("
+  "\0132#.nakama.api.UserGroupList.UserGroup\022\016"
+  "\n\006cursor\030\002 \001(\t\032\233\001\n\tUserGroup\022 \n\005group\030\001 "
+  "\001(\0132\021.nakama.api.Group\022*\n\005state\030\002 \001(\0132\033."
+  "google.protobuf.Int32Value\"@\n\005State\022\016\n\nS"
+  "UPERADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JO"
+  "IN_REQUEST\020\003\"(\n\005Users\022\037\n\005users\030\001 \003(\0132\020.n"
+  "akama.api.User\"\326\001\n\035WriteLeaderboardRecor"
+  "dRequest\022\026\n\016leaderboard_id\030\001 \001(\t\022P\n\006reco"
+  "rd\030\002 \001(\0132@.nakama.api.WriteLeaderboardRe"
+  "cordRequest.LeaderboardRecordWrite\032K\n\026Le"
+  "aderboardRecordWrite\022\r\n\005score\030\001 \001(\003\022\020\n\010s"
+  "ubscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\t\"\302\001\n\022Writ"
+  "eStorageObject\022\022\n\ncollection\030\001 \001(\t\022\013\n\003ke"
+  "y\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\022\017\n\007version\030\004 \001(\t\022"
+  "4\n\017permission_read\030\005 \001(\0132\033.google.protob"
+  "uf.Int32Value\0225\n\020permission_write\030\006 \001(\0132"
+  "\033.google.protobuf.Int32Value\"M\n\032WriteSto"
+  "rageObjectsRequest\022/\n\007objects\030\001 \003(\0132\036.na"
+  "kama.api.WriteStorageObject\"\321\001\n\034WriteTou"
+  "rnamentRecordRequest\022\025\n\rtournament_id\030\001 "
+  "\001(\t\022N\n\006record\030\002 \001(\0132>.nakama.api.WriteTo"
+  "urnamentRecordRequest.TournamentRecordWr"
+  "ite\032J\n\025TournamentRecordWrite\022\r\n\005score\030\001 "
+  "\001(\003\022\020\n\010subscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\tB"
+  "c\n\031com.heroiclabs.nakama.apiB\tNakamaApiP"
+  "\001Z\'github.com/heroiclabs/nakama-common/a"
+  "pi\252\002\017Nakama.Protobufb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_deps[2] = {
   &::descriptor_table_google_2fprotobuf_2ftimestamp_2eproto,
@@ -3048,8 +3024,8 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto = {
-  false, false, 13330, descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto, "github.com/heroiclabs/nakama-common/api/api.proto", 
-  &descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_once, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_deps, 2, 108,
+  false, false, 13268, descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto, "github.com/heroiclabs/nakama-common/api/api.proto", 
+  &descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_once, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_deps, 2, 107,
   schemas, file_default_instances, TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::offsets,
   file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto, file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto, file_level_service_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto,
 };
@@ -7443,244 +7419,6 @@ void SessionRefreshRequest::InternalSwap(SessionRefreshRequest* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata SessionRefreshRequest::GetMetadata() const {
-  return GetMetadataStatic();
-}
-
-
-// ===================================================================
-
-class SessionLogoutRequest::_Internal {
- public:
-};
-
-SessionLogoutRequest::SessionLogoutRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
-  SharedCtor();
-  RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:nakama.api.SessionLogoutRequest)
-}
-SessionLogoutRequest::SessionLogoutRequest(const SessionLogoutRequest& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_token().empty()) {
-    token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_token(), 
-      GetArena());
-  }
-  refresh_token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_refresh_token().empty()) {
-    refresh_token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_refresh_token(), 
-      GetArena());
-  }
-  // @@protoc_insertion_point(copy_constructor:nakama.api.SessionLogoutRequest)
-}
-
-void SessionLogoutRequest::SharedCtor() {
-token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-refresh_token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-
-SessionLogoutRequest::~SessionLogoutRequest() {
-  // @@protoc_insertion_point(destructor:nakama.api.SessionLogoutRequest)
-  SharedDtor();
-  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-void SessionLogoutRequest::SharedDtor() {
-  GOOGLE_DCHECK(GetArena() == nullptr);
-  token_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  refresh_token_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-
-void SessionLogoutRequest::ArenaDtor(void* object) {
-  SessionLogoutRequest* _this = reinterpret_cast< SessionLogoutRequest* >(object);
-  (void)_this;
-}
-void SessionLogoutRequest::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
-}
-void SessionLogoutRequest::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-
-void SessionLogoutRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:nakama.api.SessionLogoutRequest)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  token_.ClearToEmpty();
-  refresh_token_.ClearToEmpty();
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* SessionLogoutRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // string token = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_token();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.SessionLogoutRequest.token"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string refresh_token = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          auto str = _internal_mutable_refresh_token();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.SessionLogoutRequest.refresh_token"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag,
-            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-            ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* SessionLogoutRequest::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.SessionLogoutRequest)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string token = 1;
-  if (this->token().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_token().data(), static_cast<int>(this->_internal_token().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "nakama.api.SessionLogoutRequest.token");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_token(), target);
-  }
-
-  // string refresh_token = 2;
-  if (this->refresh_token().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_refresh_token().data(), static_cast<int>(this->_internal_refresh_token().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "nakama.api.SessionLogoutRequest.refresh_token");
-    target = stream->WriteStringMaybeAliased(
-        2, this->_internal_refresh_token(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.SessionLogoutRequest)
-  return target;
-}
-
-size_t SessionLogoutRequest::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:nakama.api.SessionLogoutRequest)
-  size_t total_size = 0;
-
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string token = 1;
-  if (this->token().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_token());
-  }
-
-  // string refresh_token = 2;
-  if (this->refresh_token().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_refresh_token());
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void SessionLogoutRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.SessionLogoutRequest)
-  GOOGLE_DCHECK_NE(&from, this);
-  const SessionLogoutRequest* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<SessionLogoutRequest>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.SessionLogoutRequest)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.SessionLogoutRequest)
-    MergeFrom(*source);
-  }
-}
-
-void SessionLogoutRequest::MergeFrom(const SessionLogoutRequest& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.SessionLogoutRequest)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.token().size() > 0) {
-    _internal_set_token(from._internal_token());
-  }
-  if (from.refresh_token().size() > 0) {
-    _internal_set_refresh_token(from._internal_refresh_token());
-  }
-}
-
-void SessionLogoutRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.SessionLogoutRequest)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void SessionLogoutRequest::CopyFrom(const SessionLogoutRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.SessionLogoutRequest)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool SessionLogoutRequest::IsInitialized() const {
-  return true;
-}
-
-void SessionLogoutRequest::InternalSwap(SessionLogoutRequest* other) {
-  using std::swap;
-  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  token_.Swap(&other->token_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  refresh_token_.Swap(&other->refresh_token_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata SessionLogoutRequest::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -32869,9 +32607,6 @@ template<> PROTOBUF_NOINLINE ::nakama::api::SessionRefreshRequest_VarsEntry_DoNo
 }
 template<> PROTOBUF_NOINLINE ::nakama::api::SessionRefreshRequest* Arena::CreateMaybeMessage< ::nakama::api::SessionRefreshRequest >(Arena* arena) {
   return Arena::CreateMessageInternal< ::nakama::api::SessionRefreshRequest >(arena);
-}
-template<> PROTOBUF_NOINLINE ::nakama::api::SessionLogoutRequest* Arena::CreateMaybeMessage< ::nakama::api::SessionLogoutRequest >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::nakama::api::SessionLogoutRequest >(arena);
 }
 template<> PROTOBUF_NOINLINE ::nakama::api::AuthenticateAppleRequest* Arena::CreateMaybeMessage< ::nakama::api::AuthenticateAppleRequest >(Arena* arena) {
   return Arena::CreateMessageInternal< ::nakama::api::AuthenticateAppleRequest >(arena);

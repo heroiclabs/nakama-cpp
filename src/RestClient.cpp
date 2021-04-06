@@ -24,7 +24,6 @@
 #include "nakama-cpp/NakamaVersion.h"
 #include "DataHelper.h"
 #include "DefaultSession.h"
-#include "google/rpc/status.pb.h"
 #include "google/protobuf/util/json_util.h"
 #include "grpc/include/grpcpp/impl/codegen/status_code_enum.h"
 #include "RapidjsonHelper.h"

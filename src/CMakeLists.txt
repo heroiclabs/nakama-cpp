@@ -109,6 +109,8 @@ target_include_directories(nakama-cpp
     PUBLIC ${THIRD_PARTY_DIR}
     PUBLIC ${PUBLIC_INCLUDE_DIR}
     PRIVATE api
+    PRIVATE api/github.com/heroiclabs/nakama-common
+
     PRIVATE .
     PRIVATE ${THIRD_PARTY_DIR}/grpc/third_party/protobuf/src
 )

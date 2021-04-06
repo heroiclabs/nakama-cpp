@@ -52,7 +52,7 @@ struct TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2epro
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[108]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[107]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -317,9 +317,6 @@ extern RpcDefaultTypeInternal _Rpc_default_instance_;
 class Session;
 struct SessionDefaultTypeInternal;
 extern SessionDefaultTypeInternal _Session_default_instance_;
-class SessionLogoutRequest;
-struct SessionLogoutRequestDefaultTypeInternal;
-extern SessionLogoutRequestDefaultTypeInternal _SessionLogoutRequest_default_instance_;
 class SessionRefreshRequest;
 struct SessionRefreshRequestDefaultTypeInternal;
 extern SessionRefreshRequestDefaultTypeInternal _SessionRefreshRequest_default_instance_;
@@ -474,7 +471,6 @@ template<> ::nakama::api::ReadStorageObjectId* Arena::CreateMaybeMessage<::nakam
 template<> ::nakama::api::ReadStorageObjectsRequest* Arena::CreateMaybeMessage<::nakama::api::ReadStorageObjectsRequest>(Arena*);
 template<> ::nakama::api::Rpc* Arena::CreateMaybeMessage<::nakama::api::Rpc>(Arena*);
 template<> ::nakama::api::Session* Arena::CreateMaybeMessage<::nakama::api::Session>(Arena*);
-template<> ::nakama::api::SessionLogoutRequest* Arena::CreateMaybeMessage<::nakama::api::SessionLogoutRequest>(Arena*);
 template<> ::nakama::api::SessionRefreshRequest* Arena::CreateMaybeMessage<::nakama::api::SessionRefreshRequest>(Arena*);
 template<> ::nakama::api::SessionRefreshRequest_VarsEntry_DoNotUse* Arena::CreateMaybeMessage<::nakama::api::SessionRefreshRequest_VarsEntry_DoNotUse>(Arena*);
 template<> ::nakama::api::StorageObject* Arena::CreateMaybeMessage<::nakama::api::StorageObject>(Arena*);
@@ -3515,168 +3511,6 @@ class SessionRefreshRequest PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
-class SessionLogoutRequest PROTOBUF_FINAL :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.SessionLogoutRequest) */ {
- public:
-  inline SessionLogoutRequest() : SessionLogoutRequest(nullptr) {}
-  virtual ~SessionLogoutRequest();
-  explicit constexpr SessionLogoutRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  SessionLogoutRequest(const SessionLogoutRequest& from);
-  SessionLogoutRequest(SessionLogoutRequest&& from) noexcept
-    : SessionLogoutRequest() {
-    *this = ::std::move(from);
-  }
-
-  inline SessionLogoutRequest& operator=(const SessionLogoutRequest& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline SessionLogoutRequest& operator=(SessionLogoutRequest&& from) noexcept {
-    if (GetArena() == from.GetArena()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const SessionLogoutRequest& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const SessionLogoutRequest* internal_default_instance() {
-    return reinterpret_cast<const SessionLogoutRequest*>(
-               &_SessionLogoutRequest_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    25;
-
-  friend void swap(SessionLogoutRequest& a, SessionLogoutRequest& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(SessionLogoutRequest* other) {
-    if (other == this) return;
-    if (GetArena() == other->GetArena()) {
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(SessionLogoutRequest* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline SessionLogoutRequest* New() const final {
-    return CreateMaybeMessage<SessionLogoutRequest>(nullptr);
-  }
-
-  SessionLogoutRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<SessionLogoutRequest>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const SessionLogoutRequest& from);
-  void MergeFrom(const SessionLogoutRequest& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(SessionLogoutRequest* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "nakama.api.SessionLogoutRequest";
-  }
-  protected:
-  explicit SessionLogoutRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    return ::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_metadata_getter(kIndexInFileMessages);
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kTokenFieldNumber = 1,
-    kRefreshTokenFieldNumber = 2,
-  };
-  // string token = 1;
-  void clear_token();
-  const std::string& token() const;
-  void set_token(const std::string& value);
-  void set_token(std::string&& value);
-  void set_token(const char* value);
-  void set_token(const char* value, size_t size);
-  std::string* mutable_token();
-  std::string* release_token();
-  void set_allocated_token(std::string* token);
-  private:
-  const std::string& _internal_token() const;
-  void _internal_set_token(const std::string& value);
-  std::string* _internal_mutable_token();
-  public:
-
-  // string refresh_token = 2;
-  void clear_refresh_token();
-  const std::string& refresh_token() const;
-  void set_refresh_token(const std::string& value);
-  void set_refresh_token(std::string&& value);
-  void set_refresh_token(const char* value);
-  void set_refresh_token(const char* value, size_t size);
-  std::string* mutable_refresh_token();
-  std::string* release_refresh_token();
-  void set_allocated_refresh_token(std::string* refresh_token);
-  private:
-  const std::string& _internal_refresh_token() const;
-  void _internal_set_refresh_token(const std::string& value);
-  std::string* _internal_mutable_refresh_token();
-  public:
-
-  // @@protoc_insertion_point(class_scope:nakama.api.SessionLogoutRequest)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr token_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr refresh_token_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
-};
-// -------------------------------------------------------------------
-
 class AuthenticateAppleRequest PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.AuthenticateAppleRequest) */ {
  public:
@@ -3720,7 +3554,7 @@ class AuthenticateAppleRequest PROTOBUF_FINAL :
                &_AuthenticateAppleRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    25;
 
   friend void swap(AuthenticateAppleRequest& a, AuthenticateAppleRequest& b) {
     a.Swap(&b);
@@ -3904,7 +3738,7 @@ class AuthenticateCustomRequest PROTOBUF_FINAL :
                &_AuthenticateCustomRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    27;
+    26;
 
   friend void swap(AuthenticateCustomRequest& a, AuthenticateCustomRequest& b) {
     a.Swap(&b);
@@ -4088,7 +3922,7 @@ class AuthenticateDeviceRequest PROTOBUF_FINAL :
                &_AuthenticateDeviceRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    28;
+    27;
 
   friend void swap(AuthenticateDeviceRequest& a, AuthenticateDeviceRequest& b) {
     a.Swap(&b);
@@ -4272,7 +4106,7 @@ class AuthenticateEmailRequest PROTOBUF_FINAL :
                &_AuthenticateEmailRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    29;
+    28;
 
   friend void swap(AuthenticateEmailRequest& a, AuthenticateEmailRequest& b) {
     a.Swap(&b);
@@ -4456,7 +4290,7 @@ class AuthenticateFacebookRequest PROTOBUF_FINAL :
                &_AuthenticateFacebookRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    30;
+    29;
 
   friend void swap(AuthenticateFacebookRequest& a, AuthenticateFacebookRequest& b) {
     a.Swap(&b);
@@ -4660,7 +4494,7 @@ class AuthenticateFacebookInstantGameRequest PROTOBUF_FINAL :
                &_AuthenticateFacebookInstantGameRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    31;
+    30;
 
   friend void swap(AuthenticateFacebookInstantGameRequest& a, AuthenticateFacebookInstantGameRequest& b) {
     a.Swap(&b);
@@ -4844,7 +4678,7 @@ class AuthenticateGameCenterRequest PROTOBUF_FINAL :
                &_AuthenticateGameCenterRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    32;
+    31;
 
   friend void swap(AuthenticateGameCenterRequest& a, AuthenticateGameCenterRequest& b) {
     a.Swap(&b);
@@ -5028,7 +4862,7 @@ class AuthenticateGoogleRequest PROTOBUF_FINAL :
                &_AuthenticateGoogleRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    33;
+    32;
 
   friend void swap(AuthenticateGoogleRequest& a, AuthenticateGoogleRequest& b) {
     a.Swap(&b);
@@ -5212,7 +5046,7 @@ class AuthenticateSteamRequest PROTOBUF_FINAL :
                &_AuthenticateSteamRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    34;
+    33;
 
   friend void swap(AuthenticateSteamRequest& a, AuthenticateSteamRequest& b) {
     a.Swap(&b);
@@ -5416,7 +5250,7 @@ class BanGroupUsersRequest PROTOBUF_FINAL :
                &_BanGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    35;
+    34;
 
   friend void swap(BanGroupUsersRequest& a, BanGroupUsersRequest& b) {
     a.Swap(&b);
@@ -5586,7 +5420,7 @@ class BlockFriendsRequest PROTOBUF_FINAL :
                &_BlockFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    36;
+    35;
 
   friend void swap(BlockFriendsRequest& a, BlockFriendsRequest& b) {
     a.Swap(&b);
@@ -5764,7 +5598,7 @@ class ChannelMessage PROTOBUF_FINAL :
                &_ChannelMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    37;
+    36;
 
   friend void swap(ChannelMessage& a, ChannelMessage& b) {
     a.Swap(&b);
@@ -6132,7 +5966,7 @@ class ChannelMessageList PROTOBUF_FINAL :
                &_ChannelMessageList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    38;
+    37;
 
   friend void swap(ChannelMessageList& a, ChannelMessageList& b) {
     a.Swap(&b);
@@ -6332,7 +6166,7 @@ class CreateGroupRequest PROTOBUF_FINAL :
                &_CreateGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    39;
+    38;
 
   friend void swap(CreateGroupRequest& a, CreateGroupRequest& b) {
     a.Swap(&b);
@@ -6552,7 +6386,7 @@ class DeleteFriendsRequest PROTOBUF_FINAL :
                &_DeleteFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    40;
+    39;
 
   friend void swap(DeleteFriendsRequest& a, DeleteFriendsRequest& b) {
     a.Swap(&b);
@@ -6730,7 +6564,7 @@ class DeleteGroupRequest PROTOBUF_FINAL :
                &_DeleteGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    41;
+    40;
 
   friend void swap(DeleteGroupRequest& a, DeleteGroupRequest& b) {
     a.Swap(&b);
@@ -6874,7 +6708,7 @@ class DeleteLeaderboardRecordRequest PROTOBUF_FINAL :
                &_DeleteLeaderboardRecordRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    42;
+    41;
 
   friend void swap(DeleteLeaderboardRecordRequest& a, DeleteLeaderboardRecordRequest& b) {
     a.Swap(&b);
@@ -7018,7 +6852,7 @@ class DeleteNotificationsRequest PROTOBUF_FINAL :
                &_DeleteNotificationsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    43;
+    42;
 
   friend void swap(DeleteNotificationsRequest& a, DeleteNotificationsRequest& b) {
     a.Swap(&b);
@@ -7170,7 +7004,7 @@ class DeleteStorageObjectId PROTOBUF_FINAL :
                &_DeleteStorageObjectId_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    44;
+    43;
 
   friend void swap(DeleteStorageObjectId& a, DeleteStorageObjectId& b) {
     a.Swap(&b);
@@ -7350,7 +7184,7 @@ class DeleteStorageObjectsRequest PROTOBUF_FINAL :
                &_DeleteStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    45;
+    44;
 
   friend void swap(DeleteStorageObjectsRequest& a, DeleteStorageObjectsRequest& b) {
     a.Swap(&b);
@@ -7479,7 +7313,7 @@ public:
   private:
   static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
     ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
-    return ::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.file_level_metadata[46];
+    return ::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.file_level_metadata[45];
   }
 
   public:
@@ -7530,7 +7364,7 @@ class Event PROTOBUF_FINAL :
                &_Event_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    47;
+    46;
 
   friend void swap(Event& a, Event& b) {
     a.Swap(&b);
@@ -7729,7 +7563,7 @@ class Friend PROTOBUF_FINAL :
                &_Friend_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    48;
+    47;
 
   friend void swap(Friend& a, Friend& b) {
     a.Swap(&b);
@@ -7949,7 +7783,7 @@ class FriendList PROTOBUF_FINAL :
                &_FriendList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    49;
+    48;
 
   friend void swap(FriendList& a, FriendList& b) {
     a.Swap(&b);
@@ -8113,7 +7947,7 @@ class GetUsersRequest PROTOBUF_FINAL :
                &_GetUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    50;
+    49;
 
   friend void swap(GetUsersRequest& a, GetUsersRequest& b) {
     a.Swap(&b);
@@ -8317,7 +8151,7 @@ class Group PROTOBUF_FINAL :
                &_Group_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    51;
+    50;
 
   friend void swap(Group& a, Group& b) {
     a.Swap(&b);
@@ -8651,7 +8485,7 @@ class GroupList PROTOBUF_FINAL :
                &_GroupList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    52;
+    51;
 
   friend void swap(GroupList& a, GroupList& b) {
     a.Swap(&b);
@@ -8815,7 +8649,7 @@ class GroupUserList_GroupUser PROTOBUF_FINAL :
                &_GroupUserList_GroupUser_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    53;
+    52;
 
   friend void swap(GroupUserList_GroupUser& a, GroupUserList_GroupUser& b) {
     a.Swap(&b);
@@ -9015,7 +8849,7 @@ class GroupUserList PROTOBUF_FINAL :
                &_GroupUserList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    54;
+    53;
 
   friend void swap(GroupUserList& a, GroupUserList& b) {
     a.Swap(&b);
@@ -9181,7 +9015,7 @@ class ImportFacebookFriendsRequest PROTOBUF_FINAL :
                &_ImportFacebookFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    55;
+    54;
 
   friend void swap(ImportFacebookFriendsRequest& a, ImportFacebookFriendsRequest& b) {
     a.Swap(&b);
@@ -9347,7 +9181,7 @@ class ImportSteamFriendsRequest PROTOBUF_FINAL :
                &_ImportSteamFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    56;
+    55;
 
   friend void swap(ImportSteamFriendsRequest& a, ImportSteamFriendsRequest& b) {
     a.Swap(&b);
@@ -9513,7 +9347,7 @@ class JoinGroupRequest PROTOBUF_FINAL :
                &_JoinGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    57;
+    56;
 
   friend void swap(JoinGroupRequest& a, JoinGroupRequest& b) {
     a.Swap(&b);
@@ -9657,7 +9491,7 @@ class JoinTournamentRequest PROTOBUF_FINAL :
                &_JoinTournamentRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    58;
+    57;
 
   friend void swap(JoinTournamentRequest& a, JoinTournamentRequest& b) {
     a.Swap(&b);
@@ -9801,7 +9635,7 @@ class KickGroupUsersRequest PROTOBUF_FINAL :
                &_KickGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    59;
+    58;
 
   friend void swap(KickGroupUsersRequest& a, KickGroupUsersRequest& b) {
     a.Swap(&b);
@@ -9971,7 +9805,7 @@ class LeaderboardRecord PROTOBUF_FINAL :
                &_LeaderboardRecord_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    60;
+    59;
 
   friend void swap(LeaderboardRecord& a, LeaderboardRecord& b) {
     a.Swap(&b);
@@ -10286,7 +10120,7 @@ class LeaderboardRecordList PROTOBUF_FINAL :
                &_LeaderboardRecordList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    61;
+    60;
 
   friend void swap(LeaderboardRecordList& a, LeaderboardRecordList& b) {
     a.Swap(&b);
@@ -10488,7 +10322,7 @@ class LeaveGroupRequest PROTOBUF_FINAL :
                &_LeaveGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    62;
+    61;
 
   friend void swap(LeaveGroupRequest& a, LeaveGroupRequest& b) {
     a.Swap(&b);
@@ -10632,7 +10466,7 @@ class LinkFacebookRequest PROTOBUF_FINAL :
                &_LinkFacebookRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    63;
+    62;
 
   friend void swap(LinkFacebookRequest& a, LinkFacebookRequest& b) {
     a.Swap(&b);
@@ -10798,7 +10632,7 @@ class LinkSteamRequest PROTOBUF_FINAL :
                &_LinkSteamRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    64;
+    63;
 
   friend void swap(LinkSteamRequest& a, LinkSteamRequest& b) {
     a.Swap(&b);
@@ -10964,7 +10798,7 @@ class ListChannelMessagesRequest PROTOBUF_FINAL :
                &_ListChannelMessagesRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    65;
+    64;
 
   friend void swap(ListChannelMessagesRequest& a, ListChannelMessagesRequest& b) {
     a.Swap(&b);
@@ -11166,7 +11000,7 @@ class ListFriendsRequest PROTOBUF_FINAL :
                &_ListFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    66;
+    65;
 
   friend void swap(ListFriendsRequest& a, ListFriendsRequest& b) {
     a.Swap(&b);
@@ -11350,7 +11184,7 @@ class ListGroupsRequest PROTOBUF_FINAL :
                &_ListGroupsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    67;
+    66;
 
   friend void swap(ListGroupsRequest& a, ListGroupsRequest& b) {
     a.Swap(&b);
@@ -11532,7 +11366,7 @@ class ListGroupUsersRequest PROTOBUF_FINAL :
                &_ListGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    68;
+    67;
 
   friend void swap(ListGroupUsersRequest& a, ListGroupUsersRequest& b) {
     a.Swap(&b);
@@ -11734,7 +11568,7 @@ class ListLeaderboardRecordsAroundOwnerRequest PROTOBUF_FINAL :
                &_ListLeaderboardRecordsAroundOwnerRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    69;
+    68;
 
   friend void swap(ListLeaderboardRecordsAroundOwnerRequest& a, ListLeaderboardRecordsAroundOwnerRequest& b) {
     a.Swap(&b);
@@ -11936,7 +11770,7 @@ class ListLeaderboardRecordsRequest PROTOBUF_FINAL :
                &_ListLeaderboardRecordsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    70;
+    69;
 
   friend void swap(ListLeaderboardRecordsRequest& a, ListLeaderboardRecordsRequest& b) {
     a.Swap(&b);
@@ -12164,7 +11998,7 @@ class ListMatchesRequest PROTOBUF_FINAL :
                &_ListMatchesRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    71;
+    70;
 
   friend void swap(ListMatchesRequest& a, ListMatchesRequest& b) {
     a.Swap(&b);
@@ -12410,7 +12244,7 @@ class ListNotificationsRequest PROTOBUF_FINAL :
                &_ListNotificationsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    72;
+    71;
 
   friend void swap(ListNotificationsRequest& a, ListNotificationsRequest& b) {
     a.Swap(&b);
@@ -12574,7 +12408,7 @@ class ListStorageObjectsRequest PROTOBUF_FINAL :
                &_ListStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    73;
+    72;
 
   friend void swap(ListStorageObjectsRequest& a, ListStorageObjectsRequest& b) {
     a.Swap(&b);
@@ -12774,7 +12608,7 @@ class ListTournamentRecordsAroundOwnerRequest PROTOBUF_FINAL :
                &_ListTournamentRecordsAroundOwnerRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    74;
+    73;
 
   friend void swap(ListTournamentRecordsAroundOwnerRequest& a, ListTournamentRecordsAroundOwnerRequest& b) {
     a.Swap(&b);
@@ -12976,7 +12810,7 @@ class ListTournamentRecordsRequest PROTOBUF_FINAL :
                &_ListTournamentRecordsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    75;
+    74;
 
   friend void swap(ListTournamentRecordsRequest& a, ListTournamentRecordsRequest& b) {
     a.Swap(&b);
@@ -13204,7 +13038,7 @@ class ListTournamentsRequest PROTOBUF_FINAL :
                &_ListTournamentsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    76;
+    75;
 
   friend void swap(ListTournamentsRequest& a, ListTournamentsRequest& b) {
     a.Swap(&b);
@@ -13448,7 +13282,7 @@ class ListUserGroupsRequest PROTOBUF_FINAL :
                &_ListUserGroupsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    77;
+    76;
 
   friend void swap(ListUserGroupsRequest& a, ListUserGroupsRequest& b) {
     a.Swap(&b);
@@ -13650,7 +13484,7 @@ class Match PROTOBUF_FINAL :
                &_Match_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    78;
+    77;
 
   friend void swap(Match& a, Match& b) {
     a.Swap(&b);
@@ -13865,7 +13699,7 @@ class MatchList PROTOBUF_FINAL :
                &_MatchList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    79;
+    78;
 
   friend void swap(MatchList& a, MatchList& b) {
     a.Swap(&b);
@@ -14011,7 +13845,7 @@ class Notification PROTOBUF_FINAL :
                &_Notification_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    80;
+    79;
 
   friend void swap(Notification& a, Notification& b) {
     a.Swap(&b);
@@ -14251,7 +14085,7 @@ class NotificationList PROTOBUF_FINAL :
                &_NotificationList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    81;
+    80;
 
   friend void swap(NotificationList& a, NotificationList& b) {
     a.Swap(&b);
@@ -14415,7 +14249,7 @@ class PromoteGroupUsersRequest PROTOBUF_FINAL :
                &_PromoteGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    82;
+    81;
 
   friend void swap(PromoteGroupUsersRequest& a, PromoteGroupUsersRequest& b) {
     a.Swap(&b);
@@ -14585,7 +14419,7 @@ class DemoteGroupUsersRequest PROTOBUF_FINAL :
                &_DemoteGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    83;
+    82;
 
   friend void swap(DemoteGroupUsersRequest& a, DemoteGroupUsersRequest& b) {
     a.Swap(&b);
@@ -14755,7 +14589,7 @@ class ReadStorageObjectId PROTOBUF_FINAL :
                &_ReadStorageObjectId_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    84;
+    83;
 
   friend void swap(ReadStorageObjectId& a, ReadStorageObjectId& b) {
     a.Swap(&b);
@@ -14935,7 +14769,7 @@ class ReadStorageObjectsRequest PROTOBUF_FINAL :
                &_ReadStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    85;
+    84;
 
   friend void swap(ReadStorageObjectsRequest& a, ReadStorageObjectsRequest& b) {
     a.Swap(&b);
@@ -15081,7 +14915,7 @@ class Rpc PROTOBUF_FINAL :
                &_Rpc_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    86;
+    85;
 
   friend void swap(Rpc& a, Rpc& b) {
     a.Swap(&b);
@@ -15261,7 +15095,7 @@ class Session PROTOBUF_FINAL :
                &_Session_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    87;
+    86;
 
   friend void swap(Session& a, Session& b) {
     a.Swap(&b);
@@ -15434,7 +15268,7 @@ class StorageObject PROTOBUF_FINAL :
                &_StorageObject_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    88;
+    87;
 
   friend void swap(StorageObject& a, StorageObject& b) {
     a.Swap(&b);
@@ -15712,7 +15546,7 @@ class StorageObjectAck PROTOBUF_FINAL :
                &_StorageObjectAck_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    89;
+    88;
 
   friend void swap(StorageObjectAck& a, StorageObjectAck& b) {
     a.Swap(&b);
@@ -15910,7 +15744,7 @@ class StorageObjectAcks PROTOBUF_FINAL :
                &_StorageObjectAcks_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    90;
+    89;
 
   friend void swap(StorageObjectAcks& a, StorageObjectAcks& b) {
     a.Swap(&b);
@@ -16056,7 +15890,7 @@ class StorageObjects PROTOBUF_FINAL :
                &_StorageObjects_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    91;
+    90;
 
   friend void swap(StorageObjects& a, StorageObjects& b) {
     a.Swap(&b);
@@ -16202,7 +16036,7 @@ class StorageObjectList PROTOBUF_FINAL :
                &_StorageObjectList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    92;
+    91;
 
   friend void swap(StorageObjectList& a, StorageObjectList& b) {
     a.Swap(&b);
@@ -16366,7 +16200,7 @@ class Tournament PROTOBUF_FINAL :
                &_Tournament_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    93;
+    92;
 
   friend void swap(Tournament& a, Tournament& b) {
     a.Swap(&b);
@@ -16734,7 +16568,7 @@ class TournamentList PROTOBUF_FINAL :
                &_TournamentList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    94;
+    93;
 
   friend void swap(TournamentList& a, TournamentList& b) {
     a.Swap(&b);
@@ -16898,7 +16732,7 @@ class TournamentRecordList PROTOBUF_FINAL :
                &_TournamentRecordList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    95;
+    94;
 
   friend void swap(TournamentRecordList& a, TournamentRecordList& b) {
     a.Swap(&b);
@@ -17100,7 +16934,7 @@ class UpdateAccountRequest PROTOBUF_FINAL :
                &_UpdateAccountRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    96;
+    95;
 
   friend void swap(UpdateAccountRequest& a, UpdateAccountRequest& b) {
     a.Swap(&b);
@@ -17346,7 +17180,7 @@ class UpdateGroupRequest PROTOBUF_FINAL :
                &_UpdateGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    97;
+    96;
 
   friend void swap(UpdateGroupRequest& a, UpdateGroupRequest& b) {
     a.Swap(&b);
@@ -17590,7 +17424,7 @@ class User PROTOBUF_FINAL :
                &_User_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    98;
+    97;
 
   friend void swap(User& a, User& b) {
     a.Swap(&b);
@@ -18030,7 +17864,7 @@ class UserGroupList_UserGroup PROTOBUF_FINAL :
                &_UserGroupList_UserGroup_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    99;
+    98;
 
   friend void swap(UserGroupList_UserGroup& a, UserGroupList_UserGroup& b) {
     a.Swap(&b);
@@ -18230,7 +18064,7 @@ class UserGroupList PROTOBUF_FINAL :
                &_UserGroupList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    100;
+    99;
 
   friend void swap(UserGroupList& a, UserGroupList& b) {
     a.Swap(&b);
@@ -18396,7 +18230,7 @@ class Users PROTOBUF_FINAL :
                &_Users_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    101;
+    100;
 
   friend void swap(Users& a, Users& b) {
     a.Swap(&b);
@@ -18542,7 +18376,7 @@ class WriteLeaderboardRecordRequest_LeaderboardRecordWrite PROTOBUF_FINAL :
                &_WriteLeaderboardRecordRequest_LeaderboardRecordWrite_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    102;
+    101;
 
   friend void swap(WriteLeaderboardRecordRequest_LeaderboardRecordWrite& a, WriteLeaderboardRecordRequest_LeaderboardRecordWrite& b) {
     a.Swap(&b);
@@ -18708,7 +18542,7 @@ class WriteLeaderboardRecordRequest PROTOBUF_FINAL :
                &_WriteLeaderboardRecordRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    103;
+    102;
 
   friend void swap(WriteLeaderboardRecordRequest& a, WriteLeaderboardRecordRequest& b) {
     a.Swap(&b);
@@ -18874,7 +18708,7 @@ class WriteStorageObject PROTOBUF_FINAL :
                &_WriteStorageObject_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    104;
+    103;
 
   friend void swap(WriteStorageObject& a, WriteStorageObject& b) {
     a.Swap(&b);
@@ -19112,7 +18946,7 @@ class WriteStorageObjectsRequest PROTOBUF_FINAL :
                &_WriteStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    105;
+    104;
 
   friend void swap(WriteStorageObjectsRequest& a, WriteStorageObjectsRequest& b) {
     a.Swap(&b);
@@ -19258,7 +19092,7 @@ class WriteTournamentRecordRequest_TournamentRecordWrite PROTOBUF_FINAL :
                &_WriteTournamentRecordRequest_TournamentRecordWrite_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    106;
+    105;
 
   friend void swap(WriteTournamentRecordRequest_TournamentRecordWrite& a, WriteTournamentRecordRequest_TournamentRecordWrite& b) {
     a.Swap(&b);
@@ -19424,7 +19258,7 @@ class WriteTournamentRecordRequest PROTOBUF_FINAL :
                &_WriteTournamentRecordRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    107;
+    106;
 
   friend void swap(WriteTournamentRecordRequest& a, WriteTournamentRecordRequest& b) {
     a.Swap(&b);
@@ -21685,132 +21519,6 @@ inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
 SessionRefreshRequest::mutable_vars() {
   // @@protoc_insertion_point(field_mutable_map:nakama.api.SessionRefreshRequest.vars)
   return _internal_mutable_vars();
-}
-
-// -------------------------------------------------------------------
-
-// SessionLogoutRequest
-
-// string token = 1;
-inline void SessionLogoutRequest::clear_token() {
-  token_.ClearToEmpty();
-}
-inline const std::string& SessionLogoutRequest::token() const {
-  // @@protoc_insertion_point(field_get:nakama.api.SessionLogoutRequest.token)
-  return _internal_token();
-}
-inline void SessionLogoutRequest::set_token(const std::string& value) {
-  _internal_set_token(value);
-  // @@protoc_insertion_point(field_set:nakama.api.SessionLogoutRequest.token)
-}
-inline std::string* SessionLogoutRequest::mutable_token() {
-  // @@protoc_insertion_point(field_mutable:nakama.api.SessionLogoutRequest.token)
-  return _internal_mutable_token();
-}
-inline const std::string& SessionLogoutRequest::_internal_token() const {
-  return token_.Get();
-}
-inline void SessionLogoutRequest::_internal_set_token(const std::string& value) {
-  
-  token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-}
-inline void SessionLogoutRequest::set_token(std::string&& value) {
-  
-  token_.Set(
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:nakama.api.SessionLogoutRequest.token)
-}
-inline void SessionLogoutRequest::set_token(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-  // @@protoc_insertion_point(field_set_char:nakama.api.SessionLogoutRequest.token)
-}
-inline void SessionLogoutRequest::set_token(const char* value,
-    size_t size) {
-  
-  token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:nakama.api.SessionLogoutRequest.token)
-}
-inline std::string* SessionLogoutRequest::_internal_mutable_token() {
-  
-  return token_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-}
-inline std::string* SessionLogoutRequest::release_token() {
-  // @@protoc_insertion_point(field_release:nakama.api.SessionLogoutRequest.token)
-  return token_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void SessionLogoutRequest::set_allocated_token(std::string* token) {
-  if (token != nullptr) {
-    
-  } else {
-    
-  }
-  token_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), token,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:nakama.api.SessionLogoutRequest.token)
-}
-
-// string refresh_token = 2;
-inline void SessionLogoutRequest::clear_refresh_token() {
-  refresh_token_.ClearToEmpty();
-}
-inline const std::string& SessionLogoutRequest::refresh_token() const {
-  // @@protoc_insertion_point(field_get:nakama.api.SessionLogoutRequest.refresh_token)
-  return _internal_refresh_token();
-}
-inline void SessionLogoutRequest::set_refresh_token(const std::string& value) {
-  _internal_set_refresh_token(value);
-  // @@protoc_insertion_point(field_set:nakama.api.SessionLogoutRequest.refresh_token)
-}
-inline std::string* SessionLogoutRequest::mutable_refresh_token() {
-  // @@protoc_insertion_point(field_mutable:nakama.api.SessionLogoutRequest.refresh_token)
-  return _internal_mutable_refresh_token();
-}
-inline const std::string& SessionLogoutRequest::_internal_refresh_token() const {
-  return refresh_token_.Get();
-}
-inline void SessionLogoutRequest::_internal_set_refresh_token(const std::string& value) {
-  
-  refresh_token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
-}
-inline void SessionLogoutRequest::set_refresh_token(std::string&& value) {
-  
-  refresh_token_.Set(
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:nakama.api.SessionLogoutRequest.refresh_token)
-}
-inline void SessionLogoutRequest::set_refresh_token(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  refresh_token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
-  // @@protoc_insertion_point(field_set_char:nakama.api.SessionLogoutRequest.refresh_token)
-}
-inline void SessionLogoutRequest::set_refresh_token(const char* value,
-    size_t size) {
-  
-  refresh_token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:nakama.api.SessionLogoutRequest.refresh_token)
-}
-inline std::string* SessionLogoutRequest::_internal_mutable_refresh_token() {
-  
-  return refresh_token_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
-}
-inline std::string* SessionLogoutRequest::release_refresh_token() {
-  // @@protoc_insertion_point(field_release:nakama.api.SessionLogoutRequest.refresh_token)
-  return refresh_token_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void SessionLogoutRequest::set_allocated_refresh_token(std::string* refresh_token) {
-  if (refresh_token != nullptr) {
-    
-  } else {
-    
-  }
-  refresh_token_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), refresh_token,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:nakama.api.SessionLogoutRequest.refresh_token)
 }
 
 // -------------------------------------------------------------------
@@ -40504,8 +40212,6 @@ inline void WriteTournamentRecordRequest::set_allocated_record(::nakama::api::Wr
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

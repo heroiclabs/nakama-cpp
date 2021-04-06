@@ -37,7 +37,7 @@
 #include <google/protobuf/unknown_field_set.h>
 #include <google/protobuf/timestamp.pb.h>
 #include <google/protobuf/wrappers.pb.h>
-#include "api/api.pb.h"
+#include "github.com/heroiclabs/nakama-common/api/api.pb.h"
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 #define PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto
