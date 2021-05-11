@@ -643,6 +643,7 @@ void assign(sNStorageObjectList& cObjList, const Nakama::NStorageObjectList& obj
 {
     cObjList.objects = nullptr;
     cObjList.objectsCount = (uint16_t)objList.objects.size();
+    cObjList.cursor = objList.cursor.c_str();
 
     if (cObjList.objectsCount > 0)
     {
