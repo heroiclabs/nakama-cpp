@@ -45,6 +45,7 @@ if(NAKAMA_SHARED_LIBRARY)
     if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
         # disable C4251 warnings
         target_compile_options(nakama-cpp PRIVATE /wd4251)
+        set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -AI\"C:/Program Files (x86)/Windows Kits/10/UnionMetadata\"" )
     endif()
 
 else()

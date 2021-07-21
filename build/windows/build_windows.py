@@ -115,7 +115,7 @@ else:
 # Windows 8   | 6.2
 # Windows 8.1 | 6.3
 # Windows 10  | 10.0
-SYSTEM_VERSION = '6.1'
+SYSTEM_VERSION = '10.0'
 
 cmake_cmd = ['cmake',
   '-B', BUILD_DIR,
