@@ -46,6 +46,14 @@
 #include "nakama-cpp/realtime/rtdata/NRtError.h"
 #include "nakama-cpp/realtime/rtdata/NStreamData.h"
 #include "nakama-cpp/realtime/rtdata/NStreamPresenceEvent.h"
+#include "nakama-cpp/realtime/rtdata/NParty.h"
+#include "nakama-cpp/realtime/rtdata/NPartyClose.h"
+#include "nakama-cpp/realtime/rtdata/NPartyData.h"
+#include "nakama-cpp/realtime/rtdata/NPartyJoinRequest.h"
+#include "nakama-cpp/realtime/rtdata/NPartyLeader.h"
+#include "nakama-cpp/realtime/rtdata/NPartyMatchmakerTicket.h"
+#include "nakama-cpp/realtime/rtdata/NPartyPresenceEvent.h"
+
 #include "github.com/heroiclabs/nakama-common/rtapi/realtime.pb.h"
 
 namespace Nakama {
@@ -103,6 +111,9 @@ namespace Nakama {
     void assign(NStream& stream, const ::nakama::realtime::Stream& data);
     void assign(NStreamData& streamData, const ::nakama::realtime::StreamData& data);
     void assign(NStreamPresenceEvent& event, const ::nakama::realtime::StreamPresenceEvent& data);
+    void assign(NPartyMatchmakerTicket& ticket, const ::nakama::realtime::PartyMatchmakerTicket& data);
+    void assign(NParty& party, const ::nakama::realtime::Party& data);
+    void assign(NPartyJoinRequest& partyJoinRequest, const ::nakama::realtime::PartyJoinRequest& data);
 
     template <class T>
     void assign(T& b, const T& data)
