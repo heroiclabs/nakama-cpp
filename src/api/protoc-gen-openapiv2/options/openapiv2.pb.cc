@@ -14,422 +14,539 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-
-PROTOBUF_PRAGMA_INIT_SEG
+extern PROTOBUF_INTERNAL_EXPORT_google_2fprotobuf_2fstruct_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ListValue_google_2fprotobuf_2fstruct_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Contact_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Header_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_Info_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Info_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_JSONSchema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_License_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Operation_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Operation_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_Response_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Response_ExamplesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Response_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Response_HeadersEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_Schema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Scopes_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Scopes_ScopeEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SecurityDefinitions_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SecurityDefinitions_SecurityEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SecurityRequirement_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SecurityRequirement_SecurityRequirementEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SecurityRequirement_SecurityRequirementValue_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SecurityScheme_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SecurityScheme_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Swagger_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Swagger_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
 namespace grpc {
 namespace gateway {
 namespace protoc_gen_openapiv2 {
 namespace options {
-constexpr Swagger_ResponsesEntry_DoNotUse::Swagger_ResponsesEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct Swagger_ResponsesEntry_DoNotUseDefaultTypeInternal {
-  constexpr Swagger_ResponsesEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~Swagger_ResponsesEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    Swagger_ResponsesEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Swagger_ResponsesEntry_DoNotUseDefaultTypeInternal _Swagger_ResponsesEntry_DoNotUse_default_instance_;
-constexpr Swagger_ExtensionsEntry_DoNotUse::Swagger_ExtensionsEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct Swagger_ExtensionsEntry_DoNotUseDefaultTypeInternal {
-  constexpr Swagger_ExtensionsEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~Swagger_ExtensionsEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    Swagger_ExtensionsEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Swagger_ExtensionsEntry_DoNotUseDefaultTypeInternal _Swagger_ExtensionsEntry_DoNotUse_default_instance_;
-constexpr Swagger::Swagger(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : schemes_()
-  , _schemes_cached_byte_size_()
-  , consumes_()
-  , produces_()
-  , responses_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , security_()
-  , extensions_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , swagger_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , host_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , base_path_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , info_(nullptr)
-  , security_definitions_(nullptr)
-  , external_docs_(nullptr){}
-struct SwaggerDefaultTypeInternal {
-  constexpr SwaggerDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~SwaggerDefaultTypeInternal() {}
-  union {
-    Swagger _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SwaggerDefaultTypeInternal _Swagger_default_instance_;
-constexpr Operation_ResponsesEntry_DoNotUse::Operation_ResponsesEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct Operation_ResponsesEntry_DoNotUseDefaultTypeInternal {
-  constexpr Operation_ResponsesEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~Operation_ResponsesEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    Operation_ResponsesEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Operation_ResponsesEntry_DoNotUseDefaultTypeInternal _Operation_ResponsesEntry_DoNotUse_default_instance_;
-constexpr Operation_ExtensionsEntry_DoNotUse::Operation_ExtensionsEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct Operation_ExtensionsEntry_DoNotUseDefaultTypeInternal {
-  constexpr Operation_ExtensionsEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~Operation_ExtensionsEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    Operation_ExtensionsEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Operation_ExtensionsEntry_DoNotUseDefaultTypeInternal _Operation_ExtensionsEntry_DoNotUse_default_instance_;
-constexpr Operation::Operation(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : tags_()
-  , consumes_()
-  , produces_()
-  , responses_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , schemes_()
-  , _schemes_cached_byte_size_()
-  , security_()
-  , extensions_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , summary_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , description_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , operation_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , external_docs_(nullptr)
-  , deprecated_(false){}
-struct OperationDefaultTypeInternal {
-  constexpr OperationDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~OperationDefaultTypeInternal() {}
-  union {
-    Operation _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT OperationDefaultTypeInternal _Operation_default_instance_;
-constexpr Header::Header(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : description_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , type_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , format_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , default__(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , pattern_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct HeaderDefaultTypeInternal {
-  constexpr HeaderDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~HeaderDefaultTypeInternal() {}
-  union {
-    Header _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT HeaderDefaultTypeInternal _Header_default_instance_;
-constexpr Response_HeadersEntry_DoNotUse::Response_HeadersEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct Response_HeadersEntry_DoNotUseDefaultTypeInternal {
-  constexpr Response_HeadersEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~Response_HeadersEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    Response_HeadersEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Response_HeadersEntry_DoNotUseDefaultTypeInternal _Response_HeadersEntry_DoNotUse_default_instance_;
-constexpr Response_ExamplesEntry_DoNotUse::Response_ExamplesEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct Response_ExamplesEntry_DoNotUseDefaultTypeInternal {
-  constexpr Response_ExamplesEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~Response_ExamplesEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    Response_ExamplesEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Response_ExamplesEntry_DoNotUseDefaultTypeInternal _Response_ExamplesEntry_DoNotUse_default_instance_;
-constexpr Response_ExtensionsEntry_DoNotUse::Response_ExtensionsEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct Response_ExtensionsEntry_DoNotUseDefaultTypeInternal {
-  constexpr Response_ExtensionsEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~Response_ExtensionsEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    Response_ExtensionsEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Response_ExtensionsEntry_DoNotUseDefaultTypeInternal _Response_ExtensionsEntry_DoNotUse_default_instance_;
-constexpr Response::Response(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : headers_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , examples_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , extensions_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , description_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , schema_(nullptr){}
-struct ResponseDefaultTypeInternal {
-  constexpr ResponseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ResponseDefaultTypeInternal() {}
-  union {
-    Response _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ResponseDefaultTypeInternal _Response_default_instance_;
-constexpr Info_ExtensionsEntry_DoNotUse::Info_ExtensionsEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct Info_ExtensionsEntry_DoNotUseDefaultTypeInternal {
-  constexpr Info_ExtensionsEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~Info_ExtensionsEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    Info_ExtensionsEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Info_ExtensionsEntry_DoNotUseDefaultTypeInternal _Info_ExtensionsEntry_DoNotUse_default_instance_;
-constexpr Info::Info(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : extensions_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , title_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , description_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , terms_of_service_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , version_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , contact_(nullptr)
-  , license_(nullptr){}
-struct InfoDefaultTypeInternal {
-  constexpr InfoDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~InfoDefaultTypeInternal() {}
-  union {
-    Info _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT InfoDefaultTypeInternal _Info_default_instance_;
-constexpr Contact::Contact(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , url_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , email_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct ContactDefaultTypeInternal {
-  constexpr ContactDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ContactDefaultTypeInternal() {}
-  union {
-    Contact _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ContactDefaultTypeInternal _Contact_default_instance_;
-constexpr License::License(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , url_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct LicenseDefaultTypeInternal {
-  constexpr LicenseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~LicenseDefaultTypeInternal() {}
-  union {
-    License _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT LicenseDefaultTypeInternal _License_default_instance_;
-constexpr ExternalDocumentation::ExternalDocumentation(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : description_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , url_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct ExternalDocumentationDefaultTypeInternal {
-  constexpr ExternalDocumentationDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ExternalDocumentationDefaultTypeInternal() {}
-  union {
-    ExternalDocumentation _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ExternalDocumentationDefaultTypeInternal _ExternalDocumentation_default_instance_;
-constexpr Schema::Schema(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : discriminator_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , example_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , json_schema_(nullptr)
-  , external_docs_(nullptr)
-  , read_only_(false){}
-struct SchemaDefaultTypeInternal {
-  constexpr SchemaDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~SchemaDefaultTypeInternal() {}
-  union {
-    Schema _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SchemaDefaultTypeInternal _Schema_default_instance_;
-constexpr JSONSchema::JSONSchema(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : required_()
-  , array_()
-  , type_()
-  , _type_cached_byte_size_()
-  , enum__()
-  , ref_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , title_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , description_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , default__(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , example_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , pattern_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , format_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , multiple_of_(0)
-  , maximum_(0)
-  , minimum_(0)
-  , max_length_(PROTOBUF_ULONGLONG(0))
-  , min_length_(PROTOBUF_ULONGLONG(0))
-  , max_items_(PROTOBUF_ULONGLONG(0))
-  , min_items_(PROTOBUF_ULONGLONG(0))
-  , max_properties_(PROTOBUF_ULONGLONG(0))
-  , min_properties_(PROTOBUF_ULONGLONG(0))
-  , read_only_(false)
-  , exclusive_maximum_(false)
-  , exclusive_minimum_(false)
-  , unique_items_(false){}
-struct JSONSchemaDefaultTypeInternal {
-  constexpr JSONSchemaDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~JSONSchemaDefaultTypeInternal() {}
-  union {
-    JSONSchema _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT JSONSchemaDefaultTypeInternal _JSONSchema_default_instance_;
-constexpr Tag::Tag(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : description_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , external_docs_(nullptr){}
-struct TagDefaultTypeInternal {
-  constexpr TagDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~TagDefaultTypeInternal() {}
-  union {
-    Tag _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT TagDefaultTypeInternal _Tag_default_instance_;
-constexpr SecurityDefinitions_SecurityEntry_DoNotUse::SecurityDefinitions_SecurityEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct SecurityDefinitions_SecurityEntry_DoNotUseDefaultTypeInternal {
-  constexpr SecurityDefinitions_SecurityEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~SecurityDefinitions_SecurityEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    SecurityDefinitions_SecurityEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SecurityDefinitions_SecurityEntry_DoNotUseDefaultTypeInternal _SecurityDefinitions_SecurityEntry_DoNotUse_default_instance_;
-constexpr SecurityDefinitions::SecurityDefinitions(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : security_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}){}
-struct SecurityDefinitionsDefaultTypeInternal {
-  constexpr SecurityDefinitionsDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~SecurityDefinitionsDefaultTypeInternal() {}
-  union {
-    SecurityDefinitions _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SecurityDefinitionsDefaultTypeInternal _SecurityDefinitions_default_instance_;
-constexpr SecurityScheme_ExtensionsEntry_DoNotUse::SecurityScheme_ExtensionsEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct SecurityScheme_ExtensionsEntry_DoNotUseDefaultTypeInternal {
-  constexpr SecurityScheme_ExtensionsEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~SecurityScheme_ExtensionsEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    SecurityScheme_ExtensionsEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SecurityScheme_ExtensionsEntry_DoNotUseDefaultTypeInternal _SecurityScheme_ExtensionsEntry_DoNotUse_default_instance_;
-constexpr SecurityScheme::SecurityScheme(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : extensions_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , description_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , authorization_url_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , token_url_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , scopes_(nullptr)
-  , type_(0)
-
-  , in_(0)
-
-  , flow_(0)
-{}
-struct SecuritySchemeDefaultTypeInternal {
-  constexpr SecuritySchemeDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~SecuritySchemeDefaultTypeInternal() {}
-  union {
-    SecurityScheme _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SecuritySchemeDefaultTypeInternal _SecurityScheme_default_instance_;
-constexpr SecurityRequirement_SecurityRequirementValue::SecurityRequirement_SecurityRequirementValue(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : scope_(){}
-struct SecurityRequirement_SecurityRequirementValueDefaultTypeInternal {
-  constexpr SecurityRequirement_SecurityRequirementValueDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~SecurityRequirement_SecurityRequirementValueDefaultTypeInternal() {}
-  union {
-    SecurityRequirement_SecurityRequirementValue _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SecurityRequirement_SecurityRequirementValueDefaultTypeInternal _SecurityRequirement_SecurityRequirementValue_default_instance_;
-constexpr SecurityRequirement_SecurityRequirementEntry_DoNotUse::SecurityRequirement_SecurityRequirementEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct SecurityRequirement_SecurityRequirementEntry_DoNotUseDefaultTypeInternal {
-  constexpr SecurityRequirement_SecurityRequirementEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~SecurityRequirement_SecurityRequirementEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    SecurityRequirement_SecurityRequirementEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SecurityRequirement_SecurityRequirementEntry_DoNotUseDefaultTypeInternal _SecurityRequirement_SecurityRequirementEntry_DoNotUse_default_instance_;
-constexpr SecurityRequirement::SecurityRequirement(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : security_requirement_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}){}
-struct SecurityRequirementDefaultTypeInternal {
-  constexpr SecurityRequirementDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~SecurityRequirementDefaultTypeInternal() {}
-  union {
-    SecurityRequirement _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SecurityRequirementDefaultTypeInternal _SecurityRequirement_default_instance_;
-constexpr Scopes_ScopeEntry_DoNotUse::Scopes_ScopeEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct Scopes_ScopeEntry_DoNotUseDefaultTypeInternal {
-  constexpr Scopes_ScopeEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~Scopes_ScopeEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    Scopes_ScopeEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Scopes_ScopeEntry_DoNotUseDefaultTypeInternal _Scopes_ScopeEntry_DoNotUse_default_instance_;
-constexpr Scopes::Scopes(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : scope_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}){}
-struct ScopesDefaultTypeInternal {
-  constexpr ScopesDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ScopesDefaultTypeInternal() {}
-  union {
-    Scopes _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ScopesDefaultTypeInternal _Scopes_default_instance_;
+class Swagger_ResponsesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Swagger_ResponsesEntry_DoNotUse> _instance;
+} _Swagger_ResponsesEntry_DoNotUse_default_instance_;
+class Swagger_ExtensionsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Swagger_ExtensionsEntry_DoNotUse> _instance;
+} _Swagger_ExtensionsEntry_DoNotUse_default_instance_;
+class SwaggerDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Swagger> _instance;
+} _Swagger_default_instance_;
+class Operation_ResponsesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Operation_ResponsesEntry_DoNotUse> _instance;
+} _Operation_ResponsesEntry_DoNotUse_default_instance_;
+class Operation_ExtensionsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Operation_ExtensionsEntry_DoNotUse> _instance;
+} _Operation_ExtensionsEntry_DoNotUse_default_instance_;
+class OperationDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Operation> _instance;
+} _Operation_default_instance_;
+class HeaderDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Header> _instance;
+} _Header_default_instance_;
+class Response_HeadersEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Response_HeadersEntry_DoNotUse> _instance;
+} _Response_HeadersEntry_DoNotUse_default_instance_;
+class Response_ExamplesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Response_ExamplesEntry_DoNotUse> _instance;
+} _Response_ExamplesEntry_DoNotUse_default_instance_;
+class Response_ExtensionsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Response_ExtensionsEntry_DoNotUse> _instance;
+} _Response_ExtensionsEntry_DoNotUse_default_instance_;
+class ResponseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Response> _instance;
+} _Response_default_instance_;
+class Info_ExtensionsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Info_ExtensionsEntry_DoNotUse> _instance;
+} _Info_ExtensionsEntry_DoNotUse_default_instance_;
+class InfoDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Info> _instance;
+} _Info_default_instance_;
+class ContactDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Contact> _instance;
+} _Contact_default_instance_;
+class LicenseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<License> _instance;
+} _License_default_instance_;
+class ExternalDocumentationDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ExternalDocumentation> _instance;
+} _ExternalDocumentation_default_instance_;
+class SchemaDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Schema> _instance;
+} _Schema_default_instance_;
+class JSONSchemaDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<JSONSchema> _instance;
+} _JSONSchema_default_instance_;
+class TagDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Tag> _instance;
+} _Tag_default_instance_;
+class SecurityDefinitions_SecurityEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SecurityDefinitions_SecurityEntry_DoNotUse> _instance;
+} _SecurityDefinitions_SecurityEntry_DoNotUse_default_instance_;
+class SecurityDefinitionsDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SecurityDefinitions> _instance;
+} _SecurityDefinitions_default_instance_;
+class SecurityScheme_ExtensionsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SecurityScheme_ExtensionsEntry_DoNotUse> _instance;
+} _SecurityScheme_ExtensionsEntry_DoNotUse_default_instance_;
+class SecuritySchemeDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SecurityScheme> _instance;
+} _SecurityScheme_default_instance_;
+class SecurityRequirement_SecurityRequirementValueDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SecurityRequirement_SecurityRequirementValue> _instance;
+} _SecurityRequirement_SecurityRequirementValue_default_instance_;
+class SecurityRequirement_SecurityRequirementEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SecurityRequirement_SecurityRequirementEntry_DoNotUse> _instance;
+} _SecurityRequirement_SecurityRequirementEntry_DoNotUse_default_instance_;
+class SecurityRequirementDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SecurityRequirement> _instance;
+} _SecurityRequirement_default_instance_;
+class Scopes_ScopeEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Scopes_ScopeEntry_DoNotUse> _instance;
+} _Scopes_ScopeEntry_DoNotUse_default_instance_;
+class ScopesDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Scopes> _instance;
+} _Scopes_default_instance_;
 }  // namespace options
 }  // namespace protoc_gen_openapiv2
 }  // namespace gateway
 }  // namespace grpc
+static void InitDefaultsscc_info_Contact_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Contact_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Contact();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Contact_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Contact_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {}};
+
+static void InitDefaultsscc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_ExternalDocumentation_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::ExternalDocumentation();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {}};
+
+static void InitDefaultsscc_info_Header_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Header_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Header();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Header_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Header_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {}};
+
+static void InitDefaultsscc_info_Info_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Info_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Info();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_Info_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, 0, InitDefaultsscc_info_Info_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_Contact_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_License_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_Info_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_Info_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Info_ExtensionsEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Info_ExtensionsEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Info_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Info_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_ListValue_google_2fprotobuf_2fstruct_2eproto.base,}};
+
+static void InitDefaultsscc_info_JSONSchema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_JSONSchema_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::JSONSchema();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_JSONSchema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_JSONSchema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {}};
+
+static void InitDefaultsscc_info_License_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_License_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::License();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_License_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_License_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {}};
+
+static void InitDefaultsscc_info_Operation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Operation_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Operation();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_Operation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 4, 0, InitDefaultsscc_info_Operation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_Operation_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_SecurityRequirement_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_Operation_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_Operation_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Operation_ExtensionsEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Operation_ExtensionsEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Operation_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Operation_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_ListValue_google_2fprotobuf_2fstruct_2eproto.base,}};
+
+static void InitDefaultsscc_info_Operation_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Operation_ResponsesEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Operation_ResponsesEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Operation_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Operation_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_Response_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_Response_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Response_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Response();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_Response_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 4, 0, InitDefaultsscc_info_Response_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_Schema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_Response_HeadersEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_Response_ExamplesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_Response_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_Response_ExamplesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Response_ExamplesEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Response_ExamplesEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Response_ExamplesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Response_ExamplesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {}};
+
+static void InitDefaultsscc_info_Response_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Response_ExtensionsEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Response_ExtensionsEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Response_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Response_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_ListValue_google_2fprotobuf_2fstruct_2eproto.base,}};
+
+static void InitDefaultsscc_info_Response_HeadersEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Response_HeadersEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Response_HeadersEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Response_HeadersEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Response_HeadersEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_Header_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_Schema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Schema_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Schema();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_Schema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_Schema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_JSONSchema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_Scopes_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Scopes_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Scopes();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Scopes_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Scopes_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_Scopes_ScopeEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_Scopes_ScopeEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Scopes_ScopeEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Scopes_ScopeEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Scopes_ScopeEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Scopes_ScopeEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {}};
+
+static void InitDefaultsscc_info_SecurityDefinitions_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_SecurityDefinitions_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::SecurityDefinitions();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SecurityDefinitions_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SecurityDefinitions_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_SecurityDefinitions_SecurityEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_SecurityDefinitions_SecurityEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_SecurityDefinitions_SecurityEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::SecurityDefinitions_SecurityEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SecurityDefinitions_SecurityEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SecurityDefinitions_SecurityEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_SecurityScheme_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_SecurityRequirement_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_SecurityRequirement_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::SecurityRequirement();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SecurityRequirement_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SecurityRequirement_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_SecurityRequirement_SecurityRequirementEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_SecurityRequirement_SecurityRequirementEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_SecurityRequirement_SecurityRequirementEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::SecurityRequirement_SecurityRequirementEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SecurityRequirement_SecurityRequirementEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SecurityRequirement_SecurityRequirementEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_SecurityRequirement_SecurityRequirementValue_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_SecurityRequirement_SecurityRequirementValue_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_SecurityRequirement_SecurityRequirementValue_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::SecurityRequirement_SecurityRequirementValue();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SecurityRequirement_SecurityRequirementValue_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_SecurityRequirement_SecurityRequirementValue_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {}};
+
+static void InitDefaultsscc_info_SecurityScheme_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_SecurityScheme_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::SecurityScheme();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SecurityScheme_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_SecurityScheme_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_Scopes_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_SecurityScheme_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_SecurityScheme_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_SecurityScheme_ExtensionsEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::SecurityScheme_ExtensionsEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SecurityScheme_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SecurityScheme_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_ListValue_google_2fprotobuf_2fstruct_2eproto.base,}};
+
+static void InitDefaultsscc_info_Swagger_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Swagger_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Swagger();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<6> scc_info_Swagger_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 6, 0, InitDefaultsscc_info_Swagger_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_Info_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_Swagger_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_SecurityDefinitions_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_SecurityRequirement_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+      &scc_info_Swagger_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_Swagger_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Swagger_ExtensionsEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Swagger_ExtensionsEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Swagger_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Swagger_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_ListValue_google_2fprotobuf_2fstruct_2eproto.base,}};
+
+static void InitDefaultsscc_info_Swagger_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Swagger_ResponsesEntry_DoNotUse_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Swagger_ResponsesEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Swagger_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Swagger_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_Response_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
+static void InitDefaultsscc_info_Tag_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::grpc::gateway::protoc_gen_openapiv2::options::_Tag_default_instance_;
+    new (ptr) ::grpc::gateway::protoc_gen_openapiv2::options::Tag();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Tag_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Tag_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto}, {
+      &scc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,}};
+
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto[28];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto[5];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto = nullptr;
@@ -928,21 +1045,46 @@ const char descriptor_table_protodef_protoc_2dgen_2dopenapiv2_2foptions_2fopenap
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fstruct_2eproto,
 };
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto_sccs[28] = {
+  &scc_info_Contact_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Header_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Info_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Info_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_JSONSchema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_License_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Operation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Operation_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Operation_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Response_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Response_ExamplesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Response_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Response_HeadersEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Schema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Scopes_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Scopes_ScopeEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_SecurityDefinitions_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_SecurityDefinitions_SecurityEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_SecurityRequirement_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_SecurityRequirement_SecurityRequirementEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_SecurityRequirement_SecurityRequirementValue_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_SecurityScheme_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_SecurityScheme_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Swagger_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Swagger_ExtensionsEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Swagger_ResponsesEntry_DoNotUse_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+  &scc_info_Tag_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base,
+};
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto = {
-  false, false, 5771, descriptor_table_protodef_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto, "protoc-gen-openapiv2/options/openapiv2.proto", 
-  &descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto_once, descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto_deps, 1, 28,
+  false, false, descriptor_table_protodef_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto, "protoc-gen-openapiv2/options/openapiv2.proto", 5771,
+  &descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto_once, descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto_sccs, descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto_deps, 28, 1,
   schemas, file_default_instances, TableStruct_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto::offsets,
-  file_level_metadata_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto, file_level_enum_descriptors_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto, file_level_service_descriptors_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto,
+  file_level_metadata_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto, 28, file_level_enum_descriptors_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto, file_level_service_descriptors_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK ::PROTOBUF_NAMESPACE_ID::Metadata
-descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto_metadata_getter(int index) {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto);
-  return descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.file_level_metadata[index];
-}
 
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto(&descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto);
+static bool dynamic_init_dummy_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto)), true);
 namespace grpc {
 namespace gateway {
 namespace protoc_gen_openapiv2 {
@@ -1186,13 +1328,14 @@ Swagger::Swagger(const Swagger& from)
 }
 
 void Swagger::SharedCtor() {
-swagger_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-host_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-base_path_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&info_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&external_docs_) -
-    reinterpret_cast<char*>(&info_)) + sizeof(external_docs_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Swagger_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  swagger_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  host_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  base_path_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&info_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&external_docs_) -
+      reinterpret_cast<char*>(&info_)) + sizeof(external_docs_));
 }
 
 Swagger::~Swagger() {
@@ -1220,6 +1363,11 @@ void Swagger::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Swagger::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Swagger& Swagger::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Swagger_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Swagger::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.Swagger)
@@ -1895,13 +2043,14 @@ Operation::Operation(const Operation& from)
 }
 
 void Operation::SharedCtor() {
-summary_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-operation_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&external_docs_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&deprecated_) -
-    reinterpret_cast<char*>(&external_docs_)) + sizeof(deprecated_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Operation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  summary_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  operation_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&external_docs_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&deprecated_) -
+      reinterpret_cast<char*>(&external_docs_)) + sizeof(deprecated_));
 }
 
 Operation::~Operation() {
@@ -1927,6 +2076,11 @@ void Operation::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Operation::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Operation& Operation::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Operation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Operation::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.Operation)
@@ -2549,11 +2703,12 @@ Header::Header(const Header& from)
 }
 
 void Header::SharedCtor() {
-description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-type_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-format_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-default__.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-pattern_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Header_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  type_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  format_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  default__.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  pattern_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 Header::~Header() {
@@ -2580,6 +2735,11 @@ void Header::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Header::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Header& Header::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Header_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Header::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.Header)
@@ -2951,8 +3111,9 @@ Response::Response(const Response& from)
 }
 
 void Response::SharedCtor() {
-description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-schema_ = nullptr;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Response_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  schema_ = nullptr;
 }
 
 Response::~Response() {
@@ -2976,6 +3137,11 @@ void Response::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Response::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Response& Response::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Response_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Response::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.Response)
@@ -3439,14 +3605,15 @@ Info::Info(const Info& from)
 }
 
 void Info::SharedCtor() {
-title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-terms_of_service_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-version_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&contact_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&license_) -
-    reinterpret_cast<char*>(&contact_)) + sizeof(license_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Info_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  terms_of_service_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  version_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&contact_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&license_) -
+      reinterpret_cast<char*>(&contact_)) + sizeof(license_));
 }
 
 Info::~Info() {
@@ -3474,6 +3641,11 @@ void Info::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Info::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Info& Info::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Info_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Info::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.Info)
@@ -3883,9 +4055,10 @@ Contact::Contact(const Contact& from)
 }
 
 void Contact::SharedCtor() {
-name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-url_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-email_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Contact_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  url_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  email_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 Contact::~Contact() {
@@ -3910,6 +4083,11 @@ void Contact::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Contact::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Contact& Contact::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Contact_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Contact::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.Contact)
@@ -4154,8 +4332,9 @@ License::License(const License& from)
 }
 
 void License::SharedCtor() {
-name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-url_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_License_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  url_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 License::~License() {
@@ -4179,6 +4358,11 @@ void License::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void License::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const License& License::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_License_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void License::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.License)
@@ -4392,8 +4576,9 @@ ExternalDocumentation::ExternalDocumentation(const ExternalDocumentation& from)
 }
 
 void ExternalDocumentation::SharedCtor() {
-description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-url_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  url_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ExternalDocumentation::~ExternalDocumentation() {
@@ -4417,6 +4602,11 @@ void ExternalDocumentation::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void ExternalDocumentation::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ExternalDocumentation& ExternalDocumentation::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ExternalDocumentation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void ExternalDocumentation::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.ExternalDocumentation)
@@ -4651,12 +4841,13 @@ Schema::Schema(const Schema& from)
 }
 
 void Schema::SharedCtor() {
-discriminator_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-example_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&json_schema_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&read_only_) -
-    reinterpret_cast<char*>(&json_schema_)) + sizeof(read_only_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Schema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  discriminator_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  example_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&json_schema_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&read_only_) -
+      reinterpret_cast<char*>(&json_schema_)) + sizeof(read_only_));
 }
 
 Schema::~Schema() {
@@ -4682,6 +4873,11 @@ void Schema::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Schema::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Schema& Schema::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Schema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Schema::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.Schema)
@@ -5017,17 +5213,18 @@ JSONSchema::JSONSchema(const JSONSchema& from)
 }
 
 void JSONSchema::SharedCtor() {
-ref_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-default__.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-example_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-pattern_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-format_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&multiple_of_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&unique_items_) -
-    reinterpret_cast<char*>(&multiple_of_)) + sizeof(unique_items_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_JSONSchema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  ref_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  default__.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  example_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  pattern_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  format_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&multiple_of_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&unique_items_) -
+      reinterpret_cast<char*>(&multiple_of_)) + sizeof(unique_items_));
 }
 
 JSONSchema::~JSONSchema() {
@@ -5056,6 +5253,11 @@ void JSONSchema::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void JSONSchema::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const JSONSchema& JSONSchema::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_JSONSchema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void JSONSchema::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.JSONSchema)
@@ -5869,8 +6071,9 @@ Tag::Tag(const Tag& from)
 }
 
 void Tag::SharedCtor() {
-description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-external_docs_ = nullptr;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Tag_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  external_docs_ = nullptr;
 }
 
 Tag::~Tag() {
@@ -5894,6 +6097,11 @@ void Tag::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Tag::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Tag& Tag::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Tag_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Tag::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.Tag)
@@ -6115,6 +6323,7 @@ SecurityDefinitions::SecurityDefinitions(const SecurityDefinitions& from)
 }
 
 void SecurityDefinitions::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SecurityDefinitions_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
 }
 
 SecurityDefinitions::~SecurityDefinitions() {
@@ -6136,6 +6345,11 @@ void SecurityDefinitions::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void SecurityDefinitions::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const SecurityDefinitions& SecurityDefinitions::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SecurityDefinitions_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void SecurityDefinitions::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.SecurityDefinitions)
@@ -6397,14 +6611,15 @@ SecurityScheme::SecurityScheme(const SecurityScheme& from)
 }
 
 void SecurityScheme::SharedCtor() {
-description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-authorization_url_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-token_url_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&scopes_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&flow_) -
-    reinterpret_cast<char*>(&scopes_)) + sizeof(flow_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SecurityScheme_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  authorization_url_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  token_url_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&scopes_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&flow_) -
+      reinterpret_cast<char*>(&scopes_)) + sizeof(flow_));
 }
 
 SecurityScheme::~SecurityScheme() {
@@ -6431,6 +6646,11 @@ void SecurityScheme::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void SecurityScheme::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const SecurityScheme& SecurityScheme::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SecurityScheme_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void SecurityScheme::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme)
@@ -6873,6 +7093,7 @@ SecurityRequirement_SecurityRequirementValue::SecurityRequirement_SecurityRequir
 }
 
 void SecurityRequirement_SecurityRequirementValue::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SecurityRequirement_SecurityRequirementValue_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
 }
 
 SecurityRequirement_SecurityRequirementValue::~SecurityRequirement_SecurityRequirementValue() {
@@ -6894,6 +7115,11 @@ void SecurityRequirement_SecurityRequirementValue::RegisterArenaDtor(::PROTOBUF_
 void SecurityRequirement_SecurityRequirementValue::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const SecurityRequirement_SecurityRequirementValue& SecurityRequirement_SecurityRequirementValue::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SecurityRequirement_SecurityRequirementValue_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void SecurityRequirement_SecurityRequirementValue::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.SecurityRequirement.SecurityRequirementValue)
@@ -7089,6 +7315,7 @@ SecurityRequirement::SecurityRequirement(const SecurityRequirement& from)
 }
 
 void SecurityRequirement::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SecurityRequirement_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
 }
 
 SecurityRequirement::~SecurityRequirement() {
@@ -7110,6 +7337,11 @@ void SecurityRequirement::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void SecurityRequirement::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const SecurityRequirement& SecurityRequirement::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SecurityRequirement_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void SecurityRequirement::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.SecurityRequirement)
@@ -7335,6 +7567,7 @@ Scopes::Scopes(const Scopes& from)
 }
 
 void Scopes::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Scopes_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
 }
 
 Scopes::~Scopes() {
@@ -7356,6 +7589,11 @@ void Scopes::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Scopes::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Scopes& Scopes::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Scopes_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Scopes::Clear() {
 // @@protoc_insertion_point(message_clear_start:grpc.gateway.protoc_gen_openapiv2.options.Scopes)

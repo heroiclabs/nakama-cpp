@@ -17,7 +17,7 @@
 #pragma once
 
 #include "BaseClient.h"
-#include "github.com/heroiclabs/nakama/apigrpc/apigrpc.grpc.pb.h"
+#include "api/apigrpc.pb.h"
 #include <set>
 
 namespace Nakama {

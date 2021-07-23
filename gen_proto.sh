@@ -16,7 +16,8 @@
 
 shopt -s extglob
 
-./protoc-3.15.6-linux-x86_64/bin/protoc -Iproto --cpp_out=./src/api \
+### TODO entire platform specific protoc version depending on host machine.
+./protoc-3.14.0-win64/bin/protoc -Iproto --cpp_out=./src/api \
 ./proto/github.com/heroiclabs/nakama-common/api/api.proto \
 ./proto/github.com/heroiclabs/nakama-common/rtapi/realtime.proto \
 ./proto/apigrpc.proto \

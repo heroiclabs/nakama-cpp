@@ -14,52 +14,65 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-
-PROTOBUF_PRAGMA_INIT_SEG
+extern PROTOBUF_INTERNAL_EXPORT_google_2fapi_2fhttp_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_CustomHttpPattern_google_2fapi_2fhttp_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_google_2fapi_2fhttp_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_HttpRule_google_2fapi_2fhttp_2eproto;
 namespace google {
 namespace api {
-constexpr Http::Http(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : rules_(){}
-struct HttpDefaultTypeInternal {
-  constexpr HttpDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~HttpDefaultTypeInternal() {}
-  union {
-    Http _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT HttpDefaultTypeInternal _Http_default_instance_;
-constexpr HttpRule::HttpRule(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : additional_bindings_()
-  , selector_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , body_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , _oneof_case_{}{}
-struct HttpRuleDefaultTypeInternal {
-  constexpr HttpRuleDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~HttpRuleDefaultTypeInternal() {}
-  union {
-    HttpRule _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT HttpRuleDefaultTypeInternal _HttpRule_default_instance_;
-constexpr CustomHttpPattern::CustomHttpPattern(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : kind_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , path_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct CustomHttpPatternDefaultTypeInternal {
-  constexpr CustomHttpPatternDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~CustomHttpPatternDefaultTypeInternal() {}
-  union {
-    CustomHttpPattern _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT CustomHttpPatternDefaultTypeInternal _CustomHttpPattern_default_instance_;
+class HttpDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Http> _instance;
+} _Http_default_instance_;
+class HttpRuleDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<HttpRule> _instance;
+} _HttpRule_default_instance_;
+class CustomHttpPatternDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<CustomHttpPattern> _instance;
+} _CustomHttpPattern_default_instance_;
 }  // namespace api
 }  // namespace google
+static void InitDefaultsscc_info_CustomHttpPattern_google_2fapi_2fhttp_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::google::api::_CustomHttpPattern_default_instance_;
+    new (ptr) ::google::api::CustomHttpPattern();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_CustomHttpPattern_google_2fapi_2fhttp_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_CustomHttpPattern_google_2fapi_2fhttp_2eproto}, {}};
+
+static void InitDefaultsscc_info_Http_google_2fapi_2fhttp_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::google::api::_Http_default_instance_;
+    new (ptr) ::google::api::Http();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Http_google_2fapi_2fhttp_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Http_google_2fapi_2fhttp_2eproto}, {
+      &scc_info_HttpRule_google_2fapi_2fhttp_2eproto.base,}};
+
+static void InitDefaultsscc_info_HttpRule_google_2fapi_2fhttp_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::google::api::_HttpRule_default_instance_;
+    new (ptr) ::google::api::HttpRule();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_HttpRule_google_2fapi_2fhttp_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_HttpRule_google_2fapi_2fhttp_2eproto}, {
+      &scc_info_CustomHttpPattern_google_2fapi_2fhttp_2eproto.base,}};
+
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_google_2fapi_2fhttp_2eproto[3];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_google_2fapi_2fhttp_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_google_2fapi_2fhttp_2eproto = nullptr;
@@ -121,21 +134,23 @@ const char descriptor_table_protodef_google_2fapi_2fhttp_2eproto[] PROTOBUF_SECT
   "/annotations;annotations\370\001\001\242\002\004GAPIb\006prot"
   "o3"
   ;
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_google_2fapi_2fhttp_2eproto_deps[1] = {
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_google_2fapi_2fhttp_2eproto_sccs[3] = {
+  &scc_info_CustomHttpPattern_google_2fapi_2fhttp_2eproto.base,
+  &scc_info_Http_google_2fapi_2fhttp_2eproto.base,
+  &scc_info_HttpRule_google_2fapi_2fhttp_2eproto.base,
+};
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_google_2fapi_2fhttp_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_google_2fapi_2fhttp_2eproto = {
-  false, false, 482, descriptor_table_protodef_google_2fapi_2fhttp_2eproto, "google/api/http.proto", 
-  &descriptor_table_google_2fapi_2fhttp_2eproto_once, nullptr, 0, 3,
+  false, false, descriptor_table_protodef_google_2fapi_2fhttp_2eproto, "google/api/http.proto", 482,
+  &descriptor_table_google_2fapi_2fhttp_2eproto_once, descriptor_table_google_2fapi_2fhttp_2eproto_sccs, descriptor_table_google_2fapi_2fhttp_2eproto_deps, 3, 0,
   schemas, file_default_instances, TableStruct_google_2fapi_2fhttp_2eproto::offsets,
-  file_level_metadata_google_2fapi_2fhttp_2eproto, file_level_enum_descriptors_google_2fapi_2fhttp_2eproto, file_level_service_descriptors_google_2fapi_2fhttp_2eproto,
+  file_level_metadata_google_2fapi_2fhttp_2eproto, 3, file_level_enum_descriptors_google_2fapi_2fhttp_2eproto, file_level_service_descriptors_google_2fapi_2fhttp_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK ::PROTOBUF_NAMESPACE_ID::Metadata
-descriptor_table_google_2fapi_2fhttp_2eproto_metadata_getter(int index) {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_google_2fapi_2fhttp_2eproto);
-  return descriptor_table_google_2fapi_2fhttp_2eproto.file_level_metadata[index];
-}
 
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_google_2fapi_2fhttp_2eproto(&descriptor_table_google_2fapi_2fhttp_2eproto);
+static bool dynamic_init_dummy_google_2fapi_2fhttp_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_google_2fapi_2fhttp_2eproto)), true);
 namespace google {
 namespace api {
 
@@ -160,6 +175,7 @@ Http::Http(const Http& from)
 }
 
 void Http::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Http_google_2fapi_2fhttp_2eproto.base);
 }
 
 Http::~Http() {
@@ -181,6 +197,11 @@ void Http::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Http::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Http& Http::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Http_google_2fapi_2fhttp_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Http::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.api.Http)
@@ -414,9 +435,10 @@ HttpRule::HttpRule(const HttpRule& from)
 }
 
 void HttpRule::SharedCtor() {
-selector_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-body_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-clear_has_pattern();
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_HttpRule_google_2fapi_2fhttp_2eproto.base);
+  selector_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  body_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  clear_has_pattern();
 }
 
 HttpRule::~HttpRule() {
@@ -443,6 +465,11 @@ void HttpRule::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void HttpRule::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const HttpRule& HttpRule::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_HttpRule_google_2fapi_2fhttp_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void HttpRule::clear_pattern() {
 // @@protoc_insertion_point(one_of_clear_start:google.api.HttpRule)
@@ -912,8 +939,9 @@ CustomHttpPattern::CustomHttpPattern(const CustomHttpPattern& from)
 }
 
 void CustomHttpPattern::SharedCtor() {
-kind_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-path_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_CustomHttpPattern_google_2fapi_2fhttp_2eproto.base);
+  kind_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  path_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 CustomHttpPattern::~CustomHttpPattern() {
@@ -937,6 +965,11 @@ void CustomHttpPattern::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void CustomHttpPattern::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const CustomHttpPattern& CustomHttpPattern::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_CustomHttpPattern_google_2fapi_2fhttp_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void CustomHttpPattern::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.api.CustomHttpPattern)

@@ -14,806 +14,1157 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-
-PROTOBUF_PRAGMA_INIT_SEG
+extern PROTOBUF_INTERNAL_EXPORT_google_2fprotobuf_2fwrappers_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_BoolValue_google_2fprotobuf_2fwrappers_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_google_2fprotobuf_2fwrappers_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Int32Value_google_2fprotobuf_2fwrappers_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_google_2fprotobuf_2fwrappers_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_StringValue_google_2fprotobuf_2fwrappers_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_google_2fprotobuf_2ftimestamp_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Timestamp_google_2fprotobuf_2ftimestamp_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_ChannelMessage_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Notification_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Rpc_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Channel_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ChannelJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ChannelLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_ChannelMessageAck_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ChannelMessageRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ChannelMessageSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ChannelMessageUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ChannelPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Error_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Error_ContextEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_Match_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchJoin_MetadataEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchmakerMatched_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_MatchmakerMatched_MatchmakerUser_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Notifications_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Party_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyAccept_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyClose_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyJoinRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyJoinRequestList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyLeader_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyPromote_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Ping_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Pong_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Status_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_StatusFollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_StatusPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_StatusUnfollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_StatusUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Stream_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_StreamData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_StreamPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 namespace nakama {
 namespace realtime {
-constexpr Envelope::Envelope(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : cid_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , _oneof_case_{}{}
-struct EnvelopeDefaultTypeInternal {
-  constexpr EnvelopeDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~EnvelopeDefaultTypeInternal() {}
-  union {
-    Envelope _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT EnvelopeDefaultTypeInternal _Envelope_default_instance_;
-constexpr Channel::Channel(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : presences_()
-  , id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , room_name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , group_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , user_id_one_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , user_id_two_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , self_(nullptr){}
-struct ChannelDefaultTypeInternal {
-  constexpr ChannelDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ChannelDefaultTypeInternal() {}
-  union {
-    Channel _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ChannelDefaultTypeInternal _Channel_default_instance_;
-constexpr ChannelJoin::ChannelJoin(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : target_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , persistence_(nullptr)
-  , hidden_(nullptr)
-  , type_(0){}
-struct ChannelJoinDefaultTypeInternal {
-  constexpr ChannelJoinDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ChannelJoinDefaultTypeInternal() {}
-  union {
-    ChannelJoin _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ChannelJoinDefaultTypeInternal _ChannelJoin_default_instance_;
-constexpr ChannelLeave::ChannelLeave(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : channel_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct ChannelLeaveDefaultTypeInternal {
-  constexpr ChannelLeaveDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ChannelLeaveDefaultTypeInternal() {}
-  union {
-    ChannelLeave _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ChannelLeaveDefaultTypeInternal _ChannelLeave_default_instance_;
-constexpr ChannelMessageAck::ChannelMessageAck(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : channel_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , message_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , username_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , room_name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , group_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , user_id_one_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , user_id_two_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , code_(nullptr)
-  , create_time_(nullptr)
-  , update_time_(nullptr)
-  , persistent_(nullptr){}
-struct ChannelMessageAckDefaultTypeInternal {
-  constexpr ChannelMessageAckDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ChannelMessageAckDefaultTypeInternal() {}
-  union {
-    ChannelMessageAck _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ChannelMessageAckDefaultTypeInternal _ChannelMessageAck_default_instance_;
-constexpr ChannelMessageSend::ChannelMessageSend(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : channel_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , content_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct ChannelMessageSendDefaultTypeInternal {
-  constexpr ChannelMessageSendDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ChannelMessageSendDefaultTypeInternal() {}
-  union {
-    ChannelMessageSend _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ChannelMessageSendDefaultTypeInternal _ChannelMessageSend_default_instance_;
-constexpr ChannelMessageUpdate::ChannelMessageUpdate(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : channel_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , message_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , content_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct ChannelMessageUpdateDefaultTypeInternal {
-  constexpr ChannelMessageUpdateDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ChannelMessageUpdateDefaultTypeInternal() {}
-  union {
-    ChannelMessageUpdate _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ChannelMessageUpdateDefaultTypeInternal _ChannelMessageUpdate_default_instance_;
-constexpr ChannelMessageRemove::ChannelMessageRemove(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : channel_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , message_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct ChannelMessageRemoveDefaultTypeInternal {
-  constexpr ChannelMessageRemoveDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ChannelMessageRemoveDefaultTypeInternal() {}
-  union {
-    ChannelMessageRemove _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ChannelMessageRemoveDefaultTypeInternal _ChannelMessageRemove_default_instance_;
-constexpr ChannelPresenceEvent::ChannelPresenceEvent(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : joins_()
-  , leaves_()
-  , channel_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , room_name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , group_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , user_id_one_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , user_id_two_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct ChannelPresenceEventDefaultTypeInternal {
-  constexpr ChannelPresenceEventDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ChannelPresenceEventDefaultTypeInternal() {}
-  union {
-    ChannelPresenceEvent _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ChannelPresenceEventDefaultTypeInternal _ChannelPresenceEvent_default_instance_;
-constexpr Error_ContextEntry_DoNotUse::Error_ContextEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct Error_ContextEntry_DoNotUseDefaultTypeInternal {
-  constexpr Error_ContextEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~Error_ContextEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    Error_ContextEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Error_ContextEntry_DoNotUseDefaultTypeInternal _Error_ContextEntry_DoNotUse_default_instance_;
-constexpr Error::Error(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : context_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , message_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , code_(0){}
-struct ErrorDefaultTypeInternal {
-  constexpr ErrorDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~ErrorDefaultTypeInternal() {}
-  union {
-    Error _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ErrorDefaultTypeInternal _Error_default_instance_;
-constexpr Match::Match(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : presences_()
-  , match_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , label_(nullptr)
-  , self_(nullptr)
-  , authoritative_(false)
-  , size_(0){}
-struct MatchDefaultTypeInternal {
-  constexpr MatchDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchDefaultTypeInternal() {}
-  union {
-    Match _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchDefaultTypeInternal _Match_default_instance_;
-constexpr MatchCreate::MatchCreate(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct MatchCreateDefaultTypeInternal {
-  constexpr MatchCreateDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchCreateDefaultTypeInternal() {}
-  union {
-    MatchCreate _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchCreateDefaultTypeInternal _MatchCreate_default_instance_;
-constexpr MatchData::MatchData(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : match_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , data_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , presence_(nullptr)
-  , op_code_(PROTOBUF_LONGLONG(0))
-  , reliable_(false){}
-struct MatchDataDefaultTypeInternal {
-  constexpr MatchDataDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchDataDefaultTypeInternal() {}
-  union {
-    MatchData _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchDataDefaultTypeInternal _MatchData_default_instance_;
-constexpr MatchDataSend::MatchDataSend(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : presences_()
-  , match_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , data_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , op_code_(PROTOBUF_LONGLONG(0))
-  , reliable_(false){}
-struct MatchDataSendDefaultTypeInternal {
-  constexpr MatchDataSendDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchDataSendDefaultTypeInternal() {}
-  union {
-    MatchDataSend _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchDataSendDefaultTypeInternal _MatchDataSend_default_instance_;
-constexpr MatchJoin_MetadataEntry_DoNotUse::MatchJoin_MetadataEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct MatchJoin_MetadataEntry_DoNotUseDefaultTypeInternal {
-  constexpr MatchJoin_MetadataEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchJoin_MetadataEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    MatchJoin_MetadataEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchJoin_MetadataEntry_DoNotUseDefaultTypeInternal _MatchJoin_MetadataEntry_DoNotUse_default_instance_;
-constexpr MatchJoin::MatchJoin(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : metadata_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , _oneof_case_{}{}
-struct MatchJoinDefaultTypeInternal {
-  constexpr MatchJoinDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchJoinDefaultTypeInternal() {}
-  union {
-    MatchJoin _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchJoinDefaultTypeInternal _MatchJoin_default_instance_;
-constexpr MatchLeave::MatchLeave(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : match_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct MatchLeaveDefaultTypeInternal {
-  constexpr MatchLeaveDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchLeaveDefaultTypeInternal() {}
-  union {
-    MatchLeave _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchLeaveDefaultTypeInternal _MatchLeave_default_instance_;
-constexpr MatchPresenceEvent::MatchPresenceEvent(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : joins_()
-  , leaves_()
-  , match_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct MatchPresenceEventDefaultTypeInternal {
-  constexpr MatchPresenceEventDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchPresenceEventDefaultTypeInternal() {}
-  union {
-    MatchPresenceEvent _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchPresenceEventDefaultTypeInternal _MatchPresenceEvent_default_instance_;
-constexpr MatchmakerAdd_StringPropertiesEntry_DoNotUse::MatchmakerAdd_StringPropertiesEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct MatchmakerAdd_StringPropertiesEntry_DoNotUseDefaultTypeInternal {
-  constexpr MatchmakerAdd_StringPropertiesEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchmakerAdd_StringPropertiesEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    MatchmakerAdd_StringPropertiesEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchmakerAdd_StringPropertiesEntry_DoNotUseDefaultTypeInternal _MatchmakerAdd_StringPropertiesEntry_DoNotUse_default_instance_;
-constexpr MatchmakerAdd_NumericPropertiesEntry_DoNotUse::MatchmakerAdd_NumericPropertiesEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct MatchmakerAdd_NumericPropertiesEntry_DoNotUseDefaultTypeInternal {
-  constexpr MatchmakerAdd_NumericPropertiesEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchmakerAdd_NumericPropertiesEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    MatchmakerAdd_NumericPropertiesEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchmakerAdd_NumericPropertiesEntry_DoNotUseDefaultTypeInternal _MatchmakerAdd_NumericPropertiesEntry_DoNotUse_default_instance_;
-constexpr MatchmakerAdd::MatchmakerAdd(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : string_properties_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , numeric_properties_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , query_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , min_count_(0)
-  , max_count_(0){}
-struct MatchmakerAddDefaultTypeInternal {
-  constexpr MatchmakerAddDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchmakerAddDefaultTypeInternal() {}
-  union {
-    MatchmakerAdd _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchmakerAddDefaultTypeInternal _MatchmakerAdd_default_instance_;
-constexpr MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse::MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUseDefaultTypeInternal {
-  constexpr MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUseDefaultTypeInternal _MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse_default_instance_;
-constexpr MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse::MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUseDefaultTypeInternal {
-  constexpr MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUseDefaultTypeInternal _MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse_default_instance_;
-constexpr MatchmakerMatched_MatchmakerUser::MatchmakerMatched_MatchmakerUser(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : string_properties_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , numeric_properties_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , presence_(nullptr){}
-struct MatchmakerMatched_MatchmakerUserDefaultTypeInternal {
-  constexpr MatchmakerMatched_MatchmakerUserDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchmakerMatched_MatchmakerUserDefaultTypeInternal() {}
-  union {
-    MatchmakerMatched_MatchmakerUser _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchmakerMatched_MatchmakerUserDefaultTypeInternal _MatchmakerMatched_MatchmakerUser_default_instance_;
-constexpr MatchmakerMatched::MatchmakerMatched(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : users_()
-  , ticket_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , self_(nullptr)
-  , _oneof_case_{}{}
-struct MatchmakerMatchedDefaultTypeInternal {
-  constexpr MatchmakerMatchedDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchmakerMatchedDefaultTypeInternal() {}
-  union {
-    MatchmakerMatched _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchmakerMatchedDefaultTypeInternal _MatchmakerMatched_default_instance_;
-constexpr MatchmakerRemove::MatchmakerRemove(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : ticket_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct MatchmakerRemoveDefaultTypeInternal {
-  constexpr MatchmakerRemoveDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchmakerRemoveDefaultTypeInternal() {}
-  union {
-    MatchmakerRemove _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchmakerRemoveDefaultTypeInternal _MatchmakerRemove_default_instance_;
-constexpr MatchmakerTicket::MatchmakerTicket(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : ticket_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct MatchmakerTicketDefaultTypeInternal {
-  constexpr MatchmakerTicketDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~MatchmakerTicketDefaultTypeInternal() {}
-  union {
-    MatchmakerTicket _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MatchmakerTicketDefaultTypeInternal _MatchmakerTicket_default_instance_;
-constexpr Notifications::Notifications(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : notifications_(){}
-struct NotificationsDefaultTypeInternal {
-  constexpr NotificationsDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~NotificationsDefaultTypeInternal() {}
-  union {
-    Notifications _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT NotificationsDefaultTypeInternal _Notifications_default_instance_;
-constexpr Party::Party(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : presences_()
-  , party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , self_(nullptr)
-  , leader_(nullptr)
-  , open_(false)
-  , max_size_(0){}
-struct PartyDefaultTypeInternal {
-  constexpr PartyDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyDefaultTypeInternal() {}
-  union {
-    Party _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyDefaultTypeInternal _Party_default_instance_;
-constexpr PartyCreate::PartyCreate(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : open_(false)
-  , max_size_(0){}
-struct PartyCreateDefaultTypeInternal {
-  constexpr PartyCreateDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyCreateDefaultTypeInternal() {}
-  union {
-    PartyCreate _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyCreateDefaultTypeInternal _PartyCreate_default_instance_;
-constexpr PartyJoin::PartyJoin(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct PartyJoinDefaultTypeInternal {
-  constexpr PartyJoinDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyJoinDefaultTypeInternal() {}
-  union {
-    PartyJoin _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyJoinDefaultTypeInternal _PartyJoin_default_instance_;
-constexpr PartyLeave::PartyLeave(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct PartyLeaveDefaultTypeInternal {
-  constexpr PartyLeaveDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyLeaveDefaultTypeInternal() {}
-  union {
-    PartyLeave _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyLeaveDefaultTypeInternal _PartyLeave_default_instance_;
-constexpr PartyPromote::PartyPromote(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , presence_(nullptr){}
-struct PartyPromoteDefaultTypeInternal {
-  constexpr PartyPromoteDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyPromoteDefaultTypeInternal() {}
-  union {
-    PartyPromote _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyPromoteDefaultTypeInternal _PartyPromote_default_instance_;
-constexpr PartyLeader::PartyLeader(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , presence_(nullptr){}
-struct PartyLeaderDefaultTypeInternal {
-  constexpr PartyLeaderDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyLeaderDefaultTypeInternal() {}
-  union {
-    PartyLeader _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyLeaderDefaultTypeInternal _PartyLeader_default_instance_;
-constexpr PartyAccept::PartyAccept(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , presence_(nullptr){}
-struct PartyAcceptDefaultTypeInternal {
-  constexpr PartyAcceptDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyAcceptDefaultTypeInternal() {}
-  union {
-    PartyAccept _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyAcceptDefaultTypeInternal _PartyAccept_default_instance_;
-constexpr PartyRemove::PartyRemove(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , presence_(nullptr){}
-struct PartyRemoveDefaultTypeInternal {
-  constexpr PartyRemoveDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyRemoveDefaultTypeInternal() {}
-  union {
-    PartyRemove _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyRemoveDefaultTypeInternal _PartyRemove_default_instance_;
-constexpr PartyClose::PartyClose(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct PartyCloseDefaultTypeInternal {
-  constexpr PartyCloseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyCloseDefaultTypeInternal() {}
-  union {
-    PartyClose _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyCloseDefaultTypeInternal _PartyClose_default_instance_;
-constexpr PartyJoinRequestList::PartyJoinRequestList(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct PartyJoinRequestListDefaultTypeInternal {
-  constexpr PartyJoinRequestListDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyJoinRequestListDefaultTypeInternal() {}
-  union {
-    PartyJoinRequestList _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyJoinRequestListDefaultTypeInternal _PartyJoinRequestList_default_instance_;
-constexpr PartyJoinRequest::PartyJoinRequest(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : presences_()
-  , party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct PartyJoinRequestDefaultTypeInternal {
-  constexpr PartyJoinRequestDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyJoinRequestDefaultTypeInternal() {}
-  union {
-    PartyJoinRequest _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyJoinRequestDefaultTypeInternal _PartyJoinRequest_default_instance_;
-constexpr PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse::PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct PartyMatchmakerAdd_StringPropertiesEntry_DoNotUseDefaultTypeInternal {
-  constexpr PartyMatchmakerAdd_StringPropertiesEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyMatchmakerAdd_StringPropertiesEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyMatchmakerAdd_StringPropertiesEntry_DoNotUseDefaultTypeInternal _PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_default_instance_;
-constexpr PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse::PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUseDefaultTypeInternal {
-  constexpr PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUseDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUseDefaultTypeInternal() {}
-  union {
-    PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUseDefaultTypeInternal _PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_default_instance_;
-constexpr PartyMatchmakerAdd::PartyMatchmakerAdd(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : string_properties_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , numeric_properties_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
-  , party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , query_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , min_count_(0)
-  , max_count_(0){}
-struct PartyMatchmakerAddDefaultTypeInternal {
-  constexpr PartyMatchmakerAddDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyMatchmakerAddDefaultTypeInternal() {}
-  union {
-    PartyMatchmakerAdd _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyMatchmakerAddDefaultTypeInternal _PartyMatchmakerAdd_default_instance_;
-constexpr PartyMatchmakerRemove::PartyMatchmakerRemove(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , ticket_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct PartyMatchmakerRemoveDefaultTypeInternal {
-  constexpr PartyMatchmakerRemoveDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyMatchmakerRemoveDefaultTypeInternal() {}
-  union {
-    PartyMatchmakerRemove _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyMatchmakerRemoveDefaultTypeInternal _PartyMatchmakerRemove_default_instance_;
-constexpr PartyMatchmakerTicket::PartyMatchmakerTicket(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , ticket_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct PartyMatchmakerTicketDefaultTypeInternal {
-  constexpr PartyMatchmakerTicketDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyMatchmakerTicketDefaultTypeInternal() {}
-  union {
-    PartyMatchmakerTicket _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyMatchmakerTicketDefaultTypeInternal _PartyMatchmakerTicket_default_instance_;
-constexpr PartyData::PartyData(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , data_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , presence_(nullptr)
-  , op_code_(PROTOBUF_LONGLONG(0)){}
-struct PartyDataDefaultTypeInternal {
-  constexpr PartyDataDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyDataDefaultTypeInternal() {}
-  union {
-    PartyData _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyDataDefaultTypeInternal _PartyData_default_instance_;
-constexpr PartyDataSend::PartyDataSend(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , data_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , op_code_(PROTOBUF_LONGLONG(0)){}
-struct PartyDataSendDefaultTypeInternal {
-  constexpr PartyDataSendDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyDataSendDefaultTypeInternal() {}
-  union {
-    PartyDataSend _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyDataSendDefaultTypeInternal _PartyDataSend_default_instance_;
-constexpr PartyPresenceEvent::PartyPresenceEvent(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : joins_()
-  , leaves_()
-  , party_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
-struct PartyPresenceEventDefaultTypeInternal {
-  constexpr PartyPresenceEventDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PartyPresenceEventDefaultTypeInternal() {}
-  union {
-    PartyPresenceEvent _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PartyPresenceEventDefaultTypeInternal _PartyPresenceEvent_default_instance_;
-constexpr Ping::Ping(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct PingDefaultTypeInternal {
-  constexpr PingDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PingDefaultTypeInternal() {}
-  union {
-    Ping _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PingDefaultTypeInternal _Ping_default_instance_;
-constexpr Pong::Pong(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
-struct PongDefaultTypeInternal {
-  constexpr PongDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~PongDefaultTypeInternal() {}
-  union {
-    Pong _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PongDefaultTypeInternal _Pong_default_instance_;
-constexpr Status::Status(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : presences_(){}
-struct StatusDefaultTypeInternal {
-  constexpr StatusDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~StatusDefaultTypeInternal() {}
-  union {
-    Status _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StatusDefaultTypeInternal _Status_default_instance_;
-constexpr StatusFollow::StatusFollow(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : user_ids_()
-  , usernames_(){}
-struct StatusFollowDefaultTypeInternal {
-  constexpr StatusFollowDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~StatusFollowDefaultTypeInternal() {}
-  union {
-    StatusFollow _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StatusFollowDefaultTypeInternal _StatusFollow_default_instance_;
-constexpr StatusPresenceEvent::StatusPresenceEvent(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : joins_()
-  , leaves_(){}
-struct StatusPresenceEventDefaultTypeInternal {
-  constexpr StatusPresenceEventDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~StatusPresenceEventDefaultTypeInternal() {}
-  union {
-    StatusPresenceEvent _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StatusPresenceEventDefaultTypeInternal _StatusPresenceEvent_default_instance_;
-constexpr StatusUnfollow::StatusUnfollow(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : user_ids_(){}
-struct StatusUnfollowDefaultTypeInternal {
-  constexpr StatusUnfollowDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~StatusUnfollowDefaultTypeInternal() {}
-  union {
-    StatusUnfollow _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StatusUnfollowDefaultTypeInternal _StatusUnfollow_default_instance_;
-constexpr StatusUpdate::StatusUpdate(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : status_(nullptr){}
-struct StatusUpdateDefaultTypeInternal {
-  constexpr StatusUpdateDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~StatusUpdateDefaultTypeInternal() {}
-  union {
-    StatusUpdate _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StatusUpdateDefaultTypeInternal _StatusUpdate_default_instance_;
-constexpr Stream::Stream(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : subject_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , subcontext_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , label_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , mode_(0){}
-struct StreamDefaultTypeInternal {
-  constexpr StreamDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~StreamDefaultTypeInternal() {}
-  union {
-    Stream _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StreamDefaultTypeInternal _Stream_default_instance_;
-constexpr StreamData::StreamData(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : data_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , stream_(nullptr)
-  , sender_(nullptr)
-  , reliable_(false){}
-struct StreamDataDefaultTypeInternal {
-  constexpr StreamDataDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~StreamDataDefaultTypeInternal() {}
-  union {
-    StreamData _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StreamDataDefaultTypeInternal _StreamData_default_instance_;
-constexpr StreamPresenceEvent::StreamPresenceEvent(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : joins_()
-  , leaves_()
-  , stream_(nullptr){}
-struct StreamPresenceEventDefaultTypeInternal {
-  constexpr StreamPresenceEventDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~StreamPresenceEventDefaultTypeInternal() {}
-  union {
-    StreamPresenceEvent _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StreamPresenceEventDefaultTypeInternal _StreamPresenceEvent_default_instance_;
-constexpr UserPresence::UserPresence(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : user_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , session_id_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , username_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , status_(nullptr)
-  , persistence_(false){}
-struct UserPresenceDefaultTypeInternal {
-  constexpr UserPresenceDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-  ~UserPresenceDefaultTypeInternal() {}
-  union {
-    UserPresence _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT UserPresenceDefaultTypeInternal _UserPresence_default_instance_;
+class EnvelopeDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Envelope> _instance;
+} _Envelope_default_instance_;
+class ChannelDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Channel> _instance;
+} _Channel_default_instance_;
+class ChannelJoinDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ChannelJoin> _instance;
+} _ChannelJoin_default_instance_;
+class ChannelLeaveDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ChannelLeave> _instance;
+} _ChannelLeave_default_instance_;
+class ChannelMessageAckDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ChannelMessageAck> _instance;
+} _ChannelMessageAck_default_instance_;
+class ChannelMessageSendDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ChannelMessageSend> _instance;
+} _ChannelMessageSend_default_instance_;
+class ChannelMessageUpdateDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ChannelMessageUpdate> _instance;
+} _ChannelMessageUpdate_default_instance_;
+class ChannelMessageRemoveDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ChannelMessageRemove> _instance;
+} _ChannelMessageRemove_default_instance_;
+class ChannelPresenceEventDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ChannelPresenceEvent> _instance;
+} _ChannelPresenceEvent_default_instance_;
+class Error_ContextEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Error_ContextEntry_DoNotUse> _instance;
+} _Error_ContextEntry_DoNotUse_default_instance_;
+class ErrorDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Error> _instance;
+} _Error_default_instance_;
+class MatchDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Match> _instance;
+} _Match_default_instance_;
+class MatchCreateDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchCreate> _instance;
+} _MatchCreate_default_instance_;
+class MatchDataDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchData> _instance;
+} _MatchData_default_instance_;
+class MatchDataSendDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchDataSend> _instance;
+} _MatchDataSend_default_instance_;
+class MatchJoin_MetadataEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchJoin_MetadataEntry_DoNotUse> _instance;
+} _MatchJoin_MetadataEntry_DoNotUse_default_instance_;
+class MatchJoinDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchJoin> _instance;
+} _MatchJoin_default_instance_;
+class MatchLeaveDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchLeave> _instance;
+} _MatchLeave_default_instance_;
+class MatchPresenceEventDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchPresenceEvent> _instance;
+} _MatchPresenceEvent_default_instance_;
+class MatchmakerAdd_StringPropertiesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchmakerAdd_StringPropertiesEntry_DoNotUse> _instance;
+} _MatchmakerAdd_StringPropertiesEntry_DoNotUse_default_instance_;
+class MatchmakerAdd_NumericPropertiesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchmakerAdd_NumericPropertiesEntry_DoNotUse> _instance;
+} _MatchmakerAdd_NumericPropertiesEntry_DoNotUse_default_instance_;
+class MatchmakerAddDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchmakerAdd> _instance;
+} _MatchmakerAdd_default_instance_;
+class MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse> _instance;
+} _MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse_default_instance_;
+class MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse> _instance;
+} _MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse_default_instance_;
+class MatchmakerMatched_MatchmakerUserDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchmakerMatched_MatchmakerUser> _instance;
+} _MatchmakerMatched_MatchmakerUser_default_instance_;
+class MatchmakerMatchedDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchmakerMatched> _instance;
+} _MatchmakerMatched_default_instance_;
+class MatchmakerRemoveDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchmakerRemove> _instance;
+} _MatchmakerRemove_default_instance_;
+class MatchmakerTicketDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MatchmakerTicket> _instance;
+} _MatchmakerTicket_default_instance_;
+class NotificationsDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Notifications> _instance;
+} _Notifications_default_instance_;
+class PartyDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Party> _instance;
+} _Party_default_instance_;
+class PartyCreateDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyCreate> _instance;
+} _PartyCreate_default_instance_;
+class PartyJoinDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyJoin> _instance;
+} _PartyJoin_default_instance_;
+class PartyLeaveDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyLeave> _instance;
+} _PartyLeave_default_instance_;
+class PartyPromoteDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyPromote> _instance;
+} _PartyPromote_default_instance_;
+class PartyLeaderDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyLeader> _instance;
+} _PartyLeader_default_instance_;
+class PartyAcceptDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyAccept> _instance;
+} _PartyAccept_default_instance_;
+class PartyRemoveDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyRemove> _instance;
+} _PartyRemove_default_instance_;
+class PartyCloseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyClose> _instance;
+} _PartyClose_default_instance_;
+class PartyJoinRequestListDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyJoinRequestList> _instance;
+} _PartyJoinRequestList_default_instance_;
+class PartyJoinRequestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyJoinRequest> _instance;
+} _PartyJoinRequest_default_instance_;
+class PartyMatchmakerAdd_StringPropertiesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse> _instance;
+} _PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_default_instance_;
+class PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse> _instance;
+} _PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_default_instance_;
+class PartyMatchmakerAddDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyMatchmakerAdd> _instance;
+} _PartyMatchmakerAdd_default_instance_;
+class PartyMatchmakerRemoveDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyMatchmakerRemove> _instance;
+} _PartyMatchmakerRemove_default_instance_;
+class PartyMatchmakerTicketDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyMatchmakerTicket> _instance;
+} _PartyMatchmakerTicket_default_instance_;
+class PartyDataDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyData> _instance;
+} _PartyData_default_instance_;
+class PartyDataSendDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyDataSend> _instance;
+} _PartyDataSend_default_instance_;
+class PartyPresenceEventDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PartyPresenceEvent> _instance;
+} _PartyPresenceEvent_default_instance_;
+class PingDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Ping> _instance;
+} _Ping_default_instance_;
+class PongDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Pong> _instance;
+} _Pong_default_instance_;
+class StatusDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Status> _instance;
+} _Status_default_instance_;
+class StatusFollowDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<StatusFollow> _instance;
+} _StatusFollow_default_instance_;
+class StatusPresenceEventDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<StatusPresenceEvent> _instance;
+} _StatusPresenceEvent_default_instance_;
+class StatusUnfollowDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<StatusUnfollow> _instance;
+} _StatusUnfollow_default_instance_;
+class StatusUpdateDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<StatusUpdate> _instance;
+} _StatusUpdate_default_instance_;
+class StreamDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Stream> _instance;
+} _Stream_default_instance_;
+class StreamDataDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<StreamData> _instance;
+} _StreamData_default_instance_;
+class StreamPresenceEventDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<StreamPresenceEvent> _instance;
+} _StreamPresenceEvent_default_instance_;
+class UserPresenceDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<UserPresence> _instance;
+} _UserPresence_default_instance_;
 }  // namespace realtime
 }  // namespace nakama
+static void InitDefaultsscc_info_Channel_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Channel_default_instance_;
+    new (ptr) ::nakama::realtime::Channel();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Channel_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Channel_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_ChannelJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_ChannelJoin_default_instance_;
+    new (ptr) ::nakama::realtime::ChannelJoin();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ChannelJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ChannelJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_BoolValue_google_2fprotobuf_2fwrappers_2eproto.base,}};
+
+static void InitDefaultsscc_info_ChannelLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_ChannelLeave_default_instance_;
+    new (ptr) ::nakama::realtime::ChannelLeave();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ChannelLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ChannelLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_ChannelMessageAck_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_ChannelMessageAck_default_instance_;
+    new (ptr) ::nakama::realtime::ChannelMessageAck();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_ChannelMessageAck_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, 0, InitDefaultsscc_info_ChannelMessageAck_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_Int32Value_google_2fprotobuf_2fwrappers_2eproto.base,
+      &scc_info_Timestamp_google_2fprotobuf_2ftimestamp_2eproto.base,
+      &scc_info_BoolValue_google_2fprotobuf_2fwrappers_2eproto.base,}};
+
+static void InitDefaultsscc_info_ChannelMessageRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_ChannelMessageRemove_default_instance_;
+    new (ptr) ::nakama::realtime::ChannelMessageRemove();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ChannelMessageRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ChannelMessageRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_ChannelMessageSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_ChannelMessageSend_default_instance_;
+    new (ptr) ::nakama::realtime::ChannelMessageSend();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ChannelMessageSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ChannelMessageSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_ChannelMessageUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_ChannelMessageUpdate_default_instance_;
+    new (ptr) ::nakama::realtime::ChannelMessageUpdate();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ChannelMessageUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ChannelMessageUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_ChannelPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_ChannelPresenceEvent_default_instance_;
+    new (ptr) ::nakama::realtime::ChannelPresenceEvent();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ChannelPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ChannelPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_Envelope_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Envelope_default_instance_;
+    new (ptr) ::nakama::realtime::Envelope();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<49> scc_info_Envelope_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 49, 0, InitDefaultsscc_info_Envelope_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_Channel_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_ChannelJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_ChannelLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_ChannelMessage_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+      &scc_info_ChannelMessageAck_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_ChannelMessageSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_ChannelMessageUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_ChannelMessageRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_ChannelPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_Error_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_Match_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchmakerMatched_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_Notifications_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_Rpc_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+      &scc_info_Status_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_StatusFollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_StatusPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_StatusUnfollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_StatusUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_StreamData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_StreamPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_Ping_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_Pong_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_Party_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyPromote_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyLeader_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyAccept_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyClose_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyJoinRequestList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyJoinRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyMatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyMatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_Error_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Error_default_instance_;
+    new (ptr) ::nakama::realtime::Error();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Error_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Error_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_Error_ContextEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_Error_ContextEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Error_ContextEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::realtime::Error_ContextEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Error_ContextEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Error_ContextEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_Match_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Match_default_instance_;
+    new (ptr) ::nakama::realtime::Match();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_Match_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_Match_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_StringValue_google_2fprotobuf_2fwrappers_2eproto.base,
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_MatchCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchCreate_default_instance_;
+    new (ptr) ::nakama::realtime::MatchCreate();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MatchCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_MatchData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchData_default_instance_;
+    new (ptr) ::nakama::realtime::MatchData();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_MatchData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_MatchDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchDataSend_default_instance_;
+    new (ptr) ::nakama::realtime::MatchDataSend();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_MatchDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_MatchJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchJoin_default_instance_;
+    new (ptr) ::nakama::realtime::MatchJoin();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_MatchJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_MatchJoin_MetadataEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_MatchJoin_MetadataEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchJoin_MetadataEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::realtime::MatchJoin_MetadataEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchJoin_MetadataEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MatchJoin_MetadataEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_MatchLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchLeave_default_instance_;
+    new (ptr) ::nakama::realtime::MatchLeave();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MatchLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_MatchPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchPresenceEvent_default_instance_;
+    new (ptr) ::nakama::realtime::MatchPresenceEvent();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_MatchPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchmakerAdd_default_instance_;
+    new (ptr) ::nakama::realtime::MatchmakerAdd();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_MatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::realtime::MatchmakerAdd_NumericPropertiesEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_MatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchmakerAdd_StringPropertiesEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::realtime::MatchmakerAdd_StringPropertiesEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_MatchmakerMatched_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchmakerMatched_default_instance_;
+    new (ptr) ::nakama::realtime::MatchmakerMatched();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchmakerMatched_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_MatchmakerMatched_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_MatchmakerMatched_MatchmakerUser_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_MatchmakerMatched_MatchmakerUser_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchmakerMatched_MatchmakerUser_default_instance_;
+    new (ptr) ::nakama::realtime::MatchmakerMatched_MatchmakerUser();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_MatchmakerMatched_MatchmakerUser_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, 0, InitDefaultsscc_info_MatchmakerMatched_MatchmakerUser_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::realtime::MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::realtime::MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_MatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchmakerRemove_default_instance_;
+    new (ptr) ::nakama::realtime::MatchmakerRemove();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_MatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_MatchmakerTicket_default_instance_;
+    new (ptr) ::nakama::realtime::MatchmakerTicket();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_Notifications_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Notifications_default_instance_;
+    new (ptr) ::nakama::realtime::Notifications();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Notifications_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Notifications_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_Notification_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,}};
+
+static void InitDefaultsscc_info_Party_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Party_default_instance_;
+    new (ptr) ::nakama::realtime::Party();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Party_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Party_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_PartyAccept_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyAccept_default_instance_;
+    new (ptr) ::nakama::realtime::PartyAccept();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyAccept_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PartyAccept_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_PartyClose_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyClose_default_instance_;
+    new (ptr) ::nakama::realtime::PartyClose();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyClose_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PartyClose_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_PartyCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyCreate_default_instance_;
+    new (ptr) ::nakama::realtime::PartyCreate();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PartyCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_PartyData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyData_default_instance_;
+    new (ptr) ::nakama::realtime::PartyData();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PartyData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_PartyDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyDataSend_default_instance_;
+    new (ptr) ::nakama::realtime::PartyDataSend();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PartyDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_PartyJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyJoin_default_instance_;
+    new (ptr) ::nakama::realtime::PartyJoin();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PartyJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_PartyJoinRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyJoinRequest_default_instance_;
+    new (ptr) ::nakama::realtime::PartyJoinRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyJoinRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PartyJoinRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_PartyJoinRequestList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyJoinRequestList_default_instance_;
+    new (ptr) ::nakama::realtime::PartyJoinRequestList();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyJoinRequestList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PartyJoinRequestList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_PartyLeader_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyLeader_default_instance_;
+    new (ptr) ::nakama::realtime::PartyLeader();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyLeader_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PartyLeader_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_PartyLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyLeave_default_instance_;
+    new (ptr) ::nakama::realtime::PartyLeave();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PartyLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyMatchmakerAdd_default_instance_;
+    new (ptr) ::nakama::realtime::PartyMatchmakerAdd();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::realtime::PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_default_instance_;
+    new (ptr) ::nakama::realtime::PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse();
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_PartyMatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyMatchmakerRemove_default_instance_;
+    new (ptr) ::nakama::realtime::PartyMatchmakerRemove();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PartyMatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_PartyMatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyMatchmakerTicket_default_instance_;
+    new (ptr) ::nakama::realtime::PartyMatchmakerTicket();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PartyMatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_PartyPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyPresenceEvent_default_instance_;
+    new (ptr) ::nakama::realtime::PartyPresenceEvent();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PartyPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_PartyPromote_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyPromote_default_instance_;
+    new (ptr) ::nakama::realtime::PartyPromote();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyPromote_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PartyPromote_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_PartyRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_PartyRemove_default_instance_;
+    new (ptr) ::nakama::realtime::PartyRemove();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PartyRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_Ping_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Ping_default_instance_;
+    new (ptr) ::nakama::realtime::Ping();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Ping_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Ping_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_Pong_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Pong_default_instance_;
+    new (ptr) ::nakama::realtime::Pong();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Pong_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Pong_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_Status_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Status_default_instance_;
+    new (ptr) ::nakama::realtime::Status();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Status_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Status_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_StatusFollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_StatusFollow_default_instance_;
+    new (ptr) ::nakama::realtime::StatusFollow();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_StatusFollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_StatusFollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_StatusPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_StatusPresenceEvent_default_instance_;
+    new (ptr) ::nakama::realtime::StatusPresenceEvent();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_StatusPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_StatusPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_StatusUnfollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_StatusUnfollow_default_instance_;
+    new (ptr) ::nakama::realtime::StatusUnfollow();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_StatusUnfollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_StatusUnfollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_StatusUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_StatusUpdate_default_instance_;
+    new (ptr) ::nakama::realtime::StatusUpdate();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_StatusUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_StatusUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_StringValue_google_2fprotobuf_2fwrappers_2eproto.base,}};
+
+static void InitDefaultsscc_info_Stream_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_Stream_default_instance_;
+    new (ptr) ::nakama::realtime::Stream();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Stream_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Stream_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {}};
+
+static void InitDefaultsscc_info_StreamData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_StreamData_default_instance_;
+    new (ptr) ::nakama::realtime::StreamData();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_StreamData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_StreamData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_Stream_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_StreamPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_StreamPresenceEvent_default_instance_;
+    new (ptr) ::nakama::realtime::StreamPresenceEvent();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_StreamPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_StreamPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_Stream_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+
+static void InitDefaultsscc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::realtime::_UserPresence_default_instance_;
+    new (ptr) ::nakama::realtime::UserPresence();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+      &scc_info_StringValue_google_2fprotobuf_2fwrappers_2eproto.base,}};
+
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto[59];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto[2];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto = nullptr;
@@ -1704,21 +2055,77 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
   &::descriptor_table_google_2fprotobuf_2ftimestamp_2eproto,
   &::descriptor_table_google_2fprotobuf_2fwrappers_2eproto,
 };
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_sccs[59] = {
+  &scc_info_Channel_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_ChannelJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_ChannelLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_ChannelMessageAck_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_ChannelMessageRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_ChannelMessageSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_ChannelMessageUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_ChannelPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_Envelope_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_Error_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_Error_ContextEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_Match_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchJoin_MetadataEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchmakerMatched_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchmakerMatched_MatchmakerUser_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_MatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_Notifications_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_Party_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyAccept_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyClose_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyJoinRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyJoinRequestList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyLeader_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyMatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyMatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyPromote_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_PartyRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_Ping_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_Pong_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_Status_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_StatusFollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_StatusPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_StatusUnfollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_StatusUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_Stream_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_StreamData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_StreamPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+  &scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+};
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto = {
-  false, false, 9103, descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto, "github.com/heroiclabs/nakama-common/rtapi/realtime.proto", 
-  &descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_once, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_deps, 3, 59,
+  false, false, descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto, "github.com/heroiclabs/nakama-common/rtapi/realtime.proto", 9103,
+  &descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_once, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_sccs, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_deps, 59, 3,
   schemas, file_default_instances, TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto::offsets,
-  file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto, file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto, file_level_service_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto,
+  file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto, 59, file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto, file_level_service_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK ::PROTOBUF_NAMESPACE_ID::Metadata
-descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_metadata_getter(int index) {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto);
-  return descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.file_level_metadata[index];
-}
 
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto(&descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto);
+static bool dynamic_init_dummy_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto)), true);
 namespace nakama {
 namespace realtime {
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ChannelJoin_Type_descriptor() {
@@ -3002,8 +3409,9 @@ Envelope::Envelope(const Envelope& from)
 }
 
 void Envelope::SharedCtor() {
-cid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-clear_has_message();
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Envelope_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  cid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  clear_has_message();
 }
 
 Envelope::~Envelope() {
@@ -3029,6 +3437,11 @@ void Envelope::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Envelope::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Envelope& Envelope::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Envelope_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Envelope::clear_message() {
 // @@protoc_insertion_point(one_of_clear_start:nakama.realtime.Envelope)
@@ -4830,12 +5243,13 @@ Channel::Channel(const Channel& from)
 }
 
 void Channel::SharedCtor() {
-id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-room_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-group_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-user_id_one_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-user_id_two_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-self_ = nullptr;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Channel_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  room_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  group_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  self_ = nullptr;
 }
 
 Channel::~Channel() {
@@ -4863,6 +5277,11 @@ void Channel::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Channel::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Channel& Channel::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Channel_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Channel::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.Channel)
@@ -5257,11 +5676,12 @@ ChannelJoin::ChannelJoin(const ChannelJoin& from)
 }
 
 void ChannelJoin::SharedCtor() {
-target_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&persistence_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&type_) -
-    reinterpret_cast<char*>(&persistence_)) + sizeof(type_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ChannelJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  target_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&persistence_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&type_) -
+      reinterpret_cast<char*>(&persistence_)) + sizeof(type_));
 }
 
 ChannelJoin::~ChannelJoin() {
@@ -5286,6 +5706,11 @@ void ChannelJoin::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void ChannelJoin::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ChannelJoin& ChannelJoin::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ChannelJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void ChannelJoin::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.ChannelJoin)
@@ -5551,7 +5976,8 @@ ChannelLeave::ChannelLeave(const ChannelLeave& from)
 }
 
 void ChannelLeave::SharedCtor() {
-channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ChannelLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ChannelLeave::~ChannelLeave() {
@@ -5574,6 +6000,11 @@ void ChannelLeave::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void ChannelLeave::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ChannelLeave& ChannelLeave::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ChannelLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void ChannelLeave::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.ChannelLeave)
@@ -5845,17 +6276,18 @@ ChannelMessageAck::ChannelMessageAck(const ChannelMessageAck& from)
 }
 
 void ChannelMessageAck::SharedCtor() {
-channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-message_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-username_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-room_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-group_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-user_id_one_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-user_id_two_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&code_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&persistent_) -
-    reinterpret_cast<char*>(&code_)) + sizeof(persistent_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ChannelMessageAck_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  message_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  username_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  room_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  group_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&code_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&persistent_) -
+      reinterpret_cast<char*>(&code_)) + sizeof(persistent_));
 }
 
 ChannelMessageAck::~ChannelMessageAck() {
@@ -5888,6 +6320,11 @@ void ChannelMessageAck::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void ChannelMessageAck::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ChannelMessageAck& ChannelMessageAck::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ChannelMessageAck_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void ChannelMessageAck::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.ChannelMessageAck)
@@ -6378,8 +6815,9 @@ ChannelMessageSend::ChannelMessageSend(const ChannelMessageSend& from)
 }
 
 void ChannelMessageSend::SharedCtor() {
-channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-content_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ChannelMessageSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  content_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ChannelMessageSend::~ChannelMessageSend() {
@@ -6403,6 +6841,11 @@ void ChannelMessageSend::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void ChannelMessageSend::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ChannelMessageSend& ChannelMessageSend::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ChannelMessageSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void ChannelMessageSend::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.ChannelMessageSend)
@@ -6621,9 +7064,10 @@ ChannelMessageUpdate::ChannelMessageUpdate(const ChannelMessageUpdate& from)
 }
 
 void ChannelMessageUpdate::SharedCtor() {
-channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-message_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-content_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ChannelMessageUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  message_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  content_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ChannelMessageUpdate::~ChannelMessageUpdate() {
@@ -6648,6 +7092,11 @@ void ChannelMessageUpdate::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void ChannelMessageUpdate::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ChannelMessageUpdate& ChannelMessageUpdate::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ChannelMessageUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void ChannelMessageUpdate::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.ChannelMessageUpdate)
@@ -6892,8 +7341,9 @@ ChannelMessageRemove::ChannelMessageRemove(const ChannelMessageRemove& from)
 }
 
 void ChannelMessageRemove::SharedCtor() {
-channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-message_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ChannelMessageRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  message_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ChannelMessageRemove::~ChannelMessageRemove() {
@@ -6917,6 +7367,11 @@ void ChannelMessageRemove::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void ChannelMessageRemove::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ChannelMessageRemove& ChannelMessageRemove::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ChannelMessageRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void ChannelMessageRemove::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.ChannelMessageRemove)
@@ -7149,11 +7604,12 @@ ChannelPresenceEvent::ChannelPresenceEvent(const ChannelPresenceEvent& from)
 }
 
 void ChannelPresenceEvent::SharedCtor() {
-channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-room_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-group_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-user_id_one_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-user_id_two_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ChannelPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  channel_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  room_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  group_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  user_id_one_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  user_id_two_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ChannelPresenceEvent::~ChannelPresenceEvent() {
@@ -7180,6 +7636,11 @@ void ChannelPresenceEvent::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void ChannelPresenceEvent::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const ChannelPresenceEvent& ChannelPresenceEvent::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ChannelPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void ChannelPresenceEvent::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.ChannelPresenceEvent)
@@ -7561,8 +8022,9 @@ Error::Error(const Error& from)
 }
 
 void Error::SharedCtor() {
-message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-code_ = 0;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Error_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  code_ = 0;
 }
 
 Error::~Error() {
@@ -7585,6 +8047,11 @@ void Error::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Error::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Error& Error::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Error_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Error::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.Error)
@@ -7887,11 +8354,12 @@ Match::Match(const Match& from)
 }
 
 void Match::SharedCtor() {
-match_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&label_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&size_) -
-    reinterpret_cast<char*>(&label_)) + sizeof(size_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Match_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  match_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&label_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&size_) -
+      reinterpret_cast<char*>(&label_)) + sizeof(size_));
 }
 
 Match::~Match() {
@@ -7916,6 +8384,11 @@ void Match::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Match::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Match& Match::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Match_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Match::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.Match)
@@ -8250,6 +8723,11 @@ void MatchCreate::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void MatchCreate::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchCreate& MatchCreate::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchCreate::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.MatchCreate)
@@ -8409,12 +8887,13 @@ MatchData::MatchData(const MatchData& from)
 }
 
 void MatchData::SharedCtor() {
-match_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&presence_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&reliable_) -
-    reinterpret_cast<char*>(&presence_)) + sizeof(reliable_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  match_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&presence_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&reliable_) -
+      reinterpret_cast<char*>(&presence_)) + sizeof(reliable_));
 }
 
 MatchData::~MatchData() {
@@ -8439,6 +8918,11 @@ void MatchData::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void MatchData::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchData& MatchData::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchData::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.MatchData)
@@ -8734,12 +9218,13 @@ MatchDataSend::MatchDataSend(const MatchDataSend& from)
 }
 
 void MatchDataSend::SharedCtor() {
-match_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&op_code_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&reliable_) -
-    reinterpret_cast<char*>(&op_code_)) + sizeof(reliable_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  match_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&op_code_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&reliable_) -
+      reinterpret_cast<char*>(&op_code_)) + sizeof(reliable_));
 }
 
 MatchDataSend::~MatchDataSend() {
@@ -8763,6 +9248,11 @@ void MatchDataSend::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void MatchDataSend::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchDataSend& MatchDataSend::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchDataSend::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.MatchDataSend)
@@ -9077,7 +9567,8 @@ MatchJoin::MatchJoin(const MatchJoin& from)
 }
 
 void MatchJoin::SharedCtor() {
-clear_has_id();
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  clear_has_id();
 }
 
 MatchJoin::~MatchJoin() {
@@ -9102,6 +9593,11 @@ void MatchJoin::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void MatchJoin::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchJoin& MatchJoin::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchJoin::clear_id() {
 // @@protoc_insertion_point(one_of_clear_start:nakama.realtime.MatchJoin)
@@ -9409,7 +9905,8 @@ MatchLeave::MatchLeave(const MatchLeave& from)
 }
 
 void MatchLeave::SharedCtor() {
-match_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  match_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 MatchLeave::~MatchLeave() {
@@ -9432,6 +9929,11 @@ void MatchLeave::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void MatchLeave::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchLeave& MatchLeave::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchLeave::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.MatchLeave)
@@ -9613,7 +10115,8 @@ MatchPresenceEvent::MatchPresenceEvent(const MatchPresenceEvent& from)
 }
 
 void MatchPresenceEvent::SharedCtor() {
-match_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  match_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 MatchPresenceEvent::~MatchPresenceEvent() {
@@ -9636,6 +10139,11 @@ void MatchPresenceEvent::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void MatchPresenceEvent::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchPresenceEvent& MatchPresenceEvent::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchPresenceEvent::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.MatchPresenceEvent)
@@ -9914,11 +10422,12 @@ MatchmakerAdd::MatchmakerAdd(const MatchmakerAdd& from)
 }
 
 void MatchmakerAdd::SharedCtor() {
-query_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&min_count_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&max_count_) -
-    reinterpret_cast<char*>(&min_count_)) + sizeof(max_count_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  query_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&min_count_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&max_count_) -
+      reinterpret_cast<char*>(&min_count_)) + sizeof(max_count_));
 }
 
 MatchmakerAdd::~MatchmakerAdd() {
@@ -9941,6 +10450,11 @@ void MatchmakerAdd::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void MatchmakerAdd::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchmakerAdd& MatchmakerAdd::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchmakerAdd::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.MatchmakerAdd)
@@ -10355,8 +10869,9 @@ MatchmakerMatched_MatchmakerUser::MatchmakerMatched_MatchmakerUser(const Matchma
 }
 
 void MatchmakerMatched_MatchmakerUser::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-presence_ = nullptr;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchmakerMatched_MatchmakerUser_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  presence_ = nullptr;
 }
 
 MatchmakerMatched_MatchmakerUser::~MatchmakerMatched_MatchmakerUser() {
@@ -10380,6 +10895,11 @@ void MatchmakerMatched_MatchmakerUser::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID
 void MatchmakerMatched_MatchmakerUser::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchmakerMatched_MatchmakerUser& MatchmakerMatched_MatchmakerUser::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchmakerMatched_MatchmakerUser_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchmakerMatched_MatchmakerUser::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.MatchmakerMatched.MatchmakerUser)
@@ -10747,9 +11267,10 @@ MatchmakerMatched::MatchmakerMatched(const MatchmakerMatched& from)
 }
 
 void MatchmakerMatched::SharedCtor() {
-ticket_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-self_ = nullptr;
-clear_has_id();
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchmakerMatched_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  ticket_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  self_ = nullptr;
+  clear_has_id();
 }
 
 MatchmakerMatched::~MatchmakerMatched() {
@@ -10776,6 +11297,11 @@ void MatchmakerMatched::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void MatchmakerMatched::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchmakerMatched& MatchmakerMatched::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchmakerMatched_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchmakerMatched::clear_id() {
 // @@protoc_insertion_point(one_of_clear_start:nakama.realtime.MatchmakerMatched)
@@ -11105,7 +11631,8 @@ MatchmakerRemove::MatchmakerRemove(const MatchmakerRemove& from)
 }
 
 void MatchmakerRemove::SharedCtor() {
-ticket_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  ticket_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 MatchmakerRemove::~MatchmakerRemove() {
@@ -11128,6 +11655,11 @@ void MatchmakerRemove::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void MatchmakerRemove::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchmakerRemove& MatchmakerRemove::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchmakerRemove::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.MatchmakerRemove)
@@ -11305,7 +11837,8 @@ MatchmakerTicket::MatchmakerTicket(const MatchmakerTicket& from)
 }
 
 void MatchmakerTicket::SharedCtor() {
-ticket_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  ticket_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 MatchmakerTicket::~MatchmakerTicket() {
@@ -11328,6 +11861,11 @@ void MatchmakerTicket::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void MatchmakerTicket::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const MatchmakerTicket& MatchmakerTicket::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void MatchmakerTicket::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.MatchmakerTicket)
@@ -11505,6 +12043,7 @@ Notifications::Notifications(const Notifications& from)
 }
 
 void Notifications::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Notifications_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
 }
 
 Notifications::~Notifications() {
@@ -11526,6 +12065,11 @@ void Notifications::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Notifications::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Notifications& Notifications::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Notifications_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Notifications::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.Notifications)
@@ -11727,11 +12271,12 @@ Party::Party(const Party& from)
 }
 
 void Party::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&self_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&max_size_) -
-    reinterpret_cast<char*>(&self_)) + sizeof(max_size_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Party_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&self_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&max_size_) -
+      reinterpret_cast<char*>(&self_)) + sizeof(max_size_));
 }
 
 Party::~Party() {
@@ -11756,6 +12301,11 @@ void Party::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Party::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Party& Party::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Party_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Party::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.Party)
@@ -12072,10 +12622,10 @@ PartyCreate::PartyCreate(const PartyCreate& from)
 }
 
 void PartyCreate::SharedCtor() {
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&open_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&max_size_) -
-    reinterpret_cast<char*>(&open_)) + sizeof(max_size_));
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&open_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&max_size_) -
+      reinterpret_cast<char*>(&open_)) + sizeof(max_size_));
 }
 
 PartyCreate::~PartyCreate() {
@@ -12097,6 +12647,11 @@ void PartyCreate::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyCreate::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyCreate& PartyCreate::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyCreate::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyCreate)
@@ -12296,7 +12851,8 @@ PartyJoin::PartyJoin(const PartyJoin& from)
 }
 
 void PartyJoin::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 PartyJoin::~PartyJoin() {
@@ -12319,6 +12875,11 @@ void PartyJoin::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyJoin::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyJoin& PartyJoin::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyJoin_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyJoin::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyJoin)
@@ -12496,7 +13057,8 @@ PartyLeave::PartyLeave(const PartyLeave& from)
 }
 
 void PartyLeave::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 PartyLeave::~PartyLeave() {
@@ -12519,6 +13081,11 @@ void PartyLeave::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyLeave::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyLeave& PartyLeave::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyLeave::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyLeave)
@@ -12706,8 +13273,9 @@ PartyPromote::PartyPromote(const PartyPromote& from)
 }
 
 void PartyPromote::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-presence_ = nullptr;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyPromote_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  presence_ = nullptr;
 }
 
 PartyPromote::~PartyPromote() {
@@ -12731,6 +13299,11 @@ void PartyPromote::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyPromote::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyPromote& PartyPromote::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyPromote_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyPromote::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyPromote)
@@ -12948,8 +13521,9 @@ PartyLeader::PartyLeader(const PartyLeader& from)
 }
 
 void PartyLeader::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-presence_ = nullptr;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyLeader_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  presence_ = nullptr;
 }
 
 PartyLeader::~PartyLeader() {
@@ -12973,6 +13547,11 @@ void PartyLeader::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyLeader::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyLeader& PartyLeader::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyLeader_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyLeader::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyLeader)
@@ -13190,8 +13769,9 @@ PartyAccept::PartyAccept(const PartyAccept& from)
 }
 
 void PartyAccept::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-presence_ = nullptr;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyAccept_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  presence_ = nullptr;
 }
 
 PartyAccept::~PartyAccept() {
@@ -13215,6 +13795,11 @@ void PartyAccept::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyAccept::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyAccept& PartyAccept::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyAccept_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyAccept::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyAccept)
@@ -13432,8 +14017,9 @@ PartyRemove::PartyRemove(const PartyRemove& from)
 }
 
 void PartyRemove::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-presence_ = nullptr;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  presence_ = nullptr;
 }
 
 PartyRemove::~PartyRemove() {
@@ -13457,6 +14043,11 @@ void PartyRemove::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyRemove::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyRemove& PartyRemove::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyRemove::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyRemove)
@@ -13664,7 +14255,8 @@ PartyClose::PartyClose(const PartyClose& from)
 }
 
 void PartyClose::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyClose_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 PartyClose::~PartyClose() {
@@ -13687,6 +14279,11 @@ void PartyClose::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyClose::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyClose& PartyClose::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyClose_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyClose::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyClose)
@@ -13864,7 +14461,8 @@ PartyJoinRequestList::PartyJoinRequestList(const PartyJoinRequestList& from)
 }
 
 void PartyJoinRequestList::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyJoinRequestList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 PartyJoinRequestList::~PartyJoinRequestList() {
@@ -13887,6 +14485,11 @@ void PartyJoinRequestList::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyJoinRequestList::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyJoinRequestList& PartyJoinRequestList::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyJoinRequestList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyJoinRequestList::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyJoinRequestList)
@@ -14066,7 +14669,8 @@ PartyJoinRequest::PartyJoinRequest(const PartyJoinRequest& from)
 }
 
 void PartyJoinRequest::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyJoinRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 PartyJoinRequest::~PartyJoinRequest() {
@@ -14089,6 +14693,11 @@ void PartyJoinRequest::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyJoinRequest::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyJoinRequest& PartyJoinRequest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyJoinRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyJoinRequest::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyJoinRequest)
@@ -14342,12 +14951,13 @@ PartyMatchmakerAdd::PartyMatchmakerAdd(const PartyMatchmakerAdd& from)
 }
 
 void PartyMatchmakerAdd::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-query_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&min_count_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&max_count_) -
-    reinterpret_cast<char*>(&min_count_)) + sizeof(max_count_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  query_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&min_count_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&max_count_) -
+      reinterpret_cast<char*>(&min_count_)) + sizeof(max_count_));
 }
 
 PartyMatchmakerAdd::~PartyMatchmakerAdd() {
@@ -14371,6 +14981,11 @@ void PartyMatchmakerAdd::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyMatchmakerAdd::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyMatchmakerAdd& PartyMatchmakerAdd::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyMatchmakerAdd::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyMatchmakerAdd)
@@ -14773,8 +15388,9 @@ PartyMatchmakerRemove::PartyMatchmakerRemove(const PartyMatchmakerRemove& from)
 }
 
 void PartyMatchmakerRemove::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-ticket_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyMatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ticket_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 PartyMatchmakerRemove::~PartyMatchmakerRemove() {
@@ -14798,6 +15414,11 @@ void PartyMatchmakerRemove::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyMatchmakerRemove::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyMatchmakerRemove& PartyMatchmakerRemove::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyMatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyMatchmakerRemove::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyMatchmakerRemove)
@@ -15011,8 +15632,9 @@ PartyMatchmakerTicket::PartyMatchmakerTicket(const PartyMatchmakerTicket& from)
 }
 
 void PartyMatchmakerTicket::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-ticket_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyMatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ticket_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 PartyMatchmakerTicket::~PartyMatchmakerTicket() {
@@ -15036,6 +15658,11 @@ void PartyMatchmakerTicket::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyMatchmakerTicket::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyMatchmakerTicket& PartyMatchmakerTicket::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyMatchmakerTicket_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyMatchmakerTicket::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyMatchmakerTicket)
@@ -15260,12 +15887,13 @@ PartyData::PartyData(const PartyData& from)
 }
 
 void PartyData::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&presence_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&op_code_) -
-    reinterpret_cast<char*>(&presence_)) + sizeof(op_code_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&presence_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&op_code_) -
+      reinterpret_cast<char*>(&presence_)) + sizeof(op_code_));
 }
 
 PartyData::~PartyData() {
@@ -15290,6 +15918,11 @@ void PartyData::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyData::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyData& PartyData::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyData::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyData)
@@ -15558,9 +16191,10 @@ PartyDataSend::PartyDataSend(const PartyDataSend& from)
 }
 
 void PartyDataSend::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-op_code_ = PROTOBUF_LONGLONG(0);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  op_code_ = PROTOBUF_LONGLONG(0);
 }
 
 PartyDataSend::~PartyDataSend() {
@@ -15584,6 +16218,11 @@ void PartyDataSend::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyDataSend::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyDataSend& PartyDataSend::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyDataSend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyDataSend::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyDataSend)
@@ -15816,7 +16455,8 @@ PartyPresenceEvent::PartyPresenceEvent(const PartyPresenceEvent& from)
 }
 
 void PartyPresenceEvent::SharedCtor() {
-party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PartyPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 PartyPresenceEvent::~PartyPresenceEvent() {
@@ -15839,6 +16479,11 @@ void PartyPresenceEvent::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void PartyPresenceEvent::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const PartyPresenceEvent& PartyPresenceEvent::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PartyPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void PartyPresenceEvent::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.PartyPresenceEvent)
@@ -16092,6 +16737,11 @@ void Ping::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Ping::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Ping& Ping::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Ping_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Ping::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.Ping)
@@ -16249,6 +16899,11 @@ void Pong::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Pong::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Pong& Pong::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Pong_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Pong::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.Pong)
@@ -16387,6 +17042,7 @@ Status::Status(const Status& from)
 }
 
 void Status::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Status_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
 }
 
 Status::~Status() {
@@ -16408,6 +17064,11 @@ void Status::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Status::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Status& Status::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Status_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Status::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.Status)
@@ -16583,6 +17244,7 @@ StatusFollow::StatusFollow(const StatusFollow& from)
 }
 
 void StatusFollow::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_StatusFollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
 }
 
 StatusFollow::~StatusFollow() {
@@ -16604,6 +17266,11 @@ void StatusFollow::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void StatusFollow::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const StatusFollow& StatusFollow::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_StatusFollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void StatusFollow::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.StatusFollow)
@@ -16819,6 +17486,7 @@ StatusPresenceEvent::StatusPresenceEvent(const StatusPresenceEvent& from)
 }
 
 void StatusPresenceEvent::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_StatusPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
 }
 
 StatusPresenceEvent::~StatusPresenceEvent() {
@@ -16840,6 +17508,11 @@ void StatusPresenceEvent::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void StatusPresenceEvent::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const StatusPresenceEvent& StatusPresenceEvent::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_StatusPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void StatusPresenceEvent::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.StatusPresenceEvent)
@@ -17043,6 +17716,7 @@ StatusUnfollow::StatusUnfollow(const StatusUnfollow& from)
 }
 
 void StatusUnfollow::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_StatusUnfollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
 }
 
 StatusUnfollow::~StatusUnfollow() {
@@ -17064,6 +17738,11 @@ void StatusUnfollow::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void StatusUnfollow::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const StatusUnfollow& StatusUnfollow::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_StatusUnfollow_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void StatusUnfollow::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.StatusUnfollow)
@@ -17256,7 +17935,8 @@ StatusUpdate::StatusUpdate(const StatusUpdate& from)
 }
 
 void StatusUpdate::SharedCtor() {
-status_ = nullptr;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_StatusUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  status_ = nullptr;
 }
 
 StatusUpdate::~StatusUpdate() {
@@ -17279,6 +17959,11 @@ void StatusUpdate::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void StatusUpdate::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const StatusUpdate& StatusUpdate::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_StatusUpdate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void StatusUpdate::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.StatusUpdate)
@@ -17466,10 +18151,11 @@ Stream::Stream(const Stream& from)
 }
 
 void Stream::SharedCtor() {
-subject_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-subcontext_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-label_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-mode_ = 0;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Stream_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  subject_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  subcontext_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  label_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  mode_ = 0;
 }
 
 Stream::~Stream() {
@@ -17494,6 +18180,11 @@ void Stream::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void Stream::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const Stream& Stream::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Stream_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void Stream::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.Stream)
@@ -17779,11 +18470,12 @@ StreamData::StreamData(const StreamData& from)
 }
 
 void StreamData::SharedCtor() {
-data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&stream_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&reliable_) -
-    reinterpret_cast<char*>(&stream_)) + sizeof(reliable_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_StreamData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&stream_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&reliable_) -
+      reinterpret_cast<char*>(&stream_)) + sizeof(reliable_));
 }
 
 StreamData::~StreamData() {
@@ -17808,6 +18500,11 @@ void StreamData::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void StreamData::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const StreamData& StreamData::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_StreamData_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void StreamData::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.StreamData)
@@ -18080,7 +18777,8 @@ StreamPresenceEvent::StreamPresenceEvent(const StreamPresenceEvent& from)
 }
 
 void StreamPresenceEvent::SharedCtor() {
-stream_ = nullptr;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_StreamPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  stream_ = nullptr;
 }
 
 StreamPresenceEvent::~StreamPresenceEvent() {
@@ -18103,6 +18801,11 @@ void StreamPresenceEvent::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void StreamPresenceEvent::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const StreamPresenceEvent& StreamPresenceEvent::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_StreamPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void StreamPresenceEvent::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.StreamPresenceEvent)
@@ -18366,13 +19069,14 @@ UserPresence::UserPresence(const UserPresence& from)
 }
 
 void UserPresence::SharedCtor() {
-user_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-session_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-username_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&status_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&persistence_) -
-    reinterpret_cast<char*>(&status_)) + sizeof(persistence_));
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  user_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  session_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  username_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&status_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&persistence_) -
+      reinterpret_cast<char*>(&status_)) + sizeof(persistence_));
 }
 
 UserPresence::~UserPresence() {
@@ -18398,6 +19102,11 @@ void UserPresence::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void UserPresence::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
+const UserPresence& UserPresence::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_UserPresence_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  return *internal_default_instance();
+}
+
 
 void UserPresence::Clear() {
 // @@protoc_insertion_point(message_clear_start:nakama.realtime.UserPresence)

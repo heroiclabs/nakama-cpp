@@ -14,8 +14,11 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-
-PROTOBUF_PRAGMA_INIT_SEG
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_JSONSchema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_Operation_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_Schema_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<6> scc_info_Swagger_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Tag_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto;
 namespace grpc {
 namespace gateway {
 namespace protoc_gen_openapiv2 {
@@ -58,38 +61,35 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
   &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
   &::descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fopenapiv2_2eproto,
 };
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto_sccs[1] = {
+};
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto = {
-  false, false, 807, descriptor_table_protodef_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto, "protoc-gen-openapiv2/options/annotations.proto", 
-  &descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto_once, descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto_deps, 2, 0,
+  false, false, descriptor_table_protodef_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto, "protoc-gen-openapiv2/options/annotations.proto", 807,
+  &descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto_once, descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto_sccs, descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto_deps, 0, 2,
   schemas, file_default_instances, TableStruct_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto::offsets,
-  file_level_metadata_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto, file_level_enum_descriptors_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto, file_level_service_descriptors_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto,
+  file_level_metadata_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto, 0, file_level_enum_descriptors_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto, file_level_service_descriptors_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK ::PROTOBUF_NAMESPACE_ID::Metadata
-descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto_metadata_getter(int index) {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto);
-  return descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto.file_level_metadata[index];
-}
 
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto(&descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto);
+static bool dynamic_init_dummy_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_protoc_2dgen_2dopenapiv2_2foptions_2fannotations_2eproto)), true);
 namespace grpc {
 namespace gateway {
 namespace protoc_gen_openapiv2 {
 namespace options {
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FileOptions,
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FileOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::MessageTypeTraits< ::grpc::gateway::protoc_gen_openapiv2::options::Swagger >, 11, false >
   openapiv2_swagger(kOpenapiv2SwaggerFieldNumber, ::grpc::gateway::protoc_gen_openapiv2::options::Swagger::default_instance());
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MethodOptions,
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MethodOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::MessageTypeTraits< ::grpc::gateway::protoc_gen_openapiv2::options::Operation >, 11, false >
   openapiv2_operation(kOpenapiv2OperationFieldNumber, ::grpc::gateway::protoc_gen_openapiv2::options::Operation::default_instance());
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::MessageTypeTraits< ::grpc::gateway::protoc_gen_openapiv2::options::Schema >, 11, false >
   openapiv2_schema(kOpenapiv2SchemaFieldNumber, ::grpc::gateway::protoc_gen_openapiv2::options::Schema::default_instance());
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::ServiceOptions,
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::ServiceOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::MessageTypeTraits< ::grpc::gateway::protoc_gen_openapiv2::options::Tag >, 11, false >
   openapiv2_tag(kOpenapiv2TagFieldNumber, ::grpc::gateway::protoc_gen_openapiv2::options::Tag::default_instance());
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::MessageTypeTraits< ::grpc::gateway::protoc_gen_openapiv2::options::JSONSchema >, 11, false >
   openapiv2_field(kOpenapiv2FieldFieldNumber, ::grpc::gateway::protoc_gen_openapiv2::options::JSONSchema::default_instance());
 
