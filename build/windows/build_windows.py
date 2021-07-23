@@ -67,8 +67,8 @@ def copy_protobuf_lib():
     copy_file(BUILD_DIR + '\\third_party\\grpc\\third_party\\protobuf\\' + BUILD_MODE + '\\libprotobuf' + libs_postfix + '.lib', release_libs_path)
 
 def copy_ssl_lib():
-    copy_file(BUILD_DIR + '\\third_party\\grpc\\third_party\\boringssl\\ssl\\' + BUILD_MODE + '\\ssl' + libs_postfix + '.lib', release_libs_path)
-    copy_file(BUILD_DIR + '\\third_party\\grpc\\third_party\\boringssl\\crypto\\' + BUILD_MODE + '\\crypto' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\third_party\\grpc\\third_party\\boringssl-with-bazel\\' + BUILD_MODE + '\\ssl' + libs_postfix + '.lib', release_libs_path)
+    copy_file(BUILD_DIR + '\\third_party\\grpc\\third_party\\boringssl-with-bazel\\' + BUILD_MODE + '\\crypto' + libs_postfix + '.lib', release_libs_path)
 
 def copy_grpc_lib():
     copy_file(BUILD_DIR + '\\third_party\\grpc\\' + BUILD_MODE + '\\address_sorting' + libs_postfix + '.lib', release_libs_path)
@@ -128,7 +128,7 @@ cmake_cmd.extend(get_common_cmake_parameters(DLL))
 
 if vs_year >= 2019:
     cmake_cmd.append('-A')
-    
+
     if ARCH == 'x64':
         cmake_cmd.append('x64')
     else:
