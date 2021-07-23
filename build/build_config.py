@@ -21,7 +21,7 @@ All platforms
 BUILD_REST_CLIENT = True
 
 # Build gRPC client
-BUILD_GRPC_CLIENT = False
+BUILD_GRPC_CLIENT = True
 
 # Build HTTP transport using C++ REST SDK
 BUILD_HTTP_CPPREST = True
