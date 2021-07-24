@@ -380,7 +380,7 @@ extern "C" {
         const sNUserPresence presence,
         NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData),
-        NRtClientErrorCallback errorCallback = nullptr);
+        NRtClientErrorCallback errorCallback);
 
     /**
      * Begin matchmaking as a party.
@@ -397,11 +397,11 @@ extern "C" {
         const char* query,
         int32_t minCount,
         int32_t maxCount,
-        const NStringMap& stringProperties,
-        const NStringDoubleMap& numericProperties,
+        const NStringMap stringProperties,
+        const NStringDoubleMap numericProperties,
         NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData, const sNPartyMatchmakerTicket*),
-        NRtClientErrorCallback errorCallback = nullptr);
+        NRtClientErrorCallback errorCallback);
 
     /**
      * End a party, kicking all party members and closing it.
@@ -412,7 +412,7 @@ extern "C" {
         const char* partyId,
         NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData),
-        NRtClientErrorCallback errorCallback = nullptr);
+        NRtClientErrorCallback errorCallback);
 
     /**
      * Create a party.
@@ -425,7 +425,7 @@ extern "C" {
         int32_t maxSize,
         NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData, const sNParty* party),
-        NRtClientErrorCallback errorCallback = nullptr);
+        NRtClientErrorCallback errorCallback);
 
     /**
      * Join a party.
@@ -436,7 +436,7 @@ extern "C" {
         const char* partyId,
         NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData),
-        NRtClientErrorCallback errorCallback = nullptr);
+        NRtClientErrorCallback errorCallback);
 
     /**
      * Leave the party.
@@ -447,7 +447,7 @@ extern "C" {
         const char* partyId,
         NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData),
-        NRtClientErrorCallback errorCallback = nullptr);
+        NRtClientErrorCallback errorCallback);
 
     /**
      * Request a list of pending join requests for a party.
