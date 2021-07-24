@@ -31,6 +31,9 @@ typedef struct NAKAMA_API NPartyJoinRequest
     /// Presences attempting to join, or who have joined.
     sNUserPresence* presences;
 
+    /// Number of presences attempting to join or who have joined.
+    uint16_t presences_count;
+
 } sNPartyJoinRequest;
 
 #ifdef __cplusplus

@@ -345,7 +345,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param stringProperties String properties.
          * @param numericProperties Numeric properties.
          */
-        virtual void addMatchmakerParty(std::string& partyId, std::string& query, int minCount, int maxCount,
+        virtual void addMatchmakerParty(std::string& partyId, std::string& query, int32_t minCount, int32_t maxCount,
             const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {}, std::function<void(const NPartyMatchmakerTicket&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
@@ -398,7 +398,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param partyId Party ID to remove/reject from.
          * @param presence The presence to remove or reject.
          */
-        virtual void removePartyMemberAsync(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void removePartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * Send data to a party.

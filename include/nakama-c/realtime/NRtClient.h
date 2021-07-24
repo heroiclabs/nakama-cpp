@@ -356,6 +356,100 @@ extern "C" {
     );
 
     /**
+     * Update the user's status online.
+     *
+     * @param status The new status of the user.
+     */
+    NAKAMA_API void NRtClient_updateStatus(
+        NRtClient client,
+        const char* status,
+        NRtClientReqData reqData,
+        void (*successCallback)(NRtClient, NRtClientReqData), // optional, pass NULL
+        NRtClientErrorCallback errorCallback
+    );
+
+    /**
+     * Accept a party member's request to join the party.
+     *
+     * @param partyId The party ID to accept the join request for.
+     * @param presence The presence to accept as a party member.
+     */
+    NAKAMA_API void NRtClient_acceptPartyMember(
+        NRtClient client,
+        const char* partyId,
+        const sNUserPresence presence,
+        NRtClientReqData reqData,
+        void (*successCallback)(NRtClient, NRtClientReqData),
+        NRtClientErrorCallback errorCallback = nullptr);
+
+    /**
+     * Begin matchmaking as a party.
+     * @param partyId Party ID.
+     * @param query Filter query used to identify suitable users.
+     * @param minCount Minimum total user count to match together.
+     * @param maxCount Maximum total user count to match together.
+     * @param stringProperties String properties.
+     * @param numericProperties Numeric properties.
+     */
+    NAKAMA_API void NRtClient_addMatchmakerParty(
+        NRtClient client,
+        const char* partyId,
+        const char* query,
+        int32_t minCount,
+        int32_t maxCount,
+        const NStringMap& stringProperties,
+        const NStringDoubleMap& numericProperties,
+        NRtClientReqData reqData,
+        void (*successCallback)(NRtClient, NRtClientReqData, const sNPartyMatchmakerTicket*),
+        NRtClientErrorCallback errorCallback = nullptr);
+
+    /**
+     * End a party, kicking all party members and closing it.
+     * @param partyId The ID of the party.
+     */
+    NAKAMA_API void NRtClient_closeParty(
+        NRtClient client,
+        const char* partyId,
+        NRtClientReqData reqData,
+        void (*successCallback)(NRtClient, NRtClientReqData),
+        NRtClientErrorCallback errorCallback = nullptr);
+
+    /**
+     * Create a party.
+     * @param open Whether or not the party will require join requests to be approved by the party leader.
+     * @param maxSize Maximum number of party members.
+     */
+    NAKAMA_API void NRtClient_createParty(
+        NRtClient client,
+        bool open,
+        int32_t maxSize,
+        NRtClientReqData reqData,
+        void (*successCallback)(NRtClient, NRtClientReqData, const sNParty* party),
+        NRtClientErrorCallback errorCallback = nullptr);
+
+    /**
+     * Join a party.
+     * @param partyId Party ID.
+     */
+    NAKAMA_API void NRtClient_joinParty(
+        NRtClient client,
+        const char* partyId,
+        NRtClientReqData reqData,
+        void (*successCallback)(NRtClient, NRtClientReqData),
+        NRtClientErrorCallback errorCallback = nullptr);
+
+    /**
+     * Leave the party.
+     * @param partyId Party ID.
+    */
+    NAKAMA_API void NRtClient_leaveParty(
+        NRtClient client,
+        const char* partyId,
+        NRtClientReqData reqData,
+        void (*successCallback)(NRtClient, NRtClientReqData),
+        NRtClientErrorCallback errorCallback = nullptr);
+
+    /**
      * Request a list of pending join requests for a party.
      * @param partyId Party ID.
      */
@@ -375,6 +469,7 @@ extern "C" {
         NRtClient client,
         const char* partyId,
         sNUserPresence partyMember,
+        NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData),  // optional, pass NULL
         NRtClientErrorCallback errorCallback
     );
@@ -387,6 +482,7 @@ extern "C" {
     NAKAMA_API void NRtClient_removeMatchmakerParty(
         NRtClient client,
         const char* ticket,
+        NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData),  // optional, pass NULL,
         NRtClientErrorCallback errorCallback
     );
@@ -396,10 +492,11 @@ extern "C" {
      * @param partyId Party ID to remove/reject from.
      * @param presence The presence to remove or reject.
      */
-    NAKAMA_API void NRtClient_removePartyMemberAsync(
+    NAKAMA_API void NRtClient_removePartyMember(
         NRtClient client,
         const char* partyId,
         sNUserPresence presence,
+        NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData),  // optional, pass NULL,
         NRtClientErrorCallback errorCallback
     );

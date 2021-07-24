@@ -947,7 +947,7 @@ void NRtClient::removeMatchmakerParty(std::string& ticket, std::function<void()>
     send(msg);
 }
 
-void NRtClient::removePartyMemberAsync(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback, RtErrorCallback errorCallback)
+void NRtClient::removePartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
