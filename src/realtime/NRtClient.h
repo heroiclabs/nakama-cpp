@@ -182,9 +182,9 @@ namespace Nakama {
 
         void removeMatchmakerParty(std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void removePartyMemberAsync(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        void removePartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void sendPartyDataAsync(std::string& partyId, long opCode, NBytes& data) override;
+        void sendPartyData(std::string& partyId, long opCode, NBytes& data) override;
 
         protected:
             void onTransportDisconnected(const NRtClientDisconnectInfo& info);

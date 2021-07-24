@@ -187,7 +187,7 @@ NAKAMA_NAMESPACE_BEGIN
             }
         }
 
-        static void partyClosedCallback(NRtClient cClient, const sNPartyData* cPartyData)
+        static void partyDataCallback(NRtClient cClient, const sNPartyData* cPartyData)
         {
             auto wrapper = getWrapper(cClient);
             if (wrapper->_listener)
@@ -209,7 +209,7 @@ NAKAMA_NAMESPACE_BEGIN
             }
         }
 
-        static void partyJoinRequestCallback(NRtClient cClient, const sNPartyLeader* cPartyLeader)
+        static void partyLeaderRequestCallback(NRtClient cClient, const sNPartyLeader* cPartyLeader)
         {
             auto wrapper = getWrapper(cClient);
             if (wrapper->_listener)
@@ -231,25 +231,7 @@ NAKAMA_NAMESPACE_BEGIN
             }
         }
 
-                static void reqOkStatusStatic(::NRtClient cClient, ::NRtClientReqData reqData, const ::sNStatus* cStatus)
-        {
-            getWrapper(cClient)->reqOkStatus(reqData, cStatus);
-        }
 
-        void partyTicketOkStatus(::NRtClientReqData reqData, const ::sNStatus* cStatus)
-        {
-            if (reqData != INVALID_REQ_ID)
-            {
-                auto it = _reqOkStatusCallbacks.find(reqData);
-                if (it != _reqOkStatusCallbacks.end())
-                {
-                    NStatus status;
-                    assign(status, cStatus);
-                    it->second(status);
-                    _reqOkStatusCallbacks.erase(it);
-                }
-            }
-        }
 
         static void statusPresenceCallback(NRtClient cClient, const sNStatusPresenceEvent* cPresence)
         {
@@ -760,26 +742,6 @@ NAKAMA_NAMESPACE_BEGIN
             delete[] presenceArray;
         }
 
-        static void reqOkStatusStatic(::NRtClient cClient, ::NRtClientReqData reqData, const ::sNStatus* cStatus)
-        {
-            getWrapper(cClient)->reqOkStatus(reqData, cStatus);
-        }
-
-        void reqOkStatus(::NRtClientReqData reqData, const ::sNStatus* cStatus)
-        {
-            if (reqData != INVALID_REQ_ID)
-            {
-                auto it = _reqOkStatusCallbacks.find(reqData);
-                if (it != _reqOkStatusCallbacks.end())
-                {
-                    NStatus status;
-                    assign(status, cStatus);
-                    it->second(status);
-                    _reqOkStatusCallbacks.erase(it);
-                }
-            }
-        }
-
         void followUsers(
             const std::vector<std::string>& userIds,
             std::function<void(const NStatus&)> successCallback = nullptr,
@@ -874,6 +836,26 @@ NAKAMA_NAMESPACE_BEGIN
                 reqId,
                 &NRtClientWrapper::reqOkEmptyStatic,
                 &NRtClientWrapper::reqErrorStatic);
+        }
+
+        static void reqOkStatusStatic(::NRtClient cClient, ::NRtClientReqData reqData, const ::sNStatus* cStatus)
+        {
+            getWrapper(cClient)->reqOkStatus(reqData, cStatus);
+        }
+
+        void reqOkStatus(::NRtClientReqData reqData, const ::sNStatus* cStatus)
+        {
+            if (reqData != INVALID_REQ_ID)
+            {
+                auto it = _reqOkStatusCallbacks.find(reqData);
+                if (it != _reqOkStatusCallbacks.end())
+                {
+                    NStatus status;
+                    assign(status, cStatus);
+                    it->second(status);
+                    _reqOkStatusCallbacks.erase(it);
+                }
+            }
         }
 
         static void reqOkRpcStatic(::NRtClient cClient, ::NRtClientReqData reqData, const ::sNRpc* cRpc)
@@ -1193,8 +1175,16 @@ NAKAMA_NAMESPACE_BEGIN
                 &NRtClientWrapper::reqErrorStatic);
         }
 
-        void sendPartyDataAsync(std::string& partyId, long opCode, NBytes& data)
+        void sendPartyData(std::string& partyId, long opCode, NBytes& data)
         {
+            sNBytes cData;
+
+            assign(cData, data);
+
+            ::NRtClient_sendPartyData(_cClient,
+                partyId.c_str(),
+                opCode,
+                &cData);
         }
 
     protected:

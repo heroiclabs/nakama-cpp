@@ -406,7 +406,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param opCode Op code value.
          * @param data The input data to send from the byte buffer, if any.
          */
-        virtual void sendPartyDataAsync(std::string& partyId, long opCode, NBytes& data) = 0;
+        virtual void sendPartyData(std::string& partyId, long opCode, NBytes& data) = 0;
     };
 
     using NRtClientPtr = std::shared_ptr<NRtClientInterface>;

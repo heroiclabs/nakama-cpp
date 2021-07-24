@@ -974,7 +974,7 @@ void NRtClient::removePartyMember(std::string& partyId, NUserPresence& presence,
     send(msg);
 }
 
-void NRtClient::sendPartyDataAsync(std::string& partyId, long opCode, NBytes& data)
+void NRtClient::sendPartyData(std::string& partyId, long opCode, NBytes& data)
 {
     NLOG_INFO("...");
 

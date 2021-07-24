@@ -507,7 +507,8 @@ extern "C" {
      * @param opCode Op code value.
      * @param data The input data to send from the byte buffer, if any.
      */
-    NAKAMA_API void NRtClient_sendPartyDataAsync(
+    NAKAMA_API void NRtClient_sendPartyData(
+        NRtClient client,
         const char* partyId,
         uint16_t opCode,
         const sNBytes* data);
