@@ -932,7 +932,7 @@ NAKAMA_NAMESPACE_BEGIN
             if (successCallback || errorCallback)
             {
                 reqId = getNextReqId();
-                if (successCallback) _reqOkEmptyCallbacks.emplace(reqId, successCallback);
+                if (successCallback) _reqOkMatchmakerPartyTicketCallbacks.emplace(reqId, successCallback);
                 if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
             }
 
@@ -999,7 +999,7 @@ NAKAMA_NAMESPACE_BEGIN
             if (successCallback || errorCallback)
             {
                 reqId = getNextReqId();
-                if (successCallback) _reqOkEmptyCallbacks.emplace(reqId, successCallback);
+                if (successCallback) _reqOkPartyCallbacks.emplace(reqId, successCallback);
                 if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
             }
 
@@ -1078,7 +1078,7 @@ NAKAMA_NAMESPACE_BEGIN
             if (successCallback || errorCallback)
             {
                 reqId = getNextReqId();
-                if (successCallback) _reqOkEmptyCallbacks.emplace(reqId, successCallback);
+                if (successCallback) _reqOkPartyJoinRequestCallbacks.emplace(reqId, successCallback);
                 if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
             }
 
