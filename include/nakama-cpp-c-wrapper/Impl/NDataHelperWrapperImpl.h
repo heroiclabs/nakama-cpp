@@ -760,7 +760,7 @@ void assign(NParty& party, const sNParty* cParty)
     assign(party.leader, &cParty->leader);
     party.maxSize = cParty->maxSize;
     party.open = cParty->open;
-    assign(party.presences, cParty->presences, cParty->presences_count);
+    assign(party.presences, cParty->presences, cParty->presencesCount);
     assign(party.self, &cParty->self);
 }
 
@@ -773,19 +773,19 @@ void assign(NPartyData& partyData, const sNPartyData* cPartyData)
 {
     assign(partyData.data, &cPartyData->data);
     partyData.opCode = cPartyData->opCode;
-    partyData.partyId = cPartyData->id;
+    partyData.partyId = cPartyData->partyId;
     assign(partyData.presence, &cPartyData->presence);
 }
 
 void assign(NPartyJoinRequest& partyJoinRequest, const sNPartyJoinRequest* cPartyJoinRequest)
 {
-    partyJoinRequest.partyId = cPartyJoinRequest->party_id;
-    assign(partyJoinRequest.presences, cPartyJoinRequest->presences, cPartyJoinRequest->presences_count);
+    partyJoinRequest.partyId = cPartyJoinRequest->partyId;
+    assign(partyJoinRequest.presences, cPartyJoinRequest->presences, cPartyJoinRequest->presencesCount);
 }
 
 void assign(NPartyLeader& partyLeader, const sNPartyLeader* cPartyLeader)
 {
-    partyLeader.partyId = cPartyLeader->party_id;
+    partyLeader.partyId = cPartyLeader->partyId;
     assign(partyLeader.presence, &cPartyLeader->presence);
 }
 

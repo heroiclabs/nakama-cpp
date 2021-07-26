@@ -467,10 +467,12 @@ void NRtClient_acceptPartyMember(
     void (*successCallback)(NRtClient, NRtClientReqData),
     NRtClientErrorCallback errorCallback)
 {
+    Nakama::NUserPresence cppPresence;
+    assign(cppPresence, presence);
+
     getCppRtClient(client)->acceptPartyMember(
         partyId,
-        presence,
-        reqData,
+        cppPresence,
         [client, successCallback, reqData]()
         {
             if (successCallback)
@@ -478,7 +480,6 @@ void NRtClient_acceptPartyMember(
                 successCallback(client, reqData);
             }
         },
-
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
@@ -495,16 +496,17 @@ void NRtClient_addMatchmakerParty(
     void (*successCallback)(NRtClient, NRtClientReqData, const sNPartyMatchmakerTicket*),
     NRtClientErrorCallback errorCallback)
 {
-Nakama::NStringMap cppStringProperties;
+    Nakama::NStringMap cppStringProperties;
     Nakama::NStringDoubleMap cppNumericProperties;
 
     Nakama::assign(cppStringProperties, stringProperties);
     Nakama::assign(cppNumericProperties, numericProperties);
 
     getCppRtClient(client)->addMatchmakerParty(
-        minCount ? Nakama::opt::optional<int32_t>(minCount) : Nakama::opt::nullopt,
-        maxCount ? Nakama::opt::optional<int32_t>(maxCount) : Nakama::opt::nullopt,
-        query ? Nakama::opt::optional<std::string>(query) : Nakama::opt::nullopt,
+        partyId,
+        query,
+        minCount,
+        maxCount,
         cppStringProperties,
         cppNumericProperties,
         [client, successCallback, reqData](const Nakama::NPartyMatchmakerTicket& ticket)
@@ -530,7 +532,6 @@ void NRtClient_closeParty(
 {
     getCppRtClient(client)->closeParty(
         partyId,
-        reqData,
         [client, successCallback, reqData]()
         {
             if (successCallback)
@@ -547,25 +548,23 @@ void NRtClient_createParty(
     bool open,
     int32_t maxSize,
     NRtClientReqData reqData,
-    void (*successCallback)(NRtClient, NRtClientReqData, const sNParty* party),
+    void (*successCallback)(NRtClient, NRtClientReqData, const sNParty*),
     NRtClientErrorCallback errorCallback)
 {
     getCppRtClient(client)->createParty(
-        partyId,
         open,
         maxSize,
-        reqData,
-        [client, successCallback, reqData](const NParty* party)
+        [client, successCallback, reqData](const Nakama::NParty& party)
         {
             sNParty cParty;
             assign(cParty, party);
 
             if (successCallback)
             {
-                successCallback(client, reqData, cParty);
+                successCallback(client, reqData, &cParty);
             }
 
-            Nakama::sNPartyFree(cParty);
+            Nakama::sNParty_free(cParty);
         },
 
         Nakama::createErrorCallback(client, reqData, errorCallback));
@@ -578,9 +577,8 @@ void NRtClient_joinParty(
     void (*successCallback)(NRtClient, NRtClientReqData),
     NRtClientErrorCallback errorCallback)
 {
-    getCppRtClient(client)->acceptPartyMember(
+    getCppRtClient(client)->joinParty(
         partyId,
-        reqData,
         [client, successCallback, reqData]()
         {
             if (successCallback)
@@ -601,7 +599,6 @@ void NRtClient_leaveParty(
 {
     getCppRtClient(client)->leaveParty(
         partyId,
-        reqData,
         [client, successCallback, reqData]()
         {
             if (successCallback)
@@ -609,7 +606,6 @@ void NRtClient_leaveParty(
                 successCallback(client, reqData);
             }
         },
-
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
@@ -620,20 +616,22 @@ void NRtClient_listPartyJoinRequests(
     void (*successCallback)(NRtClient, NRtClientReqData, const sNPartyJoinRequest* req),  // optional, pass NULL
     NRtClientErrorCallback errorCallback)
 {
-    auto listener = Nakama::getRtClientListener(client);
-
-    if (callback)
-    {
-        listener->setListPartyJoinRequestsCallback([client, callback](const Nakama::NPartyJoinRequest& requests)
+    getCppRtClient(client)->listPartyJoinRequests(
+        partyId,
+        [client, successCallback, reqData](const Nakama::NPartyJoinRequest& joinRequest)
         {
-            sNPartyJoinRequest cRequests;
-            assign(cRequests, requests);
-            callback(client, &cRequests);
-            Nakama::sNPartyJoinRequests_free(cRequests);
-        });
-    }
-    else
-        listener->setListPartyJoinRequestsCallback(nullptr);
+            sNPartyJoinRequest cJoinRequest;
+            assign(cJoinRequest, joinRequest);
+
+            if (successCallback)
+            {
+                successCallback(client, reqData, &cJoinRequest);
+            }
+
+            Nakama::sNPartyJoinRequest_free(cJoinRequest);
+        },
+
+        Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
 void NRtClient_promotePartyMember(
@@ -644,10 +642,12 @@ void NRtClient_promotePartyMember(
     void (*successCallback)(NRtClient, NRtClientReqData),  // optional, pass NULL
     NRtClientErrorCallback errorCallback)
 {
+    Nakama::NUserPresence cppPresence;
+    assign(cppPresence, partyMember);
+
     getCppRtClient(client)->promotePartyMember(
         partyId,
-        partyMember,
-        reqData,
+        cppPresence,
         [client, successCallback, reqData]()
         {
             if (successCallback)
@@ -655,7 +655,6 @@ void NRtClient_promotePartyMember(
                 successCallback(client, reqData);
             }
         },
-
         Nakama::createErrorCallback(client, reqData, errorCallback));
 }
 
@@ -668,7 +667,6 @@ void NRtClient_removeMatchmakerParty(
 {
     getCppRtClient(client)->removeMatchmakerParty(
         ticket,
-        reqData,
         [client, successCallback, reqData]()
         {
             if (successCallback)
@@ -688,10 +686,12 @@ void NRtClient_removePartyMember(
     void (*successCallback)(NRtClient, NRtClientReqData),  // optional, pass NULL,
     NRtClientErrorCallback errorCallback)
 {
+    Nakama::NUserPresence cppPresence;
+    assign(cppPresence, presence);
+
     getCppRtClient(client)->removePartyMember(
         partyId,
-        presence,
-        reqData,
+        cppPresence,
         [client, successCallback, reqData]()
         {
             if (successCallback)
@@ -709,18 +709,10 @@ void NRtClient_sendPartyData(
     uint16_t opCode,
     const sNBytes* data)
 {
-    getCppRtClient(client)->leaveParty(
-        partyId,
-        reqData,
-        [client, successCallback, reqData]()
-        {
-            if (successCallback)
-            {
-                successCallback(client, reqData);
-            }
-        },
+    Nakama::NBytes cppData;
+    Nakama::assign(cppData, data);
 
-        Nakama::createErrorCallback(client, reqData, errorCallback));
+    getCppRtClient(client)->sendPartyData(partyId, opCode, cppData);
 }
 
 void NRtClient_rpc(
@@ -913,7 +905,7 @@ void NRtClient_setPartyCallback(NRtClient client, void (*callback)(NRtClient, co
             sNParty cParty;
             assign(cParty, party);
             callback(client, &cParty);
-            Nakama::sNParty_free(cList);
+            Nakama::sNParty_free(cParty);
         });
     }
     else
@@ -926,7 +918,7 @@ void NRtClient_setPartyCloseCallback(NRtClient client, void (*callback)(NRtClien
 
     if (callback)
     {
-        listener->setPartyCloseCallback([client, callback](const Nakama::NParty& party)
+        listener->setPartyCloseCallback([client, callback](const Nakama::NPartyClose& party)
         {
             callback(client);
         });
@@ -944,9 +936,9 @@ void NRtClient_setPartyDataCallback(NRtClient client, void (*callback)(NRtClient
         listener->setPartyDataCallback([client, callback](const Nakama::NPartyData& partyData)
         {
             sNPartyData cPartyData;
-            assign(cPartyData, party);
+            assign(cPartyData, partyData);
             callback(client, &cPartyData);
-            Nakama::sNPartyData_free(cList);
+            Nakama::sNPartyData_free(cPartyData);
         });
     }
     else
@@ -959,7 +951,7 @@ void NRtClient_setPartyJoinRequestCallback(NRtClient client, void (*callback)(NR
 
     if (callback)
     {
-        listener->setPartyJoinRequestCallback([client, callback](const Nakama::NPartyJoinRequest& partyJoinRequest)
+        listener->setPartyJoinRequestCallback([client, callback](const Nakama::NPartyJoinRequest& joinRequest)
         {
             sNPartyJoinRequest cJoinRequest;
             assign(cJoinRequest, joinRequest);
@@ -999,8 +991,8 @@ void NRtClient_setPartyMatchmakerTicketCallback(NRtClient client, void (*callbac
     {
         listener->setPartyMatchmakerTicketCallback([client, callback](const Nakama::NPartyMatchmakerTicket& newTicket)
         {
-            sNPartyMatchmakerTicket cPartyMatchmakerTicket;
-            assign(cPartyMatchmakerTicket, newTicket);
+            sNPartyMatchmakerTicket cNewTicket;
+            assign(cNewTicket, newTicket);
             callback(client, &cNewTicket);
             Nakama::sNPartyMatchmakerTicket_free(cNewTicket);
         });

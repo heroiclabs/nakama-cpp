@@ -26,7 +26,7 @@ extern "C" {
 typedef struct NAKAMA_API NPartyLeader
 {
     /// The ID of the party to announce the new leader for.
-    const char* party_id;
+    const char* partyId;
 
     /// The presence of the new party leader.
     sNUserPresence presence;

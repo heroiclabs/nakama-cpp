@@ -26,13 +26,13 @@ extern "C" {
 typedef struct NAKAMA_API NPartyJoinRequest
 {
     /// The ID of the party to get a list of join requests for.
-    const char* party_id;
+    const char* partyId;
 
     /// Presences attempting to join, or who have joined.
     sNUserPresence* presences;
 
     /// Number of presences attempting to join or who have joined.
-    uint16_t presences_count;
+    uint16_t presencesCount;
 
 } sNPartyJoinRequest;
 

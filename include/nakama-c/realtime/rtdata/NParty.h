@@ -44,7 +44,7 @@ typedef struct NAKAMA_API NParty
     sNUserPresence* presences;
 
     /// The number of members currently in the party.
-    uint16_t presences_count;
+    uint16_t presencesCount;
 } sNParty;
 
 #ifdef __cplusplus

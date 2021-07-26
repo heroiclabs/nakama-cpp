@@ -902,7 +902,7 @@ NAKAMA_NAMESPACE_BEGIN
                 &NRtClientWrapper::reqErrorStatic);
         }
 
-        void acceptPartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
+        void acceptPartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
 
@@ -924,8 +924,9 @@ NAKAMA_NAMESPACE_BEGIN
                 &NRtClientWrapper::reqErrorStatic);
         }
 
-        void addMatchmakerParty(std::string& partyId, std::string& query, int32_t minCount, int32_t maxCount,
-            const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {}, std::function<void(const NPartyMatchmakerTicket&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
+
+        void addMatchmakerParty(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
+            const NStringMap stringProperties = {}, const NStringDoubleMap numericProperties = {}, std::function<void(const NPartyMatchmakerTicket&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
 
@@ -974,7 +975,7 @@ NAKAMA_NAMESPACE_BEGIN
             }
         }
 
-        void closeParty(std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
+        void closeParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
 
@@ -1033,7 +1034,7 @@ NAKAMA_NAMESPACE_BEGIN
             }
         }
 
-        void joinParty(std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
+        void joinParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
 
@@ -1052,7 +1053,7 @@ NAKAMA_NAMESPACE_BEGIN
                 &NRtClientWrapper::reqErrorStatic);
         }
 
-        void leaveParty(std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
+        void leaveParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
 
@@ -1071,7 +1072,7 @@ NAKAMA_NAMESPACE_BEGIN
                 &NRtClientWrapper::reqErrorStatic);
         }
 
-        void listPartyJoinRequests(std::string& partyId, std::function<void(const NPartyJoinRequest&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
+        void listPartyJoinRequests(const std::string& partyId, std::function<void(const NPartyJoinRequest&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
 
@@ -1110,7 +1111,7 @@ NAKAMA_NAMESPACE_BEGIN
             }
         }
 
-        void promotePartyMember(std::string& partyId, NUserPresence& partyMember, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
+        void promotePartyMember(const std::string& partyId, NUserPresence& partyMember, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
 
@@ -1133,7 +1134,7 @@ NAKAMA_NAMESPACE_BEGIN
                 &NRtClientWrapper::reqErrorStatic);
         }
 
-        void removeMatchmakerParty(std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
+        void removeMatchmakerParty(const std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
 
@@ -1152,7 +1153,7 @@ NAKAMA_NAMESPACE_BEGIN
                 &NRtClientWrapper::reqErrorStatic);
         }
 
-        void removePartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
+        void removePartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
 
@@ -1175,7 +1176,7 @@ NAKAMA_NAMESPACE_BEGIN
                 &NRtClientWrapper::reqErrorStatic);
         }
 
-        void sendPartyData(std::string& partyId, long opCode, NBytes& data)
+        void sendPartyData(const std::string& partyId, long opCode, NBytes& data)
         {
             sNBytes cData;
 

@@ -719,7 +719,7 @@ void NRtClient::rpc(const std::string & id, const opt::optional<std::string>& pa
     send(msg);
 }
 
-void NRtClient::acceptPartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback, RtErrorCallback errorCallback)
+void NRtClient::acceptPartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -745,8 +745,8 @@ void NRtClient::acceptPartyMember(std::string& partyId, NUserPresence& presence,
     send(msg);
 }
 
-void NRtClient::addMatchmakerParty(std::string& partyId, std::string& query, int minCount, int maxCount,
-    const NStringMap& stringProperties, const NStringDoubleMap& numericProperties, std::function<void(const NPartyMatchmakerTicket&)> successCallback, RtErrorCallback errorCallback)
+void NRtClient::addMatchmakerParty(const std::string& partyId, const std::string& query, int minCount, int maxCount,
+    const NStringMap stringProperties, const NStringDoubleMap numericProperties, std::function<void(const NPartyMatchmakerTicket&)> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -783,7 +783,7 @@ void NRtClient::addMatchmakerParty(std::string& partyId, std::string& query, int
     send(msg);
 }
 
-void NRtClient::closeParty(std::string& partyId, std::function<void()> successCallback, RtErrorCallback errorCallback)
+void NRtClient::closeParty(const std::string& partyId, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -830,7 +830,7 @@ void NRtClient::createParty(bool open, int maxSize, std::function<void(const NPa
     send(msg);
 }
 
-void NRtClient::joinParty(std::string& partyId, std::function<void()> successCallback, RtErrorCallback errorCallback)
+void NRtClient::joinParty(const std::string& partyId, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -852,7 +852,7 @@ void NRtClient::joinParty(std::string& partyId, std::function<void()> successCal
     send(msg);
 }
 
-void NRtClient::leaveParty(std::string& partyId, std::function<void()> successCallback, RtErrorCallback errorCallback)
+void NRtClient::leaveParty(const std::string& partyId, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -874,7 +874,7 @@ void NRtClient::leaveParty(std::string& partyId, std::function<void()> successCa
     send(msg);
 }
 
-void NRtClient::listPartyJoinRequests(std::string& partyId, std::function<void(const NPartyJoinRequest&)> successCallback, RtErrorCallback errorCallback)
+void NRtClient::listPartyJoinRequests(const std::string& partyId, std::function<void(const NPartyJoinRequest&)> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -898,7 +898,7 @@ void NRtClient::listPartyJoinRequests(std::string& partyId, std::function<void(c
     send(msg);
 }
 
-void NRtClient::promotePartyMember(std::string& partyId, NUserPresence& partyMember, std::function<void()> successCallback, RtErrorCallback errorCallback)
+void NRtClient::promotePartyMember(const std::string& partyId, NUserPresence& partyMember, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -925,7 +925,7 @@ void NRtClient::promotePartyMember(std::string& partyId, NUserPresence& partyMem
     send(msg);
 }
 
-void NRtClient::removeMatchmakerParty(std::string& ticket, std::function<void()> successCallback, RtErrorCallback errorCallback)
+void NRtClient::removeMatchmakerParty(const std::string& ticket, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -947,7 +947,7 @@ void NRtClient::removeMatchmakerParty(std::string& ticket, std::function<void()>
     send(msg);
 }
 
-void NRtClient::removePartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback, RtErrorCallback errorCallback)
+void NRtClient::removePartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -974,7 +974,7 @@ void NRtClient::removePartyMember(std::string& partyId, NUserPresence& presence,
     send(msg);
 }
 
-void NRtClient::sendPartyData(std::string& partyId, long opCode, NBytes& data)
+void NRtClient::sendPartyData(const std::string& partyId, long opCode, NBytes& data)
 {
     NLOG_INFO("...");
 

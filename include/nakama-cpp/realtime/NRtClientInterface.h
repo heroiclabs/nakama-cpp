@@ -334,7 +334,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param partyId The party ID to accept the join request for.
          * @param presence The presence to accept as a party member.
          */
-        virtual void acceptPartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void acceptPartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * Begin matchmaking as a party.
@@ -345,14 +345,14 @@ NAKAMA_NAMESPACE_BEGIN
          * @param stringProperties String properties.
          * @param numericProperties Numeric properties.
          */
-        virtual void addMatchmakerParty(std::string& partyId, std::string& query, int32_t minCount, int32_t maxCount,
-            const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {}, std::function<void(const NPartyMatchmakerTicket&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void addMatchmakerParty(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
+            const NStringMap stringProperties = {}, const NStringDoubleMap numericProperties = {}, std::function<void(const NPartyMatchmakerTicket&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * End a party, kicking all party members and closing it.
          * @param partyId The ID of the party.
          */
-        virtual void closeParty(std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void closeParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * Create a party.
@@ -365,40 +365,40 @@ NAKAMA_NAMESPACE_BEGIN
          * Join a party.
          * @param partyId Party ID.
          */
-        virtual void joinParty(std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void joinParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * Leave the party.
          * @param partyId Party ID.
          */
-        virtual void leaveParty(std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void leaveParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * Request a list of pending join requests for a party.
          * @param partyId Party ID.
          */
-        virtual void listPartyJoinRequests(std::string& partyId, std::function<void(const NPartyJoinRequest&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void listPartyJoinRequests(const std::string& partyId, std::function<void(const NPartyJoinRequest&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * Promote a new party leader.
          * @param partyId Party ID.
          * @param partyMember The presence of an existing party member to promote as the new leader.
          */
-        virtual void promotePartyMember(std::string& partyId, NUserPresence& partyMember, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void promotePartyMember(const std::string& partyId, NUserPresence& partyMember, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * Cancel a party matchmaking process using a ticket.
          * @param partyId Party ID.
          * @param ticket The ticket to cancel.
          */
-        virtual void removeMatchmakerParty(std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void removeMatchmakerParty(const std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * Kick a party member, or decline a request to join.
          * @param partyId Party ID to remove/reject from.
          * @param presence The presence to remove or reject.
          */
-        virtual void removePartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void removePartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * Send data to a party.
@@ -406,7 +406,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param opCode Op code value.
          * @param data The input data to send from the byte buffer, if any.
          */
-        virtual void sendPartyData(std::string& partyId, long opCode, NBytes& data) = 0;
+        virtual void sendPartyData(const std::string& partyId, long opCode, NBytes& data) = 0;
     };
 
     using NRtClientPtr = std::shared_ptr<NRtClientInterface>;

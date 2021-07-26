@@ -24,7 +24,7 @@ extern "C" {
 typedef struct NAKAMA_API NPartyMatchmakerTicket
 {
     /// The ID of the party.
-    const char* party_id;
+    const char* partyId;
 
     /// The ticket that can be used to cancel matchmaking.
     const char* ticket;

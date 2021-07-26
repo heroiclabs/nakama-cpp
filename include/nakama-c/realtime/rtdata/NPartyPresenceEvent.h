@@ -26,13 +26,17 @@ extern "C" {
 typedef struct NAKAMA_API NPartyPresenceEvent
 {
     /// The ID of the party.
-    const char* party_id;
+    const char* partyId;
 
     /// The user presences that have just joined the party.
     sNUserPresence* joins;
 
+    uint16_t joinsCount;
+
     /// The user presences that have just left the party.
     sNUserPresence* leaves;
+
+    uint16_t leavesCount;
 
 } sNPartyPresenceEvent;
 

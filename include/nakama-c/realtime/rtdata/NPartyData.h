@@ -26,7 +26,7 @@ extern "C" {
 typedef struct NAKAMA_API NPartyData
 {
     /// The ID of the party to close.
-    const char* id;
+    const char* partyId;
 
     /// A reference to the user presence that sent this data, if any.
     sNUserPresence presence;

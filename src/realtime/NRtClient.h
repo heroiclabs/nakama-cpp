@@ -163,28 +163,28 @@ namespace Nakama {
             RtErrorCallback errorCallback = nullptr
         ) override;
 
-        void acceptPartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        void acceptPartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void addMatchmakerParty(std::string& partyId, std::string& query, int minCount, int maxCount,
-            const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {}, std::function<void(const NPartyMatchmakerTicket&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        void addMatchmakerParty(const std::string& partyId, const std::string& query, int minCount, int maxCount,
+            const NStringMap stringProperties = {}, const NStringDoubleMap numericProperties = {}, std::function<void(const NPartyMatchmakerTicket&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void closeParty(std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        void closeParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
         void createParty(bool open, int maxSize, std::function<void(const NParty&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void joinParty(std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        void joinParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void leaveParty(std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        void leaveParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void listPartyJoinRequests(std::string& partyId, std::function<void(const NPartyJoinRequest&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        void listPartyJoinRequests(const std::string& partyId, std::function<void(const NPartyJoinRequest&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void promotePartyMember(std::string& partyId, NUserPresence& partyMember, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        void promotePartyMember(const std::string& partyId, NUserPresence& partyMember, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void removeMatchmakerParty(std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        void removeMatchmakerParty(const std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void removePartyMember(std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        void removePartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
 
-        void sendPartyData(std::string& partyId, long opCode, NBytes& data) override;
+        void sendPartyData(const std::string& partyId, long opCode, NBytes& data) override;
 
         protected:
             void onTransportDisconnected(const NRtClientDisconnectInfo& info);
