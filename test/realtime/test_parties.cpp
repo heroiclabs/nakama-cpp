@@ -54,7 +54,7 @@ void test_rt_party_join(NRtClientTest& test, const std::string& party_id)
 void test_rt_create_party()
 {
     NRtClientTest test1(__func__);
-    NRtClientTest test2("test_rt_match_join");
+    NRtClientTest test2("test_rt_party_join");
 
     test1.onRtConnect = [&test1, &test2]()
     {

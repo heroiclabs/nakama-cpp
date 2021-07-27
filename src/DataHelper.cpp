@@ -482,5 +482,30 @@ void assign(NPartyJoinRequest& partyJoinRequest, const ::nakama::realtime::Party
     assign(partyJoinRequest.presences, data.presences());
 }
 
+void assign(NPartyClose & partyClose,  const::nakama::realtime::PartyClose & data)
+{
+    assign(partyClose.id, data.party_id());
+}
+
+void assign(NPartyData & partyData,  const::nakama::realtime::PartyData & data)
+{
+    assign(partyData.data, data.data());
+    partyData.opCode = data.op_code();
+    assign(partyData.partyId, data.party_id());
+    assign(partyData.presence, data.presence());
+}
+
+void assign(NPartyLeader & partyLeader,  const::nakama::realtime::PartyLeader & data)
+{
+    assign(partyLeader.partyId, data.party_id());
+    assign(partyLeader.presence, data.presence());
+}
+
+void assign(NPartyPresenceEvent & partyPresenceEvent,  const::nakama::realtime::PartyPresenceEvent & data)
+{
+    assign(partyPresenceEvent.joins, data.joins());
+    assign(partyPresenceEvent.leaves, data.leaves());
+    assign(partyPresenceEvent.partyId, data.party_id());
+}
 
 }

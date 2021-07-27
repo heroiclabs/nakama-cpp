@@ -221,6 +221,48 @@ void NRtClient::onTransportMessage(const NBytes & data)
                 assign(event, msg.stream_presence_event());
                 _listener->onStreamPresence(event);
             }
+            else if (msg.has_party())
+            {
+                NParty party;
+                assign(party, msg.party());
+                _listener->onParty(party);
+            }
+            else if (msg.has_party_close())
+            {
+                NPartyClose partyClose;
+                assign(partyClose, msg.party_close());
+                _listener->onPartyClosed(partyClose);
+            }
+            else if (msg.has_party_data())
+            {
+                NPartyData partyData;
+                assign(partyData, msg.party_data());
+                _listener->onPartyData(partyData);
+            }
+            else if (msg.has_party_join_request())
+            {
+                NPartyJoinRequest partyRequest;
+                assign(partyRequest, msg.party_join_request());
+                _listener->onPartyJoinRequest(partyRequest);
+            }
+            else if (msg.has_party_leader())
+            {
+                NPartyLeader partyLeader;
+                assign(partyLeader, msg.party_leader());
+                _listener->onPartyLeader(partyLeader);
+            }
+            else if (msg.has_party_matchmaker_ticket())
+            {
+                NPartyMatchmakerTicket partyTicket;
+                assign(partyTicket, msg.party_matchmaker_ticket());
+                _listener->onPartyMatchmakerTicket(partyTicket);
+            }
+            else if (msg.has_party_presence_event())
+            {
+                NPartyPresenceEvent presenceEvent;
+                assign(presenceEvent, msg.party_presence_event());
+                _listener->onPartyPresence(presenceEvent);
+            }
             else
             {
                 onTransportError("Unknown message received");

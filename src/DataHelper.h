@@ -50,6 +50,7 @@
 #include "nakama-cpp/realtime/rtdata/NPartyClose.h"
 #include "nakama-cpp/realtime/rtdata/NPartyData.h"
 #include "nakama-cpp/realtime/rtdata/NPartyJoinRequest.h"
+
 #include "nakama-cpp/realtime/rtdata/NPartyLeader.h"
 #include "nakama-cpp/realtime/rtdata/NPartyMatchmakerTicket.h"
 #include "nakama-cpp/realtime/rtdata/NPartyPresenceEvent.h"
@@ -114,6 +115,10 @@ namespace Nakama {
     void assign(NPartyMatchmakerTicket& ticket, const ::nakama::realtime::PartyMatchmakerTicket& data);
     void assign(NParty& party, const ::nakama::realtime::Party& data);
     void assign(NPartyJoinRequest& partyJoinRequest, const ::nakama::realtime::PartyJoinRequest& data);
+    void assign(NPartyClose & partyClose,  const::nakama::realtime::PartyClose & data);
+    void assign(NPartyData & partyData,  const::nakama::realtime::PartyData & data);
+    void assign(NPartyLeader & partyLeader,  const::nakama::realtime::PartyLeader & data);
+    void assign(NPartyPresenceEvent & partyPresenceEvent,  const::nakama::realtime::PartyPresenceEvent & data);
 
     template <class T>
     void assign(T& b, const T& data)
