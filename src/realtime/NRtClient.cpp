@@ -837,7 +837,6 @@ void NRtClient::joinParty(const std::string& partyId, std::function<void()> succ
     ::nakama::realtime::Envelope msg;
 
     msg.mutable_party_join()->set_party_id(partyId);
-
     RtRequestContext * ctx = createReqContext(msg);
 
     if (successCallback)
