@@ -574,7 +574,7 @@ extern "C" {
     NAKAMA_API void NRtClient_setNotificationsCallback(NRtClient client, void (*callback)(NRtClient, const sNNotificationList* notifications));
 
     /**
-     * Called when occur when the current user's invitation request is accepted
+     * Called when the current user's invitation request is accepted
      * by the party leader of a closed party.
      */
     NAKAMA_API void NRtClient_setPartyCallback(NRtClient client, void (*callback)(NRtClient, const sNParty* party));
