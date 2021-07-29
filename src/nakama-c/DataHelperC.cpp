@@ -800,6 +800,49 @@ void assign(sNStatus& cStatus, const Nakama::NStatus& status)
     assign(cStatus.presences, cStatus.presencesCount, status.presences);
 }
 
+void assign(sNParty& cParty, const Nakama::NParty& party)
+{
+    cParty.id = party.id.c_str();
+    cParty.open = party.open;
+    cParty.maxSize = party.maxSize;
+    assign(cParty.self, party.self);
+    assign(cParty.leader, party.leader);
+    assign(cParty.presences, cParty.presencesCount, party.presences);
+}
+
+void assign(sNPartyPresenceEvent& cEvent, const Nakama::NPartyPresenceEvent& event)
+{
+    cEvent.partyId = event.partyId.c_str();
+    assign(cEvent.joins, cEvent.joinsCount, event.joins);
+    assign(cEvent.leaves, cEvent.leavesCount, event.leaves);
+}
+
+void assign(sNPartyData& cData, const Nakama::NPartyData& partyData)
+{
+    cData.partyId = partyData.partyId.c_str();
+    assign(cData.presence, partyData.presence);
+    cData.opCode = partyData.opCode;
+    assign(cData.data, partyData.data);
+}
+
+void assign(sNPartyLeader& cLeader, const Nakama::NPartyLeader& partyLeader)
+{
+    cLeader.partyId = partyLeader.partyId.c_str();
+    assign(cLeader.presence, partyLeader.presence);
+}
+
+void assign(sNPartyMatchmakerTicket& cTicket, const Nakama::NPartyMatchmakerTicket& ticket)
+{
+    cTicket.partyId = ticket.partyId.c_str();
+    cTicket.ticket = ticket.ticket.c_str();
+}
+
+void assign(sNPartyJoinRequest& cRequest, const Nakama::NPartyJoinRequest& request)
+{
+    cRequest.partyId = request.partyId.c_str();
+    assign(cRequest.presences, cRequest.presencesCount, request.presences);
+}
+
 void sNRtError_free(sNRtError& cError)
 {
     ::NStringMap_destroy(cError.context);
@@ -984,6 +1027,38 @@ void sNStreamPresenceEvent_free(sNStreamPresenceEvent& cEvent)
     delete[] cEvent.leaves;
     cEvent.joins = nullptr;
     cEvent.leaves = nullptr;
+}
+
+void sNPartyJoinRequest_free(sNPartyJoinRequest& cRequest)
+{
+}
+
+void sNPartyMatchmakerTicket_free(sNPartyMatchmakerTicket& cTicket)
+{
+
+}
+
+void sNPartyLeader_free(sNPartyLeader& cLeader)
+{
+
+}
+
+void sNPartyPresenceEvent_free(sNPartyPresenceEvent& cEvent)
+{
+    delete[] cEvent.joins;
+    delete[] cEvent.leaves;
+    cEvent.joins = nullptr;
+    cEvent.leaves = nullptr;
+}
+
+void sNPartyData_free(sNPartyData& cPartyData)
+{
+
+}
+
+void sNParty_free(sNParty& cParty)
+{
+
 }
 
 NAKAMA_NAMESPACE_END

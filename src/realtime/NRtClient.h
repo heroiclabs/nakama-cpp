@@ -163,6 +163,29 @@ namespace Nakama {
             RtErrorCallback errorCallback = nullptr
         ) override;
 
+        void acceptPartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+
+        void addMatchmakerParty(const std::string& partyId, const std::string& query, int minCount, int maxCount,
+            const NStringMap stringProperties = {}, const NStringDoubleMap numericProperties = {}, std::function<void(const NPartyMatchmakerTicket&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+
+        void closeParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+
+        void createParty(bool open, int maxSize, std::function<void(const NParty&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+
+        void joinParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+
+        void leaveParty(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+
+        void listPartyJoinRequests(const std::string& partyId, std::function<void(const NPartyJoinRequest&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+
+        void promotePartyMember(const std::string& partyId, NUserPresence& partyMember, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+
+        void removeMatchmakerParty(const std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+
+        void removePartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+
+        void sendPartyData(const std::string& partyId, long opCode, NBytes& data) override;
+
         protected:
             void onTransportDisconnected(const NRtClientDisconnectInfo& info);
             void onTransportError(const std::string& description);
