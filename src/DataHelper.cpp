@@ -460,4 +460,52 @@ void assign(NUserPresence & presence, const::nakama::realtime::UserPresence & da
     assign(presence.userId, data.user_id());
 }
 
+void assign(NPartyMatchmakerTicket & ticket, const::nakama::realtime::PartyMatchmakerTicket & data)
+{
+    assign(ticket.partyId, data.party_id());
+    assign(ticket.ticket, data.ticket());
+}
+
+void assign(NParty & party, const::nakama::realtime::Party & data)
+{
+    assign(party.id, data.party_id());
+    assign(party.leader, data.leader());
+    assign(party.maxSize, data.max_size());
+    assign(party.open, data.open());
+    assign(party.presences, data.presences());
+    assign(party.self, data.self());
+}
+
+void assign(NPartyJoinRequest& partyJoinRequest, const ::nakama::realtime::PartyJoinRequest& data)
+{
+    assign(partyJoinRequest.partyId, data.party_id());
+    assign(partyJoinRequest.presences, data.presences());
+}
+
+void assign(NPartyClose & partyClose,  const::nakama::realtime::PartyClose & data)
+{
+    assign(partyClose.id, data.party_id());
+}
+
+void assign(NPartyData & partyData,  const::nakama::realtime::PartyData & data)
+{
+    assign(partyData.data, data.data());
+    partyData.opCode = data.op_code();
+    assign(partyData.partyId, data.party_id());
+    assign(partyData.presence, data.presence());
+}
+
+void assign(NPartyLeader & partyLeader,  const::nakama::realtime::PartyLeader & data)
+{
+    assign(partyLeader.partyId, data.party_id());
+    assign(partyLeader.presence, data.presence());
+}
+
+void assign(NPartyPresenceEvent & partyPresenceEvent,  const::nakama::realtime::PartyPresenceEvent & data)
+{
+    assign(partyPresenceEvent.joins, data.joins());
+    assign(partyPresenceEvent.leaves, data.leaves());
+    assign(partyPresenceEvent.partyId, data.party_id());
+}
+
 }

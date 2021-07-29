@@ -50,6 +50,13 @@
 #include "nakama-c/realtime/rtdata/NStatusPresenceEvent.h"
 #include "nakama-c/realtime/rtdata/NStreamPresenceEvent.h"
 #include "nakama-c/realtime/rtdata/NStreamData.h"
+#include "nakama-c/realtime/rtdata/NParty.h"
+#include "nakama-c/realtime/rtdata/NPartyClose.h"
+#include "nakama-c/realtime/rtdata/NPartyData.h"
+#include "nakama-c/realtime/rtdata/NPartyJoinRequest.h"
+#include "nakama-c/realtime/rtdata/NPartyLeader.h"
+#include "nakama-c/realtime/rtdata/NPartyMatchmakerTicket.h"
+#include "nakama-c/realtime/rtdata/NPartyPresenceEvent.h"
 #include "nakama-c/realtime/NRtClientDisconnectInfo.h"
 
 #include "nakama-cpp/NError.h"
@@ -84,6 +91,14 @@
 #include "nakama-cpp/realtime/rtdata/NStatusPresenceEvent.h"
 #include "nakama-cpp/realtime/rtdata/NStreamPresenceEvent.h"
 #include "nakama-cpp/realtime/rtdata/NStreamData.h"
+#include "nakama-cpp/realtime/rtdata/NParty.h"
+#include "nakama-cpp/realtime/rtdata/NPartyClose.h"
+#include "nakama-cpp/realtime/rtdata/NPartyData.h"
+#include "nakama-cpp/realtime/rtdata/NPartyJoinRequest.h"
+#include "nakama-cpp/realtime/rtdata/NPartyLeader.h"
+#include "nakama-cpp/realtime/rtdata/NPartyMatchmakerTicket.h"
+#include "nakama-cpp/realtime/rtdata/NPartyPresenceEvent.h"
+
 #include "nakama-cpp/realtime/NRtClientDisconnectInfo.h"
 
 NAKAMA_NAMESPACE_BEGIN
@@ -148,6 +163,12 @@ void assign(sNStatusPresenceEvent& cEvent, const Nakama::NStatusPresenceEvent& e
 void assign(sNStream& cStream, const Nakama::NStream& stream);
 void assign(sNStreamPresenceEvent& cEvent, const Nakama::NStreamPresenceEvent& event);
 void assign(sNStreamData& cData, const Nakama::NStreamData& data);
+void assign(sNParty& cParty, const Nakama::NParty& party);
+void assign(sNPartyPresenceEvent& cEvent, const Nakama::NPartyPresenceEvent& event);
+void assign(sNPartyData& cData, const Nakama::NPartyData& partyData);
+void assign(sNPartyLeader& cLeader, const Nakama::NPartyLeader& partyLeader);
+void assign(sNPartyMatchmakerTicket& cTicket, const Nakama::NPartyMatchmakerTicket& ticket);
+void assign(sNPartyJoinRequest& cRequest, const Nakama::NPartyJoinRequest& request);
 
 void sNRtError_free(sNRtError& cError);
 void sNAccountDevice_free(sNAccountDevice& cDevice);
@@ -175,5 +196,11 @@ void sNMatchmakerMatched_free(sNMatchmakerMatched& cMatched);
 void sNMatchPresenceEvent_free(sNMatchPresenceEvent& cEvent);
 void sNStatusPresenceEvent_free(sNStatusPresenceEvent& cEvent);
 void sNStreamPresenceEvent_free(sNStreamPresenceEvent& cEvent);
+void sNPartyJoinRequest_free(sNPartyJoinRequest& cRequest);
+void sNPartyMatchmakerTicket_free(sNPartyMatchmakerTicket& cTicket);
+void sNPartyLeader_free(sNPartyLeader& cLeader);
+void sNPartyPresenceEvent_free(sNPartyPresenceEvent& cEvent);
+void sNPartyData_free(sNPartyData& cPartyData);
+void sNParty_free(sNParty& cParty);
 
 NAKAMA_NAMESPACE_END

@@ -221,6 +221,48 @@ void NRtClient::onTransportMessage(const NBytes & data)
                 assign(event, msg.stream_presence_event());
                 _listener->onStreamPresence(event);
             }
+            else if (msg.has_party())
+            {
+                NParty party;
+                assign(party, msg.party());
+                _listener->onParty(party);
+            }
+            else if (msg.has_party_close())
+            {
+                NPartyClose partyClose;
+                assign(partyClose, msg.party_close());
+                _listener->onPartyClosed(partyClose);
+            }
+            else if (msg.has_party_data())
+            {
+                NPartyData partyData;
+                assign(partyData, msg.party_data());
+                _listener->onPartyData(partyData);
+            }
+            else if (msg.has_party_join_request())
+            {
+                NPartyJoinRequest partyRequest;
+                assign(partyRequest, msg.party_join_request());
+                _listener->onPartyJoinRequest(partyRequest);
+            }
+            else if (msg.has_party_leader())
+            {
+                NPartyLeader partyLeader;
+                assign(partyLeader, msg.party_leader());
+                _listener->onPartyLeader(partyLeader);
+            }
+            else if (msg.has_party_matchmaker_ticket())
+            {
+                NPartyMatchmakerTicket partyTicket;
+                assign(partyTicket, msg.party_matchmaker_ticket());
+                _listener->onPartyMatchmakerTicket(partyTicket);
+            }
+            else if (msg.has_party_presence_event())
+            {
+                NPartyPresenceEvent presenceEvent;
+                assign(presenceEvent, msg.party_presence_event());
+                _listener->onPartyPresence(presenceEvent);
+            }
             else
             {
                 onTransportError("Unknown message received");
@@ -715,6 +757,275 @@ void NRtClient::rpc(const std::string & id, const opt::optional<std::string>& pa
         };
     }
     ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::acceptPartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback, RtErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_party_accept()->set_party_id(partyId);
+    msg.mutable_party_accept()->mutable_presence()->set_user_id(presence.userId);
+    msg.mutable_party_accept()->mutable_presence()->set_persistence(presence.persistence);
+    msg.mutable_party_accept()->mutable_presence()->set_session_id(presence.sessionId);
+    msg.mutable_party_accept()->mutable_presence()->set_username(presence.username);
+
+    RtRequestContext * ctx = createReqContext(msg);
+
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](::nakama::realtime::Envelope& msg)
+        {
+            successCallback();
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::addMatchmakerParty(const std::string& partyId, const std::string& query, int minCount, int maxCount,
+    const NStringMap stringProperties, const NStringDoubleMap numericProperties, std::function<void(const NPartyMatchmakerTicket&)> successCallback, RtErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_party_matchmaker_add()->set_party_id(partyId);
+    msg.mutable_party_matchmaker_add()->set_query(query);
+    msg.mutable_party_matchmaker_add()->set_min_count(minCount);
+    msg.mutable_party_matchmaker_add()->set_max_count(maxCount);
+
+    for (auto it : stringProperties)
+    {
+        (*(msg.mutable_party_matchmaker_add()->mutable_string_properties()))[it.first] = it.second;
+    }
+
+    for (auto it : numericProperties)
+    {
+        (*(msg.mutable_party_matchmaker_add()->mutable_numeric_properties()))[it.first] = it.second;
+    }
+
+    RtRequestContext * ctx = createReqContext(msg);
+
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](::nakama::realtime::Envelope& msg)
+        {
+            NPartyMatchmakerTicket ticket;
+            assign(ticket, msg.party_matchmaker_ticket());
+            successCallback(ticket);
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::closeParty(const std::string& partyId, std::function<void()> successCallback, RtErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_party_close()->set_party_id(partyId);
+
+    RtRequestContext * ctx = createReqContext(msg);
+
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](::nakama::realtime::Envelope& msg)
+        {
+            successCallback();
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::createParty(bool open, int maxSize, std::function<void(const NParty&)> successCallback, RtErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_party_create()->set_open(open);
+    msg.mutable_party_create()->set_max_size(maxSize);
+
+    RtRequestContext * ctx = createReqContext(msg);
+
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](::nakama::realtime::Envelope& msg)
+        {
+            NParty party;
+            assign(party, msg.party());
+            successCallback(party);
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::joinParty(const std::string& partyId, std::function<void()> successCallback, RtErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_party_join()->set_party_id(partyId);
+    RtRequestContext * ctx = createReqContext(msg);
+
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](::nakama::realtime::Envelope& msg)
+        {
+            successCallback();
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::leaveParty(const std::string& partyId, std::function<void()> successCallback, RtErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_party_leave()->set_party_id(partyId);
+
+    RtRequestContext * ctx = createReqContext(msg);
+
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](::nakama::realtime::Envelope& msg)
+        {
+            successCallback();
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::listPartyJoinRequests(const std::string& partyId, std::function<void(const NPartyJoinRequest&)> successCallback, RtErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_party_join_request_list()->set_party_id(partyId);
+
+    RtRequestContext * ctx = createReqContext(msg);
+
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](::nakama::realtime::Envelope& msg)
+        {
+            NPartyJoinRequest joinRequest;
+            assign(joinRequest, msg.party_join_request());
+            successCallback(joinRequest);
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::promotePartyMember(const std::string& partyId, NUserPresence& partyMember, std::function<void()> successCallback, RtErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_party_promote()->set_party_id(partyId);
+
+    msg.mutable_party_promote()->mutable_presence()->set_user_id(partyMember.userId);
+    msg.mutable_party_promote()->mutable_presence()->set_persistence(partyMember.persistence);
+    msg.mutable_party_promote()->mutable_presence()->set_session_id(partyMember.sessionId);
+    msg.mutable_party_promote()->mutable_presence()->set_username(partyMember.username);
+
+    RtRequestContext * ctx = createReqContext(msg);
+
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](::nakama::realtime::Envelope& msg)
+        {
+            successCallback();
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::removeMatchmakerParty(const std::string& ticket, std::function<void()> successCallback, RtErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_matchmaker_remove()->set_ticket(ticket);
+
+    RtRequestContext * ctx = createReqContext(msg);
+
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](::nakama::realtime::Envelope& msg)
+        {
+            successCallback();
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::removePartyMember(const std::string& partyId, NUserPresence& presence, std::function<void()> successCallback, RtErrorCallback errorCallback)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_party_remove()->set_party_id(partyId);
+
+    msg.mutable_party_remove()->mutable_presence()->set_user_id(presence.userId);
+    msg.mutable_party_remove()->mutable_presence()->set_persistence(presence.persistence);
+    msg.mutable_party_remove()->mutable_presence()->set_session_id(presence.sessionId);
+    msg.mutable_party_remove()->mutable_presence()->set_username(presence.username);
+
+    RtRequestContext * ctx = createReqContext(msg);
+
+    if (successCallback)
+    {
+        ctx->successCallback = [successCallback](::nakama::realtime::Envelope& msg)
+        {
+            successCallback();
+        };
+    }
+    ctx->errorCallback = errorCallback;
+
+    send(msg);
+}
+
+void NRtClient::sendPartyData(const std::string& partyId, long opCode, NBytes& data)
+{
+    NLOG_INFO("...");
+
+    ::nakama::realtime::Envelope msg;
+
+    msg.mutable_party_data_send()->set_party_id(partyId);
+    msg.mutable_party_data_send()->set_op_code(opCode);
+    msg.mutable_party_data_send()->set_data(data);
+
+    RtRequestContext * ctx = createReqContext(msg);
 
     send(msg);
 }
