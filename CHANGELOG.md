@@ -4,6 +4,14 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [2.5.0] - [2021-07-29]
+
+### Added
+- Added realtime parties support.
+
+### Fixed
+- Fixed assignment of cursor in listing of storage objects.
+
 ## [2.4.1] - [2021-01-16]
 ### Fixed
 - fix join group chat by correcting NChannelType enum values
