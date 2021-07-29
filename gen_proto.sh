@@ -16,7 +16,13 @@
 
 shopt -s extglob
 
-### TODO entire platform specific protoc version depending on host machine.
+# Note, you should replace the protoc invocation with the appropriate one for your platform:
+
+#./protoc-3.14.0-linux-x86_64/bin/protoc
+#./protoc-3.14.0-osx-x86_64/bin/protoc
+#./protoc-3.14.0-win64/bin/protoc
+
+
 ./protoc-3.14.0-win64/bin/protoc -Iproto --cpp_out=./src/api \
 ./proto/github.com/heroiclabs/nakama-common/api/api.proto \
 ./proto/github.com/heroiclabs/nakama-common/rtapi/realtime.proto \
