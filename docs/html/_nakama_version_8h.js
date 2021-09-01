@@ -1,4 +1,4 @@
 var _nakama_version_8h =
 [
-    [ "getNakamaSdkVersion", "_nakama_version_8h.html#a5a4503827e834c08a8278e45df1cbd30", null ]
+    [ "getNakamaSdkVersion", "_nakama_version_8h.html#aa168842bb6f02a413d86363f91fba709", null ]
 ];

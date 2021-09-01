@@ -603,15 +603,18 @@ You can find the C++ Client example [here](https://github.com/heroiclabs/nakama-
 
 Please follow [README-C](README-C.md)
 
-## Generating Docs
+## Generate Docs
 
-Prerequisites: `doxygen`
+API docs are generated with Doxygen and deployed to GitHub pages.
 
-Generate docs:
+When changing the API comments, rerun Doxygen and commit the changes in `docs/*`.
 
-```bash
-cd docs
-doxygen Doxyfile
+To run Doxygen:
+
+```
+brew install doxygen
+cd docs/
+doxygen
 ```
 
 ## License
