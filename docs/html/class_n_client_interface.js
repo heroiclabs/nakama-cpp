@@ -23,7 +23,7 @@ var class_n_client_interface =
     [ "demoteGroupUsers", "class_n_client_interface.html#ae47853b6290e31fc149454c6307aeb62", null ],
     [ "disconnect", "class_n_client_interface.html#a3165805b05d106591e29a82c6841baad", null ],
     [ "getAccount", "class_n_client_interface.html#a30c2295052e18912547cc9cbca35497f", null ],
-    [ "getUserData", "class_n_client_interface.html#a7ed4f0e17678f46a807c10f006733fb8", null ],
+    [ "getUserData", "class_n_client_interface.html#a85d5670606f80ba486683719960b429d", null ],
     [ "getUsers", "class_n_client_interface.html#a71b00f3374ad78e4cf00daa38839b74a", null ],
     [ "importFacebookFriends", "class_n_client_interface.html#aa6d8bfea1cf897df33cfd7251daf0ba1", null ],
     [ "joinGroup", "class_n_client_interface.html#a61ff3293b5c3967e5fa0f457d8804fa7", null ],

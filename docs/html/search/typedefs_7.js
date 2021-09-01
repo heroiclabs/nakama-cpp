@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['statuspresencecallback',['StatusPresenceCallback',['../class_nakama_1_1_n_rt_default_client_listener.html#a287f15aa7625ccfd816e51d96d01dcd1',1,'Nakama::NRtDefaultClientListener']]],
-  ['streamdatacallback',['StreamDataCallback',['../class_nakama_1_1_n_rt_default_client_listener.html#a5e6dec7dec4d24bf7aaa8091ab2d04e1',1,'Nakama::NRtDefaultClientListener']]],
-  ['streampresencecallback',['StreamPresenceCallback',['../class_nakama_1_1_n_rt_default_client_listener.html#a5db4b1350be4c033e12f58cb2adc9538',1,'Nakama::NRtDefaultClientListener']]]
+  ['statuspresencecallback_0',['StatusPresenceCallback',['../class_n_rt_default_client_listener.html#a3d181dc11fe5b10ce7064a1c0e7ebb63',1,'NRtDefaultClientListener']]],
+  ['streamdatacallback_1',['StreamDataCallback',['../class_n_rt_default_client_listener.html#a7b9083b9fb6fa25af214b04db43028f1',1,'NRtDefaultClientListener']]],
+  ['streampresencecallback_2',['StreamPresenceCallback',['../class_n_rt_default_client_listener.html#a65ea869ec8681f8311f9668f1e7478fd',1,'NRtDefaultClientListener']]]
 ];

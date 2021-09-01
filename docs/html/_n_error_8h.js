@@ -2,7 +2,7 @@ var _n_error_8h =
 [
     [ "NError", "struct_n_error.html", "struct_n_error" ],
     [ "toString", "_n_error_8h.html#a1acaa3a17646a6ecc417c1feae01a3fe", null ],
-    [ "toString", "_n_error_8h.html#a29884cc430af6176c21e0388daa4c354", null ],
+    [ "toString", "_n_error_8h.html#a8e88002303e283fca9869a71fa8016af", null ],
     [ "AlreadyExists", "_n_error_8h.html#ae4bdc1a54131de1240c10218da6afa9a", null ],
     [ "ConnectionError", "_n_error_8h.html#a3eb2ebd912cc5460d23e45f7188a0a86", null ],
     [ "ErrorCode", "_n_error_8h.html#aa342c0aeed428aeb7236a5637f7aad9a", null ],
