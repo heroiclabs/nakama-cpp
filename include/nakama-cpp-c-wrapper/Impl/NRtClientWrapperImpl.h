@@ -288,13 +288,13 @@ NAKAMA_NAMESPACE_BEGIN
             ::NRtClient_setMatchDataCallback(_cClient, &NRtClientWrapper::matchDataCallback);
             ::NRtClient_setMatchPresenceCallback(_cClient, &NRtClientWrapper::matchPresenceCallback);
             ::NRtClient_setNotificationsCallback(_cClient, &NRtClientWrapper::notificationsCallback);
-        	::NRtClient_setPartyCallback(_cClient, &NRtClientWrapper::partyCallback);
-        	::NRtClient_setPartyCloseCallback(_cClient, &NRtClientWrapper::partyClosedCallback);
+            ::NRtClient_setPartyCallback(_cClient, &NRtClientWrapper::partyCallback);
+            ::NRtClient_setPartyCloseCallback(_cClient, &NRtClientWrapper::partyClosedCallback);
             ::NRtClient_setStatusPresenceCallback(_cClient, &NRtClientWrapper::statusPresenceCallback);
-        	::NRtClient_setPartyJoinRequestCallback(_cClient, &NRtClientWrapper::partyJoinRequestCallback);
-        	::NRtClient_setPartyLeaderCallback(_cClient, &NRtClientWrapper::partyLeaderRequestCallback);
-        	::NRtClient_setPartyMatchmakerTicketCallback(_cClient, &NRtClientWrapper::partyMatchmakerTicketCallback);
-        	::NRtClient_setPartyPresenceCallback(_cClient, &NRtClientWrapper::partyPresenceCallback);
+            ::NRtClient_setPartyJoinRequestCallback(_cClient, &NRtClientWrapper::partyJoinRequestCallback);
+            ::NRtClient_setPartyLeaderCallback(_cClient, &NRtClientWrapper::partyLeaderRequestCallback);
+            ::NRtClient_setPartyMatchmakerTicketCallback(_cClient, &NRtClientWrapper::partyMatchmakerTicketCallback)
+	    ::NRtClient_setPartyPresenceCallback(_cClient, &NRtClientWrapper::partyPresenceCallback);
             ::NRtClient_setStreamPresenceCallback(_cClient, &NRtClientWrapper::streamPresenceCallback);
             ::NRtClient_setStreamDataCallback(_cClient, &NRtClientWrapper::streamDataCallback);
         }
