@@ -800,6 +800,11 @@ void assign(sNStatus& cStatus, const Nakama::NStatus& status)
     assign(cStatus.presences, cStatus.presencesCount, status.presences);
 }
 
+void assign(sNPartyClose& cPartyClose, const Nakama::NPartyClose& partyCloseEvent)
+{
+    cPartyClose.id = partyCloseEvent.id.c_str();
+}
+
 void assign(sNParty& cParty, const Nakama::NParty& party)
 {
     cParty.id = party.id.c_str();

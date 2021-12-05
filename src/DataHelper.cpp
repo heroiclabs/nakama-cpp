@@ -482,7 +482,7 @@ void assign(NPartyJoinRequest& partyJoinRequest, const ::nakama::realtime::Party
     assign(partyJoinRequest.presences, data.presences());
 }
 
-void assign(NPartyClose & partyClose,  const::nakama::realtime::PartyClose & data)
+void assign(NPartyClose& partyClose,  const::nakama::realtime::PartyClose & data)
 {
     assign(partyClose.id, data.party_id());
 }

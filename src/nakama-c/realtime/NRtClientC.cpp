@@ -912,15 +912,17 @@ void NRtClient_setPartyCallback(NRtClient client, void (*callback)(NRtClient, co
         listener->setPartyCallback(nullptr);
 }
 
-void NRtClient_setPartyCloseCallback(NRtClient client, void (*callback)(NRtClient))
+void NRtClient_setPartyCloseCallback(NRtClient client, void (*callback)(NRtClient, const sNPartyClose* partyClose))
 {
     auto listener = Nakama::getRtClientListener(client);
 
     if (callback)
     {
-        listener->setPartyCloseCallback([client, callback](const Nakama::NPartyClose& party)
+        listener->setPartyCloseCallback([client, callback](const Nakama::NPartyClose& partyClose)
         {
-            callback(client);
+            sNPartyClose cParty;
+            assign(cParty, partyClose);
+            callback(client, &cParty);
         });
     }
     else
