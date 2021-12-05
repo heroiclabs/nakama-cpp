@@ -163,6 +163,7 @@ void assign(sNStatusPresenceEvent& cEvent, const Nakama::NStatusPresenceEvent& e
 void assign(sNStream& cStream, const Nakama::NStream& stream);
 void assign(sNStreamPresenceEvent& cEvent, const Nakama::NStreamPresenceEvent& event);
 void assign(sNStreamData& cData, const Nakama::NStreamData& data);
+void assign(sNPartyClose& cPartyClose, const Nakama::NPartyClose& partyClose);
 void assign(sNParty& cParty, const Nakama::NParty& party);
 void assign(sNPartyPresenceEvent& cEvent, const Nakama::NPartyPresenceEvent& event);
 void assign(sNPartyData& cData, const Nakama::NPartyData& partyData);

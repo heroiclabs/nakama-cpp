@@ -293,8 +293,8 @@ NAKAMA_NAMESPACE_BEGIN
             ::NRtClient_setStatusPresenceCallback(_cClient, &NRtClientWrapper::statusPresenceCallback);
             ::NRtClient_setPartyJoinRequestCallback(_cClient, &NRtClientWrapper::partyJoinRequestCallback);
             ::NRtClient_setPartyLeaderCallback(_cClient, &NRtClientWrapper::partyLeaderRequestCallback);
-            ::NRtClient_setPartyMatchmakerTicketCallback(_cClient, &NRtClientWrapper::partyMatchmakerTicketCallback)
-	    ::NRtClient_setPartyPresenceCallback(_cClient, &NRtClientWrapper::partyPresenceCallback);
+            ::NRtClient_setPartyMatchmakerTicketCallback(_cClient, &NRtClientWrapper::partyMatchmakerTicketCallback);
+            ::NRtClient_setPartyPresenceCallback(_cClient, &NRtClientWrapper::partyPresenceCallback);
             ::NRtClient_setStreamPresenceCallback(_cClient, &NRtClientWrapper::streamPresenceCallback);
             ::NRtClient_setStreamDataCallback(_cClient, &NRtClientWrapper::streamDataCallback);
         }
