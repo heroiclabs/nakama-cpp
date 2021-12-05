@@ -582,7 +582,7 @@ extern "C" {
     /**
      * Called when either the user's party closes or the user is removed from the party.
      */
-    NAKAMA_API void NRtClient_setPartyCloseCallback(NRtClient client, void (*callback)(NRtClient));
+    NAKAMA_API void NRtClient_setPartyCloseCallback(NRtClient client, void (*callback)(NRtClient, const sNPartyClose* partyClose));
 
     /**
      * Called when the user receives custom party data.

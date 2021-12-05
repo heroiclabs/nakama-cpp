@@ -732,6 +732,12 @@ void assign(NStatusPresenceEvent& presence, const sNStatusPresenceEvent* cPresen
     assign(presence.leaves, cPresence->leaves, cPresence->leavesCount);
 }
 
+void assign(NPartyPresenceEvent& presence, const sNPartyPresenceEvent* partyPresence)
+{
+	assign(presence.joins, partyPresence->joins, partyPresence->joinsCount);
+	assign(presence.leaves, partyPresence->leaves, partyPresence->leavesCount);
+}
+
 void assign(NStream& stream, const sNStream* cStream)
 {
     stream.mode = cStream->mode;
