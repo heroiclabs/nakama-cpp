@@ -1149,7 +1149,7 @@ NAKAMA_NAMESPACE_BEGIN
                 &NRtClientWrapper::reqErrorStatic);
         }
 
-        void removeMatchmakerParty(const std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
+        void removeMatchmakerParty(const std::string& partyId, const std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr)
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
 
@@ -1162,6 +1162,7 @@ NAKAMA_NAMESPACE_BEGIN
 
             ::NRtClient_removeMatchmakerParty(
                 _cClient,
+                partyId.c_str(),
                 ticket.c_str(),
                 reqId,
                 &NRtClientWrapper::reqOkEmptyStatic,

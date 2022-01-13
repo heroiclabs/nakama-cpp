@@ -660,12 +660,14 @@ void NRtClient_promotePartyMember(
 
 void NRtClient_removeMatchmakerParty(
     NRtClient client,
+    const char* partyId,
     const char* ticket,
     NRtClientReqData reqData,
     void (*successCallback)(NRtClient, NRtClientReqData),  // optional, pass NULL,
     NRtClientErrorCallback errorCallback)
 {
     getCppRtClient(client)->removeMatchmakerParty(
+        partyId,
         ticket,
         [client, successCallback, reqData]()
         {

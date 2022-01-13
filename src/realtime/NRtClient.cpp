@@ -966,13 +966,14 @@ void NRtClient::promotePartyMember(const std::string& partyId, NUserPresence& pa
     send(msg);
 }
 
-void NRtClient::removeMatchmakerParty(const std::string& ticket, std::function<void()> successCallback, RtErrorCallback errorCallback)
+void NRtClient::removeMatchmakerParty(const std::string& partyId, const std::string& ticket, std::function<void()> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
     ::nakama::realtime::Envelope msg;
 
-    msg.mutable_matchmaker_remove()->set_ticket(ticket);
+    msg.mutable_party_matchmaker_remove()->set_party_id(partyId);
+    msg.mutable_party_matchmaker_remove()->set_ticket(ticket);
 
     RtRequestContext * ctx = createReqContext(msg);
 
