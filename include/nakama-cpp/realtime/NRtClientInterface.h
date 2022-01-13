@@ -391,7 +391,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param partyId Party ID.
          * @param ticket The ticket to cancel.
          */
-        virtual void removeMatchmakerParty(const std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual void removeMatchmakerParty(const std::string& partyId, const std::string& ticket, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
          * Kick a party member, or decline a request to join.
