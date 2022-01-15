@@ -87,6 +87,7 @@ void test_tournament()
         rapidjson::Document document;
         document.SetObject();
 
+        document.AddMember("authoritative", true, document.GetAllocator());
         document.AddMember("sort_order", "desc", document.GetAllocator());
         document.AddMember("operator", operator_, document.GetAllocator());
         document.AddMember("duration", duration, document.GetAllocator());
