@@ -54,8 +54,8 @@ def copy_protobuf_lib():
     copy_file(BUILD_DIR + '/third_party/grpc/third_party/protobuf/libprotobuf.a', release_libs_path)
 
 def copy_ssl_lib():
-    copy_file(BUILD_DIR + '/third_party/grpc/third_party/boringssl/crypto/libcrypto.a', release_libs_path)
-    copy_file(BUILD_DIR + '/third_party/grpc/third_party/boringssl/ssl/libssl.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/third_party/boringssl-with-bazel/libcrypto.a', release_libs_path)
+    copy_file(BUILD_DIR + '/third_party/grpc/third_party/boringssl-with-bazel/libssl.a', release_libs_path)
 
 def copy_grpc_lib():
     copy_file(BUILD_DIR + '/third_party/grpc/libaddress_sorting.a', release_libs_path)
