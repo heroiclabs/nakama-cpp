@@ -13,17 +13,25 @@ The development team use these steps to build and upload a release.
 2. Update version in:
 
 * `src/Nakama.cpp`
-* `src/CMakeLists.txt`
 * `docs/Doxyfile`
 
 3. Build and commit.
 
    ```
-   git add Nakama.cpp CHANGELOG.md CMakeLists.txt Doxyfile
-   git commit -m "Nakama C++ x.x.x release."
+   git add Nakama.cpp CHANGELOG.md Doxyfile
+   git commit -m "x.x.x release."
    ```
 
-4. Tag the release.
+4. Update docs
+
+   ```
+   cd docs/
+   doxygen
+   ```
+
+   Commit updated docs.
+
+5. Tag the release.
 
    __Note__ In source control good semver suggests a `"v"` prefix on a version. It helps group release tags.
 
@@ -32,37 +40,41 @@ The development team use these steps to build and upload a release.
    git push origin v2.0.0
    ```
 
-5. Prepare release.
+6. Copy libs.
 
-Copy `include` to `release/nakama-cpp-sdk`.
+   Copy built static libs of all platfroms to `release/libs`.
 
-Copy `third_party/nonstd` to `release/nakama-cpp-sdk/include`.
+   Copy built shared libs of all platfroms to `release/shared-libs`.
 
-Copy `LICENSE` to `release/nakama-cpp-sdk/LICENSE`.
+7. Make release archives.
 
-Copy `README.md` to `release/nakama-cpp-sdk/README.md`.
+   ```
+   cd release/
+   ./release.py
+   ```
 
-Release folder structure:
-```
-nakama-cpp-sdk/
-├── include/
-│   ├── nakama-cpp/
-│   └── nonstd/
-├── libs/
-├── shared-libs/
-├── nakama-cpp-android/
-├── CMakeLists.txt
-├── LICENSE
-├── CHANGELOG.md
-└── README.md
-```
+   Release folder structure:
 
-6. Make archive from `nakama-cpp-sdk` folder and name it `nakama-cpp-sdk_x.x.x.zip`
+   ```
+   nakama-cpp-sdk/
+   ├── include/
+   │   ├── nakama-c/
+   │   ├── nakama-cpp/
+   │   ├── nakama-cpp-c-wrapper/
+   │   └── nonstd/
+   ├── libs/
+   ├── shared-libs/
+   ├── nakama-cpp-android/
+   ├── CMakeLists.txt
+   ├── LICENSE
+   ├── CHANGELOG.md
+   └── README.md
+   ```
 
-7. Login and create a [new draft release](https://github.com/heroiclabs/nakama-cpp/releases/new) on GitHub.
+8. Login and create a [new draft release](https://github.com/heroiclabs/nakama-cpp/releases/new) on GitHub.
 
-8. Repeat the changelog in the release description.
+9. Repeat the changelog in the release description.
 
-9. Attach `nakama-cpp-sdk_x.x.x.zip`
+10. Attach release archives produced by `release.py` script.
 
-10. Publish the release.
+11. Publish the release 🎉

@@ -84,6 +84,11 @@ def release_platform(platform):
     remove_file(out_arch)
     archive7zip(sdk_path, out_arch, ignore_list)
 
+def replace_folder(src_folder, dest_folder):
+    if os.path.exists(dest_folder):
+        shutil.rmtree(dest_folder)
+    shutil.copytree(src_folder, dest_folder)
+
 def detect_sdk_version():
     with open('../src/Nakama.cpp', 'r') as f:
         while True:
@@ -98,7 +103,15 @@ def detect_sdk_version():
 
 version = detect_sdk_version()
 
-print('releasing sdk version:', version)
+print('sdk version:', version)
+
+print('copying...')
+replace_folder('../include', sdk_path + '/include')
+shutil.copytree('../third_party/nonstd', sdk_path + '/include/nonstd')
+shutil.copy('../LICENSE', sdk_path)
+shutil.copy('../README.md', sdk_path)
+shutil.copy('../README-C.md', sdk_path)
+shutil.copy('../CHANGELOG.md', sdk_path)
 
 for platform in platforms:
     move_all_to_temp()
