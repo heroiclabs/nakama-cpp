@@ -4,6 +4,12 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [2.5.1] - [2022-01-16]
+
+### Fixed
+- Fixed Party & Matchmaking callbacks.
+- Fixed removeMatchmakerParty API.
+
 ### [2.5.0] - [2021-07-29]
 
 ### Added
