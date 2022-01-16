@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Nakama C++ Client SDK<span id="projectnumber">&#160;2.5.0</span>
+   <div id="projectname">Nakama C++ Client SDK<span id="projectnumber">&#160;2.5.1</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Nakama C/C++ Client SDK </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md__Users_sean_Documents_GitHub_nakama_cpp_README"></a></p>
+<div class="textblock"><p ><a class="anchor" id="md__Users_dimo4eg_dev_Nakama_nakama_cpp_README"></a></p>
 <p ><a href="https://github.com/heroiclabs/nakama-cpp/releases/latest"><img src="https://img.shields.io/github/release/heroiclabs/nakama-cpp.svg" alt="GitHub release" style="pointer-events: none;" class="inline"/></a> <a href="https://forum.heroiclabs.com"><img src="https://img.shields.io/badge/forum-online-success.svg" alt="Forum" style="pointer-events: none;" class="inline"/></a> <a href="https://heroiclabs.com/docs/cpp-client-guide"><img src="https://img.shields.io/badge/client_guide-online-brightgreen" alt="Client guide" class="inline"/></a> <a href="https://heroiclabs.github.io/nakama-cpp/html/index.html"><img src="https://img.shields.io/badge/reference-online-brightgreen" alt="Reference" class="inline"/></a> <a href="https://github.com/heroiclabs/nakama-cpp/releases/"><img src="https://img.shields.io/github/downloads/heroiclabs/nakama-cpp/total.svg" alt="Github all releases" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/heroiclabs/nakama/blob/master/LICENSE"><img src="https://img.shields.io/github/license/heroiclabs/nakama.svg" alt="License" style="pointer-events: none;" class="inline"/></a></p>
 <p ><a href="https://github.com/heroiclabs/nakama-cpp/actions?query=workflow%3A%22Ubuntu+18.04%22"><img src="https://github.com/heroiclabs/nakama-cpp/workflows/Ubuntu%2018.04/badge.svg" alt="Build & tests on Ubuntu 18.04" style="pointer-events: none;" class="inline"/></a></p>
 <blockquote class="doxtable">
@@ -458,11 +458,13 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <p >You can find the C++ Client example <a href="https://github.com/heroiclabs/nakama-cpp/tree/master/examples/nakama-cmake-client-example">here</a></p>
 <h1>C language support</h1>
 <p >Please follow README-C</p>
-<h1>Generating Docs</h1>
-<p >Prerequisites: <code>doxygen</code></p>
-<p >Generate docs:</p>
-<div class="fragment"><div class="line">cd docs</div>
-<div class="line">doxygen Doxyfile</div>
+<h1>Generate Docs</h1>
+<p >API docs are generated with Doxygen and deployed to GitHub pages.</p>
+<p >When changing the API comments, rerun Doxygen and commit the changes in <code>docs/*</code>.</p>
+<p >To run Doxygen:</p>
+<div class="fragment"><div class="line">brew install doxygen</div>
+<div class="line">cd docs/</div>
+<div class="line">doxygen</div>
 </div><!-- fragment --><h1>License</h1>
 <p >This project is licensed under the <a href="https://github.com/heroiclabs/nakama-dotnet/blob/master/LICENSE">Apache-2 License</a>.</p>
 <h1>Special Thanks</h1>

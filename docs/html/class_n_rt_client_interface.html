@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="nakama_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Nakama C++ Client SDK<span id="projectnumber">&#160;2.5.0</span>
+   <div id="projectname">Nakama C++ Client SDK<span id="projectnumber">&#160;2.5.1</span>
    </div>
    <div id="projectbrief">Client for Nakama Server</div>
   </td>
@@ -161,8 +161,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac223feb752fcdaf2d5c1cbd5543d669a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a496266fe956063e2af2ba3d3c6b39505"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_rt_client_interface.html#a496266fe956063e2af2ba3d3c6b39505">promotePartyMember</a> (const std::string &amp;partyId, <a class="el" href="struct_n_user_presence.html">NUserPresence</a> &amp;partyMember, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="_n_rt_client_interface_8h.html#a89a3d79f0267889f3e6d4b91c8764286">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a496266fe956063e2af2ba3d3c6b39505"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e4a5934cadf9cb7793797e3925388e2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_rt_client_interface.html#a6e4a5934cadf9cb7793797e3925388e2">removeMatchmakerParty</a> (const std::string &amp;ticket, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="_n_rt_client_interface_8h.html#a89a3d79f0267889f3e6d4b91c8764286">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
-<tr class="separator:a6e4a5934cadf9cb7793797e3925388e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accc80b257efa190a770e7ada2605af73"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_rt_client_interface.html#accc80b257efa190a770e7ada2605af73">removeMatchmakerParty</a> (const std::string &amp;partyId, const std::string &amp;ticket, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="_n_rt_client_interface_8h.html#a89a3d79f0267889f3e6d4b91c8764286">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
+<tr class="separator:accc80b257efa190a770e7ada2605af73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44fcd6ad237f01f7babdc7f2800bdda7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_rt_client_interface.html#a44fcd6ad237f01f7babdc7f2800bdda7">removePartyMember</a> (const std::string &amp;partyId, <a class="el" href="struct_n_user_presence.html">NUserPresence</a> &amp;presence, std::function&lt; void()&gt; successCallback=nullptr, <a class="el" href="_n_rt_client_interface_8h.html#a89a3d79f0267889f3e6d4b91c8764286">RtErrorCallback</a> errorCallback=nullptr)=0</td></tr>
 <tr class="separator:a44fcd6ad237f01f7babdc7f2800bdda7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a222b0fa8050f09687e0e1b7e06f43c1b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_rt_client_interface.html#a222b0fa8050f09687e0e1b7e06f43c1b">sendPartyData</a> (const std::string &amp;partyId, long opCode, <a class="el" href="_n_types_8h.html#a43d571a6bf27ecaaa7f6cdf21add337a">NBytes</a> &amp;data)=0</td></tr>
@@ -1334,8 +1334,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6e4a5934cadf9cb7793797e3925388e2" name="a6e4a5934cadf9cb7793797e3925388e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e4a5934cadf9cb7793797e3925388e2">&#9670;&nbsp;</a></span>removeMatchmakerParty()</h2>
+<a id="accc80b257efa190a770e7ada2605af73" name="accc80b257efa190a770e7ada2605af73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accc80b257efa190a770e7ada2605af73">&#9670;&nbsp;</a></span>removeMatchmakerParty()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1346,6 +1346,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void NRtClientInterface::removeMatchmakerParty </td>
           <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>partyId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>ticket</em>, </td>
         </tr>

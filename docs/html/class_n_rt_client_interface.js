@@ -24,7 +24,7 @@ var class_n_rt_client_interface =
     [ "promotePartyMember", "class_n_rt_client_interface.html#a496266fe956063e2af2ba3d3c6b39505", null ],
     [ "removeChatMessage", "class_n_rt_client_interface.html#ae2d0cc4f310ba133ff6a5771e008c22e", null ],
     [ "removeMatchmaker", "class_n_rt_client_interface.html#a1de69eeaa0dfab3f8933b768ffe3641e", null ],
-    [ "removeMatchmakerParty", "class_n_rt_client_interface.html#a6e4a5934cadf9cb7793797e3925388e2", null ],
+    [ "removeMatchmakerParty", "class_n_rt_client_interface.html#accc80b257efa190a770e7ada2605af73", null ],
     [ "removePartyMember", "class_n_rt_client_interface.html#a44fcd6ad237f01f7babdc7f2800bdda7", null ],
     [ "rpc", "class_n_rt_client_interface.html#a434b8e8c5d421b23d9c051c4b6c5cb62", null ],
     [ "sendMatchData", "class_n_rt_client_interface.html#a54c5380bc1a5ad72ab5e162c4f4f814e", null ],
