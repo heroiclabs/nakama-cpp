@@ -38,7 +38,6 @@ args = parser.parse_args()
 BUILD_MODE = 'Debug'
 ARCH = 'x64'
 TOOLSET = 'v142'
-CXX_STANDARD = ''
 DLL = args.dll
 
 if args.mode:
@@ -143,9 +142,6 @@ cmake_cmd = ['cmake',
   '-T', TOOLSET,
   '-DCMAKE_SYSTEM_VERSION=' + SYSTEM_VERSION
 ]
-
-if CXX_STANDARD != '':
-    cmake_cmd.extend(['-DCMAKE_CXX_STANDARD=' + CXX_STANDARD])
 
 cmake_cmd.extend(get_common_cmake_parameters(DLL))
 

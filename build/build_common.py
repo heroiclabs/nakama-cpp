@@ -24,6 +24,7 @@ USE_CPPREST = False
 BUILD_MODE = 'Release'
 BUILD_DIR = ''
 TARGET_PLATFORM = '' # mac, ios, android, windows, linux
+CXX_STANDARD = ''
 
 def init_common(build_common_path, target_platform):
     if build_common_path.find(' ') >= 0:
@@ -59,7 +60,7 @@ def init_common(build_common_path, target_platform):
         copy_folder(os.path.join(src_include, 'nakama-cpp-c-wrapper'), dest_include)
 
 def get_common_cmake_parameters(is_shared):
-    return [
+    cmake_cmd = [
       '-DCMAKE_BUILD_TYPE=' + BUILD_MODE,
       '-DNAKAMA_SHARED_LIBRARY=' + bool2cmake(is_shared),
       '-DBUILD_REST_CLIENT=' + bool2cmake(BUILD_REST_CLIENT),
@@ -67,7 +68,10 @@ def get_common_cmake_parameters(is_shared):
       '-DBUILD_HTTP_CPPREST=' + bool2cmake(BUILD_HTTP_CPPREST),
       '-DBUILD_WEBSOCKET_CPPREST=' + bool2cmake(BUILD_WEBSOCKET_CPPREST),
       '-DBUILD_C_API=' + bool2cmake(BUILD_C_API)
-    ]
+    ]    
+    if CXX_STANDARD != '':
+        cmake_cmd.extend(['-DCMAKE_CXX_STANDARD=' + CXX_STANDARD])
+    return cmake_cmd
 
 def call(command, shell=False):
     print('calling:', str(command))
