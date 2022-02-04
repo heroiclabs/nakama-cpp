@@ -36,7 +36,7 @@ parser.add_argument(      '--dll',  help='build DLL', action='store_true')
 args = parser.parse_args()
 
 BUILD_MODE = 'Debug'
-ARCH = 'x86'
+ARCH = 'x64'
 TOOLSET = 'v142'
 CXX_STANDARD = ''
 DLL = args.dll
