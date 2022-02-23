@@ -846,7 +846,7 @@ NAKAMA_NAMESPACE_BEGIN
                 if (errorCallback) _reqErrorCallbacks.emplace(reqId, errorCallback);
             }
 
-            ::NRtClient_leaveChat(_cClient,
+            ::NRtClient_updateStatus(_cClient,
                 status.c_str(),
                 reqId,
                 &NRtClientWrapper::reqOkEmptyStatic,
