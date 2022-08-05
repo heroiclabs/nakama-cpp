@@ -555,11 +555,13 @@ NAKAMA_NAMESPACE_BEGIN
         }
 
         void createMatch(
+            const std::string& name,
             std::function<void(const NMatch&)> successCallback,
             RtErrorCallback errorCallback = nullptr
         ) override
         {
             NRtClientReqData reqId = INVALID_REQ_ID;
+            
 
             if (successCallback || errorCallback)
             {
@@ -569,6 +571,7 @@ NAKAMA_NAMESPACE_BEGIN
             }
 
             ::NRtClient_createMatch(_cClient,
+                name.c_str(),
                 reqId,
                 &NRtClientWrapper::reqOkMatchStatic,
                 &NRtClientWrapper::reqErrorStatic);
@@ -672,6 +675,7 @@ NAKAMA_NAMESPACE_BEGIN
             const opt::optional<std::string>& query = opt::nullopt,
             const NStringMap& stringProperties = {},
             const NStringDoubleMap& numericProperties = {},
+            const opt::optional <int32_t>& countMultiple = opt::nullopt,
             std::function<void(const NMatchmakerTicket&)> successCallback = nullptr,
             RtErrorCallback errorCallback = nullptr
         ) override
@@ -694,6 +698,7 @@ NAKAMA_NAMESPACE_BEGIN
                 query ? query.value().c_str() : nullptr,
                 cStringProperties,
                 cNumericProperties,
+                countMultiple ? *countMultiple : 0,
                 reqId,
                 &NRtClientWrapper::reqOkMatchmakerTicketStatic,
                 &NRtClientWrapper::reqErrorStatic);

@@ -42,6 +42,8 @@ typedef struct NAKAMA_API NTournament
     uint32_t duration;             ///< Duration of the tournament in seconds.
     uint32_t startActive;          ///< The UNIX time when the tournament start being active. A computed value.
     const char* metadata;          ///< Additional information stored as a JSON object.
+    uint32_t prevReset;            ///< The UNIX time when the tournament was last reset. A computed value.
+    NOperator operatorType;        ///< Operator.
 } sNTournament;
 
 #ifdef __cplusplus

@@ -930,6 +930,9 @@ void NClient_listGroups(
     const char* name,
     const int32_t* limit,
     const char* cursor,
+    const char* langTag,
+    const int32_t* members,
+    const bool* open,
     NClientReqData reqData,
     void(*successCallback)(NClient, NClientReqData, const sNGroupList*), NClientErrorCallback errorCallback)
 {
@@ -941,6 +944,9 @@ void NClient_listGroups(
         name,
         limit ? *limit : 0,
         cursor ? cursor : "",
+        langTag ? langTag : "",
+        members ? *members : 0,
+        open ? Nakama::opt::optional<bool>(*open) : Nakama::opt::nullopt,
         [client, reqData, successCallback](const Nakama::NGroupListPtr& groupList)
         {
             if (successCallback)
@@ -1153,6 +1159,7 @@ void NClient_writeLeaderboardRecord(
     int64_t score,
     const int64_t* subscore,
     const char* metadata,
+    eNOperator operatorType,
     NClientReqData reqData,
     void(*successCallback)(NClient, NClientReqData, const sNLeaderboardRecord*), NClientErrorCallback errorCallback)
 {
@@ -1163,6 +1170,7 @@ void NClient_writeLeaderboardRecord(
 
     if (subscore) cppSubscore = *subscore;
     if (metadata) cppMetadata = metadata;
+    Nakama::NOperator cppOperator = (Nakama::NOperator)operatorType;
 
     cppClient->writeLeaderboardRecord(
         cppSession,
@@ -1170,6 +1178,7 @@ void NClient_writeLeaderboardRecord(
         score,
         cppSubscore,
         cppMetadata,
+        cppOperator,
         [client, reqData, successCallback](const Nakama::NLeaderboardRecord& record)
         {
             if (successCallback)
@@ -1189,6 +1198,7 @@ void NClient_writeTournamentRecord(
     int64_t score,
     const int64_t* subscore,
     const char* metadata,
+    eNOperator operatorType,
     NClientReqData reqData,
     void(*successCallback)(NClient, NClientReqData, const sNLeaderboardRecord*), NClientErrorCallback errorCallback)
 {
@@ -1199,6 +1209,7 @@ void NClient_writeTournamentRecord(
 
     if (subscore) cppSubscore = *subscore;
     if (metadata) cppMetadata = metadata;
+    Nakama::NOperator cppOperator = (Nakama::NOperator)operatorType;
 
     cppClient->writeTournamentRecord(
         cppSession,
@@ -1206,6 +1217,7 @@ void NClient_writeTournamentRecord(
         score,
         cppSubscore,
         cppMetadata,
+        cppOperator,
         [client, reqData, successCallback](const Nakama::NLeaderboardRecord& record)
         {
             if (successCallback)

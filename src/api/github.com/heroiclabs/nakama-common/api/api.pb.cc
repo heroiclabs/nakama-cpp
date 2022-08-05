@@ -45,6 +45,7 @@ extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fap
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_Friend_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_Group_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_GroupUserList_GroupUser_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Leaderboard_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_LeaderboardRecord_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Match_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Notification_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
@@ -55,6 +56,7 @@ extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fap
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Tournament_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_User_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_UserGroupList_UserGroup_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ValidatedPurchase_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_WriteLeaderboardRecordRequest_LeaderboardRecordWrite_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_WriteStorageObject_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_WriteTournamentRecordRequest_TournamentRecordWrite_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
@@ -160,6 +162,10 @@ class SessionRefreshRequestDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SessionRefreshRequest> _instance;
 } _SessionRefreshRequest_default_instance_;
+class SessionLogoutRequestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SessionLogoutRequest> _instance;
+} _SessionLogoutRequest_default_instance_;
 class AuthenticateAppleRequestDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AuthenticateAppleRequest> _instance;
@@ -296,6 +302,14 @@ class KickGroupUsersRequestDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<KickGroupUsersRequest> _instance;
 } _KickGroupUsersRequest_default_instance_;
+class LeaderboardDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Leaderboard> _instance;
+} _Leaderboard_default_instance_;
+class LeaderboardListDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<LeaderboardList> _instance;
+} _LeaderboardList_default_instance_;
 class LeaderboardRecordDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<LeaderboardRecord> _instance;
@@ -464,6 +478,30 @@ class UsersDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Users> _instance;
 } _Users_default_instance_;
+class ValidatePurchaseAppleRequestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ValidatePurchaseAppleRequest> _instance;
+} _ValidatePurchaseAppleRequest_default_instance_;
+class ValidatePurchaseGoogleRequestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ValidatePurchaseGoogleRequest> _instance;
+} _ValidatePurchaseGoogleRequest_default_instance_;
+class ValidatePurchaseHuaweiRequestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ValidatePurchaseHuaweiRequest> _instance;
+} _ValidatePurchaseHuaweiRequest_default_instance_;
+class ValidatedPurchaseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ValidatedPurchase> _instance;
+} _ValidatedPurchase_default_instance_;
+class ValidatePurchaseResponseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ValidatePurchaseResponse> _instance;
+} _ValidatePurchaseResponse_default_instance_;
+class PurchaseListDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PurchaseList> _instance;
+} _PurchaseList_default_instance_;
 class WriteLeaderboardRecordRequest_LeaderboardRecordWriteDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<WriteLeaderboardRecordRequest_LeaderboardRecordWrite> _instance;
@@ -1285,6 +1323,34 @@ static void InitDefaultsscc_info_KickGroupUsersRequest_github_2ecom_2fheroiclabs
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_KickGroupUsersRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_KickGroupUsersRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {}};
 
+static void InitDefaultsscc_info_Leaderboard_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_Leaderboard_default_instance_;
+    new (ptr) ::nakama::api::Leaderboard();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Leaderboard_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Leaderboard_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
+      &scc_info_Timestamp_google_2fprotobuf_2ftimestamp_2eproto.base,}};
+
+static void InitDefaultsscc_info_LeaderboardList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_LeaderboardList_default_instance_;
+    new (ptr) ::nakama::api::LeaderboardList();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_LeaderboardList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_LeaderboardList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
+      &scc_info_Leaderboard_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,}};
+
 static void InitDefaultsscc_info_LeaderboardRecord_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -1410,9 +1476,10 @@ static void InitDefaultsscc_info_ListGroupsRequest_github_2ecom_2fheroiclabs_2fn
   }
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ListGroupsRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ListGroupsRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
-      &scc_info_Int32Value_google_2fprotobuf_2fwrappers_2eproto.base,}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ListGroupsRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ListGroupsRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
+      &scc_info_Int32Value_google_2fprotobuf_2fwrappers_2eproto.base,
+      &scc_info_BoolValue_google_2fprotobuf_2fwrappers_2eproto.base,}};
 
 static void InitDefaultsscc_info_ListLeaderboardRecordsAroundOwnerRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1616,6 +1683,20 @@ static void InitDefaultsscc_info_PromoteGroupUsersRequest_github_2ecom_2fheroicl
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PromoteGroupUsersRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PromoteGroupUsersRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {}};
 
+static void InitDefaultsscc_info_PurchaseList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_PurchaseList_default_instance_;
+    new (ptr) ::nakama::api::PurchaseList();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PurchaseList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PurchaseList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
+      &scc_info_ValidatedPurchase_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,}};
+
 static void InitDefaultsscc_info_ReadStorageObjectId_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -1668,6 +1749,19 @@ static void InitDefaultsscc_info_Session_github_2ecom_2fheroiclabs_2fnakama_2dco
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Session_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Session_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {}};
+
+static void InitDefaultsscc_info_SessionLogoutRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_SessionLogoutRequest_default_instance_;
+    new (ptr) ::nakama::api::SessionLogoutRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SessionLogoutRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_SessionLogoutRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {}};
 
 static void InitDefaultsscc_info_SessionRefreshRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1892,6 +1986,76 @@ static void InitDefaultsscc_info_Users_github_2ecom_2fheroiclabs_2fnakama_2dcomm
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Users_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
       &scc_info_User_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,}};
 
+static void InitDefaultsscc_info_ValidatePurchaseAppleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_ValidatePurchaseAppleRequest_default_instance_;
+    new (ptr) ::nakama::api::ValidatePurchaseAppleRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ValidatePurchaseAppleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ValidatePurchaseAppleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
+      &scc_info_BoolValue_google_2fprotobuf_2fwrappers_2eproto.base,}};
+
+static void InitDefaultsscc_info_ValidatePurchaseGoogleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_ValidatePurchaseGoogleRequest_default_instance_;
+    new (ptr) ::nakama::api::ValidatePurchaseGoogleRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ValidatePurchaseGoogleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ValidatePurchaseGoogleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
+      &scc_info_BoolValue_google_2fprotobuf_2fwrappers_2eproto.base,}};
+
+static void InitDefaultsscc_info_ValidatePurchaseHuaweiRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_ValidatePurchaseHuaweiRequest_default_instance_;
+    new (ptr) ::nakama::api::ValidatePurchaseHuaweiRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ValidatePurchaseHuaweiRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ValidatePurchaseHuaweiRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
+      &scc_info_BoolValue_google_2fprotobuf_2fwrappers_2eproto.base,}};
+
+static void InitDefaultsscc_info_ValidatePurchaseResponse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_ValidatePurchaseResponse_default_instance_;
+    new (ptr) ::nakama::api::ValidatePurchaseResponse();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ValidatePurchaseResponse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ValidatePurchaseResponse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
+      &scc_info_ValidatedPurchase_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,}};
+
+static void InitDefaultsscc_info_ValidatedPurchase_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::nakama::api::_ValidatedPurchase_default_instance_;
+    new (ptr) ::nakama::api::ValidatedPurchase();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ValidatedPurchase_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ValidatedPurchase_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {
+      &scc_info_Timestamp_google_2fprotobuf_2ftimestamp_2eproto.base,}};
+
 static void InitDefaultsscc_info_WriteLeaderboardRecordRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -1974,8 +2138,8 @@ static void InitDefaultsscc_info_WriteTournamentRecordRequest_TournamentRecordWr
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_WriteTournamentRecordRequest_TournamentRecordWrite_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_WriteTournamentRecordRequest_TournamentRecordWrite_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto[107];
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto[3];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto[116];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto[6];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto = nullptr;
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -2187,6 +2351,13 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::nakama::api::SessionRefreshRequest, token_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::SessionRefreshRequest, vars_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::SessionLogoutRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::SessionLogoutRequest, token_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::SessionLogoutRequest, refresh_token_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::nakama::api::AuthenticateAppleRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2465,6 +2636,26 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   PROTOBUF_FIELD_OFFSET(::nakama::api::KickGroupUsersRequest, group_id_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::KickGroupUsersRequest, user_ids_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Leaderboard, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Leaderboard, id_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Leaderboard, sort_order_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Leaderboard, operator__),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Leaderboard, prev_reset_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Leaderboard, next_reset_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Leaderboard, metadata_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Leaderboard, create_time_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Leaderboard, authoritative_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::LeaderboardList, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::LeaderboardList, leaderboards_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::LeaderboardList, cursor_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::nakama::api::LeaderboardRecord, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -2535,6 +2726,9 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   PROTOBUF_FIELD_OFFSET(::nakama::api::ListGroupsRequest, name_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::ListGroupsRequest, cursor_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::ListGroupsRequest, limit_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ListGroupsRequest, lang_tag_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ListGroupsRequest, members_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ListGroupsRequest, open_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::nakama::api::ListGroupUsersRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2773,6 +2967,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   PROTOBUF_FIELD_OFFSET(::nakama::api::Tournament, end_time_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::Tournament, duration_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::Tournament, start_active_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Tournament, prev_reset_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::Tournament, operator__),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::nakama::api::TournamentList, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2855,6 +3051,56 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::nakama::api::Users, users_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseAppleRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseAppleRequest, receipt_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseAppleRequest, persist_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseGoogleRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseGoogleRequest, purchase_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseGoogleRequest, persist_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseHuaweiRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseHuaweiRequest, purchase_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseHuaweiRequest, signature_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseHuaweiRequest, persist_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatedPurchase, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatedPurchase, product_id_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatedPurchase, transaction_id_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatedPurchase, store_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatedPurchase, purchase_time_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatedPurchase, create_time_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatedPurchase, update_time_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatedPurchase, provider_response_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatedPurchase, environment_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatedPurchase, seen_before_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::ValidatePurchaseResponse, validated_purchases_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::PurchaseList, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::nakama::api::PurchaseList, validated_purchases_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::PurchaseList, cursor_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::PurchaseList, prev_cursor_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -2862,6 +3108,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   PROTOBUF_FIELD_OFFSET(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite, score_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite, subscore_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite, metadata_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite, operator__),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::nakama::api::WriteLeaderboardRecordRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2894,6 +3141,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   PROTOBUF_FIELD_OFFSET(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite, score_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite, subscore_),
   PROTOBUF_FIELD_OFFSET(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite, metadata_),
+  PROTOBUF_FIELD_OFFSET(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite, operator__),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::nakama::api::WriteTournamentRecordRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2928,88 +3176,97 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 185, -1, sizeof(::nakama::api::AddGroupUsersRequest)},
   { 192, 199, sizeof(::nakama::api::SessionRefreshRequest_VarsEntry_DoNotUse)},
   { 201, -1, sizeof(::nakama::api::SessionRefreshRequest)},
-  { 208, -1, sizeof(::nakama::api::AuthenticateAppleRequest)},
-  { 216, -1, sizeof(::nakama::api::AuthenticateCustomRequest)},
-  { 224, -1, sizeof(::nakama::api::AuthenticateDeviceRequest)},
-  { 232, -1, sizeof(::nakama::api::AuthenticateEmailRequest)},
-  { 240, -1, sizeof(::nakama::api::AuthenticateFacebookRequest)},
-  { 249, -1, sizeof(::nakama::api::AuthenticateFacebookInstantGameRequest)},
-  { 257, -1, sizeof(::nakama::api::AuthenticateGameCenterRequest)},
-  { 265, -1, sizeof(::nakama::api::AuthenticateGoogleRequest)},
-  { 273, -1, sizeof(::nakama::api::AuthenticateSteamRequest)},
-  { 282, -1, sizeof(::nakama::api::BanGroupUsersRequest)},
-  { 289, -1, sizeof(::nakama::api::BlockFriendsRequest)},
-  { 296, -1, sizeof(::nakama::api::ChannelMessage)},
-  { 314, -1, sizeof(::nakama::api::ChannelMessageList)},
-  { 323, -1, sizeof(::nakama::api::CreateGroupRequest)},
-  { 334, -1, sizeof(::nakama::api::DeleteFriendsRequest)},
-  { 341, -1, sizeof(::nakama::api::DeleteGroupRequest)},
-  { 347, -1, sizeof(::nakama::api::DeleteLeaderboardRecordRequest)},
-  { 353, -1, sizeof(::nakama::api::DeleteNotificationsRequest)},
-  { 359, -1, sizeof(::nakama::api::DeleteStorageObjectId)},
-  { 367, -1, sizeof(::nakama::api::DeleteStorageObjectsRequest)},
-  { 373, 380, sizeof(::nakama::api::Event_PropertiesEntry_DoNotUse)},
-  { 382, -1, sizeof(::nakama::api::Event)},
-  { 391, -1, sizeof(::nakama::api::Friend)},
-  { 399, -1, sizeof(::nakama::api::FriendList)},
-  { 406, -1, sizeof(::nakama::api::GetUsersRequest)},
-  { 414, -1, sizeof(::nakama::api::Group)},
-  { 431, -1, sizeof(::nakama::api::GroupList)},
-  { 438, -1, sizeof(::nakama::api::GroupUserList_GroupUser)},
-  { 445, -1, sizeof(::nakama::api::GroupUserList)},
-  { 452, -1, sizeof(::nakama::api::ImportFacebookFriendsRequest)},
-  { 459, -1, sizeof(::nakama::api::ImportSteamFriendsRequest)},
-  { 466, -1, sizeof(::nakama::api::JoinGroupRequest)},
-  { 472, -1, sizeof(::nakama::api::JoinTournamentRequest)},
-  { 478, -1, sizeof(::nakama::api::KickGroupUsersRequest)},
-  { 485, -1, sizeof(::nakama::api::LeaderboardRecord)},
-  { 502, -1, sizeof(::nakama::api::LeaderboardRecordList)},
-  { 511, -1, sizeof(::nakama::api::LeaveGroupRequest)},
-  { 517, -1, sizeof(::nakama::api::LinkFacebookRequest)},
-  { 524, -1, sizeof(::nakama::api::LinkSteamRequest)},
-  { 531, -1, sizeof(::nakama::api::ListChannelMessagesRequest)},
-  { 540, -1, sizeof(::nakama::api::ListFriendsRequest)},
-  { 548, -1, sizeof(::nakama::api::ListGroupsRequest)},
-  { 556, -1, sizeof(::nakama::api::ListGroupUsersRequest)},
-  { 565, -1, sizeof(::nakama::api::ListLeaderboardRecordsAroundOwnerRequest)},
-  { 574, -1, sizeof(::nakama::api::ListLeaderboardRecordsRequest)},
-  { 584, -1, sizeof(::nakama::api::ListMatchesRequest)},
-  { 595, -1, sizeof(::nakama::api::ListNotificationsRequest)},
-  { 602, -1, sizeof(::nakama::api::ListStorageObjectsRequest)},
-  { 611, -1, sizeof(::nakama::api::ListTournamentRecordsAroundOwnerRequest)},
-  { 620, -1, sizeof(::nakama::api::ListTournamentRecordsRequest)},
-  { 630, -1, sizeof(::nakama::api::ListTournamentsRequest)},
-  { 641, -1, sizeof(::nakama::api::ListUserGroupsRequest)},
-  { 650, -1, sizeof(::nakama::api::Match)},
-  { 661, -1, sizeof(::nakama::api::MatchList)},
-  { 667, -1, sizeof(::nakama::api::Notification)},
-  { 679, -1, sizeof(::nakama::api::NotificationList)},
-  { 686, -1, sizeof(::nakama::api::PromoteGroupUsersRequest)},
-  { 693, -1, sizeof(::nakama::api::DemoteGroupUsersRequest)},
-  { 700, -1, sizeof(::nakama::api::ReadStorageObjectId)},
-  { 708, -1, sizeof(::nakama::api::ReadStorageObjectsRequest)},
-  { 714, -1, sizeof(::nakama::api::Rpc)},
-  { 722, -1, sizeof(::nakama::api::Session)},
-  { 730, -1, sizeof(::nakama::api::StorageObject)},
-  { 744, -1, sizeof(::nakama::api::StorageObjectAck)},
-  { 753, -1, sizeof(::nakama::api::StorageObjectAcks)},
-  { 759, -1, sizeof(::nakama::api::StorageObjects)},
-  { 765, -1, sizeof(::nakama::api::StorageObjectList)},
-  { 772, -1, sizeof(::nakama::api::Tournament)},
-  { 794, -1, sizeof(::nakama::api::TournamentList)},
-  { 801, -1, sizeof(::nakama::api::TournamentRecordList)},
-  { 810, -1, sizeof(::nakama::api::UpdateAccountRequest)},
-  { 821, -1, sizeof(::nakama::api::UpdateGroupRequest)},
-  { 832, -1, sizeof(::nakama::api::User)},
-  { 855, -1, sizeof(::nakama::api::UserGroupList_UserGroup)},
-  { 862, -1, sizeof(::nakama::api::UserGroupList)},
-  { 869, -1, sizeof(::nakama::api::Users)},
-  { 875, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite)},
-  { 883, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest)},
-  { 890, -1, sizeof(::nakama::api::WriteStorageObject)},
-  { 901, -1, sizeof(::nakama::api::WriteStorageObjectsRequest)},
-  { 907, -1, sizeof(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite)},
-  { 915, -1, sizeof(::nakama::api::WriteTournamentRecordRequest)},
+  { 208, -1, sizeof(::nakama::api::SessionLogoutRequest)},
+  { 215, -1, sizeof(::nakama::api::AuthenticateAppleRequest)},
+  { 223, -1, sizeof(::nakama::api::AuthenticateCustomRequest)},
+  { 231, -1, sizeof(::nakama::api::AuthenticateDeviceRequest)},
+  { 239, -1, sizeof(::nakama::api::AuthenticateEmailRequest)},
+  { 247, -1, sizeof(::nakama::api::AuthenticateFacebookRequest)},
+  { 256, -1, sizeof(::nakama::api::AuthenticateFacebookInstantGameRequest)},
+  { 264, -1, sizeof(::nakama::api::AuthenticateGameCenterRequest)},
+  { 272, -1, sizeof(::nakama::api::AuthenticateGoogleRequest)},
+  { 280, -1, sizeof(::nakama::api::AuthenticateSteamRequest)},
+  { 289, -1, sizeof(::nakama::api::BanGroupUsersRequest)},
+  { 296, -1, sizeof(::nakama::api::BlockFriendsRequest)},
+  { 303, -1, sizeof(::nakama::api::ChannelMessage)},
+  { 321, -1, sizeof(::nakama::api::ChannelMessageList)},
+  { 330, -1, sizeof(::nakama::api::CreateGroupRequest)},
+  { 341, -1, sizeof(::nakama::api::DeleteFriendsRequest)},
+  { 348, -1, sizeof(::nakama::api::DeleteGroupRequest)},
+  { 354, -1, sizeof(::nakama::api::DeleteLeaderboardRecordRequest)},
+  { 360, -1, sizeof(::nakama::api::DeleteNotificationsRequest)},
+  { 366, -1, sizeof(::nakama::api::DeleteStorageObjectId)},
+  { 374, -1, sizeof(::nakama::api::DeleteStorageObjectsRequest)},
+  { 380, 387, sizeof(::nakama::api::Event_PropertiesEntry_DoNotUse)},
+  { 389, -1, sizeof(::nakama::api::Event)},
+  { 398, -1, sizeof(::nakama::api::Friend)},
+  { 406, -1, sizeof(::nakama::api::FriendList)},
+  { 413, -1, sizeof(::nakama::api::GetUsersRequest)},
+  { 421, -1, sizeof(::nakama::api::Group)},
+  { 438, -1, sizeof(::nakama::api::GroupList)},
+  { 445, -1, sizeof(::nakama::api::GroupUserList_GroupUser)},
+  { 452, -1, sizeof(::nakama::api::GroupUserList)},
+  { 459, -1, sizeof(::nakama::api::ImportFacebookFriendsRequest)},
+  { 466, -1, sizeof(::nakama::api::ImportSteamFriendsRequest)},
+  { 473, -1, sizeof(::nakama::api::JoinGroupRequest)},
+  { 479, -1, sizeof(::nakama::api::JoinTournamentRequest)},
+  { 485, -1, sizeof(::nakama::api::KickGroupUsersRequest)},
+  { 492, -1, sizeof(::nakama::api::Leaderboard)},
+  { 505, -1, sizeof(::nakama::api::LeaderboardList)},
+  { 512, -1, sizeof(::nakama::api::LeaderboardRecord)},
+  { 529, -1, sizeof(::nakama::api::LeaderboardRecordList)},
+  { 538, -1, sizeof(::nakama::api::LeaveGroupRequest)},
+  { 544, -1, sizeof(::nakama::api::LinkFacebookRequest)},
+  { 551, -1, sizeof(::nakama::api::LinkSteamRequest)},
+  { 558, -1, sizeof(::nakama::api::ListChannelMessagesRequest)},
+  { 567, -1, sizeof(::nakama::api::ListFriendsRequest)},
+  { 575, -1, sizeof(::nakama::api::ListGroupsRequest)},
+  { 586, -1, sizeof(::nakama::api::ListGroupUsersRequest)},
+  { 595, -1, sizeof(::nakama::api::ListLeaderboardRecordsAroundOwnerRequest)},
+  { 604, -1, sizeof(::nakama::api::ListLeaderboardRecordsRequest)},
+  { 614, -1, sizeof(::nakama::api::ListMatchesRequest)},
+  { 625, -1, sizeof(::nakama::api::ListNotificationsRequest)},
+  { 632, -1, sizeof(::nakama::api::ListStorageObjectsRequest)},
+  { 641, -1, sizeof(::nakama::api::ListTournamentRecordsAroundOwnerRequest)},
+  { 650, -1, sizeof(::nakama::api::ListTournamentRecordsRequest)},
+  { 660, -1, sizeof(::nakama::api::ListTournamentsRequest)},
+  { 671, -1, sizeof(::nakama::api::ListUserGroupsRequest)},
+  { 680, -1, sizeof(::nakama::api::Match)},
+  { 691, -1, sizeof(::nakama::api::MatchList)},
+  { 697, -1, sizeof(::nakama::api::Notification)},
+  { 709, -1, sizeof(::nakama::api::NotificationList)},
+  { 716, -1, sizeof(::nakama::api::PromoteGroupUsersRequest)},
+  { 723, -1, sizeof(::nakama::api::DemoteGroupUsersRequest)},
+  { 730, -1, sizeof(::nakama::api::ReadStorageObjectId)},
+  { 738, -1, sizeof(::nakama::api::ReadStorageObjectsRequest)},
+  { 744, -1, sizeof(::nakama::api::Rpc)},
+  { 752, -1, sizeof(::nakama::api::Session)},
+  { 760, -1, sizeof(::nakama::api::StorageObject)},
+  { 774, -1, sizeof(::nakama::api::StorageObjectAck)},
+  { 783, -1, sizeof(::nakama::api::StorageObjectAcks)},
+  { 789, -1, sizeof(::nakama::api::StorageObjects)},
+  { 795, -1, sizeof(::nakama::api::StorageObjectList)},
+  { 802, -1, sizeof(::nakama::api::Tournament)},
+  { 826, -1, sizeof(::nakama::api::TournamentList)},
+  { 833, -1, sizeof(::nakama::api::TournamentRecordList)},
+  { 842, -1, sizeof(::nakama::api::UpdateAccountRequest)},
+  { 853, -1, sizeof(::nakama::api::UpdateGroupRequest)},
+  { 864, -1, sizeof(::nakama::api::User)},
+  { 887, -1, sizeof(::nakama::api::UserGroupList_UserGroup)},
+  { 894, -1, sizeof(::nakama::api::UserGroupList)},
+  { 901, -1, sizeof(::nakama::api::Users)},
+  { 907, -1, sizeof(::nakama::api::ValidatePurchaseAppleRequest)},
+  { 914, -1, sizeof(::nakama::api::ValidatePurchaseGoogleRequest)},
+  { 921, -1, sizeof(::nakama::api::ValidatePurchaseHuaweiRequest)},
+  { 929, -1, sizeof(::nakama::api::ValidatedPurchase)},
+  { 943, -1, sizeof(::nakama::api::ValidatePurchaseResponse)},
+  { 949, -1, sizeof(::nakama::api::PurchaseList)},
+  { 957, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite)},
+  { 966, -1, sizeof(::nakama::api::WriteLeaderboardRecordRequest)},
+  { 973, -1, sizeof(::nakama::api::WriteStorageObject)},
+  { 984, -1, sizeof(::nakama::api::WriteStorageObjectsRequest)},
+  { 990, -1, sizeof(::nakama::api::WriteTournamentRecordRequest_TournamentRecordWrite)},
+  { 999, -1, sizeof(::nakama::api::WriteTournamentRecordRequest)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -3038,6 +3295,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_AddGroupUsersRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_SessionRefreshRequest_VarsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_SessionRefreshRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_SessionLogoutRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_AuthenticateAppleRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_AuthenticateCustomRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_AuthenticateDeviceRequest_default_instance_),
@@ -3072,6 +3330,8 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_JoinGroupRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_JoinTournamentRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_KickGroupUsersRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_Leaderboard_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_LeaderboardList_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_LeaderboardRecord_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_LeaderboardRecordList_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_LeaveGroupRequest_default_instance_),
@@ -3114,6 +3374,12 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_UserGroupList_UserGroup_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_UserGroupList_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_Users_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_ValidatePurchaseAppleRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_ValidatePurchaseGoogleRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_ValidatePurchaseHuaweiRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_ValidatedPurchase_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_ValidatePurchaseResponse_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_PurchaseList_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_WriteLeaderboardRecordRequest_LeaderboardRecordWrite_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_WriteLeaderboardRecordRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::nakama::api::_WriteStorageObject_default_instance_),
@@ -3174,293 +3440,336 @@ const char descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon
   "ids\030\002 \003(\t\"\216\001\n\025SessionRefreshRequest\022\r\n\005t"
   "oken\030\001 \001(\t\0229\n\004vars\030\002 \003(\0132+.nakama.api.Se"
   "ssionRefreshRequest.VarsEntry\032+\n\tVarsEnt"
-  "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\203\001\n\030A"
-  "uthenticateAppleRequest\022)\n\007account\030\001 \001(\013"
-  "2\030.nakama.api.AccountApple\022*\n\006create\030\002 \001"
-  "(\0132\032.google.protobuf.BoolValue\022\020\n\010userna"
-  "me\030\003 \001(\t\"\205\001\n\031AuthenticateCustomRequest\022*"
-  "\n\007account\030\001 \001(\0132\031.nakama.api.AccountCust"
-  "om\022*\n\006create\030\002 \001(\0132\032.google.protobuf.Boo"
-  "lValue\022\020\n\010username\030\003 \001(\t\"\205\001\n\031Authenticat"
-  "eDeviceRequest\022*\n\007account\030\001 \001(\0132\031.nakama"
-  ".api.AccountDevice\022*\n\006create\030\002 \001(\0132\032.goo"
-  "gle.protobuf.BoolValue\022\020\n\010username\030\003 \001(\t"
-  "\"\203\001\n\030AuthenticateEmailRequest\022)\n\007account"
-  "\030\001 \001(\0132\030.nakama.api.AccountEmail\022*\n\006crea"
-  "te\030\002 \001(\0132\032.google.protobuf.BoolValue\022\020\n\010"
-  "username\030\003 \001(\t\"\263\001\n\033AuthenticateFacebookR"
-  "equest\022,\n\007account\030\001 \001(\0132\033.nakama.api.Acc"
-  "ountFacebook\022*\n\006create\030\002 \001(\0132\032.google.pr"
-  "otobuf.BoolValue\022\020\n\010username\030\003 \001(\t\022(\n\004sy"
-  "nc\030\004 \001(\0132\032.google.protobuf.BoolValue\"\237\001\n"
-  "&AuthenticateFacebookInstantGameRequest\022"
-  "7\n\007account\030\001 \001(\0132&.nakama.api.AccountFac"
-  "ebookInstantGame\022*\n\006create\030\002 \001(\0132\032.googl"
-  "e.protobuf.BoolValue\022\020\n\010username\030\003 \001(\t\"\215"
-  "\001\n\035AuthenticateGameCenterRequest\022.\n\007acco"
-  "unt\030\001 \001(\0132\035.nakama.api.AccountGameCenter"
+  "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"<\n\024Se"
+  "ssionLogoutRequest\022\r\n\005token\030\001 \001(\t\022\025\n\rref"
+  "resh_token\030\002 \001(\t\"\203\001\n\030AuthenticateAppleRe"
+  "quest\022)\n\007account\030\001 \001(\0132\030.nakama.api.Acco"
+  "untApple\022*\n\006create\030\002 \001(\0132\032.google.protob"
+  "uf.BoolValue\022\020\n\010username\030\003 \001(\t\"\205\001\n\031Authe"
+  "nticateCustomRequest\022*\n\007account\030\001 \001(\0132\031."
+  "nakama.api.AccountCustom\022*\n\006create\030\002 \001(\013"
+  "2\032.google.protobuf.BoolValue\022\020\n\010username"
+  "\030\003 \001(\t\"\205\001\n\031AuthenticateDeviceRequest\022*\n\007"
+  "account\030\001 \001(\0132\031.nakama.api.AccountDevice"
   "\022*\n\006create\030\002 \001(\0132\032.google.protobuf.BoolV"
-  "alue\022\020\n\010username\030\003 \001(\t\"\205\001\n\031AuthenticateG"
-  "oogleRequest\022*\n\007account\030\001 \001(\0132\031.nakama.a"
-  "pi.AccountGoogle\022*\n\006create\030\002 \001(\0132\032.googl"
-  "e.protobuf.BoolValue\022\020\n\010username\030\003 \001(\t\"\255"
-  "\001\n\030AuthenticateSteamRequest\022)\n\007account\030\001"
-  " \001(\0132\030.nakama.api.AccountSteam\022*\n\006create"
-  "\030\002 \001(\0132\032.google.protobuf.BoolValue\022\020\n\010us"
-  "ername\030\003 \001(\t\022(\n\004sync\030\004 \001(\0132\032.google.prot"
-  "obuf.BoolValue\":\n\024BanGroupUsersRequest\022\020"
-  "\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"5\n\023Bl"
-  "ockFriendsRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tuserna"
-  "mes\030\002 \003(\t\"\372\002\n\016ChannelMessage\022\022\n\nchannel_"
-  "id\030\001 \001(\t\022\022\n\nmessage_id\030\002 \001(\t\022)\n\004code\030\003 \001"
-  "(\0132\033.google.protobuf.Int32Value\022\021\n\tsende"
-  "r_id\030\004 \001(\t\022\020\n\010username\030\005 \001(\t\022\017\n\007content\030"
-  "\006 \001(\t\022/\n\013create_time\030\007 \001(\0132\032.google.prot"
-  "obuf.Timestamp\022/\n\013update_time\030\010 \001(\0132\032.go"
-  "ogle.protobuf.Timestamp\022.\n\npersistent\030\t "
-  "\001(\0132\032.google.protobuf.BoolValue\022\021\n\troom_"
-  "name\030\n \001(\t\022\020\n\010group_id\030\013 \001(\t\022\023\n\013user_id_"
-  "one\030\014 \001(\t\022\023\n\013user_id_two\030\r \001(\t\"\206\001\n\022Chann"
-  "elMessageList\022,\n\010messages\030\001 \003(\0132\032.nakama"
-  ".api.ChannelMessage\022\023\n\013next_cursor\030\002 \001(\t"
-  "\022\023\n\013prev_cursor\030\003 \001(\t\022\030\n\020cacheable_curso"
-  "r\030\004 \001(\t\"~\n\022CreateGroupRequest\022\014\n\004name\030\001 "
-  "\001(\t\022\023\n\013description\030\002 \001(\t\022\020\n\010lang_tag\030\003 \001"
-  "(\t\022\022\n\navatar_url\030\004 \001(\t\022\014\n\004open\030\005 \001(\010\022\021\n\t"
-  "max_count\030\006 \001(\005\"6\n\024DeleteFriendsRequest\022"
-  "\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\"&\n\022Delet"
-  "eGroupRequest\022\020\n\010group_id\030\001 \001(\t\"8\n\036Delet"
-  "eLeaderboardRecordRequest\022\026\n\016leaderboard"
-  "_id\030\001 \001(\t\")\n\032DeleteNotificationsRequest\022"
-  "\013\n\003ids\030\001 \003(\t\"I\n\025DeleteStorageObjectId\022\022\n"
+  "alue\022\020\n\010username\030\003 \001(\t\"\203\001\n\030AuthenticateE"
+  "mailRequest\022)\n\007account\030\001 \001(\0132\030.nakama.ap"
+  "i.AccountEmail\022*\n\006create\030\002 \001(\0132\032.google."
+  "protobuf.BoolValue\022\020\n\010username\030\003 \001(\t\"\263\001\n"
+  "\033AuthenticateFacebookRequest\022,\n\007account\030"
+  "\001 \001(\0132\033.nakama.api.AccountFacebook\022*\n\006cr"
+  "eate\030\002 \001(\0132\032.google.protobuf.BoolValue\022\020"
+  "\n\010username\030\003 \001(\t\022(\n\004sync\030\004 \001(\0132\032.google."
+  "protobuf.BoolValue\"\237\001\n&AuthenticateFaceb"
+  "ookInstantGameRequest\0227\n\007account\030\001 \001(\0132&"
+  ".nakama.api.AccountFacebookInstantGame\022*"
+  "\n\006create\030\002 \001(\0132\032.google.protobuf.BoolVal"
+  "ue\022\020\n\010username\030\003 \001(\t\"\215\001\n\035AuthenticateGam"
+  "eCenterRequest\022.\n\007account\030\001 \001(\0132\035.nakama"
+  ".api.AccountGameCenter\022*\n\006create\030\002 \001(\0132\032"
+  ".google.protobuf.BoolValue\022\020\n\010username\030\003"
+  " \001(\t\"\205\001\n\031AuthenticateGoogleRequest\022*\n\007ac"
+  "count\030\001 \001(\0132\031.nakama.api.AccountGoogle\022*"
+  "\n\006create\030\002 \001(\0132\032.google.protobuf.BoolVal"
+  "ue\022\020\n\010username\030\003 \001(\t\"\255\001\n\030AuthenticateSte"
+  "amRequest\022)\n\007account\030\001 \001(\0132\030.nakama.api."
+  "AccountSteam\022*\n\006create\030\002 \001(\0132\032.google.pr"
+  "otobuf.BoolValue\022\020\n\010username\030\003 \001(\t\022(\n\004sy"
+  "nc\030\004 \001(\0132\032.google.protobuf.BoolValue\":\n\024"
+  "BanGroupUsersRequest\022\020\n\010group_id\030\001 \001(\t\022\020"
+  "\n\010user_ids\030\002 \003(\t\"5\n\023BlockFriendsRequest\022"
+  "\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\"\372\002\n\016Chan"
+  "nelMessage\022\022\n\nchannel_id\030\001 \001(\t\022\022\n\nmessag"
+  "e_id\030\002 \001(\t\022)\n\004code\030\003 \001(\0132\033.google.protob"
+  "uf.Int32Value\022\021\n\tsender_id\030\004 \001(\t\022\020\n\010user"
+  "name\030\005 \001(\t\022\017\n\007content\030\006 \001(\t\022/\n\013create_ti"
+  "me\030\007 \001(\0132\032.google.protobuf.Timestamp\022/\n\013"
+  "update_time\030\010 \001(\0132\032.google.protobuf.Time"
+  "stamp\022.\n\npersistent\030\t \001(\0132\032.google.proto"
+  "buf.BoolValue\022\021\n\troom_name\030\n \001(\t\022\020\n\010grou"
+  "p_id\030\013 \001(\t\022\023\n\013user_id_one\030\014 \001(\t\022\023\n\013user_"
+  "id_two\030\r \001(\t\"\206\001\n\022ChannelMessageList\022,\n\010m"
+  "essages\030\001 \003(\0132\032.nakama.api.ChannelMessag"
+  "e\022\023\n\013next_cursor\030\002 \001(\t\022\023\n\013prev_cursor\030\003 "
+  "\001(\t\022\030\n\020cacheable_cursor\030\004 \001(\t\"~\n\022CreateG"
+  "roupRequest\022\014\n\004name\030\001 \001(\t\022\023\n\013description"
+  "\030\002 \001(\t\022\020\n\010lang_tag\030\003 \001(\t\022\022\n\navatar_url\030\004"
+  " \001(\t\022\014\n\004open\030\005 \001(\010\022\021\n\tmax_count\030\006 \001(\005\"6\n"
+  "\024DeleteFriendsRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tus"
+  "ernames\030\002 \003(\t\"&\n\022DeleteGroupRequest\022\020\n\010g"
+  "roup_id\030\001 \001(\t\"8\n\036DeleteLeaderboardRecord"
+  "Request\022\026\n\016leaderboard_id\030\001 \001(\t\")\n\032Delet"
+  "eNotificationsRequest\022\013\n\003ids\030\001 \003(\t\"I\n\025De"
+  "leteStorageObjectId\022\022\n\ncollection\030\001 \001(\t\022"
+  "\013\n\003key\030\002 \001(\t\022\017\n\007version\030\003 \001(\t\"T\n\033DeleteS"
+  "torageObjectsRequest\0225\n\nobject_ids\030\001 \003(\013"
+  "2!.nakama.api.DeleteStorageObjectId\"\300\001\n\005"
+  "Event\022\014\n\004name\030\001 \001(\t\0225\n\nproperties\030\002 \003(\0132"
+  "!.nakama.api.Event.PropertiesEntry\022-\n\tti"
+  "mestamp\030\003 \001(\0132\032.google.protobuf.Timestam"
+  "p\022\020\n\010external\030\004 \001(\010\0321\n\017PropertiesEntry\022\013"
+  "\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\315\001\n\006Frien"
+  "d\022\036\n\004user\030\001 \001(\0132\020.nakama.api.User\022*\n\005sta"
+  "te\030\002 \001(\0132\033.google.protobuf.Int32Value\022/\n"
+  "\013update_time\030\003 \001(\0132\032.google.protobuf.Tim"
+  "estamp\"F\n\005State\022\n\n\006FRIEND\020\000\022\017\n\013INVITE_SE"
+  "NT\020\001\022\023\n\017INVITE_RECEIVED\020\002\022\013\n\007BLOCKED\020\003\"A"
+  "\n\nFriendList\022#\n\007friends\030\001 \003(\0132\022.nakama.a"
+  "pi.Friend\022\016\n\006cursor\030\002 \001(\t\"G\n\017GetUsersReq"
+  "uest\022\013\n\003ids\030\001 \003(\t\022\021\n\tusernames\030\002 \003(\t\022\024\n\014"
+  "facebook_ids\030\003 \003(\t\"\265\002\n\005Group\022\n\n\002id\030\001 \001(\t"
+  "\022\022\n\ncreator_id\030\002 \001(\t\022\014\n\004name\030\003 \001(\t\022\023\n\013de"
+  "scription\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001(\t\022\020\n\010met"
+  "adata\030\006 \001(\t\022\022\n\navatar_url\030\007 \001(\t\022(\n\004open\030"
+  "\010 \001(\0132\032.google.protobuf.BoolValue\022\022\n\nedg"
+  "e_count\030\t \001(\005\022\021\n\tmax_count\030\n \001(\005\022/\n\013crea"
+  "te_time\030\013 \001(\0132\032.google.protobuf.Timestam"
+  "p\022/\n\013update_time\030\014 \001(\0132\032.google.protobuf"
+  ".Timestamp\">\n\tGroupList\022!\n\006groups\030\001 \003(\0132"
+  "\021.nakama.api.Group\022\016\n\006cursor\030\002 \001(\t\"\365\001\n\rG"
+  "roupUserList\0228\n\013group_users\030\001 \003(\0132#.naka"
+  "ma.api.GroupUserList.GroupUser\022\016\n\006cursor"
+  "\030\002 \001(\t\032\231\001\n\tGroupUser\022\036\n\004user\030\001 \001(\0132\020.nak"
+  "ama.api.User\022*\n\005state\030\002 \001(\0132\033.google.pro"
+  "tobuf.Int32Value\"@\n\005State\022\016\n\nSUPERADMIN\020"
+  "\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JOIN_REQUEST"
+  "\020\003\"w\n\034ImportFacebookFriendsRequest\022,\n\007ac"
+  "count\030\001 \001(\0132\033.nakama.api.AccountFacebook"
+  "\022)\n\005reset\030\002 \001(\0132\032.google.protobuf.BoolVa"
+  "lue\"q\n\031ImportSteamFriendsRequest\022)\n\007acco"
+  "unt\030\001 \001(\0132\030.nakama.api.AccountSteam\022)\n\005r"
+  "eset\030\002 \001(\0132\032.google.protobuf.BoolValue\"$"
+  "\n\020JoinGroupRequest\022\020\n\010group_id\030\001 \001(\t\".\n\025"
+  "JoinTournamentRequest\022\025\n\rtournament_id\030\001"
+  " \001(\t\";\n\025KickGroupUsersRequest\022\020\n\010group_i"
+  "d\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"\327\001\n\013Leaderboar"
+  "d\022\n\n\002id\030\001 \001(\t\022\022\n\nsort_order\030\002 \001(\r\022&\n\010ope"
+  "rator\030\003 \001(\0162\024.nakama.api.Operator\022\022\n\npre"
+  "v_reset\030\004 \001(\r\022\022\n\nnext_reset\030\005 \001(\r\022\020\n\010met"
+  "adata\030\006 \001(\t\022/\n\013create_time\030\007 \001(\0132\032.googl"
+  "e.protobuf.Timestamp\022\025\n\rauthoritative\030\010 "
+  "\001(\010\"P\n\017LeaderboardList\022-\n\014leaderboards\030\001"
+  " \003(\0132\027.nakama.api.Leaderboard\022\016\n\006cursor\030"
+  "\002 \001(\t\"\353\002\n\021LeaderboardRecord\022\026\n\016leaderboa"
+  "rd_id\030\001 \001(\t\022\020\n\010owner_id\030\002 \001(\t\022.\n\010usernam"
+  "e\030\003 \001(\0132\034.google.protobuf.StringValue\022\r\n"
+  "\005score\030\004 \001(\003\022\020\n\010subscore\030\005 \001(\003\022\021\n\tnum_sc"
+  "ore\030\006 \001(\005\022\020\n\010metadata\030\007 \001(\t\022/\n\013create_ti"
+  "me\030\010 \001(\0132\032.google.protobuf.Timestamp\022/\n\013"
+  "update_time\030\t \001(\0132\032.google.protobuf.Time"
+  "stamp\022/\n\013expiry_time\030\n \001(\0132\032.google.prot"
+  "obuf.Timestamp\022\014\n\004rank\030\013 \001(\003\022\025\n\rmax_num_"
+  "score\030\014 \001(\r\"\247\001\n\025LeaderboardRecordList\022.\n"
+  "\007records\030\001 \003(\0132\035.nakama.api.LeaderboardR"
+  "ecord\0224\n\rowner_records\030\002 \003(\0132\035.nakama.ap"
+  "i.LeaderboardRecord\022\023\n\013next_cursor\030\003 \001(\t"
+  "\022\023\n\013prev_cursor\030\004 \001(\t\"%\n\021LeaveGroupReque"
+  "st\022\020\n\010group_id\030\001 \001(\t\"m\n\023LinkFacebookRequ"
+  "est\022,\n\007account\030\001 \001(\0132\033.nakama.api.Accoun"
+  "tFacebook\022(\n\004sync\030\002 \001(\0132\032.google.protobu"
+  "f.BoolValue\"g\n\020LinkSteamRequest\022)\n\007accou"
+  "nt\030\001 \001(\0132\030.nakama.api.AccountSteam\022(\n\004sy"
+  "nc\030\002 \001(\0132\032.google.protobuf.BoolValue\"\231\001\n"
+  "\032ListChannelMessagesRequest\022\022\n\nchannel_i"
+  "d\030\001 \001(\t\022*\n\005limit\030\002 \001(\0132\033.google.protobuf"
+  ".Int32Value\022+\n\007forward\030\003 \001(\0132\032.google.pr"
+  "otobuf.BoolValue\022\016\n\006cursor\030\004 \001(\t\"|\n\022List"
+  "FriendsRequest\022*\n\005limit\030\001 \001(\0132\033.google.p"
+  "rotobuf.Int32Value\022*\n\005state\030\002 \001(\0132\033.goog"
+  "le.protobuf.Int32Value\022\016\n\006cursor\030\003 \001(\t\"\307"
+  "\001\n\021ListGroupsRequest\022\014\n\004name\030\001 \001(\t\022\016\n\006cu"
+  "rsor\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.google.proto"
+  "buf.Int32Value\022\020\n\010lang_tag\030\004 \001(\t\022,\n\007memb"
+  "ers\030\005 \001(\0132\033.google.protobuf.Int32Value\022("
+  "\n\004open\030\006 \001(\0132\032.google.protobuf.BoolValue"
+  "\"\221\001\n\025ListGroupUsersRequest\022\020\n\010group_id\030\001"
+  " \001(\t\022*\n\005limit\030\002 \001(\0132\033.google.protobuf.In"
+  "t32Value\022*\n\005state\030\003 \001(\0132\033.google.protobu"
+  "f.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\256\001\n(ListLea"
+  "derboardRecordsAroundOwnerRequest\022\026\n\016lea"
+  "derboard_id\030\001 \001(\t\022+\n\005limit\030\002 \001(\0132\034.googl"
+  "e.protobuf.UInt32Value\022\020\n\010owner_id\030\003 \001(\t"
+  "\022+\n\006expiry\030\004 \001(\0132\033.google.protobuf.Int64"
+  "Value\"\263\001\n\035ListLeaderboardRecordsRequest\022"
+  "\026\n\016leaderboard_id\030\001 \001(\t\022\021\n\towner_ids\030\002 \003"
+  "(\t\022*\n\005limit\030\003 \001(\0132\033.google.protobuf.Int3"
+  "2Value\022\016\n\006cursor\030\004 \001(\t\022+\n\006expiry\030\005 \001(\0132\033"
+  ".google.protobuf.Int64Value\"\253\002\n\022ListMatc"
+  "hesRequest\022*\n\005limit\030\001 \001(\0132\033.google.proto"
+  "buf.Int32Value\0221\n\rauthoritative\030\002 \001(\0132\032."
+  "google.protobuf.BoolValue\022+\n\005label\030\003 \001(\013"
+  "2\034.google.protobuf.StringValue\022-\n\010min_si"
+  "ze\030\004 \001(\0132\033.google.protobuf.Int32Value\022-\n"
+  "\010max_size\030\005 \001(\0132\033.google.protobuf.Int32V"
+  "alue\022+\n\005query\030\006 \001(\0132\034.google.protobuf.St"
+  "ringValue\"`\n\030ListNotificationsRequest\022*\n"
+  "\005limit\030\001 \001(\0132\033.google.protobuf.Int32Valu"
+  "e\022\030\n\020cacheable_cursor\030\002 \001(\t\"|\n\031ListStora"
+  "geObjectsRequest\022\017\n\007user_id\030\001 \001(\t\022\022\n\ncol"
+  "lection\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.google.pr"
+  "otobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\254\001\n\'Li"
+  "stTournamentRecordsAroundOwnerRequest\022\025\n"
+  "\rtournament_id\030\001 \001(\t\022+\n\005limit\030\002 \001(\0132\034.go"
+  "ogle.protobuf.UInt32Value\022\020\n\010owner_id\030\003 "
+  "\001(\t\022+\n\006expiry\030\004 \001(\0132\033.google.protobuf.In"
+  "t64Value\"\261\001\n\034ListTournamentRecordsReques"
+  "t\022\025\n\rtournament_id\030\001 \001(\t\022\021\n\towner_ids\030\002 "
+  "\003(\t\022*\n\005limit\030\003 \001(\0132\033.google.protobuf.Int"
+  "32Value\022\016\n\006cursor\030\004 \001(\t\022+\n\006expiry\030\005 \001(\0132"
+  "\033.google.protobuf.Int64Value\"\240\002\n\026ListTou"
+  "rnamentsRequest\0224\n\016category_start\030\001 \001(\0132"
+  "\034.google.protobuf.UInt32Value\0222\n\014categor"
+  "y_end\030\002 \001(\0132\034.google.protobuf.UInt32Valu"
+  "e\0220\n\nstart_time\030\003 \001(\0132\034.google.protobuf."
+  "UInt32Value\022.\n\010end_time\030\004 \001(\0132\034.google.p"
+  "rotobuf.UInt32Value\022*\n\005limit\030\006 \001(\0132\033.goo"
+  "gle.protobuf.Int32Value\022\016\n\006cursor\030\010 \001(\t\""
+  "\220\001\n\025ListUserGroupsRequest\022\017\n\007user_id\030\001 \001"
+  "(\t\022*\n\005limit\030\002 \001(\0132\033.google.protobuf.Int3"
+  "2Value\022*\n\005state\030\003 \001(\0132\033.google.protobuf."
+  "Int32Value\022\016\n\006cursor\030\004 \001(\t\"\224\001\n\005Match\022\020\n\010"
+  "match_id\030\001 \001(\t\022\025\n\rauthoritative\030\002 \001(\010\022+\n"
+  "\005label\030\003 \001(\0132\034.google.protobuf.StringVal"
+  "ue\022\014\n\004size\030\004 \001(\005\022\021\n\ttick_rate\030\005 \001(\005\022\024\n\014h"
+  "andler_name\030\006 \001(\t\"/\n\tMatchList\022\"\n\007matche"
+  "s\030\001 \003(\0132\021.nakama.api.Match\"\242\001\n\014Notificat"
+  "ion\022\n\n\002id\030\001 \001(\t\022\017\n\007subject\030\002 \001(\t\022\017\n\007cont"
+  "ent\030\003 \001(\t\022\014\n\004code\030\004 \001(\005\022\021\n\tsender_id\030\005 \001"
+  "(\t\022/\n\013create_time\030\006 \001(\0132\032.google.protobu"
+  "f.Timestamp\022\022\n\npersistent\030\007 \001(\010\"]\n\020Notif"
+  "icationList\022/\n\rnotifications\030\001 \003(\0132\030.nak"
+  "ama.api.Notification\022\030\n\020cacheable_cursor"
+  "\030\002 \001(\t\">\n\030PromoteGroupUsersRequest\022\020\n\010gr"
+  "oup_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"=\n\027Demote"
+  "GroupUsersRequest\022\020\n\010group_id\030\001 \001(\t\022\020\n\010u"
+  "ser_ids\030\002 \003(\t\"G\n\023ReadStorageObjectId\022\022\n\n"
+  "collection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007user_id"
+  "\030\003 \001(\t\"P\n\031ReadStorageObjectsRequest\0223\n\no"
+  "bject_ids\030\001 \003(\0132\037.nakama.api.ReadStorage"
+  "ObjectId\"4\n\003Rpc\022\n\n\002id\030\001 \001(\t\022\017\n\007payload\030\002"
+  " \001(\t\022\020\n\010http_key\030\003 \001(\t\"@\n\007Session\022\017\n\007cre"
+  "ated\030\001 \001(\010\022\r\n\005token\030\002 \001(\t\022\025\n\rrefresh_tok"
+  "en\030\003 \001(\t\"\366\001\n\rStorageObject\022\022\n\ncollection"
+  "\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007user_id\030\003 \001(\t\022\r\n\005"
+  "value\030\004 \001(\t\022\017\n\007version\030\005 \001(\t\022\027\n\017permissi"
+  "on_read\030\006 \001(\005\022\030\n\020permission_write\030\007 \001(\005\022"
+  "/\n\013create_time\030\010 \001(\0132\032.google.protobuf.T"
+  "imestamp\022/\n\013update_time\030\t \001(\0132\032.google.p"
+  "rotobuf.Timestamp\"U\n\020StorageObjectAck\022\022\n"
   "\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007versio"
-  "n\030\003 \001(\t\"T\n\033DeleteStorageObjectsRequest\0225"
-  "\n\nobject_ids\030\001 \003(\0132!.nakama.api.DeleteSt"
-  "orageObjectId\"\300\001\n\005Event\022\014\n\004name\030\001 \001(\t\0225\n"
-  "\nproperties\030\002 \003(\0132!.nakama.api.Event.Pro"
-  "pertiesEntry\022-\n\ttimestamp\030\003 \001(\0132\032.google"
-  ".protobuf.Timestamp\022\020\n\010external\030\004 \001(\010\0321\n"
-  "\017PropertiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002"
-  " \001(\t:\0028\001\"\315\001\n\006Friend\022\036\n\004user\030\001 \001(\0132\020.naka"
-  "ma.api.User\022*\n\005state\030\002 \001(\0132\033.google.prot"
-  "obuf.Int32Value\022/\n\013update_time\030\003 \001(\0132\032.g"
-  "oogle.protobuf.Timestamp\"F\n\005State\022\n\n\006FRI"
-  "END\020\000\022\017\n\013INVITE_SENT\020\001\022\023\n\017INVITE_RECEIVE"
-  "D\020\002\022\013\n\007BLOCKED\020\003\"A\n\nFriendList\022#\n\007friend"
-  "s\030\001 \003(\0132\022.nakama.api.Friend\022\016\n\006cursor\030\002 "
-  "\001(\t\"G\n\017GetUsersRequest\022\013\n\003ids\030\001 \003(\t\022\021\n\tu"
-  "sernames\030\002 \003(\t\022\024\n\014facebook_ids\030\003 \003(\t\"\265\002\n"
-  "\005Group\022\n\n\002id\030\001 \001(\t\022\022\n\ncreator_id\030\002 \001(\t\022\014"
-  "\n\004name\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\020\n\010lan"
-  "g_tag\030\005 \001(\t\022\020\n\010metadata\030\006 \001(\t\022\022\n\navatar_"
-  "url\030\007 \001(\t\022(\n\004open\030\010 \001(\0132\032.google.protobu"
-  "f.BoolValue\022\022\n\nedge_count\030\t \001(\005\022\021\n\tmax_c"
-  "ount\030\n \001(\005\022/\n\013create_time\030\013 \001(\0132\032.google"
-  ".protobuf.Timestamp\022/\n\013update_time\030\014 \001(\013"
-  "2\032.google.protobuf.Timestamp\">\n\tGroupLis"
-  "t\022!\n\006groups\030\001 \003(\0132\021.nakama.api.Group\022\016\n\006"
-  "cursor\030\002 \001(\t\"\365\001\n\rGroupUserList\0228\n\013group_"
-  "users\030\001 \003(\0132#.nakama.api.GroupUserList.G"
-  "roupUser\022\016\n\006cursor\030\002 \001(\t\032\231\001\n\tGroupUser\022\036"
-  "\n\004user\030\001 \001(\0132\020.nakama.api.User\022*\n\005state\030"
-  "\002 \001(\0132\033.google.protobuf.Int32Value\"@\n\005St"
-  "ate\022\016\n\nSUPERADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER"
-  "\020\002\022\020\n\014JOIN_REQUEST\020\003\"w\n\034ImportFacebookFr"
-  "iendsRequest\022,\n\007account\030\001 \001(\0132\033.nakama.a"
-  "pi.AccountFacebook\022)\n\005reset\030\002 \001(\0132\032.goog"
-  "le.protobuf.BoolValue\"q\n\031ImportSteamFrie"
-  "ndsRequest\022)\n\007account\030\001 \001(\0132\030.nakama.api"
-  ".AccountSteam\022)\n\005reset\030\002 \001(\0132\032.google.pr"
-  "otobuf.BoolValue\"$\n\020JoinGroupRequest\022\020\n\010"
-  "group_id\030\001 \001(\t\".\n\025JoinTournamentRequest\022"
-  "\025\n\rtournament_id\030\001 \001(\t\";\n\025KickGroupUsers"
-  "Request\022\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 "
-  "\003(\t\"\353\002\n\021LeaderboardRecord\022\026\n\016leaderboard"
-  "_id\030\001 \001(\t\022\020\n\010owner_id\030\002 \001(\t\022.\n\010username\030"
-  "\003 \001(\0132\034.google.protobuf.StringValue\022\r\n\005s"
-  "core\030\004 \001(\003\022\020\n\010subscore\030\005 \001(\003\022\021\n\tnum_scor"
-  "e\030\006 \001(\005\022\020\n\010metadata\030\007 \001(\t\022/\n\013create_time"
-  "\030\010 \001(\0132\032.google.protobuf.Timestamp\022/\n\013up"
-  "date_time\030\t \001(\0132\032.google.protobuf.Timest"
-  "amp\022/\n\013expiry_time\030\n \001(\0132\032.google.protob"
-  "uf.Timestamp\022\014\n\004rank\030\013 \001(\003\022\025\n\rmax_num_sc"
-  "ore\030\014 \001(\r\"\247\001\n\025LeaderboardRecordList\022.\n\007r"
-  "ecords\030\001 \003(\0132\035.nakama.api.LeaderboardRec"
-  "ord\0224\n\rowner_records\030\002 \003(\0132\035.nakama.api."
-  "LeaderboardRecord\022\023\n\013next_cursor\030\003 \001(\t\022\023"
-  "\n\013prev_cursor\030\004 \001(\t\"%\n\021LeaveGroupRequest"
-  "\022\020\n\010group_id\030\001 \001(\t\"m\n\023LinkFacebookReques"
-  "t\022,\n\007account\030\001 \001(\0132\033.nakama.api.AccountF"
-  "acebook\022(\n\004sync\030\002 \001(\0132\032.google.protobuf."
-  "BoolValue\"g\n\020LinkSteamRequest\022)\n\007account"
-  "\030\001 \001(\0132\030.nakama.api.AccountSteam\022(\n\004sync"
-  "\030\002 \001(\0132\032.google.protobuf.BoolValue\"\231\001\n\032L"
-  "istChannelMessagesRequest\022\022\n\nchannel_id\030"
-  "\001 \001(\t\022*\n\005limit\030\002 \001(\0132\033.google.protobuf.I"
-  "nt32Value\022+\n\007forward\030\003 \001(\0132\032.google.prot"
-  "obuf.BoolValue\022\016\n\006cursor\030\004 \001(\t\"|\n\022ListFr"
-  "iendsRequest\022*\n\005limit\030\001 \001(\0132\033.google.pro"
-  "tobuf.Int32Value\022*\n\005state\030\002 \001(\0132\033.google"
-  ".protobuf.Int32Value\022\016\n\006cursor\030\003 \001(\t\"]\n\021"
-  "ListGroupsRequest\022\014\n\004name\030\001 \001(\t\022\016\n\006curso"
-  "r\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132\033.google.protobuf"
-  ".Int32Value\"\221\001\n\025ListGroupUsersRequest\022\020\n"
-  "\010group_id\030\001 \001(\t\022*\n\005limit\030\002 \001(\0132\033.google."
-  "protobuf.Int32Value\022*\n\005state\030\003 \001(\0132\033.goo"
-  "gle.protobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\""
-  "\256\001\n(ListLeaderboardRecordsAroundOwnerReq"
-  "uest\022\026\n\016leaderboard_id\030\001 \001(\t\022+\n\005limit\030\002 "
-  "\001(\0132\034.google.protobuf.UInt32Value\022\020\n\010own"
-  "er_id\030\003 \001(\t\022+\n\006expiry\030\004 \001(\0132\033.google.pro"
-  "tobuf.Int64Value\"\263\001\n\035ListLeaderboardReco"
-  "rdsRequest\022\026\n\016leaderboard_id\030\001 \001(\t\022\021\n\tow"
-  "ner_ids\030\002 \003(\t\022*\n\005limit\030\003 \001(\0132\033.google.pr"
-  "otobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\022+\n\006exp"
-  "iry\030\005 \001(\0132\033.google.protobuf.Int64Value\"\253"
-  "\002\n\022ListMatchesRequest\022*\n\005limit\030\001 \001(\0132\033.g"
-  "oogle.protobuf.Int32Value\0221\n\rauthoritati"
-  "ve\030\002 \001(\0132\032.google.protobuf.BoolValue\022+\n\005"
-  "label\030\003 \001(\0132\034.google.protobuf.StringValu"
-  "e\022-\n\010min_size\030\004 \001(\0132\033.google.protobuf.In"
-  "t32Value\022-\n\010max_size\030\005 \001(\0132\033.google.prot"
-  "obuf.Int32Value\022+\n\005query\030\006 \001(\0132\034.google."
-  "protobuf.StringValue\"`\n\030ListNotification"
-  "sRequest\022*\n\005limit\030\001 \001(\0132\033.google.protobu"
-  "f.Int32Value\022\030\n\020cacheable_cursor\030\002 \001(\t\"|"
-  "\n\031ListStorageObjectsRequest\022\017\n\007user_id\030\001"
-  " \001(\t\022\022\n\ncollection\030\002 \001(\t\022*\n\005limit\030\003 \001(\0132"
-  "\033.google.protobuf.Int32Value\022\016\n\006cursor\030\004"
-  " \001(\t\"\254\001\n\'ListTournamentRecordsAroundOwne"
-  "rRequest\022\025\n\rtournament_id\030\001 \001(\t\022+\n\005limit"
-  "\030\002 \001(\0132\034.google.protobuf.UInt32Value\022\020\n\010"
-  "owner_id\030\003 \001(\t\022+\n\006expiry\030\004 \001(\0132\033.google."
-  "protobuf.Int64Value\"\261\001\n\034ListTournamentRe"
-  "cordsRequest\022\025\n\rtournament_id\030\001 \001(\t\022\021\n\to"
-  "wner_ids\030\002 \003(\t\022*\n\005limit\030\003 \001(\0132\033.google.p"
-  "rotobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\022+\n\006ex"
-  "piry\030\005 \001(\0132\033.google.protobuf.Int64Value\""
-  "\240\002\n\026ListTournamentsRequest\0224\n\016category_s"
-  "tart\030\001 \001(\0132\034.google.protobuf.UInt32Value"
-  "\0222\n\014category_end\030\002 \001(\0132\034.google.protobuf"
-  ".UInt32Value\0220\n\nstart_time\030\003 \001(\0132\034.googl"
-  "e.protobuf.UInt32Value\022.\n\010end_time\030\004 \001(\013"
-  "2\034.google.protobuf.UInt32Value\022*\n\005limit\030"
-  "\006 \001(\0132\033.google.protobuf.Int32Value\022\016\n\006cu"
-  "rsor\030\010 \001(\t\"\220\001\n\025ListUserGroupsRequest\022\017\n\007"
-  "user_id\030\001 \001(\t\022*\n\005limit\030\002 \001(\0132\033.google.pr"
-  "otobuf.Int32Value\022*\n\005state\030\003 \001(\0132\033.googl"
-  "e.protobuf.Int32Value\022\016\n\006cursor\030\004 \001(\t\"\224\001"
-  "\n\005Match\022\020\n\010match_id\030\001 \001(\t\022\025\n\rauthoritati"
-  "ve\030\002 \001(\010\022+\n\005label\030\003 \001(\0132\034.google.protobu"
-  "f.StringValue\022\014\n\004size\030\004 \001(\005\022\021\n\ttick_rate"
-  "\030\005 \001(\005\022\024\n\014handler_name\030\006 \001(\t\"/\n\tMatchLis"
-  "t\022\"\n\007matches\030\001 \003(\0132\021.nakama.api.Match\"\242\001"
-  "\n\014Notification\022\n\n\002id\030\001 \001(\t\022\017\n\007subject\030\002 "
-  "\001(\t\022\017\n\007content\030\003 \001(\t\022\014\n\004code\030\004 \001(\005\022\021\n\tse"
-  "nder_id\030\005 \001(\t\022/\n\013create_time\030\006 \001(\0132\032.goo"
-  "gle.protobuf.Timestamp\022\022\n\npersistent\030\007 \001"
-  "(\010\"]\n\020NotificationList\022/\n\rnotifications\030"
-  "\001 \003(\0132\030.nakama.api.Notification\022\030\n\020cache"
-  "able_cursor\030\002 \001(\t\">\n\030PromoteGroupUsersRe"
-  "quest\022\020\n\010group_id\030\001 \001(\t\022\020\n\010user_ids\030\002 \003("
-  "\t\"=\n\027DemoteGroupUsersRequest\022\020\n\010group_id"
-  "\030\001 \001(\t\022\020\n\010user_ids\030\002 \003(\t\"G\n\023ReadStorageO"
-  "bjectId\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t"
-  "\022\017\n\007user_id\030\003 \001(\t\"P\n\031ReadStorageObjectsR"
-  "equest\0223\n\nobject_ids\030\001 \003(\0132\037.nakama.api."
-  "ReadStorageObjectId\"4\n\003Rpc\022\n\n\002id\030\001 \001(\t\022\017"
-  "\n\007payload\030\002 \001(\t\022\020\n\010http_key\030\003 \001(\t\"@\n\007Ses"
-  "sion\022\017\n\007created\030\001 \001(\010\022\r\n\005token\030\002 \001(\t\022\025\n\r"
-  "refresh_token\030\003 \001(\t\"\366\001\n\rStorageObject\022\022\n"
-  "\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\017\n\007user_i"
-  "d\030\003 \001(\t\022\r\n\005value\030\004 \001(\t\022\017\n\007version\030\005 \001(\t\022"
-  "\027\n\017permission_read\030\006 \001(\005\022\030\n\020permission_w"
-  "rite\030\007 \001(\005\022/\n\013create_time\030\010 \001(\0132\032.google"
-  ".protobuf.Timestamp\022/\n\013update_time\030\t \001(\013"
-  "2\032.google.protobuf.Timestamp\"U\n\020StorageO"
-  "bjectAck\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001("
-  "\t\022\017\n\007version\030\003 \001(\t\022\017\n\007user_id\030\004 \001(\t\"\?\n\021S"
-  "torageObjectAcks\022*\n\004acks\030\001 \003(\0132\034.nakama."
-  "api.StorageObjectAck\"<\n\016StorageObjects\022*"
-  "\n\007objects\030\001 \003(\0132\031.nakama.api.StorageObje"
-  "ct\"O\n\021StorageObjectList\022*\n\007objects\030\001 \003(\013"
-  "2\031.nakama.api.StorageObject\022\016\n\006cursor\030\002 "
-  "\001(\t\"\235\003\n\nTournament\022\n\n\002id\030\001 \001(\t\022\r\n\005title\030"
-  "\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010category\030\004"
-  " \001(\r\022\022\n\nsort_order\030\005 \001(\r\022\014\n\004size\030\006 \001(\r\022\020"
-  "\n\010max_size\030\007 \001(\r\022\025\n\rmax_num_score\030\010 \001(\r\022"
-  "\021\n\tcan_enter\030\t \001(\010\022\022\n\nend_active\030\n \001(\r\022\022"
-  "\n\nnext_reset\030\013 \001(\r\022\020\n\010metadata\030\014 \001(\t\022/\n\013"
-  "create_time\030\r \001(\0132\032.google.protobuf.Time"
-  "stamp\022.\n\nstart_time\030\016 \001(\0132\032.google.proto"
-  "buf.Timestamp\022,\n\010end_time\030\017 \001(\0132\032.google"
-  ".protobuf.Timestamp\022\020\n\010duration\030\020 \001(\r\022\024\n"
-  "\014start_active\030\021 \001(\r\"M\n\016TournamentList\022+\n"
-  "\013tournaments\030\001 \003(\0132\026.nakama.api.Tourname"
-  "nt\022\016\n\006cursor\030\002 \001(\t\"\246\001\n\024TournamentRecordL"
-  "ist\022.\n\007records\030\001 \003(\0132\035.nakama.api.Leader"
-  "boardRecord\0224\n\rowner_records\030\002 \003(\0132\035.nak"
-  "ama.api.LeaderboardRecord\022\023\n\013next_cursor"
-  "\030\003 \001(\t\022\023\n\013prev_cursor\030\004 \001(\t\"\274\002\n\024UpdateAc"
-  "countRequest\022.\n\010username\030\001 \001(\0132\034.google."
-  "protobuf.StringValue\0222\n\014display_name\030\002 \001"
-  "(\0132\034.google.protobuf.StringValue\0220\n\navat"
-  "ar_url\030\003 \001(\0132\034.google.protobuf.StringVal"
-  "ue\022.\n\010lang_tag\030\004 \001(\0132\034.google.protobuf.S"
-  "tringValue\022.\n\010location\030\005 \001(\0132\034.google.pr"
-  "otobuf.StringValue\022.\n\010timezone\030\006 \001(\0132\034.g"
-  "oogle.protobuf.StringValue\"\221\002\n\022UpdateGro"
-  "upRequest\022\020\n\010group_id\030\001 \001(\t\022*\n\004name\030\002 \001("
-  "\0132\034.google.protobuf.StringValue\0221\n\013descr"
-  "iption\030\003 \001(\0132\034.google.protobuf.StringVal"
-  "ue\022.\n\010lang_tag\030\004 \001(\0132\034.google.protobuf.S"
-  "tringValue\0220\n\navatar_url\030\005 \001(\0132\034.google."
-  "protobuf.StringValue\022(\n\004open\030\006 \001(\0132\032.goo"
-  "gle.protobuf.BoolValue\"\241\003\n\004User\022\n\n\002id\030\001 "
-  "\001(\t\022\020\n\010username\030\002 \001(\t\022\024\n\014display_name\030\003 "
-  "\001(\t\022\022\n\navatar_url\030\004 \001(\t\022\020\n\010lang_tag\030\005 \001("
-  "\t\022\020\n\010location\030\006 \001(\t\022\020\n\010timezone\030\007 \001(\t\022\020\n"
-  "\010metadata\030\010 \001(\t\022\023\n\013facebook_id\030\t \001(\t\022\021\n\t"
-  "google_id\030\n \001(\t\022\025\n\rgamecenter_id\030\013 \001(\t\022\020"
-  "\n\010steam_id\030\014 \001(\t\022\016\n\006online\030\r \001(\010\022\022\n\nedge"
-  "_count\030\016 \001(\005\022/\n\013create_time\030\017 \001(\0132\032.goog"
-  "le.protobuf.Timestamp\022/\n\013update_time\030\020 \001"
-  "(\0132\032.google.protobuf.Timestamp\022 \n\030facebo"
-  "ok_instant_game_id\030\021 \001(\t\022\020\n\010apple_id\030\022 \001"
-  "(\t\"\367\001\n\rUserGroupList\0228\n\013user_groups\030\001 \003("
-  "\0132#.nakama.api.UserGroupList.UserGroup\022\016"
-  "\n\006cursor\030\002 \001(\t\032\233\001\n\tUserGroup\022 \n\005group\030\001 "
-  "\001(\0132\021.nakama.api.Group\022*\n\005state\030\002 \001(\0132\033."
-  "google.protobuf.Int32Value\"@\n\005State\022\016\n\nS"
-  "UPERADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBER\020\002\022\020\n\014JO"
-  "IN_REQUEST\020\003\"(\n\005Users\022\037\n\005users\030\001 \003(\0132\020.n"
-  "akama.api.User\"\326\001\n\035WriteLeaderboardRecor"
-  "dRequest\022\026\n\016leaderboard_id\030\001 \001(\t\022P\n\006reco"
-  "rd\030\002 \001(\0132@.nakama.api.WriteLeaderboardRe"
-  "cordRequest.LeaderboardRecordWrite\032K\n\026Le"
-  "aderboardRecordWrite\022\r\n\005score\030\001 \001(\003\022\020\n\010s"
-  "ubscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\t\"\302\001\n\022Writ"
-  "eStorageObject\022\022\n\ncollection\030\001 \001(\t\022\013\n\003ke"
-  "y\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\022\017\n\007version\030\004 \001(\t\022"
-  "4\n\017permission_read\030\005 \001(\0132\033.google.protob"
-  "uf.Int32Value\0225\n\020permission_write\030\006 \001(\0132"
-  "\033.google.protobuf.Int32Value\"M\n\032WriteSto"
-  "rageObjectsRequest\022/\n\007objects\030\001 \003(\0132\036.na"
-  "kama.api.WriteStorageObject\"\321\001\n\034WriteTou"
-  "rnamentRecordRequest\022\025\n\rtournament_id\030\001 "
-  "\001(\t\022N\n\006record\030\002 \001(\0132>.nakama.api.WriteTo"
-  "urnamentRecordRequest.TournamentRecordWr"
-  "ite\032J\n\025TournamentRecordWrite\022\r\n\005score\030\001 "
-  "\001(\003\022\020\n\010subscore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\tB"
-  "c\n\031com.heroiclabs.nakama.apiB\tNakamaApiP"
-  "\001Z\'github.com/heroiclabs/nakama-common/a"
-  "pi\252\002\017Nakama.Protobufb\006proto3"
+  "n\030\003 \001(\t\022\017\n\007user_id\030\004 \001(\t\"\?\n\021StorageObjec"
+  "tAcks\022*\n\004acks\030\001 \003(\0132\034.nakama.api.Storage"
+  "ObjectAck\"<\n\016StorageObjects\022*\n\007objects\030\001"
+  " \003(\0132\031.nakama.api.StorageObject\"O\n\021Stora"
+  "geObjectList\022*\n\007objects\030\001 \003(\0132\031.nakama.a"
+  "pi.StorageObject\022\016\n\006cursor\030\002 \001(\t\"\331\003\n\nTou"
+  "rnament\022\n\n\002id\030\001 \001(\t\022\r\n\005title\030\002 \001(\t\022\023\n\013de"
+  "scription\030\003 \001(\t\022\020\n\010category\030\004 \001(\r\022\022\n\nsor"
+  "t_order\030\005 \001(\r\022\014\n\004size\030\006 \001(\r\022\020\n\010max_size\030"
+  "\007 \001(\r\022\025\n\rmax_num_score\030\010 \001(\r\022\021\n\tcan_ente"
+  "r\030\t \001(\010\022\022\n\nend_active\030\n \001(\r\022\022\n\nnext_rese"
+  "t\030\013 \001(\r\022\020\n\010metadata\030\014 \001(\t\022/\n\013create_time"
+  "\030\r \001(\0132\032.google.protobuf.Timestamp\022.\n\nst"
+  "art_time\030\016 \001(\0132\032.google.protobuf.Timesta"
+  "mp\022,\n\010end_time\030\017 \001(\0132\032.google.protobuf.T"
+  "imestamp\022\020\n\010duration\030\020 \001(\r\022\024\n\014start_acti"
+  "ve\030\021 \001(\r\022\022\n\nprev_reset\030\022 \001(\r\022&\n\010operator"
+  "\030\023 \001(\0162\024.nakama.api.Operator\"M\n\016Tourname"
+  "ntList\022+\n\013tournaments\030\001 \003(\0132\026.nakama.api"
+  ".Tournament\022\016\n\006cursor\030\002 \001(\t\"\246\001\n\024Tourname"
+  "ntRecordList\022.\n\007records\030\001 \003(\0132\035.nakama.a"
+  "pi.LeaderboardRecord\0224\n\rowner_records\030\002 "
+  "\003(\0132\035.nakama.api.LeaderboardRecord\022\023\n\013ne"
+  "xt_cursor\030\003 \001(\t\022\023\n\013prev_cursor\030\004 \001(\t\"\274\002\n"
+  "\024UpdateAccountRequest\022.\n\010username\030\001 \001(\0132"
+  "\034.google.protobuf.StringValue\0222\n\014display"
+  "_name\030\002 \001(\0132\034.google.protobuf.StringValu"
+  "e\0220\n\navatar_url\030\003 \001(\0132\034.google.protobuf."
+  "StringValue\022.\n\010lang_tag\030\004 \001(\0132\034.google.p"
+  "rotobuf.StringValue\022.\n\010location\030\005 \001(\0132\034."
+  "google.protobuf.StringValue\022.\n\010timezone\030"
+  "\006 \001(\0132\034.google.protobuf.StringValue\"\221\002\n\022"
+  "UpdateGroupRequest\022\020\n\010group_id\030\001 \001(\t\022*\n\004"
+  "name\030\002 \001(\0132\034.google.protobuf.StringValue"
+  "\0221\n\013description\030\003 \001(\0132\034.google.protobuf."
+  "StringValue\022.\n\010lang_tag\030\004 \001(\0132\034.google.p"
+  "rotobuf.StringValue\0220\n\navatar_url\030\005 \001(\0132"
+  "\034.google.protobuf.StringValue\022(\n\004open\030\006 "
+  "\001(\0132\032.google.protobuf.BoolValue\"\241\003\n\004User"
+  "\022\n\n\002id\030\001 \001(\t\022\020\n\010username\030\002 \001(\t\022\024\n\014displa"
+  "y_name\030\003 \001(\t\022\022\n\navatar_url\030\004 \001(\t\022\020\n\010lang"
+  "_tag\030\005 \001(\t\022\020\n\010location\030\006 \001(\t\022\020\n\010timezone"
+  "\030\007 \001(\t\022\020\n\010metadata\030\010 \001(\t\022\023\n\013facebook_id\030"
+  "\t \001(\t\022\021\n\tgoogle_id\030\n \001(\t\022\025\n\rgamecenter_i"
+  "d\030\013 \001(\t\022\020\n\010steam_id\030\014 \001(\t\022\016\n\006online\030\r \001("
+  "\010\022\022\n\nedge_count\030\016 \001(\005\022/\n\013create_time\030\017 \001"
+  "(\0132\032.google.protobuf.Timestamp\022/\n\013update"
+  "_time\030\020 \001(\0132\032.google.protobuf.Timestamp\022"
+  " \n\030facebook_instant_game_id\030\021 \001(\t\022\020\n\010app"
+  "le_id\030\022 \001(\t\"\367\001\n\rUserGroupList\0228\n\013user_gr"
+  "oups\030\001 \003(\0132#.nakama.api.UserGroupList.Us"
+  "erGroup\022\016\n\006cursor\030\002 \001(\t\032\233\001\n\tUserGroup\022 \n"
+  "\005group\030\001 \001(\0132\021.nakama.api.Group\022*\n\005state"
+  "\030\002 \001(\0132\033.google.protobuf.Int32Value\"@\n\005S"
+  "tate\022\016\n\nSUPERADMIN\020\000\022\t\n\005ADMIN\020\001\022\n\n\006MEMBE"
+  "R\020\002\022\020\n\014JOIN_REQUEST\020\003\"(\n\005Users\022\037\n\005users\030"
+  "\001 \003(\0132\020.nakama.api.User\"\\\n\034ValidatePurch"
+  "aseAppleRequest\022\017\n\007receipt\030\001 \001(\t\022+\n\007pers"
+  "ist\030\002 \001(\0132\032.google.protobuf.BoolValue\"^\n"
+  "\035ValidatePurchaseGoogleRequest\022\020\n\010purcha"
+  "se\030\001 \001(\t\022+\n\007persist\030\002 \001(\0132\032.google.proto"
+  "buf.BoolValue\"q\n\035ValidatePurchaseHuaweiR"
+  "equest\022\020\n\010purchase\030\001 \001(\t\022\021\n\tsignature\030\002 "
+  "\001(\t\022+\n\007persist\030\003 \001(\0132\032.google.protobuf.B"
+  "oolValue\"\376\003\n\021ValidatedPurchase\022\022\n\nproduc"
+  "t_id\030\001 \001(\t\022\026\n\016transaction_id\030\002 \001(\t\0222\n\005st"
+  "ore\030\003 \001(\0162#.nakama.api.ValidatedPurchase"
+  ".Store\0221\n\rpurchase_time\030\004 \001(\0132\032.google.p"
+  "rotobuf.Timestamp\022/\n\013create_time\030\005 \001(\0132\032"
+  ".google.protobuf.Timestamp\022/\n\013update_tim"
+  "e\030\006 \001(\0132\032.google.protobuf.Timestamp\022\031\n\021p"
+  "rovider_response\030\007 \001(\t\022>\n\013environment\030\010 "
+  "\001(\0162).nakama.api.ValidatedPurchase.Envir"
+  "onment\022\023\n\013seen_before\030\t \001(\010\"K\n\005Store\022\023\n\017"
+  "APPLE_APP_STORE\020\000\022\025\n\021GOOGLE_PLAY_STORE\020\001"
+  "\022\026\n\022HUAWEI_APP_GALLERY\020\002\"7\n\013Environment\022"
+  "\013\n\007UNKNOWN\020\000\022\013\n\007SANDBOX\020\001\022\016\n\nPRODUCTION\020"
+  "\002\"V\n\030ValidatePurchaseResponse\022:\n\023validat"
+  "ed_purchases\030\001 \003(\0132\035.nakama.api.Validate"
+  "dPurchase\"o\n\014PurchaseList\022:\n\023validated_p"
+  "urchases\030\001 \003(\0132\035.nakama.api.ValidatedPur"
+  "chase\022\016\n\006cursor\030\002 \001(\t\022\023\n\013prev_cursor\030\003 \001"
+  "(\t\"\376\001\n\035WriteLeaderboardRecordRequest\022\026\n\016"
+  "leaderboard_id\030\001 \001(\t\022P\n\006record\030\002 \001(\0132@.n"
+  "akama.api.WriteLeaderboardRecordRequest."
+  "LeaderboardRecordWrite\032s\n\026LeaderboardRec"
+  "ordWrite\022\r\n\005score\030\001 \001(\003\022\020\n\010subscore\030\002 \001("
+  "\003\022\020\n\010metadata\030\003 \001(\t\022&\n\010operator\030\004 \001(\0162\024."
+  "nakama.api.Operator\"\302\001\n\022WriteStorageObje"
+  "ct\022\022\n\ncollection\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\022\r\n\005v"
+  "alue\030\003 \001(\t\022\017\n\007version\030\004 \001(\t\0224\n\017permissio"
+  "n_read\030\005 \001(\0132\033.google.protobuf.Int32Valu"
+  "e\0225\n\020permission_write\030\006 \001(\0132\033.google.pro"
+  "tobuf.Int32Value\"M\n\032WriteStorageObjectsR"
+  "equest\022/\n\007objects\030\001 \003(\0132\036.nakama.api.Wri"
+  "teStorageObject\"\371\001\n\034WriteTournamentRecor"
+  "dRequest\022\025\n\rtournament_id\030\001 \001(\t\022N\n\006recor"
+  "d\030\002 \001(\0132>.nakama.api.WriteTournamentReco"
+  "rdRequest.TournamentRecordWrite\032r\n\025Tourn"
+  "amentRecordWrite\022\r\n\005score\030\001 \001(\003\022\020\n\010subsc"
+  "ore\030\002 \001(\003\022\020\n\010metadata\030\003 \001(\t\022&\n\010operator\030"
+  "\004 \001(\0162\024.nakama.api.Operator*L\n\010Operator\022"
+  "\017\n\013NO_OVERRIDE\020\000\022\010\n\004BEST\020\001\022\007\n\003SET\020\002\022\r\n\tI"
+  "NCREMENT\020\003\022\r\n\tDECREMENT\020\004Bc\n\031com.heroicl"
+  "abs.nakama.apiB\tNakamaApiP\001Z\'github.com/"
+  "heroiclabs/nakama-common/api\252\002\017Nakama.Pr"
+  "otobufb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_deps[2] = {
   &::descriptor_table_google_2fprotobuf_2ftimestamp_2eproto,
   &::descriptor_table_google_2fprotobuf_2fwrappers_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_sccs[107] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_sccs[116] = {
   &scc_info_Account_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_AccountApple_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_AccountApple_VarsEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
@@ -3519,6 +3828,8 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_git
   &scc_info_JoinGroupRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_JoinTournamentRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_KickGroupUsersRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+  &scc_info_Leaderboard_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+  &scc_info_LeaderboardList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_LeaderboardRecord_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_LeaderboardRecordList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_LeaveGroupRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
@@ -3542,10 +3853,12 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_git
   &scc_info_Notification_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_NotificationList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_PromoteGroupUsersRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+  &scc_info_PurchaseList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_ReadStorageObjectId_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_ReadStorageObjectsRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_Rpc_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_Session_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+  &scc_info_SessionLogoutRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_SessionRefreshRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_SessionRefreshRequest_VarsEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_StorageObject_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
@@ -3562,6 +3875,11 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_git
   &scc_info_UserGroupList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_UserGroupList_UserGroup_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_Users_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+  &scc_info_ValidatePurchaseAppleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+  &scc_info_ValidatePurchaseGoogleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+  &scc_info_ValidatePurchaseHuaweiRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+  &scc_info_ValidatePurchaseResponse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
+  &scc_info_ValidatedPurchase_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_WriteLeaderboardRecordRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_WriteLeaderboardRecordRequest_LeaderboardRecordWrite_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
   &scc_info_WriteStorageObject_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base,
@@ -3571,10 +3889,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_git
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto = {
-  false, false, descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto, "github.com/heroiclabs/nakama-common/api/api.proto", 13268,
-  &descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_once, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_sccs, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_deps, 107, 2,
+  false, false, descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto, "github.com/heroiclabs/nakama-common/api/api.proto", 14974,
+  &descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_once, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_sccs, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto_deps, 116, 2,
   schemas, file_default_instances, TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto::offsets,
-  file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto, 107, file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto, file_level_service_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto,
+  file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto, 116, file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto, file_level_service_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -3656,6 +3974,69 @@ constexpr UserGroupList_UserGroup_State UserGroupList_UserGroup::State_MIN;
 constexpr UserGroupList_UserGroup_State UserGroupList_UserGroup::State_MAX;
 constexpr int UserGroupList_UserGroup::State_ARRAYSIZE;
 #endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ValidatedPurchase_Store_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
+  return file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto[3];
+}
+bool ValidatedPurchase_Store_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr ValidatedPurchase_Store ValidatedPurchase::APPLE_APP_STORE;
+constexpr ValidatedPurchase_Store ValidatedPurchase::GOOGLE_PLAY_STORE;
+constexpr ValidatedPurchase_Store ValidatedPurchase::HUAWEI_APP_GALLERY;
+constexpr ValidatedPurchase_Store ValidatedPurchase::Store_MIN;
+constexpr ValidatedPurchase_Store ValidatedPurchase::Store_MAX;
+constexpr int ValidatedPurchase::Store_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ValidatedPurchase_Environment_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
+  return file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto[4];
+}
+bool ValidatedPurchase_Environment_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr ValidatedPurchase_Environment ValidatedPurchase::UNKNOWN;
+constexpr ValidatedPurchase_Environment ValidatedPurchase::SANDBOX;
+constexpr ValidatedPurchase_Environment ValidatedPurchase::PRODUCTION;
+constexpr ValidatedPurchase_Environment ValidatedPurchase::Environment_MIN;
+constexpr ValidatedPurchase_Environment ValidatedPurchase::Environment_MAX;
+constexpr int ValidatedPurchase::Environment_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* Operator_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
+  return file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto[5];
+}
+bool Operator_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 // ===================================================================
 
@@ -8045,6 +8426,250 @@ void SessionRefreshRequest::InternalSwap(SessionRefreshRequest* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata SessionRefreshRequest::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class SessionLogoutRequest::_Internal {
+ public:
+};
+
+SessionLogoutRequest::SessionLogoutRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:nakama.api.SessionLogoutRequest)
+}
+SessionLogoutRequest::SessionLogoutRequest(const SessionLogoutRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_token().empty()) {
+    token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_token(), 
+      GetArena());
+  }
+  refresh_token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_refresh_token().empty()) {
+    refresh_token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_refresh_token(), 
+      GetArena());
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.SessionLogoutRequest)
+}
+
+void SessionLogoutRequest::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SessionLogoutRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  refresh_token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+SessionLogoutRequest::~SessionLogoutRequest() {
+  // @@protoc_insertion_point(destructor:nakama.api.SessionLogoutRequest)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void SessionLogoutRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  token_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  refresh_token_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void SessionLogoutRequest::ArenaDtor(void* object) {
+  SessionLogoutRequest* _this = reinterpret_cast< SessionLogoutRequest* >(object);
+  (void)_this;
+}
+void SessionLogoutRequest::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void SessionLogoutRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const SessionLogoutRequest& SessionLogoutRequest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SessionLogoutRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void SessionLogoutRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.SessionLogoutRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  token_.ClearToEmpty();
+  refresh_token_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* SessionLogoutRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string token = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_token();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.SessionLogoutRequest.token"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string refresh_token = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_refresh_token();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.SessionLogoutRequest.refresh_token"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* SessionLogoutRequest::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.SessionLogoutRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_token().data(), static_cast<int>(this->_internal_token().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.SessionLogoutRequest.token");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_token(), target);
+  }
+
+  // string refresh_token = 2;
+  if (this->refresh_token().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_refresh_token().data(), static_cast<int>(this->_internal_refresh_token().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.SessionLogoutRequest.refresh_token");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_refresh_token(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.SessionLogoutRequest)
+  return target;
+}
+
+size_t SessionLogoutRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.SessionLogoutRequest)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_token());
+  }
+
+  // string refresh_token = 2;
+  if (this->refresh_token().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_refresh_token());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void SessionLogoutRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.SessionLogoutRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const SessionLogoutRequest* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<SessionLogoutRequest>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.SessionLogoutRequest)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.SessionLogoutRequest)
+    MergeFrom(*source);
+  }
+}
+
+void SessionLogoutRequest::MergeFrom(const SessionLogoutRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.SessionLogoutRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.token().size() > 0) {
+    _internal_set_token(from._internal_token());
+  }
+  if (from.refresh_token().size() > 0) {
+    _internal_set_refresh_token(from._internal_refresh_token());
+  }
+}
+
+void SessionLogoutRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.SessionLogoutRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SessionLogoutRequest::CopyFrom(const SessionLogoutRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.SessionLogoutRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SessionLogoutRequest::IsInitialized() const {
+  return true;
+}
+
+void SessionLogoutRequest::InternalSwap(SessionLogoutRequest* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  token_.Swap(&other->token_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  refresh_token_.Swap(&other->refresh_token_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata SessionLogoutRequest::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -17842,6 +18467,664 @@ void KickGroupUsersRequest::InternalSwap(KickGroupUsersRequest* other) {
 
 // ===================================================================
 
+class Leaderboard::_Internal {
+ public:
+  static const PROTOBUF_NAMESPACE_ID::Timestamp& create_time(const Leaderboard* msg);
+};
+
+const PROTOBUF_NAMESPACE_ID::Timestamp&
+Leaderboard::_Internal::create_time(const Leaderboard* msg) {
+  return *msg->create_time_;
+}
+void Leaderboard::clear_create_time() {
+  if (GetArena() == nullptr && create_time_ != nullptr) {
+    delete create_time_;
+  }
+  create_time_ = nullptr;
+}
+Leaderboard::Leaderboard(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:nakama.api.Leaderboard)
+}
+Leaderboard::Leaderboard(const Leaderboard& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_id().empty()) {
+    id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_id(), 
+      GetArena());
+  }
+  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_metadata().empty()) {
+    metadata_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_metadata(), 
+      GetArena());
+  }
+  if (from._internal_has_create_time()) {
+    create_time_ = new PROTOBUF_NAMESPACE_ID::Timestamp(*from.create_time_);
+  } else {
+    create_time_ = nullptr;
+  }
+  ::memcpy(&sort_order_, &from.sort_order_,
+    static_cast<size_t>(reinterpret_cast<char*>(&authoritative_) -
+    reinterpret_cast<char*>(&sort_order_)) + sizeof(authoritative_));
+  // @@protoc_insertion_point(copy_constructor:nakama.api.Leaderboard)
+}
+
+void Leaderboard::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Leaderboard_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&create_time_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&authoritative_) -
+      reinterpret_cast<char*>(&create_time_)) + sizeof(authoritative_));
+}
+
+Leaderboard::~Leaderboard() {
+  // @@protoc_insertion_point(destructor:nakama.api.Leaderboard)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void Leaderboard::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  metadata_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete create_time_;
+}
+
+void Leaderboard::ArenaDtor(void* object) {
+  Leaderboard* _this = reinterpret_cast< Leaderboard* >(object);
+  (void)_this;
+}
+void Leaderboard::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void Leaderboard::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const Leaderboard& Leaderboard::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Leaderboard_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void Leaderboard::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.Leaderboard)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  id_.ClearToEmpty();
+  metadata_.ClearToEmpty();
+  if (GetArena() == nullptr && create_time_ != nullptr) {
+    delete create_time_;
+  }
+  create_time_ = nullptr;
+  ::memset(&sort_order_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&authoritative_) -
+      reinterpret_cast<char*>(&sort_order_)) + sizeof(authoritative_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* Leaderboard::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_id();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.Leaderboard.id"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint32 sort_order = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          sort_order_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .nakama.api.Operator operator = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_operator_(static_cast<::nakama::api::Operator>(val));
+        } else goto handle_unusual;
+        continue;
+      // uint32 prev_reset = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          prev_reset_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint32 next_reset = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          next_reset_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string metadata = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          auto str = _internal_mutable_metadata();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.Leaderboard.metadata"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp create_time = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          ptr = ctx->ParseMessage(_internal_mutable_create_time(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bool authoritative = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
+          authoritative_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* Leaderboard::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.Leaderboard)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string id = 1;
+  if (this->id().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_id().data(), static_cast<int>(this->_internal_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.Leaderboard.id");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_id(), target);
+  }
+
+  // uint32 sort_order = 2;
+  if (this->sort_order() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_sort_order(), target);
+  }
+
+  // .nakama.api.Operator operator = 3;
+  if (this->operator_() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      3, this->_internal_operator_(), target);
+  }
+
+  // uint32 prev_reset = 4;
+  if (this->prev_reset() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(4, this->_internal_prev_reset(), target);
+  }
+
+  // uint32 next_reset = 5;
+  if (this->next_reset() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(5, this->_internal_next_reset(), target);
+  }
+
+  // string metadata = 6;
+  if (this->metadata().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_metadata().data(), static_cast<int>(this->_internal_metadata().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.Leaderboard.metadata");
+    target = stream->WriteStringMaybeAliased(
+        6, this->_internal_metadata(), target);
+  }
+
+  // .google.protobuf.Timestamp create_time = 7;
+  if (this->has_create_time()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        7, _Internal::create_time(this), target, stream);
+  }
+
+  // bool authoritative = 8;
+  if (this->authoritative() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(8, this->_internal_authoritative(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.Leaderboard)
+  return target;
+}
+
+size_t Leaderboard::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.Leaderboard)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string id = 1;
+  if (this->id().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_id());
+  }
+
+  // string metadata = 6;
+  if (this->metadata().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_metadata());
+  }
+
+  // .google.protobuf.Timestamp create_time = 7;
+  if (this->has_create_time()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *create_time_);
+  }
+
+  // uint32 sort_order = 2;
+  if (this->sort_order() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->_internal_sort_order());
+  }
+
+  // .nakama.api.Operator operator = 3;
+  if (this->operator_() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_operator_());
+  }
+
+  // uint32 prev_reset = 4;
+  if (this->prev_reset() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->_internal_prev_reset());
+  }
+
+  // uint32 next_reset = 5;
+  if (this->next_reset() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->_internal_next_reset());
+  }
+
+  // bool authoritative = 8;
+  if (this->authoritative() != 0) {
+    total_size += 1 + 1;
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void Leaderboard::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.Leaderboard)
+  GOOGLE_DCHECK_NE(&from, this);
+  const Leaderboard* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Leaderboard>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.Leaderboard)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.Leaderboard)
+    MergeFrom(*source);
+  }
+}
+
+void Leaderboard::MergeFrom(const Leaderboard& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.Leaderboard)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.id().size() > 0) {
+    _internal_set_id(from._internal_id());
+  }
+  if (from.metadata().size() > 0) {
+    _internal_set_metadata(from._internal_metadata());
+  }
+  if (from.has_create_time()) {
+    _internal_mutable_create_time()->PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(from._internal_create_time());
+  }
+  if (from.sort_order() != 0) {
+    _internal_set_sort_order(from._internal_sort_order());
+  }
+  if (from.operator_() != 0) {
+    _internal_set_operator_(from._internal_operator_());
+  }
+  if (from.prev_reset() != 0) {
+    _internal_set_prev_reset(from._internal_prev_reset());
+  }
+  if (from.next_reset() != 0) {
+    _internal_set_next_reset(from._internal_next_reset());
+  }
+  if (from.authoritative() != 0) {
+    _internal_set_authoritative(from._internal_authoritative());
+  }
+}
+
+void Leaderboard::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.Leaderboard)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Leaderboard::CopyFrom(const Leaderboard& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.Leaderboard)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Leaderboard::IsInitialized() const {
+  return true;
+}
+
+void Leaderboard::InternalSwap(Leaderboard* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  id_.Swap(&other->id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  metadata_.Swap(&other->metadata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Leaderboard, authoritative_)
+      + sizeof(Leaderboard::authoritative_)
+      - PROTOBUF_FIELD_OFFSET(Leaderboard, create_time_)>(
+          reinterpret_cast<char*>(&create_time_),
+          reinterpret_cast<char*>(&other->create_time_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata Leaderboard::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class LeaderboardList::_Internal {
+ public:
+};
+
+LeaderboardList::LeaderboardList(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  leaderboards_(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:nakama.api.LeaderboardList)
+}
+LeaderboardList::LeaderboardList(const LeaderboardList& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      leaderboards_(from.leaderboards_) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  cursor_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_cursor().empty()) {
+    cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_cursor(), 
+      GetArena());
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.LeaderboardList)
+}
+
+void LeaderboardList::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_LeaderboardList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  cursor_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+LeaderboardList::~LeaderboardList() {
+  // @@protoc_insertion_point(destructor:nakama.api.LeaderboardList)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void LeaderboardList::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  cursor_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void LeaderboardList::ArenaDtor(void* object) {
+  LeaderboardList* _this = reinterpret_cast< LeaderboardList* >(object);
+  (void)_this;
+}
+void LeaderboardList::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void LeaderboardList::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const LeaderboardList& LeaderboardList::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_LeaderboardList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void LeaderboardList::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.LeaderboardList)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  leaderboards_.Clear();
+  cursor_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* LeaderboardList::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .nakama.api.Leaderboard leaderboards = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_leaderboards(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // string cursor = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_cursor();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.LeaderboardList.cursor"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* LeaderboardList::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.LeaderboardList)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .nakama.api.Leaderboard leaderboards = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_leaderboards_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_leaderboards(i), target, stream);
+  }
+
+  // string cursor = 2;
+  if (this->cursor().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_cursor().data(), static_cast<int>(this->_internal_cursor().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.LeaderboardList.cursor");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_cursor(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.LeaderboardList)
+  return target;
+}
+
+size_t LeaderboardList::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.LeaderboardList)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .nakama.api.Leaderboard leaderboards = 1;
+  total_size += 1UL * this->_internal_leaderboards_size();
+  for (const auto& msg : this->leaderboards_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // string cursor = 2;
+  if (this->cursor().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_cursor());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void LeaderboardList::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.LeaderboardList)
+  GOOGLE_DCHECK_NE(&from, this);
+  const LeaderboardList* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<LeaderboardList>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.LeaderboardList)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.LeaderboardList)
+    MergeFrom(*source);
+  }
+}
+
+void LeaderboardList::MergeFrom(const LeaderboardList& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.LeaderboardList)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  leaderboards_.MergeFrom(from.leaderboards_);
+  if (from.cursor().size() > 0) {
+    _internal_set_cursor(from._internal_cursor());
+  }
+}
+
+void LeaderboardList::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.LeaderboardList)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void LeaderboardList::CopyFrom(const LeaderboardList& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.LeaderboardList)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LeaderboardList::IsInitialized() const {
+  return true;
+}
+
+void LeaderboardList::InternalSwap(LeaderboardList* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  leaderboards_.InternalSwap(&other->leaderboards_);
+  cursor_.Swap(&other->cursor_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata LeaderboardList::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 class LeaderboardRecord::_Internal {
  public:
   static const PROTOBUF_NAMESPACE_ID::StringValue& username(const LeaderboardRecord* msg);
@@ -20138,17 +21421,39 @@ void ListFriendsRequest::InternalSwap(ListFriendsRequest* other) {
 class ListGroupsRequest::_Internal {
  public:
   static const PROTOBUF_NAMESPACE_ID::Int32Value& limit(const ListGroupsRequest* msg);
+  static const PROTOBUF_NAMESPACE_ID::Int32Value& members(const ListGroupsRequest* msg);
+  static const PROTOBUF_NAMESPACE_ID::BoolValue& open(const ListGroupsRequest* msg);
 };
 
 const PROTOBUF_NAMESPACE_ID::Int32Value&
 ListGroupsRequest::_Internal::limit(const ListGroupsRequest* msg) {
   return *msg->limit_;
 }
+const PROTOBUF_NAMESPACE_ID::Int32Value&
+ListGroupsRequest::_Internal::members(const ListGroupsRequest* msg) {
+  return *msg->members_;
+}
+const PROTOBUF_NAMESPACE_ID::BoolValue&
+ListGroupsRequest::_Internal::open(const ListGroupsRequest* msg) {
+  return *msg->open_;
+}
 void ListGroupsRequest::clear_limit() {
   if (GetArena() == nullptr && limit_ != nullptr) {
     delete limit_;
   }
   limit_ = nullptr;
+}
+void ListGroupsRequest::clear_members() {
+  if (GetArena() == nullptr && members_ != nullptr) {
+    delete members_;
+  }
+  members_ = nullptr;
+}
+void ListGroupsRequest::clear_open() {
+  if (GetArena() == nullptr && open_ != nullptr) {
+    delete open_;
+  }
+  open_ = nullptr;
 }
 ListGroupsRequest::ListGroupsRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
@@ -20169,10 +21474,25 @@ ListGroupsRequest::ListGroupsRequest(const ListGroupsRequest& from)
     cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_cursor(), 
       GetArena());
   }
+  lang_tag_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_lang_tag().empty()) {
+    lang_tag_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_lang_tag(), 
+      GetArena());
+  }
   if (from._internal_has_limit()) {
     limit_ = new PROTOBUF_NAMESPACE_ID::Int32Value(*from.limit_);
   } else {
     limit_ = nullptr;
+  }
+  if (from._internal_has_members()) {
+    members_ = new PROTOBUF_NAMESPACE_ID::Int32Value(*from.members_);
+  } else {
+    members_ = nullptr;
+  }
+  if (from._internal_has_open()) {
+    open_ = new PROTOBUF_NAMESPACE_ID::BoolValue(*from.open_);
+  } else {
+    open_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:nakama.api.ListGroupsRequest)
 }
@@ -20181,7 +21501,11 @@ void ListGroupsRequest::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ListGroupsRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
   name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   cursor_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  limit_ = nullptr;
+  lang_tag_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&limit_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&open_) -
+      reinterpret_cast<char*>(&limit_)) + sizeof(open_));
 }
 
 ListGroupsRequest::~ListGroupsRequest() {
@@ -20194,7 +21518,10 @@ void ListGroupsRequest::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   cursor_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  lang_tag_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete limit_;
+  if (this != internal_default_instance()) delete members_;
+  if (this != internal_default_instance()) delete open_;
 }
 
 void ListGroupsRequest::ArenaDtor(void* object) {
@@ -20220,10 +21547,19 @@ void ListGroupsRequest::Clear() {
 
   name_.ClearToEmpty();
   cursor_.ClearToEmpty();
+  lang_tag_.ClearToEmpty();
   if (GetArena() == nullptr && limit_ != nullptr) {
     delete limit_;
   }
   limit_ = nullptr;
+  if (GetArena() == nullptr && members_ != nullptr) {
+    delete members_;
+  }
+  members_ = nullptr;
+  if (GetArena() == nullptr && open_ != nullptr) {
+    delete open_;
+  }
+  open_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -20256,6 +21592,29 @@ const char* ListGroupsRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_limit(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string lang_tag = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          auto str = _internal_mutable_lang_tag();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.ListGroupsRequest.lang_tag"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.Int32Value members = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr = ctx->ParseMessage(_internal_mutable_members(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.BoolValue open = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          ptr = ctx->ParseMessage(_internal_mutable_open(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -20315,6 +21674,32 @@ failure:
         3, _Internal::limit(this), target, stream);
   }
 
+  // string lang_tag = 4;
+  if (this->lang_tag().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_lang_tag().data(), static_cast<int>(this->_internal_lang_tag().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.ListGroupsRequest.lang_tag");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_lang_tag(), target);
+  }
+
+  // .google.protobuf.Int32Value members = 5;
+  if (this->has_members()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        5, _Internal::members(this), target, stream);
+  }
+
+  // .google.protobuf.BoolValue open = 6;
+  if (this->has_open()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        6, _Internal::open(this), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -20345,11 +21730,32 @@ size_t ListGroupsRequest::ByteSizeLong() const {
         this->_internal_cursor());
   }
 
+  // string lang_tag = 4;
+  if (this->lang_tag().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_lang_tag());
+  }
+
   // .google.protobuf.Int32Value limit = 3;
   if (this->has_limit()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *limit_);
+  }
+
+  // .google.protobuf.Int32Value members = 5;
+  if (this->has_members()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *members_);
+  }
+
+  // .google.protobuf.BoolValue open = 6;
+  if (this->has_open()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *open_);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -20389,8 +21795,17 @@ void ListGroupsRequest::MergeFrom(const ListGroupsRequest& from) {
   if (from.cursor().size() > 0) {
     _internal_set_cursor(from._internal_cursor());
   }
+  if (from.lang_tag().size() > 0) {
+    _internal_set_lang_tag(from._internal_lang_tag());
+  }
   if (from.has_limit()) {
     _internal_mutable_limit()->PROTOBUF_NAMESPACE_ID::Int32Value::MergeFrom(from._internal_limit());
+  }
+  if (from.has_members()) {
+    _internal_mutable_members()->PROTOBUF_NAMESPACE_ID::Int32Value::MergeFrom(from._internal_members());
+  }
+  if (from.has_open()) {
+    _internal_mutable_open()->PROTOBUF_NAMESPACE_ID::BoolValue::MergeFrom(from._internal_open());
   }
 }
 
@@ -20417,7 +21832,13 @@ void ListGroupsRequest::InternalSwap(ListGroupsRequest* other) {
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   cursor_.Swap(&other->cursor_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  swap(limit_, other->limit_);
+  lang_tag_.Swap(&other->lang_tag_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ListGroupsRequest, open_)
+      + sizeof(ListGroupsRequest::open_)
+      - PROTOBUF_FIELD_OFFSET(ListGroupsRequest, limit_)>(
+          reinterpret_cast<char*>(&limit_),
+          reinterpret_cast<char*>(&other->limit_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ListGroupsRequest::GetMetadata() const {
@@ -28369,8 +29790,8 @@ Tournament::Tournament(const Tournament& from)
     end_time_ = nullptr;
   }
   ::memcpy(&category_, &from.category_,
-    static_cast<size_t>(reinterpret_cast<char*>(&start_active_) -
-    reinterpret_cast<char*>(&category_)) + sizeof(start_active_));
+    static_cast<size_t>(reinterpret_cast<char*>(&operator__) -
+    reinterpret_cast<char*>(&category_)) + sizeof(operator__));
   // @@protoc_insertion_point(copy_constructor:nakama.api.Tournament)
 }
 
@@ -28382,8 +29803,8 @@ void Tournament::SharedCtor() {
   metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
       reinterpret_cast<char*>(&create_time_) - reinterpret_cast<char*>(this)),
-      0, static_cast<size_t>(reinterpret_cast<char*>(&start_active_) -
-      reinterpret_cast<char*>(&create_time_)) + sizeof(start_active_));
+      0, static_cast<size_t>(reinterpret_cast<char*>(&operator__) -
+      reinterpret_cast<char*>(&create_time_)) + sizeof(operator__));
 }
 
 Tournament::~Tournament() {
@@ -28441,8 +29862,8 @@ void Tournament::Clear() {
   }
   end_time_ = nullptr;
   ::memset(&category_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&start_active_) -
-      reinterpret_cast<char*>(&category_)) + sizeof(start_active_));
+      reinterpret_cast<char*>(&operator__) -
+      reinterpret_cast<char*>(&category_)) + sizeof(operator__));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -28578,6 +29999,21 @@ const char* Tournament::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 136)) {
           start_active_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint32 prev_reset = 18;
+      case 18:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 144)) {
+          prev_reset_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .nakama.api.Operator operator = 19;
+      case 19:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 152)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_operator_(static_cast<::nakama::api::Operator>(val));
         } else goto handle_unusual;
         continue;
       default: {
@@ -28732,6 +30168,19 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(17, this->_internal_start_active(), target);
   }
 
+  // uint32 prev_reset = 18;
+  if (this->prev_reset() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(18, this->_internal_prev_reset(), target);
+  }
+
+  // .nakama.api.Operator operator = 19;
+  if (this->operator_() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      19, this->_internal_operator_(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -28865,6 +30314,19 @@ size_t Tournament::ByteSizeLong() const {
         this->_internal_start_active());
   }
 
+  // uint32 prev_reset = 18;
+  if (this->prev_reset() != 0) {
+    total_size += 2 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->_internal_prev_reset());
+  }
+
+  // .nakama.api.Operator operator = 19;
+  if (this->operator_() != 0) {
+    total_size += 2 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_operator_());
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
         _internal_metadata_, total_size, &_cached_size_);
@@ -28947,6 +30409,12 @@ void Tournament::MergeFrom(const Tournament& from) {
   if (from.start_active() != 0) {
     _internal_set_start_active(from._internal_start_active());
   }
+  if (from.prev_reset() != 0) {
+    _internal_set_prev_reset(from._internal_prev_reset());
+  }
+  if (from.operator_() != 0) {
+    _internal_set_operator_(from._internal_operator_());
+  }
 }
 
 void Tournament::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -28975,8 +30443,8 @@ void Tournament::InternalSwap(Tournament* other) {
   description_.Swap(&other->description_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   metadata_.Swap(&other->metadata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Tournament, start_active_)
-      + sizeof(Tournament::start_active_)
+      PROTOBUF_FIELD_OFFSET(Tournament, operator__)
+      + sizeof(Tournament::operator__)
       - PROTOBUF_FIELD_OFFSET(Tournament, create_time_)>(
           reinterpret_cast<char*>(&create_time_),
           reinterpret_cast<char*>(&other->create_time_));
@@ -31989,6 +33457,1787 @@ void Users::InternalSwap(Users* other) {
 
 // ===================================================================
 
+class ValidatePurchaseAppleRequest::_Internal {
+ public:
+  static const PROTOBUF_NAMESPACE_ID::BoolValue& persist(const ValidatePurchaseAppleRequest* msg);
+};
+
+const PROTOBUF_NAMESPACE_ID::BoolValue&
+ValidatePurchaseAppleRequest::_Internal::persist(const ValidatePurchaseAppleRequest* msg) {
+  return *msg->persist_;
+}
+void ValidatePurchaseAppleRequest::clear_persist() {
+  if (GetArena() == nullptr && persist_ != nullptr) {
+    delete persist_;
+  }
+  persist_ = nullptr;
+}
+ValidatePurchaseAppleRequest::ValidatePurchaseAppleRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:nakama.api.ValidatePurchaseAppleRequest)
+}
+ValidatePurchaseAppleRequest::ValidatePurchaseAppleRequest(const ValidatePurchaseAppleRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  receipt_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_receipt().empty()) {
+    receipt_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_receipt(), 
+      GetArena());
+  }
+  if (from._internal_has_persist()) {
+    persist_ = new PROTOBUF_NAMESPACE_ID::BoolValue(*from.persist_);
+  } else {
+    persist_ = nullptr;
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.ValidatePurchaseAppleRequest)
+}
+
+void ValidatePurchaseAppleRequest::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ValidatePurchaseAppleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  receipt_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  persist_ = nullptr;
+}
+
+ValidatePurchaseAppleRequest::~ValidatePurchaseAppleRequest() {
+  // @@protoc_insertion_point(destructor:nakama.api.ValidatePurchaseAppleRequest)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void ValidatePurchaseAppleRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  receipt_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete persist_;
+}
+
+void ValidatePurchaseAppleRequest::ArenaDtor(void* object) {
+  ValidatePurchaseAppleRequest* _this = reinterpret_cast< ValidatePurchaseAppleRequest* >(object);
+  (void)_this;
+}
+void ValidatePurchaseAppleRequest::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void ValidatePurchaseAppleRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ValidatePurchaseAppleRequest& ValidatePurchaseAppleRequest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ValidatePurchaseAppleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void ValidatePurchaseAppleRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.ValidatePurchaseAppleRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  receipt_.ClearToEmpty();
+  if (GetArena() == nullptr && persist_ != nullptr) {
+    delete persist_;
+  }
+  persist_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ValidatePurchaseAppleRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string receipt = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_receipt();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.ValidatePurchaseAppleRequest.receipt"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.BoolValue persist = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_persist(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ValidatePurchaseAppleRequest::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.ValidatePurchaseAppleRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string receipt = 1;
+  if (this->receipt().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_receipt().data(), static_cast<int>(this->_internal_receipt().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.ValidatePurchaseAppleRequest.receipt");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_receipt(), target);
+  }
+
+  // .google.protobuf.BoolValue persist = 2;
+  if (this->has_persist()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        2, _Internal::persist(this), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.ValidatePurchaseAppleRequest)
+  return target;
+}
+
+size_t ValidatePurchaseAppleRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.ValidatePurchaseAppleRequest)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string receipt = 1;
+  if (this->receipt().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_receipt());
+  }
+
+  // .google.protobuf.BoolValue persist = 2;
+  if (this->has_persist()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *persist_);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ValidatePurchaseAppleRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.ValidatePurchaseAppleRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ValidatePurchaseAppleRequest* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ValidatePurchaseAppleRequest>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.ValidatePurchaseAppleRequest)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.ValidatePurchaseAppleRequest)
+    MergeFrom(*source);
+  }
+}
+
+void ValidatePurchaseAppleRequest::MergeFrom(const ValidatePurchaseAppleRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.ValidatePurchaseAppleRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.receipt().size() > 0) {
+    _internal_set_receipt(from._internal_receipt());
+  }
+  if (from.has_persist()) {
+    _internal_mutable_persist()->PROTOBUF_NAMESPACE_ID::BoolValue::MergeFrom(from._internal_persist());
+  }
+}
+
+void ValidatePurchaseAppleRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.ValidatePurchaseAppleRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ValidatePurchaseAppleRequest::CopyFrom(const ValidatePurchaseAppleRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.ValidatePurchaseAppleRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ValidatePurchaseAppleRequest::IsInitialized() const {
+  return true;
+}
+
+void ValidatePurchaseAppleRequest::InternalSwap(ValidatePurchaseAppleRequest* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  receipt_.Swap(&other->receipt_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  swap(persist_, other->persist_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ValidatePurchaseAppleRequest::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class ValidatePurchaseGoogleRequest::_Internal {
+ public:
+  static const PROTOBUF_NAMESPACE_ID::BoolValue& persist(const ValidatePurchaseGoogleRequest* msg);
+};
+
+const PROTOBUF_NAMESPACE_ID::BoolValue&
+ValidatePurchaseGoogleRequest::_Internal::persist(const ValidatePurchaseGoogleRequest* msg) {
+  return *msg->persist_;
+}
+void ValidatePurchaseGoogleRequest::clear_persist() {
+  if (GetArena() == nullptr && persist_ != nullptr) {
+    delete persist_;
+  }
+  persist_ = nullptr;
+}
+ValidatePurchaseGoogleRequest::ValidatePurchaseGoogleRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:nakama.api.ValidatePurchaseGoogleRequest)
+}
+ValidatePurchaseGoogleRequest::ValidatePurchaseGoogleRequest(const ValidatePurchaseGoogleRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  purchase_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_purchase().empty()) {
+    purchase_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_purchase(), 
+      GetArena());
+  }
+  if (from._internal_has_persist()) {
+    persist_ = new PROTOBUF_NAMESPACE_ID::BoolValue(*from.persist_);
+  } else {
+    persist_ = nullptr;
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.ValidatePurchaseGoogleRequest)
+}
+
+void ValidatePurchaseGoogleRequest::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ValidatePurchaseGoogleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  purchase_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  persist_ = nullptr;
+}
+
+ValidatePurchaseGoogleRequest::~ValidatePurchaseGoogleRequest() {
+  // @@protoc_insertion_point(destructor:nakama.api.ValidatePurchaseGoogleRequest)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void ValidatePurchaseGoogleRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  purchase_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete persist_;
+}
+
+void ValidatePurchaseGoogleRequest::ArenaDtor(void* object) {
+  ValidatePurchaseGoogleRequest* _this = reinterpret_cast< ValidatePurchaseGoogleRequest* >(object);
+  (void)_this;
+}
+void ValidatePurchaseGoogleRequest::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void ValidatePurchaseGoogleRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ValidatePurchaseGoogleRequest& ValidatePurchaseGoogleRequest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ValidatePurchaseGoogleRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void ValidatePurchaseGoogleRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.ValidatePurchaseGoogleRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  purchase_.ClearToEmpty();
+  if (GetArena() == nullptr && persist_ != nullptr) {
+    delete persist_;
+  }
+  persist_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ValidatePurchaseGoogleRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string purchase = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_purchase();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.ValidatePurchaseGoogleRequest.purchase"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.BoolValue persist = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_persist(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ValidatePurchaseGoogleRequest::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.ValidatePurchaseGoogleRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string purchase = 1;
+  if (this->purchase().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_purchase().data(), static_cast<int>(this->_internal_purchase().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.ValidatePurchaseGoogleRequest.purchase");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_purchase(), target);
+  }
+
+  // .google.protobuf.BoolValue persist = 2;
+  if (this->has_persist()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        2, _Internal::persist(this), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.ValidatePurchaseGoogleRequest)
+  return target;
+}
+
+size_t ValidatePurchaseGoogleRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.ValidatePurchaseGoogleRequest)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string purchase = 1;
+  if (this->purchase().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_purchase());
+  }
+
+  // .google.protobuf.BoolValue persist = 2;
+  if (this->has_persist()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *persist_);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ValidatePurchaseGoogleRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.ValidatePurchaseGoogleRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ValidatePurchaseGoogleRequest* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ValidatePurchaseGoogleRequest>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.ValidatePurchaseGoogleRequest)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.ValidatePurchaseGoogleRequest)
+    MergeFrom(*source);
+  }
+}
+
+void ValidatePurchaseGoogleRequest::MergeFrom(const ValidatePurchaseGoogleRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.ValidatePurchaseGoogleRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.purchase().size() > 0) {
+    _internal_set_purchase(from._internal_purchase());
+  }
+  if (from.has_persist()) {
+    _internal_mutable_persist()->PROTOBUF_NAMESPACE_ID::BoolValue::MergeFrom(from._internal_persist());
+  }
+}
+
+void ValidatePurchaseGoogleRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.ValidatePurchaseGoogleRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ValidatePurchaseGoogleRequest::CopyFrom(const ValidatePurchaseGoogleRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.ValidatePurchaseGoogleRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ValidatePurchaseGoogleRequest::IsInitialized() const {
+  return true;
+}
+
+void ValidatePurchaseGoogleRequest::InternalSwap(ValidatePurchaseGoogleRequest* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  purchase_.Swap(&other->purchase_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  swap(persist_, other->persist_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ValidatePurchaseGoogleRequest::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class ValidatePurchaseHuaweiRequest::_Internal {
+ public:
+  static const PROTOBUF_NAMESPACE_ID::BoolValue& persist(const ValidatePurchaseHuaweiRequest* msg);
+};
+
+const PROTOBUF_NAMESPACE_ID::BoolValue&
+ValidatePurchaseHuaweiRequest::_Internal::persist(const ValidatePurchaseHuaweiRequest* msg) {
+  return *msg->persist_;
+}
+void ValidatePurchaseHuaweiRequest::clear_persist() {
+  if (GetArena() == nullptr && persist_ != nullptr) {
+    delete persist_;
+  }
+  persist_ = nullptr;
+}
+ValidatePurchaseHuaweiRequest::ValidatePurchaseHuaweiRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:nakama.api.ValidatePurchaseHuaweiRequest)
+}
+ValidatePurchaseHuaweiRequest::ValidatePurchaseHuaweiRequest(const ValidatePurchaseHuaweiRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  purchase_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_purchase().empty()) {
+    purchase_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_purchase(), 
+      GetArena());
+  }
+  signature_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_signature().empty()) {
+    signature_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_signature(), 
+      GetArena());
+  }
+  if (from._internal_has_persist()) {
+    persist_ = new PROTOBUF_NAMESPACE_ID::BoolValue(*from.persist_);
+  } else {
+    persist_ = nullptr;
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.ValidatePurchaseHuaweiRequest)
+}
+
+void ValidatePurchaseHuaweiRequest::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ValidatePurchaseHuaweiRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  purchase_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  signature_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  persist_ = nullptr;
+}
+
+ValidatePurchaseHuaweiRequest::~ValidatePurchaseHuaweiRequest() {
+  // @@protoc_insertion_point(destructor:nakama.api.ValidatePurchaseHuaweiRequest)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void ValidatePurchaseHuaweiRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  purchase_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  signature_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete persist_;
+}
+
+void ValidatePurchaseHuaweiRequest::ArenaDtor(void* object) {
+  ValidatePurchaseHuaweiRequest* _this = reinterpret_cast< ValidatePurchaseHuaweiRequest* >(object);
+  (void)_this;
+}
+void ValidatePurchaseHuaweiRequest::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void ValidatePurchaseHuaweiRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ValidatePurchaseHuaweiRequest& ValidatePurchaseHuaweiRequest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ValidatePurchaseHuaweiRequest_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void ValidatePurchaseHuaweiRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.ValidatePurchaseHuaweiRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  purchase_.ClearToEmpty();
+  signature_.ClearToEmpty();
+  if (GetArena() == nullptr && persist_ != nullptr) {
+    delete persist_;
+  }
+  persist_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ValidatePurchaseHuaweiRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string purchase = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_purchase();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.ValidatePurchaseHuaweiRequest.purchase"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string signature = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_signature();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.ValidatePurchaseHuaweiRequest.signature"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.BoolValue persist = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ctx->ParseMessage(_internal_mutable_persist(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ValidatePurchaseHuaweiRequest::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.ValidatePurchaseHuaweiRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string purchase = 1;
+  if (this->purchase().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_purchase().data(), static_cast<int>(this->_internal_purchase().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.ValidatePurchaseHuaweiRequest.purchase");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_purchase(), target);
+  }
+
+  // string signature = 2;
+  if (this->signature().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_signature().data(), static_cast<int>(this->_internal_signature().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.ValidatePurchaseHuaweiRequest.signature");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_signature(), target);
+  }
+
+  // .google.protobuf.BoolValue persist = 3;
+  if (this->has_persist()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        3, _Internal::persist(this), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.ValidatePurchaseHuaweiRequest)
+  return target;
+}
+
+size_t ValidatePurchaseHuaweiRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.ValidatePurchaseHuaweiRequest)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string purchase = 1;
+  if (this->purchase().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_purchase());
+  }
+
+  // string signature = 2;
+  if (this->signature().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_signature());
+  }
+
+  // .google.protobuf.BoolValue persist = 3;
+  if (this->has_persist()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *persist_);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ValidatePurchaseHuaweiRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.ValidatePurchaseHuaweiRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ValidatePurchaseHuaweiRequest* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ValidatePurchaseHuaweiRequest>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.ValidatePurchaseHuaweiRequest)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.ValidatePurchaseHuaweiRequest)
+    MergeFrom(*source);
+  }
+}
+
+void ValidatePurchaseHuaweiRequest::MergeFrom(const ValidatePurchaseHuaweiRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.ValidatePurchaseHuaweiRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.purchase().size() > 0) {
+    _internal_set_purchase(from._internal_purchase());
+  }
+  if (from.signature().size() > 0) {
+    _internal_set_signature(from._internal_signature());
+  }
+  if (from.has_persist()) {
+    _internal_mutable_persist()->PROTOBUF_NAMESPACE_ID::BoolValue::MergeFrom(from._internal_persist());
+  }
+}
+
+void ValidatePurchaseHuaweiRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.ValidatePurchaseHuaweiRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ValidatePurchaseHuaweiRequest::CopyFrom(const ValidatePurchaseHuaweiRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.ValidatePurchaseHuaweiRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ValidatePurchaseHuaweiRequest::IsInitialized() const {
+  return true;
+}
+
+void ValidatePurchaseHuaweiRequest::InternalSwap(ValidatePurchaseHuaweiRequest* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  purchase_.Swap(&other->purchase_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  signature_.Swap(&other->signature_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  swap(persist_, other->persist_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ValidatePurchaseHuaweiRequest::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class ValidatedPurchase::_Internal {
+ public:
+  static const PROTOBUF_NAMESPACE_ID::Timestamp& purchase_time(const ValidatedPurchase* msg);
+  static const PROTOBUF_NAMESPACE_ID::Timestamp& create_time(const ValidatedPurchase* msg);
+  static const PROTOBUF_NAMESPACE_ID::Timestamp& update_time(const ValidatedPurchase* msg);
+};
+
+const PROTOBUF_NAMESPACE_ID::Timestamp&
+ValidatedPurchase::_Internal::purchase_time(const ValidatedPurchase* msg) {
+  return *msg->purchase_time_;
+}
+const PROTOBUF_NAMESPACE_ID::Timestamp&
+ValidatedPurchase::_Internal::create_time(const ValidatedPurchase* msg) {
+  return *msg->create_time_;
+}
+const PROTOBUF_NAMESPACE_ID::Timestamp&
+ValidatedPurchase::_Internal::update_time(const ValidatedPurchase* msg) {
+  return *msg->update_time_;
+}
+void ValidatedPurchase::clear_purchase_time() {
+  if (GetArena() == nullptr && purchase_time_ != nullptr) {
+    delete purchase_time_;
+  }
+  purchase_time_ = nullptr;
+}
+void ValidatedPurchase::clear_create_time() {
+  if (GetArena() == nullptr && create_time_ != nullptr) {
+    delete create_time_;
+  }
+  create_time_ = nullptr;
+}
+void ValidatedPurchase::clear_update_time() {
+  if (GetArena() == nullptr && update_time_ != nullptr) {
+    delete update_time_;
+  }
+  update_time_ = nullptr;
+}
+ValidatedPurchase::ValidatedPurchase(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:nakama.api.ValidatedPurchase)
+}
+ValidatedPurchase::ValidatedPurchase(const ValidatedPurchase& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  product_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_product_id().empty()) {
+    product_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_product_id(), 
+      GetArena());
+  }
+  transaction_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_transaction_id().empty()) {
+    transaction_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_transaction_id(), 
+      GetArena());
+  }
+  provider_response_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_provider_response().empty()) {
+    provider_response_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_provider_response(), 
+      GetArena());
+  }
+  if (from._internal_has_purchase_time()) {
+    purchase_time_ = new PROTOBUF_NAMESPACE_ID::Timestamp(*from.purchase_time_);
+  } else {
+    purchase_time_ = nullptr;
+  }
+  if (from._internal_has_create_time()) {
+    create_time_ = new PROTOBUF_NAMESPACE_ID::Timestamp(*from.create_time_);
+  } else {
+    create_time_ = nullptr;
+  }
+  if (from._internal_has_update_time()) {
+    update_time_ = new PROTOBUF_NAMESPACE_ID::Timestamp(*from.update_time_);
+  } else {
+    update_time_ = nullptr;
+  }
+  ::memcpy(&store_, &from.store_,
+    static_cast<size_t>(reinterpret_cast<char*>(&seen_before_) -
+    reinterpret_cast<char*>(&store_)) + sizeof(seen_before_));
+  // @@protoc_insertion_point(copy_constructor:nakama.api.ValidatedPurchase)
+}
+
+void ValidatedPurchase::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ValidatedPurchase_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  product_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  transaction_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  provider_response_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&purchase_time_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&seen_before_) -
+      reinterpret_cast<char*>(&purchase_time_)) + sizeof(seen_before_));
+}
+
+ValidatedPurchase::~ValidatedPurchase() {
+  // @@protoc_insertion_point(destructor:nakama.api.ValidatedPurchase)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void ValidatedPurchase::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  product_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  transaction_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  provider_response_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete purchase_time_;
+  if (this != internal_default_instance()) delete create_time_;
+  if (this != internal_default_instance()) delete update_time_;
+}
+
+void ValidatedPurchase::ArenaDtor(void* object) {
+  ValidatedPurchase* _this = reinterpret_cast< ValidatedPurchase* >(object);
+  (void)_this;
+}
+void ValidatedPurchase::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void ValidatedPurchase::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ValidatedPurchase& ValidatedPurchase::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ValidatedPurchase_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void ValidatedPurchase::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.ValidatedPurchase)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  product_id_.ClearToEmpty();
+  transaction_id_.ClearToEmpty();
+  provider_response_.ClearToEmpty();
+  if (GetArena() == nullptr && purchase_time_ != nullptr) {
+    delete purchase_time_;
+  }
+  purchase_time_ = nullptr;
+  if (GetArena() == nullptr && create_time_ != nullptr) {
+    delete create_time_;
+  }
+  create_time_ = nullptr;
+  if (GetArena() == nullptr && update_time_ != nullptr) {
+    delete update_time_;
+  }
+  update_time_ = nullptr;
+  ::memset(&store_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&seen_before_) -
+      reinterpret_cast<char*>(&store_)) + sizeof(seen_before_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ValidatedPurchase::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string product_id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_product_id();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.ValidatedPurchase.product_id"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string transaction_id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_transaction_id();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.ValidatedPurchase.transaction_id"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .nakama.api.ValidatedPurchase.Store store = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_store(static_cast<::nakama::api::ValidatedPurchase_Store>(val));
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp purchase_time = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr = ctx->ParseMessage(_internal_mutable_purchase_time(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp create_time = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr = ctx->ParseMessage(_internal_mutable_create_time(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.Timestamp update_time = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          ptr = ctx->ParseMessage(_internal_mutable_update_time(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string provider_response = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          auto str = _internal_mutable_provider_response();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.ValidatedPurchase.provider_response"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .nakama.api.ValidatedPurchase.Environment environment = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_environment(static_cast<::nakama::api::ValidatedPurchase_Environment>(val));
+        } else goto handle_unusual;
+        continue;
+      // bool seen_before = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 72)) {
+          seen_before_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ValidatedPurchase::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.ValidatedPurchase)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string product_id = 1;
+  if (this->product_id().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_product_id().data(), static_cast<int>(this->_internal_product_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.ValidatedPurchase.product_id");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_product_id(), target);
+  }
+
+  // string transaction_id = 2;
+  if (this->transaction_id().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_transaction_id().data(), static_cast<int>(this->_internal_transaction_id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.ValidatedPurchase.transaction_id");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_transaction_id(), target);
+  }
+
+  // .nakama.api.ValidatedPurchase.Store store = 3;
+  if (this->store() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      3, this->_internal_store(), target);
+  }
+
+  // .google.protobuf.Timestamp purchase_time = 4;
+  if (this->has_purchase_time()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        4, _Internal::purchase_time(this), target, stream);
+  }
+
+  // .google.protobuf.Timestamp create_time = 5;
+  if (this->has_create_time()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        5, _Internal::create_time(this), target, stream);
+  }
+
+  // .google.protobuf.Timestamp update_time = 6;
+  if (this->has_update_time()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        6, _Internal::update_time(this), target, stream);
+  }
+
+  // string provider_response = 7;
+  if (this->provider_response().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_provider_response().data(), static_cast<int>(this->_internal_provider_response().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.ValidatedPurchase.provider_response");
+    target = stream->WriteStringMaybeAliased(
+        7, this->_internal_provider_response(), target);
+  }
+
+  // .nakama.api.ValidatedPurchase.Environment environment = 8;
+  if (this->environment() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      8, this->_internal_environment(), target);
+  }
+
+  // bool seen_before = 9;
+  if (this->seen_before() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(9, this->_internal_seen_before(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.ValidatedPurchase)
+  return target;
+}
+
+size_t ValidatedPurchase::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.ValidatedPurchase)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string product_id = 1;
+  if (this->product_id().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_product_id());
+  }
+
+  // string transaction_id = 2;
+  if (this->transaction_id().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_transaction_id());
+  }
+
+  // string provider_response = 7;
+  if (this->provider_response().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_provider_response());
+  }
+
+  // .google.protobuf.Timestamp purchase_time = 4;
+  if (this->has_purchase_time()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *purchase_time_);
+  }
+
+  // .google.protobuf.Timestamp create_time = 5;
+  if (this->has_create_time()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *create_time_);
+  }
+
+  // .google.protobuf.Timestamp update_time = 6;
+  if (this->has_update_time()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *update_time_);
+  }
+
+  // .nakama.api.ValidatedPurchase.Store store = 3;
+  if (this->store() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_store());
+  }
+
+  // .nakama.api.ValidatedPurchase.Environment environment = 8;
+  if (this->environment() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_environment());
+  }
+
+  // bool seen_before = 9;
+  if (this->seen_before() != 0) {
+    total_size += 1 + 1;
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ValidatedPurchase::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.ValidatedPurchase)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ValidatedPurchase* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ValidatedPurchase>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.ValidatedPurchase)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.ValidatedPurchase)
+    MergeFrom(*source);
+  }
+}
+
+void ValidatedPurchase::MergeFrom(const ValidatedPurchase& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.ValidatedPurchase)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.product_id().size() > 0) {
+    _internal_set_product_id(from._internal_product_id());
+  }
+  if (from.transaction_id().size() > 0) {
+    _internal_set_transaction_id(from._internal_transaction_id());
+  }
+  if (from.provider_response().size() > 0) {
+    _internal_set_provider_response(from._internal_provider_response());
+  }
+  if (from.has_purchase_time()) {
+    _internal_mutable_purchase_time()->PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(from._internal_purchase_time());
+  }
+  if (from.has_create_time()) {
+    _internal_mutable_create_time()->PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(from._internal_create_time());
+  }
+  if (from.has_update_time()) {
+    _internal_mutable_update_time()->PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(from._internal_update_time());
+  }
+  if (from.store() != 0) {
+    _internal_set_store(from._internal_store());
+  }
+  if (from.environment() != 0) {
+    _internal_set_environment(from._internal_environment());
+  }
+  if (from.seen_before() != 0) {
+    _internal_set_seen_before(from._internal_seen_before());
+  }
+}
+
+void ValidatedPurchase::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.ValidatedPurchase)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ValidatedPurchase::CopyFrom(const ValidatedPurchase& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.ValidatedPurchase)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ValidatedPurchase::IsInitialized() const {
+  return true;
+}
+
+void ValidatedPurchase::InternalSwap(ValidatedPurchase* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  product_id_.Swap(&other->product_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  transaction_id_.Swap(&other->transaction_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  provider_response_.Swap(&other->provider_response_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ValidatedPurchase, seen_before_)
+      + sizeof(ValidatedPurchase::seen_before_)
+      - PROTOBUF_FIELD_OFFSET(ValidatedPurchase, purchase_time_)>(
+          reinterpret_cast<char*>(&purchase_time_),
+          reinterpret_cast<char*>(&other->purchase_time_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ValidatedPurchase::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class ValidatePurchaseResponse::_Internal {
+ public:
+};
+
+ValidatePurchaseResponse::ValidatePurchaseResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  validated_purchases_(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:nakama.api.ValidatePurchaseResponse)
+}
+ValidatePurchaseResponse::ValidatePurchaseResponse(const ValidatePurchaseResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      validated_purchases_(from.validated_purchases_) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:nakama.api.ValidatePurchaseResponse)
+}
+
+void ValidatePurchaseResponse::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ValidatePurchaseResponse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+}
+
+ValidatePurchaseResponse::~ValidatePurchaseResponse() {
+  // @@protoc_insertion_point(destructor:nakama.api.ValidatePurchaseResponse)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void ValidatePurchaseResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void ValidatePurchaseResponse::ArenaDtor(void* object) {
+  ValidatePurchaseResponse* _this = reinterpret_cast< ValidatePurchaseResponse* >(object);
+  (void)_this;
+}
+void ValidatePurchaseResponse::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void ValidatePurchaseResponse::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ValidatePurchaseResponse& ValidatePurchaseResponse::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ValidatePurchaseResponse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void ValidatePurchaseResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.ValidatePurchaseResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  validated_purchases_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ValidatePurchaseResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .nakama.api.ValidatedPurchase validated_purchases = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_validated_purchases(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ValidatePurchaseResponse::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.ValidatePurchaseResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .nakama.api.ValidatedPurchase validated_purchases = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_validated_purchases_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_validated_purchases(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.ValidatePurchaseResponse)
+  return target;
+}
+
+size_t ValidatePurchaseResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.ValidatePurchaseResponse)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .nakama.api.ValidatedPurchase validated_purchases = 1;
+  total_size += 1UL * this->_internal_validated_purchases_size();
+  for (const auto& msg : this->validated_purchases_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ValidatePurchaseResponse::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.ValidatePurchaseResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ValidatePurchaseResponse* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ValidatePurchaseResponse>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.ValidatePurchaseResponse)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.ValidatePurchaseResponse)
+    MergeFrom(*source);
+  }
+}
+
+void ValidatePurchaseResponse::MergeFrom(const ValidatePurchaseResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.ValidatePurchaseResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  validated_purchases_.MergeFrom(from.validated_purchases_);
+}
+
+void ValidatePurchaseResponse::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.ValidatePurchaseResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ValidatePurchaseResponse::CopyFrom(const ValidatePurchaseResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.ValidatePurchaseResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ValidatePurchaseResponse::IsInitialized() const {
+  return true;
+}
+
+void ValidatePurchaseResponse::InternalSwap(ValidatePurchaseResponse* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  validated_purchases_.InternalSwap(&other->validated_purchases_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ValidatePurchaseResponse::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+class PurchaseList::_Internal {
+ public:
+};
+
+PurchaseList::PurchaseList(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  validated_purchases_(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:nakama.api.PurchaseList)
+}
+PurchaseList::PurchaseList(const PurchaseList& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      validated_purchases_(from.validated_purchases_) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  cursor_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_cursor().empty()) {
+    cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_cursor(), 
+      GetArena());
+  }
+  prev_cursor_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_prev_cursor().empty()) {
+    prev_cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_prev_cursor(), 
+      GetArena());
+  }
+  // @@protoc_insertion_point(copy_constructor:nakama.api.PurchaseList)
+}
+
+void PurchaseList::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PurchaseList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  cursor_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  prev_cursor_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+PurchaseList::~PurchaseList() {
+  // @@protoc_insertion_point(destructor:nakama.api.PurchaseList)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void PurchaseList::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  cursor_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  prev_cursor_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void PurchaseList::ArenaDtor(void* object) {
+  PurchaseList* _this = reinterpret_cast< PurchaseList* >(object);
+  (void)_this;
+}
+void PurchaseList::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void PurchaseList::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const PurchaseList& PurchaseList::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PurchaseList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void PurchaseList::Clear() {
+// @@protoc_insertion_point(message_clear_start:nakama.api.PurchaseList)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  validated_purchases_.Clear();
+  cursor_.ClearToEmpty();
+  prev_cursor_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* PurchaseList::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .nakama.api.ValidatedPurchase validated_purchases = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_validated_purchases(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // string cursor = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_cursor();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.PurchaseList.cursor"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string prev_cursor = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          auto str = _internal_mutable_prev_cursor();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.PurchaseList.prev_cursor"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* PurchaseList::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:nakama.api.PurchaseList)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .nakama.api.ValidatedPurchase validated_purchases = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_validated_purchases_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_validated_purchases(i), target, stream);
+  }
+
+  // string cursor = 2;
+  if (this->cursor().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_cursor().data(), static_cast<int>(this->_internal_cursor().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.PurchaseList.cursor");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_cursor(), target);
+  }
+
+  // string prev_cursor = 3;
+  if (this->prev_cursor().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_prev_cursor().data(), static_cast<int>(this->_internal_prev_cursor().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.api.PurchaseList.prev_cursor");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_prev_cursor(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:nakama.api.PurchaseList)
+  return target;
+}
+
+size_t PurchaseList::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:nakama.api.PurchaseList)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .nakama.api.ValidatedPurchase validated_purchases = 1;
+  total_size += 1UL * this->_internal_validated_purchases_size();
+  for (const auto& msg : this->validated_purchases_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // string cursor = 2;
+  if (this->cursor().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_cursor());
+  }
+
+  // string prev_cursor = 3;
+  if (this->prev_cursor().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_prev_cursor());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void PurchaseList::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:nakama.api.PurchaseList)
+  GOOGLE_DCHECK_NE(&from, this);
+  const PurchaseList* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<PurchaseList>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:nakama.api.PurchaseList)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:nakama.api.PurchaseList)
+    MergeFrom(*source);
+  }
+}
+
+void PurchaseList::MergeFrom(const PurchaseList& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:nakama.api.PurchaseList)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  validated_purchases_.MergeFrom(from.validated_purchases_);
+  if (from.cursor().size() > 0) {
+    _internal_set_cursor(from._internal_cursor());
+  }
+  if (from.prev_cursor().size() > 0) {
+    _internal_set_prev_cursor(from._internal_prev_cursor());
+  }
+}
+
+void PurchaseList::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:nakama.api.PurchaseList)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PurchaseList::CopyFrom(const PurchaseList& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:nakama.api.PurchaseList)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PurchaseList::IsInitialized() const {
+  return true;
+}
+
+void PurchaseList::InternalSwap(PurchaseList* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  validated_purchases_.InternalSwap(&other->validated_purchases_);
+  cursor_.Swap(&other->cursor_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  prev_cursor_.Swap(&other->prev_cursor_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata PurchaseList::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 class WriteLeaderboardRecordRequest_LeaderboardRecordWrite::_Internal {
  public:
 };
@@ -32008,8 +35257,8 @@ WriteLeaderboardRecordRequest_LeaderboardRecordWrite::WriteLeaderboardRecordRequ
       GetArena());
   }
   ::memcpy(&score_, &from.score_,
-    static_cast<size_t>(reinterpret_cast<char*>(&subscore_) -
-    reinterpret_cast<char*>(&score_)) + sizeof(subscore_));
+    static_cast<size_t>(reinterpret_cast<char*>(&operator__) -
+    reinterpret_cast<char*>(&score_)) + sizeof(operator__));
   // @@protoc_insertion_point(copy_constructor:nakama.api.WriteLeaderboardRecordRequest.LeaderboardRecordWrite)
 }
 
@@ -32018,8 +35267,8 @@ void WriteLeaderboardRecordRequest_LeaderboardRecordWrite::SharedCtor() {
   metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
       reinterpret_cast<char*>(&score_) - reinterpret_cast<char*>(this)),
-      0, static_cast<size_t>(reinterpret_cast<char*>(&subscore_) -
-      reinterpret_cast<char*>(&score_)) + sizeof(subscore_));
+      0, static_cast<size_t>(reinterpret_cast<char*>(&operator__) -
+      reinterpret_cast<char*>(&score_)) + sizeof(operator__));
 }
 
 WriteLeaderboardRecordRequest_LeaderboardRecordWrite::~WriteLeaderboardRecordRequest_LeaderboardRecordWrite() {
@@ -32056,8 +35305,8 @@ void WriteLeaderboardRecordRequest_LeaderboardRecordWrite::Clear() {
 
   metadata_.ClearToEmpty();
   ::memset(&score_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&subscore_) -
-      reinterpret_cast<char*>(&score_)) + sizeof(subscore_));
+      reinterpret_cast<char*>(&operator__) -
+      reinterpret_cast<char*>(&score_)) + sizeof(operator__));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -32089,6 +35338,14 @@ const char* WriteLeaderboardRecordRequest_LeaderboardRecordWrite::_InternalParse
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.WriteLeaderboardRecordRequest.LeaderboardRecordWrite.metadata"));
           CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .nakama.api.Operator operator = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_operator_(static_cast<::nakama::api::Operator>(val));
         } else goto handle_unusual;
         continue;
       default: {
@@ -32141,6 +35398,13 @@ failure:
         3, this->_internal_metadata(), target);
   }
 
+  // .nakama.api.Operator operator = 4;
+  if (this->operator_() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      4, this->_internal_operator_(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -32176,6 +35440,12 @@ size_t WriteLeaderboardRecordRequest_LeaderboardRecordWrite::ByteSizeLong() cons
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
         this->_internal_subscore());
+  }
+
+  // .nakama.api.Operator operator = 4;
+  if (this->operator_() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_operator_());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -32218,6 +35488,9 @@ void WriteLeaderboardRecordRequest_LeaderboardRecordWrite::MergeFrom(const Write
   if (from.subscore() != 0) {
     _internal_set_subscore(from._internal_subscore());
   }
+  if (from.operator_() != 0) {
+    _internal_set_operator_(from._internal_operator_());
+  }
 }
 
 void WriteLeaderboardRecordRequest_LeaderboardRecordWrite::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -32243,8 +35516,8 @@ void WriteLeaderboardRecordRequest_LeaderboardRecordWrite::InternalSwap(WriteLea
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   metadata_.Swap(&other->metadata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(WriteLeaderboardRecordRequest_LeaderboardRecordWrite, subscore_)
-      + sizeof(WriteLeaderboardRecordRequest_LeaderboardRecordWrite::subscore_)
+      PROTOBUF_FIELD_OFFSET(WriteLeaderboardRecordRequest_LeaderboardRecordWrite, operator__)
+      + sizeof(WriteLeaderboardRecordRequest_LeaderboardRecordWrite::operator__)
       - PROTOBUF_FIELD_OFFSET(WriteLeaderboardRecordRequest_LeaderboardRecordWrite, score_)>(
           reinterpret_cast<char*>(&score_),
           reinterpret_cast<char*>(&other->score_));
@@ -33146,8 +36419,8 @@ WriteTournamentRecordRequest_TournamentRecordWrite::WriteTournamentRecordRequest
       GetArena());
   }
   ::memcpy(&score_, &from.score_,
-    static_cast<size_t>(reinterpret_cast<char*>(&subscore_) -
-    reinterpret_cast<char*>(&score_)) + sizeof(subscore_));
+    static_cast<size_t>(reinterpret_cast<char*>(&operator__) -
+    reinterpret_cast<char*>(&score_)) + sizeof(operator__));
   // @@protoc_insertion_point(copy_constructor:nakama.api.WriteTournamentRecordRequest.TournamentRecordWrite)
 }
 
@@ -33156,8 +36429,8 @@ void WriteTournamentRecordRequest_TournamentRecordWrite::SharedCtor() {
   metadata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
       reinterpret_cast<char*>(&score_) - reinterpret_cast<char*>(this)),
-      0, static_cast<size_t>(reinterpret_cast<char*>(&subscore_) -
-      reinterpret_cast<char*>(&score_)) + sizeof(subscore_));
+      0, static_cast<size_t>(reinterpret_cast<char*>(&operator__) -
+      reinterpret_cast<char*>(&score_)) + sizeof(operator__));
 }
 
 WriteTournamentRecordRequest_TournamentRecordWrite::~WriteTournamentRecordRequest_TournamentRecordWrite() {
@@ -33194,8 +36467,8 @@ void WriteTournamentRecordRequest_TournamentRecordWrite::Clear() {
 
   metadata_.ClearToEmpty();
   ::memset(&score_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&subscore_) -
-      reinterpret_cast<char*>(&score_)) + sizeof(subscore_));
+      reinterpret_cast<char*>(&operator__) -
+      reinterpret_cast<char*>(&score_)) + sizeof(operator__));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -33227,6 +36500,14 @@ const char* WriteTournamentRecordRequest_TournamentRecordWrite::_InternalParse(c
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.api.WriteTournamentRecordRequest.TournamentRecordWrite.metadata"));
           CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .nakama.api.Operator operator = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_operator_(static_cast<::nakama::api::Operator>(val));
         } else goto handle_unusual;
         continue;
       default: {
@@ -33279,6 +36560,13 @@ failure:
         3, this->_internal_metadata(), target);
   }
 
+  // .nakama.api.Operator operator = 4;
+  if (this->operator_() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      4, this->_internal_operator_(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -33314,6 +36602,12 @@ size_t WriteTournamentRecordRequest_TournamentRecordWrite::ByteSizeLong() const 
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
         this->_internal_subscore());
+  }
+
+  // .nakama.api.Operator operator = 4;
+  if (this->operator_() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_operator_());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -33356,6 +36650,9 @@ void WriteTournamentRecordRequest_TournamentRecordWrite::MergeFrom(const WriteTo
   if (from.subscore() != 0) {
     _internal_set_subscore(from._internal_subscore());
   }
+  if (from.operator_() != 0) {
+    _internal_set_operator_(from._internal_operator_());
+  }
 }
 
 void WriteTournamentRecordRequest_TournamentRecordWrite::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -33381,8 +36678,8 @@ void WriteTournamentRecordRequest_TournamentRecordWrite::InternalSwap(WriteTourn
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   metadata_.Swap(&other->metadata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(WriteTournamentRecordRequest_TournamentRecordWrite, subscore_)
-      + sizeof(WriteTournamentRecordRequest_TournamentRecordWrite::subscore_)
+      PROTOBUF_FIELD_OFFSET(WriteTournamentRecordRequest_TournamentRecordWrite, operator__)
+      + sizeof(WriteTournamentRecordRequest_TournamentRecordWrite::operator__)
       - PROTOBUF_FIELD_OFFSET(WriteTournamentRecordRequest_TournamentRecordWrite, score_)>(
           reinterpret_cast<char*>(&score_),
           reinterpret_cast<char*>(&other->score_));
@@ -33720,6 +37017,9 @@ template<> PROTOBUF_NOINLINE ::nakama::api::SessionRefreshRequest_VarsEntry_DoNo
 template<> PROTOBUF_NOINLINE ::nakama::api::SessionRefreshRequest* Arena::CreateMaybeMessage< ::nakama::api::SessionRefreshRequest >(Arena* arena) {
   return Arena::CreateMessageInternal< ::nakama::api::SessionRefreshRequest >(arena);
 }
+template<> PROTOBUF_NOINLINE ::nakama::api::SessionLogoutRequest* Arena::CreateMaybeMessage< ::nakama::api::SessionLogoutRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::nakama::api::SessionLogoutRequest >(arena);
+}
 template<> PROTOBUF_NOINLINE ::nakama::api::AuthenticateAppleRequest* Arena::CreateMaybeMessage< ::nakama::api::AuthenticateAppleRequest >(Arena* arena) {
   return Arena::CreateMessageInternal< ::nakama::api::AuthenticateAppleRequest >(arena);
 }
@@ -33821,6 +37121,12 @@ template<> PROTOBUF_NOINLINE ::nakama::api::JoinTournamentRequest* Arena::Create
 }
 template<> PROTOBUF_NOINLINE ::nakama::api::KickGroupUsersRequest* Arena::CreateMaybeMessage< ::nakama::api::KickGroupUsersRequest >(Arena* arena) {
   return Arena::CreateMessageInternal< ::nakama::api::KickGroupUsersRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::nakama::api::Leaderboard* Arena::CreateMaybeMessage< ::nakama::api::Leaderboard >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::nakama::api::Leaderboard >(arena);
+}
+template<> PROTOBUF_NOINLINE ::nakama::api::LeaderboardList* Arena::CreateMaybeMessage< ::nakama::api::LeaderboardList >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::nakama::api::LeaderboardList >(arena);
 }
 template<> PROTOBUF_NOINLINE ::nakama::api::LeaderboardRecord* Arena::CreateMaybeMessage< ::nakama::api::LeaderboardRecord >(Arena* arena) {
   return Arena::CreateMessageInternal< ::nakama::api::LeaderboardRecord >(arena);
@@ -33947,6 +37253,24 @@ template<> PROTOBUF_NOINLINE ::nakama::api::UserGroupList* Arena::CreateMaybeMes
 }
 template<> PROTOBUF_NOINLINE ::nakama::api::Users* Arena::CreateMaybeMessage< ::nakama::api::Users >(Arena* arena) {
   return Arena::CreateMessageInternal< ::nakama::api::Users >(arena);
+}
+template<> PROTOBUF_NOINLINE ::nakama::api::ValidatePurchaseAppleRequest* Arena::CreateMaybeMessage< ::nakama::api::ValidatePurchaseAppleRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::nakama::api::ValidatePurchaseAppleRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::nakama::api::ValidatePurchaseGoogleRequest* Arena::CreateMaybeMessage< ::nakama::api::ValidatePurchaseGoogleRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::nakama::api::ValidatePurchaseGoogleRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::nakama::api::ValidatePurchaseHuaweiRequest* Arena::CreateMaybeMessage< ::nakama::api::ValidatePurchaseHuaweiRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::nakama::api::ValidatePurchaseHuaweiRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::nakama::api::ValidatedPurchase* Arena::CreateMaybeMessage< ::nakama::api::ValidatedPurchase >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::nakama::api::ValidatedPurchase >(arena);
+}
+template<> PROTOBUF_NOINLINE ::nakama::api::ValidatePurchaseResponse* Arena::CreateMaybeMessage< ::nakama::api::ValidatePurchaseResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::nakama::api::ValidatePurchaseResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::nakama::api::PurchaseList* Arena::CreateMaybeMessage< ::nakama::api::PurchaseList >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::nakama::api::PurchaseList >(arena);
 }
 template<> PROTOBUF_NOINLINE ::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite* Arena::CreateMaybeMessage< ::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite >(Arena* arena) {
   return Arena::CreateMessageInternal< ::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite >(arena);

@@ -24,6 +24,15 @@
 extern "C" {
 #endif
 
+ /// Operator that can be used to override the one set in the leaderboard.
+typedef enum NAKAMA_API NOperator {
+    NO_OVERRIDE = 0,        ///< Do not override the leaderboard operator.
+    BEST = 1,        ///< Override the leaderboard operator with BEST.
+    SET = 2,        ///< Override the leaderboard operator with SET.
+    INCREMENT = 3,        ///< Override the leaderboard operator with INCREMENT.
+    DECREMENT = 4    ///< Override the leaderboard operator with DECREMENT.
+}eNOperator;
+
 /// The group role status.
 typedef enum NAKAMA_API NUserGroupState
 {

@@ -360,6 +360,8 @@ void assign(NTournament & tournament, const nakama::api::Tournament & data)
     assign(tournament.duration, data.duration());
     assign(tournament.startActive, data.start_active());
     assign(tournament.metadata, data.metadata());
+    assign(tournament.prevReset, data.prev_reset());
+    tournament.operatorType = static_cast<NOperator>(data.operator_());
 }
 
 void assign(NTournamentRecordList & list, const nakama::api::TournamentRecordList & data)
@@ -412,6 +414,24 @@ void assign(NRpc & rpc, const nakama::api::Rpc & data)
     assign(rpc.id, data.id());
     assign(rpc.payload, data.payload());
     assign(rpc.httpKey, data.http_key());
+}
+
+void assign(NLeaderboard& leaderboard, const nakama::api::Leaderboard& data)
+{
+    assign(leaderboard.id, data.id());
+    assign(leaderboard.sortOrder, data.sort_order());
+    leaderboard.operatorType = static_cast<NOperator>(data.operator_());
+    assign(leaderboard.prevReset, data.prev_reset());
+    assign(leaderboard.nextReset, data.next_reset());
+    assign(leaderboard.metadata, data.metadata());
+    assign(leaderboard.createTime, data.create_time());
+    assign(leaderboard.authoritative, data.authoritative());
+}
+
+void assign(NLeaderboardList& list, const nakama::api::LeaderboardList& data)
+{
+    assign(list.leaderboards , data.leaderboards());
+    assign(list.cursor, data.cursor());
 }
 
 void assign(NChannelMessageAck & ack, const::nakama::realtime::ChannelMessageAck & data)

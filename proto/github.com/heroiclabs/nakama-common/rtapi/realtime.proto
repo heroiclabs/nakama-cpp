@@ -301,7 +301,10 @@ message Match {
 }
 
 // Create a new realtime match.
-message MatchCreate {}
+message MatchCreate {
+  // Optional name to use when creating the match.
+  string name = 1;
+}
 
 // Realtime match data received from the server.
 message MatchData {
@@ -371,6 +374,8 @@ message MatchmakerAdd {
   map<string, string> string_properties = 4;
   // Numeric properties.
   map<string, double> numeric_properties = 5;
+  // Optional multiple of the count that must be satisfied.
+  google.protobuf.Int32Value count_multiple = 6;
 }
 
 // A successful matchmaking result.
@@ -521,6 +526,8 @@ message PartyMatchmakerAdd {
   map<string, string> string_properties = 5;
   // Numeric properties.
   map<string, double> numeric_properties = 6;
+  // Optional multiple of the count that must be satisfied.
+  google.protobuf.Int32Value count_multiple = 7;
 }
 
 // Cancel a party matchmaking process using a ticket.

@@ -166,6 +166,14 @@ message SessionRefreshRequest {
   map<string, string> vars = 2;
 }
 
+// Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
+message SessionLogoutRequest {
+  // Session token to log out.
+  string token = 1;
+  // Refresh token to invalidate.
+  string refresh_token = 2;
+}
+
 // Authenticate against the server with Apple Sign In.
 message AuthenticateAppleRequest {
   // The Apple account details.
@@ -528,6 +536,34 @@ message KickGroupUsersRequest {
   repeated string user_ids = 2;
 }
 
+// A leaderboard on the server.
+message Leaderboard {
+  // The ID of the leaderboard.
+  string id = 1;
+  // ASC(0) or DESC(1) sort mode of scores in the leaderboard.
+  uint32 sort_order = 2;
+  // BEST, SET, INCREMENT or DECREMENT operator mode of the leaderboard.
+  Operator operator = 3;
+  // The UNIX time when the leaderboard was previously reset. A computed value.
+  uint32 prev_reset = 4;
+  // The UNIX time when the leaderboard is next playable. A computed value.
+  uint32 next_reset = 5;
+  // Additional information stored as a JSON object.
+  string metadata = 6;
+  // The UNIX time when the leaderboard was created.
+  google.protobuf.Timestamp create_time = 7;
+  // Wether the leaderboard was created authoritatively or not.
+  bool authoritative = 8;
+}
+
+// A list of leaderboards
+message LeaderboardList {
+  // The list of leaderboards returned.
+  repeated Leaderboard leaderboards = 1;
+  // A pagination cursor (optional).
+  string cursor = 2;
+}
+
 // Represents a complete leaderboard record with all scores and associated metadata.
 message LeaderboardRecord {
   // The ID of the leaderboard this score belongs to.
@@ -620,6 +656,12 @@ message ListGroupsRequest {
   string cursor = 2;
   // Max number of groups to return. Between 1 and 100.
   google.protobuf.Int32Value limit = 3;
+  // Language tag filter
+  string lang_tag = 4;
+  // Number of group members
+  google.protobuf.Int32Value members = 5;
+  // Optional Open/Closed filter.
+  google.protobuf.BoolValue open = 6;
 }
 
 // List all users that are part of a group.
@@ -914,7 +956,7 @@ message Tournament {
   string description = 3;
   // The category of the tournament. e.g. "vip" could be category 1.
   uint32 category = 4;
-  // ASC or DESC sort mode of scores in the tournament.
+  // ASC (0) or DESC (1) sort mode of scores in the tournament.
   uint32 sort_order = 5;
   // The current number of players in the tournament.
   uint32 size = 6;
@@ -940,6 +982,10 @@ message Tournament {
   uint32 duration = 16;
   // The UNIX time when the tournament start being active. A computed value.
   uint32 start_active = 17;
+  // The UNIX time when the tournament was last reset. A computed value.
+  uint32 prev_reset = 18;
+  // Operator.
+  Operator operator = 19;
 }
 
 // A list of tournaments.
@@ -1068,6 +1114,88 @@ message Users {
   repeated User users = 1;
 }
 
+// Apple IAP Purchases validation request
+message ValidatePurchaseAppleRequest {
+  // Base64 encoded Apple receipt data payload.
+  string receipt = 1;
+  // Persist the purchase
+  google.protobuf.BoolValue persist = 2;
+}
+
+// Google IAP Purchase validation request
+message ValidatePurchaseGoogleRequest {
+  // JSON encoded Google purchase payload.
+  string purchase = 1;
+  // Persist the purchase
+  google.protobuf.BoolValue persist = 2;
+}
+
+// Huawei IAP Purchase validation request
+message ValidatePurchaseHuaweiRequest {
+  // JSON encoded Huawei InAppPurchaseData.
+  string purchase = 1;
+  // InAppPurchaseData signature.
+  string signature = 2;
+  // Persist the purchase
+  google.protobuf.BoolValue persist = 3;
+}
+
+// Validated Purchase stored by Nakama.
+message ValidatedPurchase {
+  // Validation Provider
+  enum Store {
+    // Apple App Store
+    APPLE_APP_STORE = 0;
+    // Google Play Store
+    GOOGLE_PLAY_STORE = 1;
+    // Huawei App Gallery
+    HUAWEI_APP_GALLERY = 2;
+  }
+  // Environment where the purchase took place
+  enum Environment {
+    // Unknown environment.
+    UNKNOWN = 0;
+    // Sandbox/test environment.
+    SANDBOX = 1;
+    // Production environment.
+    PRODUCTION = 2;
+  }
+  // Purchase Product ID.
+  string product_id = 1;
+  // Purchase Transaction ID.
+  string transaction_id = 2;
+  // Store identifier
+  Store store = 3;
+  // UNIX Timestamp when the purchase was done.
+  google.protobuf.Timestamp purchase_time = 4;
+  // UNIX Timestamp when the receipt validation was stored in DB.
+  google.protobuf.Timestamp create_time = 5;
+  // UNIX Timestamp when the receipt validation was updated in DB.
+  google.protobuf.Timestamp update_time = 6;
+  // Raw provider validation response.
+  string provider_response = 7;
+  // Whether the purchase was done in production or sandbox environment.
+  Environment environment = 8;
+  // Whether the purchase had already been validated by Nakama before.
+  bool seen_before = 9;
+}
+
+// Validate IAP response
+message ValidatePurchaseResponse {
+  // Newly seen validated purchases.
+  repeated ValidatedPurchase validated_purchases = 1;
+}
+
+// A list of validated purchases stored by Nakama.
+message PurchaseList {
+  // Stored validated purchases.
+  repeated ValidatedPurchase validated_purchases = 1;
+  // The cursor to send when retrieving the next page, if any.
+  string cursor = 2;
+  // The cursor to send when retrieving the next page, if any.
+  string prev_cursor = 3;
+}
+
 // A request to submit a score to a leaderboard.
 message WriteLeaderboardRecordRequest {
   // Record values to write.
@@ -1078,6 +1206,8 @@ message WriteLeaderboardRecordRequest {
     int64 subscore = 2;
     // Optional record metadata.
     string metadata = 3;
+    // Operator override.
+    Operator operator = 4;
   }
 
   // The ID of the leaderboard to write to.
@@ -1118,10 +1248,26 @@ message WriteTournamentRecordRequest {
     int64 subscore = 2;
     // A JSON object of additional properties (optional).
     string metadata = 3;
+    // Operator override.
+    Operator operator = 4;
   }
 
   // The tournament ID to write the record for.
   string tournament_id = 1;
   // Record input.
   TournamentRecordWrite record = 2;
+}
+
+// Operator that can be used to override the one set in the leaderboard.
+enum Operator {
+  // Do not override the leaderboard operator.
+  NO_OVERRIDE = 0;
+  // Override the leaderboard operator with BEST.
+  BEST = 1;
+  // Override the leaderboard operator with SET.
+  SET = 2;
+  // Override the leaderboard operator with INCREMENT.
+  INCREMENT = 3;
+  // Override the leaderboard operator with DECREMENT.
+  DECREMENT = 4;
 }

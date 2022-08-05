@@ -446,11 +446,13 @@ void NRtClient::removeChatMessage(const std::string & channelId, const std::stri
     send(msg);
 }
 
-void NRtClient::createMatch(std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback)
+void NRtClient::createMatch(const std::string& name, std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
     ::nakama::realtime::Envelope msg;
+
+    msg.mutable_match_create()->set_name(name);
 
     msg.mutable_match_create();
 
@@ -555,6 +557,7 @@ void NRtClient::addMatchmaker(
     const opt::optional<std::string>& query,
     const NStringMap & stringProperties,
     const NStringDoubleMap & numericProperties,
+    const opt::optional <int32_t>& countMultiple,
     std::function<void(const NMatchmakerTicket&)> successCallback,
     RtErrorCallback errorCallback)
 {
@@ -576,6 +579,8 @@ void NRtClient::addMatchmaker(
     {
         (*data->mutable_numeric_properties())[it.first] = it.second;
     }
+
+    if (countMultiple) data->mutable_count_multiple()->set_value(*countMultiple);
 
     RtRequestContext * ctx = createReqContext(msg);
 

@@ -1543,6 +1543,9 @@ NAKAMA_NAMESPACE_BEGIN
             const std::string& name,
             int32_t limit,
             const std::string& cursor,
+            const std::string& langTag,
+            int32_t members,
+            const opt::optional<bool> open,
             std::function<void(NGroupListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override
@@ -1561,6 +1564,9 @@ NAKAMA_NAMESPACE_BEGIN
                 name.c_str(),
                 &limit,
                 cursor.empty() ? nullptr : cursor.c_str(),
+                langTag.c_str(),
+                &members,
+                open ? &(*open) : nullptr,
                 reqId,
                 &NClientWrapper::reqOkGroupListStatic,
                 &NClientWrapper::reqErrorStatic);
@@ -1863,6 +1869,7 @@ NAKAMA_NAMESPACE_BEGIN
             int64_t score,
             const opt::optional<int64_t>& subscore,
             const opt::optional<std::string>& metadata,
+            NOperator operatorType,
             std::function<void(NLeaderboardRecord)> successCallback,
             ErrorCallback errorCallback
         ) override
@@ -1882,6 +1889,7 @@ NAKAMA_NAMESPACE_BEGIN
                 score,
                 subscore ? &(*subscore) : nullptr,
                 metadata ? (*metadata).c_str() : nullptr,
+                (eNOperator)operatorType,
                 reqId,
                 &NClientWrapper::reqOkLeaderboardRecordStatic,
                 &NClientWrapper::reqErrorStatic);
@@ -1893,6 +1901,7 @@ NAKAMA_NAMESPACE_BEGIN
             int64_t score,
             const opt::optional<int64_t>& subscore,
             const opt::optional<std::string>& metadata,
+            NOperator operatorType,
             std::function<void(NLeaderboardRecord)> successCallback,
             ErrorCallback errorCallback
         ) override
@@ -1912,6 +1921,7 @@ NAKAMA_NAMESPACE_BEGIN
                 score,
                 subscore ? &(*subscore) : nullptr,
                 metadata ? (*metadata).c_str() : nullptr,
+                (eNOperator)operatorType,
                 reqId,
                 &NClientWrapper::reqOkLeaderboardRecordStatic,
                 &NClientWrapper::reqErrorStatic);

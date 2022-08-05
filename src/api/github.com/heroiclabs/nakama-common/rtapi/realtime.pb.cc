@@ -39,7 +39,7 @@ extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frt
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchJoin_MetadataEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchPresenceEvent_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MatchmakerMatched_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
@@ -60,7 +60,7 @@ extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frt
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyJoinRequestList_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PartyLeader_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyLeave_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PartyMatchmakerRemove_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
@@ -636,10 +636,11 @@ static void InitDefaultsscc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakam
   }
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, 0, InitDefaultsscc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
       &scc_info_MatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
-      &scc_info_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+      &scc_info_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_Int32Value_google_2fprotobuf_2fwrappers_2eproto.base,}};
 
 static void InitDefaultsscc_info_MatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -917,10 +918,11 @@ static void InitDefaultsscc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2f
   }
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, 0, InitDefaultsscc_info_PartyMatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto}, {
       &scc_info_PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
-      &scc_info_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,}};
+      &scc_info_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base,
+      &scc_info_Int32Value_google_2fprotobuf_2fwrappers_2eproto.base,}};
 
 static void InitDefaultsscc_info_PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1336,6 +1338,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::nakama::realtime::MatchCreate, name_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::nakama::realtime::MatchData, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1416,6 +1419,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   PROTOBUF_FIELD_OFFSET(::nakama::realtime::MatchmakerAdd, query_),
   PROTOBUF_FIELD_OFFSET(::nakama::realtime::MatchmakerAdd, string_properties_),
   PROTOBUF_FIELD_OFFSET(::nakama::realtime::MatchmakerAdd, numeric_properties_),
+  PROTOBUF_FIELD_OFFSET(::nakama::realtime::MatchmakerAdd, count_multiple_),
   PROTOBUF_FIELD_OFFSET(::nakama::realtime::MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::nakama::realtime::MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1578,6 +1582,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_github_2ecom_2fheroiclabs_2fna
   PROTOBUF_FIELD_OFFSET(::nakama::realtime::PartyMatchmakerAdd, query_),
   PROTOBUF_FIELD_OFFSET(::nakama::realtime::PartyMatchmakerAdd, string_properties_),
   PROTOBUF_FIELD_OFFSET(::nakama::realtime::PartyMatchmakerAdd, numeric_properties_),
+  PROTOBUF_FIELD_OFFSET(::nakama::realtime::PartyMatchmakerAdd, count_multiple_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::nakama::realtime::PartyMatchmakerRemove, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1710,52 +1715,52 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 142, -1, sizeof(::nakama::realtime::Error)},
   { 150, -1, sizeof(::nakama::realtime::Match)},
   { 161, -1, sizeof(::nakama::realtime::MatchCreate)},
-  { 166, -1, sizeof(::nakama::realtime::MatchData)},
-  { 176, -1, sizeof(::nakama::realtime::MatchDataSend)},
-  { 186, 193, sizeof(::nakama::realtime::MatchJoin_MetadataEntry_DoNotUse)},
-  { 195, -1, sizeof(::nakama::realtime::MatchJoin)},
-  { 204, -1, sizeof(::nakama::realtime::MatchLeave)},
-  { 210, -1, sizeof(::nakama::realtime::MatchPresenceEvent)},
-  { 218, 225, sizeof(::nakama::realtime::MatchmakerAdd_StringPropertiesEntry_DoNotUse)},
-  { 227, 234, sizeof(::nakama::realtime::MatchmakerAdd_NumericPropertiesEntry_DoNotUse)},
-  { 236, -1, sizeof(::nakama::realtime::MatchmakerAdd)},
-  { 246, 253, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse)},
-  { 255, 262, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse)},
-  { 264, -1, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser)},
-  { 273, -1, sizeof(::nakama::realtime::MatchmakerMatched)},
-  { 284, -1, sizeof(::nakama::realtime::MatchmakerRemove)},
-  { 290, -1, sizeof(::nakama::realtime::MatchmakerTicket)},
-  { 296, -1, sizeof(::nakama::realtime::Notifications)},
-  { 302, -1, sizeof(::nakama::realtime::Party)},
-  { 313, -1, sizeof(::nakama::realtime::PartyCreate)},
-  { 320, -1, sizeof(::nakama::realtime::PartyJoin)},
-  { 326, -1, sizeof(::nakama::realtime::PartyLeave)},
-  { 332, -1, sizeof(::nakama::realtime::PartyPromote)},
-  { 339, -1, sizeof(::nakama::realtime::PartyLeader)},
-  { 346, -1, sizeof(::nakama::realtime::PartyAccept)},
-  { 353, -1, sizeof(::nakama::realtime::PartyRemove)},
-  { 360, -1, sizeof(::nakama::realtime::PartyClose)},
-  { 366, -1, sizeof(::nakama::realtime::PartyJoinRequestList)},
-  { 372, -1, sizeof(::nakama::realtime::PartyJoinRequest)},
-  { 379, 386, sizeof(::nakama::realtime::PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse)},
-  { 388, 395, sizeof(::nakama::realtime::PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse)},
-  { 397, -1, sizeof(::nakama::realtime::PartyMatchmakerAdd)},
-  { 408, -1, sizeof(::nakama::realtime::PartyMatchmakerRemove)},
-  { 415, -1, sizeof(::nakama::realtime::PartyMatchmakerTicket)},
-  { 422, -1, sizeof(::nakama::realtime::PartyData)},
-  { 431, -1, sizeof(::nakama::realtime::PartyDataSend)},
-  { 439, -1, sizeof(::nakama::realtime::PartyPresenceEvent)},
-  { 447, -1, sizeof(::nakama::realtime::Ping)},
-  { 452, -1, sizeof(::nakama::realtime::Pong)},
-  { 457, -1, sizeof(::nakama::realtime::Status)},
-  { 463, -1, sizeof(::nakama::realtime::StatusFollow)},
-  { 470, -1, sizeof(::nakama::realtime::StatusPresenceEvent)},
-  { 477, -1, sizeof(::nakama::realtime::StatusUnfollow)},
-  { 483, -1, sizeof(::nakama::realtime::StatusUpdate)},
-  { 489, -1, sizeof(::nakama::realtime::Stream)},
-  { 498, -1, sizeof(::nakama::realtime::StreamData)},
-  { 507, -1, sizeof(::nakama::realtime::StreamPresenceEvent)},
-  { 515, -1, sizeof(::nakama::realtime::UserPresence)},
+  { 167, -1, sizeof(::nakama::realtime::MatchData)},
+  { 177, -1, sizeof(::nakama::realtime::MatchDataSend)},
+  { 187, 194, sizeof(::nakama::realtime::MatchJoin_MetadataEntry_DoNotUse)},
+  { 196, -1, sizeof(::nakama::realtime::MatchJoin)},
+  { 205, -1, sizeof(::nakama::realtime::MatchLeave)},
+  { 211, -1, sizeof(::nakama::realtime::MatchPresenceEvent)},
+  { 219, 226, sizeof(::nakama::realtime::MatchmakerAdd_StringPropertiesEntry_DoNotUse)},
+  { 228, 235, sizeof(::nakama::realtime::MatchmakerAdd_NumericPropertiesEntry_DoNotUse)},
+  { 237, -1, sizeof(::nakama::realtime::MatchmakerAdd)},
+  { 248, 255, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_StringPropertiesEntry_DoNotUse)},
+  { 257, 264, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser_NumericPropertiesEntry_DoNotUse)},
+  { 266, -1, sizeof(::nakama::realtime::MatchmakerMatched_MatchmakerUser)},
+  { 275, -1, sizeof(::nakama::realtime::MatchmakerMatched)},
+  { 286, -1, sizeof(::nakama::realtime::MatchmakerRemove)},
+  { 292, -1, sizeof(::nakama::realtime::MatchmakerTicket)},
+  { 298, -1, sizeof(::nakama::realtime::Notifications)},
+  { 304, -1, sizeof(::nakama::realtime::Party)},
+  { 315, -1, sizeof(::nakama::realtime::PartyCreate)},
+  { 322, -1, sizeof(::nakama::realtime::PartyJoin)},
+  { 328, -1, sizeof(::nakama::realtime::PartyLeave)},
+  { 334, -1, sizeof(::nakama::realtime::PartyPromote)},
+  { 341, -1, sizeof(::nakama::realtime::PartyLeader)},
+  { 348, -1, sizeof(::nakama::realtime::PartyAccept)},
+  { 355, -1, sizeof(::nakama::realtime::PartyRemove)},
+  { 362, -1, sizeof(::nakama::realtime::PartyClose)},
+  { 368, -1, sizeof(::nakama::realtime::PartyJoinRequestList)},
+  { 374, -1, sizeof(::nakama::realtime::PartyJoinRequest)},
+  { 381, 388, sizeof(::nakama::realtime::PartyMatchmakerAdd_StringPropertiesEntry_DoNotUse)},
+  { 390, 397, sizeof(::nakama::realtime::PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse)},
+  { 399, -1, sizeof(::nakama::realtime::PartyMatchmakerAdd)},
+  { 411, -1, sizeof(::nakama::realtime::PartyMatchmakerRemove)},
+  { 418, -1, sizeof(::nakama::realtime::PartyMatchmakerTicket)},
+  { 425, -1, sizeof(::nakama::realtime::PartyData)},
+  { 434, -1, sizeof(::nakama::realtime::PartyDataSend)},
+  { 442, -1, sizeof(::nakama::realtime::PartyPresenceEvent)},
+  { 450, -1, sizeof(::nakama::realtime::Ping)},
+  { 455, -1, sizeof(::nakama::realtime::Pong)},
+  { 460, -1, sizeof(::nakama::realtime::Status)},
+  { 466, -1, sizeof(::nakama::realtime::StatusFollow)},
+  { 473, -1, sizeof(::nakama::realtime::StatusPresenceEvent)},
+  { 480, -1, sizeof(::nakama::realtime::StatusUnfollow)},
+  { 486, -1, sizeof(::nakama::realtime::StatusUpdate)},
+  { 492, -1, sizeof(::nakama::realtime::Stream)},
+  { 501, -1, sizeof(::nakama::realtime::StreamData)},
+  { 510, -1, sizeof(::nakama::realtime::StreamPresenceEvent)},
+  { 518, -1, sizeof(::nakama::realtime::UserPresence)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -1941,76 +1946,79 @@ const char descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon
   "obuf.StringValue\022\014\n\004size\030\004 \001(\005\0220\n\tpresen"
   "ces\030\005 \003(\0132\035.nakama.realtime.UserPresence"
   "\022+\n\004self\030\006 \001(\0132\035.nakama.realtime.UserPre"
-  "sence\"\r\n\013MatchCreate\"\177\n\tMatchData\022\020\n\010mat"
-  "ch_id\030\001 \001(\t\022/\n\010presence\030\002 \001(\0132\035.nakama.r"
-  "ealtime.UserPresence\022\017\n\007op_code\030\003 \001(\003\022\014\n"
-  "\004data\030\004 \001(\014\022\020\n\010reliable\030\005 \001(\010\"\204\001\n\rMatchD"
-  "ataSend\022\020\n\010match_id\030\001 \001(\t\022\017\n\007op_code\030\002 \001"
-  "(\003\022\014\n\004data\030\003 \001(\014\0220\n\tpresences\030\004 \003(\0132\035.na"
-  "kama.realtime.UserPresence\022\020\n\010reliable\030\005"
-  " \001(\010\"\243\001\n\tMatchJoin\022\022\n\010match_id\030\001 \001(\tH\000\022\017"
-  "\n\005token\030\002 \001(\tH\000\022:\n\010metadata\030\003 \003(\0132(.naka"
-  "ma.realtime.MatchJoin.MetadataEntry\032/\n\rM"
-  "etadataEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t"
-  ":\0028\001B\004\n\002id\"\036\n\nMatchLeave\022\020\n\010match_id\030\001 \001"
-  "(\t\"\203\001\n\022MatchPresenceEvent\022\020\n\010match_id\030\001 "
-  "\001(\t\022,\n\005joins\030\002 \003(\0132\035.nakama.realtime.Use"
-  "rPresence\022-\n\006leaves\030\003 \003(\0132\035.nakama.realt"
-  "ime.UserPresence\"\333\002\n\rMatchmakerAdd\022\021\n\tmi"
-  "n_count\030\001 \001(\005\022\021\n\tmax_count\030\002 \001(\005\022\r\n\005quer"
-  "y\030\003 \001(\t\022O\n\021string_properties\030\004 \003(\01324.nak"
-  "ama.realtime.MatchmakerAdd.StringPropert"
-  "iesEntry\022Q\n\022numeric_properties\030\005 \003(\01325.n"
-  "akama.realtime.MatchmakerAdd.NumericProp"
-  "ertiesEntry\0327\n\025StringPropertiesEntry\022\013\n\003"
-  "key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\0328\n\026NumericP"
-  "ropertiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001"
-  "(\001:\0028\001\"\344\004\n\021MatchmakerMatched\022\016\n\006ticket\030\001"
-  " \001(\t\022\022\n\010match_id\030\002 \001(\tH\000\022\017\n\005token\030\003 \001(\tH"
-  "\000\022@\n\005users\030\004 \003(\01321.nakama.realtime.Match"
-  "makerMatched.MatchmakerUser\022\?\n\004self\030\005 \001("
-  "\01321.nakama.realtime.MatchmakerMatched.Ma"
-  "tchmakerUser\032\220\003\n\016MatchmakerUser\022/\n\010prese"
-  "nce\030\001 \001(\0132\035.nakama.realtime.UserPresence"
-  "\022\020\n\010party_id\030\002 \001(\t\022b\n\021string_properties\030"
-  "\005 \003(\0132G.nakama.realtime.MatchmakerMatche"
-  "d.MatchmakerUser.StringPropertiesEntry\022d"
-  "\n\022numeric_properties\030\006 \003(\0132H.nakama.real"
-  "time.MatchmakerMatched.MatchmakerUser.Nu"
-  "mericPropertiesEntry\0327\n\025StringProperties"
-  "Entry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\0328\n"
-  "\026NumericPropertiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005"
-  "value\030\002 \001(\001:\0028\001B\004\n\002id\"\"\n\020MatchmakerRemov"
-  "e\022\016\n\006ticket\030\001 \001(\t\"\"\n\020MatchmakerTicket\022\016\n"
-  "\006ticket\030\001 \001(\t\"@\n\rNotifications\022/\n\rnotifi"
-  "cations\030\001 \003(\0132\030.nakama.api.Notification\""
-  "\307\001\n\005Party\022\020\n\010party_id\030\001 \001(\t\022\014\n\004open\030\002 \001("
-  "\010\022\020\n\010max_size\030\003 \001(\005\022+\n\004self\030\004 \001(\0132\035.naka"
-  "ma.realtime.UserPresence\022-\n\006leader\030\005 \001(\013"
-  "2\035.nakama.realtime.UserPresence\0220\n\tprese"
-  "nces\030\006 \003(\0132\035.nakama.realtime.UserPresenc"
-  "e\"-\n\013PartyCreate\022\014\n\004open\030\001 \001(\010\022\020\n\010max_si"
-  "ze\030\002 \001(\005\"\035\n\tPartyJoin\022\020\n\010party_id\030\001 \001(\t\""
-  "\036\n\nPartyLeave\022\020\n\010party_id\030\001 \001(\t\"Q\n\014Party"
-  "Promote\022\020\n\010party_id\030\001 \001(\t\022/\n\010presence\030\002 "
-  "\001(\0132\035.nakama.realtime.UserPresence\"P\n\013Pa"
-  "rtyLeader\022\020\n\010party_id\030\001 \001(\t\022/\n\010presence\030"
-  "\002 \001(\0132\035.nakama.realtime.UserPresence\"P\n\013"
-  "PartyAccept\022\020\n\010party_id\030\001 \001(\t\022/\n\010presenc"
-  "e\030\002 \001(\0132\035.nakama.realtime.UserPresence\"P"
-  "\n\013PartyRemove\022\020\n\010party_id\030\001 \001(\t\022/\n\010prese"
-  "nce\030\002 \001(\0132\035.nakama.realtime.UserPresence"
-  "\"\036\n\nPartyClose\022\020\n\010party_id\030\001 \001(\t\"(\n\024Part"
-  "yJoinRequestList\022\020\n\010party_id\030\001 \001(\t\"V\n\020Pa"
-  "rtyJoinRequest\022\020\n\010party_id\030\001 \001(\t\0220\n\tpres"
-  "ences\030\002 \003(\0132\035.nakama.realtime.UserPresen"
-  "ce\"\374\002\n\022PartyMatchmakerAdd\022\020\n\010party_id\030\001 "
-  "\001(\t\022\021\n\tmin_count\030\002 \001(\005\022\021\n\tmax_count\030\003 \001("
-  "\005\022\r\n\005query\030\004 \001(\t\022T\n\021string_properties\030\005 "
-  "\003(\01329.nakama.realtime.PartyMatchmakerAdd"
-  ".StringPropertiesEntry\022V\n\022numeric_proper"
-  "ties\030\006 \003(\0132:.nakama.realtime.PartyMatchm"
-  "akerAdd.NumericPropertiesEntry\0327\n\025String"
+  "sence\"\033\n\013MatchCreate\022\014\n\004name\030\001 \001(\t\"\177\n\tMa"
+  "tchData\022\020\n\010match_id\030\001 \001(\t\022/\n\010presence\030\002 "
+  "\001(\0132\035.nakama.realtime.UserPresence\022\017\n\007op"
+  "_code\030\003 \001(\003\022\014\n\004data\030\004 \001(\014\022\020\n\010reliable\030\005 "
+  "\001(\010\"\204\001\n\rMatchDataSend\022\020\n\010match_id\030\001 \001(\t\022"
+  "\017\n\007op_code\030\002 \001(\003\022\014\n\004data\030\003 \001(\014\0220\n\tpresen"
+  "ces\030\004 \003(\0132\035.nakama.realtime.UserPresence"
+  "\022\020\n\010reliable\030\005 \001(\010\"\243\001\n\tMatchJoin\022\022\n\010matc"
+  "h_id\030\001 \001(\tH\000\022\017\n\005token\030\002 \001(\tH\000\022:\n\010metadat"
+  "a\030\003 \003(\0132(.nakama.realtime.MatchJoin.Meta"
+  "dataEntry\032/\n\rMetadataEntry\022\013\n\003key\030\001 \001(\t\022"
+  "\r\n\005value\030\002 \001(\t:\0028\001B\004\n\002id\"\036\n\nMatchLeave\022\020"
+  "\n\010match_id\030\001 \001(\t\"\203\001\n\022MatchPresenceEvent\022"
+  "\020\n\010match_id\030\001 \001(\t\022,\n\005joins\030\002 \003(\0132\035.nakam"
+  "a.realtime.UserPresence\022-\n\006leaves\030\003 \003(\0132"
+  "\035.nakama.realtime.UserPresence\"\220\003\n\rMatch"
+  "makerAdd\022\021\n\tmin_count\030\001 \001(\005\022\021\n\tmax_count"
+  "\030\002 \001(\005\022\r\n\005query\030\003 \001(\t\022O\n\021string_properti"
+  "es\030\004 \003(\01324.nakama.realtime.MatchmakerAdd"
+  ".StringPropertiesEntry\022Q\n\022numeric_proper"
+  "ties\030\005 \003(\01325.nakama.realtime.MatchmakerA"
+  "dd.NumericPropertiesEntry\0223\n\016count_multi"
+  "ple\030\006 \001(\0132\033.google.protobuf.Int32Value\0327"
+  "\n\025StringPropertiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005"
+  "value\030\002 \001(\t:\0028\001\0328\n\026NumericPropertiesEntr"
+  "y\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\001:\0028\001\"\344\004\n\021Ma"
+  "tchmakerMatched\022\016\n\006ticket\030\001 \001(\t\022\022\n\010match"
+  "_id\030\002 \001(\tH\000\022\017\n\005token\030\003 \001(\tH\000\022@\n\005users\030\004 "
+  "\003(\01321.nakama.realtime.MatchmakerMatched."
+  "MatchmakerUser\022\?\n\004self\030\005 \001(\01321.nakama.re"
+  "altime.MatchmakerMatched.MatchmakerUser\032"
+  "\220\003\n\016MatchmakerUser\022/\n\010presence\030\001 \001(\0132\035.n"
+  "akama.realtime.UserPresence\022\020\n\010party_id\030"
+  "\002 \001(\t\022b\n\021string_properties\030\005 \003(\0132G.nakam"
+  "a.realtime.MatchmakerMatched.MatchmakerU"
+  "ser.StringPropertiesEntry\022d\n\022numeric_pro"
+  "perties\030\006 \003(\0132H.nakama.realtime.Matchmak"
+  "erMatched.MatchmakerUser.NumericProperti"
+  "esEntry\0327\n\025StringPropertiesEntry\022\013\n\003key\030"
+  "\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\0328\n\026NumericPrope"
+  "rtiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\001:\002"
+  "8\001B\004\n\002id\"\"\n\020MatchmakerRemove\022\016\n\006ticket\030\001"
+  " \001(\t\"\"\n\020MatchmakerTicket\022\016\n\006ticket\030\001 \001(\t"
+  "\"@\n\rNotifications\022/\n\rnotifications\030\001 \003(\013"
+  "2\030.nakama.api.Notification\"\307\001\n\005Party\022\020\n\010"
+  "party_id\030\001 \001(\t\022\014\n\004open\030\002 \001(\010\022\020\n\010max_size"
+  "\030\003 \001(\005\022+\n\004self\030\004 \001(\0132\035.nakama.realtime.U"
+  "serPresence\022-\n\006leader\030\005 \001(\0132\035.nakama.rea"
+  "ltime.UserPresence\0220\n\tpresences\030\006 \003(\0132\035."
+  "nakama.realtime.UserPresence\"-\n\013PartyCre"
+  "ate\022\014\n\004open\030\001 \001(\010\022\020\n\010max_size\030\002 \001(\005\"\035\n\tP"
+  "artyJoin\022\020\n\010party_id\030\001 \001(\t\"\036\n\nPartyLeave"
+  "\022\020\n\010party_id\030\001 \001(\t\"Q\n\014PartyPromote\022\020\n\010pa"
+  "rty_id\030\001 \001(\t\022/\n\010presence\030\002 \001(\0132\035.nakama."
+  "realtime.UserPresence\"P\n\013PartyLeader\022\020\n\010"
+  "party_id\030\001 \001(\t\022/\n\010presence\030\002 \001(\0132\035.nakam"
+  "a.realtime.UserPresence\"P\n\013PartyAccept\022\020"
+  "\n\010party_id\030\001 \001(\t\022/\n\010presence\030\002 \001(\0132\035.nak"
+  "ama.realtime.UserPresence\"P\n\013PartyRemove"
+  "\022\020\n\010party_id\030\001 \001(\t\022/\n\010presence\030\002 \001(\0132\035.n"
+  "akama.realtime.UserPresence\"\036\n\nPartyClos"
+  "e\022\020\n\010party_id\030\001 \001(\t\"(\n\024PartyJoinRequestL"
+  "ist\022\020\n\010party_id\030\001 \001(\t\"V\n\020PartyJoinReques"
+  "t\022\020\n\010party_id\030\001 \001(\t\0220\n\tpresences\030\002 \003(\0132\035"
+  ".nakama.realtime.UserPresence\"\261\003\n\022PartyM"
+  "atchmakerAdd\022\020\n\010party_id\030\001 \001(\t\022\021\n\tmin_co"
+  "unt\030\002 \001(\005\022\021\n\tmax_count\030\003 \001(\005\022\r\n\005query\030\004 "
+  "\001(\t\022T\n\021string_properties\030\005 \003(\01329.nakama."
+  "realtime.PartyMatchmakerAdd.StringProper"
+  "tiesEntry\022V\n\022numeric_properties\030\006 \003(\0132:."
+  "nakama.realtime.PartyMatchmakerAdd.Numer"
+  "icPropertiesEntry\0223\n\016count_multiple\030\007 \001("
+  "\0132\033.google.protobuf.Int32Value\0327\n\025String"
   "PropertiesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 "
   "\001(\t:\0028\001\0328\n\026NumericPropertiesEntry\022\013\n\003key"
   "\030\001 \001(\t\022\r\n\005value\030\002 \001(\001:\0028\001\"9\n\025PartyMatchm"
@@ -2118,7 +2126,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_git
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto = {
-  false, false, descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto, "github.com/heroiclabs/nakama-common/rtapi/realtime.proto", 9103,
+  false, false, descriptor_table_protodef_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto, "github.com/heroiclabs/nakama-common/rtapi/realtime.proto", 9223,
   &descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_once, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_sccs, descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto_deps, 59, 3,
   schemas, file_default_instances, TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto::offsets,
   file_level_metadata_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto, 59, file_level_enum_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto, file_level_service_descriptors_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto,
@@ -8698,10 +8706,17 @@ MatchCreate::MatchCreate(::PROTOBUF_NAMESPACE_ID::Arena* arena)
 MatchCreate::MatchCreate(const MatchCreate& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_name().empty()) {
+    name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_name(), 
+      GetArena());
+  }
   // @@protoc_insertion_point(copy_constructor:nakama.realtime.MatchCreate)
 }
 
 void MatchCreate::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchCreate_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 MatchCreate::~MatchCreate() {
@@ -8712,6 +8727,7 @@ MatchCreate::~MatchCreate() {
 
 void MatchCreate::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
+  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void MatchCreate::ArenaDtor(void* object) {
@@ -8735,6 +8751,7 @@ void MatchCreate::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  name_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -8744,6 +8761,18 @@ const char* MatchCreate::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
+    switch (tag >> 3) {
+      // string name = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_name();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "nakama.realtime.MatchCreate.name"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
           ctx->SetLastTag(tag);
           goto success;
@@ -8753,6 +8782,8 @@ const char* MatchCreate::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
             ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
+      }
+    }  // switch
   }  // while
 success:
   return ptr;
@@ -8767,6 +8798,16 @@ failure:
   // @@protoc_insertion_point(serialize_to_array_start:nakama.realtime.MatchCreate)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "nakama.realtime.MatchCreate.name");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_name(), target);
+  }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -8783,6 +8824,13 @@ size_t MatchCreate::ByteSizeLong() const {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_name());
+  }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
@@ -8815,6 +8863,9 @@ void MatchCreate::MergeFrom(const MatchCreate& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.name().size() > 0) {
+    _internal_set_name(from._internal_name());
+  }
 }
 
 void MatchCreate::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -8838,6 +8889,7 @@ bool MatchCreate::IsInitialized() const {
 void MatchCreate::InternalSwap(MatchCreate* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata MatchCreate::GetMetadata() const {
@@ -10395,8 +10447,19 @@ void MatchmakerAdd_NumericPropertiesEntry_DoNotUse::MergeFrom(
 
 class MatchmakerAdd::_Internal {
  public:
+  static const PROTOBUF_NAMESPACE_ID::Int32Value& count_multiple(const MatchmakerAdd* msg);
 };
 
+const PROTOBUF_NAMESPACE_ID::Int32Value&
+MatchmakerAdd::_Internal::count_multiple(const MatchmakerAdd* msg) {
+  return *msg->count_multiple_;
+}
+void MatchmakerAdd::clear_count_multiple() {
+  if (GetArena() == nullptr && count_multiple_ != nullptr) {
+    delete count_multiple_;
+  }
+  count_multiple_ = nullptr;
+}
 MatchmakerAdd::MatchmakerAdd(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   string_properties_(arena),
@@ -10415,6 +10478,11 @@ MatchmakerAdd::MatchmakerAdd(const MatchmakerAdd& from)
     query_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_query(), 
       GetArena());
   }
+  if (from._internal_has_count_multiple()) {
+    count_multiple_ = new PROTOBUF_NAMESPACE_ID::Int32Value(*from.count_multiple_);
+  } else {
+    count_multiple_ = nullptr;
+  }
   ::memcpy(&min_count_, &from.min_count_,
     static_cast<size_t>(reinterpret_cast<char*>(&max_count_) -
     reinterpret_cast<char*>(&min_count_)) + sizeof(max_count_));
@@ -10425,9 +10493,9 @@ void MatchmakerAdd::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MatchmakerAdd_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto.base);
   query_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-      reinterpret_cast<char*>(&min_count_) - reinterpret_cast<char*>(this)),
+      reinterpret_cast<char*>(&count_multiple_) - reinterpret_cast<char*>(this)),
       0, static_cast<size_t>(reinterpret_cast<char*>(&max_count_) -
-      reinterpret_cast<char*>(&min_count_)) + sizeof(max_count_));
+      reinterpret_cast<char*>(&count_multiple_)) + sizeof(max_count_));
 }
 
 MatchmakerAdd::~MatchmakerAdd() {
@@ -10439,6 +10507,7 @@ MatchmakerAdd::~MatchmakerAdd() {
 void MatchmakerAdd::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   query_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete count_multiple_;
 }
 
 void MatchmakerAdd::ArenaDtor(void* object) {
@@ -10465,6 +10534,10 @@ void MatchmakerAdd::Clear() {
   string_properties_.Clear();
   numeric_properties_.Clear();
   query_.ClearToEmpty();
+  if (GetArena() == nullptr && count_multiple_ != nullptr) {
+    delete count_multiple_;
+  }
+  count_multiple_ = nullptr;
   ::memset(&min_count_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&max_count_) -
       reinterpret_cast<char*>(&min_count_)) + sizeof(max_count_));
@@ -10523,6 +10596,13 @@ const char* MatchmakerAdd::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<42>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.Int32Value count_multiple = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          ptr = ctx->ParseMessage(_internal_mutable_count_multiple(), ptr);
+          CHK_(ptr);
         } else goto handle_unusual;
         continue;
       default: {
@@ -10661,6 +10741,14 @@ failure:
     }
   }
 
+  // .google.protobuf.Int32Value count_multiple = 6;
+  if (this->has_count_multiple()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        6, _Internal::count_multiple(this), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -10700,6 +10788,13 @@ size_t MatchmakerAdd::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_query());
+  }
+
+  // .google.protobuf.Int32Value count_multiple = 6;
+  if (this->has_count_multiple()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *count_multiple_);
   }
 
   // int32 min_count = 1;
@@ -10752,6 +10847,9 @@ void MatchmakerAdd::MergeFrom(const MatchmakerAdd& from) {
   if (from.query().size() > 0) {
     _internal_set_query(from._internal_query());
   }
+  if (from.has_count_multiple()) {
+    _internal_mutable_count_multiple()->PROTOBUF_NAMESPACE_ID::Int32Value::MergeFrom(from._internal_count_multiple());
+  }
   if (from.min_count() != 0) {
     _internal_set_min_count(from._internal_min_count());
   }
@@ -10787,9 +10885,9 @@ void MatchmakerAdd::InternalSwap(MatchmakerAdd* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(MatchmakerAdd, max_count_)
       + sizeof(MatchmakerAdd::max_count_)
-      - PROTOBUF_FIELD_OFFSET(MatchmakerAdd, min_count_)>(
-          reinterpret_cast<char*>(&min_count_),
-          reinterpret_cast<char*>(&other->min_count_));
+      - PROTOBUF_FIELD_OFFSET(MatchmakerAdd, count_multiple_)>(
+          reinterpret_cast<char*>(&count_multiple_),
+          reinterpret_cast<char*>(&other->count_multiple_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata MatchmakerAdd::GetMetadata() const {
@@ -14919,8 +15017,19 @@ void PartyMatchmakerAdd_NumericPropertiesEntry_DoNotUse::MergeFrom(
 
 class PartyMatchmakerAdd::_Internal {
  public:
+  static const PROTOBUF_NAMESPACE_ID::Int32Value& count_multiple(const PartyMatchmakerAdd* msg);
 };
 
+const PROTOBUF_NAMESPACE_ID::Int32Value&
+PartyMatchmakerAdd::_Internal::count_multiple(const PartyMatchmakerAdd* msg) {
+  return *msg->count_multiple_;
+}
+void PartyMatchmakerAdd::clear_count_multiple() {
+  if (GetArena() == nullptr && count_multiple_ != nullptr) {
+    delete count_multiple_;
+  }
+  count_multiple_ = nullptr;
+}
 PartyMatchmakerAdd::PartyMatchmakerAdd(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   string_properties_(arena),
@@ -14944,6 +15053,11 @@ PartyMatchmakerAdd::PartyMatchmakerAdd(const PartyMatchmakerAdd& from)
     query_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_query(), 
       GetArena());
   }
+  if (from._internal_has_count_multiple()) {
+    count_multiple_ = new PROTOBUF_NAMESPACE_ID::Int32Value(*from.count_multiple_);
+  } else {
+    count_multiple_ = nullptr;
+  }
   ::memcpy(&min_count_, &from.min_count_,
     static_cast<size_t>(reinterpret_cast<char*>(&max_count_) -
     reinterpret_cast<char*>(&min_count_)) + sizeof(max_count_));
@@ -14955,9 +15069,9 @@ void PartyMatchmakerAdd::SharedCtor() {
   party_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   query_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-      reinterpret_cast<char*>(&min_count_) - reinterpret_cast<char*>(this)),
+      reinterpret_cast<char*>(&count_multiple_) - reinterpret_cast<char*>(this)),
       0, static_cast<size_t>(reinterpret_cast<char*>(&max_count_) -
-      reinterpret_cast<char*>(&min_count_)) + sizeof(max_count_));
+      reinterpret_cast<char*>(&count_multiple_)) + sizeof(max_count_));
 }
 
 PartyMatchmakerAdd::~PartyMatchmakerAdd() {
@@ -14970,6 +15084,7 @@ void PartyMatchmakerAdd::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   party_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   query_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete count_multiple_;
 }
 
 void PartyMatchmakerAdd::ArenaDtor(void* object) {
@@ -14997,6 +15112,10 @@ void PartyMatchmakerAdd::Clear() {
   numeric_properties_.Clear();
   party_id_.ClearToEmpty();
   query_.ClearToEmpty();
+  if (GetArena() == nullptr && count_multiple_ != nullptr) {
+    delete count_multiple_;
+  }
+  count_multiple_ = nullptr;
   ::memset(&min_count_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&max_count_) -
       reinterpret_cast<char*>(&min_count_)) + sizeof(max_count_));
@@ -15064,6 +15183,13 @@ const char* PartyMatchmakerAdd::_InternalParse(const char* ptr, ::PROTOBUF_NAMES
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // .google.protobuf.Int32Value count_multiple = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          ptr = ctx->ParseMessage(_internal_mutable_count_multiple(), ptr);
+          CHK_(ptr);
         } else goto handle_unusual;
         continue;
       default: {
@@ -15212,6 +15338,14 @@ failure:
     }
   }
 
+  // .google.protobuf.Int32Value count_multiple = 7;
+  if (this->has_count_multiple()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        7, _Internal::count_multiple(this), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -15258,6 +15392,13 @@ size_t PartyMatchmakerAdd::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_query());
+  }
+
+  // .google.protobuf.Int32Value count_multiple = 7;
+  if (this->has_count_multiple()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *count_multiple_);
   }
 
   // int32 min_count = 2;
@@ -15313,6 +15454,9 @@ void PartyMatchmakerAdd::MergeFrom(const PartyMatchmakerAdd& from) {
   if (from.query().size() > 0) {
     _internal_set_query(from._internal_query());
   }
+  if (from.has_count_multiple()) {
+    _internal_mutable_count_multiple()->PROTOBUF_NAMESPACE_ID::Int32Value::MergeFrom(from._internal_count_multiple());
+  }
   if (from.min_count() != 0) {
     _internal_set_min_count(from._internal_min_count());
   }
@@ -15349,9 +15493,9 @@ void PartyMatchmakerAdd::InternalSwap(PartyMatchmakerAdd* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(PartyMatchmakerAdd, max_count_)
       + sizeof(PartyMatchmakerAdd::max_count_)
-      - PROTOBUF_FIELD_OFFSET(PartyMatchmakerAdd, min_count_)>(
-          reinterpret_cast<char*>(&min_count_),
-          reinterpret_cast<char*>(&other->min_count_));
+      - PROTOBUF_FIELD_OFFSET(PartyMatchmakerAdd, count_multiple_)>(
+          reinterpret_cast<char*>(&count_multiple_),
+          reinterpret_cast<char*>(&other->count_multiple_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata PartyMatchmakerAdd::GetMetadata() const {

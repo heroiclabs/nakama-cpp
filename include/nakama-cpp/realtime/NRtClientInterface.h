@@ -197,6 +197,7 @@ NAKAMA_NAMESPACE_BEGIN
          * Create a multiplayer match on the server.
          */
         virtual void createMatch(
+            const std::string& name,
             std::function<void(const NMatch&)> successCallback,
             RtErrorCallback errorCallback = nullptr
         ) = 0;
@@ -250,6 +251,7 @@ NAKAMA_NAMESPACE_BEGIN
             const opt::optional<std::string>& query = opt::nullopt,
             const NStringMap& stringProperties = {},
             const NStringDoubleMap& numericProperties = {},
+            const opt::optional <int32_t>& countMultiple = opt::nullopt,
             std::function<void(const NMatchmakerTicket&)> successCallback = nullptr,
             RtErrorCallback errorCallback = nullptr
         ) = 0;

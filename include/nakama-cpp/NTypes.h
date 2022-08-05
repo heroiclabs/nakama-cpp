@@ -31,6 +31,14 @@
 
 NAKAMA_NAMESPACE_BEGIN
 
+    /// Operator that can be used to override the one set in the leaderboard.
+    enum class NAKAMA_API NOperator{
+        NO_OVERRIDE = 0,        ///< Do not override the leaderboard operator.
+        BEST = 1,        ///< Override the leaderboard operator with BEST.
+        SET = 2,        ///< Override the leaderboard operator with SET.
+        INCREMENT = 3,        ///< Override the leaderboard operator with INCREMENT.
+        DECREMENT = 4    ///< Override the leaderboard operator with DECREMENT.
+    };
     /// The group role status.
     enum class NAKAMA_API NUserGroupState
     {

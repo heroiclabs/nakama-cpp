@@ -822,6 +822,9 @@ extern "C" {
         const char* name,
         const int32_t* limit,              // optional, pass NULL
         const char* cursor,                // optional, pass NULL
+        const char* langTag,
+        const int32_t* members,
+        const bool* open,
         NClientReqData reqData,            // optional, pass NULL
         void (*successCallback)(NClient, NClientReqData, const sNGroupList*),
         NClientErrorCallback errorCallback // optional, pass NULL
@@ -981,6 +984,7 @@ extern "C" {
         int64_t score,
         const int64_t* subscore,           // optional, pass NULL
         const char* metadata,              // optional, pass NULL
+        eNOperator operatorType,
         NClientReqData reqData,            // optional, pass NULL
         void (*successCallback)(NClient, NClientReqData, const sNLeaderboardRecord*),
         NClientErrorCallback errorCallback // optional, pass NULL
@@ -1002,6 +1006,7 @@ extern "C" {
         int64_t score,
         const int64_t* subscore,           // optional, pass NULL
         const char* metadata,              // optional, pass NULL
+        eNOperator operatorType,
         NClientReqData reqData,            // optional, pass NULL
         void (*successCallback)(NClient, NClientReqData, const sNLeaderboardRecord*),
         NClientErrorCallback errorCallback // optional, pass NULL

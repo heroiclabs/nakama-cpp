@@ -216,6 +216,7 @@ extern "C" {
      */
     NAKAMA_API void NRtClient_createMatch(
         NRtClient client,
+        const char* name,
         NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData, const sNMatch*),
         NRtClientErrorCallback errorCallback
@@ -277,6 +278,7 @@ extern "C" {
         const char* query,                  // optional, pass NULL
         NStringMap stringProperties,        // optional, pass NULL
         NStringDoubleMap numericProperties, // optional, pass NULL
+        int32_t countMultiple,              // optional, pass 0
         NRtClientReqData reqData,
         void (*successCallback)(NRtClient, NRtClientReqData, const sNMatchmakerTicket*),
         NRtClientErrorCallback errorCallback

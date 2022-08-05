@@ -1662,7 +1662,7 @@ void RestClient::leaveGroup(NSessionPtr session, const std::string & groupId, st
     }
 }
 
-void RestClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
+void RestClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, const std::string& langTag, int32_t members, const opt::optional<bool> open, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
     try {
         NLOG_INFO("...");
@@ -1687,6 +1687,8 @@ void RestClient::listGroups(NSessionPtr session, const std::string & name, int32
         if (!name.empty()) args.emplace("name", name);
         if (!cursor.empty()) args.emplace("cursor", cursor);
         if (limit > 0) args.emplace("limit", std::to_string(limit));
+        if (!langTag.empty()) args.emplace("lang_tag", langTag);
+        if (open.has_value()) args.emplace("open", std::to_string(open.value()));
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/group", "", std::move(args));
     }
@@ -1944,6 +1946,7 @@ void RestClient::writeLeaderboardRecord(
     int64_t score,
     const opt::optional<int64_t>& subscore,
     const opt::optional<std::string>& metadata,
+    NOperator operatorType,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
     try {
@@ -1970,6 +1973,7 @@ void RestClient::writeLeaderboardRecord(
         document.AddMember("score", std::to_string(score), document.GetAllocator());
         if (subscore) document.AddMember("subscore", std::to_string(*subscore), document.GetAllocator());
         if (metadata) document.AddMember("metadata", *metadata, document.GetAllocator());
+        document.AddMember("operator", std::to_string((int32_t)operatorType), document.GetAllocator());
 
         string body = jsonDocToStr(document);
 
@@ -1987,6 +1991,7 @@ void RestClient::writeTournamentRecord(
     int64_t score,
     const opt::optional<int64_t>& subscore,
     const opt::optional<std::string>& metadata,
+    NOperator operatorType,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
     try {
@@ -2013,6 +2018,7 @@ void RestClient::writeTournamentRecord(
         document.AddMember("score", std::to_string(score), document.GetAllocator());
         if (subscore) document.AddMember("subscore", std::to_string(*subscore), document.GetAllocator());
         if (metadata) document.AddMember("metadata", *metadata, document.GetAllocator());
+        document.AddMember("operator", std::to_string((int32_t)operatorType), document.GetAllocator());
 
         string body = jsonDocToStr(document);
 

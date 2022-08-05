@@ -250,12 +250,13 @@ void NRtClient_removeChatMessage(
 }
 
 void NRtClient_createMatch(
-    NRtClient client,
+    NRtClient client, 
+    const char* name,
     NRtClientReqData reqData,
     void (*successCallback)(NRtClient, NRtClientReqData, const sNMatch*),
     NRtClientErrorCallback errorCallback)
 {
-    getCppRtClient(client)->createMatch(
+    getCppRtClient(client)->createMatch(name,
         [client, successCallback, reqData](const Nakama::NMatch& match)
         {
             if (successCallback)
@@ -339,6 +340,7 @@ void NRtClient_addMatchmaker(
     const char* query,
     NStringMap stringProperties,
     NStringDoubleMap numericProperties,
+    int32_t countMultiple,
     NRtClientReqData reqData,
     void (*successCallback)(NRtClient, NRtClientReqData, const sNMatchmakerTicket*),
     NRtClientErrorCallback errorCallback)
@@ -355,6 +357,7 @@ void NRtClient_addMatchmaker(
         query ? Nakama::opt::optional<std::string>(query) : Nakama::opt::nullopt,
         cppStringProperties,
         cppNumericProperties,
+        countMultiple ? Nakama::opt::optional<int32_t>(countMultiple) : Nakama::opt::nullopt,
         [client, successCallback, reqData](const Nakama::NMatchmakerTicket& ticket)
         {
             if (successCallback)

@@ -32,6 +32,8 @@
 #include "nakama-cpp/data/NStorageObjectList.h"
 #include "nakama-cpp/data/NStorageObjectAck.h"
 #include "nakama-cpp/data/NRpc.h"
+#include "nakama-cpp/data/NLeaderboard.h"
+#include "nakama-cpp/data/NLeaderboardList.h"
 #include "api/github.com/heroiclabs/nakama-common/api/api.pb.h"
 
 #include "nakama-cpp/realtime/rtdata/NChannelMessageAck.h"
@@ -94,6 +96,8 @@ namespace Nakama {
     void assign(NStoragePermissionRead& perm, const ::google::protobuf::int32& data);
     void assign(NStoragePermissionWrite& perm, const ::google::protobuf::int32& data);
     void assign(NRpc& rpc, const nakama::api::Rpc& data);
+    void assign(NLeaderboard& leaderboard, const nakama::api::Leaderboard& data);
+    void assign(NLeaderboardList& list, const nakama::api::LeaderboardList& data);
 
     void assign(NChannelMessageAck& ack, const ::nakama::realtime::ChannelMessageAck& data);
     void assign(NChannel& channel, const ::nakama::realtime::Channel& data);

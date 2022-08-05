@@ -748,6 +748,9 @@ NAKAMA_NAMESPACE_BEGIN
             const std::string& name,
             int32_t limit = 0,
             const std::string& cursor = "",
+            const std::string& langTag = "",
+            int32_t members = 0,
+            const opt::optional<bool> open = opt::nullopt,
             std::function<void(NGroupListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
@@ -894,6 +897,7 @@ NAKAMA_NAMESPACE_BEGIN
             int64_t score,
             const opt::optional<int64_t>& subscore = opt::nullopt,
             const opt::optional<std::string>& metadata = opt::nullopt,
+            NOperator operatorType = NOperator::BEST,
             std::function<void(NLeaderboardRecord)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
@@ -913,6 +917,7 @@ NAKAMA_NAMESPACE_BEGIN
             int64_t score,
             const opt::optional<int64_t>& subscore = opt::nullopt,
             const opt::optional<std::string>& metadata = opt::nullopt,
+            NOperator operatorType = NOperator::BEST,
             std::function<void(NLeaderboardRecord)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;

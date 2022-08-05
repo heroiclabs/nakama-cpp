@@ -38,6 +38,8 @@
 #include "nakama-c/data/NTournamentList.h"
 #include "nakama-c/data/NNotificationList.h"
 #include "nakama-c/data/NChannelMessageList.h"
+#include "nakama-c/data/NLeaderboard.h"
+#include "nakama-c/data/NLeaderboardList.h"
 #include "nakama-c/realtime/rtdata/NRtError.h"
 #include "nakama-c/realtime/rtdata/NChannel.h"
 #include "nakama-c/realtime/rtdata/NStatus.h"
@@ -59,6 +61,7 @@
 #include "nakama-c/realtime/rtdata/NPartyPresenceEvent.h"
 #include "nakama-c/realtime/NRtClientDisconnectInfo.h"
 
+
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/data/NAccount.h"
 #include "nakama-cpp/data/NUsers.h"
@@ -79,6 +82,8 @@
 #include "nakama-cpp/data/NTournamentList.h"
 #include "nakama-cpp/data/NNotificationList.h"
 #include "nakama-cpp/data/NChannelMessageList.h"
+#include "nakama-cpp/data/NLeaderboard.h"
+#include "nakama-cpp/data/NLeaderboardList.h"
 #include "nakama-cpp/realtime/rtdata/NRtError.h"
 #include "nakama-cpp/realtime/rtdata/NChannel.h"
 #include "nakama-cpp/realtime/rtdata/NStatus.h"
@@ -145,6 +150,8 @@ void assign(sNNotification* cN, const Nakama::NNotification& n);
 void assign(sNNotificationList& cList, const Nakama::NNotificationList& list);
 void assign(sNChannelMessage& cMsg, const Nakama::NChannelMessage& msg);
 void assign(sNChannelMessageList& cList, const Nakama::NChannelMessageList& list);
+void assign(sNLeaderboard* cObject, const Nakama::NLeaderboard& object);
+void assign(sNLeaderboardList& cList, const Nakama::NLeaderboardList& list);
 void assign(sNRtError& cError, const NRtError& error);
 void assign(sNChannel& cChannel, const NChannel& channel);
 void assign(sNRtClientDisconnectInfo& cInfo, const Nakama::NRtClientDisconnectInfo& info);
@@ -171,6 +178,8 @@ void assign(sNPartyLeader& cLeader, const Nakama::NPartyLeader& partyLeader);
 void assign(sNPartyMatchmakerTicket& cTicket, const Nakama::NPartyMatchmakerTicket& ticket);
 void assign(sNPartyJoinRequest& cRequest, const Nakama::NPartyJoinRequest& request);
 
+
+
 void sNRtError_free(sNRtError& cError);
 void sNAccountDevice_free(sNAccountDevice& cDevice);
 void sNAccount_free(sNAccount& cAccount);
@@ -189,6 +198,7 @@ void sNTournamentRecordList_free(sNTournamentRecordList& cRecordList);
 void sNTournamentList_free(sNTournamentList& cList);
 void sNNotificationList_free(sNNotificationList& cList);
 void sNChannelMessageList_free(sNChannelMessageList& cList);
+void sNLeaderboardList_free(sNLeaderboardList& cList);
 void sNChannel_free(sNChannel& cChannel);
 void sNStatus_free(sNStatus& cStatus);
 void sNChannelPresenceEvent_free(sNChannelPresenceEvent& cPresence);

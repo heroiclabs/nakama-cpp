@@ -683,6 +683,8 @@ void assign(sNTournament* cT, const NTournament& t)
     cT->duration = t.duration;
     cT->startActive = t.startActive;
     cT->metadata = t.metadata.c_str();
+    cT->prevReset = t.prevReset;
+    cT->operatorType = (eNOperator)t.operatorType;
 }
 
 void assign(sNTournament*& cList, uint16_t& count, const std::vector<Nakama::NTournament>& list)
@@ -768,6 +770,35 @@ void assign(sNChannelMessageList& cList, const Nakama::NChannelMessageList& list
 
     cList.nextCursor = list.nextCursor.c_str();
     cList.prevCursor = list.prevCursor.c_str();
+}
+
+void assign(sNLeaderboard* cObject, const Nakama::NLeaderboard& object)
+{
+    cObject->id = object.id.c_str();
+    cObject->sortOrder = object.sortOrder;
+    cObject->operatorType = (eNOperator)object.operatorType;
+    cObject->prevReset = object.prevReset;
+    cObject->nextReset = object.nextReset;
+    cObject->metadata = object.metadata.c_str();
+    cObject->createTime = object.createTime;
+    cObject->authoritative = object.authoritative;
+}
+
+void assign(sNLeaderboardList& cList, const Nakama::NLeaderboardList& list)
+{
+    cList.leaderboards = nullptr;
+    cList.leaderboardsCount = (uint16_t)list.leaderboards.size();
+    cList.cursor = list.cursor.c_str();
+
+    if (cList.leaderboardsCount > 0)
+    {
+        cList.leaderboards = new sNLeaderboard[cList.leaderboardsCount];
+
+        for (uint16_t i = 0; i < cList.leaderboardsCount; ++i)
+        {
+            assign(&cList.leaderboards[i], list.leaderboards[i]);
+        }
+    }
 }
 
 void assign(sNRtError& cError, const NRtError& error)
@@ -969,6 +1000,12 @@ void sNChannelMessageList_free(sNChannelMessageList& cList)
 {
     delete[] cList.messages;
     cList.messages = nullptr;
+}
+
+void sNLeaderboardList_free(sNLeaderboardList& cList)
+{
+    delete[] cList.leaderboards;
+    cList.leaderboards = nullptr;
 }
 
 void sNChannel_free(sNChannel& cChannel)

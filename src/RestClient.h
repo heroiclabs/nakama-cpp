@@ -380,6 +380,9 @@ namespace Nakama {
             const std::string& name,
             int32_t limit,
             const std::string& cursor,
+            const std::string& langTag,
+            int32_t members,
+            const opt::optional<bool> open,
             std::function<void(NGroupListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -456,6 +459,7 @@ namespace Nakama {
             int64_t score,
             const opt::optional<int64_t>& subscore,
             const opt::optional<std::string>& metadata,
+            NOperator operatorType,
             std::function<void(NLeaderboardRecord)> successCallback,
             ErrorCallback errorCallback
         ) override;
@@ -466,6 +470,7 @@ namespace Nakama {
             int64_t score,
             const opt::optional<int64_t>& subscore,
             const opt::optional<std::string>& metadata,
+            NOperator operatorType,
             std::function<void(NLeaderboardRecord)> successCallback,
             ErrorCallback errorCallback
         ) override;

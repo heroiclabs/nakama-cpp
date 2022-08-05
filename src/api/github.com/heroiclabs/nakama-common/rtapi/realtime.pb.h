@@ -3901,6 +3901,25 @@ class MatchCreate PROTOBUF_FINAL :
 
   // accessors -------------------------------------------------------
 
+  enum : int {
+    kNameFieldNumber = 1,
+  };
+  // string name = 1;
+  void clear_name();
+  const std::string& name() const;
+  void set_name(const std::string& value);
+  void set_name(std::string&& value);
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  std::string* mutable_name();
+  std::string* release_name();
+  void set_allocated_name(std::string* name);
+  private:
+  const std::string& _internal_name() const;
+  void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
+  public:
+
   // @@protoc_insertion_point(class_scope:nakama.realtime.MatchCreate)
  private:
   class _Internal;
@@ -3908,6 +3927,7 @@ class MatchCreate PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2frtapi_2frealtime_2eproto;
 };
@@ -5064,6 +5084,7 @@ class MatchmakerAdd PROTOBUF_FINAL :
     kStringPropertiesFieldNumber = 4,
     kNumericPropertiesFieldNumber = 5,
     kQueryFieldNumber = 3,
+    kCountMultipleFieldNumber = 6,
     kMinCountFieldNumber = 1,
     kMaxCountFieldNumber = 2,
   };
@@ -5117,6 +5138,24 @@ class MatchmakerAdd PROTOBUF_FINAL :
   std::string* _internal_mutable_query();
   public:
 
+  // .google.protobuf.Int32Value count_multiple = 6;
+  bool has_count_multiple() const;
+  private:
+  bool _internal_has_count_multiple() const;
+  public:
+  void clear_count_multiple();
+  const PROTOBUF_NAMESPACE_ID::Int32Value& count_multiple() const;
+  PROTOBUF_NAMESPACE_ID::Int32Value* release_count_multiple();
+  PROTOBUF_NAMESPACE_ID::Int32Value* mutable_count_multiple();
+  void set_allocated_count_multiple(PROTOBUF_NAMESPACE_ID::Int32Value* count_multiple);
+  private:
+  const PROTOBUF_NAMESPACE_ID::Int32Value& _internal_count_multiple() const;
+  PROTOBUF_NAMESPACE_ID::Int32Value* _internal_mutable_count_multiple();
+  public:
+  void unsafe_arena_set_allocated_count_multiple(
+      PROTOBUF_NAMESPACE_ID::Int32Value* count_multiple);
+  PROTOBUF_NAMESPACE_ID::Int32Value* unsafe_arena_release_count_multiple();
+
   // int32 min_count = 1;
   void clear_min_count();
   ::PROTOBUF_NAMESPACE_ID::int32 min_count() const;
@@ -5153,6 +5192,7 @@ class MatchmakerAdd PROTOBUF_FINAL :
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_DOUBLE> numeric_properties_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr query_;
+  PROTOBUF_NAMESPACE_ID::Int32Value* count_multiple_;
   ::PROTOBUF_NAMESPACE_ID::int32 min_count_;
   ::PROTOBUF_NAMESPACE_ID::int32 max_count_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -8046,6 +8086,7 @@ class PartyMatchmakerAdd PROTOBUF_FINAL :
     kNumericPropertiesFieldNumber = 6,
     kPartyIdFieldNumber = 1,
     kQueryFieldNumber = 4,
+    kCountMultipleFieldNumber = 7,
     kMinCountFieldNumber = 2,
     kMaxCountFieldNumber = 3,
   };
@@ -8115,6 +8156,24 @@ class PartyMatchmakerAdd PROTOBUF_FINAL :
   std::string* _internal_mutable_query();
   public:
 
+  // .google.protobuf.Int32Value count_multiple = 7;
+  bool has_count_multiple() const;
+  private:
+  bool _internal_has_count_multiple() const;
+  public:
+  void clear_count_multiple();
+  const PROTOBUF_NAMESPACE_ID::Int32Value& count_multiple() const;
+  PROTOBUF_NAMESPACE_ID::Int32Value* release_count_multiple();
+  PROTOBUF_NAMESPACE_ID::Int32Value* mutable_count_multiple();
+  void set_allocated_count_multiple(PROTOBUF_NAMESPACE_ID::Int32Value* count_multiple);
+  private:
+  const PROTOBUF_NAMESPACE_ID::Int32Value& _internal_count_multiple() const;
+  PROTOBUF_NAMESPACE_ID::Int32Value* _internal_mutable_count_multiple();
+  public:
+  void unsafe_arena_set_allocated_count_multiple(
+      PROTOBUF_NAMESPACE_ID::Int32Value* count_multiple);
+  PROTOBUF_NAMESPACE_ID::Int32Value* unsafe_arena_release_count_multiple();
+
   // int32 min_count = 2;
   void clear_min_count();
   ::PROTOBUF_NAMESPACE_ID::int32 min_count() const;
@@ -8152,6 +8211,7 @@ class PartyMatchmakerAdd PROTOBUF_FINAL :
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_DOUBLE> numeric_properties_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr party_id_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr query_;
+  PROTOBUF_NAMESPACE_ID::Int32Value* count_multiple_;
   ::PROTOBUF_NAMESPACE_ID::int32 min_count_;
   ::PROTOBUF_NAMESPACE_ID::int32 max_count_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -17200,6 +17260,67 @@ inline void Match::set_allocated_self(::nakama::realtime::UserPresence* self) {
 
 // MatchCreate
 
+// string name = 1;
+inline void MatchCreate::clear_name() {
+  name_.ClearToEmpty();
+}
+inline const std::string& MatchCreate::name() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.MatchCreate.name)
+  return _internal_name();
+}
+inline void MatchCreate::set_name(const std::string& value) {
+  _internal_set_name(value);
+  // @@protoc_insertion_point(field_set:nakama.realtime.MatchCreate.name)
+}
+inline std::string* MatchCreate::mutable_name() {
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.MatchCreate.name)
+  return _internal_mutable_name();
+}
+inline const std::string& MatchCreate::_internal_name() const {
+  return name_.Get();
+}
+inline void MatchCreate::_internal_set_name(const std::string& value) {
+  
+  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void MatchCreate::set_name(std::string&& value) {
+  
+  name_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.realtime.MatchCreate.name)
+}
+inline void MatchCreate::set_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.realtime.MatchCreate.name)
+}
+inline void MatchCreate::set_name(const char* value,
+    size_t size) {
+  
+  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.realtime.MatchCreate.name)
+}
+inline std::string* MatchCreate::_internal_mutable_name() {
+  
+  return name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* MatchCreate::release_name() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.MatchCreate.name)
+  return name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void MatchCreate::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.MatchCreate.name)
+}
+
 // -------------------------------------------------------------------
 
 // MatchData
@@ -18285,6 +18406,83 @@ inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, double >*
 MatchmakerAdd::mutable_numeric_properties() {
   // @@protoc_insertion_point(field_mutable_map:nakama.realtime.MatchmakerAdd.numeric_properties)
   return _internal_mutable_numeric_properties();
+}
+
+// .google.protobuf.Int32Value count_multiple = 6;
+inline bool MatchmakerAdd::_internal_has_count_multiple() const {
+  return this != internal_default_instance() && count_multiple_ != nullptr;
+}
+inline bool MatchmakerAdd::has_count_multiple() const {
+  return _internal_has_count_multiple();
+}
+inline const PROTOBUF_NAMESPACE_ID::Int32Value& MatchmakerAdd::_internal_count_multiple() const {
+  const PROTOBUF_NAMESPACE_ID::Int32Value* p = count_multiple_;
+  return p != nullptr ? *p : reinterpret_cast<const PROTOBUF_NAMESPACE_ID::Int32Value&>(
+      PROTOBUF_NAMESPACE_ID::_Int32Value_default_instance_);
+}
+inline const PROTOBUF_NAMESPACE_ID::Int32Value& MatchmakerAdd::count_multiple() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.MatchmakerAdd.count_multiple)
+  return _internal_count_multiple();
+}
+inline void MatchmakerAdd::unsafe_arena_set_allocated_count_multiple(
+    PROTOBUF_NAMESPACE_ID::Int32Value* count_multiple) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(count_multiple_);
+  }
+  count_multiple_ = count_multiple;
+  if (count_multiple) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:nakama.realtime.MatchmakerAdd.count_multiple)
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* MatchmakerAdd::release_count_multiple() {
+  
+  PROTOBUF_NAMESPACE_ID::Int32Value* temp = count_multiple_;
+  count_multiple_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* MatchmakerAdd::unsafe_arena_release_count_multiple() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.MatchmakerAdd.count_multiple)
+  
+  PROTOBUF_NAMESPACE_ID::Int32Value* temp = count_multiple_;
+  count_multiple_ = nullptr;
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* MatchmakerAdd::_internal_mutable_count_multiple() {
+  
+  if (count_multiple_ == nullptr) {
+    auto* p = CreateMaybeMessage<PROTOBUF_NAMESPACE_ID::Int32Value>(GetArena());
+    count_multiple_ = p;
+  }
+  return count_multiple_;
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* MatchmakerAdd::mutable_count_multiple() {
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.MatchmakerAdd.count_multiple)
+  return _internal_mutable_count_multiple();
+}
+inline void MatchmakerAdd::set_allocated_count_multiple(PROTOBUF_NAMESPACE_ID::Int32Value* count_multiple) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(count_multiple_);
+  }
+  if (count_multiple) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(count_multiple)->GetArena();
+    if (message_arena != submessage_arena) {
+      count_multiple = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, count_multiple, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  count_multiple_ = count_multiple;
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.MatchmakerAdd.count_multiple)
 }
 
 // -------------------------------------------------------------------
@@ -20613,6 +20811,83 @@ inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, double >*
 PartyMatchmakerAdd::mutable_numeric_properties() {
   // @@protoc_insertion_point(field_mutable_map:nakama.realtime.PartyMatchmakerAdd.numeric_properties)
   return _internal_mutable_numeric_properties();
+}
+
+// .google.protobuf.Int32Value count_multiple = 7;
+inline bool PartyMatchmakerAdd::_internal_has_count_multiple() const {
+  return this != internal_default_instance() && count_multiple_ != nullptr;
+}
+inline bool PartyMatchmakerAdd::has_count_multiple() const {
+  return _internal_has_count_multiple();
+}
+inline const PROTOBUF_NAMESPACE_ID::Int32Value& PartyMatchmakerAdd::_internal_count_multiple() const {
+  const PROTOBUF_NAMESPACE_ID::Int32Value* p = count_multiple_;
+  return p != nullptr ? *p : reinterpret_cast<const PROTOBUF_NAMESPACE_ID::Int32Value&>(
+      PROTOBUF_NAMESPACE_ID::_Int32Value_default_instance_);
+}
+inline const PROTOBUF_NAMESPACE_ID::Int32Value& PartyMatchmakerAdd::count_multiple() const {
+  // @@protoc_insertion_point(field_get:nakama.realtime.PartyMatchmakerAdd.count_multiple)
+  return _internal_count_multiple();
+}
+inline void PartyMatchmakerAdd::unsafe_arena_set_allocated_count_multiple(
+    PROTOBUF_NAMESPACE_ID::Int32Value* count_multiple) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(count_multiple_);
+  }
+  count_multiple_ = count_multiple;
+  if (count_multiple) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:nakama.realtime.PartyMatchmakerAdd.count_multiple)
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* PartyMatchmakerAdd::release_count_multiple() {
+  
+  PROTOBUF_NAMESPACE_ID::Int32Value* temp = count_multiple_;
+  count_multiple_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* PartyMatchmakerAdd::unsafe_arena_release_count_multiple() {
+  // @@protoc_insertion_point(field_release:nakama.realtime.PartyMatchmakerAdd.count_multiple)
+  
+  PROTOBUF_NAMESPACE_ID::Int32Value* temp = count_multiple_;
+  count_multiple_ = nullptr;
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* PartyMatchmakerAdd::_internal_mutable_count_multiple() {
+  
+  if (count_multiple_ == nullptr) {
+    auto* p = CreateMaybeMessage<PROTOBUF_NAMESPACE_ID::Int32Value>(GetArena());
+    count_multiple_ = p;
+  }
+  return count_multiple_;
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* PartyMatchmakerAdd::mutable_count_multiple() {
+  // @@protoc_insertion_point(field_mutable:nakama.realtime.PartyMatchmakerAdd.count_multiple)
+  return _internal_mutable_count_multiple();
+}
+inline void PartyMatchmakerAdd::set_allocated_count_multiple(PROTOBUF_NAMESPACE_ID::Int32Value* count_multiple) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(count_multiple_);
+  }
+  if (count_multiple) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(count_multiple)->GetArena();
+    if (message_arena != submessage_arena) {
+      count_multiple = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, count_multiple, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  count_multiple_ = count_multiple;
+  // @@protoc_insertion_point(field_set_allocated:nakama.realtime.PartyMatchmakerAdd.count_multiple)
 }
 
 // -------------------------------------------------------------------

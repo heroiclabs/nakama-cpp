@@ -1395,7 +1395,7 @@ void GrpcClient::leaveGroup(NSessionPtr session, const std::string & groupId, st
     responseReader->Finish(&_emptyData, &ctx->status, (void*)ctx);
 }
 
-void GrpcClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
+void GrpcClient::listGroups(NSessionPtr session, const std::string & name, int32_t limit, const std::string & cursor, const std::string& langTag, int32_t members, const opt::optional<bool> open, std::function<void(NGroupListPtr)> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -1423,6 +1423,12 @@ void GrpcClient::listGroups(NSessionPtr session, const std::string & name, int32
 
     if (!cursor.empty())
         req.set_cursor(cursor);
+
+    req.set_lang_tag(langTag);
+
+    req.mutable_members()->set_value(members);
+
+    req.mutable_open()->set_value(open.value());
 
     auto responseReader = _stub->AsyncListGroups(&ctx->context, req, &_cq);
 
@@ -1661,6 +1667,7 @@ void GrpcClient::writeLeaderboardRecord(
     int64_t score,
     const opt::optional<int64_t>& subscore,
     const opt::optional<std::string>& metadata,
+    NOperator operatorType,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
@@ -1686,6 +1693,8 @@ void GrpcClient::writeLeaderboardRecord(
     req.mutable_record()->set_score(score);
     if (subscore) req.mutable_record()->set_subscore(*subscore);
     if (metadata) req.mutable_record()->set_metadata(*metadata);
+  
+    // todo operatorType
 
     auto responseReader = _stub->AsyncWriteLeaderboardRecord(&ctx->context, req, &_cq);
 
@@ -1698,6 +1707,7 @@ void GrpcClient::writeTournamentRecord(
     int64_t score,
     const opt::optional<int64_t>& subscore,
     const opt::optional<std::string>& metadata,
+    NOperator operatorType,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
@@ -1723,6 +1733,8 @@ void GrpcClient::writeTournamentRecord(
     req.mutable_record()->set_score(score);
     if (subscore) req.mutable_record()->set_subscore(*subscore);
     if (metadata) req.mutable_record()->set_metadata(*metadata);
+
+    // todo operatorType
 
     auto responseReader = _stub->AsyncWriteTournamentRecord(&ctx->context, req, &_cq);
 
