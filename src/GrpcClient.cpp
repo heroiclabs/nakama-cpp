@@ -1979,6 +1979,7 @@ void GrpcClient::listTournamentRecordsAroundOwner(
     const std::string & tournamentId,
     const std::string & ownerId,
     const opt::optional<int32_t>& limit,
+    const std::string& cursor,
     std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
@@ -2004,6 +2005,8 @@ void GrpcClient::listTournamentRecordsAroundOwner(
     req.set_owner_id(ownerId);
 
     if (limit) req.mutable_limit()->set_value(*limit);
+
+    req.set_cursor(cursor);
 
     auto responseReader = _stub->AsyncListTournamentRecordsAroundOwner(&ctx->context, req, &_cq);
 

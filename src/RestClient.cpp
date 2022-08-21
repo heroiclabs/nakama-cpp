@@ -2295,6 +2295,7 @@ void RestClient::listTournamentRecordsAroundOwner(
     const std::string & tournamentId,
     const std::string & ownerId,
     const opt::optional<int32_t>& limit,
+    const std::string& cursor,
     std::function<void(NTournamentRecordListPtr)> successCallback, ErrorCallback errorCallback)
 {
     try {
@@ -2318,6 +2319,8 @@ void RestClient::listTournamentRecordsAroundOwner(
         NHttpQueryArgs args;
 
         if (limit) args.emplace("limit", std::to_string(*limit));
+
+        args.emplace("cursor", cursor);
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament/" + tournamentId + "/owner/" + ownerId, "", std::move(args));
     }

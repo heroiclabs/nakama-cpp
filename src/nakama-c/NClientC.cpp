@@ -1439,6 +1439,7 @@ void NClient_listTournamentRecordsAroundOwner(
     const char* ownerId,
     int32_t limit,
     NClientReqData reqData,
+    const char* cursor,
     void(*successCallback)(NClient, NClientReqData, const sNTournamentRecordList*), NClientErrorCallback errorCallback)
 {
     Nakama::NClientInterface* cppClient = getCppClient(client);
@@ -1449,6 +1450,7 @@ void NClient_listTournamentRecordsAroundOwner(
         tournamentId,
         ownerId,
         limit,
+        cursor,
         [client, reqData, successCallback](const Nakama::NTournamentRecordListPtr& recordList)
         {
             if (successCallback)

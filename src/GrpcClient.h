@@ -545,6 +545,7 @@ namespace Nakama {
             const std::string& tournamentId,
             const std::string& ownerId,
             const opt::optional<int32_t>& limit,
+            const std::string& cursor,
             std::function<void(NTournamentRecordListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override;

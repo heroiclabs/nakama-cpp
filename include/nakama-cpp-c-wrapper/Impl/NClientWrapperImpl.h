@@ -2262,6 +2262,7 @@ NAKAMA_NAMESPACE_BEGIN
             const std::string& tournamentId,
             const std::string& ownerId,
             const opt::optional<int32_t>& limit,
+            const std::string& cursor,
             std::function<void(NTournamentRecordListPtr)> successCallback,
             ErrorCallback errorCallback
         ) override
@@ -2281,6 +2282,7 @@ NAKAMA_NAMESPACE_BEGIN
                 ownerId.c_str(),
                 limit ? *limit : 0,
                 reqId,
+                cursor.c_str(),
                 &NClientWrapper::reqOkTournamentRecordListStatic,
                 &NClientWrapper::reqErrorStatic);
         }

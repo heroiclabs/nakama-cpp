@@ -1166,6 +1166,7 @@ extern "C" {
         const char* ownerId,
         int32_t limit,                     // optional, pass 0
         NClientReqData reqData,            // optional, pass NULL
+        const char* cursor,
         void (*successCallback)(NClient, NClientReqData, const sNTournamentRecordList*),
         NClientErrorCallback errorCallback // optional, pass NULL
     );

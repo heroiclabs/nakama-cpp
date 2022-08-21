@@ -52,7 +52,7 @@ struct TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2epro
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[116]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[123]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -205,6 +205,9 @@ extern FriendDefaultTypeInternal _Friend_default_instance_;
 class FriendList;
 class FriendListDefaultTypeInternal;
 extern FriendListDefaultTypeInternal _FriendList_default_instance_;
+class GetSubscriptionRequest;
+class GetSubscriptionRequestDefaultTypeInternal;
+extern GetSubscriptionRequestDefaultTypeInternal _GetSubscriptionRequest_default_instance_;
 class GetUsersRequest;
 class GetUsersRequestDefaultTypeInternal;
 extern GetUsersRequestDefaultTypeInternal _GetUsersRequest_default_instance_;
@@ -283,6 +286,9 @@ extern ListNotificationsRequestDefaultTypeInternal _ListNotificationsRequest_def
 class ListStorageObjectsRequest;
 class ListStorageObjectsRequestDefaultTypeInternal;
 extern ListStorageObjectsRequestDefaultTypeInternal _ListStorageObjectsRequest_default_instance_;
+class ListSubscriptionsRequest;
+class ListSubscriptionsRequestDefaultTypeInternal;
+extern ListSubscriptionsRequestDefaultTypeInternal _ListSubscriptionsRequest_default_instance_;
 class ListTournamentRecordsAroundOwnerRequest;
 class ListTournamentRecordsAroundOwnerRequestDefaultTypeInternal;
 extern ListTournamentRecordsAroundOwnerRequestDefaultTypeInternal _ListTournamentRecordsAroundOwnerRequest_default_instance_;
@@ -349,6 +355,9 @@ extern StorageObjectListDefaultTypeInternal _StorageObjectList_default_instance_
 class StorageObjects;
 class StorageObjectsDefaultTypeInternal;
 extern StorageObjectsDefaultTypeInternal _StorageObjects_default_instance_;
+class SubscriptionList;
+class SubscriptionListDefaultTypeInternal;
+extern SubscriptionListDefaultTypeInternal _SubscriptionList_default_instance_;
 class Tournament;
 class TournamentDefaultTypeInternal;
 extern TournamentDefaultTypeInternal _Tournament_default_instance_;
@@ -388,9 +397,21 @@ extern ValidatePurchaseHuaweiRequestDefaultTypeInternal _ValidatePurchaseHuaweiR
 class ValidatePurchaseResponse;
 class ValidatePurchaseResponseDefaultTypeInternal;
 extern ValidatePurchaseResponseDefaultTypeInternal _ValidatePurchaseResponse_default_instance_;
+class ValidateSubscriptionAppleRequest;
+class ValidateSubscriptionAppleRequestDefaultTypeInternal;
+extern ValidateSubscriptionAppleRequestDefaultTypeInternal _ValidateSubscriptionAppleRequest_default_instance_;
+class ValidateSubscriptionGoogleRequest;
+class ValidateSubscriptionGoogleRequestDefaultTypeInternal;
+extern ValidateSubscriptionGoogleRequestDefaultTypeInternal _ValidateSubscriptionGoogleRequest_default_instance_;
+class ValidateSubscriptionResponse;
+class ValidateSubscriptionResponseDefaultTypeInternal;
+extern ValidateSubscriptionResponseDefaultTypeInternal _ValidateSubscriptionResponse_default_instance_;
 class ValidatedPurchase;
 class ValidatedPurchaseDefaultTypeInternal;
 extern ValidatedPurchaseDefaultTypeInternal _ValidatedPurchase_default_instance_;
+class ValidatedSubscription;
+class ValidatedSubscriptionDefaultTypeInternal;
+extern ValidatedSubscriptionDefaultTypeInternal _ValidatedSubscription_default_instance_;
 class WriteLeaderboardRecordRequest;
 class WriteLeaderboardRecordRequestDefaultTypeInternal;
 extern WriteLeaderboardRecordRequestDefaultTypeInternal _WriteLeaderboardRecordRequest_default_instance_;
@@ -460,6 +481,7 @@ template<> ::nakama::api::Event* Arena::CreateMaybeMessage<::nakama::api::Event>
 template<> ::nakama::api::Event_PropertiesEntry_DoNotUse* Arena::CreateMaybeMessage<::nakama::api::Event_PropertiesEntry_DoNotUse>(Arena*);
 template<> ::nakama::api::Friend* Arena::CreateMaybeMessage<::nakama::api::Friend>(Arena*);
 template<> ::nakama::api::FriendList* Arena::CreateMaybeMessage<::nakama::api::FriendList>(Arena*);
+template<> ::nakama::api::GetSubscriptionRequest* Arena::CreateMaybeMessage<::nakama::api::GetSubscriptionRequest>(Arena*);
 template<> ::nakama::api::GetUsersRequest* Arena::CreateMaybeMessage<::nakama::api::GetUsersRequest>(Arena*);
 template<> ::nakama::api::Group* Arena::CreateMaybeMessage<::nakama::api::Group>(Arena*);
 template<> ::nakama::api::GroupList* Arena::CreateMaybeMessage<::nakama::api::GroupList>(Arena*);
@@ -486,6 +508,7 @@ template<> ::nakama::api::ListLeaderboardRecordsRequest* Arena::CreateMaybeMessa
 template<> ::nakama::api::ListMatchesRequest* Arena::CreateMaybeMessage<::nakama::api::ListMatchesRequest>(Arena*);
 template<> ::nakama::api::ListNotificationsRequest* Arena::CreateMaybeMessage<::nakama::api::ListNotificationsRequest>(Arena*);
 template<> ::nakama::api::ListStorageObjectsRequest* Arena::CreateMaybeMessage<::nakama::api::ListStorageObjectsRequest>(Arena*);
+template<> ::nakama::api::ListSubscriptionsRequest* Arena::CreateMaybeMessage<::nakama::api::ListSubscriptionsRequest>(Arena*);
 template<> ::nakama::api::ListTournamentRecordsAroundOwnerRequest* Arena::CreateMaybeMessage<::nakama::api::ListTournamentRecordsAroundOwnerRequest>(Arena*);
 template<> ::nakama::api::ListTournamentRecordsRequest* Arena::CreateMaybeMessage<::nakama::api::ListTournamentRecordsRequest>(Arena*);
 template<> ::nakama::api::ListTournamentsRequest* Arena::CreateMaybeMessage<::nakama::api::ListTournamentsRequest>(Arena*);
@@ -508,6 +531,7 @@ template<> ::nakama::api::StorageObjectAck* Arena::CreateMaybeMessage<::nakama::
 template<> ::nakama::api::StorageObjectAcks* Arena::CreateMaybeMessage<::nakama::api::StorageObjectAcks>(Arena*);
 template<> ::nakama::api::StorageObjectList* Arena::CreateMaybeMessage<::nakama::api::StorageObjectList>(Arena*);
 template<> ::nakama::api::StorageObjects* Arena::CreateMaybeMessage<::nakama::api::StorageObjects>(Arena*);
+template<> ::nakama::api::SubscriptionList* Arena::CreateMaybeMessage<::nakama::api::SubscriptionList>(Arena*);
 template<> ::nakama::api::Tournament* Arena::CreateMaybeMessage<::nakama::api::Tournament>(Arena*);
 template<> ::nakama::api::TournamentList* Arena::CreateMaybeMessage<::nakama::api::TournamentList>(Arena*);
 template<> ::nakama::api::TournamentRecordList* Arena::CreateMaybeMessage<::nakama::api::TournamentRecordList>(Arena*);
@@ -521,7 +545,11 @@ template<> ::nakama::api::ValidatePurchaseAppleRequest* Arena::CreateMaybeMessag
 template<> ::nakama::api::ValidatePurchaseGoogleRequest* Arena::CreateMaybeMessage<::nakama::api::ValidatePurchaseGoogleRequest>(Arena*);
 template<> ::nakama::api::ValidatePurchaseHuaweiRequest* Arena::CreateMaybeMessage<::nakama::api::ValidatePurchaseHuaweiRequest>(Arena*);
 template<> ::nakama::api::ValidatePurchaseResponse* Arena::CreateMaybeMessage<::nakama::api::ValidatePurchaseResponse>(Arena*);
+template<> ::nakama::api::ValidateSubscriptionAppleRequest* Arena::CreateMaybeMessage<::nakama::api::ValidateSubscriptionAppleRequest>(Arena*);
+template<> ::nakama::api::ValidateSubscriptionGoogleRequest* Arena::CreateMaybeMessage<::nakama::api::ValidateSubscriptionGoogleRequest>(Arena*);
+template<> ::nakama::api::ValidateSubscriptionResponse* Arena::CreateMaybeMessage<::nakama::api::ValidateSubscriptionResponse>(Arena*);
 template<> ::nakama::api::ValidatedPurchase* Arena::CreateMaybeMessage<::nakama::api::ValidatedPurchase>(Arena*);
+template<> ::nakama::api::ValidatedSubscription* Arena::CreateMaybeMessage<::nakama::api::ValidatedSubscription>(Arena*);
 template<> ::nakama::api::WriteLeaderboardRecordRequest* Arena::CreateMaybeMessage<::nakama::api::WriteLeaderboardRecordRequest>(Arena*);
 template<> ::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite* Arena::CreateMaybeMessage<::nakama::api::WriteLeaderboardRecordRequest_LeaderboardRecordWrite>(Arena*);
 template<> ::nakama::api::WriteStorageObject* Arena::CreateMaybeMessage<::nakama::api::WriteStorageObject>(Arena*);
@@ -613,57 +641,57 @@ inline bool UserGroupList_UserGroup_State_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<UserGroupList_UserGroup_State>(
     UserGroupList_UserGroup_State_descriptor(), name, value);
 }
-enum ValidatedPurchase_Store : int {
-  ValidatedPurchase_Store_APPLE_APP_STORE = 0,
-  ValidatedPurchase_Store_GOOGLE_PLAY_STORE = 1,
-  ValidatedPurchase_Store_HUAWEI_APP_GALLERY = 2,
-  ValidatedPurchase_Store_ValidatedPurchase_Store_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
-  ValidatedPurchase_Store_ValidatedPurchase_Store_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+enum StoreProvider : int {
+  APPLE_APP_STORE = 0,
+  GOOGLE_PLAY_STORE = 1,
+  HUAWEI_APP_GALLERY = 2,
+  StoreProvider_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  StoreProvider_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-bool ValidatedPurchase_Store_IsValid(int value);
-constexpr ValidatedPurchase_Store ValidatedPurchase_Store_Store_MIN = ValidatedPurchase_Store_APPLE_APP_STORE;
-constexpr ValidatedPurchase_Store ValidatedPurchase_Store_Store_MAX = ValidatedPurchase_Store_HUAWEI_APP_GALLERY;
-constexpr int ValidatedPurchase_Store_Store_ARRAYSIZE = ValidatedPurchase_Store_Store_MAX + 1;
+bool StoreProvider_IsValid(int value);
+constexpr StoreProvider StoreProvider_MIN = APPLE_APP_STORE;
+constexpr StoreProvider StoreProvider_MAX = HUAWEI_APP_GALLERY;
+constexpr int StoreProvider_ARRAYSIZE = StoreProvider_MAX + 1;
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ValidatedPurchase_Store_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* StoreProvider_descriptor();
 template<typename T>
-inline const std::string& ValidatedPurchase_Store_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, ValidatedPurchase_Store>::value ||
+inline const std::string& StoreProvider_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, StoreProvider>::value ||
     ::std::is_integral<T>::value,
-    "Incorrect type passed to function ValidatedPurchase_Store_Name.");
+    "Incorrect type passed to function StoreProvider_Name.");
   return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    ValidatedPurchase_Store_descriptor(), enum_t_value);
+    StoreProvider_descriptor(), enum_t_value);
 }
-inline bool ValidatedPurchase_Store_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, ValidatedPurchase_Store* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ValidatedPurchase_Store>(
-    ValidatedPurchase_Store_descriptor(), name, value);
+inline bool StoreProvider_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, StoreProvider* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<StoreProvider>(
+    StoreProvider_descriptor(), name, value);
 }
-enum ValidatedPurchase_Environment : int {
-  ValidatedPurchase_Environment_UNKNOWN = 0,
-  ValidatedPurchase_Environment_SANDBOX = 1,
-  ValidatedPurchase_Environment_PRODUCTION = 2,
-  ValidatedPurchase_Environment_ValidatedPurchase_Environment_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
-  ValidatedPurchase_Environment_ValidatedPurchase_Environment_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+enum StoreEnvironment : int {
+  UNKNOWN = 0,
+  SANDBOX = 1,
+  PRODUCTION = 2,
+  StoreEnvironment_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  StoreEnvironment_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-bool ValidatedPurchase_Environment_IsValid(int value);
-constexpr ValidatedPurchase_Environment ValidatedPurchase_Environment_Environment_MIN = ValidatedPurchase_Environment_UNKNOWN;
-constexpr ValidatedPurchase_Environment ValidatedPurchase_Environment_Environment_MAX = ValidatedPurchase_Environment_PRODUCTION;
-constexpr int ValidatedPurchase_Environment_Environment_ARRAYSIZE = ValidatedPurchase_Environment_Environment_MAX + 1;
+bool StoreEnvironment_IsValid(int value);
+constexpr StoreEnvironment StoreEnvironment_MIN = UNKNOWN;
+constexpr StoreEnvironment StoreEnvironment_MAX = PRODUCTION;
+constexpr int StoreEnvironment_ARRAYSIZE = StoreEnvironment_MAX + 1;
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ValidatedPurchase_Environment_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* StoreEnvironment_descriptor();
 template<typename T>
-inline const std::string& ValidatedPurchase_Environment_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, ValidatedPurchase_Environment>::value ||
+inline const std::string& StoreEnvironment_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, StoreEnvironment>::value ||
     ::std::is_integral<T>::value,
-    "Incorrect type passed to function ValidatedPurchase_Environment_Name.");
+    "Incorrect type passed to function StoreEnvironment_Name.");
   return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    ValidatedPurchase_Environment_descriptor(), enum_t_value);
+    StoreEnvironment_descriptor(), enum_t_value);
 }
-inline bool ValidatedPurchase_Environment_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, ValidatedPurchase_Environment* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ValidatedPurchase_Environment>(
-    ValidatedPurchase_Environment_descriptor(), name, value);
+inline bool StoreEnvironment_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, StoreEnvironment* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<StoreEnvironment>(
+    StoreEnvironment_descriptor(), name, value);
 }
 enum Operator : int {
   NO_OVERRIDE = 0,
@@ -8322,6 +8350,149 @@ class GetUsersRequest PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class GetSubscriptionRequest PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.GetSubscriptionRequest) */ {
+ public:
+  inline GetSubscriptionRequest() : GetSubscriptionRequest(nullptr) {}
+  virtual ~GetSubscriptionRequest();
+
+  GetSubscriptionRequest(const GetSubscriptionRequest& from);
+  GetSubscriptionRequest(GetSubscriptionRequest&& from) noexcept
+    : GetSubscriptionRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline GetSubscriptionRequest& operator=(const GetSubscriptionRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GetSubscriptionRequest& operator=(GetSubscriptionRequest&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GetSubscriptionRequest& default_instance();
+
+  static inline const GetSubscriptionRequest* internal_default_instance() {
+    return reinterpret_cast<const GetSubscriptionRequest*>(
+               &_GetSubscriptionRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    51;
+
+  friend void swap(GetSubscriptionRequest& a, GetSubscriptionRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GetSubscriptionRequest* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GetSubscriptionRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GetSubscriptionRequest* New() const final {
+    return CreateMaybeMessage<GetSubscriptionRequest>(nullptr);
+  }
+
+  GetSubscriptionRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GetSubscriptionRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GetSubscriptionRequest& from);
+  void MergeFrom(const GetSubscriptionRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GetSubscriptionRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "nakama.api.GetSubscriptionRequest";
+  }
+  protected:
+  explicit GetSubscriptionRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
+    return ::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kProductIdFieldNumber = 1,
+  };
+  // string product_id = 1;
+  void clear_product_id();
+  const std::string& product_id() const;
+  void set_product_id(const std::string& value);
+  void set_product_id(std::string&& value);
+  void set_product_id(const char* value);
+  void set_product_id(const char* value, size_t size);
+  std::string* mutable_product_id();
+  std::string* release_product_id();
+  void set_allocated_product_id(std::string* product_id);
+  private:
+  const std::string& _internal_product_id() const;
+  void _internal_set_product_id(const std::string& value);
+  std::string* _internal_mutable_product_id();
+  public:
+
+  // @@protoc_insertion_point(class_scope:nakama.api.GetSubscriptionRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr product_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+};
+// -------------------------------------------------------------------
+
 class Group PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.Group) */ {
  public:
@@ -8363,7 +8534,7 @@ class Group PROTOBUF_FINAL :
                &_Group_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    51;
+    52;
 
   friend void swap(Group& a, Group& b) {
     a.Swap(&b);
@@ -8696,7 +8867,7 @@ class GroupList PROTOBUF_FINAL :
                &_GroupList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    52;
+    53;
 
   friend void swap(GroupList& a, GroupList& b) {
     a.Swap(&b);
@@ -8859,7 +9030,7 @@ class GroupUserList_GroupUser PROTOBUF_FINAL :
                &_GroupUserList_GroupUser_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    53;
+    54;
 
   friend void swap(GroupUserList_GroupUser& a, GroupUserList_GroupUser& b) {
     a.Swap(&b);
@@ -9058,7 +9229,7 @@ class GroupUserList PROTOBUF_FINAL :
                &_GroupUserList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    54;
+    55;
 
   friend void swap(GroupUserList& a, GroupUserList& b) {
     a.Swap(&b);
@@ -9223,7 +9394,7 @@ class ImportFacebookFriendsRequest PROTOBUF_FINAL :
                &_ImportFacebookFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    55;
+    56;
 
   friend void swap(ImportFacebookFriendsRequest& a, ImportFacebookFriendsRequest& b) {
     a.Swap(&b);
@@ -9388,7 +9559,7 @@ class ImportSteamFriendsRequest PROTOBUF_FINAL :
                &_ImportSteamFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    56;
+    57;
 
   friend void swap(ImportSteamFriendsRequest& a, ImportSteamFriendsRequest& b) {
     a.Swap(&b);
@@ -9553,7 +9724,7 @@ class JoinGroupRequest PROTOBUF_FINAL :
                &_JoinGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    57;
+    58;
 
   friend void swap(JoinGroupRequest& a, JoinGroupRequest& b) {
     a.Swap(&b);
@@ -9696,7 +9867,7 @@ class JoinTournamentRequest PROTOBUF_FINAL :
                &_JoinTournamentRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    58;
+    59;
 
   friend void swap(JoinTournamentRequest& a, JoinTournamentRequest& b) {
     a.Swap(&b);
@@ -9839,7 +10010,7 @@ class KickGroupUsersRequest PROTOBUF_FINAL :
                &_KickGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    59;
+    60;
 
   friend void swap(KickGroupUsersRequest& a, KickGroupUsersRequest& b) {
     a.Swap(&b);
@@ -10008,7 +10179,7 @@ class Leaderboard PROTOBUF_FINAL :
                &_Leaderboard_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    60;
+    61;
 
   friend void swap(Leaderboard& a, Leaderboard& b) {
     a.Swap(&b);
@@ -10244,7 +10415,7 @@ class LeaderboardList PROTOBUF_FINAL :
                &_LeaderboardList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    61;
+    62;
 
   friend void swap(LeaderboardList& a, LeaderboardList& b) {
     a.Swap(&b);
@@ -10407,7 +10578,7 @@ class LeaderboardRecord PROTOBUF_FINAL :
                &_LeaderboardRecord_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    62;
+    63;
 
   friend void swap(LeaderboardRecord& a, LeaderboardRecord& b) {
     a.Swap(&b);
@@ -10721,7 +10892,7 @@ class LeaderboardRecordList PROTOBUF_FINAL :
                &_LeaderboardRecordList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    63;
+    64;
 
   friend void swap(LeaderboardRecordList& a, LeaderboardRecordList& b) {
     a.Swap(&b);
@@ -10922,7 +11093,7 @@ class LeaveGroupRequest PROTOBUF_FINAL :
                &_LeaveGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    64;
+    65;
 
   friend void swap(LeaveGroupRequest& a, LeaveGroupRequest& b) {
     a.Swap(&b);
@@ -11065,7 +11236,7 @@ class LinkFacebookRequest PROTOBUF_FINAL :
                &_LinkFacebookRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    65;
+    66;
 
   friend void swap(LinkFacebookRequest& a, LinkFacebookRequest& b) {
     a.Swap(&b);
@@ -11230,7 +11401,7 @@ class LinkSteamRequest PROTOBUF_FINAL :
                &_LinkSteamRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    66;
+    67;
 
   friend void swap(LinkSteamRequest& a, LinkSteamRequest& b) {
     a.Swap(&b);
@@ -11395,7 +11566,7 @@ class ListChannelMessagesRequest PROTOBUF_FINAL :
                &_ListChannelMessagesRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    67;
+    68;
 
   friend void swap(ListChannelMessagesRequest& a, ListChannelMessagesRequest& b) {
     a.Swap(&b);
@@ -11596,7 +11767,7 @@ class ListFriendsRequest PROTOBUF_FINAL :
                &_ListFriendsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    68;
+    69;
 
   friend void swap(ListFriendsRequest& a, ListFriendsRequest& b) {
     a.Swap(&b);
@@ -11779,7 +11950,7 @@ class ListGroupsRequest PROTOBUF_FINAL :
                &_ListGroupsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    69;
+    70;
 
   friend void swap(ListGroupsRequest& a, ListGroupsRequest& b) {
     a.Swap(&b);
@@ -12018,7 +12189,7 @@ class ListGroupUsersRequest PROTOBUF_FINAL :
                &_ListGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    70;
+    71;
 
   friend void swap(ListGroupUsersRequest& a, ListGroupUsersRequest& b) {
     a.Swap(&b);
@@ -12219,7 +12390,7 @@ class ListLeaderboardRecordsAroundOwnerRequest PROTOBUF_FINAL :
                &_ListLeaderboardRecordsAroundOwnerRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    71;
+    72;
 
   friend void swap(ListLeaderboardRecordsAroundOwnerRequest& a, ListLeaderboardRecordsAroundOwnerRequest& b) {
     a.Swap(&b);
@@ -12292,6 +12463,7 @@ class ListLeaderboardRecordsAroundOwnerRequest PROTOBUF_FINAL :
   enum : int {
     kLeaderboardIdFieldNumber = 1,
     kOwnerIdFieldNumber = 3,
+    kCursorFieldNumber = 5,
     kLimitFieldNumber = 2,
     kExpiryFieldNumber = 4,
   };
@@ -12325,6 +12497,22 @@ class ListLeaderboardRecordsAroundOwnerRequest PROTOBUF_FINAL :
   const std::string& _internal_owner_id() const;
   void _internal_set_owner_id(const std::string& value);
   std::string* _internal_mutable_owner_id();
+  public:
+
+  // string cursor = 5;
+  void clear_cursor();
+  const std::string& cursor() const;
+  void set_cursor(const std::string& value);
+  void set_cursor(std::string&& value);
+  void set_cursor(const char* value);
+  void set_cursor(const char* value, size_t size);
+  std::string* mutable_cursor();
+  std::string* release_cursor();
+  void set_allocated_cursor(std::string* cursor);
+  private:
+  const std::string& _internal_cursor() const;
+  void _internal_set_cursor(const std::string& value);
+  std::string* _internal_mutable_cursor();
   public:
 
   // .google.protobuf.UInt32Value limit = 2;
@@ -12372,6 +12560,7 @@ class ListLeaderboardRecordsAroundOwnerRequest PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr leaderboard_id_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr owner_id_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cursor_;
   PROTOBUF_NAMESPACE_ID::UInt32Value* limit_;
   PROTOBUF_NAMESPACE_ID::Int64Value* expiry_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -12420,7 +12609,7 @@ class ListLeaderboardRecordsRequest PROTOBUF_FINAL :
                &_ListLeaderboardRecordsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    72;
+    73;
 
   friend void swap(ListLeaderboardRecordsRequest& a, ListLeaderboardRecordsRequest& b) {
     a.Swap(&b);
@@ -12647,7 +12836,7 @@ class ListMatchesRequest PROTOBUF_FINAL :
                &_ListMatchesRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    73;
+    74;
 
   friend void swap(ListMatchesRequest& a, ListMatchesRequest& b) {
     a.Swap(&b);
@@ -12892,7 +13081,7 @@ class ListNotificationsRequest PROTOBUF_FINAL :
                &_ListNotificationsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    74;
+    75;
 
   friend void swap(ListNotificationsRequest& a, ListNotificationsRequest& b) {
     a.Swap(&b);
@@ -13055,7 +13244,7 @@ class ListStorageObjectsRequest PROTOBUF_FINAL :
                &_ListStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    75;
+    76;
 
   friend void swap(ListStorageObjectsRequest& a, ListStorageObjectsRequest& b) {
     a.Swap(&b);
@@ -13213,6 +13402,169 @@ class ListStorageObjectsRequest PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class ListSubscriptionsRequest PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.ListSubscriptionsRequest) */ {
+ public:
+  inline ListSubscriptionsRequest() : ListSubscriptionsRequest(nullptr) {}
+  virtual ~ListSubscriptionsRequest();
+
+  ListSubscriptionsRequest(const ListSubscriptionsRequest& from);
+  ListSubscriptionsRequest(ListSubscriptionsRequest&& from) noexcept
+    : ListSubscriptionsRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline ListSubscriptionsRequest& operator=(const ListSubscriptionsRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ListSubscriptionsRequest& operator=(ListSubscriptionsRequest&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ListSubscriptionsRequest& default_instance();
+
+  static inline const ListSubscriptionsRequest* internal_default_instance() {
+    return reinterpret_cast<const ListSubscriptionsRequest*>(
+               &_ListSubscriptionsRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    77;
+
+  friend void swap(ListSubscriptionsRequest& a, ListSubscriptionsRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ListSubscriptionsRequest* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ListSubscriptionsRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ListSubscriptionsRequest* New() const final {
+    return CreateMaybeMessage<ListSubscriptionsRequest>(nullptr);
+  }
+
+  ListSubscriptionsRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ListSubscriptionsRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ListSubscriptionsRequest& from);
+  void MergeFrom(const ListSubscriptionsRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ListSubscriptionsRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "nakama.api.ListSubscriptionsRequest";
+  }
+  protected:
+  explicit ListSubscriptionsRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
+    return ::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kCursorFieldNumber = 2,
+    kLimitFieldNumber = 1,
+  };
+  // string cursor = 2;
+  void clear_cursor();
+  const std::string& cursor() const;
+  void set_cursor(const std::string& value);
+  void set_cursor(std::string&& value);
+  void set_cursor(const char* value);
+  void set_cursor(const char* value, size_t size);
+  std::string* mutable_cursor();
+  std::string* release_cursor();
+  void set_allocated_cursor(std::string* cursor);
+  private:
+  const std::string& _internal_cursor() const;
+  void _internal_set_cursor(const std::string& value);
+  std::string* _internal_mutable_cursor();
+  public:
+
+  // .google.protobuf.Int32Value limit = 1;
+  bool has_limit() const;
+  private:
+  bool _internal_has_limit() const;
+  public:
+  void clear_limit();
+  const PROTOBUF_NAMESPACE_ID::Int32Value& limit() const;
+  PROTOBUF_NAMESPACE_ID::Int32Value* release_limit();
+  PROTOBUF_NAMESPACE_ID::Int32Value* mutable_limit();
+  void set_allocated_limit(PROTOBUF_NAMESPACE_ID::Int32Value* limit);
+  private:
+  const PROTOBUF_NAMESPACE_ID::Int32Value& _internal_limit() const;
+  PROTOBUF_NAMESPACE_ID::Int32Value* _internal_mutable_limit();
+  public:
+  void unsafe_arena_set_allocated_limit(
+      PROTOBUF_NAMESPACE_ID::Int32Value* limit);
+  PROTOBUF_NAMESPACE_ID::Int32Value* unsafe_arena_release_limit();
+
+  // @@protoc_insertion_point(class_scope:nakama.api.ListSubscriptionsRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cursor_;
+  PROTOBUF_NAMESPACE_ID::Int32Value* limit_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+};
+// -------------------------------------------------------------------
+
 class ListTournamentRecordsAroundOwnerRequest PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.ListTournamentRecordsAroundOwnerRequest) */ {
  public:
@@ -13254,7 +13606,7 @@ class ListTournamentRecordsAroundOwnerRequest PROTOBUF_FINAL :
                &_ListTournamentRecordsAroundOwnerRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    76;
+    78;
 
   friend void swap(ListTournamentRecordsAroundOwnerRequest& a, ListTournamentRecordsAroundOwnerRequest& b) {
     a.Swap(&b);
@@ -13327,6 +13679,7 @@ class ListTournamentRecordsAroundOwnerRequest PROTOBUF_FINAL :
   enum : int {
     kTournamentIdFieldNumber = 1,
     kOwnerIdFieldNumber = 3,
+    kCursorFieldNumber = 5,
     kLimitFieldNumber = 2,
     kExpiryFieldNumber = 4,
   };
@@ -13360,6 +13713,22 @@ class ListTournamentRecordsAroundOwnerRequest PROTOBUF_FINAL :
   const std::string& _internal_owner_id() const;
   void _internal_set_owner_id(const std::string& value);
   std::string* _internal_mutable_owner_id();
+  public:
+
+  // string cursor = 5;
+  void clear_cursor();
+  const std::string& cursor() const;
+  void set_cursor(const std::string& value);
+  void set_cursor(std::string&& value);
+  void set_cursor(const char* value);
+  void set_cursor(const char* value, size_t size);
+  std::string* mutable_cursor();
+  std::string* release_cursor();
+  void set_allocated_cursor(std::string* cursor);
+  private:
+  const std::string& _internal_cursor() const;
+  void _internal_set_cursor(const std::string& value);
+  std::string* _internal_mutable_cursor();
   public:
 
   // .google.protobuf.UInt32Value limit = 2;
@@ -13407,6 +13776,7 @@ class ListTournamentRecordsAroundOwnerRequest PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tournament_id_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr owner_id_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cursor_;
   PROTOBUF_NAMESPACE_ID::UInt32Value* limit_;
   PROTOBUF_NAMESPACE_ID::Int64Value* expiry_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -13455,7 +13825,7 @@ class ListTournamentRecordsRequest PROTOBUF_FINAL :
                &_ListTournamentRecordsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    77;
+    79;
 
   friend void swap(ListTournamentRecordsRequest& a, ListTournamentRecordsRequest& b) {
     a.Swap(&b);
@@ -13682,7 +14052,7 @@ class ListTournamentsRequest PROTOBUF_FINAL :
                &_ListTournamentsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    78;
+    80;
 
   friend void swap(ListTournamentsRequest& a, ListTournamentsRequest& b) {
     a.Swap(&b);
@@ -13925,7 +14295,7 @@ class ListUserGroupsRequest PROTOBUF_FINAL :
                &_ListUserGroupsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    79;
+    81;
 
   friend void swap(ListUserGroupsRequest& a, ListUserGroupsRequest& b) {
     a.Swap(&b);
@@ -14126,7 +14496,7 @@ class Match PROTOBUF_FINAL :
                &_Match_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    80;
+    82;
 
   friend void swap(Match& a, Match& b) {
     a.Swap(&b);
@@ -14340,7 +14710,7 @@ class MatchList PROTOBUF_FINAL :
                &_MatchList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    81;
+    83;
 
   friend void swap(MatchList& a, MatchList& b) {
     a.Swap(&b);
@@ -14485,7 +14855,7 @@ class Notification PROTOBUF_FINAL :
                &_Notification_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    82;
+    84;
 
   friend void swap(Notification& a, Notification& b) {
     a.Swap(&b);
@@ -14724,7 +15094,7 @@ class NotificationList PROTOBUF_FINAL :
                &_NotificationList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    83;
+    85;
 
   friend void swap(NotificationList& a, NotificationList& b) {
     a.Swap(&b);
@@ -14887,7 +15257,7 @@ class PromoteGroupUsersRequest PROTOBUF_FINAL :
                &_PromoteGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    84;
+    86;
 
   friend void swap(PromoteGroupUsersRequest& a, PromoteGroupUsersRequest& b) {
     a.Swap(&b);
@@ -15056,7 +15426,7 @@ class DemoteGroupUsersRequest PROTOBUF_FINAL :
                &_DemoteGroupUsersRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    85;
+    87;
 
   friend void swap(DemoteGroupUsersRequest& a, DemoteGroupUsersRequest& b) {
     a.Swap(&b);
@@ -15225,7 +15595,7 @@ class ReadStorageObjectId PROTOBUF_FINAL :
                &_ReadStorageObjectId_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    86;
+    88;
 
   friend void swap(ReadStorageObjectId& a, ReadStorageObjectId& b) {
     a.Swap(&b);
@@ -15404,7 +15774,7 @@ class ReadStorageObjectsRequest PROTOBUF_FINAL :
                &_ReadStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    87;
+    89;
 
   friend void swap(ReadStorageObjectsRequest& a, ReadStorageObjectsRequest& b) {
     a.Swap(&b);
@@ -15549,7 +15919,7 @@ class Rpc PROTOBUF_FINAL :
                &_Rpc_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    88;
+    90;
 
   friend void swap(Rpc& a, Rpc& b) {
     a.Swap(&b);
@@ -15728,7 +16098,7 @@ class Session PROTOBUF_FINAL :
                &_Session_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    89;
+    91;
 
   friend void swap(Session& a, Session& b) {
     a.Swap(&b);
@@ -15900,7 +16270,7 @@ class StorageObject PROTOBUF_FINAL :
                &_StorageObject_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    90;
+    92;
 
   friend void swap(StorageObject& a, StorageObject& b) {
     a.Swap(&b);
@@ -16177,7 +16547,7 @@ class StorageObjectAck PROTOBUF_FINAL :
                &_StorageObjectAck_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    91;
+    93;
 
   friend void swap(StorageObjectAck& a, StorageObjectAck& b) {
     a.Swap(&b);
@@ -16374,7 +16744,7 @@ class StorageObjectAcks PROTOBUF_FINAL :
                &_StorageObjectAcks_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    92;
+    94;
 
   friend void swap(StorageObjectAcks& a, StorageObjectAcks& b) {
     a.Swap(&b);
@@ -16519,7 +16889,7 @@ class StorageObjects PROTOBUF_FINAL :
                &_StorageObjects_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    93;
+    95;
 
   friend void swap(StorageObjects& a, StorageObjects& b) {
     a.Swap(&b);
@@ -16664,7 +17034,7 @@ class StorageObjectList PROTOBUF_FINAL :
                &_StorageObjectList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    94;
+    96;
 
   friend void swap(StorageObjectList& a, StorageObjectList& b) {
     a.Swap(&b);
@@ -16827,7 +17197,7 @@ class Tournament PROTOBUF_FINAL :
                &_Tournament_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    95;
+    97;
 
   friend void swap(Tournament& a, Tournament& b) {
     a.Swap(&b);
@@ -17216,7 +17586,7 @@ class TournamentList PROTOBUF_FINAL :
                &_TournamentList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    96;
+    98;
 
   friend void swap(TournamentList& a, TournamentList& b) {
     a.Swap(&b);
@@ -17379,7 +17749,7 @@ class TournamentRecordList PROTOBUF_FINAL :
                &_TournamentRecordList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    97;
+    99;
 
   friend void swap(TournamentRecordList& a, TournamentRecordList& b) {
     a.Swap(&b);
@@ -17580,7 +17950,7 @@ class UpdateAccountRequest PROTOBUF_FINAL :
                &_UpdateAccountRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    98;
+    100;
 
   friend void swap(UpdateAccountRequest& a, UpdateAccountRequest& b) {
     a.Swap(&b);
@@ -17825,7 +18195,7 @@ class UpdateGroupRequest PROTOBUF_FINAL :
                &_UpdateGroupRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    99;
+    101;
 
   friend void swap(UpdateGroupRequest& a, UpdateGroupRequest& b) {
     a.Swap(&b);
@@ -18068,7 +18438,7 @@ class User PROTOBUF_FINAL :
                &_User_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    100;
+    102;
 
   friend void swap(User& a, User& b) {
     a.Swap(&b);
@@ -18507,7 +18877,7 @@ class UserGroupList_UserGroup PROTOBUF_FINAL :
                &_UserGroupList_UserGroup_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    101;
+    103;
 
   friend void swap(UserGroupList_UserGroup& a, UserGroupList_UserGroup& b) {
     a.Swap(&b);
@@ -18706,7 +19076,7 @@ class UserGroupList PROTOBUF_FINAL :
                &_UserGroupList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    102;
+    104;
 
   friend void swap(UserGroupList& a, UserGroupList& b) {
     a.Swap(&b);
@@ -18871,7 +19241,7 @@ class Users PROTOBUF_FINAL :
                &_Users_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    103;
+    105;
 
   friend void swap(Users& a, Users& b) {
     a.Swap(&b);
@@ -19016,7 +19386,7 @@ class ValidatePurchaseAppleRequest PROTOBUF_FINAL :
                &_ValidatePurchaseAppleRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    104;
+    106;
 
   friend void swap(ValidatePurchaseAppleRequest& a, ValidatePurchaseAppleRequest& b) {
     a.Swap(&b);
@@ -19138,6 +19508,169 @@ class ValidatePurchaseAppleRequest PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class ValidateSubscriptionAppleRequest PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.ValidateSubscriptionAppleRequest) */ {
+ public:
+  inline ValidateSubscriptionAppleRequest() : ValidateSubscriptionAppleRequest(nullptr) {}
+  virtual ~ValidateSubscriptionAppleRequest();
+
+  ValidateSubscriptionAppleRequest(const ValidateSubscriptionAppleRequest& from);
+  ValidateSubscriptionAppleRequest(ValidateSubscriptionAppleRequest&& from) noexcept
+    : ValidateSubscriptionAppleRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline ValidateSubscriptionAppleRequest& operator=(const ValidateSubscriptionAppleRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ValidateSubscriptionAppleRequest& operator=(ValidateSubscriptionAppleRequest&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ValidateSubscriptionAppleRequest& default_instance();
+
+  static inline const ValidateSubscriptionAppleRequest* internal_default_instance() {
+    return reinterpret_cast<const ValidateSubscriptionAppleRequest*>(
+               &_ValidateSubscriptionAppleRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    107;
+
+  friend void swap(ValidateSubscriptionAppleRequest& a, ValidateSubscriptionAppleRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ValidateSubscriptionAppleRequest* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ValidateSubscriptionAppleRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ValidateSubscriptionAppleRequest* New() const final {
+    return CreateMaybeMessage<ValidateSubscriptionAppleRequest>(nullptr);
+  }
+
+  ValidateSubscriptionAppleRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ValidateSubscriptionAppleRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ValidateSubscriptionAppleRequest& from);
+  void MergeFrom(const ValidateSubscriptionAppleRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ValidateSubscriptionAppleRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "nakama.api.ValidateSubscriptionAppleRequest";
+  }
+  protected:
+  explicit ValidateSubscriptionAppleRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
+    return ::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kReceiptFieldNumber = 1,
+    kPersistFieldNumber = 2,
+  };
+  // string receipt = 1;
+  void clear_receipt();
+  const std::string& receipt() const;
+  void set_receipt(const std::string& value);
+  void set_receipt(std::string&& value);
+  void set_receipt(const char* value);
+  void set_receipt(const char* value, size_t size);
+  std::string* mutable_receipt();
+  std::string* release_receipt();
+  void set_allocated_receipt(std::string* receipt);
+  private:
+  const std::string& _internal_receipt() const;
+  void _internal_set_receipt(const std::string& value);
+  std::string* _internal_mutable_receipt();
+  public:
+
+  // .google.protobuf.BoolValue persist = 2;
+  bool has_persist() const;
+  private:
+  bool _internal_has_persist() const;
+  public:
+  void clear_persist();
+  const PROTOBUF_NAMESPACE_ID::BoolValue& persist() const;
+  PROTOBUF_NAMESPACE_ID::BoolValue* release_persist();
+  PROTOBUF_NAMESPACE_ID::BoolValue* mutable_persist();
+  void set_allocated_persist(PROTOBUF_NAMESPACE_ID::BoolValue* persist);
+  private:
+  const PROTOBUF_NAMESPACE_ID::BoolValue& _internal_persist() const;
+  PROTOBUF_NAMESPACE_ID::BoolValue* _internal_mutable_persist();
+  public:
+  void unsafe_arena_set_allocated_persist(
+      PROTOBUF_NAMESPACE_ID::BoolValue* persist);
+  PROTOBUF_NAMESPACE_ID::BoolValue* unsafe_arena_release_persist();
+
+  // @@protoc_insertion_point(class_scope:nakama.api.ValidateSubscriptionAppleRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr receipt_;
+  PROTOBUF_NAMESPACE_ID::BoolValue* persist_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+};
+// -------------------------------------------------------------------
+
 class ValidatePurchaseGoogleRequest PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.ValidatePurchaseGoogleRequest) */ {
  public:
@@ -19179,7 +19712,7 @@ class ValidatePurchaseGoogleRequest PROTOBUF_FINAL :
                &_ValidatePurchaseGoogleRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    105;
+    108;
 
   friend void swap(ValidatePurchaseGoogleRequest& a, ValidatePurchaseGoogleRequest& b) {
     a.Swap(&b);
@@ -19301,6 +19834,169 @@ class ValidatePurchaseGoogleRequest PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class ValidateSubscriptionGoogleRequest PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.ValidateSubscriptionGoogleRequest) */ {
+ public:
+  inline ValidateSubscriptionGoogleRequest() : ValidateSubscriptionGoogleRequest(nullptr) {}
+  virtual ~ValidateSubscriptionGoogleRequest();
+
+  ValidateSubscriptionGoogleRequest(const ValidateSubscriptionGoogleRequest& from);
+  ValidateSubscriptionGoogleRequest(ValidateSubscriptionGoogleRequest&& from) noexcept
+    : ValidateSubscriptionGoogleRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline ValidateSubscriptionGoogleRequest& operator=(const ValidateSubscriptionGoogleRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ValidateSubscriptionGoogleRequest& operator=(ValidateSubscriptionGoogleRequest&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ValidateSubscriptionGoogleRequest& default_instance();
+
+  static inline const ValidateSubscriptionGoogleRequest* internal_default_instance() {
+    return reinterpret_cast<const ValidateSubscriptionGoogleRequest*>(
+               &_ValidateSubscriptionGoogleRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    109;
+
+  friend void swap(ValidateSubscriptionGoogleRequest& a, ValidateSubscriptionGoogleRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ValidateSubscriptionGoogleRequest* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ValidateSubscriptionGoogleRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ValidateSubscriptionGoogleRequest* New() const final {
+    return CreateMaybeMessage<ValidateSubscriptionGoogleRequest>(nullptr);
+  }
+
+  ValidateSubscriptionGoogleRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ValidateSubscriptionGoogleRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ValidateSubscriptionGoogleRequest& from);
+  void MergeFrom(const ValidateSubscriptionGoogleRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ValidateSubscriptionGoogleRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "nakama.api.ValidateSubscriptionGoogleRequest";
+  }
+  protected:
+  explicit ValidateSubscriptionGoogleRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
+    return ::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kReceiptFieldNumber = 1,
+    kPersistFieldNumber = 2,
+  };
+  // string receipt = 1;
+  void clear_receipt();
+  const std::string& receipt() const;
+  void set_receipt(const std::string& value);
+  void set_receipt(std::string&& value);
+  void set_receipt(const char* value);
+  void set_receipt(const char* value, size_t size);
+  std::string* mutable_receipt();
+  std::string* release_receipt();
+  void set_allocated_receipt(std::string* receipt);
+  private:
+  const std::string& _internal_receipt() const;
+  void _internal_set_receipt(const std::string& value);
+  std::string* _internal_mutable_receipt();
+  public:
+
+  // .google.protobuf.BoolValue persist = 2;
+  bool has_persist() const;
+  private:
+  bool _internal_has_persist() const;
+  public:
+  void clear_persist();
+  const PROTOBUF_NAMESPACE_ID::BoolValue& persist() const;
+  PROTOBUF_NAMESPACE_ID::BoolValue* release_persist();
+  PROTOBUF_NAMESPACE_ID::BoolValue* mutable_persist();
+  void set_allocated_persist(PROTOBUF_NAMESPACE_ID::BoolValue* persist);
+  private:
+  const PROTOBUF_NAMESPACE_ID::BoolValue& _internal_persist() const;
+  PROTOBUF_NAMESPACE_ID::BoolValue* _internal_mutable_persist();
+  public:
+  void unsafe_arena_set_allocated_persist(
+      PROTOBUF_NAMESPACE_ID::BoolValue* persist);
+  PROTOBUF_NAMESPACE_ID::BoolValue* unsafe_arena_release_persist();
+
+  // @@protoc_insertion_point(class_scope:nakama.api.ValidateSubscriptionGoogleRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr receipt_;
+  PROTOBUF_NAMESPACE_ID::BoolValue* persist_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+};
+// -------------------------------------------------------------------
+
 class ValidatePurchaseHuaweiRequest PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.ValidatePurchaseHuaweiRequest) */ {
  public:
@@ -19342,7 +20038,7 @@ class ValidatePurchaseHuaweiRequest PROTOBUF_FINAL :
                &_ValidatePurchaseHuaweiRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    106;
+    110;
 
   friend void swap(ValidatePurchaseHuaweiRequest& a, ValidatePurchaseHuaweiRequest& b) {
     a.Swap(&b);
@@ -19523,7 +20219,7 @@ class ValidatedPurchase PROTOBUF_FINAL :
                &_ValidatedPurchase_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    107;
+    111;
 
   friend void swap(ValidatedPurchase& a, ValidatedPurchase& b) {
     a.Swap(&b);
@@ -19590,70 +20286,6 @@ class ValidatedPurchase PROTOBUF_FINAL :
   public:
 
   // nested types ----------------------------------------------------
-
-  typedef ValidatedPurchase_Store Store;
-  static constexpr Store APPLE_APP_STORE =
-    ValidatedPurchase_Store_APPLE_APP_STORE;
-  static constexpr Store GOOGLE_PLAY_STORE =
-    ValidatedPurchase_Store_GOOGLE_PLAY_STORE;
-  static constexpr Store HUAWEI_APP_GALLERY =
-    ValidatedPurchase_Store_HUAWEI_APP_GALLERY;
-  static inline bool Store_IsValid(int value) {
-    return ValidatedPurchase_Store_IsValid(value);
-  }
-  static constexpr Store Store_MIN =
-    ValidatedPurchase_Store_Store_MIN;
-  static constexpr Store Store_MAX =
-    ValidatedPurchase_Store_Store_MAX;
-  static constexpr int Store_ARRAYSIZE =
-    ValidatedPurchase_Store_Store_ARRAYSIZE;
-  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
-  Store_descriptor() {
-    return ValidatedPurchase_Store_descriptor();
-  }
-  template<typename T>
-  static inline const std::string& Store_Name(T enum_t_value) {
-    static_assert(::std::is_same<T, Store>::value ||
-      ::std::is_integral<T>::value,
-      "Incorrect type passed to function Store_Name.");
-    return ValidatedPurchase_Store_Name(enum_t_value);
-  }
-  static inline bool Store_Parse(::PROTOBUF_NAMESPACE_ID::ConstStringParam name,
-      Store* value) {
-    return ValidatedPurchase_Store_Parse(name, value);
-  }
-
-  typedef ValidatedPurchase_Environment Environment;
-  static constexpr Environment UNKNOWN =
-    ValidatedPurchase_Environment_UNKNOWN;
-  static constexpr Environment SANDBOX =
-    ValidatedPurchase_Environment_SANDBOX;
-  static constexpr Environment PRODUCTION =
-    ValidatedPurchase_Environment_PRODUCTION;
-  static inline bool Environment_IsValid(int value) {
-    return ValidatedPurchase_Environment_IsValid(value);
-  }
-  static constexpr Environment Environment_MIN =
-    ValidatedPurchase_Environment_Environment_MIN;
-  static constexpr Environment Environment_MAX =
-    ValidatedPurchase_Environment_Environment_MAX;
-  static constexpr int Environment_ARRAYSIZE =
-    ValidatedPurchase_Environment_Environment_ARRAYSIZE;
-  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
-  Environment_descriptor() {
-    return ValidatedPurchase_Environment_descriptor();
-  }
-  template<typename T>
-  static inline const std::string& Environment_Name(T enum_t_value) {
-    static_assert(::std::is_same<T, Environment>::value ||
-      ::std::is_integral<T>::value,
-      "Incorrect type passed to function Environment_Name.");
-    return ValidatedPurchase_Environment_Name(enum_t_value);
-  }
-  static inline bool Environment_Parse(::PROTOBUF_NAMESPACE_ID::ConstStringParam name,
-      Environment* value) {
-    return ValidatedPurchase_Environment_Parse(name, value);
-  }
 
   // accessors -------------------------------------------------------
 
@@ -19770,22 +20402,22 @@ class ValidatedPurchase PROTOBUF_FINAL :
       PROTOBUF_NAMESPACE_ID::Timestamp* update_time);
   PROTOBUF_NAMESPACE_ID::Timestamp* unsafe_arena_release_update_time();
 
-  // .nakama.api.ValidatedPurchase.Store store = 3;
+  // .nakama.api.StoreProvider store = 3;
   void clear_store();
-  ::nakama::api::ValidatedPurchase_Store store() const;
-  void set_store(::nakama::api::ValidatedPurchase_Store value);
+  ::nakama::api::StoreProvider store() const;
+  void set_store(::nakama::api::StoreProvider value);
   private:
-  ::nakama::api::ValidatedPurchase_Store _internal_store() const;
-  void _internal_set_store(::nakama::api::ValidatedPurchase_Store value);
+  ::nakama::api::StoreProvider _internal_store() const;
+  void _internal_set_store(::nakama::api::StoreProvider value);
   public:
 
-  // .nakama.api.ValidatedPurchase.Environment environment = 8;
+  // .nakama.api.StoreEnvironment environment = 8;
   void clear_environment();
-  ::nakama::api::ValidatedPurchase_Environment environment() const;
-  void set_environment(::nakama::api::ValidatedPurchase_Environment value);
+  ::nakama::api::StoreEnvironment environment() const;
+  void set_environment(::nakama::api::StoreEnvironment value);
   private:
-  ::nakama::api::ValidatedPurchase_Environment _internal_environment() const;
-  void _internal_set_environment(::nakama::api::ValidatedPurchase_Environment value);
+  ::nakama::api::StoreEnvironment _internal_environment() const;
+  void _internal_set_environment(::nakama::api::StoreEnvironment value);
   public:
 
   // bool seen_before = 9;
@@ -19859,7 +20491,7 @@ class ValidatePurchaseResponse PROTOBUF_FINAL :
                &_ValidatePurchaseResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    108;
+    112;
 
   friend void swap(ValidatePurchaseResponse& a, ValidatePurchaseResponse& b) {
     a.Swap(&b);
@@ -19963,6 +20595,425 @@ class ValidatePurchaseResponse PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class ValidateSubscriptionResponse PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.ValidateSubscriptionResponse) */ {
+ public:
+  inline ValidateSubscriptionResponse() : ValidateSubscriptionResponse(nullptr) {}
+  virtual ~ValidateSubscriptionResponse();
+
+  ValidateSubscriptionResponse(const ValidateSubscriptionResponse& from);
+  ValidateSubscriptionResponse(ValidateSubscriptionResponse&& from) noexcept
+    : ValidateSubscriptionResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline ValidateSubscriptionResponse& operator=(const ValidateSubscriptionResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ValidateSubscriptionResponse& operator=(ValidateSubscriptionResponse&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ValidateSubscriptionResponse& default_instance();
+
+  static inline const ValidateSubscriptionResponse* internal_default_instance() {
+    return reinterpret_cast<const ValidateSubscriptionResponse*>(
+               &_ValidateSubscriptionResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    113;
+
+  friend void swap(ValidateSubscriptionResponse& a, ValidateSubscriptionResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ValidateSubscriptionResponse* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ValidateSubscriptionResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ValidateSubscriptionResponse* New() const final {
+    return CreateMaybeMessage<ValidateSubscriptionResponse>(nullptr);
+  }
+
+  ValidateSubscriptionResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ValidateSubscriptionResponse>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ValidateSubscriptionResponse& from);
+  void MergeFrom(const ValidateSubscriptionResponse& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ValidateSubscriptionResponse* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "nakama.api.ValidateSubscriptionResponse";
+  }
+  protected:
+  explicit ValidateSubscriptionResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
+    return ::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kValidatedSubscriptionFieldNumber = 1,
+  };
+  // .nakama.api.ValidatedSubscription validated_subscription = 1;
+  bool has_validated_subscription() const;
+  private:
+  bool _internal_has_validated_subscription() const;
+  public:
+  void clear_validated_subscription();
+  const ::nakama::api::ValidatedSubscription& validated_subscription() const;
+  ::nakama::api::ValidatedSubscription* release_validated_subscription();
+  ::nakama::api::ValidatedSubscription* mutable_validated_subscription();
+  void set_allocated_validated_subscription(::nakama::api::ValidatedSubscription* validated_subscription);
+  private:
+  const ::nakama::api::ValidatedSubscription& _internal_validated_subscription() const;
+  ::nakama::api::ValidatedSubscription* _internal_mutable_validated_subscription();
+  public:
+  void unsafe_arena_set_allocated_validated_subscription(
+      ::nakama::api::ValidatedSubscription* validated_subscription);
+  ::nakama::api::ValidatedSubscription* unsafe_arena_release_validated_subscription();
+
+  // @@protoc_insertion_point(class_scope:nakama.api.ValidateSubscriptionResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::nakama::api::ValidatedSubscription* validated_subscription_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ValidatedSubscription PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.ValidatedSubscription) */ {
+ public:
+  inline ValidatedSubscription() : ValidatedSubscription(nullptr) {}
+  virtual ~ValidatedSubscription();
+
+  ValidatedSubscription(const ValidatedSubscription& from);
+  ValidatedSubscription(ValidatedSubscription&& from) noexcept
+    : ValidatedSubscription() {
+    *this = ::std::move(from);
+  }
+
+  inline ValidatedSubscription& operator=(const ValidatedSubscription& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ValidatedSubscription& operator=(ValidatedSubscription&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ValidatedSubscription& default_instance();
+
+  static inline const ValidatedSubscription* internal_default_instance() {
+    return reinterpret_cast<const ValidatedSubscription*>(
+               &_ValidatedSubscription_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    114;
+
+  friend void swap(ValidatedSubscription& a, ValidatedSubscription& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ValidatedSubscription* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ValidatedSubscription* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ValidatedSubscription* New() const final {
+    return CreateMaybeMessage<ValidatedSubscription>(nullptr);
+  }
+
+  ValidatedSubscription* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ValidatedSubscription>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ValidatedSubscription& from);
+  void MergeFrom(const ValidatedSubscription& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ValidatedSubscription* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "nakama.api.ValidatedSubscription";
+  }
+  protected:
+  explicit ValidatedSubscription(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
+    return ::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kProductIdFieldNumber = 1,
+    kOriginalTransactionIdFieldNumber = 2,
+    kPurchaseTimeFieldNumber = 4,
+    kCreateTimeFieldNumber = 5,
+    kUpdateTimeFieldNumber = 6,
+    kExpiryTimeFieldNumber = 8,
+    kStoreFieldNumber = 3,
+    kEnvironmentFieldNumber = 7,
+    kActiveFieldNumber = 9,
+  };
+  // string product_id = 1;
+  void clear_product_id();
+  const std::string& product_id() const;
+  void set_product_id(const std::string& value);
+  void set_product_id(std::string&& value);
+  void set_product_id(const char* value);
+  void set_product_id(const char* value, size_t size);
+  std::string* mutable_product_id();
+  std::string* release_product_id();
+  void set_allocated_product_id(std::string* product_id);
+  private:
+  const std::string& _internal_product_id() const;
+  void _internal_set_product_id(const std::string& value);
+  std::string* _internal_mutable_product_id();
+  public:
+
+  // string original_transaction_id = 2;
+  void clear_original_transaction_id();
+  const std::string& original_transaction_id() const;
+  void set_original_transaction_id(const std::string& value);
+  void set_original_transaction_id(std::string&& value);
+  void set_original_transaction_id(const char* value);
+  void set_original_transaction_id(const char* value, size_t size);
+  std::string* mutable_original_transaction_id();
+  std::string* release_original_transaction_id();
+  void set_allocated_original_transaction_id(std::string* original_transaction_id);
+  private:
+  const std::string& _internal_original_transaction_id() const;
+  void _internal_set_original_transaction_id(const std::string& value);
+  std::string* _internal_mutable_original_transaction_id();
+  public:
+
+  // .google.protobuf.Timestamp purchase_time = 4;
+  bool has_purchase_time() const;
+  private:
+  bool _internal_has_purchase_time() const;
+  public:
+  void clear_purchase_time();
+  const PROTOBUF_NAMESPACE_ID::Timestamp& purchase_time() const;
+  PROTOBUF_NAMESPACE_ID::Timestamp* release_purchase_time();
+  PROTOBUF_NAMESPACE_ID::Timestamp* mutable_purchase_time();
+  void set_allocated_purchase_time(PROTOBUF_NAMESPACE_ID::Timestamp* purchase_time);
+  private:
+  const PROTOBUF_NAMESPACE_ID::Timestamp& _internal_purchase_time() const;
+  PROTOBUF_NAMESPACE_ID::Timestamp* _internal_mutable_purchase_time();
+  public:
+  void unsafe_arena_set_allocated_purchase_time(
+      PROTOBUF_NAMESPACE_ID::Timestamp* purchase_time);
+  PROTOBUF_NAMESPACE_ID::Timestamp* unsafe_arena_release_purchase_time();
+
+  // .google.protobuf.Timestamp create_time = 5;
+  bool has_create_time() const;
+  private:
+  bool _internal_has_create_time() const;
+  public:
+  void clear_create_time();
+  const PROTOBUF_NAMESPACE_ID::Timestamp& create_time() const;
+  PROTOBUF_NAMESPACE_ID::Timestamp* release_create_time();
+  PROTOBUF_NAMESPACE_ID::Timestamp* mutable_create_time();
+  void set_allocated_create_time(PROTOBUF_NAMESPACE_ID::Timestamp* create_time);
+  private:
+  const PROTOBUF_NAMESPACE_ID::Timestamp& _internal_create_time() const;
+  PROTOBUF_NAMESPACE_ID::Timestamp* _internal_mutable_create_time();
+  public:
+  void unsafe_arena_set_allocated_create_time(
+      PROTOBUF_NAMESPACE_ID::Timestamp* create_time);
+  PROTOBUF_NAMESPACE_ID::Timestamp* unsafe_arena_release_create_time();
+
+  // .google.protobuf.Timestamp update_time = 6;
+  bool has_update_time() const;
+  private:
+  bool _internal_has_update_time() const;
+  public:
+  void clear_update_time();
+  const PROTOBUF_NAMESPACE_ID::Timestamp& update_time() const;
+  PROTOBUF_NAMESPACE_ID::Timestamp* release_update_time();
+  PROTOBUF_NAMESPACE_ID::Timestamp* mutable_update_time();
+  void set_allocated_update_time(PROTOBUF_NAMESPACE_ID::Timestamp* update_time);
+  private:
+  const PROTOBUF_NAMESPACE_ID::Timestamp& _internal_update_time() const;
+  PROTOBUF_NAMESPACE_ID::Timestamp* _internal_mutable_update_time();
+  public:
+  void unsafe_arena_set_allocated_update_time(
+      PROTOBUF_NAMESPACE_ID::Timestamp* update_time);
+  PROTOBUF_NAMESPACE_ID::Timestamp* unsafe_arena_release_update_time();
+
+  // .google.protobuf.Timestamp expiry_time = 8;
+  bool has_expiry_time() const;
+  private:
+  bool _internal_has_expiry_time() const;
+  public:
+  void clear_expiry_time();
+  const PROTOBUF_NAMESPACE_ID::Timestamp& expiry_time() const;
+  PROTOBUF_NAMESPACE_ID::Timestamp* release_expiry_time();
+  PROTOBUF_NAMESPACE_ID::Timestamp* mutable_expiry_time();
+  void set_allocated_expiry_time(PROTOBUF_NAMESPACE_ID::Timestamp* expiry_time);
+  private:
+  const PROTOBUF_NAMESPACE_ID::Timestamp& _internal_expiry_time() const;
+  PROTOBUF_NAMESPACE_ID::Timestamp* _internal_mutable_expiry_time();
+  public:
+  void unsafe_arena_set_allocated_expiry_time(
+      PROTOBUF_NAMESPACE_ID::Timestamp* expiry_time);
+  PROTOBUF_NAMESPACE_ID::Timestamp* unsafe_arena_release_expiry_time();
+
+  // .nakama.api.StoreProvider store = 3;
+  void clear_store();
+  ::nakama::api::StoreProvider store() const;
+  void set_store(::nakama::api::StoreProvider value);
+  private:
+  ::nakama::api::StoreProvider _internal_store() const;
+  void _internal_set_store(::nakama::api::StoreProvider value);
+  public:
+
+  // .nakama.api.StoreEnvironment environment = 7;
+  void clear_environment();
+  ::nakama::api::StoreEnvironment environment() const;
+  void set_environment(::nakama::api::StoreEnvironment value);
+  private:
+  ::nakama::api::StoreEnvironment _internal_environment() const;
+  void _internal_set_environment(::nakama::api::StoreEnvironment value);
+  public:
+
+  // bool active = 9;
+  void clear_active();
+  bool active() const;
+  void set_active(bool value);
+  private:
+  bool _internal_active() const;
+  void _internal_set_active(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:nakama.api.ValidatedSubscription)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr product_id_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr original_transaction_id_;
+  PROTOBUF_NAMESPACE_ID::Timestamp* purchase_time_;
+  PROTOBUF_NAMESPACE_ID::Timestamp* create_time_;
+  PROTOBUF_NAMESPACE_ID::Timestamp* update_time_;
+  PROTOBUF_NAMESPACE_ID::Timestamp* expiry_time_;
+  int store_;
+  int environment_;
+  bool active_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+};
+// -------------------------------------------------------------------
+
 class PurchaseList PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.PurchaseList) */ {
  public:
@@ -20004,7 +21055,7 @@ class PurchaseList PROTOBUF_FINAL :
                &_PurchaseList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    109;
+    115;
 
   friend void swap(PurchaseList& a, PurchaseList& b) {
     a.Swap(&b);
@@ -20144,6 +21195,187 @@ class PurchaseList PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class SubscriptionList PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.SubscriptionList) */ {
+ public:
+  inline SubscriptionList() : SubscriptionList(nullptr) {}
+  virtual ~SubscriptionList();
+
+  SubscriptionList(const SubscriptionList& from);
+  SubscriptionList(SubscriptionList&& from) noexcept
+    : SubscriptionList() {
+    *this = ::std::move(from);
+  }
+
+  inline SubscriptionList& operator=(const SubscriptionList& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SubscriptionList& operator=(SubscriptionList&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const SubscriptionList& default_instance();
+
+  static inline const SubscriptionList* internal_default_instance() {
+    return reinterpret_cast<const SubscriptionList*>(
+               &_SubscriptionList_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    116;
+
+  friend void swap(SubscriptionList& a, SubscriptionList& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SubscriptionList* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SubscriptionList* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SubscriptionList* New() const final {
+    return CreateMaybeMessage<SubscriptionList>(nullptr);
+  }
+
+  SubscriptionList* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<SubscriptionList>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const SubscriptionList& from);
+  void MergeFrom(const SubscriptionList& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SubscriptionList* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "nakama.api.SubscriptionList";
+  }
+  protected:
+  explicit SubscriptionList(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto);
+    return ::descriptor_table_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kValidatedSubscriptionsFieldNumber = 1,
+    kCursorFieldNumber = 2,
+    kPrevCursorFieldNumber = 3,
+  };
+  // repeated .nakama.api.ValidatedSubscription validated_subscriptions = 1;
+  int validated_subscriptions_size() const;
+  private:
+  int _internal_validated_subscriptions_size() const;
+  public:
+  void clear_validated_subscriptions();
+  ::nakama::api::ValidatedSubscription* mutable_validated_subscriptions(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::nakama::api::ValidatedSubscription >*
+      mutable_validated_subscriptions();
+  private:
+  const ::nakama::api::ValidatedSubscription& _internal_validated_subscriptions(int index) const;
+  ::nakama::api::ValidatedSubscription* _internal_add_validated_subscriptions();
+  public:
+  const ::nakama::api::ValidatedSubscription& validated_subscriptions(int index) const;
+  ::nakama::api::ValidatedSubscription* add_validated_subscriptions();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::nakama::api::ValidatedSubscription >&
+      validated_subscriptions() const;
+
+  // string cursor = 2;
+  void clear_cursor();
+  const std::string& cursor() const;
+  void set_cursor(const std::string& value);
+  void set_cursor(std::string&& value);
+  void set_cursor(const char* value);
+  void set_cursor(const char* value, size_t size);
+  std::string* mutable_cursor();
+  std::string* release_cursor();
+  void set_allocated_cursor(std::string* cursor);
+  private:
+  const std::string& _internal_cursor() const;
+  void _internal_set_cursor(const std::string& value);
+  std::string* _internal_mutable_cursor();
+  public:
+
+  // string prev_cursor = 3;
+  void clear_prev_cursor();
+  const std::string& prev_cursor() const;
+  void set_prev_cursor(const std::string& value);
+  void set_prev_cursor(std::string&& value);
+  void set_prev_cursor(const char* value);
+  void set_prev_cursor(const char* value, size_t size);
+  std::string* mutable_prev_cursor();
+  std::string* release_prev_cursor();
+  void set_allocated_prev_cursor(std::string* prev_cursor);
+  private:
+  const std::string& _internal_prev_cursor() const;
+  void _internal_set_prev_cursor(const std::string& value);
+  std::string* _internal_mutable_prev_cursor();
+  public:
+
+  // @@protoc_insertion_point(class_scope:nakama.api.SubscriptionList)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::nakama::api::ValidatedSubscription > validated_subscriptions_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cursor_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr prev_cursor_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_github_2ecom_2fheroiclabs_2fnakama_2dcommon_2fapi_2fapi_2eproto;
+};
+// -------------------------------------------------------------------
+
 class WriteLeaderboardRecordRequest_LeaderboardRecordWrite PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:nakama.api.WriteLeaderboardRecordRequest.LeaderboardRecordWrite) */ {
  public:
@@ -20185,7 +21417,7 @@ class WriteLeaderboardRecordRequest_LeaderboardRecordWrite PROTOBUF_FINAL :
                &_WriteLeaderboardRecordRequest_LeaderboardRecordWrite_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    110;
+    117;
 
   friend void swap(WriteLeaderboardRecordRequest_LeaderboardRecordWrite& a, WriteLeaderboardRecordRequest_LeaderboardRecordWrite& b) {
     a.Swap(&b);
@@ -20361,7 +21593,7 @@ class WriteLeaderboardRecordRequest PROTOBUF_FINAL :
                &_WriteLeaderboardRecordRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    111;
+    118;
 
   friend void swap(WriteLeaderboardRecordRequest& a, WriteLeaderboardRecordRequest& b) {
     a.Swap(&b);
@@ -20526,7 +21758,7 @@ class WriteStorageObject PROTOBUF_FINAL :
                &_WriteStorageObject_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    112;
+    119;
 
   friend void swap(WriteStorageObject& a, WriteStorageObject& b) {
     a.Swap(&b);
@@ -20763,7 +21995,7 @@ class WriteStorageObjectsRequest PROTOBUF_FINAL :
                &_WriteStorageObjectsRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    113;
+    120;
 
   friend void swap(WriteStorageObjectsRequest& a, WriteStorageObjectsRequest& b) {
     a.Swap(&b);
@@ -20908,7 +22140,7 @@ class WriteTournamentRecordRequest_TournamentRecordWrite PROTOBUF_FINAL :
                &_WriteTournamentRecordRequest_TournamentRecordWrite_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    114;
+    121;
 
   friend void swap(WriteTournamentRecordRequest_TournamentRecordWrite& a, WriteTournamentRecordRequest_TournamentRecordWrite& b) {
     a.Swap(&b);
@@ -21084,7 +22316,7 @@ class WriteTournamentRecordRequest PROTOBUF_FINAL :
                &_WriteTournamentRecordRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    115;
+    122;
 
   friend void swap(WriteTournamentRecordRequest& a, WriteTournamentRecordRequest& b) {
     a.Swap(&b);
@@ -28675,6 +29907,71 @@ GetUsersRequest::mutable_facebook_ids() {
 
 // -------------------------------------------------------------------
 
+// GetSubscriptionRequest
+
+// string product_id = 1;
+inline void GetSubscriptionRequest::clear_product_id() {
+  product_id_.ClearToEmpty();
+}
+inline const std::string& GetSubscriptionRequest::product_id() const {
+  // @@protoc_insertion_point(field_get:nakama.api.GetSubscriptionRequest.product_id)
+  return _internal_product_id();
+}
+inline void GetSubscriptionRequest::set_product_id(const std::string& value) {
+  _internal_set_product_id(value);
+  // @@protoc_insertion_point(field_set:nakama.api.GetSubscriptionRequest.product_id)
+}
+inline std::string* GetSubscriptionRequest::mutable_product_id() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.GetSubscriptionRequest.product_id)
+  return _internal_mutable_product_id();
+}
+inline const std::string& GetSubscriptionRequest::_internal_product_id() const {
+  return product_id_.Get();
+}
+inline void GetSubscriptionRequest::_internal_set_product_id(const std::string& value) {
+  
+  product_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void GetSubscriptionRequest::set_product_id(std::string&& value) {
+  
+  product_id_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.GetSubscriptionRequest.product_id)
+}
+inline void GetSubscriptionRequest::set_product_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  product_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.api.GetSubscriptionRequest.product_id)
+}
+inline void GetSubscriptionRequest::set_product_id(const char* value,
+    size_t size) {
+  
+  product_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.GetSubscriptionRequest.product_id)
+}
+inline std::string* GetSubscriptionRequest::_internal_mutable_product_id() {
+  
+  return product_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* GetSubscriptionRequest::release_product_id() {
+  // @@protoc_insertion_point(field_release:nakama.api.GetSubscriptionRequest.product_id)
+  return product_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GetSubscriptionRequest::set_allocated_product_id(std::string* product_id) {
+  if (product_id != nullptr) {
+    
+  } else {
+    
+  }
+  product_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), product_id,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.GetSubscriptionRequest.product_id)
+}
+
+// -------------------------------------------------------------------
+
 // Group
 
 // string id = 1;
@@ -33420,6 +34717,67 @@ inline void ListLeaderboardRecordsAroundOwnerRequest::set_allocated_expiry(PROTO
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.expiry)
 }
 
+// string cursor = 5;
+inline void ListLeaderboardRecordsAroundOwnerRequest::clear_cursor() {
+  cursor_.ClearToEmpty();
+}
+inline const std::string& ListLeaderboardRecordsAroundOwnerRequest::cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.cursor)
+  return _internal_cursor();
+}
+inline void ListLeaderboardRecordsAroundOwnerRequest::set_cursor(const std::string& value) {
+  _internal_set_cursor(value);
+  // @@protoc_insertion_point(field_set:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.cursor)
+}
+inline std::string* ListLeaderboardRecordsAroundOwnerRequest::mutable_cursor() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.cursor)
+  return _internal_mutable_cursor();
+}
+inline const std::string& ListLeaderboardRecordsAroundOwnerRequest::_internal_cursor() const {
+  return cursor_.Get();
+}
+inline void ListLeaderboardRecordsAroundOwnerRequest::_internal_set_cursor(const std::string& value) {
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void ListLeaderboardRecordsAroundOwnerRequest::set_cursor(std::string&& value) {
+  
+  cursor_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.cursor)
+}
+inline void ListLeaderboardRecordsAroundOwnerRequest::set_cursor(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.cursor)
+}
+inline void ListLeaderboardRecordsAroundOwnerRequest::set_cursor(const char* value,
+    size_t size) {
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.cursor)
+}
+inline std::string* ListLeaderboardRecordsAroundOwnerRequest::_internal_mutable_cursor() {
+  
+  return cursor_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* ListLeaderboardRecordsAroundOwnerRequest::release_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.cursor)
+  return cursor_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void ListLeaderboardRecordsAroundOwnerRequest::set_allocated_cursor(std::string* cursor) {
+  if (cursor != nullptr) {
+    
+  } else {
+    
+  }
+  cursor_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cursor,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListLeaderboardRecordsAroundOwnerRequest.cursor)
+}
+
 // -------------------------------------------------------------------
 
 // ListLeaderboardRecordsRequest
@@ -34648,6 +36006,148 @@ inline void ListStorageObjectsRequest::set_allocated_cursor(std::string* cursor)
 
 // -------------------------------------------------------------------
 
+// ListSubscriptionsRequest
+
+// .google.protobuf.Int32Value limit = 1;
+inline bool ListSubscriptionsRequest::_internal_has_limit() const {
+  return this != internal_default_instance() && limit_ != nullptr;
+}
+inline bool ListSubscriptionsRequest::has_limit() const {
+  return _internal_has_limit();
+}
+inline const PROTOBUF_NAMESPACE_ID::Int32Value& ListSubscriptionsRequest::_internal_limit() const {
+  const PROTOBUF_NAMESPACE_ID::Int32Value* p = limit_;
+  return p != nullptr ? *p : reinterpret_cast<const PROTOBUF_NAMESPACE_ID::Int32Value&>(
+      PROTOBUF_NAMESPACE_ID::_Int32Value_default_instance_);
+}
+inline const PROTOBUF_NAMESPACE_ID::Int32Value& ListSubscriptionsRequest::limit() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ListSubscriptionsRequest.limit)
+  return _internal_limit();
+}
+inline void ListSubscriptionsRequest::unsafe_arena_set_allocated_limit(
+    PROTOBUF_NAMESPACE_ID::Int32Value* limit) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(limit_);
+  }
+  limit_ = limit;
+  if (limit) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:nakama.api.ListSubscriptionsRequest.limit)
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* ListSubscriptionsRequest::release_limit() {
+  
+  PROTOBUF_NAMESPACE_ID::Int32Value* temp = limit_;
+  limit_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* ListSubscriptionsRequest::unsafe_arena_release_limit() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListSubscriptionsRequest.limit)
+  
+  PROTOBUF_NAMESPACE_ID::Int32Value* temp = limit_;
+  limit_ = nullptr;
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* ListSubscriptionsRequest::_internal_mutable_limit() {
+  
+  if (limit_ == nullptr) {
+    auto* p = CreateMaybeMessage<PROTOBUF_NAMESPACE_ID::Int32Value>(GetArena());
+    limit_ = p;
+  }
+  return limit_;
+}
+inline PROTOBUF_NAMESPACE_ID::Int32Value* ListSubscriptionsRequest::mutable_limit() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListSubscriptionsRequest.limit)
+  return _internal_mutable_limit();
+}
+inline void ListSubscriptionsRequest::set_allocated_limit(PROTOBUF_NAMESPACE_ID::Int32Value* limit) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(limit_);
+  }
+  if (limit) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(limit)->GetArena();
+    if (message_arena != submessage_arena) {
+      limit = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, limit, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  limit_ = limit;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListSubscriptionsRequest.limit)
+}
+
+// string cursor = 2;
+inline void ListSubscriptionsRequest::clear_cursor() {
+  cursor_.ClearToEmpty();
+}
+inline const std::string& ListSubscriptionsRequest::cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ListSubscriptionsRequest.cursor)
+  return _internal_cursor();
+}
+inline void ListSubscriptionsRequest::set_cursor(const std::string& value) {
+  _internal_set_cursor(value);
+  // @@protoc_insertion_point(field_set:nakama.api.ListSubscriptionsRequest.cursor)
+}
+inline std::string* ListSubscriptionsRequest::mutable_cursor() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListSubscriptionsRequest.cursor)
+  return _internal_mutable_cursor();
+}
+inline const std::string& ListSubscriptionsRequest::_internal_cursor() const {
+  return cursor_.Get();
+}
+inline void ListSubscriptionsRequest::_internal_set_cursor(const std::string& value) {
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void ListSubscriptionsRequest::set_cursor(std::string&& value) {
+  
+  cursor_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ListSubscriptionsRequest.cursor)
+}
+inline void ListSubscriptionsRequest::set_cursor(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.api.ListSubscriptionsRequest.cursor)
+}
+inline void ListSubscriptionsRequest::set_cursor(const char* value,
+    size_t size) {
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ListSubscriptionsRequest.cursor)
+}
+inline std::string* ListSubscriptionsRequest::_internal_mutable_cursor() {
+  
+  return cursor_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* ListSubscriptionsRequest::release_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListSubscriptionsRequest.cursor)
+  return cursor_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void ListSubscriptionsRequest::set_allocated_cursor(std::string* cursor) {
+  if (cursor != nullptr) {
+    
+  } else {
+    
+  }
+  cursor_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cursor,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListSubscriptionsRequest.cursor)
+}
+
+// -------------------------------------------------------------------
+
 // ListTournamentRecordsAroundOwnerRequest
 
 // string tournament_id = 1;
@@ -34924,6 +36424,67 @@ inline void ListTournamentRecordsAroundOwnerRequest::set_allocated_expiry(PROTOB
   }
   expiry_ = expiry;
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ListTournamentRecordsAroundOwnerRequest.expiry)
+}
+
+// string cursor = 5;
+inline void ListTournamentRecordsAroundOwnerRequest::clear_cursor() {
+  cursor_.ClearToEmpty();
+}
+inline const std::string& ListTournamentRecordsAroundOwnerRequest::cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ListTournamentRecordsAroundOwnerRequest.cursor)
+  return _internal_cursor();
+}
+inline void ListTournamentRecordsAroundOwnerRequest::set_cursor(const std::string& value) {
+  _internal_set_cursor(value);
+  // @@protoc_insertion_point(field_set:nakama.api.ListTournamentRecordsAroundOwnerRequest.cursor)
+}
+inline std::string* ListTournamentRecordsAroundOwnerRequest::mutable_cursor() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ListTournamentRecordsAroundOwnerRequest.cursor)
+  return _internal_mutable_cursor();
+}
+inline const std::string& ListTournamentRecordsAroundOwnerRequest::_internal_cursor() const {
+  return cursor_.Get();
+}
+inline void ListTournamentRecordsAroundOwnerRequest::_internal_set_cursor(const std::string& value) {
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void ListTournamentRecordsAroundOwnerRequest::set_cursor(std::string&& value) {
+  
+  cursor_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ListTournamentRecordsAroundOwnerRequest.cursor)
+}
+inline void ListTournamentRecordsAroundOwnerRequest::set_cursor(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.api.ListTournamentRecordsAroundOwnerRequest.cursor)
+}
+inline void ListTournamentRecordsAroundOwnerRequest::set_cursor(const char* value,
+    size_t size) {
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ListTournamentRecordsAroundOwnerRequest.cursor)
+}
+inline std::string* ListTournamentRecordsAroundOwnerRequest::_internal_mutable_cursor() {
+  
+  return cursor_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* ListTournamentRecordsAroundOwnerRequest::release_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.ListTournamentRecordsAroundOwnerRequest.cursor)
+  return cursor_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void ListTournamentRecordsAroundOwnerRequest::set_allocated_cursor(std::string* cursor) {
+  if (cursor != nullptr) {
+    
+  } else {
+    
+  }
+  cursor_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cursor,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ListTournamentRecordsAroundOwnerRequest.cursor)
 }
 
 // -------------------------------------------------------------------
@@ -42017,6 +43578,148 @@ inline void ValidatePurchaseAppleRequest::set_allocated_persist(PROTOBUF_NAMESPA
 
 // -------------------------------------------------------------------
 
+// ValidateSubscriptionAppleRequest
+
+// string receipt = 1;
+inline void ValidateSubscriptionAppleRequest::clear_receipt() {
+  receipt_.ClearToEmpty();
+}
+inline const std::string& ValidateSubscriptionAppleRequest::receipt() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidateSubscriptionAppleRequest.receipt)
+  return _internal_receipt();
+}
+inline void ValidateSubscriptionAppleRequest::set_receipt(const std::string& value) {
+  _internal_set_receipt(value);
+  // @@protoc_insertion_point(field_set:nakama.api.ValidateSubscriptionAppleRequest.receipt)
+}
+inline std::string* ValidateSubscriptionAppleRequest::mutable_receipt() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidateSubscriptionAppleRequest.receipt)
+  return _internal_mutable_receipt();
+}
+inline const std::string& ValidateSubscriptionAppleRequest::_internal_receipt() const {
+  return receipt_.Get();
+}
+inline void ValidateSubscriptionAppleRequest::_internal_set_receipt(const std::string& value) {
+  
+  receipt_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void ValidateSubscriptionAppleRequest::set_receipt(std::string&& value) {
+  
+  receipt_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ValidateSubscriptionAppleRequest.receipt)
+}
+inline void ValidateSubscriptionAppleRequest::set_receipt(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  receipt_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.api.ValidateSubscriptionAppleRequest.receipt)
+}
+inline void ValidateSubscriptionAppleRequest::set_receipt(const char* value,
+    size_t size) {
+  
+  receipt_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ValidateSubscriptionAppleRequest.receipt)
+}
+inline std::string* ValidateSubscriptionAppleRequest::_internal_mutable_receipt() {
+  
+  return receipt_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* ValidateSubscriptionAppleRequest::release_receipt() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidateSubscriptionAppleRequest.receipt)
+  return receipt_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void ValidateSubscriptionAppleRequest::set_allocated_receipt(std::string* receipt) {
+  if (receipt != nullptr) {
+    
+  } else {
+    
+  }
+  receipt_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), receipt,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidateSubscriptionAppleRequest.receipt)
+}
+
+// .google.protobuf.BoolValue persist = 2;
+inline bool ValidateSubscriptionAppleRequest::_internal_has_persist() const {
+  return this != internal_default_instance() && persist_ != nullptr;
+}
+inline bool ValidateSubscriptionAppleRequest::has_persist() const {
+  return _internal_has_persist();
+}
+inline const PROTOBUF_NAMESPACE_ID::BoolValue& ValidateSubscriptionAppleRequest::_internal_persist() const {
+  const PROTOBUF_NAMESPACE_ID::BoolValue* p = persist_;
+  return p != nullptr ? *p : reinterpret_cast<const PROTOBUF_NAMESPACE_ID::BoolValue&>(
+      PROTOBUF_NAMESPACE_ID::_BoolValue_default_instance_);
+}
+inline const PROTOBUF_NAMESPACE_ID::BoolValue& ValidateSubscriptionAppleRequest::persist() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidateSubscriptionAppleRequest.persist)
+  return _internal_persist();
+}
+inline void ValidateSubscriptionAppleRequest::unsafe_arena_set_allocated_persist(
+    PROTOBUF_NAMESPACE_ID::BoolValue* persist) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(persist_);
+  }
+  persist_ = persist;
+  if (persist) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:nakama.api.ValidateSubscriptionAppleRequest.persist)
+}
+inline PROTOBUF_NAMESPACE_ID::BoolValue* ValidateSubscriptionAppleRequest::release_persist() {
+  
+  PROTOBUF_NAMESPACE_ID::BoolValue* temp = persist_;
+  persist_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::BoolValue* ValidateSubscriptionAppleRequest::unsafe_arena_release_persist() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidateSubscriptionAppleRequest.persist)
+  
+  PROTOBUF_NAMESPACE_ID::BoolValue* temp = persist_;
+  persist_ = nullptr;
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::BoolValue* ValidateSubscriptionAppleRequest::_internal_mutable_persist() {
+  
+  if (persist_ == nullptr) {
+    auto* p = CreateMaybeMessage<PROTOBUF_NAMESPACE_ID::BoolValue>(GetArena());
+    persist_ = p;
+  }
+  return persist_;
+}
+inline PROTOBUF_NAMESPACE_ID::BoolValue* ValidateSubscriptionAppleRequest::mutable_persist() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidateSubscriptionAppleRequest.persist)
+  return _internal_mutable_persist();
+}
+inline void ValidateSubscriptionAppleRequest::set_allocated_persist(PROTOBUF_NAMESPACE_ID::BoolValue* persist) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(persist_);
+  }
+  if (persist) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(persist)->GetArena();
+    if (message_arena != submessage_arena) {
+      persist = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, persist, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  persist_ = persist;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidateSubscriptionAppleRequest.persist)
+}
+
+// -------------------------------------------------------------------
+
 // ValidatePurchaseGoogleRequest
 
 // string purchase = 1;
@@ -42155,6 +43858,148 @@ inline void ValidatePurchaseGoogleRequest::set_allocated_persist(PROTOBUF_NAMESP
   }
   persist_ = persist;
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidatePurchaseGoogleRequest.persist)
+}
+
+// -------------------------------------------------------------------
+
+// ValidateSubscriptionGoogleRequest
+
+// string receipt = 1;
+inline void ValidateSubscriptionGoogleRequest::clear_receipt() {
+  receipt_.ClearToEmpty();
+}
+inline const std::string& ValidateSubscriptionGoogleRequest::receipt() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidateSubscriptionGoogleRequest.receipt)
+  return _internal_receipt();
+}
+inline void ValidateSubscriptionGoogleRequest::set_receipt(const std::string& value) {
+  _internal_set_receipt(value);
+  // @@protoc_insertion_point(field_set:nakama.api.ValidateSubscriptionGoogleRequest.receipt)
+}
+inline std::string* ValidateSubscriptionGoogleRequest::mutable_receipt() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidateSubscriptionGoogleRequest.receipt)
+  return _internal_mutable_receipt();
+}
+inline const std::string& ValidateSubscriptionGoogleRequest::_internal_receipt() const {
+  return receipt_.Get();
+}
+inline void ValidateSubscriptionGoogleRequest::_internal_set_receipt(const std::string& value) {
+  
+  receipt_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void ValidateSubscriptionGoogleRequest::set_receipt(std::string&& value) {
+  
+  receipt_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ValidateSubscriptionGoogleRequest.receipt)
+}
+inline void ValidateSubscriptionGoogleRequest::set_receipt(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  receipt_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.api.ValidateSubscriptionGoogleRequest.receipt)
+}
+inline void ValidateSubscriptionGoogleRequest::set_receipt(const char* value,
+    size_t size) {
+  
+  receipt_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ValidateSubscriptionGoogleRequest.receipt)
+}
+inline std::string* ValidateSubscriptionGoogleRequest::_internal_mutable_receipt() {
+  
+  return receipt_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* ValidateSubscriptionGoogleRequest::release_receipt() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidateSubscriptionGoogleRequest.receipt)
+  return receipt_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void ValidateSubscriptionGoogleRequest::set_allocated_receipt(std::string* receipt) {
+  if (receipt != nullptr) {
+    
+  } else {
+    
+  }
+  receipt_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), receipt,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidateSubscriptionGoogleRequest.receipt)
+}
+
+// .google.protobuf.BoolValue persist = 2;
+inline bool ValidateSubscriptionGoogleRequest::_internal_has_persist() const {
+  return this != internal_default_instance() && persist_ != nullptr;
+}
+inline bool ValidateSubscriptionGoogleRequest::has_persist() const {
+  return _internal_has_persist();
+}
+inline const PROTOBUF_NAMESPACE_ID::BoolValue& ValidateSubscriptionGoogleRequest::_internal_persist() const {
+  const PROTOBUF_NAMESPACE_ID::BoolValue* p = persist_;
+  return p != nullptr ? *p : reinterpret_cast<const PROTOBUF_NAMESPACE_ID::BoolValue&>(
+      PROTOBUF_NAMESPACE_ID::_BoolValue_default_instance_);
+}
+inline const PROTOBUF_NAMESPACE_ID::BoolValue& ValidateSubscriptionGoogleRequest::persist() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidateSubscriptionGoogleRequest.persist)
+  return _internal_persist();
+}
+inline void ValidateSubscriptionGoogleRequest::unsafe_arena_set_allocated_persist(
+    PROTOBUF_NAMESPACE_ID::BoolValue* persist) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(persist_);
+  }
+  persist_ = persist;
+  if (persist) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:nakama.api.ValidateSubscriptionGoogleRequest.persist)
+}
+inline PROTOBUF_NAMESPACE_ID::BoolValue* ValidateSubscriptionGoogleRequest::release_persist() {
+  
+  PROTOBUF_NAMESPACE_ID::BoolValue* temp = persist_;
+  persist_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::BoolValue* ValidateSubscriptionGoogleRequest::unsafe_arena_release_persist() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidateSubscriptionGoogleRequest.persist)
+  
+  PROTOBUF_NAMESPACE_ID::BoolValue* temp = persist_;
+  persist_ = nullptr;
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::BoolValue* ValidateSubscriptionGoogleRequest::_internal_mutable_persist() {
+  
+  if (persist_ == nullptr) {
+    auto* p = CreateMaybeMessage<PROTOBUF_NAMESPACE_ID::BoolValue>(GetArena());
+    persist_ = p;
+  }
+  return persist_;
+}
+inline PROTOBUF_NAMESPACE_ID::BoolValue* ValidateSubscriptionGoogleRequest::mutable_persist() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidateSubscriptionGoogleRequest.persist)
+  return _internal_mutable_persist();
+}
+inline void ValidateSubscriptionGoogleRequest::set_allocated_persist(PROTOBUF_NAMESPACE_ID::BoolValue* persist) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(persist_);
+  }
+  if (persist) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(persist)->GetArena();
+    if (message_arena != submessage_arena) {
+      persist = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, persist, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  persist_ = persist;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidateSubscriptionGoogleRequest.persist)
 }
 
 // -------------------------------------------------------------------
@@ -42486,22 +44331,22 @@ inline void ValidatedPurchase::set_allocated_transaction_id(std::string* transac
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidatedPurchase.transaction_id)
 }
 
-// .nakama.api.ValidatedPurchase.Store store = 3;
+// .nakama.api.StoreProvider store = 3;
 inline void ValidatedPurchase::clear_store() {
   store_ = 0;
 }
-inline ::nakama::api::ValidatedPurchase_Store ValidatedPurchase::_internal_store() const {
-  return static_cast< ::nakama::api::ValidatedPurchase_Store >(store_);
+inline ::nakama::api::StoreProvider ValidatedPurchase::_internal_store() const {
+  return static_cast< ::nakama::api::StoreProvider >(store_);
 }
-inline ::nakama::api::ValidatedPurchase_Store ValidatedPurchase::store() const {
+inline ::nakama::api::StoreProvider ValidatedPurchase::store() const {
   // @@protoc_insertion_point(field_get:nakama.api.ValidatedPurchase.store)
   return _internal_store();
 }
-inline void ValidatedPurchase::_internal_set_store(::nakama::api::ValidatedPurchase_Store value) {
+inline void ValidatedPurchase::_internal_set_store(::nakama::api::StoreProvider value) {
   
   store_ = value;
 }
-inline void ValidatedPurchase::set_store(::nakama::api::ValidatedPurchase_Store value) {
+inline void ValidatedPurchase::set_store(::nakama::api::StoreProvider value) {
   _internal_set_store(value);
   // @@protoc_insertion_point(field_set:nakama.api.ValidatedPurchase.store)
 }
@@ -42798,22 +44643,22 @@ inline void ValidatedPurchase::set_allocated_provider_response(std::string* prov
   // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidatedPurchase.provider_response)
 }
 
-// .nakama.api.ValidatedPurchase.Environment environment = 8;
+// .nakama.api.StoreEnvironment environment = 8;
 inline void ValidatedPurchase::clear_environment() {
   environment_ = 0;
 }
-inline ::nakama::api::ValidatedPurchase_Environment ValidatedPurchase::_internal_environment() const {
-  return static_cast< ::nakama::api::ValidatedPurchase_Environment >(environment_);
+inline ::nakama::api::StoreEnvironment ValidatedPurchase::_internal_environment() const {
+  return static_cast< ::nakama::api::StoreEnvironment >(environment_);
 }
-inline ::nakama::api::ValidatedPurchase_Environment ValidatedPurchase::environment() const {
+inline ::nakama::api::StoreEnvironment ValidatedPurchase::environment() const {
   // @@protoc_insertion_point(field_get:nakama.api.ValidatedPurchase.environment)
   return _internal_environment();
 }
-inline void ValidatedPurchase::_internal_set_environment(::nakama::api::ValidatedPurchase_Environment value) {
+inline void ValidatedPurchase::_internal_set_environment(::nakama::api::StoreEnvironment value) {
   
   environment_ = value;
 }
-inline void ValidatedPurchase::set_environment(::nakama::api::ValidatedPurchase_Environment value) {
+inline void ValidatedPurchase::set_environment(::nakama::api::StoreEnvironment value) {
   _internal_set_environment(value);
   // @@protoc_insertion_point(field_set:nakama.api.ValidatedPurchase.environment)
 }
@@ -42879,6 +44724,587 @@ inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::nakama::api::Validated
 ValidatePurchaseResponse::validated_purchases() const {
   // @@protoc_insertion_point(field_list:nakama.api.ValidatePurchaseResponse.validated_purchases)
   return validated_purchases_;
+}
+
+// -------------------------------------------------------------------
+
+// ValidateSubscriptionResponse
+
+// .nakama.api.ValidatedSubscription validated_subscription = 1;
+inline bool ValidateSubscriptionResponse::_internal_has_validated_subscription() const {
+  return this != internal_default_instance() && validated_subscription_ != nullptr;
+}
+inline bool ValidateSubscriptionResponse::has_validated_subscription() const {
+  return _internal_has_validated_subscription();
+}
+inline void ValidateSubscriptionResponse::clear_validated_subscription() {
+  if (GetArena() == nullptr && validated_subscription_ != nullptr) {
+    delete validated_subscription_;
+  }
+  validated_subscription_ = nullptr;
+}
+inline const ::nakama::api::ValidatedSubscription& ValidateSubscriptionResponse::_internal_validated_subscription() const {
+  const ::nakama::api::ValidatedSubscription* p = validated_subscription_;
+  return p != nullptr ? *p : reinterpret_cast<const ::nakama::api::ValidatedSubscription&>(
+      ::nakama::api::_ValidatedSubscription_default_instance_);
+}
+inline const ::nakama::api::ValidatedSubscription& ValidateSubscriptionResponse::validated_subscription() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidateSubscriptionResponse.validated_subscription)
+  return _internal_validated_subscription();
+}
+inline void ValidateSubscriptionResponse::unsafe_arena_set_allocated_validated_subscription(
+    ::nakama::api::ValidatedSubscription* validated_subscription) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(validated_subscription_);
+  }
+  validated_subscription_ = validated_subscription;
+  if (validated_subscription) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:nakama.api.ValidateSubscriptionResponse.validated_subscription)
+}
+inline ::nakama::api::ValidatedSubscription* ValidateSubscriptionResponse::release_validated_subscription() {
+  
+  ::nakama::api::ValidatedSubscription* temp = validated_subscription_;
+  validated_subscription_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::nakama::api::ValidatedSubscription* ValidateSubscriptionResponse::unsafe_arena_release_validated_subscription() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidateSubscriptionResponse.validated_subscription)
+  
+  ::nakama::api::ValidatedSubscription* temp = validated_subscription_;
+  validated_subscription_ = nullptr;
+  return temp;
+}
+inline ::nakama::api::ValidatedSubscription* ValidateSubscriptionResponse::_internal_mutable_validated_subscription() {
+  
+  if (validated_subscription_ == nullptr) {
+    auto* p = CreateMaybeMessage<::nakama::api::ValidatedSubscription>(GetArena());
+    validated_subscription_ = p;
+  }
+  return validated_subscription_;
+}
+inline ::nakama::api::ValidatedSubscription* ValidateSubscriptionResponse::mutable_validated_subscription() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidateSubscriptionResponse.validated_subscription)
+  return _internal_mutable_validated_subscription();
+}
+inline void ValidateSubscriptionResponse::set_allocated_validated_subscription(::nakama::api::ValidatedSubscription* validated_subscription) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete validated_subscription_;
+  }
+  if (validated_subscription) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(validated_subscription);
+    if (message_arena != submessage_arena) {
+      validated_subscription = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, validated_subscription, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  validated_subscription_ = validated_subscription;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidateSubscriptionResponse.validated_subscription)
+}
+
+// -------------------------------------------------------------------
+
+// ValidatedSubscription
+
+// string product_id = 1;
+inline void ValidatedSubscription::clear_product_id() {
+  product_id_.ClearToEmpty();
+}
+inline const std::string& ValidatedSubscription::product_id() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidatedSubscription.product_id)
+  return _internal_product_id();
+}
+inline void ValidatedSubscription::set_product_id(const std::string& value) {
+  _internal_set_product_id(value);
+  // @@protoc_insertion_point(field_set:nakama.api.ValidatedSubscription.product_id)
+}
+inline std::string* ValidatedSubscription::mutable_product_id() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidatedSubscription.product_id)
+  return _internal_mutable_product_id();
+}
+inline const std::string& ValidatedSubscription::_internal_product_id() const {
+  return product_id_.Get();
+}
+inline void ValidatedSubscription::_internal_set_product_id(const std::string& value) {
+  
+  product_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void ValidatedSubscription::set_product_id(std::string&& value) {
+  
+  product_id_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ValidatedSubscription.product_id)
+}
+inline void ValidatedSubscription::set_product_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  product_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.api.ValidatedSubscription.product_id)
+}
+inline void ValidatedSubscription::set_product_id(const char* value,
+    size_t size) {
+  
+  product_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ValidatedSubscription.product_id)
+}
+inline std::string* ValidatedSubscription::_internal_mutable_product_id() {
+  
+  return product_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* ValidatedSubscription::release_product_id() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidatedSubscription.product_id)
+  return product_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void ValidatedSubscription::set_allocated_product_id(std::string* product_id) {
+  if (product_id != nullptr) {
+    
+  } else {
+    
+  }
+  product_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), product_id,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidatedSubscription.product_id)
+}
+
+// string original_transaction_id = 2;
+inline void ValidatedSubscription::clear_original_transaction_id() {
+  original_transaction_id_.ClearToEmpty();
+}
+inline const std::string& ValidatedSubscription::original_transaction_id() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidatedSubscription.original_transaction_id)
+  return _internal_original_transaction_id();
+}
+inline void ValidatedSubscription::set_original_transaction_id(const std::string& value) {
+  _internal_set_original_transaction_id(value);
+  // @@protoc_insertion_point(field_set:nakama.api.ValidatedSubscription.original_transaction_id)
+}
+inline std::string* ValidatedSubscription::mutable_original_transaction_id() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidatedSubscription.original_transaction_id)
+  return _internal_mutable_original_transaction_id();
+}
+inline const std::string& ValidatedSubscription::_internal_original_transaction_id() const {
+  return original_transaction_id_.Get();
+}
+inline void ValidatedSubscription::_internal_set_original_transaction_id(const std::string& value) {
+  
+  original_transaction_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void ValidatedSubscription::set_original_transaction_id(std::string&& value) {
+  
+  original_transaction_id_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.ValidatedSubscription.original_transaction_id)
+}
+inline void ValidatedSubscription::set_original_transaction_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  original_transaction_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.api.ValidatedSubscription.original_transaction_id)
+}
+inline void ValidatedSubscription::set_original_transaction_id(const char* value,
+    size_t size) {
+  
+  original_transaction_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.ValidatedSubscription.original_transaction_id)
+}
+inline std::string* ValidatedSubscription::_internal_mutable_original_transaction_id() {
+  
+  return original_transaction_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* ValidatedSubscription::release_original_transaction_id() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidatedSubscription.original_transaction_id)
+  return original_transaction_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void ValidatedSubscription::set_allocated_original_transaction_id(std::string* original_transaction_id) {
+  if (original_transaction_id != nullptr) {
+    
+  } else {
+    
+  }
+  original_transaction_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), original_transaction_id,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidatedSubscription.original_transaction_id)
+}
+
+// .nakama.api.StoreProvider store = 3;
+inline void ValidatedSubscription::clear_store() {
+  store_ = 0;
+}
+inline ::nakama::api::StoreProvider ValidatedSubscription::_internal_store() const {
+  return static_cast< ::nakama::api::StoreProvider >(store_);
+}
+inline ::nakama::api::StoreProvider ValidatedSubscription::store() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidatedSubscription.store)
+  return _internal_store();
+}
+inline void ValidatedSubscription::_internal_set_store(::nakama::api::StoreProvider value) {
+  
+  store_ = value;
+}
+inline void ValidatedSubscription::set_store(::nakama::api::StoreProvider value) {
+  _internal_set_store(value);
+  // @@protoc_insertion_point(field_set:nakama.api.ValidatedSubscription.store)
+}
+
+// .google.protobuf.Timestamp purchase_time = 4;
+inline bool ValidatedSubscription::_internal_has_purchase_time() const {
+  return this != internal_default_instance() && purchase_time_ != nullptr;
+}
+inline bool ValidatedSubscription::has_purchase_time() const {
+  return _internal_has_purchase_time();
+}
+inline const PROTOBUF_NAMESPACE_ID::Timestamp& ValidatedSubscription::_internal_purchase_time() const {
+  const PROTOBUF_NAMESPACE_ID::Timestamp* p = purchase_time_;
+  return p != nullptr ? *p : reinterpret_cast<const PROTOBUF_NAMESPACE_ID::Timestamp&>(
+      PROTOBUF_NAMESPACE_ID::_Timestamp_default_instance_);
+}
+inline const PROTOBUF_NAMESPACE_ID::Timestamp& ValidatedSubscription::purchase_time() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidatedSubscription.purchase_time)
+  return _internal_purchase_time();
+}
+inline void ValidatedSubscription::unsafe_arena_set_allocated_purchase_time(
+    PROTOBUF_NAMESPACE_ID::Timestamp* purchase_time) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(purchase_time_);
+  }
+  purchase_time_ = purchase_time;
+  if (purchase_time) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:nakama.api.ValidatedSubscription.purchase_time)
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::release_purchase_time() {
+  
+  PROTOBUF_NAMESPACE_ID::Timestamp* temp = purchase_time_;
+  purchase_time_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::unsafe_arena_release_purchase_time() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidatedSubscription.purchase_time)
+  
+  PROTOBUF_NAMESPACE_ID::Timestamp* temp = purchase_time_;
+  purchase_time_ = nullptr;
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::_internal_mutable_purchase_time() {
+  
+  if (purchase_time_ == nullptr) {
+    auto* p = CreateMaybeMessage<PROTOBUF_NAMESPACE_ID::Timestamp>(GetArena());
+    purchase_time_ = p;
+  }
+  return purchase_time_;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::mutable_purchase_time() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidatedSubscription.purchase_time)
+  return _internal_mutable_purchase_time();
+}
+inline void ValidatedSubscription::set_allocated_purchase_time(PROTOBUF_NAMESPACE_ID::Timestamp* purchase_time) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(purchase_time_);
+  }
+  if (purchase_time) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(purchase_time)->GetArena();
+    if (message_arena != submessage_arena) {
+      purchase_time = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, purchase_time, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  purchase_time_ = purchase_time;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidatedSubscription.purchase_time)
+}
+
+// .google.protobuf.Timestamp create_time = 5;
+inline bool ValidatedSubscription::_internal_has_create_time() const {
+  return this != internal_default_instance() && create_time_ != nullptr;
+}
+inline bool ValidatedSubscription::has_create_time() const {
+  return _internal_has_create_time();
+}
+inline const PROTOBUF_NAMESPACE_ID::Timestamp& ValidatedSubscription::_internal_create_time() const {
+  const PROTOBUF_NAMESPACE_ID::Timestamp* p = create_time_;
+  return p != nullptr ? *p : reinterpret_cast<const PROTOBUF_NAMESPACE_ID::Timestamp&>(
+      PROTOBUF_NAMESPACE_ID::_Timestamp_default_instance_);
+}
+inline const PROTOBUF_NAMESPACE_ID::Timestamp& ValidatedSubscription::create_time() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidatedSubscription.create_time)
+  return _internal_create_time();
+}
+inline void ValidatedSubscription::unsafe_arena_set_allocated_create_time(
+    PROTOBUF_NAMESPACE_ID::Timestamp* create_time) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(create_time_);
+  }
+  create_time_ = create_time;
+  if (create_time) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:nakama.api.ValidatedSubscription.create_time)
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::release_create_time() {
+  
+  PROTOBUF_NAMESPACE_ID::Timestamp* temp = create_time_;
+  create_time_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::unsafe_arena_release_create_time() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidatedSubscription.create_time)
+  
+  PROTOBUF_NAMESPACE_ID::Timestamp* temp = create_time_;
+  create_time_ = nullptr;
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::_internal_mutable_create_time() {
+  
+  if (create_time_ == nullptr) {
+    auto* p = CreateMaybeMessage<PROTOBUF_NAMESPACE_ID::Timestamp>(GetArena());
+    create_time_ = p;
+  }
+  return create_time_;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::mutable_create_time() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidatedSubscription.create_time)
+  return _internal_mutable_create_time();
+}
+inline void ValidatedSubscription::set_allocated_create_time(PROTOBUF_NAMESPACE_ID::Timestamp* create_time) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(create_time_);
+  }
+  if (create_time) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(create_time)->GetArena();
+    if (message_arena != submessage_arena) {
+      create_time = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, create_time, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  create_time_ = create_time;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidatedSubscription.create_time)
+}
+
+// .google.protobuf.Timestamp update_time = 6;
+inline bool ValidatedSubscription::_internal_has_update_time() const {
+  return this != internal_default_instance() && update_time_ != nullptr;
+}
+inline bool ValidatedSubscription::has_update_time() const {
+  return _internal_has_update_time();
+}
+inline const PROTOBUF_NAMESPACE_ID::Timestamp& ValidatedSubscription::_internal_update_time() const {
+  const PROTOBUF_NAMESPACE_ID::Timestamp* p = update_time_;
+  return p != nullptr ? *p : reinterpret_cast<const PROTOBUF_NAMESPACE_ID::Timestamp&>(
+      PROTOBUF_NAMESPACE_ID::_Timestamp_default_instance_);
+}
+inline const PROTOBUF_NAMESPACE_ID::Timestamp& ValidatedSubscription::update_time() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidatedSubscription.update_time)
+  return _internal_update_time();
+}
+inline void ValidatedSubscription::unsafe_arena_set_allocated_update_time(
+    PROTOBUF_NAMESPACE_ID::Timestamp* update_time) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(update_time_);
+  }
+  update_time_ = update_time;
+  if (update_time) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:nakama.api.ValidatedSubscription.update_time)
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::release_update_time() {
+  
+  PROTOBUF_NAMESPACE_ID::Timestamp* temp = update_time_;
+  update_time_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::unsafe_arena_release_update_time() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidatedSubscription.update_time)
+  
+  PROTOBUF_NAMESPACE_ID::Timestamp* temp = update_time_;
+  update_time_ = nullptr;
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::_internal_mutable_update_time() {
+  
+  if (update_time_ == nullptr) {
+    auto* p = CreateMaybeMessage<PROTOBUF_NAMESPACE_ID::Timestamp>(GetArena());
+    update_time_ = p;
+  }
+  return update_time_;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::mutable_update_time() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidatedSubscription.update_time)
+  return _internal_mutable_update_time();
+}
+inline void ValidatedSubscription::set_allocated_update_time(PROTOBUF_NAMESPACE_ID::Timestamp* update_time) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(update_time_);
+  }
+  if (update_time) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(update_time)->GetArena();
+    if (message_arena != submessage_arena) {
+      update_time = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, update_time, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  update_time_ = update_time;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidatedSubscription.update_time)
+}
+
+// .nakama.api.StoreEnvironment environment = 7;
+inline void ValidatedSubscription::clear_environment() {
+  environment_ = 0;
+}
+inline ::nakama::api::StoreEnvironment ValidatedSubscription::_internal_environment() const {
+  return static_cast< ::nakama::api::StoreEnvironment >(environment_);
+}
+inline ::nakama::api::StoreEnvironment ValidatedSubscription::environment() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidatedSubscription.environment)
+  return _internal_environment();
+}
+inline void ValidatedSubscription::_internal_set_environment(::nakama::api::StoreEnvironment value) {
+  
+  environment_ = value;
+}
+inline void ValidatedSubscription::set_environment(::nakama::api::StoreEnvironment value) {
+  _internal_set_environment(value);
+  // @@protoc_insertion_point(field_set:nakama.api.ValidatedSubscription.environment)
+}
+
+// .google.protobuf.Timestamp expiry_time = 8;
+inline bool ValidatedSubscription::_internal_has_expiry_time() const {
+  return this != internal_default_instance() && expiry_time_ != nullptr;
+}
+inline bool ValidatedSubscription::has_expiry_time() const {
+  return _internal_has_expiry_time();
+}
+inline const PROTOBUF_NAMESPACE_ID::Timestamp& ValidatedSubscription::_internal_expiry_time() const {
+  const PROTOBUF_NAMESPACE_ID::Timestamp* p = expiry_time_;
+  return p != nullptr ? *p : reinterpret_cast<const PROTOBUF_NAMESPACE_ID::Timestamp&>(
+      PROTOBUF_NAMESPACE_ID::_Timestamp_default_instance_);
+}
+inline const PROTOBUF_NAMESPACE_ID::Timestamp& ValidatedSubscription::expiry_time() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidatedSubscription.expiry_time)
+  return _internal_expiry_time();
+}
+inline void ValidatedSubscription::unsafe_arena_set_allocated_expiry_time(
+    PROTOBUF_NAMESPACE_ID::Timestamp* expiry_time) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(expiry_time_);
+  }
+  expiry_time_ = expiry_time;
+  if (expiry_time) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:nakama.api.ValidatedSubscription.expiry_time)
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::release_expiry_time() {
+  
+  PROTOBUF_NAMESPACE_ID::Timestamp* temp = expiry_time_;
+  expiry_time_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::unsafe_arena_release_expiry_time() {
+  // @@protoc_insertion_point(field_release:nakama.api.ValidatedSubscription.expiry_time)
+  
+  PROTOBUF_NAMESPACE_ID::Timestamp* temp = expiry_time_;
+  expiry_time_ = nullptr;
+  return temp;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::_internal_mutable_expiry_time() {
+  
+  if (expiry_time_ == nullptr) {
+    auto* p = CreateMaybeMessage<PROTOBUF_NAMESPACE_ID::Timestamp>(GetArena());
+    expiry_time_ = p;
+  }
+  return expiry_time_;
+}
+inline PROTOBUF_NAMESPACE_ID::Timestamp* ValidatedSubscription::mutable_expiry_time() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.ValidatedSubscription.expiry_time)
+  return _internal_mutable_expiry_time();
+}
+inline void ValidatedSubscription::set_allocated_expiry_time(PROTOBUF_NAMESPACE_ID::Timestamp* expiry_time) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(expiry_time_);
+  }
+  if (expiry_time) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(expiry_time)->GetArena();
+    if (message_arena != submessage_arena) {
+      expiry_time = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, expiry_time, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  expiry_time_ = expiry_time;
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.ValidatedSubscription.expiry_time)
+}
+
+// bool active = 9;
+inline void ValidatedSubscription::clear_active() {
+  active_ = false;
+}
+inline bool ValidatedSubscription::_internal_active() const {
+  return active_;
+}
+inline bool ValidatedSubscription::active() const {
+  // @@protoc_insertion_point(field_get:nakama.api.ValidatedSubscription.active)
+  return _internal_active();
+}
+inline void ValidatedSubscription::_internal_set_active(bool value) {
+  
+  active_ = value;
+}
+inline void ValidatedSubscription::set_active(bool value) {
+  _internal_set_active(value);
+  // @@protoc_insertion_point(field_set:nakama.api.ValidatedSubscription.active)
 }
 
 // -------------------------------------------------------------------
@@ -43044,6 +45470,171 @@ inline void PurchaseList::set_allocated_prev_cursor(std::string* prev_cursor) {
   prev_cursor_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), prev_cursor,
       GetArena());
   // @@protoc_insertion_point(field_set_allocated:nakama.api.PurchaseList.prev_cursor)
+}
+
+// -------------------------------------------------------------------
+
+// SubscriptionList
+
+// repeated .nakama.api.ValidatedSubscription validated_subscriptions = 1;
+inline int SubscriptionList::_internal_validated_subscriptions_size() const {
+  return validated_subscriptions_.size();
+}
+inline int SubscriptionList::validated_subscriptions_size() const {
+  return _internal_validated_subscriptions_size();
+}
+inline void SubscriptionList::clear_validated_subscriptions() {
+  validated_subscriptions_.Clear();
+}
+inline ::nakama::api::ValidatedSubscription* SubscriptionList::mutable_validated_subscriptions(int index) {
+  // @@protoc_insertion_point(field_mutable:nakama.api.SubscriptionList.validated_subscriptions)
+  return validated_subscriptions_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::nakama::api::ValidatedSubscription >*
+SubscriptionList::mutable_validated_subscriptions() {
+  // @@protoc_insertion_point(field_mutable_list:nakama.api.SubscriptionList.validated_subscriptions)
+  return &validated_subscriptions_;
+}
+inline const ::nakama::api::ValidatedSubscription& SubscriptionList::_internal_validated_subscriptions(int index) const {
+  return validated_subscriptions_.Get(index);
+}
+inline const ::nakama::api::ValidatedSubscription& SubscriptionList::validated_subscriptions(int index) const {
+  // @@protoc_insertion_point(field_get:nakama.api.SubscriptionList.validated_subscriptions)
+  return _internal_validated_subscriptions(index);
+}
+inline ::nakama::api::ValidatedSubscription* SubscriptionList::_internal_add_validated_subscriptions() {
+  return validated_subscriptions_.Add();
+}
+inline ::nakama::api::ValidatedSubscription* SubscriptionList::add_validated_subscriptions() {
+  // @@protoc_insertion_point(field_add:nakama.api.SubscriptionList.validated_subscriptions)
+  return _internal_add_validated_subscriptions();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::nakama::api::ValidatedSubscription >&
+SubscriptionList::validated_subscriptions() const {
+  // @@protoc_insertion_point(field_list:nakama.api.SubscriptionList.validated_subscriptions)
+  return validated_subscriptions_;
+}
+
+// string cursor = 2;
+inline void SubscriptionList::clear_cursor() {
+  cursor_.ClearToEmpty();
+}
+inline const std::string& SubscriptionList::cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.SubscriptionList.cursor)
+  return _internal_cursor();
+}
+inline void SubscriptionList::set_cursor(const std::string& value) {
+  _internal_set_cursor(value);
+  // @@protoc_insertion_point(field_set:nakama.api.SubscriptionList.cursor)
+}
+inline std::string* SubscriptionList::mutable_cursor() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.SubscriptionList.cursor)
+  return _internal_mutable_cursor();
+}
+inline const std::string& SubscriptionList::_internal_cursor() const {
+  return cursor_.Get();
+}
+inline void SubscriptionList::_internal_set_cursor(const std::string& value) {
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void SubscriptionList::set_cursor(std::string&& value) {
+  
+  cursor_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.SubscriptionList.cursor)
+}
+inline void SubscriptionList::set_cursor(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.api.SubscriptionList.cursor)
+}
+inline void SubscriptionList::set_cursor(const char* value,
+    size_t size) {
+  
+  cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.SubscriptionList.cursor)
+}
+inline std::string* SubscriptionList::_internal_mutable_cursor() {
+  
+  return cursor_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* SubscriptionList::release_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.SubscriptionList.cursor)
+  return cursor_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void SubscriptionList::set_allocated_cursor(std::string* cursor) {
+  if (cursor != nullptr) {
+    
+  } else {
+    
+  }
+  cursor_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), cursor,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.SubscriptionList.cursor)
+}
+
+// string prev_cursor = 3;
+inline void SubscriptionList::clear_prev_cursor() {
+  prev_cursor_.ClearToEmpty();
+}
+inline const std::string& SubscriptionList::prev_cursor() const {
+  // @@protoc_insertion_point(field_get:nakama.api.SubscriptionList.prev_cursor)
+  return _internal_prev_cursor();
+}
+inline void SubscriptionList::set_prev_cursor(const std::string& value) {
+  _internal_set_prev_cursor(value);
+  // @@protoc_insertion_point(field_set:nakama.api.SubscriptionList.prev_cursor)
+}
+inline std::string* SubscriptionList::mutable_prev_cursor() {
+  // @@protoc_insertion_point(field_mutable:nakama.api.SubscriptionList.prev_cursor)
+  return _internal_mutable_prev_cursor();
+}
+inline const std::string& SubscriptionList::_internal_prev_cursor() const {
+  return prev_cursor_.Get();
+}
+inline void SubscriptionList::_internal_set_prev_cursor(const std::string& value) {
+  
+  prev_cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void SubscriptionList::set_prev_cursor(std::string&& value) {
+  
+  prev_cursor_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:nakama.api.SubscriptionList.prev_cursor)
+}
+inline void SubscriptionList::set_prev_cursor(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  prev_cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:nakama.api.SubscriptionList.prev_cursor)
+}
+inline void SubscriptionList::set_prev_cursor(const char* value,
+    size_t size) {
+  
+  prev_cursor_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:nakama.api.SubscriptionList.prev_cursor)
+}
+inline std::string* SubscriptionList::_internal_mutable_prev_cursor() {
+  
+  return prev_cursor_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* SubscriptionList::release_prev_cursor() {
+  // @@protoc_insertion_point(field_release:nakama.api.SubscriptionList.prev_cursor)
+  return prev_cursor_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void SubscriptionList::set_allocated_prev_cursor(std::string* prev_cursor) {
+  if (prev_cursor != nullptr) {
+    
+  } else {
+    
+  }
+  prev_cursor_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), prev_cursor,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:nakama.api.SubscriptionList.prev_cursor)
 }
 
 // -------------------------------------------------------------------
@@ -44270,6 +46861,20 @@ inline void WriteTournamentRecordRequest::set_allocated_record(::nakama::api::Wr
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -44293,15 +46898,15 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::nakama::api::UserGroupList_UserGroup_State>() {
   return ::nakama::api::UserGroupList_UserGroup_State_descriptor();
 }
-template <> struct is_proto_enum< ::nakama::api::ValidatedPurchase_Store> : ::std::true_type {};
+template <> struct is_proto_enum< ::nakama::api::StoreProvider> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::nakama::api::ValidatedPurchase_Store>() {
-  return ::nakama::api::ValidatedPurchase_Store_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::nakama::api::StoreProvider>() {
+  return ::nakama::api::StoreProvider_descriptor();
 }
-template <> struct is_proto_enum< ::nakama::api::ValidatedPurchase_Environment> : ::std::true_type {};
+template <> struct is_proto_enum< ::nakama::api::StoreEnvironment> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::nakama::api::ValidatedPurchase_Environment>() {
-  return ::nakama::api::ValidatedPurchase_Environment_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::nakama::api::StoreEnvironment>() {
+  return ::nakama::api::StoreEnvironment_descriptor();
 }
 template <> struct is_proto_enum< ::nakama::api::Operator> : ::std::true_type {};
 template <>

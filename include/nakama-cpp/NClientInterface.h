@@ -1058,6 +1058,7 @@ NAKAMA_NAMESPACE_BEGIN
             const std::string& tournamentId,
             const std::string& ownerId,
             const opt::optional<int32_t>& limit = opt::nullopt,
+            const std::string& cursor = "",
             std::function<void(NTournamentRecordListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) = 0;
