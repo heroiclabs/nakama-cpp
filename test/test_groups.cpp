@@ -70,7 +70,7 @@ public:
             }
         };
 
-        client->listGroups(session, group_name, 0, "", successCallback);
+        client->listGroups(session, group_name, 0, "", "",12,false, successCallback);
     }
 
     void createGroup()

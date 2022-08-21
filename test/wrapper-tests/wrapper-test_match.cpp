@@ -91,7 +91,7 @@ void wrapper_test_rt_create_match()
             test2.runTest();
         };
 
-        test1.rtClient->createMatch(
+        test1.rtClient->createMatch("test",
             successCallback);
     });
 
@@ -128,6 +128,7 @@ void wrapper_test_rt_matchmaker2(WrapperTest& test2)
             opt::nullopt,
             {},
             {},
+            1,
             successCallback);
     });
 
@@ -179,6 +180,7 @@ void wrapper_test_rt_matchmaker()
             opt::nullopt,
             {},
             {},
+            1,
             successCallback);
     });
 

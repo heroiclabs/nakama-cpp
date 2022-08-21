@@ -82,6 +82,7 @@ void test_rt_create_match()
         };
 
         test1.rtClient->createMatch(
+            "test",
             successCallback);
     };
 
@@ -119,7 +120,7 @@ void test_rt_matchmaker2(NRtClientTest& test2)
             2,
             opt::nullopt,
             {},
-            {},
+            {},2,
             successCallback);
     };
 
@@ -171,6 +172,7 @@ void test_rt_matchmaker()
             opt::nullopt,
             {},
             {},
+            2,
             successCallback);
     };
 
