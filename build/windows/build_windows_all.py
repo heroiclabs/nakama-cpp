@@ -27,7 +27,7 @@ else:
 
 modes_list    = ['Release', 'Debug']
 arch_list     = ['x86', 'x64']
-toolsets_list = ['v140', 'v141', 'v142']
+toolsets_list = ['v140', 'v141', 'v142', 'v143']
 
 def call(command):
     res = subprocess.call(command, shell=False)
