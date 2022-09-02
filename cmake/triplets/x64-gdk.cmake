@@ -6,7 +6,7 @@ set(VCPKG_BUILD_TYPE "release")
 
 # GDK installs this "architecture" (which is just a way to configure
 # global complilation options for Xbox platform, not a real arch)
-set(VCPKG_CMAKE_CONFIGURE_OPTIONS "-A Gaming.Xbox.Scarlett.x64")
+set(VCPKG_CMAKE_CONFIGURE_OPTIONS "-A ${CMAKE_GENERATOR_PLATFORM}")
 
 # explicitly switch off VCVARS in case future me is tempted to
 # switch it back on. VCPKG ports are not entirely CMake based,
@@ -17,4 +17,4 @@ set(VCPKG_LOAD_VCVARS_ENV OFF)
 # This variable is a Heroic "extension" to vcpkg.
 # vcpkg prefers Ninja generator on all platforms, but Windows UWP,
 # but we want VisualStudio, because adds Xbox configuration to it.
-set(VCPKG_CMAKE_FORCE_GENERATOR "Visual Studio 17 2022")
+set(VCPKG_CMAKE_FORCE_GENERATOR ${CMAKE_GENERATOR})
