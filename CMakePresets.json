@@ -49,11 +49,11 @@
       "name": "gdk",
       "inherits": ["default"],
       "generator": "Visual Studio 17 2022",
-      "architecture": "Gaming.Xbox.Scarlett.x64",
       "toolchainFile": "${sourceDir}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "hidden": true,
       "cacheVariables": {
+        "GDK": "ON",
         "BUILD_GRPC_CLIENT": "OFF",
-        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE__": "${sourceDir}/cmake/CMakeGDKXbox.cmake",
         "VCPKG_HOST_TRIPLET": "x64-windows-static-md-release",
         "VCPKG_TARGET_TRIPLET": "x64-gdk",
         "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets",
@@ -65,6 +65,21 @@
         "lhs": "${hostSystemName}",
         "rhs": "Windows"
       }
+    },
+    {
+      "name": "gdk-xbox-scarlett",
+      "inherits": ["gdk"],
+      "architecture": "Gaming.Xbox.Scarlett.x64"
+    },
+    {
+      "name": "gdk-xbox-one",
+      "inherits": ["gdk"],
+      "architecture": "Gaming.Xbox.XboxOne.x64"
+    },
+    {
+      "name": "gdk-win-x64",
+      "inherits": ["gdk"],
+      "architecture": "Gaming.Desktop.x64"
     },
     {
       "name": "macosx-arm64-host_arm64",
@@ -317,9 +332,40 @@
       "verbose": true
     },
     {
-      "name": "release-gdk",
-      "configurePreset": "gdk",
-      "configuration": "MinSizeRel"
+      "name": "debug-gdk-xbox-one",
+      "configurePreset": "gdk-xbox-one",
+      "configuration": "Debug",
+      "verbose": true
+    },
+    {
+      "name": "release-gdk-xbox-one",
+      "configurePreset": "gdk-xbox-one",
+      "configuration": "MinSizeRel",
+      "verbose": true
+    },
+    {
+      "name": "debug-gdk-xbox-scarlett",
+      "configurePreset": "gdk-xbox-scarlett",
+      "configuration": "Debug",
+      "verbose": true
+    },
+    {
+      "name": "release-gdk-xbox-scarlett",
+      "configurePreset": "gdk-xbox-scarlett",
+      "configuration": "MinSizeRel",
+      "verbose": true
+    },
+    {
+      "name": "debug-gdk-win-x64",
+      "configurePreset": "gdk-win-x64",
+      "configuration": "Debug",
+      "verbose": true
+    },
+    {
+      "name": "release-gdk-win-x64",
+      "configurePreset": "gdk-win-x64",
+      "configuration": "MinSizeRel",
+      "verbose": true
     }
   ]
 }
