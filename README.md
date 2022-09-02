@@ -412,3 +412,5 @@ which can be set with `-DNAKAMA_PRIVATE_REPO_GIT_TAG=123456` cmd flag at configu
 
 You can edit files in-place in `./build/${preset}/_deps/nakama-cpp-private-src` for a speedy development. Once
 done commit and push by running git from that location, it is proper git clone, so normal git commands should work.
+
+GDK is expected to be installed completely normally, per Microsoft instructions. Use the March 2022 edition for Unreal Engine.
