@@ -60,11 +60,3 @@ endif()
 target_include_directories(nakama-test
     PRIVATE src
 )
-
-### Prepare unreal test suite
-# Directory where NakamaTestApp.uproject can find sources of dependent modules
-set(_unreal_test_tmp ${CMAKE_CURRENT_SOURCE_DIR}/unreal/Intermediate/Source/)
-file(MAKE_DIRECTORY ${_unreal_test_tmp})
-file(COPY src DESTINATION ${_unreal_test_tmp})
-file(COPY ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/rapidjson DESTINATION ${_unreal_test_tmp})
-

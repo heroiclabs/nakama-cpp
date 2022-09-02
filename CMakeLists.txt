@@ -149,22 +149,6 @@ if(APPLE)
 
 endif()
 
-
-# If UNREAL modifier specified, we change file layout in install dir
-# so that it is easier to integrate with Unreal.
-# We also install same files to Unreal test suite in test/unreal dir
-# so that produced artifacts can be immediately tested
-if (UNREAL)
-    set(libnakama_prefix Nakama/libnakama/)
-    string(PREPEND CMAKE_INSTALL_LIBDIR ${libnakama_prefix})
-    string(PREPEND CMAKE_INSTALL_INCLUDEDIR ${libnakama_prefix})
-    string(PREPEND CMAKE_INSTALL_BINDIR ${libnakama_prefix})
-
-    set(unreal_test_project_source ${CMAKE_SOURCE_DIR}/test/unreal/Source)
-    install(DIRECTORY unreal/Nakama/ DESTINATION Nakama PATTERN ".unpack-nakama-archive-here" EXCLUDE)
-    install(DIRECTORY unreal/Nakama/ DESTINATION ${unreal_test_project_source}/Nakama PATTERN ".unpack-nakama-archive-here" EXCLUDE)
-endif()
-
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     if(GDK)
         # GDK ships libhttpclient with it, we just need to link
@@ -379,39 +363,6 @@ endif()
 if(MSVC)
     install(FILES $<TARGET_PDB_FILE:nakama-sdk> DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT nakama-sdk OPTIONAL)
 endif()
-
-
-# Also install same artifacts to the Unreal test suite so that they can be tested immediately
-# TODO: avoid duplication with regular install by using macro
-if (UNREAL)
-    install(TARGETS
-            nakama-sdk
-            nakama-sdk-interface
-            nakama-api-proto
-            #		${HTTP_IMPL_LIB} ${WS_IMPL_LIB}
-            FRAMEWORK DESTINATION ${unreal_test_project_source}/${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
-            LIBRARY DESTINATION ${unreal_test_project_source} COMPONENT nakama-sdk
-            ARCHIVE DESTINATION ${unreal_test_project_source} COMPONENT nakama-sdk
-            RUNTIME DESTINATION ${unreal_test_project_source} COMPONENT nakama-sdk
-            FILE_SET HEADERS DESTINATION ${unreal_test_project_source}/${CMAKE_INSTALL_INCLUDEDIR} COMPONENT headers
-            )
-
-
-    install(DIRECTORY ${NONSTD_INCLUDE_DIR}/nonstd DESTINATION ${unreal_test_project_source}/${CMAKE_INSTALL_INCLUDEDIR} COMPONENT headers)
-
-
-    if (GDK)
-        # Redistribute XCurl from GDK
-        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/XCurl.dll
-                DESTINATION ${unreal_test_project_source}/${CMAKE_INSTALL_BINDIR} COMPONENT nakama-sdk
-                )
-    endif()
-
-    if(MSVC)
-        install(FILES $<TARGET_PDB_FILE:nakama-sdk> DESTINATION "${unreal_test_project_source}/${CMAKE_INSTALL_LIBDIR}" COMPONENT nakama-sdk OPTIONAL)
-    endif()
-endif()
-
 
 # See recommendations here:
 # https://gitlab.kitware.com/cmake/cmake/-/issues/18453
