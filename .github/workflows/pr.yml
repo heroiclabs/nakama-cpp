@@ -1,0 +1,89 @@
+name: pr check
+on: [pull_request]
+jobs:
+  windows:
+    timeout-minutes: 20
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: setup-postgres
+        uses: ikalnytskyi/action-setup-postgres@v3
+        with:
+          username: root
+          database: nakama
+          port: 26257
+      - uses: ./.github/actions/run-nakama
+        with:
+          postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
+      - uses: ./.github/actions/cmake-build
+        with:
+          preset: win-x64
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - shell: bash
+        run: |
+          ./build/win-x64/test/MinSizeRel/nakama-test || {
+              echo "Test failed, showing Nakama log for diagnostics";
+              cat /tmp/nakama.log;
+              exit 1;
+          }
+  linux:
+    timeout-minutes: 20
+    runs-on: ubuntu-18.04
+    steps:
+      - run: gdb --version || { sudo apt update && sudo apt install gdb && gdb --version; }
+      - uses: actions/checkout@v3
+      - id: setup-postgres
+        uses: ikalnytskyi/action-setup-postgres@v3
+        with:
+          username: root
+          database: nakama
+          port: 26257
+      - uses: ./.github/actions/run-nakama
+        with:
+          postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
+      - uses: ./.github/actions/cmake-build
+        with:
+          preset: linux-amd64
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - shell: bash
+        run: |
+          ./build/linux-amd64/test/MinSizeRel/nakama-test || {
+              echo "Test failed, showing Nakama log for diagnostics";
+              cat /tmp/nakama.log;
+              exit 1;
+          }
+#  Below are various diagnostics I used when tests failed, but unluckily only in CI
+#  Leaving it here in case we'll need it in the future
+#          tail -f /tmp/nakama.log &
+#          sleep 60
+#          while sudo gdb --batch --ex "attach $(pgrep nakama-test)" --ex 'thread apply all bt'; do
+#            curl -u admin:password -v http://localhost:7351/debug/pprof/goroutine?debug=2
+#            ss -n -i -t '( dport = 7350 || sport = 7350 )'
+#            sleep 10;
+#            date
+#          done
+
+  apple:
+    timeout-minutes: 20
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+      - id: setup-postgres
+        uses: ikalnytskyi/action-setup-postgres@v3
+        with:
+          username: root
+          database: nakama
+          port: 26257
+      - uses: ./.github/actions/run-nakama
+        with:
+          postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
+      - uses: ./.github/actions/cmake-build
+        with:
+          preset: macosx-x64-host_x64
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          ./build/macosx-x64-host_x64/test/MinSizeRel/nakama-test || {
+              echo "Test failed, showing Nakama log for diagnostics";
+              cat /tmp/nakama.log;
+              exit 1;
+          }

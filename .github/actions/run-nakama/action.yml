@@ -1,0 +1,31 @@
+name: 'Builds and runs nakama'
+description: 'Builds and runs Nakama'
+inputs:
+  ref:
+    description: 'Nakama git ref to run'
+    required: false
+    default: v3.12.0
+  postgres_uri:
+    description: 'PostgreSQL connection URI'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: heroiclabs/nakama
+        path: nakama.git
+        fetch-depth: 1
+    - uses: actions/setup-go@v3
+      with:
+        cache: true
+        cache-dependency-path: nakama.git/go.sum
+    - run: go build -v .
+      shell: bash
+      working-directory: nakama.git
+    - run: ./nakama migrate up -database.address "${{ inputs.postgres_uri }}"
+      shell: bash
+      working-directory: nakama.git
+    - run: nohup ./nakama &>/tmp/nakama.log &
+      shell: bash
+      working-directory: nakama.git

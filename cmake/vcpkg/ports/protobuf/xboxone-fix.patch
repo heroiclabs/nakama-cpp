@@ -1,0 +1,13 @@
+diff --git a/src/google/protobuf/io/io_win32.cc b/src/google/protobuf/io/io_win32.cc
+index ed8ab19..cb7a8f2 100644
+--- a/src/google/protobuf/io/io_win32.cc
++++ b/src/google/protobuf/io/io_win32.cc
+@@ -42,7 +42,7 @@
+ //
+ // This file is only used on Windows, it's empty on other platforms.
+ 
+-#if defined(_WIN32) && !defined(_XBOX_ONE)
++#if defined(_WIN32)
+ 
+ // Comment this out to fall back to using the ANSI versions (open, mkdir, ...)
+ // instead of the Unicode ones (_wopen, _wmkdir, ...). Doing so can be useful to

@@ -1,0 +1,7 @@
+cmake-build-*
+build
+out
+.idea
+/test/Engine
+CMakeUserPresets.json
+local.properties

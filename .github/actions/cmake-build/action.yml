@@ -1,0 +1,122 @@
+name: 'CMake build for libnakama'
+description: 'Configures build environment and invokes CMake. Not generic, tailored for libnakama.'
+inputs:
+  preset:
+    description: 'Configure preset name'
+    required: true
+  build_type:
+    description: 'Build config: MinSizeRel or Debug'
+    required: true
+    default: 'MinSizeRel'
+  flavour:
+    description: 'Possible values: Unreal, libcxx'
+    required: false
+  artifact_retention_days:
+    description: 'Artifact retention days'
+    default: 2
+  GITHUB_TOKEN:
+    description: 'Github token for Github Package Registry'
+    required: true
+
+
+outputs:
+  artifact_name:
+    description: 'Artifact name'
+    value: ${{ steps.artifact_name.outputs.name }}
+runs:
+  using: "composite"
+  steps:
+    - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
+      shell: bash
+
+    - name: 'Setup NuGet Credentials'
+      shell: bash
+      run: >
+        mono=$( type -p mono || :);
+        nuget="$mono $(vcpkg fetch nuget | tail -n 1)";
+        $nuget sources list  | grep -q ${{ github.repository_owner }} || $nuget sources add
+        -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+        -storepasswordincleartext
+        -name "GitHub"
+        -username "heroiclabs"
+        -password "${{ inputs.GITHUB_TOKEN }}"
+    - name: Setup NuGet API key
+      shell: bash
+      run: >
+        $( type -p mono || :) `vcpkg fetch nuget | tail -n 1`
+        setapikey "${{ inputs.GITHUB_TOKEN }}" 
+        -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+
+    - id: cmake_args
+      shell: bash
+      if: ${{ inputs.flavour }}
+      run: |
+        if [[ "${{inputs.flavour}}" == "Unreal" ]]; then
+          echo "::set-output name=args::-DUNREAL=ON"
+        elif [[ "${{inputs.flavour}}" == "libcxx" ]]; then
+          echo "::set-output name=args::-DWITH_LIBCXX=ON"
+        else
+          echo "::error::Unexpected 'input' flavour value: ${{ inputs.flavour }}"
+        fi
+
+    - name: Installing prerequisites
+      run:  |
+        if [[ "${{ runner.os }}"  == "Linux" ]]; then 
+          sudo ./ci/setup-ubuntu.sh
+        elif [[ "${{ runner.os }}" == "macOS" ]]; then
+          ./ci/setup-osx.sh
+        fi
+        
+        if [[ "${{ runner.os }}" == "Linux" ]]; then
+          echo 'CC=/usr/bin/gcc-11' >> "$GITHUB_ENV"
+          echo 'CXX=/usr/bin/g++-11' >> "$GITHUB_ENV"
+        fi
+      shell: bash
+    - run: rm -rf out
+      shell: bash
+    - run: cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
+      shell: bash
+    - run: cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+      shell: bash
+    - run: cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+      shell: bash
+    - id: artifact_name
+      shell: bash
+      run: |
+        sha=${{ github.sha }}
+        preset="${{ inputs.preset }}"
+        # strip -host_{arm64,x64} from the preset, because it is not relevant for users
+        preset=${preset%-host_*}
+        if [[ -n "${{ inputs.flavour }}" ]]; then
+          name="libnakama-${{ inputs.flavour }}-${preset}-${{ inputs.build_type }}-git.${sha:0:8}"
+        else
+          name="libnakama-${preset}-${{ inputs.build_type }}-git.${sha:0:8}"
+        fi
+        echo "::set-output name=artifact::${name}"
+    #
+    - run: >
+        rm -rf ./out/*/*libHttpClient*.{lib,a};
+        rm -rf ./out/Nakama/libnakama/*/*libHttpClient*.{lib,a};
+
+      shell: bash
+
+    - name: Prepare artifact archive
+      run: |
+        bin7z=$(type -p 7z || type -p 7zr)  # windows and linux/osx has different 7z binaries names
+        cd out
+        ${bin7z} a ../${{ steps.artifact_name.outputs.artifact }}.7z '*'
+      shell: bash
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ${{ steps.artifact_name.outputs.artifact }}
+        path: ./${{ steps.artifact_name.outputs.artifact }}.7z
+        retention-days: ${{ inputs.artifact_retention_days }}
+    - if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ steps.artifact_name.outputs.artifact }}-workdir-debug
+        path: |
+          ./build
+          ./cmake/vcpkg/buildtrees
+        retention-days: 1

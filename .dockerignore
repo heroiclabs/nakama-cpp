@@ -1,0 +1,10 @@
+/build
+/out
+/cmake/vcpkg/buildtrees/
+/cmake/vcpkg/build*/
+/cmake/vcpkg/downloads/
+/cmake/vcpkg/installed*/
+/cmake/vcpkg/packages/
+/cmake/vcpkg/scripts/buildsystems/tmp/
+/test/src/unreal/Intermediate
+/test/src/unreal/Binaries
