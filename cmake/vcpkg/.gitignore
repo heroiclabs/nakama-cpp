@@ -302,7 +302,6 @@ __pycache__/
 !/triplets/community
 !/triplets/community/**
 
-*.exe
 *.zip
 
 ############################################################
