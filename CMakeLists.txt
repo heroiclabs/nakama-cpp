@@ -138,7 +138,7 @@ if(NAKAMA_SHARED_LIBRARY)
 endif()
 
 
-if(APPLE)
+if(APPLE AND !UNREAL)
     file(TOUCH ${CMAKE_BINARY_DIR}/dummy.h ${CMAKE_BINARY_DIR}/dummy.cpp)
     set(DUMMY_CPP ${CMAKE_BINARY_DIR}/dummy.cpp)
     set(DUMMY_H ${CMAKE_BINARY_DIR}/dummy.h)
@@ -286,19 +286,27 @@ endif()
 
 add_library(nakama-sdk ${BUILD_MODE} ${NAKAMA_SDK_DEPS})
 
-set_target_properties(nakama-sdk PROPERTIES
-        FRAMEWORK TRUE
-        FRAMEWORK_VERSION A
 
-        # we deliberately dont list all real headers, because it is a can of worms. See:
-        # - https://gitlab.kitware.com/cmake/cmake/-/issues/16739
-        # - https://gitlab.kitware.com/cmake/cmake/-/issues/22760
-        # Probably can be removed when proper FILE_SET support lands: https://gitlab.kitware.com/cmake/cmake/-/issues/23386
-        PUBLIC_HEADER "${DUMMY_H}"
-        MACOSX_FRAMEWORK_IDENTIFIER com.heroiclabs.libnakama
-        VERSION ${LIBNAKAMA_VERSION}
-        SOVERSION ${LIBNAKAMA_SOVERSION}
-        )
+set_target_properties(nakama-sdk PROPERTIES
+    VERSION ${LIBNAKAMA_VERSION}
+    SOVERSION ${LIBNAKAMA_SOVERSION}
+)
+
+### Unreal Engine does not recognize frameworks.
+
+if (!UNREAL)
+    set_target_properties(nakama-sdk PROPERTIES
+            FRAMEWORK TRUE
+            FRAMEWORK_VERSION A
+
+            # we deliberately dont list all real headers, because it is a can of worms. See:
+            # - https://gitlab.kitware.com/cmake/cmake/-/issues/16739
+            # - https://gitlab.kitware.com/cmake/cmake/-/issues/22760
+            # Probably can be removed when proper FILE_SET support lands: https://gitlab.kitware.com/cmake/cmake/-/issues/23386
+            PUBLIC_HEADER "${DUMMY_H}"
+            MACOSX_FRAMEWORK_IDENTIFIER com.heroiclabs.libnakama
+            )
+endif()
 
 add_library(nakama::sdk ALIAS nakama-sdk)
 target_link_libraries(nakama-sdk
