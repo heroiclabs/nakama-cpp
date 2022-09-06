@@ -145,6 +145,8 @@ HRESULT NHttpClientLibHC::prep_hc_call(const NHttpRequest& req, call_ptr& call) 
         HCHttpCallRequestSetHeader(pcall, p.first.c_str(), p.second.c_str(), true);
     }
 
+    CHECK_AND_LOG(HCHttpCallRequestSetRetryAllowed(pcall, false), "HCHttpCallRequestSetRetryAllowed failed");
+
     return S_OK;
 }
 
