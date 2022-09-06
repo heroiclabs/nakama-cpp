@@ -2,7 +2,7 @@ name: Build All
 on: [workflow_call, workflow_dispatch]
 jobs:
   windows_matrix:
-    timeout-minutes: 10
+    timeout-minutes: 30
     strategy:
       matrix:
         build_type: [MinSizeRel, Debug]
@@ -26,7 +26,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   linux_matrix:
-    timeout-minutes: 10
+    timeout-minutes: 30
     strategy:
       matrix:
         flavour: [ "", "libcxx" ]
@@ -57,7 +57,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   apple_matrix:
-    timeout-minutes: 10
+    timeout-minutes: 30
     strategy:
       matrix:
         preset: ["ios-arm64-host_x64", "iphonesimulator-x64-host_x64", "macosx-x64-host_x64", "macosx-arm64-host_x64"]
