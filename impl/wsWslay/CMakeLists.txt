@@ -20,16 +20,6 @@ if (WSLAY_NETIO STREQUAL "CURL")
     target_link_libraries(nakama-impl-ws-wslay INTERFACE CURL::libcurl)
 endif()
 
-if (ORBIS OR PROSPERO)
-    FetchContent_GetProperties(nakama-cpp-private)
-    if(NOT nakama-cpp-private_POPULATED)
-        FetchContent_Populate(nakama-cpp-private)
-    endif()
-    target_include_directories(nakama-impl-ws-wslay INTERFACE
-            ${nakama-cpp-private_SOURCE_DIR}/netIOSony
-    )
-endif()
-
 if (NOT WSLAY_NETIO)
     message(FATAL_ERROR "Error in our CMake, must be set by now")
 endif()

@@ -1,12 +1,6 @@
 # Various platform specific defines
 
-if(CMAKE_GENERATOR_PLATFORM MATCHES ^Gaming.Xbox)
-    message("Configuring GDK build")
-    set(GDK ON)
-    # should be in the GDK toolchain
-    set(CMAKE_CXX_STANDARD_LIBRARIES "xgameplatform.lib xgameruntime.lib")
-    set(CMAKE_C_STANDARD_LIBRARIES   "xgameplatform.lib xgameruntime.lib")
-elseif (NOT XDK AND (CMAKE_SYSTEM_NAME STREQUAL Windows OR WindowsDesktop))
+if (CMAKE_SYSTEM_NAME STREQUAL Windows OR WindowsDesktop)
     set(WindowsDesktop ON)
     message("Configuring Windows Desktop build")
     # Sets minimual Windows version we are targeting
@@ -14,8 +8,6 @@ elseif (NOT XDK AND (CMAKE_SYSTEM_NAME STREQUAL Windows OR WindowsDesktop))
     add_compile_definitions(NTDDI_VERSION=NTDDI_WIN7 _WIN32_WINNT=_WIN32_WINNT_WIN7)
     set(BUILDWIN32 ON)  # libhttpclient
     set(CMAKE_INSTALL_BINDIR ${CMAKE_INSTALL_LIBDIR})  # place .dll where .lib is so that multiplatform archives can be created
-elseif (XDK)
-    message("Configuring XDK build")
 elseif(CMAKE_SYSTEM_NAME STREQUAL Darwin)
     set(Darwin)
     message("Configuring Apple MacOSX build")
@@ -39,17 +31,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL iOS)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     message("Configuring Linux build")
     set(LINUX ON)
-
     set(THREADS_PREFER_PTHREAD_FLAG ON)
     find_package(Threads REQUIRED)
     set(PTHREADS_LIB Threads::Threads)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "ORBIS")
-    set(ORBIS ON)
-    message(STATUS "Configuring Sony PS4 (Orbis) build")
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Prospero")
-    set(PROSPERO ON)
-    message(STATUS "Configuring Sony PS5 (Prospero) build")
 endif()
-
-
-

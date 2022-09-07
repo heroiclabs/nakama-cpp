@@ -92,12 +92,21 @@ include(cmake/with-libcxx.cmake)
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake
         CACHE FILEPATH "Vcpkg toolchain file")
 
+# This wont trigger clone, until one of impls do FetchContent_Populate
+FetchContent_Declare(
+    nakama-cpp-private
+    GIT_REPOSITORY https://github.com/heroiclabs/nakama-cpp-private.git
+    GIT_TAG ${NAKAMA_PRIVATE_REPO_GIT_TAG}
+    GIT_SHALLOW TRUE
+)
+
 project(nakama-sdk LANGUAGES CXX)
 include(cmake/platformSupport.cmake)
 include(cmake/compilerFlags.cmake)
 include(cmake/linkerFlags.cmake)
 include(cmake/localCompilerFlags.cmake)
 include(GNUInstallDirs)
+include(FetchContent)
 
 if(MSVC)
     # On windows it is critical not to accidentally use DLL
@@ -150,13 +159,7 @@ if(APPLE)
 endif()
 
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
-    if(GDK)
-        # GDK ships libhttpclient with it, we just need to link
-        # %() syntax doesn't work, CMake adds .lib to the end, breaking the build
-        #set(LIBHTTPCLIENT_TARGET "%(AdditionalDependencies)")
-        set(LIBHTTPCLIENT_TARGET "libHttpClient.142.GDK.C.lib")
-        set(LIBHTTPCLIENT_GDK_DEPS "Microsoft.Xbox.Services.142.GDK.C.lib" "XCurl.lib" "winhttp.lib" crypt32.lib)
-    else()
+    if(NOT LIBHTTPCLIENT_BUILTIN)
         if (LINUX OR APPLE)
             find_package(CURL CONFIG REQUIRED)
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
@@ -189,20 +192,8 @@ endif()
 if(WS_IMPL STREQUAL "wslay")
     if (LINUX OR APPLE)
         set(WSLAY_NETIO "CURL")
-    elseif(ORBIS OR PROSPERO)
-        set(WSLAY_NETIO "SONY")
     endif()
 endif()
-
-
-include(FetchContent)
-# This wont trigger clone, until one of impls do FetchContent_Populate
-FetchContent_Declare(
-        nakama-cpp-private
-        GIT_REPOSITORY https://github.com/heroiclabs/nakama-cpp-private.git
-        GIT_TAG ${NAKAMA_PRIVATE_REPO_GIT_TAG}
-        GIT_SHALLOW TRUE
-)
 
 add_library(nakama-ws-impl INTERFACE)
 if(WS_IMPL STREQUAL "libhttpclient")
@@ -274,8 +265,7 @@ if (HTTP_IMPL STREQUAL libhttpclient OR WS_IMPL STREQUAL libhttpclient)
     # wont be excluded due to '--exclude-libs ALL' linker flag. Although we
     # dont expose libhttpclient in our API , we still want it's symbols exported
     # in our ABI, because that is how JVM finds native code on Android platform.
-    # GDK libhttpclient is a special case (precompiled, not a target).
-    if (NOT GDK)
+    if (NOT LIBHTTPCLIENT_BUILTIN)
         list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
     endif()
 endif()
@@ -352,13 +342,6 @@ file(GLOB_RECURSE OPTIONAL_LITE_EXPORT ${optional-lite_DIR}/*.cmake)
 # so instead we make it available to cmake users by manually copying its export file to our installation
 # so that find_package(nakama-sdk) can also find optional-lite
 install(FILES ${OPTIONAL_LITE_EXPORT} DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nakama)
-
-if (GDK)
-    # Redistribute XCurl from GDK
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/XCurl.dll
-            DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
-            )
-endif()
 
 if(MSVC)
     install(FILES $<TARGET_PDB_FILE:nakama-sdk> DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT nakama-sdk OPTIONAL)

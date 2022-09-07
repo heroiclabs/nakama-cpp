@@ -41,7 +41,7 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
     return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
 #elif defined(BUILD_WEBSOCKET_WSLAY)
 #if !defined(WSLAY_NETIO_TYPE)
-#error wslay websocket layer need to be parametrized with WSLAY_NETIO_TYPE. Define WSLAY_NETIO_$IMPL in the CMake.
+#error wslay websocket layer need to be parameterized with WSLAY_NETIO_TYPE. Define WSLAY_NETIO_$IMPL in the CMake.
 #endif
     return NRtTransportPtr(new NWebsocketWslay<WSLAY_NETIO_TYPE>());
 #elif defined(BUILD_WEBSOCKET_IS_BLANK)

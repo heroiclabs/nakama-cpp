@@ -7,37 +7,8 @@ vcpkg_from_github(
         PATCHES
         fix-static-build.patch
         fix-default-proto-file-path.patch
-        xboxone-fix.patch
-        sony-consoles.patch
 )
 
-
-# It looks like use of some standard headers, like  <mutex>, on Linux adds
-# `pthread_` weak symbols without adding `NEEDED` entry to the resulting ELF,
-# thus making program crash at the runtime. We want to link with `-lpthread`
-# explicitly to avoid that.
-#
-# Protobuf adds `-lpthread` flag using result of `FindThreads.cmake` module.
-#
-# On windows it is a noop, as no additional flags are needed to use
-# threads-aware primitives.
-#
-# On PS4/PS5 `FindThreads` is going to fail, so we disable it, but that's fine
-# as we don't need to pass -lpthread explicitly on sony platforms
-if (CMAKE_SYSTEM_NAME STREQUAL "ORBIS" OR CMAKE_SYSTEM_NAME STREQUAL "Prospero")
-    vcpkg_replace_string(${SOURCE_PATH}/cmake/CMakeLists.txt
-        "find_package(Threads REQUIRED)"
-	    ""
-    )
-endif()
-
-# Sony requires C++14 as a minimal version. Bump C++14 version
-# for all platforms for consistency and to find possible problems
-# earlier
-vcpkg_replace_string(${SOURCE_PATH}/cmake/CMakeLists.txt
-        "CMAKE_CXX_STANDARD 11"
-        "CMAKE_CXX_STANDARD 14"
-        )
 
 string(COMPARE EQUAL "${TARGET_TRIPLET}" "${HOST_TRIPLET}" protobuf_BUILD_PROTOC_BINARIES)
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" protobuf_BUILD_SHARED_LIBS)

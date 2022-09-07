@@ -46,42 +46,6 @@
       }
     },
     {
-      "name": "gdk",
-      "inherits": ["default"],
-      "generator": "Visual Studio 17 2022",
-      "toolchainFile": "${sourceDir}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake",
-      "hidden": true,
-      "cacheVariables": {
-        "GDK": "ON",
-        "BUILD_GRPC_CLIENT": "OFF",
-        "VCPKG_HOST_TRIPLET": "x64-windows-static-md-release",
-        "VCPKG_TARGET_TRIPLET": "x64-gdk",
-        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets",
-        "WS_IMPL": "libhttpclient",
-        "HTTP_IMPL": "libhttpclient"
-      },
-      "condition": {
-        "type": "equals",
-        "lhs": "${hostSystemName}",
-        "rhs": "Windows"
-      }
-    },
-    {
-      "name": "gdk-xbox-scarlett",
-      "inherits": ["gdk"],
-      "architecture": "Gaming.Xbox.Scarlett.x64"
-    },
-    {
-      "name": "gdk-xbox-one",
-      "inherits": ["gdk"],
-      "architecture": "Gaming.Xbox.XboxOne.x64"
-    },
-    {
-      "name": "gdk-win-x64",
-      "inherits": ["gdk"],
-      "architecture": "Gaming.Desktop.x64"
-    },
-    {
       "name": "macosx-arm64-host_arm64",
       "inherits": [
         "default"
@@ -213,58 +177,6 @@
         "CC": "/usr/bin/gcc-11",
         "CXX": "/usr/bin/g++-11"
       }
-    },
-    {
-      "name": "ps4",
-      "inherits": ["linux-amd64"],
-      "cacheVariables": {
-        "VCPKG_HOST_TRIPLET": "x64-windows-static-md-release",
-        "VCPKG_TARGET_TRIPLET": "ps4",
-        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/cmake/ps4-toolchain.cmake",
-        "HTTP_IMPL": "sony",
-        "WS_IMPL": "wslay"
-      },
-      "environment": {
-        "VCPKG_KEEP_ENV_VARS": "SCE_ROOT_DIR;SCE_ORBIS_SDK_DIR"
-      },
-      "condition": {
-        "type": "equals",
-        "lhs": "${hostSystemName}",
-        "rhs": "Windows"
-      }
-    },
-    {
-      "name": "ps5",
-      "inherits": ["ps4"],
-      "cacheVariables": {
-        "VCPKG_TARGET_TRIPLET": "ps5",
-        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/cmake/ps5-toolchain.cmake"
-      },
-      "environment": {
-        "VCPKG_KEEP_ENV_VARS": "SCE_ROOT_DIR;SCE_PROSPERO_SDK_DIR"
-      }
-    },
-    {
-      "name": "xdk-x64",
-      "inherits": ["default"],
-      "generator": "Ninja Multi-Config",
-      "cacheVariables": {
-        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/cmake/xdk-toolchain.cmake",
-        "VCPKG_HOST_TRIPLET": "x64-windows-static-md-release",
-        "VCPKG_TARGET_TRIPLET": "x64-xdk",
-        "VCPKG_VERBOSE": "TRUE",
-        "BUILD_GRPC_CLIENT": "OFF",
-        "WS_IMPL": "libhttpclient",
-        "HTTP_IMPL": "libhttpclient"
-      },
-      "environment": {
-        "VCPKG_KEEP_ENV_VARS": "XboxOneXDKLatest;XboxOneExtensionSDKLatest"
-      },
-      "condition": {
-        "type": "equals",
-        "lhs": "${hostSystemName}",
-        "rhs": "Windows"
-      }
     }
   ],
   "buildPresets": [
@@ -290,18 +202,6 @@
       "configuration": "Debug"
     },
     {
-      "name": "release-ps4",
-      "configurePreset": "ps4",
-      "configuration": "MinSizeRel",
-      "verbose": true
-    },
-    {
-      "name": "release-ps5",
-      "configurePreset": "ps5",
-      "configuration": "MinSizeRel",
-      "verbose": true
-    },
-    {
       "name": "release-macosx-arm64",
       "configurePreset": "macosx-arm64-host_x64",
       "configuration": "MinSizeRel",
@@ -316,54 +216,6 @@
     {
       "name": "release-ios-arm64",
       "configurePreset": "ios-arm64-host_x64",
-      "configuration": "MinSizeRel",
-      "verbose": true
-    },
-    {
-      "name": "debug-xdk-x64",
-      "configurePreset": "xdk-x64",
-      "configuration": "Debug",
-      "verbose": true
-    },
-    {
-      "name": "release-xdk-x64",
-      "configurePreset": "xdk-x64",
-      "configuration": "MinSizeRel",
-      "verbose": true
-    },
-    {
-      "name": "debug-gdk-xbox-one",
-      "configurePreset": "gdk-xbox-one",
-      "configuration": "Debug",
-      "verbose": true
-    },
-    {
-      "name": "release-gdk-xbox-one",
-      "configurePreset": "gdk-xbox-one",
-      "configuration": "MinSizeRel",
-      "verbose": true
-    },
-    {
-      "name": "debug-gdk-xbox-scarlett",
-      "configurePreset": "gdk-xbox-scarlett",
-      "configuration": "Debug",
-      "verbose": true
-    },
-    {
-      "name": "release-gdk-xbox-scarlett",
-      "configurePreset": "gdk-xbox-scarlett",
-      "configuration": "MinSizeRel",
-      "verbose": true
-    },
-    {
-      "name": "debug-gdk-win-x64",
-      "configurePreset": "gdk-win-x64",
-      "configuration": "Debug",
-      "verbose": true
-    },
-    {
-      "name": "release-gdk-win-x64",
-      "configurePreset": "gdk-win-x64",
       "configuration": "MinSizeRel",
       "verbose": true
     }
