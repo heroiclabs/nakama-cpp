@@ -69,8 +69,6 @@ if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
     set(ENV{VCPKG_CHAINLOAD_TOOLCHAIN_FILE} "${VCPKG_CHAINLOAD_TOOLCHAIN_FILE}")
 endif()
 
-set(NAKAMA_PRIVATE_REPO_GIT_TAG "main" CACHE STRING "nakama-cpp-private repo Git tag")
-
 cmake_policy(SET CMP0012 NEW)
 
 
@@ -91,14 +89,6 @@ include(cmake/with-libcxx.cmake)
 # dependencies. Some dependencies are optional and enabled via VCPKG_MANIFEST_FEATURES
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake
         CACHE FILEPATH "Vcpkg toolchain file")
-
-# This wont trigger clone, until one of impls do FetchContent_Populate
-FetchContent_Declare(
-    nakama-cpp-private
-    GIT_REPOSITORY https://github.com/heroiclabs/nakama-cpp-private.git
-    GIT_TAG ${NAKAMA_PRIVATE_REPO_GIT_TAG}
-    GIT_SHALLOW TRUE
-)
 
 project(nakama-sdk LANGUAGES CXX)
 include(cmake/platformSupport.cmake)
