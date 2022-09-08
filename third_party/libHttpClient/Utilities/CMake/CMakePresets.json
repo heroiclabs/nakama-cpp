@@ -1,0 +1,44 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "displayName": "Default",
+      "description": "Default components: ws=libhttpclient, http=libhttpclient",
+      "hidden": true
+    },
+    {
+      "name": "xdk-x64",
+      "inherits": ["default"],
+      "binaryDir": "build/${presetName}",
+      "installDir": "out/${presetName}",
+      "generator": "Ninja",
+      "toolchainFile": "${sourceDir}/../../../../cmake/xdk-toolchain.cmake",
+      "cacheVariables": {
+        "XDK": "ON"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "Release-xdk-x64",
+      "configurePreset": "xdk-x64",
+      "configuration": "Release"
+    },
+    {
+      "name": "Debug-xdk-x64",
+      "configurePreset": "xdk-x64",
+      "configuration": "Debug"
+    }
+  ]
+}

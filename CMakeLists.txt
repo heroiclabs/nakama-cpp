@@ -1,96 +1,358 @@
-#
-# Copyright 2019 The Nakama Authors
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+cmake_minimum_required(VERSION 3.23)
+include(version.cmake)
 
-cmake_minimum_required(VERSION 3.15)
+option(BUILD_GRPC_CLIENT "Build GRPC client" ON)
+set(WEBSOCKET_IMPLS libhttpclient wslay OFF)
+set(WS_IMPL OFF CACHE STRING "Websocket implementation. One of: ${WEBSOCKET_IMPLS}")
 
-project(nakama-cpp)
+set(HTTP_IMPLS libhttpclient OFF)
+set(HTTP_IMPL OFF CACHE STRING "HTTP implementation. One of: ${HTTP_IMPLS}")
 
-cmake_policy(SET CMP0042 NEW)
-cmake_policy(SET CMP0048 NEW)
-cmake_policy(SET CMP0054 NEW)
-cmake_policy(SET CMP0063 NEW)
-cmake_policy(SET CMP0074 NEW)
-cmake_policy(SET CMP0077 NEW)
-cmake_policy(SET CMP0091 NEW)
+option(UNREAL "Unreal engine support" OFF)
 
-#set(CMAKE_C_VISIBILITY_PRESET hidden)
-#set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-#set(CMAKE_VISIBILITY_INLINES_HIDDEN TRUE)
+if (UNREAL)
+    message(NOTICE "Disabling HTTP transport in Unreal build mode")
+    set(HTTP_IMPL OFF CACHE STRING "HTTP implementation" FORCE)
 
-if(NOT WIN32)
-    add_compile_options(-fvisibility=hidden -fPIC)
-endif()
-
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
-
-include(windows_support)
-
-option(BUILD_REST_CLIENT "Build REST client" ON)
-option(BUILD_HTTP_CPPREST "Build HTTP transport using cpprest SDK" ON)
-option(BUILD_WEBSOCKET_CPPREST "Build Websocket transport using cpprest SDK" ON)
-option(BUILD_GRPC_CLIENT "Build gRPC client" OFF)
-option(LOGS_ENABLED "enable logs" ON)
-option(NAKAMA_SSL_ENABLED "enable SSL" ON)
-
-set(gRPC_BUILD_CSHARP_EXT OFF)
-set(protobuf_BUILD_TESTS OFF)
-set(BENCHMARK_ENABLE_LTO:BOOL OFF)
-set(BENCHMARK_ENABLE_TESTING:BOOL OFF)
-set(BUILD_STATIC_LIBS ON)
-set(BUILD_SHARED_LIBS OFF)
-set(RUN_HAVE_STD_REGEX 0)
-set(RUN_HAVE_POSIX_REGEX 0)
-set(RUN_HAVE_GNU_POSIX_REGEX 0)
-set(RUN_HAVE_STEADY_CLOCK 0)
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-set(PUBLIC_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
-set(THIRD_PARTY_DIR ${PROJECT_SOURCE_DIR}/third_party)
-
-add_subdirectory(src)
-
-if(BUILD_HTTP_CPPREST OR BUILD_WEBSOCKET_CPPREST)
-    set(USE_CPPREST TRUE)
-endif()
-
-set(CMAKE_FOLDER third_party)
-
-if(BUILD_GRPC_CLIENT)
-    add_subdirectory(${THIRD_PARTY_DIR}/grpc)
-else()
-    if(USE_CPPREST)
-        add_subdirectory(${THIRD_PARTY_DIR}/grpc/third_party/boringssl-with-bazel)
+    # too many bugs in the Linux WS implementation:
+    # https://github.com/EpicGames/UnrealEngine/pull/7267 and
+    # https://github.com/EpicGames/UnrealEngine/pull/9103
+    if (NOT VCPKG_TARGET_TRIPLET MATCHES "linux")
+        message(NOTICE "Disabling WS transport in Unreal build mode")
+        set(WS_IMPL OFF CACHE STRING "WS implementation" FORCE)
     endif()
-    add_subdirectory(${THIRD_PARTY_DIR}/grpc/third_party/protobuf/cmake ${CMAKE_CURRENT_BINARY_DIR}/third_party/grpc/third_party/protobuf)
 endif()
 
-if(USE_CPPREST)
-    set(OPENSSL_INCLUDE_DIR ${THIRD_PARTY_DIR}/grpc/third_party/boringssl-with-bazel/src/include)
-    set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
-    set(BUILD_SAMPLES OFF CACHE BOOL "" FORCE)
-    set(WERROR OFF CACHE BOOL "" FORCE)
-    set(CPPREST_EXCLUDE_COMPRESSION ON CACHE BOOL "" FORCE)
-    set(CPPREST_ABI_TAG "" CACHE STRING "" FORCE)
-    add_subdirectory(${THIRD_PARTY_DIR}/cpprestsdk)
+# when building android, this cmake is called from gradle with ANDROID_ABI passed.
+# use it to select vcpkg triplet
+if (ANDROID_ABI MATCHES armeabi-v7a)
+    set(VCPKG_TARGET_TRIPLET arm-android-heroic)
+elseif (ANDROID_ABI MATCHES arm64-v8a)
+    set(VCPKG_TARGET_TRIPLET arm64-android-heroic)
+elseif (ANDROID_ABI MATCHES x86_64)
+    set(VCPKG_TARGET_TRIPLET x64-android-heroic)
 endif()
 
-set(CMAKE_FOLDER)
 
-# only build tests for desktop OS
-if(NOT CMAKE_CROSSCOMPILING)
-    add_subdirectory(test)
-    set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT nakama-test)
+# We need to set VCPKG_MANIFEST_FEATURE before calling project(), because
+# that is where dependencies are installed and where real toolchain file (if any)
+# is configured.
+if (BUILD_GRPC_CLIENT)
+    list(APPEND VCPKG_MANIFEST_FEATURES "grpc")
 endif()
+
+# Not that many CMake variables are set before first project(),
+# for instance CMAKE_SYSTEM_NAME which would normally identify build target platform
+# is empty at this point, so we rely on VCPKG_TARGET_TRIPLET to identify platform.
+if (HTTP_IMPL STREQUAL "libhttpclient" AND VCPKG_TARGET_TRIPLET MATCHES "linux|ios|osx|iphonesimulator")
+    # on MacOSX curl seems to be part of the system, but we bring our own for consistency
+    list(APPEND VCPKG_MANIFEST_FEATURES "curl")
+endif()
+
+if (WS_IMPL STREQUAL "libhttpclient" AND VCPKG_TARGET_TRIPLET MATCHES "linux|windows|android")
+    list(APPEND VCPKG_MANIFEST_FEATURES "websocketpp")
+endif()
+
+if (WS_IMPL STREQUAL "wslay")
+    list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
+    if(VCPKG_TARGET_TRIPLET MATCHES "linux|ios|osx|iphonesimulator")
+        list(APPEND VCPKG_MANIFEST_FEATURES "curl")
+    endif()
+endif()
+
+# being called from gradle
+if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
+    # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE ${ANDROID_NDK}/build/cmake/android.toolchain.cmake)
+
+    # and also set env var to be used by *-android-heroic triplets
+    set(ENV{VCPKG_CHAINLOAD_TOOLCHAIN_FILE} "${VCPKG_CHAINLOAD_TOOLCHAIN_FILE}")
+endif()
+
+cmake_policy(SET CMP0012 NEW)
+
+
+
+# If this CMake is called as part of another build system, like gradle's android plugin,
+# where CMAKE_TOOLCHAIN_FILE is unconditionally passed, we can pass extra arg TOOLCHAIN_LOAD_FIRST
+# to force toolchain value and then chainload original toolchain
+if(DEFINED TOOLCHAIN_LOAD_FIRST)
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${CMAKE_TOOLCHAIN_FILE}")
+    cmake_path(ABSOLUTE_PATH TOOLCHAIN_LOAD_FIRST OUTPUT_VARIABLE CMAKE_TOOLCHAIN_FILE)
+endif()
+
+# must come before first project() so that libc++ is compiled
+# and ready when vcpkg starts building dependencies
+include(cmake/with-libcxx.cmake)
+
+# Kickstarts vcpkg dependency manager. It will parse vcpkg.json and install all configured
+# dependencies. Some dependencies are optional and enabled via VCPKG_MANIFEST_FEATURES
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake
+        CACHE FILEPATH "Vcpkg toolchain file")
+
+project(nakama-sdk LANGUAGES CXX)
+include(cmake/platformSupport.cmake)
+include(cmake/compilerFlags.cmake)
+include(cmake/linkerFlags.cmake)
+include(cmake/localCompilerFlags.cmake)
+include(GNUInstallDirs)
+include(FetchContent)
+
+if(MSVC)
+    # On windows it is critical not to accidentally use DLL
+    # compiled with "wrong" runtime (/MD, /MDd) so we name them differently
+    set(CMAKE_DEBUG_POSTFIX "_d")
+endif()
+
+set(CMAKE_CXX_STANDARD 17)
+option(LOGS_ENABLED "Enable log output" ON)
+option(NAKAMA_SHARED_LIBRARY "Build shared library" ON)
+#set(NAKAMA_SHARED_LIBRARY OFF)
+
+if(NOT MSVC)
+    string(APPEND CMAKE_CXX_FLAGS " -fexceptions")
+endif()
+
+option(ADDRESS_SANITIZER "Enable address sanitizer (broken on windows)" OFF)
+
+# libhttpclient uses websocketpp when system winhttp doesn't provide one (< Windows 8)
+# this flag allows us to force use of websocketpp so that it can be tested on current Windows versions
+option(LIBHTTPCLIENT_FORCE_WEBSOCKETPP "Force use of websocketpp instead of winhttp in the libhttpclient" OFF)
+
+if(LOGS_ENABLED)
+    add_compile_definitions(NLOGS_ENABLED)
+endif(LOGS_ENABLED)
+
+if (ADDRESS_SANITIZER)
+    add_compile_options(-fsanitize=address -O1 -fno-optimize-sibling-calls -fno-omit-frame-pointer)
+    string(REPLACE /RTC1 "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
+endif()
+
+
+set(BUILD_MODE STATIC)
+if(NAKAMA_SHARED_LIBRARY)
+    set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+    set(BUILD_MODE SHARED)
+    add_compile_definitions(NAKAMA_SHARED_LIBRARY NAKAMA_SHARED_LIBRARY_EXPORTS)
+endif()
+
+
+if(APPLE)
+    file(TOUCH ${CMAKE_BINARY_DIR}/dummy.h ${CMAKE_BINARY_DIR}/dummy.cpp)
+    set(DUMMY_CPP ${CMAKE_BINARY_DIR}/dummy.cpp)
+    set(DUMMY_H ${CMAKE_BINARY_DIR}/dummy.h)
+
+    # Just copy over headers into framework dir, because "official" way of doing it
+    # via PUBLIC_HEADER property is full of bugs (see comment on PUBLIC_HEADER property below)
+    set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework/Headers)
+
+endif()
+
+if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
+    if(NOT LIBHTTPCLIENT_BUILTIN)
+        if (LINUX OR APPLE)
+            find_package(CURL CONFIG REQUIRED)
+            target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
+            if (APPLE)
+                # curl uses c-ares and for some reason c-ares's CMake doesn't
+                # declare dependency on libresolv, even though it uses it
+                # probably bug in vcpkg or c-ares upstream, but here we do a workaround
+                target_link_libraries(CURL::libcurl INTERFACE -lresolv)
+            endif()
+        endif()
+
+        add_subdirectory(third_party/libHttpClient/Utilities/CMake)
+
+        if (NOT WS_IMPL STREQUAL "libhttpclient")
+            target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
+        else()
+            if(LIBHTTPCLIENT_FORCE_WEBSOCKETPP)
+                message(STATUS "Forcing libhttpclient to use websocketpp even on modern Windows platforms")
+                target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_FORCE_WINSOCKETPP")
+            endif()
+        endif()
+        install(TARGETS
+                ${LIBHTTPCLIENT_TARGET}
+                EXPORT nakama-export
+                LIBRARY ARCHIVE RUNTIME
+                )
+    endif()
+endif()
+
+if(WS_IMPL STREQUAL "wslay")
+    if (LINUX OR APPLE)
+        set(WSLAY_NETIO "CURL")
+    endif()
+endif()
+
+add_library(nakama-ws-impl INTERFACE)
+if(WS_IMPL STREQUAL "libhttpclient")
+    set(BUILD_WEBSOCKET_LIBHTTPCLIENT ON)
+    set(WS_IMPL_LIB nakama-impl-ws-libhttpclient)
+    add_subdirectory(impl/wsLibHttpClient EXCLUDE_FROM_ALL)
+elseif(WS_IMPL STREQUAL "wslay")
+    set(BUILD_WEBSOCKET_WSLAY ON)
+    set(WS_IMPL_LIB nakama-impl-ws-wslay)
+    add_subdirectory(impl/wsWslay EXCLUDE_FROM_ALL)
+elseif(NOT (WS_IMPL STREQUAL "OFF"))
+    message(FATAL_ERROR "Unknown WS_IMPL: ${WS_IMPL}")
+elseif(WS_IMPL STREQUAL OFF)
+    set(BUILD_WEBSOCKET_IS_BLANK ON)
+endif()
+
+if(HTTP_IMPL STREQUAL "libhttpclient")
+    set(BUILD_HTTP_LIBHTTPCLIENT ON)
+    add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
+elseif(HTTP_IMPL STREQUAL OFF)
+    set(BUILD_HTTP_IS_BLANK ON)
+endif()
+
+if(NOT BUILD_HTTP_IS_BLANK AND NOT HTTP_IMPL_LIB)
+    message(FATAL_ERROR "BUG: CMakeLists.txt in the impl dir must set HTTP_IMPL_LIB with PARENT_SCOPE")
+endif()
+
+find_package(optional-lite CONFIG REQUIRED)
+# SDK API
+add_subdirectory(interface)
+
+# Factories, that's where all messy ifdefs to select concrete implementations are
+add_subdirectory(factory EXCLUDE_FROM_ALL)
+
+# Implements API, but without concrete implementations of transports
+add_subdirectory(core EXCLUDE_FROM_ALL)
+
+if (NOT LIBHTTPCLIENT_TARGET)
+    # A bit of a hack. $<TARGET_EXISTS:""> below makes cmake to error, so
+    # we set variable to the value which doesn't match any target
+    set(LIBHTTPCLIENT_TARGET doesnt-exist)
+endif()
+
+# create dummy file because pure "library of libraries" is not supported
+
+set(NAKAMA_SDK_DEPS
+    $<TARGET_OBJECTS:nakama-sdk-core-misc>
+    $<TARGET_OBJECTS:nakama-sdk-core-rest>
+    $<TARGET_OBJECTS:nakama-sdk-core-rt>
+    $<TARGET_OBJECTS:nakama-sdk-core-common>
+    $<TARGET_OBJECTS:nakama-sdk-client-factory>
+    $<TARGET_OBJECTS:nakama-sdk-rtclient-factory>
+
+
+
+    # Xcode generator doesn't produce library for a target with no "own" files
+    # https://gitlab.kitware.com/cmake/cmake/-/issues/23688
+    ${DUMMY_CPP}
+
+    # library need to have a header so that Headers directory structure is created
+    ${DUMMY_H}
+)
+
+if (HTTP_IMPL STREQUAL libhttpclient OR WS_IMPL STREQUAL libhttpclient)
+    # We build LIBHTTPCLIENT as OBJECT library so that its symbols
+    # wont be excluded due to '--exclude-libs ALL' linker flag. Although we
+    # dont expose libhttpclient in our API , we still want it's symbols exported
+    # in our ABI, because that is how JVM finds native code on Android platform.
+    if (NOT LIBHTTPCLIENT_BUILTIN)
+        list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
+    endif()
+endif()
+
+if (BUILD_GRPC_CLIENT)
+    list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:nakama-sdk-core-grpc>)
+endif()
+
+add_library(nakama-sdk ${BUILD_MODE} ${NAKAMA_SDK_DEPS})
+
+set_target_properties(nakama-sdk PROPERTIES
+        FRAMEWORK TRUE
+        FRAMEWORK_VERSION A
+
+        # we deliberately dont list all real headers, because it is a can of worms. See:
+        # - https://gitlab.kitware.com/cmake/cmake/-/issues/16739
+        # - https://gitlab.kitware.com/cmake/cmake/-/issues/22760
+        # Probably can be removed when proper FILE_SET support lands: https://gitlab.kitware.com/cmake/cmake/-/issues/23386
+        PUBLIC_HEADER "${DUMMY_H}"
+        MACOSX_FRAMEWORK_IDENTIFIER com.heroiclabs.libnakama
+        VERSION ${LIBNAKAMA_VERSION}
+        SOVERSION ${LIBNAKAMA_SOVERSION}
+        )
+
+add_library(nakama::sdk ALIAS nakama-sdk)
+target_link_libraries(nakama-sdk
+        PUBLIC nakama::sdk-interface ${PTHREADS_LIB}
+        PRIVATE
+            nakama-api-proto
+            $<$<TARGET_EXISTS:nakama-sdk-core-grpc>:nakama-grpc-proto>
+		${HTTP_IMPL_LIB} ${WS_IMPL_LIB}
+        ${PLATFORM_LIBS}
+        )
+
+if (ADDRESS_SANITIZER)
+   if (MSVC)
+        target_link_libraries(nakama-sdk INTERFACE
+                clang_rt.asan_dynamic-x86_64 clang_rt.asan_dynamic_runtime_thunk-x86_64)
+        target_link_directories(nakama-sdk INTERFACE "C:/Program Files/LLVM/lib/clang/13.0.1/lib/windows")
+        target_link_options(nakama-sdk INTERFACE /wholearchive:clang_rt.asan_dynamic_runtime_thunk-x86_64.lib)
+    else()
+        target_link_options(nakama-sdk PRIVATE -fsanitize=address)
+        # Uncomment bellow if main executable is NOT compiled with asan (pretty limited diagnostics in this case).
+        # target_link_libraries(nakama-sdk PRIVATE asan)
+   endif()
+endif()
+
+install(TARGETS
+            nakama-sdk
+            nakama-sdk-interface
+            nakama-api-proto
+        EXPORT nakama-export
+        FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
+        RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
+        FILE_SET HEADERS COMPONENT headers
+        INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+)
+
+get_target_property(NONSTD_INCLUDE_DIR nonstd::optional-lite INTERFACE_INCLUDE_DIRECTORIES)
+
+# Imported libraries (such as those found with find_package) can't be installed
+# so do it manually for optional-lite
+# IMPORTANT: this needs to come *after* FRAMEWORK install, because it expects
+# directory structure created by it
+install(DIRECTORY ${NONSTD_INCLUDE_DIR}/nonstd TYPE INCLUDE COMPONENT headers)
+
+file(GLOB_RECURSE OPTIONAL_LITE_EXPORT ${optional-lite_DIR}/*.cmake)
+
+# we cannot install/export optional-lite ourselves because it is a third-party dependency.
+# so instead we make it available to cmake users by manually copying its export file to our installation
+# so that find_package(nakama-sdk) can also find optional-lite
+install(FILES ${OPTIONAL_LITE_EXPORT} DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nakama)
+
+if(MSVC)
+    install(FILES $<TARGET_PDB_FILE:nakama-sdk> DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT nakama-sdk OPTIONAL)
+endif()
+
+# See recommendations here:
+# https://gitlab.kitware.com/cmake/cmake/-/issues/18453
+install(EXPORT nakama-export
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nakama)
+
+
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-sdk-config.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake"
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nakama
+  NO_SET_AND_CHECK_MACRO
+  NO_CHECK_REQUIRED_COMPONENTS_MACRO
+  )
+
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nakama
+)
+
+add_subdirectory(test)
+
+# Call last so that it can reference any target previously defined
+include(cmake/linkerFlagsTargets.cmake)

@@ -1,0 +1,18 @@
+{
+  "name": "libcxx",
+  "version": "14.0.3",
+  "port-version": 1,
+  "description": "The LLVM libc++ stdlib",
+  "homepage": "https://llvm.org",
+  "license": "Apache-2.0",
+  "dependencies": [
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}

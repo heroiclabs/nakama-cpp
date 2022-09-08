@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/Microsoft/vcpkg.git
+	branch = master
+	commit = 9ff4659a075d5f4f30aaca9f7c4e7f059ecc1d6d
+	parent = 57933723ef435578d6bb752d97163430f444b3b2
+	method = merge
+	cmdver = 0.4.3

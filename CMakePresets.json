@@ -1,0 +1,223 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "displayName": "Default",
+      "description": "Default components: ws=OFF, http=OFF",
+      "binaryDir": "build/${presetName}",
+      "installDir": "out",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Debug;MinSizeRel;RelWithDebInfo",
+        "LOGS_ENABLED": "ON",
+        "BUILD_GRPC_CLIENT": "ON",
+        "BUILD_REST_CLIENT": "ON",
+        "WS_IMPL": "OFF",
+        "HTTP_IMPL": "OFF",
+        "CMAKE_INSTALL_LIBDIR": "${presetName}",
+        "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk",
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets",
+        "VCPKG_OVERLAY_PORTS": "${sourceDir}/cmake/vcpkg-ports"
+      }
+    },
+    {
+      "name": "win-x64",
+      "inherits": ["default"],
+      "generator": "Visual Studio 17 2022",
+      "toolchainFile": "${sourceDir}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "WindowsDesktop": "ON",
+        "BUILD_GRPC_CLIENT": "OFF",
+        "VCPKG_HOST_TRIPLET": "x64-windows-static-heroic",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic",
+        "WS_IMPL": "libhttpclient",
+        "HTTP_IMPL": "libhttpclient"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "macosx-arm64-host_arm64",
+      "inherits": [
+        "default"
+      ],
+      "installDir": "out",
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "CMAKE_INSTALL_LIBDIR": "macosx-arm64",
+        "HTTP_IMPL": "libhttpclient",
+        "WS_IMPL": "wslay",
+        "BUILD_GRPC_CLIENT": "OFF",
+        "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
+        "VCPKG_TARGET_TRIPLET": "arm64-osx-heroic",
+        "CMAKE_OSX_ARCHITECTURES": "arm64"
+      },
+      "condition":
+      {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "macosx-arm64-host_x64",
+      "inherits": ["macosx-arm64-host_arm64"],
+      "cacheVariables": {
+        "CMAKE_INSTALL_LIBDIR": "macosx-arm64",
+        "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
+        "CMAKE_OSX_ARCHITECTURES": "arm64"
+    }
+    },
+    {
+      "name": "macosx-x64-host_x64",
+      "inherits": ["macosx-arm64-host_x64"],
+      "cacheVariables": {
+        "CMAKE_INSTALL_LIBDIR": "macosx-x64",
+        "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
+        "VCPKG_TARGET_TRIPLET": "x64-osx-heroic",
+        "CMAKE_OSX_ARCHITECTURES": "x86_64"
+      }
+    },
+    {
+      "name": "macosx-x64-host_arm64",
+      "inherits": ["macosx-x64-host_x64"],
+      "cacheVariables": {
+        "CMAKE_INSTALL_LIBDIR": "macosx-x64",
+        "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
+        "CMAKE_OSX_ARCHITECTURES": "x86_64"
+      }
+    },
+    {
+      "name": "ios-arm64-host_arm64",
+      "inherits": [ "macosx-arm64-host_arm64" ],
+      "cacheVariables": {
+        "CMAKE_INSTALL_LIBDIR": "ios-arm64",
+        "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
+        "CMAKE_SYSTEM_NAME": "iOS"
+      }
+    },
+    {
+      "name": "ios-arm64-host_x64",
+      "inherits": [ "ios-arm64-host_arm64" ],
+      "installDir": "out",
+      "cacheVariables": {
+        "CMAKE_INSTALL_LIBDIR": "ios-arm64",
+        "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
+        "VCPKG_HOST_TRIPLET": "x64-osx-heroic"
+      }
+    },
+    {
+      "name": "iphonesimulator-x64-host_arm64",
+      "inherits": [ "macosx-x64-host_arm64" ],
+      "cacheVariables": {
+        "CMAKE_INSTALL_LIBDIR": "iphonesimulator-x64",
+        "VCPKG_TARGET_TRIPLET": "x64-iphonesimulator-heroic",
+        "CMAKE_SYSTEM_NAME": "iOS",
+	    "CMAKE_OSX_SYSROOT": "iphonesimulator",
+        "CMAKE_OSX_ARCHITECTURES": "x86_64"
+      }
+    },
+    {
+      "name": "iphonesimulator-x64-host_x64",
+      "inherits": [ "iphonesimulator-x64-host_arm64" ],
+      "cacheVariables": {
+        "VCPKG_HOST_TRIPLET": "x64-osx-heroic"
+      }
+    },
+    {
+      "name": "android",
+      "inherits": ["default"],
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "VCPKG_HOST_TRIPLET": "selected-by-gradle",
+        "VCPKG_TARGET_TRIPLET": "selected-by-our-cmake",
+        "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE",
+        "ANDROID_ABI": "passed-by-gradle",
+        "ANDROID_ARM_NEON": "ON",
+        "ANDROID_STL": "c++_shared",
+        "BUILD_GRPC_CLIENT": "OFF",
+        "HTTP_IMPL": "libhttpclient",
+        "WS_IMPL": "libhttpclient"
+      },
+      "environment": {
+        "VCPKG_KEEP_ENV_VARS": "VCPKG_CHAINLOAD_TOOLCHAIN_FILE"
+      }
+    },
+    {
+      "name": "linux-amd64",
+      "inherits": ["default"],
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "VCPKG_HOST_TRIPLET": "x64-linux-heroic",
+        "VCPKG_TARGET_TRIPLET": "x64-linux-heroic",
+        "BUILD_GRPC_CLIENT": "OFF",
+        "HTTP_IMPL": "libhttpclient",
+        "WS_IMPL": "wslay"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "ubuntu1804-amd64",
+      "inherits": ["linux-amd64"],
+      "hidden": true,
+      "environment": {
+        "CC": "/usr/bin/gcc-11",
+        "CXX": "/usr/bin/g++-11"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "release-win-x64",
+      "configurePreset": "win-x64",
+      "configuration": "MinSizeRel",
+      "verbose": true
+    },
+    {
+      "name": "debug-win-x64",
+      "configurePreset": "win-x64",
+      "configuration": "Debug"
+    },
+    {
+      "name": "release-linux-amd64",
+      "configurePreset": "linux-amd64",
+      "configuration": "MinSizeRel"
+    },
+    {
+      "name": "debug-linux-amd64",
+      "configurePreset": "linux-amd64",
+      "configuration": "Debug"
+    },
+    {
+      "name": "release-macosx-arm64",
+      "configurePreset": "macosx-arm64-host_x64",
+      "configuration": "MinSizeRel",
+      "verbose": true
+    },
+    {
+      "name": "release-macosx-x64",
+      "configurePreset": "macosx-x64-host_x64",
+      "configuration": "MinSizeRel",
+      "verbose": true
+    },
+    {
+      "name": "release-ios-arm64",
+      "configurePreset": "ios-arm64-host_x64",
+      "configuration": "MinSizeRel",
+      "verbose": true
+    }
+  ]
+}

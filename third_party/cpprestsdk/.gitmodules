@@ -1,6 +1,0 @@
-[submodule "vcpkg"]
-	path = vcpkg
-	url = https://github.com/Microsoft/vcpkg
-[submodule "websocketspp"]
-	path = Release/libs/websocketpp
-	url = https://github.com/zaphoyd/websocketpp/

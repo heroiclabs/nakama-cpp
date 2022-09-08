@@ -1,0 +1,128 @@
+name: Build All
+on: [workflow_call, workflow_dispatch]
+jobs:
+  windows_matrix:
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        build_type: [MinSizeRel, Debug]
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cmake-build
+        with:
+          preset: win-x64
+          build_type: ${{ matrix.build_type }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Unreal Engine doesn't officially support debug (/MDd flag) builds,
+      # so we build Unreal flavour in release config only
+      - if: ${{ matrix.build_type == 'MinSizeRel' }}
+        uses: ./.github/actions/cmake-build
+        with:
+          preset: win-x64
+          build_type: ${{ matrix.build_type }}
+          flavour: Unreal
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  linux_matrix:
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        flavour: [ "", "libcxx" ]
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cmake-build
+        with:
+          preset: linux-amd64
+          flavour: ${{ matrix.flavour }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Once libc++ version is built, same build tree can be reused for Unreal
+      - if: matrix.flavour == 'libcxx'
+        uses: ./.github/actions/cmake-build
+        with:
+          preset: linux-amd64
+          flavour: Unreal
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  android:
+    timeout-minutes: 60
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/android-build
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  apple_matrix:
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        preset: ["ios-arm64-host_x64", "iphonesimulator-x64-host_x64", "macosx-x64-host_x64", "macosx-arm64-host_x64"]
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cmake-build
+        with:
+          preset: ${{ matrix.preset }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Unreal module
+        uses: ./.github/actions/cmake-build
+        with:
+          preset: ${{ matrix.preset }}
+          flavour: Unreal
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  combine:
+    needs: [windows_matrix, linux_matrix, apple_matrix]
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: restore apple's lipo from cache
+        id: lipo_cache
+        uses: actions/cache@v3
+        with:
+          path: cctools/cctools/misc/lipo
+          key: lipo-${{ hashFiles('ci/build-lipo.sh') }}
+      - name: build apple's lipo
+        if: steps.lipo_cache.outputs.cache-hit != 'true'
+        run: ./ci/build-lipo.sh
+      - name: make lipo available on system path
+        run: echo "$PWD/cctools/cctools/misc" >> $GITHUB_PATH
+      - uses: actions/download-artifact@v3
+        with:
+          path: artifacts7z
+
+      -  name: Unpack artifacts as if they were plain dir uploads
+         run: |
+           for f in artifacts7z/*/*.7z; do
+             destdir=artifacts/$(basename $(dirname $f))
+             echo "Unpacking $f to $destdir"
+             7zr x -o$destdir $f
+           done
+      - id: combine
+        run: /bin/bash -x ./ci/combine-artifacts.sh artifacts
+
+      - name: Prepare artifacts archives
+        run: |
+          (
+            cd ./${{ steps.combine.outputs.unreal-artifact-dir }}
+            7zr a ../${{ steps.combine.outputs.unreal-artifact-name }}.7z '*'
+          )
+          (
+            cd ./${{ steps.combine.outputs.generic-artifact-dir }}
+            7zr a ../${{ steps.combine.outputs.generic-artifact-name }}.7z '*'
+          )
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.combine.outputs.unreal-artifact-name }}
+          path: ./${{ steps.combine.outputs.unreal-artifact-dir }}.7z
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.combine.outputs.generic-artifact-name }}
+          path: ./${{ steps.combine.outputs.generic-artifact-dir }}.7z
+          retention-days: 2
+

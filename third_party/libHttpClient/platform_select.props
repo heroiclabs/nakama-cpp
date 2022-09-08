@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--If the HCPlatform is not set, infer it-->
+  <Choose>
+    <When Condition="'$(HCPlatform)'=='GSDK' OR '$(HCPlatform)'=='GXDK'">  <!-- For backcompat -->
+      <PropertyGroup>
+        <HCPlatform>GDK</HCPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(HCPlatform)'!=''">
+    </When>
+    <When Condition="'$(ApplicationType)'=='Windows Store'">
+      <PropertyGroup>
+        <HCPlatform>UWP</HCPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Platform)'=='Durango'">
+      <PropertyGroup>
+        <HCPlatform>XDK</HCPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Platform)'=='Gaming.Desktop.x64' OR '$(Platform)'=='Gaming.Xbox.XboxOne.x64' OR '$(Platform)'=='Gaming.Xbox.Scarlett.x64'">
+      <PropertyGroup>
+        <HCPlatform>GDK</HCPlatform>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <HCPlatform>Win32</HCPlatform>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions Condition="'$(HCPlatform)'=='UWP'">%(PreprocessorDefinitions);HC_PLATFORM_MSBUILD_GUESS=HC_PLATFORM_UWP</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(HCPlatform)'=='XDK'">%(PreprocessorDefinitions);HC_PLATFORM_MSBUILD_GUESS=HC_PLATFORM_XDK</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(HCPlatform)'=='GDK'">%(PreprocessorDefinitions);HC_PLATFORM_MSBUILD_GUESS=HC_PLATFORM_GDK</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(HCPlatform)'=='Win32'">%(PreprocessorDefinitions);HC_PLATFORM_MSBUILD_GUESS=HC_PLATFORM_WIN32</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+</Project>
