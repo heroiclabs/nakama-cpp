@@ -1,6 +1,0 @@
-FetchContent_GetProperties(nakama-cpp-private)
-if(NOT nakama-cpp-private_POPULATED)
-    FetchContent_Populate(nakama-cpp-private)
-endif()
-add_subdirectory(${nakama-cpp-private_SOURCE_DIR}/httpSony ${nakama-cpp-private_BINARY_DIR}/httpSony)
-set(HTTP_IMPL_LIB ${HTTP_IMPL_LIB} PARENT_SCOPE)

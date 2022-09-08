@@ -5,7 +5,7 @@ option(BUILD_GRPC_CLIENT "Build GRPC client" ON)
 set(WEBSOCKET_IMPLS libhttpclient wslay OFF)
 set(WS_IMPL OFF CACHE STRING "Websocket implementation. One of: ${WEBSOCKET_IMPLS}")
 
-set(HTTP_IMPLS libhttpclient sony OFF)
+set(HTTP_IMPLS libhttpclient OFF)
 set(HTTP_IMPL OFF CACHE STRING "HTTP implementation. One of: ${HTTP_IMPLS}")
 
 option(UNREAL "Unreal engine support" OFF)
@@ -213,9 +213,6 @@ endif()
 if(HTTP_IMPL STREQUAL "libhttpclient")
     set(BUILD_HTTP_LIBHTTPCLIENT ON)
     add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
-elseif(HTTP_IMPL STREQUAL "sony")
-    set(BUILD_HTTP_SONY ON)
-    add_subdirectory(impl/httpSonyConsoles EXCLUDE_FROM_ALL)
 elseif(HTTP_IMPL STREQUAL OFF)
     set(BUILD_HTTP_IS_BLANK ON)
 endif()
@@ -298,8 +295,6 @@ target_link_libraries(nakama-sdk
             $<$<TARGET_EXISTS:nakama-sdk-core-grpc>:nakama-grpc-proto>
 		${HTTP_IMPL_LIB} ${WS_IMPL_LIB}
         ${PLATFORM_LIBS}
-        # empty if not GDK
-        ${LIBHTTPCLIENT_GDK_DEPS}
         )
 
 if (ADDRESS_SANITIZER)
