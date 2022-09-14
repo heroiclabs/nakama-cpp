@@ -153,12 +153,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         if (LINUX OR APPLE)
             find_package(CURL CONFIG REQUIRED)
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
-            if (APPLE)
-                # curl uses c-ares and for some reason c-ares's CMake doesn't
-                # declare dependency on libresolv, even though it uses it
-                # probably bug in vcpkg or c-ares upstream, but here we do a workaround
-                target_link_libraries(CURL::libcurl INTERFACE -lresolv)
-            endif()
         endif()
 
         add_subdirectory(third_party/libHttpClient/Utilities/CMake)
