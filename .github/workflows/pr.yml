@@ -2,7 +2,7 @@ name: pr check
 on: [pull_request]
 jobs:
   windows:
-    timeout-minutes: 20
+    timeout-minutes: 30
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
