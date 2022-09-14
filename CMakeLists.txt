@@ -107,7 +107,6 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 option(LOGS_ENABLED "Enable log output" ON)
 option(NAKAMA_SHARED_LIBRARY "Build shared library" ON)
-#set(NAKAMA_SHARED_LIBRARY OFF)
 
 if(NOT MSVC)
     string(APPEND CMAKE_CXX_FLAGS " -fexceptions")

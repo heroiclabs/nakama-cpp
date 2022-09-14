@@ -28,13 +28,6 @@ if (ADDRESS_SANITIZER)
     unset(_compile_options)
 endif()
 
-
-#include(ExternalProject)
-#ExternalProject_Add(nakama-sdk
-#        SOURCE_DIR ..
-#        CMAKE_CACHE_ARGS "-DBUILD_SHARED=ON"
-#)
-
 file(
     GLOB SRCS
     LIST_DIRECTORIES false
@@ -60,3 +53,42 @@ endif()
 target_include_directories(nakama-test
     PRIVATE src
 )
+
+if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+
+# CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
+# https://gitlab.kitware.com/cmake/cmake/-/issues/22240
+set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
+
+endif()
+
+# no ZERO_CHECK target for Xcode
+set(CMAKE_SUPPRESS_REGENERATION true)
+
+# bitcode will be deprecated in Xcode 14 which is in beta at the time of this writing
+# https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes
+set_target_properties(nakama-test PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER "com.tests"
+    XCODE_ATTRIBUTE_ENABLE_BITCODE "NO"
+    XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER "com.heroiclabs.tests"
+    XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "YES"
+    XCODE_ATTRIBUTE_CODE_SIGNING_STYLE "AUTOMATIC"
+    XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
+    XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "$ENV{NAKAMA_TESTS_DEVELOPMENT_TEAM}"
+    XCODE_LINK_BUILD_PHASE_MODE KNOWN_LOCATION
+    XCODE_EMBED_FRAMEWORKS nakama-sdk
+    XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
+	XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY	"YES"
+    XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
+)
+
+
+if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+    set_target_properties(nakama-test PROPERTIES
+        INSTALL_RPATH @executable_path/Frameworks
+    )
+endif()
+
+### TODO cross-platform compatibility
+install(TARGETS nakama-test
+    BUNDLE DESTINATION ${CMAKE_SOURCE_DIR}/out/tests/${CMAKE_INSTALL_LIBDIR})
