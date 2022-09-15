@@ -15,7 +15,6 @@
  */
 
 #include "realtime/RtClientTestBase.h"
-#define RAPIDJSON_HAS_STDSTRING 1
 #include "rapidjson/document.h"
 
 namespace Nakama {

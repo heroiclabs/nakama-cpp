@@ -23,7 +23,7 @@
 #include "DefaultSession.h"
 #include "google/protobuf/util/json_util.h"
 #include "grpc_status_code_enum.h"
-#include "RapidjsonHelper.h"
+#include "rapidjson/document.h"
 #include <rapidjson/writer.h>
 #include <rapidjson/stringbuffer.h>
 

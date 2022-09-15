@@ -18,7 +18,8 @@
 #include "StrUtil.h"
 #include "nakama-cpp/NUtils.h"
 #include "nakama-cpp/log/NLogger.h"
-#include "RapidjsonHelper.h"
+#include "rapidjson/document.h"
+
 
 #undef NMODULE_NAME
 #define NMODULE_NAME "Nakama::DefaultSession"
