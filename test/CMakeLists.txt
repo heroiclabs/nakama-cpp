@@ -66,6 +66,10 @@ file(
 
 add_executable(nakama-test ${SRCS})
 
+set_target_properties(nakama-test PROPERTIES
+    MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/test.plist
+)
+
 target_link_libraries(nakama-test
     INTERFACE rapidjson
     PRIVATE nakama-sdk
