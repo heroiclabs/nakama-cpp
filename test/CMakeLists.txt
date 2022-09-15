@@ -24,10 +24,14 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/Tencent/rapidjson
   GIT_TAG        master
   GIT_SHALLOW    TRUE
-  SOURCE_SUBDIR  dont-include  # skips implicit add_subdirectory call
 )
 
 FetchContent_MakeAvailable(rapidjson)
+
+set(RAPIDJSON_BUILD_DOC CACHE INTERNAL OFF)
+set(RAPIDJSON_BUILD_EXAMPLE CACHE INTERNAL OFF)
+set(RAPIDJSON_BUILD_TESTS CACHE INTERNAL OFF)
+set(RAPIDJSON_BUILD_THIRDPARTY_GTEST CACHE INTERNAL OFF)
 
 get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
 set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/out/${CMAKE_INSTALL_LIBDIR}/cmake/nakama)
@@ -56,11 +60,12 @@ file(
 add_executable(nakama-test ${SRCS})
 
 target_link_libraries(nakama-test
-    PRIVATE nakama-sdk rapidjson
+    PRIVATE nakama-sdk
+    PUBLIC rapidjson
 )
 
 target_include_directories(nakama-test
-    PRIVATE src nakama-sdk ${rapidjson_SOURCE_DIR}/include ### for some reason passing the rapidjson target doesn't work
+    PRIVATE src nakama-sdk
 )
 
 target_compile_features(nakama-test PRIVATE cxx_std_14)
