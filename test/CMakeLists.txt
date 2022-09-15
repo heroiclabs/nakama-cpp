@@ -26,7 +26,11 @@ FetchContent_Declare(
   GIT_SHALLOW    TRUE
 )
 
-FetchContent_MakeAvailable(rapidjson)
+FetchContent_GetProperties(rapidjson)
+if(NOT rapidjson_POPULATED)
+  FetchContent_Populate(rapidjson)
+  add_subdirectory(${rapidjson_SOURCE_DIR} ${rapidjson_BINARY_DIR} EXCLUDE_FROM_ALL) # don't install rapidjson
+endif()
 
 get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
 set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/out/${CMAKE_INSTALL_LIBDIR}/cmake/nakama)
