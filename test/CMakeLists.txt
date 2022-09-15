@@ -28,11 +28,6 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(rapidjson)
 
-set(RAPIDJSON_BUILD_DOC CACHE INTERNAL OFF)
-set(RAPIDJSON_BUILD_EXAMPLE CACHE INTERNAL OFF)
-set(RAPIDJSON_BUILD_TESTS CACHE INTERNAL OFF)
-set(RAPIDJSON_BUILD_THIRDPARTY_GTEST CACHE INTERNAL OFF)
-
 get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
 set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/out/${CMAKE_INSTALL_LIBDIR}/cmake/nakama)
 find_package(nakama-sdk CONFIG REQUIRED)
@@ -60,12 +55,13 @@ file(
 add_executable(nakama-test ${SRCS})
 
 target_link_libraries(nakama-test
+    INTERFACE rapidjson
     PRIVATE nakama-sdk
-    PUBLIC rapidjson
 )
 
 target_include_directories(nakama-test
-    PRIVATE src nakama-sdk
+    PRIVATE src
+    ${rapidjson_SOURCE_DIR}/include ### rapidjson probably not setup correctly by its authors, because target_link_libraries should handle this
 )
 
 target_compile_features(nakama-test PRIVATE cxx_std_14)
@@ -112,11 +108,10 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
     )
 endif()
 
-
-set(TEST_OUT_DIR "${CMAKE_SOURCE_DIR}/out/test/${CMAKE_INSTALL_LIBDIR}")
+set(_TEST_OUT_DIR "${CMAKE_SOURCE_DIR}/out/test/${CMAKE_INSTALL_LIBDIR}")
 
 install(TARGETS nakama-test
-    BUNDLE DESTINATION ${TEST_OUT_DIR}
-    RUNTIME DESTINATION ${TEST_OUT_DIR}
+    BUNDLE DESTINATION ${_TEST_OUT_DIR}
+    RUNTIME DESTINATION ${_TEST_OUT_DIR}
 )
 
