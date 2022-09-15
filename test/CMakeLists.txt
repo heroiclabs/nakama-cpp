@@ -19,6 +19,14 @@ project(nakama-test LANGUAGES CXX)
 
 include(FetchContent)
 
+
+### This needs to be one of the first commands in order to prevent code signing issues.
+if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+    # CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
+    # https://gitlab.kitware.com/cmake/cmake/-/issues/22240
+    set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
+endif()
+
 FetchContent_Declare(
   rapidjson
   GIT_REPOSITORY https://github.com/Tencent/rapidjson
@@ -77,12 +85,6 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows" AND ${NAKAMA_TGT_TYPE} STREQUAL "SHAR
             COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:nakama-test> $<TARGET_FILE_DIR:nakama-test>
             COMMAND_EXPAND_LISTS
             )
-endif()
-
-if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
-    # CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
-    # https://gitlab.kitware.com/cmake/cmake/-/issues/22240
-    set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
 endif()
 
 # no ZERO_CHECK target for Xcode
