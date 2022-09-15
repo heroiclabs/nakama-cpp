@@ -19,12 +19,12 @@ project(nakama-test LANGUAGES CXX)
 
 include(FetchContent)
 
-
 FetchContent_Declare(
   rapidjson
   GIT_REPOSITORY https://github.com/Tencent/rapidjson
   GIT_TAG        master
   GIT_SHALLOW    TRUE
+  SOURCE_SUBDIR  dont-include  # skips implicit add_subdirectory call
 )
 
 FetchContent_MakeAvailable(rapidjson)
@@ -54,12 +54,13 @@ file(
 )
 
 add_executable(nakama-test ${SRCS})
+
 target_link_libraries(nakama-test
-    PRIVATE nakama-sdk
+    PRIVATE nakama-sdk rapidjson
 )
 
 target_include_directories(nakama-test
-    PRIVATE nakama-sdk
+    PRIVATE src nakama-sdk ${rapidjson_SOURCE_DIR}/include ### for some reason passing the rapidjson target doesn't work
 )
 
 target_compile_features(nakama-test PRIVATE cxx_std_14)
@@ -72,10 +73,6 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows" AND ${NAKAMA_TGT_TYPE} STREQUAL "SHAR
             COMMAND_EXPAND_LISTS
             )
 endif()
-
-target_include_directories(nakama-test
-    PRIVATE src
-)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
     # CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
@@ -96,7 +93,7 @@ set_target_properties(nakama-test PROPERTIES
     XCODE_ATTRIBUTE_CODE_SIGNING_STYLE "AUTOMATIC"
     XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
     XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "$ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}"
-    XCODE_LINK_BUILD_PHASE_MODE BUILT_ONLY
+    XCODE_LINK_BUILD_PHASE_MODE KNOWN_LOCATION
     XCODE_EMBED_FRAMEWORKS ${_NAKAMA_PROJECT}/out/${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework ## todo figure out why passing target doesn't work
     XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
 	XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY	"YES"
