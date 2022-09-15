@@ -351,7 +351,5 @@ install(FILES
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nakama
 )
 
-add_subdirectory(test)
-
 # Call last so that it can reference any target previously defined
 include(cmake/linkerFlagsTargets.cmake)

@@ -8,5 +8,5 @@ In-tree example:
 cd example
 cmake --list-presets
 cmake --preset <configure-preset>
-cmake --build --preset <build-preset>
+cmake --build --preset <build-preset> --target install
 ```

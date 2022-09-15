@@ -3,11 +3,9 @@ cmake_minimum_required(VERSION 3.23)
 set(CMAKE_CXX_STANDARD 14)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
-
-# CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
-# https://gitlab.kitware.com/cmake/cmake/-/issues/22240
-set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
-
+    # CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
+    # https://gitlab.kitware.com/cmake/cmake/-/issues/22240
+    set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
 endif()
 
 get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
