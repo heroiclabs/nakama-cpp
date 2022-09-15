@@ -17,6 +17,18 @@ cmake_minimum_required(VERSION 3.22)
 
 project(nakama-test LANGUAGES CXX)
 
+include(FetchContent)
+
+
+FetchContent_Declare(
+  rapidjson
+  GIT_REPOSITORY https://github.com/Tencent/rapidjson
+  GIT_TAG        master
+  GIT_SHALLOW    TRUE
+)
+
+FetchContent_MakeAvailable(rapidjson)
+
 get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
 set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/out/${CMAKE_INSTALL_LIBDIR}/cmake/nakama)
 find_package(nakama-sdk CONFIG REQUIRED)
@@ -73,10 +85,6 @@ endif()
 
 # no ZERO_CHECK target for Xcode
 set(CMAKE_SUPPRESS_REGENERATION true)
-
-get_target_property(NAKAMA_SDK_FRAMEWORK nakama-sdk RUNTIME_OUTPUT_DIRECTORY)
-message("FRAMEWORK IS " ${NAKAMA_SDK_FRAMEWORK})
-message("PATH IS ${nakama-sdk_BINARY_DIR}/MinSizeRel/nakama-sdk.framework")
 
 # bitcode will be deprecated in Xcode 14 which is in beta at the time of this writing
 # https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes
