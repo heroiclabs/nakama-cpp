@@ -21,7 +21,7 @@ include(FetchContent)
 
 
 ### This needs to be one of the first commands in order to prevent code signing issues.
-if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     # CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
     # https://gitlab.kitware.com/cmake/cmake/-/issues/22240
     set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
@@ -64,7 +64,7 @@ file(
     "${CMAKE_CURRENT_SOURCE_DIR}/src/realtime/*.h*"
 )
 
-add_executable(nakama-test ${SRCS})
+add_executable(nakama-test MACOSX_BUNDLE ${SRCS})
 
 set_target_properties(nakama-test PROPERTIES
     MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/test.plist
@@ -112,7 +112,7 @@ set_target_properties(nakama-test PROPERTIES
 )
 
 
-if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set_target_properties(nakama-test PROPERTIES
         INSTALL_RPATH @executable_path/Frameworks
     )

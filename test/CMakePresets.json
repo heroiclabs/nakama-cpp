@@ -151,7 +151,8 @@
         "name": "release-macosx-x64",
         "configurePreset": "macosx-x64-host_x64",
         "configuration": "MinSizeRel",
-        "verbose": true
+        "verbose": true,
+        "nativeToolOptions": ["-allowProvisioningUpdates"]
       },
       {
         "name": "release-ios-arm64",

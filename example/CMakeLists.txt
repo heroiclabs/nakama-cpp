@@ -2,7 +2,7 @@ project(nakama-example LANGUAGES CXX)
 cmake_minimum_required(VERSION 3.23)
 set(CMAKE_CXX_STANDARD 14)
 
-if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     # CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
     # https://gitlab.kitware.com/cmake/cmake/-/issues/22240
     set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
@@ -41,7 +41,7 @@ set_target_properties(nakama-example PROPERTIES
 )
 
 
-if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set_target_properties(nakama-example PROPERTIES
         INSTALL_RPATH @executable_path/Frameworks
     )
