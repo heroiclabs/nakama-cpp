@@ -21,7 +21,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - shell: bash
         run: |
-          ./build/win-x64/test/MinSizeRel/nakama-test || {
+          ./test/out/test/win-x64/nakama-test.exe || {
               echo "Test failed, showing Nakama log for diagnostics";
               cat /tmp/nakama.log;
               exit 1;
