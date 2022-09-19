@@ -82,7 +82,7 @@ jobs:
           preset: macosx-x64-host_x64
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          ./build/macosx-x64-host_x64/test/MinSizeRel/nakama-test || {
+          ./example/out/macosx-x64/nakama-example.app/Contents/MacOS/nakama-example || {
               echo "Test failed, showing Nakama log for diagnostics";
               cat /tmp/nakama.log;
               exit 1;
