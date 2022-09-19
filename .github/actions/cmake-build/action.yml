@@ -80,13 +80,13 @@ runs:
       shell: bash
     - run: cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
       shell: bash
-    - run: pushd test && cmake --preset ${{ inputs.preset }}
+    - run: cd test && cmake --preset ${{ inputs.preset }}
       shell: bash
-    - run: cmake --preset ${{ inputs.preset }}
+    - run: cd test && cmake --preset ${{ inputs.preset }}
       shell: bash
-    - run: cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+    - run: cd test && cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
       shell: bash
-    - run: cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} && popd
+    - run: cd test && cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
       shell: bash
     - id: artifact_name
       shell: bash
