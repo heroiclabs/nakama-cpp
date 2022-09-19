@@ -7,7 +7,7 @@ The format is based on [keep a changelog](http://keepachangelog.com/) and this p
 ### [2.6.0] - [2022-09-02]
 
 ### Changed
-- This is a rewrite of the C++ repository structure and build system. The user-facing remains unchanged.
+- This is a rewrite of the C++ repository structure and build system. The user-facing API remains unchanged.
 
 ### [2.5.1] - [2022-01-16]
 
