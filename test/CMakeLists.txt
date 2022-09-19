@@ -19,6 +19,11 @@ project(nakama-test LANGUAGES CXX)
 
 include(FetchContent)
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(THREADS_PREFER_PTHREAD_FLAG ON)
+    find_package(Threads REQUIRED)
+    set(PTHREADS_LIB Threads::Threads)
+endif()
 
 ### This needs to be one of the first commands in order to prevent code signing issues.
 if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
