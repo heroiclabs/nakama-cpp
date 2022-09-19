@@ -2,7 +2,7 @@ name: pr check
 on: [pull_request]
 jobs:
   windows:
-    timeout-minutes: 20
+    timeout-minutes: 30
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,7 +27,7 @@ jobs:
               exit 1;
           }
   linux:
-    timeout-minutes: 20
+    timeout-minutes: 30
     runs-on: ubuntu-18.04
     steps:
       - run: gdb --version || { sudo apt update && sudo apt install gdb && gdb --version; }
@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - shell: bash
         run: |
-          ./build/linux-amd64/test/MinSizeRel/nakama-test || {
+          ./test/out/test/linux-amd64/nakama-test || {
               echo "Test failed, showing Nakama log for diagnostics";
               cat /tmp/nakama.log;
               exit 1;
@@ -64,7 +64,7 @@ jobs:
 #          done
 
   apple:
-    timeout-minutes: 20
+    timeout-minutes: 30
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3

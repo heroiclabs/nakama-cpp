@@ -62,8 +62,12 @@ target_link_libraries(nakama-example
     PRIVATE nakama-sdk
 )
 
-### TODO cross-platform compatibility
-install(TARGETS nakama-example
-    BUNDLE DESTINATION ${CMAKE_SOURCE_DIR}/out/${CMAKE_INSTALL_LIBDIR})
+set(EXAMPLE_OUT_DIR "${CMAKE_SOURCE_DIR}/out/${CMAKE_INSTALL_LIBDIR}")
 
-install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/out/${CMAKE_INSTALL_LIBDIR})
+install(TARGETS nakama-example
+    BUNDLE DESTINATION ${EXAMPLE_OUT_DIR})
+
+install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
+    RUNTIME DESTINATION ${EXAMPLE_OUT_DIR}
+    LIBRARY DESTINATION ${EXAMPLE_OUT_DIR}
+ )
