@@ -41,11 +41,16 @@ set_target_properties(nakama-example PROPERTIES
 )
 
 
-if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
     set_target_properties(nakama-example PROPERTIES
         INSTALL_RPATH @executable_path/Frameworks
     )
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set_target_properties(nakama-example PROPERTIES
+        INSTALL_RPATH @executable_path/../Frameworks
+    )
 endif()
+
 
 target_link_libraries(nakama-example
     PRIVATE nakama-sdk
