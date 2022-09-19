@@ -116,7 +116,6 @@ set_target_properties(nakama-test PROPERTIES
     XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
 )
 
-
 if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
     set_target_properties(nakama-test PROPERTIES
         INSTALL_RPATH @executable_path/Frameworks
@@ -127,7 +126,7 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     )
 endif()
 
-set(_TEST_OUT_DIR "${CMAKE_SOURCE_DIR}/out/test/${CMAKE_INSTALL_LIBDIR}")
+set(_TEST_OUT_DIR "${CMAKE_SOURCE_DIR}/out/${CMAKE_INSTALL_LIBDIR}")
 
 install(TARGETS nakama-test
     BUNDLE DESTINATION ${_TEST_OUT_DIR}
@@ -137,5 +136,5 @@ install(TARGETS nakama-test
 install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
     RUNTIME DESTINATION ${_TEST_OUT_DIR}
     LIBRARY DESTINATION ${_TEST_OUT_DIR}
+    FRAMEWORK DESTINATION ${_TEST_OUT_DIR}
 )
-
