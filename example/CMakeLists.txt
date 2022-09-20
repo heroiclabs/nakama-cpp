@@ -55,6 +55,10 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set_target_properties(nakama-example PROPERTIES
         INSTALL_RPATH @executable_path/../Frameworks
     )
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set_target_properties(nakama-test PROPERTIES
+        INSTALL_RPATH $ORIGIN
+    )
 endif()
 
 

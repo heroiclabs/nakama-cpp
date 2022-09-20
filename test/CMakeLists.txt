@@ -116,13 +116,17 @@ set_target_properties(nakama-test PROPERTIES
     XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
 )
 
-if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+if(${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
     set_target_properties(nakama-test PROPERTIES
         INSTALL_RPATH @executable_path/Frameworks
     )
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set_target_properties(nakama-test PROPERTIES
         INSTALL_RPATH @executable_path/../Frameworks
+    )
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set_target_properties(nakama-test PROPERTIES
+        INSTALL_RPATH $ORIGIN
     )
 endif()
 
