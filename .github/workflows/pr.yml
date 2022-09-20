@@ -81,8 +81,9 @@ jobs:
         with:
           preset: macosx-x64-host_x64
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NAKAMA_TEST_DEVELOPMENT_TEAM: ${{ secrets.NAKAMA_TEST_DEVELOPMENT_TEAM }}
       - run: |
-          ./example/out/macosx-x64/nakama-example.app/Contents/MacOS/nakama-example || {
+          ./example/out/macosx-x64/nakama-test.app/Contents/MacOS/nakama-test || {
               echo "Test failed, showing Nakama log for diagnostics";
               cat /tmp/nakama.log;
               exit 1;
