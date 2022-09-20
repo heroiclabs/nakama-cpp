@@ -82,6 +82,8 @@ runs:
     - run: cd test && cmake --preset ${{ inputs.preset }}
       shell: bash
     - run: cd test && cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+      env:
+          NAKAMA_TEST_DEVELOPMENT_TEAM: ${{ secrets.NAKAMA_TEST_DEVELOPMENT_TEAM }}
       shell: bash
     - run: cd test && cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
       shell: bash

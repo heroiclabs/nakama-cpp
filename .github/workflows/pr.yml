@@ -2,7 +2,7 @@ name: pr check
 on: [pull_request]
 jobs:
   windows:
-    timeout-minutes: 30
+    timeout-minutes: 40
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
@@ -81,8 +81,6 @@ jobs:
         with:
           preset: macosx-x64-host_x64
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - env:
-          NAKAMA_TEST_DEVELOPMENT_TEAM: ${{ secrets.NAKAMA_TEST_DEVELOPMENT_TEAM }}
         run: |
             ./example/out/macosx-x64/nakama-test.app/Contents/MacOS/nakama-test || {
                 echo "Test failed, showing Nakama log for diagnostics";
