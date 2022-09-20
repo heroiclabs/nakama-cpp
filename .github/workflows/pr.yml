@@ -21,7 +21,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - shell: bash
         run: |
-          ./out/test/win-x64/nakama-test.exe || {
+          ./test/out/win-x64/nakama-test.exe || {
               echo "Test failed, showing Nakama log for diagnostics";
               cat /tmp/nakama.log;
               exit 1;
@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - shell: bash
         run: |
-          ./out/test/linux-amd64/nakama-test || {
+          ./test/out/linux-amd64/nakama-test || {
               echo "Test failed, showing Nakama log for diagnostics";
               cat /tmp/nakama.log;
               exit 1;
