@@ -2,12 +2,16 @@ project(nakama-example LANGUAGES CXX)
 cmake_minimum_required(VERSION 3.23)
 set(CMAKE_CXX_STANDARD 14)
 
-if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    # CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
+    # https://gitlab.kitware.com/cmake/cmake/-/issues/22240
+    set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
+endif()
 
-# CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
-# https://gitlab.kitware.com/cmake/cmake/-/issues/22240
-set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
-
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(THREADS_PREFER_PTHREAD_FLAG ON)
+    find_package(Threads REQUIRED)
+    set(PTHREADS_LIB Threads::Threads)
 endif()
 
 get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
@@ -47,12 +51,28 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
     set_target_properties(nakama-example PROPERTIES
         INSTALL_RPATH @executable_path/Frameworks
     )
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set_target_properties(nakama-example PROPERTIES
+        INSTALL_RPATH @executable_path/../Frameworks
+    )
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set_target_properties(nakama-test PROPERTIES
+        INSTALL_RPATH $ORIGIN
+    )
 endif()
+
 
 target_link_libraries(nakama-example
     PRIVATE nakama-sdk
 )
 
-### TODO cross-platform compatibility
+set(EXAMPLE_OUT_DIR "${CMAKE_SOURCE_DIR}/out/${CMAKE_INSTALL_LIBDIR}")
+
 install(TARGETS nakama-example
-    BUNDLE DESTINATION ${CMAKE_SOURCE_DIR}/out/${CMAKE_INSTALL_LIBDIR})
+    BUNDLE DESTINATION ${EXAMPLE_OUT_DIR})
+
+install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
+    RUNTIME DESTINATION ${EXAMPLE_OUT_DIR}
+    LIBRARY DESTINATION ${EXAMPLE_OUT_DIR}
+    FRAMEWORK DESTINATION ${EXAMPLE_OUT_DIR}
+ )

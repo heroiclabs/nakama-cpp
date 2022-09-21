@@ -28,7 +28,6 @@ runs:
   steps:
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
       shell: bash
-
     - name: 'Setup NuGet Credentials'
       shell: bash
       run: >
@@ -44,7 +43,7 @@ runs:
       shell: bash
       run: >
         $( type -p mono || :) `vcpkg fetch nuget | tail -n 1`
-        setapikey "${{ inputs.GITHUB_TOKEN }}" 
+        setapikey "${{ inputs.GITHUB_TOKEN }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
 
     - id: cmake_args
@@ -61,12 +60,12 @@ runs:
 
     - name: Installing prerequisites
       run:  |
-        if [[ "${{ runner.os }}"  == "Linux" ]]; then 
+        if [[ "${{ runner.os }}"  == "Linux" ]]; then
           sudo ./ci/setup-ubuntu.sh
         elif [[ "${{ runner.os }}" == "macOS" ]]; then
           ./ci/setup-osx.sh
         fi
-        
+
         if [[ "${{ runner.os }}" == "Linux" ]]; then
           echo 'CC=/usr/bin/gcc-11' >> "$GITHUB_ENV"
           echo 'CXX=/usr/bin/g++-11' >> "$GITHUB_ENV"
@@ -79,6 +78,12 @@ runs:
     - run: cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
       shell: bash
     - run: cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+      shell: bash
+    - run: cd test && cmake --preset ${{ inputs.preset }}
+      shell: bash
+    - run: cd test && cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+      shell: bash
+    - run: cd test && cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
       shell: bash
     - id: artifact_name
       shell: bash

@@ -107,7 +107,6 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 option(LOGS_ENABLED "Enable log output" ON)
 option(NAKAMA_SHARED_LIBRARY "Build shared library" ON)
-#set(NAKAMA_SHARED_LIBRARY OFF)
 
 if(NOT MSVC)
     string(APPEND CMAKE_CXX_FLAGS " -fexceptions")
@@ -345,8 +344,6 @@ install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nakama
 )
-
-add_subdirectory(test)
 
 # Call last so that it can reference any target previously defined
 include(cmake/linkerFlagsTargets.cmake)
