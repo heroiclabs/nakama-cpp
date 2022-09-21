@@ -21,9 +21,7 @@
         "WS_IMPL": "OFF",
         "HTTP_IMPL": "OFF",
         "CMAKE_INSTALL_LIBDIR": "${presetName}",
-        "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk",
-        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets",
-        "VCPKG_OVERLAY_PORTS": "${sourceDir}/cmake/vcpkg-ports"
+        "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk"
       }
     },
     {
