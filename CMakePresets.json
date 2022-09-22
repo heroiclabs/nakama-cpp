@@ -28,7 +28,6 @@
       "name": "win-x64",
       "inherits": ["default"],
       "generator": "Visual Studio 17 2022",
-      "toolchainFile": "${sourceDir}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "WindowsDesktop": "ON",
         "BUILD_GRPC_CLIENT": "OFF",
