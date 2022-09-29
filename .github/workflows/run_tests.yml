@@ -112,7 +112,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - shell: bash
         run: |
-            ./example/out/macosx-x64/nakama-test.app/Contents/MacOS/nakama-test || {
+            ./test/out/macosx-x64/nakama-test.app/Contents/MacOS/nakama-test || {
                 echo "Test failed, showing Nakama log for diagnostics";
                 cat /tmp/nakama.log;
                 exit 1;
