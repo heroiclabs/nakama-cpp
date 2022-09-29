@@ -90,7 +90,7 @@ include(cmake/with-libcxx.cmake)
 
 # Kickstarts vcpkg dependency manager. It will parse vcpkg.json and install all configured
 # dependencies. Some dependencies are optional and enabled via VCPKG_MANIFEST_FEATURES
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake
+set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
         CACHE FILEPATH "Vcpkg toolchain file")
 
 project(nakama-sdk LANGUAGES CXX)

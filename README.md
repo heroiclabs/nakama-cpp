@@ -205,6 +205,9 @@ https://heroiclabs.com/docs/install-configuration/#socket
 
 ## Prerequisite
 
+You should download vcpkg (https://github.com/microsoft/vcpkg) somewhere on your machine set your $VCPKG_ROOT environment variable to point to the
+repository.
+
 ### Windows
 
 - [CMake >= 3.22](https://cmake.org/download/)
