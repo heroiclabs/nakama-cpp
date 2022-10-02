@@ -250,7 +250,7 @@ void GrpcClient::authenticateDevice(
     {
         ctx->successCallback = [sessionData, successCallback]()
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refreshToken(), sessionData->created()));
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refresh_token(), sessionData->created()));
             successCallback(session);
         };
     }
@@ -293,7 +293,7 @@ void GrpcClient::authenticateEmail(
     {
         ctx->successCallback = [sessionData, successCallback]()
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refreshToken(), sessionData->created()));
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refresh_token(), sessionData->created()));
             successCallback(session);
         };
     }
@@ -337,7 +337,7 @@ void GrpcClient::authenticateFacebook(
     {
         ctx->successCallback = [sessionData, successCallback]()
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refreshToken(), sessionData->created()));
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refresh_token(), sessionData->created()));
             successCallback(session);
         };
     }
@@ -380,7 +380,7 @@ void GrpcClient::authenticateGoogle(
     {
         ctx->successCallback = [sessionData, successCallback]()
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refreshToken(), sessionData->created()));
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refresh_token(), sessionData->created()));
             successCallback(session);
         };
     }
@@ -427,7 +427,7 @@ void GrpcClient::authenticateGameCenter(
     {
         ctx->successCallback = [sessionData, successCallback]()
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refreshToken(), sessionData->created()));
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refresh_token(), sessionData->created()));
             successCallback(session);
         };
     }
@@ -479,7 +479,7 @@ void GrpcClient::authenticateApple(
     {
         ctx->successCallback = [sessionData, successCallback]()
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refreshToken(), sessionData->created()));
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refresh_token(), sessionData->created()));
             successCallback(session);
         };
     }
@@ -521,7 +521,7 @@ void GrpcClient::authenticateCustom(
     {
         ctx->successCallback = [sessionData, successCallback]()
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refreshToken(), sessionData->created()));
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refresh_token(), sessionData->created()));
             successCallback(session);
         };
     }
@@ -563,7 +563,7 @@ void GrpcClient::authenticateSteam(
     {
         ctx->successCallback = [sessionData, successCallback]()
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refreshToken(), sessionData->created()));
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refresh_token(), sessionData->created()));
             successCallback(session);
         };
     }
@@ -586,10 +586,10 @@ void GrpcClient::authenticateSteam(
     responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
-void authenticateRefresh(
-    NSessionPtr session,
-    std::function<void(NSessionPtr)> successCallback = nullptr,
-    ErrorCallback errorCallback = nullptr) override
+void GrpcClient::authenticateRefresh(
+        NSessionPtr session,
+        std::function<void(NSessionPtr)> successCallback,
+        ErrorCallback errorCallback)
 {
     NLOG_INFO("...");
 
@@ -601,18 +601,17 @@ void authenticateRefresh(
     {
         ctx->successCallback = [sessionData, successCallback]()
         {
-            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refreshToken, sessionData->created()));
+            NSessionPtr session(new DefaultSession(sessionData->token(), sessionData->refresh_token(), sessionData->created()));
             successCallback(session);
         };
     }
     ctx->errorCallback = errorCallback;
 
-    nakama::api::AuthenticateRefreshRequest req;
+    nakama::api::SessionRefreshRequest req;
 
-    auto* refresh_token = req.mutable_refresh_token();
-    refresh_token->set_token(session->refresh_token);
+    req.set_token(session->getRefreshToken());
 
-    auto responseReader = _stub->AsyncAuthenticateRefresh(&ctx->context, req, &_cq);
+    auto responseReader = _stub->AsyncSessionRefresh(&ctx->context, req, &_cq);
     responseReader->Finish(&(*sessionData), &ctx->status, (void*)ctx);
 }
 
