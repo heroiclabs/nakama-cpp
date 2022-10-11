@@ -278,7 +278,7 @@ cmake --build --preset release-linux-amd64
 
 ### Linux
 
-To build Linux release you can use provider Docker image like following:
+To build Linux release you can use provided Docker image like following:
 
 ```
 docker buildx build -f scripts/Dockerfile --progress=plain --output=./out .
