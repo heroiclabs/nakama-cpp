@@ -309,21 +309,6 @@ install(TARGETS
         INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
 
-get_target_property(NONSTD_INCLUDE_DIR nonstd::optional-lite INTERFACE_INCLUDE_DIRECTORIES)
-
-# Imported libraries (such as those found with find_package) can't be installed
-# so do it manually for optional-lite
-# IMPORTANT: this needs to come *after* FRAMEWORK install, because it expects
-# directory structure created by it
-install(DIRECTORY ${NONSTD_INCLUDE_DIR}/nonstd TYPE INCLUDE COMPONENT headers)
-
-file(GLOB_RECURSE OPTIONAL_LITE_EXPORT ${optional-lite_DIR}/*.cmake)
-
-# we cannot install/export optional-lite ourselves because it is a third-party dependency.
-# so instead we make it available to cmake users by manually copying its export file to our installation
-# so that find_package(nakama-sdk) can also find optional-lite
-install(FILES ${OPTIONAL_LITE_EXPORT} DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nakama)
-
 if(MSVC)
     install(FILES $<TARGET_PDB_FILE:nakama-sdk> DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT nakama-sdk OPTIONAL)
 endif()
