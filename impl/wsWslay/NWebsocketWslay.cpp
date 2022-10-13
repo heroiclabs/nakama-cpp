@@ -167,8 +167,7 @@ namespace Nakama {
         }
 
         auto rnrn_pos = _buf.find("\r\n\r\n");
-        // clear handshake response from buffer. if server sent us message immediately after HTTP upgrade,
-        // buffer will still contain it.
+        // clear handshake response from buffer. if server sent us message immediately after HTTP upgrade, buffer will still contain it.
         _buf.erase(_buf.begin(), std::next(_buf.begin(), rnrn_pos + 4));
 
         return NetIOAsyncResult::DONE;
