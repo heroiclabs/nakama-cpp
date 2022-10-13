@@ -167,10 +167,8 @@ namespace Nakama {
         }
 
         auto rnrn_pos = _buf.find("\r\n\r\n");
-        // check if server sent us message immediately after HTTP upgrade
-        if (rnrn_pos != _buf.size() - 4) {
-            _buf.erase(_buf.begin(), std::next(_buf.begin(), rnrn_pos + 4));
-        }
+        // clear handshake response from buffer. if server sent us message immediately after HTTP upgrade, buffer will still contain it.
+        _buf.erase(_buf.begin(), std::next(_buf.begin(), rnrn_pos + 4));
 
         return NetIOAsyncResult::DONE;
     }
@@ -289,8 +287,22 @@ namespace Nakama {
     void NWebsocketWslay<IO>::tick() {
         // most common case
         if (_state == State::Connected) {
-            wslay_event_recv(_ctx.get());
-            wslay_event_send(_ctx.get());
+            int ret = wslay_event_recv(_ctx.get());
+            if (ret != 0)
+            {
+                NLOG(NLogLevel::Error, "[wslay] unable to receive message from peer: %d", ret);
+                disconnect(false);
+                return;
+            }
+
+            ret = wslay_event_send(_ctx.get());
+            if (ret != 0)
+            {
+                NLOG(NLogLevel::Error, "[wslay] unable to send message to peer: %d", ret);
+                disconnect(false);
+                return;
+            }
+
             return;
         }
 
