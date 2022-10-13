@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.23)
 include(version.cmake)
 
+# we use list append to allow dependent libraries to inject their own triplets and ports into this.
 list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_SOURCE_DIR}/cmake/triplets")
 list(APPEND VCPKG_OVERLAY_PORTS "${CMAKE_SOURCE_DIR}/cmake/vcpkg-ports")
 
