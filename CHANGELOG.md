@@ -4,6 +4,15 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [2.6.1] - [2022-10-13]
+### Fixed
+- Fixed an issue where the web socket would hang on slower network connections.
+- Fixed authenticateRefresh in the GrpcClient.
+
+### Added
+
+- The test suite is now runnable on iOS.
+
 ### [2.6.0] - [2022-09-02]
 
 ### Changed
