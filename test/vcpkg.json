@@ -1,0 +1,9 @@
+{
+    "name": "nakama-test",
+    "version-string": "0.0.0",
+    "default-features": [],
+    "dependencies": [
+      "rapidjson",
+      "optional-lite"
+    ]
+  }

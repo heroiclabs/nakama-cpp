@@ -15,6 +15,9 @@
 #
 cmake_minimum_required(VERSION 3.22)
 
+set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
+        CACHE FILEPATH "Vcpkg toolchain file")
+
 project(nakama-test LANGUAGES CXX)
 
 include(FetchContent)
@@ -32,18 +35,8 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin"
     set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
 endif()
 
-FetchContent_Declare(
-  rapidjson
-  GIT_REPOSITORY https://github.com/Tencent/rapidjson
-  GIT_TAG        master
-  GIT_SHALLOW    TRUE
-)
-
-FetchContent_GetProperties(rapidjson)
-if(NOT rapidjson_POPULATED)
-  FetchContent_Populate(rapidjson)
-  add_subdirectory(${rapidjson_SOURCE_DIR} ${rapidjson_BINARY_DIR} EXCLUDE_FROM_ALL) # don't install rapidjson
-endif()
+find_package(RapidJSON CONFIG REQUIRED)
+find_package(optional-lite)
 
 get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
 set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/out/${CMAKE_INSTALL_LIBDIR}/cmake/nakama)

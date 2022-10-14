@@ -1,6 +1,13 @@
-project(nakama-example LANGUAGES CXX)
+
 cmake_minimum_required(VERSION 3.23)
+
+set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
+        CACHE FILEPATH "Vcpkg toolchain file")
+
+project(nakama-example LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 14)
+
+find_package(optional-lite)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     # CMake needs to implement a cleaner way of doing this: https://gitlab.kitware.com/cmake/cmake/-/issues/22997 &&
