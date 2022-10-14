@@ -21,16 +21,13 @@
         "WS_IMPL": "OFF",
         "HTTP_IMPL": "OFF",
         "CMAKE_INSTALL_LIBDIR": "${presetName}",
-        "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk",
-        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets",
-        "VCPKG_OVERLAY_PORTS": "${sourceDir}/cmake/vcpkg-ports"
+        "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk"
       }
     },
     {
       "name": "win-x64",
       "inherits": ["default"],
       "generator": "Visual Studio 17 2022",
-      "toolchainFile": "${sourceDir}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "WindowsDesktop": "ON",
         "BUILD_GRPC_CLIENT": "OFF",

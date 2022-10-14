@@ -1,6 +1,6 @@
 {
   "name": "nakma-sdk",
-  "version-string": "0.1.0",
+  "version-string": "2.6.0",
   "default-features": [],
   "dependencies": [
     "protobuf",
