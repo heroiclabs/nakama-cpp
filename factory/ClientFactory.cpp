@@ -54,17 +54,23 @@ NClientPtr createDefaultClient(const NClientParameters& parameters)
 #endif
 }
 
-#ifdef BUILD_GRPC_CLIENT
 NClientPtr createGrpcClient(const NClientParameters& parameters)
 {
+#ifdef BUILD_GRPC_CLIENT
     NClientPtr client(new GrpcClient(parameters));
     return client;
-}
-#endif
 
-#ifdef BUILD_REST_CLIENT
+#else
+    (void)parameters;
+    NLOG_ERROR("gRPC client is not available");
+    return nullptr;
+
+#endif
+}
+
 NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportPtr httpTransport)
 {
+#ifdef BUILD_REST_CLIENT
 
     if (!httpTransport)
     {
@@ -79,8 +85,14 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
 
     NClientPtr client(new RestClient(parameters, httpTransport));
     return client;
-}
+
+#else
+
+    NLOG_ERROR("REST client is not available");
+    return nullptr;
+
 #endif
+}
 
 #ifdef BUILD_REST_CLIENT
 NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platformParams)
