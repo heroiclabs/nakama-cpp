@@ -113,10 +113,15 @@ void NRtClientTest::tick()
 {
     NCppTest::tick();
 
-    if (rtClient)
+    if (rtClient && !this->_rtTickPaused)
     {
         rtClient->tick();
     }
+}
+
+void NRtClientTest::setRtTickPaused(bool paused)
+{
+    this->_rtTickPaused = paused;
 }
 
 } // namespace Test

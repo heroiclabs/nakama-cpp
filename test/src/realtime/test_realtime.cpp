@@ -122,6 +122,32 @@ void test_rt_heartbeat()
     test.runTest();
 }
 
+void test_rt_sleep_tick()
+{
+    NRtClientTest test(__func__);
+
+    test.setTestTimeoutMs(100000);
+    test.onRtConnect = [&test]()
+    {
+        test.rtClient->createMatch([&test](const Nakama::NMatch& match)
+        {
+            std::cout << "created match" << std::endl;
+            std::cout << "about to sleep" << std::endl;
+            test.setRtTickPaused(true);
+            sleep(90000);
+            test.setRtTickPaused(false);
+            std::cout << "done sleeping" << std::endl;
+
+            test.rtClient->leaveMatch(match.matchId, [&test](){
+                test.stopTest(true);
+            });
+        });
+    };
+
+    test.runTest();
+}
+
+
 void test_rt_joinChat()
 {
     NRtClientTest test(__func__);

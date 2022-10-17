@@ -44,7 +44,12 @@ public:
 
     std::function<bool()> onTimeoutCb;
 
+    void setRtTickPaused(bool paused);
+
     void tick() override;
+
+private:
+    bool _rtTickPaused;
 };
 
 } // namespace Test
