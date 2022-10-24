@@ -198,6 +198,7 @@ namespace Nakama {
 
     template<typename IO>
     void NWebsocketWslay<IO>::connect(const std::string& url, NRtTransportType transportType) {
+        std::lock_guard(this->_lifecycle_lock);
         assert(!_ctx);
         {
             wslay_event_context_ptr p;
@@ -233,6 +234,8 @@ namespace Nakama {
 
     template<typename IO>
     void NWebsocketWslay<IO>::disconnect(bool remote) {
+        std::lock_guard(this->_lifecycle_lock);
+
         if (!remote && _state == State::Connected) {
             assert(_ctx);
             // we've asked for disconnect, send close frame before closing socket
@@ -262,6 +265,8 @@ namespace Nakama {
 
     template<typename IO>
     bool NWebsocketWslay<IO>::send(const NBytes& data) {
+        std::lock_guard(this->_lifecycle_lock);
+
         struct wslay_event_msg msg{
             _opcode,
             reinterpret_cast<const uint8_t*>(&data[0]),
@@ -285,6 +290,8 @@ namespace Nakama {
 
     template<typename IO>
     void NWebsocketWslay<IO>::tick() {
+        std::lock_guard(this->_lifecycle_lock);
+
         // most common case
         if (_state == State::Connected) {
             int ret = wslay_event_recv(_ctx.get());

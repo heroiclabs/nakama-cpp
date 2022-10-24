@@ -18,6 +18,7 @@
 
 #include <string>
 #include <memory>
+#include <mutex>
 #include <wslay/wslay.h>
 #include "nakama-cpp/realtime/NRtTransportInterface.h"
 #include "StrUtil.h"
@@ -74,6 +75,9 @@ private:
     //Http send state
     std::string _buf;
     std::string::iterator _buf_iter;
+    // lock each function in the connect/tick/send/disconnect lifecycle functions to prevent bad race conditions.
+    std::mutex _lifecycle_lock;
+
 };
 
 }
