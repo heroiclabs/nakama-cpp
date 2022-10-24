@@ -288,16 +288,20 @@ namespace Nakama {
         // most common case
         if (_state == State::Connected) {
             int ret = wslay_event_recv(_ctx.get());
-            if (ret != 0)
-            {
+
+            // disconnect() may have been called in on_msg_recv_callback()
+            if (_state == State::Disconnected) {
+                return;
+            }
+
+            if (ret != 0) {
                 NLOG(NLogLevel::Error, "[wslay] unable to receive message from peer: %d", ret);
                 disconnect(false);
                 return;
             }
 
             ret = wslay_event_send(_ctx.get());
-            if (ret != 0)
-            {
+            if (ret != 0) {
                 NLOG(NLogLevel::Error, "[wslay] unable to send message to peer: %d", ret);
                 disconnect(false);
                 return;
