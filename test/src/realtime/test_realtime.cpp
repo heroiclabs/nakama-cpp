@@ -122,11 +122,12 @@ void test_rt_heartbeat()
     test.runTest();
 }
 
-void test_rt_sleep_tick()
+void test_rt_remote_disconnect()
 {
     NRtClientTest test(__func__);
-
-    test.setTestTimeoutMs(20000);
+    // test what
+    test.setRtStopTestOnDisconnect(false);
+    test.setTestTimeoutMs(15000);
     test.onRtConnect = [&test]()
     {
         test.rtClient->createMatch([&test](const Nakama::NMatch& match)
@@ -263,7 +264,7 @@ void run_realtime_tests()
 
 void test_realtime()
 {
-    test_rt_sleep_tick();
+    test_rt_remote_disconnect();
     // These tests are not protocol specific
     test_rt_quickdestroy();
     test_rt_rapiddisconnect();
