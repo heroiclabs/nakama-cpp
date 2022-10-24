@@ -126,7 +126,7 @@ void test_rt_sleep_tick()
 {
     NRtClientTest test(__func__);
 
-    test.setTestTimeoutMs(100000);
+    test.setTestTimeoutMs(20000);
     test.onRtConnect = [&test]()
     {
         test.rtClient->createMatch([&test](const Nakama::NMatch& match)
@@ -134,7 +134,7 @@ void test_rt_sleep_tick()
             std::cout << "created match" << std::endl;
             std::cout << "about to sleep" << std::endl;
             test.setRtTickPaused(true);
-            sleep(90000);
+            sleep(10000);
             test.setRtTickPaused(false);
             std::cout << "done sleeping" << std::endl;
 
@@ -263,6 +263,7 @@ void run_realtime_tests()
 
 void test_realtime()
 {
+    test_rt_sleep_tick();
     // These tests are not protocol specific
     test_rt_quickdestroy();
     test_rt_rapiddisconnect();
