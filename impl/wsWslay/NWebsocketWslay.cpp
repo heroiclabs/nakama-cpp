@@ -21,7 +21,7 @@ namespace Nakama {
         if (wslay_is_ctrl_frame(arg->opcode)) {
             if (arg->opcode == WSLAY_CONNECTION_CLOSE) {
                 NLOG(NLogLevel::Info, "Remote server closed connection with status code %d", arg->status_code);
-                ws->disconnect(true);
+                ws->_state = State::RemoteDisconnect;
             }
         } else {
             std::string s(reinterpret_cast<const char*>(arg->msg), arg->msg_length);
@@ -86,7 +86,6 @@ namespace Nakama {
         }
         return ret;
     }
-
 
     static std::string get_random16() {
         std::mt19937_64 rng(std::random_device{}());
@@ -198,7 +197,6 @@ namespace Nakama {
 
     template<typename IO>
     void NWebsocketWslay<IO>::connect(const std::string& url, NRtTransportType transportType) {
-        std::lock_guard(this->_lifecycle_lock);
         assert(!_ctx);
         {
             wslay_event_context_ptr p;
@@ -234,8 +232,6 @@ namespace Nakama {
 
     template<typename IO>
     void NWebsocketWslay<IO>::disconnect(bool remote) {
-        std::lock_guard(this->_lifecycle_lock);
-
         if (!remote && _state == State::Connected) {
             assert(_ctx);
             // we've asked for disconnect, send close frame before closing socket
@@ -265,8 +261,6 @@ namespace Nakama {
 
     template<typename IO>
     bool NWebsocketWslay<IO>::send(const NBytes& data) {
-        std::lock_guard(this->_lifecycle_lock);
-
         struct wslay_event_msg msg{
             _opcode,
             reinterpret_cast<const uint8_t*>(&data[0]),
@@ -290,16 +284,9 @@ namespace Nakama {
 
     template<typename IO>
     void NWebsocketWslay<IO>::tick() {
-        std::lock_guard(this->_lifecycle_lock);
-
         // most common case
         if (_state == State::Connected) {
             int ret = wslay_event_recv(_ctx.get());
-
-            // disconnect() may have been called in on_msg_recv_callback()
-            if (_state == State::Disconnected) {
-                return;
-            }
 
             if (ret != 0) {
                 NLOG(NLogLevel::Error, "[wslay] unable to receive message from peer: %d", ret);
@@ -315,6 +302,10 @@ namespace Nakama {
             }
 
             return;
+        }
+
+        if (_state == State::RemoteDisconnect) {
+            disconnect(true);
         }
 
         // async connect state machine:

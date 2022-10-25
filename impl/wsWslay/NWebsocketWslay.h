@@ -27,11 +27,12 @@
 namespace Nakama {
 
 enum class State {
+    RemoteDisconnect,
     Disconnected,
     Connecting,
     Handshake_Sending,
     Handshake_Receiving,
-    Connected,
+    Connected
 };
 
 template<typename IO>
@@ -75,9 +76,6 @@ private:
     //Http send state
     std::string _buf;
     std::string::iterator _buf_iter;
-    // lock each function in the connect/tick/send/disconnect lifecycle functions to prevent bad race conditions.
-    std::mutex _lifecycle_lock;
-
 };
 
 }
