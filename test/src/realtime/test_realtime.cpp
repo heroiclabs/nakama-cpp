@@ -127,7 +127,7 @@ void test_rt_heartbeat()
 void test_rt_remote_disconnect()
 {
     NRtClientTest test(__func__);
-    // test what
+    // we want to test behavior of socket after disconnect.
     test.setRtStopTestOnDisconnect(false);
     test.setTestTimeoutMs(15000);
     test.onRtConnect = [&test]()

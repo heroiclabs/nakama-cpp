@@ -18,7 +18,6 @@
 
 #include <string>
 #include <memory>
-#include <mutex>
 #include <wslay/wslay.h>
 #include "nakama-cpp/realtime/NRtTransportInterface.h"
 #include "StrUtil.h"
