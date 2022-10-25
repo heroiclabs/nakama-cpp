@@ -23,8 +23,8 @@ namespace Test {
 class NRtClientTest : public NCppTest
 {
 public:
-    NRtClientTest(const char* name) : NCppTest(name) {
-        this->setRtStopTestOnDisconnect(true);
+    NRtClientTest(const char* name) : NCppTest(name), _rtTickPaused(false), _stopTestOnDisconnect(true) {
+
     }
 
     std::function<void()> onRtConnect;
