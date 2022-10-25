@@ -122,6 +122,8 @@ void test_rt_heartbeat()
     test.runTest();
 }
 
+// optional test -- pass --socket.pong_wait_ms 5000 to Nakama so that it disconnects rtclient after sleep
+// in order to test how it will react.
 void test_rt_remote_disconnect()
 {
     NRtClientTest test(__func__);
@@ -132,16 +134,11 @@ void test_rt_remote_disconnect()
     {
         test.rtClient->createMatch([&test](const Nakama::NMatch& match)
         {
-            std::cout << "created match" << std::endl;
-            std::cout << "about to sleep" << std::endl;
             test.setRtTickPaused(true);
             sleep(10000);
             test.setRtTickPaused(false);
-            std::cout << "done sleeping" << std::endl;
-
-            test.rtClient->leaveMatch(match.matchId, [&test](){
-                test.stopTest(true);
-            });
+            sleep(1000);
+            test.stopTest(true);
         });
     };
 
@@ -264,7 +261,6 @@ void run_realtime_tests()
 
 void test_realtime()
 {
-    test_rt_remote_disconnect();
     // These tests are not protocol specific
     test_rt_quickdestroy();
     test_rt_rapiddisconnect();
