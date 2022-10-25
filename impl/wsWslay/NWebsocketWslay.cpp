@@ -185,7 +185,7 @@ namespace Nakama {
             nullptr,
             on_msg_recv_callback
         },
-        _ctx(nullptr, wslay_event_context_free)
+        _ctx(nullptr, wslay_event_context_free), _state(State::Disconnected)
     {}
 
     template<typename IO>
