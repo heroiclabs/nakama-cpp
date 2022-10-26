@@ -5,15 +5,7 @@
   "dependencies": [
     "protobuf",
     "rapidjson",
-    "optional-lite",
-    {
-      "name": "vcpkg-cmake",
-      "host": true
-    },
-    {
-      "name": "vcpkg-cmake-config",
-      "host": true
-    }
+    "optional-lite"
   ],
   "features": {
     "libcxx": {
