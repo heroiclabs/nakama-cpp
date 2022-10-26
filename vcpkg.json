@@ -1,5 +1,5 @@
 {
-  "name": "nakma-sdk",
+  "name": "nakama-sdk",
   "version-string": "2.6.0",
   "default-features": [],
   "dependencies": [
