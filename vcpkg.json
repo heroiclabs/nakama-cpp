@@ -1,47 +1,47 @@
 {
-  "name": "nakama-sdk",
-  "version-string": "2.6.0",
-  "default-features": [],
-  "dependencies": [
-    "protobuf",
-    "rapidjson",
-    "optional-lite"
-  ],
-  "features": {
-    "libcxx": {
-      "description": "Build using libc++",
-      "dependencies": [
-        {
-          "name":  "llvm",
-          "platform": "linux",
-          "default-features": false,
-          "features": [
-            "libcxx"
-          ]
-        }
-      ]
-    },
-    "grpc": {
-      "description": "Build GRPC client",
-      "dependencies": [ "grpc" ]
-    },
-    "websocketpp": {
-      "description": "Pull in websocketpp dependency (should be used only on Linux)",
-      "dependencies": [ "websocketpp", "asio" ]
-    },
-    "wslay": {
-      "description": "Pull in wslay dependency",
-      "dependencies": [ "wslay" ]
-    },
-    "curl": {
-      "description": "Pull in libcurl dependency",
-      "dependencies": [
-        {
-          "name":  "curl",
-          "default-features":  false,
-          "features":  ["ssl"]
-        }
-      ]
+    "name": "nakama-sdk",
+    "version-string": "2.6.0",
+    "default-features": [],
+    "dependencies": [
+      "protobuf",
+      "rapidjson",
+      "optional-lite"
+    ],
+    "features": {
+      "libcxx": {
+        "description": "Build using libc++",
+        "dependencies": [
+          {
+            "name":  "llvm",
+            "platform": "linux",
+            "default-features": false,
+            "features": [
+              "libcxx"
+            ]
+          }
+        ]
+      },
+      "grpc": {
+        "description": "Build GRPC client",
+        "dependencies": [ "grpc" ]
+      },
+      "websocketpp": {
+        "description": "Pull in websocketpp dependency (should be used only on Linux)",
+        "dependencies": [ "websocketpp", "asio" ]
+      },
+      "wslay": {
+        "description": "Pull in wslay dependency",
+        "dependencies": [ "wslay" ]
+      },
+      "curl": {
+        "description": "Pull in libcurl dependency",
+        "dependencies": [
+          {
+            "name":  "curl",
+            "default-features":  false,
+            "features":  ["ssl"]
+          }
+        ]
+      }
     }
   }
-}
