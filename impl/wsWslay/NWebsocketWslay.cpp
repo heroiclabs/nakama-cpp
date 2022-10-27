@@ -304,6 +304,7 @@ namespace Nakama {
             return;
         }
 
+        // this is set if the wslay_event_recv above reads a close frame.
         if (_state == State::RemoteDisconnect) {
             disconnect(true);
         }
