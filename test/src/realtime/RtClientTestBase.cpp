@@ -49,7 +49,7 @@ void NRtClientTest::runTest()
 
     listener.setDisconnectCallback([this](const NRtClientDisconnectInfo &/*info*/)
     {
-        if (!isDone())
+        if (!isDone() && this->_stopTestOnDisconnect)
         {
             stopTest();
         }
@@ -113,10 +113,20 @@ void NRtClientTest::tick()
 {
     NCppTest::tick();
 
-    if (rtClient)
+    if (rtClient && !this->_rtTickPaused)
     {
         rtClient->tick();
     }
+}
+
+void NRtClientTest::setRtTickPaused(bool paused)
+{
+    this->_rtTickPaused = paused;
+}
+
+void NRtClientTest::setRtStopTestOnDisconnect(bool stopTest)
+{
+    this->_stopTestOnDisconnect = stopTest;
 }
 
 } // namespace Test

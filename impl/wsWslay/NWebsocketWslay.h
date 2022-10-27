@@ -26,11 +26,12 @@
 namespace Nakama {
 
 enum class State {
+    RemoteDisconnect,
     Disconnected,
     Connecting,
     Handshake_Sending,
     Handshake_Receiving,
-    Connected,
+    Connected
 };
 
 template<typename IO>

@@ -21,7 +21,7 @@ namespace Nakama {
         if (wslay_is_ctrl_frame(arg->opcode)) {
             if (arg->opcode == WSLAY_CONNECTION_CLOSE) {
                 NLOG(NLogLevel::Info, "Remote server closed connection with status code %d", arg->status_code);
-                ws->disconnect(true);
+                ws->_state = State::RemoteDisconnect;
             }
         } else {
             std::string s(reinterpret_cast<const char*>(arg->msg), arg->msg_length);
@@ -86,7 +86,6 @@ namespace Nakama {
         }
         return ret;
     }
-
 
     static std::string get_random16() {
         std::mt19937_64 rng(std::random_device{}());
@@ -186,7 +185,7 @@ namespace Nakama {
             nullptr,
             on_msg_recv_callback
         },
-        _ctx(nullptr, wslay_event_context_free)
+        _ctx(nullptr, wslay_event_context_free), _state(State::Disconnected)
     {}
 
     template<typename IO>
@@ -288,22 +287,26 @@ namespace Nakama {
         // most common case
         if (_state == State::Connected) {
             int ret = wslay_event_recv(_ctx.get());
-            if (ret != 0)
-            {
+
+            if (ret != 0) {
                 NLOG(NLogLevel::Error, "[wslay] unable to receive message from peer: %d", ret);
                 disconnect(false);
                 return;
             }
 
             ret = wslay_event_send(_ctx.get());
-            if (ret != 0)
-            {
+            if (ret != 0) {
                 NLOG(NLogLevel::Error, "[wslay] unable to send message to peer: %d", ret);
                 disconnect(false);
                 return;
             }
 
             return;
+        }
+
+        // this is set if the wslay_event_recv above reads a close frame.
+        if (_state == State::RemoteDisconnect) {
+            disconnect(true);
         }
 
         // async connect state machine:
