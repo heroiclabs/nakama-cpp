@@ -191,7 +191,7 @@ namespace Nakama {
     template<typename IO>
     NWebsocketWslay<IO>::~NWebsocketWslay() {
         if (_connected) {
-            this->disconnect(false);
+            this->disconnect(false, std::nullopt);
         }
     }
 
@@ -227,11 +227,11 @@ namespace Nakama {
 
     template<typename IO>
     void NWebsocketWslay<IO>::disconnect() {
-        this->disconnect(false);
+        this->disconnect(false, std::nullopt);
     }
 
     template<typename IO>
-    void NWebsocketWslay<IO>::disconnect(bool remote) {
+    void NWebsocketWslay<IO>::disconnect(bool remote, std::optional<uint16_t> code) {
         if (!remote && _state == State::Connected) {
             assert(_ctx);
             // we've asked for disconnect, send close frame before closing socket
@@ -240,9 +240,10 @@ namespace Nakama {
         }
 
         this->io.close();
-        if (remote) {
+        if (code) {
             assert(_connected);
             NRtClientDisconnectInfo info;
+            info.code = code.value();
             info.remote = remote;
             fireOnDisconnected(info);
         }
@@ -290,14 +291,14 @@ namespace Nakama {
 
             if (ret != 0) {
                 NLOG(NLogLevel::Error, "[wslay] unable to receive message from peer: %d", ret);
-                disconnect(false);
+                disconnect(false, NRtClientDisconnectInfo::Code::TRANSPORT_ERROR);
                 return;
             }
 
             ret = wslay_event_send(_ctx.get());
             if (ret != 0) {
                 NLOG(NLogLevel::Error, "[wslay] unable to send message to peer: %d", ret);
-                disconnect(false);
+                disconnect(false, NRtClientDisconnectInfo::Code::TRANSPORT_ERROR);
                 return;
             }
 
@@ -306,7 +307,8 @@ namespace Nakama {
 
         // this is set if the wslay_event_recv above reads a close frame.
         if (_state == State::RemoteDisconnect) {
-            disconnect(true);
+            uint16_t code = wslay_event_get_status_code_received(_ctx.get());
+            disconnect(true, code);
         }
 
         // async connect state machine:
