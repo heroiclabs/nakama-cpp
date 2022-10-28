@@ -5,5 +5,9 @@ vcpkg_from_github(
     SHA512 05446f2a59947afcfd029be62c7639566765f2dc1564982b6d5366ebf60f4be6a4539d1caaa0ab20d27bb8b4a806862ddcb1d5bd0007b7a28eb26e0f10bf0164
 )
 
-vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH})
+vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH}
+    OPTIONS
+        --DINCLUDE_OPTIONAL_LITE=OFF
+)
+
 vcpkg_cmake_install()
