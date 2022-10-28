@@ -340,7 +340,7 @@ install(FILES
 if (INCLUDE_OPTIONAL_LITE)
     install(DIRECTORY
         ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/nonstd
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/include
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
 endif()
 
