@@ -7,7 +7,7 @@ vcpkg_from_github(
 
 vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH}
     OPTIONS
-        --DINCLUDE_OPTIONAL_LITE=OFF
+        --DINCLUDE_OPTIONAL_LITE=OFF # user will obtain optional-lite via vcpkg dependency management
 )
 
 vcpkg_cmake_install()
