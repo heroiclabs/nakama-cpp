@@ -60,7 +60,7 @@ private:
     NetIOAsyncResult http_handshake_init();
     NetIOAsyncResult http_handshake_send();
     NetIOAsyncResult http_handshake_receive();
-    void disconnect(bool remote);
+    void disconnect(bool remote, std::optional<uint16_t> code);
 
     IO io;
     struct wslay_event_callbacks _callbacks;
