@@ -9,8 +9,7 @@ option(BUILD_GRPC_CLIENT "Build GRPC client" ON)
 set(WEBSOCKET_IMPLS libhttpclient wslay OFF)
 set(WS_IMPL OFF CACHE STRING "Websocket implementation. One of: ${WEBSOCKET_IMPLS}")
 
-set(HTTP_IMPLS libhttpclient OFF)
-set(HTTP_IMPL OFF CACHE STRING "HTTP implementation. One of: ${HTTP_IMPLS}")
+set(HTTP_IMPL OFF CACHE STRING "HTTP implementation")
 
 option(UNREAL "Unreal engine support" OFF)
 
@@ -53,7 +52,7 @@ if (HTTP_IMPL STREQUAL "libhttpclient" AND VCPKG_TARGET_TRIPLET MATCHES "linux|i
     list(APPEND VCPKG_MANIFEST_FEATURES "curl")
 endif()
 
-if (WS_IMPL STREQUAL "libhttpclient" AND VCPKG_TARGET_TRIPLET MATCHES "linux|windows|android")
+if (LIBHTTPCLIENT_FORCE_WEBSOCKETPP)
     list(APPEND VCPKG_MANIFEST_FEATURES "websocketpp")
 endif()
 
