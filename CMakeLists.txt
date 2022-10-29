@@ -6,8 +6,7 @@ list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_SOURCE_DIR}/cmake/triplets")
 list(APPEND VCPKG_OVERLAY_PORTS "${CMAKE_SOURCE_DIR}/cmake/vcpkg-ports")
 
 option(BUILD_GRPC_CLIENT "Build GRPC client" ON)
-set(WEBSOCKET_IMPLS libhttpclient wslay OFF)
-set(WS_IMPL OFF CACHE STRING "Websocket implementation. One of: ${WEBSOCKET_IMPLS}")
+set(WS_IMPL OFF CACHE STRING "Websocket implementation.")
 
 set(HTTP_IMPL OFF CACHE STRING "HTTP implementation")
 
