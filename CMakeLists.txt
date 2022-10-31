@@ -12,6 +12,9 @@ set(WS_IMPL OFF CACHE STRING "Websocket implementation. One of: ${WEBSOCKET_IMPL
 set(HTTP_IMPLS libhttpclient OFF)
 set(HTTP_IMPL OFF CACHE STRING "HTTP implementation. One of: ${HTTP_IMPLS}")
 
+# By default, assume user will not obtain optional-lite via third party mechanism.
+option(INCLUDE_OPTIONAL_LITE "Include optional lite in include folder" ON)
+
 option(UNREAL "Unreal engine support" OFF)
 
 if (UNREAL)
@@ -333,6 +336,13 @@ install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nakama
 )
+
+if (INCLUDE_OPTIONAL_LITE)
+    install(DIRECTORY
+        ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/nonstd
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    )
+endif()
 
 # Call last so that it can reference any target previously defined
 include(cmake/linkerFlagsTargets.cmake)
