@@ -8,7 +8,9 @@
     "dependencies": [
         "protobuf",
         "rapidjson",
-        "optional-lite"
+        "optional-lite",
+        "vcpkg-cmake",
+        "vcpkg-cmake-config"
     ],
     "features": {
         "wslay": {

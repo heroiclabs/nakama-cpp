@@ -9,6 +9,9 @@ option(BUILD_GRPC_CLIENT OFF)
 option(BUILD_REST_CLIENT OFF)
 option(BUILD_WSLAY OFF)
 
+# By default, assume user will not obtain optional-lite via third party mechanism.
+option(INCLUDE_OPTIONAL_LITE "Include optional lite in include folder" ON)
+
 option(UNREAL "Unreal engine support" OFF)
 
 set(HTTP_IMPL "OFF")
@@ -320,6 +323,13 @@ install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nakama
 )
+
+if (INCLUDE_OPTIONAL_LITE)
+    install(DIRECTORY
+        ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/nonstd
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    )
+endif()
 
 # Call last so that it can reference any target previously defined
 include(cmake/linkerFlagsTargets.cmake)
