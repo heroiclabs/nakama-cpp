@@ -1,6 +1,6 @@
 {
     "default": {
-        "nakama-cpp": {
+        "nakama-sdk": {
             "baseline": "2.6.0",
             "port-version": 0
         }
