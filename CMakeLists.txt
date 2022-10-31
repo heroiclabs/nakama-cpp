@@ -23,7 +23,7 @@ if (UNREAL AND NOT LINUX)
     # https://github.com/EpicGames/UnrealEngine/pull/7267 and
     # https://github.com/EpicGames/UnrealEngine/pull/9103
     set(WS_IMPL "OFF" STRING)
-else if (BUILD_WSLAY)
+elseif (BUILD_WSLAY)
     set(WS_IMPL "wslay" STRING)
 else()
     set(WS_IMPL "libhttpclient" STRING)

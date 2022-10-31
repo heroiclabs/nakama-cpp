@@ -1,5 +1,8 @@
 {
-    "default-features": ["wslay", "curl"],
+    "default-features": [
+        "wslay",
+        "curl"
+    ],
     "dependencies": [
         "protobuf",
         "rapidjson",
@@ -7,30 +10,42 @@
     ],
     "features": {
         "wslay": {
-            "name": "wslay",
-            "platform": "linux | osx | ios"
+            "description": "Websockets library decoupled from IO and handshakes.",
+            "dependencies": [
+                {
+                    "name": "wslay",
+                    "platform": "linux | osx | ios"
+                }
+            ]
         },
         "curl": {
-            "name": "curl",
-            "default-features": false,
-            "features": [
-                "ssl"
-            ],
-            "platform": "linux | osx | ios"
+            "description": "The libcurl networking library.",
+            "dependencies": [
+                {
+                    "name": "curl",
+                    "default-features": false,
+                    "features": [
+                        "ssl"
+                    ],
+                    "platform": "linux | osx | ios"
+                }
+            ]
         },
         "libcxx": {
+            "description": "An alternative C++ standard library, used by Unreal Engine.",
             "dependencies": [
                 {
                     "name": "llvm",
-                    "platform": "linux",
                     "default-features": false,
                     "features": [
                         "libcxx"
-                    ]
+                    ],
+                    "platform": "linux"
                 }
             ]
         },
         "grpc": {
+            "description": "The grpc networking protocol.",
             "dependencies": [
                 "grpc"
             ]
