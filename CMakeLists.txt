@@ -11,7 +11,7 @@ option(BUILD_WSLAY OFF)
 
 option(UNREAL "Unreal engine support" OFF)
 
-set(HTTP_IMPL "OFF" STRING)
+set(HTTP_IMPL "OFF")
 
 if (NOT UNREAL)
     set(HTTP_IMPL "libhttpclient")
@@ -22,11 +22,11 @@ if (UNREAL AND NOT LINUX)
     # too many bugs in the Linux WS implementation:
     # https://github.com/EpicGames/UnrealEngine/pull/7267 and
     # https://github.com/EpicGames/UnrealEngine/pull/9103
-    set(WS_IMPL "OFF" STRING)
+    set(WS_IMPL "OFF")
 elseif (BUILD_WSLAY)
-    set(WS_IMPL "wslay" STRING)
+    set(WS_IMPL "wslay")
 else()
-    set(WS_IMPL "libhttpclient" STRING)
+    set(WS_IMPL "libhttpclient")
 endif()
 
 # when building android, this cmake is called from gradle with ANDROID_ABI passed.

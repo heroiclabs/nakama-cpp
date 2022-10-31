@@ -8,7 +8,7 @@ vcpkg_from_github(
 vcpkg_check_features(
     FEATURES
         wslay BUILD_WSLAY
-        grpc BUILD_GRPC_CLIENT
+        grpc  BUILD_GRPC_CLIENT
 )
 
 vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH}
