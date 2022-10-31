@@ -23,7 +23,9 @@ namespace Test {
 class NRtClientTest : public NCppTest
 {
 public:
-    NRtClientTest(const char* name) : NCppTest(name) {}
+    NRtClientTest(const char* name) : NCppTest(name), _rtTickPaused(false), _stopTestOnDisconnect(true) {
+
+    }
 
     std::function<void()> onRtConnect;
 
@@ -44,7 +46,14 @@ public:
 
     std::function<bool()> onTimeoutCb;
 
+    void setRtTickPaused(bool paused);
+    void setRtStopTestOnDisconnect(bool stopTest);
+
     void tick() override;
+
+private:
+    bool _rtTickPaused;
+    bool _stopTestOnDisconnect;
 };
 
 } // namespace Test
