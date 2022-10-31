@@ -299,7 +299,7 @@ Supported build modifiers are:
 - `LIBHTTPCLIENT_FORCE_WEBSOCKETPP`: On Windows platforms libhttpclient always includes
   websocketpp transport and uses it if Windows doesn't support websocket natively (< Windows 8).
   You can set this build modifier to force use of websocketpp transport, so that it can be tested without
-  installing Windows 7.
+  installing Windows 7. If you
 - `WITH_LIBCXX`: dynamically link with libc++ instead of libstdc++ on Linux platform.
   - `LIBCXX_STATIC`: link libc++ statically
 - `UNREAL`: creates binaries that are compatible with Unreal Engine.

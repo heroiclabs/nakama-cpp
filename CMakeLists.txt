@@ -5,24 +5,28 @@ include(version.cmake)
 list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_SOURCE_DIR}/cmake/triplets")
 list(APPEND VCPKG_OVERLAY_PORTS "${CMAKE_SOURCE_DIR}/cmake/vcpkg-ports")
 
-option(BUILD_GRPC_CLIENT "Build GRPC client" ON)
-set(WS_IMPL OFF CACHE STRING "Websocket implementation.")
-
-set(HTTP_IMPL OFF CACHE STRING "HTTP implementation")
+option(BUILD_GRPC_CLIENT OFF)
+option(BUILD_REST_CLIENT OFF)
+option(BUILD_WSLAY OFF)
 
 option(UNREAL "Unreal engine support" OFF)
 
-if (UNREAL)
-    message(NOTICE "Disabling HTTP transport in Unreal build mode")
-    set(HTTP_IMPL OFF CACHE STRING "HTTP implementation" FORCE)
+set(HTTP_IMPL "OFF" STRING)
 
+if (NOT UNREAL)
+    set(HTTP_IMPL "libhttpclient")
+endif()
+
+if (UNREAL AND NOT LINUX)
+    message(NOTICE "Disabling WS transport in Unreal build mode")
     # too many bugs in the Linux WS implementation:
     # https://github.com/EpicGames/UnrealEngine/pull/7267 and
     # https://github.com/EpicGames/UnrealEngine/pull/9103
-    if (NOT VCPKG_TARGET_TRIPLET MATCHES "linux")
-        message(NOTICE "Disabling WS transport in Unreal build mode")
-        set(WS_IMPL OFF CACHE STRING "WS implementation" FORCE)
-    endif()
+    set(WS_IMPL "OFF" STRING)
+else if (BUILD_WSLAY)
+    set(WS_IMPL "wslay" STRING)
+else()
+    set(WS_IMPL "libhttpclient" STRING)
 endif()
 
 # when building android, this cmake is called from gradle with ANDROID_ABI passed.
@@ -35,33 +39,6 @@ elseif (ANDROID_ABI MATCHES x86_64)
     set(VCPKG_TARGET_TRIPLET x64-android-heroic)
 endif()
 
-
-# We need to set VCPKG_MANIFEST_FEATURE before calling project(), because
-# that is where dependencies are installed and where real toolchain file (if any)
-# is configured.
-if (BUILD_GRPC_CLIENT)
-    list(APPEND VCPKG_MANIFEST_FEATURES "grpc")
-endif()
-
-# Not that many CMake variables are set before first project(),
-# for instance CMAKE_SYSTEM_NAME which would normally identify build target platform
-# is empty at this point, so we rely on VCPKG_TARGET_TRIPLET to identify platform.
-if (HTTP_IMPL STREQUAL "libhttpclient" AND VCPKG_TARGET_TRIPLET MATCHES "linux|ios|osx|iphonesimulator")
-    # on MacOSX curl seems to be part of the system, but we bring our own for consistency
-    list(APPEND VCPKG_MANIFEST_FEATURES "curl")
-endif()
-
-if (LIBHTTPCLIENT_FORCE_WEBSOCKETPP)
-    list(APPEND VCPKG_MANIFEST_FEATURES "websocketpp")
-endif()
-
-if (WS_IMPL STREQUAL "wslay")
-    list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
-    if(VCPKG_TARGET_TRIPLET MATCHES "linux|ios|osx|iphonesimulator")
-        list(APPEND VCPKG_MANIFEST_FEATURES "curl")
-    endif()
-endif()
-
 # being called from gradle
 if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
     # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
@@ -72,8 +49,6 @@ if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
 endif()
 
 cmake_policy(SET CMP0012 NEW)
-
-
 
 # If this CMake is called as part of another build system, like gradle's android plugin,
 # where CMAKE_TOOLCHAIN_FILE is unconditionally passed, we can pass extra arg TOOLCHAIN_LOAD_FIRST
@@ -120,6 +95,10 @@ option(ADDRESS_SANITIZER "Enable address sanitizer (broken on windows)" OFF)
 # this flag allows us to force use of websocketpp so that it can be tested on current Windows versions
 option(LIBHTTPCLIENT_FORCE_WEBSOCKETPP "Force use of websocketpp instead of winhttp in the libhttpclient" OFF)
 
+if (LIBHTTPCLIENT_FORCE_WEBSOCKETPP)
+    list(APPEND VCPKG_MANIFEST_FEATURES "websocketpp")
+endif()
+
 if(LOGS_ENABLED)
     add_compile_definitions(NLOGS_ENABLED)
 endif(LOGS_ENABLED)
@@ -147,6 +126,16 @@ if(APPLE)
     # via PUBLIC_HEADER property is full of bugs (see comment on PUBLIC_HEADER property below)
     set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework/Headers)
 
+endif()
+
+
+message(NOTICE "Disabling HTTP transport in Unreal build mode")
+
+# too many bugs in the Linux WS implementation:
+# https://github.com/EpicGames/UnrealEngine/pull/7267 and
+# https://github.com/EpicGames/UnrealEngine/pull/9103
+if (NOT LINUX)
+    message(NOTICE "Disabling WS transport in Unreal build mode")
 endif()
 
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")

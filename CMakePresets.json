@@ -9,17 +9,13 @@
     {
       "name": "default",
       "displayName": "Default",
-      "description": "Default components: ws=OFF, http=OFF",
+      "description": "No shipped websocket or http implementation.",
       "binaryDir": "build/${presetName}",
       "installDir": "out",
       "hidden": true,
       "cacheVariables": {
         "CMAKE_CONFIGURATION_TYPES": "Debug;MinSizeRel;RelWithDebInfo",
         "LOGS_ENABLED": "ON",
-        "BUILD_GRPC_CLIENT": "ON",
-        "BUILD_REST_CLIENT": "ON",
-        "WS_IMPL": "OFF",
-        "HTTP_IMPL": "OFF",
         "CMAKE_INSTALL_LIBDIR": "${presetName}",
         "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk"
       }
@@ -30,11 +26,8 @@
       "generator": "Visual Studio 17 2022",
       "cacheVariables": {
         "WindowsDesktop": "ON",
-        "BUILD_GRPC_CLIENT": "OFF",
         "VCPKG_HOST_TRIPLET": "x64-windows-static-heroic",
-        "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic",
-        "WS_IMPL": "libhttpclient",
-        "HTTP_IMPL": "libhttpclient"
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic"
       },
       "condition": {
         "type": "equals",
@@ -51,12 +44,10 @@
       "generator": "Ninja Multi-Config",
       "cacheVariables": {
         "CMAKE_INSTALL_LIBDIR": "macosx-arm64",
-        "HTTP_IMPL": "libhttpclient",
-        "WS_IMPL": "wslay",
-        "BUILD_GRPC_CLIENT": "OFF",
         "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
         "VCPKG_TARGET_TRIPLET": "arm64-osx-heroic",
-        "CMAKE_OSX_ARCHITECTURES": "arm64"
+        "CMAKE_OSX_ARCHITECTURES": "arm64",
+        "BUILD_WSLAY": "ON"
       },
       "condition":
       {
@@ -72,7 +63,7 @@
         "CMAKE_INSTALL_LIBDIR": "macosx-arm64",
         "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
         "CMAKE_OSX_ARCHITECTURES": "arm64"
-    }
+      }
     },
     {
       "name": "macosx-x64-host_x64",
@@ -140,10 +131,7 @@
         "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE",
         "ANDROID_ABI": "passed-by-gradle",
         "ANDROID_ARM_NEON": "ON",
-        "ANDROID_STL": "c++_shared",
-        "BUILD_GRPC_CLIENT": "OFF",
-        "HTTP_IMPL": "libhttpclient",
-        "WS_IMPL": "libhttpclient"
+        "ANDROID_STL": "c++_shared"
       },
       "environment": {
         "VCPKG_KEEP_ENV_VARS": "VCPKG_CHAINLOAD_TOOLCHAIN_FILE"
@@ -156,9 +144,7 @@
       "cacheVariables": {
         "VCPKG_HOST_TRIPLET": "x64-linux-heroic",
         "VCPKG_TARGET_TRIPLET": "x64-linux-heroic",
-        "BUILD_GRPC_CLIENT": "OFF",
-        "HTTP_IMPL": "libhttpclient",
-        "WS_IMPL": "wslay"
+        "BUILD_WSLAY": "ON"
       },
       "condition": {
         "type": "equals",

@@ -1,45 +1,39 @@
 {
-    "default-features": [],
+    "default-features": ["wslay", "curl"],
     "dependencies": [
-      "protobuf",
-      "rapidjson",
-      "optional-lite"
+        "protobuf",
+        "rapidjson",
+        "optional-lite"
     ],
     "features": {
-      "libcxx": {
-        "description": "Build using libc++",
-        "dependencies": [
-          {
-            "name":  "llvm",
-            "platform": "linux",
+        "wslay": {
+            "name": "wslay",
+            "platform": "linux | osx | ios"
+        },
+        "curl": {
+            "name": "curl",
             "default-features": false,
             "features": [
-              "libcxx"
+                "ssl"
+            ],
+            "platform": "linux | osx | ios"
+        },
+        "libcxx": {
+            "dependencies": [
+                {
+                    "name": "llvm",
+                    "platform": "linux",
+                    "default-features": false,
+                    "features": [
+                        "libcxx"
+                    ]
+                }
             ]
-          }
-        ]
-      },
-      "grpc": {
-        "description": "Build GRPC client",
-        "dependencies": [ "grpc" ]
-      },
-      "websocketpp": {
-        "description": "Pull in websocketpp dependency (should be used only on Linux)",
-        "dependencies": [ "websocketpp", "asio" ]
-      },
-      "wslay": {
-        "description": "Pull in wslay dependency",
-        "dependencies": [ "wslay" ]
-      },
-      "curl": {
-        "description": "Pull in libcurl dependency",
-        "dependencies": [
-          {
-            "name":  "curl",
-            "default-features":  false,
-            "features":  ["ssl"]
-          }
-        ]
-      }
+        },
+        "grpc": {
+            "dependencies": [
+                "grpc"
+            ]
+        }
     }
-  }
+}
