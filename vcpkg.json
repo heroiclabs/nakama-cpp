@@ -50,10 +50,10 @@
                 "grpc"
             ]
         },
-        "external_http": {
+        "external-http": {
             "description": "The HTTP library will be provided at runtime by the consumer."
         },
-        "external_ws": {
+        "external-ws": {
             "description": "The Websocket library will be provided at runtime by the consumer."
         }
     }
