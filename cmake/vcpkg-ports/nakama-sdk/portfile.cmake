@@ -1,11 +1,15 @@
+### sacrifice determinism for iteration speed in this section because for now we already have the registry baseline for pinning commits
+set(VCPKG_USE_HEAD_VERSION ON)
+
 vcpkg_from_git(
     OUT_SOURCE_PATH SOURCE_PATH
     URL https://github.com/heroiclabs/nakama-cpp.git
     HEAD_REF master
 )
 
+set(VCPKG_USE_HEAD_VERSION OFF)
+
 vcpkg_check_features(
-    OUT_FEATURE_OPTIONS FEATURE_OPTIONS
     FEATURES
         wslay BUILD_WSLAY
         grpc  BUILD_GRPC_CLIENT
