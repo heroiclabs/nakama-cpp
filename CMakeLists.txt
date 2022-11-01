@@ -5,34 +5,38 @@ include(version.cmake)
 list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_SOURCE_DIR}/cmake/triplets")
 list(APPEND VCPKG_OVERLAY_PORTS "${CMAKE_SOURCE_DIR}/cmake/vcpkg-ports")
 
-option(BUILD_GRPC_CLIENT OFF)
-option(BUILD_WSLAY OFF)
-
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(INCLUDE_OPTIONAL_LITE "Include optional lite in include folder" ON)
 
 option(UNREAL "Unreal engine support" OFF)
 
+set(BUILD_REST_CLIENT ON)
 set(HTTP_IMPL "")
+set(WS_IMPL "")
 
-if (NOT UNREAL)
+if (UNREAL)
+    set(WITH_EXTERNAL_HTTP ON)
+    # too many bugs in the Unreal Linux WS implementation:
+    # https://github.com/EpicGames/UnrealEngine/pull/7267 and
+    # https://github.com/EpicGames/UnrealEngine/pull/9103
+    if (NOT LINUX)
+        message(NOTICE "Disabling WS transport in Unreal build mode")
+        set(WITH_EXTERNAL_WS ON)
+    endif()
+endif()
+
+if (BUILD_WSLAY)
+    set(WS_IMPL "wslay")
+endif()
+
+### default to libhttpclient
+
+if (HTTP_IMPL STREQUAL "" AND NOT WITH_EXTERNAL_HTTP)
     set(HTTP_IMPL "libhttpclient")
 endif()
 
-if (UNREAL AND NOT LINUX)
-    message(NOTICE "Disabling WS transport in Unreal build mode")
-    # too many bugs in the Linux WS implementation:
-    # https://github.com/EpicGames/UnrealEngine/pull/7267 and
-    # https://github.com/EpicGames/UnrealEngine/pull/9103
-    set(WS_IMPL "OFF")
-elseif (BUILD_WSLAY)
-    set(WS_IMPL "wslay")
-elseif (BUILD_LIBHTTP_CLIENT)
-    set(WS_IMPL "libhttpclient")
-endif()
-
-if (NOT (HTTP_IMPL STREQUAL ""))
-    set(BUILD_REST_CLIENT ON)
+if (WS_IMPL STREQUAL "" AND NOT WITH_EXTERNAL_WS)
+    set(HTTP_IMPL "libhttpclient")
 endif()
 
 # when building android, this cmake is called from gradle with ANDROID_ABI passed.
