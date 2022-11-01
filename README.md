@@ -414,6 +414,11 @@ Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
       }]
 ```
 
+# Contributing
 
-TODO: mention:
-git rev-parse HEAD:./cmake/vcpkg-ports/nakama-sdk
+If you need to make a change to the portfile, vcpkg has a very particular process for exposing that change to port consumers:
+
+(1) Make the desired change to the portfile and commit it.
+(2) Get the git-tree hash of the portfile directory: `git rev-parse HEAD:./cmake/vcpkg-ports/nakama-sdk`.
+(3) Update the `git-tree` key to contain the value of this hash in `versions\n-\nakama-sdk.json`.
+(4) Commit the new changes to have your portfile change propogated to consumers.

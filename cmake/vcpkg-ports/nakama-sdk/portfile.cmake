@@ -10,6 +10,7 @@ vcpkg_from_git(
 set(VCPKG_USE_HEAD_VERSION OFF)
 
 vcpkg_check_features(
+    OUT_FEATURE_OPTIONS FEATURE_OPTIONS
     FEATURES
         wslay BUILD_WSLAY
         grpc  BUILD_GRPC_CLIENT
