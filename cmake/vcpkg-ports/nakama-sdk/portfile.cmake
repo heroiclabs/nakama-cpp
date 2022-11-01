@@ -18,7 +18,7 @@ vcpkg_check_features(
 
 vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH}
   OPTIONS
-    --DINCLUDE_OPTIONAL_LITE=OFF # user will obtain optional-lite via vcpkg dependency management
+    -DINCLUDE_OPTIONAL_LITE=OFF # user will obtain optional-lite via vcpkg dependency management
     ${FEATURE_OPTIONS} ### created by vcpkg_check_features
 )
 
