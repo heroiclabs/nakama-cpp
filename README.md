@@ -424,6 +424,6 @@ If you need to make a change to the portfile, vcpkg has a very particular proces
 (4) Get the git-tree hash of the portfile directory: `git rev-parse HEAD:./cmake/vcpkg-ports/nakama-sdk`.
 (5) Update the `git-tree` key to contain the value of this hash in `versions\n-\nakama-sdk.json`.
 (6) Commit the new changes to have your portfile change propogated to consumers.
-(7) Consumers will need to update to the new port increment in their manifest. They will need to update to the new commit as the `baseline` value in their `vcpkg.json`.
+(7) Consumers may need to update to the new port increment in their manifest. They will need to update to the new commit as the `baseline` value in their `vcpkg.json`.
 
 We are investigating ways to simplify this process, although portfile changes are very rare.
