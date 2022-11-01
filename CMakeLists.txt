@@ -6,7 +6,6 @@ list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_SOURCE_DIR}/cmake/triplets")
 list(APPEND VCPKG_OVERLAY_PORTS "${CMAKE_SOURCE_DIR}/cmake/vcpkg-ports")
 
 option(BUILD_GRPC_CLIENT OFF)
-option(BUILD_REST_CLIENT OFF)
 option(BUILD_WSLAY OFF)
 
 # By default, assume user will not obtain optional-lite via third party mechanism.
@@ -30,6 +29,10 @@ elseif (BUILD_WSLAY)
     set(WS_IMPL "wslay")
 else()
     set(WS_IMPL "libhttpclient")
+endif()
+
+if (NOT (HTTP_IMPL STREQUAL ""))
+    set(BUILD_REST_CLIENT ON)
 endif()
 
 # when building android, this cmake is called from gradle with ANDROID_ABI passed.

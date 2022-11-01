@@ -20,21 +20,12 @@ add_subdirectory(src)
 
 # TODO: Currently full RtClient is always built, regardless if websocket implementation is enabled
 add_subdirectory(core-rt EXCLUDE_FROM_ALL)
-#target_link_libraries(nakama-sdk-core
-#        PUBLIC nakama-sdk-core-rt
-#        )
 
 if (BUILD_REST_CLIENT)
     add_subdirectory(core-rest EXCLUDE_FROM_ALL)
-#    target_link_libraries(nakama-sdk-core
-#            PUBLIC nakama-sdk-core-rest
-#            )
 endif()
 
 if (BUILD_GRPC_CLIENT)
     add_subdirectory(core-grpc EXCLUDE_FROM_ALL)
-#    target_link_libraries(nakama-sdk-core
-#                PUBLIC nakama-sdk-core-grpc
-#                )
 endif()
 
