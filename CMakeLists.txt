@@ -7,7 +7,6 @@ list(APPEND VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg-ports")
 
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(INCLUDE_OPTIONAL_LITE "Include optional lite in include folder" ON)
-
 option(UNREAL "Unreal engine support" OFF)
 
 set(BUILD_REST_CLIENT ON)
@@ -19,6 +18,7 @@ if (UNREAL)
     # too many bugs in the Unreal Linux WS implementation:
     # https://github.com/EpicGames/UnrealEngine/pull/7267 and
     # https://github.com/EpicGames/UnrealEngine/pull/9103
+    message(NOTICE "Disabling HTTP transport in Unreal build mode")
     if (NOT LINUX)
         message(NOTICE "Disabling WS transport in Unreal build mode")
         set(WITH_EXTERNAL_WS ON)
@@ -137,9 +137,6 @@ if(APPLE)
     set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework/Headers)
 
 endif()
-
-
-message(NOTICE "Disabling HTTP transport in Unreal build mode")
 
 # too many bugs in the Linux WS implementation:
 # https://github.com/EpicGames/UnrealEngine/pull/7267 and
