@@ -414,3 +414,6 @@ Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
       }]
 ```
 
+
+TODO: mention:
+git rev-parse HEAD:./cmake/vcpkg-ports/nakama-sdk
