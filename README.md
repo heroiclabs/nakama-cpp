@@ -356,64 +356,60 @@ You can then archive and release `out/osx-universal`  directory.
 Platforms vary in their implementation of transports for HTTP and WS. One of the
 transports, `libhttpclient` itself can use different implementations depending on the platform.
 
-
 HTTP:
 
-Platform | Current                  | Planned |
-  --- |--------------------------| ---
- Win32 | libhttpclient -> winhttp | -
-Linux | libhttpclient->curl      | -
-MacOS | libhttpclient -> OS      | -
-iOS   | libhttpclient -> OS      | -
-XDK  | libhttpclient -> OS      | -
-GDK | libhttpclient -> OS      | -
-PS4/5 | OS                       |  -
-Unreal | $platform              | sdk-blank + unreal
+Platform | Transport              |
+  --- |---------------------------|
+Win32 | libhttpclient -> winhttp  |
+Android | libhttpclient -> okhttp |
+Linux | libhttpclient->curl       |
+MacOS | libhttpclient -> OS       |
+iOS   | libhttpclient -> OS       |
+Unreal | unreal                   |
 
 Websockets:
 
-Platform | Current                      | Planned |
---- |------------------------------| ---
-Win32 | libhttpclient -> winhttp     | -
-Linux | wslay                        | -
-MacOS | wslay                        | libhttpclient -> OS (min OSX 10.14)
-iOS   | wslay                        | libhttpclient -> OS (min iOS xx.xx)
-XDK  | libhttpclient -> OS          | -
-GDK | libhttpclient -> OS          | -
-PS4/5 | wslay                        |  OS (new SDK)
-Unreal | $platform                  | sdk-blank + unreal
+Platform | Transport
+--- |------------------------------|
+Win32 | libhttpclient -> winhttp   |
+Android | libhttpclient -> okhttp  |
+Linux | wslay                      |
+MacOS | wslay                      |
+iOS   | wslay                      |
+Unreal | unreal                    |
 
+# How to integrate the SDK
 
-### Blank build
+There are three ways of integrating the SDK into your build.
 
-Transports are the messiest and hardest part when it comes to compiling on multiple platforms.
-The rest of the code is "pure" and relies on nothing, but stdlib, making it fairly trivial to compile.
+## Github Release
+We provide headers and binaries for all supported platforms in our releases section.
 
-It is possible to make a "blank" build of the SDK with no transports included. An example use case
-would be to have it shipped alongside a game executable, where game executable is responsible
-for providing `NHttpTransportInterface` and `NRtTransportInterface` implementations. For instance
-if the game is Unreal based, then builtin Unreal HTTP and WS clients can be used to implement
-transport and passed to the blank SDK.
+## CMake
+After downloading it to a folder you've configured CMake to look for targets in, you can import our package via the `find_package` command in CMake: `find_package(nakama-sdk)`.
 
-To make a blank build pass `-D HTTP_IMPL=OFF -D WS_IMPL=OFF` to cmake at configure time. Example:
+## vcpkg
 
+Our SDK integrates with vcpkg by providing itself as a git registry. To include it in your vcpkg manifest, create a `vcpkg-configuration.json`
+in your root directory.
+
+{
+    "registries":
+    [
+        {
+            "kind": "git",
+            "repository": "https://github.com/heroiclabs/nakama-cpp",
+            "baseline": "<commit>",
+            "reference": "<branch>",
+            "packages": ["nakama-sdk"]
+        }
+    ]
+}
+
+Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
 ```
-cmake --preset win-x64 -D HTTP_IMPL=OFF -D WS_IMPL=OFF
-cmake --build --preset release-win-x64
+    "dependencies": [
+      {
+        "name": "nakama-sdk"
+      }]
 ```
-
-### Non-public (consoles) transports
-
-Consoles code can't be published to the public repository and their code is hosted in
-https://github.com/heroiclabs/nakama-cpp-private repository.  Private repository hosts
-just source code and minimal CMake files required to build them, rest of build system
-resides here.
-
-Consoles build presets will implicitly check out nakama-cpp-private repository, so you don't
-need to do anything special. You can configure commit used with `NAKAMA_PRIVATE_REPO_GIT_TAG` variable,
-which can be set with `-DNAKAMA_PRIVATE_REPO_GIT_TAG=123456` cmd flag at configuration time
-
-You can edit files in-place in `./build/${preset}/_deps/nakama-cpp-private-src` for a speedy development. Once
-done commit and push by running git from that location, it is proper git clone, so normal git commands should work.
-
-GDK is expected to be installed completely normally, per Microsoft instructions. Use the March 2022 edition for Unreal Engine.
