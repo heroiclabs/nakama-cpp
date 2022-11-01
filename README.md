@@ -418,12 +418,9 @@ Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
 
 If you need to make a change to the portfile, vcpkg has a very particular process for exposing that change to port consumers:
 
-(1) Make the desired change to the portfile.
-(2) Optionally increment `port-version` in `versions/baseline.json` and `versions\n-\nakama-sdk.json` and `cmake\vcpkg-ports\nakama-sdk\vcpkg.json`.
-(3) Commit your changes.
-(4) Get the git-tree hash of the portfile directory: `git rev-parse HEAD:./cmake/vcpkg-ports/nakama-sdk`.
-(5) Update the `git-tree` key to contain the value of this hash in `versions\n-\nakama-sdk.json`.
-(6) Commit the new changes to have your portfile change propogated to consumers.
-(7) Consumers  will need to update to the new commit as the `baseline` value in their `vcpkg.json`. They may need to update to the new port increment in their manifest.
+(1) Make the desired change to the portfile. Commit.
+(2) Get the git-tree hash of the portfile directory: `git rev-parse HEAD:./cmake/vcpkg-ports/nakama-sdk`.
+(3) Update the `git-tree` key to contain the value of this hash in `versions\n-\nakama-sdk.json`. Commit.
+(4) Consumers will need to update to the new commit as the `baseline` value in their `vcpkg.json`.
 
 We are investigating ways to simplify this process, although portfile changes are very rare.
