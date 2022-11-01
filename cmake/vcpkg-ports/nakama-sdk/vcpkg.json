@@ -18,8 +18,7 @@
             "description": "Websockets library decoupled from IO and handshakes.",
             "dependencies": [
                 {
-                    "name": "wslay",
-                    "platform": "linux | osx | ios | ps4 | ps5"
+                    "name": "wslay"
                 }
             ]
         },
@@ -31,8 +30,7 @@
                     "default-features": false,
                     "features": [
                         "ssl"
-                    ],
-                    "platform": "linux | osx | ios | ps4 | ps5"
+                    ]
                 }
             ]
         },
