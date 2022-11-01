@@ -49,6 +49,12 @@
             "dependencies": [
                 "grpc"
             ]
+        },
+        "external_http": {
+            "description": "The HTTP library will be provided at runtime by the consumer."
+        },
+        "external_ws": {
+            "description": "The Websocket library will be provided at runtime by the consumer."
         }
     }
 }

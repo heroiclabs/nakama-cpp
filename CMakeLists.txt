@@ -13,7 +13,7 @@ option(INCLUDE_OPTIONAL_LITE "Include optional lite in include folder" ON)
 
 option(UNREAL "Unreal engine support" OFF)
 
-set(HTTP_IMPL "OFF")
+set(HTTP_IMPL "")
 
 if (NOT UNREAL)
     set(HTTP_IMPL "libhttpclient")
@@ -27,7 +27,7 @@ if (UNREAL AND NOT LINUX)
     set(WS_IMPL "OFF")
 elseif (BUILD_WSLAY)
     set(WS_IMPL "wslay")
-else()
+elseif (BUILD_LIBHTTP_CLIENT)
     set(WS_IMPL "libhttpclient")
 endif()
 

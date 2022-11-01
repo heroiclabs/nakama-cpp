@@ -14,6 +14,9 @@ vcpkg_check_features(
     FEATURES
         wslay BUILD_WSLAY
         grpc  BUILD_GRPC_CLIENT
+        external_http WITH_EXTERNAL_HTTP
+        external_ws WITH_EXTERNAL_WS
+
 )
 
 vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH}
