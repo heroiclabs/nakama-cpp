@@ -1,6 +1,6 @@
 {
     "name": "nakama-sdk",
-    "version-string": "2.6.0",
+    "version-string": "2.6.0#1",
     "default-features": [
         "wslay",
         "curl"
