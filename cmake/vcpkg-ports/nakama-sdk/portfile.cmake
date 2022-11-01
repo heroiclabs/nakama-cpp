@@ -1,14 +1,10 @@
 ### sacrifice determinism for iteration speed in this section because for now we already have the registry baseline for pinning commits
 set(VCPKG_USE_HEAD_VERSION ON)
 
-if (STREQUAL ${NAKAMA_SDK_BRANCH} "")
-    set(NAKAMA_SDK_BRANCH "master")
-endif()
-
 vcpkg_from_git(
     OUT_SOURCE_PATH SOURCE_PATH
     URL https://github.com/heroiclabs/nakama-cpp.git
-    HEAD_REF ${NAKAMA_SDK_BRANCH}
+    HEAD_REF luke/feature-rework
 )
 
 set(VCPKG_USE_HEAD_VERSION OFF)
