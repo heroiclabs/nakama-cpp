@@ -25,6 +25,7 @@ if (UNREAL)
     endif()
 endif()
 
+message("BUILD WSLAY IS ${BUILD_WSLAY}")
 if (BUILD_WSLAY)
     set(WS_IMPL "wslay")
 endif()
