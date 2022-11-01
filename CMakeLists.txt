@@ -139,13 +139,6 @@ if(APPLE)
 
 endif()
 
-# too many bugs in the Linux WS implementation:
-# https://github.com/EpicGames/UnrealEngine/pull/7267 and
-# https://github.com/EpicGames/UnrealEngine/pull/9103
-if (NOT LINUX)
-    message(NOTICE "Disabling WS transport in Unreal build mode")
-endif()
-
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     if(NOT LIBHTTPCLIENT_BUILTIN)
         if (LINUX OR APPLE)
