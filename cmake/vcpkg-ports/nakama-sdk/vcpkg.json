@@ -19,7 +19,7 @@
             "dependencies": [
                 {
                     "name": "wslay",
-                    "platform": "linux | osx | ios"
+                    "platform": "linux | osx | ios | ps4 | ps5"
                 }
             ]
         },
@@ -32,7 +32,7 @@
                     "features": [
                         "ssl"
                     ],
-                    "platform": "linux | osx | ios"
+                    "platform": "linux | osx | ios | ps4 | ps5"
                 }
             ]
         },
