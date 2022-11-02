@@ -14,7 +14,7 @@
             "dependencies": [
                 {
                     "name": "wslay",
-                    "platform": "linux |osx | ios"
+                    "platform": "linux | osx | ios"
                 }
             ]
         },
