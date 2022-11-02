@@ -19,18 +19,6 @@
                 }
             ]
         },
-        "curl": {
-            "description": "The libcurl networking library.",
-            "dependencies": [
-                {
-                    "name": "curl",
-                    "default-features": false,
-                    "features": [
-                        "ssl"
-                    ]
-                }
-            ]
-        },
         "libcxx": {
             "description": "An alternative C++ standard library, used by Unreal Engine.",
             "dependencies": [
