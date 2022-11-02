@@ -1,5 +1,7 @@
 {
     "default-features": [
+        "wslay",
+        "curl"
     ],
     "dependencies": [
         "protobuf",
