@@ -32,7 +32,7 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
 #if defined(BUILD_WEBSOCKET_LIBHTTPCLIENT)
     return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
 #elif defined(BUILD_WEBSOCKET_WSLAY)
-    return NRtTransportPtr(new NWebsocketWslay<WSLAY_NETIO_CURL>());
+    return NRtTransportPtr(new NWebsocketWslay<NetIOCurl>());
 #endif
 }
 
