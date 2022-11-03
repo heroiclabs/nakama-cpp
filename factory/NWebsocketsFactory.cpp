@@ -29,14 +29,19 @@
 
 namespace Nakama {
 
+#ifndef WITH_EXTERNAL_WS
+
 NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams)
 {
     (void)platformParams;  // silence unused variable warning on some platforms
-#if defined(BUILD_WEBSOCKET_LIBHTTPCLIENT)
+    #if defined(BUILD_WEBSOCKET_LIBHTTPCLIENT)
     return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
-#elif defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL)
+    #elif defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL)
     return NRtTransportPtr(new NWebsocketWslay<NetIOCurl>());
-#endif
+    #endif
 }
+
+#endif
+
 
 } // namespace Nakama

@@ -92,11 +92,11 @@ NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platform
 {
     (void)platformParams;  // silence unused variable warning on some platforms
     // Compilation error if no implementation is selected
-#if defined(BUILD_HTTP_LIBHTTPCLIENT)
+    #if defined(BUILD_HTTP_LIBHTTPCLIENT)
     return NHttpTransportPtr(new NHttpClientLibHC(platformParams));s
-#else #error "New impl is not listed here, fix it"
-#endif
+    #else #error "New impl is not listed here, fix it"
+    #endif
 }
-#endif //BUILD_REST_CLIENT
+#endif //WITH_EXTRNAL_HTTP
 
 }
