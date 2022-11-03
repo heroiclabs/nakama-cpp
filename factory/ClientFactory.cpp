@@ -87,7 +87,7 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
 #endif
 }
 
-#ifndef defined(WITH_EXTERNAL_HTTP)
+#ifndef WITH_EXTERNAL_HTTP
 NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platformParams)
 {
     (void)platformParams;  // silence unused variable warning on some platforms
