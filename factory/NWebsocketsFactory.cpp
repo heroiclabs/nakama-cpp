@@ -22,6 +22,7 @@
 #include "../../impl/wsLibHttpClient/NWebsocketLibHC.h"
 #elif defined(BUILD_WEBSOCKET_WSLAY)
 #include "NWebsocketWslay.h"
+#include "NetIOCurl.h"
 #endif
 
 namespace Nakama {
