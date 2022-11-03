@@ -36,7 +36,7 @@ if (HTTP_IMPL STREQUAL "" AND NOT WITH_EXTERNAL_HTTP)
 endif()
 
 if (WS_IMPL STREQUAL "" AND NOT WITH_EXTERNAL_WS)
-    set(HTTP_IMPL "libhttpclient")
+    set(WS_IMPL "libhttpclient")
 endif()
 
 # when building android, this cmake is called from gradle with ANDROID_ABI passed.
@@ -178,20 +178,15 @@ elseif(WS_IMPL STREQUAL "wslay")
     set(BUILD_WEBSOCKET_WSLAY ON)
     set(WS_IMPL_LIB nakama-impl-ws-wslay)
     add_subdirectory(impl/wsWslay EXCLUDE_FROM_ALL)
-elseif(NOT (WS_IMPL STREQUAL "OFF"))
+elseif(NOT (WITH_EXTERNAL_WS))
     message(FATAL_ERROR "Unknown WS_IMPL: ${WS_IMPL}")
-elseif(WS_IMPL STREQUAL OFF)
-    set(BUILD_WEBSOCKET_IS_BLANK ON)
-endif()
 
 if(HTTP_IMPL STREQUAL "libhttpclient")
     set(BUILD_HTTP_LIBHTTPCLIENT ON)
     add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
-elseif(HTTP_IMPL STREQUAL OFF)
-    set(BUILD_HTTP_IS_BLANK ON)
 endif()
 
-if(NOT BUILD_HTTP_IS_BLANK AND NOT HTTP_IMPL_LIB)
+if(NOT WITH_EXTERNAL_WS AND NOT HTTP_IMPL_LIB)
     message(FATAL_ERROR "BUG: CMakeLists.txt in the impl dir must set HTTP_IMPL_LIB with PARENT_SCOPE")
 endif()
 

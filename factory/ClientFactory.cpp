@@ -29,11 +29,6 @@
 #include "../../impl/httpLibHttpClient/NHttpClientLibHC.h"
 #endif
 
-#ifdef BUILD_HTTP_SONY
-#include "httpSony.h"
-#endif
-
-
 namespace Nakama {
 
 NClientPtr createDefaultClient(const NClientParameters& parameters)
@@ -101,9 +96,7 @@ NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platform
     // Compilation error if no implementation is selected
 #if defined(BUILD_HTTP_LIBHTTPCLIENT)
     return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
-#elif defined(BUILD_HTTP_SONY)
-    return NHttpTransportPtr(NHttpClientSony::New());
-#elif defined(BUILD_HTTP_IS_BLANK)
+#elif defined(WITH_EXTERNAL_HTTP)
     NLOG_ERROR("No default transport included, users must provide their own explicitly");
     return nullptr;
 #else

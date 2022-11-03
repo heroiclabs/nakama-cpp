@@ -44,7 +44,7 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
 #error wslay websocket layer need to be parameterized with WSLAY_NETIO_TYPE. Define WSLAY_NETIO_$IMPL in the CMake.
 #endif
     return NRtTransportPtr(new NWebsocketWslay<WSLAY_NETIO_TYPE>());
-#elif defined(BUILD_WEBSOCKET_IS_BLANK)
+#elif defined(WITH_EXTERNAL_WS)
     NLOG_ERROR("No builtin Websocket transport available. Provide one explicitly.");
     return nullptr;
 #endif
