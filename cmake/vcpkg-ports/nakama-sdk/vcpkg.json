@@ -17,6 +17,10 @@
                 {
                     "name": "websocketpp",
                     "platform": "windows"
+                },
+                {
+                    "name": "asio",
+                    "platform": "windows"
                 }
             ]
         },

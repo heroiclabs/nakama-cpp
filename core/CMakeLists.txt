@@ -3,8 +3,6 @@ project(nakama-sdk-cpp DESCRIPTION "Nakama C++ Client" LANGUAGES CXX)
 
 set(NAKAMA_GIT_TAG "master" CACHE STRING "nakama Git tag to fetch Proto files from")
 set(NAKAMA_COMMON_GIT_TAG "master" CACHE STRING "nakama-common Git tag to fetch Proto files from")
-option(BUILD_GRPC_CLIENT "Build GRPC client" ON)
-option(BUILD_REST_CLIENT "Builds REST client" ON)
 
 # unconditional
 find_package(RapidJSON CONFIG REQUIRED)
