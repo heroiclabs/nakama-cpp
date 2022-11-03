@@ -181,7 +181,7 @@ if(HTTP_IMPL STREQUAL "libhttpclient")
     add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
 endif()
 
-if(NOT WITH_EXTERNAL_WS AND NOT HTTP_IMPL_LIB)
+if(NOT WITH_EXTERNAL_HTTP AND NOT HTTP_IMPL_LIB)
     message(FATAL_ERROR "BUG: CMakeLists.txt in the impl dir must set HTTP_IMPL_LIB with PARENT_SCOPE")
 endif()
 
