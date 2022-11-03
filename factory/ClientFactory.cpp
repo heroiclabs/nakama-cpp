@@ -33,7 +33,8 @@ namespace Nakama {
 
 NClientPtr createDefaultClient(const NClientParameters& parameters)
 {
-#ifdef BUILD_REST_CLIENT
+#ifdef BUILD_REST_CLIENT AND !defined(WITH_EXTERNAL_HTTP)
+
     return createRestClient(parameters);
 #elif defined(BUILD_GRPC_CLIENT)
 
@@ -61,9 +62,9 @@ NClientPtr createGrpcClient(const NClientParameters& parameters)
 #endif
 }
 
+#ifdef BUILD_REST_CLIENT && !defined(WITH_EXTERNAL_HTTP)
 NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportPtr httpTransport)
 {
-#ifdef BUILD_REST_CLIENT
 
     if (!httpTransport)
     {
@@ -78,14 +79,8 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
 
     NClientPtr client(new RestClient(parameters, httpTransport));
     return client;
-
-#else
-
-    NLOG_ERROR("REST client is not available");
-    return nullptr;
-
-#endif
 }
+#endif
 
 #ifndef WITH_EXTERNAL_HTTP
 NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platformParams)
