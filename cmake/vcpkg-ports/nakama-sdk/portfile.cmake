@@ -1,4 +1,3 @@
-### sacrifice determinism for iteration speed in this section because for now we already have the registry baseline for pinning commits
 set(VCPKG_USE_HEAD_VERSION ON)
 
 vcpkg_from_git(
