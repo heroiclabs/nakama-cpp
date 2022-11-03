@@ -371,7 +371,7 @@ Websockets:
 
 Platform | Transport
 --- |------------------------------|
-Win32 | libhttpclient -> winhttp   |
+Win32 | libhttpclient -> websocketpp |
 Android | libhttpclient -> okhttp  |
 Linux | wslay                      |
 MacOS | wslay                      |

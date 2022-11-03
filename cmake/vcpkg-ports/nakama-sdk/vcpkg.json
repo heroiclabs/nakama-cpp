@@ -11,6 +11,15 @@
         "vcpkg-cmake-config"
     ],
     "features": {
+        "websocketpp": {
+            "description": "Websockets library.",
+            "dependencies": [
+                {
+                    "name": "websocketpp",
+                    "platform": "windows"
+                }
+            ]
+        },
         "wslay": {
             "description": "Websockets library decoupled from IO and handshakes.",
             "dependencies": [

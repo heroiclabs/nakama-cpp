@@ -2,7 +2,8 @@
     "builtin-baseline": "14e7bb4ae24616ec54ff6b2f6ef4e8659434ea44",
     "default-features": [
         "wslay",
-        "curl"
+        "curl",
+        "websocketpp"
     ],
     "dependencies": [
         "protobuf",
@@ -13,6 +14,15 @@
         "optional-lite"
     ],
     "features": {
+        "websocketpp": {
+            "description": "Websockets library.",
+            "dependencies": [
+                {
+                    "name": "websocketpp",
+                    "platform": "windows"
+                }
+            ]
+        },
         "wslay": {
             "description": "Websockets library decoupled from IO and handshakes.",
             "dependencies": [
