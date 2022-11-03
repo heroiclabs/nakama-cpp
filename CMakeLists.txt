@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.23)
 include(version.cmake)
 
 # we use list append to allow dependent libraries to inject their own triplets and ports into this.
-set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
-set(VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg-ports")
+list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
+list(APPEND VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg-ports")
 
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(INCLUDE_OPTIONAL_LITE "Include optional lite in include folder" ON)
