@@ -13,6 +13,7 @@ vcpkg_check_features(
     FEATURES
         wslay BUILD_WSLAY
         grpc  BUILD_GRPC_CLIENT
+        curl  BUILD_CURL
         external-http WITH_EXTERNAL_HTTP
         external-ws WITH_EXTERNAL_WS
 )

@@ -163,12 +163,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     endif()
 endif()
 
-if(WS_IMPL STREQUAL "wslay")
-    if (LINUX OR APPLE)
-        set(WSLAY_NETIO "CURL")
-    endif()
-endif()
-
 add_library(nakama-ws-impl INTERFACE)
 if(WS_IMPL STREQUAL "libhttpclient")
     set(BUILD_WEBSOCKET_LIBHTTPCLIENT ON)
