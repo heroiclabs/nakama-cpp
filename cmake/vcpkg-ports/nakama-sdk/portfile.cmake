@@ -15,7 +15,6 @@ vcpkg_check_features(
         grpc  BUILD_GRPC_CLIENT
         external-http WITH_EXTERNAL_HTTP
         external-ws WITH_EXTERNAL_WS
-
 )
 
 vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH}

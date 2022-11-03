@@ -180,6 +180,7 @@ elseif(WS_IMPL STREQUAL "wslay")
     add_subdirectory(impl/wsWslay EXCLUDE_FROM_ALL)
 elseif(NOT (WITH_EXTERNAL_WS))
     message(FATAL_ERROR "Unknown WS_IMPL: ${WS_IMPL}")
+endif()
 
 if(HTTP_IMPL STREQUAL "libhttpclient")
     set(BUILD_HTTP_LIBHTTPCLIENT ON)
