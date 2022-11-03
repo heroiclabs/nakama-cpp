@@ -35,5 +35,6 @@ elseif(WITH_EXTERNAL_WS)
     target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE WITH_EXTERNAL_WS)
 endif()
 
-
-
+if (BUILD_CURL)
+    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_CURL)
+endif()
