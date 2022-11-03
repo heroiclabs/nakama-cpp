@@ -34,9 +34,7 @@ namespace Nakama {
 NClientPtr createDefaultClient(const NClientParameters& parameters)
 {
 #ifdef BUILD_REST_CLIENT
-
     return createRestClient(parameters);
-
 #elif defined(BUILD_GRPC_CLIENT)
 
     return createGrpcClient(parameters);
@@ -89,18 +87,14 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
 #endif
 }
 
-#ifdef BUILD_REST_CLIENT
+#ifndef defined(WITH_EXTERNAL_HTTP)
 NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platformParams)
 {
     (void)platformParams;  // silence unused variable warning on some platforms
     // Compilation error if no implementation is selected
 #if defined(BUILD_HTTP_LIBHTTPCLIENT)
-    return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
-#elif defined(WITH_EXTERNAL_HTTP)
-    NLOG_ERROR("No default transport included, users must provide their own explicitly");
-    return nullptr;
-#else
-#error "New impl is not listed here, fix it"
+    return NHttpTransportPtr(new NHttpClientLibHC(platformParams));s
+#else #error "New impl is not listed here, fix it"
 #endif
 }
 #endif //BUILD_REST_CLIENT

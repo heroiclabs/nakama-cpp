@@ -24,14 +24,6 @@
 #include "NWebsocketWslay.h"
 #endif
 
-#if defined(WSLAY_NETIO_CURL)
-#include "NetIOCurl.h"
-#define WSLAY_NETIO_TYPE NetIOCurl
-#elif defined(WSLAY_NETIO_SONY)
-#include "NetIOSony.h"
-#define WSLAY_NETIO_TYPE NetIOSony
-#endif
-
 namespace Nakama {
 
 NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams)
@@ -40,13 +32,8 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
 #if defined(BUILD_WEBSOCKET_LIBHTTPCLIENT)
     return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
 #elif defined(BUILD_WEBSOCKET_WSLAY)
-#if !defined(WSLAY_NETIO_TYPE)
-#error wslay websocket layer need to be parameterized with WSLAY_NETIO_TYPE. Define WSLAY_NETIO_$IMPL in the CMake.
-#endif
-    return NRtTransportPtr(new NWebsocketWslay<WSLAY_NETIO_TYPE>());
-#elif defined(WITH_EXTERNAL_WS)
-    NLOG_ERROR("No builtin Websocket transport available. Provide one explicitly.");
-    return nullptr;
+    return NRtTransportPtr(new NWebsocketWslay<WSLAY_NETIO_CURL>());
 #endif
 }
+
 } // namespace Nakama

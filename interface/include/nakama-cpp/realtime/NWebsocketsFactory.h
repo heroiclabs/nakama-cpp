@@ -27,7 +27,9 @@ NAKAMA_NAMESPACE_BEGIN
      * Create default websocket transport.
      *
      */
+    #ifndef(WITH_EXTERNAL_WS)
     NAKAMA_API NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParameters);
-    
+    return nullptr;
+
 
 NAKAMA_NAMESPACE_END
