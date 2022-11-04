@@ -2,32 +2,40 @@ cmake_minimum_required(VERSION 3.23)
 include(version.cmake)
 
 # we use list append to allow dependent libraries to inject their own triplets and ports into this.
-list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_SOURCE_DIR}/cmake/triplets")
-list(APPEND VCPKG_OVERLAY_PORTS "${CMAKE_SOURCE_DIR}/cmake/vcpkg-ports")
-
-option(BUILD_GRPC_CLIENT "Build GRPC client" ON)
-set(WEBSOCKET_IMPLS libhttpclient wslay OFF)
-set(WS_IMPL OFF CACHE STRING "Websocket implementation. One of: ${WEBSOCKET_IMPLS}")
-
-set(HTTP_IMPLS libhttpclient OFF)
-set(HTTP_IMPL OFF CACHE STRING "HTTP implementation. One of: ${HTTP_IMPLS}")
+list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
+list(APPEND VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg-ports")
 
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(INCLUDE_OPTIONAL_LITE "Include optional lite in include folder" ON)
-
 option(UNREAL "Unreal engine support" OFF)
 
-if (UNREAL)
-    message(NOTICE "Disabling HTTP transport in Unreal build mode")
-    set(HTTP_IMPL OFF CACHE STRING "HTTP implementation" FORCE)
+set(HTTP_IMPL "")
+set(WS_IMPL "")
 
-    # too many bugs in the Linux WS implementation:
+if (UNREAL)
+    set(WITH_EXTERNAL_HTTP ON)
+    # too many bugs in the Unreal Linux WS implementation:
     # https://github.com/EpicGames/UnrealEngine/pull/7267 and
     # https://github.com/EpicGames/UnrealEngine/pull/9103
-    if (NOT VCPKG_TARGET_TRIPLET MATCHES "linux")
+    message(NOTICE "Disabling HTTP transport in Unreal build mode")
+    if (NOT LINUX)
         message(NOTICE "Disabling WS transport in Unreal build mode")
-        set(WS_IMPL OFF CACHE STRING "WS implementation" FORCE)
+        set(WITH_EXTERNAL_WS ON)
     endif()
+endif()
+
+if (BUILD_WSLAY)
+    set(WS_IMPL "wslay")
+endif()
+
+### default to libhttpclient
+
+if (HTTP_IMPL STREQUAL "" AND NOT WITH_EXTERNAL_HTTP)
+    set(HTTP_IMPL "libhttpclient")
+endif()
+
+if (WS_IMPL STREQUAL "" AND NOT WITH_EXTERNAL_WS)
+    set(WS_IMPL "libhttpclient")
 endif()
 
 # when building android, this cmake is called from gradle with ANDROID_ABI passed.
@@ -40,33 +48,6 @@ elseif (ANDROID_ABI MATCHES x86_64)
     set(VCPKG_TARGET_TRIPLET x64-android-heroic)
 endif()
 
-
-# We need to set VCPKG_MANIFEST_FEATURE before calling project(), because
-# that is where dependencies are installed and where real toolchain file (if any)
-# is configured.
-if (BUILD_GRPC_CLIENT)
-    list(APPEND VCPKG_MANIFEST_FEATURES "grpc")
-endif()
-
-# Not that many CMake variables are set before first project(),
-# for instance CMAKE_SYSTEM_NAME which would normally identify build target platform
-# is empty at this point, so we rely on VCPKG_TARGET_TRIPLET to identify platform.
-if (HTTP_IMPL STREQUAL "libhttpclient" AND VCPKG_TARGET_TRIPLET MATCHES "linux|ios|osx|iphonesimulator")
-    # on MacOSX curl seems to be part of the system, but we bring our own for consistency
-    list(APPEND VCPKG_MANIFEST_FEATURES "curl")
-endif()
-
-if (WS_IMPL STREQUAL "libhttpclient" AND VCPKG_TARGET_TRIPLET MATCHES "linux|windows|android")
-    list(APPEND VCPKG_MANIFEST_FEATURES "websocketpp")
-endif()
-
-if (WS_IMPL STREQUAL "wslay")
-    list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
-    if(VCPKG_TARGET_TRIPLET MATCHES "linux|ios|osx|iphonesimulator")
-        list(APPEND VCPKG_MANIFEST_FEATURES "curl")
-    endif()
-endif()
-
 # being called from gradle
 if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
     # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
@@ -77,8 +58,6 @@ if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
 endif()
 
 cmake_policy(SET CMP0012 NEW)
-
-
 
 # If this CMake is called as part of another build system, like gradle's android plugin,
 # where CMAKE_TOOLCHAIN_FILE is unconditionally passed, we can pass extra arg TOOLCHAIN_LOAD_FIRST
@@ -124,6 +103,10 @@ option(ADDRESS_SANITIZER "Enable address sanitizer (broken on windows)" OFF)
 # libhttpclient uses websocketpp when system winhttp doesn't provide one (< Windows 8)
 # this flag allows us to force use of websocketpp so that it can be tested on current Windows versions
 option(LIBHTTPCLIENT_FORCE_WEBSOCKETPP "Force use of websocketpp instead of winhttp in the libhttpclient" OFF)
+
+if (LIBHTTPCLIENT_FORCE_WEBSOCKETPP)
+    list(APPEND VCPKG_MANIFEST_FEATURES "websocketpp")
+endif()
 
 if(LOGS_ENABLED)
     add_compile_definitions(NLOGS_ENABLED)
@@ -179,12 +162,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     endif()
 endif()
 
-if(WS_IMPL STREQUAL "wslay")
-    if (LINUX OR APPLE)
-        set(WSLAY_NETIO "CURL")
-    endif()
-endif()
-
 add_library(nakama-ws-impl INTERFACE)
 if(WS_IMPL STREQUAL "libhttpclient")
     set(BUILD_WEBSOCKET_LIBHTTPCLIENT ON)
@@ -194,20 +171,16 @@ elseif(WS_IMPL STREQUAL "wslay")
     set(BUILD_WEBSOCKET_WSLAY ON)
     set(WS_IMPL_LIB nakama-impl-ws-wslay)
     add_subdirectory(impl/wsWslay EXCLUDE_FROM_ALL)
-elseif(NOT (WS_IMPL STREQUAL "OFF"))
+elseif(NOT (WITH_EXTERNAL_WS))
     message(FATAL_ERROR "Unknown WS_IMPL: ${WS_IMPL}")
-elseif(WS_IMPL STREQUAL OFF)
-    set(BUILD_WEBSOCKET_IS_BLANK ON)
 endif()
 
 if(HTTP_IMPL STREQUAL "libhttpclient")
     set(BUILD_HTTP_LIBHTTPCLIENT ON)
     add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
-elseif(HTTP_IMPL STREQUAL OFF)
-    set(BUILD_HTTP_IS_BLANK ON)
 endif()
 
-if(NOT BUILD_HTTP_IS_BLANK AND NOT HTTP_IMPL_LIB)
+if(NOT WITH_EXTERNAL_HTTP AND NOT HTTP_IMPL_LIB)
     message(FATAL_ERROR "BUG: CMakeLists.txt in the impl dir must set HTTP_IMPL_LIB with PARENT_SCOPE")
 endif()
 

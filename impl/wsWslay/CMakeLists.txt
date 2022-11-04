@@ -15,13 +15,9 @@ target_link_libraries(nakama-impl-ws-wslay INTERFACE
 
 target_include_directories(nakama-impl-ws-wslay INTERFACE .)
 
-if (WSLAY_NETIO STREQUAL "CURL")
+if (BUILD_CURL)
     find_package(CURL CONFIG REQUIRED)
     target_link_libraries(nakama-impl-ws-wslay INTERFACE CURL::libcurl)
-endif()
-
-if (NOT WSLAY_NETIO)
-    message(FATAL_ERROR "Error in our CMake, must be set by now")
 endif()
 
 target_compile_definitions(nakama-impl-ws-wslay INTERFACE "WSLAY_NETIO_${WSLAY_NETIO}")

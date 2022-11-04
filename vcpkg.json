@@ -1,45 +1,72 @@
 {
-    "default-features": [],
+    "builtin-baseline": "14e7bb4ae24616ec54ff6b2f6ef4e8659434ea44",
+    "default-features": [
+        "wslay",
+        "curl",
+        "websocketpp"
+    ],
     "dependencies": [
-      "protobuf",
-      "rapidjson",
-      "optional-lite"
+        "protobuf",
+        {
+            "name": "rapidjson",
+            "version>=": "2020-09-14#2"
+        },
+        "optional-lite"
     ],
     "features": {
-      "libcxx": {
-        "description": "Build using libc++",
-        "dependencies": [
-          {
-            "name":  "llvm",
-            "platform": "linux",
-            "default-features": false,
-            "features": [
-              "libcxx"
+        "websocketpp": {
+            "description": "Websockets library.",
+            "dependencies": [
+                {
+                    "name": "websocketpp",
+                    "platform": "windows"
+                },
+                {
+                    "name": "asio",
+                    "platform": "windows"
+                }
             ]
-          }
-        ]
-      },
-      "grpc": {
-        "description": "Build GRPC client",
-        "dependencies": [ "grpc" ]
-      },
-      "websocketpp": {
-        "description": "Pull in websocketpp dependency (should be used only on Linux)",
-        "dependencies": [ "websocketpp", "asio" ]
-      },
-      "wslay": {
-        "description": "Pull in wslay dependency",
-        "dependencies": [ "wslay" ]
-      },
-      "curl": {
-        "description": "Pull in libcurl dependency",
-        "dependencies": [
-          {
-            "name":  "curl",
-            "default-features":  false,
-            "features":  ["ssl"]
-          }
-        ]
-      }
+        },
+        "wslay": {
+            "description": "Websockets library decoupled from IO and handshakes.",
+            "dependencies": [
+                {
+                    "name": "wslay",
+                    "platform": "linux | osx | ios"
+                }
+            ]
+        },
+        "curl": {
+            "description": "The libcurl networking library.",
+            "dependencies": [
+                {
+                    "name": "curl",
+                    "default-features": false,
+                    "features": [
+                        "ssl"
+                    ],
+                    "platform": "linux | osx | ios"
+                }
+            ]
+        },
+        "libcxx": {
+            "description": "An alternative C++ standard library, used by Unreal Engine.",
+            "dependencies": [
+                {
+                    "name": "llvm",
+                    "default-features": false,
+                    "features": [
+                        "libcxx"
+                    ],
+                    "platform": "linux"
+                }
+            ]
+        },
+        "grpc": {
+            "description": "The grpc networking protocol.",
+            "dependencies": [
+                "grpc"
+            ]
+        }
     }
-  }
+}

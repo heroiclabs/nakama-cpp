@@ -299,7 +299,7 @@ Supported build modifiers are:
 - `LIBHTTPCLIENT_FORCE_WEBSOCKETPP`: On Windows platforms libhttpclient always includes
   websocketpp transport and uses it if Windows doesn't support websocket natively (< Windows 8).
   You can set this build modifier to force use of websocketpp transport, so that it can be tested without
-  installing Windows 7.
+  installing Windows 7. If you
 - `WITH_LIBCXX`: dynamically link with libc++ instead of libstdc++ on Linux platform.
   - `LIBCXX_STATIC`: link libc++ statically
 - `UNREAL`: creates binaries that are compatible with Unreal Engine.
@@ -356,64 +356,71 @@ You can then archive and release `out/osx-universal`  directory.
 Platforms vary in their implementation of transports for HTTP and WS. One of the
 transports, `libhttpclient` itself can use different implementations depending on the platform.
 
-
 HTTP:
 
-Platform | Current                  | Planned |
-  --- |--------------------------| ---
- Win32 | libhttpclient -> winhttp | -
-Linux | libhttpclient->curl      | -
-MacOS | libhttpclient -> OS      | -
-iOS   | libhttpclient -> OS      | -
-XDK  | libhttpclient -> OS      | -
-GDK | libhttpclient -> OS      | -
-PS4/5 | OS                       |  -
-Unreal | $platform              | sdk-blank + unreal
+Platform | Transport              |
+  --- |---------------------------|
+Win32 | libhttpclient -> winhttp  |
+Android | libhttpclient -> okhttp |
+Linux | libhttpclient->curl       |
+MacOS | libhttpclient -> OS       |
+iOS   | libhttpclient -> OS       |
+Unreal | unreal                   |
 
 Websockets:
 
-Platform | Current                      | Planned |
---- |------------------------------| ---
-Win32 | libhttpclient -> winhttp     | -
-Linux | wslay                        | -
-MacOS | wslay                        | libhttpclient -> OS (min OSX 10.14)
-iOS   | wslay                        | libhttpclient -> OS (min iOS xx.xx)
-XDK  | libhttpclient -> OS          | -
-GDK | libhttpclient -> OS          | -
-PS4/5 | wslay                        |  OS (new SDK)
-Unreal | $platform                  | sdk-blank + unreal
+Platform | Transport
+--- |------------------------------|
+Win32 | libhttpclient -> websocketpp |
+Android | libhttpclient -> okhttp  |
+Linux | wslay                      |
+MacOS | wslay                      |
+iOS   | wslay                      |
+Unreal | unreal                    |
 
+# How to integrate the SDK
 
-### Blank build
+There are three ways of integrating the SDK into your build.
 
-Transports are the messiest and hardest part when it comes to compiling on multiple platforms.
-The rest of the code is "pure" and relies on nothing, but stdlib, making it fairly trivial to compile.
+## Github Release
+We provide headers and binaries for all supported platforms in our releases section.
 
-It is possible to make a "blank" build of the SDK with no transports included. An example use case
-would be to have it shipped alongside a game executable, where game executable is responsible
-for providing `NHttpTransportInterface` and `NRtTransportInterface` implementations. For instance
-if the game is Unreal based, then builtin Unreal HTTP and WS clients can be used to implement
-transport and passed to the blank SDK.
+## CMake
+After downloading it to a folder you've configured CMake to look for targets in, you can import our package via the `find_package` command in CMake: `find_package(nakama-sdk)`.
 
-To make a blank build pass `-D HTTP_IMPL=OFF -D WS_IMPL=OFF` to cmake at configure time. Example:
+## vcpkg
 
+Our SDK integrates with vcpkg by providing itself through a git registry. To include it in your vcpkg manifest, create a `vcpkg-configuration.json`
+in your root directory.
+
+{
+    "registries":
+    [
+        {
+            "kind": "git",
+            "repository": "https://github.com/heroiclabs/nakama-cpp",
+            "baseline": "<commit>",
+            "reference": "<branch>",
+            "packages": ["nakama-sdk"]
+        }
+    ]
+}
+
+Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
 ```
-cmake --preset win-x64 -D HTTP_IMPL=OFF -D WS_IMPL=OFF
-cmake --build --preset release-win-x64
+    "dependencies": [
+      {
+        "name": "nakama-sdk"
+      }]
 ```
 
-### Non-public (consoles) transports
+# Contributing
 
-Consoles code can't be published to the public repository and their code is hosted in
-https://github.com/heroiclabs/nakama-cpp-private repository.  Private repository hosts
-just source code and minimal CMake files required to build them, rest of build system
-resides here.
+If you need to make a change to the portfile, vcpkg has a very particular process for exposing that change to port consumers:
 
-Consoles build presets will implicitly check out nakama-cpp-private repository, so you don't
-need to do anything special. You can configure commit used with `NAKAMA_PRIVATE_REPO_GIT_TAG` variable,
-which can be set with `-DNAKAMA_PRIVATE_REPO_GIT_TAG=123456` cmd flag at configuration time
+(1) Make the desired change to the portfile. Commit.
+(2) Get the git-tree hash of the portfile directory: `git rev-parse HEAD:./cmake/vcpkg-ports/nakama-sdk`.
+(3) Update the `git-tree` key to contain the value of this hash in `versions\n-\nakama-sdk.json`. Commit.
+(4) Consumers will need to update to the new commit as the `baseline` value in their `vcpkg-configuration.json`.
 
-You can edit files in-place in `./build/${preset}/_deps/nakama-cpp-private-src` for a speedy development. Once
-done commit and push by running git from that location, it is proper git clone, so normal git commands should work.
-
-GDK is expected to be installed completely normally, per Microsoft instructions. Use the March 2022 edition for Unreal Engine.
+We are investigating ways to simplify this process, although portfile changes are very rare.

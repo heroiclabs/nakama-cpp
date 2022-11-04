@@ -1,13 +1,27 @@
-vcpkg_from_github(
+set(VCPKG_USE_HEAD_VERSION ON)
+
+vcpkg_from_git(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO heroiclabs/nakama-cpp
-    REF 9f984507326a1e60a9adb785cbf455abc8202bf9
-    SHA512 05446f2a59947afcfd029be62c7639566765f2dc1564982b6d5366ebf60f4be6a4539d1caaa0ab20d27bb8b4a806862ddcb1d5bd0007b7a28eb26e0f10bf0164
+    URL https://github.com/heroiclabs/nakama-cpp.git
+    HEAD_REF master
+)
+
+set(VCPKG_USE_HEAD_VERSION OFF)
+
+vcpkg_check_features(
+    OUT_FEATURE_OPTIONS FEATURE_OPTIONS
+    FEATURES
+        wslay BUILD_WSLAY
+        grpc  BUILD_GRPC_CLIENT
+        curl  BUILD_CURL
+        external-http WITH_EXTERNAL_HTTP
+        external-ws WITH_EXTERNAL_WS
 )
 
 vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH}
-    OPTIONS
-        --DINCLUDE_OPTIONAL_LITE=OFF # user will obtain optional-lite via vcpkg dependency management
+  OPTIONS
+    -DINCLUDE_OPTIONAL_LITE=OFF # user will obtain optional-lite via vcpkg dependency management
+    ${FEATURE_OPTIONS} ### created by vcpkg_check_features
 )
 
 vcpkg_cmake_install()

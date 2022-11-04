@@ -21,57 +21,37 @@
     #include "../core/core-grpc/GrpcClient.h"
 #endif
 
-#ifdef BUILD_REST_CLIENT
-    #include "../core/core-rest/RestClient.h"
-#endif
+#include "../core/core-rest/RestClient.h"
 
 #ifdef BUILD_HTTP_LIBHTTPCLIENT
 #include "../../impl/httpLibHttpClient/NHttpClientLibHC.h"
 #endif
 
-#ifdef BUILD_HTTP_SONY
-#include "httpSony.h"
-#endif
-
-
 namespace Nakama {
 
+#if !defined(WITH_EXTERNAL_HTTP) || defined(BUILD_GRPC_CLIENT)
 NClientPtr createDefaultClient(const NClientParameters& parameters)
 {
-#ifdef BUILD_REST_CLIENT
-
-    return createRestClient(parameters);
-
-#elif defined(BUILD_GRPC_CLIENT)
-
+    #if defined(BUILD_GRPC_CLIENT)
     return createGrpcClient(parameters);
-
-#else
-
-    NLOG_ERROR("No default client is available");
-    return nullptr;
-
-#endif
+    #else
+    return createRestClient(parameters);
+    #endif
 }
+#endif
+
+#if BUILD_GRPC_CLIENT
 
 NClientPtr createGrpcClient(const NClientParameters& parameters)
 {
-#ifdef BUILD_GRPC_CLIENT
     NClientPtr client(new GrpcClient(parameters));
     return client;
-
-#else
-    (void)parameters;
-    NLOG_ERROR("gRPC client is not available");
-    return nullptr;
+}
 
 #endif
-}
 
 NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportPtr httpTransport)
 {
-#ifdef BUILD_REST_CLIENT
-
     if (!httpTransport)
     {
         httpTransport = createDefaultHttpTransport(parameters.platformParams);
@@ -85,31 +65,19 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
 
     NClientPtr client(new RestClient(parameters, httpTransport));
     return client;
-
-#else
-
-    NLOG_ERROR("REST client is not available");
-    return nullptr;
-
-#endif
 }
 
-#ifdef BUILD_REST_CLIENT
+#ifndef WITH_EXTERNAL_HTTP
 NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platformParams)
 {
     (void)platformParams;  // silence unused variable warning on some platforms
     // Compilation error if no implementation is selected
-#if defined(BUILD_HTTP_LIBHTTPCLIENT)
+    #if defined(BUILD_HTTP_LIBHTTPCLIENT)
     return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
-#elif defined(BUILD_HTTP_SONY)
-    return NHttpTransportPtr(NHttpClientSony::New());
-#elif defined(BUILD_HTTP_IS_BLANK)
-    NLOG_ERROR("No default transport included, users must provide their own explicitly");
-    return nullptr;
-#else
-#error "New impl is not listed here, fix it"
-#endif
+    #else
+        #error Could not find default http transport for platform.
+    #endif
 }
-#endif //BUILD_REST_CLIENT
+#endif //WITH_EXTRNAL_HTTP
 
 }
