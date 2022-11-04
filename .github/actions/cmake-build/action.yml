@@ -61,7 +61,7 @@ runs:
     - name: Setup vcpkg
       shell: bash
       run: >
-        git clone --depth=1 https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+        git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
 
     - name: Installing prerequisites
       run:  |
