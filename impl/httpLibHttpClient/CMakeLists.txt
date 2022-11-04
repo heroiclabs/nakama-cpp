@@ -8,6 +8,13 @@ file(
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 add_library(nakama-impl-http-libhttpclient OBJECT ${srcs})
+
+
+if (APPLE)
+    target_compile_definitions(nakama-impl-http-libhttpclient INTERFACE "HC_APPLE_POSIX")
+endif()
+
+
 target_link_libraries(nakama-impl-http-libhttpclient
         PUBLIC nakama-api-proto nakama::sdk-interface
         # libhttpclient is OBJECT library, so this link wont create
