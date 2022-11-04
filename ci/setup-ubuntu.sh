@@ -30,7 +30,7 @@ ensure_mono() {
 
 setup_vcpkg() {
   ensure_mono
-  eatmydata "${VCPKG_ROOT}"/bootstrap-vcpkg.sh
+  eatmydata "${VCPKG_ROOT}/bootstrap-vcpkg.sh"
 }
 
 
