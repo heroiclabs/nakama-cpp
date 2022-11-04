@@ -58,6 +58,11 @@ runs:
           echo "::error::Unexpected 'input' flavour value: ${{ inputs.flavour }}"
         fi
 
+    - name: Setup vcpkg
+      shell: bash
+      run: >
+        git clone --depth=1 https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+
     - name: Installing prerequisites
       run:  |
         if [[ "${{ runner.os }}"  == "Linux" ]]; then
