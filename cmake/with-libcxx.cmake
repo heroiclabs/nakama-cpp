@@ -53,7 +53,7 @@ endif()
 set(LIBCXX_INSTALL_ROOT ${CMAKE_CURRENT_BINARY_DIR}/libcxx)
 
 execute_process(COMMAND
-  ${CMAKE_CURRENT_LIST_DIR}/vcpkg/vcpkg 
+  ${VCPKG_ROOT_DIR}/vcpkg
   --feature-flags=-manifests
   install
   --triplet=${TRIPLET}
