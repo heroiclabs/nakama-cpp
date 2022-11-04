@@ -79,10 +79,7 @@ void NCppTest::createWorkingClient()
 
 NClientPtr NCppTest::createClient(const NClientParameters& parameters)
 {
-    if (getClientType() == ClientType_Grpc)
-        client = createGrpcClient(parameters);
-    else
-#if !defined(__UNREAL__)        
+#if !defined(__UNREAL__)
         client = createRestClient(parameters);
 #else
         client = Nakama::Unreal::createNakamaClient(parameters, Nakama::NLogLevel::Debug);
@@ -190,7 +187,6 @@ int main(int argc, char *argv[])
     cout << endl;
     cout << "server config:" << endl;
     cout << "host     : " << Nakama::Test::g_serverHost << endl;
-    cout << "gRPC port: " << SERVER_GRPC_PORT << endl;
     cout << "HTTP port: " << SERVER_HTTP_PORT << endl;
     cout << "key      : " << SERVER_KEY << endl;
     cout << "ssl      : " << (SERVER_SSL ? "true" : "false") << endl;
@@ -211,15 +207,6 @@ int main(int argc, char *argv[])
             return res;
         }
     };
-
-    // gRPC client tests
-    g_clientType = ClientType_Grpc;
-    if (Nakama::Test::NCppTest("").createClient({})) {
-        res = Nakama::Test::runAllTests();
-        if (res != 0) {
-            return res;
-        }
-    }
 
     return res;
 }
