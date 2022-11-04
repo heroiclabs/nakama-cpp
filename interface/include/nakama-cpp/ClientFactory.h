@@ -62,7 +62,10 @@ NAKAMA_NAMESPACE_BEGIN
      *
      * @param parameters the client parameters
      */
+#ifndef WITH_EXTERNAL_HTTP
     NAKAMA_API NClientPtr createDefaultClient(const NClientParameters& parameters);
+#endif
+
 
     /**
      * Creates the gRPC client to interact with Nakama server.
@@ -77,9 +80,7 @@ NAKAMA_NAMESPACE_BEGIN
      * @param parameters the client parameters
      * @param httpTransport optional, the HTTP client. If not set then default HTTP transport will be used.
      */
-#ifdef BUILD_REST_CLIENT && !defined(WITH_EXTERNAL_HTTP)
     NAKAMA_API NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportPtr httpTransport = nullptr);
-#endif
 
     /**
      * Creates default HTTP transport using C++ REST SDK.

@@ -9,7 +9,6 @@ list(APPEND VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg-ports")
 option(INCLUDE_OPTIONAL_LITE "Include optional lite in include folder" ON)
 option(UNREAL "Unreal engine support" OFF)
 
-set(BUILD_REST_CLIENT ON)
 set(HTTP_IMPL "")
 set(WS_IMPL "")
 

@@ -38,6 +38,8 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
     return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
     #elif defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL)
     return NRtTransportPtr(new NWebsocketWslay<NetIOCurl>());
+    #else
+        #error Could not find default web socket transport for platform.
     #endif
 }
 
