@@ -30,7 +30,7 @@ ensure_mono() {
 
 setup_vcpkg() {
   ensure_mono
-  eatmydata ./cmake/vcpkg/bootstrap-vcpkg.sh
+  eatmydata "${VCPKG_ROOT}"/bootstrap-vcpkg.sh
 }
 
 
@@ -39,7 +39,7 @@ if [[ -z "$@" ]]; then
   (( $(gcc -dumpversion) >= 11 )) || install_gcc_11
   ninja --version 2>/dev/null || install_ninja
   setup_vcpkg
-else 
+else
   # allow caller to cherry-pick what exactly to do
   for arg in "$@"; do
     $arg

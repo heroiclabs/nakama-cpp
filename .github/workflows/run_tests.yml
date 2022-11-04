@@ -63,7 +63,7 @@ jobs:
 #            date
 #          done
 
-  apple:
+  macos:
     timeout-minutes: 30
     runs-on: macos-12
     env:
