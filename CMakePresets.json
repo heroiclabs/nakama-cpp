@@ -47,7 +47,8 @@
         "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
         "VCPKG_TARGET_TRIPLET": "arm64-osx-heroic",
         "CMAKE_OSX_ARCHITECTURES": "arm64",
-        "BUILD_WSLAY": "ON"
+        "BUILD_WSLAY": "ON",
+        "BUILD_CURL": "ON"
       },
       "condition":
       {
