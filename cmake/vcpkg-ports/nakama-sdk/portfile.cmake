@@ -3,7 +3,7 @@ set(VCPKG_USE_HEAD_VERSION ON)
 vcpkg_from_git(
     OUT_SOURCE_PATH SOURCE_PATH
     URL https://github.com/heroiclabs/nakama-cpp.git
-    HEAD_REF luke/feature-rework
+    HEAD_REF master
 )
 
 set(VCPKG_USE_HEAD_VERSION OFF)
