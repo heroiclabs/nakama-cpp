@@ -390,7 +390,7 @@ After downloading it to a folder you've configured CMake to look for targets in,
 
 ## vcpkg
 
-Our SDK integrates with vcpkg by providing itself as a git registry. To include it in your vcpkg manifest, create a `vcpkg-configuration.json`
+Our SDK integrates with vcpkg by providing itself through a git registry. To include it in your vcpkg manifest, create a `vcpkg-configuration.json`
 in your root directory.
 
 {
