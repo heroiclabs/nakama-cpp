@@ -24,4 +24,5 @@ vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH}
     ${FEATURE_OPTIONS} ### created by vcpkg_check_features
 )
 
+vcpkg_cmake_config_fixup()
 vcpkg_cmake_install()
