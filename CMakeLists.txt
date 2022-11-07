@@ -292,21 +292,21 @@ endif()
 
 ## use share directory for export files (at least a vcpkg convention)
 install(EXPORT nakama-export
-        DESTINATION share)
+        DESTINATION share/nakama-sdk)
 
 
 include(CMakePackageConfigHelpers)
 
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-sdk-config.cmake.in
   "${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake"
-  INSTALL_DESTINATION share
+  INSTALL_DESTINATION share/nakama-sdk
   NO_SET_AND_CHECK_MACRO
   NO_CHECK_REQUIRED_COMPONENTS_MACRO
   )
 
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake
-  DESTINATION share
+  DESTINATION share/nakama-sdk
 )
 
 if (INCLUDE_OPTIONAL_LITE)
