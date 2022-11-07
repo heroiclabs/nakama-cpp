@@ -290,23 +290,23 @@ if(MSVC)
     install(FILES $<TARGET_PDB_FILE:nakama-sdk> DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT nakama-sdk OPTIONAL)
 endif()
 
-## use /share directory for export files (at least a vcpkg convention)
+## use share directory for export files (at least a vcpkg convention)
 install(EXPORT nakama-export
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/share)
+        DESTINATION share)
 
 
 include(CMakePackageConfigHelpers)
 
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-sdk-config.cmake.in
   "${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake"
-  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/share
+  INSTALL_DESTINATION share
   NO_SET_AND_CHECK_MACRO
   NO_CHECK_REQUIRED_COMPONENTS_MACRO
   )
 
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/share
+  DESTINATION share
 )
 
 if (INCLUDE_OPTIONAL_LITE)
