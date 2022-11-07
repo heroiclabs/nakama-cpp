@@ -53,11 +53,11 @@ endif()
 set(LIBCXX_INSTALL_ROOT ${CMAKE_CURRENT_BINARY_DIR}/libcxx)
 
 execute_process(COMMAND
-  ${CMAKE_CURRENT_LIST_DIR}/vcpkg/vcpkg 
+  ${VCPKG_ROOT}/vcpkg
   --feature-flags=-manifests
   install
   --triplet=${TRIPLET}
-  --vcpkg-root ${CMAKE_CURRENT_LIST_DIR}/vcpkg
+  --vcpkg-root ${VCPKG_ROOT}
   --x-install-root=${LIBCXX_INSTALL_ROOT}
   --overlay-ports=${CMAKE_CURRENT_LIST_DIR}/vcpkg-ports
   --overlay-triplets=${CMAKE_CURRENT_LIST_DIR}/triplets

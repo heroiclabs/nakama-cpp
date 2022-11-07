@@ -46,6 +46,11 @@ runs:
         setapikey "${{ inputs.GITHUB_TOKEN }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
 
+    - name: Setup vcpkg
+      shell: bash
+      run: >
+        git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+
     - id: cmake_args
       shell: bash
       if: ${{ inputs.flavour }}

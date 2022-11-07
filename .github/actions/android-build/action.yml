@@ -28,7 +28,7 @@ runs:
     - name: Installing prerequisites
       shell: bash
       run:  |
-        if [[ "${{ runner.os }}"  == "Linux" ]]; then 
+        if [[ "${{ runner.os }}"  == "Linux" ]]; then
           sudo ./ci/setup-ubuntu.sh install_ninja setup_vcpkg
         elif [[ "${{ runner.os }}" == "macOS" ]]; then
           ./ci/setup-osx.sh
@@ -40,8 +40,13 @@ runs:
       shell: bash
       run: >
         mono `vcpkg fetch nuget | tail -n 1`
-        setapikey "${{ inputs.GITHUB_TOKEN }}" 
+        setapikey "${{ inputs.GITHUB_TOKEN }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+
+    - name: Setup vcpkg
+      shell: bash
+      run: >
+        git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
 
     - run: rm -rf out
       shell: bash

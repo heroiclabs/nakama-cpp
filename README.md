@@ -233,7 +233,7 @@ cd /tmp; curl -L -O https://github.com/ninja-build/ninja/releases/download/v1.10
 exec /bin/bash -l   # make ~/bin available on PATH
 git clone /mnt/z/repos/nakama-cpp-mono ~/localrepos/nakama-cpp-mono
 cd ~/localrepos/nakama-cpp-mono
-./cmake/vcpkg/bootstrap-vcpkg.sh
+${VCPKG_ROOT}/bootstrap-vcpkg.sh
 ```
 
 If you plan to use `WITH_LIBCXX`, then also do following:
