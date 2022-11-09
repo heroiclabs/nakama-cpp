@@ -42,7 +42,7 @@
                     "features": [
                         "ssl"
                     ],
-                    "platform": "linux | osx | ios | ps4 | ps5"
+                    "platform": "linux | osx | ios"
                 }
             ]
         },
