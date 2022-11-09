@@ -231,8 +231,8 @@ mkdir -p ~/opt; curl -L https://github.com/Kitware/CMake/releases/download/v3.23
 mkdir -p ~/bin; ln -s ~/opt/cmake-3.23.1-linux-x86_64/bin/cmake ~/bin/
 cd /tmp; curl -L -O https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-linux.zip; unzip ninja-linux.zip; mv ninja ~/bin
 exec /bin/bash -l   # make ~/bin available on PATH
-git clone /mnt/z/repos/nakama-cpp-mono ~/localrepos/nakama-cpp-mono
-cd ~/localrepos/nakama-cpp-mono
+git clone /mnt/z/repos/nakama-cpp ~/localrepos/nakama-cpp
+cd ~/localrepos/nakama-cpp
 ${VCPKG_ROOT}/bootstrap-vcpkg.sh
 ```
 
