@@ -1,11 +1,5 @@
 {
     "builtin-baseline": "14e7bb4ae24616ec54ff6b2f6ef4e8659434ea44",
-    "default-features": [
-        "wslay",
-        "curl",
-        "libhttpclient-ws",
-        "libhttpclient-http"
-    ],
     "dependencies": [
         "protobuf",
         {
