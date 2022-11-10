@@ -151,6 +151,7 @@
         "VCPKG_HOST_TRIPLET": "x64-linux-heroic",
         "VCPKG_TARGET_TRIPLET": "x64-linux-heroic",
         "BUILD_WSLAY": "ON",
+        "BUILD_CURL": "ON",
         "WITH_LIBHTTPCLIENT_HTTP": "ON"
       },
       "condition": {
