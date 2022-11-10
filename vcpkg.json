@@ -30,7 +30,7 @@
         },
         "libhttpclient-ws": {
             "description": "Websockets library that delegates to other implementations.",
-            "supports": "windows & android & osx"
+            "supports": "windows & android"
 
         },
         "libhttpclient-http": {
