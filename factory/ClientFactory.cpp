@@ -54,13 +54,8 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
 {
     if (!httpTransport)
     {
-        httpTransport = createDefaultHttpTransport(parameters.platformParams);
-
-        if (!httpTransport)
-        {
-            NLOG_ERROR("Error creating HTTP transport");
-            return nullptr;
-        }
+        NLOG_ERROR("Error creating HTTP transport");
+        return nullptr;
     }
 
     NClientPtr client(new RestClient(parameters, httpTransport));
