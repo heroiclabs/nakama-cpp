@@ -27,7 +27,9 @@
       "cacheVariables": {
         "WindowsDesktop": "ON",
         "VCPKG_HOST_TRIPLET": "x64-windows-static-heroic",
-        "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic"
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic",
+        "WITH_LIBHTTPCLIENT_HTTP": "ON",
+        "WITH_LIBHTTPCLIENT_WS": "ON"
       },
       "condition": {
         "type": "equals",
@@ -47,6 +49,7 @@
         "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
         "VCPKG_TARGET_TRIPLET": "arm64-osx-heroic",
         "CMAKE_OSX_ARCHITECTURES": "arm64",
+        "WITH_LIBHTTPCLIENT_HTTP": "ON",
         "BUILD_WSLAY": "ON",
         "BUILD_CURL": "ON"
       },
@@ -132,7 +135,9 @@
         "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE",
         "ANDROID_ABI": "passed-by-gradle",
         "ANDROID_ARM_NEON": "ON",
-        "ANDROID_STL": "c++_shared"
+        "ANDROID_STL": "c++_shared",
+        "WITH_LIBHTTPCLIENT_HTTP": "ON",
+        "WITH_LIBHTTPCLIENT_WS": "ON"
       },
       "environment": {
         "VCPKG_KEEP_ENV_VARS": "VCPKG_CHAINLOAD_TOOLCHAIN_FILE"
@@ -145,7 +150,8 @@
       "cacheVariables": {
         "VCPKG_HOST_TRIPLET": "x64-linux-heroic",
         "VCPKG_TARGET_TRIPLET": "x64-linux-heroic",
-        "BUILD_WSLAY": "ON"
+        "BUILD_WSLAY": "ON",
+        "WITH_LIBHTTPCLIENT_HTTP": "ON"
       },
       "condition": {
         "type": "equals",

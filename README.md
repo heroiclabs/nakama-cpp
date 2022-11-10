@@ -360,23 +360,26 @@ HTTP:
 
 Platform | Transport              |
   --- |---------------------------|
-Win32 | libhttpclient -> winhttp  |
+Windows | libhttpclient -> winhttp  |
 Android | libhttpclient -> okhttp |
 Linux | libhttpclient->curl       |
 MacOS | libhttpclient -> OS       |
 iOS   | libhttpclient -> OS       |
 Unreal | unreal                   |
+Windows 7 | libhttpclient -> websocketpp |
 
 Websockets:
 
 Platform | Transport
 --- |------------------------------|
-Win32 | libhttpclient -> websocketpp |
+Windows | libhttpclient -> winhttp |
 Android | libhttpclient -> okhttp  |
 Linux | wslay                      |
 MacOS | wslay                      |
 iOS   | wslay                      |
 Unreal | unreal                    |
+Windows 7 | libhttpclient -> websocketpp |
+
 
 # How to integrate the SDK
 

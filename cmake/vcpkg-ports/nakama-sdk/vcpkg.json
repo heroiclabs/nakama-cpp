@@ -2,7 +2,12 @@
     "name": "nakama-sdk",
     "version": "2.6.0",
     "port-version": 3,
-    "default-features": [],
+    "default-features": [
+        "wslay",
+        "curl",
+        "libhttpclient-ws",
+        "libhttpclient-http"
+    ],
     "dependencies": [
         "protobuf",
         "rapidjson",
@@ -24,14 +29,23 @@
                 }
             ]
         },
+        "libhttpclient-ws": {
+            "description": "Websockets library that delegates to other implementations.",
+            "supports": "windows & android & osx"
+
+        },
+        "libhttpclient-http": {
+            "description": "HTTP library that delegates to other implementations.",
+            "supports": "windows & android & osx & ios & linux"
+        },
         "wslay": {
             "description": "Websockets library decoupled from IO and handshakes.",
             "dependencies": [
                 {
-                    "name": "wslay",
-                    "platform": "linux | osx | ios | ps4 | ps5"
+                    "name": "wslay"
                 }
-            ]
+            ],
+            "supports": "osx | ios | linux"
         },
         "curl": {
             "description": "The libcurl networking library.",
@@ -41,10 +55,10 @@
                     "default-features": false,
                     "features": [
                         "ssl"
-                    ],
-                    "platform": "linux | osx | ios"
+                    ]
                 }
-            ]
+            ],
+            "supports": "osx | ios | linux"
         },
         "libcxx": {
             "description": "An alternative C++ standard library, used by Unreal Engine.",

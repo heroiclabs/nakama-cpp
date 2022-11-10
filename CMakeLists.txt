@@ -13,29 +13,29 @@ set(HTTP_IMPL "")
 set(WS_IMPL "")
 
 if (UNREAL)
-    set(WITH_EXTERNAL_HTTP ON)
     # too many bugs in the Unreal Linux WS implementation:
     # https://github.com/EpicGames/UnrealEngine/pull/7267 and
     # https://github.com/EpicGames/UnrealEngine/pull/9103
     message(NOTICE "Disabling HTTP transport in Unreal build mode")
-    if (NOT LINUX)
+    if (LINUX)
         message(NOTICE "Disabling WS transport in Unreal build mode")
+    else()
+        set(WS_IMPL "wslay")
+    endif()
+else()
+    if (WITH_LIBHTTPCLIENT_HTTP)
+        set(HTTP_IMPL "libhttpclient")
+    else()
+        set(WITH_EXTERNAL_HTTP ON)
+    endif()
+
+    if (WITH_LIBHTTPCLIENT_WS)
+        set(WS_IMPL "libhttpclient")
+    elseif (BUILD_WSLAY)
+        set(WS_IMPL "wslay")
+    else()
         set(WITH_EXTERNAL_WS ON)
     endif()
-endif()
-
-if (BUILD_WSLAY)
-    set(WS_IMPL "wslay")
-endif()
-
-### default to libhttpclient
-
-if (HTTP_IMPL STREQUAL "" AND NOT WITH_EXTERNAL_HTTP)
-    set(HTTP_IMPL "libhttpclient")
-endif()
-
-if (WS_IMPL STREQUAL "" AND NOT WITH_EXTERNAL_WS)
-    set(WS_IMPL "libhttpclient")
 endif()
 
 # when building android, this cmake is called from gradle with ANDROID_ABI passed.
@@ -164,15 +164,12 @@ endif()
 
 add_library(nakama-ws-impl INTERFACE)
 if(WS_IMPL STREQUAL "libhttpclient")
-    set(BUILD_WEBSOCKET_LIBHTTPCLIENT ON)
     set(WS_IMPL_LIB nakama-impl-ws-libhttpclient)
     add_subdirectory(impl/wsLibHttpClient EXCLUDE_FROM_ALL)
 elseif(WS_IMPL STREQUAL "wslay")
     set(BUILD_WEBSOCKET_WSLAY ON)
     set(WS_IMPL_LIB nakama-impl-ws-wslay)
     add_subdirectory(impl/wsWslay EXCLUDE_FROM_ALL)
-elseif(NOT (WITH_EXTERNAL_WS))
-    message(FATAL_ERROR "Unknown WS_IMPL: ${WS_IMPL}")
 endif()
 
 if(HTTP_IMPL STREQUAL "libhttpclient")

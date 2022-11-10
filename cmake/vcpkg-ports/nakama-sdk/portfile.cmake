@@ -14,8 +14,8 @@ vcpkg_check_features(
         wslay BUILD_WSLAY
         grpc  BUILD_GRPC_CLIENT
         curl  BUILD_CURL
-        external-http WITH_EXTERNAL_HTTP
-        external-ws WITH_EXTERNAL_WS
+        libhttpclient-http WITH_LIBHTTPCLIENT_HTTP
+        libhttpclient-ws WITH_LIBHTTPCLIENT_WS
 )
 
 vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH}
