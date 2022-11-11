@@ -10,22 +10,20 @@
         "vcpkg-cmake-config"
     ],
     "features": {
-        "websocketpp": {
-            "description": "Websockets library.",
+        "libhttpclient-ws": {
+            "description": "Websockets library that delegates to other implementations.",
+            "supports": "windows | android",
             "dependencies": [
                 {
                     "name": "websocketpp",
-                    "platform": "windows"
+                    "default-features": false,
+                    "platform": "windows | android"
                 },
                 {
                     "name": "asio",
-                    "platform": "windows"
+                    "platform": "windows | android"
                 }
             ]
-        },
-        "libhttpclient-ws": {
-            "description": "Websockets library that delegates to other implementations.",
-            "supports": "windows | android"
         },
         "libhttpclient-http": {
             "description": "HTTP library that delegates to other implementations.",
@@ -71,12 +69,6 @@
             "dependencies": [
                 "grpc"
             ]
-        },
-        "external-http": {
-            "description": "The HTTP library will be provided at runtime by the consumer."
-        },
-        "external-ws": {
-            "description": "The Websocket library will be provided at runtime by the consumer."
         }
     }
 }

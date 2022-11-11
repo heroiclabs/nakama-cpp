@@ -360,8 +360,8 @@ HTTP:
 
 Platform | Transport              |
   --- |---------------------------|
-Windows | libhttpclient -> winhttp  |
-Android | libhttpclient -> okhttp |
+Windows | libhttpclient -> websocketpp  |
+Android | libhttpclient -> websocketpp |
 Linux | libhttpclient->curl       |
 MacOS | libhttpclient -> OS       |
 iOS   | libhttpclient -> OS       |
@@ -372,8 +372,8 @@ Websockets:
 
 Platform | Transport
 --- |------------------------------|
-Windows | libhttpclient -> winhttp |
-Android | libhttpclient -> okhttp  |
+Windows | libhttpclient -> websocketpp |
+Android | libhttpclient -> websocketpp  |
 Linux | wslay                      |
 MacOS | wslay                      |
 iOS   | wslay                      |
