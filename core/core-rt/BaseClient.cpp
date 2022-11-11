@@ -29,7 +29,7 @@ namespace Nakama {
 NRtClientPtr BaseClient::createRtClient(int32_t port, NRtTransportPtr transport)
 {
     RtClientParameters parameters;
-    
+
     parameters.host = _host;
     parameters.port = port;
     parameters.ssl  = _ssl;
@@ -42,13 +42,8 @@ NRtClientPtr BaseClient::createRtClient(const RtClientParameters& parameters, NR
 {
     if (!transport)
     {
-        transport = createDefaultWebsocket(parameters.platformParams);
-
-        if (!transport)
-        {
-            NLOG_ERROR("No default websockets transport available. Please set transport.");
-            return nullptr;
-        }
+        NLOG_ERROR("No websockets transport passed. Please set transport.");
+        return nullptr;
     }
 
     NRtClientPtr client(new NRtClient(transport, parameters.host, parameters.port, parameters.ssl));

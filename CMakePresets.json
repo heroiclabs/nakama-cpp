@@ -29,7 +29,8 @@
         "VCPKG_HOST_TRIPLET": "x64-windows-static-heroic",
         "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic",
         "WITH_LIBHTTPCLIENT_HTTP": "ON",
-        "WITH_LIBHTTPCLIENT_WS": "ON"
+        "WITH_LIBHTTPCLIENT_WS": "ON",
+        "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws; libhttpclient-http"
       },
       "condition": {
         "type": "equals",

@@ -22,6 +22,10 @@
                 {
                     "name": "asio",
                     "platform": "windows | android"
+                },
+                {
+                    "name": "openssl",
+                    "platform": "windows | android"
                 }
             ]
         },
