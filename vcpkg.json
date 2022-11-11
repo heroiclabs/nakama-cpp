@@ -24,12 +24,12 @@
         },
         "libhttpclient-ws": {
             "description": "Websockets library that delegates to other implementations.",
-            "supports": "windows & android"
+            "supports": "windows | android"
 
         },
         "libhttpclient-http": {
             "description": "HTTP library that delegates to other implementations.",
-            "supports": "windows & android & osx & ios & linux"
+            "supports": "windows | android | osx | ios | linux"
         },
         "wslay": {
             "description": "Websockets library decoupled from IO and handshakes.",

@@ -414,8 +414,13 @@ Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
     "dependencies": [
       {
         "name": "nakama-sdk"
+        "features": [<desired-feature-1>, <desired-feature-2>]
       }]
 ```
+
+vcpkg does not currently support specifying default features by platform, so you must specify your desired features based on the platform.
+
+For an example, look at how our [cocos-2d-x client](https://github.com/heroiclabs/nakama-cocos2d-x.git) does it. Also see our [our built-in transports](#transports) for each platform as we represent them using vcpkg features. If you do not specify a transport for the platform, the client will expect you to pass in your own at runtime.
 
 # Contributing
 
