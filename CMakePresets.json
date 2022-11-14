@@ -30,7 +30,7 @@
         "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic",
         "WITH_LIBHTTPCLIENT_HTTP": "ON",
         "WITH_LIBHTTPCLIENT_WS": "ON",
-        "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws; libhttpclient-http"
+        "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;libhttpclient-http"
       },
       "condition": {
         "type": "equals",
@@ -52,7 +52,8 @@
         "CMAKE_OSX_ARCHITECTURES": "arm64",
         "WITH_LIBHTTPCLIENT_HTTP": "ON",
         "BUILD_WSLAY": "ON",
-        "BUILD_CURL": "ON"
+        "BUILD_CURL": "ON",
+        "VCPKG_MANIFEST_FEATURES": "wslay;curl"
       },
       "condition":
       {
@@ -95,7 +96,9 @@
       "cacheVariables": {
         "CMAKE_INSTALL_LIBDIR": "ios-arm64",
         "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
-        "CMAKE_SYSTEM_NAME": "iOS"
+        "CMAKE_SYSTEM_NAME": "iOS",
+        "BUILD_WSLAY": "ON",
+        "BUILD_CURL": "ON"
       }
     },
     {
@@ -153,7 +156,8 @@
         "VCPKG_TARGET_TRIPLET": "x64-linux-heroic",
         "WITH_LIBHTTPCLIENT_HTTP": "ON",
         "BUILD_WSLAY": "ON",
-        "BUILD_CURL": "ON"
+        "BUILD_CURL": "ON",
+        "VCPKG_MANIFEST_FEATURES": "curl;wslay"
     },
       "condition": {
         "type": "equals",
