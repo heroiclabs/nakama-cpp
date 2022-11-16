@@ -18,6 +18,7 @@
 #include <chrono>
 #include <mutex>
 #include "NWebsocketLibHC.h"
+#include <nakama-cpp/log/NLogger.h>
 
 
 namespace Nakama {
@@ -72,7 +73,52 @@ static NTimestamp getUnixTimestampMs()
     return ms.count();
 }
 
-void configureNLogger();
+// Converts our loglevel to HCTracelevel
+static HCTraceLevel HCLevelForNLevel(NLogLevel lvl) {
+    switch (lvl) {
+        case NLogLevel::Debug:
+            return HCTraceLevel::Verbose;
+        case NLogLevel::Info:
+            return HCTraceLevel::Information;
+        case NLogLevel::Warn:
+            return HCTraceLevel::Warning;
+        case NLogLevel::Error:
+            return HCTraceLevel::Error;
+        case NLogLevel::Fatal:
+            return HCTraceLevel::Error;
+    }
+
+    return HCTraceLevel::Off;
+}
+
+static void configureNLogger() {
+    static bool configured = false;
+    auto l = NLogger::getSink();
+    if (!l) {
+        return;
+    }
+
+    if (configured) return;
+    configured = true;
+
+    HCSettingsSetTraceLevel(HCLevelForNLevel(l->getLevel()));
+    HCTraceSetClientCallback([](
+            const char* areaName, HCTraceLevel level, uint64_t /*threadId*/, uint64_t /*timestamp*/, const char* message) {
+        switch (level) {
+            case HCTraceLevel::Verbose:
+                return NLogger::Debug(message, areaName);
+            case HCTraceLevel::Information:
+                return NLogger::Info(message, areaName);
+            case HCTraceLevel::Important:
+            case HCTraceLevel::Warning:
+                return NLogger::Warn(message, areaName);
+            case HCTraceLevel::Error:
+                return NLogger::Error(message, areaName);
+            case HCTraceLevel::Off:
+                return;
+        }
+    });
+}
 
 std::unique_ptr<NWebsocketLibHC> NWebsocketLibHC::New(const NPlatformParameters& platformParams)
 {

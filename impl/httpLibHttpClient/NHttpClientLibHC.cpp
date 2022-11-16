@@ -27,7 +27,7 @@ static HCTraceLevel HCLevelForNLevel(NLogLevel lvl) {
     return HCTraceLevel::Off;
 }
 
-void configureNLogger() {
+static void configureNLogger() {
     static bool configured = false;
     auto l = NLogger::getSink();
     if (!l) {
