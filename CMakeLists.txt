@@ -80,7 +80,6 @@ project(nakama-sdk LANGUAGES CXX)
 include(cmake/platformSupport.cmake)
 include(cmake/compilerFlags.cmake)
 include(cmake/linkerFlags.cmake)
-include(cmake/localCompilerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
 
@@ -313,5 +312,6 @@ if (INCLUDE_OPTIONAL_LITE)
     )
 endif()
 
-# Call last so that it can reference any target previously defined
+# Call last so they can reference any target previously defined
 include(cmake/linkerFlagsTargets.cmake)
+include(cmake/localCompilerFlags.cmake)
