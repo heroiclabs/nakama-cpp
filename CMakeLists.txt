@@ -91,7 +91,6 @@ endif()
 
 set(CMAKE_CXX_STANDARD 17)
 option(LOGS_ENABLED "Enable log output" ON)
-option(NAKAMA_SHARED_LIBRARY "Build shared library" ON)
 
 if(NOT MSVC)
     string(APPEND CMAKE_CXX_FLAGS " -fexceptions")
@@ -117,10 +116,8 @@ if (ADDRESS_SANITIZER)
 endif()
 
 
-set(BUILD_MODE STATIC)
-if(NAKAMA_SHARED_LIBRARY)
+if(BUILD_SHARED_LIBS)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-    set(BUILD_MODE SHARED)
     add_compile_definitions(NAKAMA_SHARED_LIBRARY NAKAMA_SHARED_LIBRARY_EXPORTS)
 endif()
 
@@ -230,7 +227,7 @@ if (BUILD_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:nakama-sdk-core-grpc>)
 endif()
 
-add_library(nakama-sdk ${BUILD_MODE} ${NAKAMA_SDK_DEPS})
+add_library(nakama-sdk ${NAKAMA_SDK_DEPS})
 
 set_target_properties(nakama-sdk PROPERTIES
         FRAMEWORK TRUE
