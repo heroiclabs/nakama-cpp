@@ -188,7 +188,7 @@ NWebsocketLibHC::~NWebsocketLibHC() noexcept {
 void NWebsocketLibHC::connect(const std::string &url, NRtTransportType type) {
     {
         HCWebsocketHandle ws = nullptr;
-        auto hr = HCWebSocketCreate(&ws, static_cast<HCWebSocketMessageFunction>(&ws_on_text_msg), static_cast<HCWebSocketBinaryMessageFunction>(&ws_on_binary_msg), static_cast<HCWebSocketCloseEventFunction>(&ws_on_close), this);
+        auto hr = HCWebSocketCreate(&ws, reinterpret_cast<HCWebSocketMessageFunction>(&ws_on_text_msg), reinterpret_cast<HCWebSocketBinaryMessageFunction>(&ws_on_binary_msg), reinterpret_cast<HCWebSocketCloseEventFunction>(&ws_on_close), this);
         if (FAILED(hr)) {
             HC_TRACE_ERROR(wsTransportLibHC, "Error HCWebSocketCreate(): hr=%d", hr);
             this->fireOnError("Websocket connection error");
