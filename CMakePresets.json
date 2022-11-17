@@ -17,7 +17,8 @@
         "CMAKE_CONFIGURATION_TYPES": "Debug;MinSizeRel;RelWithDebInfo",
         "LOGS_ENABLED": "ON",
         "CMAKE_INSTALL_LIBDIR": "${presetName}",
-        "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk"
+        "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk",
+        "BUILD_SHARED_LIBS": "ON"
       }
     },
     {
