@@ -393,18 +393,17 @@ After downloading it to a folder you've configured CMake to look for targets in,
 
 ## vcpkg
 
-Our SDK integrates with vcpkg by providing itself through a git registry. To include it in your vcpkg manifest, create a `vcpkg-configuration.json`
-in your root directory.
+Our SDK integrates with vcpkg by providing itself and a few dependencies through a git registry. To include it in your vcpkg manifest, create a `vcpkg-configuration.json` in your root directory.
 
 {
     "registries":
     [
         {
             "kind": "git",
-            "repository": "https://github.com/heroiclabs/nakama-cpp",
+            "repository": "https://github.com/heroiclabs/nakama-vcpkg-registry",
             "baseline": "<commit>",
             "reference": "<branch>",
-            "packages": ["nakama-sdk"]
+            "packages": ["nakama-sdk", "wslay"]
         }
     ]
 }
@@ -418,17 +417,6 @@ Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
       }]
 ```
 
-vcpkg does not currently support specifying default features by platform, so you must specify your desired features based on the platform.
+vcpkg does not currently allow us to provide default features per platform, so you must specify your desired transports/features in your own vcpkg.json.
 
-For an example, look at how our [cocos-2d-x client](https://github.com/heroiclabs/nakama-cocos2d-x.git) does it. Also see our [our built-in transports](#transports) for each platform as we represent them using vcpkg features. If you do not specify a transport for the platform, the client will expect you to pass in your own at runtime.
-
-# Contributing
-
-If you need to make a change to the portfile, vcpkg has a very particular process for exposing that change to port consumers:
-
-(1) Make the desired change to the portfile. Commit.
-(2) Get the git-tree hash of the portfile directory: `git rev-parse HEAD:./cmake/vcpkg-ports/nakama-sdk`.
-(3) Update the `git-tree` key to contain the value of this hash in `versions\n-\nakama-sdk.json`. Commit.
-(4) Consumers will need to update to the new commit as the `baseline` value in their `vcpkg-configuration.json`.
-
-We are investigating ways to simplify this process, although portfile changes are very rare.
+For an example, look at how our [cocos-2d-x client](https://github.com/heroiclabs/nakama-cocos2d-x.git) does this. Also see our [our built-in transports](#transports) for each platform that we represent with vcpkg features. If you do not specify a transport for the platform, the client will expect you to pass in your own at runtime.
