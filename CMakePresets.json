@@ -40,6 +40,24 @@
       }
     },
     {
+      "name": "win-x86",
+      "inherits": ["default"],
+      "generator": "Visual Studio 17 2022",
+      "cacheVariables": {
+        "WindowsDesktop": "ON",
+        "VCPKG_HOST_TRIPLET": "x86-windows-release",
+        "VCPKG_TARGET_TRIPLET": "x86-windows-release",
+        "WITH_LIBHTTPCLIENT_HTTP": "ON",
+        "WITH_LIBHTTPCLIENT_WS": "ON",
+        "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;libhttpclient-http"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
       "name": "macosx-arm64-host_arm64",
       "inherits": [
         "default"
@@ -186,6 +204,17 @@
     {
       "name": "debug-win-x64",
       "configurePreset": "win-x64",
+      "configuration": "Debug"
+    },
+    {
+      "name": "release-win-x86",
+      "configurePreset": "win-x86",
+      "configuration": "MinSizeRel",
+      "verbose": true
+    },
+    {
+      "name": "debug-win-x86",
+      "configurePreset": "win-x86",
       "configuration": "Debug"
     },
     {
