@@ -1,15 +1,16 @@
 # Fetch proto files from nakama and nakama-common and builds them
 include(FetchContent)
 
-option(SKIP_GIT_UPDATE "Skips Nakama proto files re-fetch. Allows offline re-configure." OFF)
-
 FetchContent_Declare(
         nakama-repo
         GIT_REPOSITORY https://github.com/heroiclabs/nakama
         GIT_TAG        ${NAKAMA_GIT_TAG}
         GIT_SHALLOW    TRUE
         GIT_PROGRESS   TRUE
-        UPDATE_DISCONNECTED ${SKIP_GIT_UPDATE}
+        LOG_DOWNLOAD   TRUE
+        LOG_UPDATE TRUE TRUE
+        LOG_OUTPUT_ON_FAILURE TRUE
+
 )
 FetchContent_Declare(
         nakama-common-repo
@@ -17,10 +18,15 @@ FetchContent_Declare(
         GIT_TAG        ${NAKAMA_COMMON_GIT_TAG}
         GIT_SHALLOW    TRUE
         GIT_PROGRESS   TRUE
-        UPDATE_DISCONNECTED ${SKIP_GIT_UPDATE}
+        LOG_DOWNLOAD   TRUE
+        LOG_UPDATE TRUE TRUE
+        LOG_OUTPUT_ON_FAILURE TRUE
 )
 
-FetchContent_MakeAvailable(nakama-repo nakama-common-repo)
+message("making available")
+
+FetchContent_Populate(nakama-repo)
+FetchContent_Populate(nakama-common-repo)
 
 #### API and RTAPI proto ####
 
@@ -28,6 +34,8 @@ file(GLOB_RECURSE NAKAMA_API_PROTO_FILES
         ${nakama-common-repo_SOURCE_DIR}/api/*.proto
         ${nakama-common-repo_SOURCE_DIR}/rtapi/*.proto
         )
+
+message("adding library")
 
 add_library(nakama-api-proto OBJECT ${NAKAMA_API_PROTO_FILES})
 add_library(nakama::api-proto ALIAS nakama-api-proto)
@@ -37,11 +45,17 @@ target_include_directories(nakama-api-proto PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
+
+message("generating")
+message(${nakama-common-repo_SOURCE_DIR})
+
 protobuf_generate(TARGET nakama-api-proto
         LANGUAGE cpp
         IMPORT_DIRS "${nakama-common-repo_SOURCE_DIR}"
         PROTOC_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR}
         )
+
+message("done generating")
 
 if (BUILD_GRPC_CLIENT)
 #### apigrpc.proto ####
