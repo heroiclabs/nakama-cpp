@@ -9,7 +9,6 @@ FetchContent_Declare(
         GIT_TAG        ${NAKAMA_GIT_TAG}
         GIT_SHALLOW    TRUE
         GIT_PROGRESS   TRUE
-        SOURCE_SUBDIR  dont-include  # skips implicit add_subdirectory call
         UPDATE_DISCONNECTED ${SKIP_GIT_UPDATE}
 )
 FetchContent_Declare(
@@ -18,7 +17,6 @@ FetchContent_Declare(
         GIT_TAG        ${NAKAMA_COMMON_GIT_TAG}
         GIT_SHALLOW    TRUE
         GIT_PROGRESS   TRUE
-        SOURCE_SUBDIR  dont-include  # skips implicit add_subdirectory call
         UPDATE_DISCONNECTED ${SKIP_GIT_UPDATE}
 )
 
