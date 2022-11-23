@@ -17,6 +17,7 @@ repositories {
 
 def headersBuildDir = layout.buildDirectory.dir('headers')
 def headersDir = layout.buildDirectory.dir('headers/include')
+def vcpkgRoot = System.getenv('VCPKG_ROOT')
 
 
 def vcpkgHostTriplet() {
@@ -54,10 +55,12 @@ android {
             stl 'c++_shared'
         }
 
+
+
         externalNativeBuild {
             cmake {
                 arguments '--preset', 'android',
-                        '-DTOOLCHAIN_LOAD_FIRST=cmake/vcpkg/scripts/buildsystems/vcpkg.cmake',
+                        "-DTOOLCHAIN_LOAD_FIRST=${vcpkgRoot}/scripts/buildsystems/vcpkg.cmake",
                         "-DANDROID_STL=${ndk.stl}",
                         "-DVCPKG_HOST_TRIPLET=${vcpkgHostTriplet()}"
                 targets 'nakama-sdk'
