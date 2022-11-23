@@ -35,7 +35,7 @@ runs:
       shell: bash
       run:  |
         if [[ "${{ runner.os }}"  == "Linux" ]]; then
-          sudo ./ci/setup-ubuntu.sh install_ninja setup_vcpkg
+          VCPKG_ROOT=${VCPKG_ROOT} sudo ./ci/setup-ubuntu.sh install_ninja setup_vcpkg
         elif [[ "${{ runner.os }}" == "macOS" ]]; then
           ./ci/setup-osx.sh
         fi
