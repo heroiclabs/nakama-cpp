@@ -14,15 +14,15 @@ outputs:
 runs:
   using: "composite"
   steps:
-    # gradle invokes cmake to build native code, so our usual vcpkg config is still necessary
-    # NOTE: 'Source' here is the name of NuGet registry created by actions/setup-dotnet@v2
-    - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,Source,readwrite" >> $GITHUB_ENV
-      shell: bash
-
     - name: Setup vcpkg
       shell: bash
       run: >
         [ ! -d "${PWD}/vcpkg" ] && git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+
+    # gradle invokes cmake to build native code, so our usual vcpkg config is still necessary
+    # NOTE: 'Source' here is the name of NuGet registry created by actions/setup-dotnet@v2
+    - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,Source,readwrite" >> $GITHUB_ENV
+      shell: bash
 
     - uses: actions/setup-dotnet@v2
       with:

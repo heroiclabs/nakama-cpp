@@ -26,6 +26,10 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Setup vcpkg
+      shell: bash
+      run: >
+        [ ! -d "${PWD}/vcpkg" ] && git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
       shell: bash
     - name: 'Setup NuGet Credentials'
@@ -45,12 +49,6 @@ runs:
         $( type -p mono || :) `vcpkg fetch nuget | tail -n 1`
         setapikey "${{ inputs.GITHUB_TOKEN }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-
-    - name: Setup vcpkg
-      shell: bash
-      run: >
-        [ ! -d "${PWD}/vcpkg" ] && git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
-
     - id: cmake_args
       shell: bash
       if: ${{ inputs.flavour }}
