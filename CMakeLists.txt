@@ -17,7 +17,7 @@ if (UNREAL)
     # https://github.com/EpicGames/UnrealEngine/pull/9103
     message(NOTICE "Disabling HTTP transport in Unreal build mode")
 
-    if (LINUX)
+    if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
         set(WS_IMPL "wslay")
     else()
         message(NOTICE "Disabling WS transport in Unreal build mode")
@@ -34,6 +34,7 @@ else()
     endif()
 endif()
 
+message("android abi is ${ANDROID_ABI}")
 # when building android, this cmake is called from gradle with ANDROID_ABI passed.
 # use it to select vcpkg triplet
 if (ANDROID_ABI MATCHES armeabi-v7a)
@@ -73,11 +74,13 @@ set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
         CACHE FILEPATH "Vcpkg toolchain file")
 
 project(nakama-sdk LANGUAGES CXX)
+
 include(cmake/platformSupport.cmake)
 include(cmake/compilerFlags.cmake)
 include(cmake/linkerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
+
 
 if(MSVC)
     # On windows it is critical not to accidentally use DLL
@@ -131,7 +134,7 @@ endif()
 
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     if (NOT LIBHTTPCLIENT_BUILTIN)
-        if (LINUX OR APPLE)
+        if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR APPLE)
             find_package(CURL CONFIG REQUIRED)
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
         endif()
