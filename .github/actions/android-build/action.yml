@@ -19,6 +19,11 @@ runs:
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,Source,readwrite" >> $GITHUB_ENV
       shell: bash
 
+    - name: Setup vcpkg
+      shell: bash
+      run: >
+        git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+
     - uses: actions/setup-dotnet@v2
       with:
         source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
@@ -42,11 +47,6 @@ runs:
         mono `vcpkg fetch nuget | tail -n 1`
         setapikey "${{ inputs.GITHUB_TOKEN }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-
-    - name: Setup vcpkg
-      shell: bash
-      run: >
-        git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
 
     - run: rm -rf out
       shell: bash
