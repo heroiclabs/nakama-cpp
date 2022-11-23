@@ -228,10 +228,10 @@
       "configuration": "Debug"
     },
     {
-        "name": "debug-macosx-arm64",
-        "configurePreset": "macosx-arm64-host_x64",
-        "configuration": "Debug",
-        "verbose": true
+      "name": "debug-macosx-arm64",
+      "configurePreset": "macosx-arm64-host_x64",
+      "configuration": "Debug",
+      "verbose": true
     },
     {
       "name": "release-macosx-arm64",
@@ -240,10 +240,10 @@
       "verbose": true
     },
     {
-        "name": "debug-macosx-x64",
-        "configurePreset": "macosx-x64-host_x64",
-        "configuration": "Debug",
-        "verbose": true
+      "name": "debug-macosx-x64",
+      "configurePreset": "macosx-x64-host_x64",
+      "configuration": "Debug",
+      "verbose": true
     },
     {
       "name": "release-macosx-x64",

@@ -140,6 +140,21 @@
         "configurePreset": "linux-amd64",
         "configuration": "Debug"
       },
+
+      {
+        "name": "debug-macosx-arm64",
+        "configurePreset": "macosx-arm64-host_x64",
+        "configuration": "Debug",
+        "verbose": true,
+        "nativeToolOptions": ["-allowProvisioningUpdates"]
+      },
+      {
+        "name": "debug-macosx-x64",
+        "configurePreset": "macosx-x64-host_x64",
+        "configuration": "Debug",
+        "verbose": true,
+        "nativeToolOptions": ["-allowProvisioningUpdates"]
+      },
       {
         "name": "release-macosx-arm64",
         "configurePreset": "macosx-arm64-host_x64",
