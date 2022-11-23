@@ -16,24 +16,21 @@ if (UNREAL)
     # https://github.com/EpicGames/UnrealEngine/pull/7267 and
     # https://github.com/EpicGames/UnrealEngine/pull/9103
     message(NOTICE "Disabling HTTP transport in Unreal build mode")
+
     if (LINUX)
-        message(NOTICE "Disabling WS transport in Unreal build mode")
-    else()
         set(WS_IMPL "wslay")
+    else()
+        message(NOTICE "Disabling WS transport in Unreal build mode")
     endif()
 else()
     if (WITH_LIBHTTPCLIENT_HTTP)
         set(HTTP_IMPL "libhttpclient")
-    else()
-        set(WITH_EXTERNAL_HTTP ON)
     endif()
 
     if (WITH_LIBHTTPCLIENT_WS)
         set(WS_IMPL "libhttpclient")
     elseif (BUILD_WSLAY)
         set(WS_IMPL "wslay")
-    else()
-        set(WITH_EXTERNAL_WS ON)
     endif()
 endif()
 
@@ -170,10 +167,6 @@ endif()
 if(HTTP_IMPL STREQUAL "libhttpclient")
     set(BUILD_HTTP_LIBHTTPCLIENT ON)
     add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
-endif()
-
-if(NOT WITH_EXTERNAL_HTTP AND NOT HTTP_IMPL_LIB)
-    message(FATAL_ERROR "BUG: CMakeLists.txt in the impl dir must set HTTP_IMPL_LIB with PARENT_SCOPE")
 endif()
 
 find_package(optional-lite CONFIG REQUIRED)
