@@ -160,7 +160,9 @@
         "ANDROID_ARM_NEON": "ON",
         "ANDROID_STL": "c++_shared",
         "WITH_LIBHTTPCLIENT_HTTP": "ON",
-        "WITH_LIBHTTPCLIENT_WS": "ON"
+        "WITH_LIBHTTPCLIENT_WS": "ON",
+        "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;libhttpclient-http"
+
       },
       "environment": {
         "VCPKG_KEEP_ENV_VARS": "VCPKG_CHAINLOAD_TOOLCHAIN_FILE"
