@@ -17,8 +17,9 @@ runs:
     - name: Setup vcpkg
       shell: bash
       run: >
-        [ ! -d "${PWD}/vcpkg" ] && git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
-
+        if [ ! -d "${PWD}/vcpkg" ] then
+          git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+        fi
     # gradle invokes cmake to build native code, so our usual vcpkg config is still necessary
     # NOTE: 'Source' here is the name of NuGet registry created by actions/setup-dotnet@v2
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,Source,readwrite" >> $GITHUB_ENV

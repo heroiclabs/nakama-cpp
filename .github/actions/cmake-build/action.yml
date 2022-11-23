@@ -29,7 +29,9 @@ runs:
     - name: Setup vcpkg
       shell: bash
       run: >
-        [ ! -d "${PWD}/vcpkg" ] && git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+        if [ ! -d "${PWD}/vcpkg" ] then
+          git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+        fi
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
       shell: bash
     - name: 'Setup NuGet Credentials'
