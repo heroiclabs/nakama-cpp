@@ -26,6 +26,18 @@ using namespace std;
 
 namespace Nakama {
 
+NRtClientPtr BaseClient::createRtClient(int32_t port)
+{
+    RtClientParameters parameters;
+
+    parameters.host = _host;
+    parameters.port = port;
+    parameters.ssl  = _ssl;
+    parameters.platformParams = _platformParams;
+
+    return createRtClient(parameters, createDefaultWebsocket(_platformParams));
+}
+
 NRtClientPtr BaseClient::createRtClient(int32_t port, NRtTransportPtr transport)
 {
     RtClientParameters parameters;

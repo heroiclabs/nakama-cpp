@@ -32,6 +32,7 @@ namespace Nakama {
         void setUserData(void* userData) override { _userData = userData; }
         void* getUserData() const override { return _userData; }
 
+        NRtClientPtr createRtClient(int32_t port) override;
         NRtClientPtr createRtClient(int32_t port, NRtTransportPtr transport) override;
         NRtClientPtr createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport) override;
 
