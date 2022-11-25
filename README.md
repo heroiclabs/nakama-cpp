@@ -107,7 +107,7 @@ The client can create one or more realtime clients with the server. Each realtim
 ```cpp
 bool createStatus = true; // if the socket should show the user as online to others.
 // define realtime client in your class as NRtClientPtr rtClient;
-rtClient = client->createRtClient(DEFAULT_PORT);
+rtClient = client->createRtClient();
 // define listener in your class as NRtDefaultClientListener listener;
 listener.setConnectCallback([]()
 {
@@ -181,7 +181,7 @@ Client will default to use the Websocket transport provided by [C++ REST SDK](ht
 You can use a custom Websocket transport by implementing the [NRtTransportInterface](https://github.com/heroiclabs/nakama-cpp/blob/master/include/nakama-cpp/realtime/NRtTransportInterface.h):
 
 ```cpp
-rtClient = client->createRtClient(port, websockets_transport);
+rtClient = client->createRtClient(websockets_transport);
 ```
 
 For more code examples, have a look at:
