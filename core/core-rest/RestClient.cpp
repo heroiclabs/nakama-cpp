@@ -71,19 +71,18 @@ RestClient::RestClient(const NClientParameters& parameters, NHttpTransportPtr ht
     _host = parameters.host;
     _ssl = parameters.ssl;
     _platformParams = parameters.platformParams;
-
+    _port = parameters.port;
     std::string baseUrl;
 
-    int32_t port = parameters.port;
 
-    if (port == DEFAULT_PORT)
+    if (_port == DEFAULT_PORT)
     {
-        port = parameters.ssl ? 443 : 7350;
-        NLOG(NLogLevel::Info, "using default port %d", port);
+        _port = parameters.ssl ? 443 : 7350;
+        NLOG(NLogLevel::Info, "using default port %d", _port);
     }
 
     _ssl ? baseUrl.append("https") : baseUrl.append("http");
-    baseUrl.append("://").append(parameters.host).append(":").append(std::to_string(port));
+    baseUrl.append("://").append(parameters.host).append(":").append(std::to_string(_port));
 
     _httpClient->setBaseUri(baseUrl);
 

@@ -26,13 +26,19 @@ using namespace std;
 
 namespace Nakama {
 
-NRtClientPtr BaseClient::createRtClient(const RtClientParameters& parameters)
+NRtClientPtr BaseClient::createRtClient()
 {
-    return createRtClient(parameters, createDefaultWebsocket(parameters.platformParams));
+    return createRtClient(createDefaultWebsocket(_platformParams));
 }
 
-NRtClientPtr BaseClient::createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport)
+NRtClientPtr BaseClient::createRtClient(NRtTransportPtr transport)
 {
+    RtClientParameters parameters;
+    parameters.host = _host;
+    parameters.port = _port;
+    parameters.ssl  = _ssl;
+    parameters.platformParams = _platformParams;
+
     if (!transport)
     {
         NLOG_ERROR("No websockets transport passed. Please set transport.");

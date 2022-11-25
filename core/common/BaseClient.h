@@ -32,10 +32,11 @@ namespace Nakama {
         void setUserData(void* userData) override { _userData = userData; }
         void* getUserData() const override { return _userData; }
 
-        NRtClientPtr createRtClient(const RtClientParameters& parameters) override;
-        NRtClientPtr createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport) override;
+        NRtClientPtr createRtClient() override;
+        NRtClientPtr createRtClient(NRtTransportPtr transport) override;
 
     protected:
+        int _port;
         std::string _host;
         bool _ssl = false;
         std::string _basicAuthMetadata;

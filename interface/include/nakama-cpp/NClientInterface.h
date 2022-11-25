@@ -94,22 +94,19 @@ NAKAMA_NAMESPACE_BEGIN
         virtual void tick() = 0;
 
         /**
-         * Create a new real-time client.
-         *
-         * @param port The port number of the server.
-         *        Default is 7350 for non-SSL connection, 443 for SSL.
+         * Create a new real-time client with parameters from client.
          * @return a new NRtClient instance.
          */
-        virtual NRtClientPtr createRtClient(const RtClientParameters& parameters) = 0;
+        virtual NRtClientPtr createRtClient() = 0;
 
         /**
-         * Create a new real-time client with a transport.
+         * Create a new real-time client with parameters from client.
          *
          * @param parameters The real-time client parameters.
          * @param transport The websocket transport.
          * @return a new NRtClient instance.
          */
-        virtual NRtClientPtr createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport) = 0;
+        virtual NRtClientPtr createRtClient(NRtTransportPtr transport) = 0;
 
         /**
          * Authenticate a user with a device id.
