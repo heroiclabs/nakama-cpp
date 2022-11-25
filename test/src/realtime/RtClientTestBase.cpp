@@ -24,12 +24,12 @@
 namespace Nakama {
 namespace Test {
 
-NRtClientPtr createRtClient(NClientPtr client, int32_t port)
+NRtClientPtr createRtClient(NClientPtr client)
 {
 #if defined(__UNREAL__)
-    return Nakama::Unreal::createNakamaRtClient(client, port);
+    return Nakama::Unreal::createNakamaRtClient(client);
 #else
-    return client->createRtClient(port);
+    return client->createRtClient();
 #endif
 }
 
@@ -85,7 +85,7 @@ void NRtClientTest::runTest()
 
         std::cout << "session token: " << session->getAuthToken() << std::endl;
 
-        rtClient = createRtClient(client, SERVER_HTTP_PORT);
+        rtClient = createRtClient(client);
 
         rtClient->setListener(&listener);
 
@@ -101,7 +101,7 @@ void NRtClientTest::runTest(std::function<void()> func) {
     createWorkingClient();
     auto successCallback = [this, func](NSessionPtr sess) {
         this->session = sess;
-        this->rtClient = createRtClient(client, SERVER_HTTP_PORT);
+        this->rtClient = createRtClient(client);
         this->rtClient->setListener(&listener);
         func();
     };
