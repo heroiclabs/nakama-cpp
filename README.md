@@ -184,11 +184,6 @@ You can use a custom Websocket transport by implementing the [NRtTransportInterf
 rtClient = client->createRtClient(websockets_transport);
 ```
 
-For more code examples, have a look at:
-
-* [NWebsocketCppRest](https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NWebsocketCppRest.h)
-* [NCocosWebSocket](https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/example/Classes/NakamaCocos2d/NCocosWebSocket.h)
-
 #### Activity timeout
 
 Built-in websocket transport supports "Activity timeout" feature - if no any message received from server during "Activity timeout" then connection will be closed. Set 0 to disable this feature (default value).
