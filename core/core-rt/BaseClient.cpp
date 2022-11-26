@@ -26,10 +26,12 @@ using namespace std;
 
 namespace Nakama {
 
+#ifndef WITH_EXTERNAL_WS
 NRtClientPtr BaseClient::createRtClient()
 {
     return createRtClient(createDefaultWebsocket(_platformParams));
 }
+#endif
 
 NRtClientPtr BaseClient::createRtClient(NRtTransportPtr transport)
 {

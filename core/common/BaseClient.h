@@ -32,7 +32,10 @@ namespace Nakama {
         void setUserData(void* userData) override { _userData = userData; }
         void* getUserData() const override { return _userData; }
 
+#ifndef WITH_EXTERNAL_WS
         NRtClientPtr createRtClient() override;
+#endif
+
         NRtClientPtr createRtClient(NRtTransportPtr transport) override;
 
     protected:

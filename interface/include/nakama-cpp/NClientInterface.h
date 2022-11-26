@@ -93,11 +93,13 @@ NAKAMA_NAMESPACE_BEGIN
          */
         virtual void tick() = 0;
 
+#ifndef WITH_EXTERNAL_WS
         /**
          * Create a new real-time client with parameters from client.
          * @return a new NRtClient instance.
          */
         virtual NRtClientPtr createRtClient() = 0;
+#endif
 
         /**
          * Create a new real-time client with parameters from client.
