@@ -20,14 +20,6 @@ target_link_libraries(nakama-sdk-rtclient-factory
         PRIVATE ${WS_IMPL_LIB}
         )
 
-if (BUILD_WEBSOCKET_LIBHTTPCLIENT)
-    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_WEBSOCKET_LIBHTTPCLIENT)
-elseif (BUILD_WEBSOCKET_WSLAY)
-    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_WEBSOCKET_WSLAY)
-else()
-    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE WITH_EXTERNAL_WS)
-endif()
-
 if (BUILD_CURL)
     target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_CURL)
 endif()

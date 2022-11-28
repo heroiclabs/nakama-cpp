@@ -35,7 +35,7 @@ NClientPtr createDefaultClient(const NClientParameters& parameters)
     #if defined(BUILD_GRPC_CLIENT)
     return createGrpcClient(parameters);
     #else
-    return createRestClient(parameters);
+    return createRestClient(parameters, createDefaultHttpTransport(parameters.platformParams));
     #endif
 }
 #endif

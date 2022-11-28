@@ -80,7 +80,7 @@ void NCppTest::createWorkingClient()
 NClientPtr NCppTest::createClient(const NClientParameters& parameters)
 {
 #if !defined(__UNREAL__)
-        client = createRestClient(parameters);
+        client = createDefaultClient(parameters);
 #else
         client = Nakama::Unreal::createNakamaClient(parameters, Nakama::NLogLevel::Debug);
 #endif
