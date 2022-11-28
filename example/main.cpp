@@ -54,7 +54,7 @@ int main() {
         NRtDefaultClientListener listener;
         listener.setConnectCallback(connectSucceededCallback);
         listener.setErrorCallback(rtErrorCallback);
-        rtClient = client->createRtClient(DEFAULT_PORT);
+        rtClient = client->createRtClient();
         rtClient->setListener(&listener);
         std::cout << "Connecting socket" << std::endl;
         rtClient->connect(session, true, NRtClientProtocol::Json);

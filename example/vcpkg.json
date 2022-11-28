@@ -1,5 +1,8 @@
 {
     "name": "nakama-example",
     "version-string": "0.0.0",
-    "default-features": []
+    "default-features": [],
+    "dependencies": [
+        "optional-lite"
+      ]
   }

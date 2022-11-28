@@ -14,7 +14,7 @@
         "hidden": true,
         "cacheVariables": {
           "CMAKE_INSTALL_LIBDIR": "${presetName}",
-          "CMAKE_CONFIGURATION_TYPES": "MinSizeRel"
+          "CMAKE_CONFIGURATION_TYPES": "Debug;MinSizeRel"
         }
       },
       {
@@ -144,11 +144,24 @@
         "configuration": "Debug"
       },
       {
+        "name": "debug-macosx-arm64",
+        "configurePreset": "macosx-arm64-host_x64",
+        "configuration": "Debug",
+        "verbose": true,
+        "nativeToolOptions": ["-allowProvisioningUpdates"]
+      },
+      {
         "name": "release-macosx-arm64",
         "configurePreset": "macosx-arm64-host_x64",
         "configuration": "MinSizeRel",
         "verbose": true,
         "nativeToolOptions": ["-allowProvisioningUpdates"]
+      },
+      {
+        "name": "debug-macosx-x64",
+        "configurePreset": "macosx-x64-host_x64",
+        "configuration": "Debug",
+        "verbose": true
       },
       {
         "name": "release-macosx-x64",
