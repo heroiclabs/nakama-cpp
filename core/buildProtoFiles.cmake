@@ -7,11 +7,11 @@ set(NAKAMA ${CMAKE_CURRENT_BINARY_DIR}/nakama-master)
 set(NAKAMA_COMMON_ZIP ${NAKAMA_COMMON}.zip)
 set(NAKAMA_ZIP ${NAKAMA}.zip)
 
-file(DOWNLOAD https://github.com/heroiclabs/nakama-common/archive/refs/heads/master.zip ${NAKAMA_COMMON_ZIP} SHOW_PROGRESS)
-file(DOWNLOAD https://github.com/heroiclabs/nakama/archive/refs/heads/master.zip ${NAKAMA_ZIP} SHOW_PROGRESS)
+file(DOWNLOAD https://github.com/heroiclabs/nakama-common/archive/refs/heads/master.zip ${NAKAMA_COMMON_ZIP})
+file(DOWNLOAD https://github.com/heroiclabs/nakama/archive/refs/heads/master.zip ${NAKAMA_ZIP})
 
-file(ARCHIVE_EXTRACT INPUT ${NAKAMA_COMMON_ZIP} DESTINATION ${CMAKE_CURRENT_BINARY_DIR} VERBOSE)
-file(ARCHIVE_EXTRACT INPUT ${NAKAMA_ZIP} DESTINATION ${CMAKE_CURRENT_BINARY_DIR} VERBOSE)
+file(ARCHIVE_EXTRACT INPUT ${NAKAMA_COMMON_ZIP} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(ARCHIVE_EXTRACT INPUT ${NAKAMA_ZIP} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 #### API and RTAPI proto ####
 
@@ -19,8 +19,6 @@ file(GLOB_RECURSE NAKAMA_API_PROTO_FILES
         ${NAKAMA_COMMON}/api/*.proto
         ${NAKAMA_COMMON}/rtapi/*.proto
         )
-
-message("adding library")
 
 add_library(nakama-api-proto OBJECT ${NAKAMA_API_PROTO_FILES})
 add_library(nakama::api-proto ALIAS nakama-api-proto)

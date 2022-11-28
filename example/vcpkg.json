@@ -1,8 +1,20 @@
 {
     "name": "nakama-example",
-    "version-string": "0.0.0",
-    "default-features": [],
+    "version": "1.0.0",
     "dependencies": [
-        "optional-lite"
-      ]
-  }
+        {
+            "name": "nakama-sdk",
+            "version>=": "2.6.0#3",
+            "platform": "ios | osx | linux",
+            "features": ["wslay", "curl"]
+        },
+        {
+            "name": "nakama-sdk",
+            "version>=": "2.6.0#3",
+            "platform": "android | windows",
+            "features": ["libhttpclient-ws"]
+        }
+    ],
+    "default-features": [],
+    "builtin-baseline": "62d01b70df227850b728f5050418b917ad6d2b32"
+}

@@ -4,6 +4,12 @@ include(version.cmake)
 # we use list append to allow dependent libraries to inject their own triplets and ports into this.
 list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
 
+
+if(NOT BUILD_SHARED_LIBS)
+    message(WARNING "The Nakama C++ client can only be built as a shared library.")
+    set(BUILD_SHARED_LIBS ON)
+endif()
+
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(INCLUDE_OPTIONAL_LITE "Include optional lite in include folder" ON)
 option(UNREAL "Unreal engine support" OFF)
