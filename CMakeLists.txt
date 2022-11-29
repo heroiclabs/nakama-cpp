@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.23)
 include(version.cmake)
 
+set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
 # we use list append to allow dependent libraries to inject their own triplets and ports into this.
 list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
-
 
 if(NOT BUILD_SHARED_LIBS)
     message(WARNING "The Nakama C++ client can only be built as a shared library.")

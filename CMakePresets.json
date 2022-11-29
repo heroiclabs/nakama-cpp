@@ -14,7 +14,6 @@
       "installDir": "out",
       "hidden": true,
       "cacheVariables": {
-        "CMAKE_CONFIGURATION_TYPES": "Debug;MinSizeRel;RelWithDebInfo",
         "LOGS_ENABLED": "ON",
         "CMAKE_INSTALL_LIBDIR": "${presetName}",
         "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk",
