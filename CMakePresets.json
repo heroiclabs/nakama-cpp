@@ -45,7 +45,7 @@
       "generator": "Visual Studio 17 2022",
       "cacheVariables": {
         "WindowsDesktop": "ON",
-        "VCPKG_HOST_TRIPLET": "x64-windows-static-heroic",
+        "VCPKG_HOST_TRIPLET": "x86-windows-release",
         "VCPKG_TARGET_TRIPLET": "x86-windows-release",
         "WITH_LIBHTTPCLIENT_HTTP": "ON",
         "WITH_LIBHTTPCLIENT_WS": "ON",
