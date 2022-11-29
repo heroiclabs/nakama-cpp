@@ -40,7 +40,6 @@ else()
     endif()
 endif()
 
-message("android abi is ${ANDROID_ABI}")
 # when building android, this cmake is called from gradle with ANDROID_ABI passed.
 # use it to select vcpkg triplet
 if (ANDROID_ABI MATCHES armeabi-v7a)
