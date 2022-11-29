@@ -6,13 +6,13 @@
             "name": "nakama-sdk",
             "version>=": "2.6.0#3",
             "platform": "ios | osx | linux",
-            "features": ["wslay", "curl"]
+            "features": ["wslay", "curl", "libhttpclient-http"]
         },
         {
             "name": "nakama-sdk",
             "version>=": "2.6.0#3",
             "platform": "android | windows",
-            "features": ["libhttpclient-ws"]
+            "features": ["libhttpclient-ws", "libhttpclient-http"]
         }
     ],
     "default-features": [],

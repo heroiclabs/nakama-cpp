@@ -28,7 +28,6 @@ set_target_properties(nakama-example PROPERTIES
     MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/example.plist
 )
 
-
 # no ZERO_CHECK target for Xcode
 set(CMAKE_SUPPRESS_REGENERATION true)
 
@@ -46,7 +45,7 @@ set_target_properties(nakama-example PROPERTIES
     XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "$ENV{NAKAMA_EXAMPLE_DEVELOPMENT_TEAM}"
     XCODE_LINK_BUILD_PHASE_MODE KNOWN_LOCATION
     # targets don't work for embedding frameworks, and can't find a better way to get path
-    XCODE_EMBED_FRAMEWORKS ${_VCPKG_INSTALLED_DIR}/lib/nakama-sdk.framework
+    XCODE_EMBED_FRAMEWORKS ${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/nakama-sdk.framework
     XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
 	XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY	"YES"
     XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
