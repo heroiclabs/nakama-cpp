@@ -54,7 +54,7 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
 {
     if (!httpTransport)
     {
-        NLOG_ERROR("Error creating HTTP transport");
+        NLOG_ERROR("HTTP transport cannot be null.");
         return nullptr;
     }
 

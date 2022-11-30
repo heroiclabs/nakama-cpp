@@ -119,7 +119,7 @@ if (BUILD_WEBSOCKET_LIBHTTPCLIENT)
 elseif (BUILD_WEBSOCKET_WSLAY)
     add_compile_definitions(BUILD_WEBSOCKET_WSLAY)
 else()
-    add_compile_definitions(PRIVATE WITH_EXTERNAL_WS)
+    add_compile_definitions(WITH_EXTERNAL_WS)
 endif()
 
 if (ADDRESS_SANITIZER)

@@ -66,12 +66,14 @@ NAKAMA_NAMESPACE_BEGIN
     NAKAMA_API NClientPtr createDefaultClient(const NClientParameters& parameters);
 #endif
 
+#if BUILD_GRPC_CLIENT
     /**
      * Creates the gRPC client to interact with Nakama server.
      *
      * @param parameters the client parameters
      */
     NAKAMA_API NClientPtr createGrpcClient(const NClientParameters& parameters);
+#endif
 
     /**
      * Creates the REST client (HTTP/1.1) to interact with Nakama server.
