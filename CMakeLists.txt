@@ -11,7 +11,9 @@ if(NOT BUILD_SHARED_LIBS)
 endif()
 
 # By default, assume user will not obtain optional-lite via third party mechanism.
-option(INCLUDE_OPTIONAL_LITE "Include optional lite in include folder" ON)
+option(PUBLISH_OPTIONAL_LITE "Include optional lite in include folder" ON)
+option(PUBLISH_PROTOBUF "Include protobuf in the runtime libraries folder." OFF)
+
 option(UNREAL "Unreal engine support" OFF)
 
 set(HTTP_IMPL "")
@@ -320,10 +322,22 @@ install(FILES
   DESTINATION share/nakama-sdk
 )
 
-if (INCLUDE_OPTIONAL_LITE)
+if (PUBLISH_OPTIONAL_LITE)
     install(DIRECTORY
         ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/nonstd
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/include
+    )
+endif()
+
+if (PUBLISH_PROTOBUF)
+    install(DIRECTORY
+        ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/google
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/include
+    )
+
+    install(FILES
+        ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/libprotobuf.a
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
     )
 endif()
 
