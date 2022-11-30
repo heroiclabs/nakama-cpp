@@ -11,7 +11,7 @@ if(NOT BUILD_SHARED_LIBS)
 endif()
 
 # By default, assume user will not obtain optional-lite via third party mechanism.
-option(PUBLISH_OPTIONAL_LITE "Include optional lite in include folder" ON)
+option(PUBLISH_OPTIONAL_LITE "Include optional lite in include folder" OFF)
 option(PUBLISH_PROTOBUF "Include protobuf in the runtime libraries folder." OFF)
 
 option(UNREAL "Unreal engine support" OFF)
