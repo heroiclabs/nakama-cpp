@@ -325,19 +325,19 @@ install(FILES
 if (DISTRIBUTE_OPTIONAL_LITE)
     install(DIRECTORY
         ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/nonstd
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/third-party/include
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/nakama-third-party/include
     )
 endif()
 
 if (DISTRIBUTE_PROTOBUF)
     install(DIRECTORY
         ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/google
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/third-party/include
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/nakama-third-party/include
     )
 
     install(FILES
         ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/libprotobuf.a
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/third-party
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/nakama-third-party
     )
 endif()
 
