@@ -62,7 +62,7 @@
         "default"
       ],
       "installDir": "out",
-      "generator": "Ninja Multi-Config",
+      "generator": "Xcode",
       "cacheVariables": {
         "CMAKE_INSTALL_LIBDIR": "macosx-arm64",
         "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
