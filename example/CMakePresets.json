@@ -107,7 +107,7 @@
             "installDir": "out",
             "cacheVariables": {
                 "CMAKE_INSTALL_LIBDIR": "ios-arm64",
-                "VCPKG_TARGET_TRIPLET": "arm64-ios-release",
+                "VCPKG_TARGET_TRIPLET": "arm64-ios",
                 "VCPKG_HOST_TRIPLET": "x64-osx-release"
             }
         },
