@@ -64,10 +64,6 @@ file(
 
 add_executable(nakama-test MACOSX_BUNDLE ${SRCS})
 
-set_target_properties(nakama-test PROPERTIES
-    MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/test.plist
-)
-
 target_link_libraries(nakama-test
     INTERFACE rapidjson
     PRIVATE nakama-sdk
@@ -96,6 +92,7 @@ set(CMAKE_SUPPRESS_REGENERATION true)
 # https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes
 set_target_properties(nakama-test PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER "com.test"
+    MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/test.plist
     XCODE_ATTRIBUTE_ENABLE_BITCODE "NO"
     XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER "com.heroiclabs.test"
     XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "YES"
