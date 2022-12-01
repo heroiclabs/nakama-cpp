@@ -89,6 +89,11 @@ NAKAMA_NAMESPACE_BEGIN
         virtual void tick() = 0;
 
         /**
+         * Get websocket transport which RtClient uses.
+         */
+        virtual NRtTransportPtr getTransport() const = 0;
+
+        /**
          * Set events listener
          *
          * @param listener The listener of client events.
