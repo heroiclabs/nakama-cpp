@@ -355,8 +355,8 @@ HTTP:
 
 Platform | Transport              |
   --- |---------------------------|
-Windows | libhttpclient -> websocketpp  |
-Android | libhttpclient -> websocketpp |
+Windows | libhttpclient -> winhttp  |
+Android | libhttpclient -> okhttp |
 Linux | libhttpclient->curl       |
 MacOS | libhttpclient -> OS       |
 iOS   | libhttpclient -> OS       |
@@ -367,8 +367,8 @@ Websockets:
 
 Platform | Transport
 --- |------------------------------|
-Windows | libhttpclient -> websocketpp |
-Android | libhttpclient -> websocketpp  |
+Windows | libhttpclient -> winhttp |
+Android | libhttpclient -> okhttp  |
 Linux | wslay                      |
 MacOS | wslay                      |
 iOS   | wslay                      |
