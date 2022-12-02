@@ -16,15 +16,15 @@
                 {
                     "name": "websocketpp",
                     "default-features": false,
-                    "platform": "windows | android"
+                    "platform": "windows"
                 },
                 {
                     "name": "asio",
-                    "platform": "windows | android"
+                    "platform": "windows"
                 },
                 {
                     "name": "openssl",
-                    "platform": "windows | android"
+                    "platform": "windows"
                 }
             ]
         },
