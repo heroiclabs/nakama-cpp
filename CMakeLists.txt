@@ -146,7 +146,15 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
         endif()
 
-        add_subdirectory(third_party/libHttpClient/Utilities/CMake)
+        FetchContent_Declare(
+            libHttpClient
+            GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
+            GIT_TAG        41e4e73cc1dce236e0c9d674cd7096121493b48e
+            SOURCE_SUBDIR  Utilities/CMake
+        )
+
+        ### TODO this logic doesn't make sense.
+            FetchContent_MakeAvailable(libHttpClient)
 
         if (NOT WS_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
