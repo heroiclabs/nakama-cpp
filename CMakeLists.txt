@@ -42,34 +42,15 @@ else()
     endif()
 endif()
 
-# when building android, this cmake is called from gradle with ANDROID_ABI passed.
-# use it to select vcpkg triplet
-if (ANDROID_ABI MATCHES armeabi-v7a)
-    set(VCPKG_TARGET_TRIPLET arm-android-heroic)
-elseif (ANDROID_ABI MATCHES arm64-v8a)
-    set(VCPKG_TARGET_TRIPLET arm64-android-heroic)
-elseif (ANDROID_ABI MATCHES x86_64)
-    set(VCPKG_TARGET_TRIPLET x64-android-heroic)
-endif()
-
-# being called from gradle
 if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
     # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
-    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE ${ANDROID_NDK}/build/cmake/android.toolchain.cmake)
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{NAKAMA_ANDROID_NDK}/build/cmake/android.toolchain.cmake)
 
     # and also set env var to be used by *-android-heroic triplets
     set(ENV{VCPKG_CHAINLOAD_TOOLCHAIN_FILE} "${VCPKG_CHAINLOAD_TOOLCHAIN_FILE}")
 endif()
 
 cmake_policy(SET CMP0012 NEW)
-
-# If this CMake is called as part of another build system, like gradle's android plugin,
-# where CMAKE_TOOLCHAIN_FILE is unconditionally passed, we can pass extra arg TOOLCHAIN_LOAD_FIRST
-# to force toolchain value and then chainload original toolchain
-if(DEFINED TOOLCHAIN_LOAD_FIRST)
-    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${CMAKE_TOOLCHAIN_FILE}")
-    cmake_path(ABSOLUTE_PATH TOOLCHAIN_LOAD_FIRST OUTPUT_VARIABLE CMAKE_TOOLCHAIN_FILE)
-endif()
 
 # must come before first project() so that libc++ is compiled
 # and ready when vcpkg starts building dependencies
@@ -146,15 +127,24 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
         endif()
 
+        if (ANDROID)
+            set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake/Android/libHttpClient)
+            set(LIBHTTPCLIENT_TARGET libHttpClient.Android)
+        else()
+            set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake)
+            ## TODO set TARGET and make sure all platforms still work
+        endif()
+
         FetchContent_Declare(
             libHttpClient
             GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
             GIT_TAG        41e4e73cc1dce236e0c9d674cd7096121493b48e
-            SOURCE_SUBDIR  Utilities/CMake
+            SOURCE_SUBDIR  ${LIBHTTPCLIENT_SOURCE_SUBDIR}
         )
 
-        ### TODO this logic doesn't make sense.
-            FetchContent_MakeAvailable(libHttpClient)
+        FetchContent_MakeAvailable(libHttpClient)
+
+
 
         if (NOT WS_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
@@ -168,7 +158,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
                 ${LIBHTTPCLIENT_TARGET}
                 EXPORT nakama-export
                 LIBRARY ARCHIVE RUNTIME
-                )
+        )
     endif()
 endif()
 
@@ -197,12 +187,6 @@ add_subdirectory(factory EXCLUDE_FROM_ALL)
 # Implements API, but without concrete implementations of transports
 add_subdirectory(core EXCLUDE_FROM_ALL)
 
-if (NOT LIBHTTPCLIENT_TARGET)
-    # A bit of a hack. $<TARGET_EXISTS:""> below makes cmake to error, so
-    # we set variable to the value which doesn't match any target
-    set(LIBHTTPCLIENT_TARGET doesnt-exist)
-endif()
-
 # create dummy file because pure "library of libraries" is not supported
 
 set(NAKAMA_SDK_DEPS
@@ -212,7 +196,6 @@ set(NAKAMA_SDK_DEPS
     $<TARGET_OBJECTS:nakama-sdk-core-common>
     $<TARGET_OBJECTS:nakama-sdk-client-factory>
     $<TARGET_OBJECTS:nakama-sdk-rtclient-factory>
-
 
 
     # Xcode generator doesn't produce library for a target with no "own" files

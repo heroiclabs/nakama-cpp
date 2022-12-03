@@ -15,6 +15,7 @@ if (APPLE)
 endif()
 
 
+message("doing target link libraries to ${LIBHTTPCLIENT_TARGET}")
 target_link_libraries(nakama-impl-http-libhttpclient
         PUBLIC nakama-api-proto nakama::sdk-interface
         # libhttpclient is OBJECT library, so this link wont create

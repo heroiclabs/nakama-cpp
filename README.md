@@ -240,15 +240,10 @@ export CC=/usr/bin/gcc-11
 export CXX=/usr/bin/g++-11
 ```
 
-
 ### OS X
 
 - brew install ninja cmake pkg-config
 - XCode or XCode command line tools
-
-### Android
-- Ensure the Android SDK is installed. Android has special build instructions -- we use Gradle and call into CMake from it:
-`cd ./android && ./gradlew assemble`. The .aar artifact can be used from the build tree.
 
 ## Build
 
@@ -281,6 +276,12 @@ To build Linux release you can use provided Docker image like following:
 ```
 docker buildx build -f scripts/Dockerfile --progress=plain --output=./out .
 ```
+
+### Android
+
+To build for Android set your `NAKAMA_ANDROID_NDK` environment variable to your NDK before building.
+
+Your NDK is typically located within your SDK:`<sdk>/ndk/<ndk-version>`
 
 ### Build modifiers
 
