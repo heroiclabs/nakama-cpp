@@ -138,13 +138,11 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         FetchContent_Declare(
             libHttpClient
             GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
-            GIT_TAG        41e4e73cc1dce236e0c9d674cd7096121493b48e
+            GIT_TAG        cc2374a35cb0e3d1f6daab284b55a9516e0c5aff
             SOURCE_SUBDIR  ${LIBHTTPCLIENT_SOURCE_SUBDIR}
         )
 
         FetchContent_MakeAvailable(libHttpClient)
-
-
 
         if (NOT WS_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")

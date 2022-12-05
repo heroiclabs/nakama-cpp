@@ -9,7 +9,7 @@ find_package(RapidJSON CONFIG REQUIRED)
 
 # unconditional, because core-rt is always built and it uses nakama-api-proto
 # TODO: split buildProtoFiles into grpc and api-proto
-find_package(Protobuf 3.21.8.0 EXACT CONFIG REQUIRED)
+find_package(Protobuf CONFIG REQUIRED)
 include(buildProtoFiles.cmake)
 
 add_subdirectory(common EXCLUDE_FROM_ALL)
