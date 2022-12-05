@@ -47,13 +47,23 @@ jobs:
           flavour: Unreal
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  android:
-    timeout-minutes: 60
-    runs-on: ubuntu-20.04
+  android_matrix:
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        preset: ["android-armeabi-v7a-host_osx_x64", "android-arm64-v8a-host_osx_x64", "android-x64-host_osx_x64"]
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/android-build
+      - uses: ./.github/actions/cmake-build
         with:
+          preset: ${{ matrix.preset }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Unreal module
+        uses: ./.github/actions/cmake-build
+        with:
+          preset: ${{ matrix.preset }}
+          flavour: Unreal
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   apple_matrix:
@@ -76,7 +86,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   combine:
-    needs: [windows_matrix, linux_matrix, apple_matrix]
+    needs: [android_matrix, windows_matrix, linux_matrix, apple_matrix]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
