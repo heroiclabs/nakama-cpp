@@ -45,7 +45,8 @@ find_package(RapidJSON CONFIG REQUIRED)
 find_package(optional-lite)
 
 get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
-set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/out/share/nakama-sdk)
+set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/out/${PRESET_NAME}/share/nakama-sdk)
+message("dir is ${nakama-sdk_DIR}")
 find_package(nakama-sdk CONFIG REQUIRED)
 
 if (ADDRESS_SANITIZER)

@@ -11,7 +11,7 @@
             "displayName": "Default",
             "description": "",
             "binaryDir": "build/${presetName}",
-            "installDir": "out",
+            "installDir": "out/${presetName}",
             "hidden": true,
             "cacheVariables": {
                 "CMAKE_CONFIGURATION_TYPES": "Debug;MinSizeRel",
