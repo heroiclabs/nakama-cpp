@@ -152,11 +152,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
                 target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_FORCE_WINSOCKETPP")
             endif()
         endif()
-        install(TARGETS
-                ${LIBHTTPCLIENT_TARGET}
-                EXPORT nakama-export
-                LIBRARY ARCHIVE RUNTIME
-        )
     endif()
 endif()
 
