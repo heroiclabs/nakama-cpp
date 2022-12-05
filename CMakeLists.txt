@@ -44,7 +44,7 @@ endif()
 
 if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
     # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
-    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{NAKAMA_ANDROID_NDK}/build/cmake/android.toolchain.cmake)
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
 
     # and also set env var to be used by *-android-heroic triplets
     set(ENV{VCPKG_CHAINLOAD_TOOLCHAIN_FILE} "${VCPKG_CHAINLOAD_TOOLCHAIN_FILE}")
@@ -213,12 +213,11 @@ if (BUILD_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:nakama-sdk-core-grpc>)
 endif()
 
-if (BUILD_WEBSOCKET_LIBHTTPCLIENT)
+if (WITH_LIBHTTPCLIENT_WS)
     target_compile_definitions(nakama-sdk-core-rt PUBLIC BUILD_WEBSOCKET_LIBHTTPCLIENT)
     target_compile_definitions(nakama-sdk-core-common PUBLIC BUILD_WEBSOCKET_LIBHTTPCLIENT)
     target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC BUILD_WEBSOCKET_LIBHTTPCLIENT)
     target_compile_definitions(nakama-sdk-interface INTERFACE BUILD_WEBSOCKET_LIBHTTPCLIENT)
-
 elseif (BUILD_WEBSOCKET_WSLAY)
     target_compile_definitions(nakama-sdk-core-rt PUBLIC BUILD_WEBSOCKET_WSLAY)
     target_compile_definitions(nakama-sdk-core-common PUBLIC BUILD_WEBSOCKET_WSLAY)

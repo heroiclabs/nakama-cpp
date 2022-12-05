@@ -155,10 +155,11 @@
                 "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE",
                 "ANDROID_ARM_NEON": "ON",
                 "ANDROID_STL": "c++_shared",
+                "ANDROID_PLATFORM": "android-21",
+                "CMAKE_SYSTEM_NAME": "Android",
                 "WITH_LIBHTTPCLIENT_HTTP": "ON",
                 "WITH_LIBHTTPCLIENT_WS": "ON",
-                "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;libhttpclient-http",
-                "ANDROID_PLATFORM": "android-21"
+                "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;libhttpclient-http"
             },
             "condition": {
                 "type": "equals",
@@ -166,7 +167,7 @@
                 "rhs": "Darwin"
             },
             "environment": {
-                "NDK": "$env{NAKAMA_ANDROID_NDK}"
+                "NDK": "$env{ANDROID_NDK_HOME}"
             }
         },
         {
@@ -184,9 +185,6 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            },
-            "environment": {
-                "NDK": "$env{NAKAMA_ANDROID_NDK}"
             }
         },
         {
@@ -204,9 +202,6 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            },
-            "environment": {
-                "NDK": "$env{NAKAMA_ANDROID_NDK}"
             }
         },
         {
@@ -224,9 +219,6 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            },
-            "environment": {
-                "NDK": "$env{NAKAMA_ANDROID_NDK}"
             }
         },
         {

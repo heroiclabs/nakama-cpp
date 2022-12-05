@@ -18,6 +18,12 @@ cmake_minimum_required(VERSION 3.22)
 set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
         CACHE FILEPATH "Vcpkg toolchain file")
 
+
+if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
+    # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
+endif()
+
 project(nakama-test LANGUAGES CXX)
 
 include(FetchContent)
