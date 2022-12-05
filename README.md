@@ -5,7 +5,9 @@ Nakama C/C++ Client SDK
 
 [Nakama](https://github.com/heroiclabs/nakama) is an open-source server designed to power modern games and apps. Features include user accounts, chat, social, matchmaker, realtime multiplayer, and much [more](https://heroiclabs.com).
 
-This client implements the full API and socket options with the server. It's written in C and C++11 with minimal dependencies to support Unreal, game consoles, Cocos2d-x, and other custom engines and frameworks.
+This client implements the full API and socket options with the server. It's written in C and C++11 with minimal dependencies to support Unreal, Cocos2d-x, Oculus, and other custom engines and frameworks.
+
+We also support various game consoles via a private C++ repository. Please reach out to support@heroiclabs.com to discuss console support for your project.
 
 If you experience any issues with the client, [open an issue](https://github.com/heroiclabs/nakama-cpp/issues).
 
@@ -279,7 +281,7 @@ docker buildx build -f scripts/Dockerfile --progress=plain --output=./out .
 
 ### Android
 
-To build for Android set your `NAKAMA_ANDROID_NDK` environment variable to your NDK before building.
+To build for Android set your `ANDROID_NDK_HOME` environment variable to your NDK before building.
 
 Your NDK is typically located within your SDK:`<sdk>/ndk/<ndk-version>`
 
