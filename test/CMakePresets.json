@@ -199,7 +199,7 @@
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "x64-osx",
                 "VCPKG_TARGET_TRIPLET": "x64-android",
-                "ANDROID_ABI": "x64"
+                "ANDROID_ABI": "x86_64"
             },
             "condition": {
                 "type": "equals",

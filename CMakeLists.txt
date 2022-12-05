@@ -42,12 +42,12 @@ else()
     endif()
 endif()
 
-if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
-    # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
-    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
+if (DEFINED ANDROID_ABI)
+    if (DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
+        message(FATAL "Cannot specify an external chainload toolchain if building for Android.")
+    endif()
 
-    # and also set env var to be used by *-android-heroic triplets
-    set(ENV{VCPKG_CHAINLOAD_TOOLCHAIN_FILE} "${VCPKG_CHAINLOAD_TOOLCHAIN_FILE}")
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
 endif()
 
 cmake_policy(SET CMP0012 NEW)
