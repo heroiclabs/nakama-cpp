@@ -4,6 +4,9 @@ include(version.cmake)
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
 set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
 
+set(FETCHCONTENT_FULLY_DISCONNECTED OFF)
+set(FETCHCONTENT_UPDATES_DISCONNECTED OFF)
+
 if(NOT BUILD_SHARED_LIBS)
     message(WARNING "The Nakama C++ client can only be built as a shared library.")
     set(BUILD_SHARED_LIBS ON)
