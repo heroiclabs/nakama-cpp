@@ -69,7 +69,7 @@ include(cmake/linkerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
 set(FETCHCONTENT_QUIET FALSE)
-
+set(FETCHCONTENT_BASE_DIR ${PROJECT_SOURCE_DIR}/third-party)
 
 if(MSVC)
     # On windows it is critical not to accidentally use DLL
@@ -137,15 +137,12 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
             ## TODO set TARGET and make sure all platforms still work
         endif()
 
-        if ($<TARGET_EXISTS:{LIBHTTPCLIENT_TARGET}>)
-
-            # We build LIBHTTPCLIENT as OBJECT library so that its symbols
-            # wont be excluded due to '--exclude-libs ALL' linker flag. Although we
-            # dont expose libhttpclient in our API , we still want it's symbols exported
-            # in our ABI, because that is how JVM finds native code on Android platform.
-            list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
-            message("appending libhttpclient")
-        endif()
+        # We build LIBHTTPCLIENT as OBJECT library so that its symbols
+        # wont be excluded due to '--exclude-libs ALL' linker flag. Although we
+        # dont expose libhttpclient in our API , we still want it's symbols exported
+        # in our ABI, because that is how JVM finds native code on Android platform.
+        list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
+        message("appending libhttpclient")
 
         FetchContent_Declare(
             libHttpClient

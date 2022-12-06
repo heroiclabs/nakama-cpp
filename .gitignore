@@ -5,3 +5,4 @@ out
 /test/Engine
 CMakeUserPresets.json
 local.properties
+third-party ## FetchContent dependencies.
