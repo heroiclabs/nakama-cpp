@@ -127,9 +127,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
         endif()
 
-        message("ANDROID VARIABLE IS ${ANDROID}")
-
-        set(LIBHTTPCLIENT_TARGET "dummy-value")
+        set(FETCHCONTENT_QUIET OFF)
 
         if (ANDROID)
             set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake/Android/libHttpClient)
@@ -146,7 +144,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
 
         message("doing fetchcontent declare")
-        message("subdir is ${LIBHTTPCLIENT_SOURCE_SUBDIR}")
 
         FetchContent_Declare(
             libHttpClient
