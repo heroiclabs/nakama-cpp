@@ -2,8 +2,7 @@ cmake_minimum_required(VERSION 3.23)
 include(version.cmake)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
-# we use list append to allow dependent libraries to inject their own triplets and ports into this.
-list(APPEND VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
+set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
 
 if(NOT BUILD_SHARED_LIBS)
     message(WARNING "The Nakama C++ client can only be built as a shared library.")
@@ -120,12 +119,15 @@ if(APPLE)
 
 endif()
 
+message("entering libhttpclient if block")
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     if (NOT LIBHTTPCLIENT_BUILTIN)
         if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR APPLE)
             find_package(CURL CONFIG REQUIRED)
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
         endif()
+
+        message("ANDROID VARIABLE IS ${ANDROID}")
 
         if (ANDROID)
             set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake/Android/libHttpClient)
@@ -140,6 +142,8 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         # dont expose libhttpclient in our API , we still want it's symbols exported
         # in our ABI, because that is how JVM finds native code on Android platform.
         list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
+
+        message("doing fetchcontent declare")
 
         FetchContent_Declare(
             libHttpClient
@@ -160,6 +164,9 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         endif()
     endif()
 endif()
+
+message("done with if block")
+
 
 add_library(nakama-ws-impl INTERFACE)
 if(WS_IMPL STREQUAL "libhttpclient")
