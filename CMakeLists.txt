@@ -132,7 +132,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
         endif()
 
-
         if (ANDROID)
             set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake/Android/libHttpClient)
             set(LIBHTTPCLIENT_TARGET libHttpClient.Android)
@@ -146,7 +145,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         # dont expose libhttpclient in our API , we still want it's symbols exported
         # in our ABI, because that is how JVM finds native code on Android platform.
         list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
-        message("appending libhttpclient")
 
         FetchContent_Declare(
             libHttpClient
@@ -159,7 +157,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         )
 
         FetchContent_MakeAvailable(libHttpClient)
-        message("source dir ${libhttpclient_SOURCE_DIR}")
 
         if (NOT TARGET ${LIBHTTPCLIENT_TARGET})
             message(FATAL_ERROR "Could not find libhttpclient target: ${LIBHTTPCLIENT_TARGET}.")
@@ -175,8 +172,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         endif()
     endif()
 endif()
-
-message("done with if block")
 
 
 add_library(nakama-ws-impl INTERFACE)
