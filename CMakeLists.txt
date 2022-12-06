@@ -156,6 +156,10 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
 
         FetchContent_MakeAvailable(libHttpClient)
 
+        if (NOT TARGET ${LIBHTTPCLIENT_TARGET})
+            message(FATAL "could not find libhttclient target ${LIBHTTPCLIENT_TARGET}")
+        endif()
+
         if (NOT WS_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
         else()
