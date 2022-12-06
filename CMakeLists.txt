@@ -18,6 +18,7 @@ option(UNREAL "Unreal engine support" OFF)
 
 set(HTTP_IMPL "")
 set(WS_IMPL "")
+set(NAKAMA_SDK_DEPS "")
 
 if (UNREAL)
     # too many bugs in the Unreal Linux WS implementation:
@@ -102,7 +103,6 @@ if (ADDRESS_SANITIZER)
     string(REPLACE /RTC1 "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
 endif()
 
-
 if(BUILD_SHARED_LIBS)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
     add_compile_definitions(NAKAMA_SHARED_LIBRARY NAKAMA_SHARED_LIBRARY_EXPORTS)
@@ -134,6 +134,12 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
             set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake)
             ## TODO set TARGET and make sure all platforms still work
         endif()
+
+        # We build LIBHTTPCLIENT as OBJECT library so that its symbols
+        # wont be excluded due to '--exclude-libs ALL' linker flag. Although we
+        # dont expose libhttpclient in our API , we still want it's symbols exported
+        # in our ABI, because that is how JVM finds native code on Android platform.
+        list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
 
         FetchContent_Declare(
             libHttpClient
@@ -182,7 +188,7 @@ add_subdirectory(core EXCLUDE_FROM_ALL)
 
 # create dummy file because pure "library of libraries" is not supported
 
-set(NAKAMA_SDK_DEPS
+list(APPEND NAKAMA_SDK_DEPS
     $<TARGET_OBJECTS:nakama-sdk-core-misc>
     $<TARGET_OBJECTS:nakama-sdk-core-rest>
     $<TARGET_OBJECTS:nakama-sdk-core-rt>
@@ -198,16 +204,6 @@ set(NAKAMA_SDK_DEPS
     # library need to have a header so that Headers directory structure is created
     ${DUMMY_H}
 )
-
-if (HTTP_IMPL STREQUAL libhttpclient OR WS_IMPL STREQUAL libhttpclient)
-    # We build LIBHTTPCLIENT as OBJECT library so that its symbols
-    # wont be excluded due to '--exclude-libs ALL' linker flag. Although we
-    # dont expose libhttpclient in our API , we still want it's symbols exported
-    # in our ABI, because that is how JVM finds native code on Android platform.
-    if (NOT LIBHTTPCLIENT_BUILTIN)
-        list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
-    endif()
-endif()
 
 if (BUILD_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:nakama-sdk-core-grpc>)
