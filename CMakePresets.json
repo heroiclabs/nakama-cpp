@@ -47,7 +47,6 @@
             "installDir": "out",
             "generator": "Xcode",
             "cacheVariables": {
-                "CMAKE_INSTALL_LIBDIR": "macosx-arm64",
                 "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
                 "VCPKG_TARGET_TRIPLET": "arm64-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "arm64",
@@ -68,7 +67,6 @@
                 "macosx-arm64-host_arm64"
             ],
             "cacheVariables": {
-                "CMAKE_INSTALL_LIBDIR": "macosx-arm64",
                 "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "arm64"
             }
@@ -79,7 +77,6 @@
                 "macosx-arm64-host_x64"
             ],
             "cacheVariables": {
-                "CMAKE_INSTALL_LIBDIR": "macosx-x64",
                 "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
                 "VCPKG_TARGET_TRIPLET": "x64-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "x86_64"
@@ -91,7 +88,6 @@
                 "macosx-x64-host_x64"
             ],
             "cacheVariables": {
-                "CMAKE_INSTALL_LIBDIR": "macosx-x64",
                 "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "x86_64"
             }
@@ -102,7 +98,6 @@
                 "macosx-arm64-host_arm64"
             ],
             "cacheVariables": {
-                "CMAKE_INSTALL_LIBDIR": "ios-arm64",
                 "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
                 "CMAKE_SYSTEM_NAME": "iOS",
                 "BUILD_WSLAY": "ON",
@@ -116,7 +111,6 @@
             ],
             "installDir": "out",
             "cacheVariables": {
-                "CMAKE_INSTALL_LIBDIR": "ios-arm64",
                 "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
                 "VCPKG_HOST_TRIPLET": "x64-osx-heroic"
             }
@@ -127,7 +121,6 @@
                 "macosx-x64-host_arm64"
             ],
             "cacheVariables": {
-                "CMAKE_INSTALL_LIBDIR": "iphonesimulator-x64",
                 "VCPKG_TARGET_TRIPLET": "x64-iphonesimulator-heroic",
                 "CMAKE_SYSTEM_NAME": "iOS",
                 "CMAKE_OSX_SYSROOT": "iphonesimulator",
