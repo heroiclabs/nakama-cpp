@@ -155,9 +155,10 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         )
 
         FetchContent_MakeAvailable(libHttpClient)
+        message("source dir ${libhttpclient_SOURCE_DIR}")
 
         if (NOT TARGET ${LIBHTTPCLIENT_TARGET})
-            message(FATAL "could not find libhttclient target ${LIBHTTPCLIENT_TARGET}")
+            message(FATAL_ERROR "Could not find libhttpclient target: ${LIBHTTPCLIENT_TARGET}.")
         endif()
 
         if (NOT WS_IMPL STREQUAL "libhttpclient")
