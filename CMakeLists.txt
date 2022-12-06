@@ -68,6 +68,7 @@ include(cmake/compilerFlags.cmake)
 include(cmake/linkerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
+set(FETCHCONTENT_QUIET FALSE)
 
 
 if(MSVC)
@@ -127,7 +128,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
         endif()
 
-        set(FETCHCONTENT_QUIET OFF)
 
         if (ANDROID)
             set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake/Android/libHttpClient)
@@ -150,6 +150,9 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
             GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
             GIT_TAG        cc2374a35cb0e3d1f6daab284b55a9516e0c5aff
             SOURCE_SUBDIR  ${LIBHTTPCLIENT_SOURCE_SUBDIR}
+            GIT_PROGRESS TRUE
+            GIT_SHALLOW TRUE
+            USES_TERMINAL_DOWNLOAD TRUE
         )
 
         FetchContent_MakeAvailable(libHttpClient)
