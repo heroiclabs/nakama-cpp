@@ -4,6 +4,7 @@ include(version.cmake)
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
 set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
 
+## TODO figure out why vcpkg seems to toggle these on and prevent downloading from fetchcontent
 set(FETCHCONTENT_FULLY_DISCONNECTED OFF)
 set(FETCHCONTENT_UPDATES_DISCONNECTED OFF)
 
