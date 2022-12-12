@@ -72,8 +72,6 @@ include(cmake/compilerFlags.cmake)
 include(cmake/linkerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
-set(FETCHCONTENT_QUIET FALSE)
-set(FETCHCONTENT_BASE_DIR ${PROJECT_SOURCE_DIR}/third-party)
 
 if(MSVC)
     # On windows it is critical not to accidentally use DLL
@@ -124,7 +122,6 @@ if(APPLE)
 
 endif()
 
-message("entering libhttpclient if block")
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     if (NOT LIBHTTPCLIENT_BUILTIN)
         if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR APPLE)
@@ -137,7 +134,12 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
             set(LIBHTTPCLIENT_TARGET libHttpClient.Android)
         else()
             set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake)
-            ## TODO set TARGET and make sure all platforms still work
+
+            if (APPLE)
+                set(LIBHTTPCLIENT_TARGET libHttpClient.Apple.C)
+            endif()
+
+            ## TODO windows, linux etc.
         endif()
 
         # We build LIBHTTPCLIENT as OBJECT library so that its symbols
@@ -149,7 +151,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         FetchContent_Declare(
             libHttpClient
             GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
-            GIT_TAG        cc2374a35cb0e3d1f6daab284b55a9516e0c5aff
+            GIT_TAG        2c203523552d9cf93c9386282241c686331e25f1
             SOURCE_SUBDIR  ${LIBHTTPCLIENT_SOURCE_SUBDIR}
             GIT_PROGRESS TRUE
             GIT_SHALLOW TRUE
@@ -159,7 +161,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         FetchContent_MakeAvailable(libHttpClient)
 
         if (NOT TARGET ${LIBHTTPCLIENT_TARGET})
-            message(FATAL_ERROR "Could not find libhttpclient target: ${LIBHTTPCLIENT_TARGET}.")
+            message(FATAL_ERROR "Could not find libhttpclient target: ${LIBHTTPCLIENT_TARGET}")
         endif()
 
         if (NOT WS_IMPL STREQUAL "libhttpclient")
