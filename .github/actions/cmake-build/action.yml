@@ -80,6 +80,8 @@ runs:
       shell: bash
     - run: cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
       shell: bash
+    - run: cat ./build/${{ inputs.preset }}/vcpkg-manifest-install.log
+      shell: bash
     - run: cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
       shell: bash
     - run: cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
