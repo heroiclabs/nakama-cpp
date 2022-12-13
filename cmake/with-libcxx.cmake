@@ -63,6 +63,8 @@ execute_process(COMMAND
   --overlay-triplets=${PROJECT_SOURCE_DIR}/cmake/triplets
   libcxx
   COMMAND_ERROR_IS_FATAL ANY
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  COMMAND_ECHO
 )
 
 
