@@ -82,9 +82,9 @@ runs:
       shell: bash
     - if: always()
       run: >
-        VCPKG_LOG=./build/${{ inputs.preset }}/vcpkg-manifest-install.log
-        if [[ test -f "$VCPKG_LOG" ]]; then
-          cat VCPKG_LOG
+        vcpkg_log=./build/${{ inputs.preset }}/vcpkg-manifest-install.log;
+        if test -f "$vcpkg_log"; then
+          cat ${vcpkg_log}
         fi
       shell: bash
     - run: cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
