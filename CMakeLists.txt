@@ -5,11 +5,6 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
 set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
 set(CMAKE_SUPPRESS_REGENERATION true) ## for Xcode
 
-if (APPLE)
-    set(CMAKE_XCODE_ATTRIBUTE_USE_HEADERMAP NO)             ## breaks builds for libhttpclient
-    set(CMAKE_XCODE_ATTRIBUTE_ALWAYS_SEARCH_USER_PATHS NO)  ## breaks builds for libhttpclient
-endif()
-
 ## TODO figure out why vcpkg seems to toggle these on and prevent downloading from fetchcontent
 set(FETCHCONTENT_FULLY_DISCONNECTED OFF)
 set(FETCHCONTENT_UPDATES_DISCONNECTED OFF)
@@ -154,10 +149,12 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         # in our ABI, because that is how JVM finds native code on Android platform.
         list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
 
+        set(LIBHTTPCLIENT_OBJECT_LIBRARY ON)
+
         FetchContent_Declare(
             libHttpClient
             GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
-            GIT_TAG        80681153ec7dd953a02b8ebd8df6ce3721f5d854
+            GIT_TAG        11abd0f3be701311a996e4b893089393aa5d12b5
             SOURCE_SUBDIR  ${LIBHTTPCLIENT_SOURCE_SUBDIR}
             GIT_PROGRESS TRUE
             GIT_SHALLOW TRUE
