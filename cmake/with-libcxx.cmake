@@ -52,6 +52,7 @@ endif()
 # remove it. Instead we build and install it on a side.
 set(LIBCXX_INSTALL_ROOT ${CMAKE_CURRENT_BINARY_DIR}/libcxx)
 
+message("VCPKGROOT IS $ENV{VCPKG_ROOT}")
 execute_process(COMMAND
   $ENV{VCPKG_ROOT}/vcpkg
   --feature-flags=-manifests
