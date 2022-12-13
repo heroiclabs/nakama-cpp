@@ -59,8 +59,7 @@ execute_process(COMMAND
   --triplet=${TRIPLET}
   --vcpkg-root $ENV{VCPKG_ROOT}
   --x-install-root=${LIBCXX_INSTALL_ROOT}
-  --overlay-ports=${CMAKE_CURRENT_LIST_DIR}/vcpkg-ports
-  --overlay-triplets=${CMAKE_CURRENT_LIST_DIR}/triplets
+  --overlay-triplets=${PROJECT_SOURCE_DIR}/cmake/triplets
   libcxx
   COMMAND_ERROR_IS_FATAL ANY
 )
