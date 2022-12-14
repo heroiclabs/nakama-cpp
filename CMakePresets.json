@@ -11,7 +11,6 @@
             "displayName": "Default",
             "description": "No shipped websocket or http implementation.",
             "binaryDir": "build/${presetName}",
-            "installDir": "out/${presetName}",
             "hidden": true,
             "cacheVariables": {
                 "LOGS_ENABLED": "ON",
@@ -37,14 +36,15 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Windows"
-            }
+            },
+            "installDir": "out/win-x64"
         },
         {
             "name": "macosx-arm64-host_arm64",
             "inherits": [
                 "default"
             ],
-            "installDir": "out",
+            "installDir": "out/macosx-arm64",
             "generator": "Xcode",
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
@@ -69,7 +69,8 @@
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "arm64"
-            }
+            },
+            "installDir": "out/macosx-arm64"
         },
         {
             "name": "macosx-x64-host_x64",
@@ -80,7 +81,8 @@
                 "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
                 "VCPKG_TARGET_TRIPLET": "x64-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "x86_64"
-            }
+            },
+            "installDir": "out/macosx-x64"
         },
         {
             "name": "macosx-x64-host_arm64",
@@ -102,14 +104,15 @@
                 "CMAKE_SYSTEM_NAME": "iOS",
                 "BUILD_WSLAY": "ON",
                 "BUILD_CURL": "ON"
-            }
+            },
+            "installDir": "out/ios-arm64"
         },
         {
             "name": "ios-arm64-host_x64",
             "inherits": [
                 "ios-arm64-host_arm64"
             ],
-            "installDir": "out",
+            "installDir": "out/ios-arm64",
             "cacheVariables": {
                 "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
                 "VCPKG_HOST_TRIPLET": "x64-osx-heroic"
@@ -157,9 +160,6 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            },
-            "environment": {
-                "NDK": "$env{ANDROID_NDK_HOME}"
             }
         },
         {
@@ -177,7 +177,8 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            }
+            },
+            "installDir": "out/android-armeabi-v7a"
         },
         {
             "name": "android-arm64-v8a-host_osx_x64",
@@ -194,7 +195,8 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            }
+            },
+            "installDir": "out/android-arm64-v8a"
         },
         {
             "name": "android-x64-host_osx_x64",
@@ -211,7 +213,8 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            }
+            },
+            "installDir": "out/android-x64"
         },
         {
             "name": "linux-amd64",
@@ -231,7 +234,8 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Linux"
-            }
+            },
+            "installDir": "out/linux-amd64"
         },
         {
             "name": "ubuntu1804-amd64",
@@ -242,7 +246,8 @@
             "environment": {
                 "CC": "/usr/bin/gcc-11",
                 "CXX": "/usr/bin/g++-11"
-            }
+            },
+            "installDir": "out/ubuntu1804-amd64"
         }
     ],
     "buildPresets": [
