@@ -8,6 +8,18 @@
             "name": "rapidjson",
             "version>=": "2020-09-14#2"
         },
-        "optional-lite"
+        "optional-lite",
+        {
+            "name": "nakama-sdk",
+            "version>=": "2.6.0#3",
+            "platform": "ios | osx | linux",
+            "features": ["wslay", "curl", "libhttpclient-http"]
+        },
+        {
+            "name": "nakama-sdk",
+            "version>=": "2.6.0#3",
+            "platform": "android | windows",
+            "features": ["libhttpclient-ws", "libhttpclient-http"]
+        }
     ]
-  }
+}

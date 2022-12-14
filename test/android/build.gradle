@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:7.3.0'
     }
 }
 
@@ -18,13 +18,28 @@ repositories {
 android {
     compileSdkVersion 30
     defaultConfig {
-        applicationId "com.heroiclabs.nakama-test"
+        applicationId "com.heroiclabs.nakamatest"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName '1.0'
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-
+        ndk {
+            abiFilters "${androidABI}"
+        }
+        externalNativeBuild {
+            cmake {
+                arguments '--preset',
+                        "android-${androidABI}-host_osx_x64",
+                        "-DTOOLCHAIN_LOAD_FIRST=${System.getenv('VCPKG_ROOT')}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake"
+                targets 'nakama-test'
+            }
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            version "3.25.0-rc4"
+            path "../CMakeLists.txt"
+        }
     }
     buildTypes {
         release {
@@ -32,21 +47,4 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    sourceSets {
-        debug {
-            jniLibs.srcDirs "../out/libnakama-sdk.so"
-        }
-        release {
-            jniLibs.srcDirs "../out/libnakama-sdk.so"
-        }
-    }
-
-    externalNativeBuild {
-        cmake {
-            // define the path where the CMakeList has been put for this module.
-            path("../CMakeLists.txt")
-        }
-    }
 }
-

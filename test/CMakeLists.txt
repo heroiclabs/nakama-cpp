@@ -15,9 +15,13 @@
 #
 cmake_minimum_required(VERSION 3.18.1)
 
-set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
-        CACHE FILEPATH "Vcpkg toolchain file")
+message("reading file")
+if (NOT ANDROID) ## set as loadfirst in gradle so it doesn't get stomped by the android toolchain
+    set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
+            CACHE FILEPATH "Vcpkg toolchain file")
+endif()
 
+message("TOOLCHAIN FILE IS ${CMAKE_TOOLCHAIN_FILE}")
 
 if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
     # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
@@ -27,6 +31,9 @@ endif()
 project(nakama-test LANGUAGES CXX)
 
 include(FetchContent)
+
+message("including FetchContent")
+
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(THREADS_PREFER_PTHREAD_FLAG ON)
@@ -41,12 +48,11 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin"
     set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
 endif()
 
+
+message("finding package")
+
 find_package(RapidJSON CONFIG REQUIRED)
 find_package(optional-lite)
-
-get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
-set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/out/${PRESET_NAME}/share/nakama-sdk)
-message("dir is ${nakama-sdk_DIR}")
 find_package(nakama-sdk CONFIG REQUIRED)
 
 if (ADDRESS_SANITIZER)

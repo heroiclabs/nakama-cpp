@@ -6,4 +6,4 @@ pluginManagement {
   }
 }
 
-rootProject.name = 'nakama-test'
+rootProject.name = 'nakamatest'

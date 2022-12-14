@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.23)
 include(version.cmake)
 
+if (ANDROID)
+    SET(ANDROID_USE_LEGACY_TOOLCHAIN_FILE FALSE)
+endif()
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
 set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
 set(CMAKE_SUPPRESS_REGENERATION true) ## for Xcode

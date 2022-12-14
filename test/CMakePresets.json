@@ -10,7 +10,6 @@
             "name": "default",
             "displayName": "Default",
             "binaryDir": "build/${presetName}",
-            "installDir": "out/${presetName}",
             "hidden": true,
             "cacheVariables": {
                 "CMAKE_CONFIGURATION_TYPES": "Debug;MinSizeRel",
@@ -36,7 +35,8 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Windows"
-            }
+            },
+            "installDir": "out/win-x64"
         },
         {
             "name": "macosx-arm64-host_arm64",
@@ -51,7 +51,8 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            }
+            },
+            "installDir": "out/macosx-arm64"
         },
         {
             "name": "macosx-arm64-host_x64",
@@ -61,7 +62,8 @@
             "generator": "Xcode",
             "cacheVariables": {
                 "CMAKE_OSX_ARCHITECTURES": "arm64"
-            }
+            },
+            "installDir": "out/macosx-x64"
         },
         {
             "name": "macosx-x64-host_x64",
@@ -71,7 +73,8 @@
             "generator": "Xcode",
             "cacheVariables": {
                 "CMAKE_OSX_ARCHITECTURES": "x86_64"
-            }
+            },
+            "installDir": "out/macosx-x64"
         },
         {
             "name": "macosx-x64-host_arm64",
@@ -81,7 +84,8 @@
             "generator": "Xcode",
             "cacheVariables": {
                 "CMAKE_OSX_ARCHITECTURES": "x86_64"
-            }
+            },
+            "installDir": "out/macosx-arm64"
         },
         {
             "name": "ios-arm64-host_arm64",
@@ -92,14 +96,16 @@
             "cacheVariables": {
                 "CMAKE_SYSTEM_NAME": "iOS",
                 "CMAKE_SYSTEM_VERSION": "15"
-            }
+            },
+            "installDir": "out/ios-arm64"
         },
         {
             "name": "ios-arm64-host_x64",
             "inherits": [
                 "ios-arm64-host_arm64"
             ],
-            "generator": "Xcode"
+            "generator": "Xcode",
+            "installDir": "out/ios-arm64"
         },
         {
             "name": "iphonesimulator-x64-host_arm64",
@@ -131,7 +137,8 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Linux"
-            }
+            },
+            "installDir": "out/linux-arm64"
         },
         {
             "name": "android-default",
@@ -165,13 +172,16 @@
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "x64-osx",
                 "VCPKG_TARGET_TRIPLET": "arm-android",
-                "ANDROID_ABI": "armeabi-v7a"
+                "ANDROID_ABI": "armeabi-v7a",
+                "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE"
+
             },
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            }
+            },
+            "installDir": "out/android-aremabi-v7a"
         },
         {
             "name": "android-arm64-v8a-host_osx_x64",
@@ -188,7 +198,8 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            }
+            },
+            "installDir": "out/android-arm64-v8a"
         },
         {
             "name": "android-x64-host_osx_x64",
@@ -205,7 +216,8 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
-            }
+            },
+            "installDir": "out/android-x64"
         }
     ],
     "buildPresets": [
