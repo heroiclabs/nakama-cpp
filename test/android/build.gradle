@@ -1,0 +1,52 @@
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0'
+    }
+}
+
+plugins {
+    id('com.android.application') version '7.1.1'
+}
+
+repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+
+}
+
+android {
+    compileSdkVersion 30
+    defaultConfig {
+        applicationId "com.heroiclabs.nakama-test"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName '1.0'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        debug {
+            jniLibs.srcDirs "../out/libnakama-sdk.so"
+        }
+        release {
+            jniLibs.srcDirs "../out/libnakama-sdk.so"
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            // define the path where the CMakeList has been put for this module.
+            path("../CMakeLists.txt")
+        }
+    }
+}
+
