@@ -29,8 +29,7 @@ android {
         externalNativeBuild {
             cmake {
                 arguments '--preset',
-                        "android-${androidABI}-host_osx_x64",
-                        "-DTOOLCHAIN_LOAD_FIRST=${System.getenv('VCPKG_ROOT')}/cmake/vcpkg/scripts/buildsystems/vcpkg.cmake"
+                        "android-${androidABI}-host_osx_x64"
                 targets 'nakama-test'
             }
         }

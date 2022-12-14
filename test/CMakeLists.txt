@@ -16,10 +16,8 @@
 cmake_minimum_required(VERSION 3.18.1)
 
 message("reading file")
-if (NOT ANDROID) ## set as loadfirst in gradle so it doesn't get stomped by the android toolchain
-    set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
-            CACHE FILEPATH "Vcpkg toolchain file")
-endif()
+ ## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
+set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake CACHE FILEPATH "Vcpkg toolchain file" FORCE)
 
 message("TOOLCHAIN FILE IS ${CMAKE_TOOLCHAIN_FILE}")
 
