@@ -22,5 +22,5 @@ To run on an Android device, also inside the `android` folder:
 
 (1) `adb install ./build/outputs/apk/debug/nakamatest-debug.apk`
 (2) `adb shell`
-(3) `am start -a android.intent.action.MAIN -n com.heroiclabs.nakamatest/android.app.NativeActivity`
-(4) `logcat | grep "com.heroiclabs.nakamatest"`
+(3) `logcat -c && am start -a android.intent.action.MAIN -n com.heroiclabs.nakamatest/android.app.NativeActivity`
+(4) `logcat` (You can append a filter with `| grep "nakama"` but you may miss some information).
