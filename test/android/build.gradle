@@ -20,7 +20,7 @@ android {
     defaultConfig {
         applicationId "com.heroiclabs.nakamatest"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName '1.0'
         ndk {
@@ -29,7 +29,8 @@ android {
         externalNativeBuild {
             cmake {
                 arguments '--preset',
-                        "android-${androidABI}-host_osx_x64"
+                        "android-${androidABI}-host_osx_x64",
+                        "-DVCPKG_BUILD_TYPE=Release"
                 targets 'nakama-test'
             }
         }
