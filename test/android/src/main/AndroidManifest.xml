@@ -3,18 +3,15 @@
 
     <application
         android:allowBackup="true">
-        <!--<activity
+        <activity
             android:name="android.app.NativeActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/app_name">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="helloworld-c" />
-
+            android:label="@string/app_name"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
+        </activity>
     </application>
 </manifest>

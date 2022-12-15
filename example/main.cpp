@@ -20,6 +20,11 @@
 #include <thread>
 #include <optional>
 
+#if __ANDROID__
+    #include <android_native_app_glue>
+#endif
+
+
 int main() {
     Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
     Nakama::NClientParameters params;
@@ -85,3 +90,14 @@ int main() {
     client->disconnect();
     return 0;
 }
+
+#if __ANDROID__
+
+extern "C"
+{
+    void android_main(struct android_app* state) {
+        main();
+    }
+}
+
+#endif

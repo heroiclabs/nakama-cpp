@@ -11,8 +11,13 @@ cmake --preset <configure-preset>
 cmake --build --preset <build-preset> --target install
 ```
 
-For Android:
+For Android, inside the `android` folder:
 
 `./gradlew assemble -PandroidABI=<ANDROID_ABI>` where ANDROD_ABI is one of those defined in `CMakePreset.json`.
 
 `./gradlew assemble -PandroidABI=arm64-v8a`
+
+To run on an Android device:
+
+`adb install <path-to-output>`
+`adb shell monkey -p com.heroiclabs.nakamatest -c android.intent.category.LAUNCHER 1`
