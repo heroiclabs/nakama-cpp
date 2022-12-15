@@ -134,7 +134,7 @@ public:
         createWorkingClient();
         client->setErrorCallback([this, retryPeriodMs](const NError& /*error*/)
         {
-            cout << "Not connected. Will retry in " << retryPeriodMs << " msec..." << endl;
+            NLOG_INFO("Not connected. Will retry in " << retryPeriodMs << " msec...");
             _retryAt = getUnixTimestampMs() + retryPeriodMs;
         });
         auth();
@@ -143,11 +143,11 @@ public:
 
     void auth()
     {
-        cout << "Connecting..." << endl;
+        NLOG_INFO("Connecting...");
 
         auto successCallback = [this](NSessionPtr /*session*/)
         {
-            cout << "Connected" << endl;
+            NLOG_INFO("Connected");
             stopTest(true);
         };
         client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
@@ -182,14 +182,12 @@ int mainHelper(int argc, char *argv[])
         Nakama::Test::g_serverHost = argv[1];
     }
 
-    cout << "running nakama tests..." << endl;
-    cout << endl;
-    cout << "server config:" << endl;
-    cout << "host     : " << Nakama::Test::g_serverHost << endl;
-    cout << "HTTP port: " << SERVER_HTTP_PORT << endl;
-    cout << "key      : " << SERVER_KEY << endl;
-    cout << "ssl      : " << (SERVER_SSL ? "true" : "false") << endl;
-    cout << endl;
+    NLOG_INFO("running nakama tests...");
+    NLOG_INFO("server config:");
+    NLOG_INFO("host     : " << Nakama::Test::g_serverHost);
+    NLOG_INFO("HTTP port: " << SERVER_HTTP_PORT);
+    NLOG_INFO("key      : " << SERVER_KEY);
+    NLOG_INFO("ssl      : " << (SERVER_SSL ? "true" : "false"));
 
 #if !defined(__UNREAL__)
     Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
