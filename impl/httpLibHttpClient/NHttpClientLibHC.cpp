@@ -61,7 +61,10 @@ NHttpClientLibHC::NHttpClientLibHC(const NPlatformParameters& platformParams):
     m_baseUri(),
     m_queue_terminated(false)
 {
+    Nakama::NLogger::Info("configuring nlogger", "hc");
+
     configureNLogger();
+    NLogger::Info("constructor called", "hc");
 
 #ifdef __ANDROID__
     HCInitArgs initArgs{
@@ -75,6 +78,9 @@ NHttpClientLibHC::NHttpClientLibHC(const NPlatformParameters& platformParams):
 #endif
 
 
+    NLogger::Info("initializings", "hc");
+
+
     HRESULT hr = HCInitialize(initArgsParam);
     if (FAILED(hr)) {
         HC_TRACE_ERROR_HR(httpTransportLibHC, hr, "HCInitialize failed");
@@ -86,6 +92,9 @@ NHttpClientLibHC::NHttpClientLibHC(const NPlatformParameters& platformParams):
                      &q
                      );
     m_queue.reset(q);
+
+    NLogger::Info("resetting, "hc");
+
 }
 
 NHttpClientLibHC::~NHttpClientLibHC() noexcept

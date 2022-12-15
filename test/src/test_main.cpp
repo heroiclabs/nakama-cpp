@@ -76,9 +76,15 @@ NCppTest::NCppTest(const char* name) : NTest(name)
 
 void NCppTest::createWorkingClient()
 {
+    NLOG_INFO("Creating a working client.");
+
     NClientParameters parameters;
 
+    NLOG_INFO("setting params.");
+
     setWorkingClientParameters(parameters);
+
+    NLOG_INFO("creating client.");
 
     createClient(parameters);
 }
@@ -86,7 +92,12 @@ void NCppTest::createWorkingClient()
 NClientPtr NCppTest::createClient(const NClientParameters& parameters)
 {
 #if !defined(__UNREAL__)
-        client = createDefaultClient(parameters);
+    NLOG_INFO("Creating default client.");
+
+    client = createDefaultClient(parameters);
+
+    NLOG_INFO("done creating default client.");
+
 #else
         client = Nakama::Unreal::createNakamaClient(parameters, Nakama::NLogLevel::Debug);
 #endif
