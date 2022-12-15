@@ -21,11 +21,28 @@
 #include <optional>
 
 #if __ANDROID__
-    #include <android_native_app_glue>
+    #include <android_native_app_glue.h>
+    #include <jni.h>
 #endif
 
 
+#if __ANDROID__
+
+extern "C"
+{
+    void android_main(struct android_app* app) {
+        mainHelper();
+    }
+}
+
+#else
 int main() {
+    mainHelper();
+}
+
+#endif
+
+int mainHelper() {
     Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
     Nakama::NClientParameters params;
     params.serverKey = "defaultkey";
@@ -90,14 +107,3 @@ int main() {
     client->disconnect();
     return 0;
 }
-
-#if __ANDROID__
-
-extern "C"
-{
-    void android_main(struct android_app* state) {
-        main();
-    }
-}
-
-#endif

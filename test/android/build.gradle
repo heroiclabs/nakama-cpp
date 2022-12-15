@@ -30,7 +30,9 @@ android {
             cmake {
                 arguments '--preset',
                         "android-${androidABI}-host_osx_x64",
-                        "-DVCPKG_BUILD_TYPE=Release"
+                        "-DVCPKG_BUILD_TYPE=Release",
+                         "-DANDROID_STL=c++_shared"
+
                 targets 'nakama-test'
             }
         }

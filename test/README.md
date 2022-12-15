@@ -13,11 +13,14 @@ cmake --build --preset <build-preset> --target install
 
 For Android, inside the `android` folder:
 
-`./gradlew assemble -PandroidABI=<ANDROID_ABI>` where ANDROD_ABI is one of those defined in `CMakePreset.json`.
+`./gradlew assemble -PandroidABI=<ANDROID_ABI>` where ANDROD_ABI is one of those defined in `CMakePresets.json`.
 
+For example:
 `./gradlew assemble -PandroidABI=arm64-v8a`
 
-To run on an Android device:
+To run on an Android device, also inside the `android` folder:
 
-`adb install <path-to-output>`
-`adb shell monkey -p com.heroiclabs.nakamatest -c android.intent.category.LAUNCHER 1`
+(1) `adb install ./build/outputs/apk/debug/nakamatest-debug.apk`
+(2) `adb shell`
+(3) `am start -a android.intent.action.MAIN -n com.heroiclabs.nakamatest/android.app.NativeActivity`
+(4) `logcat | grep "com.heroiclabs.nakamatest"`

@@ -15,23 +15,17 @@
 #
 cmake_minimum_required(VERSION 3.18.1)
 
-message("reading file")
  ## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
 set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake CACHE FILEPATH "Vcpkg toolchain file" FORCE)
-
-message("TOOLCHAIN FILE IS ${CMAKE_TOOLCHAIN_FILE}")
 
 if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
     # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
     set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
 endif()
 
-project(nakama-test LANGUAGES CXX)
+project(nakama-test LANGUAGES C CXX)
 
 include(FetchContent)
-
-message("including FetchContent")
-
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(THREADS_PREFER_PTHREAD_FLAG ON)
@@ -45,9 +39,6 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin"
     # https://gitlab.kitware.com/cmake/cmake/-/issues/22240
     set(CMAKE_BUILD_WITH_INSTALL_RPATH YES)
 endif()
-
-
-message("finding package")
 
 find_package(RapidJSON CONFIG REQUIRED)
 find_package(optional-lite)
@@ -73,7 +64,30 @@ file(
     "${CMAKE_CURRENT_SOURCE_DIR}/src/realtime/*.h*"
 )
 
-add_executable(nakama-test MACOSX_BUNDLE ${SRCS})
+# following this guide: https://medium.com/androiddevelopers/getting-started-with-c-and-android-native-activities-2213b402ffff
+# alternatively we could do this in `Android.mk` but we already use CMake.
+if (ANDROID)
+
+    find_library(log-lib log)
+
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
+
+    add_library(native_app_glue STATIC $ENV{ANDROID_NDK_HOME}/sources/android/native_app_glue/android_native_app_glue.c)
+    target_include_directories(native_app_glue PUBLIC $ENV{ANDROID_NDK_HOME}/sources/android/native_app_glue)
+
+    ## android NDK works best with a library to load into the native activity
+    add_library(nakama-test ${SRCS})
+
+    target_link_libraries(nakama-test
+        PUBLIC
+            ${log-lib}
+            android
+            native_app_glue
+    )
+else()
+    add_executable(nakama-test MACOSX_BUNDLE ${SRCS})
+endif()
+
 
 target_link_libraries(nakama-test
     INTERFACE rapidjson

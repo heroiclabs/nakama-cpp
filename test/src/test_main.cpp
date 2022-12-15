@@ -19,6 +19,12 @@
 #include "TaskExecutor.h"
 #include "nakama-cpp/NUtils.h"
 
+#if defined(__ANDROID__)
+#include <android_native_app_glue.h>
+#include <jni.h>
+#endif
+
+
 #if defined(__UNREAL__)
 #include "NakamaUnreal.h"
 #endif
@@ -167,15 +173,8 @@ private:
 } // namespace Test
 } // namespace Nakama
 
-#if defined(_MSC_VER)
-#pragma warning(disable:4447)
-#endif
 
-#ifdef __UNREAL__
-int test_main(int argc, const char *argv[])
-#else
-int main(int argc, char *argv[])
-#endif
+int mainHelper(int argc, char *argv[])
 {
     int res = 0;
 
@@ -210,3 +209,28 @@ int main(int argc, char *argv[])
 
     return res;
 }
+
+#if defined(_MSC_VER)
+#pragma warning(disable:4447)
+#endif
+
+#ifdef __UNREAL__
+int test_main(int argc, const char *argv[])
+{
+    mainHelper(0, nullptr);
+}
+#elif defined(__ANDROID__)
+extern "C"
+{
+    void android_main(struct android_app* app)
+    {
+        mainHelper(0, nullptr);
+    }
+}
+#else
+int main(int argc, char *argv[])
+{
+    mainHelper(argc, argv);
+}
+
+#endif
