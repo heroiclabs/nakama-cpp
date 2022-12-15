@@ -131,10 +131,12 @@ public:
 
     void connect(uint32_t retryPeriodMs)
     {
+        NLOG_INFO("connecting");
         createWorkingClient();
+
         client->setErrorCallback([this, retryPeriodMs](const NError& /*error*/)
         {
-            NLOG_INFO("Not connected. Will retry in " << retryPeriodMs << " msec...");
+            NLOG(Nakama::NLogLevel::Info, "Not connected. Will retry in %d msec...",  retryPeriodMs);
             _retryAt = getUnixTimestampMs() + retryPeriodMs;
         });
         auth();
@@ -182,19 +184,21 @@ int mainHelper(int argc, char *argv[])
         Nakama::Test::g_serverHost = argv[1];
     }
 
-    NLOG_INFO("running nakama tests...");
-    NLOG_INFO("server config:");
-    NLOG_INFO("host     : " << Nakama::Test::g_serverHost);
-    NLOG_INFO("HTTP port: " << SERVER_HTTP_PORT);
-    NLOG_INFO("key      : " << SERVER_KEY);
-    NLOG_INFO("ssl      : " << (SERVER_SSL ? "true" : "false"));
-
 #if !defined(__UNREAL__)
     Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
 #endif
 
+    NLOG(Nakama::NLogLevel::Info, "server config...");
+    NLOG(Nakama::NLogLevel::Info, "host     : %s", Nakama::Test::g_serverHost.c_str());
+    NLOG(Nakama::NLogLevel::Info, "HTTP port: %d", SERVER_HTTP_PORT);
+    NLOG(Nakama::NLogLevel::Info, "key      : %s", SERVER_KEY);
+    NLOG(Nakama::NLogLevel::Info, "ssl      : %s", (SERVER_SSL ? "true" : "false"));
+
+
+    Nakama::NLogger::Info("starting tests", "hc");
     Nakama::Test::NConnectTest connectTest;
     connectTest.connect(2000);
+    Nakama::NLogger::Info("done calling connect", "hc");
 
     // REST client tests
     g_clientType = ClientType_Rest;

@@ -172,7 +172,7 @@ NLogger::setLevel(NLogLevel::Debug);
 
 - `Fatal` writes only logs with `Fatal` logging level.
 
-Note: to use logging macroses you have to define `NLOGS_ENABLED`.
+Note: to use logging macros you have to define `NLOGS_ENABLED`.
 
 ### Websockets transport
 

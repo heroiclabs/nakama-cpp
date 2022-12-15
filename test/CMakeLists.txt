@@ -25,6 +25,8 @@ endif()
 
 project(nakama-test LANGUAGES C CXX)
 
+option(LOGS_ENABLED "Enable log output" ON)
+
 include(FetchContent)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -88,6 +90,9 @@ else()
     add_executable(nakama-test MACOSX_BUNDLE ${SRCS})
 endif()
 
+if (LOGS_ENABLED)
+    target_compile_definitions(nakama-test PRIVATE "NLOGS_ENABLED")
+endif()
 
 target_link_libraries(nakama-test
     INTERFACE rapidjson
