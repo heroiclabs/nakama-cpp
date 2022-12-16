@@ -18,7 +18,7 @@
         {
             "name": "nakama-sdk",
             "version>=": "2.6.0#3",
-            "platform": "android",
+            "platform": "windows",
             "features": ["libhttpclient-ws", "libhttpclient-http", "logs"]
         },
         {

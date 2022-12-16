@@ -26,7 +26,7 @@
 
 #ifdef BUILD_HTTP_LIBHTTPCLIENT
 #include "../../impl/httpLibHttpClient/NHttpClientLibHC.h"
-#elif defined(BUILD_HTTP_CPPREST)
+#elif defined(BUILD_HTTP_CPPRESTSDK)
 #include "../../impl/httpCppRest/NHttpClientCppRest.h"
 #endif
 
@@ -35,12 +35,9 @@ namespace Nakama {
 #if !defined(WITH_EXTERNAL_HTTP) || defined(BUILD_GRPC_CLIENT)
 NClientPtr createDefaultClient(const NClientParameters& parameters)
 {
-    NLOG_INFO("create default client called");
-
     #if defined(BUILD_GRPC_CLIENT)
     return createGrpcClient(parameters);
     #else
-    Nakama::NLogger::Info("creating rest client", "hc");
     return createRestClient(parameters, createDefaultHttpTransport(parameters.platformParams));
     #endif
 }
@@ -58,8 +55,6 @@ NClientPtr createGrpcClient(const NClientParameters& parameters)
 
 NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportPtr httpTransport)
 {
-    Nakama::NLogger::Info("creating rest client inner", "hc");
-
     if (!httpTransport)
     {
         NLOG_ERROR("HTTP transport cannot be null.");
@@ -73,13 +68,11 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
 #ifndef WITH_EXTERNAL_HTTP
 NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platformParams)
 {
-    Nakama::NLogger::Info("creating default http transport", "hc");
-
     (void)platformParams;  // silence unused variable warning on some platforms
     // Compilation error if no implementation is selected
     #if defined(BUILD_HTTP_LIBHTTPCLIENT)
     return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
-    #elif defined(BUILD_HTTP_CPPREST)
+    #elif defined(BUILD_HTTP_CPPRESTSDK)
     return NHttpTransportPtr(new NHttpClientCppRest());
     #else
         #error Could not find default http transport for platform.
