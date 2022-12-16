@@ -17,6 +17,7 @@
 #pragma once
 
 #include <nakama-cpp/NHttpTransportInterface.h>
+#include "NPlatformParams.h"
 #include "cpprest/http_client.h"
 #include <list>
 #include <mutex>
@@ -33,7 +34,7 @@ namespace Nakama {
     public:
         using ReqId = uint64_t;
 
-        NHttpClientCppRest();
+        NHttpClientCppRest(const NPlatformParameters& platformParams);
         ~NHttpClientCppRest();
 
         void setBaseUri(const std::string& uri) override;

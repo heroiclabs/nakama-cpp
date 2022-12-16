@@ -16,6 +16,7 @@
 
 #include "NHttpClientCppRest.h"
 #include "CppRestUtils.h"
+#include "NPlatformParams.h"
 
 namespace Nakama {
 
@@ -55,9 +56,11 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////
-NHttpClientCppRest::NHttpClientCppRest()
-    : _context(std::make_shared<NHttpClientCppRestContext>(*this))
+NHttpClientCppRest::NHttpClientCppRest(NPlatformParameters& params) : _context(std::make_shared<NHttpClientCppRestContext>(*this))
 {
+#if __ANDROID__
+    cpprest_init(params.vm);
+#endif
 }
 
 NHttpClientCppRest::~NHttpClientCppRest()
@@ -260,7 +263,7 @@ NHttpClientCppRest::ReqContextPtr NHttpClientCppRest::popFinishedReq()
 
     if (_finishedRequests.empty())
         return nullptr;
-    
+
     ReqContextPtr ctx = std::move(_finishedRequests.front());
     _finishedRequests.pop_front();
 

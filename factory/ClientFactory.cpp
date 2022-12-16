@@ -73,7 +73,7 @@ NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platform
     #if defined(BUILD_HTTP_LIBHTTPCLIENT)
     return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
     #elif defined(BUILD_HTTP_CPPRESTSDK)
-    return NHttpTransportPtr(new NHttpClientCppRest());
+    return NHttpTransportPtr(new NHttpClientCppRest(platformParams));
     #else
         #error Could not find default http transport for platform.
     #endif
