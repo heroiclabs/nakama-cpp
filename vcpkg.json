@@ -73,9 +73,10 @@
                 "grpc"
             ]
         },
-        "cpprestsdk": {
-            "description": "Deprecated HTTP library.",
-            "dependencies": [ {"name": "cpprestsdk"} ]
+        "cpprestsdk-http": {
+            "description": "Maintenance-mode HTTP library.",
+            "dependencies": [ {"name": "cpprestsdk"} ],
+            "supports": "android"
         }
     }
 }

@@ -242,8 +242,6 @@ extern "C"
     {
         g_platformParameters.javaVM = app->activity->vm;
         g_platformParameters.applicationContext = app->activity->clazz;
-
-        app->activity->vm->AttachCurrentThread(&app->activity->env, NULL);
         mainHelper(1, nullptr);
     }
 }
