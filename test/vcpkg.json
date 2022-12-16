@@ -8,25 +8,31 @@
             "name": "rapidjson",
             "version>=": "2020-09-14#2"
         },
-        "optional-lite",
-        {
-            "name": "nakama-sdk",
-            "version>=": "2.6.0#3",
-            "platform": "ios | osx | linux",
-            "features": ["wslay", "curl", "libhttpclient-http"]
-        },
-        {
-            "name": "nakama-sdk",
-            "version>=": "2.6.0#3",
-            "platform": "windows",
-            "features": ["libhttpclient-ws", "libhttpclient-http", "logs"]
-        },
-        {
-            "name": "nakama-sdk",
-            "version>=": "2.6.0#3",
-            "platform": "android",
-            "features": ["wslay", "curl", "cpprestsdk-http", "logs"]
+        "optional-lite"
+    ],
+    "features": {
+        "nakama-sdk": {
+            "description": "Use the vcpkg installation of the nakama sdk",
+            "dependencies": [
+                {
+                    "name": "nakama-sdk",
+                    "version>=": "2.6.0#3",
+                    "platform": "ios | osx | linux",
+                    "features": ["wslay", "curl", "libhttpclient-http"]
+                },
+                {
+                    "name": "nakama-sdk",
+                    "version>=": "2.6.0#3",
+                    "platform": "windows",
+                    "features": ["libhttpclient-ws", "libhttpclient-http", "logs"]
+                },
+                {
+                    "name": "nakama-sdk",
+                    "version>=": "2.6.0#3",
+                    "platform": "android",
+                    "features": ["wslay", "curl", "cpprestsdk-http", "logs"]
+                }
+            ]
         }
-
-    ]
+    }
 }

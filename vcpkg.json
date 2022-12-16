@@ -80,6 +80,7 @@
             "description": "Maintenance-mode HTTP library.",
             "dependencies": [ {"name": "cpprestsdk"} ],
             "supports": "android"
-        }
+        },
+
     }
 }

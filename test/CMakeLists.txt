@@ -26,6 +26,7 @@ endif()
 project(nakama-test LANGUAGES C CXX)
 
 option(LOGS_ENABLED "Enable log output" ON)
+option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
 
 include(FetchContent)
 
@@ -44,6 +45,15 @@ endif()
 
 find_package(RapidJSON CONFIG REQUIRED)
 find_package(optional-lite)
+
+### CMakePresets.json doesn't seem to pass the ${installDir} to the CMake file, so we have to reconstitute it.
+string(REPLACE ${CMAKE_SOURCE_DIR}/ "" CMAKE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}")
+get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
+
+if (NOT REMOTE_NAKAMA_SDK)
+    set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/share/nakama-sdk)
+endif()
+
 find_package(nakama-sdk CONFIG REQUIRED)
 
 if (ADDRESS_SANITIZER)
@@ -118,6 +128,14 @@ endif()
 # no ZERO_CHECK target for Xcode
 set(CMAKE_SUPPRESS_REGENERATION true)
 
+set(NAKAMA_SDK_FRAMEWORK_LOCATION "")
+
+if (REMOTE_NAKAMA_SDK)
+    set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/nakama-sdk.framework)
+else()
+    set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_NAKAMA_PROJECT}/out/${CMAKE_INSTALL_PREFIX}/nakama-sdk.framework)
+endif()
+
 # bitcode will be deprecated in Xcode 14 which is in beta at the time of this writing
 # https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes
 set_target_properties(nakama-test PROPERTIES
@@ -129,7 +147,7 @@ set_target_properties(nakama-test PROPERTIES
     XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Apple Development"
     XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "$ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}"
     XCODE_LINK_BUILD_PHASE_MODE KNOWN_LOCATION
-    XCODE_EMBED_FRAMEWORKS ${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/nakama-sdk.framework ## todo figure out why passing target doesn't work
+    XCODE_EMBED_FRAMEWORKS ${NAKAMA_SDK_FRAMEWORK_LOCATION} ## todo figure out why passing target doesn't work
     XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
 	XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY	"YES"
     XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
@@ -149,7 +167,7 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     )
 endif()
 
-set(_TEST_OUT_DIR "${CMAKE_SOURCE_DIR}/out/${CMAKE_INSTALL_LIBDIR}")
+set(_TEST_OUT_DIR "${CMAKE_SOURCE_DIR}/out/${CMAKE_INSTALL_PREFIX}")
 
 install(TARGETS nakama-test
     BUNDLE DESTINATION ${_TEST_OUT_DIR}
