@@ -359,7 +359,7 @@ HTTP:
 Platform | Transport              |
   --- |---------------------------|
 Windows | libhttpclient -> winhttp  |
-Android | libhttpclient -> okhttp |
+Android | cpprestsdk              |
 Linux | libhttpclient->curl       |
 MacOS | libhttpclient -> OS       |
 iOS   | libhttpclient -> OS       |
@@ -371,7 +371,7 @@ Websockets:
 Platform | Transport
 --- |------------------------------|
 Windows | libhttpclient -> winhttp |
-Android | libhttpclient -> okhttp  |
+Android | wslay                    |
 Linux | wslay                      |
 MacOS | wslay                      |
 iOS   | wslay                      |

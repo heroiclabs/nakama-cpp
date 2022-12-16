@@ -9,6 +9,8 @@ endif()
 
 if(BUILD_HTTP_LIBHTTPCLIENT)
     target_compile_definitions(nakama-sdk-client-factory PRIVATE BUILD_HTTP_LIBHTTPCLIENT)
+elseif(BUILD_HTTP_CPPRESTSDK)
+    target_compile_definitions(nakama-sdk-client-factory PRIVATE BUILD_HTTP_CPPRESTSDK)
 else()
     target_compile_definitions(nakama-sdk-client-factory PRIVATE WITH_EXTERNAL_HTTP)
 endif()

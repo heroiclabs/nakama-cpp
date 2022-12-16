@@ -42,6 +42,8 @@ if (UNREAL)
 else()
     if (WITH_LIBHTTPCLIENT_HTTP)
         set(HTTP_IMPL "libhttpclient")
+    elseif (WITH_CPPRESTSDK_HTTP)
+        set(HTTP_IMPL "cpprestsdk")
     endif()
 
     if (WITH_LIBHTTPCLIENT_WS)
@@ -180,6 +182,10 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
             endif()
         endif()
     endif()
+endif()
+
+if (HTTP_IMPL STREQUAL "libhttpclient")
+    add_subdirectory(impl/httpCppRest EXCLUDE_FROM_ALL)
 endif()
 
 

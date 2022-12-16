@@ -152,9 +152,9 @@
                 "ANDROID_STL": "c++_shared",
                 "ANDROID_PLATFORM": "android-21",
                 "CMAKE_SYSTEM_NAME": "Android",
-                "WITH_LIBHTTPCLIENT_HTTP": "ON",
-                "WITH_LIBHTTPCLIENT_WS": "ON",
-                "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;libhttpclient-http"
+                "BUILD_WSLAY": "ON",
+                "BUILD_CURL": "ON",
+                "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;cpprestsdk-http;curl;wslay"
             },
             "condition": {
                 "type": "equals",

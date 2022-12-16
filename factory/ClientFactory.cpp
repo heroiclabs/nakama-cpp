@@ -21,10 +21,13 @@
     #include "../core/core-grpc/GrpcClient.h"
 #endif
 
+
 #include "../core/core-rest/RestClient.h"
 
 #ifdef BUILD_HTTP_LIBHTTPCLIENT
 #include "../../impl/httpLibHttpClient/NHttpClientLibHC.h"
+#elif defined(BUILD_HTTP_CPPREST)
+#include "../../impl/httpCppRest/NHttpClientCppRest.h"
 #endif
 
 namespace Nakama {
@@ -76,6 +79,8 @@ NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platform
     // Compilation error if no implementation is selected
     #if defined(BUILD_HTTP_LIBHTTPCLIENT)
     return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
+    #elif defined(BUILD_HTTP_CPPREST)
+    return NHttpTransportPtr(new NHttpClientCppRest());
     #else
         #error Could not find default http transport for platform.
     #endif
