@@ -18,6 +18,7 @@
 #include "test_serverConfig.h"
 #include "TaskExecutor.h"
 #include "nakama-cpp/NUtils.h"
+#include "nakama-cpp/NPlatformParams.h"
 
 #if defined(__ANDROID__)
 #include <android_native_app_glue.h>
@@ -30,6 +31,7 @@
 #endif
 
 eClientType g_clientType = ClientType_Unknown;
+Nakama::NPlatformParameters g_platformParameters = {}; // todo this should not be global
 
 extern "C"
 {
@@ -65,6 +67,7 @@ void setWorkingClientParameters(NClientParameters& parameters)
     parameters.port      = SERVER_PORT;
     parameters.serverKey = SERVER_KEY;
     parameters.ssl       = SERVER_SSL;
+    parameters.platformParams = g_platformParameters; // TODO this should be passed in properly not global
 }
 
 // *************************************************************
@@ -237,7 +240,9 @@ extern "C"
 {
     void android_main(struct android_app* app)
     {
-        mainHelper(0, nullptr);
+        g_platformParameters.javaVM = app->activity->vm;
+        g_platformParameters.applicationContext = app->activity->clazz;
+        mainHelper(1, nullptr);
     }
 }
 #else
