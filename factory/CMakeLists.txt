@@ -12,7 +12,7 @@ if(BUILD_HTTP_LIBHTTPCLIENT)
 elseif(BUILD_HTTP_CPPRESTSDK)
     target_compile_definitions(nakama-sdk-client-factory PRIVATE BUILD_HTTP_CPPRESTSDK)
 else()
-    target_compile_definitions(nakama-sdk-client-factory PRIVATE WITH_EXTERNAL_HTTP)
+   # target_compile_definitions(nakama-sdk-client-factory PRIVATE WITH_EXTERNAL_HTTP)
 endif()
 
 add_library(nakama-sdk-rtclient-factory OBJECT NWebsocketsFactory.cpp)

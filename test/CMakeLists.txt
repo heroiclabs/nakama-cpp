@@ -129,7 +129,7 @@ set_target_properties(nakama-test PROPERTIES
     XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Apple Development"
     XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "$ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}"
     XCODE_LINK_BUILD_PHASE_MODE KNOWN_LOCATION
-    XCODE_EMBED_FRAMEWORKS ${_NAKAMA_PROJECT}/out/${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework ## todo figure out why passing target doesn't work
+    XCODE_EMBED_FRAMEWORKS ${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/nakama-sdk.framework ## todo figure out why passing target doesn't work
     XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
 	XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY	"YES"
     XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
