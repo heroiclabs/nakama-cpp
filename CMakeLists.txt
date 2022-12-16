@@ -184,7 +184,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     endif()
 endif()
 
-if (HTTP_IMPL STREQUAL "libhttpclient")
+if (HTTP_IMPL STREQUAL "cpprestsdk")
     add_subdirectory(impl/httpCppRest EXCLUDE_FROM_ALL)
 endif()
 

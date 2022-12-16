@@ -13,7 +13,7 @@
             "name": "nakama-sdk",
             "version>=": "2.6.0#3",
             "platform": "ios | osx | linux",
-            "features": ["wslay", "curl", "libhttpclient-http", "logs"]
+            "features": ["wslay", "curl", "libhttpclient-http"]
         },
         {
             "name": "nakama-sdk",

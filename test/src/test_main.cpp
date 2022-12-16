@@ -131,7 +131,6 @@ public:
 
     void connect(uint32_t retryPeriodMs)
     {
-        NLOG_INFO("connecting");
         createWorkingClient();
 
         client->setErrorCallback([this, retryPeriodMs](const NError& /*error*/)

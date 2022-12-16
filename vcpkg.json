@@ -41,6 +41,9 @@
             ],
             "supports": "osx | ios | linux"
         },
+        "logs": {
+            "description": "Whether or not logs are enabled."
+        },
         "curl": {
             "description": "The libcurl networking library.",
             "dependencies": [
