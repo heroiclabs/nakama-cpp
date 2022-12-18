@@ -20,8 +20,11 @@ extern "C" {
 
 #define SERVER_KEY           "defaultkey"
 #define SERVER_HTTP_KEY      "defaulthttpkey"
-#define SERVER_HOST          "127.0.0.1"
-
+#ifdef __ANDROID__
+    #define SERVER_HOST          "10.0.2.2"
+#else
+    #define SERVER_HOST          "127.0.0.1"
+#endif
 #define SERVER_HTTP_PORT     7350
 #define SERVER_SSL           false
 

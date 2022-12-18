@@ -154,7 +154,8 @@
                 "CMAKE_SYSTEM_NAME": "Android",
                 "BUILD_WSLAY": "ON",
                 "BUILD_CURL": "ON",
-                "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;cpprestsdk-http;curl;wslay"
+                "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;cpprestsdk-http;curl;wslay",
+                "WITH_CPPRESTSDK_HTTP": "ON"
             },
             "condition": {
                 "type": "equals",
@@ -318,6 +319,24 @@
             "name": "release-android-arm64-v8a",
             "configurePreset": "android-arm64-v8a-host_osx_x64",
             "configuration": "MinSizeRel",
+            "verbose": true
+        },
+        {
+            "name": "debug-android-armeabi-v7a",
+            "configurePreset": "android-armeabi-v7a-host_osx_x64",
+            "configuration": "Debug",
+            "verbose": true
+        },
+        {
+            "name": "debug-android-x64",
+            "configurePreset": "android-x64-host_osx_x64",
+            "configuration": "Debug",
+            "verbose": true
+        },
+        {
+            "name": "debug-android-arm64-v8a",
+            "configurePreset": "android-arm64-v8a-host_osx_x64",
+            "configuration": "Debug",
             "verbose": true
         }
     ]

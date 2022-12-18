@@ -28,6 +28,10 @@ project(nakama-test LANGUAGES C CXX)
 option(LOGS_ENABLED "Enable log output" ON)
 option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
 
+if(REMOTE_NAKAMA_SDK)
+    list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
+endif()
+
 include(FetchContent)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -167,7 +171,7 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     )
 endif()
 
-set(_TEST_OUT_DIR "${CMAKE_SOURCE_DIR}/out/${CMAKE_INSTALL_PREFIX}")
+set(_TEST_OUT_DIR "${CMAKE_INSTALL_PREFIX}")
 
 install(TARGETS nakama-test
     BUNDLE DESTINATION ${_TEST_OUT_DIR}

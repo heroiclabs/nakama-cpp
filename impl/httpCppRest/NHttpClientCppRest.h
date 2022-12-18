@@ -17,7 +17,7 @@
 #pragma once
 
 #include <nakama-cpp/NHttpTransportInterface.h>
-#include "NPlatformParams.h"
+#include "nakama-cpp/NPlatformParams.h"
 #include "cpprest/http_client.h"
 #include <list>
 #include <mutex>
@@ -57,9 +57,9 @@ namespace Nakama {
             NHttpResponsePtr response;
         };
 
-        using ReqContextPtr = std::unique_ptr<ReqContext>;
+        using ReqContextPtr = std::shared_ptr<ReqContext>;
 
-        ReqContext* createReqContext();
+        std::shared_ptr<ReqContext> createReqContext();
         void finishReq(ReqId id, NHttpResponsePtr response);
         void finishReqWithError(ReqId id, int statusCode, std::string&& reason);
         void removePendingReq(ReqId id);

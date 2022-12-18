@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <memory.h>
 #include "NHttpClientCppRest.h"
 #include "CppRestUtils.h"
 #include "NPlatformParams.h"
@@ -56,11 +57,12 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////
-NHttpClientCppRest::NHttpClientCppRest(NPlatformParameters& params) : _context(std::make_shared<NHttpClientCppRestContext>(*this))
+NHttpClientCppRest::NHttpClientCppRest(const NPlatformParameters& params) : _context(std::make_shared<NHttpClientCppRestContext>(*this))
 {
 #if __ANDROID__
-    cpprest_init(params.vm);
+    cpprest_init(params.javaVM);
 #endif
+
 }
 
 NHttpClientCppRest::~NHttpClientCppRest()
@@ -69,21 +71,16 @@ NHttpClientCppRest::~NHttpClientCppRest()
         std::lock_guard<std::mutex> guard(_context->mutex);
         _context->alive = false;
     }
-
-    _client.reset();
 }
 
 void NHttpClientCppRest::setBaseUri(const std::string& uri)
 {
-    _baseUri = FROM_STD_STR(uri);
-
-    if (_client && _client->base_uri().to_string() == _baseUri)
+    if (_client)
     {
-        // the same
         return;
     }
 
-    _client.reset();
+    _client = std::make_unique<http_client>(http_client(FROM_STD_STR(uri)));
 }
 
 void NHttpClientCppRest::tick()
@@ -99,7 +96,9 @@ void NHttpClientCppRest::tick()
 
 void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCallback& callback)
 {
-    ReqContext* ctx = createReqContext();
+    NLOG_INFO("Constructing request.");
+
+    std::shared_ptr<ReqContext> ctx = createReqContext();
     ReqId reqId = ctx->id;
     bool hasCallback = !!callback;
 
@@ -112,8 +111,6 @@ void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCal
             _context->finishReqWithError(reqId, InternalStatusCodes::NOT_INITIALIZED_ERROR, "[NHttpClientCppRest::request] base uri is not set");
             return;
         }
-
-        _client.reset(new http_client(_baseUri));
     }
 
     // Build request URI and start the request.
@@ -192,8 +189,6 @@ void NHttpClientCppRest::cancelAllRequests()
 {
     std::lock_guard<std::mutex> guard(_context->mutex);
 
-    _client.reset();
-
     while (!_pendingRequests.empty())
     {
         auto& ctx = _pendingRequests.front();
@@ -211,12 +206,12 @@ void NHttpClientCppRest::cancelAllRequests()
     }
 }
 
-NHttpClientCppRest::ReqContext* NHttpClientCppRest::createReqContext()
+std::shared_ptr<NHttpClientCppRest::ReqContext> NHttpClientCppRest::createReqContext()
 {
-    ReqContext* ctx = new ReqContext(_context->nextReqId++);
+    std::shared_ptr<ReqContext> ctx = std::make_shared<ReqContext>(ReqContext(_context->nextReqId++));
 
     std::lock_guard<std::mutex> guard(_context->mutex);
-    _pendingRequests.emplace_back(ReqContextPtr(ctx));
+    _pendingRequests.emplace_back(ctx);
 
     return ctx;
 }
