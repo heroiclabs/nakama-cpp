@@ -155,7 +155,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         # in our ABI, because that is how JVM finds native code on Android platform.
         list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
 
-        set(LIBHTTPCLIENT_OBJECT_LIBRARY ON)
+        set(LIBHTTPCLIENT_OBJECT_LIBRARY TRUE)
 
         FetchContent_Declare(
             libHttpClient
