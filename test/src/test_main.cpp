@@ -60,6 +60,9 @@ void test_realtime();
 void test_internals();
 
 static std::string g_serverHost = SERVER_HOST;
+#ifdef __ANDROID__
+static JavaVM* g_vm;
+#endif
 
 void setWorkingClientParameters(NClientParameters& parameters)
 {
@@ -67,6 +70,9 @@ void setWorkingClientParameters(NClientParameters& parameters)
     parameters.port      = SERVER_PORT;
     parameters.serverKey = SERVER_KEY;
     parameters.ssl       = SERVER_SSL;
+#ifdef __ANDROID__
+    parameters.platformParams.javaVM = g_vm;
+#endif
 }
 
 // *************************************************************
@@ -225,6 +231,7 @@ extern "C"
 {
     void android_main(struct android_app* app)
     {
+        Nakama::Test::g_vm = app->activity->vm;
         mainHelper(1, nullptr);
     }
 }
