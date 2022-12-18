@@ -4,6 +4,7 @@
 #include <regex>
 #include <sstream>
 #include <iostream>
+#include "nakama-cpp/log/NLogger.h"
 
 // Copy of internal function from StrUtil so that we can test it
 std::string encodeURIComponent(std::string decoded)
@@ -34,21 +35,17 @@ void test_uriencode() {
     std::string expected = "%CE%B2%CF%83%CE%BA%CE%B1%CF%84%CE%B1%CE%B73";
 
     if (encoded != expected) {
-        std::cerr << "Expected: " << expected << std::endl;
-        std::cerr << "Encoded:  " << encoded << std::endl;
+        NLOG_ERROR("Expected: " + expected);
+        NLOG_ERROR("Encoded:  " + encoded);
         abort();
     }
 
-    std::cout << "test_uriencode passed" << std::endl;
+    NLOG_INFO("test_uriencode passed");
 }
 
 
 void test_internals() {
     unsigned char c = char(120);
-
-    std::cout << '%' << std::uppercase << std::hex << +c << std::endl;
-
-
     test_uriencode();
 }
 

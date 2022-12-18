@@ -25,7 +25,7 @@ void test_rt_party_join(NRtClientTest& test, const std::string& party_id)
 {
     auto successCallback = [&test](const NParty& party)
     {
-        std::cout << "joined party: " << party.id << std::endl;
+        NLOG_INFO("joined party: " + party.id);
 
         std::string payload = "How are you?";
 
@@ -46,7 +46,7 @@ void test_rt_party_join(NRtClientTest& test, const std::string& party_id)
 
     test.listener.setPartyDataCallback([&test](const NPartyData& data)
     {
-        std::cout << "party data: " << data.data << std::endl;
+        NLOG_INFO("party data: " + data.data);
         test.stopTest(true);
     });
 }
@@ -60,7 +60,7 @@ void test_rt_create_party()
     {
         auto successCallback = [&test2](const NParty& party)
         {
-            std::cout << "created match: " << party.id << std::endl;
+            NLOG_INFO("created match: " + party.id);
 
             test2.onRtConnect = [&test2, party]()
             {
@@ -75,7 +75,7 @@ void test_rt_create_party()
 
     test1.listener.setPartyDataCallback([&test1](const NPartyData& data)
     {
-        std::cout << "party data: " << data.data << std::endl;
+        NLOG_INFO("party data: " + data.data);
 
         std::string payload = "I'm fine";
 

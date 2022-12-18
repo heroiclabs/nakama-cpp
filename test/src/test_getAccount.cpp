@@ -29,15 +29,15 @@ void test_getAccount()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
 
         auto successCallback = [&test, session](const NAccount& account)
         {
-            std::cout << "account user id: " << account.user.id << std::endl;
+            NLOG_INFO("account user id: " + account.user.id);
 
             auto successCallback = [&test]()
             {
-                std::cout << "account updated" << std::endl;
+                NLOG_INFO("account updated");
                 test.stopTest(true);
             };
 

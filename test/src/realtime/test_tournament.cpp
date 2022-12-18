@@ -34,7 +34,7 @@ void test_tournament()
     {
         auto successCallback = [&](const NRpc& rpc)
         {
-            std::cout << "rpc response: " << rpc.payload << std::endl;
+            NLOG_INFO("rpc response: " + rpc.payload);
 
             rapidjson::Document document;
             if (document.Parse(rpc.payload).HasParseError())
@@ -51,11 +51,11 @@ void test_tournament()
 
                     auto successCallback = [&, tournamentId]()
                     {
-                        std::cout << "Successfully joined tournament" << std::endl;
+                        NLOG_INFO("Successfully joined tournament");
 
                         auto successCallback = [&](const NRpc& /*rpc*/)
                         {
-                            std::cout << "tournament deleted." << std::endl;
+                            NLOG_INFO("tournament deleted.");
                             test.stopTest(true);
                         };
 

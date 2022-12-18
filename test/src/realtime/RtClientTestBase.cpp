@@ -64,26 +64,26 @@ void NRtClientTest::runTest()
     {
         for (auto& presence : event.joins)
         {
-            std::cout << "Joined User ID: " << presence.userId << " Username: " << presence.username << " Status: " << presence.status << std::endl;
+            NLOG_INFO("Joined User ID: " + presence.userId + " Username: " + presence.username + " Status: " + presence.status);
         }
 
         for (auto& presence : event.leaves)
         {
-            std::cout << "Left User ID: " << presence.userId << " Username: " << presence.username << " Status: " << presence.status << std::endl;
+            NLOG_INFO("Left User ID: " + presence.userId + " Username: " + presence.username + " Status: " + presence.status);
         }
     });
 
     listener.setChannelMessageCallback([](const NChannelMessage& message)
     {
-        std::cout << "Received a message on channel " << message.channelId << std::endl;
-        std::cout << "Message content: " << message.content << std::endl;
+        NLOG_INFO("Received a message on channel " + message.channelId);
+        NLOG_INFO("Message content: " + message.content);
     });
 
     auto successCallback = [this](NSessionPtr sess)
     {
         this->session = sess;
 
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
 
         rtClient = createRtClient(client);
 

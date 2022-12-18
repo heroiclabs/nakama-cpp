@@ -15,9 +15,10 @@
  */
 
 #include <memory.h>
+#include "nakama-cpp/log/NLogger.h"
 #include "NHttpClientCppRest.h"
 #include "CppRestUtils.h"
-#include "NPlatformParams.h"
+#include "nakama-cpp/NPlatformParams.h"
 
 namespace Nakama {
 

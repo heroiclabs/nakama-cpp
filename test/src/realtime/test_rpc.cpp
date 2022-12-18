@@ -35,7 +35,7 @@ void test_rpc_with_http_key()
         {
             auto successCallback = [](const NRpc& rpc)
             {
-                std::cout << "rpc response: " << rpc.payload << std::endl;
+                NLOG_INFO("rpc response: " + rpc.payload);
                 NTEST_ASSERT(!rpc.payload.empty());
                 TaskExecutor::instance().currentTaskCompleted();
             };
@@ -52,7 +52,7 @@ void test_rpc_with_http_key()
         {
             auto successCallback = [](const NRpc& rpc)
             {
-                std::cout << "rpc response: " << rpc.payload << std::endl;
+                NLOG_INFO("rpc response: " + rpc.payload);
                 NTEST_ASSERT(rpc.payload.empty());
                 TaskExecutor::instance().currentTaskCompleted();
             };
@@ -91,7 +91,7 @@ void test_rpc_with_auth()
             {
                 auto successCallback = [](const NRpc& rpc)
                 {
-                    std::cout << "rpc response: " << rpc.payload << std::endl;
+                    NLOG_INFO("rpc response: " + rpc.payload);
                     NTEST_ASSERT(rpc.payload.empty());
                     TaskExecutor::instance().currentTaskCompleted();
                 };
@@ -109,7 +109,7 @@ void test_rpc_with_auth()
 
                 auto successCallback = [json](const NRpc& rpc)
                 {
-                    std::cout << "rpc response: " << rpc.payload << std::endl;
+                    NLOG_INFO("rpc response: " + rpc.payload);
                     NTEST_ASSERT(rpc.payload == json);
                     TaskExecutor::instance().currentTaskCompleted();
                 };
@@ -148,7 +148,7 @@ void test_rpc_with_auth()
             {
                 auto successCallback = [](const NRpc& rpc)
                 {
-                    std::cout << "rpc response: " << rpc.payload << std::endl;
+                    NLOG_INFO("rpc response: " + rpc.payload);
                     NTEST_ASSERT(!rpc.payload.empty());
                     TaskExecutor::instance().currentTaskCompleted();
                 };
@@ -164,7 +164,7 @@ void test_rpc_with_auth()
             {
                 auto successCallback = [](const NRpc& rpc)
                 {
-                    std::cout << "rpc response: " << rpc.payload << std::endl;
+                    NLOG_INFO("rpc response: " + rpc.payload);
                     TaskExecutor::instance().currentTaskCompleted();
                 };
 
@@ -182,7 +182,7 @@ void test_rpc_with_auth()
             {
                 auto successCallback = [](const NRpc& rpc)
                 {
-                    std::cout << "rpc response: " << rpc.payload << std::endl;
+                    NLOG_INFO("rpc response: " + rpc.payload);
                     NTEST_ASSERT(rpc.payload.empty());
                     TaskExecutor::instance().currentTaskCompleted();
                 };
@@ -199,7 +199,7 @@ void test_rpc_with_auth()
 
                 auto successCallback = [json](const NRpc& rpc)
                 {
-                    std::cout << "rpc response: " << rpc.payload << std::endl;
+                    NLOG_INFO("rpc response: " + rpc.payload);
                     NTEST_ASSERT(rpc.payload == json);
                     TaskExecutor::instance().currentTaskCompleted();
                 };
@@ -236,7 +236,7 @@ void test_rpc_with_auth()
             {
                 auto successCallback = [](const NRpc& rpc)
                 {
-                    std::cout << "rpc response: " << rpc.payload << std::endl;
+                    NLOG_INFO("rpc response: " + rpc.payload);
                     NTEST_ASSERT(!rpc.payload.empty());
                     TaskExecutor::instance().currentTaskCompleted();
                 };

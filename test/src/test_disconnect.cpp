@@ -34,7 +34,7 @@ void test_connectError()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
         test.stopTest();
     };
 
@@ -60,7 +60,7 @@ void test_connectErrorAndDestroy()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
         test.stopTest();
     };
 
@@ -82,7 +82,7 @@ void test_disconnection()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
         test.stopTest(true);
     };
 
@@ -102,7 +102,7 @@ void test_disconnect()
 {
     test_connectError();
     test_connectErrorAndDestroy();
-    //test_disconnection(); depending on transport implementation either success or error may be legitimately called. Test is inheritly racy 
+    //test_disconnection(); depending on transport implementation either success or error may be legitimately called. Test is inheritly racy
 }
 
 } // namespace Test
