@@ -15,7 +15,8 @@
             "cacheVariables": {
                 "LOGS_ENABLED": "ON",
                 "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk",
-                "BUILD_SHARED_LIBS": "ON"
+                "BUILD_SHARED_LIBS": "ON",
+                "DISTRIBUTE_OPTIONAL_LITE": "ON"
             }
         },
         {

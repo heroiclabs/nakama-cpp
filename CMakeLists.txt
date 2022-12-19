@@ -332,20 +332,26 @@ install(FILES
 if (DISTRIBUTE_OPTIONAL_LITE)
     install(DIRECTORY
         ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/nonstd
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/nakama-third-party/include
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
+
+    file(GLOB OPTIONAL_LITE_CONFIGS "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/optional-lite/*.cmake")
+    install(FILES ${OPTIONAL_LITE_CONFIGS} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/optional-lite)
 endif()
 
 if (DISTRIBUTE_PROTOBUF)
     install(DIRECTORY
         ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/google
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/nakama-third-party/include
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
 
     install(FILES
         ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/libprotobuf.a
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/nakama-third-party
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
     )
+
+    file(GLOB PROTOBUF_CONFIGS "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/protobuf/*.cmake")
+    install(FILES ${PROTOBUF_CONFIGS} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/protobuf)
 endif()
 
 # Call last so they can reference any target previously defined
