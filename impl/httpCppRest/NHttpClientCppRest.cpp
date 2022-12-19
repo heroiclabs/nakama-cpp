@@ -76,7 +76,7 @@ NHttpClientCppRest::~NHttpClientCppRest()
 
 void NHttpClientCppRest::setBaseUri(const std::string& uri)
 {
-    if (_client)
+    if (_client.get())
     {
         return;
     }
@@ -97,7 +97,6 @@ void NHttpClientCppRest::tick()
 
 void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCallback& callback)
 {
-    NLOG_INFO("Constructing request.");
 
     std::shared_ptr<ReqContext> ctx = createReqContext();
     ReqId reqId = ctx->id;
