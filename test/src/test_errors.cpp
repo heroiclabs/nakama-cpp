@@ -29,7 +29,7 @@ void test_error_NotFound()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
         test.stopTest(false);
     };
 
@@ -51,7 +51,7 @@ void test_error_InvalidArgument()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
         test.stopTest();
     };
 
@@ -73,7 +73,7 @@ void test_error_InvalidArgument2()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
         test.stopTest();
     };
 

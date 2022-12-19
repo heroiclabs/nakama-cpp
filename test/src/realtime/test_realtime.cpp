@@ -57,11 +57,11 @@ void test_rt_rapiddisconnect()
         test.onTimeoutCb = []() { return true; };
 
         test.listener.setConnectCallback([&hadConnectCallback]() {
-            std::cout << "TEST: Connect" << std::endl;
+            NLOG_INFO("TEST: Connect");
             hadConnectCallback = true;
         });
         test.listener.setDisconnectCallback([&test, &hadConnectCallback](const NRtClientDisconnectInfo& /*info*/) {
-            std::cout << "TEST: Disconnect" << std::endl;
+            NLOG_INFO("TEST: Disconnect");
             // both connect and disconnect callback fired and disconnect fired after connect
             test.stopTest(hadConnectCallback);
         });
@@ -75,14 +75,14 @@ void test_rt_reconnect()
     NRtClientTest test(__func__);
     bool connectedOnce = false;
     test.onRtConnect = [&test, &connectedOnce](){
-        std::cout << "TEST: connected" << std::endl;
+        NLOG_INFO("TEST: connected");
         test.listener.setDisconnectCallback([&test](const NRtClientDisconnectInfo& /*info*/){
-            std::cout << "TEST: disconnected, connecting again" << std::endl;
+            NLOG_INFO("TEST: disconnected, connecting again");
             test.rtClient->connect(test.session, true, test.protocol);
         });
         test.rtClient->disconnect();
         if(connectedOnce) {
-            std::cout << "TEST: Stopping test with success" << std::endl;
+            NLOG_INFO("TEST: Stopping test with success");
             test.stopTest(true); // connect after disconnect succeeded
         } else {
             connectedOnce = true;
@@ -97,7 +97,7 @@ void test_rt_heartbeat()
     test.setTestTimeoutMs(100000);
     int i = 0;
     test.onRtConnect = [&test, &i](){
-        std::cout << "CONNECTED" << std::endl;
+        NLOG_INFO("CONNECTED");
         // Fail heartbeat immediately on the second tick
         // Adjusting heartbeat timeout like below is not really representative case of a network failue,
         // because server sends close frame and it gets delivered. To test it for real, comment line below
@@ -107,7 +107,7 @@ void test_rt_heartbeat()
         test.rtClient->setHeartbeatIntervalMs(0);
         test.listener.setDisconnectCallback([&test, &i](const NRtClientDisconnectInfo& info){
             if (info.code != NRtClientDisconnectInfo::Code::HEARTBEAT_FAILURE) {
-                std::cout << "Unexpected heartbeat failure disconnect code, wanted=4000 , got=" << info.code << std::endl;
+                NLOG_INFO("Unexpected heartbeat failure disconnect code, wanted=4000 , got=" + std::to_string(info.code));
                 test.stopTest(false);
             }
 
@@ -156,25 +156,25 @@ void test_rt_joinChat()
     {
         if (main_thread_id != this_thread::get_id())
         {
-            std::cout << "ERROR: onRtConnect executed not from main thread!" << std::endl;
+            NLOG_INFO("ERROR: onRtConnect executed not from main thread!");
             test.stopTest();
             return;
         }
 
         auto successCallback = [&test, &main_thread_id](NChannelPtr channel)
         {
-            std::cout << "joined chat: " << channel->id << std::endl;
+            NLOG_INFO("joined chat: " + channel->id);
 
             if (main_thread_id != this_thread::get_id())
             {
-                std::cout << "ERROR: successCallback executed not from main thread!" << std::endl;
+                NLOG_INFO("ERROR: successCallback executed not from main thread!");
                 test.stopTest();
                 return;
             }
 
             auto ackCallback = [&test](const NChannelMessageAck& ack)
             {
-                std::cout << "message sent successfuly. msg id: " << ack.messageId << std::endl;
+                NLOG_INFO("message sent successfuly. msg id: " + ack.messageId);
                 test.stopTest(true);
             };
 
@@ -210,24 +210,24 @@ void test_rt_joinGroupChat()
     {
         if (main_thread_id != this_thread::get_id())
         {
-            std::cout << "ERROR: onRtConnect executed not from main thread!" << std::endl;
+            NLOG_INFO("ERROR: onRtConnect executed not from main thread!");
             test.stopTest();
             return;
         }
 
         auto successCallback = [&test](NGroup group)
         {
-            std::cout << "joined group: " << group.id << std::endl;
+            NLOG_INFO("joined group: " + group.id);
 
             auto joinedChatSucceeded = [&test](NChannelPtr /*channel*/)
             {
-                std::cout << "Group chat joined successfully." << std::endl;
+                NLOG_INFO("Group chat joined successfully.");
                 test.stopTest(true);
             };
 
             auto joinedChatFailed = [&test](const NRtError& err)
             {
-                std::cout << "Could not join group chat: " << toString(err) << std::endl;
+                NLOG_INFO("Could not join group chat: " + toString(err));
                 test.stopTest(false);
             };
 
@@ -273,7 +273,7 @@ void test_realtime()
     run_realtime_tests();
 
     NRtClientTest::protocol = NRtClientProtocol::Json;
-    std::cout << std::endl << "using Json protocol" << std::endl;
+    NLOG_INFO("using Json protocol");
 
     run_realtime_tests();
 }

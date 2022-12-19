@@ -27,7 +27,7 @@ void test_rt_match_join(NRtClientTest& test, const std::string& match_id)
 {
     auto successCallback = [&test](const NMatch& match)
     {
-        std::cout << "joined match: " << match.matchId << std::endl;
+        NLOG_INFO("joined match: " + match.matchId);
 
         std::string data = "Anybody there?";
 
@@ -55,7 +55,7 @@ void test_authoritative_match()
     {
         auto successCallback = [&](const NRpc& rpc)
         {
-            std::cout << "rpc response: " << rpc.payload << std::endl;
+            NLOG_INFO("rpc response: " + rpc.payload);
 
             bool succeeded = false;
             rapidjson::Document document;

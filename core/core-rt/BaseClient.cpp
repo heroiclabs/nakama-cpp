@@ -26,29 +26,25 @@ using namespace std;
 
 namespace Nakama {
 
-NRtClientPtr BaseClient::createRtClient(int32_t port, NRtTransportPtr transport)
+#ifndef WITH_EXTERNAL_WS
+NRtClientPtr BaseClient::createRtClient()
+{
+    return createRtClient(createDefaultWebsocket(_platformParams));
+}
+#endif
+
+NRtClientPtr BaseClient::createRtClient(NRtTransportPtr transport)
 {
     RtClientParameters parameters;
-    
     parameters.host = _host;
-    parameters.port = port;
+    parameters.port = _port;
     parameters.ssl  = _ssl;
     parameters.platformParams = _platformParams;
 
-    return createRtClient(parameters, transport);
-}
-
-NRtClientPtr BaseClient::createRtClient(const RtClientParameters& parameters, NRtTransportPtr transport)
-{
     if (!transport)
     {
-        transport = createDefaultWebsocket(parameters.platformParams);
-
-        if (!transport)
-        {
-            NLOG_ERROR("No default websockets transport available. Please set transport.");
-            return nullptr;
-        }
+        NLOG_ERROR("No websockets transport passed. Please set transport.");
+        return nullptr;
     }
 
     NRtClientPtr client(new NRtClient(transport, parameters.host, parameters.port, parameters.ssl));

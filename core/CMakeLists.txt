@@ -20,4 +20,3 @@ add_subdirectory(core-rest EXCLUDE_FROM_ALL)
 if (BUILD_GRPC_CLIENT)
     add_subdirectory(core-grpc EXCLUDE_FROM_ALL)
 endif()
-

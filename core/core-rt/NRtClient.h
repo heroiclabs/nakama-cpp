@@ -41,6 +41,7 @@ namespace Nakama {
 
         void tick() override;
 
+        NRtTransportPtr getTransport() const override { return _transport; }
         void setListener(NRtClientListenerInterface* listener) override;
 
         void setUserData(void* userData) override { _userData = userData; }

@@ -21,10 +21,13 @@
     #include "../core/core-grpc/GrpcClient.h"
 #endif
 
+
 #include "../core/core-rest/RestClient.h"
 
 #ifdef BUILD_HTTP_LIBHTTPCLIENT
 #include "../../impl/httpLibHttpClient/NHttpClientLibHC.h"
+#elif defined(BUILD_HTTP_CPPRESTSDK)
+#include "../../impl/httpCppRest/NHttpClientCppRest.h"
 #endif
 
 namespace Nakama {
@@ -35,7 +38,7 @@ NClientPtr createDefaultClient(const NClientParameters& parameters)
     #if defined(BUILD_GRPC_CLIENT)
     return createGrpcClient(parameters);
     #else
-    return createRestClient(parameters);
+    return createRestClient(parameters, createDefaultHttpTransport(parameters.platformParams));
     #endif
 }
 #endif
@@ -54,13 +57,8 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
 {
     if (!httpTransport)
     {
-        httpTransport = createDefaultHttpTransport(parameters.platformParams);
-
-        if (!httpTransport)
-        {
-            NLOG_ERROR("Error creating HTTP transport");
-            return nullptr;
-        }
+        NLOG_ERROR("HTTP transport cannot be null.");
+        return nullptr;
     }
 
     NClientPtr client(new RestClient(parameters, httpTransport));
@@ -74,6 +72,8 @@ NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platform
     // Compilation error if no implementation is selected
     #if defined(BUILD_HTTP_LIBHTTPCLIENT)
     return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
+    #elif defined(BUILD_HTTP_CPPRESTSDK)
+    return NHttpTransportPtr(new NHttpClientCppRest(platformParams));
     #else
         #error Could not find default http transport for platform.
     #endif

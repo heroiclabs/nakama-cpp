@@ -1,34 +1,23 @@
 # Fetch proto files from nakama and nakama-common and builds them
 include(FetchContent)
 
-option(SKIP_GIT_UPDATE "Skips Nakama proto files re-fetch. Allows offline re-configure." OFF)
+set(NAKAMA_COMMON ${CMAKE_CURRENT_BINARY_DIR}/nakama-common-master)
+set(NAKAMA ${CMAKE_CURRENT_BINARY_DIR}/nakama-master)
 
-FetchContent_Declare(
-        nakama-repo
-        GIT_REPOSITORY https://github.com/heroiclabs/nakama
-        GIT_TAG        ${NAKAMA_GIT_TAG}
-        GIT_SHALLOW    TRUE
-        GIT_PROGRESS   TRUE
-        SOURCE_SUBDIR  dont-include  # skips implicit add_subdirectory call
-        UPDATE_DISCONNECTED ${SKIP_GIT_UPDATE}
-)
-FetchContent_Declare(
-        nakama-common-repo
-        GIT_REPOSITORY https://github.com/heroiclabs/nakama-common
-        GIT_TAG        ${NAKAMA_COMMON_GIT_TAG}
-        GIT_SHALLOW    TRUE
-        GIT_PROGRESS   TRUE
-        SOURCE_SUBDIR  dont-include  # skips implicit add_subdirectory call
-        UPDATE_DISCONNECTED ${SKIP_GIT_UPDATE}
-)
+set(NAKAMA_COMMON_ZIP ${NAKAMA_COMMON}.zip)
+set(NAKAMA_ZIP ${NAKAMA}.zip)
 
-FetchContent_MakeAvailable(nakama-repo nakama-common-repo)
+file(DOWNLOAD https://github.com/heroiclabs/nakama-common/archive/refs/heads/master.zip ${NAKAMA_COMMON_ZIP})
+file(DOWNLOAD https://github.com/heroiclabs/nakama/archive/refs/heads/master.zip ${NAKAMA_ZIP})
+
+file(ARCHIVE_EXTRACT INPUT ${NAKAMA_COMMON_ZIP} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(ARCHIVE_EXTRACT INPUT ${NAKAMA_ZIP} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 #### API and RTAPI proto ####
 
 file(GLOB_RECURSE NAKAMA_API_PROTO_FILES
-        ${nakama-common-repo_SOURCE_DIR}/api/*.proto
-        ${nakama-common-repo_SOURCE_DIR}/rtapi/*.proto
+        ${NAKAMA_COMMON}/api/*.proto
+        ${NAKAMA_COMMON}/rtapi/*.proto
         )
 
 add_library(nakama-api-proto OBJECT ${NAKAMA_API_PROTO_FILES})
@@ -39,11 +28,14 @@ target_include_directories(nakama-api-proto PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
+
 protobuf_generate(TARGET nakama-api-proto
         LANGUAGE cpp
-        IMPORT_DIRS "${nakama-common-repo_SOURCE_DIR}"
+        IMPORT_DIRS "${NAKAMA_COMMON}"
         PROTOC_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR}
         )
+
+message("done generating")
 
 if (BUILD_GRPC_CLIENT)
 #### apigrpc.proto ####
@@ -69,9 +61,9 @@ import public \"api/api.proto\";
 ")
 
 file(GLOB_RECURSE NAKAMA_GRPC_PROTO_FILES
-        ${nakama-repo_SOURCE_DIR}/apigrpc/*.proto
-        ${nakama-repo_SOURCE_DIR}/build/grpc-gateway-v2.3.0/third_party/googleapis/*.proto
-        ${nakama-repo_SOURCE_DIR}/vendor/github.com/grpc-ecosystem/grpc-gateway/v2/*.proto
+        ${NAKAMA}/apigrpc/*.proto
+        ${NAKAMA}/build/grpc-gateway-v2.3.0/third_party/googleapis/*.proto
+        ${NAKAMA}/vendor/github.com/grpc-ecosystem/grpc-gateway/v2/*.proto
         )
 add_library(nakama-grpc-proto OBJECT ${NAKAMA_GRPC_PROTO_FILES} ${api_compat_proto})
 add_library(nakama::grpc-proto ALIAS nakama-grpc-proto)
@@ -98,11 +90,11 @@ install(TARGETS
 #
 # TLDR; put most specific import paths first
 set(NAKAMA_GRPC_PROTO_IMPORT_DIRS
-        ${nakama-repo_SOURCE_DIR}/build/grpc-gateway-v2.3.0/third_party/googleapis  # dep of apigrpc.proto
-        ${nakama-repo_SOURCE_DIR}/vendor/github.com/grpc-ecosystem/grpc-gateway/v2  # dep of apigrpc.proto
+        ${NAKAMA}/build/grpc-gateway-v2.3.0/third_party/googleapis  # dep of apigrpc.proto
+        ${NAKAMA}/vendor/github.com/grpc-ecosystem/grpc-gateway/v2  # dep of apigrpc.proto
         ${CMAKE_CURRENT_BINARY_DIR}/_proto  # this makes 'github.com/heroiclabs/nakama-common/api/api.proto' import work
-        ${nakama-repo_SOURCE_DIR}    # this path relative to .proto file gives us canonical name apigrpc/apigrpc.pb.h we want
-        ${nakama-common-repo_SOURCE_DIR}  # this is where real api/api.proto is
+        ${NAKAMA}    # this path relative to .proto file gives us canonical name apigrpc/apigrpc.pb.h we want
+        ${NAKAMA_COMMON}  # this is where real api/api.proto is
         )
 
 find_package(gRPC CONFIG REQUIRED)

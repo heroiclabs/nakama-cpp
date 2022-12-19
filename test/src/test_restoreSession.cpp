@@ -56,39 +56,39 @@ void test_restoreSession()
 
         my_session = restoreSession(session->getAuthToken(), session->getRefreshToken());
 
-        std::cout << "session token: " << my_session->getAuthToken() << std::endl;
-        std::cout << "isExpired: " << my_session->isExpired() << std::endl;
+        NLOG_INFO("session token: " + my_session->getAuthToken());
+        NLOG_INFO("isExpired: " + std::to_string(my_session->isExpired()));
 
         if (session->isRefreshExpired())
         {
-            std::cout << "original session refresh token must not be expired" << std::endl;
+            NLOG_INFO("original session refresh token must not be expired");
             test.stopTest();
         }
         else if (session->isExpired())
         {
-            std::cout << "original session token must not be expired" << std::endl;
+            NLOG_INFO("original session token must not be expired");
             test.stopTest();
         }
         else if (my_session->isExpired())
         {
-            std::cout << "restored session token must not be expired" << std::endl;
+            NLOG_INFO("restored session token must not be expired");
             test.stopTest();
         }
         else if (!my_session->isExpired(getUnixTimestampMs() + expirePeriodMinutes * 60 * 1000))
         {
-            std::cout << "restored session token must be expired after " << expirePeriodMinutes << " minutes" << std::endl;
+            NLOG_INFO("restored session token must be expired after " + std::to_string(expirePeriodMinutes) + " minutes");
             test.stopTest();
         }
         else if (!my_session->isRefreshExpired(getUnixTimestampMs() + refreshExpirePeriodMinutes * 60 * 1000))
         {
-            std::cout << "restored session token must be expired after " << expirePeriodMinutes << " minutes" << std::endl;
+            NLOG_INFO("restored session token must be expired after " + std::to_string(expirePeriodMinutes) + " minutes");
             test.stopTest();
         }
         else
         {
             auto successCallback = [&test](const NAccount& account)
             {
-                std::cout << "account user id: " << account.user.id << std::endl;
+                NLOG_INFO("account user id: " + account.user.id);
                 test.stopTest(true);
             };
 

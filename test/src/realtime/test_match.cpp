@@ -25,7 +25,7 @@ void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const 
 {
     auto successCallback = [&test](const NMatch& match)
     {
-        std::cout << "joined match: " << match.matchId << std::endl;
+        NLOG_INFO("joined match: " + match.matchId);
 
         std::string payload = "How are you?";
 
@@ -57,7 +57,7 @@ void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const 
 
     test.listener.setMatchDataCallback([&test](const NMatchData& data)
     {
-        std::cout << "match data: " << data.data << std::endl;
+        NLOG_INFO("match data: " + data.data);
         test.stopTest(true);
     });
 }
@@ -71,7 +71,7 @@ void test_rt_create_match()
     {
         auto successCallback = [&test2](const NMatch& match)
         {
-            std::cout << "created match: " << match.matchId << std::endl;
+            NLOG_INFO("created match: " + match.matchId);
 
             test2.onRtConnect = [&test2, match]()
             {
@@ -87,7 +87,7 @@ void test_rt_create_match()
 
     test1.listener.setMatchDataCallback([&test1](const NMatchData& data)
     {
-        std::cout << "match data: " << data.data << std::endl;
+        NLOG_INFO("match data: " + data.data);
 
         std::string payload = "I'm fine";
 
@@ -110,7 +110,7 @@ void test_rt_matchmaker2(NRtClientTest& test2)
     {
         auto successCallback = [](const NMatchmakerTicket& ticket)
         {
-            std::cout << "matchmaker ticket: " << ticket.ticket << std::endl;
+            NLOG_INFO("matchmaker ticket: " + ticket.ticket);
             // waiting for MatchmakerMatchedCallback
         };
 
@@ -126,14 +126,14 @@ void test_rt_matchmaker2(NRtClientTest& test2)
 
     test2.listener.setMatchmakerMatchedCallback([&test2](NMatchmakerMatchedPtr matched)
     {
-        std::cout << "matched token: " << matched->token << std::endl;
+        NLOG_INFO("matched token: " + matched->token);
 
         test_rt_match_join(test2, "", matched->token);
     });
 
     test2.listener.setMatchDataCallback([&test2](const NMatchData& data)
     {
-        std::cout << "match data: " << data.data << std::endl;
+        NLOG_INFO("match data: " + data.data);
 
         std::string payload = "Nice day today!";
 
@@ -164,7 +164,7 @@ void test_rt_matchmaker()
 
         auto successCallback = [](const NMatchmakerTicket& ticket)
         {
-            std::cout << "matchmaker ticket: " << ticket.ticket << std::endl;
+            NLOG_INFO("matchmaker ticket: " + ticket.ticket);
             // waiting for MatchmakerMatchedCallback
         };
 
@@ -180,14 +180,14 @@ void test_rt_matchmaker()
 
     test1.listener.setMatchmakerMatchedCallback([&test1](NMatchmakerMatchedPtr matched)
     {
-        std::cout << "matched token: " << matched->token << std::endl;
+        NLOG_INFO("matched token: " + matched->token);
 
         test_rt_match_join(test1, "", matched->token);
     });
 
     test1.listener.setMatchDataCallback([&test1](const NMatchData& data)
     {
-        std::cout << "match data: " << data.data << std::endl;
+        NLOG_INFO("match data: " + data.data);
 
         std::string payload = "Nice day today!";
 

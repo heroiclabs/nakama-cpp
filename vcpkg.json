@@ -1,10 +1,5 @@
 {
-    "builtin-baseline": "14e7bb4ae24616ec54ff6b2f6ef4e8659434ea44",
-    "default-features": [
-        "wslay",
-        "curl",
-        "websocketpp"
-    ],
+    "builtin-baseline": "4cb4a5c5ddcb9de0c83c85837ee6974c8333f032",
     "dependencies": [
         "protobuf",
         {
@@ -14,27 +9,40 @@
         "optional-lite"
     ],
     "features": {
-        "websocketpp": {
-            "description": "Websockets library.",
+        "libhttpclient-ws": {
+            "description": "Websockets library that delegates to other implementations.",
+            "supports": "windows | android",
             "dependencies": [
                 {
                     "name": "websocketpp",
+                    "default-features": false,
                     "platform": "windows"
                 },
                 {
                     "name": "asio",
                     "platform": "windows"
+                },
+                {
+                    "name": "openssl",
+                    "platform": "windows"
                 }
             ]
+        },
+        "libhttpclient-http": {
+            "description": "HTTP library that delegates to other implementations.",
+            "supports": "windows | android | osx | ios | linux"
         },
         "wslay": {
             "description": "Websockets library decoupled from IO and handshakes.",
             "dependencies": [
                 {
-                    "name": "wslay",
-                    "platform": "linux | osx | ios"
+                    "name": "wslay"
                 }
-            ]
+            ],
+            "supports": "osx | ios | linux"
+        },
+        "logs": {
+            "description": "Whether or not logs are enabled."
         },
         "curl": {
             "description": "The libcurl networking library.",
@@ -44,10 +52,10 @@
                     "default-features": false,
                     "features": [
                         "ssl"
-                    ],
-                    "platform": "linux | osx | ios"
+                    ]
                 }
-            ]
+            ],
+            "supports": "osx | ios | linux"
         },
         "libcxx": {
             "description": "An alternative C++ standard library, used by Unreal Engine.",
@@ -67,6 +75,11 @@
             "dependencies": [
                 "grpc"
             ]
+        },
+        "cpprestsdk-http": {
+            "description": "Maintenance-mode HTTP library.",
+            "dependencies": [ {"name": "cpprestsdk"} ],
+            "supports": "android"
         }
     }
 }

@@ -26,6 +26,12 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Setup vcpkg
+      shell: bash
+      run: >
+        if [ ! -d "${PWD}/vcpkg" ]; then
+          git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+        fi
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
       shell: bash
     - name: 'Setup NuGet Credentials'
@@ -45,12 +51,6 @@ runs:
         $( type -p mono || :) `vcpkg fetch nuget | tail -n 1`
         setapikey "${{ inputs.GITHUB_TOKEN }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-
-    - name: Setup vcpkg
-      shell: bash
-      run: >
-        git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
-
     - id: cmake_args
       shell: bash
       if: ${{ inputs.flavour }}
@@ -79,6 +79,13 @@ runs:
     - run: rm -rf out
       shell: bash
     - run: cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
+      shell: bash
+    - if: always()
+      run: >
+        vcpkg_log=./build/${{ inputs.preset }}/vcpkg-manifest-install.log;
+        if test -f "$vcpkg_log"; then
+          cat ${vcpkg_log}
+        fi
       shell: bash
     - run: cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
       shell: bash

@@ -20,6 +20,7 @@
 #include <vector>
 #include <iostream>
 #include <nakama-cpp/NError.h>
+#include "nakama-cpp/log/NLogger.h"
 
 namespace Nakama {
 namespace Test {
@@ -66,7 +67,7 @@ void runTestsLoop()
             {
                 if (!test->checkTimeout(step)) {
                     test->onTimeout();
-                    std::cout << "Test timeout" << std::endl;
+                    NLOG_INFO("Test timeout");
                     test->stopTest(test->isSucceeded());
                 }
                 test->tick();
@@ -82,11 +83,11 @@ void abortCurrentTest(const char* file, int lineno)
 {
     if (g_running_tests.size() > 1)
     {
-        cout << g_running_tests.size() << " tests are running, aborting one..." << endl;
+        NLOG_INFO(std::to_string(g_running_tests.size()) + " tests are running, aborting one...");
     }
 
-    cout << "TEST ASSERT FAILED!" << endl;
-    cout << file << ":" << lineno << endl;
+    NLOG_INFO("TEST ASSERT FAILED!");
+    NLOG_INFO(std::string(file) + ":" + std::to_string(lineno));
     g_cur_test->stopTest();
 }
 
@@ -152,20 +153,18 @@ void NTest::stopTest(bool succeeded)
         printTestName("Failed");
         abort();
     }
-
-    cout << endl << endl;
 }
 
 void NTest::stopTest(const NError& error) {
-    std::cerr << "Stopping test with error: " << toString(error) << std::endl;
+    NLOG_ERROR("Stopping test with error: " + toString(error));
     stopTest(false);
 }
 
 void NTest::printTestName(const char* event)
 {
-    cout << "*************************************" << endl;
-    cout << event << " " << _name << endl;
-    cout << "*************************************" << endl;
+    NLOG_INFO("*************************************");
+    NLOG_INFO(std::string(event) + " " + _name);
+    NLOG_INFO("*************************************");
 }
 
 // *************************************************************
@@ -189,10 +188,11 @@ void printTotalStats()
     // total stats
     uint32_t testsPassed = (g_runTestsCount - g_failedTestsCount);
 
-    cout << endl << endl;
-    cout << "Total tests : " << g_runTestsCount << endl;
-    cout << "Tests passed: " << testsPassed << " ("; printPercent(cout, g_runTestsCount, testsPassed) << ")" << endl;
-    cout << "Tests failed: " << g_failedTestsCount << " ("; printPercent(cout, g_runTestsCount, g_failedTestsCount) << ")" << endl;
+    NLOG_INFO("Total tests : " + std::to_string(g_runTestsCount));
+    NLOG_INFO("Tests passed: " + std::to_string(testsPassed) +" (");
+    printPercent(cout, g_runTestsCount, testsPassed);
+    NLOG_INFO("Tests failed: " + std::to_string(g_failedTestsCount) + " (");
+    printPercent(cout, g_runTestsCount, g_failedTestsCount);
 }
 
 int getFailedCount()

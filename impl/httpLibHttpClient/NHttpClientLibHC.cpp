@@ -27,7 +27,7 @@ static HCTraceLevel HCLevelForNLevel(NLogLevel lvl) {
     return HCTraceLevel::Off;
 }
 
-void configureNLogger() {
+static void configureNLogger() {
     static bool configured = false;
     auto l = NLogger::getSink();
     if (!l) {
@@ -73,7 +73,6 @@ NHttpClientLibHC::NHttpClientLibHC(const NPlatformParameters& platformParams):
     (void)platformParams;
     HCInitArgs* initArgsParam = nullptr;
 #endif
-
 
     HRESULT hr = HCInitialize(initArgsParam);
     if (FAILED(hr)) {

@@ -5,7 +5,9 @@ Nakama C/C++ Client SDK
 
 [Nakama](https://github.com/heroiclabs/nakama) is an open-source server designed to power modern games and apps. Features include user accounts, chat, social, matchmaker, realtime multiplayer, and much [more](https://heroiclabs.com).
 
-This client implements the full API and socket options with the server. It's written in C and C++11 with minimal dependencies to support Unreal, game consoles, Cocos2d-x, and other custom engines and frameworks.
+This client implements the full API and socket options with the server. It's written in C and C++11 with minimal dependencies to support Unreal, Cocos2d-x, Oculus, and other custom engines and frameworks.
+
+We also support various game consoles via a private C++ repository. Please reach out to support@heroiclabs.com to discuss console support for your project.
 
 If you experience any issues with the client, [open an issue](https://github.com/heroiclabs/nakama-cpp/issues).
 
@@ -107,7 +109,7 @@ The client can create one or more realtime clients with the server. Each realtim
 ```cpp
 bool createStatus = true; // if the socket should show the user as online to others.
 // define realtime client in your class as NRtClientPtr rtClient;
-rtClient = client->createRtClient(DEFAULT_PORT);
+rtClient = client->createRtClient();
 // define listener in your class as NRtDefaultClientListener listener;
 listener.setConnectCallback([]()
 {
@@ -170,7 +172,7 @@ NLogger::setLevel(NLogLevel::Debug);
 
 - `Fatal` writes only logs with `Fatal` logging level.
 
-Note: to use logging macroses you have to define `NLOGS_ENABLED`.
+Note: to use logging macros you have to define `NLOGS_ENABLED`.
 
 ### Websockets transport
 
@@ -181,13 +183,8 @@ Client will default to use the Websocket transport provided by [C++ REST SDK](ht
 You can use a custom Websocket transport by implementing the [NRtTransportInterface](https://github.com/heroiclabs/nakama-cpp/blob/master/include/nakama-cpp/realtime/NRtTransportInterface.h):
 
 ```cpp
-rtClient = client->createRtClient(port, websockets_transport);
+rtClient = client->createRtClient(websockets_transport);
 ```
-
-For more code examples, have a look at:
-
-* [NWebsocketCppRest](https://github.com/heroiclabs/nakama-cpp/blob/master/src/realtime/NWebsocketCppRest.h)
-* [NCocosWebSocket](https://github.com/heroiclabs/nakama-cocos2d-x/blob/master/example/Classes/NakamaCocos2d/NCocosWebSocket.h)
 
 #### Activity timeout
 
@@ -231,8 +228,8 @@ mkdir -p ~/opt; curl -L https://github.com/Kitware/CMake/releases/download/v3.23
 mkdir -p ~/bin; ln -s ~/opt/cmake-3.23.1-linux-x86_64/bin/cmake ~/bin/
 cd /tmp; curl -L -O https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-linux.zip; unzip ninja-linux.zip; mv ninja ~/bin
 exec /bin/bash -l   # make ~/bin available on PATH
-git clone /mnt/z/repos/nakama-cpp-mono ~/localrepos/nakama-cpp-mono
-cd ~/localrepos/nakama-cpp-mono
+git clone /mnt/z/repos/nakama-cpp ~/localrepos/nakama-cpp
+cd ~/localrepos/nakama-cpp
 ${VCPKG_ROOT}/bootstrap-vcpkg.sh
 ```
 
@@ -245,15 +242,10 @@ export CC=/usr/bin/gcc-11
 export CXX=/usr/bin/g++-11
 ```
 
-
 ### OS X
 
 - brew install ninja cmake pkg-config
 - XCode or XCode command line tools
-
-### Android
-- Ensure the Android SDK is installed. Android has special build instructions -- we use Gradle and call into CMake from it:
-`cd ./android && ./gradlew assemble`. The .aar artifact can be used from the build tree.
 
 ## Build
 
@@ -286,6 +278,12 @@ To build Linux release you can use provided Docker image like following:
 ```
 docker buildx build -f scripts/Dockerfile --progress=plain --output=./out .
 ```
+
+### Android
+
+To build for Android set your `ANDROID_NDK_HOME` environment variable to your NDK before building.
+
+Your NDK is typically located within your SDK:`<sdk>/ndk/<ndk-version>`
 
 ### Build modifiers
 
@@ -360,23 +358,26 @@ HTTP:
 
 Platform | Transport              |
   --- |---------------------------|
-Win32 | libhttpclient -> winhttp  |
-Android | libhttpclient -> okhttp |
+Windows | libhttpclient -> winhttp  |
+Android | cpprestsdk              |
 Linux | libhttpclient->curl       |
 MacOS | libhttpclient -> OS       |
 iOS   | libhttpclient -> OS       |
 Unreal | unreal                   |
+Windows 7 | libhttpclient -> websocketpp |
 
 Websockets:
 
 Platform | Transport
 --- |------------------------------|
-Win32 | libhttpclient -> websocketpp |
-Android | libhttpclient -> okhttp  |
+Windows | libhttpclient -> winhttp |
+Android | wslay                    |
 Linux | wslay                      |
 MacOS | wslay                      |
 iOS   | wslay                      |
 Unreal | unreal                    |
+Windows 7 | libhttpclient -> websocketpp |
+
 
 # How to integrate the SDK
 
@@ -390,18 +391,17 @@ After downloading it to a folder you've configured CMake to look for targets in,
 
 ## vcpkg
 
-Our SDK integrates with vcpkg by providing itself through a git registry. To include it in your vcpkg manifest, create a `vcpkg-configuration.json`
-in your root directory.
+Our SDK integrates with vcpkg by providing itself and a few dependencies through a git registry. To include it in your vcpkg manifest, create a `vcpkg-configuration.json` in your root directory.
 
 {
     "registries":
     [
         {
             "kind": "git",
-            "repository": "https://github.com/heroiclabs/nakama-cpp",
+            "repository": "https://github.com/heroiclabs/nakama-vcpkg-registry",
             "baseline": "<commit>",
             "reference": "<branch>",
-            "packages": ["nakama-sdk"]
+            "packages": ["nakama-sdk", "wslay"]
         }
     ]
 }
@@ -411,16 +411,10 @@ Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
     "dependencies": [
       {
         "name": "nakama-sdk"
+        "features": [<desired-feature-1>, <desired-feature-2>]
       }]
 ```
 
-# Contributing
+vcpkg does not currently allow us to provide default features per platform, so you must specify your desired transports/features in your own vcpkg.json.
 
-If you need to make a change to the portfile, vcpkg has a very particular process for exposing that change to port consumers:
-
-(1) Make the desired change to the portfile. Commit.
-(2) Get the git-tree hash of the portfile directory: `git rev-parse HEAD:./cmake/vcpkg-ports/nakama-sdk`.
-(3) Update the `git-tree` key to contain the value of this hash in `versions\n-\nakama-sdk.json`. Commit.
-(4) Consumers will need to update to the new commit as the `baseline` value in their `vcpkg-configuration.json`.
-
-We are investigating ways to simplify this process, although portfile changes are very rare.
+For an example, look at how our [cocos-2d-x client](https://github.com/heroiclabs/nakama-cocos2d-x.git) does this. Also see our [our built-in transports](#transports) for each platform that we represent with vcpkg features. If you do not specify a transport for the platform, the client will expect you to pass in your own at runtime.

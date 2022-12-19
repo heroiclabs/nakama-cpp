@@ -38,7 +38,7 @@ public:
         {
             this->session = sess;
 
-            std::cout << "session token: " << session->getAuthToken() << std::endl;
+            NLOG_INFO("session token: " + session->getAuthToken());
 
             listGroups();
         };
@@ -52,12 +52,12 @@ public:
     {
         auto successCallback = [this](NGroupListPtr list)
         {
-            cout << "Groups count " << list->groups.size() << endl;
+            cout << "Groups count " + list->groups.size() << endl;
 
             for (auto& group : list->groups)
             {
-                cout << "Group name " << group.name << endl;
-                cout << "Group ID " << group.id << endl;
+                cout << "Group name " + group.name << endl;
+                cout << "Group ID " + group.id << endl;
             }
 
             if (list->groups.size() > 0)
@@ -96,7 +96,7 @@ public:
     {
         auto successCallback = [this]()
         {
-            std::cout << "group updated" << std::endl;
+            NLOG_INFO("group updated");
             stopTest(true);
         };
 
@@ -130,7 +130,7 @@ public:
         {
             this->session = sess;
 
-            std::cout << "session token: " << sess->getAuthToken() << std::endl;
+            NLOG_INFO("session token: " + sess->getAuthToken());
 
             listGroups();
         };
@@ -144,12 +144,12 @@ public:
     {
         auto successCallback = [this](NGroupListPtr list)
         {
-            cout << "Groups count " << list->groups.size() << endl;
+            cout << "Groups count " + list->groups.size() << endl;
 
             for (auto& group : list->groups)
             {
-                cout << "Group name " << group.name << endl;
-                cout << "Group ID " << group.id << endl;
+                cout << "Group name " + group.name << endl;
+                cout << "Group ID " + group.id << endl;
             }
 
             auto successCallback = [this](NGroupUserListPtr)

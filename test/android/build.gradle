@@ -1,0 +1,56 @@
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'
+    }
+}
+
+plugins {
+    id('com.android.application') version '7.1.1'
+}
+
+repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+
+}
+
+android {
+    compileSdkVersion 30
+    defaultConfig {
+        applicationId "com.heroiclabs.nakamatest"
+        minSdkVersion 16
+        targetSdkVersion 31
+        versionCode 1
+        versionName '1.0'
+        ndk {
+            abiFilters "${androidABI}"
+        }
+        externalNativeBuild {
+            cmake {
+                arguments '--preset',
+                        "android-${androidABI}-host_osx_x64",
+                        "-DVCPKG_BUILD_TYPE=Release",
+                        "-DANDROID_STL=c++_shared",
+                        "-DCMAKE_BUILD_TYPE=Debug"
+
+                targets 'nakama-test'
+            }
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            version "3.25.0-rc4"
+            path "../CMakeLists.txt"
+        }
+    }
+    buildTypes {
+        customDebugType {
+            debuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}

@@ -29,7 +29,7 @@ void test_writeStorageInvalidArgument()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        std::cout << "Authenticated successfully" << std::endl;
+        NLOG_INFO("Authenticated successfully");
 
         std::vector<NStorageObjectWrite> objects;
         NStorageObjectWrite obj;
@@ -65,11 +65,11 @@ void test_writeStorage()
         {
             if (acks.size() == 1)
             {
-                std::cout << "write ok. version: " << acks[0].version << std::endl;
+                NLOG_INFO("write ok. version: " + acks[0].version);
 
                 auto successCallback = [&test](NStorageObjectListPtr list)
                 {
-                    std::cout << "objects count: " << list->objects.size() << std::endl;
+                    NLOG_INFO("objects count: " + std::to_string(list->objects.size()));
 
                     test.stopTest(list->objects.size() > 0);
                 };
@@ -116,11 +116,11 @@ void test_writeStorageCursor()
         {
             if (acks.size() == numCandies)
             {
-                std::cout << "write ok. version: " << acks[0].version << std::endl;
+                NLOG_INFO("write ok. version: " + acks[0].version);
 
                 auto firstListCallback = [&test, session](NStorageObjectListPtr list)
                 {
-                    std::cout << "cursor : " << list->cursor << std::endl;
+                    NLOG_INFO("cursor : " + list->cursor);
 
                     auto secondListCallback = [&test, session](NStorageObjectListPtr list)
                     {

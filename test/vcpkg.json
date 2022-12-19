@@ -1,9 +1,38 @@
 {
     "name": "nakama-test",
+    "builtin-baseline": "4cb4a5c5ddcb9de0c83c85837ee6974c8333f032",
     "version-string": "0.0.0",
     "default-features": [],
     "dependencies": [
-      "rapidjson",
-      "optional-lite"
-    ]
-  }
+        {
+            "name": "rapidjson",
+            "version>=": "2020-09-14#2"
+        },
+        "optional-lite"
+    ],
+    "features": {
+        "nakama-sdk": {
+            "description": "Use the vcpkg installation of the nakama sdk",
+            "dependencies": [
+                {
+                    "name": "nakama-sdk",
+                    "version>=": "2.6.0#3",
+                    "platform": "ios | osx | linux",
+                    "features": ["wslay", "curl", "libhttpclient-http"]
+                },
+                {
+                    "name": "nakama-sdk",
+                    "version>=": "2.6.0#3",
+                    "platform": "windows",
+                    "features": ["libhttpclient-ws", "libhttpclient-http", "logs"]
+                },
+                {
+                    "name": "nakama-sdk",
+                    "version>=": "2.6.0#3",
+                    "platform": "android",
+                    "features": ["wslay", "curl", "cpprestsdk-http", "logs"]
+                }
+            ]
+        }
+    }
+}

@@ -29,18 +29,18 @@ void test_createAndDeleteNotifications()
     {
         test.listener.setNotificationsCallback([&test](const NNotificationList& list)
         {
-            std::cout << "Received notifications: " << list.notifications.size() << std::endl;
+            NLOG_INFO("Received notifications: " + std::to_string(list.notifications.size()));
 
             auto removedNotificationCallback = [&test]()
             {
-                std::cout << "Notification removed." << std::endl;
+                NLOG_INFO("Notification removed.");
                 test.stopTest(true);
             };
 
             for (auto& notification : list.notifications)
             {
-                std::cout << "Notification code: " << notification.code << std::endl;
-                std::cout << "\tcontent: " << notification.content << std::endl;
+                NLOG_INFO("Notification code: " + std::to_string(notification.code));
+                NLOG_INFO("\tcontent: " + notification.content);
 
                 test.client->deleteNotifications(
                     test.session,
@@ -51,7 +51,7 @@ void test_createAndDeleteNotifications()
 
         auto successCallback = [](const NRpc& rpc)
         {
-            std::cout << "rpc response: " << rpc.payload << std::endl;
+            NLOG_INFO("rpc response: " + rpc.payload);
         };
 
         test.rtClient->rpc(
@@ -71,7 +71,7 @@ void test_createListAndDeleteNotifications()
     {
         auto successCallback = [&test](const NRpc& rpc)
         {
-            std::cout << "rpc response: " << rpc.payload << std::endl;
+            NLOG_INFO("rpc response: " + rpc.payload);
 
             auto listCallback = [&test](NNotificationListPtr list)
             {
@@ -79,14 +79,14 @@ void test_createListAndDeleteNotifications()
                 {
                     auto removedNotificationCallback = [&test]()
                     {
-                        std::cout << "Notification removed." << std::endl;
+                        NLOG_INFO("Notification removed.");
                         test.stopTest(true);
                     };
 
                     for (auto& notification : list->notifications)
                     {
-                        std::cout << "Notification code: " << notification.code << std::endl;
-                        std::cout << "\tcontent: " << notification.content << std::endl;
+                        NLOG_INFO("Notification code: " + std::to_string(notification.code));
+                        NLOG_INFO("\tcontent: " + notification.content);
 
                         test.client->deleteNotifications(
                             test.session,

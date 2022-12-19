@@ -45,8 +45,8 @@ void test_authenticateEmail2()
     auto successCallback = [&test](NSessionPtr session)
     {
          // ensure that username is encoded properly
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
-        std::cout << "returning username: " << session->getUsername() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
+        NLOG_INFO("returning username: " + session->getUsername());
         test.stopTest(!session->getAuthToken().empty() && u8"βσκαταη3" == session->getUsername());
     };
 
@@ -63,7 +63,7 @@ void test_authenticateDevice()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
         test.stopTest(session->getAuthToken().empty() == false);
     };
 
@@ -80,7 +80,7 @@ void test_authenticateDevice2()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        std::cout << "session token: " << session->getAuthToken() << std::endl;
+        NLOG_INFO("session token: " + session->getAuthToken());
         test.stopTest(session->getAuthToken().empty() == false);
         NTEST_ASSERT(session->getVariable("param1") == "test value");
     };

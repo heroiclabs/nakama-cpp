@@ -7,11 +7,11 @@ if (BUILD_GRPC_CLIENT)
     target_compile_definitions(nakama-sdk-client-factory PRIVATE BUILD_GRPC_CLIENT)
 endif()
 
-if(BUILD_HTTP_CPPREST)
-    target_compile_definitions(nakama-sdk-client-factory PRIVATE BUILD_HTTP_CPPREST)
-elseif(BUILD_HTTP_LIBHTTPCLIENT)
+if(WITH_LIBHTTPCLIENT_HTTP)
     target_compile_definitions(nakama-sdk-client-factory PRIVATE BUILD_HTTP_LIBHTTPCLIENT)
-elseif(WITH_EXTERNAL_HTTP)
+elseif(WITH_CPPRESTSDK_HTTP)
+    target_compile_definitions(nakama-sdk-client-factory PRIVATE BUILD_HTTP_CPPRESTSDK)
+else()
     target_compile_definitions(nakama-sdk-client-factory PRIVATE WITH_EXTERNAL_HTTP)
 endif()
 
@@ -21,16 +21,6 @@ target_link_libraries(nakama-sdk-rtclient-factory
         PUBLIC nakama-sdk-interface
         PRIVATE ${WS_IMPL_LIB}
         )
-
-if (BUILD_WEBSOCKET_CPPREST)
-    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_WEBSOCKET_CPPREST)
-elseif (BUILD_WEBSOCKET_LIBHTTPCLIENT)
-    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_WEBSOCKET_LIBHTTPCLIENT)
-elseif (BUILD_WEBSOCKET_WSLAY)
-    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_WEBSOCKET_WSLAY)
-elseif(WITH_EXTERNAL_WS)
-    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE WITH_EXTERNAL_WS)
-endif()
 
 if (BUILD_CURL)
     target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_CURL)

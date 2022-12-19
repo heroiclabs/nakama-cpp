@@ -42,7 +42,7 @@ GrpcClient::GrpcClient(const NClientParameters& parameters)
     _ssl = parameters.ssl;
     _platformParams = parameters.platformParams;
 
-    int32_t port = parameters.port;
+    _port = parameters.port;
 
     if (port == DEFAULT_PORT)
     {

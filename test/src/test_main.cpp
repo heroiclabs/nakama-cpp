@@ -18,6 +18,14 @@
 #include "test_serverConfig.h"
 #include "TaskExecutor.h"
 #include "nakama-cpp/NUtils.h"
+#include "nakama-cpp/NPlatformParams.h"
+#include "nakama-cpp/ClientFactory.h"
+
+#if defined(__ANDROID__)
+#include <android_native_app_glue.h>
+#include <jni.h>
+#endif
+
 
 #if defined(__UNREAL__)
 #include "NakamaUnreal.h"
@@ -52,6 +60,9 @@ void test_realtime();
 void test_internals();
 
 static std::string g_serverHost = SERVER_HOST;
+#ifdef __ANDROID__
+static JavaVM* g_vm;
+#endif
 
 void setWorkingClientParameters(NClientParameters& parameters)
 {
@@ -59,6 +70,9 @@ void setWorkingClientParameters(NClientParameters& parameters)
     parameters.port      = SERVER_PORT;
     parameters.serverKey = SERVER_KEY;
     parameters.ssl       = SERVER_SSL;
+#ifdef __ANDROID__
+    parameters.platformParams.javaVM = g_vm;
+#endif
 }
 
 // *************************************************************
@@ -71,16 +85,14 @@ NCppTest::NCppTest(const char* name) : NTest(name)
 void NCppTest::createWorkingClient()
 {
     NClientParameters parameters;
-
     setWorkingClientParameters(parameters);
-
     createClient(parameters);
 }
 
 NClientPtr NCppTest::createClient(const NClientParameters& parameters)
 {
 #if !defined(__UNREAL__)
-        client = createRestClient(parameters);
+    client = createDefaultClient(parameters);
 #else
         client = Nakama::Unreal::createNakamaClient(parameters, Nakama::NLogLevel::Debug);
 #endif
@@ -126,9 +138,10 @@ public:
     void connect(uint32_t retryPeriodMs)
     {
         createWorkingClient();
+
         client->setErrorCallback([this, retryPeriodMs](const NError& /*error*/)
         {
-            cout << "Not connected. Will retry in " << retryPeriodMs << " msec..." << endl;
+            NLOG(Nakama::NLogLevel::Info, "Not connected. Will retry in %d msec...",  retryPeriodMs);
             _retryAt = getUnixTimestampMs() + retryPeriodMs;
         });
         auth();
@@ -137,11 +150,11 @@ public:
 
     void auth()
     {
-        cout << "Connecting..." << endl;
+        NLOG_INFO("Connecting...");
 
         auto successCallback = [this](NSessionPtr /*session*/)
         {
-            cout << "Connected" << endl;
+            NLOG_INFO("Connected");
             stopTest(true);
         };
         client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
@@ -167,15 +180,8 @@ private:
 } // namespace Test
 } // namespace Nakama
 
-#if defined(_MSC_VER)
-#pragma warning(disable:4447)
-#endif
 
-#ifdef __UNREAL__
-int test_main(int argc, const char *argv[])
-#else
-int main(int argc, char *argv[])
-#endif
+int mainHelper(int argc, char *argv[])
 {
     int res = 0;
 
@@ -183,21 +189,21 @@ int main(int argc, char *argv[])
         Nakama::Test::g_serverHost = argv[1];
     }
 
-    cout << "running nakama tests..." << endl;
-    cout << endl;
-    cout << "server config:" << endl;
-    cout << "host     : " << Nakama::Test::g_serverHost << endl;
-    cout << "HTTP port: " << SERVER_HTTP_PORT << endl;
-    cout << "key      : " << SERVER_KEY << endl;
-    cout << "ssl      : " << (SERVER_SSL ? "true" : "false") << endl;
-    cout << endl;
-
 #if !defined(__UNREAL__)
     Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
 #endif
 
+    NLOG(Nakama::NLogLevel::Info, "server config...");
+    NLOG(Nakama::NLogLevel::Info, "host     : %s", Nakama::Test::g_serverHost.c_str());
+    NLOG(Nakama::NLogLevel::Info, "HTTP port: %d", SERVER_HTTP_PORT);
+    NLOG(Nakama::NLogLevel::Info, "key      : %s", SERVER_KEY);
+    NLOG(Nakama::NLogLevel::Info, "ssl      : %s", (SERVER_SSL ? "true" : "false"));
+
+
+    Nakama::NLogger::Info("starting tests", "hc");
     Nakama::Test::NConnectTest connectTest;
     connectTest.connect(2000);
+    Nakama::NLogger::Info("done calling connect", "hc");
 
     // REST client tests
     g_clientType = ClientType_Rest;
@@ -210,3 +216,29 @@ int main(int argc, char *argv[])
 
     return res;
 }
+
+#if defined(_MSC_VER)
+#pragma warning(disable:4447)
+#endif
+
+#ifdef __UNREAL__
+int test_main(int argc, const char *argv[])
+{
+    mainHelper(0, nullptr);
+}
+#elif defined(__ANDROID__)
+extern "C"
+{
+    void android_main(struct android_app* app)
+    {
+        Nakama::Test::g_vm = app->activity->vm;
+        mainHelper(1, nullptr);
+    }
+}
+#else
+int main(int argc, char *argv[])
+{
+    mainHelper(argc, argv);
+}
+
+#endif
