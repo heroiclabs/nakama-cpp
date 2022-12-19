@@ -25,6 +25,11 @@ namespace Nakama {
 using namespace web::http;                  // Common HTTP functionality
 using namespace web::http::client;          // HTTP client features
 
+
+#ifdef __ANDROID__
+static bool initialized_cpp_rest = false;
+#endif
+
 class NHttpClientCppRestContext
 {
 public:
@@ -60,10 +65,13 @@ public:
 ///////////////////////////////////////////////////////////////
 NHttpClientCppRest::NHttpClientCppRest(const NPlatformParameters& params) : _context(std::make_shared<NHttpClientCppRestContext>(*this))
 {
-#if __ANDROID__
-    cpprest_init(params.javaVM);
+#ifdef __ANDROID__
+    if (!initialized_cpp_rest)
+    {
+        cpprest_init(params.javaVM);
+        initialized_cpp_rest = true;
+    }
 #endif
-
 }
 
 NHttpClientCppRest::~NHttpClientCppRest()
