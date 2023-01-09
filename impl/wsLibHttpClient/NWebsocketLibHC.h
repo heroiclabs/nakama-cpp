@@ -52,9 +52,9 @@ namespace Nakama {
         uint32_t _activityTimeoutMs = 0;
         uint64_t _lastReceivedMessageTimeMs;
 
-        static void ws_on_text_msg(HCWebsocketHandle ws, const char* str, void *self);
-        static void ws_on_binary_msg(HCWebsocketHandle ws, const uint8_t* bytes, uint32_t size, void *self);
-        static void ws_on_close(HCWebsocketHandle ws, HCWebSocketCloseStatus status, void *self);
+        static void __stdcall ws_on_text_msg(HCWebsocketHandle ws, const char* str, void *self);
+        static void __stdcall ws_on_binary_msg(HCWebsocketHandle ws, const uint8_t* bytes, uint32_t size, void *self);
+        static void __stdcall ws_on_close(HCWebsocketHandle ws, HCWebSocketCloseStatus status, void *self);
         void on_msg(HCWebsocketHandle ws, std::string &&s);
 
     };
