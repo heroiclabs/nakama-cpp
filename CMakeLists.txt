@@ -62,10 +62,6 @@ endif()
 
 cmake_policy(SET CMP0012 NEW)
 
-# must come before first project() so that libc++ is compiled
-# and ready when vcpkg starts building dependencies
-include(cmake/with-libcxx.cmake)
-
 # Kickstarts vcpkg dependency manager. It will parse vcpkg.json and install all configured
 # dependencies. Some dependencies are optional and enabled via VCPKG_MANIFEST_FEATURES
 set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
