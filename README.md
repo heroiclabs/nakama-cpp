@@ -285,6 +285,11 @@ To build for Android set your `ANDROID_NDK_HOME` environment variable to your ND
 
 Your NDK is typically located within your SDK:`<sdk>/ndk/<ndk-version>`
 
+### Windows 32-Bit
+
+We support native 32-bit builds. Keep in mind that when building from source, you must run your command
+in a 32-bit (e.g., C:\Windows\System32\cmd.exe) environment.
+
 ### Build modifiers
 
 Presets mostly represent platforms SDK can be built for. Sometimes

@@ -297,7 +297,7 @@ bool NWebsocketLibHC::send(const NBytes& data) {
     return SUCCEEDED(hr);
 }
 
-void NWebsocketLibHC::ws_on_text_msg(HCWebsocketHandle ws, const char *s, void *context) {
+void __stdcall NWebsocketLibHC::ws_on_text_msg(HCWebsocketHandle ws, const char *s, void *context) {
     HC_TRACE_INFORMATION(wsTransportLibHC, "ws_on_text_msg ws=%p", ws);
     auto self = static_cast<NWebsocketLibHC *>(context);
     if (auto lock = g_registry.lockKey(self)) {
@@ -305,7 +305,7 @@ void NWebsocketLibHC::ws_on_text_msg(HCWebsocketHandle ws, const char *s, void *
     }
 }
 
-void NWebsocketLibHC::ws_on_binary_msg(HCWebsocketHandle ws, const uint8_t *bytes, uint32_t size, void *context) {
+void __stdcall NWebsocketLibHC::ws_on_binary_msg(HCWebsocketHandle ws, const uint8_t *bytes, uint32_t size, void *context) {
     HC_TRACE_INFORMATION(wsTransportLibHC, "ws_on_binary_msg ws=%p", ws);
     auto self = static_cast<NWebsocketLibHC *>(context);
     if (auto lock = g_registry.lockKey(self)) {
@@ -315,7 +315,7 @@ void NWebsocketLibHC::ws_on_binary_msg(HCWebsocketHandle ws, const uint8_t *byte
 
 // Callback is called on an unspecified thread when socket is closed.
 // Arrange fireOnDisconnected() to be called from the tick()
-void NWebsocketLibHC::ws_on_close(HCWebsocketHandle ws, HCWebSocketCloseStatus status, void *context) {
+void __stdcall NWebsocketLibHC::ws_on_close(HCWebsocketHandle ws, HCWebSocketCloseStatus status, void *context) {
     HC_TRACE_INFORMATION(wsTransportLibHC, "ws_on_close ws=%p", ws);
     auto self = static_cast<NWebsocketLibHC *>(context);
 
