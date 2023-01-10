@@ -166,7 +166,7 @@ static HRESULT setup_hc_response_to_string(ctx_t &ctx)
 // in the asyncBlock context. Here we extract relevant information
 // to call SDK callback. Once this function is done final cleanup is
 // done via unique_ptr<HC_CALL> destructor implicitly.
-static void hc_req_completed_cb(XAsyncBlock *ab) noexcept {
+static void __stdcall hc_req_completed_cb(XAsyncBlock *ab) noexcept {
     const std::unique_ptr<XAsyncBlock> asyncBlock(ab);
     const std::unique_ptr<ctx_t> ctx(static_cast<ctx_t*>(asyncBlock->context));
 

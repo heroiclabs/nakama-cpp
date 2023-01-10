@@ -141,11 +141,25 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         else()
             set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake)
 
-            if (APPLE)
+            if(XDK)
+                if (WINRT)
+                    set(LIBHTTPCLIENT_TARGET libHttpClient.XDK.WinRT)
+                else()
+                    set(LIBHTTPCLIENT_TARGET libHttpClient.XDK.C)
+                endif()
+            elseif (BUILDWIN32)
+                set(LIBHTTPCLIENT_TARGET libHttpClient.Win32.C)
+            elseif (GDK)
+                set(LIBHTTPCLIENT_TARGET libHttpClient.GDK.C)
+            elseif (APPLE)
                 set(LIBHTTPCLIENT_TARGET libHttpClient.Apple.C)
+            else()
+                if (WINRT)
+                    set(LIBHTTPCLIENT_TARGET libHttpClient.UWP.WinRT)
+                else()
+                    set(LIBHTTPCLIENT_TARGET libHttpClient.UWP.C)
+                endif()
             endif()
-
-            ## TODO windows, linux etc.
         endif()
 
         # We build LIBHTTPCLIENT as OBJECT library so that its symbols
@@ -167,10 +181,6 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         )
 
         FetchContent_MakeAvailable(libHttpClient)
-
-        if (NOT TARGET ${LIBHTTPCLIENT_TARGET})
-            message(FATAL_ERROR "Could not find libhttpclient target: ${LIBHTTPCLIENT_TARGET}")
-        endif()
 
         if (NOT WS_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
