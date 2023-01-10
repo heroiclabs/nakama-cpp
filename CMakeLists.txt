@@ -171,7 +171,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         FetchContent_Declare(
             libHttpClient
             GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
-            GIT_TAG        11abd0f3be701311a996e4b893089393aa5d12b5
+            GIT_TAG        fdf2d1d44b52a8f82be322d8e17f41e04fb607f0
             SOURCE_SUBDIR  ${LIBHTTPCLIENT_SOURCE_SUBDIR}
             GIT_PROGRESS TRUE
             GIT_SHALLOW TRUE
