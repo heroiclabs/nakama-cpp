@@ -126,7 +126,7 @@ endif()
 
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     if (NOT LIBHTTPCLIENT_BUILTIN)
-        if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR APPLE)
+        if (LINUX OR APPLE)
             find_package(CURL CONFIG REQUIRED)
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
         endif()
@@ -171,7 +171,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         FetchContent_Declare(
             libHttpClient
             GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
-            GIT_TAG        fdf2d1d44b52a8f82be322d8e17f41e04fb607f0
+            GIT_TAG        c535d5943516bb5d8f3a50858da617ebd0dd3f3f
             SOURCE_SUBDIR  ${LIBHTTPCLIENT_SOURCE_SUBDIR}
             GIT_PROGRESS TRUE
             GIT_SHALLOW TRUE
