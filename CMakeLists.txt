@@ -62,10 +62,6 @@ endif()
 
 cmake_policy(SET CMP0012 NEW)
 
-# must come before first project() so that libc++ is compiled
-# and ready when vcpkg starts building dependencies
-include(cmake/with-libcxx.cmake)
-
 # Kickstarts vcpkg dependency manager. It will parse vcpkg.json and install all configured
 # dependencies. Some dependencies are optional and enabled via VCPKG_MANIFEST_FEATURES
 set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
@@ -130,7 +126,7 @@ endif()
 
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     if (NOT LIBHTTPCLIENT_BUILTIN)
-        if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR APPLE)
+        if (LINUX OR APPLE)
             find_package(CURL CONFIG REQUIRED)
             target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
         endif()
@@ -153,6 +149,8 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
                 set(LIBHTTPCLIENT_TARGET libHttpClient.GDK.C)
             elseif (APPLE)
                 set(LIBHTTPCLIENT_TARGET libHttpClient.Apple.C)
+            elseif(DEFINED LINUX)
+                set(LIBHTTPCLIENT_TARGET libHttpClient.Linux.C)
             else()
                 if (WINRT)
                     set(LIBHTTPCLIENT_TARGET libHttpClient.UWP.WinRT)
@@ -173,7 +171,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         FetchContent_Declare(
             libHttpClient
             GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
-            GIT_TAG        11abd0f3be701311a996e4b893089393aa5d12b5
+            GIT_TAG        c535d5943516bb5d8f3a50858da617ebd0dd3f3f
             SOURCE_SUBDIR  ${LIBHTTPCLIENT_SOURCE_SUBDIR}
             GIT_PROGRESS TRUE
             GIT_SHALLOW TRUE

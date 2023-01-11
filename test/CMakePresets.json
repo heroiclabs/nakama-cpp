@@ -160,7 +160,7 @@
                 "lhs": "${hostSystemName}",
                 "rhs": "Linux"
             },
-            "installDir": "out/linux-arm64"
+            "installDir": "out/linux-amd64"
         },
         {
             "name": "android-default",
