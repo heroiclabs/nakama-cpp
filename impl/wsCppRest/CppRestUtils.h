@@ -14,30 +14,14 @@
  * limitations under the License.
  */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#pragma once
 
-#define SERVER_KEY           "we4INqzP5e1E"
-#define SERVER_HTTP_KEY      "defaulthttpkey"
-#ifdef __ANDROID__
-    #define SERVER_HOST          "lukenewproj.us-east1.nakamacloud.io"
+#include "cpprest/asyncrt_utils.h"
+
+#ifdef _WIN32
+    #define TO_STD_STR(ws_str)     utility::conversions::to_utf8string(ws_str)
+    #define FROM_STD_STR(utf8str)  utility::conversions::to_string_t(utf8str)
 #else
-    #define SERVER_HOST          "127.0.0.1"
-#endif
-#define SERVER_HTTP_PORT     443
-#define SERVER_SSL           true
-
-typedef enum
-{
-    ClientType_Unknown,
-    ClientType_Rest
-} eClientType;
-
-eClientType getClientType(void);
-
-#define SERVER_PORT SERVER_HTTP_PORT
-
-#ifdef __cplusplus
-}
+    #define TO_STD_STR(ws_str)     ws_str
+    #define FROM_STD_STR(utf8str)  utf8str
 #endif

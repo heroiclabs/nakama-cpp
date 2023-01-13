@@ -39,7 +39,7 @@
                     "name": "wslay"
                 }
             ],
-            "supports": "osx | ios | linux"
+            "supports": "osx | ios | linux | android"
         },
         "logs": {
             "description": "Whether or not logs are enabled."
@@ -76,9 +76,18 @@
                 "grpc"
             ]
         },
-        "cpprestsdk-http": {
+        "cpprestsdk": {
             "description": "Maintenance-mode HTTP library.",
-            "dependencies": [ {"name": "cpprestsdk"} ],
+            "dependencies": [
+                {
+                    "name": "cpprestsdk",
+                    "default-features": false,
+                    "features": [
+                        "websockets"
+                    ],
+                    "platform": "android"
+                }
+            ],
             "supports": "android"
         }
     }
