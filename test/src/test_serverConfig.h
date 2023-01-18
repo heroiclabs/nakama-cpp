@@ -18,15 +18,11 @@
 extern "C" {
 #endif
 
-#define SERVER_KEY           "we4INqzP5e1E"
+#define SERVER_KEY           "defaultkey"
 #define SERVER_HTTP_KEY      "defaulthttpkey"
-#ifdef __ANDROID__
-    #define SERVER_HOST          "lukenewproj.us-east1.nakamacloud.io"
-#else
-    #define SERVER_HOST          "127.0.0.1"
-#endif
-#define SERVER_HTTP_PORT     443
-#define SERVER_SSL           true
+#define SERVER_HOST          "127.0.0.1"
+#define SERVER_HTTP_PORT     7350
+#define SERVER_SSL           false
 
 typedef enum
 {
