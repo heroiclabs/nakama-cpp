@@ -39,7 +39,7 @@
                     "name": "wslay"
                 }
             ],
-            "supports": "osx | ios | linux | android"
+            "supports": "osx | ios | linux"
         },
         "logs": {
             "description": "Whether or not logs are enabled."

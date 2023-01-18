@@ -51,7 +51,7 @@ void NWebsocketCppRest::tick()
     {
         if (_activityTimeoutMs > 0 && getUnixTimestampMs()-_lastReceivedMessageTimeMs >= _activityTimeoutMs)
         {
-            disconnect(web::websockets::client::websocket_close_status::abnormal_close, "Activity timeout");
+            disconnect(web::websockets::client::websocket_close_status::going_away, "Activity timeout");
         }
     }
 
@@ -120,21 +120,12 @@ void NWebsocketCppRest::disconnect(web::websockets::client::websocket_close_stat
     _disconnectInitiated = true;
     _connected = false;
 
-    auto task = _wsClient->close(status, FROM_STD_STR(reason));
-    // Task-based continuation
-    (void) task.then([this](pplx::task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (const std::exception & e)
-        {
-            addErrorEvent("[NWebsocketCppRest::disconnect] exception: " + std::string(e.what()));
-        }
-    });
-
+    _wsClient->close(status, FROM_STD_STR(reason));
+    // clear handlers to prevent them from firing again before server ack, then reset pointer
+    _wsClient->set_close_handler([](web::web_sockets::client::websocket_close_status, const utility::string_t&, const std::error_code&){});
+    _wsClient->set_message_handler([](const web::web_sockets::client::websocket_incoming_message&){});
     _wsClient.reset();
+
 }
 
 bool NWebsocketCppRest::send(const NBytes & data)
@@ -216,6 +207,11 @@ void NWebsocketCppRest::onClosed(web::websockets::client::websocket_close_status
     if (disconnectInfo->code == 1005) // No Status Received
     {
         disconnectInfo->remote = !_disconnectInitiated;
+    }
+    else if (disconnectInfo->code == 1001) //mild hack: we've reserved "going away in websocketpp" for activity timeout
+    {
+        disconnectInfo->code = static_cast<uint16_t>(close_status);
+        disconnectInfo->remote = false;
     }
     else
     {
