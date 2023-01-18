@@ -25,6 +25,8 @@
     #if defined(BUILD_CURL)
 #include "NetIOCurl.h"
     #endif
+#elif defined(BUILD_WEBSOCKET_CPPRESTSDK)
+#include "NWebsocketCppRest.h"
 #endif
 
 namespace Nakama {
@@ -38,6 +40,8 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
     return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
     #elif defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL)
     return NRtTransportPtr(new NWebsocketWslay<NetIOCurl>());
+    #elif defined(BUILD_WEBSOCKET_CPPRESTSDK)
+    return NRtTransportPtr(new NWebsocketCppRest());
     #else
         #error Could not find default web socket transport for platform.
     #endif
