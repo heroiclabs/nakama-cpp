@@ -27,7 +27,6 @@ namespace Nakama {
 
 NWebsocketCppRest::NWebsocketCppRest()
 {
-    NLOG_DEBUG("");
 }
 
 NWebsocketCppRest::~NWebsocketCppRest()
@@ -68,8 +67,6 @@ void NWebsocketCppRest::connect(const std::string & url, NRtTransportType type)
 {
     try
     {
-        NLOG_DEBUG("...");
-
         web::websockets::client::websocket_client_config config;
 
         config.set_user_agent(std::string("Nakama C++ ") + getNakamaSdkVersion());
@@ -215,7 +212,7 @@ void NWebsocketCppRest::onClosed(web::websockets::client::websocket_close_status
     }
     else
     {
-        disconnectInfo->remote = !_disconnectInitiated/* && !websocketpp::close::status::invalid(info.code)*/;
+        disconnectInfo->remote = !_disconnectInitiated;
     }
 
     executeInUserThread([this, disconnectInfo]()
