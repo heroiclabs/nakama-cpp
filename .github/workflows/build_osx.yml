@@ -9,7 +9,7 @@ jobs:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/cmake-build
+      - uses: ${GITHUB_WORKSPACE}/.github/actions/cmake-build
         with:
           preset: ${{ matrix.preset }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

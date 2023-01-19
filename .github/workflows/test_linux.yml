@@ -13,16 +13,16 @@ jobs:
             username: root
             database: nakama
             port: 26257
-        - uses: ./.github/actions/run-nakama
+        - uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/actions/run-nakama
           with:
             postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
-        - uses: ./.github/actions/cmake-build
+        - uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/actions/cmake-build
           with:
             preset: linux-amd64
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         - shell: bash
           run: |
-            ./test/out/linux-amd64/nakama-test || {
+            ${GITHUB_WORKSPACE}/nakama-cpp/test/out/linux-amd64/nakama-test || {
                 echo "Test failed, showing Nakama log for diagnostics";
                 cat /tmp/nakama.log;
                 exit 1;

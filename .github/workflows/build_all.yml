@@ -2,15 +2,15 @@ name: Build All
 on: [workflow_call, workflow_dispatch]
 jobs:
   android_matrix:
-    uses: ./.github/workflows/build_android.yml
+    uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/workflows/build_android.yml
   ios_matrix:
-    uses: ./.github/workflows/build_ios.yml
+    uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/workflows/build_ios.yml
   linux_matrix:
-    uses: ./.github/workflows/build_linux.yml
+    uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/workflows/build_linux.yml
   osx_matrix:
-    uses: ./.github/workflows/build_osx.yml
+    uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/workflows/build_osx.yml
   windows_matrix:
-    uses: ./.github/workflows/build_windows.yml
+    uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/workflows/build_windows.yml
   combine:
     needs: [android_matrix, ios_matrix, linux_matrix, osx_matrix, windows_matrix]
     runs-on: ubuntu-22.04
@@ -24,7 +24,7 @@ jobs:
           key: lipo-${{ hashFiles('ci/build-lipo.sh') }}
       - name: build apple's lipo
         if: steps.lipo_cache.outputs.cache-hit != 'true'
-        run: ./ci/build-lipo.sh
+        run: ${GITHUB_WORKSPACE}/nakama-cpp/ci/build-lipo.sh
       - name: make lipo available on system path
         run: echo "$PWD/cctools/cctools/misc" >> $GITHUB_PATH
       - uses: actions/download-artifact@v3
@@ -39,18 +39,18 @@ jobs:
              7zr x -o$destdir $f
            done
       - id: combine
-        run: /bin/bash -x ./ci/combine-artifacts.sh artifacts
+        run: /bin/bash -x ${GITHUB_WORKSPACE}/nakama-cpp/ci/combine-artifacts.sh artifacts
 
       - name: Prepare artifacts archives
         run: |
           (
-            cd ./${{ steps.combine.outputs.generic-artifact-dir }}
+            cd ${GITHUB_WORKSPACE}/nakama-cpp/${{ steps.combine.outputs.generic-artifact-dir }}
             7zr a ../${{ steps.combine.outputs.generic-artifact-name }}.7z '*'
           )
 
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.combine.outputs.generic-artifact-name }}
-          path: ./${{ steps.combine.outputs.generic-artifact-dir }}.7z
+          path: ${GITHUB_WORKSPACE}/nakama-cpp/${{ steps.combine.outputs.generic-artifact-dir }}.7z
           retention-days: 2
 
