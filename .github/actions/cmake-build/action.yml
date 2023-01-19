@@ -28,7 +28,7 @@ runs:
       run: >
         if [ ! -d "${PWD}/vcpkg" ]; then
           git clone https://github.com/microsoft/vcpkg.git
-          echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+          echo "VCPKG_ROOT=${GITHUB_WORKSPACE}/vcpkg" >> $GITHUB_ENV
         fi
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
       shell: bash
@@ -53,7 +53,7 @@ runs:
       name: Setup Ubuntu
       run: |
         sudo ./ci/setup-ubuntu.sh
-        sudo eatmydata "${PWD}/vcpkg/bootstrap-vcpkg.sh"
+        sudo eatmydata "${GITHUB_WORKSPACE}/vcpkg/bootstrap-vcpkg.sh"
         echo 'CC=/usr/bin/gcc-11' >> "$GITHUB_ENV"
         echo 'CXX=/usr/bin/g++-11' >> "$GITHUB_ENV"
       shell: bash
@@ -116,5 +116,5 @@ runs:
         name: ${{ steps.artifact_name.outputs.artifact }}-workdir-debug
         path: |
           ./build
-          ./cmake/vcpkg/buildtrees
+          ${GITHUB_WORKSPACE}/vcpkg/buildtrees
         retention-days: 1
