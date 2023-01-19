@@ -23,13 +23,11 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Setup vcpkg
-      shell: bash
-      run: >
-        if [ ! -d "${PWD}/vcpkg" ]; then
-          git clone https://github.com/microsoft/vcpkg.git
-          echo "VCPKG_ROOT=${GITHUB_WORKSPACE}/vcpkg" >> $GITHUB_ENV
-        fi
+    - uses: actions/checkout@v3
+      with:
+        repository: microsoft/vcpkg
+        ref: "2578040872f99afe504cc5634285693c9cbf088d"
+        fetch-depth: 1
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
       shell: bash
     - name: 'Setup NuGet Credentials'
@@ -91,12 +89,6 @@ runs:
         preset=${preset%-host_*}
         name="libnakama-${preset}-${{ inputs.build_type }}-git.${sha:0:8}"
         echo "::set-output name=artifact::${name}"
-    #
-    - run: >
-        rm -rf ./out/*/*libHttpClient*.{lib,a};
-        rm -rf ./out/Nakama/libnakama/*/*libHttpClient*.{lib,a};
-
-      shell: bash
 
     - name: Prepare artifact archive
       run: |
@@ -115,6 +107,6 @@ runs:
       with:
         name: ${{ steps.artifact_name.outputs.artifact }}-workdir-debug
         path: |
-          ./build
+          ${GITHUB_WORKSPACE}/nakama-cpp/build
           ${GITHUB_WORKSPACE}/vcpkg
         retention-days: 1
