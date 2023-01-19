@@ -28,20 +28,7 @@ ensure_mono() {
   mono --version >/dev/null
 }
 
-setup_vcpkg() {
-  ensure_mono
-  eatmydata "${{env.VCPKG_ROOT}}/bootstrap-vcpkg.sh"
-}
-
-
-if [[ -z "$@" ]]; then
-  # default mode, do regular setup
-  (( $(gcc -dumpversion) >= 11 )) || install_gcc_11
-  ninja --version 2>/dev/null || install_ninja
-  setup_vcpkg
-else
-  # allow caller to cherry-pick what exactly to do
-  for arg in "$@"; do
-    $arg
-  done
-fi
+# default mode, do regular setup
+(( $(gcc -dumpversion) >= 11 )) || install_gcc_11
+ninja --version 2>/dev/null || install_ninja
+ensure_mono

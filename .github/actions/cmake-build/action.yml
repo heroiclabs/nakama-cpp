@@ -27,7 +27,8 @@ runs:
       shell: bash
       run: >
         if [ ! -d "${PWD}/vcpkg" ]; then
-          git clone https://github.com/microsoft/vcpkg.git && echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
+          git clone https://github.com/microsoft/vcpkg.git
+          echo "VCPKG_ROOT=${PWD}/vcpkg" >> $GITHUB_ENV
         fi
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
       shell: bash
@@ -48,18 +49,17 @@ runs:
         $( type -p mono || :) `vcpkg fetch nuget | tail -n 1`
         setapikey "${{ inputs.GITHUB_TOKEN }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-    - name: Installing prerequisites
-      run:  |
-        if [[ "${{ runner.os }}"  == "Linux" ]]; then
-          sudo ./ci/setup-ubuntu.sh
-        elif [[ "${{ runner.os }}" == "macOS" ]]; then
-          ./ci/setup-osx.sh
-        fi
-
-        if [[ "${{ runner.os }}" == "Linux" ]]; then
-          echo 'CC=/usr/bin/gcc-11' >> "$GITHUB_ENV"
-          echo 'CXX=/usr/bin/g++-11' >> "$GITHUB_ENV"
-        fi
+    - if: runner.os == "Linux"
+      name: Setup Ubuntu
+      run: |
+        sudo ./ci/setup-ubuntu.sh
+        sudo eatmydata "${PWD}/vcpkg/bootstrap-vcpkg.sh"
+        echo 'CC=/usr/bin/gcc-11' >> "$GITHUB_ENV"
+        echo 'CXX=/usr/bin/g++-11' >> "$GITHUB_ENV"
+      shell: bash
+    - if: runner.os == "macOS"
+      name: Setup macOS
+      run: ./ci/setup-osx.sh
       shell: bash
     - run: rm -rf out
       shell: bash
