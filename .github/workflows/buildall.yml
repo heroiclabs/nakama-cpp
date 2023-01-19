@@ -2,15 +2,15 @@ name: Build All
 on: [workflow_call, workflow_dispatch]
 jobs:
   android_matrix:
-    uses: ./.github/workflows/android_matrix.yml
+    uses: ./.github/workflows/build_android.yml
   ios_matrix:
-    uses: ./.github/workflows/ios_matrix.yml
+    uses: ./.github/workflows/build_ios.yml
   linux_matrix:
-    uses: ./.github/workflows/linux_matrix.yml
+    uses: ./.github/workflows/build_linux.yml
   osx_matrix:
-    uses: ./.github/workflows/osx_matrix.yml
+    uses: ./.github/workflows/build_osx.yml
   windows_matrix:
-    uses: ./.github/workflows/windows_matrix.yml
+    uses: ./.github/workflows/build_windows.yml
   combine:
     needs: [android_matrix, ios_matrix, linux_matrix, osx_matrix, windows_matrix]
     runs-on: ubuntu-22.04

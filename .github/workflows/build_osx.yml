@@ -5,7 +5,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        preset: ["ios-arm64-host_x64", "iphonesimulator-x64-host_x64", "macosx-x64-host_x64", "macosx-arm64-host_x64"]
+        preset: ["macosx-x64-host_x64", "macosx-arm64-host_x64"]
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
