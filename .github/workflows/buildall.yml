@@ -23,7 +23,6 @@ jobs:
       - uses: ./.github/actions/cmake-build
         with:
           preset: linux-amd64
-          flavour: ${{ matrix.flavour }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   android_matrix:

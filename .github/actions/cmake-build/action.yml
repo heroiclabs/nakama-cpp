@@ -89,11 +89,7 @@ runs:
         preset="${{ inputs.preset }}"
         # strip -host_{arm64,x64} from the preset, because it is not relevant for users
         preset=${preset%-host_*}
-        if [[ -n "${{ inputs.flavour }}" ]]; then
-          name="libnakama-${{ inputs.flavour }}-${preset}-${{ inputs.build_type }}-git.${sha:0:8}"
-        else
-          name="libnakama-${preset}-${{ inputs.build_type }}-git.${sha:0:8}"
-        fi
+        name="libnakama-${preset}-${{ inputs.build_type }}-git.${sha:0:8}"
         echo "::set-output name=artifact::${name}"
     #
     - run: >
