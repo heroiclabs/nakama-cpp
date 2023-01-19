@@ -1,0 +1,15 @@
+name: Build Android
+on: [workflow_call, workflow_dispatch]
+jobs:
+  android_matrix:
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        preset: ["android-armeabi-v7a-host_osx_x64", "android-arm64-v8a-host_osx_x64", "android-x64-host_osx_x64"]
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cmake-build
+        with:
+          preset: ${{ matrix.preset }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

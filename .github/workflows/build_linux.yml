@@ -1,0 +1,13 @@
+name: Build Linux
+on: [workflow_call, workflow_dispatch]
+jobs:
+  linux_matrix:
+    timeout-minutes: 30
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cmake-build
+        with:
+          preset: linux-amd64
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
