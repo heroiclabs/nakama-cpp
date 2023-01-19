@@ -49,7 +49,7 @@ runs:
         $( type -p mono || :) `vcpkg fetch nuget | tail -n 1`
         setapikey "${{ inputs.GITHUB_TOKEN }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-    - if: runner.os == "Linux"
+    - if: runner.os == 'Linux'
       name: Setup Ubuntu
       run: |
         sudo ./ci/setup-ubuntu.sh
@@ -57,7 +57,7 @@ runs:
         echo 'CC=/usr/bin/gcc-11' >> "$GITHUB_ENV"
         echo 'CXX=/usr/bin/g++-11' >> "$GITHUB_ENV"
       shell: bash
-    - if: runner.os == "macOS"
+    - if: runner.os == 'macOS'
       name: Setup macOS
       run: ./ci/setup-osx.sh
       shell: bash
