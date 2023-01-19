@@ -2,8 +2,8 @@ name: Test All
 on: [workflow_dispatch]
 jobs:
   test_android:
-    uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/workflows/test_linux.yml
+    uses: ./.github/workflows/test_linux.yml
   test_osx:
-    uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/workflows/test_osx.yml
+    uses: ./.github/workflows/test_osx.yml
   test_windows:
-    uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/workflows/test_windows.yml
+    uses: ./.github/workflows/test_windows.yml
