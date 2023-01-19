@@ -8,9 +8,6 @@ inputs:
     description: 'Build config: MinSizeRel or Debug'
     required: true
     default: 'MinSizeRel'
-  flavour:
-    description: 'Possible values: Unreal, libcxx'
-    required: false
   artifact_retention_days:
     description: 'Artifact retention days'
     default: 2
@@ -51,18 +48,6 @@ runs:
         $( type -p mono || :) `vcpkg fetch nuget | tail -n 1`
         setapikey "${{ inputs.GITHUB_TOKEN }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-    - id: cmake_args
-      shell: bash
-      if: ${{ inputs.flavour }}
-      run: |
-        if [[ "${{inputs.flavour}}" == "Unreal" ]]; then
-          echo "::set-output name=args::-DUNREAL=ON"
-        elif [[ "${{inputs.flavour}}" == "libcxx" ]]; then
-          echo "::set-output name=args::-DWITH_LIBCXX=ON"
-        else
-          echo "::error::Unexpected 'input' flavour value: ${{ inputs.flavour }}"
-        fi
-
     - name: Installing prerequisites
       run:  |
         if [[ "${{ runner.os }}"  == "Linux" ]]; then

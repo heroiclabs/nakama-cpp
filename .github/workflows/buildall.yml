@@ -15,21 +15,8 @@ jobs:
           build_type: ${{ matrix.build_type }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Unreal Engine doesn't officially support debug (/MDd flag) builds,
-      # so we build Unreal flavour in release config only
-      - if: ${{ matrix.build_type == 'MinSizeRel' }}
-        uses: ./.github/actions/cmake-build
-        with:
-          preset: win-x64
-          build_type: ${{ matrix.build_type }}
-          flavour: Unreal
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   linux_matrix:
     timeout-minutes: 30
-    strategy:
-      matrix:
-        flavour: [ "", "libcxx" ]
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
@@ -39,13 +26,6 @@ jobs:
           flavour: ${{ matrix.flavour }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Once libc++ version is built, same build tree can be reused for Unreal
-      - if: matrix.flavour == 'libcxx'
-        uses: ./.github/actions/cmake-build
-        with:
-          preset: linux-amd64
-          flavour: Unreal
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   android_matrix:
     timeout-minutes: 30
     strategy:
@@ -59,13 +39,6 @@ jobs:
           preset: ${{ matrix.preset }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Unreal module
-        uses: ./.github/actions/cmake-build
-        with:
-          preset: ${{ matrix.preset }}
-          flavour: Unreal
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   apple_matrix:
     timeout-minutes: 30
     strategy:
@@ -77,12 +50,6 @@ jobs:
       - uses: ./.github/actions/cmake-build
         with:
           preset: ${{ matrix.preset }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build Unreal module
-        uses: ./.github/actions/cmake-build
-        with:
-          preset: ${{ matrix.preset }}
-          flavour: Unreal
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   combine:
@@ -118,18 +85,10 @@ jobs:
       - name: Prepare artifacts archives
         run: |
           (
-            cd ./${{ steps.combine.outputs.unreal-artifact-dir }}
-            7zr a ../${{ steps.combine.outputs.unreal-artifact-name }}.7z '*'
-          )
-          (
             cd ./${{ steps.combine.outputs.generic-artifact-dir }}
             7zr a ../${{ steps.combine.outputs.generic-artifact-name }}.7z '*'
           )
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: ${{ steps.combine.outputs.unreal-artifact-name }}
-          path: ./${{ steps.combine.outputs.unreal-artifact-dir }}.7z
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.combine.outputs.generic-artifact-name }}
