@@ -11,4 +11,3 @@ jobs:
           preset: linux-amd64
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
