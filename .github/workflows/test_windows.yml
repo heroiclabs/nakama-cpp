@@ -1,0 +1,30 @@
+name: Test Windows
+on: [workflow_dispatch]
+jobs:
+  windows:
+      timeout-minutes: 40
+      runs-on: windows-latest
+      steps:
+        - uses: actions/checkout@v3
+        - id: setup-postgres
+          uses: ikalnytskyi/action-setup-postgres@v3
+          with:
+            username: root
+            database: nakama
+            port: 26257
+        - uses: ./.github/actions/run-nakama
+          with:
+            postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
+        - uses: ./.github/actions/cmake-build
+          with:
+            preset: win-x64
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - shell: bash
+          run: |
+            ./test/out/win-x64/nakama-test.exe || {
+                echo "Test failed, showing Nakama log for diagnostics";
+                cat /tmp/nakama.log;
+                exit 1;
+            }
+
+
