@@ -1,8 +1,6 @@
 name: Build Windows
 on: [workflow_call, workflow_dispatch]
 jobs:
-  setup_vcpkg:
-      uses: ./.github/workflows/setup_vcpkg.yml
   build_windows:
     timeout-minutes: 30
     strategy:
@@ -11,6 +9,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-vcpkg
       - uses: ./.github/actions/cmake-build
         with:
           preset: win-x64

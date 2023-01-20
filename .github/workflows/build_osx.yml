@@ -1,8 +1,6 @@
 name: Build OSX
 on: [workflow_call, workflow_dispatch]
 jobs:
-  setup_vcpkg:
-      uses: ./.github/workflows/setup_vcpkg.yml
   build_osx:
     timeout-minutes: 30
     strategy:
@@ -13,6 +11,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: ./ci/setup-osx.sh
         shell: bash
+      - uses: ./.github/actions/setup-vcpkg
       - uses: ./.github/actions/cmake-build
         with:
           preset: ${{ matrix.preset }}

@@ -1,8 +1,6 @@
 name: Build iOS
 on: [workflow_call, workflow_dispatch]
 jobs:
-  setup_vcpkg:
-      uses: ./.github/workflows/setup_vcpkg.yml
   build_ios:
     timeout-minutes: 30
     strategy:
@@ -10,6 +8,7 @@ jobs:
         preset: ["ios-arm64-host_x64", "iphonesimulator-x64-host_x64"]
     runs-on: macos-12
     steps:
+      - uses: ./.github/actions/setup-vcpkg
       - uses: actions/checkout@v3
       - run: ./ci/setup-osx.sh
         shell: bash
