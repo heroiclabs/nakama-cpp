@@ -8,10 +8,11 @@ jobs:
         preset: ["android-armeabi-v7a-host_linux-x64", "android-arm64-v8a-host_linux-x64", "android-x64-host_linux-x64"]
     runs-on: ubuntu-18.04
     steps:
-      - run: ./ci/setup-ubuntu.sh
-        shell: bash
+
       - uses: ./.github/actions/setup-vcpkg
       - uses: actions/checkout@v3
+      - run: ./ci/setup-ubuntu.sh
+        shell: bash
       - uses: ./.github/actions/cmake-build
         with:
           preset: ${{ matrix.preset }}
