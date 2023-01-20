@@ -47,5 +47,5 @@ runs:
         name: ${{ steps.artifact_name.outputs.artifact }}-workdir-debug
         path: |
           ./build
-          ${GITHUB_WORKSPACE}/vcpkg
+          ../vcpkg
         retention-days: 1
