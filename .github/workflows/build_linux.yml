@@ -3,8 +3,6 @@ on: [workflow_call, workflow_dispatch]
 jobs:
   setup_vcpkg:
       uses: ./.github/workflows/setup_vcpkg.yml
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build_linux:
     timeout-minutes: 30
     runs-on: ubuntu-18.04
@@ -15,5 +13,4 @@ jobs:
       - uses: ./.github/actions/cmake-build
         with:
           preset: linux-amd64
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -47,7 +47,6 @@ jobs:
         - uses: ./.github/actions/cmake-build
           with:
             preset: macosx-x64-host_x64
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         - shell: bash
           run: |
               ./test/out/macosx-x64/nakama-test.app/Contents/MacOS/nakama-test || {

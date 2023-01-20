@@ -18,7 +18,6 @@ jobs:
         - uses: ./.github/actions/cmake-build
           with:
             preset: win-x64
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         - shell: bash
           run: |
             ./test/out/win-x64/nakama-test.exe || {

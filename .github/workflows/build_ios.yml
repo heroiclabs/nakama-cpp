@@ -3,8 +3,6 @@ on: [workflow_call, workflow_dispatch]
 jobs:
   setup_vcpkg:
       uses: ./.github/workflows/setup_vcpkg.yml
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build_ios:
     timeout-minutes: 30
     strategy:
@@ -18,4 +16,3 @@ jobs:
       - uses: ./.github/actions/cmake-build
         with:
           preset: ${{ matrix.preset }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

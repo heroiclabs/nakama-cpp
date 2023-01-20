@@ -18,7 +18,7 @@ jobs:
           shell: bash
           run: >
             $( type -p mono || :) `vcpkg fetch nuget | tail -n 1`
-            setapikey "${{ inputs.GITHUB_TOKEN }}"
+            setapikey "${{ secrets.GITHUB_TOKEN }}"
             -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
         - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
           shell: bash
@@ -32,4 +32,4 @@ jobs:
             -storepasswordincleartext
             -name "GitHub"
             -username "heroiclabs"
-            -password "${{ inputs.GITHUB_TOKEN }}"
+            -password "${{ secrets.GITHUB_TOKEN }}"

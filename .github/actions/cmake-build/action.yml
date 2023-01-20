@@ -11,9 +11,6 @@ inputs:
   artifact_retention_days:
     description: 'Artifact retention days'
     default: "2"
-  GITHUB_TOKEN:
-    description: 'Github token for Github Package Registry'
-    required: true
 outputs:
   artifact_name:
     description: 'Artifact name'
