@@ -18,8 +18,8 @@ jobs:
             }
 
             install_gcc_11() {
-              eatmydata add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-              eatmydata apt update && apt install --no-install-recommends -y g++-11 python3-distutils git pkg-config curl zip unzip tar make
+              sudo eatmydata add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+              sudo eatmydata apt update && apt install --no-install-recommends -y g++-11 python3-distutils git pkg-config curl zip unzip tar make
             }
 
             # vcpkg wants mono, make sure it finds one
@@ -33,9 +33,9 @@ jobs:
               mono --version >/dev/null
             }
 
-            (( $(gcc -dumpversion) >= 11 )) || sudo install_gcc_11
-            sudo ninja --version 2>/dev/null || sudo install_ninja
-            sudo ensure_mono
+            (( $(gcc -dumpversion) >= 11 )) || install_gcc_11
+            ninja --version 2>/dev/null || install_ninja
+            ensure_mono
             echo 'CC=/usr/bin/gcc-11' >> "$GITHUB_ENV"
             echo 'CXX=/usr/bin/g++-11' >> "$GITHUB_ENV"
           shell: bash
