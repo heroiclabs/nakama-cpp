@@ -12,7 +12,7 @@ jobs:
             fetch-depth: 1
         - if: runner.os == 'Linux'
           run: >
-            sudo eatmydata "${GITHUB_WORKSPACE}/vcpkg/bootstrap-vcpkg.sh"
+            sudo eatmydata "./bootstrap-vcpkg.sh"
           shell: bash
         - name: Setup NuGet API key
           shell: bash
