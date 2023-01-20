@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
-      - run: sudo ./ci/setup-ubuntu.sh
-        shell: bash
       - uses: ./.github/actions/cmake-build
         with:
           preset: linux-amd64
