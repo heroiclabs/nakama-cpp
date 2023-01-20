@@ -32,3 +32,5 @@ ensure_mono() {
 (( $(gcc -dumpversion) >= 11 )) || install_gcc_11
 ninja --version 2>/dev/null || install_ninja
 ensure_mono
+echo 'CC=/usr/bin/gcc-11' >> "$GITHUB_ENV"
+echo 'CXX=/usr/bin/g++-11' >> "$GITHUB_ENV"

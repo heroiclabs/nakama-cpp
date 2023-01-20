@@ -5,6 +5,9 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-18.04
     steps:
+      - run: ./ci/setup-ubuntu.sh
+        shell: bash
+      - uses: ./.github/actions/setup-vcpkg
       - uses: actions/checkout@v3
       - uses: ./.github/actions/cmake-build
         with:
