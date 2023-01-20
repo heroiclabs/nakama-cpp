@@ -19,7 +19,7 @@ jobs:
 
             install_gcc_11() {
               sudo eatmydata add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-              sudo eatmydata apt update && apt install --no-install-recommends -y g++-11 python3-distutils git pkg-config curl zip unzip tar make
+              sudo eatmydata apt update && sudo apt install --no-install-recommends -y g++-11 python3-distutils git pkg-config curl zip unzip tar make
             }
 
             # vcpkg wants mono, make sure it finds one
