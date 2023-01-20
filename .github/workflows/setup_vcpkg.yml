@@ -22,6 +22,8 @@ jobs:
             -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
         - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
           shell: bash
+        - run: echo "${PWD}" >> $GITHUB_ENV
+          shell: bash
         - name: 'Setup NuGet Credentials'
           shell: bash
           run: >
