@@ -283,9 +283,11 @@ set_target_properties(nakama-sdk PROPERTIES
         # Probably can be removed when proper FILE_SET support lands: https://gitlab.kitware.com/cmake/cmake/-/issues/23386
         PUBLIC_HEADER "${DUMMY_H}"
         MACOSX_FRAMEWORK_IDENTIFIER com.heroiclabs.libnakama
+        MACOSX_FRAMEWORK_BUNDLE_VERSION ${LIBNAKAMA_VERSION}
+        MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
         VERSION ${LIBNAKAMA_VERSION}
         SOVERSION ${LIBNAKAMA_SOVERSION}
-        )
+    )
 
 add_library(nakama::sdk ALIAS nakama-sdk)
 target_link_libraries(nakama-sdk
