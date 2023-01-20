@@ -24,6 +24,10 @@ jobs:
           shell: bash
         - run: echo "VCPKG_ROOT=${GITHUB_WORKSPACE}" >> $GITHUB_ENV
           shell: bash
+        - run: echo "ENV IS $GITHUB_ENV"
+          shell: bash
+        - run: echo "workspace IS ${GITHUB_WORKSPACE}"
+          shell: bash
         - name: 'Setup NuGet Credentials'
           shell: bash
           run: >
