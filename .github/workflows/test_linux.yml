@@ -19,7 +19,6 @@ jobs:
         - uses: ./.github/actions/cmake-build
           with:
             preset: linux-amd64
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         - shell: bash
           run: |
             ./test/out/linux-amd64/nakama-test || {

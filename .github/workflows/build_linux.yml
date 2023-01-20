@@ -3,7 +3,10 @@ on: [workflow_call, workflow_dispatch]
 jobs:
   setup_vcpkg:
       uses: ./.github/workflows/setup_vcpkg.yml
+  setup_ubuntu:
+      uses: ./.github/workflows/setup_ubuntu.yml
   build_linux:
+    needs: [setup_vcpkg, setup_ubuntu]
     timeout-minutes: 30
     runs-on: ubuntu-18.04
     steps:
