@@ -38,4 +38,5 @@ jobs:
             sudo ensure_mono
             echo 'CC=/usr/bin/gcc-11' >> "$GITHUB_ENV"
             echo 'CXX=/usr/bin/g++-11' >> "$GITHUB_ENV"
+          shell: bash
 
