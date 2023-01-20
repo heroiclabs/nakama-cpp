@@ -46,6 +46,6 @@ runs:
       with:
         name: ${{ steps.artifact_name.outputs.artifact }}-workdir-debug
         path: |
-          ./nakama-cpp/build
+          ./build
           ${GITHUB_WORKSPACE}/vcpkg
         retention-days: 1
