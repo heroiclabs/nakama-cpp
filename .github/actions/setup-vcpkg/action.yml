@@ -8,6 +8,7 @@ runs:
         repository: microsoft/vcpkg
         ref: "2578040872f99afe504cc5634285693c9cbf088d"
         fetch-depth: 1
+        path: vcpkg
     - if: runner.os == 'Linux'
       run: >
         sudo eatmydata "./bootstrap-vcpkg.sh"
@@ -19,12 +20,6 @@ runs:
         setapikey "${{ secrets.GITHUB_TOKEN }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite\n" >> $GITHUB_ENV
-      shell: bash
-    - run: echo "VCPKG_ROOT=${GITHUB_WORKSPACE}" >> $GITHUB_ENV
-      shell: bash
-    - run: echo "ENV IS $GITHUB_ENV"
-      shell: bash
-    - run: echo "workspace IS ${GITHUB_WORKSPACE}"
       shell: bash
     - name: 'Setup NuGet Credentials'
       shell: bash

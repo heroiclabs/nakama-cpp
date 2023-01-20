@@ -9,7 +9,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/setup-vcpkg
       - uses: ./.github/actions/cmake-build
         with:
           preset: win-x64
