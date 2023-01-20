@@ -36,7 +36,6 @@ runs:
         cd out
         ${bin7z} a ../${{ steps.artifact_name.outputs.artifact }}.7z '*'
       shell: bash
-      working-directory: "${GITHUB_WORKSPACE}/nakama-cpp"
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.artifact_name.outputs.artifact }}
@@ -47,6 +46,6 @@ runs:
       with:
         name: ${{ steps.artifact_name.outputs.artifact }}-workdir-debug
         path: |
-          ${GITHUB_WORKSPACE}/nakama-cpp/build
+          ./nakama-cpp/build
           ${GITHUB_WORKSPACE}/vcpkg
         retention-days: 1
