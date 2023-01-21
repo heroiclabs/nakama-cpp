@@ -9,7 +9,27 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
+        with:
+          path: nakama-cpp
       - uses: ./.github/actions/setup-ubuntu
-      - uses: ./.github/actions/cmake-build
+      - uses: ./.github/actions/setup-vcpkg
+        with:
+          path: vcpkg
+      - id: build
+        uses: ./.github/actions/cmake-build
         with:
           preset: ${{ matrix.preset }}
+          path: nakama-cpp
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.build.outputs.artifact_name }}
+          path: ${{ steps.build.outputs.artifact_name }}.7z
+          retention-days: 2
+      - if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
+          path: |
+            ./nakama-cpp/build
+            ./vcpkg
+          retention-days: 1

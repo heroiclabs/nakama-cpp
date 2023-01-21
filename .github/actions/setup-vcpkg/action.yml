@@ -1,5 +1,9 @@
 name: 'Setup Vcpkg'
 description: 'Clone and bootstrap vcpkg'
+inputs:
+  path:
+    description: 'vcpkg repository path'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -7,7 +11,7 @@ runs:
       with:
         repository: microsoft/vcpkg
         path: vcpkg
-    - run: "echo VCPKG_ROOT=${GITHUB_WORKSPACE}/vcpkg >> $GITHUB_ENV"
+    - run: "echo VCPKG_ROOT=${{ inputs.path }}} >> $GITHUB_ENV"
       shell: bash
     - if: runner.os == 'Linux'
       run: >

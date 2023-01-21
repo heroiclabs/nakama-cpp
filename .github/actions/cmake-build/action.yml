@@ -8,45 +8,35 @@ inputs:
     description: 'Build config: MinSizeRel or Debug'
     required: true
     default: 'MinSizeRel'
-  artifact_retention_days:
-    description: 'Artifact retention days'
-    default: "2"
+  path:
+    description: 'nakama-cpp repository path'
+    required: true
 outputs:
   artifact_name:
     description: 'Artifact name'
-    value: ${{ steps.artifact_name.outputs.name }}
+    value: ${{ steps.build.outputs.artifact_name }}
 runs:
   using: "composite"
   steps:
-    - uses: ${{ github.workspace }}/nakama-cpp/.github/actions/setup-vcpkg
-    - run: |
+    - id: build
+      run: |
         rm -rf out
         cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
-        cmake --build ${GITHUB_WORKSPACE}/nakama-cpp/build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
-        cmake --install ${GITHUB_WORKSPACE}/nakama-cpp/build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        cmake --build ${{ inputs.path }}/build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+        cmake --install ${{ inputs.path }}/build/${{ inputs.preset }} --config ${{ inputs.build_type }}
         cd test && cmake --preset ${{ inputs.preset }}
-        cd test && cmake --build ${GITHUB_WORKSPACE}/nakama-cpp/build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
-        cd test && cmake --install ${GITHUB_WORKSPACE}/nakama-cpp/build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        cd test && cmake --build ${{ inputs.path }}/build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+        cd test && cmake --install ${{ inputs.path }}/build/${{ inputs.preset }} --config ${{ inputs.build_type }}
         sha=${{ github.sha }}
         preset="${{ inputs.preset }}"
         # strip -host_{arm64,x64} from the preset, because it is not relevant for users
         preset=${preset%-host_*}
         name="libnakama-${preset}-${{ inputs.build_type }}-git.${sha:0:8}"
-        echo "::set-output name=artifact::${name}"
+        echo "artifact_name=${name}" >> $GITHUB_OUTPUT
         bin7z=$(type -p 7z || type -p 7zr)  # windows and linux/osx has different 7z binaries names
         cd out
-        ${bin7z} a ${GITHUB_WORKSPACE}/nakama-cpp/${{ steps.artifact_name.outputs.artifact }}.7z '*'
+        ${bin7z} a ${{ inputs.path }}/${name}.7z '*'
       shell: bash
-    - uses: actions/upload-artifact@v3
-      with:
-        name: ${{ steps.artifact_name.outputs.artifact }}
-        path: ${GITHUB_WORKSPACE}/nakama-cpp/${{ steps.artifact_name.outputs.artifact }}.7z
-        retention-days: ${{ inputs.artifact_retention_days }}
-    - if: failure()
-      uses: actions/upload-artifact@v3
-      with:
-        name: ${{ steps.artifact_name.outputs.artifact }}-workdir-debug
-        path: |
-          ${GITHUB_WORKSPACE}/nakama-cpp/build
-          ${GITHUB_WORKSPACE}/vcpkg
-        retention-days: 1
+
+
+
