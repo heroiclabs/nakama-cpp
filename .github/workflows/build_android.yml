@@ -9,12 +9,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
-        with:
-          path: nakama-cpp
       - uses: ./.github/actions/setup-ubuntu
       - uses: ./.github/actions/setup-vcpkg
-        with:
-          path: vcpkg
       - id: build
         uses: ./.github/actions/cmake-build
         with:
