@@ -18,7 +18,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/actions/setup-vcpkg
+    - uses: ${{ github.workspace }}/nakama-cpp/.github/actions/setup-vcpkg
     - run: |
         rm -rf out
         cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}

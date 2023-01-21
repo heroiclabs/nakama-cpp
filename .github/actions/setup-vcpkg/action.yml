@@ -6,8 +6,6 @@ runs:
     - uses: actions/checkout@v3
       with:
         repository: microsoft/vcpkg
-        ref: "2578040872f99afe504cc5634285693c9cbf088d"
-        fetch-depth: 1
         path: vcpkg
     - run: "echo VCPKG_ROOT=${GITHUB_WORKSPACE}/vcpkg >> $GITHUB_ENV"
       shell: bash
