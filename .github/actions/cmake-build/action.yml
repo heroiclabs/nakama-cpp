@@ -18,16 +18,15 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: ./.github/actions/setup-vcpkg
+    - uses: ${GITHUB_WORKSPACE}/nakama-cpp/.github/actions/setup-vcpkg
     - run: |
-        echo "VCPKG_ROOT=${GITHUB_WORKSPACE}/vcpkg" >> $GITHUB_ENV
         rm -rf out
         cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
-        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
-        cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        cmake --build ${GITHUB_WORKSPACE}/nakama-cpp/build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+        cmake --install ${GITHUB_WORKSPACE}/nakama-cpp/build/${{ inputs.preset }} --config ${{ inputs.build_type }}
         cd test && cmake --preset ${{ inputs.preset }}
-        cd test && cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
-        cd test && cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        cd test && cmake --build ${GITHUB_WORKSPACE}/nakama-cpp/build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+        cd test && cmake --install ${GITHUB_WORKSPACE}/nakama-cpp/build/${{ inputs.preset }} --config ${{ inputs.build_type }}
         sha=${{ github.sha }}
         preset="${{ inputs.preset }}"
         # strip -host_{arm64,x64} from the preset, because it is not relevant for users
@@ -36,18 +35,18 @@ runs:
         echo "::set-output name=artifact::${name}"
         bin7z=$(type -p 7z || type -p 7zr)  # windows and linux/osx has different 7z binaries names
         cd out
-        ${bin7z} a ../${{ steps.artifact_name.outputs.artifact }}.7z '*'
+        ${bin7z} a ${GITHUB_WORKSPACE}/nakama-cpp/${{ steps.artifact_name.outputs.artifact }}.7z '*'
       shell: bash
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.artifact_name.outputs.artifact }}
-        path: ./${{ steps.artifact_name.outputs.artifact }}.7z
+        path: ${GITHUB_WORKSPACE}/nakama-cpp/${{ steps.artifact_name.outputs.artifact }}.7z
         retention-days: ${{ inputs.artifact_retention_days }}
     - if: failure()
       uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.artifact_name.outputs.artifact }}-workdir-debug
         path: |
-          ./build
-          ./vcpkg
+          ${GITHUB_WORKSPACE}/nakama-cpp/build
+          ${GITHUB_WORKSPACE}/vcpkg
         retention-days: 1
