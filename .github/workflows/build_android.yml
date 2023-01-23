@@ -15,6 +15,7 @@ jobs:
         with:
           path: vcpkg
           repository: microsoft/vcpkg
+          fetch-depth: 0
       - uses: ./nakama-cpp/.github/actions/setup-ubuntu
       - uses: ./nakama-cpp/.github/actions/setup-vcpkg
         with:
