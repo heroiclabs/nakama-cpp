@@ -10,7 +10,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: "echo VCPKG_ROOT=${{ github.workspace }} ${{ inputs.path }}} >> $GITHUB_ENV"
+    - run: "echo VCPKG_ROOT=${{ github.workspace }}/${{ inputs.path }}} >> $GITHUB_ENV"
       shell: bash
       working-directory: ${{ github.workspace }}/${{ inputs.path }}
     - if: runner.os == 'Linux'
