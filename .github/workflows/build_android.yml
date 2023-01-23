@@ -15,13 +15,13 @@ jobs:
         with:
           path: vcpkg
           repository: microsoft/vcpkg
-      - uses: ./.github/actions/setup-ubuntu
-      - uses: ./.github/actions/setup-vcpkg
+      - uses: ./nakama-cpp/.github/actions/setup-ubuntu
+      - uses: ./nakama-cpp/.github/actions/setup-vcpkg
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           path: vcpkg
       - id: build
-        uses: ./.github/actions/cmake-build
+        uses: ./nakama-cpp/.github/actions/cmake-build
         with:
           preset: ${{ matrix.preset }}
           path: nakama-cpp
@@ -35,6 +35,6 @@ jobs:
         with:
           name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
           path: |
-            ${GITHUB_WORKSPACE}/nakama-cpp/build
-            ${GITHUB_WORKSPACE}/vcpkg/buildtrees
+            ./nakama-cpp/build
+            ./vcpkg/buildtrees
           retention-days: 1
