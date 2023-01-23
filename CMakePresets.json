@@ -170,6 +170,7 @@
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
                 "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE",
+                "ANDROID_ARM_NEON": "ON",
                 "ANDROID_STL": "c++_shared",
                 "ANDROID_PLATFORM": "android-21",
                 "CMAKE_SYSTEM_NAME": "Android",
