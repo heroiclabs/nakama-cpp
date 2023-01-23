@@ -3,7 +3,7 @@ on: [workflow_call, workflow_dispatch]
 jobs:
   build_linux:
     timeout-minutes: 30
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/cmake-build
