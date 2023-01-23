@@ -191,7 +191,7 @@
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
-                "VCPKG_TARGET_TRIPLET": "arm-android-heroic",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android-heroic",
                 "ANDROID_ABI": "armeabi-v7a"
             },
             "condition": {
@@ -245,7 +245,7 @@
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
-                "VCPKG_TARGET_TRIPLET": "arm-android-heroic",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android-heroic",
                 "ANDROID_ABI": "armeabi-v7a"
             },
             "condition": {
@@ -332,7 +332,7 @@
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "x64-linux-release",
-                "VCPKG_TARGET_TRIPLET": "arm-android-heroic",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android-heroic",
                 "ANDROID_ABI": "armeabi-v7a"
             },
             "condition": {

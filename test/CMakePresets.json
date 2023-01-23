@@ -192,7 +192,7 @@
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "x64-osx",
-                "VCPKG_TARGET_TRIPLET": "arm-android",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android",
                 "ANDROID_ABI": "armeabi-v7a",
                 "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE"
 
