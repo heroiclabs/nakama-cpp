@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           path: nakama-cpp
-      - run: ./nakama-cpp/.ci/setup-osx.sh
+      - run: ./nakama-cpp/ci/setup-osx.sh
         shell: bash
       - uses: ./nakama-cpp/.github/actions/build-platform-and-upload
         with:
