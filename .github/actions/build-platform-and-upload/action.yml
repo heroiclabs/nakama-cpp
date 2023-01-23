@@ -1,5 +1,5 @@
-name: 'CMake build for libnakama'
-description: 'Configures build environment and invokes CMake. Not generic, tailored for libnakama.'
+name: 'Build platform and upload'
+description: 'Build for a single platform and upload the resulting artifact.'
 inputs:
   preset:
     description: 'Configure preset name'
@@ -10,15 +10,20 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: ./nakama-cpp/.github/actions/setup-ubuntu
-    - uses: ./nakama-cpp/.github/actions/setup-vcpkg
+
+    - uses: actions/checkout@v3
+      with:
+        path: vcpkg
+        repository: microsoft/vcpkg
+        fetch-depth: 0
+    - uses: ${{ inputs.path }}/nakama-cpp/.github/actions/setup-vcpkg
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         path: vcpkg
     - id: build
       uses: ./nakama-cpp/.github/actions/cmake-build
       with:
-        preset: ${{ matrix.preset }}
+        preset: ${{ inputs.preset }}
         path: nakama-cpp
     - uses: actions/upload-artifact@v3
       with:
@@ -30,6 +35,7 @@ runs:
       with:
         name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
         path: |
-          ./nakama-cpp/build
+          ./${{ inputs.path }}/build
           ./vcpkg/buildtrees
         retention-days: 1
+

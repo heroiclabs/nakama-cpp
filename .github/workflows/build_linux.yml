@@ -6,7 +6,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/cmake-build
         with:
-          preset: linux-amd64
-
+          path: nakama-cpp
+      - uses: ./nakama-cpp/.github/actions/setup-ubuntu
+      - uses: ./nakama-cpp/.github/actions/build-platform-and-upload
+        with:
+          path: nakama-cpp
+          preset: ${{ matrix.preset }}
