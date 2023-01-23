@@ -7,10 +7,13 @@ inputs:
   path:
     description: 'Relative path under $GITHUB_WORKSPACE to the nakama-cpp repository'
     required: true
+  github_token:
+    description: 'Github token'
+    required: true
+
 runs:
   using: "composite"
   steps:
-
     - uses: actions/checkout@v3
       with:
         path: vcpkg
@@ -18,7 +21,7 @@ runs:
         fetch-depth: 0
     - uses: ${{ inputs.path }}/nakama-cpp/.github/actions/setup-vcpkg
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ inputs.github_token }}
         path: vcpkg
     - id: build
       uses: ./nakama-cpp/.github/actions/cmake-build

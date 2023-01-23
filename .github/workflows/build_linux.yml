@@ -13,3 +13,4 @@ jobs:
         with:
           path: nakama-cpp
           preset: ${{ matrix.preset }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
