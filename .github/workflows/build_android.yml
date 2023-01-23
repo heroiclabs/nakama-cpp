@@ -9,10 +9,17 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
+        with:
+          path: nakama-cpp
+      - uses: actions/checkout@v3
+        with:
+          path: vcpkg
+          repository: microsoft/vcpkg
       - uses: ./.github/actions/setup-ubuntu
       - uses: ./.github/actions/setup-vcpkg
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          path: vcpkg
       - id: build
         uses: ./.github/actions/cmake-build
         with:
@@ -28,6 +35,6 @@ jobs:
         with:
           name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
           path: |
-            ./nakama-cpp/build
-            ./vcpkg
+            ${GITHUB_WORKSPACE}/nakama-cpp/build
+            ${GITHUB_WORKSPACE}/vcpkg/buildtrees
           retention-days: 1

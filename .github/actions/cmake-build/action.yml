@@ -9,7 +9,7 @@ inputs:
     required: true
     default: 'MinSizeRel'
   path:
-    description: 'nakama-cpp repository path'
+    description: 'Relative path under $GITHUB_WORKSPACE to the nakama-cpp repository'
     required: true
 outputs:
   artifact_name:
@@ -19,14 +19,15 @@ runs:
   using: "composite"
   steps:
     - id: build
+      working-directory: ${{ github.workspace }}/${{ inputs.path }}
       run: |
         rm -rf out
         cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
-        cmake --build ${{ inputs.path }}/build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
-        cmake --install ${{ inputs.path }}/build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+        cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
         cd test && cmake --preset ${{ inputs.preset }}
-        cd test && cmake --build ${{ inputs.path }}/build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
-        cd test && cmake --install ${{ inputs.path }}/build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        cd test && cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+        cd test && cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
         sha=${{ github.sha }}
         preset="${{ inputs.preset }}"
         # strip -host_{arm64,x64} from the preset, because it is not relevant for users
@@ -35,7 +36,7 @@ runs:
         echo "artifact_name=${name}" >> $GITHUB_OUTPUT
         bin7z=$(type -p 7z || type -p 7zr)  # windows and linux/osx has different 7z binaries names
         cd out
-        ${bin7z} a ${{ inputs.path }}/${name}.7z '*'
+        ${bin7z} a ./${name}.7z '*'
       shell: bash
 
 
