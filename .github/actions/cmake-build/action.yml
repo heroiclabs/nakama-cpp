@@ -4,32 +4,32 @@ inputs:
   preset:
     description: 'Configure preset name'
     required: true
-  path:
-    description: 'Relative path under $GITHUB_WORKSPACE to the nakama-cpp repository'
+  working-directory:
+    description: 'Relative path under $GITHUB_WORKSPACE to the repository'
     required: true
+  build_type:
+    description: 'Build config: MinSizeRel or Debug'
+    required: true
+    default: 'MinSizeRel'
 runs:
   using: "composite"
   steps:
-    - uses: ./nakama-cpp/.github/actions/setup-ubuntu
-    - uses: ./nakama-cpp/.github/actions/setup-vcpkg
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        path: vcpkg
-    - id: build
-      uses: ./nakama-cpp/.github/actions/cmake-build
-      with:
-        preset: ${{ inputs.preset }}
-        path: nakama-cpp
-    - uses: actions/upload-artifact@v3
-      with:
-        name: ${{ steps.build.outputs.artifact_name }}
-        path: ${{ steps.build.outputs.artifact_name }}.7z
-        retention-days: 2
-    - if: failure()
-      uses: actions/upload-artifact@v3
-      with:
-        name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
-        path: |
-          ./nakama-cpp/build
-          ./vcpkg/buildtrees
-        retention-days: 1
+  - working-directory: ${{ inputs.path }}
+    run: |
+      rm -rf out
+      cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
+      cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+      cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+      cd test && cmake --preset ${{ inputs.preset }}
+      cd test && cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+      cd test && cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+      sha=${{ github.sha }}
+      preset="${{ inputs.preset }}"
+      # strip -host_{arm64,x64} from the preset, because it is not relevant for users
+      preset=${preset%-host_*}
+      name="libnakama-${preset}-${{ inputs.build_type }}-git.${sha:0:8}"
+      echo "artifact_name=${name}" >> $GITHUB_OUTPUT
+      bin7z=$(type -p 7z || type -p 7zr)  # windows and linux/osx has different 7z binaries names
+      cd out
+      ${bin7z} a ./${name}.7z '*'
+    shell: bash

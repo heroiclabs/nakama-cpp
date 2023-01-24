@@ -6,6 +6,8 @@ jobs:
     strategy:
       matrix:
         build_type: [MinSizeRel, Debug]
+        preset: [win-x64, win-x86]
+
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
@@ -13,6 +15,7 @@ jobs:
           path: nakama-cpp
       - uses: ./nakama-cpp/.github/actions/build-platform-and-upload
         with:
-          path: nakama-cpp
+          working-directory: nakama-cpp
           preset: ${{ matrix.preset }}
+          build_type: ${{ matrix.build_type }}
           github_token: ${{ secrets.GITHUB_TOKEN }}

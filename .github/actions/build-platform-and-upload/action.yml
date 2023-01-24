@@ -4,13 +4,16 @@ inputs:
   preset:
     description: 'Configure preset name'
     required: true
-  path:
+  working-directory:
     description: 'Relative path under $GITHUB_WORKSPACE to the nakama-cpp repository'
     required: true
   github_token:
     description: 'Github token'
     required: true
-
+  build_type:
+    description: 'Build config: MinSizeRel or Debug'
+    required: true
+    default: 'MinSizeRel'
 runs:
   using: "composite"
   steps:
@@ -19,15 +22,17 @@ runs:
         path: vcpkg
         repository: microsoft/vcpkg
         fetch-depth: 0
-    - uses: ${{ inputs.path }}/nakama-cpp/.github/actions/setup-vcpkg
+    - uses: .github/actions/setup-vcpkg
       with:
         github_token: ${{ inputs.github_token }}
-        path: vcpkg
+        working_directory: vcpkg
     - id: build
-      uses: ./nakama-cpp/.github/actions/cmake-build
+      uses: .github/actions/cmake-build
       with:
         preset: ${{ inputs.preset }}
-        path: nakama-cpp
+        working-directory: ${{ inputs.working-directory }}
+        build_type: ${{ inputs.build_type }}
+
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.build.outputs.artifact_name }}
@@ -38,7 +43,7 @@ runs:
       with:
         name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
         path: |
-          ./${{ inputs.path }}/build
+          ./${{ inputs.working-directory }}/build
           ./vcpkg/buildtrees
         retention-days: 1
 

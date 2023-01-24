@@ -11,6 +11,6 @@ jobs:
       - uses: ./nakama-cpp/.github/actions/setup-ubuntu
       - uses: ./nakama-cpp/.github/actions/build-platform-and-upload
         with:
-          path: nakama-cpp
+          working-directory: nakama-cpp
           preset: ${{ matrix.preset }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
