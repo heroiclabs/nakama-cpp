@@ -145,10 +145,7 @@
             "name": "iphonesimulator-x64-host_x64",
             "inherits": [
                 "iphonesimulator-x64-host_arm64"
-            ],
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-osx-heroic"
-            }
+            ]
         },
         {
             "name": "linux-amd64",

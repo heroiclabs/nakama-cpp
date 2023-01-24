@@ -140,7 +140,6 @@ else()
     set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/lib/nakama-sdk.framework)
 endif()
 
-message("FRAMEWORK LOCATION ${NAKAMA_SDK_FRAMEWORK_LOCATION}")
 # bitcode will be deprecated in Xcode 14 which is in beta at the time of this writing
 # https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes
 set_target_properties(nakama-test PROPERTIES
