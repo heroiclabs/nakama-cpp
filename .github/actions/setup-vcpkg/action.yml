@@ -20,8 +20,9 @@ runs:
       shell: bash
       working-directory: ${{ inputs.vcpkg-path }}
     - if: runner.os == 'Windows'
-      run: "echo VCPKG_ROOT=${{ github.workspace }}\\${{ inputs.vcpkg-path }} >> $GITHUB_ENV"
-      shell: bash
+      run: |
+        echo "VCPKG_ROOT=${{ github.workspace }}/${{ inputs.vcpkg-path }}" | Out-File -FilePath $env:GITHUB_ENV -Append
+      shell: powershell
       working-directory: ${{ inputs.vcpkg-path }}
     - if: runner.os == 'Linux'
       run: sudo eatmydata "./bootstrap-vcpkg.sh"
