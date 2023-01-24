@@ -34,7 +34,7 @@ runs:
       uses: ./.github/actions/cmake-build
       with:
         preset: ${{ inputs.preset }}
-        working-directory: ${{ inputs.nakama-cpp-paths }}
+        working-directory: ${{ inputs.nakama-cpp-path }}
         build_type: ${{ inputs.build_type }}
     - uses: actions/upload-artifact@v3
       with:
@@ -46,7 +46,7 @@ runs:
       with:
         name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
         path: |
-          ./${{ nakama-cpp-path }}/build
+          ./${{ inputs.nakama-cpp-path }}/build
           ./vcpkg/buildtrees
         retention-days: 1
 
