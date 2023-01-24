@@ -149,7 +149,9 @@
                 "VCPKG_TARGET_TRIPLET": "x64-iphonesimulator-heroic",
                 "CMAKE_SYSTEM_NAME": "iOS",
                 "CMAKE_OSX_SYSROOT": "iphonesimulator",
-                "CMAKE_OSX_ARCHITECTURES": "x86_64"
+                "CMAKE_OSX_ARCHITECTURES": "x86_64",
+                "BUILD_WSLAY": "ON",
+                "BUILD_CURL": "ON"
             }
         },
         {
