@@ -4,7 +4,7 @@ inputs:
   preset:
     description: 'Configure preset name'
     required: true
-  working-directory:
+  nakama-cpp-path:
     description: 'Relative path under $GITHUB_WORKSPACE to the nakama-cpp repository'
     required: true
   github_token:
@@ -22,17 +22,20 @@ runs:
         path: vcpkg
         repository: microsoft/vcpkg
         fetch-depth: 0
-    - uses: .github/actions/setup-vcpkg
+        # workaround: we can't use local inputs in values for `uses` keys, so copy actions to the root workspace
+        # we can get around this by creating an internal actions repo if we want.
+    - run: "cp -r ${GITHUB_WORKSPACE}/${INPUT_NAKAMA_CPP_PATH}/.github/actions ${GITHUB_WORKSPACE}/.github"
+      shell: bash
+    - uses: ./.github/actions/setup-vcpkg
       with:
         github_token: ${{ inputs.github_token }}
         working_directory: vcpkg
     - id: build
-      uses: .github/actions/cmake-build
+      uses: ./.github/actions/cmake-build
       with:
         preset: ${{ inputs.preset }}
-        working-directory: ${{ inputs.working-directory }}
+        working-directory: ${{ inputs.nakama-cpp-paths }}
         build_type: ${{ inputs.build_type }}
-
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.build.outputs.artifact_name }}
@@ -43,7 +46,7 @@ runs:
       with:
         name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
         path: |
-          ./${{ inputs.working-directory }}/build
+          ./${{ nakama-cpp-path }}/build
           ./vcpkg/buildtrees
         retention-days: 1
 
