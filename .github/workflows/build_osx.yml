@@ -17,7 +17,7 @@ jobs:
           vcpkg-path: vcpkg
       - run: ./nakama-cpp/ci/setup-osx.sh
         shell: bash
-      - uses: ./nakama-cpp/.github/actions/build-platform-and-upload
+      - uses: ./nakama-cpp/.github/actions/build-library-and-upload
         with:
           nakama-cpp-path: nakama-cpp
           preset: ${{ matrix.preset }}

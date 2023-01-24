@@ -17,7 +17,7 @@ runs:
     - id: build
       run: |
         rm -rf out
-        cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
+        cmake --preset ${{ inputs.preset }}
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
         cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
         sha=${{ github.sha }}

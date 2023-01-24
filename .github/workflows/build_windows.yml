@@ -17,7 +17,7 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
           vcpkg-path: vcpkg
-      - uses: ./nakama-cpp/.github/actions/build-platform-and-upload
+      - uses: ./nakama-cpp/.github/actions/build-library-and-upload
         with:
           nakama-cpp-path: nakama-cpp
           preset: ${{ matrix.preset }}
