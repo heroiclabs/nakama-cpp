@@ -1,7 +1,7 @@
 name: 'Setup Vcpkg'
 description: 'Clone and bootstrap vcpkg'
 inputs:
-  working_directory:
+  working-directory:
     description: 'Relative path under $GITHUB_WORKSPACE to the vcpkg repository'
     required: true
   github_token:

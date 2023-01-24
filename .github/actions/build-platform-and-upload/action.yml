@@ -24,12 +24,13 @@ runs:
         fetch-depth: 0
         # workaround: we can't use local inputs in values for `uses` keys, so copy actions to the root workspace
         # we can get around this by creating an internal actions repo if we want.
-    - run: "cp -r ${GITHUB_WORKSPACE}/${INPUT_NAKAMA_CPP_PATH}/.github/actions ${GITHUB_WORKSPACE}/.github"
+    - run: "cp -r ./.github/actions ${GITHUB_WORKSPACE}/.github"
       shell: bash
+      working-directory: ${{ inputs.nakama-cpp-path }}
     - uses: ./.github/actions/setup-vcpkg
       with:
         github_token: ${{ inputs.github_token }}
-        working_directory: vcpkg
+        working-directory: vcpkg
     - id: build
       uses: ./.github/actions/cmake-build
       with:
