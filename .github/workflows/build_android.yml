@@ -21,10 +21,7 @@ jobs:
           nakama-cpp-path: nakama-cpp
           preset: ${{ matrix.preset }}
       - if: failure()
-        uses: actions/upload-artifact@v3
+        uses: ./nakama-cpp/.github/actions/handle-failure
         with:
-          name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
-          path: |
-            ./nakama-cpp/build
-            ./vcpkg/buildtrees
-          retention-days: 1
+          nakama-cpp-path: nakama-cpp
+          vcpkg-path: vcpkg
