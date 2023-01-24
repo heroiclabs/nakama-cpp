@@ -1,11 +1,11 @@
 name: Test Windows
-on: [workflow_dispatch]
+on: [workflow_dispatch, workflow_call]
 jobs:
   windows:
       timeout-minutes: 40
       runs-on: windows-latest
       steps:
-        - uses: actions/checkout@v3
+        - uses: heroiclabs/nakama-cpp@${{vars.GITHUB_REF_NAME}}/build_windows.yml
         - id: setup-postgres
           uses: ikalnytskyi/action-setup-postgres@v3
           with:
@@ -15,12 +15,9 @@ jobs:
         - uses: ./.github/actions/run-nakama
           with:
             postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
-        - uses: ./.github/actions/cmake-build
-          with:
-            preset: win-x64
         - shell: bash
           run: |
-            ./test/out/win-x64/nakama-test.exe || {
+            ./nakama-cpp/test/out/win-x64/nakama-test.exe || {
                 echo "Test failed, showing Nakama log for diagnostics";
                 cat /tmp/nakama.log;
                 exit 1;

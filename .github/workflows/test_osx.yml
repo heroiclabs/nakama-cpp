@@ -1,5 +1,5 @@
 name: Test OSX
-on: [workflow_dispatch]
+on: [workflow_dispatch, workflow_call]
 jobs:
   macos:
       timeout-minutes: 30
@@ -35,21 +35,19 @@ jobs:
             mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
             cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
         - uses: actions/checkout@v3
+        - uses: heroiclabs/nakama-cpp@${{vars.GITHUB_REF_NAME}}/.github/workflows/build_osx.yml
         - id: setup-postgres
           uses: ikalnytskyi/action-setup-postgres@v3
           with:
             username: root
             database: nakama
             port: 26257
-        - uses: ./.github/actions/run-nakama
+        - uses: heroiclabs/nakama-cpp@${{vars.GITHUB_REF_NAME}}/actions/run-nakama
           with:
             postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
-        - uses: ./.github/actions/cmake-build
-          with:
-            preset: macosx-x64-host_x64
         - shell: bash
           run: |
-              ./test/out/macosx-x64/nakama-test.app/Contents/MacOS/nakama-test || {
+              ./nakama-cpp/test/out/macosx-x64/nakama-test.app/Contents/MacOS/nakama-test || {
                   echo "Test failed, showing Nakama log for diagnostics";
                   cat /tmp/nakama.log;
                   exit 1;

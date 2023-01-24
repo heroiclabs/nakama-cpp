@@ -2,15 +2,15 @@ name: Build All
 on: [workflow_call, workflow_dispatch]
 jobs:
   build_android:
-    uses: ./.github/workflows/build_android.yml
+    uses: heroiclabs/nakama-cpp/.github/workflows/build_android.yml@${{ vars.GITHUB_REF_NAME }}
   build_ios:
-    uses: ./.github/workflows/build_ios.yml
+    uses: heroiclabs/nakama-cpp/.github/workflows/build_ios.yml@${{ vars.GITHUB_REF_NAME }}
   build_linux:
-    uses: ./.github/workflows/build_linux.yml
+    uses: heroiclabs/nakama-cpp/.github/workflows/build_linux.yml@${{ vars.GITHUB_REF_NAME }}
   build_osx:
-    uses: ./.github/workflows/build_osx.yml
+    uses: ./.github/workflows/build_osx.yml@${{ vars.GITHUB_REF_NAME }}
   build_windows:
-    uses: ./.github/workflows/build_windows.yml
+    uses: ./.github/workflows/build_windows.yml@${{ vars.GITHUB_REF_NAME }}
   combine:
     needs: [build_android, build_ios, build_linux, build_osx, build_windows]
     runs-on: ubuntu-22.04

@@ -20,9 +20,11 @@ runs:
         cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
         cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
-        cd test && cmake --preset ${{ inputs.preset }}
-        cd test && cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
-        cd test && cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        cd test
+        cmake --preset ${{ inputs.preset }}
+        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+        cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        cd ..
         sha=${{ github.sha }}
         preset="${{ inputs.preset }}"
         # strip -host_{arm64,x64} from the preset, because it is not relevant for users

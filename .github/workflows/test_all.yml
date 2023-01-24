@@ -1,9 +1,9 @@
 name: Test All
 on: [workflow_dispatch]
 jobs:
-  test_android:
-    uses: ./.github/workflows/test_linux.yml
+  test_linux:
+    uses:  heroiclabs/nakama-cpp/.github/workflows/test_linux.yml@${{ vars.GITHUB_REF_NAME }}
   test_osx:
-    uses: ./.github/workflows/test_osx.yml
+    uses:  heroiclabs/nakama-cpp/.github/workflows/test_osx.yml@${{ vars.GITHUB_REF_NAME }}
   test_windows:
-    uses: ./.github/workflows/test_windows.yml
+    uses: heroiclabs/nakama-cpp/.github/workflows/test_windows.yml@${{ vars.GITHUB_REF_NAME }}
