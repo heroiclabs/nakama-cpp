@@ -15,7 +15,12 @@ runs:
         path: ${{ inputs.vcpkg-path }}
         repository: microsoft/vcpkg
         fetch-depth: 0
-    - run: "echo VCPKG_ROOT=${{ github.workspace }}/${{ inputs.vcpkg-path }} >> $GITHUB_ENV"
+    - if: runner.os != 'Windows'
+      run: "echo VCPKG_ROOT=${{ github.workspace }}/${{ inputs.vcpkg-path }} >> $GITHUB_ENV"
+      shell: bash
+      working-directory: ${{ inputs.vcpkg-path }}
+    - if: runner.os == 'Windows'
+      run: "echo VCPKG_ROOT=${{ github.workspace }}\\${{ inputs.vcpkg-path }} >> $GITHUB_ENV"
       shell: bash
       working-directory: ${{ inputs.vcpkg-path }}
     - if: runner.os == 'Linux'
