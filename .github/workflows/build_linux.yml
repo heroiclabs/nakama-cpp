@@ -16,7 +16,7 @@ jobs:
       - uses: ./nakama-cpp/.github/actions/build-platform-and-upload
         with:
           nakama-cpp-path: nakama-cpp
-          preset: ${{ matrix.preset }}
+          preset: linux-amd64
       - if: failure()
         uses: actions/upload-artifact@v3
         with:
