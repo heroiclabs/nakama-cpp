@@ -1,5 +1,5 @@
 name: Build All
-on: [workflow_call, workflow_dispatch]
+on: [workflow_call]
 jobs:
   build_android:
     uses: ./.github/workflows/build_android.yml
