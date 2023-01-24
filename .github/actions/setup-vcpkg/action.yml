@@ -12,27 +12,27 @@ runs:
   steps:
     - uses: actions/checkout@v3
       with:
-        path: ${{ inputs.vcpkg_path }}
+        path: ${{ inputs.vcpkg-path }}
         repository: microsoft/vcpkg
         fetch-depth: 0
-    - run: "echo VCPKG_ROOT=${{ github.workspace }}/${{ inputs.vcpkg_path }} >> $GITHUB_ENV"
+    - run: "echo VCPKG_ROOT=${{ github.workspace }}/${{ inputs.vcpkg-path }} >> $GITHUB_ENV"
       shell: bash
-      working-directory: ${{ inputs.vcpkg_path }}
+      working-directory: ${{ inputs.vcpkg-path }}
     - if: runner.os == 'Linux'
       run: sudo eatmydata "./bootstrap-vcpkg.sh"
       shell: bash
-      working-directory: ${{ inputs.vcpkg_path }}
+      working-directory: ${{ inputs.vcpkg-path }}
     - if: runner.os == 'Windows'
       run: .\bootstrap-vcpkg.bat
       shell: bash
-      working-directory: ${{ inputs.vcpkg_path }}
+      working-directory: ${{ inputs.vcpkg-path }}
     - name: Setup NuGet API key
       shell: bash
       run: >
         $( type -p mono || :) `vcpkg fetch nuget | tail -n 1`
         setapikey "${{ inputs.github_token }}"
         -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-      working-directory: ${{ inputs.vcpkg_path }}
+      working-directory: ${{ inputs.vcpkg-path }}
     - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
       shell: bash
     - name: 'Setup NuGet Credentials'
@@ -46,4 +46,4 @@ runs:
         -name "GitHub"
         -username "heroiclabs"
         -password "${{ inputs.GITHUB_TOKEN }}"
-      working-directory: ${{ inputs.vcpkg_path }}
+      working-directory: ${{ inputs.vcpkg-path }}
