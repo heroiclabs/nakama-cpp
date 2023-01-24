@@ -15,11 +15,24 @@ runs:
   using: "composite"
   steps:
     - id: build
-      uses: ./.github/actions/cmake-build
-      with:
-        preset: ${{ inputs.preset }}
-        working-directory: ${{ inputs.nakama-cpp-path }}
-        build_type: ${{ inputs.build_type }}
+      run: |
+        rm -rf out
+        cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
+        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+        cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        cd test && cmake --preset ${{ inputs.preset }}
+        cd test && cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+        cd test && cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        sha=${{ github.sha }}
+        preset="${{ inputs.preset }}"
+        # strip -host_{arm64,x64} from the preset, because it is not relevant for users
+        preset=${preset%-host_*}
+        name="libnakama-${preset}-${{ inputs.build_type }}-git.${sha:0:8}"
+        echo "artifact_name=${name}" >> $GITHUB_OUTPUT
+        bin7z=$(type -p 7z || type -p 7zr)  # windows and linux/osx has different 7z binaries names
+        cd out
+        ${bin7z} a ./${name}.7z '*'
+      shell: bash
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.build.outputs.artifact_name }}
