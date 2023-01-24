@@ -33,6 +33,7 @@ runs:
         cd out
         ${bin7z} a ./${name}.7z '*'
       shell: bash
+      working-directory: ${{ inputs.nakama-cpp-path }}
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.build.outputs.artifact_name }}
