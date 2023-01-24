@@ -26,6 +26,5 @@ jobs:
         with:
           name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
           path: |
-            ./nakama-cpp/build
-            ./vcpkg/buildtrees
+            ./
           retention-days: 1
