@@ -24,7 +24,7 @@ runs:
       working-directory: ${{ inputs.vcpkg-path }}
     - if: runner.os == 'Windows'
       run: .\bootstrap-vcpkg.bat
-      shell: bash
+      shell: powershell
       working-directory: ${{ inputs.vcpkg-path }}
     - name: Setup NuGet API key
       shell: bash
