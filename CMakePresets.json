@@ -173,9 +173,11 @@
                 "ANDROID_ARM_NEON": "ON",
                 "ANDROID_STL": "c++_shared",
                 "ANDROID_PLATFORM": "android-21",
+                "BUILD_CURL_HTTP": "ON",
+                "BUILD_WSLAY": "ON",
+                "BUILD_CURL_IO": "ON",
                 "CMAKE_SYSTEM_NAME": "Android",
-                "VCPKG_MANIFEST_FEATURES": "cpprestsdk",
-                "WITH_CPPRESTSDK": "ON"
+                "VCPKG_MANIFEST_FEATURES": "curl;wslay"
             },
             "condition": {
                 "type": "equals",
