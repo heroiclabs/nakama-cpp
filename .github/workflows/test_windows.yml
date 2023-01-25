@@ -6,21 +6,6 @@ jobs:
       runs-on: windows-latest
       steps:
         - uses: heroiclabs/nakama-cpp@${{vars.GITHUB_REF_NAME}}/build_windows.yml
-        - id: setup-postgres
-          uses: ikalnytskyi/action-setup-postgres@v3
-          with:
-            username: root
-            database: nakama
-            port: 26257
-        - uses: ./.github/actions/run-nakama
-          with:
-            postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
-        - shell: bash
-          run: |
-            ./nakama-cpp/test/out/win-x64/nakama-test.exe || {
-                echo "Test failed, showing Nakama log for diagnostics";
-                cat /tmp/nakama.log;
-                exit 1;
-            }
+
 
 

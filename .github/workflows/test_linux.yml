@@ -1,36 +1,24 @@
 name: Test Linux
 on: [workflow_dispatch, workflow_call]
 jobs:
-  linux:
-      timeout-minutes: 30
-      runs-on: ubuntu-18.04
-      steps:
-        - run: gdb --version || { sudo apt update && sudo apt install gdb && gdb --version; }
-        - uses: actions/checkout@v3
-        - uses: ./.github/workflows/build_linux.yml
-        - id: setup-postgres
-          uses: ikalnytskyi/action-setup-postgres@v3
-          with:
-            username: root
-            database: nakama
-            port: 26257
-        - uses: ./.github/actions/run-nakama
-          with:
-            postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
-        - shell: bash
-          run: |
-            ./nakama-cpp/test/out/linux-amd64/nakama-test || {
-                echo "Test failed, showing Nakama log for diagnostics";
-                cat /tmp/nakama.log;
-                exit 1;
-            }
-  #  Below are various diagnostics I used when tests failed, but unluckily only in CI
-  #  Leaving it here in case we'll need it in the future
-  #          tail -f /tmp/nakama.log &
-  #          sleep 60
-  #          while sudo gdb --batch --ex "attach $(pgrep nakama-test)" --ex 'thread apply all bt'; do
-  #            curl -u admin:password -v http://localhost:7351/debug/pprof/goroutine?debug=2
-  #            ss -n -i -t '( dport = 7350 || sport = 7350 )'
-  #            sleep 10;
-  #            date
-  #          done
+  build_linux:
+    timeout-minutes: 30
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: nakama-cpp
+      - uses: ./nakama-cpp/.github/actions/setup-ubuntu
+      - uses: ./nakama-cpp/.github/actions/setup-vcpkg
+        with:
+          github_token: ${{ secrets.github_token }}
+          vcpkg-path: vcpkg
+      - uses: ./nakama-cpp/.github/actions/build-test-and-run
+        with:
+          nakama-cpp-path: nakama-cpp
+          preset: linux-amd64
+      - if: failure()
+        uses: ./nakama-cpp/.github/actions/handle-failure
+        with:
+          nakama-cpp-path: nakama-cpp
+          vcpkg-path: vcpkg
