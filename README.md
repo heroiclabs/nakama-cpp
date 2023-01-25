@@ -262,13 +262,13 @@ Then configure the build system.
 cmake --preset linux-amd64
 ```
 
-Configuration step  builds all necessary dependencies and installs them under `./build/*/vcpkg_installed`.
+The configuration step builds all necessary dependencies and installs them under `./build/*/vcpkg_installed`.
 
 
 Next, build the SDK:
 
 ```
-cmake --build --preset release-linux-amd64
+cmake --build build/linux-amd64 --config MinSizeRel --target install
 ```
 
 ### Linux

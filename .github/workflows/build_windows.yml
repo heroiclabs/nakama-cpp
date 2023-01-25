@@ -1,0 +1,16 @@
+name: Build Windows
+on: [workflow_call, workflow_dispatch]
+jobs:
+  windows_matrix:
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        build_type: [MinSizeRel, Debug]
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cmake-build
+        with:
+          preset: win-x64
+          build_type: ${{ matrix.build_type }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,92 +1,18 @@
 name: Build All
 on: [workflow_call, workflow_dispatch]
 jobs:
-  windows_matrix:
-    timeout-minutes: 30
-    strategy:
-      matrix:
-        build_type: [MinSizeRel, Debug]
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/cmake-build
-        with:
-          preset: win-x64
-          build_type: ${{ matrix.build_type }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Unreal Engine doesn't officially support debug (/MDd flag) builds,
-      # so we build Unreal flavour in release config only
-      - if: ${{ matrix.build_type == 'MinSizeRel' }}
-        uses: ./.github/actions/cmake-build
-        with:
-          preset: win-x64
-          build_type: ${{ matrix.build_type }}
-          flavour: Unreal
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  linux_matrix:
-    timeout-minutes: 30
-    strategy:
-      matrix:
-        flavour: [ "", "libcxx" ]
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/cmake-build
-        with:
-          preset: linux-amd64
-          flavour: ${{ matrix.flavour }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Once libc++ version is built, same build tree can be reused for Unreal
-      - if: matrix.flavour == 'libcxx'
-        uses: ./.github/actions/cmake-build
-        with:
-          preset: linux-amd64
-          flavour: Unreal
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   android_matrix:
-    timeout-minutes: 30
-    strategy:
-      matrix:
-        preset: ["android-armeabi-v7a-host_osx_x64", "android-arm64-v8a-host_osx_x64", "android-x64-host_osx_x64"]
-    runs-on: macos-12
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/cmake-build
-        with:
-          preset: ${{ matrix.preset }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build Unreal module
-        uses: ./.github/actions/cmake-build
-        with:
-          preset: ${{ matrix.preset }}
-          flavour: Unreal
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  apple_matrix:
-    timeout-minutes: 30
-    strategy:
-      matrix:
-        preset: ["ios-arm64-host_x64", "iphonesimulator-x64-host_x64", "macosx-x64-host_x64", "macosx-arm64-host_x64"]
-    runs-on: macos-12
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/cmake-build
-        with:
-          preset: ${{ matrix.preset }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build Unreal module
-        uses: ./.github/actions/cmake-build
-        with:
-          preset: ${{ matrix.preset }}
-          flavour: Unreal
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+    uses: ./android_matrix.yml
+  ios_matrix:
+    uses: ./ios_matrix.yml
+  linux_matrix:
+    uses: ./linux_matrix.yml
+  osx_matrix:
+    uses: ./osx_matrix.yml
+  windows_matrix:
+    uses: ./osx_matrix.yml
   combine:
-    needs: [android_matrix, windows_matrix, linux_matrix, apple_matrix]
+    needs: [android_matrix, ios_matrix, linux_matrix, osx_matrix, windows_matrix]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -118,18 +44,10 @@ jobs:
       - name: Prepare artifacts archives
         run: |
           (
-            cd ./${{ steps.combine.outputs.unreal-artifact-dir }}
-            7zr a ../${{ steps.combine.outputs.unreal-artifact-name }}.7z '*'
-          )
-          (
             cd ./${{ steps.combine.outputs.generic-artifact-dir }}
             7zr a ../${{ steps.combine.outputs.generic-artifact-name }}.7z '*'
           )
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: ${{ steps.combine.outputs.unreal-artifact-name }}
-          path: ./${{ steps.combine.outputs.unreal-artifact-dir }}.7z
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.combine.outputs.generic-artifact-name }}

@@ -240,6 +240,60 @@
             "installDir": "out/android-x64"
         },
         {
+            "name": "android-armeabi-v7a-host_osx_arm64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
+                "VCPKG_TARGET_TRIPLET": "arm-android-heroic",
+                "ANDROID_ABI": "armeabi-v7a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-armeabi-v7a"
+        },
+        {
+            "name": "android-arm64-v8a-host_arm64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
+                "VCPKG_TARGET_TRIPLET": "arm64-android-heroic",
+                "ANDROID_ABI": "arm64-v8a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-arm64-v8a"
+        },
+        {
+            "name": "android-x64-host_osx_arm64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
+                "VCPKG_TARGET_TRIPLET": "x64-android-heroic",
+                "ANDROID_ABI": "x86_64"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-x64"
+        },
+        {
             "name": "linux-amd64",
             "inherits": [
                 "default"
@@ -271,106 +325,6 @@
                 "CXX": "/usr/bin/g++-11"
             },
             "installDir": "out/ubuntu1804-amd64"
-        }
-    ],
-    "buildPresets": [
-        {
-            "name": "release-win-x64",
-            "configurePreset": "win-x64",
-            "configuration": "MinSizeRel",
-            "verbose": true
-        },
-        {
-            "name": "debug-win-x64",
-            "configurePreset": "win-x64",
-            "configuration": "Debug"
-        },
-        {
-            "name": "release-win-x86",
-            "configurePreset": "win-x86",
-            "configuration": "MinSizeRel",
-            "verbose": true
-        },
-        {
-            "name": "debug-win-x86",
-            "configurePreset": "win-x86",
-            "configuration": "Debug"
-        },
-        {
-            "name": "release-linux-amd64",
-            "configurePreset": "linux-amd64",
-            "configuration": "MinSizeRel"
-        },
-        {
-            "name": "debug-linux-amd64",
-            "configurePreset": "linux-amd64",
-            "configuration": "Debug"
-        },
-        {
-            "name": "debug-macosx-arm64",
-            "configurePreset": "macosx-arm64-host_x64",
-            "configuration": "Debug",
-            "verbose": true
-        },
-        {
-            "name": "release-macosx-arm64",
-            "configurePreset": "macosx-arm64-host_x64",
-            "configuration": "MinSizeRel",
-            "verbose": true
-        },
-        {
-            "name": "debug-macosx-x64",
-            "configurePreset": "macosx-x64-host_x64",
-            "configuration": "Debug",
-            "verbose": true
-        },
-        {
-            "name": "release-macosx-x64",
-            "configurePreset": "macosx-x64-host_x64",
-            "configuration": "MinSizeRel",
-            "verbose": true
-        },
-        {
-            "name": "release-ios-arm64",
-            "configurePreset": "ios-arm64-host_x64",
-            "configuration": "MinSizeRel",
-            "verbose": true
-        },
-        {
-            "name": "release-android-armeabi-v7a",
-            "configurePreset": "android-armeabi-v7a-host_osx_x64",
-            "configuration": "MinSizeRel",
-            "verbose": true
-        },
-        {
-            "name": "release-android-x64",
-            "configurePreset": "android-x64-host_osx_x64",
-            "configuration": "MinSizeRel",
-            "verbose": true
-        },
-        {
-            "name": "release-android-arm64-v8a",
-            "configurePreset": "android-arm64-v8a-host_osx_x64",
-            "configuration": "MinSizeRel",
-            "verbose": true
-        },
-        {
-            "name": "debug-android-armeabi-v7a",
-            "configurePreset": "android-armeabi-v7a-host_osx_x64",
-            "configuration": "Debug",
-            "verbose": true
-        },
-        {
-            "name": "debug-android-x64",
-            "configurePreset": "android-x64-host_osx_x64",
-            "configuration": "Debug",
-            "verbose": true
-        },
-        {
-            "name": "debug-android-arm64-v8a",
-            "configurePreset": "android-arm64-v8a-host_osx_x64",
-            "configuration": "Debug",
-            "verbose": true
         }
     ]
 }
