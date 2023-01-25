@@ -35,8 +35,7 @@ namespace Nakama {
 
         void cancelAllRequests() override;
     private:
-        std::unique_ptr<CURL, decltype(&curl_easy_cleanup)> _curl;
-        std::unique_ptr<CURLM, decltype(&curl_multi_cleanup)> _curlm;
-        std::unique_ptr<CURLU, decltype(&curl_url_cleanup)> _curl_url;
+        std::unique_ptr<CURLM, decltype(&curl_multi_cleanup)> _curl_multi;
+        std::string _base_uri;
     };
 }
