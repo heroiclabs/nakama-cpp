@@ -28,6 +28,8 @@
 #include "../../impl/httpLibHttpClient/NHttpClientLibHC.h"
 #elif defined(BUILD_HTTP_CPPRESTSDK)
 #include "../../impl/httpCppRest/NHttpClientCppRest.h"
+#elif defined(BUILD_HTTP_CURL)
+#include "../../impl/httpCppRest/NHttpClientLibCurl.h"
 #endif
 
 namespace Nakama {
@@ -74,6 +76,8 @@ NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platform
     return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
     #elif defined(BUILD_HTTP_CPPRESTSDK)
     return NHttpTransportPtr(new NHttpClientCppRest(platformParams));
+    #elif defined(BUILD_HTTP_CURL)
+    return NHttpTransportPtr(new NHttpClientLibCurl(platformParams));
     #else
         #error Could not find default http transport for platform.
     #endif

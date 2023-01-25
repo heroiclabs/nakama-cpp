@@ -44,6 +44,8 @@ else()
         set(HTTP_IMPL "libhttpclient")
     elseif (WITH_CPPRESTSDK)
         set(HTTP_IMPL "cpprestsdk")
+    elseif (BUILD_CURL_HTTP)
+        set(HTTP_IMPL "curl")
     endif()
 
     if (WITH_LIBHTTPCLIENT_WS)
@@ -196,6 +198,8 @@ endif()
 
 if (HTTP_IMPL STREQUAL "cpprestsdk")
     add_subdirectory(impl/httpCppRest EXCLUDE_FROM_ALL)
+elseif(HTTP_IMPL STREQUAL "curl")
+    add_subdirectory(impl/httpCurl EXCLUDE_FROM_ALL)
 endif()
 
 add_library(nakama-ws-impl INTERFACE)
