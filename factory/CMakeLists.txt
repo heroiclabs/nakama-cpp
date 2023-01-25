@@ -24,6 +24,6 @@ target_link_libraries(nakama-sdk-rtclient-factory
         PRIVATE ${WS_IMPL_LIB}
         )
 
-if (BUILD_CURL)
-    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_CURL)
+if (BUILD_CURL_IO)
+    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_CURL_IO)
 endif()
