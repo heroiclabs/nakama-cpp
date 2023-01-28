@@ -27,13 +27,18 @@ namespace Nakama
 class NHttpClientLibCurlContext
 {
     public:
-        int http_response_code;
-        std::string error_message;
-        std::string body;
-        NHttpClientLibCurlContext(const NHttpResponseCallback& callback);
-        void invokeCallback();
+        NHttpClientLibCurlContext(const NHttpResponseCallback callback, const curl_slist* headers);
+        ~NHttpClientLibCurlContext();
+
+        NHttpResponseCallback get_callback();
+        curl_slist* get_headers();
+        std::string get_body();
+        std::string set_body(const std::string body);
+
     private:
         NHttpResponseCallback _callback;
+        curl_slist* _headers;
+        std::string _body;
 };
 
 }

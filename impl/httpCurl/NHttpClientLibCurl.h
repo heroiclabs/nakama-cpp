@@ -16,26 +16,27 @@
 
 #pragma once
 
+#include <map>
 #include <nakama-cpp/NHttpTransportInterface.h>
 #include <nakama-cpp/NPlatformParams.h>
 #include <curl/curl.h>
+#include "NHttpClientLibCurlContext.h"
 
 namespace Nakama {
     class NHttpClientLibCurl: public NHttpTransportInterface
     {
-    public:
-        NHttpClientLibCurl(const NPlatformParameters& platformParameters);
-        ~NHttpClientLibCurl() noexcept;
+        public:
+            NHttpClientLibCurl(const NPlatformParameters& platformParameters);
+            ~NHttpClientLibCurl() noexcept;
 
-        void setBaseUri(const std::string& uri) override;
-
-        void tick() override;
-
-        void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) override;
-
-        void cancelAllRequests() override;
-    private:
-        std::unique_ptr<CURLM, decltype(&curl_multi_cleanup)> _curl_multi;
-        std::string _base_uri;
+            void setBaseUri(const std::string& uri) override;
+            void tick() override;
+            void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) override;
+            void cancelAllRequests() override;
+        private:
+            std::unique_ptr<CURLM, decltype(&curl_multi_cleanup)> _curl_multi;
+            std::string _base_uri;
+            std::map<CURL*, std::unique_ptr<NHttpClientLibCurlContext>> _curl_easys;
+            void handle_curl_easy_set_opt_error(std::string action, CURLcode code, const NHttpResponseCallback& callback);
     };
 }

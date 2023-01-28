@@ -23,19 +23,25 @@
 
 namespace Nakama
 {
-    NHttpClientLibCurlContext::NHttpClientLibCurlContext(const NHttpResponseCallback& callback) : _callback(callback)
+    NHttpClientLibCurlContext::NHttpClientLibCurlContext(const NHttpResponseCallback callback, const curl_slist* headers) : _callback(callback), _headers(headers)
     {
     }
 
-    void NHttpClientLibCurlContext::invokeCallback()
+    NHttpResponseCallback NHttpClientLibCurlContext::get_callback()
     {
-        if (_callback != nullptr)
+        return _callback;
+    }
+
+    curl_slist* NHttpClientLibCurlContext::get_headers()
+    {
+        return _headers;
+    }
+
+    ~NHttpClientLibCurlContext::NHttpClientLibCurlContext()
+    {
+        if (headers != NULL)
         {
-            std::shared_ptr<NHttpResponse> response(new NHttpResponse());
-            response->statusCode = http_response_code;
-            response->body = this->body;
-            response->errorMessage = this->error_message;
-            _callback(response);
+            curl_slist_free_all(headers);
         }
     }
 }
