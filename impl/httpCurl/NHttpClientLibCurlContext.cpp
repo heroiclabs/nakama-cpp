@@ -23,7 +23,7 @@
 
 namespace Nakama
 {
-    NHttpClientLibCurlContext::NHttpClientLibCurlContext(const NHttpResponseCallback callback, const curl_slist* headers) : _callback(callback), _headers(headers)
+    NHttpClientLibCurlContext::NHttpClientLibCurlContext(const NHttpResponseCallback callback, curl_slist* headers) : _callback(callback), _headers(headers)
     {
     }
 
@@ -32,16 +32,11 @@ namespace Nakama
         return _callback;
     }
 
-    curl_slist* NHttpClientLibCurlContext::get_headers()
+    NHttpClientLibCurlContext::~NHttpClientLibCurlContext()
     {
-        return _headers;
-    }
-
-    ~NHttpClientLibCurlContext::NHttpClientLibCurlContext()
-    {
-        if (headers != NULL)
+        if (_headers != NULL)
         {
-            curl_slist_free_all(headers);
+            curl_slist_free_all(_headers);
         }
     }
 }

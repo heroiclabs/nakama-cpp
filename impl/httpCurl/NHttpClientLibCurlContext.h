@@ -27,7 +27,7 @@ namespace Nakama
 class NHttpClientLibCurlContext
 {
     public:
-        NHttpClientLibCurlContext(const NHttpResponseCallback callback, const curl_slist* headers);
+        NHttpClientLibCurlContext(const NHttpResponseCallback callback, curl_slist* headers);
         ~NHttpClientLibCurlContext();
 
         NHttpResponseCallback get_callback();
