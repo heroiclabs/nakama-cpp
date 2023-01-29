@@ -39,4 +39,19 @@ namespace Nakama
             curl_slist_free_all(_headers);
         }
     }
+
+    curl_slist* NHttpClientLibCurlContext::get_headers()
+    {
+        return _headers;
+    }
+
+    std::string NHttpClientLibCurlContext::get_body()
+    {
+        return _body;
+    }
+
+    std::string NHttpClientLibCurlContext::set_body(const std::string body)
+    {
+        _body = body;
+    }
 }

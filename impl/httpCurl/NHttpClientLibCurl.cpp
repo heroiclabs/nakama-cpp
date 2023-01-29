@@ -105,9 +105,11 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
         response->statusCode = -1;
         callback(response);
         return;
-    }
+    };
 
-    _curl_easys.emplace(curl_easy, curl_ctx);
+
+    std::lock_guard(_contextsMutex);
+    _contexts.emplace(std::pair(curl_easy, curl_ctx));
 }
 
 void NHttpClientLibCurl::setBaseUri(const std::string& uri)
@@ -138,10 +140,19 @@ void NHttpClientLibCurl::tick()
             }
 
             CURL* e = m->easy_handle;
-            auto it = _curl_easys.begin();
-            while (it != _curl_easys.end())
+
+            mc = curl_multi_remove_handle(_curl_multi.get(), e);
+            if (mc)
             {
-                if (it->first == e)
+                NLOG(Nakama::NLogLevel::Error, "curl_multi_remove_handle() failed, code %d.\n", (int)mc);
+            }
+
+            std::lock_guard(_contextsMutex);
+
+            auto it = _contexts.begin();
+            while (it != _contexts.end())
+            {
+                if (it->first.get() == e)
                 {
                     break;
                 }
@@ -149,43 +160,30 @@ void NHttpClientLibCurl::tick()
                 it++;
             }
 
-            if (it == _curl_easys.end())
+            if (it == _contexts.end())
             {
                 NLOG(Nakama::NLogLevel::Error, "curl_multi_info_read() error: untracked easy handle.");
                 continue;
             }
 
-            // todo check if equal to end
-                if (it->second->get_callback() != NULL)
+            if (it->second->get_callback() != NULL)
+            {
+                auto response = std::shared_ptr<NHttpResponse>(new NHttpResponse());
+                response->body = it->second->get_body();
+
+                int response_code;
+                CURLcode curl_code = curl_easy_getinfo(e, CURLINFO_RESPONSE_CODE, &response_code);
+                response->statusCode = response_code;
+
+                if (curl_code != CURLE_OK)
                 {
-                    auto response = std::shared_ptr<NHttpResponse>(new NHttpResponse());
-                    response->body = it->second->get_body();
-
-                    int response_code;
-                    CURLcode curl_code = curl_easy_getinfo(e, CURLINFO_RESPONSE_CODE, &response_code);
-                    response->statusCode = response_code;
-
-                    if (curl_code != CURLE_OK)
-                    {
-
-                    }
-                    else
-                    {
-                        NLOG(Nakama::NLogLevel::Error, "curl_easy_getinfo() failed when getting response code, code %d.\n", (int)curl_code);
-                    }
-
-                    it->second->get_callback()(response);
+                    NLOG(Nakama::NLogLevel::Error, "curl_easy_getinfo() failed when getting response code, code %d.\n", (int)curl_code);
                 }
 
-
-            mc = curl_multi_remove_handle(_curl_multi.get(), e);
-            if (mc)
-            {
-                NLOG(Nakama::NLogLevel::Error, "curl_multi_remove_handle() failed, code %d.\n", (int)mc);
+                it->second->get_callback()(response);
             }
-            curl_easy_cleanup(it->first);
-            // TODO free too?
-            _curl_easys.erase(it->first);
+
+            _contexts.remove(*it);
         }
     }
     while(m);
@@ -193,7 +191,8 @@ void NHttpClientLibCurl::tick()
 
 void NHttpClientLibCurl::cancelAllRequests()
 {
-    for (auto it = _curl_easys.begin(); it != _curl_easys.end(); it++)
+    std::lock_guard(_contextsMutex);
+    for (auto it = _contexts.begin(); it != _contexts.end(); it++)
     {
         NHttpResponsePtr responsePtr(new NHttpResponse());
 
@@ -201,17 +200,14 @@ void NHttpClientLibCurl::cancelAllRequests()
         responsePtr->errorMessage = "cancelled by user";
 
         it->second->get_callback()(responsePtr);
-        CURLMcode mc = curl_multi_remove_handle(_curl_multi.get(), it->first);
+        CURLMcode mc = curl_multi_remove_handle(_curl_multi.get(), it->first.get());
         if (mc != CURLM_OK)
         {
             NLOG(Nakama::NLogLevel::Error, "curl_multi_remove_handle() failed, code %d.\n", (int)mc);
         }
-
-        curl_easy_cleanup(it->first);
-        // TODO free too?
     }
 
-    _curl_easys.clear();
+    _contexts.clear();
 }
 
 void NHttpClientLibCurl::handle_curl_easy_set_opt_error(std::string action, CURLcode code, const NHttpResponseCallback& callback)
