@@ -2,7 +2,7 @@
 #include <curl/curl.h>
 #include <memory.h>
 #include <nakama-cpp/log/NLogger.h>
-#include "NHttpTransportInterface.h"
+#include <nakama-cpp/NHttpTransportInterface.h>
 #include "NHttpClientLibCurl.h"
 #include "log/NLogger.h"
 

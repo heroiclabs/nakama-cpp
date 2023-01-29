@@ -19,7 +19,7 @@
 
 #include <string>
 #include <curl/curl.h>
-#include "NHttpTransportInterface.h"
+#include <nakama-cpp/NHttpTransportInterface.h>
 
 namespace Nakama
 {

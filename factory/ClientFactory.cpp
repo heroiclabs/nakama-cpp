@@ -29,7 +29,7 @@
 #elif defined(BUILD_HTTP_CPPRESTSDK)
 #include "../../impl/httpCppRest/NHttpClientCppRest.h"
 #elif defined(BUILD_HTTP_CURL)
-#include "../../impl/httpCppRest/NHttpClientLibCurl.h"
+#include "../../impl/httpCurl/NHttpClientLibCurl.h"
 #endif
 
 namespace Nakama {
