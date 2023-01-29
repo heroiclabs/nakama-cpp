@@ -30,7 +30,6 @@ namespace Nakama {
     {
         public:
             NHttpClientLibCurl(const NPlatformParameters& platformParameters);
-            ~NHttpClientLibCurl() noexcept;
 
             void setBaseUri(const std::string& uri) override;
             void tick() override;
