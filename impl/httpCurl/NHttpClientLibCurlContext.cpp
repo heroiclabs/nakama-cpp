@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 
-#pragma once
-
 #include <string>
 #include <curl/curl.h>
-#include "NHttpTransportInterface.h"
+#include "nakama-cpp/NHttpTransportInterface.h"
 #include "NHttpClientLibCurlContext.h"
 
 namespace Nakama

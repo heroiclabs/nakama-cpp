@@ -4,7 +4,7 @@
 #include <nakama-cpp/log/NLogger.h>
 #include <nakama-cpp/NHttpTransportInterface.h>
 #include "NHttpClientLibCurl.h"
-#include "log/NLogger.h"
+#include "nakama-cpp/log/NLogger.h"
 
 static size_t write_callback(char* buffer, size_t size, size_t nmemb, void* user_ctx)
 {
@@ -25,7 +25,7 @@ NHttpClientLibCurl::NHttpClientLibCurl(const NPlatformParameters& platformParame
 {
 }
 
-void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) noexcept
+void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCallback& callback) noexcept
 {
     std::unique_ptr<CURL, decltype(&curl_easy_cleanup)> curl_easy(curl_easy_init(), curl_easy_cleanup);
 
@@ -107,9 +107,9 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
         return;
     };
 
-
-    std::lock_guard(_contextsMutex);
-    _contexts.emplace(std::pair(curl_easy, curl_ctx));
+    const std::lock_guard lock(_contextsMutex);
+    std::pair<std::unique_ptr<CURL, decltype(&curl_easy_cleanup)>, std::unique_ptr<NHttpClientLibCurlContext>> pair(std::move(curl_easy), std::move(curl_ctx));
+    _contexts.emplace_back(std::move(pair));
 }
 
 void NHttpClientLibCurl::setBaseUri(const std::string& uri)
@@ -147,7 +147,7 @@ void NHttpClientLibCurl::tick()
                 NLOG(Nakama::NLogLevel::Error, "curl_multi_remove_handle() failed, code %d.\n", (int)mc);
             }
 
-            std::lock_guard(_contextsMutex);
+            const std::lock_guard lock(_contextsMutex);
 
             auto it = _contexts.begin();
             while (it != _contexts.end())
@@ -191,7 +191,7 @@ void NHttpClientLibCurl::tick()
 
 void NHttpClientLibCurl::cancelAllRequests()
 {
-    std::lock_guard(_contextsMutex);
+    const std::lock_guard lock(_contextsMutex);
     for (auto it = _contexts.begin(); it != _contexts.end(); it++)
     {
         NHttpResponsePtr responsePtr(new NHttpResponse());

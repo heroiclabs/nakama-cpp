@@ -34,7 +34,7 @@ namespace Nakama {
 
             void setBaseUri(const std::string& uri) override;
             void tick() override;
-            void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) override;
+            void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) noexcept override;
             void cancelAllRequests() override;
         private:
             std::unique_ptr<CURLM, decltype(&curl_multi_cleanup)> _curl_multi;
