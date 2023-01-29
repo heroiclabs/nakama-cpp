@@ -59,7 +59,7 @@ endif()
 
 if (DEFINED ANDROID_ABI)
     if (DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
-        message(FATAL "Cannot specify an external chainload toolchain if building for Android.")
+        message(FATAL_ERROR "Cannot specify an external chainload toolchain if building for Android.")
     endif()
 
     set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
