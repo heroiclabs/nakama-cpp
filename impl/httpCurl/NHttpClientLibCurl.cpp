@@ -13,7 +13,7 @@ static size_t write_callback(char* buffer, size_t size, size_t nmemb, void* user
 
     if (buffer != NULL)
     {
-        curl_ctx->set_body(std::string(buffer));
+        curl_ctx->set_body(buffer);
     }
 
     return nmemb * size;
@@ -45,7 +45,6 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
             return;
         }
     }
-
 
     const char *callMethod = nullptr;
     switch (req.method) {
@@ -175,8 +174,8 @@ void NHttpClientLibCurl::tick()
                     continue;
                 }
 
-                _contexts.remove(*it);
                 context = std::move(it->second);
+                _contexts.remove(*it);
             }
 
             auto callback = context->get_callback();
@@ -185,18 +184,24 @@ void NHttpClientLibCurl::tick()
                 auto response = std::shared_ptr<NHttpResponse>(new NHttpResponse());
                 response->body = context->get_body();
 
-                int response_code;
-                CURLcode curl_code = curl_easy_getinfo(e, CURLINFO_RESPONSE_CODE, &response_code);
-                response->statusCode = response_code;
-
-                if (curl_code != CURLE_OK)
+                if (m->data.result != CURLE_OK)
                 {
-                    NLOG(Nakama::NLogLevel::Error, "curl_easy_getinfo() failed when getting response code, code %d.\n", (int)curl_code);
+                    response->statusCode = InternalStatusCodes::CONNECTION_ERROR;
+                }
+                else
+                {
+                    int response_code;
+                    CURLcode curl_code = curl_easy_getinfo(e, CURLINFO_RESPONSE_CODE, &response_code);
+                    response->statusCode = response_code;
+
+                    if (curl_code != CURLE_OK)
+                    {
+                        NLOG(Nakama::NLogLevel::Error, "curl_easy_getinfo() failed when getting response code, code %d.\n", (int)curl_code);
+                    }
                 }
 
                 callback(response);
             }
-
         }
     }
     while(m);
