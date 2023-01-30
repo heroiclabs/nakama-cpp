@@ -72,9 +72,9 @@
                 "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
                 "VCPKG_TARGET_TRIPLET": "arm64-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "arm64",
+                "WITH_LIBHTTPCLIENT_HTTP": "ON",
                 "BUILD_WSLAY": "ON",
                 "BUILD_CURL_IO": "ON",
-                "BUILD_CURL_HTTP": "ON",
                 "VCPKG_MANIFEST_FEATURES": "wslay;curl"
             },
             "condition": {
