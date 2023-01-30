@@ -38,9 +38,14 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
 
     for (auto it = req.headers.begin(); it != req.headers.end(); it++)
     {
-        headers_list = curl_slist_append(headers_list, it->first.c_str());
-        headers_list = curl_slist_append(headers_list, it->second.c_str());
+        headers_list = curl_slist_append(headers_list, (it->first + ": " + it->second).c_str());
+        if (headers_list == NULL)
+        {
+            NLOG(Nakama::NLogLevel::Error, "error writing header: %s", it->first.c_str());
+            return;
+        }
     }
+
 
     const char *callMethod = nullptr;
     switch (req.method) {
@@ -62,6 +67,13 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     if (curl_code != CURLE_OK)
     {
         handle_curl_easy_set_opt_error("setting url", curl_code, callback);
+        return;
+    }
+
+    curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_HTTPHEADER, headers_list);
+    if (curl_code != CURLE_OK)
+    {
+        handle_curl_easy_set_opt_error("adding headers", curl_code, callback);
         return;
     }
 
@@ -124,7 +136,7 @@ void NHttpClientLibCurl::tick()
     if (mc)
     {
         // log but do not return -- still see if any pending messages
-        NLOG(Nakama::NLogLevel::Error, "curl_multi_poll() failed, code %d.\n", (int)mc);
+        NLOG(Nakama::NLogLevel::Error, "curl_multi_perform() failed, code %d.\n", (int)mc);
     }
 
     struct CURLMsg* m = nullptr;
@@ -142,29 +154,36 @@ void NHttpClientLibCurl::tick()
                 NLOG(Nakama::NLogLevel::Error, "curl_multi_remove_handle() failed, code %d.\n", (int)mc);
             }
 
-            const std::lock_guard lock(_contextsMutex);
-
-            auto it = _contexts.begin();
-            while (it != _contexts.end())
+            std::unique_ptr<NHttpClientLibCurlContext> context = NULL;
             {
-                if (it->first.get() == e)
+                const std::lock_guard lock(_contextsMutex);
+
+                auto it = _contexts.begin();
+                while (it != _contexts.end())
                 {
-                    break;
+                    if (it->first.get() == e)
+                    {
+                        break;
+                    }
+
+                    it++;
                 }
 
-                it++;
+                if (it == _contexts.end())
+                {
+                    NLOG(Nakama::NLogLevel::Error, "curl_multi_info_read() error: untracked easy handle.");
+                    continue;
+                }
+
+                _contexts.remove(*it);
+                context = std::move(it->second);
             }
 
-            if (it == _contexts.end())
-            {
-                NLOG(Nakama::NLogLevel::Error, "curl_multi_info_read() error: untracked easy handle.");
-                continue;
-            }
-
-            if (it->second->get_callback() != NULL)
+            auto callback = context->get_callback();
+            if (callback != NULL)
             {
                 auto response = std::shared_ptr<NHttpResponse>(new NHttpResponse());
-                response->body = it->second->get_body();
+                response->body = context->get_body();
 
                 int response_code;
                 CURLcode curl_code = curl_easy_getinfo(e, CURLINFO_RESPONSE_CODE, &response_code);
@@ -175,10 +194,9 @@ void NHttpClientLibCurl::tick()
                     NLOG(Nakama::NLogLevel::Error, "curl_easy_getinfo() failed when getting response code, code %d.\n", (int)curl_code);
                 }
 
-                it->second->get_callback()(response);
+                callback(response);
             }
 
-            _contexts.remove(*it);
         }
     }
     while(m);
