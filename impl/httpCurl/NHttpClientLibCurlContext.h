@@ -33,7 +33,7 @@ class NHttpClientLibCurlContext
         NHttpResponseCallback get_callback();
         curl_slist* get_headers();
         std::string get_body();
-        void set_body(std::string body);
+        void append_body(std::string body);
 
     private:
         NHttpResponseCallback _callback;

@@ -48,8 +48,8 @@ namespace Nakama
         return _body;
     }
 
-    void NHttpClientLibCurlContext::set_body(std::string body)
+    void NHttpClientLibCurlContext::append_body(std::string body)
     {
-        _body = body;
+        _body += body;
     }
 }

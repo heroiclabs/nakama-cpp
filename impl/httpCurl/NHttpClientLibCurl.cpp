@@ -13,7 +13,8 @@ static size_t write_callback(char* buffer, size_t size, size_t nmemb, void* user
 
     if (buffer != NULL)
     {
-        curl_ctx->set_body(buffer);
+        // char buffer from libcurl is not null terminated.
+        curl_ctx->append_body(std::string(buffer, nmemb * size));
     }
 
     return nmemb * size;
