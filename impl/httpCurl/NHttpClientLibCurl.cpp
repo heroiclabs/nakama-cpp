@@ -134,11 +134,6 @@ void NHttpClientLibCurl::tick()
         int msgq = 0;
         m = curl_multi_info_read(_curl_multi.get(), &msgq);
         if (m && (m->msg == CURLMSG_DONE)) {
-            if (m->data.result != CURLE_OK) {
-                NLOG(Nakama::NLogLevel::Error, "curl_multi_info_read() error: %s", curl_easy_strerror(m->data.result));
-                continue;
-            }
-
             CURL* e = m->easy_handle;
 
             mc = curl_multi_remove_handle(_curl_multi.get(), e);
