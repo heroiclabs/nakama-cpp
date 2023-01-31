@@ -6,10 +6,48 @@
 #include "NHttpClientLibCurl.h"
 #include "nakama-cpp/log/NLogger.h"
 
+static int debug_callback(CURL *handle, curl_infotype type,
+             char *data, size_t size,
+             void *userp)
+{
+    const char *text;
+    (void)handle; /* prevent compiler warning */
+    (void)userp;
+
+    switch (type) {
+    case CURLINFO_TEXT:
+        NLOG(Nakama::NLogLevel::Debug, "libcurl debug info <=> Text: %s", data);
+    default: /* in case a new one is introduced to shock us */
+        return 0;
+
+    case CURLINFO_HEADER_OUT:
+        text = "=> Send header";
+        break;
+    case CURLINFO_DATA_OUT:
+        text = "=> Send data";
+        break;
+    case CURLINFO_SSL_DATA_OUT:
+        text = "=> Send SSL data";
+        break;
+    case CURLINFO_HEADER_IN:
+        text = "<= Recv header";
+        break;
+    case CURLINFO_DATA_IN:
+        text = "<= Recv data";
+        break;
+    case CURLINFO_SSL_DATA_IN:
+        text = "<= Recv SSL data";
+        break;
+    }
+
+    NLOG(Nakama::NLogLevel::Debug, "libcurl debug info: %s", text);
+    return 0;
+}
+
 static size_t write_callback(char* buffer, size_t size, size_t nmemb, void* user_ctx)
 {
     Nakama::NHttpClientLibCurlContext* curl_ctx = (Nakama::NHttpClientLibCurlContext*) user_ctx;
-    NLOG(Nakama::NLogLevel::Info, "received response... \n %s \n", buffer);
+    NLOG(Nakama::NLogLevel::Info, "received response... \n %s", buffer);
 
     if (buffer != NULL)
     {
@@ -109,6 +147,21 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
         return;
     }
 
+    /* ask libcurl to show us the verbose output */
+    curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_VERBOSE, 1L);
+    if (curl_code != CURLE_OK)
+    {
+        handle_curl_easy_set_opt_error("setting verbose output", curl_code, callback);
+        return;
+    }
+
+    curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_DEBUGFUNCTION, debug_callback);
+    if (curl_code != CURLE_OK)
+    {
+        handle_curl_easy_set_opt_error("adding debug function", curl_code, callback);
+        return;
+    }
+
     CURLMcode curl_multi_code = curl_multi_add_handle(_curl_multi.get(), curl_easy.get());
     if (curl_multi_code != CURLM_OK)
     {
@@ -187,6 +240,7 @@ void NHttpClientLibCurl::tick()
 
                 if (m->data.result != CURLE_OK)
                 {
+                    NLOG(Nakama::NLogLevel::Error, "curl easy handle returned code: %d \n", (int) m->data.result);
                     response->statusCode = InternalStatusCodes::CONNECTION_ERROR;
                 }
                 else

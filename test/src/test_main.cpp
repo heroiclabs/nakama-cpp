@@ -200,10 +200,8 @@ int mainHelper(int argc, char *argv[])
     NLOG(Nakama::NLogLevel::Info, "ssl      : %s", (SERVER_SSL ? "true" : "false"));
 
 
-    Nakama::NLogger::Info("starting tests", "hc");
     Nakama::Test::NConnectTest connectTest;
     connectTest.connect(2000);
-    Nakama::NLogger::Info("done calling connect", "hc");
 
     // REST client tests
     g_clientType = ClientType_Rest;
