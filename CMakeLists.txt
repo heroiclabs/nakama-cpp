@@ -63,10 +63,13 @@ endif()
 
 cmake_policy(SET CMP0012 NEW)
 
-# Kickstarts vcpkg dependency manager. It will parse vcpkg.json and install all configured
-# dependencies. Some dependencies are optional and enabled via VCPKG_MANIFEST_FEATURES
-set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
-        CACHE FILEPATH "Vcpkg toolchain file")
+## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
+set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake CACHE FILEPATH "Vcpkg toolchain file" FORCE)
+
+if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
+    # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
+endif()
 
 project(nakama-sdk LANGUAGES CXX)
 

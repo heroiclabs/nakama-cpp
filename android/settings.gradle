@@ -16,3 +16,4 @@ pluginManagement {
 }
 
 rootProject.name = 'nakama'
+include ':app'
