@@ -12,13 +12,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+
+file(
+    GLOB_RECURSE srcs
+    LIST_DIRECTORIES false
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
+)
 
 add_library(android-ca OBJECT
-            android-ca.cpp)
+            ${srcs})
 
+
+message(${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(android-ca PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(android-ca
                       android
-                      log)
+                      nakama-sdk-core-misc)
+

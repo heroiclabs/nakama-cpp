@@ -5,7 +5,7 @@
 #include <nakama-cpp/NHttpTransportInterface.h>
 #include "NHttpClientLibCurl.h"
 #include "nakama-cpp/log/NLogger.h"
-#include "nakama-cpp/android-ca.h"
+#include "android-ca.h"
 
 static int debug_callback(CURL *handle, curl_infotype type,
              char *data, size_t size,
@@ -138,7 +138,7 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     }
 
 #if __ANDROID__
-    curl_easy_setopt(curl, CURLOPT_CAINFO, getCaCertificates(this-));
+    curl_easy_setopt(curl_easy.get(), CURLOPT_CAINFO, getCaCertificates(this->_javaVM, this->_applicationContext));
 #endif
 
     curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_WRITEFUNCTION, write_callback);

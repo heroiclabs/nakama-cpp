@@ -20,6 +20,6 @@
 namespace Nakama
 {
     // TODO smart pointers
-    const char* getCaCertificates(JNIEnv *env, jobject instance)
+    const char* getCaCertificates(JNIEnv *env, jobject instance);
 }
 
