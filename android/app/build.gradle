@@ -1,0 +1,47 @@
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.1'
+    }
+}
+plugins {
+    id 'com.android.library' version '7.2.1'
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 31
+    ndkVersion "25.1.8937393"
+    buildTypes {
+        minsizerel {}
+        debug {}
+    }
+
+    defaultConfig {
+        targetSdkVersion 30
+
+        ndk {
+            stl 'c++_shared'
+            abiFilters "${abi}"
+        }
+
+        externalNativeBuild {
+            cmake {
+                arguments '--preset', "android-${abi}-host_${host}"
+                targets 'nakama-sdk'
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            version "3.25.0+"
+            path "../..//CMakeLists.txt"
+        }
+    }
+}

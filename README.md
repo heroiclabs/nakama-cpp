@@ -285,6 +285,12 @@ To build for Android set your `ANDROID_NDK_HOME` environment variable to your ND
 
 Your NDK is typically located within your SDK:`<sdk>/ndk/<ndk-version>`
 
+Then, inside the `android` folder:
+`./gradlew assemble -Pabi=<ANDROID_ABI> -Phost=<host>` where ANDROID_ABI and HOST is one of those defined in `CMakePresets.json`.
+
+For example:
+`./gradlew assemble -Pabi=arm64-v8a -Phost=osx_arm64`
+
 ### Windows 32-Bit
 
 We support native 32-bit builds. Keep in mind that when building from source, you must run your command
