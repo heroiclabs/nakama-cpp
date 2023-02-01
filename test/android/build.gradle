@@ -24,16 +24,13 @@ android {
         versionCode 1
         versionName '1.0'
         ndk {
-            abiFilters "${androidABI}"
+            abiFilters "${abi}"
         }
         externalNativeBuild {
             cmake {
                 arguments '--preset',
-                        "android-${androidABI}-host_osx_arm64",
-                        "-DVCPKG_BUILD_TYPE=Release",
-                        "-DANDROID_STL=c++_shared",
-                        "-DCMAKE_BUILD_TYPE=Debug"
-
+                        "android-${abi}-host_${host}",
+                        "-DCMAKE_BUILD_TYPE=Debug" // TODO figure out why assigning this in CMakePresets.json cache variables doesn't work
                 targets 'nakama-test'
             }
         }

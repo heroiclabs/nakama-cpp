@@ -174,12 +174,8 @@
                 "ANDROID_ARM_NEON": "ON",
                 "ANDROID_STL": "c++_shared",
                 "ANDROID_PLATFORM": "android-21",
-                "CMAKE_SYSTEM_NAME": "Android"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
+                "CMAKE_SYSTEM_NAME": "Android",
+                "CMAKE_BUILD_TYPE": "Debug"
             },
             "environment": {
                 "NDK": "$env{ANDROID_NDK_HOME}"
@@ -194,9 +190,7 @@
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "x64-osx",
                 "VCPKG_TARGET_TRIPLET": "arm-android",
-                "ANDROID_ABI": "armeabi-v7a",
-                "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE"
-
+                "ANDROID_ABI": "armeabi-v7a"
             },
             "condition": {
                 "type": "equals",

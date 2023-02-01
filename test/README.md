@@ -13,9 +13,9 @@ cmake --build --preset <build-preset> --target install
 
 To build for Android, inside the `android` folder:
 
-`./gradlew assemble -PandroidABI=<ANDROID_ABI>` where ANDROD_ABI is one of those defined in `CMakePresets.json`.
+`./gradlew assemble -Pabi=<ANDROID_ABI> -Phost=<host>` where ANDROID_ABI and HOST is one of those defined in `CMakePresets.json`.
 
 For example:
-`./gradlew assemble -PandroidABI=arm64-v8a`
+`./gradlew assemble -Pabi=arm64-v8a -Phost=osx_arm64`
 
 To deploy to an Android device, also inside the `android` folder, run `deploy.sh`.
