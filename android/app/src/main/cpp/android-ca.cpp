@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-
 #include <jni.h>
 #include <string.h>
 #include "nakama-cpp/log/NLogger.h"
 
-const char* getCaCertificates(JNIEnv *env, jobject instance)
+const char* getCaCertificates(JNIEnv *env)
 {
-    jclass cls = env->GetObjectClass(instance);
+    jclass cls = env->FindClass("com/nakamasdk/AndroidCA");
     jmethodID mid = env->GetStaticMethodID(cls, "getCaCertificates", "()[B");
     if (mid == 0) {
         // error: method not found

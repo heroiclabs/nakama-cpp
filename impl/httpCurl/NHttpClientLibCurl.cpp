@@ -138,7 +138,7 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     }
 
 #if __ANDROID__
-    curl_easy_setopt(curl_easy.get(), CURLOPT_CAINFO, getCaCertificates(this->_javaVM, this->_applicationContext));
+    curl_easy_setopt(curl_easy.get(), CURLOPT_CAINFO, getCaCertificates(this->_javaVM->getEnv()));
 #endif
 
     curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_WRITEFUNCTION, write_callback);
