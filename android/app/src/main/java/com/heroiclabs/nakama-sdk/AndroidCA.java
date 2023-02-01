@@ -17,21 +17,41 @@
 package com.heroiclabs.nakamasdk;
 
 import androidx.annotation.Keep;
-import javax.net.ssl.TrustManagerFactory;
+import java.io.StringWriter;
 import java.security.KeyStore;
+import java.security.cert.CertificateEncodingException;
+import java.security.cert.X509Certificate;
+import javax.net.ssl.TrustManagerFactory;
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemWriter;
 import android.util.Log;
 
 public class AndroidCA {
 
     @Keep
-    public static String getCAPath(String[] args) {
+    public static byte[] loadCAPem(String[] args) {
         try {
             TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
             tmf.init((KeyStore) null);
-            return tmf.getTrustManagers()[0];
+            X509Certificate[] trustedCertificates = new X509Certificate[0];
+            for (javax.net.ssl.TrustManager tm : tmf.getTrustManagers()) {
+                if (tm instanceof javax.net.ssl.X509TrustManager) {
+                    trustedCertificates = ((javax.net.ssl.X509TrustManager) tm).getAcceptedIssuers();
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            for (X509Certificate certificate : trustedCertificates) {
+                try (PemWriter pemWriter = new PemWriter(new StringWriter())) {
+                    pemWriter.writeObject(new PemObject("CERTIFICATE", certificate.getEncoded()));
+                    pemWriter.flush();
+                    sb.append(pemWriter.toString());
+                }
+            }
+
+            return sb.toString().getBytes();
         } catch (Exception e) {
-            Log.e("nakama", "CA Path Error: " + e.msg);
-            return env.get("ANDROID_ROOT") + "system/etc/security/cacerts"; // try a historically known path
+            Log.e("Nakama", "Unable to obtain trusted CA certificates: " + e.getMessage());
+            return new byte[]{};
         }
     }
 }
