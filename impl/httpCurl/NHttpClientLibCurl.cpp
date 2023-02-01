@@ -64,8 +64,7 @@ namespace Nakama {
 NHttpClientLibCurl::NHttpClientLibCurl(const NPlatformParameters& platformParameters) : _curl_multi(curl_multi_init(), curl_multi_cleanup)
 {
 #if __ANDROID__
-    this->_javaVM = platformParameters.javaVM;
-    this->_applicationContext = platformParameters.applicationContext;
+    this->_jniEnv = platformParameters.jniEnv;
 #endif
 }
 
@@ -138,7 +137,12 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     }
 
 #if __ANDROID__
-    curl_easy_setopt(curl_easy.get(), CURLOPT_CAINFO, getCaCertificates(this->_javaVM->getEnv()));
+    struct curl_blob blob;
+    blob.data = (void*) getCaCertificates(this->_jniEnv);
+    blob.len = strlen((char*) blob.data);
+    blob.flags = CURL_BLOB_COPY;
+    curl_easy_setopt(curl_easy.get(), CURLOPT_CAINFO_BLOB, &blob);
+    free(blob.data);
 #endif
 
     curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_WRITEFUNCTION, write_callback);

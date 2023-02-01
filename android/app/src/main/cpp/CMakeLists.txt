@@ -20,8 +20,7 @@ file(
     "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )
 
-add_library(android-ca OBJECT
-            ${srcs})
+add_library(android-ca ${srcs})
 
 
 message(${CMAKE_CURRENT_SOURCE_DIR})

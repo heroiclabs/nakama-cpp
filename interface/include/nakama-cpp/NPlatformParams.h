@@ -26,8 +26,8 @@ NAKAMA_NAMESPACE_BEGIN
 
 #ifdef __ANDROID__
 struct NPlatformParameters {
-    JavaVM *javaVM;
-    jobject applicationContext;
+    JavaVM* javaVM;
+    JNIEnv* jniEnv;
 };
 #else
 #define DEFAULT_PLATFORM_PARAMS

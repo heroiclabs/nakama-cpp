@@ -47,8 +47,7 @@ namespace Nakama {
             void handle_curl_easy_set_opt_error(std::string action, CURLcode code, const NHttpResponseCallback& callback);
             std::mutex _contextsMutex;
 #if ANDROID
-            JavaVM* _javaVM;
-            jobject _applicationContext;
+            JNIEnv* _jniEnv;
 #endif
     };
 }

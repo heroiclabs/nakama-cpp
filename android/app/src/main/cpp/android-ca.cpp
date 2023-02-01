@@ -18,20 +18,23 @@
 #include <string.h>
 #include "nakama-cpp/log/NLogger.h"
 
-const char* getCaCertificates(JNIEnv *env)
+namespace Nakama
 {
-    jclass cls = env->FindClass("com/nakamasdk/AndroidCA");
-    jmethodID mid = env->GetStaticMethodID(cls, "getCaCertificates", "()[B");
-    if (mid == 0) {
-        // error: method not found
-        return NULL;
+    void* getCaCertificates(JNIEnv *env)
+    {
+        jclass cls = env->FindClass("com/nakamasdk/AndroidCA");
+        jmethodID mid = env->GetStaticMethodID(cls, "getCaCertificates", "()[B");
+        if (mid == 0) {
+            // error: method not found
+            return NULL;
+        }
+
+        jbyteArray certificatesArray = (jbyteArray)env->CallStaticObjectMethod(cls, mid);
+        jsize certificatesArrayLength = env->GetArrayLength(certificatesArray);
+        jbyte *certificates = env->GetByteArrayElements(certificatesArray, NULL);
+
+        void* certificatesCharArray = strdup(reinterpret_cast<char *>(certificates));
+        env->ReleaseByteArrayElements(certificatesArray, certificates, JNI_ABORT);
+        return certificatesCharArray;
     }
-
-    jbyteArray certificatesArray = (jbyteArray)env->CallStaticObjectMethod(cls, mid);
-    jsize certificatesArrayLength = env->GetArrayLength(certificatesArray);
-    jbyte *certificates = env->GetByteArrayElements(certificatesArray, NULL);
-
-    const char* certificatesCharArray = strdup(reinterpret_cast<char *>(certificates));
-    env->ReleaseByteArrayElements(certificatesArray, certificates, JNI_ABORT);
-    return certificatesCharArray;
 }
