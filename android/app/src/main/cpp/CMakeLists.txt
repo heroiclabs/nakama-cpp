@@ -15,11 +15,10 @@
 #
 
 add_library(android-ca OBJECT
-            android-ca.c)
+            android-ca.cpp)
 
-target_include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(android-ca PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Include libraries needed for hello-jnicallback lib
 target_link_libraries(android-ca
                       android
                       log)

@@ -5,6 +5,7 @@
 #include <nakama-cpp/NHttpTransportInterface.h>
 #include "NHttpClientLibCurl.h"
 #include "nakama-cpp/log/NLogger.h"
+#include "nakama-cpp/android-ca.h"
 
 static int debug_callback(CURL *handle, curl_infotype type,
              char *data, size_t size,
@@ -62,6 +63,10 @@ namespace Nakama {
 
 NHttpClientLibCurl::NHttpClientLibCurl(const NPlatformParameters& platformParameters) : _curl_multi(curl_multi_init(), curl_multi_cleanup)
 {
+#if __ANDROID__
+    this->_javaVM = platformParameters.javaVM;
+    this->_applicationContext = platformParameters.applicationContext;
+#endif
 }
 
 void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCallback& callback) noexcept
@@ -131,6 +136,10 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
         handle_curl_easy_set_opt_error("adding call method", curl_code, callback);
         return;
     }
+
+#if __ANDROID__
+    curl_easy_setopt(curl, CURLOPT_CAINFO, getCaCertificates(this-));
+#endif
 
     curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_WRITEFUNCTION, write_callback);
     if (curl_code != CURLE_OK)

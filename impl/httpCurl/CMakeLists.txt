@@ -17,6 +17,7 @@ target_link_libraries(nakama-impl-http-libcurl
         # link time dependency on libhttpclient, but still going to
         # configure include paths
         PUBLIC CURL::libcurl
+        android-ca
         )
 
 set(HTTP_IMPL_LIB nakama-impl-http-libcurl PARENT_SCOPE)

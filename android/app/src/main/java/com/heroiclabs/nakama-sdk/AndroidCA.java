@@ -29,7 +29,7 @@ import android.util.Log;
 public class AndroidCA {
 
     @Keep
-    public static byte[] loadCAPem(String[] args) {
+    public static byte[] getCaCertificates(String[] args) {
         try {
             TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
             tmf.init((KeyStore) null);

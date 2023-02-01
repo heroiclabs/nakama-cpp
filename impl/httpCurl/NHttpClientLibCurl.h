@@ -24,6 +24,9 @@
 #include <nakama-cpp/NPlatformParams.h>
 #include <curl/curl.h>
 #include "NHttpClientLibCurlContext.h"
+#if __ANDROID__
+#include <jni.h>
+#endif
 
 namespace Nakama {
     class NHttpClientLibCurl: public NHttpTransportInterface
@@ -43,5 +46,9 @@ namespace Nakama {
             std::list<std::pair<std::unique_ptr<CURL, decltype(&curl_easy_cleanup)>, std::unique_ptr<NHttpClientLibCurlContext>>> _contexts;
             void handle_curl_easy_set_opt_error(std::string action, CURLcode code, const NHttpResponseCallback& callback);
             std::mutex _contextsMutex;
+#if ANDROID
+            JavaVM* _javaVM;
+            jobject _applicationContext;
+#endif
     };
 }
