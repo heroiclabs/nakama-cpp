@@ -22,7 +22,6 @@ file(
 
 add_library(android-ca OBJECT ${srcs})
 
-message(${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(android-ca PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(android-ca

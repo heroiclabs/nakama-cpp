@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         targetSdkVersion 30
-
+        minSdkVersion 21
         ndk {
             stl 'c++_shared'
             abiFilters "${abi}"
