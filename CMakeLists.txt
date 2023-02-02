@@ -252,6 +252,7 @@ if (BUILD_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:nakama-sdk-core-grpc>)
 endif()
 
+## TODO this can be massively simplified
 if (WITH_LIBHTTPCLIENT_WS)
     target_compile_definitions(nakama-sdk-core-rt PUBLIC BUILD_WEBSOCKET_LIBHTTPCLIENT)
     target_compile_definitions(nakama-sdk-core-common PUBLIC BUILD_WEBSOCKET_LIBHTTPCLIENT)
@@ -364,3 +365,20 @@ endif()
 # Call last so they can reference any target previously defined
 include(cmake/linkerFlagsTargets.cmake)
 include(cmake/localCompilerFlags.cmake)
+
+if (ANDROID)
+    install(
+        CODE
+        "execute_process(
+            COMMAND
+            ${CMAKE_COMMAND}
+            -DANDROID_ABI=${ANDROID_ABI}
+            -DCMAKE_INSTALL_LIBDIR=${CMAKE_INSTALL_LIBDIR}
+            -DCMAKE_INSTALL_INCLUDEDIR=${CMAKE_INSTALL_INCLUDEDIR}
+            -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+            -DGRADLE_ROOT=${CMAKE_SOURCE_DIR}/android/app/src/main
+            -P
+            ${CMAKE_SOURCE_DIR}/cmake/androidPostInstall.cmake
+        )"
+    )
+endif()
