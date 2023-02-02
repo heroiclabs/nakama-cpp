@@ -128,10 +128,6 @@ if(APPLE)
 
 endif()
 
-if(ANDROID)
-    add_subdirectory(android/app/src/main/cpp)
-endif()
-
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     if (NOT LIBHTTPCLIENT_BUILTIN)
         if (LINUX OR APPLE)

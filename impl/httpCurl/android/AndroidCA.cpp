@@ -18,7 +18,7 @@
 #include <memory>
 #include <string.h>
 #include "nakama-cpp/log/NLogger.h"
-#include "android-ca.h"
+#include "AndroidCA.h"
 
 namespace Nakama
 {
