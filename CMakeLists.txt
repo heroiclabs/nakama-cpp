@@ -376,7 +376,7 @@ if (ANDROID)
             -DCMAKE_INSTALL_LIBDIR=${CMAKE_INSTALL_LIBDIR}
             -DCMAKE_INSTALL_INCLUDEDIR=${CMAKE_INSTALL_INCLUDEDIR}
             -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-            -DGRADLE_ROOT=${CMAKE_SOURCE_DIR}/android/app/src/main
+            -DGRADLE_ROOT=${CMAKE_SOURCE_DIR}/android
             -P
             ${CMAKE_SOURCE_DIR}/cmake/androidPostInstall.cmake
         )"

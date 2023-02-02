@@ -15,5 +15,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'nakama'
+rootProject.name = 'nakama-sdk'
 include ':app'

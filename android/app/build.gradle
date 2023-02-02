@@ -1,40 +1,24 @@
-
-// based on the following documentation: https://developer.android.com/studio/projects/gradle-external-native-builds#jniLibs
-
-buildscript {
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
-    }
-}
-plugins {
-    id 'com.android.library' version '7.3.1'
-}
-
 repositories {
     google()
     mavenCentral()
 }
 
-android {
-    namespace "com.heroiclabs.nakamasdk"
-    compileSdkVersion 32
-    ndkVersion "25.1.8937393"
+apply plugin: 'com.android.library'
 
+android {
+    compileSdkVersion 31
     defaultConfig {
         minSdkVersion 21
-        ndk {
-            stl 'c++_shared'
-            abiFilters "${abi}"
-        }
+        targetSdkVersion 31
     }
-
-    buildFeatures {
-        prefabPublishing true
-    }
-
-    prefab {
-        'nakama-sdk' {
-            headers "src/main/headers"
+    sourceSets {
+        main {
+            jni {
+                srcDirs "src/main/headers"
+            }
+            jniLibs {
+                srcDirs "src/main/jniLibs"
+            }
         }
     }
 }
@@ -42,4 +26,5 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'org.bouncycastle:bcpkix-jdk15on:1.56'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
