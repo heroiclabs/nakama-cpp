@@ -1,4 +1,4 @@
-#include <string.h>
+#include <string>
 #include <curl/curl.h>
 #include <memory.h>
 #include <nakama-cpp/log/NLogger.h>
@@ -137,12 +137,12 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     }
 
 #if __ANDROID__
+    CACertificateData data = Nakama::getCaCertificates(this->_jniEnv);
     struct curl_blob blob;
-    blob.data = (void*) getCaCertificates(this->_jniEnv);
-    blob.len = strlen((char*) blob.data);
+    blob.data = reinterpret_cast<char*>(data.data.get());
+    blob.len = data.len;
     blob.flags = CURL_BLOB_COPY;
     curl_easy_setopt(curl_easy.get(), CURLOPT_CAINFO_BLOB, &blob);
-    free(blob.data);
 #endif
 
     curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_WRITEFUNCTION, write_callback);

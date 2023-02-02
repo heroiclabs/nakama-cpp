@@ -13,6 +13,6 @@ find_package(curl)
 
 target_link_libraries(nakama-impl-http-libcurl
     PUBLIC nakama-api-proto nakama::sdk-interface CURL::libcurl android-ca
-    )
+)
 
 set(HTTP_IMPL_LIB nakama-impl-http-libcurl PARENT_SCOPE)

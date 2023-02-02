@@ -14,12 +14,19 @@
  * limitations under the License.
  */
 
+#pragma once
+
 #include <jni.h>
 #include <string.h>
 
 namespace Nakama
 {
-    // TODO smart pointers
-    void* getCaCertificates(JNIEnv *env);
-}
+    struct CACertificateData
+    {
+        std::unique_ptr<unsigned char[]> data;
+        int len;
+    };
+
+    CACertificateData getCaCertificates(JNIEnv *env);
+};
 
