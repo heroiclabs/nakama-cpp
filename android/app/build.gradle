@@ -10,15 +10,34 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 32
+
+        ndk {
+            abiFilters "${androidABI}"
+        }
     }
+
     sourceSets {
         main {
-            jni {
-                srcDirs "src/main/headers"
-            }
             jniLibs {
-                srcDirs "src/main/jniLibs"
+                srcDirs 'src/main/libs'
             }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/libs/CMakeLists.txt"
+        }
+        version "3.22.1"
+    }
+
+    buildFeatures {
+        prefabPublishing true
+    }
+
+    prefab {
+        libnakama {
+            headers "src/main/headers"
         }
     }
 }

@@ -1,7 +1,7 @@
 # move to our gradle tree
 
 set(GRADLE_MAIN ${GRADLE_ROOT}/app/src/main)
-set(GRADLE_JNI ${GRADLE_MAIN}/jniLibs/${ANDROID_ABI})
+set(GRADLE_JNI ${GRADLE_MAIN}/libs/${ANDROID_ABI})
 set(GRADLE_HEADERS ${GRADLE_MAIN}/headers)
 
 message("-- Cleaning: ${GRADLE_JNI}")

@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.23)
+# I think we are constrained to the version that the latest android sdk uses, for Android builds.
+cmake_minimum_required(VERSION 3.22.1)
 include(version.cmake)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")

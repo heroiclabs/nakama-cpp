@@ -13,5 +13,5 @@ android/.gradle
 android/build
 android/app/.cxx
 
-android/app/src/main/headers/
-android/app/src/main/jniLibs/
+android/app/src/main/libs
+android/app/src/main/headers
