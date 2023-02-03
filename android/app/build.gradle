@@ -6,10 +6,10 @@ repositories {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
     }
     sourceSets {
         main {
@@ -25,6 +25,6 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'org.bouncycastle:bcpkix-jdk15on:1.56'
+    implementation 'org.bouncycastle:bcpkix-jdk15on:1.66'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

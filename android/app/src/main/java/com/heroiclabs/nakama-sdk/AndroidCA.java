@@ -36,7 +36,9 @@ public class AndroidCA {
             X509Certificate[] trustedCertificates = new X509Certificate[0];
             for (javax.net.ssl.TrustManager tm : tmf.getTrustManagers()) {
                 if (tm instanceof javax.net.ssl.X509TrustManager) {
+                    // TODO so we just get the first? ssl trust manager shouldn't we get all of them?
                     trustedCertificates = ((javax.net.ssl.X509TrustManager) tm).getAcceptedIssuers();
+                    break;
                 }
             }
             StringBuilder sb = new StringBuilder();
