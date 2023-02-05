@@ -12,19 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-message("-- Bundling Java code...")
-
-execute_process(COMMAND ./gradlew createJar
-    WORKING_DIRECTORY ${GRADLE_ROOT}
-    OUTPUT_VARIABLE GRADLE_OUTPUT
-    ERROR_VARIABLE GRADLE_ERROR
-    COMMAND_ERROR_IS_FATAL ANY
-    COMMAND_ECHO STDOUT
-)
-
-message("-- Gradle Output: ${GRADLE_OUTPUT}")
-message("-- Moving Java bytecode to CMake installation directory.")
+message("-- Moving Java bytecode to CMake installation directory from ${INPUT_JAR} to ${OUTPUT_JAR_DIR}")
 
 file(COPY ${INPUT_JAR} DESTINATION ${OUTPUT_JAR_DIR})
-

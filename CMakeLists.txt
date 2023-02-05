@@ -367,15 +367,34 @@ endif()
 include(cmake/linkerFlagsTargets.cmake)
 include(cmake/localCompilerFlags.cmake)
 
-if (ANDROID)
+if (ANDROID AND HTTP_IMPL STREQUAL "curl")
+    set(CREATE_JAR TRUE) # we need the code for accessing native Android CA store.
+else()
+    set(CREATE_JAR FALSE)
+endif()
+
+if (CREATE_JAR)
+    message("-- Bundling Java code...")
+
+    execute_process(COMMAND ./gradlew createJar
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/android
+        OUTPUT_VARIABLE GRADLE_OUTPUT
+        ERROR_VARIABLE GRADLE_ERROR
+        COMMAND_ERROR_IS_FATAL ANY
+        COMMAND_ECHO STDOUT
+    )
+
+    message("-- Gradle Output: ${GRADLE_OUTPUT}")
+    set(INPUT_JAR ${CMAKE_SOURCE_DIR}/android/app/build/libs/libnakama-sdk.jar)
+    set(OUTPUT_JAR_DIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
+
     install(
         CODE
         "execute_process(
             COMMAND
             ${CMAKE_COMMAND}
-            -DGRADLE_ROOT={CMAKE_SOURCE_DIR}/android
-            -DINPUT_JAR=${CMAKE_SOURCE_DIR}/android/app/build/libs/libnakama-sdk.jar
-            -DOUTPUT_JAR_DIR=${CMAKE_SOURCE_DIR}/${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}
+            -DINPUT_JAR=${INPUT_JAR}
+            -DOUTPUT_JAR_DIR=${OUTPUT_JAR_DIR}
             -P
             ${CMAKE_SOURCE_DIR}/cmake/androidPostInstall.cmake
         )"
