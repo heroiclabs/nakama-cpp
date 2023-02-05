@@ -5,7 +5,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        preset: ["android-armeabi-v7a-host_osx_x64", "android-arm64-v8a-host_osx_x64", "android-x64-host_osx_x64"]
+        preset: ["android-arm64-v8a-host_osx_x64", "android-x64-host_osx_x64"]
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
