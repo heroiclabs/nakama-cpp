@@ -373,11 +373,9 @@ if (ANDROID)
         "execute_process(
             COMMAND
             ${CMAKE_COMMAND}
-            -DANDROID_ABI=${ANDROID_ABI}
-            -DCMAKE_INSTALL_LIBDIR=${CMAKE_INSTALL_LIBDIR}
-            -DCMAKE_INSTALL_INCLUDEDIR=${CMAKE_INSTALL_INCLUDEDIR}
-            -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-            -DGRADLE_ROOT=${CMAKE_SOURCE_DIR}/android
+            -DGRADLE_ROOT={CMAKE_SOURCE_DIR}/android
+            -DINPUT_JAR=${CMAKE_SOURCE_DIR}/android/app/build/libs/libnakama-sdk.jar
+            -DOUTPUT_JAR_DIR=${CMAKE_SOURCE_DIR}/${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}
             -P
             ${CMAKE_SOURCE_DIR}/cmake/androidPostInstall.cmake
         )"

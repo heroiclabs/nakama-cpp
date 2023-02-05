@@ -12,6 +12,3 @@ android/.gradle
 # Ignore Gradle build output directory
 android/build
 android/app/.cxx
-
-android/app/src/main/libs
-android/app/src/main/headers

@@ -1,25 +1,21 @@
-# move to our gradle tree
+# Copyright 2023 The Nakama Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-set(GRADLE_MAIN ${GRADLE_ROOT}/app/src/main)
-set(GRADLE_JNI ${GRADLE_MAIN}/libs/${ANDROID_ABI})
-set(GRADLE_HEADERS ${GRADLE_MAIN}/headers)
 
-message("-- Cleaning: ${GRADLE_JNI}")
-message("-- Cleaning: ${GRADLE_HEADERS}")
+message("-- Bundling Java code...")
 
-file(REMOVE_RECURSE ${GRADLE_JNI})
-file(REMOVE_RECURSE ${GRADLE_HEADERS})
-
-message("-- Copying installed library to: ${GRADLE_JNI}")
-message("-- Copying installed headers to: ${GRADLE_HEADERS}")
-
-file(COPY ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/libnakama-sdk.so DESTINATION ${GRADLE_JNI})
-file(COPY ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/nakama-cpp DESTINATION ${GRADLE_HEADERS})
-
-message("-- Bundling Java with C++ code in Gradle inside: ${GRADLE_ROOT}")
-message("-- Android ABI is ${ANDROID_ABI}")
-
-execute_process(COMMAND ./gradlew assemble -Pabi=${ANDROID_ABI}
+execute_process(COMMAND ./gradlew createJar
     WORKING_DIRECTORY ${GRADLE_ROOT}
     OUTPUT_VARIABLE GRADLE_OUTPUT
     ERROR_VARIABLE GRADLE_ERROR
@@ -28,6 +24,7 @@ execute_process(COMMAND ./gradlew assemble -Pabi=${ANDROID_ABI}
 )
 
 message("-- Gradle Output: ${GRADLE_OUTPUT}")
-message("-- Moving artifact back to CMake installation directory.")
+message("-- Moving Java bytecode to CMake installation directory.")
 
-# put resulting .aar back in our ./out directory
+file(COPY ${INPUT_JAR} DESTINATION ${OUTPUT_JAR_DIR})
+

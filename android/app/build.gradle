@@ -1,49 +1,26 @@
+plugins {
+    id 'com.android.library' version '7.4.0' apply true
+}
+
 repositories {
     google()
     mavenCentral()
 }
-
-apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 32
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 32
-
-        ndk {
-            abiFilters "${androidABI}"
-        }
-    }
-
-    sourceSets {
-        main {
-            jniLibs {
-                srcDirs 'src/main/libs'
-            }
-        }
-    }
-
-    externalNativeBuild {
-        cmake {
-            path "src/main/libs/CMakeLists.txt"
-        }
-        version "3.22.1"
-    }
-
-    buildFeatures {
-        prefabPublishing true
-    }
-
-    prefab {
-        libnakama {
-            headers "src/main/headers"
-        }
     }
 }
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'org.bouncycastle:bcpkix-jdk15on:1.66'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+task createJar(type: Jar) {
+    archiveName = "libnakama-sdk.jar"
+    from android.sourceSets.main.java.srcDirs
 }
