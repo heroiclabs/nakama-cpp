@@ -75,7 +75,6 @@ void setWorkingClientParameters(NClientParameters& parameters)
 #ifdef __ANDROID__
     parameters.platformParams.javaVM = g_vm;
     parameters.platformParams.jniEnv = g_env;
-
 #endif
 }
 
