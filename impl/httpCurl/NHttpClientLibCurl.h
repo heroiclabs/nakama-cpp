@@ -48,6 +48,7 @@ namespace Nakama {
             std::mutex _contextsMutex;
 #if ANDROID
             JNIEnv* _jniEnv;
+            JavaVM* _javaVM;
 #endif
     };
 }
