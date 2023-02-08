@@ -87,7 +87,6 @@ file(
 # following this guide: https://medium.com/androiddevelopers/getting-started-with-c-and-android-native-activities-2213b402ffff
 # alternatively we could do this in `Android.mk` but we already use CMake.
 if (ANDROID)
-
     find_library(log-lib log)
 
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")

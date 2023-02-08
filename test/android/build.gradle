@@ -49,7 +49,9 @@ android {
             cmake {
                 arguments '--preset',
                         "android-${abi}-host_${host}",
-                        "-DCMAKE_BUILD_TYPE=Debug" // TODO figure out why assigning this in CMakePresets.json cache variables doesn't work
+                         // TODO figure out why assigning these in CMakePresets.json cache variables doesn't work
+                        "-DANDROID_STL=c++_shared",
+                        "-DCMAKE_BUILD_TYPE=Debug"
                 targets 'nakama-test'
             }
         }
