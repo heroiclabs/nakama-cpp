@@ -13,14 +13,16 @@ android {
         minSdkVersion 21
         targetSdkVersion 32
     }
+
+    libraryVariants.all {
+        variant ->
+        variant.outputs.all {
+            outputFileName = "libnakama-sdk.aar"
+        }
+    }
 }
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'org.bouncycastle:bcpkix-jdk15on:1.66'
-}
-
-task createJar(type: Jar) {
-    archiveName = "libnakama-sdk.jar"
-    from android.sourceSets.main.java.srcDirs
 }

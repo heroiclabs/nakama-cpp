@@ -24,7 +24,7 @@ plugins {
 }
 
 dependencies {
-    implementation files("../../out/android-${abi}/lib/libnakama-sdk.jar")
+    implementation files("../../out/android-${abi}/lib/libnakama-sdk.aar")
 }
 
 repositories {
@@ -38,7 +38,7 @@ android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "com.heroiclabs.nakamatest"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
         versionName '1.0'
