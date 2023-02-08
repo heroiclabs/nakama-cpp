@@ -18,4 +18,4 @@ To build for Android, inside the `android` folder:
 For example:
 `./gradlew assemble -Pabi=arm64-v8a -Phost=osx_arm64`
 
-To deploy to an Android device, also inside the `android` folder, run `deploy.sh`.
+To deploy to an Android device, also inside the `android` folder, run `deploy.sh <device_id>`.
