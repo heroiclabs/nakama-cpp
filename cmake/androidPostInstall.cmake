@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-message("-- Moving Java bytecode to CMake installation directory from ${INPUT_JAR} to ${OUTPUT_JAR_DIR}")
+message("-- Moving Java bytecode to CMake installation directory from '${INPUT_JAR}' to '${OUTPUT_JAR_DIR}'")
 
 file(COPY ${INPUT_JAR} DESTINATION ${OUTPUT_JAR_DIR})
