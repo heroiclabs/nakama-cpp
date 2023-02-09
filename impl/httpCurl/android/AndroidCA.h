@@ -27,6 +27,6 @@ namespace Nakama
         int len;
     };
 
-    CACertificateData getCaCertificates(JavaVM* vm, JNIEnv* env);
+    CACertificateData getCaCertificates();
 };
 

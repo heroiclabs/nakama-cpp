@@ -46,9 +46,5 @@ namespace Nakama {
             std::list<std::pair<std::unique_ptr<CURL, decltype(&curl_easy_cleanup)>, std::unique_ptr<NHttpClientLibCurlContext>>> _contexts;
             void handle_curl_easy_set_opt_error(std::string action, CURLcode code, const NHttpResponseCallback& callback);
             std::mutex _contextsMutex;
-#if ANDROID
-            JNIEnv* _jniEnv;
-            JavaVM* _javaVM;
-#endif
     };
 }

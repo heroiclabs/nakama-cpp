@@ -63,10 +63,6 @@ namespace Nakama {
 
 NHttpClientLibCurl::NHttpClientLibCurl(const NPlatformParameters& platformParameters) : _curl_multi(curl_multi_init(), curl_multi_cleanup)
 {
-#if __ANDROID__
-    this->_jniEnv = platformParameters.jniEnv;
-    this->_javaVM = platformParameters.javaVM;
-#endif
 }
 
 void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCallback& callback) noexcept
@@ -138,7 +134,7 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     }
 
 #if __ANDROID__
-    CACertificateData data = Nakama::getCaCertificates(this->_javaVM, this->_jniEnv);
+    CACertificateData data = Nakama::getCaCertificates();
     struct curl_blob blob;
     blob.data = reinterpret_cast<char*>(data.data.get());
     blob.len = data.len;

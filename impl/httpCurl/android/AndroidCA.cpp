@@ -22,27 +22,43 @@
 
 namespace Nakama
 {
-    CACertificateData getCaCertificates(JavaVM* vm, JNIEnv* env)
-    {
-        CACertificateData certData;
-        vm->AttachCurrentThread(&env, NULL);
+    static JavaVM* _vm;
+    static JNIEnv* _env;
+    jclass _cls;
+    jmethodID _mid;
 
-        jclass cls = env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
-        jmethodID mid = env->GetStaticMethodID(cls, "getCaCertificates", "()[B");
-        if (mid == 0) {
-            NLOG(NLogLevel::Error, "No getCaCertificates method found.");
-            return certData;
+    JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
+        _vm = vm;
+        if (vm->GetEnv(reinterpret_cast<void**>(&_env), JNI_VERSION_1_6) != JNI_OK) {
+            return JNI_ERR;
         }
 
-        jbyteArray certificatesArray = (jbyteArray)env->CallStaticObjectMethod(cls, mid);
-        jsize certificatesArrayLength = env->GetArrayLength(certificatesArray);
-        jbyte* certificates = env->GetByteArrayElements(certificatesArray, NULL);
+        // Find your class. JNI_OnLoad is called from the correct class loader context for this to work.
+        jclass _cls = _env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
+        if (_cls == nullptr) return JNI_ERR;
+
+        _mid = _env->GetStaticMethodID(_cls, "getCaCertificates", "()[B");
+        if (_mid == 0) {
+            return JNI_ERR;
+        }
+
+        return JNI_VERSION_1_6;
+    }
+
+    CACertificateData getCaCertificates()
+    {
+        CACertificateData certData;
+        _vm->AttachCurrentThread(&_env, NULL);
+
+        jbyteArray certificatesArray = (jbyteArray)_env->CallStaticObjectMethod(_cls, _mid);
+        jsize certificatesArrayLength = _env->GetArrayLength(certificatesArray);
+        jbyte* certificates = _env->GetByteArrayElements(certificatesArray, NULL);
 
         std::unique_ptr<unsigned char[]> certificatesCharArray(new unsigned char[certificatesArrayLength]);
         memcpy(certificatesCharArray.get(), certificates, certificatesArrayLength);
-        env->ReleaseByteArrayElements(certificatesArray, certificates, JNI_ABORT);
+        _env->ReleaseByteArrayElements(certificatesArray, certificates, JNI_ABORT);
 
-        vm->DetachCurrentThread();
+        _vm->DetachCurrentThread();
         certData.data = std::move(certificatesCharArray);
         certData.len = static_cast<int>(certificatesArrayLength);
         return certData;
