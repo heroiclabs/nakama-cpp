@@ -376,16 +376,15 @@ endif()
 if (CREATE_JAR)
     message("-- Bundling Java code...")
 
-    execute_process(COMMAND ./gradlew assemble
+    set(LIBNAKAMA_AAR "${CMAKE_SOURCE_DIR}/android/app/build/outputs/aar/libnakama-sdk.aar")
+    add_custom_command(
+        OUTPUT $LIBNAKAMA_AAR
+        COMMAND ./gradlew assemble
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/android
-        OUTPUT_VARIABLE GRADLE_OUTPUT
-        ERROR_VARIABLE GRADLE_ERROR
-        COMMAND_ERROR_IS_FATAL ANY
-        COMMAND_ECHO STDOUT
     )
 
     message("-- Gradle Output: ${GRADLE_OUTPUT}")
-    set(INPUT_JAR ${CMAKE_SOURCE_DIR}/android/app/build/outputs/aar/libnakama-sdk.aar)
+    set(INPUT_JAR ${LIBNAKAMA_AAR})
     set(OUTPUT_JAR_DIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 
     install(
