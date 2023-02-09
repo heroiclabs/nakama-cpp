@@ -89,19 +89,12 @@ file(
 if (ANDROID)
     find_library(log-lib log)
 
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
-
-    add_library(native_app_glue STATIC $ENV{ANDROID_NDK_HOME}/sources/android/native_app_glue/android_native_app_glue.c)
-    target_include_directories(native_app_glue PUBLIC $ENV{ANDROID_NDK_HOME}/sources/android/native_app_glue)
-
-    ## android NDK works best with a library to load into the native activity
     add_library(nakama-test ${SRCS})
 
     target_link_libraries(nakama-test
         PUBLIC
             ${log-lib}
             android
-            native_app_glue
     )
 else()
     add_executable(nakama-test MACOSX_BUNDLE ${SRCS})

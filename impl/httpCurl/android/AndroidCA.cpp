@@ -46,7 +46,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         return JNI_ERR;
     }
 
-    // Find your class. JNI_OnLoad is called from the correct class loader context for this to work.
+    // Find the class. JNI_OnLoad is called from with the application-level class loader. This allows this to work.
     jclass _cls = _env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
     if (_cls == nullptr) return JNI_ERR;
 

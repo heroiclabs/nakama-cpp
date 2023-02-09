@@ -22,7 +22,6 @@
 #include "nakama-cpp/ClientFactory.h"
 
 #if defined(__ANDROID__)
-#include <android_native_app_glue.h>
 #include <jni.h>
 #endif
 
@@ -221,10 +220,12 @@ int test_main(int argc, const char *argv[])
 #elif defined(__ANDROID__)
 extern "C"
 {
-    void android_main(struct android_app* app)
+    JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
     {
         mainHelper(1, nullptr);
+        return JNI_VERSION_1_4;
     }
+
 }
 #else
 int main(int argc, char *argv[])
