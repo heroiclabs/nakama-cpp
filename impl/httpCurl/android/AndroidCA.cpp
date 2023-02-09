@@ -20,31 +20,46 @@
 #include "nakama-cpp/log/NLogger.h"
 #include "AndroidCA.h"
 
-namespace Nakama
-{
-    static JavaVM* _vm;
-    static JNIEnv* _env;
-    jclass _cls;
-    jmethodID _mid;
+/* TODO add support for users utilizing this library from a NativeActivity.
+In order to do so, they need to get the class loader from their native activity and pass that to our library.
+We would need to provide hooks for it.
+also see: https://archive.is/QzA8 (this is old so there may now be an easier way):
 
-    JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
-        _vm = vm;
-        if (vm->GetEnv(reinterpret_cast<void**>(&_env), JNI_VERSION_1_6) != JNI_OK) {
-            return JNI_ERR;
-        }
+JNIEnv *jni;
+state->vm->AttachCurrentThread(&jni, NULL);
+jclass activityClass = jni->FindClass("android/app/NativeActivity");
+jmethodID getClassLoader = jni->GetMethodID(activityClass,"getClassLoader", "()Ljava/lang/ClassLoader;");
+jobject cls = jni->CallObjectMethod(state->activity->clazz, getClassLoader);
+jclass classLoader = jni->FindClass("java/lang/ClassLoader");
+jmethodID findClass = jni->GetMethodID(classLoader, "loadClass", "(Ljava/lang/String;)Ljava/lang/Class;");
+jstring strClassName = jni->NewStringUTF("com/tewdew/ClassIWant");
+jclass classIWant = (jclass)jni->CallObjectMethod(cls, findClass, strClassName);*/
 
-        // Find your class. JNI_OnLoad is called from the correct class loader context for this to work.
-        jclass _cls = _env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
-        if (_cls == nullptr) return JNI_ERR;
+static JavaVM* _vm;
+static JNIEnv* _env;
+jclass _cls;
+jmethodID _mid;
 
-        _mid = _env->GetStaticMethodID(_cls, "getCaCertificates", "()[B");
-        if (_mid == 0) {
-            return JNI_ERR;
-        }
-
-        return JNI_VERSION_1_6;
+JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
+    _vm = vm;
+    if (vm->GetEnv(reinterpret_cast<void**>(&_env), JNI_VERSION_1_6) != JNI_OK) {
+        return JNI_ERR;
     }
 
+    // Find your class. JNI_OnLoad is called from the correct class loader context for this to work.
+    jclass _cls = _env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
+    if (_cls == nullptr) return JNI_ERR;
+
+    _mid = _env->GetStaticMethodID(_cls, "getCaCertificates", "()[B");
+    if (_mid == 0) {
+        return JNI_ERR;
+    }
+
+    return JNI_VERSION_1_6;
+}
+
+namespace Nakama
+{
     CACertificateData getCaCertificates()
     {
         CACertificateData certData;
