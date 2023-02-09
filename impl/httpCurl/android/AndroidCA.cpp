@@ -27,7 +27,7 @@ namespace Nakama
         CACertificateData certData;
         vm->AttachCurrentThread(&env, NULL);
 
-        jclass cls = env->FindClass("com/nakamasdk/AndroidCA");
+        jclass cls = env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
         jmethodID mid = env->GetStaticMethodID(cls, "getCaCertificates", "()[B");
         if (mid == 0) {
             NLOG(NLogLevel::Error, "No getCaCertificates method found.");
