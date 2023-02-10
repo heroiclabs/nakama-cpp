@@ -374,28 +374,19 @@ else()
 endif()
 
 if (CREATE_JAR)
-    message("-- Bundling Java code...")
+    message("-- Configured to build Java code with Gradle.")
 
     set(LIBNAKAMA_AAR "${CMAKE_SOURCE_DIR}/android/app/build/outputs/aar/libnakama-sdk.aar")
-    add_custom_command(
-        OUTPUT $LIBNAKAMA_AAR
+    # TODO it's very odd that add_custom_command did not seem to trigger, so we use add_custom_target
+    add_custom_target(
+        nakama-aar ALL
         COMMAND ./gradlew assemble
+        BYPRODUCTS ${LIBNAKAMA_AAR}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/android
+        VERBATIM
+        USES_TERMINAL
+        DEPENDS ${CMAKE_SOURCE_DIR}/test/android/src/main/java/com/heroiclabs/nakamatest/MainActivity.java
     )
 
-    message("-- Gradle Output: ${GRADLE_OUTPUT}")
-    set(INPUT_JAR ${LIBNAKAMA_AAR})
-    set(OUTPUT_JAR_DIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
-
-    install(
-        CODE
-        "execute_process(
-            COMMAND
-            ${CMAKE_COMMAND}
-            -DINPUT_JAR=${INPUT_JAR}
-            -DOUTPUT_JAR_DIR=${OUTPUT_JAR_DIR}
-            -P
-            ${CMAKE_SOURCE_DIR}/cmake/androidPostInstall.cmake
-        )"
-    )
+    install(FILES ${LIBNAKAMA_AAR} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
