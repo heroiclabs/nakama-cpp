@@ -17,43 +17,42 @@
 package com.heroiclabs.nakamasdk;
 
 import androidx.annotation.Keep;
-import java.io.StringWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.security.KeyStore;
-import java.security.cert.CertificateEncodingException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import javax.net.ssl.TrustManagerFactory;
-import org.bouncycastle.util.io.pem.PemObject;
-import org.bouncycastle.util.io.pem.PemWriter;
-import android.util.Log;
+import java.util.Base64;
+import java.util.Enumeration;
 
 public class AndroidCA {
 
     @Keep
     public static byte[] getCaCertificates() {
         try {
-            TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-            tmf.init((KeyStore) null);
-            X509Certificate[] trustedCertificates = new X509Certificate[0];
-            for (javax.net.ssl.TrustManager tm : tmf.getTrustManagers()) {
-                if (tm instanceof javax.net.ssl.X509TrustManager) {
-                    // TODO so we just get the first? ssl trust manager shouldn't we get all of them?
-                    trustedCertificates = ((javax.net.ssl.X509TrustManager) tm).getAcceptedIssuers();
-                    break;
-                }
-            }
-            StringBuilder sb = new StringBuilder();
-            for (X509Certificate certificate : trustedCertificates) {
-                try (PemWriter pemWriter = new PemWriter(new StringWriter())) {
-                    pemWriter.writeObject(new PemObject("CERTIFICATE", certificate.getEncoded()));
-                    pemWriter.flush();
-                    sb.append(pemWriter.toString());
-                }
+            KeyStore keyStore = KeyStore.getInstance("AndroidCAStore");
+            keyStore.load(null, null);
+            Enumeration<String> aliases = keyStore.aliases();
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            Writer writer = new OutputStreamWriter(outputStream);
+
+            while (aliases.hasMoreElements()) {
+                String alias = aliases.nextElement();
+                X509Certificate cert = (X509Certificate) keyStore.getCertificate(alias);
+
+                writer.write("-----BEGIN CERTIFICATE-----\n");
+                writer.write(Base64.getEncoder().encodeToString(cert.getEncoded()));
+                writer.write("\n-----END CERTIFICATE-----\n");
             }
 
-            return sb.toString().getBytes();
+            writer.flush();
+            return outputStream.toByteArray();
         } catch (Exception e) {
-            Log.e("Nakama", "Unable to obtain trusted CA certificates: " + e.getMessage());
-            return new byte[]{};
+            e.printStackTrace();
+            return new byte[0];
         }
     }
 }

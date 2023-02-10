@@ -37,8 +37,6 @@ jclass classIWant = (jclass)jni->CallObjectMethod(cls, findClass, strClassName);
 
 static JavaVM* _vm;
 static JNIEnv* _env;
-static jclass _cls;
-static jmethodID _mid;
 
 extern "C"
 {
@@ -48,15 +46,6 @@ extern "C"
         NLOG_INFO("JNI ON LOAD CALLED FOR ANDROID CA");
 
         if (vm->GetEnv(reinterpret_cast<void**>(&_env), JNI_VERSION_1_6) != JNI_OK) {
-            return JNI_ERR;
-        }
-
-        // Find the class. JNI_OnLoad is called from with the application-level class loader. This allows this to work.
-        jclass _cls = _env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
-        if (_cls == nullptr) return JNI_ERR;
-
-        _mid = _env->GetStaticMethodID(_cls, "getCaCertificates", "()[B");
-        if (_mid == 0) {
             return JNI_ERR;
         }
 
@@ -75,7 +64,11 @@ namespace Nakama
 
         NLOG_INFO("attaching current thread");
 
-        jbyteArray certificatesArray = (jbyteArray)_env->CallStaticObjectMethod(_cls, _mid);
+        // Find the class. JNI_OnLoad is called from with the application-level class loader. This allows this to work.
+        jclass cls = _env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
+        jmethodID mid = _env->GetStaticMethodID(cls, "getCaCertificates", "()[B");
+
+        jbyteArray certificatesArray = (jbyteArray)_env->CallStaticObjectMethod(cls, mid);
         jsize certificatesArrayLength = _env->GetArrayLength(certificatesArray);
         jbyte* certificates = _env->GetByteArrayElements(certificatesArray, NULL);
 
