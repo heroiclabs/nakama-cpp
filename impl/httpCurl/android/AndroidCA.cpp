@@ -57,30 +57,49 @@ namespace Nakama
 {
     CACertificateData getCaCertificates()
     {
-        NLOG_INFO("GET CA CERTS CALLED");
-
         CACertificateData certData;
-        _vm->AttachCurrentThread(&_env, NULL);
 
-        NLOG_INFO("attaching current thread");
+        // Attach the current thread to the JVM.
+        _vm->AttachCurrentThread(&_env, NULL);
 
         // Find the class. JNI_OnLoad is called from with the application-level class loader. This allows this to work.
         jclass cls = _env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
+        if (cls == NULL) {
+            NLOG_ERROR("Failed to find class com/heroiclabs/nakamasdk/AndroidCA");
+            _vm->DetachCurrentThread();
+            return certData;
+        }
+
         jmethodID mid = _env->GetStaticMethodID(cls, "getCaCertificates", "()[B");
+        if (mid == NULL) {
+            NLOG_ERROR("Failed to find method getCaCertificates in class com/heroiclabs/nakamasdk/AndroidCA");
+            _vm->DetachCurrentThread();
+            return certData;
+        }
 
         jbyteArray certificatesArray = (jbyteArray)_env->CallStaticObjectMethod(cls, mid);
+        if (certificatesArray == NULL) {
+            NLOG_ERROR("Failed to call method getCaCertificates in class com/heroiclabs/nakamasdk/AndroidCA");
+            _vm->DetachCurrentThread();
+            return certData;
+        }
+
         jsize certificatesArrayLength = _env->GetArrayLength(certificatesArray);
         jbyte* certificates = _env->GetByteArrayElements(certificatesArray, NULL);
-
-        NLOG_INFO("char array");
+        if (certificates == NULL) {
+            NLOG_ERROR("Failed to get elements of certificatesArray");
+            _env->ReleaseByteArrayElements(certificatesArray, certificates, JNI_ABORT);
+            _vm->DetachCurrentThread();
+            return certData;
+        }
 
         std::unique_ptr<unsigned char[]> certificatesCharArray(new unsigned char[certificatesArrayLength]);
         memcpy(certificatesCharArray.get(), certificates, certificatesArrayLength);
         _env->ReleaseByteArrayElements(certificatesArray, certificates, JNI_ABORT);
 
-        NLOG_INFO("detaching current thread");
-
+        // Detach the current thread from the JVM.
         _vm->DetachCurrentThread();
+
         certData.data = std::move(certificatesCharArray);
         certData.len = static_cast<int>(certificatesArrayLength);
 
