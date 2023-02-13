@@ -5,6 +5,7 @@
 #include <nakama-cpp/log/NLogger.h>
 #include "StrUtil.h"
 #include "NetIO.h"
+#include "AndroidCA.h"
 
 NAKAMA_NAMESPACE_BEGIN
 
@@ -36,6 +37,15 @@ struct NetIOCurl {
         curl_easy_setopt(_curl.get(), CURLOPT_CONNECT_ONLY, 1);
         curl_easy_setopt(_curl.get(), CURLOPT_VERBOSE, 1);
         curl_easy_setopt(_curl.get(), CURLOPT_CONNECTTIMEOUT, 5);
+
+#if __ANDROID__
+        CACertificateData data = Nakama::getCaCertificates();
+        struct curl_blob blob;
+        blob.data = reinterpret_cast<char*>(data.data.get());
+        blob.len = data.len;
+        blob.flags = CURL_BLOB_COPY;
+        curl_easy_setopt(_curl.get(), CURLOPT_CAINFO_BLOB, &blob);
+#endif
 
         // only way to do async connect is via curl_multi interface
         if (CURLMcode res = curl_multi_add_handle(_curlm.get(), _curl.get()); res != CURLM_OK) {

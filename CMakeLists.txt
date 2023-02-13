@@ -220,6 +220,41 @@ if(HTTP_IMPL STREQUAL "libhttpclient")
     add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
 endif()
 
+if (ANDROID AND (HTTP_IMPL STREQUAL "curl" OR WS_IMPL STREQUAL "wslay"))
+    add_subdirectory(impl/android)
+    set(CREATE_JAR TRUE) # we need the code for accessing native Android CA store.
+
+    if (HTTP_IMPL STREQUAL "curl")
+        target_link_libraries(nakama-impl-http-libcurl PUBLIC android-ca)
+    endif()
+
+    if (WS_IMPL STREQUAL "wslay")
+        target_link_libraries(nakama-impl-ws-wslay INTERFACE android-ca)
+    endif()
+
+    list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:android-ca>)
+else()
+    set(CREATE_JAR FALSE)
+endif()
+
+if (CREATE_JAR)
+    message("-- Configured to build Java code with Gradle.")
+
+    set(LIBNAKAMA_AAR "${CMAKE_SOURCE_DIR}/android/app/build/outputs/aar/libnakama-sdk.aar")
+    # TODO it's very odd that add_custom_command did not seem to trigger, so we use add_custom_target
+    add_custom_target(
+        nakama-aar ALL
+        COMMAND ./gradlew assemble
+        BYPRODUCTS ${LIBNAKAMA_AAR}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/android
+        VERBATIM
+        USES_TERMINAL
+        DEPENDS ${CMAKE_SOURCE_DIR}/test/android/src/main/java/com/heroiclabs/nakamatest/MainActivity.java
+    )
+
+    install(FILES ${LIBNAKAMA_AAR} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+endif()
+
 find_package(optional-lite CONFIG REQUIRED)
 # SDK API
 add_subdirectory(interface)
@@ -239,7 +274,6 @@ list(APPEND NAKAMA_SDK_DEPS
     $<TARGET_OBJECTS:nakama-sdk-core-common>
     $<TARGET_OBJECTS:nakama-sdk-client-factory>
     $<TARGET_OBJECTS:nakama-sdk-rtclient-factory>
-
 
     # Xcode generator doesn't produce library for a target with no "own" files
     # https://gitlab.kitware.com/cmake/cmake/-/issues/23688
@@ -292,7 +326,7 @@ set_target_properties(nakama-sdk PROPERTIES
         MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
         VERSION ${LIBNAKAMA_VERSION}
         SOVERSION ${LIBNAKAMA_SOVERSION}
-    )
+)
 
 add_library(nakama::sdk ALIAS nakama-sdk)
 target_link_libraries(nakama-sdk
@@ -366,27 +400,3 @@ endif()
 # Call last so they can reference any target previously defined
 include(cmake/linkerFlagsTargets.cmake)
 include(cmake/localCompilerFlags.cmake)
-
-if (ANDROID AND HTTP_IMPL STREQUAL "curl")
-    set(CREATE_JAR TRUE) # we need the code for accessing native Android CA store.
-else()
-    set(CREATE_JAR FALSE)
-endif()
-
-if (CREATE_JAR)
-    message("-- Configured to build Java code with Gradle.")
-
-    set(LIBNAKAMA_AAR "${CMAKE_SOURCE_DIR}/android/app/build/outputs/aar/libnakama-sdk.aar")
-    # TODO it's very odd that add_custom_command did not seem to trigger, so we use add_custom_target
-    add_custom_target(
-        nakama-aar ALL
-        COMMAND ./gradlew assemble
-        BYPRODUCTS ${LIBNAKAMA_AAR}
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/android
-        VERBATIM
-        USES_TERMINAL
-        DEPENDS ${CMAKE_SOURCE_DIR}/test/android/src/main/java/com/heroiclabs/nakamatest/MainActivity.java
-    )
-
-    install(FILES ${LIBNAKAMA_AAR} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-endif()

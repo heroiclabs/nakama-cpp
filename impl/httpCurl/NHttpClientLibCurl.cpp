@@ -18,7 +18,7 @@ static int debug_callback(CURL *handle, curl_infotype type,
     switch (type) {
     case CURLINFO_TEXT:
         NLOG(Nakama::NLogLevel::Debug, "libcurl debug info <=> Text: %s", data);
-    default: /* in case a new one is introduced to shock us */
+    default: /* in case a new one is introduced */
         return 0;
 
     case CURLINFO_HEADER_OUT:

@@ -18,6 +18,7 @@
 
 #include <jni.h>
 #include <string.h>
+#include <memory.h>
 
 namespace Nakama
 {

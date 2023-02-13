@@ -92,9 +92,6 @@ namespace Nakama
     {
         CACertificateData certData;
 
-
-        NLOG_DEBUG("Calling static method...");
-
         jbyteArray certificatesArray = (jbyteArray)_env->CallStaticObjectMethod(_cls, _mid);
         if (certificatesArray == NULL) {
             NLOG_ERROR("Failed to call method getCaCertificates in class com/heroiclabs/nakamasdk/AndroidCA");
@@ -105,12 +102,9 @@ namespace Nakama
         jsize certificatesArrayLength = _env->GetArrayLength(certificatesArray);
         jbyte* certificates = _env->GetByteArrayElements(certificatesArray, NULL);
         if (certificates == NULL) {
-            NLOG_ERROR("Failed to get elements of certificatesArray");
             _env->ReleaseByteArrayElements(certificatesArray, certificates, JNI_ABORT);
             return certData;
         }
-
-        NLOG_DEBUG("Getting certificates char array");
 
         std::unique_ptr<unsigned char[]> certificatesCharArray(new unsigned char[certificatesArrayLength]);
         memcpy(certificatesCharArray.get(), certificates, certificatesArrayLength);
@@ -119,8 +113,6 @@ namespace Nakama
 
         certData.data = std::move(certificatesCharArray);
         certData.len = static_cast<int>(certificatesArrayLength);
-
-        NLOG_DEBUG("returning cert data");
 
         return certData;
     }
