@@ -4,6 +4,9 @@ jobs:
   macos:
       timeout-minutes: 30
       runs-on: macos-12
+      strategy:
+        matrix:
+          preset: ["macosx-x64-host_x64", "macosx-arm64-host_x64"]
       env:
         NAKAMA_TEST_DEVELOPMENT_TEAM: ${{ secrets.NAKAMA_TEST_DEVELOPMENT_TEAM }}
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
@@ -11,6 +14,9 @@ jobs:
         BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
         KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
       steps:
+        - uses: actions/checkout@v3
+          with:
+            path: nakama-cpp
         - name: Install the Apple certificate and provisioning profile
           run: |
             # create variables
@@ -35,21 +41,13 @@ jobs:
             mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
             cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
         - uses: actions/checkout@v3
-        - uses: heroiclabs/nakama-cpp@${{vars.GITHUB_REF_NAME}}/.github/workflows/build_osx.yml
-        - id: setup-postgres
-          uses: ikalnytskyi/action-setup-postgres@v3
+        - uses: ./nakama-cpp/.github/actions/build-library-and-upload
           with:
-            username: root
-            database: nakama
-            port: 26257
-        - uses: heroiclabs/nakama-cpp@${{vars.GITHUB_REF_NAME}}/actions/run-nakama
+            nakama-cpp-path: nakama-cpp
+            preset: ${{ matrix.preset }}
+        - uses: ./nakama-cpp/.github/actions/build-test-and-run
           with:
-            postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
-        - shell: bash
-          run: |
-              ./nakama-cpp/test/out/macosx-x64/nakama-test.app/Contents/MacOS/nakama-test || {
-                  echo "Test failed, showing Nakama log for diagnostics";
-                  cat /tmp/nakama.log;
-                  exit 1;
-              }
+            nakama-cpp-path: nakama-cpp
+            preset: ${{ matrix.preset }}
+
 

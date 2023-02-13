@@ -20,5 +20,5 @@ runs:
         cmake --preset ${{ inputs.preset }}
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
         cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
-        ./out/${{ inputs.preset }}/nakama-test
       working-directory: ${{ inputs.nakama-cpp-path }}
+      shell: bash

@@ -13,6 +13,10 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
           vcpkg-path: vcpkg
+      - uses: ./nakama-cpp/.github/actions/build-library-and-upload
+        with:
+          nakama-cpp-path: nakama-cpp
+          preset: linux-amd64
       - uses: ./nakama-cpp/.github/actions/build-test-and-run
         with:
           nakama-cpp-path: nakama-cpp

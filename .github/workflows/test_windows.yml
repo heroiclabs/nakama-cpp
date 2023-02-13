@@ -5,7 +5,14 @@ jobs:
       timeout-minutes: 40
       runs-on: windows-latest
       steps:
-        - uses: heroiclabs/nakama-cpp@${{vars.GITHUB_REF_NAME}}/build_windows.yml
-
-
-
+        - uses: actions/checkout@v3
+          with:
+            path: nakama-cpp
+        - uses: ./nakama-cpp/.github/actions/build-library-and-upload
+          with:
+            nakama-cpp-path: nakama-cpp
+            preset: ${{ matrix.preset }}
+        - uses: ./nakama-cpp/.github/actions/build-test-and-run
+          with:
+            nakama-cpp-path: nakama-cpp
+            preset: ${{ matrix.preset }}
