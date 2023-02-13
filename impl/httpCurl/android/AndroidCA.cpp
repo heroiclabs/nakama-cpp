@@ -38,27 +38,28 @@ jclass classIWant = (jclass)jni->CallObjectMethod(cls, findClass, strClassName);
 */
 
 static JavaVM* _vm;
-static JNIEnv* _env;
 static jclass _cls;
 static jmethodID _mid;
+static JNIEnv* _env; // use a single continuous native thread for our cert grabbing (TODO maybe we could cache the cert data)
 
 extern "C"
 {
     // Invoked when this library is loaded using System.loadLibrary() in the JVM.
     // There is a 1:1 relationship between JNIEnv and a native thread.
-    // In this callback, we get the current JNIEnv because it has a classloader that can find AndroidCA.
-    // But in getCACertificiates we create a new native thread so that it can run in isolation (we don't know what native threads, if any,
-    // are running at that point.) Keep in mind that getCACertificates only has the "system" classloader, it would not be able to
-    // find the AndroidCA class, that's why we cache the class and method ids in the OnLoad callback.
+    // In this callback, we get the current JNIEnv (load_env) because it has a classloader that can find AndroidCA.
+    // But in getCACertificiates we create use a new native thread so that it can run in isolation (the ART manages the load_env, so we need our own.)
+    // Keep in mind that getCACertificates only has the "system" classloader, it would not be able to find the AndroidCA class, that's why we cache the class and method ids in the OnLoad callback.
     JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         _vm = vm;
 
-        if (vm->GetEnv(reinterpret_cast<void**>(&_env), JNI_VERSION_1_6) != JNI_OK) {
+        JNIEnv* load_env;
+
+        if (vm->GetEnv(reinterpret_cast<void**>(&load_env), JNI_VERSION_1_6) != JNI_OK) {
             return JNI_ERR;
         }
 
         // Find the class. JNI_OnLoad is called from with the application-level rather than just system level class loader. This allows this to work.
-        _cls = _env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
+        _cls = load_env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
         if (_cls == NULL) {
             NLOG_ERROR("Failed to find class com/heroiclabs/nakamasdk/AndroidCA");
             return JNI_ERR;
@@ -66,11 +67,18 @@ extern "C"
 
         // promote the jclass to a global object. otherwise we can't share it between native threads (remember, JNI represents a native thread)
         // because the underlying Java object representing the class gets GC'd.
-        _cls = (jclass) _env->NewGlobalRef(_cls);
+        _cls = (jclass) load_env->NewGlobalRef(_cls);
 
-        _mid = _env->GetStaticMethodID(_cls, "getCaCertificates", "()[B");
+        _mid = load_env->GetStaticMethodID(_cls, "getCaCertificates", "()[B");
         if (_mid == NULL) {
             NLOG_ERROR("Failed to find method getCaCertificates in class com/heroiclabs/nakamasdk/AndroidCA");
+            return JNI_ERR;
+        }
+
+        int result = _vm->AttachCurrentThread(&_env, NULL);
+        // Attach the current thread to the JVM.
+        if (result != JNI_OK) {
+            NLOG_ERROR("Thread attach failed: " + std::to_string(result));
             return JNI_ERR;
         }
 
@@ -84,20 +92,12 @@ namespace Nakama
     {
         CACertificateData certData;
 
-        JNIEnv* env;
-        int result = _vm->AttachCurrentThread(&env, NULL);
-        // Attach the current thread to the JVM.
-        if (result != JNI_OK) {
-            NLOG_ERROR("Thread attach failed: " + std::to_string(result));
-            return certData;
-        }
 
         NLOG_DEBUG("Calling static method...");
 
         jbyteArray certificatesArray = (jbyteArray)_env->CallStaticObjectMethod(_cls, _mid);
         if (certificatesArray == NULL) {
             NLOG_ERROR("Failed to call method getCaCertificates in class com/heroiclabs/nakamasdk/AndroidCA");
-            _vm->DetachCurrentThread();
             return certData;
         }
 
@@ -107,7 +107,6 @@ namespace Nakama
         if (certificates == NULL) {
             NLOG_ERROR("Failed to get elements of certificatesArray");
             _env->ReleaseByteArrayElements(certificatesArray, certificates, JNI_ABORT);
-            _vm->DetachCurrentThread();
             return certData;
         }
 
@@ -117,13 +116,6 @@ namespace Nakama
         memcpy(certificatesCharArray.get(), certificates, certificatesArrayLength);
         _env->ReleaseByteArrayElements(certificatesArray, certificates, JNI_ABORT);
 
-
-        NLOG_DEBUG("Detaching current thread");
-
-        // Detach the current thread from the JVM, this frees the JNI* object.
-        _vm->DetachCurrentThread();
-
-        NLOG_DEBUG("Done detaching current thread");
 
         certData.data = std::move(certificatesCharArray);
         certData.len = static_cast<int>(certificatesArrayLength);
