@@ -149,7 +149,9 @@
                 "VCPKG_TARGET_TRIPLET": "x64-iphonesimulator-heroic",
                 "CMAKE_SYSTEM_NAME": "iOS",
                 "CMAKE_OSX_SYSROOT": "iphonesimulator",
-                "CMAKE_OSX_ARCHITECTURES": "x86_64"
+                "CMAKE_OSX_ARCHITECTURES": "x86_64",
+                "BUILD_WSLAY": "ON",
+                "BUILD_CURL": "ON"
             }
         },
         {
@@ -229,15 +231,15 @@
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
-                "VCPKG_TARGET_TRIPLET": "arm64-android-heroic",
-                "ANDROID_ABI": "arm64-v8a"
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android-heroic",
+                "ANDROID_ABI": "armeabi-v7a"
             },
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
             },
-            "installDir": "out/android-arm64-v8a"
+            "installDir": "out/android-armeabi-v7a"
         },
         {
             "name": "android-x64-host_osx_arm64",
@@ -289,6 +291,60 @@
                 "CXX": "/usr/bin/g++-11"
             },
             "installDir": "out/ubuntu1804-amd64"
+        },
+        {
+            "name": "android-armeabi-v7a-host_linux-x64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-linux-release",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android-heroic",
+                "ANDROID_ABI": "armeabi-v7a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "installDir": "out/android-armeabi-v7a"
+        },
+        {
+            "name": "android-arm64-v8a-host_linux-x64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-linux-release",
+                "VCPKG_TARGET_TRIPLET": "arm64-android-heroic",
+                "ANDROID_ABI": "arm64-v8a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "installDir": "out/android-arm64-v8a"
+        },
+        {
+            "name": "android-x64-host_linux-x64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-linux-release",
+                "VCPKG_TARGET_TRIPLET": "x64-android-heroic",
+                "ANDROID_ABI": "x86_64"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "installDir": "out/android-x64"
         }
     ]
 }

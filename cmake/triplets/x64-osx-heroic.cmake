@@ -6,6 +6,6 @@ set(VCPKG_BUILD_TYPE release)
 set(VCPKG_CMAKE_SYSTEM_NAME Darwin)
 set(VCPKG_OSX_ARCHITECTURES x86_64)
 
-# HeroicLabs additions to standard triplets:
+# Heroic Labs additions to standard triplets:
 set(VCPKG_OSX_DEPLOYMENT_TARGET "10.15")
 include(${CMAKE_CURRENT_LIST_DIR}/feature-visibility-hidden.cmake)

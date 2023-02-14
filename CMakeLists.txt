@@ -2,6 +2,15 @@
 cmake_minimum_required(VERSION 3.22.1)
 include(version.cmake)
 
+if (CMAKE_OSX_SYSROOT STREQUAL "iphonesimulator")
+    # this hack seems to be required for now, otherwise CMake still thinks we are building for arm...
+    set(CMAKE_XCODE_ATTRIBUTE_EXCLUDED_ARCHS[sdk=iphonesimulator*] "arm64")
+endif()
+
+if (ANDROID)
+    SET(ANDROID_USE_LEGACY_TOOLCHAIN_FILE FALSE)
+endif()
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
 set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
 set(CMAKE_SUPPRESS_REGENERATION true) ## for Xcode
@@ -173,6 +182,8 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
 
         set(LIBHTTPCLIENT_OBJECT_LIBRARY TRUE)
 
+        ## force libhttpclient to build statically
+        set(BUILD_SHARED_LIBS OFF)
         FetchContent_Declare(
             libHttpClient
             GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
@@ -184,6 +195,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         )
 
         FetchContent_MakeAvailable(libHttpClient)
+        set(BUILD_SHARED_LIBS ON)
 
         if (NOT WS_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")

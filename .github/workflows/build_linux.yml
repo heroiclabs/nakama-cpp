@@ -1,13 +1,24 @@
 name: Build Linux
 on: [workflow_call, workflow_dispatch]
 jobs:
-  linux_matrix:
+  build_linux:
     timeout-minutes: 30
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/cmake-build
         with:
+          path: nakama-cpp
+      - uses: ./nakama-cpp/.github/actions/setup-ubuntu
+      - uses: ./nakama-cpp/.github/actions/setup-vcpkg
+        with:
+          github_token: ${{ secrets.github_token }}
+          vcpkg-path: vcpkg
+      - uses: ./nakama-cpp/.github/actions/build-library-and-upload
+        with:
+          nakama-cpp-path: nakama-cpp
           preset: linux-amd64
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - if: failure()
+        uses: ./nakama-cpp/.github/actions/handle-failure
+        with:
+          nakama-cpp-path: nakama-cpp
+          vcpkg-path: vcpkg
