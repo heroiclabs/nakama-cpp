@@ -1,5 +1,5 @@
 name: Test Windows
-on: [workflow_dispatch, workflow_call]
+on: [workflow_dispatch, workflow_call, pull_request]
 jobs:
   windows:
       timeout-minutes: 40
