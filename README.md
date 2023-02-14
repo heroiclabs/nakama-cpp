@@ -378,7 +378,7 @@ HTTP:
 Platform | Transport              |
   --- |---------------------------|
 Windows | libhttpclient -> winhttp  |
-Android | cpprestsdk              |
+Android | libcurl                 |
 Linux | libhttpclient->curl       |
 MacOS | libhttpclient -> OS       |
 iOS   | libhttpclient -> OS       |
