@@ -10,10 +10,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: "zip -r build.zip ./build"
+    - run: "zip -r build ./build"
       shell: bash
       working-directory: ${{ inputs.nakama-cpp-path }}
-    - run: "zip -r buildtrees.zip ./buildtrees"
+    - run: "zip -r buildtrees ./buildtrees"
       shell: bash
       working-directory: ${{ inputs.vcpkg-path }}
     - run: |

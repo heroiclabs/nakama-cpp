@@ -37,7 +37,7 @@ runs:
       run: |
         folder_name="${{ steps.get-folder-name.outputs.folder-name }}"
         cd "./nakama-cpp/out"
-        zip -r "./${folder_name}.zip" "./${folder_name}"
+        zip -r "./${folder_name}" "./${folder_name}"
         echo "artifact-path=${PWD}/${folder_name}.zip" >> $GITHUB_OUTPUT
       shell: bash
     - name: Upload artifact
