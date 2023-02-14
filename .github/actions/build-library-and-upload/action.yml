@@ -32,7 +32,6 @@ runs:
           echo "folder-name=$folder_name" >> $GITHUB_OUTPUT
         done
       shell: bash
-
     - name: Create zip file
       id: create-zip
       run: |
@@ -46,3 +45,4 @@ runs:
       with:
         name: ${{ steps.get-folder-name.outputs.folder-name }}
         path: ${{ steps.create-zip.outputs.artifact-path }}
+        if-no-files-found: error

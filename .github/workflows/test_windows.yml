@@ -1,5 +1,5 @@
 name: Test Windows
-on: [workflow_dispatch, workflow_call, pull_request]
+on: [workflow_dispatch, workflow_call]
 jobs:
   windows:
       strategy:
