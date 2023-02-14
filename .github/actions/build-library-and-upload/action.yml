@@ -48,4 +48,3 @@ runs:
       with:
         name: ${{ steps.get-folder-name.outputs.folder-name }}
         path: ${{ steps.create-zip.outputs.artifact-path }}
-      shell: bash
