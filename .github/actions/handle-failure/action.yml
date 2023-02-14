@@ -18,7 +18,7 @@ runs:
       working-directory: ${{ inputs.vcpkg-path }}
     - run: |
         if [ -e "./nakama-cpp/out" ]; then
-          zip -r ./nakama-cpp/out.zip ./nakama-cpp/out"
+          zip -r ./nakama-cpp/out.zip ./nakama-cpp/out
         fi
       shell: bash
       working-directory: ${{ inputs.vcpkg-path }}
