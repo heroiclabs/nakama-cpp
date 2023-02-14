@@ -22,3 +22,30 @@ runs:
         cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
       working-directory: ${{ inputs.nakama-cpp-path }}
       shell: bash
+
+    - name: Get folder name
+      id: get-folder-name
+      run: |
+        path="./nakama-cpp/out"
+        for dir in "$path"/*/; do
+          folder_name=$(basename "$dir")
+          echo "::set-output name=folder-name::$folder_name"
+        done
+      shell: bash
+
+    - name: Create zip file
+      id: create-zip
+      run: |
+        folder_name="${{ steps.get-folder-name.outputs.folder-name }}"
+        artifact_path="./${folder_name}.zip"
+        cd "./nakama-cpp/out"
+        zip -r "${artifact_path}" "./${folder_name}"
+        echo "::set-output name=artifact-path::$artifact_path"
+      shell: bash
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ steps.get-folder-name.outputs.folder-name }}
+        path: ${{ steps.create-zip.outputs.artifact-path }}
+      shell: bash
