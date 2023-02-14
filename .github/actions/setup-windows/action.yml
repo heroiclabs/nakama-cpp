@@ -1,0 +1,13 @@
+name: 'Setup Windows'
+description: 'Sets up prereqs for all windows machines'
+runs:
+  using: "composite"
+  steps:
+    - name: Install Chocolatey
+      run: |
+        Set-ExecutionPolicy Bypass -Scope Process -Force
+        iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+      shell: powershell
+    - name: Install zip
+      run: choco install zip
+      shell: powershell

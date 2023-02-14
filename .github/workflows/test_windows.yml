@@ -12,6 +12,8 @@ jobs:
         - uses: actions/checkout@v3
           with:
             path: nakama-cpp
+        - uses: ./nakama-cpp/.github/actions/setup-windows
+        - uses: ./nakama-cpp/.github/actions/setup-vcpkg
         - uses: ./nakama-cpp/.github/actions/build-library-and-upload
           with:
             nakama-cpp-path: nakama-cpp
