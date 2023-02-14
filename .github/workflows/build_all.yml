@@ -47,10 +47,15 @@ jobs:
             cd ./${{ steps.combine.outputs.generic-artifact-dir }}
             7zr a ../${{ steps.combine.outputs.generic-artifact-name }}.7z '*'
           )
-
+        shell: bash
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.combine.outputs.generic-artifact-name }}
           path: ./${{ steps.combine.outputs.generic-artifact-dir }}.7z
           retention-days: 2
-
+      - if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: workdir-debug
+          path: ./
+          retention-days: 1
