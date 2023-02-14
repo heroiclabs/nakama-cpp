@@ -29,7 +29,7 @@ runs:
         path="./nakama-cpp/out"
         for dir in "$path"/*/; do
           folder_name=$(basename "$dir")
-          echo "::set-output name=folder-name::$folder_name"
+          echo "folder-name=$folder_name" >> $GITHUB_OUTPUT
         done
       shell: bash
 
@@ -39,11 +39,10 @@ runs:
         folder_name="${{ steps.get-folder-name.outputs.folder-name }}"
         cd "./nakama-cpp/out"
         zip -r "./${folder_name}.zip" "./${folder_name}"
-        echo "::set-output name=artifact-path::${PWD}/${folder_name}.zip"
+        echo "artifact-path=${PWD}/${folder_name}.zip" >> $GITHUB_OUTPUT
       shell: bash
-
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.get-folder-name.outputs.folder-name }}
         path: ${{ steps.create-zip.outputs.artifact-path }}
