@@ -22,7 +22,7 @@
 #include "../../impl/wsLibHttpClient/NWebsocketLibHC.h"
 #elif defined(BUILD_WEBSOCKET_WSLAY)
 #include "NWebsocketWslay.h"
-    #if defined(BUILD_CURL)
+    #if defined(BUILD_CURL_IO)
 #include "NetIOCurl.h"
     #endif
 #elif defined(BUILD_WEBSOCKET_CPPRESTSDK)
@@ -38,7 +38,7 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
     (void)platformParams;  // silence unused variable warning on some platforms
     #if defined(BUILD_WEBSOCKET_LIBHTTPCLIENT)
     return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
-    #elif defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL)
+    #elif defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL_IO)
     return NRtTransportPtr(new NWebsocketWslay<NetIOCurl>());
     #elif defined(BUILD_WEBSOCKET_CPPRESTSDK)
     return NRtTransportPtr(new NWebsocketCppRest());

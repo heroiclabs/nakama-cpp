@@ -198,6 +198,18 @@ You can change ping period on server - `ping_period_ms` parameter:
 
 https://heroiclabs.com/docs/install-configuration/#socket
 
+#### Android
+
+To use our native C++ library in your Android application, you will need to include an additional .aar file that we ship for SSL support.
+
+For example, in Gradle:
+
+```
+implementation files("<path/to/libnakama-sdk.aar>")
+```
+
+Then you will need to load our native library from Java by calling `System.loadLibrary("nakama-sdk")` when your activity is created.
+
 # How to build
 
 ## Prerequisite

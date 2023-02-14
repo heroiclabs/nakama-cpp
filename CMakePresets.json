@@ -74,7 +74,7 @@
                 "CMAKE_OSX_ARCHITECTURES": "arm64",
                 "WITH_LIBHTTPCLIENT_HTTP": "ON",
                 "BUILD_WSLAY": "ON",
-                "BUILD_CURL": "ON",
+                "BUILD_CURL_IO": "ON",
                 "VCPKG_MANIFEST_FEATURES": "wslay;curl"
             },
             "condition": {
@@ -125,7 +125,7 @@
                 "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
                 "CMAKE_SYSTEM_NAME": "iOS",
                 "BUILD_WSLAY": "ON",
-                "BUILD_CURL": "ON"
+                "BUILD_CURL_IO": "ON"
             },
             "installDir": "out/ios-arm64"
         },
@@ -175,33 +175,17 @@
                 "ANDROID_ARM_NEON": "ON",
                 "ANDROID_STL": "c++_shared",
                 "ANDROID_PLATFORM": "android-21",
+                "BUILD_CURL_HTTP": "ON",
+                "BUILD_WSLAY": "ON",
+                "BUILD_CURL_IO": "ON",
                 "CMAKE_SYSTEM_NAME": "Android",
-                "VCPKG_MANIFEST_FEATURES": "cpprestsdk",
-                "WITH_CPPRESTSDK": "ON"
+                "VCPKG_MANIFEST_FEATURES": "curl;wslay"
             },
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Darwin"
             }
-        },
-        {
-            "name": "android-armeabi-v7a-host_osx_x64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
-                "VCPKG_TARGET_TRIPLET": "arm-neon-android-heroic",
-                "ANDROID_ABI": "armeabi-v7a"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
-            },
-            "installDir": "out/android-armeabi-v7a"
         },
         {
             "name": "android-arm64-v8a-host_osx_x64",
@@ -240,7 +224,7 @@
             "installDir": "out/android-x64"
         },
         {
-            "name": "android-armeabi-v7a-host_osx_arm64",
+            "name": "android-arm64-v8a-host_osx_arm64",
             "inherits": [
                 "android-default"
             ],
@@ -256,24 +240,6 @@
                 "rhs": "Darwin"
             },
             "installDir": "out/android-armeabi-v7a"
-        },
-        {
-            "name": "android-arm64-v8a-host_arm64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
-                "VCPKG_TARGET_TRIPLET": "arm64-android-heroic",
-                "ANDROID_ABI": "arm64-v8a"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
-            },
-            "installDir": "out/android-arm64-v8a"
         },
         {
             "name": "android-x64-host_osx_arm64",
@@ -304,7 +270,7 @@
                 "VCPKG_TARGET_TRIPLET": "x64-linux-heroic",
                 "WITH_LIBHTTPCLIENT_HTTP": "ON",
                 "BUILD_WSLAY": "ON",
-                "BUILD_CURL": "ON",
+                "BUILD_CURL_IO": "ON",
                 "VCPKG_MANIFEST_FEATURES": "curl;wslay"
             },
             "condition": {

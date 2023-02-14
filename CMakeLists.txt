@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.23)
+# I think we are constrained to the version that the latest android sdk uses, for Android builds.
+cmake_minimum_required(VERSION 3.22.1)
 include(version.cmake)
-
 
 if (CMAKE_OSX_SYSROOT STREQUAL "iphonesimulator")
     # this hack seems to be required for now, otherwise CMake still thinks we are building for arm...
@@ -50,6 +50,8 @@ else()
         set(HTTP_IMPL "libhttpclient")
     elseif (WITH_CPPRESTSDK)
         set(HTTP_IMPL "cpprestsdk")
+    elseif (BUILD_CURL_HTTP)
+        set(HTTP_IMPL "curl")
     endif()
 
     if (WITH_LIBHTTPCLIENT_WS)
@@ -63,7 +65,7 @@ endif()
 
 if (DEFINED ANDROID_ABI)
     if (DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
-        message(FATAL "Cannot specify an external chainload toolchain if building for Android.")
+        message(FATAL_ERROR "Cannot specify an external chainload toolchain if building for Android.")
     endif()
 
     set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
@@ -71,10 +73,13 @@ endif()
 
 cmake_policy(SET CMP0012 NEW)
 
-# Kickstarts vcpkg dependency manager. It will parse vcpkg.json and install all configured
-# dependencies. Some dependencies are optional and enabled via VCPKG_MANIFEST_FEATURES
-set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
-        CACHE FILEPATH "Vcpkg toolchain file")
+## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
+set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake CACHE FILEPATH "Vcpkg toolchain file" FORCE)
+
+if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
+    # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
+endif()
 
 project(nakama-sdk LANGUAGES CXX)
 
@@ -205,6 +210,8 @@ endif()
 
 if (HTTP_IMPL STREQUAL "cpprestsdk")
     add_subdirectory(impl/httpCppRest EXCLUDE_FROM_ALL)
+elseif(HTTP_IMPL STREQUAL "curl")
+    add_subdirectory(impl/httpCurl EXCLUDE_FROM_ALL)
 endif()
 
 add_library(nakama-ws-impl INTERFACE)
@@ -223,6 +230,41 @@ endif()
 if(HTTP_IMPL STREQUAL "libhttpclient")
     set(BUILD_HTTP_LIBHTTPCLIENT ON)
     add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
+endif()
+
+if (ANDROID AND (HTTP_IMPL STREQUAL "curl" OR WS_IMPL STREQUAL "wslay"))
+    add_subdirectory(impl/android)
+    set(CREATE_JAR TRUE) # we need the code for accessing native Android CA store.
+
+    if (HTTP_IMPL STREQUAL "curl")
+        target_link_libraries(nakama-impl-http-libcurl PUBLIC android-ca)
+    endif()
+
+    if (WS_IMPL STREQUAL "wslay")
+        target_link_libraries(nakama-impl-ws-wslay INTERFACE android-ca)
+    endif()
+
+    list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:android-ca>)
+else()
+    set(CREATE_JAR FALSE)
+endif()
+
+if (CREATE_JAR)
+    message("-- Configured to build Java code with Gradle.")
+
+    set(LIBNAKAMA_AAR "${CMAKE_SOURCE_DIR}/android/app/build/outputs/aar/libnakama-sdk.aar")
+    # TODO it's very odd that add_custom_command did not seem to trigger, so we use add_custom_target
+    add_custom_target(
+        nakama-aar ALL
+        COMMAND ./gradlew assemble
+        BYPRODUCTS ${LIBNAKAMA_AAR}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/android
+        VERBATIM
+        USES_TERMINAL
+        DEPENDS ${CMAKE_SOURCE_DIR}/test/android/src/main/java/com/heroiclabs/nakamatest/MainActivity.java
+    )
+
+    install(FILES ${LIBNAKAMA_AAR} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
 
 find_package(optional-lite CONFIG REQUIRED)
@@ -245,7 +287,6 @@ list(APPEND NAKAMA_SDK_DEPS
     $<TARGET_OBJECTS:nakama-sdk-client-factory>
     $<TARGET_OBJECTS:nakama-sdk-rtclient-factory>
 
-
     # Xcode generator doesn't produce library for a target with no "own" files
     # https://gitlab.kitware.com/cmake/cmake/-/issues/23688
     ${DUMMY_CPP}
@@ -258,6 +299,7 @@ if (BUILD_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:nakama-sdk-core-grpc>)
 endif()
 
+## TODO this can be massively simplified
 if (WITH_LIBHTTPCLIENT_WS)
     target_compile_definitions(nakama-sdk-core-rt PUBLIC BUILD_WEBSOCKET_LIBHTTPCLIENT)
     target_compile_definitions(nakama-sdk-core-common PUBLIC BUILD_WEBSOCKET_LIBHTTPCLIENT)
@@ -296,7 +338,7 @@ set_target_properties(nakama-sdk PROPERTIES
         MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
         VERSION ${LIBNAKAMA_VERSION}
         SOVERSION ${LIBNAKAMA_SOVERSION}
-    )
+)
 
 add_library(nakama::sdk ALIAS nakama-sdk)
 target_link_libraries(nakama-sdk

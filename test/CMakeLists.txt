@@ -12,8 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+
 cmake_minimum_required(VERSION 3.18.1)
+
+if(APPLE AND (NOT DEFINED ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}))
+    message(FATAL_ERROR "No test development team setup. Please have an entry for NAKAMA_TEST_DEVELOPMENT_TEAM in your environment variables. See README.md for more information.")
+endif()
 
  ## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
 set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake CACHE FILEPATH "Vcpkg toolchain file" FORCE)
@@ -83,22 +87,14 @@ file(
 # following this guide: https://medium.com/androiddevelopers/getting-started-with-c-and-android-native-activities-2213b402ffff
 # alternatively we could do this in `Android.mk` but we already use CMake.
 if (ANDROID)
-
     find_library(log-lib log)
 
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
-
-    add_library(native_app_glue STATIC $ENV{ANDROID_NDK_HOME}/sources/android/native_app_glue/android_native_app_glue.c)
-    target_include_directories(native_app_glue PUBLIC $ENV{ANDROID_NDK_HOME}/sources/android/native_app_glue)
-
-    ## android NDK works best with a library to load into the native activity
     add_library(nakama-test ${SRCS})
 
     target_link_libraries(nakama-test
         PUBLIC
             ${log-lib}
             android
-            native_app_glue
     )
 else()
     add_executable(nakama-test MACOSX_BUNDLE ${SRCS})
@@ -140,8 +136,6 @@ else()
     set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/lib/nakama-sdk.framework)
 endif()
 
-# bitcode will be deprecated in Xcode 14 which is in beta at the time of this writing
-# https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes
 set_target_properties(nakama-test PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER "com.test"
     MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/test.plist

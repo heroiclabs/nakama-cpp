@@ -170,36 +170,12 @@
                 "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE",
                 "ANDROID_STL": "c++_shared",
                 "ANDROID_PLATFORM": "android-21",
-                "CMAKE_SYSTEM_NAME": "Android"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
+                "CMAKE_SYSTEM_NAME": "Android",
+                "CMAKE_BUILD_TYPE": "Debug"
             },
             "environment": {
                 "NDK": "$env{ANDROID_NDK_HOME}"
             }
-        },
-        {
-            "name": "android-armeabi-v7a-host_osx_x64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-osx",
-                "VCPKG_TARGET_TRIPLET": "arm-neon-android",
-                "ANDROID_ABI": "armeabi-v7a",
-                "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE"
-
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
-            },
-            "installDir": "out/android-aremabi-v7a"
         },
         {
             "name": "android-arm64-v8a-host_osx_x64",
@@ -236,24 +212,6 @@
                 "rhs": "Darwin"
             },
             "installDir": "out/android-x64"
-        },
-        {
-            "name": "android-armeabi-v7a-host_linux-x64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-linux-release",
-                "VCPKG_TARGET_TRIPLET": "arm-neon-android",
-                "ANDROID_ABI": "armeabi-v7a"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Linux"
-            },
-            "installDir": "out/android-armeabi-v7a"
         },
         {
             "name": "android-arm64-v8a-host_linux-x64",

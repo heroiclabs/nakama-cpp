@@ -11,6 +11,8 @@ if(WITH_LIBHTTPCLIENT_HTTP)
     target_compile_definitions(nakama-sdk-client-factory PRIVATE BUILD_HTTP_LIBHTTPCLIENT)
 elseif(WITH_CPPRESTSDK)
     target_compile_definitions(nakama-sdk-client-factory PRIVATE BUILD_HTTP_CPPRESTSDK)
+elseif(BUILD_CURL_HTTP)
+    target_compile_definitions(nakama-sdk-client-factory PRIVATE BUILD_HTTP_CURL)
 else()
     target_compile_definitions(nakama-sdk-client-factory PRIVATE WITH_EXTERNAL_HTTP)
 endif()
@@ -23,6 +25,6 @@ target_link_libraries(nakama-sdk-rtclient-factory
         PRIVATE ${WS_IMPL_LIB}
         )
 
-if (BUILD_CURL)
-    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_CURL)
+if (BUILD_CURL_IO)
+    target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_CURL_IO)
 endif()
