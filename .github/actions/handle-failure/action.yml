@@ -17,11 +17,11 @@ runs:
       shell: bash
       working-directory: ${{ inputs.vcpkg-path }}
     - run: |
-        if [ -e "./nakama-cpp/out" ]; then
-          zip -r ./nakama-cpp/out.zip ./nakama-cpp/out
+        if [ -e "./out" ]; then
+          zip -r ./out.zip ./out
         fi
       shell: bash
-      working-directory: ${{ inputs.vcpkg-path }}
+      working-directory: ${{ inputs.nakama-cpp-path }}
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
