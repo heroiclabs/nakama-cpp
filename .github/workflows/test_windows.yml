@@ -2,6 +2,10 @@ name: Test Windows
 on: [workflow_dispatch, workflow_call, pull_request]
 jobs:
   windows:
+      strategy:
+        matrix:
+          build_type: [MinSizeRel, Debug]
+          preset: [win-x64, win-x86]
       timeout-minutes: 40
       runs-on: windows-latest
       steps:
@@ -12,6 +16,7 @@ jobs:
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
+            build_type: ${{ matrix.build_type }}
         - uses: ./nakama-cpp/.github/actions/build-test-and-run
           with:
             nakama-cpp-path: nakama-cpp
