@@ -12,9 +12,8 @@ runs:
   steps:
     - id: build
       run: |
-        cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
-        cmake --build ./build/${{ inputs.preset }} --verbose
-        cmake --install ./build/${{ inputs.preset }}
+        cmake --preset ${{ inputs.preset }}
+        cmake --build ./build/${{ inputs.preset }} --target install
       shell: bash
       working-directory: ${{ inputs.nakama-cpp-path }}/test
     - id: setup-postgres
