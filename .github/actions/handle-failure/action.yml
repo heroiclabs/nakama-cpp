@@ -1,0 +1,25 @@
+name: 'Handle Failure'
+description: 'Handle a build failure'
+inputs:
+  vcpkg-path:
+    description: 'Relative path under $GITHUB_WORKSPACE to the vcpkg repository'
+    required: true
+  nakama-cpp-path:
+    description: 'Relative path under $GITHUB_WORKSPACE to the nakama-cpp repository'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: "zip -r build.zip ./build"
+      shell: bash
+      working-directory: ${{ inputs.nakama-cpp-path }}
+    - run: "zip -r buildtrees.zip ./buildtrees"
+      shell: bash
+      working-directory: ${{ inputs.vcpkg-path }}
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
+        path: |
+          ./nakama-cpp/build.zip
+          ./vcpkg/buildtrees.zip
+        retention-days: 1

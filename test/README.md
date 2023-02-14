@@ -11,6 +11,9 @@ cmake --preset <configure-preset>
 cmake --build --preset <build-preset> --target install
 ```
 
+To build and deploy for iOS, you will need to pass `-- -allowProvisioningUpdates` to the end of your cmake build command.
+
+
 To build for Android, inside the `android` folder:
 
 `./gradlew assemble -PandroidABI=<ANDROID_ABI>` where ANDROD_ABI is one of those defined in `CMakePresets.json`.

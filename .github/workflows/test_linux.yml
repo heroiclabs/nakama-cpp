@@ -1,18 +1,14 @@
-name: Build Windows
-on: [workflow_call, workflow_dispatch]
+name: Test Linux
+on: [workflow_dispatch, workflow_call]
 jobs:
-  build_windows:
+  build_linux:
     timeout-minutes: 30
-    strategy:
-      matrix:
-        build_type: [MinSizeRel, Debug]
-        preset: [win-x64, win-x86]
-
-    runs-on: windows-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
           path: nakama-cpp
+      - uses: ./nakama-cpp/.github/actions/setup-ubuntu
       - uses: ./nakama-cpp/.github/actions/setup-vcpkg
         with:
           github_token: ${{ secrets.github_token }}
@@ -20,8 +16,11 @@ jobs:
       - uses: ./nakama-cpp/.github/actions/build-library-and-upload
         with:
           nakama-cpp-path: nakama-cpp
-          preset: ${{ matrix.preset }}
-          build_type: ${{ matrix.build_type }}
+          preset: linux-amd64
+      - uses: ./nakama-cpp/.github/actions/build-test-and-run
+        with:
+          nakama-cpp-path: nakama-cpp
+          preset: linux-amd64
       - if: failure()
         uses: ./nakama-cpp/.github/actions/handle-failure
         with:

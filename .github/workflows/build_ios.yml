@@ -1,7 +1,7 @@
 name: Build iOS
 on: [workflow_call, workflow_dispatch]
 jobs:
-  ios_matrix:
+  build_ios:
     timeout-minutes: 30
     strategy:
       matrix:
@@ -9,7 +9,21 @@ jobs:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/cmake-build
         with:
+          path: nakama-cpp
+      - uses: ./nakama-cpp/.github/actions/setup-vcpkg
+        with:
+          github_token: ${{ secrets.github_token }}
+          vcpkg-path: vcpkg
+      - run: ./nakama-cpp/ci/setup-osx.sh
+        shell: bash
+      - uses: ./nakama-cpp/.github/actions/build-library-and-upload
+        with:
+          nakama-cpp-path: nakama-cpp
           preset: ${{ matrix.preset }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - if: failure()
+        uses: ./nakama-cpp/.github/actions/handle-failure
+        with:
+          nakama-cpp-path: nakama-cpp
+          vcpkg-path: vcpkg
+

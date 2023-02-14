@@ -1,0 +1,55 @@
+name: 'Setup Vcpkg'
+description: 'Clone and bootstrap vcpkg'
+inputs:
+  vcpkg-path:
+    description: 'Relative path under $GITHUB_WORKSPACE to the vcpkg repository'
+    required: true
+  github_token:
+    description: 'github token'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        path: ${{ inputs.vcpkg-path }}
+        repository: microsoft/vcpkg
+        fetch-depth: 0
+    - if: runner.os != 'Windows'
+      run: "echo VCPKG_ROOT=${{ github.workspace }}/${{ inputs.vcpkg-path }} >> $GITHUB_ENV"
+      shell: bash
+      working-directory: ${{ inputs.vcpkg-path }}
+    - if: runner.os == 'Windows'
+      run: |
+        echo "VCPKG_ROOT=${{ github.workspace }}/${{ inputs.vcpkg-path }}" | Out-File -FilePath $env:GITHUB_ENV -Append
+      shell: powershell
+      working-directory: ${{ inputs.vcpkg-path }}
+    - if: runner.os == 'Linux'
+      run: sudo eatmydata "./bootstrap-vcpkg.sh"
+      shell: bash
+      working-directory: ${{ inputs.vcpkg-path }}
+    - if: runner.os == 'Windows'
+      run: .\bootstrap-vcpkg.bat
+      shell: powershell
+      working-directory: ${{ inputs.vcpkg-path }}
+    - name: Setup NuGet API key
+      shell: bash
+      run: >
+        $( type -p mono || :) `vcpkg fetch nuget | tail -n 1`
+        setapikey "${{ inputs.github_token }}"
+        -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+      working-directory: ${{ inputs.vcpkg-path }}
+    - run: echo "VCPKG_BINARY_SOURCES=clear;nuget,GitHub,readwrite" >> $GITHUB_ENV
+      shell: bash
+    - name: 'Setup NuGet Credentials'
+      shell: bash
+      run: >
+        mono=$( type -p mono || :);
+        nuget="$mono $(vcpkg fetch nuget | tail -n 1)";
+        $nuget sources list  | grep -q ${{ github.repository_owner }} || $nuget sources add
+        -source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+        -storepasswordincleartext
+        -name "GitHub"
+        -username "heroiclabs"
+        -password "${{ inputs.github_token }}"
+      working-directory: ${{ inputs.vcpkg-path }}

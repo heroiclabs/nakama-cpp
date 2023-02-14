@@ -1,0 +1,35 @@
+name: 'Build test and run'
+description: 'Build a test for nakama-cpp and run it'
+inputs:
+  preset:
+    description: 'Configure preset name'
+    required: true
+  nakama-cpp-path:
+    description: 'Relative path under $GITHUB_WORKSPACE to the nakama-cpp repository'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - id: build
+      run: |
+        cmake --preset ${{ inputs.preset }} ${{ steps.cmake_args.outputs.args }}
+        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} --verbose
+        cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+      shell: bash
+      working-directory: ${{ inputs.nakama-cpp-path }}/test
+    - id: setup-postgres
+      uses: ikalnytskyi/action-setup-postgres@v3
+      with:
+        username: root
+        database: nakama
+        port: 26257
+    - uses: ./.github/actions/run-nakama
+      with:
+        postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
+    - shell: bash
+      run: |
+        ./${{ inputs.nakama-cpp-path }}/test/out/${{ inputs.preset }}/nakama-test || {
+            echo "Test failed, showing Nakama log for diagnostics";
+            cat /tmp/nakama.log;
+            exit 1;
+        }
