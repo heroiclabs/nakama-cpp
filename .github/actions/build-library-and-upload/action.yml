@@ -82,3 +82,4 @@ runs:
       with:
         name: ${{ steps.get-folder-name-windows.outputs.folder-name }}
         path: ${{ steps.create-zip-windows.outputs.artifact }}
+      if: runner.os == 'Windows'
