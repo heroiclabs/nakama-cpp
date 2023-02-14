@@ -40,7 +40,7 @@ runs:
         folder_name="${{ steps.get-folder-name.outputs.folder-name }}"
         cd "./out"
         zip -r "./${folder_name}" "./${folder_name}"
-        echo "artifact-path=${PWD}/${folder_name}.zip" >> $GITHUB_OUTPUT
+        echo "artifact-path=./${folder_name}.zip" >> $GITHUB_OUTPUT
       working-directory: ${{ inputs.nakama-cpp-path }}
       shell: bash
 
