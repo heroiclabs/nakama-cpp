@@ -23,7 +23,7 @@ runs:
         username: root
         database: nakama
         port: 26257
-    - uses: ./.github/actions/run-nakama
+    - uses: ./nakama-cpp/.github/actions/run-nakama
       with:
         postgres_uri: "${{ steps.setup-postgres.outputs.connection-uri }}"
     - shell: bash
