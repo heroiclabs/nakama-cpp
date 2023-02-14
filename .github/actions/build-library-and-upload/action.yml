@@ -23,8 +23,8 @@ runs:
       working-directory: ${{ inputs.nakama-cpp-path }}
       shell: bash
 
-    - name: Get folder name
-      id: get-folder-name
+    - name: Get folder name (Linux/MacOS)
+      id: get-folder-name-unix
       run: |
         path="./out"
         for dir in "$path"/*/; do
@@ -33,20 +33,52 @@ runs:
         done
       working-directory: ${{ inputs.nakama-cpp-path }}
       shell: bash
+      if: runner.os != 'Windows'
 
-    - name: Create zip file
-      id: create-zip
+    - name: Get folder name (Windows)
+      id: get-folder-name-windows
       run: |
-        folder_name="${{ steps.get-folder-name.outputs.folder-name }}"
+        $path = "./out"
+        Get-ChildItem -Directory "$path" | ForEach-Object {
+            $folder_name = $_.Name
+            Write-Output "folder-name=$folder_name" >> $env:GITHUB_OUTPUT
+        }
+      working-directory: ${{ inputs.nakama-cpp-path }}
+      shell: powershell
+      if: runner.os == 'Windows'
+
+    - name: Create zip file (Linux/MacOS)
+      id: create-zip-unix
+      run: |
+        folder_name="${{ steps.get-folder-name-unix.outputs.folder-name }}"
         cd "./out"
         zip -r "./${folder_name}" "./${folder_name}"
         echo "artifact-path=./${folder_name}.zip" >> $GITHUB_OUTPUT
       working-directory: ${{ inputs.nakama-cpp-path }}
       shell: bash
+      if: runner.os != 'Windows'
+
+    - name: Create zip file (Windows)
+      id: create-zip-windows
+      run: |
+        $folder_name = ${{ steps.get-folder-name-windows.outputs.folder-name }}
+        cd "./out"
+        Compress-Archive -Path "./$folder_name" -DestinationPath "./$folder_name.zip"
+        Write-Output "artifact-path=./$folder_name.zip" >> $env:GITHUB_OUTPUT
+      working-directory: ${{ inputs.nakama-cpp-path }}
+      shell: powershell
+      if: runner.os == 'Windows'
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ steps.get-folder-name.outputs.folder-name }}
-        path: ${{ steps.create-zip.outputs.artifact-path }}
+        name: ${{ steps.get-folder-name-unix.outputs.folder-name }}
+        path: ${{ steps.create-zip-unix.outputs.artifact-path }}
         if-no-files-found: error
+      if: runner.os != 'Windows'
+
+    - name: Upload artifact (Windows)
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ steps.get-folder-name-windows.outputs.folder-name }}
+        path: ${{ steps.create-zip-windows.outputs.artifact
