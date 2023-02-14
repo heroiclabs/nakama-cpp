@@ -26,20 +26,24 @@ runs:
     - name: Get folder name
       id: get-folder-name
       run: |
-        path="./nakama-cpp/out"
+        path="./out"
         for dir in "$path"/*/; do
           folder_name=$(basename "$dir")
           echo "folder-name=$folder_name" >> $GITHUB_OUTPUT
         done
+      working-directory: ${{ inputs.nakama-cpp-path }}
       shell: bash
+
     - name: Create zip file
       id: create-zip
       run: |
         folder_name="${{ steps.get-folder-name.outputs.folder-name }}"
-        cd "./nakama-cpp/out"
+        cd "./out"
         zip -r "./${folder_name}" "./${folder_name}"
         echo "artifact-path=${PWD}/${folder_name}.zip" >> $GITHUB_OUTPUT
+      working-directory: ${{ inputs.nakama-cpp-path }}
       shell: bash
+
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
