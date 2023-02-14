@@ -61,7 +61,7 @@ runs:
     - name: Create zip file (Windows)
       id: create-zip-windows
       run: |
-        $folder_name = ${{ steps.get-folder-name-windows.outputs.folder-name }}
+        $folder_name = "${{ steps.get-folder-name-windows.outputs.folder-name }}"
         cd "./out"
         Compress-Archive -Path "./$folder_name" -DestinationPath "./$folder_name.zip"
         Write-Output "artifact-path=./$folder_name.zip" >> $env:GITHUB_OUTPUT
