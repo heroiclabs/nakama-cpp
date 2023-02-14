@@ -411,7 +411,7 @@ After downloading it to a folder you've configured CMake to look for targets in,
 ## vcpkg
 
 Our SDK integrates with vcpkg by providing itself and a few dependencies through a git registry. To include it in your vcpkg manifest, create a `vcpkg-configuration.json` in your root directory.
-
+```
 {
     "registries":
     [
@@ -424,7 +424,7 @@ Our SDK integrates with vcpkg by providing itself and a few dependencies through
         }
     ]
 }
-
+```
 Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
 ```
     "dependencies": [
