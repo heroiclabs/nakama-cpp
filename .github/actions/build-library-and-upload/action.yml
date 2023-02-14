@@ -37,10 +37,9 @@ runs:
       id: create-zip
       run: |
         folder_name="${{ steps.get-folder-name.outputs.folder-name }}"
-        artifact_path="./${folder_name}.zip"
         cd "./nakama-cpp/out"
-        zip -r "${artifact_path}" "./${folder_name}"
-        echo "::set-output name=artifact-path::$artifact_path"
+        zip -r "./${folder_name}.zip" "./${folder_name}"
+        echo "::set-output name=artifact-path::${PWD}/${folder_name}.zip"
       shell: bash
 
     - name: Upload artifact
