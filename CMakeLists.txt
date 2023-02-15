@@ -26,7 +26,7 @@ if(NOT BUILD_SHARED_LIBS)
 endif()
 
 # By default, assume user will not obtain optional-lite via third party mechanism.
-option(DISTRIBUTE_OPTIONAL_LITE "Distribute optional lite with the Nakama client." OFF)
+option(DISTRIBUTE_OPTIONAL_LITE "Distribute optional lite with the Nakama client." ON)
 
 option(UNREAL "Unreal engine support" OFF)
 
