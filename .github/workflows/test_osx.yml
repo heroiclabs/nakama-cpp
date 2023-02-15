@@ -44,7 +44,7 @@ jobs:
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
-            native-tool-options: "-allowProvisioningUpdates -hideShellScriptEnvironment"
+            native-tool-options: "-allowProvisioningUpdates"
         - if: failure()
           uses: ./nakama-cpp/.github/actions/handle-failure
           with:
