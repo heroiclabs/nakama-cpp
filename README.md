@@ -198,6 +198,18 @@ You can change ping period on server - `ping_period_ms` parameter:
 
 https://heroiclabs.com/docs/install-configuration/#socket
 
+#### Android
+
+To use our native C++ library in your Android application, you will need to include an additional .aar file that we ship for SSL support.
+
+For example, in Gradle:
+
+```
+implementation files("<path/to/libnakama-sdk.aar>")
+```
+
+Then you will need to load our native library from Java by calling `System.loadLibrary("nakama-sdk")` when your activity is created.
+
 # How to build
 
 ## Prerequisite
@@ -366,7 +378,7 @@ HTTP:
 Platform | Transport              |
   --- |---------------------------|
 Windows | libhttpclient -> winhttp  |
-Android | cpprestsdk              |
+Android | libcurl                 |
 Linux | libhttpclient->curl       |
 MacOS | libhttpclient -> OS       |
 iOS   | libhttpclient -> OS       |
@@ -399,7 +411,7 @@ After downloading it to a folder you've configured CMake to look for targets in,
 ## vcpkg
 
 Our SDK integrates with vcpkg by providing itself and a few dependencies through a git registry. To include it in your vcpkg manifest, create a `vcpkg-configuration.json` in your root directory.
-
+```
 {
     "registries":
     [
@@ -412,7 +424,7 @@ Our SDK integrates with vcpkg by providing itself and a few dependencies through
         }
     ]
 }
-
+```
 Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
 ```
     "dependencies": [

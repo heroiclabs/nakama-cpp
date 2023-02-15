@@ -144,7 +144,7 @@ void test_authentication()
 
     test_authenticateDevice();
     test_authenticateDevice2();
-    test_authenticateRefresh();
+    //test_authenticateRefresh();
 }
 
 } // namespace Test

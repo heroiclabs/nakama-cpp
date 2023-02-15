@@ -1,5 +1,5 @@
 {
-    "builtin-baseline": "4cb4a5c5ddcb9de0c83c85837ee6974c8333f032",
+    "builtin-baseline": "b4f29c54450ddfc7efd2989cb9d32158ae291b40",
     "dependencies": [
         "protobuf",
         {
@@ -39,7 +39,7 @@
                     "name": "wslay"
                 }
             ],
-            "supports": "osx | ios | linux"
+            "supports": "osx | ios | linux | android"
         },
         "logs": {
             "description": "Whether or not logs are enabled."

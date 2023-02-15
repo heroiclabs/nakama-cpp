@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Nakama Authors
+ * Copyright 2023 Heroic Labs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,18 @@
 
 #pragma once
 
-#include <nakama-cpp/NTypes.h>
+#include <jni.h>
+#include <string.h>
+#include <memory.h>
 
-#ifdef __ANDROID__
-#include "jni.h"
-#endif
+namespace Nakama
+{
+    struct CACertificateData
+    {
+        std::unique_ptr<unsigned char[]> data;
+        int len;
+    };
 
-NAKAMA_NAMESPACE_BEGIN
+    CACertificateData getCaCertificates();
+};
 
-// Keeping for API stability in the case that we need to add platform-specific features.
-struct NPlatformParameters {};
-
-NAKAMA_NAMESPACE_END

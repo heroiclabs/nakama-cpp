@@ -15,7 +15,7 @@ target_link_libraries(nakama-impl-ws-wslay INTERFACE
 
 target_include_directories(nakama-impl-ws-wslay INTERFACE .)
 
-if (BUILD_CURL)
+if (BUILD_CURL_IO)
     find_package(CURL CONFIG REQUIRED)
     target_link_libraries(nakama-impl-ws-wslay INTERFACE CURL::libcurl)
 endif()
