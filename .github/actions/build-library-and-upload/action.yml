@@ -53,7 +53,7 @@ runs:
         folder_name="${{ steps.get-folder-name-unix.outputs.folder-name }}"
         cd "./out"
         zip -r "./${folder_name}" "./${folder_name}"
-        echo "artifact-path=./${folder_name}.zip" >> $GITHUB_OUTPUT
+        echo "artifact-path=${PWD}/${folder_name}.zip" >> $GITHUB_OUTPUT
       working-directory: ${{ inputs.nakama-cpp-path }}
       shell: bash
       if: runner.os != 'Windows'
@@ -64,7 +64,8 @@ runs:
         $folder_name = "${{ steps.get-folder-name-windows.outputs.folder-name }}"
         cd "./out"
         Compress-Archive -Path "./$folder_name" -DestinationPath "./$folder_name.zip"
-        Write-Output "artifact-path=./$folder_name.zip" >> $env:GITHUB_OUTPUT
+        $artifact_path = Join-Path $PWD "$folder_name.zip"
+        Write-Output "artifact-path=$artifact_path" >> $env:GITHUB_OUTPUT
       working-directory: ${{ inputs.nakama-cpp-path }}
       shell: powershell
       if: runner.os == 'Windows'
