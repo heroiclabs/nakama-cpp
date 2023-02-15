@@ -1,5 +1,5 @@
 This is a project for running tests on nakama-cpp via CMake. You'll need an architecture-specific `nakama-sdk` release
-installed in `out`.
+installed in `out`. Make sure it was built with `--config MinSizeRel`.
 
 If you are building for Mac/iOS, you'll need to set your NAKAMA_TEST_DEVELOPMENT_TEAM environment variable to your team ID. Your can find your team ID at developer.apple.com.
 
@@ -8,7 +8,7 @@ In-tree example:
 cd example
 cmake --list-presets
 cmake --preset <configure-preset>
-cmake --build --preset <build-preset> --target install
+cmake --build build/<build-preset> --target install
 ```
 
 To build and deploy for iOS, you will need to pass `-- -allowProvisioningUpdates` to the end of your cmake build command.
