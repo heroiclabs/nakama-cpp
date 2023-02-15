@@ -25,3 +25,8 @@ jobs:
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
+        - if: failure()
+          uses: ./nakama-cpp/.github/actions/handle-failure
+          with:
+            nakama-cpp-path: nakama-cpp
+            vcpkg-path: vcpkg
