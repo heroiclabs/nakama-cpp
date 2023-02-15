@@ -4,7 +4,7 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
-### [2.7.0] - [2022-02-15]
+### [2.7.0] - [2023-02-15]
 ### Added
 - Windows x86 support
 - Support for vcpkg consumption. See README.md for examples.
