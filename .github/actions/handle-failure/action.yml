@@ -12,28 +12,28 @@ runs:
   steps:
     - if: runner.os != 'Windows'
       run: |
-        cd ${{ inputs.nakama-cpp-path }}
+        cd $GITHUB_WORKSPACE/${{ inputs.nakama-cpp-path }}
         if [ -d "./build" ]; then
           zip -r build ./build
         fi
         if [ -d "./out" ]; then
           zip -r out ./out
         fi
-        cd ${{ inputs.vcpkg-path }}
+        cd $GITHUB_WORKSPACE/${{ inputs.vcpkg-path }}
         if [ -d "./buildtrees" ]; then
           zip -r buildtrees ./buildtrees
         fi
       shell: bash
     - if: runner.os == 'Windows'
       run: |
-        cd ${{ inputs.nakama-cpp-path }}
+        cd $GITHUB_WORKSPACE/${{ inputs.nakama-cpp-path }}
         if (Test-Path -Path './build') {
           Compress-Archive -Path ./build -DestinationPath build.zip
         }
         if (Test-Path -Path './out') {
           Compress-Archive -Path ./out -DestinationPath out.zip
         }
-        cd ${{ inputs.vcpkg-path }}
+        cd $GITHUB_WORKSPACE/${{ inputs.vcpkg-path }}
         if (Test-Path -Path './buildtrees') {
           Compress-Archive -Path ./buildtrees -DestinationPath buildtrees.zip
         }
