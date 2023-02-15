@@ -82,5 +82,5 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.get-folder-name-windows.outputs.folder-name }}
-        path: ${{ steps.create-zip-windows.outputs.artifact }}
+        path: ${{ steps.create-zip-windows.outputs.artifact-path }}
       if: runner.os == 'Windows'
