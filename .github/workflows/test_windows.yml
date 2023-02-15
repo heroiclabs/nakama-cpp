@@ -13,6 +13,9 @@ jobs:
           with:
             path: nakama-cpp
         - uses: ./nakama-cpp/.github/actions/setup-vcpkg
+          with:
+            github_token: ${{ secrets.github_token }}
+            vcpkg-path: vcpkg
         - uses: ./nakama-cpp/.github/actions/build-library-and-upload
           with:
             nakama-cpp-path: nakama-cpp

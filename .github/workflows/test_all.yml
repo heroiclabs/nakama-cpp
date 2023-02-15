@@ -6,4 +6,4 @@ jobs:
   test_osx:
     uses:  ./.github/workflows/test_osx.yml
   test_windows:
-    uses: ./.github/workflows/test_windows.yml
+    uses:  ./.github/workflows/test_windows.yml
