@@ -24,6 +24,7 @@ runs:
       with:
         ref: ${{ github.head_ref }}
         repository: heroiclabs/nakama-client-testrunner
+        token: ${{ secrets.GH_PAT }}
     - name: Start docker containers for nakama-client-testrunner
       working-directory: nakama-client-testrunner
       run: ./docker-compose up -d --wait
