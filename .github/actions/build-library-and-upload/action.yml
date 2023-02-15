@@ -81,6 +81,6 @@ runs:
     - name: Upload artifact (Windows)
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ steps.get-folder-name-windows.outputs.folder-name }}
+        name: ${{ steps.get-folder-name-windows.outputs.folder-name }}-${{ inputs.build_type }}
         path: ${{ steps.create-zip-windows.outputs.artifact-path }}
       if: runner.os == 'Windows'
