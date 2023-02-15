@@ -4,14 +4,26 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
-### [2.6.1] - [2022-10-13]
+### [2.7.0] - [2023-02-15]
+### Added
+- Windows x86 support
+- Support for vcpkg consumption. See README.md for examples.
+- The test suite is now runnable on iOS and Android devices.
+- Added a libcurl network transport and specified it as the default for Android.
+- Android builds can now be made on ARM macs.
+- Nakama can now be included via users by CMake `find_package(nakama-sdk)` calls.
+
+### Changed
+- Removed ability to create default client and realtime clients if no default transport is specified for the platform (`createDefaultClient`, `createDefaultRtClient`). This will only affect users who use vcpkg or CMake to explicitly toggle off our default transports.
+- Simplfied the Android build toolchain. The entry point is now standardized with our other platforms using the `cmake --preset ...` pattern.
+
 ### Fixed
+- We now publish header and debug binaries for Windows
+- Platforms using our wslay adapter (Android, Linux, Mac, iOS) now trigger `onDisconnect` on error.
 - Fixed an issue where the web socket would hang on slower network connections.
 - Fixed authenticateRefresh in the GrpcClient.
+- Added CFBundleVersion to MacOSX frameworks which is required for the app store upload process.
 
-### Added
-
-- The test suite is now runnable on iOS.
 
 ### [2.6.0] - [2022-09-02]
 
