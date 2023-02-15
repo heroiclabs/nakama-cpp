@@ -6,7 +6,7 @@ jobs:
       runs-on: macos-12
       strategy:
         matrix:
-          preset: ["macosx-x64-host_x64", "macosx-arm64-host_x64"]
+          preset: ["macosx-x64-host_arm64", "macosx-arm64-host_arm64"]
       env:
         NAKAMA_TEST_DEVELOPMENT_TEAM: ${{ secrets.NAKAMA_TEST_DEVELOPMENT_TEAM }}
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
