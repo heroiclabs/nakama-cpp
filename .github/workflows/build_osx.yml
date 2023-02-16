@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         preset: ["macosx-x64-host_x64", "macosx-arm64-host_x64"]
-        build_type: [MinSizeRel]
+        build-type: [MinSizeRel]
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
@@ -23,7 +23,7 @@ jobs:
         with:
           nakama-cpp-path: nakama-cpp
           preset: ${{ matrix.preset }}
-          build_type: ${{ matrix.build_type }}
+          build-type: ${{ matrix.build-type }}
       - if: failure()
         uses: ./nakama-cpp/.github/actions/handle-failure
         with:

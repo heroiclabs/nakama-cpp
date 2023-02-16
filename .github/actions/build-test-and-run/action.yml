@@ -23,8 +23,8 @@ runs:
     - id: build
       run: |
         cmake --preset ${{ inputs.preset }}
-        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} -- ${{ inputs.native-tool-options }}
-        cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
+        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} -- ${{ inputs.native-tool-options }}
+        cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build-type }}
       working-directory: ${{ inputs.nakama-cpp-path }}/test
       shell: bash
     - name: Checkout nakama-client-testrunner
