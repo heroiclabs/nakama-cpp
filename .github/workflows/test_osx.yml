@@ -43,6 +43,8 @@ jobs:
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
+        - name: Set up Docker
+          uses: docker/setup-buildx-action@v2
         - uses: ./nakama-cpp/.github/actions/build-test-and-run
           with:
             nakama-cpp-path: nakama-cpp
