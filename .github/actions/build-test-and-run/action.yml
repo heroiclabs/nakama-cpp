@@ -28,11 +28,13 @@ runs:
         repository: heroiclabs/nakama-client-testrunner
         token: ${{ inputs.testrunner-pat }}
         path: nakama-client-testrunner
-    - name: Docker login
-      run: |
-        echo ${{ inputs.testrunner-pat }} | docker login https://docker.pkg.github.com -u lugehorsam --password-stdin
+    - name: Login to GitHub Packages
+      uses: docker/login-action@v1
+      with:
+        registry: docker.pkg.github.com
+        username: ${{ github.actor }}
+        password: ${{ secrets.GH_PAT }}
       shell: bash
-
     - name: Start docker containers for nakama-client-testrunner
       run: |
         docker-compose up -d
