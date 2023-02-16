@@ -36,6 +36,7 @@ runs:
         password: ${{ inputs.testrunner-pat }}
     - name: Start docker containers for nakama-client-testrunner
       run: |
+        echo ${{ inputs.testrunner-pat }} | docker login https://docker.pkg.github.com -u lugehorsam --password-stdin
         docker-compose up -d
       working-directory: nakama-client-testrunner
       shell: bash
