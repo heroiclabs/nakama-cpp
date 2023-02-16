@@ -3,7 +3,10 @@ on: [workflow_dispatch]
 jobs:
   test_linux:
     uses:  ./.github/workflows/test_linux.yml
+    secrets: inherit
   test_osx:
     uses:  ./.github/workflows/test_osx.yml
+    secrets: inherit
   test_windows:
     uses:  ./.github/workflows/test_windows.yml
+    secrets: inherit
