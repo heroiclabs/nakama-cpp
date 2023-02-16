@@ -34,7 +34,6 @@ runs:
         registry: docker.pkg.github.com
         username: ${{ github.actor }}
         password: ${{ secrets.GH_PAT }}
-      shell: bash
     - name: Start docker containers for nakama-client-testrunner
       run: |
         docker-compose up -d
