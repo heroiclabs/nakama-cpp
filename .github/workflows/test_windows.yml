@@ -26,6 +26,7 @@ jobs:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
             testrunner-pat: ${{ secrets.GH_PAT }}
+            build_type: ${{ matrix.build_type }}
         - if: failure()
           uses: ./nakama-cpp/.github/actions/handle-failure
           with:

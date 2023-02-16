@@ -3,6 +3,9 @@ on: [workflow_call, workflow_dispatch]
 jobs:
   build_linux:
     timeout-minutes: 30
+    strategy:
+      matrix:
+        build_type: [MinSizeRel]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -17,6 +20,7 @@ jobs:
         with:
           nakama-cpp-path: nakama-cpp
           preset: linux-amd64
+          build_type: ${{ matrix.build_type }}
       - if: failure()
         uses: ./nakama-cpp/.github/actions/handle-failure
         with:

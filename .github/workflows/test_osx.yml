@@ -51,6 +51,7 @@ jobs:
             preset: ${{ matrix.preset }}
             testrunner-pat: ${{ secrets.GH_PAT }}
             native-tool-options: "-allowProvisioningUpdates"
+            build-type: MinSizeRel
         - if: failure()
           uses: ./nakama-cpp/.github/actions/handle-failure
           with:

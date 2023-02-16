@@ -10,7 +10,6 @@ inputs:
   build_type:
     description: 'Build config: MinSizeRel or Debug'
     required: true
-    default: 'MinSizeRel'
 runs:
   using: "composite"
   steps:

@@ -7,7 +7,6 @@ jobs:
       matrix:
         build_type: [MinSizeRel, Debug]
         preset: [win-x64, win-x86]
-
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3

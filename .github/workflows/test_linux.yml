@@ -22,6 +22,7 @@ jobs:
           nakama-cpp-path: nakama-cpp
           preset: linux-amd64
           testrunner-pat: ${{ secrets.GH_PAT }}
+          build-type: MinSizeRel
       - if: failure()
         uses: ./nakama-cpp/.github/actions/handle-failure
         with:

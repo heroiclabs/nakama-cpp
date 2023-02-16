@@ -10,16 +10,21 @@ inputs:
   testrunner-pat:
     description: 'PAT to access the private Nakama testrunner'
     required: true
+  build-type:
+    description: The build type.
+    required: true
   native-tool-options:
     description: 'Flags to pass to the underlying build system used by the CMake generator.'
     required: false
+
 runs:
   using: "composite"
   steps:
     - id: build
       run: |
         cmake --preset ${{ inputs.preset }}
-        cmake --build ./build/${{ inputs.preset }} --target install -- ${{ inputs.native-tool-options }}
+        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build_type }} -- ${{ inputs.native-tool-options }}
+        cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build_type }}
       working-directory: ${{ inputs.nakama-cpp-path }}/test
       shell: bash
     - name: Checkout nakama-client-testrunner

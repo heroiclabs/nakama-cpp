@@ -6,6 +6,7 @@ jobs:
     strategy:
       matrix:
         preset: ["android-arm64-v8a-host_linux-x64", "android-x64-host_linux-x64"]
+        build_type: [MinSizeRel]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -20,6 +21,7 @@ jobs:
         with:
           nakama-cpp-path: nakama-cpp
           preset: ${{ matrix.preset }}
+          build_type: ${{ matrix.build_type }}
       - if: failure()
         uses: ./nakama-cpp/.github/actions/handle-failure
         with:
