@@ -25,7 +25,6 @@ runs:
     - name: Checkout nakama-client-testrunner
       uses: actions/checkout@v2
       with:
-        ref: ${{ github.head_ref }}
         repository: heroiclabs/nakama-client-testrunner
         token: ${{ inputs.testrunner-pat }}
     - name: Start docker containers for nakama-client-testrunner
