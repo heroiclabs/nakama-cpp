@@ -20,8 +20,8 @@ runs:
       run: |
         cmake --preset ${{ inputs.preset }}
         cmake --build ./build/${{ inputs.preset }} --target install -- ${{ inputs.native-tool-options }}
-      shell: bash
       working-directory: ${{ inputs.nakama-cpp-path }}/test
+      shell: bash
     - name: Checkout nakama-client-testrunner
       uses: actions/checkout@v2
       with:
@@ -29,8 +29,9 @@ runs:
         token: ${{ inputs.testrunner-pat }}
         path: nakama-client-testrunner
     - name: Start docker containers for nakama-client-testrunner
+      run: |
+        docker-compose up -d --wait
       working-directory: nakama-client-testrunner
-      run: docker-compose up -d --wait
       shell: bash
     - run: |
         ./${{ inputs.nakama-cpp-path }}/test/out/${{ inputs.preset }}/nakama-test || {
