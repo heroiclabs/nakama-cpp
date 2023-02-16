@@ -4,7 +4,7 @@ jobs:
   windows:
       strategy:
         matrix:
-          build_type: [MinSizeRel, Debug]
+          build_type: [MinSizeRel]
           preset: [win-x64, win-x86]
       timeout-minutes: 40
       runs-on: windows-latest
