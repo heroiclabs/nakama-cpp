@@ -1,7 +1,7 @@
 name: Test Linux
 on: [workflow_dispatch, workflow_call, pull_request]
 jobs:
-  build_linux:
+  test_linux:
     timeout-minutes: 30
     runs-on: ubuntu-22.04
     steps:
