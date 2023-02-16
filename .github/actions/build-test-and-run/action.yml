@@ -30,8 +30,7 @@ runs:
         path: nakama-client-testrunner
     - name: Start docker containers for nakama-client-testrunner
       run: |
-        docker-compose --version
-        docker-compose up -d --wait
+        docker-compose up -d
       working-directory: nakama-client-testrunner
       shell: bash
     - run: |
