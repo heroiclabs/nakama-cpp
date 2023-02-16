@@ -30,7 +30,7 @@ runs:
         path: nakama-client-testrunner
     - name: Docker login
       run: |
-        docker login https://docker.pkg.github.com -u lugehorsam -p ${{ inputs.testrunner-pat }}
+        echo ${{ inputs.testrunner-pat }} | docker login https://docker.pkg.github.com -u lugehorsam --password-stdin
       shell: bash
 
     - name: Start docker containers for nakama-client-testrunner
