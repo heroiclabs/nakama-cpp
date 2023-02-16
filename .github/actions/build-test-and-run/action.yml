@@ -7,6 +7,9 @@ inputs:
   nakama-cpp-path:
     description: 'Relative path under $GITHUB_WORKSPACE to the nakama-cpp repository'
     required: true
+  testrunner-pat:
+    description: 'PAT to access the private Nakama testrunner'
+    required: true
   native-tool-options:
     description: 'Flags to pass to the underlying build system used by the CMake generator.'
     required: false
@@ -24,7 +27,7 @@ runs:
       with:
         ref: ${{ github.head_ref }}
         repository: heroiclabs/nakama-client-testrunner
-        token: ${{ secrets.GH_PAT }}
+        token: ${{ inputs.testrunner-pat }}
     - name: Start docker containers for nakama-client-testrunner
       working-directory: nakama-client-testrunner
       run: ./docker-compose up -d --wait
