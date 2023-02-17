@@ -35,9 +35,9 @@ jobs:
             brew install --cask docker
             open /Applications/Docker.app
         - name: Add Docker to PATH
-          run: |
-            echo 'export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"' >> $GITHUB_ENV
-            docker --version
+          uses: actions/add-path@v1
+          with:
+            path: /Applications/Docker.app/Contents/Resources/bin
         - uses: actions/checkout@v3
           with:
             path: nakama-cpp
