@@ -34,12 +34,10 @@ jobs:
           run: |
             brew install --cask docker
             open /Applications/Docker.app
-            docker --version
-        - name: Install Docker Compose
+        - name: Add Docker to PATH
           run: |
-            sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
-            docker-compose --version
+            echo 'export PATH="/usr/local/bin:$PATH"' >> $GITHUB_ENV
+            docker --version
         - uses: actions/checkout@v3
           with:
             path: nakama-cpp
