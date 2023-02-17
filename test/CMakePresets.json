@@ -12,7 +12,6 @@
             "binaryDir": "build/${presetName}",
             "hidden": true,
             "cacheVariables": {
-                "CMAKE_CONFIGURATION_TYPES": "MinSizeRel",
                 "RAPIDJSON_BUILD_DOC": "OFF",
                 "RAPIDJSON_BUILD_EXAMPLES": "OFF",
                 "RAPIDJSON_BUILD_TESTS": "OFF",

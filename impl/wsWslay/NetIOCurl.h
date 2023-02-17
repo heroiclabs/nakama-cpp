@@ -5,7 +5,10 @@
 #include <nakama-cpp/log/NLogger.h>
 #include "StrUtil.h"
 #include "NetIO.h"
+
+#if __ANDROID__
 #include "AndroidCA.h"
+#endif
 
 NAKAMA_NAMESPACE_BEGIN
 

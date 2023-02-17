@@ -1,8 +1,11 @@
 name: Test Linux
-on: [workflow_dispatch, workflow_call]
+on: [workflow_dispatch, workflow_call, pull_request]
 jobs:
-  build_linux:
+  test_linux:
     timeout-minutes: 30
+    strategy:
+      matrix:
+        build-type: [MinSizeRel]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -17,10 +20,13 @@ jobs:
         with:
           nakama-cpp-path: nakama-cpp
           preset: linux-amd64
+          build-type: ${{ matrix.build-type }}
       - uses: ./nakama-cpp/.github/actions/build-test-and-run
         with:
           nakama-cpp-path: nakama-cpp
           preset: linux-amd64
+          testrunner-pat: ${{ secrets.GH_PAT }}
+          build-type: ${{ matrix.build-type }}
       - if: failure()
         uses: ./nakama-cpp/.github/actions/handle-failure
         with:

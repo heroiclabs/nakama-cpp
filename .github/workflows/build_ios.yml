@@ -6,21 +6,24 @@ jobs:
     strategy:
       matrix:
         preset: ["ios-arm64-host_x64", "iphonesimulator-x64-host_x64"]
+        build-type: [MinSizeRel]
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
         with:
           path: nakama-cpp
+      - run: |
+            brew install pkg-config
+        shell: bash
       - uses: ./nakama-cpp/.github/actions/setup-vcpkg
         with:
           github_token: ${{ secrets.github_token }}
           vcpkg-path: vcpkg
-      - run: ./nakama-cpp/ci/setup-osx.sh
-        shell: bash
       - uses: ./nakama-cpp/.github/actions/build-library-and-upload
         with:
           nakama-cpp-path: nakama-cpp
           preset: ${{ matrix.preset }}
+          build-type: ${{ matrix.build-type }}
       - if: failure()
         uses: ./nakama-cpp/.github/actions/handle-failure
         with:

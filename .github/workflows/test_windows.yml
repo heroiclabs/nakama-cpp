@@ -1,18 +1,34 @@
 name: Test Windows
 on: [workflow_dispatch, workflow_call]
 jobs:
-  windows:
+  test_windows:
+      strategy:
+        matrix:
+          build-type: [MinSizeRel]
+          preset: [win-x64, win-x86]
       timeout-minutes: 40
       runs-on: windows-latest
       steps:
         - uses: actions/checkout@v3
           with:
             path: nakama-cpp
+        - uses: ./nakama-cpp/.github/actions/setup-vcpkg
+          with:
+            github_token: ${{ secrets.github_token }}
+            vcpkg-path: vcpkg
         - uses: ./nakama-cpp/.github/actions/build-library-and-upload
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
+            build-type: ${{ matrix.build-type }}
         - uses: ./nakama-cpp/.github/actions/build-test-and-run
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
+            testrunner-pat: ${{ secrets.GH_PAT }}
+            build-type: ${{ matrix.build-type }}
+        - if: failure()
+          uses: ./nakama-cpp/.github/actions/handle-failure
+          with:
+            nakama-cpp-path: nakama-cpp
+            vcpkg-path: vcpkg

@@ -1,53 +1,67 @@
 name: Test OSX
 on: [workflow_dispatch, workflow_call]
 jobs:
-  macos:
+  test_macos:
       timeout-minutes: 30
       runs-on: macos-12
       strategy:
         matrix:
           preset: ["macosx-x64-host_x64", "macosx-arm64-host_x64"]
+          build-type: [MinSizeRel]
       env:
         NAKAMA_TEST_DEVELOPMENT_TEAM: ${{ secrets.NAKAMA_TEST_DEVELOPMENT_TEAM }}
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
         P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-        BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
         KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
       steps:
-        - uses: actions/checkout@v3
-          with:
-            path: nakama-cpp
         - name: Install the Apple certificate and provisioning profile
           run: |
             # create variables
             CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
             PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
             KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-
             # import certificate and provisioning profile from secrets
             echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
             echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode --output $PP_PATH
-
             # create temporary keychain
             security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
             security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
             security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-
             # import certificate to keychain
             security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
             security list-keychain -d user -s $KEYCHAIN_PATH
-
-            # apply provisioning profile
-            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+        - name: Install Docker
+          run: |
+            brew install --cask docker
+            open /Applications/Docker.app
+        - name: Add Docker to PATH
+          run: |
+            echo 'export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"' >> $GITHUB_ENV
+            docker --version
         - uses: actions/checkout@v3
+          with:
+            path: nakama-cpp
+        - run: |
+            brew install pkg-config
+          shell: bash
+        - uses: ./nakama-cpp/.github/actions/setup-vcpkg
+          with:
+            github_token: ${{ secrets.github_token }}
+            vcpkg-path: vcpkg
         - uses: ./nakama-cpp/.github/actions/build-library-and-upload
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
+            build-type: ${{ matrix.build-type }}
         - uses: ./nakama-cpp/.github/actions/build-test-and-run
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
-
-
+            testrunner-pat: ${{ secrets.GH_PAT }}
+            native-tool-options: "-allowProvisioningUpdates"
+            build-type: ${{ matrix.build-type }}
+        - if: failure()
+          uses: ./nakama-cpp/.github/actions/handle-failure
+          with:
+            nakama-cpp-path: nakama-cpp
+            vcpkg-path: vcpkg
