@@ -1,0 +1,6 @@
+- Increment the version in `version.cmake`.
+- Update the CHANGELOG.md.
+- Run the Build All and Test All workflows to and ensure that everything has passed.
+- Create a new tag and release with the changelog notes and upload the built artifacts.
+- Add a new entry for the package version in the vcpkg registry: https://github.com/heroiclabs/nakama-vcpkg-registry
+- Update the dependent Heroic C++ repositories with the new C++ and kick off those releases as well.
