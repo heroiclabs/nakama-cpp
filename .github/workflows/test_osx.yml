@@ -34,10 +34,6 @@ jobs:
           run: |
             brew install --cask docker
             open /Applications/Docker.app
-        - name: Add Docker to PATH
-          uses: actions/add-path@v1
-          with:
-            path: /Applications/Docker.app/Contents/Resources/bin
         - uses: actions/checkout@v3
           with:
             path: nakama-cpp
@@ -60,6 +56,8 @@ jobs:
             testrunner-pat: ${{ secrets.GH_PAT }}
             native-tool-options: "-allowProvisioningUpdates"
             build-type: ${{ matrix.build-type }}
+          env:
+            PATH: "$PATH:/Applications/Docker.app/Contents/Resources/bin"
         - if: failure()
           uses: ./nakama-cpp/.github/actions/handle-failure
           with:
