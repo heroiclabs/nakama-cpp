@@ -30,6 +30,16 @@ jobs:
             # import certificate to keychain
             security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
             security list-keychain -d user -s $KEYCHAIN_PATH
+        - name: Install Docker
+          run: |
+            brew install --cask docker
+            open /Applications/Docker.app
+            docker --version
+        - name: Install Docker Compose
+          run: |
+            sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+            docker-compose --version
         - uses: actions/checkout@v3
           with:
             path: nakama-cpp
@@ -45,17 +55,6 @@ jobs:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
             build-type: ${{ matrix.build-type }}
-        - name: Install Docker
-          run: |
-            brew install --cask docker
-            open /Applications/Docker.app
-            docker --version
-
-        - name: Install Docker Compose
-          run: |
-            sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
-            docker-compose --version
         - uses: ./nakama-cpp/.github/actions/build-test-and-run
           with:
             nakama-cpp-path: nakama-cpp
