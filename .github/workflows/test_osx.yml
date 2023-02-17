@@ -7,6 +7,7 @@ jobs:
       strategy:
         matrix:
           preset: ["macosx-x64-host_x64", "macosx-arm64-host_x64"]
+          build-type: [MinSizeRel]
       env:
         NAKAMA_TEST_DEVELOPMENT_TEAM: ${{ secrets.NAKAMA_TEST_DEVELOPMENT_TEAM }}
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
@@ -43,6 +44,7 @@ jobs:
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
+            build-type: ${{ matrix.build-type }}
         - name: Set up Docker
           uses: docker/setup-buildx-action@v2
         - uses: ./nakama-cpp/.github/actions/build-test-and-run
@@ -51,7 +53,7 @@ jobs:
             preset: ${{ matrix.preset }}
             testrunner-pat: ${{ secrets.GH_PAT }}
             native-tool-options: "-allowProvisioningUpdates"
-            build-type: MinSizeRel
+            build-type: ${{ matrix.build-type }}
         - if: failure()
           uses: ./nakama-cpp/.github/actions/handle-failure
           with:
