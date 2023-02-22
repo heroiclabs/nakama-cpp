@@ -195,6 +195,24 @@
             "installDir": "out/android-arm64-v8a"
         },
         {
+            "name": "android-arm64-v8a-host_osx_arm64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "arm64-osx",
+                "VCPKG_TARGET_TRIPLET": "arm64-android",
+                "ANDROID_ABI": "arm64-v8a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-arm64-v8a"
+        },
+        {
             "name": "android-x64-host_osx_x64",
             "inherits": [
                 "android-default"
