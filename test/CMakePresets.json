@@ -247,6 +247,60 @@
                 "rhs": "Linux"
             },
             "installDir": "out/android-x64"
+        },
+        {
+            "name": "android-armeabi-v7a-host_osx_arm64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-linux-release",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android",
+                "ANDROID_ABI": "armeabi-v7a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "installDir": "out/android-armeabi-v7a"
+        },
+        {
+            "name": "android-armeabi-v7a-host_osx_x64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-osx",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android",
+                "ANDROID_ABI": "armeabi-v7a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-armeabi-v7a"
+        },
+        {
+            "name": "android-armeabi-v7a-host_osx_arm64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "arm64-osx",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android",
+                "ANDROID_ABI": "armeabi-v7a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-armeabi-v7a"
         }
     ]
 }
