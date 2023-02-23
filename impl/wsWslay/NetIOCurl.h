@@ -42,10 +42,10 @@ struct NetIOCurl {
         curl_easy_setopt(_curl.get(), CURLOPT_CONNECTTIMEOUT, 5);
 
 #if __ANDROID__
-        CACertificateData data = Nakama::getCaCertificates();
+        CACertificateData* data = Nakama::getCaCertificates();
         struct curl_blob blob;
-        blob.data = reinterpret_cast<char*>(data.data.get());
-        blob.len = data.len;
+        blob.data = reinterpret_cast<char*>(data->data);
+        blob.len = data->len;
         blob.flags = CURL_BLOB_COPY;
         curl_easy_setopt(_curl.get(), CURLOPT_CAINFO_BLOB, &blob);
 #endif

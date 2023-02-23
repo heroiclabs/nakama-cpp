@@ -24,10 +24,10 @@ namespace Nakama
 {
     struct CACertificateData
     {
-        std::unique_ptr<unsigned char[]> data;
+        unsigned char* data;
         int len;
     };
 
-    CACertificateData getCaCertificates();
+    CACertificateData* getCaCertificates();
 };
 
