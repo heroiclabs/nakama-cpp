@@ -134,10 +134,10 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     }
 
 #if __ANDROID__
-    CACertificateData data = Nakama::getCaCertificates();
+    CACertificateData* data = Nakama::getCaCertificates();
     struct curl_blob blob;
-    blob.data = reinterpret_cast<char*>(data.data.get());
-    blob.len = data.len;
+    blob.data = reinterpret_cast<char*>(data->data);
+    blob.len = data->len;
     blob.flags = CURL_BLOB_COPY;
     curl_easy_setopt(curl_easy.get(), CURLOPT_CAINFO_BLOB, &blob);
 #endif
