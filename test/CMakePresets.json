@@ -267,7 +267,7 @@
             "installDir": "out/android-x64"
         },
         {
-            "name": "android-armeabi-v7a-host_osx_arm64",
+            "name": "android-armeabi-v7a-host_linux-x64",
             "inherits": [
                 "android-default"
             ],
