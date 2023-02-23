@@ -11,31 +11,52 @@ runs:
   using: "composite"
   steps:
     - if: runner.os != 'Windows'
+      env:
+        nakama_cpp_path: ${{ inputs.nakama-cpp-path }}
+        vcpkg_path: ${{ inputs.vcpkg-path }}
       run: |
-        cd $GITHUB_WORKSPACE/${{ inputs.nakama-cpp-path }}
-        if [ -d "./build" ]; then
-          zip -r build ./build
+        nakama_cpp_build_dir=$GITHUB_WORKSPACE/$nakama_cpp_path/build
+        nakama_cpp_out_dir=$GITHUB_WORKSPACE/$nakama_cpp_path/out
+        vcpkg_buildtrees_dir=$GITHUB_WORKSPACE/$vcpkg_path/buildtrees
+
+        if [ -d "$nakama_cpp_build_dir" ]; then
+          cd "$GITHUB_WORKSPACE/$nakama_cpp_path"
+          zip -r build $nakama_cpp_build_dir
         fi
-        if [ -d "./out" ]; then
-          zip -r out ./out
+
+        if [ -d "$nakama_cpp_out_dir" ]; then
+          cd "$GITHUB_WORKSPACE/$nakama_cpp_path"
+          zip -r out $nakama_cpp_out_dir
         fi
-        cd $GITHUB_WORKSPACE/${{ inputs.vcpkg-path }}
-        if [ -d "./buildtrees" ]; then
-          zip -r buildtrees ./buildtrees
+
+        if [ -d "$vcpkg_buildtrees_dir" ]; then
+          cd "$GITHUB_WORKSPACE/$vcpkg_path"
+          zip -r buildtrees $vcpkg_buildtrees_dir
         fi
       shell: bash
+
     - if: runner.os == 'Windows'
+      env:
+        nakama_cpp_path: ${{ inputs.nakama-cpp-path }}
+        vcpkg_path: ${{ inputs.vcpkg-path }}
       run: |
-        cd $GITHUB_WORKSPACE/${{ inputs.nakama-cpp-path }}
-        if (Test-Path -Path './build') {
-          Compress-Archive -Path ./build -DestinationPath build.zip
+        nakama_cpp_build_dir=$GITHUB_WORKSPACE/$nakama_cpp_path/build
+        nakama_cpp_out_dir=$GITHUB_WORKSPACE/$nakama_cpp_path/out
+        vcpkg_buildtrees_dir=$GITHUB_WORKSPACE/$vcpkg_path/buildtrees
+
+        if (Test-Path -Path "$nakama_cpp_build_dir") {
+          cd "$GITHUB_WORKSPACE/$nakama_cpp_path"
+          Compress-Archive -Path $nakama_cpp_build_dir -DestinationPath build.zip
         }
-        if (Test-Path -Path './out') {
-          Compress-Archive -Path ./out -DestinationPath out.zip
+
+        if (Test-Path -Path "$nakama_cpp_out_dir") {
+          cd "$GITHUB_WORKSPACE/$nakama_cpp_path"
+          Compress-Archive -Path $nakama_cpp_out_dir -DestinationPath out.zip
         }
-        cd $GITHUB_WORKSPACE/${{ inputs.vcpkg-path }}
-        if (Test-Path -Path './buildtrees') {
-          Compress-Archive -Path ./buildtrees -DestinationPath buildtrees.zip
+
+        if (Test-Path -Path "$vcpkg_buildtrees_dir") {
+          cd "$GITHUB_WORKSPACE/$vcpkg_path"
+          Compress-Archive -Path $vcpkg_buildtrees_dir -DestinationPath buildtrees.zip
         }
       shell: powershell
     - uses: actions/upload-artifact@v3
