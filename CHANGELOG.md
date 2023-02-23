@@ -4,6 +4,11 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [2.7.1] - [2023-02-23]
+### Fixed
+- Restore armeabi-v7a Android support.
+- Fixed an issue where SSL certificates for the libcurl transport were not loaded properly if the JavaVM was shared with other libraries.
+
 ### [2.7.0] - [2023-02-15]
 ### Added
 - Windows x86 support
