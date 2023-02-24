@@ -20,18 +20,21 @@ runs:
         vcpkg_buildtrees_dir=$GITHUB_WORKSPACE/$vcpkg_path/buildtrees
 
         if [ -d "$nakama_cpp_build_dir" ]; then
-          cd "$GITHUB_WORKSPACE/$nakama_cpp_path"
+          pushd "$GITHUB_WORKSPACE/$nakama_cpp_path"
           zip -r build $nakama_cpp_build_dir
+          popd
         fi
 
         if [ -d "$nakama_cpp_out_dir" ]; then
-          cd "$GITHUB_WORKSPACE/$nakama_cpp_path"
+          pushd "$GITHUB_WORKSPACE/$nakama_cpp_path"
           zip -r out $nakama_cpp_out_dir
+          popd
         fi
 
         if [ -d "$vcpkg_buildtrees_dir" ]; then
-          cd "$GITHUB_WORKSPACE/$vcpkg_path"
+          pushd "$GITHUB_WORKSPACE/$vcpkg_path"
           zip -r buildtrees $vcpkg_buildtrees_dir
+          popd
         fi
       shell: bash
 
@@ -45,18 +48,21 @@ runs:
         $vcpkg_buildtrees_dir = "$GITHUB_WORKSPACE/${{ env.vcpkg_path }}/buildtrees"
 
         if (Test-Path -Path $nakama_cpp_build_dir) {
-          cd "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}"
+          Push-Location "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}"
           Compress-Archive -Path $nakama_cpp_build_dir -DestinationPath build.zip
+          Pop-Location
         }
 
         if (Test-Path -Path $nakama_cpp_out_dir) {
-          cd "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}"
+          Push-Location "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}"
           Compress-Archive -Path $nakama_cpp_out_dir -DestinationPath out.zip
+          Pop-Location
         }
 
         if (Test-Path -Path $vcpkg_buildtrees_dir) {
-          cd "$GITHUB_WORKSPACE/${{ env.vcpkg_path }}"
+          Push-Location "$GITHUB_WORKSPACE/${{ env.vcpkg_path }}"
           Compress-Archive -Path $vcpkg_buildtrees_dir -DestinationPath buildtrees.zip
+          Pop-Location
         }
       shell: powershell
     - uses: actions/upload-artifact@v3
