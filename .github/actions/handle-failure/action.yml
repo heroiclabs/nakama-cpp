@@ -43,24 +43,24 @@ runs:
         nakama_cpp_path: ${{ inputs.nakama-cpp-path }}
         vcpkg_path: ${{ inputs.vcpkg-path }}
       run: |
-        $nakama_cpp_build_dir = "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}/build"
-        $nakama_cpp_out_dir = "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}/out"
-        $vcpkg_buildtrees_dir = "$GITHUB_WORKSPACE/${{ env.vcpkg_path }}/buildtrees"
+        $nakama_cpp_build_dir = "$env:GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}/build"
+        $nakama_cpp_out_dir = "$env:GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}/out"
+        $vcpkg_buildtrees_dir = "$env:GITHUB_WORKSPACE/${{ env.vcpkg_path }}/buildtrees"
 
         if (Test-Path -Path $nakama_cpp_build_dir) {
-          Push-Location "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}"
+          Push-Location "$env:GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}"
           Compress-Archive -Path $nakama_cpp_build_dir -DestinationPath build.zip
           Pop-Location
         }
 
         if (Test-Path -Path $nakama_cpp_out_dir) {
-          Push-Location "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}"
+          Push-Location "$env:GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}"
           Compress-Archive -Path $nakama_cpp_out_dir -DestinationPath out.zip
           Pop-Location
         }
 
         if (Test-Path -Path $vcpkg_buildtrees_dir) {
-          Push-Location "$GITHUB_WORKSPACE/${{ env.vcpkg_path }}"
+          Push-Location "$env:GITHUB_WORKSPACE/${{ env.vcpkg_path }}"
           Compress-Archive -Path $vcpkg_buildtrees_dir -DestinationPath buildtrees.zip
           Pop-Location
         }
