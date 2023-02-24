@@ -40,22 +40,22 @@ runs:
         nakama_cpp_path: ${{ inputs.nakama-cpp-path }}
         vcpkg_path: ${{ inputs.vcpkg-path }}
       run: |
-        nakama_cpp_build_dir=$GITHUB_WORKSPACE/$nakama_cpp_path/build
-        nakama_cpp_out_dir=$GITHUB_WORKSPACE/$nakama_cpp_path/out
-        vcpkg_buildtrees_dir=$GITHUB_WORKSPACE/$vcpkg_path/buildtrees
+        $nakama_cpp_build_dir = "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}/build"
+        $nakama_cpp_out_dir = "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}/out"
+        $vcpkg_buildtrees_dir = "$GITHUB_WORKSPACE/${{ env.vcpkg_path }}/buildtrees"
 
-        if (Test-Path -Path "$nakama_cpp_build_dir") {
-          cd "$GITHUB_WORKSPACE/$nakama_cpp_path"
+        if (Test-Path -Path $nakama_cpp_build_dir) {
+          cd "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}"
           Compress-Archive -Path $nakama_cpp_build_dir -DestinationPath build.zip
         }
 
-        if (Test-Path -Path "$nakama_cpp_out_dir") {
-          cd "$GITHUB_WORKSPACE/$nakama_cpp_path"
+        if (Test-Path -Path $nakama_cpp_out_dir) {
+          cd "$GITHUB_WORKSPACE/${{ env.nakama_cpp_path }}"
           Compress-Archive -Path $nakama_cpp_out_dir -DestinationPath out.zip
         }
 
-        if (Test-Path -Path "$vcpkg_buildtrees_dir") {
-          cd "$GITHUB_WORKSPACE/$vcpkg_path"
+        if (Test-Path -Path $vcpkg_buildtrees_dir) {
+          cd "$GITHUB_WORKSPACE/${{ env.vcpkg_path }}"
           Compress-Archive -Path $vcpkg_buildtrees_dir -DestinationPath buildtrees.zip
         }
       shell: powershell
