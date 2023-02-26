@@ -12,6 +12,15 @@ jobs:
         - uses: actions/checkout@v3
           with:
             path: nakama-cpp
+        - name: Set Docker default platform to Linux ## otherwise Linux containers in testrunner docker-compose.yaml won't run
+          run: |
+            $env:DOCKER_DEFAULT_PLATFORM="linux"
+        - uses: ./nakama-cpp/.github/actions/build-test-and-run
+          with:
+            nakama-cpp-path: nakama-cpp
+            preset: ${{ matrix.preset }}
+            testrunner-pat: ${{ secrets.GH_PAT }}
+            build-type: ${{ matrix.build-type }}
         - uses: ./nakama-cpp/.github/actions/setup-vcpkg
           with:
             github_token: ${{ secrets.github_token }}
@@ -20,12 +29,6 @@ jobs:
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
-            build-type: ${{ matrix.build-type }}
-        - uses: ./nakama-cpp/.github/actions/build-test-and-run
-          with:
-            nakama-cpp-path: nakama-cpp
-            preset: ${{ matrix.preset }}
-            testrunner-pat: ${{ secrets.GH_PAT }}
             build-type: ${{ matrix.build-type }}
         - if: failure()
           uses: ./nakama-cpp/.github/actions/handle-failure
