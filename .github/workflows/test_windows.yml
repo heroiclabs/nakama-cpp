@@ -15,6 +15,7 @@ jobs:
         - name: Set Docker default platform to Linux ## otherwise Linux containers in testrunner docker-compose.yaml won't run
           run: |
             $env:DOCKER_DEFAULT_PLATFORM="linux"
+            & 'C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchLinuxEngine
         - uses: ./nakama-cpp/.github/actions/build-test-and-run
           with:
             nakama-cpp-path: nakama-cpp
