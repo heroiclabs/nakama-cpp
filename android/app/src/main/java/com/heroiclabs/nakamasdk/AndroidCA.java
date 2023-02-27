@@ -45,7 +45,7 @@ public class AndroidCA {
 
                 writer.write("-----BEGIN CERTIFICATE-----\n");
                 byte[] certBytes = cert.getEncoded();
-                writer.write(Base64.encodeToString(certBytes, 0, certBytes.length, Base64.DEFAULT));
+                writer.write(Base64.encodeToString(certBytes, 0, certBytes.length, Base64.NO_WRAP));
                 writer.write("\n-----END CERTIFICATE-----\n");
             }
 
