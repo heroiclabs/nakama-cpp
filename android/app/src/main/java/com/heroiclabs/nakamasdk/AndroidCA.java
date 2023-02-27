@@ -24,7 +24,7 @@ import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.Base64;
+import android.util.Base64;
 import java.util.Enumeration;
 
 public class AndroidCA {
@@ -44,7 +44,8 @@ public class AndroidCA {
                 X509Certificate cert = (X509Certificate) keyStore.getCertificate(alias);
 
                 writer.write("-----BEGIN CERTIFICATE-----\n");
-                writer.write(Base64.getEncoder().encodeToString(cert.getEncoded()));
+                byte[] certBytes = cert.getEncoded();
+                writer.write(Base64.encodeToString(certBytes, 0, certBytes.length, Base64.DEFAULT));
                 writer.write("\n-----END CERTIFICATE-----\n");
             }
 
