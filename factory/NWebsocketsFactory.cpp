@@ -31,7 +31,7 @@
 
 namespace Nakama {
 
-#ifndef WITH_EXTERNAL_WS
+#if !defined(WITH_EXTERNAL_WS) && !defined(BUILD_IO_EXTERNAL)
 
 NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams)
 {
@@ -43,7 +43,7 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
     #elif defined(BUILD_WEBSOCKET_CPPRESTSDK)
     return NRtTransportPtr(new NWebsocketCppRest());
     #else
-        #error Could not find default web socket transport for platform.
+        #error Could not find default web socket transport or IO for platform.
     #endif
 }
 

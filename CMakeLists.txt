@@ -299,28 +299,32 @@ if (BUILD_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:nakama-sdk-core-grpc>)
 endif()
 
-## TODO this can be massively simplified
+
+set(WS_COMPILE_DEFINITION "")
+
 if (WITH_LIBHTTPCLIENT_WS)
-    target_compile_definitions(nakama-sdk-core-rt PUBLIC BUILD_WEBSOCKET_LIBHTTPCLIENT)
-    target_compile_definitions(nakama-sdk-core-common PUBLIC BUILD_WEBSOCKET_LIBHTTPCLIENT)
-    target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC BUILD_WEBSOCKET_LIBHTTPCLIENT)
-    target_compile_definitions(nakama-sdk-interface INTERFACE BUILD_WEBSOCKET_LIBHTTPCLIENT)
+    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_LIBHTTPCLIENT)
 elseif (BUILD_WEBSOCKET_WSLAY)
-    target_compile_definitions(nakama-sdk-core-rt PUBLIC BUILD_WEBSOCKET_WSLAY)
-    target_compile_definitions(nakama-sdk-core-common PUBLIC BUILD_WEBSOCKET_WSLAY)
-    target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC BUILD_WEBSOCKET_WSLAY)
-    target_compile_definitions(nakama-sdk-interface INTERFACE BUILD_WEBSOCKET_WSLAY)
+    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_WSLAY)
+
+    if (BUILD_CURL_IO)
+        target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_CURL_IO)
+    else()
+        # no IO baked in for Wslay -- we expect user to provide the IO.
+        target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_IO_EXTERNAL)
+    endif()
+
 elseif (WITH_CPPRESTSDK)
-    target_compile_definitions(nakama-sdk-core-rt PUBLIC BUILD_WEBSOCKET_CPPRESTSDK)
-    target_compile_definitions(nakama-sdk-core-common PUBLIC BUILD_WEBSOCKET_CPPRESTSDK)
-    target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC BUILD_WEBSOCKET_CPPRESTSDK)
-    target_compile_definitions(nakama-sdk-interface INTERFACE BUILD_WEBSOCKET_CPPRESTSDK)
+    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_CPPRESTSDK)
 else()
-    target_compile_definitions(nakama-sdk-core-rt PUBLIC WITH_EXTERNAL_WS)
-    target_compile_definitions(nakama-sdk-core-common PUBLIC WITH_EXTERNAL_WS)
-    target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC WITH_EXTERNAL_WS)
-    target_compile_definitions(nakama-sdk-interface INTERFACE WITH_EXTERNAL_WS)
+    # no WS baked in -- we expect user to provide WS transport
+    set(WS_COMPILE_DEFINITION WITH_EXTERNAL_WS)
 endif()
+
+target_compile_definitions(nakama-sdk-core-rt PUBLIC ${WS_COMPILE_DEFINITION})
+target_compile_definitions(nakama-sdk-core-common PUBLIC ${WS_COMPILE_DEFINITION})
+target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC ${WS_COMPILE_DEFINITION})
+target_compile_definitions(nakama-sdk-interface INTERFACE ${WS_COMPILE_DEFINITION})
 
 add_library(nakama-sdk ${NAKAMA_SDK_DEPS})
 
