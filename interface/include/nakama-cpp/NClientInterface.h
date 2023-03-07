@@ -93,7 +93,7 @@ NAKAMA_NAMESPACE_BEGIN
          */
         virtual void tick() = 0;
 
-#ifndef WITH_EXTERNAL_WS
+#if defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL_IO)
         /**
          * Create a new real-time client with parameters from client.
          * @return a new NRtClient instance.
