@@ -26,7 +26,7 @@ using namespace std;
 
 namespace Nakama {
 
-#ifndef WITH_EXTERNAL_WS
+#if defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL_IO)
 NRtClientPtr BaseClient::createRtClient()
 {
     return createRtClient(createDefaultWebsocket(_platformParams));

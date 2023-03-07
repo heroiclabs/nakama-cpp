@@ -308,10 +308,12 @@ elseif (BUILD_WEBSOCKET_WSLAY)
     set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_WSLAY)
 
     if (BUILD_CURL_IO)
-        target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_CURL_IO)
+        target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC BUILD_CURL_IO)
     else()
         # no IO baked in for Wslay -- we expect user to provide the IO.
-        target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE BUILD_IO_EXTERNAL)
+        target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC BUILD_IO_EXTERNAL)
+        target_compile_definitions(nakama-sdk-core-rt PUBLIC BUILD_IO_EXTERNAL)
+        target_compile_definitions(nakama-sdk-interface INTERFACE BUILD_IO_EXTERNAL)
     endif()
 
 elseif (WITH_CPPRESTSDK)
