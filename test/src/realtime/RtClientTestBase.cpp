@@ -17,20 +17,12 @@
 #include "realtime/RtClientTestBase.h"
 #include "test_serverConfig.h"
 
-#if defined(__UNREAL__)
-#include "NakamaUnreal.h"
-#endif
-
 namespace Nakama {
 namespace Test {
 
 NRtClientPtr createRtClient(NClientPtr client)
 {
-#if defined(__UNREAL__)
-    return Nakama::Unreal::createNakamaRtClient(client);
-#else
     return client->createRtClient();
-#endif
 }
 
 NRtClientProtocol NRtClientTest::protocol = NRtClientProtocol::Protobuf;

@@ -28,39 +28,24 @@ endif()
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(DISTRIBUTE_OPTIONAL_LITE "Distribute optional lite with the Nakama client." ON)
 
-option(UNREAL "Unreal engine support" OFF)
-
 set(HTTP_IMPL "")
 set(WS_IMPL "")
 set(NAKAMA_SDK_DEPS "")
 
-if (UNREAL)
-    # too many bugs in the Unreal Linux WS implementation:
-    # https://github.com/EpicGames/UnrealEngine/pull/7267 and
-    # https://github.com/EpicGames/UnrealEngine/pull/9103
-    message(NOTICE "Disabling HTTP transport in Unreal build mode")
+if (WITH_LIBHTTPCLIENT_HTTP)
+    set(HTTP_IMPL "libhttpclient")
+elseif (WITH_CPPRESTSDK)
+    set(HTTP_IMPL "cpprestsdk")
+elseif (BUILD_CURL_HTTP)
+    set(HTTP_IMPL "curl")
+endif()
 
-    if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-        set(WS_IMPL "wslay")
-    else()
-        message(NOTICE "Disabling WS transport in Unreal build mode")
-    endif()
-else()
-    if (WITH_LIBHTTPCLIENT_HTTP)
-        set(HTTP_IMPL "libhttpclient")
-    elseif (WITH_CPPRESTSDK)
-        set(HTTP_IMPL "cpprestsdk")
-    elseif (BUILD_CURL_HTTP)
-        set(HTTP_IMPL "curl")
-    endif()
-
-    if (WITH_LIBHTTPCLIENT_WS)
-        set(WS_IMPL "libhttpclient")
-    elseif (BUILD_WSLAY)
-        set(WS_IMPL "wslay")
-    elseif (WITH_CPPRESTSDK)
-        set(WS_IMPL "cpprestsdk")
-    endif()
+if (WITH_LIBHTTPCLIENT_WS)
+    set(WS_IMPL "libhttpclient")
+elseif (BUILD_WSLAY)
+    set(WS_IMPL "wslay")
+elseif (WITH_CPPRESTSDK)
+    set(WS_IMPL "cpprestsdk")
 endif()
 
 if (DEFINED ANDROID_ABI)

@@ -127,20 +127,19 @@ void test_authenticateRefresh()
 void test_authentication()
 {
     test_authenticateEmail1();
-#if !defined(__UNREAL__)
-// No matter what I do, it still fails when running from within Unreal on Windows, because
-// u8"...." utf-8 string constant is interpreted  incorrectly. When compiling outside
-// Unreal we pass /utf-8 on MSVC, but there seems to be no way to pass arbitrary compiler flags
-// when compiling Unreal module.
-// According to Unreal's Engine/Source/Programs/UnrealBuildTool/Platform/Windows/VCToolChain.cs
-// it passes '/source-charset:utf-8' and '/execution-charset:utf-8' which according to MSVC docs
-// is exactly what `/utf-8` flag expands to, but either it doesn't really pass it (and annoyingly
-// there is no way to see exact compiler flags used by UnrealBuildTool or at least I didn't find one)
-// or it doesn't have exactly same effect as `/utf-8`.
-// According to MSVC docs, another way to tell compiler that source is UTF-8 encoded is to add BOM,
-// which this file has now, but it changed nothing.
+
+    // No matter what I do, it still fails when running from within Unreal on Windows, because
+    // u8"...." utf-8 string constant is interpreted  incorrectly. When compiling outside
+    // Unreal we pass /utf-8 on MSVC, but there seems to be no way to pass arbitrary compiler flags
+    // when compiling Unreal module.
+    // According to Unreal's Engine/Source/Programs/UnrealBuildTool/Platform/Windows/VCToolChain.cs
+    // it passes '/source-charset:utf-8' and '/execution-charset:utf-8' which according to MSVC docs
+    // is exactly what `/utf-8` flag expands to, but either it doesn't really pass it (and annoyingly
+    // there is no way to see exact compiler flags used by UnrealBuildTool or at least I didn't find one)
+    // or it doesn't have exactly same effect as `/utf-8`.
+    // According to MSVC docs, another way to tell compiler that source is UTF-8 encoded is to add BOM,
+    // which this file has now, but it changed nothing.
     test_authenticateEmail2();
-#endif
 
     test_authenticateDevice();
     test_authenticateDevice2();

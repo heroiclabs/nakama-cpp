@@ -25,11 +25,6 @@
 #include <jni.h>
 #endif
 
-
-#if defined(__UNREAL__)
-#include "NakamaUnreal.h"
-#endif
-
 eClientType g_clientType = ClientType_Unknown;
 
 extern "C"
@@ -85,11 +80,8 @@ void NCppTest::createWorkingClient()
 
 NClientPtr NCppTest::createClient(const NClientParameters& parameters)
 {
-#if !defined(__UNREAL__)
     client = createDefaultClient(parameters);
-#else
-        client = Nakama::Unreal::createNakamaClient(parameters, Nakama::NLogLevel::Debug);
-#endif
+
     if (client)
     {
         client->setErrorCallback([this](const NError& error) { stopTest(error); });
@@ -184,9 +176,7 @@ int mainHelper(int argc, char *argv[])
         Nakama::Test::g_serverHost = argv[1];
     }
 
-#if !defined(__UNREAL__)
     Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
-#endif
 
     NLOG(Nakama::NLogLevel::Info, "server config...");
     NLOG(Nakama::NLogLevel::Info, "host     : %s", Nakama::Test::g_serverHost.c_str());
@@ -214,12 +204,7 @@ int mainHelper(int argc, char *argv[])
 #pragma warning(disable:4447)
 #endif
 
-#ifdef __UNREAL__
-int test_main(int argc, const char *argv[])
-{
-    mainHelper(0, nullptr);
-}
-#elif defined(__ANDROID__)
+#if defined(__ANDROID__)
 extern "C"
 {
     JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
