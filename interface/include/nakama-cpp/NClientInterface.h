@@ -956,6 +956,7 @@ NAKAMA_NAMESPACE_BEGIN
             const opt::optional<int32_t>& max_size = opt::nullopt,
             const opt::optional<int32_t>& limit = opt::nullopt,
             const opt::optional<std::string>& label = opt::nullopt,
+            const opt::optional<std::string>& query = opt::nullopt,
             const opt::optional<bool>& authoritative = opt::nullopt,
             std::function<void(NMatchListPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr

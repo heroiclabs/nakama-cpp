@@ -2089,6 +2089,7 @@ void RestClient::listMatches(
     const opt::optional<int32_t>& max_size,
     const opt::optional<int32_t>& limit,
     const opt::optional<std::string>& label,
+    const opt::optional<std::string>& query,
     const opt::optional<bool>& authoritative,
     std::function<void(NMatchListPtr)> successCallback, ErrorCallback errorCallback)
 {
@@ -2116,6 +2117,7 @@ void RestClient::listMatches(
         if (max_size) args.emplace("max_size", std::to_string(*max_size));
         if (limit) args.emplace("limit", std::to_string(*limit));
         if (label) args.emplace("label", encodeURIComponent(*label));
+        if (query) args.emplace("query", encodeURIComponent(*query));
         if (authoritative) AddBoolArg(args, "authoritative", *authoritative);
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/match", "", std::move(args));
