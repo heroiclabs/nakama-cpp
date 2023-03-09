@@ -488,6 +488,7 @@ namespace Nakama {
             const opt::optional<int32_t>& max_size,
             const opt::optional<int32_t>& limit,
             const opt::optional<std::string>& label,
+            const opt::optional<std::string>& query,
             const opt::optional<bool>& authoritative,
             std::function<void(NMatchListPtr)> successCallback,
             ErrorCallback errorCallback

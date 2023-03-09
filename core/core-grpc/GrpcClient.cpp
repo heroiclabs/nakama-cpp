@@ -1783,6 +1783,7 @@ void GrpcClient::listMatches(
     const opt::optional<int32_t>& max_size,
     const opt::optional<int32_t>& limit,
     const opt::optional<std::string>& label,
+    const opt::optional<std::string>& query,
     const opt::optional<bool>& authoritative,
     std::function<void(NMatchListPtr)> successCallback, ErrorCallback errorCallback)
 {
@@ -1809,6 +1810,7 @@ void GrpcClient::listMatches(
     if (max_size) req.mutable_max_size()->set_value(*max_size);
     if (limit) req.mutable_limit()->set_value(*limit);
     if (label) req.mutable_label()->set_value(*label);
+    if (query) req.mutable_query()->set_value(*query);
     if (authoritative) req.mutable_authoritative()->set_value(*authoritative);
 
     auto responseReader = _stub->AsyncListMatches(&ctx->context, req, &_cq);
