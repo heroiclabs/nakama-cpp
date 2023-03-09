@@ -319,9 +319,6 @@ Supported build modifiers are:
   installing Windows 7. If you
 - `WITH_LIBCXX`: dynamically link with libc++ instead of libstdc++ on Linux platform.
   - `LIBCXX_STATIC`: link libc++ statically
-- `UNREAL`: creates binaries that are compatible with Unreal Engine.
-  - Using this build modifier produces blank build with no HTTP or WS transports, because Unreal module provides those.
-  - When compiling on Linux, it automatically enables `WITH_LIBCXX=ON` and `LIBCXX_STATIC=ON`
 - `ADDRESS_SANITIZER`: instrument library with [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer)
 
 Build modifiers are CMake variables passed at configure time using `-D` switch.
@@ -382,7 +379,6 @@ Android | libcurl                 |
 Linux | libhttpclient->curl       |
 MacOS | libhttpclient -> OS       |
 iOS   | libhttpclient -> OS       |
-Unreal | unreal                   |
 Windows 7 | libhttpclient -> websocketpp |
 
 Websockets:
@@ -394,7 +390,6 @@ Android | wslay                    |
 Linux | wslay                      |
 MacOS | wslay                      |
 iOS   | wslay                      |
-Unreal | unreal                    |
 Windows 7 | libhttpclient -> websocketpp |
 
 
