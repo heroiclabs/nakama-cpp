@@ -150,16 +150,9 @@ public:
     void tick() override
     {
         NCppTest::tick();
-
-        if (_retryAt != 0 && getUnixTimestampMs() >= _retryAt)
-        {
-            _retryAt = 0;
-            auth();
-        }
     }
 
 private:
-    NTimestamp _retryAt = 0;
 };
 
 
