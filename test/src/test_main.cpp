@@ -131,7 +131,6 @@ public:
         client->setErrorCallback([this, retryPeriodMs](const NError& /*error*/)
         {
             NLOG(Nakama::NLogLevel::Info, "Not connected. Will retry in %d msec...",  retryPeriodMs);
-            _retryAt = getUnixTimestampMs() + retryPeriodMs;
         });
         auth();
         runTest();
