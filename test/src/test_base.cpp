@@ -35,8 +35,6 @@ NTest* g_cur_test = nullptr;
 uint32_t g_runTestsCount = 0;
 uint32_t g_failedTestsCount = 0;
 
-void(*g_on_tick)(int ms) = nullptr;
-
 void addRunningTest(NTest* test)
 {
     g_running_tests.push_back(test);
@@ -71,7 +69,6 @@ void runTestsLoop()
                     test->stopTest(test->isSucceeded());
                 }
                 test->tick();
-                if (g_on_tick != nullptr) g_on_tick(15);
             }
         }
 
