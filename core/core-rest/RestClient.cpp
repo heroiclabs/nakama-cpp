@@ -1456,7 +1456,7 @@ void RestClient::blockFriends(
     }
 }
 
-void RestClient::listFriends(
+void RestClient::listFriendsAsync(
     NSessionPtr session,
     const opt::optional<int32_t>& limit,
     const opt::optional<NFriend::State>& state,

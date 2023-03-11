@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <future>
 #include "BaseClient.h"
 #include "NRtClient.h"
 #include "nakama-cpp/realtime/NWebsocketsFactory.h"
@@ -50,5 +51,28 @@ NRtClientPtr BaseClient::createRtClient(NRtTransportPtr transport)
     NRtClientPtr client(new NRtClient(transport, parameters.host, parameters.port, parameters.ssl));
     return client;
 }
+
+#if NAKAMA_FUTURES
+
+std::future<NFriendListPtr> RestClient::listFriendsAsync(
+    NSessionPtr session,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<NFriend::State>& state,
+    const std::string& cursor
+) {
+    std::promise<NFriendListPtr> promise;
+
+    listFriends(session, limit, state, cursor,
+        [&](NFriendListPtr friendList) {
+            promise.set_value(friendList);
+        },
+        [&](const NError& error) {
+            promise.set_exception(std::make_exception_ptr(std::runtime_error(error.getMessage())));
+        });
+
+    return promise.get_future();
+}
+
+#endif
 
 }

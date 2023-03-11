@@ -1187,6 +1187,24 @@ NAKAMA_NAMESPACE_BEGIN
         ) = 0;
     };
 
+#if NAKAMA_FUTURES
+        /**
+         * List of friends of the current user.
+         *
+         * @param session The session of the user.
+         * @param limit The max number of records to return. Between 1 and 100.
+         * @param state The friend state to list.
+         * @param cursor An optional next page cursor.
+         */
+        std::future<NFriendListPtr> listFriendsAsync(
+            NSessionPtr session,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<NFriend::State>& state,
+            const std::string& cursor = "",
+        ) = 0;
+
+#endif
+
     using NClientPtr = std::shared_ptr<NClientInterface>;
 
 NAKAMA_NAMESPACE_END
