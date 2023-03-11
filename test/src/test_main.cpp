@@ -50,6 +50,7 @@ void test_disconnect();
 void test_restoreSession();
 void test_storage();
 void test_groups();
+void test_friends();
 void test_listMatches();
 void test_realtime();
 void test_internals();
@@ -107,6 +108,7 @@ int runAllTests()
     test_restoreSession();
     test_storage();
     test_groups();
+    test_friends();
     test_realtime();
     test_listMatches();
 
