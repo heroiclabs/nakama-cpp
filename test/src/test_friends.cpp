@@ -16,11 +16,9 @@
 
 #include <condition_variable>
 #include <mutex>
-#include <crossguid/guid.hpp>
 #include "test_main.h"
 
-namespace Nakama {
-namespace Test {
+namespace Nakama::Test {
 
 using namespace std;
 
