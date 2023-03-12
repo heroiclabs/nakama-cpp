@@ -1157,7 +1157,7 @@ NAKAMA_NAMESPACE_BEGIN
         ) = 0;
 
         /**
-         * Execute a Lua function with an input payload on the server.
+         * Execute a server framework function with an input payload on the server.
          *
          * @param session The session of the user.
          * @param id The id of the function to execute on the server.
@@ -1172,7 +1172,7 @@ NAKAMA_NAMESPACE_BEGIN
         ) = 0;
 
         /**
-         * Execute a Lua function with an input payload on the server.
+         * Execute a server framework function with an input payload on the server.
          *
          * @param http_key The server's runtime HTTP key.
          * @param id The id of the function to execute on the server.
@@ -1187,7 +1187,450 @@ NAKAMA_NAMESPACE_BEGIN
         ) = 0;
     };
 
-#if NAKAMA_FUTURES
+/**
+         * Authenticate a user with a device id.
+         *
+         * @param id A device identifier usually obtained from a platform API.
+         * @param username A username used to create the user. Defaults to empty string.
+         * @param create True if the user should be created when authenticated. Defaults to false.
+         * @param vars Extra information that will be bundled in the session token.
+         */
+        std::future<NSessionPtr> authenticateDeviceAsync(
+            const std::string& id,
+            const opt::optional<std::string>& username = opt::nullopt,
+            const opt::optional<bool>& create = opt::nullopt,
+            const NStringMap& vars = {}
+        );
+
+        /**
+         * Authenticate a user with an email and password.
+         *
+         * @param email The email address of the user.
+         * @param password The password for the user.
+         * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
+         * @param vars Extra information that will be bundled in the session token.
+         */
+        std::future<NSessionPtr> authenticateEmailAsync(
+            const std::string& email,
+            const std::string& password,
+            const std::string& username = std::string(),
+            bool create = false,
+            const NStringMap& vars = {}
+        );
+
+        /**
+         * Authenticate a user with a Facebook auth token.
+         *
+         * @param accessToken An OAuth access token from the Facebook SDK.
+         * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
+         * @param importFriends True if the Facebook friends should be imported.
+         * @param vars Extra information that will be bundled in the session token.
+         */
+        std::future<NSessionPtr> authenticateFacebookAsync(
+            const std::string& accessToken,
+            const std::string& username = std::string(),
+            bool create = false,
+            bool importFriends = false,
+            const NStringMap& vars = {}
+        );
+
+        /**
+         * Authenticate a user with a Google auth token.
+         *
+         * @param accessToken An OAuth access token from the Google SDK.
+         * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
+         * @param vars Extra information that will be bundled in the session token.
+         */
+        void authenticateGoogleAsync(
+            const std::string& accessToken,
+            const std::string& username = std::string(),
+            bool create = false,
+            const NStringMap& vars = {}
+        );
+
+        /**
+         * Authenticate a user with Apple Game Center.
+         *
+         * @param playerId The player id of the user in Game Center.
+         * @param bundleId The bundle id of the Game Center application.
+         * @param timestampSeconds The date and time that the signature was created.
+         * @param salt A random <c>NSString</c> used to compute the hash and keep it randomized.
+         * @param signature The verification signature data generated.
+         * @param publicKeyUrl The URL for the public encryption key.
+         * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
+         * @param vars Extra information that will be bundled in the session token.
+         */
+        void authenticateGameCenterAsync(
+            const std::string& playerId,
+            const std::string& bundleId,
+            NTimestamp timestampSeconds,
+            const std::string& salt,
+            const std::string& signature,
+            const std::string& publicKeyUrl,
+            const std::string& username = std::string(),
+            bool create = false,
+            const NStringMap& vars = {}
+        );
+
+        /**
+         * Authenticate a user with Apple Sign In.
+         *
+         * @param token The ID token received from Apple to validate.
+         * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
+         * @param vars Extra information that will be bundled in the session token.
+         */
+        std::future<NSessionPtr> authenticateAppleAsync(
+            const std::string& token,
+            const std::string& username = std::string(),
+            bool create = false,
+            const NStringMap& vars = {}
+        );
+
+        /**
+         * Authenticate a user with a custom id.
+         *
+         * @param id A custom identifier usually obtained from an external authentication service.
+         * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
+         * @param vars Extra information that will be bundled in the session token.
+         */
+        std::future<NSessionPtr> authenticateCustomAsync(
+            const std::string& id,
+            const std::string& username = std::string(),
+            bool create = false,
+            const NStringMap& vars = {}
+        );
+
+        /**
+         * Authenticate a user with a Steam auth token.
+         *
+         * @param token An authentication token from the Steam network.
+         * @param username A username used to create the user.
+         * @param create True if the user should be created when authenticated.
+         * @param vars Extra information that will be bundled in the session token.
+         */
+        std::future<NSessionPtr> authenticateSteamAsync(
+            const std::string& token,
+            const std::string& username = std::string(),
+            bool create = false,
+            const NStringMap& vars = {}
+        );
+
+        /**
+         * Refresh a user's session using a refresh token retrieved from a previous authentication request.
+         * @param session The session of the user.
+        **/
+        std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session);
+
+        /**
+         * Link a Facebook profile to a user account.
+         *
+         * @param session The session of the user.
+         * @param accessToken An OAuth access token from the Facebook SDK.
+         * @param importFriends True if the Facebook friends should be imported.
+         */
+        std::future<void> linkFacebookAsync(
+            NSessionPtr session,
+            const std::string& accessToken,
+            const opt::optional<bool>& importFriends = opt::nullopt
+        );
+
+        /**
+         * Link an email with password to the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param email The email address of the user.
+         * @param password The password for the user.
+         */
+        std::future<void> linkEmailAsync(
+            NSessionPtr session,
+            const std::string& email,
+            const std::string& password
+        );
+
+        /**
+         * Link a device id to the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param id A device identifier usually obtained from a platform API.
+         */
+        std::future<void> linkDeviceAsync(
+            NSessionPtr session,
+            const std::string& id
+        );
+
+        /**
+         * Link a Google profile to a user account.
+         *
+         * @param session The session of the user.
+         * @param accessToken An OAuth access token from the Google SDK.
+         */
+        std::future<void> linkGoogleAsync(
+            NSessionPtr session,
+            const std::string& accessToken
+        );
+
+        /**
+         * Link a Game Center profile to a user account.
+         *
+         * @param session The session of the user.
+         * @param playerId The player id of the user in Game Center.
+         * @param bundleId The bundle id of the Game Center application.
+         * @param timestampSeconds The date and time that the signature was created.
+         * @param salt A random <c>NSString</c> used to compute the hash and keep it randomized.
+         * @param signature The verification signature data generated.
+         * @param publicKeyUrl The URL for the public encryption key.
+         */
+        std::future<void> linkGameCenterAsync(
+            NSessionPtr session,
+            const std::string& playerId,
+            const std::string& bundleId,
+            NTimestamp timestampSeconds,
+            const std::string& salt,
+            const std::string& signature,
+            const std::string& publicKeyUrl
+        );
+
+        /**
+         * Link an Apple ID to the social profiles on the current user's account.
+         *
+         * @param session The session of the user.
+         * @param token The ID token received from Apple.
+         */
+        std::future<void> linkAppleAsync(
+            NSessionPtr session,
+            const std::string& token
+        );
+
+        /**
+         * Link a Steam profile to a user account.
+         *
+         * @param session The session of the user.
+         * @param token An authentication token from the Steam network.
+         */
+        std::future<void> linkSteamAsync(
+            NSessionPtr session,
+            const std::string& token
+        );
+
+        /**
+         * Link a custom id to the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param id A custom identifier usually obtained from an external authentication service.
+         */
+        std::future<void> linkCustomAsync(
+            NSessionPtr session,
+            const std::string& id
+        );
+
+        /**
+         * Unlink a Facebook profile from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param accessToken An OAuth access token from the Facebook SDK.
+         */
+        std::future<void> unlinkFacebookAsync(
+            NSessionPtr session,
+            const std::string& accessToken
+        );
+
+        /**
+         * Unlink an email with password from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param email The email address of the user.
+         * @param password The password for the user.
+         */
+        std::future<void> unlinkEmailAsync(
+            NSessionPtr session,
+            const std::string& email,
+            const std::string& password
+        );
+
+        /**
+         * Unlink a Google profile from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param accessToken An OAuth access token from the Google SDK.
+         */
+        std::future<void> unlinkGoogleAsync(
+            NSessionPtr session,
+            const std::string& accessToken
+        );
+
+        /**
+         * Unlink a Game Center profile from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param playerId The player id of the user in Game Center.
+         * @param bundleId The bundle id of the Game Center application.
+         * @param timestampSeconds The date and time that the signature was created.
+         * @param salt A random <c>NSString</c> used to compute the hash and keep it randomized.
+         * @param signature The verification signature data generated.
+         * @param publicKeyUrl The URL for the public encryption key.
+         */
+        std::future<void> unlinkGameCenterAsync(
+            NSessionPtr session,
+            const std::string& playerId,
+            const std::string& bundleId,
+            NTimestamp timestampSeconds,
+            const std::string& salt,
+            const std::string& signature,
+            const std::string& publicKeyUrl
+        );
+
+        /**
+         * Unlink a Apple profile from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param token An Apple authentication token.
+         */
+        std::future<void> unlinkAppleAsync(
+            NSessionPtr session,
+            const std::string& token
+        );
+
+        /**
+         * Unlink a Steam profile from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param token An authentication token from the Steam network.
+         */
+        std::future<void> unlinkSteamAsync(
+            NSessionPtr session,
+            const std::string& token
+        );
+
+        /**
+         * Unlink a device id from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param id A device identifier usually obtained from a platform API.
+         */
+        std::future<void> unlinkDeviceAsync(
+            NSessionPtr session,
+            const std::string& id
+        );
+
+        /**
+         * Unlink a custom id from the user account owned by the session.
+         *
+         * @param session The session of the user.
+         * @param id A custom identifier usually obtained from an external authentication service.
+         */
+        std::future<void> unlinkCustomAsync(
+            NSessionPtr session,
+            const std::string& id
+        );
+
+        /**
+         * Import Facebook friends and add them to the user's account.
+         *
+         * The server will import friends when the user authenticates with Facebook. This function can be used to be
+         * explicit with the import operation.
+         *
+         * @param session The session of the user.
+         * @param token An OAuth access token from the Facebook SDK.
+         * @param reset True if the Facebook friend import for the user should be reset.
+         */
+        std::future<void> importFacebookFriendsAsync(
+            NSessionPtr session,
+            const std::string& token,
+            const opt::optional<bool>& reset = opt::nullopt
+        );
+
+        /**
+         * Fetch the user account owned by the session.
+         *
+         * @param session The session of the user.
+         */
+        std::future<const NAccount&> getAccountAsync(
+            NSessionPtr session
+        );;
+
+        /**
+         * Update the current user's account on the server.
+         *
+         * @param session The session for the user.
+         * @param username The new username for the user.
+         * @param displayName A new display name for the user.
+         * @param avatarUrl A new avatar url for the user.
+         * @param langTag A new language tag in BCP-47 format for the user.
+         * @param location A new location for the user.
+         * @param timezone New timezone information for the user.
+         */
+        std::future<void> updateAccount(
+            NSessionPtr session,
+            const opt::optional<std::string>& username    = opt::nullopt,
+            const opt::optional<std::string>& displayName = opt::nullopt,
+            const opt::optional<std::string>& avatarUrl   = opt::nullopt,
+            const opt::optional<std::string>& langTag     = opt::nullopt,
+            const opt::optional<std::string>& location    = opt::nullopt,
+            const opt::optional<std::string>& timezone    = opt::nullopt
+        );
+
+        /**
+         * Fetch one or more users by id, usernames, and Facebook ids.
+         *
+         * @param session The session of the user.
+         * @param ids List of user IDs.
+         * @param usernames List of usernames.
+         * @param facebookIds List of Facebook IDs.
+         */
+        std::future<const NUsers&> getUsersAsync(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames = {},
+            const std::vector<std::string>& facebookIds = {}
+        );
+
+        /**
+         * Add one or more friends by id.
+         *
+         * @param session The session of the user.
+         * @param ids The ids of the users to add or invite as friends.
+         * @param usernames The usernames of the users to add as friends.
+         */
+        std::future<void> addFriendsAsync(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames = {}
+        );
+
+        /**
+         * Delete one more or users by id or username from friends.
+         *
+         * @param session The session of the user.
+         * @param ids the user ids to remove as friends.
+         * @param usernames The usernames to remove as friends.
+         */
+        std::future<void> deleteFriendsAsync(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames = {},
+            std::function<void()> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        );
+
+        /**
+         * Block one or more friends by id.
+         *
+         * @param session The session of the user.
+         * @param ids The ids of the users to block.
+         * @param usernames The usernames of the users to block.
+         */
+        std::future<void> blockFriends(
+            NSessionPtr session,
+            const std::vector<std::string>& ids,
+            const std::vector<std::string>& usernames = {}
+        );
+
         /**
          * List of friends of the current user.
          *
@@ -1200,10 +1643,499 @@ NAKAMA_NAMESPACE_BEGIN
             NSessionPtr session,
             const opt::optional<int32_t>& limit,
             const opt::optional<NFriend::State>& state,
-            const std::string& cursor = "",
-        ) = 0;
+            const std::string& cursor = ""
+        );
 
-#endif
+        /**
+         * Create a group.
+         *
+         * @param session The session of the user.
+         * @param name The name for the group.
+         * @param description A description for the group.
+         * @param avatarUrl An avatar url for the group.
+         * @param langTag A language tag in BCP-47 format for the group.
+         * @param open True if the group should have open membership.
+         * @param maxCount Maximum number of group members.
+         */
+        std::future<const NGroup&> createGroupAsync(
+            NSessionPtr session,
+            const std::string& name,
+            const std::string& description = "",
+            const std::string& avatarUrl = "",
+            const std::string& langTag = "",
+            bool open = false,
+            const opt::optional<int32_t>& maxCount = {}
+        );
+
+        /**
+         * Delete a group by id.
+         *
+         * @param session The session of the user.
+         * @param groupId The group id to to remove.
+         */
+        std::future<void> deleteGroupAsync(
+            NSessionPtr session,
+            const std::string& groupId
+        );
+
+        /**
+         * Add one or more users to the group.
+         *
+         * @param session The session of the user.
+         * @param groupId The id of the group to add users into.
+         * @param ids The ids of the users to add or invite to the group.
+         */
+        std::future<void> addGroupUsersAsync(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids
+        );
+
+        /**
+         * List all users part of the group.
+         *
+         * @param session The session of the user.
+         * @param groupId The id of the group.
+         * @param limit The max number of records to return. Between 1 and 100.
+         * @param state The group membership state to list.
+         * @param cursor An optional next page cursor.
+         */
+        std::future<NGroupUserListPtr> listGroupUsersAsync(
+            NSessionPtr session,
+            const std::string& groupId,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<NUserGroupState>& state,
+            const std::string& cursor = ""
+        );
+
+        /**
+         * Kick one or more users from the group.
+         *
+         * @param session The session of the user.
+         * @param groupId The id of the group.
+         * @param ids The ids of the users to kick.
+         */
+        std::future<void> kickGroupUsersAsync(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids
+        );
+
+        /**
+         * Join a group if it has open membership or request to join it.
+         *
+         * @param session The session of the user.
+         * @param groupId The id of the group to join.
+         */
+        std::future<void> joinGroupAsync(
+            NSessionPtr session,
+            const std::string& groupId
+        );
+
+        /**
+         * Leave a group by id.
+         *
+         * @param session The session of the user.
+         * @param groupId The id of the group to leave.
+         */
+        std::future<void> leaveGroupAsync(
+            NSessionPtr session,
+            const std::string& groupId
+        );
+
+        /**
+         * List groups on the server.
+         *
+         * @param session The session of the user.
+         * @param name The name filter to apply to the group list.
+         * @param limit The number of groups to list.
+         * @param cursor A cursor for the current position in the groups to list.
+         */
+        std::future<NGroupListPtr> listGroupsAsync(
+            NSessionPtr session,
+            const std::string& name,
+            int32_t limit = 0,
+            const std::string& cursor = ""
+        );
+
+        /**
+         * List of groups the current user is a member of.
+         *
+         * @param session The session of the user.
+         * @param limit The max number of records to return. Between 1 and 100.
+         * @param state The group membership state to list.
+         * @param cursor An optional next page cursor.
+         */
+        std::future<NUserGroupListPtr> listUserGroupsAsync(
+            NSessionPtr session,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<NUserGroupState>& state,
+            const std::string& cursor = ""
+        );
+
+        /**
+         * List groups a user is a member of.
+         *
+         * @param session The session of the user.
+         * @param userId The id of the user whose groups to list.
+         * @param limit The max number of records to return. Between 1 and 100.
+         * @param state The group membership state to list.
+         * @param cursor An optional next page cursor.
+         */
+        std::future<NUserGroupListPtr> listUserGroupsAsync(
+            NSessionPtr session,
+            const std::string& userId,
+            const opt::optional<int32_t>& limit,
+            const opt::optional<NUserGroupState>& state,
+            const std::string& cursor = "",
+            std::function<void(NUserGroupListPtr)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        );
+
+        /**
+         * Promote a set of users in a group to the next role up.
+         *
+         * @param session The session of the user.
+         * @param groupId The group ID to promote in.
+         * @param ids The ids of the users to promote.
+         */
+        std::future<void> promoteGroupUsersAsync(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids
+        );
+
+        /**
+         * Demote a set of users in a group to the next role down.
+         *
+         * @param session The session of the user.
+         * @param groupId The group ID to demote in.
+         * @param ids The ids of the users to demote.
+         */
+        std::future<void> demoteGroupUsersAsync(
+            NSessionPtr session,
+            const std::string& groupId,
+            const std::vector<std::string>& ids
+        );
+
+        /**
+         * Update a group.
+         *
+         * The user must have the correct access permissions for the group.
+         *
+         * @param session The session of the user.
+         * @param groupId The id of the group to update.
+         * @param name A new name for the group.
+         * @param description A new description for the group.
+         * @param avatarUrl A new avatar url for the group.
+         * @param langTag A new language tag in BCP-47 format for the group.
+         * @param open True if the group should have open membership.
+         */
+        std::future<void> updateGroupAsync(
+            NSessionPtr session,
+            const std::string& groupId,
+            const opt::optional<std::string>& name = opt::nullopt,
+            const opt::optional<std::string>& description = opt::nullopt,
+            const opt::optional<std::string>& avatarUrl = opt::nullopt,
+            const opt::optional<std::string>& langTag = opt::nullopt,
+            const opt::optional<bool>& open = opt::nullopt
+        );
+
+        /**
+         * List records from a leaderboard.
+         *
+         * @param session The session of the user.
+         * @param leaderboardId The id of the leaderboard to list.
+         * @param ownerIds Record owners to fetch with the list of records.
+         * @param limit The number of records to list.
+         * @param cursor A cursor for the current position in the leaderboard records to list.
+         */
+        std::future<NLeaderboardRecordListPtr> listLeaderboardRecordsAsync(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            const std::vector<std::string>& ownerIds = {},
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt
+        );
+
+        /**
+         * List leaderboard records from a given leaderboard around the owner.
+         *
+         * @param session The session of the user.
+         * @param leaderboardId The id of the leaderboard to list.
+         * @param ownerId The owner to retrieve records around.
+         * @param limit Max number of records to return. Between 1 and 100.
+         */
+        std::future<NLeaderboardRecordListPtr> listLeaderboardRecordsAroundOwnerAsync(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            const std::string& ownerId,
+            const opt::optional<int32_t>& limit = opt::nullopt
+        );
+
+        /**
+         * Write a record to a leaderboard.
+         *
+         * @param session The session for the user.
+         * @param leaderboardId The id of the leaderboard to write.
+         * @param score The score for the leaderboard record.
+         * @param subscore The subscore for the leaderboard record.
+         * @param metadata The metadata for the leaderboard record.
+         */
+        std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
+            NSessionPtr session,
+            const std::string& leaderboardId,
+            int64_t score,
+            const opt::optional<int64_t>& subscore = opt::nullopt,
+            const opt::optional<std::string>& metadata = opt::nullopt
+        );
+
+        /**
+         * A request to submit a score to a tournament.
+         *
+         * @param session The session for the user.
+         * @param tournamentId The tournament ID to write the record for.
+         * @param score The score value to submit.
+         * @param subscore  An optional secondary value.
+         * @param metadata A JSON object of additional properties.
+         */
+        std::future<NLeaderboardRecord> writeTournamentRecordAsync(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            int64_t score,
+            const opt::optional<int64_t>& subscore = opt::nullopt,
+            const opt::optional<std::string>& metadata = opt::nullopt
+        );
+
+        /**
+         * Delete a leaderboard record.
+         *
+         * @param session The session of the user.
+         * @param leaderboardId The id of the leaderboard with the record to be deleted.
+         */
+        std::future<void> deleteLeaderboardRecordAsync(
+            NSessionPtr session,
+            const std::string& leaderboardId
+        );
+
+        /**
+         * Fetch a list of matches active on the server.
+         *
+         * @param session The session of the user.
+         * @param min_size The minimum number of match participants.
+         * @param max_size The maximum number of match participants.
+         * @param limit The number of matches to list.
+         * @param label The label to filter the match list on.
+         * @param authoritative <c>true</c> to include authoritative matches.
+         */
+        std::future<NMatchListPtr> listMatchesAsync(
+            NSessionPtr session,
+            const opt::optional<int32_t>& min_size = opt::nullopt,
+            const opt::optional<int32_t>& max_size = opt::nullopt,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& label = opt::nullopt,
+            const opt::optional<std::string>& query = opt::nullopt,
+            const opt::optional<bool>& authoritative = opt::nullopt
+        );
+
+        /**
+         * List notifications for the user with an optional cursor.
+         *
+         * @param session The session of the user.
+         * @param limit The number of notifications to list.
+         * @param cacheableCursor A cursor for the current position in notifications to list.
+         */
+        std::future<NNotificationListPtr> listNotificationsAsync(
+            NSessionPtr session,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& cacheableCursor = opt::nullopt
+        );
+
+        /**
+         * Delete one or more notifications by id.
+         *
+         * @param session The session of the user.
+         * @param notificationIds The notification ids to remove.
+         */
+        std::future<void> deleteNotificationsAsync(
+            NSessionPtr session,
+            const std::vector<std::string>& notificationIds
+        );
+
+        /**
+         * List messages from a chat channel.
+         *
+         * @param session The session of the user.
+         * @param channelId A channel identifier.
+         * @param limit The number of chat messages to list.
+         * @param cursor A cursor for the current position in the messages history to list.
+         * @param forward Fetch messages forward from the current cursor (or the start).
+         */
+        std::future<NChannelMessageListPtr> listChannelMessagesAsync(
+            NSessionPtr session,
+            const std::string& channelId,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt,
+            const opt::optional<bool>& forward = opt::nullopt
+        );
+
+        /**
+         * List active/upcoming tournaments based on given filters.
+         *
+         * @param session The session of the user.
+         * @param categoryStart The start of the categories to include. Defaults to 0.
+         * @param categoryEnd The end of the categories to include. Defaults to 128.
+         * @param startTime The start time for tournaments. Defaults to current Unix time.
+         * @param endTime The end time for tournaments. Defaults to +1 year from current Unix time.
+         * @param limit Max number of records to return. Between 1 and 100.
+         * @param cursor A next page cursor for listings.
+         */
+        std::future<NTournamentListPtr> listTournamentsAsync(
+            NSessionPtr session,
+            const opt::optional<uint32_t>& categoryStart = opt::nullopt,
+            const opt::optional<uint32_t>& categoryEnd = opt::nullopt,
+            const opt::optional<uint32_t>& startTime = opt::nullopt,
+            const opt::optional<uint32_t>& endTime = opt::nullopt,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt
+        );
+
+        /**
+         * List tournament records from a given tournament.
+         *
+         * @param session The session of the user.
+         * @param tournamentId The ID of the tournament to list for.
+         * @param limit Max number of records to return. Between 1 and 100.
+         * @param cursor A next or previous page cursor.
+         * @param ownerIds One or more owners to retrieve records for.
+         */
+        std::future<NTournamentRecordListPtr> listTournamentRecordsAsync(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt,
+            const std::vector<std::string>& ownerIds = {}
+        );
+
+        /**
+         * List tournament records from a given tournament around the owner.
+         *
+         * @param session The session of the user.
+         * @param tournamentId The ID of the tournament to list for.
+         * @param ownerId The owner to retrieve records around.
+         * @param limit Max number of records to return. Between 1 and 100.
+         */
+        std::future<NTournamentRecordListPtr> listTournamentRecordsAroundOwnerAsync(
+            NSessionPtr session,
+            const std::string& tournamentId,
+            const std::string& ownerId,
+            const opt::optional<int32_t>& limit = opt::nullopt
+        );
+
+        /**
+         * Join a tournament if it has open membership or request to join it.
+         *
+         * @param session The session of the user.
+         * @param tournamentId The id of the tournament to join.
+         */
+        std::future<void> joinTournamentAsync(
+            NSessionPtr session,
+            const std::string& tournamentId
+        );
+
+        /**
+         * List storage objects in a collection which have public read access.
+         *
+         * @param session The session of the user.
+         * @param collection The collection to list over.
+         * @param limit The number of objects to list.
+         * @param cursor A cursor to paginate over the collection.
+         */
+        std::future<NStorageObjectListPtr> listStorageObjectsAsync(
+            NSessionPtr session,
+            const std::string& collection,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt
+        );
+
+        /**
+         * List storage objects in a collection which belong to a specific user and have public read access.
+         *
+         * @param session The session of the user.
+         * @param collection The collection to list over.
+         * @param userId The user ID of the user to list objects for.
+         * @param limit The number of objects to list.
+         * @param cursor A cursor to paginate over the collection.
+         */
+        std::future<NStorageObjectListPtr> listUsersStorageObjects(
+            NSessionPtr session,
+            const std::string& collection,
+            const std::string& userId,
+            const opt::optional<int32_t>& limit = opt::nullopt,
+            const opt::optional<std::string>& cursor = opt::nullopt
+        );
+
+        /**
+         * Write objects to the storage engine.
+         *
+         * @param session The session of the user.
+         * @param objects The objects to write.
+         */
+        std::future<const NStorageObjectAcks&> writeStorageObjectsAsync(
+            NSessionPtr session,
+            const std::vector<NStorageObjectWrite>& objects
+        );
+
+        /**
+         * Read one or more objects from the storage engine.
+         *
+         * @param session The session of the user.
+         * @param objectIds The objects to read.
+         */
+        std::future<NStorageObjects> readStorageObjectsAsync(
+            NSessionPtr session,
+            const std::vector<NReadStorageObjectId>& objectIds,
+            std::function<void(const NStorageObjects&)> successCallback = nullptr,
+            ErrorCallback errorCallback = nullptr
+        );
+
+        /**
+         * Delete one or more storage objects.
+         *
+         * @param session The session of the user.
+         * @param objectIds The ids of the objects to delete.
+         */
+        std::future<NDeleteStorageObjectId> deleteStorageObjectsASync(
+            NSessionPtr session,
+            const std::vector<NDeleteStorageObjectId>& objectIds,
+        );
+
+        /**
+         * Execute a server framework function with an input payload on the server.
+         *
+         * @param session The session of the user.
+         * @param id The id of the function to execute on the server.
+         * @param payload The payload to send with the function call.
+         */
+        std::future<const NRpc&> rpcAsync(
+            NSessionPtr session,
+            const std::string& id,
+            const opt::optional<std::string>& payload = opt::nullopt
+        );
+
+        /**
+         * Execute an RPC function with an input payload on the server.
+         *
+         * @param http_key The server's runtime HTTP key.
+         * @param id The id of the function to execute on the server.
+         * @param payload The payload to send with the function call.
+         */
+        std::future<const NRpc&> rpcAsync(
+            const std::string& http_key,
+            const std::string& id,
+            const opt::optional<std::string>& payload = opt::nullopt
+        );
+    }
 
     using NClientPtr = std::shared_ptr<NClientInterface>;
 
