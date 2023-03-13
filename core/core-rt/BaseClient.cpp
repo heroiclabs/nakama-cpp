@@ -243,7 +243,7 @@ std::future<void> BaseClient::linkFacebookAsync(
     std::promise<void> promise;
 
     linkFacebook(session, accessToken, importFriends,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -262,7 +262,7 @@ std::future<void> BaseClient::linkEmailAsync(
     std::promise<void> promise;
 
     linkEmail(session, email, password,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -280,7 +280,7 @@ std::future<void> BaseClient::linkDeviceAsync(
     std::promise<void> promise;
 
     linkDevice(session, id,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -298,7 +298,7 @@ std::future<void> BaseClient::linkGoogleAsync(
     std::promise<void> promise;
 
     linkGoogle(session, accessToken,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -321,7 +321,7 @@ std::future<void> BaseClient::linkGameCenterAsync(
     std::promise<void> promise;
 
     linkGameCenter(session, playerId, bundleId, timestampSeconds, salt, signature, publicKeyUrl,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -339,7 +339,7 @@ std::future<void> BaseClient::linkAppleAsync(
     std::promise<void> promise;
 
     linkApple(session, token,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -357,7 +357,7 @@ std::future<void> BaseClient::linkSteamAsync(
     std::promise<void> promise;
 
     linkSteam(session, token,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -375,7 +375,7 @@ std::future<void> BaseClient::linkCustomAsync(
     std::promise<void> promise;
 
     linkCustom(session, id,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -393,7 +393,7 @@ std::future<void> BaseClient::unlinkFacebookAsync(
     std::promise<void> promise;
 
     unlinkFacebook(session, accessToken,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -430,7 +430,7 @@ std::future<void> BaseClient::unlinkGoogleAsync(
     std::promise<void> promise;
 
     unlinkGoogle(session, accessToken,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -452,8 +452,8 @@ std::future<void> BaseClient::unlinkGameCenterAsync(
 {
     std::promise<void> promise;
 
-    unlinkGameCenter(session, playerId, bundleId, timestampSeconds, salt, siganture, publicKeyUrl,
-        [&](NSessionPtr session) {
+    unlinkGameCenter(session, playerId, bundleId, timestampSeconds, salt, signature, publicKeyUrl,
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -471,7 +471,7 @@ std::future<void> BaseClient::unlinkAppleAsync(
     std::promise<void> promise;
 
     unlinkApple(session, token,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -489,7 +489,7 @@ std::future<void> BaseClient::unlinkSteamAsync(
     std::promise<void> promise;
 
     unlinkSteam(session, token,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -507,7 +507,7 @@ std::future<void> BaseClient::unlinkDeviceAsync(
     std::promise<void> promise;
 
     unlinkDevice(session, id,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -525,7 +525,7 @@ std::future<void> BaseClient::unlinkCustomAsync(
     std::promise<void> promise;
 
     unlinkCustom(session, id,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -544,7 +544,7 @@ std::future<void> BaseClient::importFacebookFriendsAsync(
     std::promise<void> promise;
 
     importFacebookFriends(session, token, reset,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -625,7 +625,7 @@ std::future<void> BaseClient::deleteFriendsAsync(
     std::promise<void> promise;
 
     deleteFriends(session, ids, usernames,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -1278,16 +1278,16 @@ std::future<NStorageObjects> BaseClient::readStorageObjectsAsync(
     return promise.get_future();
 }
 
-std::future<NDeleteStorageObjectId> BaseClient::deleteStorageObjectsASync(
+std::future<void> BaseClient::deleteStorageObjectsASync(
     NSessionPtr session,
     const std::vector<NDeleteStorageObjectId>& objectIds
 )
 {
-    std::promise<NDeleteStorageObjectId> promise;
+    std::promise<void> promise;
 
-    readStorageObjects(session, objectIds,
-        [&](NDeleteStorageObjectId objects) {
-            promise.set_value(objects);
+    deleteStorageObjects(session, objectIds,
+        [&]() {
+            promise.set_value();
         },
         [&](const NError& error) {
             promise.set_exception(std::make_exception_ptr(std::runtime_error(error.message)));

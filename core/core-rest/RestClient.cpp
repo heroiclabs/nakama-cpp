@@ -1456,45 +1456,6 @@ void RestClient::blockFriends(
     }
 }
 
-void RestClient::listFriendsAsync(
-    NSessionPtr session,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<NFriend::State>& state,
-    const std::string& cursor,
-    std::function<void(NFriendListPtr)> successCallback, ErrorCallback errorCallback)
-{
-    try {
-        NLOG_INFO("...");
-
-        auto data(make_shared<nakama::api::FriendList>());
-        RestReqContext* ctx = createReqContext(data.get());
-        setSessionAuth(ctx, session);
-
-        if (successCallback)
-        {
-            ctx->successCallback = [data, successCallback]()
-            {
-                NFriendListPtr friends(new NFriendList());
-                assign(*friends, *data);
-                successCallback(friends);
-            };
-        }
-        ctx->errorCallback = errorCallback;
-
-        NHttpQueryArgs args;
-
-        if (limit) args.emplace("limit", std::to_string(*limit));
-        if (state) args.emplace("state", std::to_string((int32_t)*state));
-        if (!cursor.empty()) args.emplace("cursor", cursor);
-
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/friend", "", std::move(args));
-    }
-    catch (exception& e)
-    {
-        NLOG_ERROR("exception: " + string(e.what()));
-    }
-}
-
 void RestClient::createGroup(
     NSessionPtr session,
     const std::string & name,

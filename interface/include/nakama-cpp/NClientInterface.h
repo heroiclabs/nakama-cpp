@@ -1187,7 +1187,7 @@ NAKAMA_NAMESPACE_BEGIN
         ) = 0;
     };
 
-/**
+        /**
          * Authenticate a user with a device id.
          *
          * @param id A device identifier usually obtained from a platform API.
@@ -1264,7 +1264,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param create True if the user should be created when authenticated.
          * @param vars Extra information that will be bundled in the session token.
          */
-        void authenticateGameCenterAsync(
+        std::future<NSessionPtr> authenticateGameCenterAsync(
             const std::string& playerId,
             const std::string& bundleId,
             NTimestamp timestampSeconds,
@@ -2067,7 +2067,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param limit The number of objects to list.
          * @param cursor A cursor to paginate over the collection.
          */
-        std::future<NStorageObjectListPtr> listUsersStorageObjects(
+        std::future<NStorageObjectListPtr> listUsersStorageObjectsAsync(
             NSessionPtr session,
             const std::string& collection,
             const std::string& userId,
@@ -2107,7 +2107,7 @@ NAKAMA_NAMESPACE_BEGIN
          */
         std::future<NDeleteStorageObjectId> deleteStorageObjectsASync(
             NSessionPtr session,
-            const std::vector<NDeleteStorageObjectId>& objectIds,
+            const std::vector<NDeleteStorageObjectId>& objectIds
         );
 
         /**
@@ -2135,8 +2135,6 @@ NAKAMA_NAMESPACE_BEGIN
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt
         );
-    }
-
-    using NClientPtr = std::shared_ptr<NClientInterface>;
+        using NClientPtr = std::shared_ptr<NClientInterface>;
 
 NAKAMA_NAMESPACE_END
