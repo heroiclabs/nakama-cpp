@@ -183,9 +183,9 @@ std::future<NSessionPtr> BaseClient::authenticateAppleAsync(
 
 std::future<NSessionPtr> BaseClient::authenticateCustomAsync(
     const std::string& id,
-    const std::string& username = std::string(),
-    bool create = false,
-    const NStringMap& vars = {}
+    const std::string& username,
+    bool create,
+    const NStringMap& vars
 )
 {
     std::promise<NSessionPtr> promise;
@@ -203,10 +203,9 @@ std::future<NSessionPtr> BaseClient::authenticateCustomAsync(
 
 std::future<NSessionPtr> BaseClient::authenticateSteamAsync(
     const std::string& token,
-    const std::string& username = std::string(),
-    bool create = false,
-    const NStringMap& vars = {}
-)
+    const std::string& username,
+    bool create,
+    const NStringMap& vars)
 {
     std::promise<NSessionPtr> promise;
 
@@ -239,7 +238,7 @@ std::future<NSessionPtr> BaseClient::authenticateRefreshAsync(NSessionPtr sessio
 std::future<void> BaseClient::linkFacebookAsync(
     NSessionPtr session,
     const std::string& accessToken,
-    const opt::optional<bool>& importFriends = opt::nullopt
+    const opt::optional<bool>& importFriends
 )
 {
     std::promise<void> promise;
@@ -540,7 +539,7 @@ std::future<void> BaseClient::unlinkCustomAsync(
 std::future<void> BaseClient::importFacebookFriendsAsync(
     NSessionPtr session,
     const std::string& token,
-    const opt::optional<bool>& reset = opt::nullopt
+    const opt::optional<bool>& reset
 )
 {
     std::promise<void> promise;
@@ -558,13 +557,12 @@ std::future<void> BaseClient::importFacebookFriendsAsync(
 
 std::future<void> BaseClient::updateAccountAsync(
     NSessionPtr session,
-    const opt::optional<std::string>& username    = opt::nullopt,
-    const opt::optional<std::string>& displayName = opt::nullopt,
-    const opt::optional<std::string>& avatarUrl   = opt::nullopt,
-    const opt::optional<std::string>& langTag     = opt::nullopt,
-    const opt::optional<std::string>& location    = opt::nullopt,
-    const opt::optional<std::string>& timezone    = opt::nullopt
-)
+    const opt::optional<std::string>& username,
+    const opt::optional<std::string>& displayName,
+    const opt::optional<std::string>& avatarUrl,
+    const opt::optional<std::string>& langTag,
+    const opt::optional<std::string>& location,
+    const opt::optional<std::string>& timezone)
 {
     std::promise<void> promise;
 
@@ -582,8 +580,8 @@ std::future<void> BaseClient::updateAccountAsync(
 std::future<const NUsers&> BaseClient::getUsersAsync(
     NSessionPtr session,
     const std::vector<std::string>& ids,
-    const std::vector<std::string>& usernames = {},
-    const std::vector<std::string>& facebookIds = {}
+    const std::vector<std::string>& usernames,
+    const std::vector<std::string>& facebookIds
 )
 {
     std::promise<const NUsers&> promise;
@@ -602,7 +600,7 @@ std::future<const NUsers&> BaseClient::getUsersAsync(
 std::future<void> BaseClient::addFriendsAsync(
     NSessionPtr session,
     const std::vector<std::string>& ids,
-    const std::vector<std::string>& usernames = {}
+    const std::vector<std::string>& usernames
 )
 {
     std::promise<void> promise;
@@ -621,7 +619,7 @@ std::future<void> BaseClient::addFriendsAsync(
 std::future<void> BaseClient::deleteFriendsAsync(
     NSessionPtr session,
     const std::vector<std::string>& ids,
-    const std::vector<std::string>& usernames = {}
+    const std::vector<std::string>& usernames
 )
 {
     std::promise<void> promise;
@@ -640,7 +638,7 @@ std::future<void> BaseClient::deleteFriendsAsync(
 std::future<void> BaseClient::blockFriendsAsync(
     NSessionPtr session,
     const std::vector<std::string>& ids,
-    const std::vector<std::string>& usernames = {}
+    const std::vector<std::string>& usernames
 )
 {
     std::promise<void> promise;
@@ -678,11 +676,11 @@ std::future<NFriendListPtr> BaseClient::listFriendsAsync(
 std::future<const NGroup&> BaseClient::createGroupAsync(
     NSessionPtr session,
     const std::string& name,
-    const std::string& description = "",
-    const std::string& avatarUrl = "",
-    const std::string& langTag = "",
-    bool open = false,
-    const opt::optional<int32_t>& maxCount = {}
+    const std::string& description,
+    const std::string& avatarUrl,
+    const std::string& langTag,
+    bool open,
+    const opt::optional<int32_t>& maxCount
 )
 {
     std::promise<const NGroup&> promise;
@@ -741,7 +739,7 @@ std::future<NGroupUserListPtr> BaseClient::listGroupUsersAsync(
     const std::string& groupId,
     const opt::optional<int32_t>& limit,
     const opt::optional<NUserGroupState>& state,
-    const std::string& cursor = ""
+    const std::string& cursor
 )
 {
     std::promise<NGroupUserListPtr> promise;
@@ -816,8 +814,8 @@ std::future<void> BaseClient::leaveGroupAsync(
 std::future<NGroupListPtr> BaseClient::listGroupsAsync(
     NSessionPtr session,
     const std::string& name,
-    int32_t limit = 0,
-    const std::string& cursor = ""
+    int32_t limit,
+    const std::string& cursor
 )
 {
     std::promise<NGroupListPtr> promise;
@@ -837,7 +835,7 @@ std::future<NUserGroupListPtr> BaseClient::listUserGroupsAsync(
     NSessionPtr session,
     const opt::optional<int32_t>& limit,
     const opt::optional<NUserGroupState>& state,
-    const std::string& cursor = ""
+    const std::string& cursor
 )
 {
     std::promise<NUserGroupListPtr> promise;
@@ -858,10 +856,7 @@ std::future<NUserGroupListPtr> BaseClient::listUserGroupsAsync(
     const std::string& userId,
     const opt::optional<int32_t>& limit,
     const opt::optional<NUserGroupState>& state,
-    const std::string& cursor = "",
-    std::function<void(NUserGroupListPtr)> successCallback = nullptr,
-    ErrorCallback errorCallback = nullptr
-)
+    const std::string& cursor)
 {
     std::promise<NUserGroupListPtr> promise;
 
@@ -917,11 +912,11 @@ std::future<void> BaseClient::demoteGroupUsersAsync(
 std::future<void> BaseClient::updateGroupAsync(
     NSessionPtr session,
     const std::string& groupId,
-    const opt::optional<std::string>& name = opt::nullopt,
-    const opt::optional<std::string>& description = opt::nullopt,
-    const opt::optional<std::string>& avatarUrl = opt::nullopt,
-    const opt::optional<std::string>& langTag = opt::nullopt,
-    const opt::optional<bool>& open = opt::nullopt
+    const opt::optional<std::string>& name,
+    const opt::optional<std::string>& description,
+    const opt::optional<std::string>& avatarUrl,
+    const opt::optional<std::string>& langTag,
+    const opt::optional<bool>& open
 )
 {
     std::promise<void> promise;
@@ -940,9 +935,9 @@ std::future<void> BaseClient::updateGroupAsync(
 std::future<NLeaderboardRecordListPtr> BaseClient::listLeaderboardRecordsAsync(
     NSessionPtr session,
     const std::string& leaderboardId,
-    const std::vector<std::string>& ownerIds = {},
-    const opt::optional<int32_t>& limit = opt::nullopt,
-    const opt::optional<std::string>& cursor = opt::nullopt
+    const std::vector<std::string>& ownerIds,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cursor
 )
 {
     std::promise<NLeaderboardRecordListPtr> promise;
@@ -962,7 +957,7 @@ std::future<NLeaderboardRecordListPtr> BaseClient::listLeaderboardRecordsAroundO
     NSessionPtr session,
     const std::string& leaderboardId,
     const std::string& ownerId,
-    const opt::optional<int32_t>& limit = opt::nullopt
+    const opt::optional<int32_t>& limit
 )
 {
     std::promise<NLeaderboardRecordListPtr> promise;
@@ -982,8 +977,8 @@ std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
     NSessionPtr session,
     const std::string& leaderboardId,
     std::int64_t score,
-    const opt::optional<std::int64_t>& subscore = opt::nullopt,
-    const opt::optional<std::string>& metadata = opt::nullopt
+    const opt::optional<std::int64_t>& subscore,
+    const opt::optional<std::string>& metadata
 )
 {
     std::promise<NLeaderboardRecord> promise;
@@ -1003,8 +998,8 @@ std::future<NLeaderboardRecord> BaseClient::writeTournamentRecordAsync(
     NSessionPtr session,
     const std::string& tournamentId,
     std::int64_t score,
-    const opt::optional<std::int64_t>& subscore = opt::nullopt,
-    const opt::optional<std::string>& metadata = opt::nullopt
+    const opt::optional<std::int64_t>& subscore,
+    const opt::optional<std::string>& metadata
 )
 {
     std::promise<NLeaderboardRecord> promise;
@@ -1040,12 +1035,12 @@ std::future<void> BaseClient::deleteLeaderboardRecordAsync(
 
 std::future<NMatchListPtr> BaseClient::listMatchesAsync(
     NSessionPtr session,
-    const opt::optional<int32_t>& min_size = opt::nullopt,
-    const opt::optional<int32_t>& max_size = opt::nullopt,
-    const opt::optional<int32_t>& limit = opt::nullopt,
-    const opt::optional<std::string>& label = opt::nullopt,
-    const opt::optional<std::string>& query = opt::nullopt,
-    const opt::optional<bool>& authoritative = opt::nullopt
+    const opt::optional<int32_t>& min_size,
+    const opt::optional<int32_t>& max_size,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& label,
+    const opt::optional<std::string>& query,
+    const opt::optional<bool>& authoritative
 )
 {
     std::promise<NMatchListPtr> promise;
@@ -1063,8 +1058,8 @@ std::future<NMatchListPtr> BaseClient::listMatchesAsync(
 
 std::future<NNotificationListPtr> BaseClient::listNotificationsAsync(
     NSessionPtr session,
-    const opt::optional<int32_t>& limit = opt::nullopt,
-    const opt::optional<std::string>& cacheableCursor = opt::nullopt
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cacheableCursor
 )
 {
     std::promise<NNotificationListPtr> promise;
@@ -1101,9 +1096,9 @@ std::future<void> BaseClient::deleteNotificationsAsync(
 std::future<NChannelMessageListPtr> BaseClient::listChannelMessagesAsync(
     NSessionPtr session,
     const std::string& channelId,
-    const opt::optional<int32_t>& limit = opt::nullopt,
-    const opt::optional<std::string>& cursor = opt::nullopt,
-    const opt::optional<bool>& forward = opt::nullopt
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cursor,
+    const opt::optional<bool>& forward
 )
 {
     std::promise<NChannelMessageListPtr> promise;
@@ -1121,12 +1116,12 @@ std::future<NChannelMessageListPtr> BaseClient::listChannelMessagesAsync(
 
 std::future<NTournamentListPtr> BaseClient::listTournamentsAsync(
     NSessionPtr session,
-    const opt::optional<uint32_t>& categoryStart = opt::nullopt,
-    const opt::optional<uint32_t>& categoryEnd = opt::nullopt,
-    const opt::optional<uint32_t>& startTime = opt::nullopt,
-    const opt::optional<uint32_t>& endTime = opt::nullopt,
-    const opt::optional<int32_t>& limit = opt::nullopt,
-    const opt::optional<std::string>& cursor = opt::nullopt
+    const opt::optional<uint32_t>& categoryStart,
+    const opt::optional<uint32_t>& categoryEnd,
+    const opt::optional<uint32_t>& startTime,
+    const opt::optional<uint32_t>& endTime,
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cursor
 )
 {
     std::promise<NTournamentListPtr> promise;
@@ -1145,9 +1140,9 @@ std::future<NTournamentListPtr> BaseClient::listTournamentsAsync(
 std::future<NTournamentRecordListPtr> BaseClient::listTournamentRecordsAsync(
     NSessionPtr session,
     const std::string& tournamentId,
-    const opt::optional<int32_t>& limit = opt::nullopt,
-    const opt::optional<std::string>& cursor = opt::nullopt,
-    const std::vector<std::string>& ownerIds = {}
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cursor,
+    const std::vector<std::string>& ownerIds
 )
 {
     std::promise<NTournamentRecordListPtr> promise;
@@ -1167,7 +1162,7 @@ std::future<NTournamentRecordListPtr> BaseClient::listTournamentRecordsAroundOwn
     NSessionPtr session,
     const std::string& tournamentId,
     const std::string& ownerId,
-    const opt::optional<int32_t>& limit = opt::nullopt
+    const opt::optional<int32_t>& limit
 )
 {
     std::promise<NTournamentRecordListPtr> promise;
@@ -1204,8 +1199,8 @@ std::future<void> BaseClient::joinTournamentAsync(
 std::future<NStorageObjectListPtr> BaseClient::listStorageObjectsAsync(
     NSessionPtr session,
     const std::string& collection,
-    const opt::optional<int32_t>& limit = opt::nullopt,
-    const opt::optional<std::string>& cursor = opt::nullopt
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cursor
 )
 {
     std::promise<NStorageObjectListPtr> promise;
@@ -1225,8 +1220,8 @@ std::future<NStorageObjectListPtr> BaseClient::listUsersStorageObjectsAsync(
     NSessionPtr session,
     const std::string& collection,
     const std::string& userId,
-    const opt::optional<int32_t>& limit = opt::nullopt,
-    const opt::optional<std::string>& cursor = opt::nullopt
+    const opt::optional<int32_t>& limit,
+    const opt::optional<std::string>& cursor
 )
 {
     std::promise<NStorageObjectListPtr> promise;
@@ -1262,9 +1257,7 @@ std::future<const NStorageObjectAcks&> BaseClient::writeStorageObjectsAsync(
 
 std::future<NStorageObjects> BaseClient::readStorageObjectsAsync(
     NSessionPtr session,
-    const std::vector<NReadStorageObjectId>& objectIds,
-    std::function<void(const NStorageObjects&)> successCallback = nullptr,
-    ErrorCallback errorCallback = nullptr
+    const std::vector<NReadStorageObjectId>& objectIds
 )
 {
     std::promise<NStorageObjects> promise;
@@ -1301,7 +1294,7 @@ std::future<void> BaseClient::deleteStorageObjectsAsync(
 std::future<const NRpc&> BaseClient::rpcAsync(
     NSessionPtr session,
     const std::string& id,
-    const opt::optional<std::string>& payload = opt::nullopt
+    const opt::optional<std::string>& payload
 )
 {
     std::promise<const NRpc&> promise;
@@ -1320,7 +1313,7 @@ std::future<const NRpc&> BaseClient::rpcAsync(
 std::future<const NRpc&> BaseClient::rpcAsync(
     const std::string& http_key,
     const std::string& id,
-    const opt::optional<std::string>& payload = opt::nullopt
+    const opt::optional<std::string>& payload
 )
 {
     std::promise<const NRpc&> promise;

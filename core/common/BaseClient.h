@@ -312,9 +312,7 @@ namespace Nakama {
             const std::string& userId,
             const opt::optional<int32_t>& limit,
             const opt::optional<NUserGroupState>& state,
-            const std::string& cursor = "",
-            std::function<void(NUserGroupListPtr)> successCallback = nullptr,
-            ErrorCallback errorCallback = nullptr
+            const std::string& cursor = ""
         ) override;
 
         std::future<void> promoteGroupUsersAsync(
@@ -456,9 +454,7 @@ namespace Nakama {
 
         std::future<NStorageObjects> readStorageObjectsAsync(
             NSessionPtr session,
-            const std::vector<NReadStorageObjectId>& objectIds,
-            std::function<void(const NStorageObjects&)> successCallback = nullptr,
-            ErrorCallback errorCallback = nullptr
+            const std::vector<NReadStorageObjectId>& objectIds
         ) override;
 
         std::future<void> deleteStorageObjectsAsync(
