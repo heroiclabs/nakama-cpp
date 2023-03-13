@@ -15,10 +15,12 @@
  */
 
 #include <future>
-#include "BaseClient.h"
-#include "NRtClient.h"
+
+#include "nakama-cpp/NClientInterface.h"
 #include "nakama-cpp/realtime/NWebsocketsFactory.h"
 #include "nakama-cpp/log/NLogger.h"
+#include "NRtClient.h"
+#include "BaseClient.h"
 
 #undef NMODULE_NAME
 #define NMODULE_NAME "Nakama::BaseClient"
@@ -567,7 +569,7 @@ std::future<void> BaseClient::updateAccountAsync(
     std::promise<void> promise;
 
     updateAccount(session, username, displayName, avatarUrl, langTag, location, timezone,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -987,8 +989,8 @@ std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
     std::promise<NLeaderboardRecord> promise;
 
     writeLeaderboardRecord(session, leaderboardId, score, subscore, metadata,
-        [&](NLeaderboardRecord recordList) {
-            promise.set_value(recordList);
+        [&](NLeaderboardRecord record) {
+            promise.set_value(record);
         },
         [&](const NError& error) {
             promise.set_exception(std::make_exception_ptr(std::runtime_error(error.message)));

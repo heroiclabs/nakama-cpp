@@ -1244,7 +1244,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param create True if the user should be created when authenticated.
          * @param vars Extra information that will be bundled in the session token.
          */
-        virtual void authenticateGoogleAsync(
+        virtual std::future<NSessionPtr> authenticateGoogleAsync(
             const std::string& accessToken,
             const std::string& username = std::string(),
             bool create = false,
@@ -1623,7 +1623,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param ids The ids of the users to block.
          * @param usernames The usernames of the users to block.
          */
-        virtual std::future<void> blockFriends(
+        virtual std::future<void> blockFriendsAsync(
             NSessionPtr session,
             const std::vector<std::string>& ids,
             const std::vector<std::string>& usernames = {}
@@ -2103,7 +2103,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param session The session of the user.
          * @param objectIds The ids of the objects to delete.
          */
-        virtual std::future<NDeleteStorageObjectId> deleteStorageObjectsASync(
+        virtual std::future<void> deleteStorageObjectsAsync(
             NSessionPtr session,
             const std::vector<NDeleteStorageObjectId>& objectIds
         ) = 0;
