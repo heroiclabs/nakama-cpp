@@ -15,11 +15,39 @@
  */
 
 
+#include <future>
 #include "nakama-cpp/NClientInterface.h"
+#include "nakama-cpp/log/NLogger.h"
 #include "BaseClient.h"
 
 namespace Nakama
 {
+
+#if defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL_IO)
+NRtClientPtr BaseClient::createRtClient()
+{
+    return createRtClient(createDefaultWebsocket(_platformParams));
+}
+#endif
+
+NRtClientPtr BaseClient::createRtClient(NRtTransportPtr transport)
+{
+    RtClientParameters parameters;
+    parameters.host = _host;
+    parameters.port = _port;
+    parameters.ssl  = _ssl;
+    parameters.platformParams = _platformParams;
+
+    if (!transport)
+    {
+        NLOG_ERROR("No websockets transport passed. Please set transport.");
+        return nullptr;
+    }
+
+    NRtClientPtr client(new NRtClient(transport, parameters.host, parameters.port, parameters.ssl));
+    return client;
+}
+
 std::future<NSessionPtr> BaseClient::authenticateDeviceAsync(
     const std::string& id,
     const opt::optional<std::string>& username,
@@ -521,18 +549,18 @@ std::future<void> BaseClient::importFacebookFriendsAsync(
     return promise.get_future();
 }
 
-std::future<const NAccount&> getAccountAsync(NSessionPtr session)
+std::future<const NAccount&> BaseClient::getAccountAsync(NSessionPtr session)
 {
     std::promise<const NAccount&> promise;
-/*
-    updateAccount(session,
+
+    getAccount(session,
         [&](const NAccount& account) {
             promise.set_value(account);
         },
         [&](const NError& error) {
             promise.set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
         });
-*/
+
     return promise.get_future();
 }
 
@@ -954,7 +982,7 @@ std::future<NLeaderboardRecordListPtr> BaseClient::listLeaderboardRecordsAroundO
     return promise.get_future();
 }
 
-std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
+std::future<NLeaderboardRecord> BaseClient::writeLeaderboardRecordAsync(
     NSessionPtr session,
     const std::string& leaderboardId,
     std::int64_t score,
@@ -963,7 +991,7 @@ std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
 )
 {
     std::promise<NLeaderboardRecord> promise;
-/*
+
     writeLeaderboardRecord(session, leaderboardId, score, subscore, metadata,
         [&](NLeaderboardRecord record) {
             promise.set_value(record);
@@ -971,7 +999,7 @@ std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
         [&](const NError& error) {
             promise.set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
         });
-*/
+
     return promise.get_future();
 }
 
