@@ -238,7 +238,7 @@ namespace Nakama {
             ErrorCallback errorCallback = nullptr
         );
 
-        std::future<void> blockFriends(
+        std::future<void> blockFriendsAsync(
             NSessionPtr session,
             const std::vector<std::string>& ids,
             const std::vector<std::string>& usernames = {}
@@ -464,7 +464,7 @@ namespace Nakama {
             ErrorCallback errorCallback = nullptr
         );
 
-        std::future<NDeleteStorageObjectId> deleteStorageObjectsASync(
+        std::future<void> deleteStorageObjectsAsync(
             NSessionPtr session,
             const std::vector<NDeleteStorageObjectId>& objectIds
         );

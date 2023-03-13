@@ -1565,7 +1565,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param location A new location for the user.
          * @param timezone New timezone information for the user.
          */
-        std::future<void> updateAccount(
+        std::future<void> updateAccountAsync(
             NSessionPtr session,
             const opt::optional<std::string>& username    = opt::nullopt,
             const opt::optional<std::string>& displayName = opt::nullopt,
@@ -1613,9 +1613,7 @@ NAKAMA_NAMESPACE_BEGIN
         std::future<void> deleteFriendsAsync(
             NSessionPtr session,
             const std::vector<std::string>& ids,
-            const std::vector<std::string>& usernames = {},
-            std::function<void()> successCallback = nullptr,
-            ErrorCallback errorCallback = nullptr
+            const std::vector<std::string>& usernames = {}
         );
 
         /**

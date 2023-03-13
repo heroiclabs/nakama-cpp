@@ -412,7 +412,7 @@ std::future<void> BaseClient::unlinkEmailAsync(
     std::promise<void> promise;
 
     unlinkEmail(session, email, password,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -606,7 +606,7 @@ std::future<void> BaseClient::addFriendsAsync(
     std::promise<void> promise;
 
     addFriends(session, ids, usernames,
-        [&](NSessionPtr session) {
+        [&]() {
             promise.set_value();
         },
         [&](const NError& error) {
@@ -635,7 +635,7 @@ std::future<void> BaseClient::deleteFriendsAsync(
     return promise.get_future();
 }
 
-std::future<void> BaseClient::blockFriends(
+std::future<void> BaseClient::blockFriendsAsync(
     NSessionPtr session,
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames = {}
@@ -1278,7 +1278,7 @@ std::future<NStorageObjects> BaseClient::readStorageObjectsAsync(
     return promise.get_future();
 }
 
-std::future<void> BaseClient::deleteStorageObjectsASync(
+std::future<void> BaseClient::deleteStorageObjectsAsync(
     NSessionPtr session,
     const std::vector<NDeleteStorageObjectId>& objectIds
 )
