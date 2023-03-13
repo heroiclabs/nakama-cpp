@@ -352,6 +352,7 @@ namespace Nakama {
             const opt::optional<int32_t>& limit = opt::nullopt
         ) override;
 
+
         std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
             NSessionPtr session,
             const std::string& leaderboardId,
