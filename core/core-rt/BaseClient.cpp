@@ -56,9 +56,9 @@ NRtClientPtr BaseClient::createRtClient(NRtTransportPtr transport)
 
 std::future<NSessionPtr> BaseClient::authenticateDeviceAsync(
     const std::string& id,
-    const opt::optional<std::string>& username = opt::nullopt,
-    const opt::optional<bool>& create = opt::nullopt,
-    const NStringMap& vars = {}
+    const opt::optional<std::string>& username,
+    const opt::optional<bool>& create,
+    const NStringMap& vars
 )
 {
     std::promise<NSessionPtr> promise;
@@ -77,9 +77,9 @@ std::future<NSessionPtr> BaseClient::authenticateDeviceAsync(
 std::future<NSessionPtr> BaseClient::authenticateEmailAsync(
     const std::string& email,
     const std::string& password,
-    const std::string& username = std::string(),
-    bool create = false,
-    const NStringMap& vars = {}
+    const std::string& username,
+    bool create,
+    const NStringMap& vars
 )
 {
     std::promise<NSessionPtr> promise;
@@ -97,10 +97,10 @@ std::future<NSessionPtr> BaseClient::authenticateEmailAsync(
 
 std::future<NSessionPtr> BaseClient::authenticateFacebookAsync(
     const std::string& accessToken,
-    const std::string& username = std::string(),
-    bool create = false,
-    bool importFriends = false,
-    const NStringMap& vars = {}
+    const std::string& username,
+    bool create,
+    bool importFriends,
+    const NStringMap& vars
 )
 {
     std::promise<NSessionPtr> promise;
@@ -118,9 +118,9 @@ std::future<NSessionPtr> BaseClient::authenticateFacebookAsync(
 
 std::future<NSessionPtr> BaseClient::authenticateGoogleAsync(
     const std::string& accessToken,
-    const std::string& username = std::string(),
-    bool create = false,
-    const NStringMap& vars = {}
+    const std::string& username,
+    bool create,
+    const NStringMap& vars
 )
 {
     std::promise<NSessionPtr> promise;
@@ -143,9 +143,9 @@ std::future<NSessionPtr> BaseClient::authenticateGameCenterAsync(
     const std::string& salt,
     const std::string& signature,
     const std::string& publicKeyUrl,
-    const std::string& username = std::string(),
-    bool create = false,
-    const NStringMap& vars = {}
+    const std::string& username,
+    bool create,
+    const NStringMap& vars
 )
 {
     std::promise<NSessionPtr> promise;
@@ -163,9 +163,9 @@ std::future<NSessionPtr> BaseClient::authenticateGameCenterAsync(
 
 std::future<NSessionPtr> BaseClient::authenticateAppleAsync(
     const std::string& token,
-    const std::string& username = std::string(),
-    bool create = false,
-    const NStringMap& vars = {}
+    const std::string& username,
+    bool create,
+    const NStringMap& vars
 )
 {
     std::promise<NSessionPtr> promise;
