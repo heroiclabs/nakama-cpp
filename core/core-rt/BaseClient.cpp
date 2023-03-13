@@ -979,8 +979,8 @@ std::future<NLeaderboardRecordListPtr> BaseClient::listLeaderboardRecordsAroundO
 std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
     NSessionPtr session,
     const std::string& leaderboardId,
-    int64_t score,
-    const opt::optional<int64_t>& subscore = opt::nullopt,
+    std::int64_t score,
+    const opt::optional<std::int64_t>& subscore = opt::nullopt,
     const opt::optional<std::string>& metadata = opt::nullopt
 )
 {
@@ -1000,8 +1000,8 @@ std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
 std::future<NLeaderboardRecord> BaseClient::writeTournamentRecordAsync(
     NSessionPtr session,
     const std::string& tournamentId,
-    int64_t score,
-    const opt::optional<int64_t>& subscore = opt::nullopt,
+    std::int64_t score,
+    const opt::optional<std::int64_t>& subscore = opt::nullopt,
     const opt::optional<std::string>& metadata = opt::nullopt
 )
 {

@@ -671,7 +671,7 @@ void NRtClient::removeMatchmaker(const std::string & ticket, std::function<void(
     send(msg);
 }
 
-void NRtClient::sendMatchData(const std::string & matchId, int64_t opCode, const NBytes & data, const std::vector<NUserPresence>& presences)
+void NRtClient::sendMatchData(const std::string & matchId, std::int64_t opCode, const NBytes & data, const std::vector<NUserPresence>& presences)
 {
     NLOG_INFO("...");
 
