@@ -2133,7 +2133,8 @@ NAKAMA_NAMESPACE_BEGIN
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt
         ) = 0;
-        using NClientPtr = std::shared_ptr<NClientInterface>;
     };
+
+    using NClientPtr = std::shared_ptr<NClientInterface>;
 
 NAKAMA_NAMESPACE_END
