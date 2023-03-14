@@ -20,29 +20,31 @@
 #include <iomanip>
 #include "TestGuid.h"
 
-namespace Nakama::Test {
-    // unlikely to meet the uniqueness + unpredictability requirements of a real GUID generator,
-    // but more portable than any other library and good enough for a test suite.
-    std::string TestGuid::newGuid() {
-        std::random_device rd;
-        std::mt19937_64 gen(rd());
-        std::uniform_int_distribution<uint64_t> dis(0, std::numeric_limits<uint64_t>::max());
+namespace Nakama {
+    namespace Test {
+        // unlikely to meet the uniqueness + unpredictability requirements of a real GUID generator,
+        // but more portable than any other library and good enough for a test suite.
+        std::string TestGuid::newGuid() {
+            std::random_device rd;
+            std::mt19937_64 gen(rd());
+            std::uniform_int_distribution<uint64_t> dis(0, std::numeric_limits<uint64_t>::max());
 
-        // Generate 128 bits of random data
-        uint64_t data1 = dis(gen);
-        uint64_t data2 = dis(gen);
+            // Generate 128 bits of random data
+            uint64_t data1 = dis(gen);
+            uint64_t data2 = dis(gen);
 
-        // Format the data as a GUID
-        std::stringstream ss;
-        ss << std::hex << std::setfill('0') << std::setw(16) << data1 << std::setw(16) << data2;
-        std::string guid = ss.str();
+            // Format the data as a GUID
+            std::stringstream ss;
+            ss << std::hex << std::setfill('0') << std::setw(16) << data1 << std::setw(16) << data2;
+            std::string guid = ss.str();
 
-        // Insert hyphens at the appropriate positions
-        guid.insert(20, "-");
-        guid.insert(16, "-");
-        guid.insert(12, "-");
-        guid.insert(8, "-");
+            // Insert hyphens at the appropriate positions
+            guid.insert(20, "-");
+            guid.insert(16, "-");
+            guid.insert(12, "-");
+            guid.insert(8, "-");
 
-        return guid;
+            return guid;
+        }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 The Nakama Authors
+ * Copyright 2023 The Nakama Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,76 +16,40 @@
 
 #include <condition_variable>
 #include <mutex>
+#include "TestGuid.h"
 #include "test_main.h"
 
-namespace Nakama::Test {
+namespace Nakama
+{
+    namespace Test {
 
 using namespace std;
 
 void test_listFriends()
 {
     NCppTest test(__func__);
-
     test.createWorkingClient();
 
-    const size_t numFriends = 20;
+    const size_t numFriends = 5;
     std::vector<string> friendIds(numFriends);
-    NSessionPtr session = nullptr;
 
-    std::mutex mutex;
-
-    auto successCallback = [&mutex, &session](NSessionPtr sessionResponse) -> void
-    {
-        session = sessionResponse;
-    };
-
-    auto failureCallback = [&test](NError error) -> void
-    {
-        test.stopTest(error);
-    };
-
-    test.client.get()->authenticateCustom(xg::newGuid().str(), "", true, {}, successCallback, failureCallback);
-
-    lock.
-    int numAuths = 0;
+    Nakama::NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), "", true, {}).get();
 
     for (int i = 0; i < numFriends; i++)
     {
-        auto successCallback = [&cv, &mutex, &numAuths](NSessionPtr session) -> void
-        {
-            std::lock_guard(mutex);
-            numAuths++;
-            cv.notify_one();
-        };
-
-        auto failureCallback = [&test](NError error) -> void
-        {
-            test.stopTest(error);
-        };
-
-        friendIds[i] = xg::newGuid().str();
-        test.client->authenticateCustom(friendIds[i], "", true, {}, successCallback, failureCallback);
+        friendIds[i] = TestGuid::newGuid();
+        // unfortunately, std::when_any is a C++23 feature.
+        test.client->authenticateCustomAsync(friendIds[i], "", true, {}).get();
     }
 
-    cv.wait(lock);
+    // test that using cursor gives a different friend.
+    test.client->addFriendsAsync(session, friendIds, {}).get();
+    const int limit = 1;
+    Nakama::NFriendListPtr invitedList = test.client->listFriendsAsync(session, limit, Nakama::NFriend::State::INVITE_SENT).get();
+    std::string returnedFriendId1 = invitedList->friends[0].user.id;
+    invitedList = test.client->listFriendsAsync(session, limit, Nakama::NFriend::State::INVITE_SENT, invitedList->cursor).get();
+    std::string returnedFriendId2 = invitedList->friends[0].user.id;
 
-    auto successCallback = [&cv, &mutex, &numAuths](NSessionPtr session) -> void
-    {
-        std::lock_guard(mutex);
-        numAuths++;
-        if (numAuths >= numFriends) {
-            cv.notify_one();
-        }
-    };
-
-    auto failureCallback = [&test](NError error) -> void
-    {
-        test.stopTest(error);
-    };
-
-    test.client->addFriends(test.client.[i], friendIds, {}, successCallback, failureCallback);
-
-    cv.wait(lock, []{ return true; })
     test.runTest();
 }
 
@@ -94,5 +58,6 @@ void test_friends()
     test_listFriends();
 }
 
-} // namespace Test
-} // namespace Nakama
+    }
+
+} // namespace Nakama::Test

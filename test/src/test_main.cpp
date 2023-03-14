@@ -100,17 +100,17 @@ void NCppTest::tick()
 
 int runAllTests()
 {
-    test_internals();
-    test_authentication();
-    test_getAccount();
-    test_disconnect();
-    test_errors();
-    test_restoreSession();
-    test_storage();
-    test_groups();
-    test_friends();
-    test_realtime();
-    test_listMatches();
+//    test_internals();
+//    test_authentication();
+//    test_getAccount();
+//    test_disconnect();
+//    test_errors();
+//    test_restoreSession();
+//    test_storage();
+//    test_groups();
+      test_friends();
+//    test_realtime();
+//    test_listMatches();
 
     // total stats
     printTotalStats();

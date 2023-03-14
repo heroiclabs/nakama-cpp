@@ -14,9 +14,14 @@
  * limitations under the License.
  */
 
-namespace Nakama::Test {
-    class TestGuid {
-        public:
-            static std::string newGuid();
-    }
+namespace Nakama
+{
+    namespace Test
+    {
+        class TestGuid
+        {
+            public:
+                static std::string newGuid();
+        };
+    };
 }
