@@ -1249,7 +1249,7 @@ NAKAMA_NAMESPACE_BEGIN
             const std::string& username = std::string(),
             bool create = false,
             const NStringMap& vars = {}
-        );
+        ) = 0;
 
         /**
          * Authenticate a user with Apple Game Center.

@@ -18,7 +18,9 @@
 #include <future>
 #include "nakama-cpp/NClientInterface.h"
 #include "nakama-cpp/log/NLogger.h"
+#include "nakama-cpp/realtime/NWebsocketsFactory.h"
 #include "BaseClient.h"
+#include "../core-rt/NRtClient.h"
 
 namespace Nakama
 {
