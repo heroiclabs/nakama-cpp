@@ -68,7 +68,7 @@ void setWorkingClientParameters(NClientParameters& parameters)
 // *************************************************************
 // NCppTest
 // *************************************************************
-NCppTest::NCppTest(const char* name) : NTest(name)
+NCppTest::NCppTest(const char* name, bool threadedTick) : NTest(name, threadedTick)
 {
 }
 

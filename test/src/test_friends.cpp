@@ -23,40 +23,47 @@ namespace Nakama
 {
     namespace Test {
 
-using namespace std;
+        using namespace std;
 
-void test_listFriends()
-{
-    NCppTest test(__func__);
-    test.createWorkingClient();
+        void test_listFriends()
+        {
+            NLOG_INFO("testing friends");
+            NCppTest test(__func__, true);
+            test.createWorkingClient();
+            test.runTest();
 
-    const size_t numFriends = 5;
-    std::vector<string> friendIds(numFriends);
+            NLOG_INFO("about to call run test");
 
-    Nakama::NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), "", true, {}).get();
+            NLOG_INFO("run test done being called");
 
-    for (int i = 0; i < numFriends; i++)
-    {
-        friendIds[i] = TestGuid::newGuid();
-        // unfortunately, std::when_any is a C++23 feature.
-        test.client->authenticateCustomAsync(friendIds[i], "", true, {}).get();
-    }
+            const size_t numFriends = 5;
+            std::vector<string> friendIds(numFriends);
 
-    // test that using cursor gives a different friend.
-    test.client->addFriendsAsync(session, friendIds, {}).get();
-    const int limit = 1;
-    Nakama::NFriendListPtr invitedList = test.client->listFriendsAsync(session, limit, Nakama::NFriend::State::INVITE_SENT).get();
-    std::string returnedFriendId1 = invitedList->friends[0].user.id;
-    invitedList = test.client->listFriendsAsync(session, limit, Nakama::NFriend::State::INVITE_SENT, invitedList->cursor).get();
-    std::string returnedFriendId2 = invitedList->friends[0].user.id;
 
-    test.runTest();
-}
+            Nakama::NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), "", true, {}).get();
 
-void test_friends()
-{
-    test_listFriends();
-}
+            for (int i = 0; i < numFriends; i++)
+            {
+                friendIds[i] = TestGuid::newGuid();
+                // unfortunately, std::when_any is a C++23 feature.
+                test.client->authenticateCustomAsync(friendIds[i], "", true, {}).get();
+            }
+
+            // test that using cursor gives a different friend.
+            test.client->addFriendsAsync(session, friendIds, {}).get();
+            const int limit = 1;
+            Nakama::NFriendListPtr invitedList = test.client->listFriendsAsync(session, limit, Nakama::NFriend::State::INVITE_SENT).get();
+            std::string returnedFriendId1 = invitedList->friends[0].user.id;
+            invitedList = test.client->listFriendsAsync(session, limit, Nakama::NFriend::State::INVITE_SENT, invitedList->cursor).get();
+            std::string returnedFriendId2 = invitedList->friends[0].user.id;
+
+            test.stopTest(returnedFriendId1 != returnedFriendId2);
+        }
+
+        void test_friends()
+        {
+            test_listFriends();
+        }
 
     }
 

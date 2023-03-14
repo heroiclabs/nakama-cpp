@@ -101,8 +101,8 @@ void sleep(uint32_t ms)
 
 // *************************************************************
 
-NTest::NTest(const char * name)
-        : _name(name)
+NTest::NTest(const char * name, bool threadedTick)
+        : _name(name), _threadedTick(threadedTick)
 {
     g_cur_test = this;
 }
@@ -114,6 +114,18 @@ NTest::~NTest()
 }
 
 void NTest::runTest()
+{
+    if (_threadedTick)
+    {
+        _tickThread = std::thread(&NTest::runTestInternal, this);
+    }
+    else
+    {
+        runTestInternal();
+    }
+}
+
+void NTest::runTestInternal()
 {
     if (!_continue_loop)
         return;
@@ -135,6 +147,11 @@ void NTest::runTest()
 
 void NTest::stopTest(bool succeeded)
 {
+    if (_threadedTick)
+    {
+        _tickThread.join();
+    }
+
     removeRunningTest(this);
 
     _testSucceeded = succeeded;
