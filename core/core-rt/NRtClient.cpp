@@ -1243,6 +1243,12 @@ void NRtClient::heartbeat()
 
 void NRtClient::send(const ::nakama::realtime::Envelope & msg)
 {
+    int cid = -1;
+    if (msg.cid() != "")
+    {
+        cid = std::stoi(msg.cid());
+    }
+
     if (!_wantDisconnect && isConnected())
     {
         NBytes bytes;
@@ -1251,20 +1257,19 @@ void NRtClient::send(const ::nakama::realtime::Envelope & msg)
         {
             if (!_transport->send(bytes))
             {
-                reqInternalError(std::stoi(msg.cid()), NRtError(RtErrorCode::TRANSPORT_ERROR, "Send message failed"));
-
+                reqInternalError(cid, NRtError(RtErrorCode::TRANSPORT_ERROR, "Send message failed"));
                 _transport->disconnect();
             }
             _lastMessageTs = getUnixTimestampMs();
         }
         else
         {
-            reqInternalError(std::stoi(msg.cid()), NRtError(RtErrorCode::TRANSPORT_ERROR, "Serialize message failed"));
+            reqInternalError(cid, NRtError(RtErrorCode::TRANSPORT_ERROR, "Serialize message failed"));
         }
     }
     else
     {
-        reqInternalError(std::stoi(msg.cid()), NRtError(RtErrorCode::CONNECT_ERROR, "Not connected"));
+        reqInternalError(cid, NRtError(RtErrorCode::CONNECT_ERROR, "Not connected"));
     }
 }
 
