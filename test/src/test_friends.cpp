@@ -32,31 +32,40 @@ namespace Nakama
             test.createWorkingClient();
             test.runTest();
 
-            NLOG_INFO("about to call run test");
-
             NLOG_INFO("run test done being called");
 
             const size_t numFriends = 5;
             std::vector<string> friendIds(numFriends);
 
-
             Nakama::NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), "", true, {}).get();
+            NLOG_INFO("session: " + session->getUserId());
 
+            // unfortunately, std::when_any is a C++23 feature.
             for (int i = 0; i < numFriends; i++)
             {
-                friendIds[i] = TestGuid::newGuid();
-                // unfortunately, std::when_any is a C++23 feature.
-                test.client->authenticateCustomAsync(friendIds[i], "", true, {}).get();
+                NSessionPtr friendSession = test.client->authenticateCustomAsync(TestGuid::newGuid(), "", true, {}).get();
+                friendIds[i] = friendSession->getUserId();
             }
 
             // test that using cursor gives a different friend.
             test.client->addFriendsAsync(session, friendIds, {}).get();
+
             const int limit = 1;
             Nakama::NFriendListPtr invitedList = test.client->listFriendsAsync(session, limit, Nakama::NFriend::State::INVITE_SENT).get();
-            std::string returnedFriendId1 = invitedList->friends[0].user.id;
-            invitedList = test.client->listFriendsAsync(session, limit, Nakama::NFriend::State::INVITE_SENT, invitedList->cursor).get();
-            std::string returnedFriendId2 = invitedList->friends[0].user.id;
+            if (invitedList->friends.empty()) {
+                NLOG_ERROR("empty invited list 1");
+                test.stopTest(false);
+            }
 
+            std::string returnedFriendId1 = invitedList->friends[0].user.id;
+
+            invitedList = test.client->listFriendsAsync(session, limit, Nakama::NFriend::State::INVITE_SENT, invitedList->cursor).get();
+            if (invitedList->friends.empty()) {
+                NLOG_ERROR("empty invited list 2");
+                test.stopTest(false);
+            }
+
+            std::string returnedFriendId2 = invitedList->friends[0].user.id;
             test.stopTest(returnedFriendId1 != returnedFriendId2);
         }
 

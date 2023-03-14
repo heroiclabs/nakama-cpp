@@ -147,15 +147,15 @@ void NTest::runTestInternal()
 
 void NTest::stopTest(bool succeeded)
 {
-    if (_threadedTick)
-    {
-        _tickThread.join();
-    }
-
     removeRunningTest(this);
 
     _testSucceeded = succeeded;
     _continue_loop = false;
+
+    if (_threadedTick)
+    {
+        _tickThread.join();
+    }
 
     if (succeeded)
     {
