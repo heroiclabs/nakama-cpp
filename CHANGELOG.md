@@ -4,6 +4,17 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [2.7.2] - [2023-03-15]
+### Added
+- Added support for listing matches with a query.
+
+### Fixed
+- Fixed encoding issue with some cursors sent to the server.
+- Fixed an exception that could be thrown when the client sent match data over a bad network.
+
+### Changed
+- Improved build automation around test suite.
+
 ### [2.7.1] - [2023-02-23]
 ### Fixed
 - Restore armeabi-v7a Android support.
