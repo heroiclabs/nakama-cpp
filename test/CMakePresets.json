@@ -17,7 +17,8 @@
                 "RAPIDJSON_BUILD_TESTS": "OFF",
                 "RAPIDJSON_BUILD_THIRDPARTY_GTEST": "OFF",
                 "BUILD_SHARED_LIBS": "ON",
-                "PRESET_NAME": "${presetName}"
+                "PRESET_NAME": "${presetName}",
+                "RUN_ON_DESKTOP_INSTALL": "ON"
             }
         },
         {

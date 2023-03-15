@@ -195,3 +195,11 @@ install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
     LIBRARY DESTINATION ${_TEST_OUT_DIR}
     FRAMEWORK DESTINATION ${_TEST_OUT_DIR}
 )
+
+if (RUN_ON_DESKTOP_INSTALL AND (CMAKE_SYSTEM_NAME MATCHES "Windows" OR CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Darwin"))
+    add_custom_command(
+        TARGET nakama-test
+        POST_BUILD
+        COMMAND $<TARGET_FILE:nakama-test>
+    )
+endif()
