@@ -36,3 +36,4 @@ runs:
         cmake --preset ${{ inputs.preset }}
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} -- ${{ inputs.native-tool-options }} --target install run
       shell: bash
+      working-directory: ${{ inputs.nakama-cpp-path }}/test
