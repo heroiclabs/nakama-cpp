@@ -1485,7 +1485,7 @@ void RestClient::listFriends(
 
         if (limit) args.emplace("limit", std::to_string(*limit));
         if (state) args.emplace("state", std::to_string((int32_t)*state));
-        if (!cursor.empty()) args.emplace("cursor", cursor);
+        if (!cursor.empty()) args.emplace("cursor", encodeURIComponent(cursor));
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/friend", "", std::move(args));
     }
@@ -1628,7 +1628,7 @@ void RestClient::listGroupUsers(
 
         if (limit) args.emplace("limit", std::to_string(*limit));
         if (state) args.emplace("state", std::to_string((int32_t)*state));
-        if (!cursor.empty()) args.emplace("cursor", cursor);
+        if (!cursor.empty()) args.emplace("cursor", encodeURIComponent(cursor));
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/group/" + groupId + "/user", "", std::move(args));
     }
@@ -1725,7 +1725,7 @@ void RestClient::listGroups(NSessionPtr session, const std::string & name, int32
         NHttpQueryArgs args;
 
         if (!name.empty()) args.emplace("name", name);
-        if (!cursor.empty()) args.emplace("cursor", cursor);
+        if (!cursor.empty()) args.emplace("cursor", encodeURIComponent(cursor));
         if (limit > 0) args.emplace("limit", std::to_string(limit));
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/group", "", std::move(args));
@@ -1790,7 +1790,7 @@ void RestClient::listUserGroups(
 
         if (limit) args.emplace("limit", std::to_string(*limit));
         if (state) args.emplace("state", std::to_string((int32_t)*state));
-        if (!cursor.empty()) args.emplace("cursor", cursor);
+        if (!cursor.empty()) args.emplace("cursor", encodeURIComponent(cursor));
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/user/" + userId + "/group", "", std::move(args));
     }
@@ -1931,7 +1931,7 @@ void RestClient::listLeaderboardRecords(
         }
 
         if (limit) args.emplace("limit", std::to_string(*limit));
-        if (cursor) args.emplace("cursor", *cursor);
+        if (cursor) args.emplace("cursor", encodeURIComponent(*cursor));
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/leaderboard/" + leaderboardId, "", std::move(args));
     }
@@ -2155,7 +2155,7 @@ void RestClient::listNotifications(
         NHttpQueryArgs args;
 
         if (limit) args.emplace("limit", std::to_string(*limit));
-        if (cacheableCursor) args.emplace("cursor", *cacheableCursor);
+        if (cacheableCursor) args.emplace("cursor", encodeURIComponent(*cacheableCursor));
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/notification", "", std::move(args));
     }
@@ -2226,7 +2226,7 @@ void RestClient::listChannelMessages(
         NHttpQueryArgs args;
 
         if (limit) args.emplace("limit", std::to_string(*limit));
-        if (cursor) args.emplace("cursor", *cursor);
+        if (cursor) args.emplace("cursor", encodeURIComponent(*cursor));
         if (forward) AddBoolArg(args, "forward", *forward);
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/channel/" + channelId, "", std::move(args));
@@ -2272,7 +2272,7 @@ void RestClient::listTournaments(
         if (startTime) args.emplace("start_time", std::to_string(*startTime));
         if (endTime) args.emplace("end_time", std::to_string(*endTime));
         if (limit) args.emplace("limit", std::to_string(*limit));
-        if (cursor) args.emplace("cursor", *cursor);
+        if (cursor) args.emplace("cursor", encodeURIComponent(*cursor));
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament", "", std::move(args));
     }
@@ -2311,7 +2311,7 @@ void RestClient::listTournamentRecords(
         NHttpQueryArgs args;
 
         if (limit) args.emplace("limit", std::to_string(*limit));
-        if (cursor) args.emplace("cursor", *cursor);
+        if (cursor) args.emplace("cursor", encodeURIComponent(*cursor));
 
         for (auto& id : ownerIds)
         {
@@ -2410,7 +2410,7 @@ void RestClient::listStorageObjects(
         NHttpQueryArgs args;
 
         if (limit) args.emplace("limit", std::to_string(*limit));
-        if (cursor) args.emplace("cursor", *cursor);
+        if (cursor) args.emplace("cursor", encodeURIComponent(*cursor));
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/storage/" + collection, "", std::move(args));
     }
@@ -2450,7 +2450,7 @@ void RestClient::listUsersStorageObjects(
 
         args.emplace("user_id", userId);
         if (limit) args.emplace("limit", std::to_string(*limit));
-        if (cursor) args.emplace("cursor", *cursor);
+        if (cursor) args.emplace("cursor", encodeURIComponent(*cursor));
 
         sendReq(ctx, NHttpReqMethod::GET, "/v2/storage/" + collection, "", std::move(args));
     }
