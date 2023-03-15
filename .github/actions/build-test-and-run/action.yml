@@ -20,12 +20,15 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Start docker containers for nakama-client-testrunner
+      run: |
+        docker-compose up -d
+      working-directory: nakama-client-testrunner
+      shell: bash
     - id: build
       run: |
         cmake --preset ${{ inputs.preset }}
-        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} -- ${{ inputs.native-tool-options }}
-        cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build-type }}
-      working-directory: ${{ inputs.nakama-cpp-path }}/test
+        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} -- ${{ inputs.native-tool-options }} --target install run
       shell: bash
     - name: Checkout nakama-client-testrunner
       uses: actions/checkout@v2
@@ -33,15 +36,3 @@ runs:
         repository: heroiclabs/nakama-client-testrunner
         token: ${{ inputs.testrunner-pat }}
         path: nakama-client-testrunner
-    - name: Start docker containers for nakama-client-testrunner
-      run: |
-        docker-compose up -d
-      working-directory: nakama-client-testrunner
-      shell: bash
-    - run: |
-        ./${{ inputs.nakama-cpp-path }}/test/out/${{ inputs.preset }}/nakama-test || {
-            echo "Test failed, showing Nakama log for diagnostics";
-            cat /tmp/nakama.log;
-            exit 1;
-        }
-      shell: bash
