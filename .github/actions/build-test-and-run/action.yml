@@ -20,6 +20,12 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout nakama-client-testrunner
+      uses: actions/checkout@v2
+      with:
+        repository: heroiclabs/nakama-client-testrunner
+        token: ${{ inputs.testrunner-pat }}
+        path: nakama-client-testrunner
     - name: Start docker containers for nakama-client-testrunner
       run: |
         docker-compose up -d
@@ -30,9 +36,3 @@ runs:
         cmake --preset ${{ inputs.preset }}
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} -- ${{ inputs.native-tool-options }} --target install run
       shell: bash
-    - name: Checkout nakama-client-testrunner
-      uses: actions/checkout@v2
-      with:
-        repository: heroiclabs/nakama-client-testrunner
-        token: ${{ inputs.testrunner-pat }}
-        path: nakama-client-testrunner
