@@ -1,5 +1,4 @@
-This is a project for running tests on nakama-cpp via CMake. You'll need an architecture-specific `nakama-sdk` release
-installed in `out`. Make sure it was built with `--config MinSizeRel`.
+This is a project for running tests on nakama-cpp via CMake. Building it will automatically build nakama-sdk for the target platform as well. You can set `-DREMOTE_NAKAMA_SDK=TRUE` when configuring the tests to pull in a version of the nakama-sdk published on vcpkg.
 
 If you are building for Mac/iOS, you'll need to set your NAKAMA_TEST_DEVELOPMENT_TEAM environment variable to your team ID. Your can find your team ID at developer.apple.com.
 
@@ -12,7 +11,6 @@ cmake --build build/<build-preset> --target install
 ```
 
 To build and deploy for iOS, you will need to pass `-- -allowProvisioningUpdates` to the end of your cmake build command.
-
 
 To build for Android, inside the `android` folder:
 

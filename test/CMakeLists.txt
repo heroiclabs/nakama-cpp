@@ -34,6 +34,24 @@ option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
 
 if(REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
+else()
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} -S .. --preset ${PRESET_NAME}
+        RESULT_VARIABLE result
+    )
+
+    if (result)
+        message(FATAL_ERROR "Configuration of nakama-cpp preset ${PRESET_NAME} failed.")
+    endif()
+
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} --build ../build/${PRESET_NAME} --config MinSizeRel --target install
+        RESULT_VARIABLE result
+    )
+
+    if (result)
+        message(FATAL_ERROR "Building and installing nakama-cpp with preset ${PRESET_NAME} failed.")
+    endif()
 endif()
 
 include(FetchContent)
