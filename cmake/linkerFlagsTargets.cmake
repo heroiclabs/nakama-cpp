@@ -4,5 +4,5 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang
     # like when we link libc++ statically or openssl
     # NOTE: target specifically nakama-sdk (our library), because we DONT want it to be set on
     #       nakama-test (test executable) in some cases (namely when linking libc++ statically)
-    target_link_options(nakama-sdk PRIVATE -Wl,--exclude-libs ALL)
+    target_link_options(nakama-sdk PRIVATE -Wl,--exclude-libs,ALL)
 endif()
