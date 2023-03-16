@@ -12,6 +12,7 @@ The format is based on [keep a changelog](http://keepachangelog.com/) and this p
 - Fixed encoding issue with some cursors sent to the server.
 - Fixed an exception that could be thrown when the client sent match data over a bad network.
 - Upgraded libcurl to 7.88.1 which fixed a rare Websocket SSL handshake issue on Unix systems.
+- Fixed base64 dependency in Android SSL for broader Android API level support.
 
 ### Changed
 - Improved build automation around test suite.
