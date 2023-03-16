@@ -90,5 +90,8 @@
             ],
             "supports": "android"
         }
-    }
+    },
+    "overrides": [
+        { "name": "curl", "version": "7.88.1" }
+    ]
 }
