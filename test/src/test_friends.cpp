@@ -27,18 +27,14 @@ namespace Nakama
 
         void test_listFriends()
         {
-            NLOG_INFO("testing friends");
             NCppTest test(__func__, true);
             test.createWorkingClient();
             test.runTest();
-
-            NLOG_INFO("run test done being called");
 
             const size_t numFriends = 5;
             std::vector<string> friendIds(numFriends);
 
             Nakama::NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), "", true, {}).get();
-            NLOG_INFO("session: " + session->getUserId());
 
             // unfortunately, std::when_any is a C++23 feature.
             for (int i = 0; i < numFriends; i++)
