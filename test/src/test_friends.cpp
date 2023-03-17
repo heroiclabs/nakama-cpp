@@ -47,6 +47,7 @@ namespace Nakama
             test.client->addFriendsAsync(session, friendIds, {}).get();
 
             const int limit = 1;
+
             Nakama::NFriendListPtr invitedList = test.client->listFriendsAsync(session, limit, Nakama::NFriend::State::INVITE_SENT).get();
             if (invitedList->friends.empty()) {
                 NLOG_ERROR("empty invited list 1");
@@ -69,7 +70,6 @@ namespace Nakama
         {
             test_listFriends();
         }
-
     }
 
 } // namespace Nakama::Test
