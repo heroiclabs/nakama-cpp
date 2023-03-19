@@ -204,9 +204,7 @@ namespace Nakama {
         ) override;
 
         std::future<void> leaveChatAsync(
-            const std::string& channelId,
-            std::function<void()> successCallback = nullptr,
-            RtErrorCallback errorCallback = nullptr
+            const std::string& channelId
         ) override;
 
         std::future<const NChannelMessageAck&> writeChatMessageAsync(
@@ -274,9 +272,7 @@ namespace Nakama {
 
         std::future<const NRpc&> rpcAsync(
             const std::string& id,
-            const opt::optional<std::string>& payload = opt::nullopt,
-            std::function<void(const NRpc&)> successCallback = nullptr,
-            RtErrorCallback errorCallback = nullptr
+            const opt::optional<std::string>& payload = opt::nullopt
         ) override;
 
         std::future<void> acceptPartyMemberAsync(const std::string& partyId, NUserPresence& presence) override;
@@ -291,7 +287,7 @@ namespace Nakama {
 
         std::future<void> joinPartyAsync(const std::string& partyId) override;
 
-        std::future<void> leavePartyAsync(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) override;
+        std::future<void> leavePartyAsync(const std::string& partyId) override;
 
         std::future<const NPartyJoinRequest&> listPartyJoinRequestsAsync(const std::string& partyId) override;
 
@@ -340,5 +336,4 @@ namespace Nakama {
             std::atomic<bool> _wantDisconnect = false;
 
     };
-
 }

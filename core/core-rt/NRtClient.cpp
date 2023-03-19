@@ -1111,6 +1111,109 @@ void NRtClient::ping(std::function<void()> successCallback, RtErrorCallback erro
     send(msg);
 }
 
+std::future<NChannelPtr> NRtClient::joinChatAsync(
+            const std::string& target,
+            NChannelType type,
+            const opt::optional<bool>& persistence = opt::nullopt,
+            const opt::optional<bool>& hidden = opt::nullopt
+        );
+
+std::future<void> NRtClient::leaveChatAsync(
+    const std::string& channelId
+);
+
+std::future<const NChannelMessageAck&> NRtClient::writeChatMessageAsync(
+    const std::string& channelId,
+    const std::string& content
+);
+
+std::future<const NChannelMessageAck&> NRtClient::updateChatMessageAsync(
+    const std::string& channelId,
+    const std::string& messageId,
+    const std::string& content
+);
+
+std::future<void> NRtClient::removeChatMessageAsync(
+    const std::string& channelId,
+    const std::string& messageId
+);
+
+std::future<const NMatch&> NRtClient::createMatchAsync();
+
+std::future<const NMatch&> NRtClient::joinMatchAsync(
+    const std::string& matchId,
+    const NStringMap& metadata
+);
+
+std::future<const NMatch&> NRtClient::joinMatchByTokenAsync(
+    const std::string& token
+);
+
+std::future<void> NRtClient::leaveMatchAsync(
+    const std::string& matchId
+);
+
+std::future<const NMatchmakerTicket&> NRtClient::addMatchmakerAsync(
+    const opt::optional<int32_t>& minCount = opt::nullopt,
+    const opt::optional<int32_t>& maxCount = opt::nullopt,
+    const opt::optional<std::string>& query = opt::nullopt,
+    const NStringMap& stringProperties = {},
+    const NStringDoubleMap& numericProperties = {},
+    const opt::optional<int32_t>& countMultiple = opt::nullopt
+);
+
+std::future<void> NRtClient::removeMatchmakerAsync(
+    const std::string& ticket
+);
+
+std::future<void> NRtClient::sendMatchDataAsync(
+    const std::string& matchId,
+    std::int64_t opCode,
+    const NBytes& data,
+    const std::vector<NUserPresence>& presences = {}
+);
+
+std::future<const NStatus&> NRtClient::followUsersAsync(
+    const std::vector<std::string>& userIds
+);
+
+std::future<void> NRtClient::unfollowUsersAsync(
+    const std::vector<std::string>& userIds
+);
+
+std::future<void> NRtClient::updateStatusAsync(
+    const std::string& status
+);
+
+std::future<const NRpc&> NRtClient::rpcAsync(
+    const std::string& id,
+    const opt::optional<std::string>& payload = opt::nullopt,
+);
+
+std::future<void> NRtClient::acceptPartyMemberAsync(const std::string& partyId, NUserPresence& presence);
+
+std::future<const NPartyMatchmakerTicket&> NRtClient::addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
+    const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {},
+    const opt::optional<int32_t>& countMultiple = opt::nullopt);
+
+std::future<void> NRtClient::closePartyAsync(const std::string& partyId);
+
+std::future<const NParty&> NRtClient::createPartyAsync(bool open, int maxSize);
+
+std::future<void> NRtClient::joinPartyAsync(const std::string& partyId);
+
+std::future<void> NRtClient::leavePartyAsync(const std::string& partyId);
+
+std::future<const NPartyJoinRequest&> NRtClient::listPartyJoinRequestsAsync(const std::string& partyId);
+
+std::future<void> NRtClient::promotePartyMemberAsync(const std::string& partyId, NUserPresence& partyMember);
+
+std::future<void> NRtClient::removeMatchmakerPartyAsync(const std::string& partyId, const std::string& ticket);
+
+std::future<void> NRtClient::removePartyMemberAsync(const std::string& partyId, NUserPresence& presence);
+
+std::future<void> NRtClient::sendPartyDataAsync(const std::string& partyId, long opCode, NBytes& data);
+
 std::shared_ptr<RtRequestContext> NRtClient::createReqContext(::nakama::realtime::Envelope& msg)
 {
     std::lock_guard<std::mutex> lock(_reqContextsLock);
