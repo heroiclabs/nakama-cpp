@@ -99,12 +99,19 @@ void test_rt_party_matchmaker()
     test1.onRtConnect = [&test1]()
     {
         auto party = test1.rtClient->createPartyAsync(false, 1).get();
-        test1.rtClient->addMatchmakerParty();
+        auto ticket = test1.rtClient->addMatchmakerPartyAsync(party.id, "*", 0, 2).get();
+        test1.stopTest(ticket.ticket != "");
+    };
 
-    }
+    test2.onRtConnect = [&test2]()
+    {
+        auto party = test2.rtClient->createPartyAsync(false, 1).get();
+        auto ticket = test2.rtClient->addMatchmakerPartyAsync(party.id, "*", 0, 2).get();
+        test2.stopTest(ticket.ticket != "");
+    };
 
-    test1.
-
+    test1.runTest();
+    test2.runTest();
 }
 
 void test_rt_party()
