@@ -91,9 +91,26 @@ void test_rt_create_party()
     test1.runTest();
 }
 
+void test_rt_party_matchmaker()
+{
+    NRtClientTest test1(__func__, true);
+    NRtClientTest test2("test_rt_party_matchmaker2", true);
+
+    test1.onRtConnect = [&test1]()
+    {
+        auto party = test1.rtClient->createPartyAsync(false, 1).get();
+        test1.rtClient->addMatchmakerParty();
+
+    }
+
+    test1.
+
+}
+
 void test_rt_party()
 {
     test_rt_create_party();
+    test_rt_party_matchmaker();
 }
 
 } // namespace Test

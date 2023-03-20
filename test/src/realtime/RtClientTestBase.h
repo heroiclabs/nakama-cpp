@@ -23,7 +23,7 @@ namespace Test {
 class NRtClientTest : public NCppTest
 {
 public:
-    NRtClientTest(const char* name) : NCppTest(name), _rtTickPaused(false), _stopTestOnDisconnect(true) {
+    NRtClientTest(const char* name, bool threadedTick = false) : NCppTest(name, threadedTick), _rtTickPaused(false), _stopTestOnDisconnect(true) {
 
     }
 

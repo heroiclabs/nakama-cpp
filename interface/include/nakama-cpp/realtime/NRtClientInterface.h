@@ -615,9 +615,7 @@ NAKAMA_NAMESPACE_BEGIN
          */
         virtual std::future<const NRpc&> rpcAsync(
             const std::string& id,
-            const opt::optional<std::string>& payload = opt::nullopt,
-            std::function<void(const NRpc&)> successCallback = nullptr,
-            RtErrorCallback errorCallback = nullptr
+            const opt::optional<std::string>& payload = opt::nullopt
         ) = 0;
 
         /**
@@ -665,7 +663,7 @@ NAKAMA_NAMESPACE_BEGIN
          * Leave the party.
          * @param partyId Party ID.
          */
-        virtual std::future<void> leavePartyAsync(const std::string& partyId, std::function<void()> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
+        virtual std::future<void> leavePartyAsync(const std::string& partyId) = 0;
 
         /**
          * Request a list of pending join requests for a party.
