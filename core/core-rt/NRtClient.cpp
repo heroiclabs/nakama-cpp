@@ -1114,8 +1114,8 @@ void NRtClient::ping(std::function<void()> successCallback, RtErrorCallback erro
 std::future<NChannelPtr> NRtClient::joinChatAsync(
             const std::string& target,
             NChannelType type,
-            const opt::optional<bool>& persistence = opt::nullopt,
-            const opt::optional<bool>& hidden = opt::nullopt
+            const opt::optional<bool>& persistence,
+            const opt::optional<bool>& hidden
 )
 {
     auto promise = std::make_shared<std::promise<NChannelPtr>>();
@@ -1250,12 +1250,12 @@ std::future<void> NRtClient::leaveMatchAsync(
 }
 
 std::future<const NMatchmakerTicket&> NRtClient::addMatchmakerAsync(
-    const opt::optional<int32_t>& minCount = opt::nullopt,
-    const opt::optional<int32_t>& maxCount = opt::nullopt,
-    const opt::optional<std::string>& query = opt::nullopt,
-    const NStringMap& stringProperties = {},
-    const NStringDoubleMap& numericProperties = {},
-    const opt::optional<int32_t>& countMultiple = opt::nullopt
+    const opt::optional<int32_t>& minCount,
+    const opt::optional<int32_t>& maxCount,
+    const opt::optional<std::string>& query,
+    const NStringMap& stringProperties,
+    const NStringDoubleMap& numericProperties,
+    const opt::optional<int32_t>& countMultiple
 )
 {
     auto promise = std::make_shared<std::promise<const NMatchmakerTicket&>>();
@@ -1285,7 +1285,7 @@ std::future<void> NRtClient::sendMatchDataAsync(
     const std::string& matchId,
     std::int64_t opCode,
     const NBytes& data,
-    const std::vector<NUserPresence>& presences = {}
+    const std::vector<NUserPresence>& presences
 )
 {
     sendMatchData(matchId, opCode, data);
@@ -1333,7 +1333,7 @@ std::future<void> NRtClient::updateStatusAsync(
 
 std::future<const NRpc&> NRtClient::rpcAsync(
     const std::string& id,
-    const opt::optional<std::string>& payload = opt::nullopt
+    const opt::optional<std::string>& payload
 )
 {
     auto promise = std::make_shared<std::promise<const NRpc&>>();
@@ -1358,8 +1358,8 @@ std::future<void> NRtClient::acceptPartyMemberAsync(const std::string& partyId, 
 }
 
 std::future<const NPartyMatchmakerTicket&> NRtClient::addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
-    const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {},
-    const opt::optional<int32_t>& countMultiple = opt::nullopt)
+    const NStringMap& stringProperties, const NStringDoubleMap& numericProperties,
+    const opt::optional<int32_t>& countMultiple)
 {
     auto promise = std::make_shared<std::promise<const NPartyMatchmakerTicket&>>();
 

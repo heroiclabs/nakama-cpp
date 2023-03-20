@@ -462,9 +462,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param channelId The channel to leave.
          */
         virtual std::future<void> leaveChatAsync(
-            const std::string& channelId,
-            std::function<void()> successCallback = nullptr,
-            RtErrorCallback errorCallback = nullptr
+            const std::string& channelId
         ) = 0;
 
         /**
