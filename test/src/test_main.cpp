@@ -50,6 +50,7 @@ void test_disconnect();
 void test_restoreSession();
 void test_storage();
 void test_groups();
+void test_friends();
 void test_listMatches();
 void test_realtime();
 void test_internals();
@@ -67,7 +68,7 @@ void setWorkingClientParameters(NClientParameters& parameters)
 // *************************************************************
 // NCppTest
 // *************************************************************
-NCppTest::NCppTest(const char* name) : NTest(name)
+NCppTest::NCppTest(const char* name, bool threadedTick) : NTest(name, threadedTick)
 {
 }
 
@@ -107,6 +108,7 @@ int runAllTests()
     test_restoreSession();
     test_storage();
     test_groups();
+    test_friends();
     test_realtime();
     test_listMatches();
 
@@ -129,7 +131,6 @@ public:
         client->setErrorCallback([this, retryPeriodMs](const NError& /*error*/)
         {
             NLOG(Nakama::NLogLevel::Info, "Not connected. Will retry in %d msec...",  retryPeriodMs);
-            _retryAt = getUnixTimestampMs() + retryPeriodMs;
         });
         auth();
         runTest();
@@ -150,16 +151,9 @@ public:
     void tick() override
     {
         NCppTest::tick();
-
-        if (_retryAt != 0 && getUnixTimestampMs() >= _retryAt)
-        {
-            _retryAt = 0;
-            auth();
-        }
     }
 
 private:
-    NTimestamp _retryAt = 0;
 };
 
 

@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include <string>
+#include <thread>
 #include <nakama-cpp/NError.h>
 
 namespace Nakama {
@@ -28,7 +29,7 @@ namespace Test {
     class NTest
     {
     public:
-        NTest(const char* name);
+        NTest(const char* name, bool separateThread = false);
         virtual ~NTest();
 
         virtual void createWorkingClient() = 0;
@@ -56,8 +57,12 @@ namespace Test {
     protected:
         bool _continue_loop = true;
         bool _testSucceeded = false;
+        bool _threadedTick = false;
         std::string _name;
+        std::thread _tickThread;
         int timeoutMs = 60*1000;
+    private:
+        void runTestInternal();
     };
 
     void sleep(uint32_t ms);

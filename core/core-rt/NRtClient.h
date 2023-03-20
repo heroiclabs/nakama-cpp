@@ -141,7 +141,7 @@ namespace Nakama {
 
         void sendMatchData(
             const std::string& matchId,
-            int64_t opCode,
+            std::int64_t opCode,
             const NBytes& data,
             const std::vector<NUserPresence>& presences = {}
         ) override;

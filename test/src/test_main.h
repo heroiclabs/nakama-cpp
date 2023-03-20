@@ -25,7 +25,7 @@ namespace Test {
     class NCppTest : public NTest
     {
     public:
-        explicit NCppTest(const char* name);
+        explicit NCppTest(const char* name, bool threadedTick = false);
 
         void createWorkingClient() override;
         NClientPtr createClient(const NClientParameters& parameters);

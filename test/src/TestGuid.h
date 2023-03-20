@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 The Nakama Authors
+ * Copyright 2023 The Nakama Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,14 @@
  * limitations under the License.
  */
 
-#pragma once
-
-#include <nakama-cpp/realtime/rtdata/NUserPresence.h>
-#include <nakama-cpp/NTypes.h>
-#include <nakama-cpp/NExport.h>
-
-NAKAMA_NAMESPACE_BEGIN
-
-    /// Realtime match data received from the server.
-    struct NMatchData
+namespace Nakama
+{
+    namespace Test
     {
-        std::string matchId;       ///< The match unique ID.
-        NUserPresence presence;    ///< A reference to the user presence that sent this data, if any.
-        std::int64_t opCode;            ///< Op code value.
-        NBytes data;               ///< Data payload, if any.
+        class TestGuid
+        {
+            public:
+                static std::string newGuid();
+        };
     };
-
-NAKAMA_NAMESPACE_END
+}

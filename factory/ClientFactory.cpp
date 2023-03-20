@@ -16,11 +16,11 @@
 
 #include "nakama-cpp/ClientFactory.h"
 #include "nakama-cpp/log/NLogger.h"
+#include "nakama-cpp/NClientInterface.h"
 
 #ifdef BUILD_GRPC_CLIENT
     #include "../core/core-grpc/GrpcClient.h"
 #endif
-
 
 #include "../core/core-rest/RestClient.h"
 

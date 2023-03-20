@@ -1981,8 +1981,8 @@ void RestClient::listLeaderboardRecordsAroundOwner(
 void RestClient::writeLeaderboardRecord(
     NSessionPtr session,
     const std::string & leaderboardId,
-    int64_t score,
-    const opt::optional<int64_t>& subscore,
+    std::int64_t score,
+    const opt::optional<std::int64_t>& subscore,
     const opt::optional<std::string>& metadata,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
@@ -2024,8 +2024,8 @@ void RestClient::writeLeaderboardRecord(
 void RestClient::writeTournamentRecord(
     NSessionPtr session,
     const std::string & tournamentId,
-    int64_t score,
-    const opt::optional<int64_t>& subscore,
+    std::int64_t score,
+    const opt::optional<std::int64_t>& subscore,
     const opt::optional<std::string>& metadata,
     std::function<void(NLeaderboardRecord)> successCallback, ErrorCallback errorCallback)
 {
