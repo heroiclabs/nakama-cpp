@@ -21,19 +21,13 @@
 #include <iostream>
 #include <nakama-cpp/NError.h>
 #include "nakama-cpp/log/NLogger.h"
+#include "globals.h"
 
 namespace Nakama {
 namespace Test {
 
 using namespace std;
 
-// currently running tests
-std::vector<NTest*> g_running_tests;
-NTest* g_cur_test = nullptr;
-
-// stats
-uint32_t g_runTestsCount = 0;
-uint32_t g_failedTestsCount = 0;
 
 void addRunningTest(NTest* test)
 {
