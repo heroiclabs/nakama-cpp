@@ -15,7 +15,6 @@
  */
 
 #include "NCppTest.h"
-#include "TaskExecutor.h"
 
 namespace Nakama {
     namespace Test {
@@ -44,7 +43,6 @@ namespace Nakama {
         void NCppTest::tick()
         {
             client->tick();
-            TaskExecutor::instance().tick();
         }
     }
 }

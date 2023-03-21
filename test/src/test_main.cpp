@@ -16,7 +16,6 @@
 
 #include "NCppTest.h"
 #include "test_serverConfig.h"
-#include "TaskExecutor.h"
 #include "nakama-cpp/NUtils.h"
 #include "nakama-cpp/NPlatformParams.h"
 #include "nakama-cpp/ClientFactory.h"
@@ -103,7 +102,7 @@ int runAllTests()
     NLOG_INFO("Tests failed: " + std::to_string(g_failedTestsCount) + " (");
     printPercent(cout, g_runTestsCount, g_failedTestsCount);
 
-    return getFailedCount() == 0 ? 0 : -1;
+    return g_failedTestsCount == 0 ? 0 : -1;
 }
 
 

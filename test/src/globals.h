@@ -16,27 +16,23 @@
 
 #pragma once
 
+#include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
-
 
 namespace Nakama {
     namespace Test {
-
-        #define NTEST_ASSERT(cond)  if (!(cond)) { abortCurrentTest(__FILE__, __LINE__); }
-
-        // currently running tests
-        extern std::vector<NTest*> g_running_tests;
-        extern NTest* g_cur_test;
+        static inline void NTEST_ASSERT(bool cond)
+        {
+            if (!cond)
+            {
+                NLOG_INFO("TEST ASSERT FAILED!");
+                NLOG_INFO(std::string(__FILE__) + ":" + std::to_string(__LINE__));
+                abort();
+            }
+        }
 
         // stats
         extern uint32_t g_runTestsCount;
         extern uint32_t g_failedTestsCount;
-
-        void sleep(uint32_t ms);
-        int getFailedCount();
-        void abortCurrentTest(const char* file, int lineno);
-        void removeRunningTest(NTest* test);
-        void addRunningTest(NTest* test);
-        void runTestsLoop();
     }
 }

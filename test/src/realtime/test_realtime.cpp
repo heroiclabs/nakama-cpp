@@ -137,9 +137,12 @@ void test_rt_remote_disconnect()
         test.rtClient->createMatch([&test](const Nakama::NMatch& match)
         {
             test.setRtTickPaused(true);
-            sleep(10000);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+
             test.setRtTickPaused(false);
-            sleep(1000);
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
             test.stopTest(true);
         });
     };

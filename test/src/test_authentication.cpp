@@ -82,8 +82,7 @@ void test_authenticateDevice2()
     auto successCallback = [&test](NSessionPtr session)
     {
         NLOG_INFO("session token: " + session->getAuthToken());
-        test.stopTest(session->getAuthToken().empty() == false);
-        NTEST_ASSERT(session->getVariable("param1") == "test value");
+        test.stopTest(session->getAuthToken().empty() == false && session->getVariable("param1") == "test value");
     };
 
     NStringMap vars;

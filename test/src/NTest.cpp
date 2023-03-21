@@ -26,13 +26,10 @@ namespace Test {
     NTest::NTest(const char * name, bool threadedTick)
             : _name(name), _threadedTick(threadedTick)
     {
-        g_cur_test = this;
     }
 
     NTest::~NTest()
     {
-        removeRunningTest(this);
-        g_cur_test = nullptr;
     }
 
     void NTest::runTest()
@@ -57,20 +54,25 @@ namespace Test {
 
         ++g_runTestsCount;
 
-        addRunningTest(this);
-
         printTestName("Running");
 
-        if (g_running_tests.size() == 1)
+        while (!isDone())
         {
-            runTestsLoop();
+            if (!checkTimeout(50)) {
+                onTimeout();
+                NLOG_INFO("Test timeout");
+                stopTest(isSucceeded());
+            }
+
+            tick();
+
+            std::chrono::milliseconds sleep_period(50);
+            std::this_thread::sleep_for(sleep_period);
         }
     }
 
     void NTest::stopTest(bool succeeded)
     {
-        removeRunningTest(this);
-
         _testSucceeded = succeeded;
         _continue_loop = false;
 
