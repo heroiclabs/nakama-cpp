@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "test_base.h"
+#include "NTest.h"
 #include <chrono>
 #include <thread>
 #include <vector>

@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "test_base.h"
+#include "NTest.h"
 #include "nakama-cpp/Nakama.h"
 
 namespace Nakama {
