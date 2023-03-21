@@ -14,16 +14,11 @@
  * limitations under the License.
  */
 
-#include "realtime/RtClientTestBase.h"
+#include "realtime/RtClientTest.h"
 #include "test_serverConfig.h"
 
 namespace Nakama {
 namespace Test {
-
-NRtClientPtr createRtClient(NClientPtr client)
-{
-    return client->createRtClient();
-}
 
 NRtClientProtocol NRtClientTest::protocol = NRtClientProtocol::Protobuf;
 
@@ -77,7 +72,7 @@ void NRtClientTest::runTest()
 
         NLOG_INFO("session token: " + session->getAuthToken());
 
-        rtClient = createRtClient(client);
+        rtClient = client->createRtClient();
 
         rtClient->setListener(&listener);
 
@@ -93,7 +88,7 @@ void NRtClientTest::runTest(std::function<void()> func) {
     createWorkingClient();
     auto successCallback = [this, func](NSessionPtr sess) {
         this->session = sess;
-        this->rtClient = createRtClient(client);
+        this->rtClient = client->createRtClient();
         this->rtClient->setListener(&listener);
         func();
     };

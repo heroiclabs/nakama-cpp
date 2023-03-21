@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "realtime/RtClientTestBase.h"
+#include "realtime/RtClientTest.h"
 #define RAPIDJSON_HAS_STDSTRING 1
 #include "rapidjson/document.h"
 
