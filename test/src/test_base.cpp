@@ -28,7 +28,6 @@ namespace Test {
 
 using namespace std;
 
-
 void addRunningTest(NTest* test)
 {
     g_running_tests.push_back(test);
@@ -173,34 +172,6 @@ void NTest::printTestName(const char* event)
     NLOG_INFO("*************************************");
     NLOG_INFO(std::string(event) + " " + _name);
     NLOG_INFO("*************************************");
-}
-
-// *************************************************************
-
-ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
-{
-    if (totalCount > 0)
-    {
-        os << count * 100 / totalCount << "%";
-    }
-    else
-    {
-        os << "0%";
-    }
-
-    return os;
-}
-
-void printTotalStats()
-{
-    // total stats
-    uint32_t testsPassed = (g_runTestsCount - g_failedTestsCount);
-
-    NLOG_INFO("Total tests : " + std::to_string(g_runTestsCount));
-    NLOG_INFO("Tests passed: " + std::to_string(testsPassed) +" (");
-    printPercent(cout, g_runTestsCount, testsPassed);
-    NLOG_INFO("Tests failed: " + std::to_string(g_failedTestsCount) + " (");
-    printPercent(cout, g_runTestsCount, g_failedTestsCount);
 }
 
 int getFailedCount()

@@ -66,7 +66,6 @@ namespace Test {
     };
 
     void sleep(uint32_t ms);
-    void printTotalStats();
     int getFailedCount();
     void abortCurrentTest(const char* file, int lineno);
     NTest* getCurTest();
