@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
+#include "NCppTest.h"
 #include "test_serverConfig.h"
 #include "TaskExecutor.h"
 #include "nakama-cpp/NUtils.h"
@@ -66,36 +66,6 @@ void setWorkingClientParameters(NClientParameters& parameters)
     parameters.ssl       = SERVER_SSL;
 }
 
-// *************************************************************
-// NCppTest
-// *************************************************************
-NCppTest::NCppTest(const char* name, bool threadedTick) : NTest(name, threadedTick)
-{
-}
-
-void NCppTest::createWorkingClient()
-{
-    NClientParameters parameters;
-    setWorkingClientParameters(parameters);
-    createClient(parameters);
-}
-
-NClientPtr NCppTest::createClient(const NClientParameters& parameters)
-{
-    client = createDefaultClient(parameters);
-
-    if (client)
-    {
-        client->setErrorCallback([this](const NError& error) { stopTest(error); });
-    }
-    return client;
-}
-
-void NCppTest::tick()
-{
-    client->tick();
-    TaskExecutor::instance().tick();
-}
 
 ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
 {

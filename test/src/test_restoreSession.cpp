@@ -15,7 +15,7 @@
  */
 
 #include "globals.h"
-#include "test_main.h"
+#include "NCppTest.h"
 #include "nakama-cpp/NUtils.h"
 
 namespace Nakama {

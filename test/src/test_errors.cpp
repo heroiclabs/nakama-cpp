@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
+#include "NCppTest.h"
 
 namespace Nakama {
 namespace Test {

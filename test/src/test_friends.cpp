@@ -17,7 +17,7 @@
 #include <condition_variable>
 #include <mutex>
 #include "TestGuid.h"
-#include "test_main.h"
+#include "NCppTest.h"
 
 namespace Nakama
 {
