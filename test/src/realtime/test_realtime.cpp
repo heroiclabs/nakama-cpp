@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-#include "realtime/RtClientTest.h"
 #include <thread>
+#include "realtime/RtClientTest.h"
+#include "globals.h"
 
 namespace Nakama {
 namespace Test {

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "globals.h"
 #include "test_main.h"
 #include "nakama-cpp/NUtils.h"
 

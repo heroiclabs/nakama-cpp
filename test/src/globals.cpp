@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "nakama-cpp/log/NLogger.h"
 #include "globals.h"
 
 namespace Nakama {
@@ -26,5 +27,68 @@ namespace Nakama {
         uint32_t g_runTestsCount = 0;
         uint32_t g_failedTestsCount = 0;
 
+        void addRunningTest(NTest* test)
+        {
+            g_running_tests.push_back(test);
+        }
+
+        void removeRunningTest(NTest* test)
+        {
+            for (auto it = g_running_tests.begin(); it != g_running_tests.end(); ++it)
+            {
+                if (*it == test)
+                {
+                    g_running_tests.erase(it);
+                    break;
+                }
+            }
+        }
+
+        void runTestsLoop()
+        {
+            while (!g_running_tests.empty())
+            {
+                auto running_tests = g_running_tests;
+                int step = 15;
+
+                for (auto test : running_tests)
+                {
+                    if (!test->isDone())
+                    {
+                        if (!test->checkTimeout(step)) {
+                            test->onTimeout();
+                            NLOG_INFO("Test timeout");
+                            test->stopTest(test->isSucceeded());
+                        }
+                        test->tick();
+                    }
+                }
+
+                sleep(step);
+            }
+        }
+
+        void abortCurrentTest(const char* file, int lineno)
+        {
+            if (g_running_tests.size() > 1)
+            {
+                NLOG_INFO(std::to_string(g_running_tests.size()) + " tests are running, aborting one...");
+            }
+
+            NLOG_INFO("TEST ASSERT FAILED!");
+            NLOG_INFO(std::string(file) + ":" + std::to_string(lineno));
+            g_cur_test->stopTest();
+        }
+
+        void sleep(uint32_t ms)
+        {
+            std::chrono::milliseconds sleep_period(ms);
+            std::this_thread::sleep_for(sleep_period);
+        }
+
+        int getFailedCount()
+        {
+            return g_failedTestsCount;
+        }
     }
 }

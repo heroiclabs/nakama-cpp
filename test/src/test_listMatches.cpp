@@ -15,6 +15,7 @@
  */
 
 #include "test_main.h"
+#include "globals.h"
 
 namespace Nakama {
 namespace Test {
@@ -53,7 +54,7 @@ public:
             auto successCallback = [this](NMatchListPtr matchList)
             {
                 NLOG_INFO("Expecting match count to be 2. Actual count: " + std::to_string(matchList->matches.size()));
-                NTEST_ASSERT(matchList->matches.size() == 2)
+                NTEST_ASSERT(matchList->matches.size() == 2);
                 stopTest(true);
             };
 

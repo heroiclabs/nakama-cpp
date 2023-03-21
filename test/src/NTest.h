@@ -24,8 +24,6 @@
 namespace Nakama {
 namespace Test {
 
-#define NTEST_ASSERT(cond)  if (!(cond)) { abortCurrentTest(__FILE__, __LINE__); }
-
     class NTest
     {
     public:
@@ -64,11 +62,6 @@ namespace Test {
     private:
         void runTestInternal();
     };
-
-    void sleep(uint32_t ms);
-    int getFailedCount();
-    void abortCurrentTest(const char* file, int lineno);
-    NTest* getCurTest();
 
 } // namespace Test
 } // namespace Nakama

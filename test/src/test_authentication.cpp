@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "globals.h"
 #include "test_main.h"
 
 namespace Nakama {

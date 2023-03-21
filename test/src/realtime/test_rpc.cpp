@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "globals.h"
 #include "realtime/RtClientTest.h"
 #include "TaskExecutor.h"
 #include "test_serverConfig.h"
