@@ -66,7 +66,6 @@ void setWorkingClientParameters(NClientParameters& parameters)
     parameters.ssl       = SERVER_SSL;
 }
 
-
 ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
 {
     if (totalCount > 0)
@@ -131,12 +130,10 @@ int mainHelper(int argc, char *argv[])
 
     // REST client tests
     g_clientType = ClientType_Rest;
-    if (Nakama::Test::NCppTest("").createClient({})) {
-        res = Nakama::Test::runAllTests();
-        if (res != 0) {
-            return res;
-        }
-    };
+    res = Nakama::Test::runAllTests();
+    if (res != 0) {
+        return res;
+    }
 
     return res;
 }
