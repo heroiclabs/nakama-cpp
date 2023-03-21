@@ -118,45 +118,6 @@ int runAllTests()
     return getFailedCount() == 0 ? 0 : -1;
 }
 
-// will try to connect to server until connected
-class NConnectTest : public NCppTest
-{
-public:
-    NConnectTest() : NCppTest("NConnectTest") {}
-
-    void connect(uint32_t retryPeriodMs)
-    {
-        createWorkingClient();
-
-        client->setErrorCallback([this, retryPeriodMs](const NError& /*error*/)
-        {
-            NLOG(Nakama::NLogLevel::Info, "Not connected. Will retry in %d msec...",  retryPeriodMs);
-        });
-        auth();
-        runTest();
-    }
-
-    void auth()
-    {
-        NLOG_INFO("Connecting...");
-
-        auto successCallback = [this](NSessionPtr /*session*/)
-        {
-            NLOG_INFO("Connected");
-            stopTest(true);
-        };
-        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
-    }
-
-    void tick() override
-    {
-        NCppTest::tick();
-    }
-
-private:
-};
-
-
 
 } // namespace Test
 } // namespace Nakama
@@ -178,9 +139,6 @@ int mainHelper(int argc, char *argv[])
     NLOG(Nakama::NLogLevel::Info, "key      : %s", SERVER_KEY);
     NLOG(Nakama::NLogLevel::Info, "ssl      : %s", (SERVER_SSL ? "true" : "false"));
 
-
-    Nakama::Test::NConnectTest connectTest;
-    connectTest.connect(2000);
 
     // REST client tests
     g_clientType = ClientType_Rest;
