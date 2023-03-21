@@ -201,10 +201,12 @@ if (CMAKE_SYSTEM_NAME MATCHES "Windows" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
     add_custom_target(run
         COMMAND ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/nakama-test
         USES_TERMINAL
+        DEPENDS install
     )
 elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
     add_custom_target(run
         COMMAND $<TARGET_BUNDLE_DIR:nakama-test>/Contents/MacOS/nakama-test
         USES_TERMINAL
+        DEPENDS install
     )
 endif()
