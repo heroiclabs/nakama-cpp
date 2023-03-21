@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-#include "NTest.h"
+#include "globals.h"
 
 namespace Nakama {
     namespace Test {
 
-        // currently running tests
-        extern std::vector<NTest*> g_running_tests;
-        extern NTest* g_cur_test;
+        std::vector<NTest*> g_running_tests;
+        NTest* g_cur_test = nullptr;
 
         // stats
-        extern uint32_t g_runTestsCount;
-        extern uint32_t g_failedTestsCount;
+        uint32_t g_runTestsCount = 0;
+        uint32_t g_failedTestsCount = 0;
 
     }
 }
