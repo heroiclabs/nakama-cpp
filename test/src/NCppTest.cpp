@@ -19,33 +19,32 @@
 
 namespace Nakama {
     namespace Test {
-
-    NCppTest::NCppTest(const char* name, bool threadedTick) : NTest(name, threadedTick)
-    {
-    }
-
-    void NCppTest::createWorkingClient()
-    {
-        NClientParameters parameters;
-        setWorkingClientParameters(parameters);
-        createClient(parameters);
-    }
-
-    NClientPtr NCppTest::createClient(const NClientParameters& parameters)
-    {
-        client = createDefaultClient(parameters);
-
-        if (client)
+        NCppTest::NCppTest(const char* name, bool threadedTick) : NTest(name, threadedTick)
         {
-            client->setErrorCallback([this](const NError& error) { stopTest(error); });
         }
-        return client;
-    }
 
-    void NCppTest::tick()
-    {
-        client->tick();
-        TaskExecutor::instance().tick();
-    }
+        void NCppTest::createWorkingClient()
+        {
+            NClientParameters parameters;
+            setWorkingClientParameters(parameters);
+            createClient(parameters);
+        }
+
+        NClientPtr NCppTest::createClient(const NClientParameters& parameters)
+        {
+            client = createDefaultClient(parameters);
+
+            if (client)
+            {
+                client->setErrorCallback([this](const NError& error) { stopTest(error); });
+            }
+            return client;
+        }
+
+        void NCppTest::tick()
+        {
+            client->tick();
+            TaskExecutor::instance().tick();
+        }
     }
 }
