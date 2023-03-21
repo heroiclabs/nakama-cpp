@@ -21,6 +21,7 @@
 #include "NRtClientProtocol_Protobuf.h"
 #include "NRtClientProtocol_Json.h"
 #include "nakama-cpp/NUtils.h"
+#include "nakama-cpp/realtime/rtdata/NRtException.h"
 
 #undef NMODULE_NAME
 #define NMODULE_NAME "NRtClient"
@@ -1125,7 +1126,7 @@ std::future<NChannelPtr> NRtClient::joinChatAsync(
             promise->set_value(channel);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();
@@ -1153,7 +1154,7 @@ std::future<const NChannelMessageAck&> NRtClient::writeChatMessageAsync(
             promise->set_value(ack);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();
@@ -1172,7 +1173,7 @@ std::future<const NChannelMessageAck&> NRtClient::updateChatMessageAsync(
             promise->set_value(ack);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();
@@ -1198,7 +1199,7 @@ std::future<const NMatch&> NRtClient::createMatchAsync()
             promise->set_value(match);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
         return promise->get_future();
@@ -1216,7 +1217,7 @@ std::future<const NMatch&> NRtClient::joinMatchAsync(
             promise->set_value(match);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();
@@ -1233,7 +1234,7 @@ std::future<const NMatch&> NRtClient::joinMatchByTokenAsync(
             promise->set_value(match);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();
@@ -1265,7 +1266,7 @@ std::future<const NMatchmakerTicket&> NRtClient::addMatchmakerAsync(
             promise->set_value(ticket);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();
@@ -1305,7 +1306,7 @@ std::future<const NStatus&> NRtClient::followUsersAsync(
             promise->set_value(ticket);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();
@@ -1343,7 +1344,7 @@ std::future<const NRpc&> NRtClient::rpcAsync(
             promise->set_value(rpc);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();
@@ -1368,7 +1369,7 @@ std::future<const NPartyMatchmakerTicket&> NRtClient::addMatchmakerPartyAsync(co
             promise->set_value(ticket);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();
@@ -1391,7 +1392,7 @@ std::future<const NParty&> NRtClient::createPartyAsync(bool open, int maxSize)
             promise->set_value(party);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();
@@ -1422,7 +1423,7 @@ std::future<const NPartyJoinRequest&> NRtClient::listPartyJoinRequestsAsync(cons
             promise->set_value(partyJoinRequest);
         },
         [=](const NRtError& error) {
-            promise->set_exception(std::make_exception_ptr(std::runtime_error(error.message)));
+            promise->set_exception(std::make_exception_ptr(NRtException(error)));
         });
 
     return promise->get_future();

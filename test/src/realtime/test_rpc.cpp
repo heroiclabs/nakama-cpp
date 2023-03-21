@@ -25,53 +25,16 @@ using namespace std;
 
 void test_rpc_with_http_key()
 {
-    NCppTest test(__func__);
-
+    NCppTest test(__func__, true);
     test.createWorkingClient();
-
-    TaskExecutor& taskExecutor = TaskExecutor::instance();
-
-    taskExecutor.addTask([&]()
-        {
-            auto successCallback = [](const NRpc& rpc)
-            {
-                NLOG_INFO("rpc response: " + rpc.payload);
-                NTEST_ASSERT(!rpc.payload.empty());
-                TaskExecutor::instance().currentTaskCompleted();
-            };
-
-            string json = "{\"v\":\"test\"}";
-            test.client->rpc(
-                SERVER_HTTP_KEY,
-                "clientrpc.rpc",
-                json,
-                successCallback);
-        });
-
-    taskExecutor.addTask([&]()
-        {
-            auto successCallback = [](const NRpc& rpc)
-            {
-                NLOG_INFO("rpc response: " + rpc.payload);
-                NTEST_ASSERT(rpc.payload.empty());
-                TaskExecutor::instance().currentTaskCompleted();
-            };
-
-            test.client->rpc(
-                SERVER_HTTP_KEY,
-                "clientrpc.rpc",
-                opt::nullopt,
-                successCallback);
-        });
-
-    // test completion task, must be last task
-    taskExecutor.addTask([&test]()
-        {
-            test.stopTest(true);
-            TaskExecutor::instance().currentTaskCompleted();
-        });
-
     test.runTest();
+
+    string json = "{\"v\":\"test\"}";
+    auto rpc1 = test.client->rpcAsync(SERVER_HTTP_KEY, "clientrpc.rpc", json).get();
+    NTEST_ASSERT(!rpc1.payload.empty());
+
+    auto rpc2 = test.client->rpcAsync(SERVER_HTTP_KEY, "clientrpc.rpc", opt::nullopt).get();
+    NTEST_ASSERT(rpc2.payload.empty());
 }
 
 void test_rpc_with_auth()
@@ -79,86 +42,32 @@ void test_rpc_with_auth()
     NRtClientTest test(__func__);
     test.setTestTimeoutMs(100000);
 
-
     test.onRtConnect = [&test]()
     {
-        TaskExecutor& taskExecutor = TaskExecutor::instance();
+        test.client->rpcAsync(test.session, "clientrpc.rpc", opt::nullopt).get();
 
-        /////////////////////////////////////////////////////////////////
-        // REST or gRPC rpc tests
-        /////////////////////////////////////////////////////////////////
-        taskExecutor.addTask([&test]()
-            {
-                auto successCallback = [](const NRpc& rpc)
-                {
-                    NLOG_INFO("rpc response: " + rpc.payload);
-                    NTEST_ASSERT(rpc.payload.empty());
-                    TaskExecutor::instance().currentTaskCompleted();
-                };
+        NTEST_ASSERT(rpc.payload.empty());
 
-                test.client->rpc(
-                    test.session,
-                    "clientrpc.rpc",
-                    opt::nullopt,
-                    successCallback);
-            });
+        string json = "{\"user_id\":\"" + test.session->getUserId() + "\"}";
 
-        taskExecutor.addTask([&test]()
-            {
-                string json = "{\"user_id\":\"" + test.session->getUserId() + "\"}";
+        test.client->rpcAsync(test.session, "clientrpc.rpc", json, successCallback).get();
+        NTEST_ASSERT(rpc.payload == json);
 
-                auto successCallback = [json](const NRpc& rpc)
-                {
-                    NLOG_INFO("rpc response: " + rpc.payload);
-                    NTEST_ASSERT(rpc.payload == json);
-                    TaskExecutor::instance().currentTaskCompleted();
-                };
+        try
+        {
+            auto rpc1 = test.client->rpcAsync(test.session, "clientrpc.rpc_error", "{}").get();
 
-                test.client->rpc(
-                    test.session,
-                    "clientrpc.rpc",
-                    json,
-                    successCallback);
-            });
+        }
+        catch (std::exception_ptr<NError> e)
+        {
+            NTEST_ASSERT(error.code == ErrorCode::InternalError);
 
-        taskExecutor.addTask([&test]()
-            {
-                auto successCallback = [](const NRpc& /*rpc*/)
-                {
-                    // this rpc call must fail
-                    NTEST_ASSERT(false);
-                    TaskExecutor::instance().currentTaskCompleted();
-                };
+        }
 
-                auto errorCallback = [](const NError& error)
-                {
-                    NTEST_ASSERT(error.code == ErrorCode::InternalError);
-                    TaskExecutor::instance().currentTaskCompleted();
-                };
-
-                test.client->rpc(
-                    test.session,
-                    "clientrpc.rpc_error",
-                    "{}",
-                    successCallback,
-                    errorCallback);
-            });
-
-        taskExecutor.addTask([&test]()
-            {
-                auto successCallback = [](const NRpc& rpc)
-                {
-                    NLOG_INFO("rpc response: " + rpc.payload);
-                    NTEST_ASSERT(!rpc.payload.empty());
-                    TaskExecutor::instance().currentTaskCompleted();
-                };
-
-                test.client->rpc(
-                    test.session,
-                    "clientrpc.rpc_get",
-                    "{}",
-                    successCallback);
-            });
+        NLOG_INFO("rpc response: " + rpc.payload);
+        NTEST_ASSERT(!rpc1.payload.empty());
+        test.client->rpcAsync(test.session, "clientrpc.rpc_get",  "{}").get();
+    };
 
         taskExecutor.addTask([&test]()
             {
