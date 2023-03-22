@@ -28,10 +28,6 @@ namespace Test {
     {
     }
 
-    NTest::~NTest()
-    {
-    }
-
     void NTest::runTest()
     {
         if (_threadedTick)
