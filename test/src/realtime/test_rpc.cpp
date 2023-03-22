@@ -15,7 +15,7 @@
  */
 
 #include <exception>
-#include "NError.h"
+#include "nakama-cpp/NError.h"
 #include "globals.h"
 #include "realtime/RtClientTest.h"
 #include "test_serverConfig.h"
@@ -75,7 +75,7 @@ void test_rpc_with_auth()
 
         auto rpc6 = test.rtClient->rpcAsync("clientrpc.rpc", opt::nullopt);
 
-        string json = "{\"user_id\":\"" + test.session->getUserId() + "\"}";
+        json = "{\"user_id\":\"" + test.session->getUserId() + "\"}";
 
         auto rpc7 = test.rtClient->rpcAsync("clientrpc.rpc", json).get();
 
