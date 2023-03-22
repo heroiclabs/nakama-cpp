@@ -25,6 +25,6 @@ namespace Nakama
         NRtException(const NRtError& error)
             : std::runtime_error(error.message), error(error) {}
 
-        const NRtError& error;
+        const NRtError error;
     };
 }

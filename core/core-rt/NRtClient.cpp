@@ -33,6 +33,7 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int32_t
     , _port(port)
     , _ssl(ssl)
     , _transport(transport)
+    , _connectPromise(std::make_unique<std::promise<void>>())
 {
     NLOG_INFO("Created");
 
@@ -43,17 +44,7 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int32_t
         NLOG(NLogLevel::Info, "using default port %d", _port);
     }
 
-    _transport->setConnectCallback([this]()
-    {
-        NLOG_DEBUG("connected");
-        _heartbeatFailureReported = false;
-
-        if (_listener)
-        {
-            _listener->onConnect();
-        }
-    });
-
+    _transport->setConnectCallback(std::bind(&NRtClient::onTransportConnected, this));
     _transport->setErrorCallback(std::bind(&NRtClient::onTransportError, this, std::placeholders::_1));
     _transport->setDisconnectCallback(std::bind(&NRtClient::onTransportDisconnected, this, std::placeholders::_1));
     _transport->setMessageCallback(std::bind(&NRtClient::onTransportMessage, this, std::placeholders::_1));
@@ -116,6 +107,30 @@ void NRtClient::connect(NSessionPtr session, bool createStatus, NRtClientProtoco
     _transport->connect(url, transportType);
 }
 
+std::future<void> NRtClient::connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol)
+{
+    bool futureCompleted = _connectPromise->get_future().wait_for(std::chrono::seconds(0)) == std::future_status::ready;
+    if (!futureCompleted)
+    {
+        // if old promise not ready, just complete it for the user.
+        _connectPromise->set_value();
+    }
+
+    // stomp the old promise
+    _connectPromise = std::make_unique<std::promise<void>>();
+
+    // already connected
+    if (_transport->isConnected()) {
+
+        _connectPromise->set_value();
+        return _connectPromise->get_future();
+    }
+
+    connect(session, createStatus, protocol);
+
+    return _connectPromise->get_future();
+}
+
 bool NRtClient::isConnected() const
 {
     return _transport->isConnected();
@@ -125,6 +140,15 @@ void NRtClient::disconnect()
 {
     NRtClientDisconnectInfo info{NRtClientDisconnectInfo::Code::NORMAL_CLOSURE, "Disconnect initiated by us", false};
     disconnect(info);
+}
+
+std::future<void> NRtClient::disconnectAsync()
+{
+    // currently, disconnect callback is invoked immediately by client here, so we just return a completed future.
+    disconnect();
+    std::promise<void> promise = std::promise<void>();
+    promise.set_value();
+    return promise.get_future();
 }
 
 void NRtClient::disconnect(const NRtClientDisconnectInfo& info)
@@ -159,6 +183,24 @@ void NRtClient::disconnect(const NRtClientDisconnectInfo& info)
     }
 }
 
+void NRtClient::onTransportConnected()
+{
+    NLOG_DEBUG("connected");
+    _heartbeatFailureReported = false;
+
+    if (_listener)
+    {
+        _listener->onConnect();
+    }
+
+    // defend against an adapter somehow calling on_connected twice or other unknown edge cases.
+    bool futureCompleted = _connectPromise->get_future().wait_for(std::chrono::seconds(0)) == std::future_status::ready;
+    if (!futureCompleted)
+    {
+        _connectPromise->set_value();
+    }
+}
+
 void NRtClient::onTransportDisconnected(const NRtClientDisconnectInfo& info)
 {
     NLOG(NLogLevel::Debug, "code: %u, remote: %d, %s", info.code, info.remote, info.reason.c_str());
@@ -168,6 +210,12 @@ void NRtClient::onTransportDisconnected(const NRtClientDisconnectInfo& info)
     if (_listener)
     {
         _listener->onDisconnect(info);
+    }
+
+    bool futureCompleted = _connectPromise->get_future().wait_for(std::chrono::seconds(0)) == std::future_status::ready;
+    if (!futureCompleted)
+    {
+        _connectPromise->set_exception(std::make_exception_ptr(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "Disconnected while connecting.")));
     }
 }
 
@@ -184,6 +232,12 @@ void NRtClient::onTransportError(const std::string& description)
     if (_listener)
     {
         _listener->onError(error);
+    }
+
+    bool futureCompleted = _connectPromise->get_future().wait_for(std::chrono::seconds(0)) == std::future_status::ready;
+    if (!futureCompleted)
+    {
+        _connectPromise->set_exception(std::make_exception_ptr(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "An error occurred while connecting.")));
     }
 }
 

@@ -34,6 +34,7 @@ namespace Test {
         if (_threadedTick)
         {
             _tickThread = std::thread(&NTest::runTestInternal, this);
+            _tickThread.join();
         }
         else
         {

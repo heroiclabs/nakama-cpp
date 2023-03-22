@@ -143,6 +143,15 @@ NAKAMA_NAMESPACE_BEGIN
         virtual void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol = NRtClientProtocol::Protobuf) = 0;
 
         /**
+         * Connect to the server.
+         *
+         * @param session The session of the user.
+         * @param createStatus True if the socket should show the user as online to others.
+         * @param protocol Communication protocol. Default is Protobuf.
+         */
+        virtual std::future<void> connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol = NRtClientProtocol::Protobuf) = 0;
+
+        /**
          * @return True if connected to server.
          */
         virtual bool isConnected() const = 0;
@@ -151,6 +160,11 @@ NAKAMA_NAMESPACE_BEGIN
          * Close the connection with the server.
          */
         virtual void disconnect() = 0;
+
+        /**
+         * Close the connection with the server.
+         */
+        virtual std::future<void> disconnectAsync() = 0;
 
         /**
          * Join a chat channel on the server.

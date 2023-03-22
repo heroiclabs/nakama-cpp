@@ -16,10 +16,11 @@
 
 #pragma once
 
+#include <map>
+#include <memory>
 #include "nakama-cpp/realtime/NRtClientInterface.h"
 #include "rtapi/realtime.pb.h"
 #include "NRtClientProtocolInterface.h"
-#include <map>
 
 namespace Nakama {
 
@@ -56,10 +57,13 @@ namespace Nakama {
         }
 
         void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
+        std::future<void> connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
 
         bool isConnected() const override;
 
         void disconnect() override;
+
+        std::future<void> disconnectAsync() override;
 
         void joinChat(
             const std::string& target,
@@ -300,6 +304,7 @@ namespace Nakama {
         std::future<void> sendPartyDataAsync(const std::string& partyId, long opCode, NBytes& data) override;
 
         protected:
+            void onTransportConnected();
             void onTransportDisconnected(const NRtClientDisconnectInfo& info);
             void onTransportError(const std::string& description);
             void onTransportMessage(const NBytes& data);
@@ -334,6 +339,6 @@ namespace Nakama {
             bool _heartbeatFailureReported = false;
             opt::optional<int> _heartbeatIntervalMs = 5000;
             std::atomic<bool> _wantDisconnect = false;
-
+            std::unique_ptr<std::promise<void>> _connectPromise = nullptr;
     };
 }

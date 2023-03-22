@@ -25,6 +25,6 @@ namespace Nakama
         NException(const NError& error)
             : std::runtime_error(error.message), error(error) {}
 
-        const NError& error;
+        const NError error;
     };
 }
