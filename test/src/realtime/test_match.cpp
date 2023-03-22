@@ -23,37 +23,25 @@ using namespace std;
 
 void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const std::string& match_token = "")
 {
-    auto successCallback = [&test](const NMatch& match)
-    {
-        NLOG_INFO("joined match: " + match.matchId);
-
-        std::string payload = "How are you?";
-
-        test.rtClient->sendMatchData(
-            match.matchId,
-            1, // op code
-            payload,
-            {}
-        );
-    };
+    NMatch match;
 
     if (!match_id.empty())
     {
         NStringMap metadata;
-
         metadata.emplace("key", "value");
-
-        test.rtClient->joinMatch(
-            match_id,
-            metadata,
-            successCallback);
+        match = test.rtClient->joinMatchAsync(match_id, metadata).get();
     }
     else
     {
-        test.rtClient->joinMatchByToken(
-            match_token,
-            successCallback);
+        test.rtClient->joinMatchByTokenAsync(match_token).get();
     }
+
+    NLOG_INFO("joined match: " + match.matchId);
+
+    const std::string payload = "How are you?";
+
+    const int opcode = 1;
+    test.rtClient->sendMatchDataAsync(match.matchId, opcode, payload).get();
 
     test.listener.setMatchDataCallback([&test](const NMatchData& data)
     {
@@ -64,42 +52,27 @@ void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const 
 
 void test_rt_create_match()
 {
-    NRtClientTest test1(__func__);
-    NRtClientTest test2("test_rt_match_join");
+    const bool threadedTick = true;
+    NRtClientTest test1(__func__, threadedTick);
+    NRtClientTest test2("test_rt_match_join", threadedTick);
 
     test1.onRtConnect = [&test1, &test2]()
     {
-        auto successCallback = [&test2](const NMatch& match)
-        {
-            NLOG_INFO("created match: " + match.matchId);
-
-            test2.onRtConnect = [&test2, match]()
-            {
-                test_rt_match_join(test2, match.matchId);
-            };
-
-            test2.runTest();
-        };
-
-        test1.rtClient->createMatch(
-            successCallback);
+        test2.runTest();
+        NMatch match = test1.rtClient->createMatchAsync().get();
+        NLOG_INFO("created match: " + match.matchId);
+        test_rt_match_join(test2, match.matchId);
     };
 
     test1.listener.setMatchDataCallback([&test1](const NMatchData& data)
     {
         NLOG_INFO("match data: " + data.data);
-
-        std::string payload = "I'm fine";
-
-        test1.rtClient->sendMatchData(
-            data.matchId,
-            1, // op code
-            payload,
-            {}
-        );
-
+        const std::string payload = "I'm fine";
+        const int opcode = 1;
+        test1.rtClient->sendMatchData(data.matchId, opcode, payload);
         test1.stopTest(true);
     });
+
 
     test1.runTest();
 }
@@ -108,42 +81,27 @@ void test_rt_matchmaker2(NRtClientTest& test2)
 {
     test2.onRtConnect = [&test2]()
     {
-        auto successCallback = [](const NMatchmakerTicket& ticket)
-        {
-            NLOG_INFO("matchmaker ticket: " + ticket.ticket);
-            // waiting for MatchmakerMatchedCallback
-        };
-
-        test2.rtClient->addMatchmaker(
-            2,
-            2,
-            opt::nullopt,
-            {},
-            {},
-            2,
-            successCallback);
+        const int minCount = 2;
+        const int maxCount = 2;
+        const std::string query = "";
+        const NStringMap stringProperties = {};
+        const NStringDoubleMap numericProperties = {};
+        const int countMultiple = 2;
+        test2.rtClient->addMatchmakerAsync(minCount, maxCount, query, stringProperties, numericProperties, countMultiple).get();
     };
 
     test2.listener.setMatchmakerMatchedCallback([&test2](NMatchmakerMatchedPtr matched)
     {
         NLOG_INFO("matched token: " + matched->token);
-
         test_rt_match_join(test2, "", matched->token);
     });
 
     test2.listener.setMatchDataCallback([&test2](const NMatchData& data)
     {
         NLOG_INFO("match data: " + data.data);
-
-        std::string payload = "Nice day today!";
-
-        test2.rtClient->sendMatchData(
-            data.matchId,
-            1, // op code
-            payload,
-            {}
-        );
-
+        const std::string payload = "Nice day today!";
+        const int opcode = 1;
+        test2.rtClient->sendMatchDataAsync(data.matchId, opcode, payload).get();
         test2.stopTest(true);
     });
 
@@ -188,16 +146,9 @@ void test_rt_matchmaker()
     test1.listener.setMatchDataCallback([&test1](const NMatchData& data)
     {
         NLOG_INFO("match data: " + data.data);
-
         std::string payload = "Nice day today!";
-
-        test1.rtClient->sendMatchData(
-            data.matchId,
-            1, // op code
-            payload,
-            {}
-        );
-
+        int opcode = 1;
+        test1.rtClient->sendMatchDataAsync(data.matchId, opcode, payload).get();
         test1.stopTest(true);
     });
 
