@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "NCppTest.h"
+#include "NTest.h"
 #include "globals.h"
 
 namespace Nakama {
@@ -22,12 +22,12 @@ namespace Test {
 
 using namespace std;
 
-class NMatchListTest : public NCppTest
+class NMatchListTest : public NTest
 {
     NSessionPtr session;
 
 public:
-    explicit NMatchListTest(const char* name) : NCppTest(name) {}
+    explicit NMatchListTest(const char* name) : NTest(name) {}
 
     void runTest() override
     {
@@ -44,7 +44,7 @@ public:
 
         client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
-        NCppTest::runTest();
+        NTest::runTest();
     }
 
     void listMatches()

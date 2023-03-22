@@ -29,7 +29,7 @@ using namespace std;
 
 void test_rpc_with_http_key()
 {
-    NCppTest test(__func__, true);
+    NTest test(__func__, true);
     test.createWorkingClient();
     test.runTest();
 

@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-#include "NCppTest.h"
+#include "NTest.h"
+#include "nakama-cpp/log/NLogger.h"
 
 namespace Nakama {
 namespace Test {
@@ -23,7 +24,7 @@ using namespace std;
 
 void test_connectError()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
     test.setTestTimeoutMs(20000);
 
     NClientParameters parameters;
@@ -50,7 +51,7 @@ void test_connectError()
 
 void test_connectErrorAndDestroy()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     NClientParameters parameters;
 
@@ -76,7 +77,7 @@ void test_connectErrorAndDestroy()
 
 void test_disconnection()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 

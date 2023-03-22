@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "nakama-cpp/log/NLogger.h"
 #include "realtime/RtClientTest.h"
 #include "test_serverConfig.h"
 
@@ -81,7 +82,7 @@ void NRtClientTest::runTest()
 
     client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
-    NCppTest::runTest();
+    NTest::runTest();
 }
 
 void NRtClientTest::runTest(std::function<void()> func) {
@@ -93,12 +94,12 @@ void NRtClientTest::runTest(std::function<void()> func) {
         func();
     };
     client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
-    NCppTest::runTest();
+    NTest::runTest();
 }
 
 void NRtClientTest::tick()
 {
-    NCppTest::tick();
+    NTest::tick();
 
     if (rtClient && !this->_rtTickPaused)
     {

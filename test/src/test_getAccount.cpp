@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-#include "NCppTest.h"
+#include "nakama-cpp/log/NLogger.h"
+#include "NTest.h"
 
 namespace Nakama {
 namespace Test {
@@ -23,7 +24,7 @@ using namespace std;
 
 void test_getAccount()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 

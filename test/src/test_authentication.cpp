@@ -15,7 +15,7 @@
  */
 
 #include "globals.h"
-#include "NCppTest.h"
+#include "NTest.h"
 
 namespace Nakama {
 namespace Test {
@@ -24,7 +24,7 @@ using namespace std;
 
 void test_authenticateEmail1()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 
@@ -39,7 +39,7 @@ void test_authenticateEmail1()
 
 void test_authenticateEmail2()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 
@@ -58,7 +58,7 @@ void test_authenticateEmail2()
 
 void test_authenticateDevice()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 
@@ -75,7 +75,7 @@ void test_authenticateDevice()
 
 void test_authenticateDevice2()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 
@@ -96,7 +96,7 @@ void test_authenticateDevice2()
 
 void test_authenticateRefresh()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 

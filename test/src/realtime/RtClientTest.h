@@ -14,16 +14,20 @@
  * limitations under the License.
  */
 
-#include "NCppTest.h"
 #include "nakama-cpp/realtime/NRtDefaultClientListener.h"
+#include "nakama-cpp/NClientInterface.h"
+#include "nakama-cpp/ClientFactory.h"
+#include "nakama-cpp/realtime/NWebsocketsFactory.h"
+
+#include "NTest.h"
 
 namespace Nakama {
 namespace Test {
 
-class NRtClientTest : public NCppTest
+class NRtClientTest : public NTest
 {
 public:
-    NRtClientTest(const char* name, bool threadedTick = false) : NCppTest(name, threadedTick), _rtTickPaused(false), _stopTestOnDisconnect(true) {
+    NRtClientTest(const char* name, bool threadedTick = false) : NTest(name, threadedTick), _rtTickPaused(false), _stopTestOnDisconnect(true) {
 
     }
 

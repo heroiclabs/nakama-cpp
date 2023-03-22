@@ -15,7 +15,7 @@
  */
 
 #include "globals.h"
-#include "NCppTest.h"
+#include "NTest.h"
 #include "nakama-cpp/NUtils.h"
 
 namespace Nakama {
@@ -25,7 +25,7 @@ using namespace std;
 
 void test_restoreSession()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 

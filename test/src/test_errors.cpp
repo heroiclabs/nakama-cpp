@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-#include "NCppTest.h"
+#include "nakama-cpp/log/NLogger.h"
+#include "NTest.h"
 
 namespace Nakama {
 namespace Test {
@@ -23,7 +24,7 @@ using namespace std;
 
 void test_error_NotFound()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 
@@ -45,7 +46,7 @@ void test_error_NotFound()
 
 void test_error_InvalidArgument()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 
@@ -67,7 +68,7 @@ void test_error_InvalidArgument()
 
 void test_error_InvalidArgument2()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 
@@ -89,7 +90,7 @@ void test_error_InvalidArgument2()
 
 void test_error_Unauthenticated()
 {
-    NCppTest test(__func__);
+    NTest test(__func__);
 
     test.createWorkingClient();
 

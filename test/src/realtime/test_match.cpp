@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "nakama-cpp/log/NLogger.h"
 #include "realtime/RtClientTest.h"
 
 namespace Nakama {

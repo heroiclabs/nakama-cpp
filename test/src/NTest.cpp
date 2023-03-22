@@ -19,6 +19,7 @@
 #include "NTest.h"
 #include "nakama-cpp/Nakama.h"
 #include "globals.h"
+#include "test_serverConfig.h"
 
 namespace Nakama {
 namespace Test {
@@ -72,11 +73,6 @@ namespace Test {
         _testSucceeded = succeeded;
         _continue_loop = false;
 
-        if (_threadedTick)
-        {
-            _tickThread.join();
-        }
-
         if (succeeded)
         {
             printTestName("Succeeded");
@@ -99,6 +95,32 @@ namespace Test {
         NLOG_INFO("*************************************");
         NLOG_INFO(std::string(event) + " " + _name);
         NLOG_INFO("*************************************");
+    }
+
+    void NTest::createWorkingClient()
+    {
+        NClientParameters parameters;
+        parameters.host      = SERVER_HOST;
+        parameters.port      = SERVER_PORT;
+        parameters.serverKey = SERVER_KEY;
+        parameters.ssl       = SERVER_SSL;
+        createClient(parameters);
+    }
+
+    NClientPtr NTest::createClient(const NClientParameters& parameters)
+    {
+        client = createDefaultClient(parameters);
+
+        if (client)
+        {
+            client->setErrorCallback([this](const NError& error) { stopTest(error); });
+        }
+        return client;
+    }
+
+    void NTest::tick()
+    {
+        client->tick();
     }
 }
 }

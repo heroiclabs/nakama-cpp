@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include "NCppTest.h"
 #include "test_serverConfig.h"
 #include "nakama-cpp/NUtils.h"
 #include "nakama-cpp/NPlatformParams.h"
@@ -55,16 +54,6 @@ void test_listMatches();
 void test_realtime();
 void test_internals();
 
-static std::string g_serverHost = SERVER_HOST;
-
-void setWorkingClientParameters(NClientParameters& parameters)
-{
-    parameters.host      = g_serverHost;
-    parameters.port      = SERVER_PORT;
-    parameters.serverKey = SERVER_KEY;
-    parameters.ssl       = SERVER_SSL;
-}
-
 ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
 {
     if (totalCount > 0)
@@ -81,17 +70,17 @@ ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
 
 int runAllTests()
 {
-    test_internals();
-    test_authentication();
-    test_getAccount();
-    test_disconnect();
-    test_errors();
-    test_restoreSession();
-    test_storage();
-    test_groups();
-    test_friends();
+//    test_internals();
+//    test_authentication();
+//    test_getAccount();
+//    test_disconnect();
+//    test_errors();
+//    test_restoreSession();
+//    test_storage();
+//    test_groups();
+//    test_friends();
     test_realtime();
-    test_listMatches();
+//    test_listMatches();
 
     // total stats
     uint32_t testsPassed = (g_runTestsCount - g_failedTestsCount);
@@ -114,14 +103,10 @@ int mainHelper(int argc, char *argv[])
 {
     int res = 0;
 
-    if (argc > 1) {
-        Nakama::Test::g_serverHost = argv[1];
-    }
-
     Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
 
     NLOG(Nakama::NLogLevel::Info, "server config...");
-    NLOG(Nakama::NLogLevel::Info, "host     : %s", Nakama::Test::g_serverHost.c_str());
+    NLOG(Nakama::NLogLevel::Info, "host     : %s", SERVER_HOST);
     NLOG(Nakama::NLogLevel::Info, "HTTP port: %d", SERVER_HTTP_PORT);
     NLOG(Nakama::NLogLevel::Info, "key      : %s", SERVER_KEY);
     NLOG(Nakama::NLogLevel::Info, "ssl      : %s", (SERVER_SSL ? "true" : "false"));

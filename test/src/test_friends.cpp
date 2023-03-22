@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-#include <condition_variable>
-#include <mutex>
 #include "TestGuid.h"
-#include "NCppTest.h"
+#include "NTest.h"
+#include "nakama-cpp/log/NLogger.h"
 
 namespace Nakama
 {
@@ -27,7 +26,7 @@ namespace Nakama
 
         void test_listFriends()
         {
-            NCppTest test(__func__, true);
+            NTest test(__func__, true);
             test.createWorkingClient();
             test.runTest();
 

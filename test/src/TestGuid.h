@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include <string>
+
 namespace Nakama
 {
     namespace Test

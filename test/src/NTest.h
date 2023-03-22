@@ -20,6 +20,8 @@
 #include <string>
 #include <thread>
 #include <nakama-cpp/NError.h>
+#include "nakama-cpp/NClientInterface.h"
+#include "nakama-cpp/ClientFactory.h"
 
 namespace Nakama {
 namespace Test {
@@ -27,17 +29,18 @@ namespace Test {
     class NTest
     {
     public:
-        NTest(const char* name, bool separateThread = false);
-        virtual ~NTest();
+        NTest(const char* name, bool threadedTick = false);
+        NClientPtr createClient(const NClientParameters& parameters);
 
-        virtual void createWorkingClient() = 0;
+        virtual void createWorkingClient();
 
         virtual void runTest();
+
         virtual void stopTest(bool succeeded = false);
         virtual void stopTest(const NError& error);
         virtual void onTimeout() {};
 
-        virtual void tick() {}
+        virtual void tick();
         bool checkTimeout(int timePassedMs) {
             timeoutMs -= timePassedMs;
             return timeoutMs >= 0;
@@ -48,6 +51,8 @@ namespace Test {
         void setTestTimeoutMs(int ms) {
             timeoutMs = ms;
         }
+
+        NClientPtr client;
 
     protected:
         void printTestName(const char* event);
