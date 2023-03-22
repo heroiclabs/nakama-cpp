@@ -23,11 +23,8 @@ namespace Nakama
     class NException : public std::runtime_error {
     public:
         NException(const NError& error)
-            : std::runtime_error(error.message), m_error(error) {}
+            : std::runtime_error(error.message), error(error) {}
 
-        const NError& error() const { return m_error; }
-
-    private:
-        NError m_error;
+        const NError& error;
     };
 }

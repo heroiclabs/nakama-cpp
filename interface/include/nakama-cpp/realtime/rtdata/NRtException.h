@@ -23,11 +23,8 @@ namespace Nakama
     class NRtException : public std::runtime_error {
     public:
         NRtException(const NRtError& error)
-            : std::runtime_error(error.message), m_error(error) {}
+            : std::runtime_error(error.message), error(error) {}
 
-        const NRtError& error() const { return m_error; }
-
-    private:
-        NRtError m_error;
+        const NRtError& error;
     };
 }
