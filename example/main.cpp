@@ -63,8 +63,8 @@ int mainHelper() {
     };
 
     auto rtErrorCallback = [&done](const Nakama::NRtError& error) {
-        NLOG_INFO("Error from socket:...")
-        NLOG_INFO(error.message)
+        NLOG_INFO("Error from socket:...");
+        NLOG_INFO(error.message);
         done = true;
     };
 
