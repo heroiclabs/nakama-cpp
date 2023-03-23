@@ -15,20 +15,21 @@
  */
 
 #include "nakama-cpp/log/NLogger.h"
-#include "realtime/RtClientTest.h"
+#include "NTest.h"
+#include "TestGuid.h"
 
 namespace Nakama {
 namespace Test {
 
-using namespace std;
 
 void test_createAndDeleteNotifications()
 {
-    NRtClientTest test(__func__);
+    NTest test(__func__);
+    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+    bool createStatus = true;
+    test.rtClient->connectAsync(session, createStatus).get();
 
-    test.onRtConnect = [&test]()
-    {
-        test.listener.setNotificationsCallback([&test](const NNotificationList& list)
+        test.listener.setNotificationsCallback([&test, session](const NNotificationList& list)
         {
             NLOG_INFO("Received notifications: " + std::to_string(list.notifications.size()));
 
@@ -44,21 +45,15 @@ void test_createAndDeleteNotifications()
                 NLOG_INFO("\tcontent: " + notification.content);
 
                 test.client->deleteNotifications(
-                    test.session,
+                    session,
                     { notification.id },
                     removedNotificationCallback);
             }
-        });
 
-        auto successCallback = [](const NRpc& rpc)
-        {
-            NLOG_INFO("rpc response: " + rpc.payload);
-        };
 
-        test.rtClient->rpc(
+        test.rtClient->rpcAsync(
             "clientrpc.send_notification",
-            "{\"user_id\":\"" + test.session->getUserId() + "\"}",
-            successCallback);
+            "{\"user_id\":\"" + test.session->getUserId() + "\"}");
     };
 
     test.runTest();
@@ -66,7 +61,7 @@ void test_createAndDeleteNotifications()
 
 void test_createListAndDeleteNotifications()
 {
-    NRtClientTest test(__func__);
+    NTest test(__func__);
 
     test.onRtConnect = [&test]()
     {

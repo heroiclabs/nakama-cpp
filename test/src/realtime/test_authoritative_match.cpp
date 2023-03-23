@@ -15,7 +15,7 @@
  */
 
 #include "nakama-cpp/log/NLogger.h"
-#include "realtime/RtClientTest.h"
+#include "NTest.h"
 #define RAPIDJSON_HAS_STDSTRING 1
 #include "rapidjson/document.h"
 
@@ -24,7 +24,7 @@ namespace Test {
 
 using namespace std;
 
-void test_rt_match_join(NRtClientTest& test, const std::string& match_id)
+void test_rt_match_join(NTest& test, const std::string& match_id)
 {
     auto successCallback = [&test](const NMatch& match)
     {
@@ -49,8 +49,8 @@ void test_rt_match_join(NRtClientTest& test, const std::string& match_id)
 
 void test_authoritative_match()
 {
-    NRtClientTest test(__func__);
-    NRtClientTest test2("test_authoritative_match_join");
+    NTest test(__func__);
+    NTest test2("test_authoritative_match_join");
 
     test.onRtConnect = [&]()
     {

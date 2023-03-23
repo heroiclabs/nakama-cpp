@@ -15,7 +15,7 @@
  */
 
 #include <thread>
-#include "realtime/RtClientTest.h"
+#include "NTest.h"
 #include "globals.h"
 
 namespace Nakama {
@@ -32,7 +32,7 @@ void test_rt_party();
 
 void test_rt_quickdestroy()
 {
-    NRtClientTest test(__func__);
+    NTest test(__func__);
     test.runTest([&test]() {
         test.listener.setErrorCallback([&test](const NRtError&) {
             test.stopTest(false);
@@ -48,7 +48,7 @@ void test_rt_quickdestroy()
 
 void test_rt_rapiddisconnect()
 {
-    NRtClientTest test(__func__);
+    NTest test(__func__);
     test.setTestTimeoutMs(1000);
     bool hadConnectCallback = false;
 
@@ -73,7 +73,7 @@ void test_rt_rapiddisconnect()
 
 void test_rt_reconnect()
 {
-    NRtClientTest test(__func__);
+    NTest test(__func__);
     bool connectedOnce = false;
     test.onRtConnect = [&test, &connectedOnce](){
         NLOG_INFO("TEST: connected");
@@ -94,7 +94,7 @@ void test_rt_reconnect()
 
 void test_rt_heartbeat()
 {
-    NRtClientTest test(__func__);
+    NTest test(__func__);
     test.setRtStopTestOnDisconnect(false);
     test.setTestTimeoutMs(100000);
     int i = 0;
@@ -128,7 +128,7 @@ void test_rt_heartbeat()
 // in order to test how it will react.
 void test_rt_remote_disconnect()
 {
-    NRtClientTest test(__func__);
+    NTest test(__func__);
     // we want to test behavior of socket after disconnect.
     test.setRtStopTestOnDisconnect(false);
     test.setTestTimeoutMs(15000);
@@ -153,7 +153,7 @@ void test_rt_remote_disconnect()
 
 void test_rt_joinChat()
 {
-    NRtClientTest test(__func__);
+    NTest test(__func__);
 
     thread::id main_thread_id = this_thread::get_id();
 
@@ -207,7 +207,7 @@ void test_rt_joinChat()
 
 void test_rt_joinGroupChat()
 {
-    NRtClientTest test(__func__);
+    NTest test(__func__);
 
     thread::id main_thread_id = this_thread::get_id();
 
@@ -277,7 +277,7 @@ void test_realtime()
 
     run_realtime_tests();
 
-    NRtClientTest::protocol = NRtClientProtocol::Json;
+    NTest::protocol = NRtClientProtocol::Json;
     NLOG_INFO("using Json protocol");
 
 //    run_realtime_tests();

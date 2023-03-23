@@ -30,7 +30,7 @@ namespace Test {
     {
     public:
         NTest(const char* name, bool threadedTick = false);
-        NClientPtr createClient(const NClientParameters& parameters);
+        void createClient(const NClientParameters& parameters);
 
         virtual void createWorkingClient();
 
@@ -53,6 +53,7 @@ namespace Test {
         }
 
         NClientPtr client;
+        NRtClientPtr rtClient;
 
     protected:
         void printTestName(const char* event);
@@ -64,6 +65,7 @@ namespace Test {
         std::string _name;
         std::thread _tickThread;
         int timeoutMs = 60*1000;
+
     private:
         void runTestInternal();
     };

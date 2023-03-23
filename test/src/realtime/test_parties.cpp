@@ -15,14 +15,14 @@
  */
 
 #include "nakama-cpp/log/NLogger.h"
-#include "realtime/RtClientTest.h"
+#include "NTest.h"
 
 namespace Nakama {
 namespace Test {
 
 using namespace std;
 
-void test_rt_party_join(NRtClientTest& test, const std::string& party_id)
+void test_rt_party_join(NTest& test, const std::string& party_id)
 {
     auto successCallback = [&test](const NParty& party)
     {
@@ -54,8 +54,8 @@ void test_rt_party_join(NRtClientTest& test, const std::string& party_id)
 
 void test_rt_create_party()
 {
-    NRtClientTest test1(__func__);
-    NRtClientTest test2("test_rt_party_join");
+    NTest test1(__func__);
+    NTest test2("test_rt_party_join");
 
     test1.onRtConnect = [&test1, &test2]()
     {
@@ -94,8 +94,8 @@ void test_rt_create_party()
 
 void test_rt_party_matchmaker()
 {
-    NRtClientTest test1(__func__, true);
-    NRtClientTest test2("test_rt_party_matchmaker2", true);
+    NTest test1(__func__, true);
+    NTest test2("test_rt_party_matchmaker2", true);
 
     test1.onRtConnect = [&test1]()
     {

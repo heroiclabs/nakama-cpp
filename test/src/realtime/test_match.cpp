@@ -15,14 +15,14 @@
  */
 
 #include "nakama-cpp/log/NLogger.h"
-#include "realtime/RtClientTest.h"
+#include "NTest.h"
 
 namespace Nakama {
 namespace Test {
 
 using namespace std;
 
-void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const std::string& match_token = "")
+void test_rt_match_join(NTest& test, const std::string& match_id, const std::string& match_token = "")
 {
     NMatch match;
 
@@ -54,8 +54,8 @@ void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const 
 void test_rt_create_match()
 {
     const bool threadedTick = true;
-    NRtClientTest test1(__func__, threadedTick);
-    NRtClientTest test2("test_rt_match_join", threadedTick);
+    NTest test1(__func__, threadedTick);
+    NTest test2("test_rt_match_join", threadedTick);
 
     test1.onRtConnect = [&test1, &test2]()
     {
@@ -78,7 +78,7 @@ void test_rt_create_match()
     test1.runTest();
 }
 
-void test_rt_matchmaker2(NRtClientTest& test2)
+void test_rt_matchmaker2(NTest& test2)
 {
     test2.onRtConnect = [&test2]()
     {
@@ -111,9 +111,9 @@ void test_rt_matchmaker2(NRtClientTest& test2)
 
 void test_rt_matchmaker()
 {
-    NRtClientTest test1(__func__);
+    NTest test1(__func__);
     test1.setTestTimeoutMs(20000);
-    NRtClientTest test2("test_rt_matchmake2");
+    NTest test2("test_rt_matchmake2");
     test2.setTestTimeoutMs(20000);
 
     test1.onRtConnect = [&test1, &test2]()

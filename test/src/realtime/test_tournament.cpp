@@ -20,7 +20,7 @@
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
-#include "realtime/RtClientTest.h"
+#include "NTest.h"
 
 namespace Nakama {
 namespace Test {
@@ -29,7 +29,7 @@ using namespace std;
 
 void test_tournament()
 {
-    NRtClientTest test(__func__);
+    NTest test(__func__);
 
     test.onRtConnect = [&]()
     {

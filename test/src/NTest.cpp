@@ -22,106 +22,105 @@
 #include "test_serverConfig.h"
 
 namespace Nakama {
-namespace Test {
+    namespace Test {
 
-    NTest::NTest(const char * name, bool threadedTick)
-            : _name(name), _threadedTick(threadedTick)
-    {
-    }
-
-    void NTest::runTest()
-    {
-        if (_threadedTick)
+        NTest::NTest(const char * name, bool threadedTick)
+                : _name(name), _threadedTick(threadedTick)
         {
-            _tickThread = std::thread(&NTest::runTestInternal, this);
-            _tickThread.join();
         }
-        else
+
+        void NTest::runTest()
         {
-            runTestInternal();
-        }
-    }
-
-    void NTest::runTestInternal()
-    {
-        if (!_continue_loop)
-            return;
-
-        if (g_runTestsCount > 0)
-            std::cout << std::endl << std::endl;
-
-        ++g_runTestsCount;
-
-        printTestName("Running");
-
-        while (!isDone())
-        {
-            if (!checkTimeout(50)) {
-                onTimeout();
-                NLOG_INFO("Test timeout");
-                stopTest(isSucceeded());
+            if (_threadedTick)
+            {
+                _tickThread = std::thread(&NTest::runTestInternal, this);
+                _tickThread.join();
             }
-
-            tick();
-
-            std::chrono::milliseconds sleep_period(50);
-            std::this_thread::sleep_for(sleep_period);
+            else
+            {
+                runTestInternal();
+            }
         }
-    }
 
-    void NTest::stopTest(bool succeeded)
-    {
-        _testSucceeded = succeeded;
-        _continue_loop = false;
 
-        if (succeeded)
+        void NTest::runTestInternal()
         {
-            printTestName("Succeeded");
+            if (!_continue_loop)
+                return;
+
+            if (g_runTestsCount > 0)
+                std::cout << std::endl << std::endl;
+
+            ++g_runTestsCount;
+
+            printTestName("Running");
+
+            while (!isDone())
+            {
+                if (!checkTimeout(50)) {
+                    onTimeout();
+                    NLOG_INFO("Test timeout");
+                    stopTest(isSucceeded());
+                }
+
+                tick();
+
+                std::chrono::milliseconds sleep_period(50);
+                std::this_thread::sleep_for(sleep_period);
+            }
         }
-        else
+
+        void NTest::stopTest(bool succeeded)
         {
-            ++g_failedTestsCount;
-            printTestName("Failed");
-            abort();
+            _testSucceeded = succeeded;
+            _continue_loop = false;
+
+            if (succeeded)
+            {
+                printTestName("Succeeded");
+            }
+            else
+            {
+                ++g_failedTestsCount;
+                printTestName("Failed");
+                abort();
+            }
         }
-    }
 
-    void NTest::stopTest(const NError& error) {
-        NLOG_ERROR("Stopping test with error: " + toString(error));
-        stopTest(false);
-    }
+        void NTest::stopTest(const NError& error) {
+            NLOG_ERROR("Stopping test with error: " + toString(error));
+            stopTest(false);
+        }
 
-    void NTest::printTestName(const char* event)
-    {
-        NLOG_INFO("*************************************");
-        NLOG_INFO(std::string(event) + " " + _name);
-        NLOG_INFO("*************************************");
-    }
-
-    void NTest::createWorkingClient()
-    {
-        NClientParameters parameters;
-        parameters.host      = SERVER_HOST;
-        parameters.port      = SERVER_PORT;
-        parameters.serverKey = SERVER_KEY;
-        parameters.ssl       = SERVER_SSL;
-        createClient(parameters);
-    }
-
-    NClientPtr NTest::createClient(const NClientParameters& parameters)
-    {
-        client = createDefaultClient(parameters);
-
-        if (client)
+        void NTest::printTestName(const char* event)
         {
+            NLOG_INFO("*************************************");
+            NLOG_INFO(std::string(event) + " " + _name);
+            NLOG_INFO("*************************************");
+        }
+
+        void NTest::createWorkingClient()
+        {
+            NClientParameters parameters;
+            parameters.host      = SERVER_HOST;
+            parameters.port      = SERVER_PORT;
+            parameters.serverKey = SERVER_KEY;
+            parameters.ssl       = SERVER_SSL;
+            createClient(parameters);
+        }
+
+        void NTest::createClient(const NClientParameters& parameters)
+        {
+            client = createDefaultClient(parameters);
             client->setErrorCallback([this](const NError& error) { stopTest(error); });
+            rtClient = client->createRtClient();
+            rtClient->
         }
-        return client;
-    }
 
-    void NTest::tick()
-    {
-        client->tick();
+        void NTest::tick()
+        {
+            client->tick();
+            rtClient->tick();
+        }
     }
-}
 }
