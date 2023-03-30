@@ -24,89 +24,57 @@ namespace Test {
 
 void test_createAndDeleteNotifications()
 {
-    NTest test(__func__);
+    bool threadedTick = true;
+    NTest test(__func__, threadedTick);
+    test.runTest();
     NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
-    bool createStatus = true;
+    bool createStatus = false;
     test.rtClient->connectAsync(session, createStatus).get();
 
-        test.listener.setNotificationsCallback([&test, session](const NNotificationList& list)
+    test.listener.setNotificationsCallback([&test, session](const NNotificationList& list)
+    {
+        NLOG_INFO("Received notifications: " + std::to_string(list.notifications.size()));
+
+        for (auto& notification : list.notifications)
         {
-            NLOG_INFO("Received notifications: " + std::to_string(list.notifications.size()));
+            NLOG_INFO("Notification code: " + std::to_string(notification.code));
+            NLOG_INFO("\tcontent: " + notification.content);
 
-            auto removedNotificationCallback = [&test]()
-            {
-                NLOG_INFO("Notification removed.");
-                test.stopTest(true);
-            };
-
-            for (auto& notification : list.notifications)
-            {
-                NLOG_INFO("Notification code: " + std::to_string(notification.code));
-                NLOG_INFO("\tcontent: " + notification.content);
-
-                test.client->deleteNotifications(
-                    session,
-                    { notification.id },
-                    removedNotificationCallback);
-            }
+            test.client->deleteNotificationsAsync(session, {notification.id}).get();
+            test.stopTest(true);
+        }
 
 
-        test.rtClient->rpcAsync(
-            "clientrpc.send_notification",
-            "{\"user_id\":\"" + test.session->getUserId() + "\"}");
-    };
+        test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}");
+    });
 
-    test.runTest();
+    test.waitUntilStop()
 }
 
 void test_createListAndDeleteNotifications()
 {
-    NTest test(__func__);
-
-    test.onRtConnect = [&test]()
-    {
-        auto successCallback = [&test](const NRpc& rpc)
-        {
-            NLOG_INFO("rpc response: " + rpc.payload);
-
-            auto listCallback = [&test](NNotificationListPtr list)
-            {
-                if (list->notifications.size() > 0)
-                {
-                    auto removedNotificationCallback = [&test]()
-                    {
-                        NLOG_INFO("Notification removed.");
-                        test.stopTest(true);
-                    };
-
-                    for (auto& notification : list->notifications)
-                    {
-                        NLOG_INFO("Notification code: " + std::to_string(notification.code));
-                        NLOG_INFO("\tcontent: " + notification.content);
-
-                        test.client->deleteNotifications(
-                            test.session,
-                            { notification.id },
-                            removedNotificationCallback);
-                    }
-                }
-                else
-                    test.stopTest();
-            };
-
-            test.client->listNotifications(test.session,
-                opt::nullopt,
-                opt::nullopt,
-                listCallback);
-        };
-
-        test.rtClient->rpc(
-            "clientrpc.send_notification",
-            "{\"user_id\":\"" + test.session->getUserId() + "\"}",
-            successCallback);
-    };
-
+    bool threadedTick = true;
+    NTest test(__func__, threadedTick);
     test.runTest();
+    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+    bool createStatus = false;
+    test.rtClient->connectAsync(session, createStatus).get();
+    const Nakama::NRpc& rpc = test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
+    NNotificationListPtr list = test.client->listNotificationsAsync(session, opt::nullopt, opt::nullopt).get();
+    if (list->notifications.size() > 0)
+    {
+        for (auto& notification : list->notifications)
+        {
+            NLOG_INFO("Notification code: " + std::to_string(notification.code));
+            NLOG_INFO("\tcontent: " + notification.content);
+            test.client->deleteNotificationsAsync(session, {notification.id});
+            test.stopTest(true);
+        }
+    }
+    else
+    {
+        test.stopTest();
+    }
 }
 
 void test_notifications()

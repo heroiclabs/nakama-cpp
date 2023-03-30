@@ -22,6 +22,7 @@
 #include <nakama-cpp/NError.h>
 #include "nakama-cpp/NClientInterface.h"
 #include "nakama-cpp/ClientFactory.h"
+#include "nakama-cpp/realtime/NRtDefaultClientListener.h"
 
 namespace Nakama {
 namespace Test {
@@ -30,6 +31,8 @@ namespace Test {
     {
     public:
         NTest(const char* name, bool threadedTick = false);
+        NTest(std::string name, bool threadedTick = false);
+
         void createClient(const NClientParameters& parameters);
 
         virtual void createWorkingClient();
@@ -54,6 +57,7 @@ namespace Test {
 
         NClientPtr client;
         NRtClientPtr rtClient;
+        NRtDefaultClientListener listener;
 
     protected:
         void printTestName(const char* event);

@@ -24,7 +24,7 @@
 namespace Nakama {
     namespace Test {
 
-        NTest::NTest(const char * name, bool threadedTick)
+        NTest::NTest(std::string name, bool threadedTick)
                 : _name(name), _threadedTick(threadedTick)
         {
         }
@@ -114,7 +114,7 @@ namespace Nakama {
             client = createDefaultClient(parameters);
             client->setErrorCallback([this](const NError& error) { stopTest(error); });
             rtClient = client->createRtClient();
-            rtClient->
+            rtClient->setListener(&listener);
         }
 
         void NTest::tick()

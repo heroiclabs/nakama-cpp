@@ -18,76 +18,52 @@
 #include "NTest.h"
 #define RAPIDJSON_HAS_STDSTRING 1
 #include "rapidjson/document.h"
+#include "TestGuid.h"
 
 namespace Nakama {
 namespace Test {
 
 using namespace std;
 
-void test_rt_match_join(NTest& test, const std::string& match_id)
-{
-    auto successCallback = [&test](const NMatch& match)
-    {
-        NLOG_INFO("joined match: " + match.matchId);
-
-        std::string data = "Anybody there?";
-
-        test.rtClient->sendMatchData(
-            match.matchId,
-            1, // op code
-            data,
-            {}
-        );
-        test.stopTest(true);
-    };
-
-    test.rtClient->joinMatch(
-        match_id,
-        {},
-        successCallback);
-}
-
 void test_authoritative_match()
 {
-    NTest test(__func__);
-    NTest test2("test_authoritative_match_join");
-
-    test.onRtConnect = [&]()
-    {
-        auto successCallback = [&](const NRpc& rpc)
-        {
-            NLOG_INFO("rpc response: " + rpc.payload);
-
-            bool succeeded = false;
-            rapidjson::Document document;
-            if (!document.Parse(rpc.payload).HasParseError())
-            {
-                auto& jsonMatchId = document["match_id"];
-
-                if (jsonMatchId.IsString())
-                {
-                    string matchId = jsonMatchId.GetString();
-
-                    test2.onRtConnect = [&test2, matchId]()
-                    {
-                        test_rt_match_join(test2, matchId);
-                    };
-
-                    test2.runTest();
-                    succeeded = true;
-                }
-            }
-
-            test.stopTest(succeeded);
-        };
-
-        test.rtClient->rpc(
-            "clientrpc.create_authoritative_match",
-            "{\"debug\": true, \"label\": \"TestAuthoritativeMatch\"}",
-            successCallback);
-    };
-
+    bool threadedTick = true;
+    NTest test(__func__ , threadedTick);
+    NTest test2("test_authoritative_match_join", threadedTick);
     test.runTest();
+    test2.runTest();
+
+    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+    bool createStatus = false;
+    test.rtClient->connectAsync(session, createStatus).get();
+
+    NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+    test2.rtClient->connectAsync(session2, createStatus).get();
+
+    const NRpc& rpc = test.rtClient->rpcAsync("clientrpc.create_authoritative_match", "{\"debug\": true, \"label\": \"TestAuthoritativeMatch\"}").get();
+
+    rapidjson::Document document;
+    if (!document.Parse(rpc.payload).HasParseError())
+    {
+        auto& jsonMatchId = document["match_id"];
+
+        if (jsonMatchId.IsString())
+        {
+            string matchId = jsonMatchId.GetString();
+            test2.rtClient->joinMatchAsync(matchId, {}).get();
+        }
+        else
+        {
+            test.stopTest(false);
+        }
+    }
+    else
+    {
+        test.stopTest(false);
+    }
+
+    test.stopTest(true);
+    test2.stopTest(true);
 }
 
 } // namespace Test
