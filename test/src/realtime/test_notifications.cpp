@@ -21,7 +21,6 @@
 namespace Nakama {
 namespace Test {
 
-
 void test_createAndDeleteNotifications()
 {
     bool threadedTick = true;

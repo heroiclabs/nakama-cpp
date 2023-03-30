@@ -16,80 +16,52 @@
 
 #include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
+#include "TestGuid.h"
 
 namespace Nakama {
 namespace Test {
 
 using namespace std;
 
-void test_rt_party_join(NTest& test, const std::string& party_id)
-{
-    auto successCallback = [&test](const NParty& party)
-    {
-        NLOG_INFO("joined party: " + party.id);
-
-        std::string payload = "How are you?";
-
-        test.rtClient->sendPartyData(
-            party.id,
-            1, // op code
-            payload
-        );
-    };
-
-    NStringMap metadata;
-
-    metadata.emplace("key", "value");
-
-    test.rtClient->joinParty(party_id);
-
-    test.listener.setPartyCallback(successCallback);
-
-    test.listener.setPartyDataCallback([&test](const NPartyData& data)
-    {
-        NLOG_INFO("party data: " + data.data);
-        test.stopTest(true);
-    });
-}
-
 void test_rt_create_party()
 {
-    NTest test1(__func__);
-    NTest test2("test_rt_party_join");
-
-    test1.onRtConnect = [&test1, &test2]()
-    {
-        auto successCallback = [&test2](const NParty& party)
-        {
-            NLOG_INFO("created match: " + party.id);
-
-            test2.onRtConnect = [&test2, party]()
-            {
-                test_rt_party_join(test2, party.id);
-            };
-
-            test2.runTest();
-        };
-
-        test1.rtClient->createParty(true, 2, successCallback);
-    };
-
-    test1.listener.setPartyDataCallback([&test1](const NPartyData& data)
-    {
-        NLOG_INFO("party data: " + data.data);
-
-        std::string payload = "I'm fine";
-
-        test1.rtClient->sendPartyData(
-            data.partyId,
-            1, // op code
-            payload
-        );
-
-        test1.stopTest(true);
-    });
+    bool threadedTick = true;
+    NTest test1(__func__, threadedTick);
+    NTest test2(std::string(__func__) + std::string("2"), threadedTick);
 
     test1.runTest();
+    test2.runTest();
+
+    NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+    NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+
+    bool createStatus = false;
+    test1.rtClient->connectAsync(session, createStatus).get();
+    test2.rtClient->connectAsync(session2, createStatus).get();
+
+    const NParty& party = test1.rtClient->createPartyAsync(true, 2).get();
+
+    auto partyJoinCallback = [&test2](const NParty& party)
+    {
+        NLOG_INFO("joined party: " + party.id);
+        std::string payload = "How are you?";
+        int opcode = 1;
+        test2.rtClient->sendPartyData(party.id, opcode, payload);
+    };
+
+    test2.listener.setPartyCallback(partyJoinCallback);
+
+    test1.listener.setPartyDataCallback([&test1, &test2](const NPartyData& data)
+    {
+        NLOG_INFO("party data: " + data.data);
+        test1.stopTest(true);
+        test2.stopTest(true);
+    });
+
+    test2.rtClient->joinPartyAsync(party.id).get();
+
+    test1.waitUntilStop();
+    test2.waitUntilStop();
 }
 
 void test_rt_party_matchmaker()
@@ -97,19 +69,13 @@ void test_rt_party_matchmaker()
     NTest test1(__func__, true);
     NTest test2("test_rt_party_matchmaker2", true);
 
-    test1.onRtConnect = [&test1]()
-    {
-        auto party = test1.rtClient->createPartyAsync(false, 1).get();
-        auto ticket = test1.rtClient->addMatchmakerPartyAsync(party.id, "*", 0, 2).get();
-        test1.stopTest(ticket.ticket != "");
-    };
+    auto party = test1.rtClient->createPartyAsync(false, 1).get();
+    auto ticket = test1.rtClient->addMatchmakerPartyAsync(party.id, "*", 0, 2).get();
+    test1.stopTest(ticket.ticket != "");
 
-    test2.onRtConnect = [&test2]()
-    {
-        auto party = test2.rtClient->createPartyAsync(false, 1).get();
-        auto ticket = test2.rtClient->addMatchmakerPartyAsync(party.id, "*", 0, 2).get();
-        test2.stopTest(ticket.ticket != "");
-    };
+    auto party = test2.rtClient->createPartyAsync(false, 1).get();
+    auto ticket = test2.rtClient->addMatchmakerPartyAsync(party.id, "*", 0, 2).get();
+    test2.stopTest(ticket.ticket != "");
 
     test1.runTest();
     test2.runTest();
