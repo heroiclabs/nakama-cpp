@@ -26,7 +26,6 @@ namespace Nakama {
         {
             bool threadedTick = true;
             NTest test(__func__, threadedTick);
-            test.createWorkingClient();
 
             test.listener.setErrorCallback([&test](const NRtError&) {
                 test.stopTest(false);

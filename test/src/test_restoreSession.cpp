@@ -27,8 +27,6 @@ void test_restoreSession()
 {
     NTest test(__func__);
 
-    test.createWorkingClient();
-
     NSessionPtr my_session;
 
     {

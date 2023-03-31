@@ -26,8 +26,6 @@ void test_writeStorageInvalidArgument()
 {
     NTest test(__func__);
 
-    test.createWorkingClient();
-
     auto successCallback = [&test](NSessionPtr session)
     {
         NLOG_INFO("Authenticated successfully");
@@ -57,8 +55,6 @@ void test_writeStorageInvalidArgument()
 void test_writeStorage()
 {
     NTest test(__func__);
-
-    test.createWorkingClient();
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -106,8 +102,6 @@ void test_writeStorage()
 void test_writeStorageCursor()
 {
     NTest test(__func__);
-
-    test.createWorkingClient();
 
     auto successCallback = [&test](NSessionPtr session)
     {

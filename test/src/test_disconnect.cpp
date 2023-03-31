@@ -79,8 +79,6 @@ void test_disconnection()
 {
     NTest test(__func__);
 
-    test.createWorkingClient();
-
     auto successCallback = [&test](NSessionPtr session)
     {
         NLOG_INFO("session token: " + session->getAuthToken());

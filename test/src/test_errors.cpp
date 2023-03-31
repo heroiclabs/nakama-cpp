@@ -26,8 +26,6 @@ void test_error_NotFound()
 {
     NTest test(__func__);
 
-    test.createWorkingClient();
-
     auto successCallback = [&test](NSessionPtr session)
     {
         NLOG_INFO("session token: " + session->getAuthToken());
@@ -47,8 +45,6 @@ void test_error_NotFound()
 void test_error_InvalidArgument()
 {
     NTest test(__func__);
-
-    test.createWorkingClient();
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -70,8 +66,6 @@ void test_error_InvalidArgument2()
 {
     NTest test(__func__);
 
-    test.createWorkingClient();
-
     auto successCallback = [&test](NSessionPtr session)
     {
         NLOG_INFO("session token: " + session->getAuthToken());
@@ -91,8 +85,6 @@ void test_error_InvalidArgument2()
 void test_error_Unauthenticated()
 {
     NTest test(__func__);
-
-    test.createWorkingClient();
 
     auto errorCallback = [&test](const NError& error)
     {

@@ -29,9 +29,7 @@ void test_authoritative_match()
 {
     bool threadedTick = true;
     NTest test(__func__ , threadedTick);
-    test.createWorkingClient();
     NTest test2("test_authoritative_match_join", threadedTick);
-    test2.createWorkingClient();
 
     test.runTest();
     test2.runTest();

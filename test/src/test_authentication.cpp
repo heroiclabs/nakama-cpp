@@ -26,8 +26,6 @@ void test_authenticateEmail1()
 {
     NTest test(__func__);
 
-    test.createWorkingClient();
-
     auto successCallback = [&test](NSessionPtr session)
     {
         test.stopTest(!session->getAuthToken().empty());
@@ -40,8 +38,6 @@ void test_authenticateEmail1()
 void test_authenticateEmail2()
 {
     NTest test(__func__);
-
-    test.createWorkingClient();
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -60,8 +56,6 @@ void test_authenticateDevice()
 {
     NTest test(__func__);
 
-    test.createWorkingClient();
-
     auto successCallback = [&test](NSessionPtr session)
     {
         NLOG_INFO("session token: " + session->getAuthToken());
@@ -76,8 +70,6 @@ void test_authenticateDevice()
 void test_authenticateDevice2()
 {
     NTest test(__func__);
-
-    test.createWorkingClient();
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -97,8 +89,6 @@ void test_authenticateDevice2()
 void test_authenticateRefresh()
 {
     NTest test(__func__);
-
-    test.createWorkingClient();
 
     auto successCallback = [&test](NSessionPtr session1)
     {

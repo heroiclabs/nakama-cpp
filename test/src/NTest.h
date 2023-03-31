@@ -39,6 +39,12 @@ namespace Test {
         void stopTest(const NError& error);
         void onTimeout() {};
 
+        void set_rt_tick_paused(bool paused) {
+            _rtTickPaused = true;
+        }
+
+        void waitUntilStop();
+
         void tick();
         bool checkTimeout(int timePassedMs) {
             timeoutMs -= timePassedMs;
@@ -65,6 +71,7 @@ namespace Test {
         std::string _name;
         std::thread _tickThread;
         int timeoutMs = 60*1000;
+        bool _rtTickPaused;
 
     private:
         void runTestInternal();

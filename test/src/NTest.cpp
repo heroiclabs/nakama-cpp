@@ -16,6 +16,8 @@
  */
 
 #include <iostream>
+#include <mutex>
+#include <condition_variable>
 #include "NTest.h"
 #include "nakama-cpp/Nakama.h"
 #include "globals.h"
@@ -106,7 +108,16 @@ namespace Nakama {
         void NTest::tick()
         {
             client->tick();
-            rtClient->tick();
+
+            if (!_rtTickPaused)
+            {
+                rtClient->tick();
+            }
+        }
+
+        void NTest::waitUntilStop()
+        {
+
         }
     }
 }

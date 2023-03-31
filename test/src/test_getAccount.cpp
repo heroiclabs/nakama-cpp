@@ -26,8 +26,6 @@ void test_getAccount()
 {
     NTest test(__func__);
 
-    test.createWorkingClient();
-
     auto successCallback = [&test](NSessionPtr session)
     {
         NLOG_INFO("session token: " + session->getAuthToken());

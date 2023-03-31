@@ -34,8 +34,6 @@ public:
 
     void runTest() override
     {
-        createWorkingClient();
-
         auto successCallback = [this](NSessionPtr sess)
         {
             this->session = sess;
@@ -126,8 +124,6 @@ public:
 
     void runTest() override
     {
-        createWorkingClient();
-
         auto successCallback = [this](NSessionPtr sess)
         {
             this->session = sess;

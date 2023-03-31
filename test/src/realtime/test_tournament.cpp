@@ -82,39 +82,39 @@ void test_tournament()
             }
             else
             {
-            auto& jsonTournamentId = document["tournament_id"];
+                auto& jsonTournamentId = document["tournament_id"];
 
-            if (jsonTournamentId.IsString())
-            {
-                string tournamentId = jsonTournamentId.GetString();
-
-                auto successCallback = [&, tournamentId]()
+                if (jsonTournamentId.IsString())
                 {
-                    NLOG_INFO("Successfully joined tournament");
+                    string tournamentId = jsonTournamentId.GetString();
 
-                    auto successCallback = [&](const NRpc& /*rpc*/)
+                    auto successCallback = [&, tournamentId]()
                     {
-                        NLOG_INFO("tournament deleted.");
-                        test.stopTest(true);
+                        NLOG_INFO("Successfully joined tournament");
+
+                        auto successCallback = [&](const NRpc& /*rpc*/)
+                        {
+                            NLOG_INFO("tournament deleted.");
+                            test.stopTest(true);
+                        };
+
+                        test.rtClient->rpc(
+                            "clientrpc.delete_tournament",
+                            "{\"tournament_id\":\"" + tournamentId + "\"}",
+                            successCallback);
                     };
 
-                    test.rtClient->rpc(
-                        "clientrpc.delete_tournament",
-                        "{\"tournament_id\":\"" + tournamentId + "\"}",
+                    test.client->joinTournament(
+                        session,
+                        tournamentId,
                         successCallback);
-                };
-
-                test.client->joinTournament(
-                    session,
-                    tournamentId,
-                    successCallback);
+                }
+                else
+                {
+                    test.stopTest();
+                }
             }
-            else
-            {
-                test.stopTest();
-            }
-        }
-    };
-}
+        };
+    }
 
 }

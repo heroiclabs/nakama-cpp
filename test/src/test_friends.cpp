@@ -27,7 +27,6 @@ namespace Nakama
         void test_listFriends()
         {
             NTest test(__func__, true);
-            test.createWorkingClient();
             test.runTest();
 
             const size_t numFriends = 5;
