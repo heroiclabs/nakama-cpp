@@ -25,8 +25,12 @@ namespace Nakama {
     namespace Test {
 
         NTest::NTest(std::string name, bool threadedTick)
-                : _name(name), _threadedTick(threadedTick)
+                : _name(name), _threadedTick(threadedTick),
+                client(createDefaultClient({SERVER_KEY, SERVER_HOST, SERVER_PORT, SERVER_SSL})),
+                rtClient(client->createRtClient())
         {
+            client->setErrorCallback([this](const NError& error) { stopTest(error); });
+            rtClient->setListener(&listener);
         }
 
         void NTest::runTest()
@@ -97,24 +101,6 @@ namespace Nakama {
             NLOG_INFO("*************************************");
             NLOG_INFO(std::string(event) + " " + _name);
             NLOG_INFO("*************************************");
-        }
-
-        void NTest::createWorkingClient()
-        {
-            NClientParameters parameters;
-            parameters.host      = SERVER_HOST;
-            parameters.port      = SERVER_PORT;
-            parameters.serverKey = SERVER_KEY;
-            parameters.ssl       = SERVER_SSL;
-            createClient(parameters);
-        }
-
-        void NTest::createClient(const NClientParameters& parameters)
-        {
-            client = createDefaultClient(parameters);
-            client->setErrorCallback([this](const NError& error) { stopTest(error); });
-            rtClient = client->createRtClient();
-            rtClient->setListener(&listener);
         }
 
         void NTest::tick()

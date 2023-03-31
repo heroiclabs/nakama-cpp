@@ -33,17 +33,13 @@ namespace Test {
         NTest(const char* name, bool threadedTick = false);
         NTest(std::string name, bool threadedTick = false);
 
-        void createClient(const NClientParameters& parameters);
+        void runTest();
 
-        virtual void createWorkingClient();
+        void stopTest(bool succeeded = false);
+        void stopTest(const NError& error);
+        void onTimeout() {};
 
-        virtual void runTest();
-
-        virtual void stopTest(bool succeeded = false);
-        virtual void stopTest(const NError& error);
-        virtual void onTimeout() {};
-
-        virtual void tick();
+        void tick();
         bool checkTimeout(int timePassedMs) {
             timeoutMs -= timePassedMs;
             return timeoutMs >= 0;
@@ -55,8 +51,8 @@ namespace Test {
             timeoutMs = ms;
         }
 
-        NClientPtr client;
-        NRtClientPtr rtClient;
+        const NClientPtr client;
+        const NRtClientPtr rtClient;
         NRtDefaultClientListener listener;
 
     protected:

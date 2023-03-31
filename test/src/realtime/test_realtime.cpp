@@ -35,7 +35,7 @@ void run_realtime_tests()
 {
 //    test_rt_joinChat();
 //    test_rt_joinGroupChat();
-    test_rt_match();
+      test_rt_match();
 //    test_notifications();
 //    test_authoritative_match();
 //    test_tournament();

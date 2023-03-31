@@ -25,6 +25,7 @@ namespace Nakama {
         {
             bool threadedTick = true;
             NTest test(__func__, threadedTick);
+            test.createWorkingClient();
             test.runTest();
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
             bool createStatus = false;
@@ -42,6 +43,7 @@ namespace Nakama {
         {
             bool threadedTick = true;
             NTest test(__func__, threadedTick);
+            test.createWorkingClient();
             test.runTest();
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
             bool createStatus = false;

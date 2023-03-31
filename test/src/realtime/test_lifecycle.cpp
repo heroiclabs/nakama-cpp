@@ -26,6 +26,7 @@ namespace Nakama {
         {
             bool threadedTick = true;
             NTest test(__func__, threadedTick);
+            test.createWorkingClient();
 
             test.listener.setErrorCallback([&test](const NRtError&) {
                 test.stopTest(false);
@@ -49,6 +50,7 @@ namespace Nakama {
             bool threadedTick = true;
             NTest test(__func__, threadedTick);
             test.setTestTimeoutMs(1000);
+
             bool hadConnectCallback = false;
 
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
