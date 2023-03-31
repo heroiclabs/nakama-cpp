@@ -40,7 +40,7 @@ namespace Test {
         void stopTest(const NError& error);
         void onTimeout() {};
 
-        void set_rt_tick_paused(bool paused) {
+        void setRtTickPaused(bool paused) {
             _rtTickPaused = true;
         }
 

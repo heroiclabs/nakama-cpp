@@ -65,7 +65,6 @@ void test_connectErrorAndDestroy()
 
     test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
 
-    test.client.reset();
 }
 
 void test_disconnection()
