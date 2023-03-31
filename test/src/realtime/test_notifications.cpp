@@ -47,7 +47,7 @@ void test_createAndDeleteNotifications()
         test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}");
     });
 
-    test.waitUntilStop()
+    test.waitUntilStop();
 }
 
 void test_createListAndDeleteNotifications()

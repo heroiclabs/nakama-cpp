@@ -75,14 +75,14 @@ void test_tournament()
 
     NLOG_INFO("rpc response: " + rpc.payload);
 
-            rapidjson::Document document;
-            if (document.Parse(rpc.payload).HasParseError())
+            rapidjson::Document responseDocument;
+            if (responseDocument.Parse(rpc.payload).HasParseError())
             {
                 test.stopTest();
             }
             else
             {
-                auto& jsonTournamentId = document["tournament_id"];
+                auto& jsonTournamentId = responseDocument["tournament_id"];
 
                 if (jsonTournamentId.IsString())
                 {

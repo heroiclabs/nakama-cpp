@@ -56,7 +56,6 @@ void test_realtime()
 
     run_realtime_tests();
 
-    NTest::protocol = NRtClientProtocol::Json;
     NLOG_INFO("using Json protocol");
 
 //    run_realtime_tests();

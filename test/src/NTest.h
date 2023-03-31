@@ -34,7 +34,7 @@ namespace Test {
         NTest(std::string name, bool threadedTick = false);
         NTest(std::string name, NClientParameters parameters);
 
-        void runTest();
+        virtual void runTest();
 
         void stopTest(bool succeeded = false);
         void stopTest(const NError& error);

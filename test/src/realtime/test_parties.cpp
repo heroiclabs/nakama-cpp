@@ -69,13 +69,13 @@ void test_rt_party_matchmaker()
     NTest test1(__func__, true);
     NTest test2("test_rt_party_matchmaker2", true);
 
-    auto party = test1.rtClient->createPartyAsync(false, 1).get();
-    auto ticket = test1.rtClient->addMatchmakerPartyAsync(party.id, "*", 0, 2).get();
-    test1.stopTest(ticket.ticket != "");
+    auto party1 = test1.rtClient->createPartyAsync(false, 1).get();
+    auto ticket1 = test1.rtClient->addMatchmakerPartyAsync(party1.id, "*", 0, 2).get();
+    test1.stopTest(ticket1.ticket != "");
 
-    auto party = test2.rtClient->createPartyAsync(false, 1).get();
-    auto ticket = test2.rtClient->addMatchmakerPartyAsync(party.id, "*", 0, 2).get();
-    test2.stopTest(ticket.ticket != "");
+    auto party2 = test2.rtClient->createPartyAsync(false, 1).get();
+    auto ticket2 = test2.rtClient->addMatchmakerPartyAsync(party2.id, "*", 0, 2).get();
+    test2.stopTest(ticket2.ticket != "");
 
     test1.runTest();
     test2.runTest();

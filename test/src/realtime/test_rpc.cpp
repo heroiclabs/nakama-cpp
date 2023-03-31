@@ -38,18 +38,10 @@ namespace Nakama {
 
         NTest test2(__func__, threadedTick);
         NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid()).get();
-        bool createStatus = false;
         test1.rtClient->connectAsync(session2, createStatus).get();
 
         test1.runTest();
         test2.runTest();
-
-        NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid()).get();
-        NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid()).get();
-
-        bool createStatus = false;
-        test1.rtClient->connectAsync(session, createStatus).get();
-        test2.rtClient->connectAsync(session2, createStatus).get();
 
         string json = "{\"v\":\"test\"}";
         auto rpc1 = test1.client->rpcAsync(SERVER_HTTP_KEY, "clientrpc.rpc", json).get();
