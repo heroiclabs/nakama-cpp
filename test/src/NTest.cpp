@@ -44,6 +44,10 @@ namespace Nakama {
             rtClient->setListener(&listener);
         }
 
+        NTest::NTest(const char* name, bool threadedTick) : NTest(std::string(name), threadedTick)
+        {
+
+        }
         void NTest::runTest()
         {
             if (_threadedTick)
@@ -87,12 +91,19 @@ namespace Nakama {
 
         void NTest::stopTest(bool succeeded)
         {
-            _testSucceeded = succeeded;
-            _continue_loop = false;
+            {
+                std::unique_lock<std::mutex> lock(this->_mtx);
+                _testSucceeded = succeeded;
+                _continue_loop = false;
+            }
 
             if (succeeded)
             {
                 printTestName("Succeeded");
+                if (_threadedTick)
+                {
+                    _cv.notify_all();
+                }
             }
             else
             {
@@ -126,7 +137,13 @@ namespace Nakama {
 
         void NTest::waitUntilStop()
         {
+            // only makes sense for threaded ticks
+            if (!_threadedTick) {
+                return;
+            }
 
+            std::unique_lock<std::mutex> lock(this->_mtx);
+            _cv.wait(lock, [this]{ return isSucceeded(); });
         }
     }
 }

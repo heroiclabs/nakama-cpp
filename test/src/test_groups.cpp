@@ -30,7 +30,7 @@ class NGroupsTest : public NTest
     NSessionPtr session;
 
 public:
-    NGroupsTest(const char* name) : NTest(name) {}
+    NGroupsTest(std::string name) : NTest(name) {}
 
     void runTest() override
     {
@@ -120,7 +120,7 @@ class NGroupUsersTest : public NTest
     NSessionPtr session;
 
 public:
-    explicit NGroupUsersTest(const char* name) : NTest(name) {}
+    explicit NGroupUsersTest(std::string name) : NTest(name) {}
 
     void runTest() override
     {
