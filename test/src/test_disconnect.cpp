@@ -24,14 +24,11 @@ using namespace std;
 
 void test_connectError()
 {
-    NTest test(__func__);
-    test.setTestTimeoutMs(20000);
-
     NClientParameters parameters;
-
     parameters.port = 1111;
 
-    test.createClient(parameters);
+    NTest test(__func__, parameters);
+    test.setTestTimeoutMs(20000);
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -51,13 +48,9 @@ void test_connectError()
 
 void test_connectErrorAndDestroy()
 {
-    NTest test(__func__);
-
     NClientParameters parameters;
-
     parameters.port = 1111;
-
-    test.createClient(parameters);
+    NTest test(__func__, parameters);
 
     auto successCallback = [&test](NSessionPtr session)
     {

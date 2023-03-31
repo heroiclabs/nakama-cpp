@@ -32,6 +32,7 @@ namespace Test {
     public:
         NTest(const char* name, bool threadedTick = false);
         NTest(std::string name, bool threadedTick = false);
+        NTest(std::string name, NClientParameters parameters);
 
         void runTest();
 

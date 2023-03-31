@@ -35,6 +35,15 @@ namespace Nakama {
             rtClient->setListener(&listener);
         }
 
+        NTest::NTest(std::string name, NClientParameters parameters)
+                : _name(name),
+                client(createDefaultClient(parameters)),
+                rtClient(client->createRtClient())
+        {
+            client->setErrorCallback([this](const NError& error) { stopTest(error); });
+            rtClient->setListener(&listener);
+        }
+
         void NTest::runTest()
         {
             if (_threadedTick)
