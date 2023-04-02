@@ -26,7 +26,7 @@ void test_createAndDeleteNotifications()
     bool threadedTick = true;
     NTest test(__func__, threadedTick);
     test.runTest();
-    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
     bool createStatus = false;
     test.rtClient->connectAsync(session, createStatus).get();
 
@@ -55,7 +55,7 @@ void test_createListAndDeleteNotifications()
     bool threadedTick = true;
     NTest test(__func__, threadedTick);
     test.runTest();
-    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
     bool createStatus = false;
     test.rtClient->connectAsync(session, createStatus).get();
     const Nakama::NRpc& rpc = test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();

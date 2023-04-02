@@ -32,7 +32,7 @@ namespace Nakama {
             test1.runTest();
             test2.runTest();
 
-            NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+            NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
             test1.rtClient->connectAsync(session, createStatus).get();
 
@@ -52,11 +52,11 @@ namespace Nakama {
             test1.runTest();
             test2.runTest();
 
-            NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+            NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
             test1.rtClient->connectAsync(session, createStatus).get();
 
-            NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+            NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             test2.rtClient->connectAsync(session2, createStatus).get();
 
             test1.listener.setMatchDataCallback([&test1, &test2](const NMatchData& data)

@@ -32,12 +32,12 @@ namespace Nakama {
     {
         bool threadedTick = true;
         NTest test1(__func__, threadedTick);
-        NSessionPtr session1 = test1.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+        NSessionPtr session1 = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
         bool createStatus = false;
         test1.rtClient->connectAsync(session1, createStatus).get();
 
         NTest test2(__func__, threadedTick);
-        NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+        NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
         test1.rtClient->connectAsync(session2, createStatus).get();
 
         test1.runTest();
@@ -58,7 +58,7 @@ namespace Nakama {
         test.setTestTimeoutMs(100000);
         test.runTest();
 
-        NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+        NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
 
         auto rpc1 = test.client->rpcAsync(session, "clientrpc.rpc", opt::nullopt).get();
         NTEST_ASSERT(rpc1.payload.empty());

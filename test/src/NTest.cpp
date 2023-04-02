@@ -53,7 +53,6 @@ namespace Nakama {
             if (_threadedTick)
             {
                 _tickThread = std::thread(&NTest::runTestInternal, this);
-                _tickThread.join();
             }
             else
             {
@@ -92,7 +91,6 @@ namespace Nakama {
         void NTest::stopTest(bool succeeded)
         {
             {
-                std::unique_lock<std::mutex> lock(this->_mtx);
                 _testSucceeded = succeeded;
                 _continue_loop = false;
             }
@@ -100,10 +98,6 @@ namespace Nakama {
             if (succeeded)
             {
                 printTestName("Succeeded");
-                if (_threadedTick)
-                {
-                    _cv.notify_all();
-                }
             }
             else
             {
@@ -137,13 +131,7 @@ namespace Nakama {
 
         void NTest::waitUntilStop()
         {
-            // only makes sense for threaded ticks
-            if (!_threadedTick) {
-                return;
-            }
-
-            std::unique_lock<std::mutex> lock(this->_mtx);
-            _cv.wait(lock, [this]{ return isSucceeded(); });
+            _tickThread.join();
         }
     }
 }

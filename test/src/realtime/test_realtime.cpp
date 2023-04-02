@@ -29,18 +29,19 @@ void test_authoritative_match();
 void test_tournament();
 void test_rpc();
 void test_rt_party();
-
+void test_rt_joinChat();
+void test_rt_joinGroupChat();
 
 void run_realtime_tests()
 {
-//    test_rt_joinChat();
-//    test_rt_joinGroupChat();
-      test_rt_match();
-//    test_notifications();
-//    test_authoritative_match();
-//    test_tournament();
-//    test_rpc();
-//    test_rt_party();
+    test_rt_joinChat();
+    test_rt_joinGroupChat();
+    test_rt_match();
+    test_notifications();
+    test_authoritative_match();
+    test_tournament();
+    test_rpc();
+    test_rt_party();
 }
 
 void test_realtime()

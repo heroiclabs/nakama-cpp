@@ -76,8 +76,6 @@ namespace Test {
 
     private:
         void runTestInternal();
-        std::mutex _mtx;
-        std::condition_variable _cv;
     };
 
 } // namespace Test

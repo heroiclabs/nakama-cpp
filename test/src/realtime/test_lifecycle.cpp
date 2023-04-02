@@ -36,7 +36,7 @@ namespace Nakama {
                 test.stopTest(true);
             });
 
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
 
             test.rtClient->connectAsync(session, createStatus).get();
@@ -52,7 +52,7 @@ namespace Nakama {
 
             bool hadConnectCallback = false;
 
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
 
             test.rtClient->connectAsync(session, createStatus).get();
@@ -81,7 +81,7 @@ namespace Nakama {
             bool hadConnectCallback = false;
             test.runTest();
 
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
 
             test.rtClient->connectAsync(session, createStatus).get();
@@ -112,7 +112,7 @@ namespace Nakama {
             bool hadConnectCallback = false;
             test.runTest();
 
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
 
             test.setTestTimeoutMs(100000);
@@ -152,7 +152,7 @@ namespace Nakama {
             bool hadConnectCallback = false;
             test.runTest();
 
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
 
             test.rtClient->createMatchAsync().get();

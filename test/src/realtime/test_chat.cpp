@@ -25,8 +25,11 @@ namespace Nakama {
         {
             bool threadedTick = true;
             NTest test(__func__, threadedTick);
+            NLOG_INFO("running test..");
             test.runTest();
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+            NLOG_INFO("done call run test");
+
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
             test.rtClient->connectAsync(session, createStatus).get();
 
@@ -43,7 +46,7 @@ namespace Nakama {
             bool threadedTick = true;
             NTest test(__func__, threadedTick);
             test.runTest();
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
             test.rtClient->connectAsync(session, createStatus).get();
             const NGroup& group = test.client->createGroupAsync(session, "group chat " + session->getAuthToken(), "a group for chatting", "", "", false, {}).get();

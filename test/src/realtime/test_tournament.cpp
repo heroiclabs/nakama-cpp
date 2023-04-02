@@ -33,7 +33,7 @@ void test_tournament()
     bool threadedTick = true;
 
     NTest test(__func__, threadedTick);
-    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
 
     test.runTest();
     bool createStatus = false;

@@ -34,11 +34,11 @@ void test_authoritative_match()
     test.runTest();
     test2.runTest();
 
-    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
     bool createStatus = false;
     test.rtClient->connectAsync(session, createStatus).get();
 
-    NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid()).get();
+    NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
     test2.rtClient->connectAsync(session2, createStatus).get();
 
     const NRpc& rpc = test.rtClient->rpcAsync("clientrpc.create_authoritative_match", "{\"debug\": true, \"label\": \"TestAuthoritativeMatch\"}").get();
