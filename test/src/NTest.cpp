@@ -27,7 +27,7 @@ namespace Nakama {
     namespace Test {
 
         NTest::NTest(std::string name, bool threadedTick)
-                : _name(name), _threadedTick(threadedTick),
+                : _name(name), _threadedTick(threadedTick), _rtTickPaused(false),
                 client(createDefaultClient({SERVER_KEY, SERVER_HOST, SERVER_PORT, SERVER_SSL})),
                 rtClient(client->createRtClient())
         {
@@ -81,6 +81,8 @@ namespace Nakama {
                     stopTest(isSucceeded());
                 }
 
+                NLOG_INFO("doing tick");
+
                 tick();
 
                 std::chrono::milliseconds sleep_period(50);
@@ -125,6 +127,8 @@ namespace Nakama {
 
             if (!_rtTickPaused)
             {
+                NLOG_INFO("ticking rt client");
+
                 rtClient->tick();
             }
         }

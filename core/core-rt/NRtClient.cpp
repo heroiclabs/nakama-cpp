@@ -193,12 +193,7 @@ void NRtClient::onTransportConnected()
         _listener->onConnect();
     }
 
-    // defend against an adapter somehow calling on_connected twice or other unknown edge cases.
-    bool futureCompleted = _connectPromise->get_future().wait_for(std::chrono::seconds(0)) == std::future_status::ready;
-    if (!futureCompleted)
-    {
-        _connectPromise->set_value();
-    }
+    _connectPromise->set_value();
 }
 
 void NRtClient::onTransportDisconnected(const NRtClientDisconnectInfo& info)
@@ -212,11 +207,7 @@ void NRtClient::onTransportDisconnected(const NRtClientDisconnectInfo& info)
         _listener->onDisconnect(info);
     }
 
-    bool futureCompleted = _connectPromise->get_future().wait_for(std::chrono::seconds(0)) == std::future_status::ready;
-    if (!futureCompleted)
-    {
-        _connectPromise->set_exception(std::make_exception_ptr(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "Disconnected while connecting."))));
-    }
+    _connectPromise->set_exception(std::make_exception_ptr(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "Disconnected while connecting."))));
 }
 
 void NRtClient::onTransportError(const std::string& description)
