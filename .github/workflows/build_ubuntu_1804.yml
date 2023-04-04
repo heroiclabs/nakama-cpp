@@ -1,0 +1,30 @@
+name: Build Linux
+on: [workflow_call, workflow_dispatch]
+jobs:
+  build_ubuntu_1804:
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        build-type: [MinSizeRel]
+    runs-on: ubuntu-22.04
+    container:
+      image: ubuntu:18.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: nakama-cpp
+      - uses: ./nakama-cpp/.github/actions/setup-ubuntu
+      - uses: ./nakama-cpp/.github/actions/setup-vcpkg
+        with:
+          github_token: ${{ secrets.github_token }}
+          vcpkg-path: vcpkg
+      - uses: ./nakama-cpp/.github/actions/build-library-and-upload
+        with:
+          nakama-cpp-path: nakama-cpp
+          preset: linux-amd64
+          build-type: ${{ matrix.build-type }}
+      - if: failure()
+        uses: ./nakama-cpp/.github/actions/handle-failure
+        with:
+          nakama-cpp-path: nakama-cpp
+          vcpkg-path: vcpkg
