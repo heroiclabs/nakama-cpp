@@ -1,8 +1,8 @@
 name: Test All
 on: [workflow_dispatch]
 jobs:
-  test_linux:
-    uses:  ./.github/workflows/test_linux.yml
+  test_ubuntu_2204:
+    uses:  ./.github/workflows/test_ubuntu_2204.yml
     secrets: inherit
   test_osx:
     uses:  ./.github/workflows/test_osx.yml

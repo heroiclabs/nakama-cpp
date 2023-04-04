@@ -5,8 +5,8 @@ jobs:
     uses: ./.github/workflows/build_android.yml
   build_ios:
     uses: ./.github/workflows/build_ios.yml
-  build_linux:
-    uses: ./.github/workflows/build_linux.yml
+  build_ubuntu_2204:
+    uses: ./.github/workflows/build_ubuntu_2204.yml
   build_osx:
     uses: ./.github/workflows/build_osx.yml
   build_windows:
