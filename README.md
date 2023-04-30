@@ -7,7 +7,7 @@ Nakama C/C++ Client SDK
 
 This client implements the full API and socket options with the server. It's written in C and C++11 with minimal dependencies to support Unreal, Cocos2d-x, Oculus, and other custom engines and frameworks.
 
-We also support various game consoles via a private C++ repository. Please reach out to support@heroiclabs.com to discuss console support for your project.
+We also support various game consoles. Please reach out to support@heroiclabs.com to discuss console support for your project.
 
 If you experience any issues with the client, [open an issue](https://github.com/heroiclabs/nakama-cpp/issues).
 
