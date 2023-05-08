@@ -345,8 +345,10 @@ if (BUILD_SHARED_LIBS)
             $<$<TARGET_EXISTS:nakama-sdk-core-grpc>:nakama-grpc-proto>
             ${HTTP_IMPL_LIB}
             ${WS_IMPL_LIB}
+            nakama-api-proto
         )
 else()
+    # make a self-contained static library
     target_sources(nakama-sdk
         PUBLIC
             ${PTHREADS_LIB}

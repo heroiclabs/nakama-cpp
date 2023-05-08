@@ -37,7 +37,7 @@ if(REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
 else()
     execute_process(
-        COMMAND ${CMAKE_COMMAND} -S .. --preset ${PRESET_NAME} -DBUILD_SHARED_LIBS=#{SHARED_NAKAMA_SDK}
+        COMMAND ${CMAKE_COMMAND} -S .. --preset ${PRESET_NAME} -DBUILD_SHARED_LIBS=${SHARED_NAKAMA_SDK}
         RESULT_VARIABLE result
     )
 
@@ -45,8 +45,15 @@ else()
         message(FATAL_ERROR "Configuration of nakama-cpp preset ${PRESET_NAME} failed.")
     endif()
 
+    set(NAKAMA_BUILD_TYPE "Debug")
+
+    ## TODO multi-config generators?
+    if (CMAKE_BUILD_TYPE)
+        set(NAKAMA_BUILD_TYPE ${CMAKE_BUILD_TYPE})
+    endif()
+    message("build type is ${NAKAMA_BUILD_TYPE}")
     execute_process(
-        COMMAND ${CMAKE_COMMAND} --build ../build/${PRESET_NAME} --config MinSizeRel --target install
+        COMMAND ${CMAKE_COMMAND} --build ../build/${PRESET_NAME} --config ${NAKAMA_BUILD_TYPE} --target install
         RESULT_VARIABLE result
     )
 
