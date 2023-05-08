@@ -336,14 +336,27 @@ set_target_properties(nakama-sdk PROPERTIES
 
 add_library(nakama::sdk ALIAS nakama-sdk)
 target_link_libraries(nakama-sdk
-        PUBLIC nakama::sdk-interface ${PTHREADS_LIB}
+        PUBLIC
+        nakama::sdk-interface ${PTHREADS_LIB}
+)
+if (BUILD_SHARED_LIBS)
+    target_link_libraries(nakama-sdk
         PRIVATE
-            nakama-api-proto
             $<$<TARGET_EXISTS:nakama-sdk-core-grpc>:nakama-grpc-proto>
-		${HTTP_IMPL_LIB} ${WS_IMPL_LIB}
-        ${PLATFORM_LIBS}
+            ${HTTP_IMPL_LIB}
+            ${WS_IMPL_LIB}
         )
+else()
+    target_sources(nakama-sdk
+        PUBLIC
+            ${PTHREADS_LIB}
+        PRIVATE
+            $<TARGET_OBJECTS:${HTTP_IMPL_LIB}>
+            $<TARGET_OBJECTS:${WS_IMPL_LIB}>
+            $<TARGET_OBJECTS:nakama-api-proto>
 
+        )
+endif()
 if (ADDRESS_SANITIZER)
    if (MSVC)
         target_link_libraries(nakama-sdk INTERFACE

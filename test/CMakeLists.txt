@@ -31,12 +31,13 @@ project(nakama-test LANGUAGES C CXX)
 
 option(LOGS_ENABLED "Enable log output" ON)
 option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
+option(SHARED_NAKAMA_SDK "Use a shared installation of Nakama" OFF)
 
 if(REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
 else()
     execute_process(
-        COMMAND ${CMAKE_COMMAND} -S .. --preset ${PRESET_NAME}
+        COMMAND ${CMAKE_COMMAND} -S .. --preset ${PRESET_NAME} -DBUILD_SHARED_LIBS=#{SHARED_NAKAMA_SDK}
         RESULT_VARIABLE result
     )
 
@@ -190,12 +191,13 @@ install(TARGETS nakama-test
     RUNTIME DESTINATION ${_TEST_OUT_DIR}
 )
 
-install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
-    RUNTIME DESTINATION ${_TEST_OUT_DIR}
-    LIBRARY DESTINATION ${_TEST_OUT_DIR}
-    FRAMEWORK DESTINATION ${_TEST_OUT_DIR}
-)
-
+if (SHARED_NAKAMA_SDK)
+    install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
+        RUNTIME DESTINATION ${_TEST_OUT_DIR}
+        LIBRARY DESTINATION ${_TEST_OUT_DIR}
+        FRAMEWORK DESTINATION ${_TEST_OUT_DIR}
+    )
+endif()
 
 if (CMAKE_SYSTEM_NAME MATCHES "Windows" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
     add_custom_target(run

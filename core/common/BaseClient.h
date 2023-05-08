@@ -32,7 +32,7 @@ namespace Nakama {
         void setUserData(void* userData) override { _userData = userData; }
         void* getUserData() const override { return _userData; }
 
-#if defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL_IO)
+#if !defined(WITH_EXTERNAL_WS) && !defined(BUILD_IO_EXTERNAL)
         NRtClientPtr createRtClient() override;
 #endif
 
