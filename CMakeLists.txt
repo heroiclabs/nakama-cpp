@@ -20,11 +20,6 @@ set(VCPKG_PREFER_SYSTEM_LIBS OFF)
 set(FETCHCONTENT_FULLY_DISCONNECTED OFF)
 set(FETCHCONTENT_UPDATES_DISCONNECTED OFF)
 
-if(NOT BUILD_SHARED_LIBS)
-    message(WARNING "The Nakama C++ client can only be built as a shared library.")
-    set(BUILD_SHARED_LIBS ON)
-endif()
-
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(DISTRIBUTE_OPTIONAL_LITE "Distribute optional lite with the Nakama client." ON)
 
@@ -375,7 +370,7 @@ install(TARGETS
         INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
 
-if(MSVC)
+if(MSVC AND BUILD_SHARED_LIBS)
     install(FILES $<TARGET_PDB_FILE:nakama-sdk> DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT nakama-sdk OPTIONAL)
 endif()
 
