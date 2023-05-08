@@ -43,6 +43,8 @@ elseif (WITH_CPPRESTSDK)
     set(WS_IMPL "cpprestsdk")
 endif()
 
+find_package(Protobuf CONFIG REQUIRED)
+
 if (DEFINED ANDROID_ABI)
     if (DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
         message(FATAL_ERROR "Cannot specify an external chainload toolchain if building for Android.")

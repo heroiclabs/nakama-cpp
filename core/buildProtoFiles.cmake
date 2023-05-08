@@ -23,17 +23,27 @@ file(GLOB_RECURSE NAKAMA_API_PROTO_FILES
 add_library(nakama-api-proto OBJECT ${NAKAMA_API_PROTO_FILES})
 add_library(nakama::api-proto ALIAS nakama-api-proto)
 
-target_link_libraries(nakama-api-proto PRIVATE protobuf::libprotobuf)
+if (BUILD_SHARED_LIBS)
+    target_link_libraries(nakama-api-proto PRIVATE protobuf::libprotobuf)
+else()
+    list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:protobuf::libprotobuf>)
+    set(NAKAMA_SDK_DEPS ${NAKAMA_SDK_DEPS} PARENT_SCOPE)
+    target_include_directories(nakama-api-proto
+        PRIVATE
+        $<TARGET_PROPERTY:protobuf::libprotobuf,INTERFACE_INCLUDE_DIRECTORIES>
+    )
+endif()
+
 target_include_directories(nakama-api-proto PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 protobuf_generate(TARGET nakama-api-proto
-        LANGUAGE cpp
-        IMPORT_DIRS "${NAKAMA_COMMON}"
-        PROTOC_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR}
-        )
+    LANGUAGE cpp
+    IMPORT_DIRS "${NAKAMA_COMMON}"
+    PROTOC_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 message("done generating")
 
