@@ -167,8 +167,12 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
 
         set(LIBHTTPCLIENT_OBJECT_LIBRARY TRUE)
 
-        ## force libhttpclient to build statically
-        set(BUILD_SHARED_LIBS OFF)
+        set(WAS_SHARED_LIBS ${BUILD_SHARED_LIBS})
+        if (BUILD_SHARED_LIBS)
+            ## force libhttpclient to build statically
+            set(BUILD_SHARED_LIBS OFF)
+        endif()
+
         FetchContent_Declare(
             libHttpClient
             GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
@@ -180,7 +184,10 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         )
 
         FetchContent_MakeAvailable(libHttpClient)
-        set(BUILD_SHARED_LIBS ON)
+
+        if (WAS_SHARED_LIBS)
+            set(BUILD_SHARED_LIBS ON)
+        endif()
 
         if (NOT WS_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
