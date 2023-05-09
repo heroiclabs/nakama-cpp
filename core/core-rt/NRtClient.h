@@ -211,12 +211,12 @@ namespace Nakama {
             const std::string& channelId
         ) override;
 
-        std::future<const NChannelMessageAck&> writeChatMessageAsync(
+        std::future<NChannelMessageAck> writeChatMessageAsync(
             const std::string& channelId,
             const std::string& content
         ) override;
 
-        std::future<const NChannelMessageAck&> updateChatMessageAsync(
+        std::future<NChannelMessageAck> updateChatMessageAsync(
             const std::string& channelId,
             const std::string& messageId,
             const std::string& content
@@ -227,14 +227,14 @@ namespace Nakama {
             const std::string& messageId
         ) override;
 
-        std::future<const NMatch&> createMatchAsync() override;
+        std::future<NMatch> createMatchAsync() override;
 
-        std::future<const NMatch&> joinMatchAsync(
+        std::future<NMatch> joinMatchAsync(
             const std::string& matchId,
             const NStringMap& metadata
         ) override;
 
-        std::future<const NMatch&> joinMatchByTokenAsync(
+        std::future<NMatch> joinMatchByTokenAsync(
             const std::string& token
         ) override;
 
@@ -242,7 +242,7 @@ namespace Nakama {
             const std::string& matchId
         ) override;
 
-        std::future<const NMatchmakerTicket&> addMatchmakerAsync(
+        std::future<NMatchmakerTicket> addMatchmakerAsync(
             const opt::optional<int32_t>& minCount = opt::nullopt,
             const opt::optional<int32_t>& maxCount = opt::nullopt,
             const opt::optional<std::string>& query = opt::nullopt,
@@ -262,7 +262,7 @@ namespace Nakama {
             const std::vector<NUserPresence>& presences = {}
         ) override;
 
-        std::future<const NStatus&> followUsersAsync(
+        std::future<NStatus> followUsersAsync(
             const std::vector<std::string>& userIds
         ) override;
 
@@ -274,26 +274,26 @@ namespace Nakama {
             const std::string& status
         ) override;
 
-        std::future<const NRpc&> rpcAsync(
+        std::future<NRpc> rpcAsync(
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt
         ) override;
 
         std::future<void> acceptPartyMemberAsync(const std::string& partyId, NUserPresence& presence) override;
 
-        std::future<const NPartyMatchmakerTicket&> addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
+        std::future<NPartyMatchmakerTicket> addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
             const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {},
             const opt::optional<int32_t>& countMultiple = opt::nullopt) override;
 
         std::future<void> closePartyAsync(const std::string& partyId) override;
 
-        std::future<const NParty&> createPartyAsync(bool open, int maxSize) override;
+        std::future<NParty> createPartyAsync(bool open, int maxSize) override;
 
         std::future<void> joinPartyAsync(const std::string& partyId) override;
 
         std::future<void> leavePartyAsync(const std::string& partyId) override;
 
-        std::future<const NPartyJoinRequest&> listPartyJoinRequestsAsync(const std::string& partyId) override;
+        std::future<NPartyJoinRequest> listPartyJoinRequestsAsync(const std::string& partyId) override;
 
         std::future<void> promotePartyMemberAsync(const std::string& partyId, NUserPresence& partyMember) override;
 

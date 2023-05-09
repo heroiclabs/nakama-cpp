@@ -1303,13 +1303,13 @@ std::future<void> BaseClient::deleteStorageObjectsAsync(
     return promise->get_future();
 }
 
-std::future<const NRpc&> BaseClient::rpcAsync(
+std::future<NRpc> BaseClient::rpcAsync(
     NSessionPtr session,
     const std::string& id,
     const opt::optional<std::string>& payload
 )
 {
-    auto promise = std::make_shared<std::promise<const NRpc&>>();
+    auto promise = std::make_shared<std::promise<NRpc>>();
 
     rpc(session, id, payload,
         [=](const NRpc& rpc) {
@@ -1322,13 +1322,13 @@ std::future<const NRpc&> BaseClient::rpcAsync(
     return promise->get_future();
 }
 
-std::future<const NRpc&> BaseClient::rpcAsync(
+std::future<NRpc> BaseClient::rpcAsync(
     const std::string& http_key,
     const std::string& id,
     const opt::optional<std::string>& payload
 )
 {
-    auto promise = std::make_shared<std::promise<const NRpc&>>();
+    auto promise = std::make_shared<std::promise<NRpc>>();
 
     rpc(http_key, id, payload,
         [=](const NRpc& rpc) {

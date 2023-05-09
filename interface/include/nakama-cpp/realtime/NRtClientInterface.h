@@ -485,7 +485,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param channelId The channel to send on.
          * @param content The content of the chat message. Must be a JSON object.
          */
-        virtual std::future<const NChannelMessageAck&> writeChatMessageAsync(
+        virtual std::future<NChannelMessageAck> writeChatMessageAsync(
             const std::string& channelId,
             const std::string& content
         ) = 0;
@@ -497,7 +497,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param messageId The ID of the message to update.
          * @param content The content update for the message. Must be a JSON object.
          */
-        virtual std::future<const NChannelMessageAck&> updateChatMessageAsync(
+        virtual std::future<NChannelMessageAck> updateChatMessageAsync(
             const std::string& channelId,
             const std::string& messageId,
             const std::string& content
@@ -517,14 +517,14 @@ NAKAMA_NAMESPACE_BEGIN
         /**
          * Create a multiplayer match on the server.
          */
-        virtual std::future<const NMatch&> createMatchAsync() = 0;
+        virtual std::future<NMatch> createMatchAsync() = 0;
 
         /**
          * Join a multiplayer match by ID.
          *
          * @param matchId A match ID.
          */
-        virtual std::future<const NMatch&> joinMatchAsync(
+        virtual std::future<NMatch> joinMatchAsync(
             const std::string& matchId,
             const NStringMap& metadata
         ) = 0;
@@ -534,7 +534,7 @@ NAKAMA_NAMESPACE_BEGIN
          *
          * @param token A matchmaker ticket result object.
          */
-        virtual std::future<const NMatch&> joinMatchByTokenAsync(
+        virtual std::future<NMatch> joinMatchByTokenAsync(
             const std::string& token
         ) = 0;
 
@@ -557,7 +557,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param numericProperties A set of k/v numeric properties to provide in searches.
          * @param countMultiple An optional multiple of the matched count that must be satisfied.
          */
-        virtual std::future<const NMatchmakerTicket&> addMatchmakerAsync(
+        virtual std::future<NMatchmakerTicket> addMatchmakerAsync(
             const opt::optional<int32_t>& minCount = opt::nullopt,
             const opt::optional<int32_t>& maxCount = opt::nullopt,
             const opt::optional<std::string>& query = opt::nullopt,
@@ -597,7 +597,7 @@ NAKAMA_NAMESPACE_BEGIN
          *
          * @param userIds The user Ids to follow.
          */
-        virtual std::future<const NStatus&> followUsersAsync(
+        virtual std::future<NStatus> followUsersAsync(
             const std::vector<std::string>& userIds
         ) = 0;
 
@@ -625,7 +625,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param id The ID of the function to execute.
          * @param payload The string content to send to the server.
          */
-        virtual std::future<const NRpc&> rpcAsync(
+        virtual std::future<NRpc> rpcAsync(
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt
         ) = 0;
@@ -648,7 +648,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param numericProperties Numeric properties.
          * @param countMultiple An optional multiple of the matched count that must be satisfied.
          */
-        virtual std::future<const NPartyMatchmakerTicket&> addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
+        virtual std::future<NPartyMatchmakerTicket> addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
             const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {},
             const opt::optional<int32_t>& countMultiple = opt::nullopt) = 0;
 
@@ -663,7 +663,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param open Whether or not the party will require join requests to be approved by the party leader.
          * @param maxSize Maximum number of party members.
          */
-        virtual std::future<const NParty&> createPartyAsync(bool open, int maxSize) = 0;
+        virtual std::future<NParty> createPartyAsync(bool open, int maxSize) = 0;
 
         /**
          * Join a party.
@@ -681,7 +681,7 @@ NAKAMA_NAMESPACE_BEGIN
          * Request a list of pending join requests for a party.
          * @param partyId Party ID.
          */
-        virtual std::future<const NPartyJoinRequest&> listPartyJoinRequestsAsync(const std::string& partyId) = 0;
+        virtual std::future<NPartyJoinRequest> listPartyJoinRequestsAsync(const std::string& partyId) = 0;
 
         /**
          * Promote a new party leader.

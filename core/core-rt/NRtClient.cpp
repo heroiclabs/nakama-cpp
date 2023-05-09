@@ -1187,12 +1187,12 @@ std::future<void> NRtClient::leaveChatAsync(
     return promise->get_future();
 }
 
-std::future<const NChannelMessageAck&> NRtClient::writeChatMessageAsync(
+std::future<NChannelMessageAck> NRtClient::writeChatMessageAsync(
     const std::string& channelId,
     const std::string& content
 )
 {
-    auto promise = std::make_shared<std::promise<const NChannelMessageAck&>>();
+    auto promise = std::make_shared<std::promise<NChannelMessageAck>>();
 
     writeChatMessage(channelId, content,
         [=](const NChannelMessageAck& ack) {
@@ -1205,13 +1205,13 @@ std::future<const NChannelMessageAck&> NRtClient::writeChatMessageAsync(
     return promise->get_future();
 }
 
-std::future<const NChannelMessageAck&> NRtClient::updateChatMessageAsync(
+std::future<NChannelMessageAck> NRtClient::updateChatMessageAsync(
     const std::string& channelId,
     const std::string& messageId,
     const std::string& content
 )
 {
-    auto promise = std::make_shared<std::promise<const NChannelMessageAck&>>();
+    auto promise = std::make_shared<std::promise<NChannelMessageAck>>();
 
     updateChatMessage(channelId, messageId, content,
         [=](const NChannelMessageAck& ack) {
@@ -1235,9 +1235,9 @@ std::future<void> NRtClient::removeChatMessageAsync(
     return promise->get_future();
 }
 
-std::future<const NMatch&> NRtClient::createMatchAsync()
+std::future<NMatch> NRtClient::createMatchAsync()
 {
-    auto promise = std::make_shared<std::promise<const NMatch&>>();
+    auto promise = std::make_shared<std::promise<NMatch>>();
 
     createMatch(
         [=](const NMatch& match) {
@@ -1250,12 +1250,12 @@ std::future<const NMatch&> NRtClient::createMatchAsync()
         return promise->get_future();
 }
 
-std::future<const NMatch&> NRtClient::joinMatchAsync(
+std::future<NMatch> NRtClient::joinMatchAsync(
     const std::string& matchId,
     const NStringMap& metadata
 )
 {
-    auto promise = std::make_shared<std::promise<const NMatch&>>();
+    auto promise = std::make_shared<std::promise<NMatch>>();
 
     joinMatch(matchId, metadata,
         [=](const NMatch& match) {
@@ -1268,11 +1268,11 @@ std::future<const NMatch&> NRtClient::joinMatchAsync(
     return promise->get_future();
 }
 
-std::future<const NMatch&> NRtClient::joinMatchByTokenAsync(
+std::future<NMatch> NRtClient::joinMatchByTokenAsync(
     const std::string& token
 )
 {
-    auto promise = std::make_shared<std::promise<const NMatch&>>();
+    auto promise = std::make_shared<std::promise<NMatch>>();
 
     joinMatchByToken(token,
         [=](const NMatch& match) {
@@ -1295,7 +1295,7 @@ std::future<void> NRtClient::leaveMatchAsync(
     return promise->get_future();
 }
 
-std::future<const NMatchmakerTicket&> NRtClient::addMatchmakerAsync(
+std::future<NMatchmakerTicket> NRtClient::addMatchmakerAsync(
     const opt::optional<int32_t>& minCount,
     const opt::optional<int32_t>& maxCount,
     const opt::optional<std::string>& query,
@@ -1304,7 +1304,7 @@ std::future<const NMatchmakerTicket&> NRtClient::addMatchmakerAsync(
     const opt::optional<int32_t>& countMultiple
 )
 {
-    auto promise = std::make_shared<std::promise<const NMatchmakerTicket&>>();
+    auto promise = std::make_shared<std::promise<NMatchmakerTicket>>();
 
     addMatchmaker(minCount, maxCount, query, stringProperties, numericProperties, countMultiple,
         [=](const NMatchmakerTicket& ticket) {
@@ -1340,11 +1340,11 @@ std::future<void> NRtClient::sendMatchDataAsync(
     return promise->get_future();
 }
 
-std::future<const NStatus&> NRtClient::followUsersAsync(
+std::future<NStatus> NRtClient::followUsersAsync(
     const std::vector<std::string>& userIds
 )
 {
-    auto promise = std::make_shared<std::promise<const NStatus&>>();
+    auto promise = std::make_shared<std::promise<NStatus>>();
 
     followUsers(userIds,
         [=](const NStatus& ticket) {
@@ -1377,12 +1377,12 @@ std::future<void> NRtClient::updateStatusAsync(
     return promise->get_future();
 }
 
-std::future<const NRpc&> NRtClient::rpcAsync(
+std::future<NRpc> NRtClient::rpcAsync(
     const std::string& id,
     const opt::optional<std::string>& payload
 )
 {
-    auto promise = std::make_shared<std::promise<const NRpc&>>();
+    auto promise = std::make_shared<std::promise<NRpc>>();
 
     rpc(id, payload,
         [=](const NRpc& rpc) {
@@ -1403,11 +1403,11 @@ std::future<void> NRtClient::acceptPartyMemberAsync(const std::string& partyId, 
     return promise->get_future();
 }
 
-std::future<const NPartyMatchmakerTicket&> NRtClient::addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
+std::future<NPartyMatchmakerTicket> NRtClient::addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
     const NStringMap& stringProperties, const NStringDoubleMap& numericProperties,
     const opt::optional<int32_t>& countMultiple)
 {
-    auto promise = std::make_shared<std::promise<const NPartyMatchmakerTicket&>>();
+    auto promise = std::make_shared<std::promise<NPartyMatchmakerTicket>>();
 
     addMatchmakerParty(partyId, query, minCount, maxCount, stringProperties, numericProperties, countMultiple,
         [=](const NPartyMatchmakerTicket& ticket) {
@@ -1428,9 +1428,9 @@ std::future<void> NRtClient::closePartyAsync(const std::string& partyId)
     return promise->get_future();
 }
 
-std::future<const NParty&> NRtClient::createPartyAsync(bool open, int maxSize)
+std::future<NParty> NRtClient::createPartyAsync(bool open, int maxSize)
 {
-    auto promise = std::make_shared<std::promise<const NParty&>>();
+    auto promise = std::make_shared<std::promise<NParty>>();
 
     createParty(open, maxSize,
         [=](const NParty& party) {
@@ -1459,9 +1459,9 @@ std::future<void> NRtClient::leavePartyAsync(const std::string& partyId)
     return promise->get_future();
 }
 
-std::future<const NPartyJoinRequest&> NRtClient::listPartyJoinRequestsAsync(const std::string& partyId)
+std::future<NPartyJoinRequest> NRtClient::listPartyJoinRequestsAsync(const std::string& partyId)
 {
-    auto promise = std::make_shared<std::promise<const NPartyJoinRequest&>>();
+    auto promise = std::make_shared<std::promise<NPartyJoinRequest>>();
 
     listPartyJoinRequests(partyId,
         [=](const NPartyJoinRequest& partyJoinRequest) {

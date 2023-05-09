@@ -2111,7 +2111,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param id The id of the function to execute on the server.
          * @param payload The payload to send with the function call.
          */
-        virtual std::future<const NRpc&> rpcAsync(
+        virtual std::future<NRpc> rpcAsync(
             NSessionPtr session,
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt
@@ -2124,7 +2124,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param id The id of the function to execute on the server.
          * @param payload The payload to send with the function call.
          */
-        virtual std::future<const NRpc&> rpcAsync(
+        virtual std::future<NRpc> rpcAsync(
             const std::string& http_key,
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt

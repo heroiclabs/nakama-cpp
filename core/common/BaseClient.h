@@ -463,13 +463,13 @@ namespace Nakama {
             const std::vector<NDeleteStorageObjectId>& objectIds
         ) override;
 
-        std::future<const NRpc&> rpcAsync(
+        std::future<NRpc> rpcAsync(
             NSessionPtr session,
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt
         ) override;
 
-        std::future<const NRpc&> rpcAsync(
+        std::future<NRpc> rpcAsync(
             const std::string& http_key,
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt
