@@ -58,7 +58,7 @@ void test_createListAndDeleteNotifications()
     NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
     bool createStatus = false;
     test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
-    const Nakama::NRpc& rpc = test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
+    const Nakama::NRpc rpc = test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
     NNotificationListPtr list = test.client->listNotificationsAsync(session, opt::nullopt, opt::nullopt).get();
     if (list->notifications.size() > 0)
     {

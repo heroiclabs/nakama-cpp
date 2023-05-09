@@ -552,9 +552,9 @@ std::future<void> BaseClient::importFacebookFriendsAsync(
     return promise->get_future();
 }
 
-std::future<const NAccount&> BaseClient::getAccountAsync(NSessionPtr session)
+std::future<NAccount> BaseClient::getAccountAsync(NSessionPtr session)
 {
-    auto promise = std::make_shared<std::promise<const NAccount&>>();
+    auto promise = std::make_shared<std::promise<NAccount>>();
 
     getAccount(session,
         [=](const NAccount& account) {
@@ -589,14 +589,14 @@ std::future<void> BaseClient::updateAccountAsync(
     return promise->get_future();
 }
 
-std::future<const NUsers&> BaseClient::getUsersAsync(
+std::future<NUsers> BaseClient::getUsersAsync(
     NSessionPtr session,
     const std::vector<std::string>& ids,
     const std::vector<std::string>& usernames,
     const std::vector<std::string>& facebookIds
 )
 {
-    std::shared_ptr<std::promise<const NUsers&>> promise = std::make_shared<std::promise<const NUsers&>>();
+    std::shared_ptr<std::promise<NUsers>> promise = std::make_shared<std::promise<NUsers>>();
 
     getUsers(session, ids, usernames, facebookIds,
         [=](const NUsers& users) {
@@ -685,7 +685,7 @@ std::future<NFriendListPtr> BaseClient::listFriendsAsync(
     return promise->get_future();
 }
 
-std::future<const NGroup&> BaseClient::createGroupAsync(
+std::future<NGroup> BaseClient::createGroupAsync(
     NSessionPtr session,
     const std::string& name,
     const std::string& description,
@@ -695,7 +695,7 @@ std::future<const NGroup&> BaseClient::createGroupAsync(
     const opt::optional<int32_t>& maxCount
 )
 {
-    auto promise = std::make_shared<std::promise<const NGroup&>>();
+    auto promise = std::make_shared<std::promise<NGroup>>();
 
     createGroup(session, name, description, avatarUrl, langTag, open, maxCount,
         [=](const NGroup& group) {
@@ -1249,12 +1249,12 @@ std::future<NStorageObjectListPtr> BaseClient::listUsersStorageObjectsAsync(
     return promise->get_future();
 }
 
-std::future<const NStorageObjectAcks&> BaseClient::writeStorageObjectsAsync(
+std::future<NStorageObjectAcks> BaseClient::writeStorageObjectsAsync(
     NSessionPtr session,
     const std::vector<NStorageObjectWrite>& objects
 )
 {
-    auto promise = std::make_shared<std::promise<const NStorageObjectAcks&>>();
+    auto promise = std::make_shared<std::promise<NStorageObjectAcks>>();
 
     writeStorageObjects(session, objects,
         [=](const NStorageObjectAcks& acks) {

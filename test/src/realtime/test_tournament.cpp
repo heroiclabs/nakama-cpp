@@ -71,7 +71,7 @@ void test_tournament()
     document.Accept(writer);
     string json = buffer.GetString();
 
-    const NRpc& rpc = test.rtClient->rpcAsync("clientrpc.create_tournament", json).get();
+    const NRpc rpc = test.rtClient->rpcAsync("clientrpc.create_tournament", json).get();
 
     NLOG_INFO("rpc response: " + rpc.payload);
 

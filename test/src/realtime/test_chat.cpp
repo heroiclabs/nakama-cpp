@@ -37,7 +37,7 @@ namespace Nakama {
             std::string json_data = "{\"msg\":\"Hello there!\"}";
 
             const NChannelPtr channel = test.rtClient->joinChatAsync("chat", NChannelType::ROOM, {}, {}).get();
-            const NChannelMessageAck& ack = test.rtClient->writeChatMessageAsync(channel->id, json_data).get();
+            const NChannelMessageAck ack = test.rtClient->writeChatMessageAsync(channel->id, json_data).get();
 
             test.stopTest(ack.channelId == channel->id);
         }
@@ -50,7 +50,7 @@ namespace Nakama {
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
             test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
-            const NGroup& group = test.client->createGroupAsync(session, "group chat " + session->getAuthToken(), "a group for chatting", "", "", false, {}).get();
+            const NGroup group = test.client->createGroupAsync(session, "group chat " + session->getAuthToken(), "a group for chatting", "", "", false, {}).get();
             const NChannelPtr channelPtr = test.rtClient->joinChatAsync(group.id, NChannelType::GROUP, {}, {}).get();
             test.stopTest(true);
         }
