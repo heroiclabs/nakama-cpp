@@ -25,9 +25,7 @@ namespace Nakama {
         {
             bool threadedTick = true;
             NTest test(__func__, threadedTick);
-            NLOG_INFO("running test..");
             test.runTest();
-            NLOG_INFO("done call run test");
 
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
@@ -39,11 +37,15 @@ namespace Nakama {
             const NChannelPtr channel = test.rtClient->joinChatAsync("chat", NChannelType::ROOM, {}, {}).get();
             const NChannelMessageAck ack = test.rtClient->writeChatMessageAsync(channel->id, json_data).get();
 
+            NLOG_INFO("call stop test");
             test.stopTest(ack.channelId == channel->id);
+            NLOG_INFO("done call stop test");
         }
 
         void test_rt_joinGroupChat()
         {
+            NLOG_INFO("calling join group chat");
+
             bool threadedTick = true;
             NTest test(__func__, threadedTick);
             test.runTest();

@@ -33,6 +33,7 @@ namespace Test {
         NTest(const char* name, bool threadedTick = false);
         NTest(std::string name, bool threadedTick = false);
         NTest(std::string name, NClientParameters parameters);
+        ~NTest();
 
         virtual void runTest();
 

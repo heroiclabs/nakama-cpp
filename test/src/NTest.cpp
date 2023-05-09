@@ -34,6 +34,12 @@ namespace Nakama {
             client->setErrorCallback([this](const NError& error) { stopTest(error); });
             rtClient->setListener(&listener);
         }
+        NTest::~NTest()
+        {
+            if (_threadedTick) {
+                _tickThread.join();
+            }
+        }
 
         NTest::NTest(std::string name, NClientParameters parameters)
                 : _name(name),
@@ -81,8 +87,6 @@ namespace Nakama {
                     stopTest(isSucceeded());
                 }
 
-                NLOG_INFO("doing tick");
-
                 tick();
 
                 std::chrono::milliseconds sleep_period(50);
@@ -92,10 +96,8 @@ namespace Nakama {
 
         void NTest::stopTest(bool succeeded)
         {
-            {
-                _testSucceeded = succeeded;
-                _continue_loop = false;
-            }
+            _testSucceeded = succeeded;
+            _continue_loop = false;
 
             if (succeeded)
             {
@@ -127,8 +129,6 @@ namespace Nakama {
 
             if (!_rtTickPaused)
             {
-                NLOG_INFO("ticking rt client");
-
                 rtClient->tick();
             }
         }
