@@ -39,7 +39,7 @@ namespace Nakama {
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
 
-            test.rtClient->connectAsync(session, createStatus).get();
+            test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
 
             test.waitUntilStop();
         }
@@ -55,7 +55,7 @@ namespace Nakama {
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
 
-            test.rtClient->connectAsync(session, createStatus).get();
+            test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
             test.rtClient->disconnect();
 
             test.listener.setConnectCallback([&hadConnectCallback]() {
@@ -84,7 +84,7 @@ namespace Nakama {
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
 
-            test.rtClient->connectAsync(session, createStatus).get();
+            test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
 
             bool connectedOnce = false;
             test.listener.setDisconnectCallback([&test, &session](const NRtClientDisconnectInfo& /*info*/){

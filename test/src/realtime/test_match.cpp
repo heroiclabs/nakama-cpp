@@ -34,7 +34,7 @@ namespace Nakama {
 
             NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
-            test1.rtClient->connectAsync(session, createStatus).get();
+            test1.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
 
             NMatch match = test1.rtClient->createMatchAsync().get();
             NLOG_INFO("created match: " + match.matchId);
@@ -54,10 +54,10 @@ namespace Nakama {
 
             NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
-            test1.rtClient->connectAsync(session, createStatus).get();
+            test1.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
 
             NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-            test2.rtClient->connectAsync(session2, createStatus).get();
+            test2.rtClient->connectAsync(session2, createStatus, NRtClientProtocol::Json).get();
 
             test1.listener.setMatchDataCallback([&test1, &test2](const NMatchData& data)
             {

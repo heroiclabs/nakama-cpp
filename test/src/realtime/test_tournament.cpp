@@ -37,7 +37,7 @@ void test_tournament()
 
     test.runTest();
     bool createStatus = false;
-    test.rtClient->connectAsync(session, createStatus).get();
+    test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
 
 
     NTimestamp start_time = getUnixTimestampMs() / 1000; // starts now in seconds

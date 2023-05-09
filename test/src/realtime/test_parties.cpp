@@ -36,8 +36,8 @@ void test_rt_create_party()
     NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
 
     bool createStatus = false;
-    test1.rtClient->connectAsync(session, createStatus).get();
-    test2.rtClient->connectAsync(session2, createStatus).get();
+    test1.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
+    test2.rtClient->connectAsync(session2, createStatus, NRtClientProtocol::Json).get();
 
     const NParty& party = test1.rtClient->createPartyAsync(true, 2).get();
 
