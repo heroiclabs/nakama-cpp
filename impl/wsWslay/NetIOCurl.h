@@ -26,7 +26,7 @@ struct NetIOCurl {
         CURLUcode rc = curl_url_set(u.get(), CURLUPART_URL , urlParts.url.c_str(), CURLU_NON_SUPPORT_SCHEME);
         if (rc) {
             NLOG(Nakama::NLogLevel::Error, "invalid URL(%s): %s", urlParts.url.c_str(), curl_url_strerror(rc));
-            return NetIOAsyncResult::ERROR;
+            return NetIOAsyncResult::ERR;
         }
         if (urlParts.scheme == "wss") {
             curl_url_set(u.get(), CURLUPART_SCHEME, "https", 0);
@@ -54,7 +54,7 @@ struct NetIOCurl {
         if (CURLMcode res = curl_multi_add_handle(_curlm.get(), _curl.get()); res != CURLM_OK) {
             NLOG(Nakama::NLogLevel::Error, "libcurl error: %s", curl_multi_strerror(res));
             _curl.reset();
-            return NetIOAsyncResult::ERROR;
+            return NetIOAsyncResult::ERR;
         }
 
         //save curl_url because it must stay alive as long as curl_easy uses it
@@ -68,7 +68,7 @@ struct NetIOCurl {
 
         if (CURLMcode res = curl_multi_perform(_curlm.get(), &running_handles); res != CURLM_OK) {
             NLOG(Nakama::NLogLevel::Error, "libcurl error: %s", curl_multi_strerror(res));
-            return NetIOAsyncResult::ERROR;
+            return NetIOAsyncResult::ERR;
         }
 
         // done connecting (or failed) , either way take easy_handle out of multi
@@ -78,7 +78,7 @@ struct NetIOCurl {
             struct CURLMsg* m = curl_multi_info_read(_curlm.get(), &msgq);
             if (!(m && m->msg == CURLMSG_DONE)) {
                 NLOG(Nakama::NLogLevel::Error, "unexpected libcurl error: curl_multi_info_read had no completed messages");
-                return NetIOAsyncResult::ERROR;
+                return NetIOAsyncResult::ERR;
             }
 
             assert(msgq == 0);  // there should be at most 1 easy handle in multi handle
@@ -86,7 +86,7 @@ struct NetIOCurl {
 
             if (m->data.result != CURLE_OK) {
                 NLOG(Nakama::NLogLevel::Error, "libcurl error: %s", curl_easy_strerror(m->data.result));
-                return NetIOAsyncResult::ERROR;
+                return NetIOAsyncResult::ERR;
             }
 
             return NetIOAsyncResult::DONE;

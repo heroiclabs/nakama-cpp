@@ -43,7 +43,6 @@ elseif (WITH_CPPRESTSDK)
     set(WS_IMPL "cpprestsdk")
 endif()
 
-find_package(Protobuf CONFIG REQUIRED)
 
 if (DEFINED ANDROID_ABI)
     if (DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
@@ -70,6 +69,11 @@ include(cmake/compilerFlags.cmake)
 include(cmake/linkerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
+
+## needed because target objects of these libraries are appended to NAKAMA_SDK_DEPS which are used in this cmakelists.
+# TODO remove from sub-cmakelists?
+find_package(Protobuf CONFIG REQUIRED)
+find_package(CURL CONFIG REQUIRED)
 
 if(MSVC)
     # On windows it is critical not to accidentally use DLL

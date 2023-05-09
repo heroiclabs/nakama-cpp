@@ -9,75 +9,9 @@
         "optional-lite"
     ],
     "features": {
-        "libhttpclient-ws": {
-            "description": "Websockets library that delegates to other implementations.",
-            "supports": "windows | android",
-            "dependencies": [
-                {
-                    "name": "websocketpp",
-                    "default-features": false,
-                    "platform": "windows"
-                },
-                {
-                    "name": "asio",
-                    "platform": "windows"
-                },
-                {
-                    "name": "openssl",
-                    "platform": "windows"
-                }
-            ]
-        },
-        "libhttpclient-http": {
-            "description": "HTTP library that delegates to other implementations.",
-            "supports": "windows | android | osx | ios | linux"
-        },
-        "wslay": {
-            "description": "Websockets library decoupled from IO and handshakes.",
-            "dependencies": [
-                {
-                    "name": "wslay"
-                }
-            ],
-            "supports": "osx | ios | linux | android"
-        },
-        "logs": {
-            "description": "Whether or not logs are enabled."
-        },
-        "curl": {
-            "description": "The libcurl networking library.",
-            "dependencies": [
-                {
-                    "name": "curl",
-                    "default-features": false,
-                    "features": [
-                        "ssl"
-                    ]
-                }
-            ],
-            "supports": "osx | ios | linux"
-        },
-        "libcxx": {
-            "description": "An alternative C++ standard library, used by Unreal Engine.",
-            "dependencies": [
-                {
-                    "name": "llvm",
-                    "default-features": false,
-                    "features": [
-                        "libcxx"
-                    ],
-                    "platform": "linux"
-                }
-            ]
-        },
-        "grpc": {
-            "description": "The grpc networking protocol.",
-            "dependencies": [
-                "grpc"
-            ]
-        },
         "cpprestsdk": {
-            "description": "Maintenance-mode HTTP library.",
+            "description": "Maintenance-mode HTTP and Websockets library.",
+            "supports": "android",
             "dependencies": [
                 {
                     "name": "cpprestsdk",
@@ -87,8 +21,62 @@
                     ],
                     "platform": "android"
                 }
-            ],
-            "supports": "android"
+            ]
+        },
+        "curl-http": {
+            "description": "The libcurl networking library.",
+            "dependencies": [
+            {
+                "name": "curl",
+                "default-features": false,
+                "features": [
+                "ssl"
+                ]
+            }
+            ]
+        },
+        "curl-io": {
+            "description": "The libcurl networking library.",
+            "dependencies": [
+            {
+                "name": "curl",
+                "default-features": false,
+                "features": [
+                "ssl"
+                ]
+            }
+            ]
+        },
+        "libcxx": {
+            "description": "An alternative C++ standard library, used by Unreal Engine.",
+            "dependencies": [
+            {
+                "name": "llvm",
+                "default-features": false,
+                "features": [
+                    "libcxx"
+                ],
+                "platform": "linux"
+            }
+            ]
+        },
+        "libhttpclient-http": {
+            "description": "HTTP library that delegates to other implementations."
+        },
+        "libhttpclient-ws": {
+            "description": "Websockets library that delegates to other implementations."
+        },
+        "logs": {
+            "description": "Whether or not logs are enabled."
+        },
+        "windows-use-msbuild": {
+            "description": "Whether or not to compile the SDK with MSBuild on Windows machines."
+        },
+        "wslay": {
+            "description": "Websockets library decoupled from IO and handshakes.",
+            "dependencies": [
+            "wslay"
+            ]
         }
     },
     "overrides": [

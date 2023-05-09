@@ -27,9 +27,10 @@
                 "WindowsDesktop": "ON",
                 "VCPKG_HOST_TRIPLET": "x64-windows-static-heroic",
                 "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic",
-                "WITH_LIBHTTPCLIENT_HTTP": "ON",
-                "WITH_LIBHTTPCLIENT_WS": "ON",
-                "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;libhttpclient-http"
+                "BUILD_WSLAY": "ON",
+                "BUILD_CURL_IO": "ON",
+                "BUILD_CURL_HTTP": "ON",
+                "VCPKG_MANIFEST_FEATURES": "wslay;curl-io;curl-http"
             },
             "condition": {
                 "type": "equals",
@@ -49,9 +50,10 @@
                 "WindowsDesktop": "ON",
                 "VCPKG_HOST_TRIPLET": "x86-windows-release",
                 "VCPKG_TARGET_TRIPLET": "x86-windows-release",
-                "WITH_LIBHTTPCLIENT_HTTP": "ON",
-                "WITH_LIBHTTPCLIENT_WS": "ON",
-                "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;libhttpclient-http"
+                "BUILD_WSLAY": "ON",
+                "BUILD_CURL_IO": "ON",
+                "BUILD_CURL_HTTP": "ON",
+                "VCPKG_MANIFEST_FEATURES": "wslay;curl-io;curl-http"
             },
             "condition": {
                 "type": "equals",
@@ -71,10 +73,10 @@
                 "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
                 "VCPKG_TARGET_TRIPLET": "arm64-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "arm64",
-                "WITH_LIBHTTPCLIENT_HTTP": "ON",
+                "BUILD_CURL_HTTP": "ON",
                 "BUILD_WSLAY": "ON",
                 "BUILD_CURL_IO": "ON",
-                "VCPKG_MANIFEST_FEATURES": "wslay;curl"
+                "VCPKG_MANIFEST_FEATURES": "wslay;curl-io;curl-http"
             },
             "condition": {
                 "type": "equals",
@@ -123,6 +125,7 @@
             "cacheVariables": {
                 "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
                 "CMAKE_SYSTEM_NAME": "iOS",
+                "BUILD_CURL_HTTP": "ON",
                 "BUILD_WSLAY": "ON",
                 "BUILD_CURL_IO": "ON"
             },
@@ -148,9 +151,7 @@
                 "VCPKG_TARGET_TRIPLET": "x64-iphonesimulator-heroic",
                 "CMAKE_SYSTEM_NAME": "iOS",
                 "CMAKE_OSX_SYSROOT": "iphonesimulator",
-                "CMAKE_OSX_ARCHITECTURES": "x86_64",
-                "BUILD_WSLAY": "ON",
-                "BUILD_CURL": "ON"
+                "CMAKE_OSX_ARCHITECTURES": "x86_64"
             }
         },
         {
@@ -178,7 +179,7 @@
                 "BUILD_WSLAY": "ON",
                 "BUILD_CURL_IO": "ON",
                 "CMAKE_SYSTEM_NAME": "Android",
-                "VCPKG_MANIFEST_FEATURES": "curl;wslay"
+                "VCPKG_MANIFEST_FEATURES": "wslay;curl-io;curl-http"
             },
             "condition": {
                 "type": "equals",
@@ -306,7 +307,8 @@
                 "WITH_LIBHTTPCLIENT_HTTP": "ON",
                 "BUILD_WSLAY": "ON",
                 "BUILD_CURL_IO": "ON",
-                "VCPKG_MANIFEST_FEATURES": "curl;wslay"
+                "BUILD_CURL_HTTP": "ON",
+                "VCPKG_MANIFEST_FEATURES": "curl-http;curl-io;wslay"
             },
             "condition": {
                 "type": "equals",

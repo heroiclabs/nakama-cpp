@@ -98,8 +98,13 @@ namespace Nakama {
         _client_key = Nakama::base64Encode(get_random16());
 
         bool useSsl = _url.scheme == "wss";
-        uint16_t default_port = useSsl ? 443 : 80;
-        uint16_t port = _url.port.template value_or(default_port);
+        uint16_t port;
+
+        if (_url.port.has_value()) {
+            port = *_url.port;
+        } else {
+            port = DEFAULT_PORT;
+        }
 
         std::ostringstream reqb;
         reqb << "GET /" << _url.pathAndArgs << " HTTP/1.1" << "\r\n"
@@ -119,7 +124,7 @@ namespace Nakama {
         int would_block = 0;
         while (_buf_iter != _buf.end() || would_block != 0) {
             int sent = this->io.send(&*_buf_iter, _buf.end() - _buf_iter, &would_block);
-            if (sent < 0) { return NetIOAsyncResult::ERROR; }
+            if (sent < 0) { return NetIOAsyncResult::ERR; }
             std::advance(_buf_iter, sent);
         }
 
@@ -140,10 +145,10 @@ namespace Nakama {
             if (would_block != 0) {
                 return NetIOAsyncResult::AGAIN;
             } else if (read < 0) {
-                return NetIOAsyncResult::ERROR;
+                return NetIOAsyncResult::ERR;
             } else if (read == 0) {
                 NLOG_ERROR("http_upgrade: disconnected during http handshake");
-                return NetIOAsyncResult::ERROR;
+                return NetIOAsyncResult::ERR;
             }
             _buf.append(&rbuf[0], read);
         } while(_buf.find("\r\n\r\n") == std::string::npos);
@@ -153,7 +158,7 @@ namespace Nakama {
         auto s = _buf.find(hdr);
         if (s == std::string::npos) {
             NLOG_ERROR("http_upgrade: missing required headers");
-            return NetIOAsyncResult::ERROR;
+            return NetIOAsyncResult::ERR;
         }
 
         auto accept_key = std::string_view(_buf);
@@ -162,7 +167,7 @@ namespace Nakama {
 
         if (accept_key != create_acceptkey(_client_key)) {
             NLOG(Nakama::NLogLevel::Error, "Websocket server returned unexpected Sec-WebSocket-Accept key: %s", accept_key);
-            return NetIOAsyncResult::ERROR;
+            return NetIOAsyncResult::ERR;
         }
 
         auto rnrn_pos = _buf.find("\r\n\r\n");
@@ -217,7 +222,7 @@ namespace Nakama {
         }
         _url = urlOpt.value();
 
-        if (this->io.connect_init(_url) == NetIOAsyncResult::ERROR) {
+        if (this->io.connect_init(_url) == NetIOAsyncResult::ERR) {
             fireOnError("Failed connect");
             return;
         }
@@ -340,7 +345,7 @@ namespace Nakama {
             }
         } while (res == NetIOAsyncResult::DONE); // try to complete multiple stages in one tick
 
-        if (res == NetIOAsyncResult::ERROR) {
+        if (res == NetIOAsyncResult::ERR) {
             std::string errMessage;
             switch (_state) {
                 case State::Connecting:

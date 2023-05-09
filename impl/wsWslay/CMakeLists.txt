@@ -1,17 +1,18 @@
 file(
-        GLOB_RECURSE srcs
-        LIST_DIRECTORIES false
-        "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
+    GLOB_RECURSE srcs
+    LIST_DIRECTORIES false
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )
 
 
 find_package(wslay CONFIG REQUIRED)
-add_library(nakama-impl-ws-wslay INTERFACE ${srcs})
+add_library(nakama-impl-ws-wslay OBJECT ${srcs})
+set_target_properties(nakama-impl-ws-wslay PROPERTIES LINKER_LANGUAGE CXX)
 
 target_link_libraries(nakama-impl-ws-wslay INTERFACE
-        nakama-api-proto nakama::sdk-interface
-        wslay nakama-sdk-core-common
-        )
+    nakama-api-proto nakama::sdk-interface
+    wslay nakama-sdk-core-common
+)
 
 target_include_directories(nakama-impl-ws-wslay INTERFACE .)
 

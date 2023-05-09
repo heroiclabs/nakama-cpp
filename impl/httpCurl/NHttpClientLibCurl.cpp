@@ -5,7 +5,10 @@
 #include <nakama-cpp/NHttpTransportInterface.h>
 #include "NHttpClientLibCurl.h"
 #include "nakama-cpp/log/NLogger.h"
+
+#if __ANDROID__
 #include "AndroidCA.h"
+#endif
 
 static int debug_callback(CURL *handle, curl_infotype type,
              char *data, size_t size,
