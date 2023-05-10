@@ -26,6 +26,8 @@
 namespace Nakama {
     namespace Test {
 
+        NRtClientProtocol NTest::RtProtocol = NRtClientProtocol::Json;
+
         NTest::NTest(std::string name, bool threadedTick)
                 : _name(name), _threadedTick(threadedTick), _rtTickPaused(false),
                 client(createDefaultClient({SERVER_KEY, SERVER_HOST, SERVER_PORT, SERVER_SSL})),

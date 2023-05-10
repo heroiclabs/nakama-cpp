@@ -38,11 +38,11 @@ namespace Nakama {
 
         NSessionPtr session1 = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
         bool createStatus = false;
-        test1.rtClient->connectAsync(session1, createStatus, NRtClientProtocol::Json).get();
+        test1.rtClient->connectAsync(session1, createStatus, NTest::RtProtocol).get();
 
 
         NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-        test2.rtClient->connectAsync(session2, createStatus, NRtClientProtocol::Json).get();
+        test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
 
         string json = "{\"v\":\"test\"}";
         auto rpc1 = test1.client->rpcAsync(SERVER_HTTP_KEY, "clientrpc.rpc", json).get();

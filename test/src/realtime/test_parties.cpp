@@ -36,8 +36,8 @@ void test_rt_create_party()
     NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
 
     bool createStatus = false;
-    test1.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
-    test2.rtClient->connectAsync(session2, createStatus, NRtClientProtocol::Json).get();
+    test1.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
+    test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
 
     const NParty& party = test1.rtClient->createPartyAsync(true, 2).get();
 
@@ -73,8 +73,8 @@ void test_rt_party_matchmaker()
     NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
 
     bool createStatus = false;
-    test1.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
-    test2.rtClient->connectAsync(session2, createStatus, NRtClientProtocol::Json).get();
+    test1.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
+    test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
 
     auto party1 = test1.rtClient->createPartyAsync(false, 1).get();
     auto ticket1 = test1.rtClient->addMatchmakerPartyAsync(party1.id, "*", 2, 2).get();

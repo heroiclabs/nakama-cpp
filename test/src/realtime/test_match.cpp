@@ -32,7 +32,7 @@ namespace Nakama {
 
             NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
-            test1.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
+            test1.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
 
             NMatch match = test1.rtClient->createMatchAsync().get();
 
@@ -59,12 +59,12 @@ namespace Nakama {
 
             NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
-            test1.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
+            test1.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
 
             NLOG_INFO("done 1");
 
             NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-            test2.rtClient->connectAsync(session2, createStatus, NRtClientProtocol::Json).get();
+            test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
 
             NLOG_INFO("done 1");
             NLOG_INFO("connected");

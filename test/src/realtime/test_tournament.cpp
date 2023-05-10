@@ -37,7 +37,7 @@ void test_tournament()
     NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
 
     bool createStatus = false;
-    test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
+    test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
 
 
     NTimestamp start_time = getUnixTimestampMs() / 1000; // starts now in seconds

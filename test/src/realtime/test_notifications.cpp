@@ -28,7 +28,7 @@ void test_createAndDeleteNotifications()
     test.runTest();
     NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
     bool createStatus = false;
-    test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
+    test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
 
     std::promise<void> notificationsPromise;
     test.listener.setNotificationsCallback([&test, session, &notificationsPromise](const NNotificationList& list)
@@ -58,7 +58,7 @@ void test_createListAndDeleteNotifications()
     test.runTest();
     NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
     bool createStatus = false;
-    test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
+    test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
     const Nakama::NRpc rpc = test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
     NNotificationListPtr list = test.client->listNotificationsAsync(session, opt::nullopt, opt::nullopt).get();
     if (list->notifications.size() > 0)
