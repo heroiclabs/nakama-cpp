@@ -33,12 +33,7 @@ namespace Nakama {
         {
             client->setErrorCallback([this](const NError& error) { stopTest(error); });
             rtClient->setListener(&listener);
-        }
-        NTest::~NTest()
-        {
-            if (_threadedTick) {
-                _tickThread.join();
-            }
+            _isDone.store(false);
         }
 
         NTest::NTest(std::string name, NClientParameters parameters)
@@ -52,10 +47,23 @@ namespace Nakama {
 
         NTest::NTest(const char* name, bool threadedTick) : NTest(std::string(name), threadedTick)
         {
+            NLOG_INFO("created test");
 
         }
+
+        NTest::~NTest()
+        {
+            NLOG_INFO("starting destructor");
+
+            _tickThread.join();
+            NLOG_INFO("finished destructor");
+
+        }
+
         void NTest::runTest()
         {
+            NLOG_INFO("running test");
+
             if (_threadedTick)
             {
                 _tickThread = std::thread(&NTest::runTestInternal, this);
@@ -66,14 +74,12 @@ namespace Nakama {
             }
         }
 
-
         void NTest::runTestInternal()
         {
-            if (!_continue_loop)
-                return;
-
             if (g_runTestsCount > 0)
+            {
                 std::cout << std::endl << std::endl;
+            }
 
             ++g_runTestsCount;
 
@@ -82,7 +88,6 @@ namespace Nakama {
             while (!isDone())
             {
                 if (!checkTimeout(50)) {
-                    onTimeout();
                     NLOG_INFO("Test timeout");
                     stopTest(isSucceeded());
                 }
@@ -92,12 +97,15 @@ namespace Nakama {
                 std::chrono::milliseconds sleep_period(50);
                 std::this_thread::sleep_for(sleep_period);
             }
+
+            NLOG_INFO("done running tst internal");
+
         }
 
         void NTest::stopTest(bool succeeded)
         {
-            _testSucceeded = succeeded;
-            _continue_loop = false;
+            _testSucceeded.store(succeeded);
+            _isDone.store(true);
 
             if (succeeded)
             {
@@ -131,11 +139,6 @@ namespace Nakama {
             {
                 rtClient->tick();
             }
-        }
-
-        void NTest::waitUntilStop()
-        {
-            _tickThread.join();
         }
     }
 }

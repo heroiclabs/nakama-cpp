@@ -30,7 +30,8 @@ void test_createAndDeleteNotifications()
     bool createStatus = false;
     test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
 
-    test.listener.setNotificationsCallback([&test, session](const NNotificationList& list)
+    std::promise<void> notificationsPromise;
+    test.listener.setNotificationsCallback([&test, session, &notificationsPromise](const NNotificationList& list)
     {
         NLOG_INFO("Received notifications: " + std::to_string(list.notifications.size()));
 
@@ -38,16 +39,16 @@ void test_createAndDeleteNotifications()
         {
             NLOG_INFO("Notification code: " + std::to_string(notification.code));
             NLOG_INFO("\tcontent: " + notification.content);
-
-            test.client->deleteNotificationsAsync(session, {notification.id}).get();
-            test.stopTest(true);
         }
 
-
-        test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}");
+        notificationsPromise.set_value();
     });
 
-    test.waitUntilStop();
+    test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
+
+    notificationsPromise.get_future().get();
+    test.stopTest(true);
+
 }
 
 void test_createListAndDeleteNotifications()

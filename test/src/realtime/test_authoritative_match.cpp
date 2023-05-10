@@ -41,7 +41,7 @@ void test_authoritative_match()
     NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
     test2.rtClient->connectAsync(session2, createStatus, NRtClientProtocol::Json).get();
 
-    const NRpc& rpc = test.rtClient->rpcAsync("clientrpc.create_authoritative_match", "{\"debug\": true, \"label\": \"TestAuthoritativeMatch\"}").get();
+    const NRpc rpc = test.rtClient->rpcAsync("clientrpc.create_authoritative_match", "{\"debug\": true, \"label\": \"TestAuthoritativeMatch\"}").get();
 
     rapidjson::Document document;
     if (!document.Parse(rpc.payload).HasParseError())

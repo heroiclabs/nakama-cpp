@@ -33,9 +33,9 @@ void test_tournament()
     bool threadedTick = true;
 
     NTest test(__func__, threadedTick);
+    test.runTest();
     NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
 
-    test.runTest();
     bool createStatus = false;
     test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
 

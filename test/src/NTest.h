@@ -39,21 +39,18 @@ namespace Test {
 
         void stopTest(bool succeeded = false);
         void stopTest(const NError& error);
-        void onTimeout() {};
 
         void setRtTickPaused(bool paused) {
             _rtTickPaused = true;
         }
-
-        void waitUntilStop();
 
         void tick();
         bool checkTimeout(int timePassedMs) {
             timeoutMs -= timePassedMs;
             return timeoutMs >= 0;
         }
-        bool isDone() const { return !_continue_loop; }
-        bool isSucceeded() const { return _testSucceeded; }
+        bool isDone() const { return _isDone.load(); }
+        bool isSucceeded() const { return _testSucceeded.load(); }
 
         void setTestTimeoutMs(int ms) {
             timeoutMs = ms;
@@ -63,19 +60,15 @@ namespace Test {
         const NRtClientPtr rtClient;
         NRtDefaultClientListener listener;
 
-    protected:
+    private:
         void printTestName(const char* event);
-
-    protected:
-        bool _continue_loop = true;
-        bool _testSucceeded = false;
+        std::atomic<bool> _isDone;
+        std::atomic<bool> _testSucceeded;
         bool _threadedTick = false;
         std::string _name;
         std::thread _tickThread;
         int timeoutMs = 60*1000;
         bool _rtTickPaused;
-
-    private:
         void runTestInternal();
     };
 

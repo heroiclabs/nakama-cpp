@@ -57,7 +57,7 @@ void test_realtime()
 
     run_realtime_tests();
 
-    NLOG_INFO("using Json protocol");
+    NLOG_INFO("using protobuf protocol");
 
 //    run_realtime_tests();
 }

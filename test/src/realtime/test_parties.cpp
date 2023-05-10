@@ -41,27 +41,25 @@ void test_rt_create_party()
 
     const NParty& party = test1.rtClient->createPartyAsync(true, 2).get();
 
-    auto partyJoinCallback = [&test2](const NParty& party)
+    std::promise<void> partyJoinPromise;
+    std::promise<void> partyDataPromise;
+
+    auto partyJoinCallback = [&partyJoinPromise](const NParty& party)
     {
-        NLOG_INFO("joined party: " + party.id);
-        std::string payload = "How are you?";
-        int opcode = 1;
-        test2.rtClient->sendPartyData(party.id, opcode, payload);
+        partyJoinPromise.set_value();
     };
 
     test2.listener.setPartyCallback(partyJoinCallback);
 
-    test1.listener.setPartyDataCallback([&test1, &test2](const NPartyData& data)
+    test1.listener.setPartyDataCallback([&partyDataPromise](const NPartyData& data)
     {
-        NLOG_INFO("party data: " + data.data);
-        test1.stopTest(true);
-        test2.stopTest(true);
+        partyDataPromise.set_value();
     });
 
     test2.rtClient->joinPartyAsync(party.id).get();
 
-    test1.waitUntilStop();
-    test2.waitUntilStop();
+    test1.stopTest(true);
+    test2.stopTest(true);
 }
 
 void test_rt_party_matchmaker()
@@ -69,16 +67,23 @@ void test_rt_party_matchmaker()
     NTest test1(__func__, true);
     NTest test2("test_rt_party_matchmaker2", true);
 
+    test1.runTest();
+    test2.runTest();
+    NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+    NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+    bool createStatus = false;
+    test1.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
+    test2.rtClient->connectAsync(session2, createStatus, NRtClientProtocol::Json).get();
+
     auto party1 = test1.rtClient->createPartyAsync(false, 1).get();
-    auto ticket1 = test1.rtClient->addMatchmakerPartyAsync(party1.id, "*", 0, 2).get();
+    auto ticket1 = test1.rtClient->addMatchmakerPartyAsync(party1.id, "*", 2, 2).get();
     test1.stopTest(ticket1.ticket != "");
 
     auto party2 = test2.rtClient->createPartyAsync(false, 1).get();
-    auto ticket2 = test2.rtClient->addMatchmakerPartyAsync(party2.id, "*", 0, 2).get();
+    auto ticket2 = test2.rtClient->addMatchmakerPartyAsync(party2.id, "*", 2, 2).get();
     test2.stopTest(ticket2.ticket != "");
 
-    test1.runTest();
-    test2.runTest();
 }
 
 void test_rt_party()

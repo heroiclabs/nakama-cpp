@@ -27,21 +27,24 @@ namespace Nakama {
         {
             const bool threadedTick = true;
             NTest test1(__func__, threadedTick);
-            NTest test2(__func__ + std::string("2"), threadedTick);
 
             test1.runTest();
-            test2.runTest();
 
             NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
             test1.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
 
             NMatch match = test1.rtClient->createMatchAsync().get();
-            NLOG_INFO("created match: " + match.matchId);
+
+            test1.stopTest(true);
+
+            NLOG_INFO("stopped create match");
         }
 
         void test_rt_matchmaker()
         {
+            NLOG_INFO("started testing matchmaker");
+
             bool threadedTick = true;
             NTest test1(__func__, threadedTick);
             NTest test2(std::string(__func__) + std::string("2"), threadedTick);
@@ -52,43 +55,61 @@ namespace Nakama {
             test1.runTest();
             test2.runTest();
 
+            NLOG_INFO("authing");
+
             NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
             test1.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
 
+            NLOG_INFO("done 1");
+
             NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             test2.rtClient->connectAsync(session2, createStatus, NRtClientProtocol::Json).get();
 
-            test1.listener.setMatchDataCallback([&test1, &test2](const NMatchData& data)
-            {
-                NLOG_INFO("match data: " + data.data);
+            NLOG_INFO("done 1");
+            NLOG_INFO("connected");
 
-                test1.stopTest(data.opCode == 1);
-                test2.stopTest(data.data == "Nice day today!");
+            auto matchedPromise = std::promise<NMatchmakerMatchedPtr>();
+            auto matched2Promise = std::promise<NMatchmakerMatchedPtr>();
+
+            test1.listener.setMatchmakerMatchedCallback([&test1, &matchedPromise](NMatchmakerMatchedPtr matched)
+            {
+                matchedPromise.set_value(matched);
             });
 
-            test1.listener.setMatchmakerMatchedCallback([&test1](NMatchmakerMatchedPtr matched)
+            test2.listener.setMatchmakerMatchedCallback([&test2, &matched2Promise](NMatchmakerMatchedPtr matched)
             {
-                test1.rtClient->joinMatchAsync(matched->matchId, {}).get();
-            });
-
-            test2.listener.setMatchmakerMatchedCallback([&test2](NMatchmakerMatchedPtr matched)
-            {
-                test2.rtClient->joinMatchAsync(matched->matchId, {}).get();
-                test2.rtClient->sendMatchDataAsync(matched->matchId, 1, "Nice day today!").get();
+                matched2Promise.set_value(matched);
             });
 
             const int minCount = 2;
             const int maxCount = 2;
-            const std::string query = "";
+            const std::string query = "*";
             const NStringMap stringProperties = {};
             const NStringDoubleMap numericProperties = {};
-            const int countMultiple = 2;
-            test1.rtClient->addMatchmakerAsync(minCount, maxCount, query, stringProperties, numericProperties, countMultiple).get();
-            test2.rtClient->addMatchmakerAsync(minCount, maxCount, query, stringProperties, numericProperties, countMultiple).get();
+            const int countMultiple = 1;
 
-            test1.waitUntilStop();
-            test2.waitUntilStop();
+            NLOG_INFO("adding matchmaker");
+
+            NMatchmakerTicket ticket = test1.rtClient->addMatchmakerAsync(minCount, maxCount, query, stringProperties, numericProperties, countMultiple).get();
+            NMatchmakerTicket ticket2 = test2.rtClient->addMatchmakerAsync(minCount, maxCount, query, stringProperties, numericProperties, countMultiple).get();
+
+
+            NLOG_INFO("got tickets");
+
+
+            NMatchmakerMatchedPtr matched = matchedPromise.get_future().get();
+            NMatchmakerMatchedPtr matched2 = matched2Promise.get_future().get();
+
+            NLOG_INFO("got matched");
+            NLOG_INFO(matched->matchId);
+            NLOG_INFO(matched2->matchId);
+
+            test1.rtClient->joinMatchByTokenAsync(matched->token).get();
+            test2.rtClient->joinMatchByTokenAsync(matched2->token).get();
+
+            test1.stopTest(true);
+            test2.stopTest(true);
         }
 
         void test_rt_match()

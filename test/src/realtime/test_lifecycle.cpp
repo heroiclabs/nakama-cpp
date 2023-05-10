@@ -40,8 +40,6 @@ namespace Nakama {
             bool createStatus = false;
 
             test.rtClient->connectAsync(session, createStatus, NRtClientProtocol::Json).get();
-
-            test.waitUntilStop();
         }
 
         void test_rt_rapiddisconnect()
@@ -69,8 +67,6 @@ namespace Nakama {
             });
 
             test.rtClient->connect(session, true);
-
-            test.waitUntilStop();
         }
 
         void test_rt_reconnect()
@@ -100,8 +96,6 @@ namespace Nakama {
             } else {
                 connectedOnce = true;
             }
-
-            test.waitUntilStop();
         }
 
         void test_rt_heartbeat()
@@ -138,8 +132,6 @@ namespace Nakama {
                 // test that heartbeats continue to work after reconnect
                 test.rtClient->connect(session, true);
             });
-
-            test.waitUntilStop();
         }
 
         // optional test -- pass --socket.pong_wait_ms 5000 to Nakama so that it disconnects rtclient after sleep
