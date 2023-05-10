@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-#include <string>
+#include "nakama-cpp/log/NLogger.h"
+#include "NTest.h"
+#include "globals.h"
 
-namespace Nakama
-{
-    namespace Test
-    {
-        class TestGuid
-        {
-            public:
-                static std::string newGuid();
-        };
-    };
+namespace Nakama {
+    namespace Test {
+        uint32_t g_runTestsCount = 0;
+        uint32_t g_failedTestsCount = 0;
+    }
 }

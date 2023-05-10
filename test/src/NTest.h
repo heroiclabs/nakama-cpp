@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 The Nakama Authors
+ * Copyright 2023 The Nakama Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,56 +20,59 @@
 #include <string>
 #include <thread>
 #include <nakama-cpp/NError.h>
+#include "nakama-cpp/NClientInterface.h"
+#include "nakama-cpp/ClientFactory.h"
+#include "nakama-cpp/realtime/NRtDefaultClientListener.h"
 
 namespace Nakama {
 namespace Test {
 
-#define NTEST_ASSERT(cond)  if (!(cond)) { abortCurrentTest(__FILE__, __LINE__); }
-
     class NTest
     {
     public:
-        NTest(const char* name, bool separateThread = false);
-        virtual ~NTest();
+        static NRtClientProtocol RtProtocol;
 
-        virtual void createWorkingClient() = 0;
+        NTest(const char* name, bool threadedTick = false);
+        NTest(std::string name, bool threadedTick = false);
+        NTest(std::string name, NClientParameters parameters);
+        ~NTest();
 
         virtual void runTest();
-        virtual void stopTest(bool succeeded = false);
-        virtual void stopTest(const NError& error);
-        virtual void onTimeout() {};
 
-        virtual void tick() {}
+        void stopTest(bool succeeded = false);
+        void stopTest(const NError& error);
+
+        void setRtTickPaused(bool paused) {
+            _rtTickPaused = true;
+        }
+
+        void tick();
         bool checkTimeout(int timePassedMs) {
             timeoutMs -= timePassedMs;
             return timeoutMs >= 0;
         }
-        bool isDone() const { return !_continue_loop; }
-        bool isSucceeded() const { return _testSucceeded; }
+        bool isDone() const { return _isDone.load(); }
+        bool isSucceeded() const { return _testSucceeded.load(); }
 
         void setTestTimeoutMs(int ms) {
             timeoutMs = ms;
         }
 
-    protected:
-        void printTestName(const char* event);
+        const NClientPtr client;
+        const NRtClientPtr rtClient;
+        NRtDefaultClientListener listener;
 
-    protected:
-        bool _continue_loop = true;
-        bool _testSucceeded = false;
+    private:
+        void printTestName(const char* event);
+        std::atomic<bool> _isDone;
+        std::atomic<bool> _testSucceeded;
         bool _threadedTick = false;
         std::string _name;
         std::thread _tickThread;
         int timeoutMs = 60*1000;
-    private:
+        bool _rtTickPaused;
         void runTestInternal();
     };
-
-    void sleep(uint32_t ms);
-    void printTotalStats();
-    int getFailedCount();
-    void abortCurrentTest(const char* file, int lineno);
-    NTest* getCurTest();
 
 } // namespace Test
 } // namespace Nakama

@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
+#include "nakama-cpp/log/NLogger.h"
+#include "NTest.h"
 
 namespace Nakama {
 namespace Test {
@@ -23,9 +24,7 @@ using namespace std;
 
 void test_writeStorageInvalidArgument()
 {
-    NCppTest test(__func__);
-
-    test.createWorkingClient();
+    NTest test(__func__);
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -55,9 +54,7 @@ void test_writeStorageInvalidArgument()
 
 void test_writeStorage()
 {
-    NCppTest test(__func__);
-
-    test.createWorkingClient();
+    NTest test(__func__);
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -104,9 +101,7 @@ void test_writeStorage()
 
 void test_writeStorageCursor()
 {
-    NCppTest test(__func__);
-
-    test.createWorkingClient();
+    NTest test(__func__);
 
     auto successCallback = [&test](NSessionPtr session)
     {

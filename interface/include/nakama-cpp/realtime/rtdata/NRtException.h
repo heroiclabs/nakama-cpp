@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-#include <string>
+#pragma once
+
+#include "NRtError.h"
 
 namespace Nakama
 {
-    namespace Test
-    {
-        class TestGuid
-        {
-            public:
-                static std::string newGuid();
-        };
+    class NRtException : public std::runtime_error {
+    public:
+        NRtException(const NRtError& error)
+            : std::runtime_error(error.message), error(error) {}
+
+        const NRtError error;
     };
 }

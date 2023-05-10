@@ -54,6 +54,7 @@ NAKAMA_NAMESPACE_BEGIN
 #endif
     };
 
+
     /// DefaultClientParameters is deprectaed, use NClientParameters instead
     using DefaultClientParameters = NClientParameters;
 

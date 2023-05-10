@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-#include <string>
+#pragma once
+
+#include "NError.h"
 
 namespace Nakama
 {
-    namespace Test
-    {
-        class TestGuid
-        {
-            public:
-                static std::string newGuid();
-        };
+    class NException : public std::runtime_error {
+    public:
+        NException(const NError& error)
+            : std::runtime_error(error.message), error(error) {}
+
+        const NError error;
     };
 }

@@ -1550,7 +1550,7 @@ NAKAMA_NAMESPACE_BEGIN
          *
          * @param session The session of the user.
          */
-        virtual std::future<const NAccount&> getAccountAsync(
+        virtual std::future<NAccount> getAccountAsync(
             NSessionPtr session
         ) = 0;
 
@@ -1583,7 +1583,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param usernames List of usernames.
          * @param facebookIds List of Facebook IDs.
          */
-        virtual std::future<const NUsers&> getUsersAsync(
+        virtual std::future<NUsers> getUsersAsync(
             NSessionPtr session,
             const std::vector<std::string>& ids,
             const std::vector<std::string>& usernames = {},
@@ -1655,7 +1655,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param open True if the group should have open membership.
          * @param maxCount Maximum number of group members.
          */
-        virtual std::future<const NGroup&> createGroupAsync(
+        virtual std::future<NGroup> createGroupAsync(
             NSessionPtr session,
             const std::string& name,
             const std::string& description = "",
@@ -2077,7 +2077,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param session The session of the user.
          * @param objects The objects to write.
          */
-        virtual std::future<const NStorageObjectAcks&> writeStorageObjectsAsync(
+        virtual std::future<NStorageObjectAcks> writeStorageObjectsAsync(
             NSessionPtr session,
             const std::vector<NStorageObjectWrite>& objects
         ) = 0;
@@ -2111,7 +2111,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param id The id of the function to execute on the server.
          * @param payload The payload to send with the function call.
          */
-        virtual std::future<const NRpc&> rpcAsync(
+        virtual std::future<NRpc> rpcAsync(
             NSessionPtr session,
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt
@@ -2124,7 +2124,7 @@ NAKAMA_NAMESPACE_BEGIN
          * @param id The id of the function to execute on the server.
          * @param payload The payload to send with the function call.
          */
-        virtual std::future<const NRpc&> rpcAsync(
+        virtual std::future<NRpc> rpcAsync(
             const std::string& http_key,
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt

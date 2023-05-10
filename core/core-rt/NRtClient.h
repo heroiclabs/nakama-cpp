@@ -16,10 +16,11 @@
 
 #pragma once
 
+#include <map>
+#include <memory>
 #include "nakama-cpp/realtime/NRtClientInterface.h"
 #include "rtapi/realtime.pb.h"
 #include "NRtClientProtocolInterface.h"
-#include <map>
 
 namespace Nakama {
 
@@ -56,10 +57,13 @@ namespace Nakama {
         }
 
         void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
+        std::future<void> connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
 
         bool isConnected() const override;
 
         void disconnect() override;
+
+        std::future<void> disconnectAsync() override;
 
         void joinChat(
             const std::string& target,
@@ -196,8 +200,111 @@ namespace Nakama {
 
         void sendPartyData(const std::string& partyId, long opCode, NBytes& data) override;
 
+        std::future<NChannelPtr> joinChatAsync(
+            const std::string& target,
+            NChannelType type,
+            const opt::optional<bool>& persistence = opt::nullopt,
+            const opt::optional<bool>& hidden = opt::nullopt
+        ) override;
+
+        std::future<void> leaveChatAsync(
+            const std::string& channelId
+        ) override;
+
+        std::future<NChannelMessageAck> writeChatMessageAsync(
+            const std::string& channelId,
+            const std::string& content
+        ) override;
+
+        std::future<NChannelMessageAck> updateChatMessageAsync(
+            const std::string& channelId,
+            const std::string& messageId,
+            const std::string& content
+        ) override;
+
+        std::future<void> removeChatMessageAsync(
+            const std::string& channelId,
+            const std::string& messageId
+        ) override;
+
+        std::future<NMatch> createMatchAsync() override;
+
+        std::future<NMatch> joinMatchAsync(
+            const std::string& matchId,
+            const NStringMap& metadata
+        ) override;
+
+        std::future<NMatch> joinMatchByTokenAsync(
+            const std::string& token
+        ) override;
+
+        std::future<void> leaveMatchAsync(
+            const std::string& matchId
+        ) override;
+
+        std::future<NMatchmakerTicket> addMatchmakerAsync(
+            const opt::optional<int32_t>& minCount = opt::nullopt,
+            const opt::optional<int32_t>& maxCount = opt::nullopt,
+            const opt::optional<std::string>& query = opt::nullopt,
+            const NStringMap& stringProperties = {},
+            const NStringDoubleMap& numericProperties = {},
+            const opt::optional<int32_t>& countMultiple = opt::nullopt
+        ) override;
+
+        std::future<void> removeMatchmakerAsync(
+            const std::string& ticket
+        ) override;
+
+        std::future<void> sendMatchDataAsync(
+            const std::string& matchId,
+            std::int64_t opCode,
+            const NBytes& data,
+            const std::vector<NUserPresence>& presences = {}
+        ) override;
+
+        std::future<NStatus> followUsersAsync(
+            const std::vector<std::string>& userIds
+        ) override;
+
+        std::future<void> unfollowUsersAsync(
+            const std::vector<std::string>& userIds
+        ) override;
+
+        std::future<void> updateStatusAsync(
+            const std::string& status
+        ) override;
+
+        std::future<NRpc> rpcAsync(
+            const std::string& id,
+            const opt::optional<std::string>& payload = opt::nullopt
+        ) override;
+
+        std::future<void> acceptPartyMemberAsync(const std::string& partyId, NUserPresence& presence) override;
+
+        std::future<NPartyMatchmakerTicket> addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
+            const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {},
+            const opt::optional<int32_t>& countMultiple = opt::nullopt) override;
+
+        std::future<void> closePartyAsync(const std::string& partyId) override;
+
+        std::future<NParty> createPartyAsync(bool open, int maxSize) override;
+
+        std::future<void> joinPartyAsync(const std::string& partyId) override;
+
+        std::future<void> leavePartyAsync(const std::string& partyId) override;
+
+        std::future<NPartyJoinRequest> listPartyJoinRequestsAsync(const std::string& partyId) override;
+
+        std::future<void> promotePartyMemberAsync(const std::string& partyId, NUserPresence& partyMember) override;
+
+        std::future<void> removeMatchmakerPartyAsync(const std::string& partyId, const std::string& ticket) override;
+
+        std::future<void> removePartyMemberAsync(const std::string& partyId, NUserPresence& presence) override;
+
+        std::future<void> sendPartyDataAsync(const std::string& partyId, long opCode, NBytes& data) override;
 
         protected:
+            void onTransportConnected();
             void onTransportDisconnected(const NRtClientDisconnectInfo& info);
             void onTransportError(const std::string& description);
             void onTransportMessage(const NBytes& data);
@@ -232,7 +339,6 @@ namespace Nakama {
             bool _heartbeatFailureReported = false;
             opt::optional<int> _heartbeatIntervalMs = 5000;
             std::atomic<bool> _wantDisconnect = false;
-
+            std::unique_ptr<std::promise<void>> _connectPromise = nullptr;
     };
-
 }
