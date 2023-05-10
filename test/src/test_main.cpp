@@ -70,17 +70,17 @@ ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
 
 int runAllTests()
 {
-//    test_internals();
-//    test_authentication();
-//    test_getAccount();
-//    test_disconnect();
-//    test_errors();
-//    test_restoreSession();
-//    test_storage();
-//    test_groups();
-//    test_friends();
+    test_internals();
+    test_authentication();
+    test_getAccount();
+    test_disconnect();
+    test_errors();
+    test_restoreSession();
+    test_storage();
+    test_groups();
+    test_friends();
+    test_listMatches();
     test_realtime();
-//    test_listMatches();
 
     // total stats
     uint32_t testsPassed = (g_runTestsCount - g_failedTestsCount);

@@ -49,22 +49,19 @@ namespace Nakama {
 
         NTest::NTest(const char* name, bool threadedTick) : NTest(std::string(name), threadedTick)
         {
-            NLOG_INFO("created test");
-
         }
 
         NTest::~NTest()
         {
-            NLOG_INFO("starting destructor");
+            if (_threadedTick)
+            {
+                _tickThread.join();
 
-            _tickThread.join();
-            NLOG_INFO("finished destructor");
-
+            }
         }
 
         void NTest::runTest()
         {
-            NLOG_INFO("running test");
 
             if (_threadedTick)
             {

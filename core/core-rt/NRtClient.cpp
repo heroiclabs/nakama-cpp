@@ -109,11 +109,15 @@ void NRtClient::connect(NSessionPtr session, bool createStatus, NRtClientProtoco
 
 std::future<void> NRtClient::connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol)
 {
-    bool futureCompleted = _connectPromise->get_future().wait_for(std::chrono::seconds(0)) == std::future_status::ready;
-    if (!futureCompleted)
+    try
     {
         // if old promise not ready, just complete it for the user.
         _connectPromise->set_value();
+    }
+    catch(const std::future_error& e)
+    {
+        // if we get an exception here, it means the connect promise has completed already from a previous connect.
+        // this is very expected.
     }
 
     // stomp the old promise
@@ -185,7 +189,6 @@ void NRtClient::disconnect(const NRtClientDisconnectInfo& info)
 
 void NRtClient::onTransportConnected()
 {
-    NLOG_DEBUG("connected");
     _heartbeatFailureReported = false;
 
     if (_listener)
@@ -207,7 +210,17 @@ void NRtClient::onTransportDisconnected(const NRtClientDisconnectInfo& info)
         _listener->onDisconnect(info);
     }
 
-    _connectPromise->set_exception(std::make_exception_ptr<NRtException>(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "Disconnected while connecting."))));
+    try
+    {
+        // assume we are disconnecting mid-connect
+       _connectPromise->set_exception(std::make_exception_ptr<NRtException>(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "Disconnected while connecting."))));
+    }
+    catch(const std::future_error& e)
+    {
+        // we've already set the state on this, so we've already connected, so nothing else to do.
+    }
+
+
 }
 
 void NRtClient::onTransportError(const std::string& description)

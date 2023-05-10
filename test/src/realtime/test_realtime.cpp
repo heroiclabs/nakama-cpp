@@ -34,7 +34,6 @@ void test_rt_joinGroupChat();
 void test_rt_quickdestroy();
 void test_rt_rapiddisconnect();
 void test_rt_reconnect();
-void test_rt_heartbeat();
 
 
 void run_realtime_tests()
@@ -52,15 +51,12 @@ void run_realtime_tests()
 void test_realtime()
 {
     // These tests are not protocol specific
-    //test_rt_quickdestroy();
-    //test_rt_rapiddisconnect();
-    //// change to 10 iterations to trigger https://github.com/microsoft/libHttpClient/issues/698 bug
-    //for (int i = 0; i < 1; i++) {
-    //    test_rt_reconnect();
-    //}
+    test_rt_rapiddisconnect();
+    /// change to 10 iterations to trigger https://github.com/microsoft/libHttpClient/issues/698 bug
+    for (int i = 0; i < 1; i++) {
+        test_rt_reconnect();
+    }
 
-
-//    test_rt_heartbeat();
     NTest::RtProtocol = NRtClientProtocol::Json;
     run_realtime_tests();
 

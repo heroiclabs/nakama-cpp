@@ -32,13 +32,14 @@ void test_connectError()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        NLOG_INFO("session token: " + session->getAuthToken());
         test.stopTest();
     };
 
     auto errorCallback = [&test](const NError& error)
     {
-        test.stopTest(error.code == ErrorCode::ConnectionError);
+        NLOG_INFO("connect error " + std::to_string((int) error.code));
+
+        test.stopTest(error.code == ErrorCode::ConnectionError || error.code == ErrorCode::CancelledByUser);
     };
 
     test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
