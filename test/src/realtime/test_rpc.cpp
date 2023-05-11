@@ -74,7 +74,7 @@ namespace Nakama {
             auto rpc3 = test.client->rpcAsync(session, "clientrpc.rpc_error", "{}").get();
         }
         // TODO make catching NException work
-        catch (const std::runtime_error& e)
+        catch (const std::exception& e)
         {
             caughtException1 = true;
         }
@@ -102,7 +102,7 @@ namespace Nakama {
             test.rtClient->rpcAsync("clientrpc.rpc_error", "{}").get();
         }
         // TODO make catching NRtException work
-        catch(const std::runtime_error& e)
+        catch(const std::exception& e)
         {
             caughtException2 = true;
         }

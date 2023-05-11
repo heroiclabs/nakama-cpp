@@ -31,6 +31,7 @@ project(nakama-test LANGUAGES C CXX)
 
 option(LOGS_ENABLED "Enable log output" ON)
 option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
+option(NAKAMA_SDK_CONFIG Debug)
 
 if(REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
@@ -45,7 +46,7 @@ else()
     endif()
 
     execute_process(
-        COMMAND ${CMAKE_COMMAND} --build ../build/${PRESET_NAME} --config MinSizeRel --target install
+        COMMAND ${CMAKE_COMMAND} --build ../build/${PRESET_NAME} --config ${NAKAMA_SDK_CONFIG} --target install
         RESULT_VARIABLE result
     )
 

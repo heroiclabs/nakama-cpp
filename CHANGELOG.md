@@ -4,6 +4,14 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [2.8.0] - [2023-05-11]
+### Added
+- Added an additional `std::future`-based API to `NClient` and `NRtClient`. All methods in these clients have future-based counterpart suffixed with `Async`.
+### Fixed
+- Fixed multiple errant compiler directives in `NClient`.
+### Changed
+- Simplified test suite and improved build system for proprietary platforms.
+
 ### [2.7.2] - [2023-03-15]
 ### Added
 - Added support for listing matches with a query.
