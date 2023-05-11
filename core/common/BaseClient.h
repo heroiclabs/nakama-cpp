@@ -202,7 +202,7 @@ namespace Nakama {
             const opt::optional<bool>& reset = opt::nullopt
         ) override;
 
-        std::future<const NAccount&> getAccountAsync(
+        std::future<NAccount> getAccountAsync(
             NSessionPtr session
         ) override;
 
@@ -216,7 +216,7 @@ namespace Nakama {
             const opt::optional<std::string>& timezone    = opt::nullopt
         ) override;
 
-        std::future<const NUsers&> getUsersAsync(
+        std::future<NUsers> getUsersAsync(
             NSessionPtr session,
             const std::vector<std::string>& ids,
             const std::vector<std::string>& usernames = {},
@@ -248,7 +248,7 @@ namespace Nakama {
             const std::string& cursor = ""
         ) override;;
 
-        std::future<const NGroup&> createGroupAsync(
+        std::future<NGroup> createGroupAsync(
             NSessionPtr session,
             const std::string& name,
             const std::string& description = "",
@@ -448,7 +448,7 @@ namespace Nakama {
             const opt::optional<std::string>& cursor = opt::nullopt
         ) override;
 
-        std::future<const NStorageObjectAcks&> writeStorageObjectsAsync(
+        std::future<NStorageObjectAcks> writeStorageObjectsAsync(
             NSessionPtr session,
             const std::vector<NStorageObjectWrite>& objects
         ) override;
@@ -463,13 +463,13 @@ namespace Nakama {
             const std::vector<NDeleteStorageObjectId>& objectIds
         ) override;
 
-        std::future<const NRpc&> rpcAsync(
+        std::future<NRpc> rpcAsync(
             NSessionPtr session,
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt
         ) override;
 
-        std::future<const NRpc&> rpcAsync(
+        std::future<NRpc> rpcAsync(
             const std::string& http_key,
             const std::string& id,
             const opt::optional<std::string>& payload = opt::nullopt

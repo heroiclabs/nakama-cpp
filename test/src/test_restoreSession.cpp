@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
+#include "globals.h"
+#include "NTest.h"
 #include "nakama-cpp/NUtils.h"
 
 namespace Nakama {
@@ -24,9 +25,7 @@ using namespace std;
 
 void test_restoreSession()
 {
-    NCppTest test(__func__);
-
-    test.createWorkingClient();
+    NTest test(__func__);
 
     NSessionPtr my_session;
 

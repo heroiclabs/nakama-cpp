@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
+#include "NTest.h"
+#include "nakama-cpp/NSessionInterface.h"
+#include "nakama-cpp/log/NLogger.h"
 
 namespace Nakama {
 namespace Test {
 
 using namespace std;
 
-class NGroupsTest : public NCppTest
+class NGroupsTest : public NTest
 {
     const std::string group_name = "We're-Nakama-Lovers";
 
     NSessionPtr session;
 
 public:
-    NGroupsTest(const char* name) : NCppTest(name) {}
+    NGroupsTest(std::string name) : NTest(name) {}
 
     void runTest() override
     {
-        createWorkingClient();
-
         auto successCallback = [this](NSessionPtr sess)
         {
             this->session = sess;
@@ -45,7 +45,7 @@ public:
 
         client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
-        NCppTest::runTest();
+        NTest::runTest();
     }
 
     void listGroups()
@@ -113,19 +113,17 @@ public:
 };
 
 // this test must run after NGroupTest
-class NGroupUsersTest : public NCppTest
+class NGroupUsersTest : public NTest
 {
     const std::string group_name = "We're-Nakama-Lovers";
 
     NSessionPtr session;
 
 public:
-    explicit NGroupUsersTest(const char* name) : NCppTest(name) {}
+    explicit NGroupUsersTest(std::string name) : NTest(name) {}
 
     void runTest() override
     {
-        createWorkingClient();
-
         auto successCallback = [this](NSessionPtr sess)
         {
             this->session = sess;
@@ -137,7 +135,7 @@ public:
 
         client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
-        NCppTest::runTest();
+        NTest::runTest();
     }
 
     void listGroups()

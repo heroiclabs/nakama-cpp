@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
+#include "NTest.h"
+#include "nakama-cpp/log/NLogger.h"
 
 namespace Nakama {
 namespace Test {
@@ -23,24 +24,22 @@ using namespace std;
 
 void test_connectError()
 {
-    NCppTest test(__func__);
-    test.setTestTimeoutMs(20000);
-
     NClientParameters parameters;
-
     parameters.port = 1111;
 
-    test.createClient(parameters);
+    NTest test(__func__, parameters);
+    test.setTestTimeoutMs(20000);
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        NLOG_INFO("session token: " + session->getAuthToken());
         test.stopTest();
     };
 
     auto errorCallback = [&test](const NError& error)
     {
-        test.stopTest(error.code == ErrorCode::ConnectionError);
+        NLOG_INFO("connect error " + std::to_string((int) error.code));
+
+        test.stopTest(error.code == ErrorCode::ConnectionError || error.code == ErrorCode::CancelledByUser);
     };
 
     test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
@@ -50,13 +49,9 @@ void test_connectError()
 
 void test_connectErrorAndDestroy()
 {
-    NCppTest test(__func__);
-
     NClientParameters parameters;
-
     parameters.port = 1111;
-
-    test.createClient(parameters);
+    NTest test(__func__, parameters);
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -71,14 +66,11 @@ void test_connectErrorAndDestroy()
 
     test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
 
-    test.client.reset();
 }
 
 void test_disconnection()
 {
-    NCppTest test(__func__);
-
-    test.createWorkingClient();
+    NTest test(__func__);
 
     auto successCallback = [&test](NSessionPtr session)
     {

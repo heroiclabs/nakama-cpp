@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
+#include "globals.h"
+#include "NTest.h"
 
 namespace Nakama {
 namespace Test {
@@ -23,9 +24,7 @@ using namespace std;
 
 void test_authenticateEmail1()
 {
-    NCppTest test(__func__);
-
-    test.createWorkingClient();
+    NTest test(__func__);
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -38,9 +37,7 @@ void test_authenticateEmail1()
 
 void test_authenticateEmail2()
 {
-    NCppTest test(__func__);
-
-    test.createWorkingClient();
+    NTest test(__func__);
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -57,9 +54,7 @@ void test_authenticateEmail2()
 
 void test_authenticateDevice()
 {
-    NCppTest test(__func__);
-
-    test.createWorkingClient();
+    NTest test(__func__);
 
     auto successCallback = [&test](NSessionPtr session)
     {
@@ -74,15 +69,12 @@ void test_authenticateDevice()
 
 void test_authenticateDevice2()
 {
-    NCppTest test(__func__);
-
-    test.createWorkingClient();
+    NTest test(__func__);
 
     auto successCallback = [&test](NSessionPtr session)
     {
         NLOG_INFO("session token: " + session->getAuthToken());
-        test.stopTest(session->getAuthToken().empty() == false);
-        NTEST_ASSERT(session->getVariable("param1") == "test value");
+        test.stopTest(session->getAuthToken().empty() == false && session->getVariable("param1") == "test value");
     };
 
     NStringMap vars;
@@ -96,9 +88,7 @@ void test_authenticateDevice2()
 
 void test_authenticateRefresh()
 {
-    NCppTest test(__func__);
-
-    test.createWorkingClient();
+    NTest test(__func__);
 
     auto successCallback = [&test](NSessionPtr session1)
     {

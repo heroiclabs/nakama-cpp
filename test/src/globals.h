@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 The Nakama Authors
+ * Copyright 2023 The Nakama Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,23 @@
 
 #pragma once
 
-#include "test_base.h"
-#include "nakama-cpp/Nakama.h"
+#include "nakama-cpp/log/NLogger.h"
+#include "NTest.h"
 
 namespace Nakama {
-namespace Test {
+    namespace Test {
+        static inline void NTEST_ASSERT(bool cond)
+        {
+            if (!cond)
+            {
+                NLOG_INFO("TEST ASSERT FAILED!");
+                NLOG_INFO(std::string(__FILE__) + ":" + std::to_string(__LINE__));
+                abort();
+            }
+        }
 
-    class NCppTest : public NTest
-    {
-    public:
-        explicit NCppTest(const char* name, bool threadedTick = false);
-
-        void createWorkingClient() override;
-        NClientPtr createClient(const NClientParameters& parameters);
-        void tick() override;
-
-        NClientPtr client;
-    };
-
-    void setWorkingClientParameters(NClientParameters& parameters);
-
-} // namespace Test
-} // namespace Nakama
+        // stats
+        extern uint32_t g_runTestsCount;
+        extern uint32_t g_failedTestsCount;
+    }
+}

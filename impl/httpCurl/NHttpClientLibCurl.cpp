@@ -51,7 +51,6 @@ static int debug_callback(CURL *handle, curl_infotype type,
 static size_t write_callback(char* buffer, size_t size, size_t nmemb, void* user_ctx)
 {
     Nakama::NHttpClientLibCurlContext* curl_ctx = (Nakama::NHttpClientLibCurlContext*) user_ctx;
-    NLOG(Nakama::NLogLevel::Info, "received response... \n %s", buffer);
 
     if (buffer != NULL)
     {
@@ -168,14 +167,17 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
         return;
     }
 
+#ifdef CURL_DEBUG
     curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_DEBUGFUNCTION, debug_callback);
     if (curl_code != CURLE_OK)
     {
         handle_curl_easy_set_opt_error("adding debug function", curl_code, callback);
         return;
     }
+#endif
 
     CURLMcode curl_multi_code = curl_multi_add_handle(_curl_multi.get(), curl_easy.get());
+
     if (curl_multi_code != CURLM_OK)
     {
         auto response = std::shared_ptr<NHttpResponse>(new NHttpResponse());
@@ -248,6 +250,8 @@ void NHttpClientLibCurl::tick()
             auto callback = context->get_callback();
             if (callback != NULL)
             {
+                NLOG_DEBUG("invoking curl callback");
+
                 auto response = std::shared_ptr<NHttpResponse>(new NHttpResponse());
                 response->body = context->get_body();
 

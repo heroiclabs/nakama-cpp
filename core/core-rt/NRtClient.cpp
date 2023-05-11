@@ -21,6 +21,7 @@
 #include "NRtClientProtocol_Protobuf.h"
 #include "NRtClientProtocol_Json.h"
 #include "nakama-cpp/NUtils.h"
+#include "nakama-cpp/realtime/rtdata/NRtException.h"
 
 #undef NMODULE_NAME
 #define NMODULE_NAME "NRtClient"
@@ -32,6 +33,7 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int32_t
     , _port(port)
     , _ssl(ssl)
     , _transport(transport)
+    , _connectPromise(std::make_unique<std::promise<void>>())
 {
     NLOG_INFO("Created");
 
@@ -42,17 +44,7 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int32_t
         NLOG(NLogLevel::Info, "using default port %d", _port);
     }
 
-    _transport->setConnectCallback([this]()
-    {
-        NLOG_DEBUG("connected");
-        _heartbeatFailureReported = false;
-
-        if (_listener)
-        {
-            _listener->onConnect();
-        }
-    });
-
+    _transport->setConnectCallback(std::bind(&NRtClient::onTransportConnected, this));
     _transport->setErrorCallback(std::bind(&NRtClient::onTransportError, this, std::placeholders::_1));
     _transport->setDisconnectCallback(std::bind(&NRtClient::onTransportDisconnected, this, std::placeholders::_1));
     _transport->setMessageCallback(std::bind(&NRtClient::onTransportMessage, this, std::placeholders::_1));
@@ -115,6 +107,34 @@ void NRtClient::connect(NSessionPtr session, bool createStatus, NRtClientProtoco
     _transport->connect(url, transportType);
 }
 
+std::future<void> NRtClient::connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol)
+{
+    try
+    {
+        // if old promise not ready, just complete it for the user.
+        _connectPromise->set_value();
+    }
+    catch(const std::future_error& e)
+    {
+        // if we get an exception here, it means the connect promise has completed already from a previous connect.
+        // this is very expected.
+    }
+
+    // stomp the old promise
+    _connectPromise = std::make_unique<std::promise<void>>();
+
+    // already connected
+    if (_transport->isConnected()) {
+
+        _connectPromise->set_value();
+        return _connectPromise->get_future();
+    }
+
+    connect(session, createStatus, protocol);
+
+    return _connectPromise->get_future();
+}
+
 bool NRtClient::isConnected() const
 {
     return _transport->isConnected();
@@ -124,6 +144,15 @@ void NRtClient::disconnect()
 {
     NRtClientDisconnectInfo info{NRtClientDisconnectInfo::Code::NORMAL_CLOSURE, "Disconnect initiated by us", false};
     disconnect(info);
+}
+
+std::future<void> NRtClient::disconnectAsync()
+{
+    // currently, disconnect callback is invoked immediately by client here, so we just return a completed future.
+    disconnect();
+    std::promise<void> promise = std::promise<void>();
+    promise.set_value();
+    return promise.get_future();
 }
 
 void NRtClient::disconnect(const NRtClientDisconnectInfo& info)
@@ -158,6 +187,18 @@ void NRtClient::disconnect(const NRtClientDisconnectInfo& info)
     }
 }
 
+void NRtClient::onTransportConnected()
+{
+    _heartbeatFailureReported = false;
+
+    if (_listener)
+    {
+        _listener->onConnect();
+    }
+
+    _connectPromise->set_value();
+}
+
 void NRtClient::onTransportDisconnected(const NRtClientDisconnectInfo& info)
 {
     NLOG(NLogLevel::Debug, "code: %u, remote: %d, %s", info.code, info.remote, info.reason.c_str());
@@ -168,6 +209,18 @@ void NRtClient::onTransportDisconnected(const NRtClientDisconnectInfo& info)
     {
         _listener->onDisconnect(info);
     }
+
+    try
+    {
+        // assume we are disconnecting mid-connect
+       _connectPromise->set_exception(std::make_exception_ptr<NRtException>(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "Disconnected while connecting."))));
+    }
+    catch(const std::future_error& e)
+    {
+        // we've already set the state on this, so we've already connected, so nothing else to do.
+    }
+
+
 }
 
 void NRtClient::onTransportError(const std::string& description)
@@ -183,6 +236,12 @@ void NRtClient::onTransportError(const std::string& description)
     if (_listener)
     {
         _listener->onError(error);
+    }
+
+    bool futureCompleted = _connectPromise->get_future().wait_for(std::chrono::seconds(0)) == std::future_status::ready;
+    if (!futureCompleted)
+    {
+        _connectPromise->set_exception(std::make_exception_ptr<NRtException>(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "An error occurred while connecting."))));
     }
 }
 
@@ -1109,6 +1168,357 @@ void NRtClient::ping(std::function<void()> successCallback, RtErrorCallback erro
     ctx->errorCallback = errorCallback;
 
     send(msg);
+}
+
+std::future<NChannelPtr> NRtClient::joinChatAsync(
+            const std::string& target,
+            NChannelType type,
+            const opt::optional<bool>& persistence,
+            const opt::optional<bool>& hidden
+)
+{
+    auto promise = std::make_shared<std::promise<NChannelPtr>>();
+
+    joinChat(target, type, persistence, hidden,
+        [=](NChannelPtr channel) {
+            promise->set_value(channel);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::leaveChatAsync(
+    const std::string& channelId
+)
+{
+    leaveChatAsync(channelId);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<NChannelMessageAck> NRtClient::writeChatMessageAsync(
+    const std::string& channelId,
+    const std::string& content
+)
+{
+    auto promise = std::make_shared<std::promise<NChannelMessageAck>>();
+
+    writeChatMessage(channelId, content,
+        [=](const NChannelMessageAck& ack) {
+            promise->set_value(ack);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<NChannelMessageAck> NRtClient::updateChatMessageAsync(
+    const std::string& channelId,
+    const std::string& messageId,
+    const std::string& content
+)
+{
+    auto promise = std::make_shared<std::promise<NChannelMessageAck>>();
+
+    updateChatMessage(channelId, messageId, content,
+        [=](const NChannelMessageAck& ack) {
+            promise->set_value(ack);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::removeChatMessageAsync(
+    const std::string& channelId,
+    const std::string& messageId
+)
+{
+    removeChatMessage(channelId, messageId);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<NMatch> NRtClient::createMatchAsync()
+{
+    auto promise = std::make_shared<std::promise<NMatch>>();
+
+    createMatch(
+        [=](const NMatch& match) {
+            promise->set_value(match);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+        return promise->get_future();
+}
+
+std::future<NMatch> NRtClient::joinMatchAsync(
+    const std::string& matchId,
+    const NStringMap& metadata
+)
+{
+    auto promise = std::make_shared<std::promise<NMatch>>();
+
+    joinMatch(matchId, metadata,
+        [=](const NMatch& match) {
+            promise->set_value(match);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<NMatch> NRtClient::joinMatchByTokenAsync(
+    const std::string& token
+)
+{
+    auto promise = std::make_shared<std::promise<NMatch>>();
+
+    joinMatchByToken(token,
+        [=](const NMatch& match) {
+            promise->set_value(match);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::leaveMatchAsync(
+    const std::string& matchId
+)
+{
+    leaveMatch(matchId);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<NMatchmakerTicket> NRtClient::addMatchmakerAsync(
+    const opt::optional<int32_t>& minCount,
+    const opt::optional<int32_t>& maxCount,
+    const opt::optional<std::string>& query,
+    const NStringMap& stringProperties,
+    const NStringDoubleMap& numericProperties,
+    const opt::optional<int32_t>& countMultiple
+)
+{
+    auto promise = std::make_shared<std::promise<NMatchmakerTicket>>();
+
+    addMatchmaker(minCount, maxCount, query, stringProperties, numericProperties, countMultiple,
+        [=](const NMatchmakerTicket& ticket) {
+            promise->set_value(ticket);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::removeMatchmakerAsync(
+    const std::string& ticket
+)
+{
+    removeMatchmaker(ticket);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::sendMatchDataAsync(
+    const std::string& matchId,
+    std::int64_t opCode,
+    const NBytes& data,
+    const std::vector<NUserPresence>& presences
+)
+{
+    sendMatchData(matchId, opCode, data);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<NStatus> NRtClient::followUsersAsync(
+    const std::vector<std::string>& userIds
+)
+{
+    auto promise = std::make_shared<std::promise<NStatus>>();
+
+    followUsers(userIds,
+        [=](const NStatus& ticket) {
+            promise->set_value(ticket);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::unfollowUsersAsync(
+    const std::vector<std::string>& userIds
+)
+{
+    unfollowUsers(userIds);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::updateStatusAsync(
+    const std::string& status
+)
+{
+    updateStatusAsync(status);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<NRpc> NRtClient::rpcAsync(
+    const std::string& id,
+    const opt::optional<std::string>& payload
+)
+{
+    auto promise = std::make_shared<std::promise<NRpc>>();
+    std::cout << "rpc async";
+
+    rpc(id, payload,
+        [=](const NRpc& rpc) {
+            promise->set_value(rpc);
+        },
+        [=](const NRtError& error) {
+    std::cout << "exception in lambda";
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::acceptPartyMemberAsync(const std::string& partyId, NUserPresence& presence)
+{
+    acceptPartyMember(partyId, presence);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<NPartyMatchmakerTicket> NRtClient::addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
+    const NStringMap& stringProperties, const NStringDoubleMap& numericProperties,
+    const opt::optional<int32_t>& countMultiple)
+{
+    auto promise = std::make_shared<std::promise<NPartyMatchmakerTicket>>();
+
+    addMatchmakerParty(partyId, query, minCount, maxCount, stringProperties, numericProperties, countMultiple,
+        [=](const NPartyMatchmakerTicket& ticket) {
+            promise->set_value(ticket);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::closePartyAsync(const std::string& partyId)
+{
+    closeParty(partyId);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<NParty> NRtClient::createPartyAsync(bool open, int maxSize)
+{
+    auto promise = std::make_shared<std::promise<NParty>>();
+
+    createParty(open, maxSize,
+        [=](const NParty& party) {
+            promise->set_value(party);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::joinPartyAsync(const std::string& partyId)
+{
+    joinParty(partyId);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::leavePartyAsync(const std::string& partyId)
+{
+    leaveParty(partyId);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<NPartyJoinRequest> NRtClient::listPartyJoinRequestsAsync(const std::string& partyId)
+{
+    auto promise = std::make_shared<std::promise<NPartyJoinRequest>>();
+
+    listPartyJoinRequests(partyId,
+        [=](const NPartyJoinRequest& partyJoinRequest) {
+            promise->set_value(partyJoinRequest);
+        },
+        [=](const NRtError& error) {
+            promise->set_exception(std::make_exception_ptr<NRtException>(error));
+        });
+
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::promotePartyMemberAsync(const std::string& partyId, NUserPresence& partyMember)
+{
+    promotePartyMember(partyId, partyMember);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::removeMatchmakerPartyAsync(const std::string& partyId, const std::string& ticket)
+{
+    removeMatchmakerParty(partyId, ticket);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::removePartyMemberAsync(const std::string& partyId, NUserPresence& presence)
+{
+    removePartyMember(partyId, presence);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
+}
+
+std::future<void> NRtClient::sendPartyDataAsync(const std::string& partyId, long opCode, NBytes& data)
+{
+    sendPartyData(partyId, opCode, data);
+    auto promise = std::make_shared<std::promise<void>>();
+    promise->set_value();
+    return promise->get_future();
 }
 
 std::shared_ptr<RtRequestContext> NRtClient::createReqContext(::nakama::realtime::Envelope& msg)

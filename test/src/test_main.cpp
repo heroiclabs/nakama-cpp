@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
 #include "test_serverConfig.h"
-#include "TaskExecutor.h"
 #include "nakama-cpp/NUtils.h"
 #include "nakama-cpp/NPlatformParams.h"
 #include "nakama-cpp/ClientFactory.h"
+#include "globals.h"
 
 #if defined(__ANDROID__)
 #include <jni.h>
@@ -55,48 +54,19 @@ void test_listMatches();
 void test_realtime();
 void test_internals();
 
-static std::string g_serverHost = SERVER_HOST;
-
-void setWorkingClientParameters(NClientParameters& parameters)
+ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
 {
-    parameters.host      = g_serverHost;
-    parameters.port      = SERVER_PORT;
-    parameters.serverKey = SERVER_KEY;
-    parameters.ssl       = SERVER_SSL;
-}
-
-// *************************************************************
-// NCppTest
-// *************************************************************
-NCppTest::NCppTest(const char* name, bool threadedTick) : NTest(name, threadedTick)
-{
-}
-
-void NCppTest::createWorkingClient()
-{
-    NClientParameters parameters;
-    setWorkingClientParameters(parameters);
-    createClient(parameters);
-}
-
-NClientPtr NCppTest::createClient(const NClientParameters& parameters)
-{
-    client = createDefaultClient(parameters);
-
-    if (client)
+    if (totalCount > 0)
     {
-        client->setErrorCallback([this](const NError& error) { stopTest(error); });
+        os << count * 100 / totalCount << "%";
     }
-    return client;
-}
+    else
+    {
+        os << "0%";
+    }
 
-void NCppTest::tick()
-{
-    client->tick();
-    TaskExecutor::instance().tick();
+    return os;
 }
-
-// *************************************************************
 
 int runAllTests()
 {
@@ -109,53 +79,20 @@ int runAllTests()
     test_storage();
     test_groups();
     test_friends();
-    test_realtime();
     test_listMatches();
+    test_realtime();
 
     // total stats
-    printTotalStats();
+    uint32_t testsPassed = (g_runTestsCount - g_failedTestsCount);
 
-    return getFailedCount() == 0 ? 0 : -1;
+    NLOG_INFO("Total tests : " + std::to_string(g_runTestsCount));
+    NLOG_INFO("Tests passed: " + std::to_string(testsPassed) +" (");
+    printPercent(cout, g_runTestsCount, testsPassed);
+    NLOG_INFO("Tests failed: " + std::to_string(g_failedTestsCount) + " (");
+    printPercent(cout, g_runTestsCount, g_failedTestsCount);
+
+    return g_failedTestsCount == 0 ? 0 : -1;
 }
-
-// will try to connect to server until connected
-class NConnectTest : public NCppTest
-{
-public:
-    NConnectTest() : NCppTest("NConnectTest") {}
-
-    void connect(uint32_t retryPeriodMs)
-    {
-        createWorkingClient();
-
-        client->setErrorCallback([this, retryPeriodMs](const NError& /*error*/)
-        {
-            NLOG(Nakama::NLogLevel::Info, "Not connected. Will retry in %d msec...",  retryPeriodMs);
-        });
-        auth();
-        runTest();
-    }
-
-    void auth()
-    {
-        NLOG_INFO("Connecting...");
-
-        auto successCallback = [this](NSessionPtr /*session*/)
-        {
-            NLOG_INFO("Connected");
-            stopTest(true);
-        };
-        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
-    }
-
-    void tick() override
-    {
-        NCppTest::tick();
-    }
-
-private:
-};
-
 
 
 } // namespace Test
@@ -166,30 +103,21 @@ int mainHelper(int argc, char *argv[])
 {
     int res = 0;
 
-    if (argc > 1) {
-        Nakama::Test::g_serverHost = argv[1];
-    }
-
     Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
 
     NLOG(Nakama::NLogLevel::Info, "server config...");
-    NLOG(Nakama::NLogLevel::Info, "host     : %s", Nakama::Test::g_serverHost.c_str());
+    NLOG(Nakama::NLogLevel::Info, "host     : %s", SERVER_HOST);
     NLOG(Nakama::NLogLevel::Info, "HTTP port: %d", SERVER_HTTP_PORT);
     NLOG(Nakama::NLogLevel::Info, "key      : %s", SERVER_KEY);
     NLOG(Nakama::NLogLevel::Info, "ssl      : %s", (SERVER_SSL ? "true" : "false"));
 
 
-    Nakama::Test::NConnectTest connectTest;
-    connectTest.connect(2000);
-
     // REST client tests
     g_clientType = ClientType_Rest;
-    if (Nakama::Test::NCppTest("").createClient({})) {
-        res = Nakama::Test::runAllTests();
-        if (res != 0) {
-            return res;
-        }
-    };
+    res = Nakama::Test::runAllTests();
+    if (res != 0) {
+        return res;
+    }
 
     return res;
 }

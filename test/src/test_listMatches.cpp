@@ -14,24 +14,23 @@
  * limitations under the License.
  */
 
-#include "test_main.h"
+#include "NTest.h"
+#include "globals.h"
 
 namespace Nakama {
 namespace Test {
 
 using namespace std;
 
-class NMatchListTest : public NCppTest
+class NMatchListTest : public NTest
 {
     NSessionPtr session;
 
 public:
-    explicit NMatchListTest(const char* name) : NCppTest(name) {}
+    explicit NMatchListTest(const char* name) : NTest(name) {}
 
     void runTest() override
     {
-        createWorkingClient();
-
         auto successCallback = [this](NSessionPtr sess)
         {
             this->session = sess;
@@ -43,7 +42,7 @@ public:
 
         client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
-        NCppTest::runTest();
+        NTest::runTest();
     }
 
     void listMatches()
@@ -53,7 +52,7 @@ public:
             auto successCallback = [this](NMatchListPtr matchList)
             {
                 NLOG_INFO("Expecting match count to be 2. Actual count: " + std::to_string(matchList->matches.size()));
-                NTEST_ASSERT(matchList->matches.size() == 2)
+                NTEST_ASSERT(matchList->matches.size() == 2);
                 stopTest(true);
             };
 

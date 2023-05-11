@@ -14,201 +14,109 @@
  * limitations under the License.
  */
 
-#include "realtime/RtClientTestBase.h"
+#include "nakama-cpp/log/NLogger.h"
+#include "NTest.h"
+#include "TestGuid.h"
 
 namespace Nakama {
-namespace Test {
+    namespace Test {
 
-using namespace std;
+        using namespace std;
 
-void test_rt_match_join(NRtClientTest& test, const std::string& match_id, const std::string& match_token = "")
-{
-    auto successCallback = [&test](const NMatch& match)
-    {
-        NLOG_INFO("joined match: " + match.matchId);
-
-        std::string payload = "How are you?";
-
-        test.rtClient->sendMatchData(
-            match.matchId,
-            1, // op code
-            payload,
-            {}
-        );
-    };
-
-    if (!match_id.empty())
-    {
-        NStringMap metadata;
-
-        metadata.emplace("key", "value");
-
-        test.rtClient->joinMatch(
-            match_id,
-            metadata,
-            successCallback);
-    }
-    else
-    {
-        test.rtClient->joinMatchByToken(
-            match_token,
-            successCallback);
-    }
-
-    test.listener.setMatchDataCallback([&test](const NMatchData& data)
-    {
-        NLOG_INFO("match data: " + data.data);
-        test.stopTest(true);
-    });
-}
-
-void test_rt_create_match()
-{
-    NRtClientTest test1(__func__);
-    NRtClientTest test2("test_rt_match_join");
-
-    test1.onRtConnect = [&test1, &test2]()
-    {
-        auto successCallback = [&test2](const NMatch& match)
+        void test_rt_create_match()
         {
-            NLOG_INFO("created match: " + match.matchId);
+            const bool threadedTick = true;
+            NTest test1(__func__, threadedTick);
 
-            test2.onRtConnect = [&test2, match]()
-            {
-                test_rt_match_join(test2, match.matchId);
-            };
+            test1.runTest();
 
+            NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+            bool createStatus = false;
+            test1.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
+
+            NMatch match = test1.rtClient->createMatchAsync().get();
+
+            test1.stopTest(true);
+
+            NLOG_INFO("stopped create match");
+        }
+
+        void test_rt_matchmaker()
+        {
+            NLOG_INFO("started testing matchmaker");
+
+            bool threadedTick = true;
+            NTest test1(__func__, threadedTick);
+            NTest test2(std::string(__func__) + std::string("2"), threadedTick);
+
+            test1.setTestTimeoutMs(20000);
+            test2.setTestTimeoutMs(20000);
+
+            test1.runTest();
             test2.runTest();
-        };
 
-        test1.rtClient->createMatch(
-            successCallback);
-    };
+            NLOG_INFO("authing");
 
-    test1.listener.setMatchDataCallback([&test1](const NMatchData& data)
-    {
-        NLOG_INFO("match data: " + data.data);
+            NSessionPtr session = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+            bool createStatus = false;
+            test1.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
 
-        std::string payload = "I'm fine";
+            NLOG_INFO("done 1");
 
-        test1.rtClient->sendMatchData(
-            data.matchId,
-            1, // op code
-            payload,
-            {}
-        );
+            NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+            test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
 
-        test1.stopTest(true);
-    });
+            NLOG_INFO("done 1");
+            NLOG_INFO("connected");
 
-    test1.runTest();
-}
+            auto matchedPromise = std::promise<NMatchmakerMatchedPtr>();
+            auto matched2Promise = std::promise<NMatchmakerMatchedPtr>();
 
-void test_rt_matchmaker2(NRtClientTest& test2)
-{
-    test2.onRtConnect = [&test2]()
-    {
-        auto successCallback = [](const NMatchmakerTicket& ticket)
+            test1.listener.setMatchmakerMatchedCallback([&test1, &matchedPromise](NMatchmakerMatchedPtr matched)
+            {
+                matchedPromise.set_value(matched);
+            });
+
+            test2.listener.setMatchmakerMatchedCallback([&test2, &matched2Promise](NMatchmakerMatchedPtr matched)
+            {
+                matched2Promise.set_value(matched);
+            });
+
+            const int minCount = 2;
+            const int maxCount = 2;
+            const std::string query = "*";
+            const NStringMap stringProperties = {};
+            const NStringDoubleMap numericProperties = {};
+            const int countMultiple = 1;
+
+            NLOG_INFO("adding matchmaker");
+
+            NMatchmakerTicket ticket = test1.rtClient->addMatchmakerAsync(minCount, maxCount, query, stringProperties, numericProperties, countMultiple).get();
+            NMatchmakerTicket ticket2 = test2.rtClient->addMatchmakerAsync(minCount, maxCount, query, stringProperties, numericProperties, countMultiple).get();
+
+
+            NLOG_INFO("got tickets");
+
+
+            NMatchmakerMatchedPtr matched = matchedPromise.get_future().get();
+            NMatchmakerMatchedPtr matched2 = matched2Promise.get_future().get();
+
+            NLOG_INFO("got matched");
+            NLOG_INFO(matched->matchId);
+            NLOG_INFO(matched2->matchId);
+
+            test1.rtClient->joinMatchByTokenAsync(matched->token).get();
+            test2.rtClient->joinMatchByTokenAsync(matched2->token).get();
+
+            test1.stopTest(true);
+            test2.stopTest(true);
+        }
+
+        void test_rt_match()
         {
-            NLOG_INFO("matchmaker ticket: " + ticket.ticket);
-            // waiting for MatchmakerMatchedCallback
-        };
+            test_rt_create_match();
+            test_rt_matchmaker();
+        }
 
-        test2.rtClient->addMatchmaker(
-            2,
-            2,
-            opt::nullopt,
-            {},
-            {},
-            2,
-            successCallback);
-    };
-
-    test2.listener.setMatchmakerMatchedCallback([&test2](NMatchmakerMatchedPtr matched)
-    {
-        NLOG_INFO("matched token: " + matched->token);
-
-        test_rt_match_join(test2, "", matched->token);
-    });
-
-    test2.listener.setMatchDataCallback([&test2](const NMatchData& data)
-    {
-        NLOG_INFO("match data: " + data.data);
-
-        std::string payload = "Nice day today!";
-
-        test2.rtClient->sendMatchData(
-            data.matchId,
-            1, // op code
-            payload,
-            {}
-        );
-
-        test2.stopTest(true);
-    });
-
-    test2.runTest();
-}
-
-void test_rt_matchmaker()
-{
-    NRtClientTest test1(__func__);
-    test1.setTestTimeoutMs(20000);
-    NRtClientTest test2("test_rt_matchmake2");
-    test2.setTestTimeoutMs(20000);
-
-    test1.onRtConnect = [&test1, &test2]()
-    {
-        // run second test
-        test_rt_matchmaker2(test2);
-
-        auto successCallback = [](const NMatchmakerTicket& ticket)
-        {
-            NLOG_INFO("matchmaker ticket: " + ticket.ticket);
-            // waiting for MatchmakerMatchedCallback
-        };
-
-        test1.rtClient->addMatchmaker(
-            2,
-            2,
-            opt::nullopt,
-            {},
-            {},
-            2,
-            successCallback);
-    };
-
-    test1.listener.setMatchmakerMatchedCallback([&test1](NMatchmakerMatchedPtr matched)
-    {
-        NLOG_INFO("matched token: " + matched->token);
-
-        test_rt_match_join(test1, "", matched->token);
-    });
-
-    test1.listener.setMatchDataCallback([&test1](const NMatchData& data)
-    {
-        NLOG_INFO("match data: " + data.data);
-
-        std::string payload = "Nice day today!";
-
-        test1.rtClient->sendMatchData(
-            data.matchId,
-            1, // op code
-            payload,
-            {}
-        );
-
-        test1.stopTest(true);
-    });
-
-    test1.runTest();
-}
-
-void test_rt_match()
-{
-    test_rt_create_match();
-    test_rt_matchmaker();
-}
-
-} // namespace Test
+    } // namespace Test
 } // namespace Nakama
