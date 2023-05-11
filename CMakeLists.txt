@@ -360,6 +360,7 @@ install(TARGETS
             nakama-sdk-core-common
             ${HTTP_IMPL_LIB}
             ${WS_IMPL_LIB}
+            ${LIBHTTPCLIENT_TARGET} ## TODO figure out why some of this and the above targets are needed for static builds.
         EXPORT nakama-export
         FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
