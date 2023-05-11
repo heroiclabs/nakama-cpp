@@ -33,7 +33,7 @@ runs:
       shell: bash
     - id: build
       run: |
-        cmake --preset ${{ inputs.preset }}
+        cmake --preset ${{ inputs.preset }} -DBUILD_SHARED_NAKAMA_SDK=ON
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} --target install run -- ${{ inputs.native-tool-options }}
       shell: bash
       working-directory: ${{ inputs.nakama-cpp-path }}/test

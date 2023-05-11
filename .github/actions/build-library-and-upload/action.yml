@@ -16,7 +16,7 @@ runs:
     - id: build
       run: |
         rm -rf out
-        cmake --preset ${{ inputs.preset }}
+        cmake --preset ${{ inputs.preset }} -DBUILD_SHARED_LIBS=ON
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} --verbose
         cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build-type }}
       working-directory: ${{ inputs.nakama-cpp-path }}
