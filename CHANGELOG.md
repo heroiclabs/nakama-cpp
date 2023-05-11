@@ -7,6 +7,7 @@ The format is based on [keep a changelog](http://keepachangelog.com/) and this p
 ### [2.8.0] - [2023-05-11]
 ### Added
 - Added an additional `std::future`-based API to `NClient` and `NRtClient`. All methods in these clients have future-based counterpart suffixed with `Async`.
+- Added static build support for Nakama SDK via package managers like vcpkg. We have plans to add static distributions to our release pages in the future.
 ### Fixed
 - Fixed multiple errant compiler directives in `NClient`.
 ### Changed

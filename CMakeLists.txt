@@ -20,11 +20,6 @@ set(VCPKG_PREFER_SYSTEM_LIBS OFF)
 set(FETCHCONTENT_FULLY_DISCONNECTED OFF)
 set(FETCHCONTENT_UPDATES_DISCONNECTED OFF)
 
-if(NOT BUILD_SHARED_LIBS)
-    message(WARNING "The Nakama C++ client can only be built as a shared library.")
-    set(BUILD_SHARED_LIBS ON)
-endif()
-
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(DISTRIBUTE_OPTIONAL_LITE "Distribute optional lite with the Nakama client." ON)
 
@@ -166,6 +161,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
 
         set(LIBHTTPCLIENT_OBJECT_LIBRARY TRUE)
+        set(WAS_SHARED_LIBS ${BUILD_SHARED_LIBS})
 
         ## force libhttpclient to build statically
         set(BUILD_SHARED_LIBS OFF)
@@ -180,7 +176,9 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         )
 
         FetchContent_MakeAvailable(libHttpClient)
-        set(BUILD_SHARED_LIBS ON)
+        if (${WAS_SHARED_LIBS})
+            set(BUILD_SHARED_LIBS ON)
+        endif()
 
         if (NOT WS_IMPL STREQUAL "libhttpclient")
             target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
@@ -359,6 +357,10 @@ install(TARGETS
             nakama-sdk
             nakama-sdk-interface
             nakama-api-proto
+            nakama-sdk-core-common
+            ${HTTP_IMPL_LIB}
+            ${WS_IMPL_LIB}
+            ${LIBHTTPCLIENT_TARGET} ## TODO figure out why some of this and the above targets are needed for static builds.
         EXPORT nakama-export
         FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
@@ -368,7 +370,7 @@ install(TARGETS
         INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
 
-if(MSVC)
+if(MSVC AND BUILD_SHARED_LIBS)
     install(FILES $<TARGET_PDB_FILE:nakama-sdk> DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT nakama-sdk OPTIONAL)
 endif()
 
