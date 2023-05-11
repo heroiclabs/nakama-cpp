@@ -31,7 +31,7 @@ project(nakama-test LANGUAGES C CXX)
 
 option(LOGS_ENABLED "Enable log output" ON)
 option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
-option(NAKAMA_SDK_CONFIG "The optimization level of the SDK" Debug)
+set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 option(BUILD_SHARED_NAKAMA_SDK "Whether the local Nakama SDK should be static or shared." OFF)
 
 if(REMOTE_NAKAMA_SDK)
