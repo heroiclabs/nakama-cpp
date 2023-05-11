@@ -71,6 +71,7 @@ ostream& printPercent(ostream& os, uint32_t totalCount, uint32_t count)
 int runAllTests()
 {
     test_internals();
+
     test_authentication();
     test_getAccount();
     test_disconnect();
@@ -114,6 +115,7 @@ int mainHelper(int argc, char *argv[])
 
     // REST client tests
     g_clientType = ClientType_Rest;
+
     res = Nakama::Test::runAllTests();
     if (res != 0) {
         return res;
