@@ -13,7 +13,9 @@ target_link_libraries(nakama-impl-ws-wslay INTERFACE
         wslay nakama-sdk-core-common
         )
 
-target_include_directories(nakama-impl-ws-wslay INTERFACE .)
+target_include_directories(nakama-impl-ws-wslay INTERFACE
+        "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>")
 
 if (BUILD_CURL_IO)
     find_package(CURL CONFIG REQUIRED)

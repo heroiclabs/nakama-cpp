@@ -28,9 +28,10 @@
                 "WindowsDesktop": "ON",
                 "VCPKG_HOST_TRIPLET": "x64-windows-static-heroic",
                 "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic",
-                "WITH_LIBHTTPCLIENT_HTTP": "ON",
-                "WITH_LIBHTTPCLIENT_WS": "ON",
-                "VCPKG_MANIFEST_FEATURES": "libhttpclient-ws;libhttpclient-http"
+                "BUILD_WSLAY": "ON",
+                "BUILD_CURL_IO": "ON",
+                "BUILD_CURL_HTTP": "ON",
+                "VCPKG_MANIFEST_FEATURES": "wslay;curl"
             },
             "condition": {
                 "type": "equals",
