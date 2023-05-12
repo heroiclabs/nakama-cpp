@@ -317,7 +317,6 @@ foreach(lib ${NAKAMA_SDK_DEPS})
   list(APPEND NAKAMA_SDK_DEPS_OBJECTS $<TARGET_OBJECTS:${lib}>)
 endforeach()
 
-
 add_library(nakama-sdk ${NAKAMA_SDK_DEPS_OBJECTS} ${DUMMY_CPP} ${DUMMY_H})
 
 set_target_properties(nakama-sdk PROPERTIES
