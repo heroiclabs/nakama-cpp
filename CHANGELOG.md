@@ -12,6 +12,7 @@ The format is based on [keep a changelog](http://keepachangelog.com/) and this p
 - Fixed multiple errant compiler directives in `NClient`.
 ### Changed
 - Simplified test suite and improved build system for proprietary platforms.
+- Upgraded Curl to 8.0.1.
 
 ### [2.7.2] - [2023-03-15]
 ### Added

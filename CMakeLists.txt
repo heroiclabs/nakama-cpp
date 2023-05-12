@@ -358,6 +358,7 @@ install(TARGETS
             nakama-sdk-interface
             nakama-api-proto
             nakama-sdk-core-common
+            nakama-sdk-core-misc
             ${HTTP_IMPL_LIB}
             ${WS_IMPL_LIB}
             ${LIBHTTPCLIENT_TARGET} ## TODO figure out why some of this and the above targets are needed for static builds.
