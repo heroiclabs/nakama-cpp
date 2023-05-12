@@ -152,6 +152,7 @@
                 "lhs": "${hostSystemName}",
                 "rhs": "Linux"
             },
+            "generator": "Ninja Multi-Config",
             "installDir": "out/linux-amd64"
         },
         {

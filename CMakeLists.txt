@@ -108,10 +108,6 @@ endif()
 
 
 if(APPLE)
-    file(TOUCH ${CMAKE_BINARY_DIR}/dummy.h ${CMAKE_BINARY_DIR}/dummy.cpp)
-    set(DUMMY_CPP ${CMAKE_BINARY_DIR}/dummy.cpp)
-    set(DUMMY_H ${CMAKE_BINARY_DIR}/dummy.h)
-
     # Just copy over headers into framework dir, because "official" way of doing it
     # via PUBLIC_HEADER property is full of bugs (see comment on PUBLIC_HEADER property below)
     set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework/Headers)
@@ -158,7 +154,7 @@ if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
         # wont be excluded due to '--exclude-libs ALL' linker flag. Although we
         # dont expose libhttpclient in our API , we still want it's symbols exported
         # in our ABI, because that is how JVM finds native code on Android platform.
-        list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:${LIBHTTPCLIENT_TARGET}>)
+        list(APPEND NAKAMA_SDK_DEPS ${LIBHTTPCLIENT_TARGET})
 
         set(LIBHTTPCLIENT_OBJECT_LIBRARY TRUE)
         set(WAS_SHARED_LIBS ${BUILD_SHARED_LIBS})
@@ -227,7 +223,7 @@ if (ANDROID AND (HTTP_IMPL STREQUAL "curl" OR WS_IMPL STREQUAL "wslay"))
         target_link_libraries(nakama-impl-ws-wslay INTERFACE android-ca)
     endif()
 
-    list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:android-ca>)
+    list(APPEND NAKAMA_SDK_DEPS android-ca)
 else()
     set(CREATE_JAR FALSE)
 endif()
@@ -263,23 +259,16 @@ add_subdirectory(core EXCLUDE_FROM_ALL)
 # create dummy file because pure "library of libraries" is not supported
 
 list(APPEND NAKAMA_SDK_DEPS
-    $<TARGET_OBJECTS:nakama-sdk-core-misc>
-    $<TARGET_OBJECTS:nakama-sdk-core-rest>
-    $<TARGET_OBJECTS:nakama-sdk-core-rt>
-    $<TARGET_OBJECTS:nakama-sdk-core-common>
-    $<TARGET_OBJECTS:nakama-sdk-client-factory>
-    $<TARGET_OBJECTS:nakama-sdk-rtclient-factory>
-
-    # Xcode generator doesn't produce library for a target with no "own" files
-    # https://gitlab.kitware.com/cmake/cmake/-/issues/23688
-    ${DUMMY_CPP}
-
-    # library need to have a header so that Headers directory structure is created
-    ${DUMMY_H}
+    nakama-sdk-core-misc
+    nakama-sdk-core-rest
+    nakama-sdk-core-rt
+    nakama-sdk-core-common
+    nakama-sdk-client-factory
+    nakama-sdk-rtclient-factory
 )
 
 if (BUILD_GRPC_CLIENT)
-    list(APPEND NAKAMA_SDK_DEPS $<TARGET_OBJECTS:nakama-sdk-core-grpc>)
+    list(APPEND NAKAMA_SDK_DEPS nakama-sdk-core-grpc)
 endif()
 
 
@@ -312,7 +301,15 @@ target_compile_definitions(nakama-sdk-core-common PUBLIC ${WS_COMPILE_DEFINITION
 target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC ${WS_COMPILE_DEFINITION})
 target_compile_definitions(nakama-sdk-interface INTERFACE ${WS_COMPILE_DEFINITION})
 
-add_library(nakama-sdk ${NAKAMA_SDK_DEPS})
+set(NAKAMA_SDK_DEPS_OBJECTS "")
+
+foreach(lib ${NAKAMA_SDK_DEPS})
+  # Append the TARGET_OBJECTS of the current library to the list
+  list(APPEND NAKAMA_SDK_DEPS_OBJECTS $<TARGET_OBJECTS:${lib}>)
+endforeach()
+
+
+add_library(nakama-sdk ${NAKAMA_SDK_DEPS_OBJECTS})
 
 set_target_properties(nakama-sdk PROPERTIES
         FRAMEWORK TRUE
@@ -321,8 +318,6 @@ set_target_properties(nakama-sdk PROPERTIES
         # we deliberately dont list all real headers, because it is a can of worms. See:
         # - https://gitlab.kitware.com/cmake/cmake/-/issues/16739
         # - https://gitlab.kitware.com/cmake/cmake/-/issues/22760
-        # Probably can be removed when proper FILE_SET support lands: https://gitlab.kitware.com/cmake/cmake/-/issues/23386
-        PUBLIC_HEADER "${DUMMY_H}"
         MACOSX_FRAMEWORK_IDENTIFIER com.heroiclabs.libnakama
         MACOSX_FRAMEWORK_BUNDLE_VERSION ${LIBNAKAMA_VERSION}
         MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
@@ -357,12 +352,9 @@ install(TARGETS
             nakama-sdk
             nakama-sdk-interface
             nakama-api-proto
-            nakama-sdk-core-common
-            nakama-sdk-core-misc
             ${HTTP_IMPL_LIB}
             ${WS_IMPL_LIB}
-            ${LIBHTTPCLIENT_TARGET} ## TODO figure out why some of this and the above targets are needed for static builds.
-            android-ca
+            ${NAKAMA_SDK_DEPS}
         EXPORT nakama-export
         FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
