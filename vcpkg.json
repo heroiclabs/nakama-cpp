@@ -54,8 +54,7 @@
                         "ssl"
                     ]
                 }
-            ],
-            "supports": "osx | ios | linux"
+            ]
         },
         "libcxx": {
             "description": "An alternative C++ standard library, used by Unreal Engine.",
@@ -92,6 +91,6 @@
         }
     },
     "overrides": [
-        { "name": "curl", "version": "7.88.1" }
+        { "name": "curl", "version": "8.0.1" }
     ]
 }
