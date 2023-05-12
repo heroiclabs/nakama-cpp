@@ -256,7 +256,16 @@ add_subdirectory(factory EXCLUDE_FROM_ALL)
 # Implements API, but without concrete implementations of transports
 add_subdirectory(core EXCLUDE_FROM_ALL)
 
-# create dummy file because pure "library of libraries" is not supported
+# create dummy file because pure "library of libraries" is not supported: https://gitlab.kitware.com/cmake/cmake/-/issues/23688
+set(DUMMY_CPP "")
+set(DUMMY_H "")
+
+if (APPLE)
+    file(TOUCH ${CMAKE_BINARY_DIR}/dummy.h ${CMAKE_BINARY_DIR}/dummy.cpp)
+    set(DUMMY_CPP ${CMAKE_BINARY_DIR}/dummy.cpp)
+    set(DUMMY_H ${CMAKE_BINARY_DIR}/dummy.h)
+    list(APPEND NAKAMA_SDK_DEPS)
+endif()
 
 list(APPEND NAKAMA_SDK_DEPS
     nakama-sdk-core-misc
@@ -309,7 +318,7 @@ foreach(lib ${NAKAMA_SDK_DEPS})
 endforeach()
 
 
-add_library(nakama-sdk ${NAKAMA_SDK_DEPS_OBJECTS})
+add_library(nakama-sdk ${NAKAMA_SDK_DEPS_OBJECTS} ${DUMMY_CPP} ${DUMMY_H})
 
 set_target_properties(nakama-sdk PROPERTIES
         FRAMEWORK TRUE
