@@ -4,15 +4,19 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
-### [2.8.0] - [2023-05-11]
+### [2.8.0] - [2023-05-15]
 ### Added
 - Added an additional `std::future`-based API to `NClient` and `NRtClient`. All methods in these clients have future-based counterpart suffixed with `Async`.
 - Added static build support for Nakama SDK via package managers like vcpkg. We have plans to add static distributions to our release pages in the future.
+
 ### Fixed
 - Fixed multiple errant compiler directives in `NClient`.
+
 ### Changed
 - Simplified test suite and improved build system for proprietary platforms.
 - Upgraded Curl to 8.0.1.
+- Changed adapter on Windows from libhttpclient to libcurl.
+- Removed "d" suffix from Windows debug library.
 
 ### [2.7.2] - [2023-03-15]
 ### Added

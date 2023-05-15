@@ -69,12 +69,6 @@ include(cmake/linkerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
 
-if(MSVC)
-    # On windows it is critical not to accidentally use DLL
-    # compiled with "wrong" runtime (/MD, /MDd) so we name them differently
-    set(CMAKE_DEBUG_POSTFIX "_d")
-endif()
-
 set(CMAKE_CXX_STANDARD 17)
 option(LOGS_ENABLED "Enable log output" ON)
 

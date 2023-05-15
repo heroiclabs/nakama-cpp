@@ -45,6 +45,6 @@ namespace Nakama {
             // TODO would be more performant but less safe as a map with CURL* as key
             std::list<std::pair<std::unique_ptr<CURL, decltype(&curl_easy_cleanup)>, std::unique_ptr<NHttpClientLibCurlContext>>> _contexts;
             void handle_curl_easy_set_opt_error(std::string action, CURLcode code, const NHttpResponseCallback& callback);
-            std::mutex _contextsMutex;
+            std::mutex _mutex;
     };
 }
