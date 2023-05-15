@@ -16,6 +16,7 @@ The format is based on [keep a changelog](http://keepachangelog.com/) and this p
 - Simplified test suite and improved build system for proprietary platforms.
 - Upgraded Curl to 8.0.1.
 - Changed adapter on Windows from libhttpclient to libcurl.
+- Removed "d" suffix from Windows debug library.
 
 ### [2.7.2] - [2023-03-15]
 ### Added
