@@ -215,6 +215,7 @@ void NHttpClientLibCurl::tick()
     }
 
     struct CURLMsg* m = nullptr;
+    CURLcode result;
 
     do
     {
@@ -225,6 +226,7 @@ void NHttpClientLibCurl::tick()
 
         if (m && (m->msg == CURLMSG_DONE)) {
             lock.lock();
+            result = m->data.result;  // cache here because when we remove the easy handle, m is invalidated.
             CURL* e = m->easy_handle;
             mc = curl_multi_remove_handle(_curl_multi.get(), e);
 
@@ -264,7 +266,7 @@ void NHttpClientLibCurl::tick()
                 auto response = std::shared_ptr<NHttpResponse>(new NHttpResponse());
                 response->body = context->get_body();
 
-                if (m->data.result != CURLE_OK)
+                if (result != CURLE_OK)
                 {
                     NLOG(Nakama::NLogLevel::Error, "curl easy handle returned code: %d \n", (int) m->data.result);
                     response->statusCode = InternalStatusCodes::CONNECTION_ERROR;
