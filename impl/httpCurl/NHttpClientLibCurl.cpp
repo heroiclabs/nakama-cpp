@@ -228,12 +228,8 @@ void NHttpClientLibCurl::tick()
             lock.lock();
             result = m->data.result;  // cache here because when we remove the easy handle, m is invalidated.
             CURL* e = m->easy_handle;
-            mc = curl_multi_remove_handle(_curl_multi.get(), e);
-
-            if (mc)
-            {
-                NLOG(Nakama::NLogLevel::Error, "curl_multi_remove_handle() failed, code %d.\n", (int)mc);
-            }
+            int response_code;
+            CURLcode curl_code = curl_easy_getinfo(e, CURLINFO_RESPONSE_CODE, &response_code);
 
             std::unique_ptr<NHttpClientLibCurlContext> context = NULL;
 
@@ -256,6 +252,7 @@ void NHttpClientLibCurl::tick()
 
             context = std::move(it->second);
             _contexts.remove(*it);
+
             lock.unlock();
 
             auto callback = context->get_callback();
@@ -268,13 +265,11 @@ void NHttpClientLibCurl::tick()
 
                 if (result != CURLE_OK)
                 {
-                    NLOG(Nakama::NLogLevel::Error, "curl easy handle returned code: %d \n", (int) m->data.result);
+                    NLOG(Nakama::NLogLevel::Error, "curl easy handle returned code: %d \n", (int) result);
                     response->statusCode = InternalStatusCodes::CONNECTION_ERROR;
                 }
                 else
                 {
-                    int response_code;
-                    CURLcode curl_code = curl_easy_getinfo(e, CURLINFO_RESPONSE_CODE, &response_code);
                     response->statusCode = response_code;
 
                     if (curl_code != CURLE_OK)
@@ -283,7 +278,17 @@ void NHttpClientLibCurl::tick()
                     }
                 }
 
+                mc = curl_multi_remove_handle(_curl_multi.get(), e);
                 callback(response);
+            }
+            else
+            {
+                mc = curl_multi_remove_handle(_curl_multi.get(), e);
+            }
+
+            if (mc)
+            {
+                NLOG(Nakama::NLogLevel::Error, "curl_multi_remove_handle() failed, code %d.\n", (int)mc);
             }
         }
     }
