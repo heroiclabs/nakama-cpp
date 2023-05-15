@@ -305,7 +305,7 @@
             "cacheVariables": {
                 "VCPKG_HOST_TRIPLET": "x64-linux-heroic",
                 "VCPKG_TARGET_TRIPLET": "x64-linux-heroic",
-                "WITH_LIBHTTPCLIENT_HTTP": "ON",
+                "BUILD_CURL_HTTP": "ON",
                 "BUILD_WSLAY": "ON",
                 "BUILD_CURL_IO": "ON",
                 "VCPKG_MANIFEST_FEATURES": "curl;wslay"
