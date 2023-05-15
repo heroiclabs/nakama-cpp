@@ -175,6 +175,7 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
         return;
     }
 #endif
+    const std::lock_guard lock(_mutex);
 
     CURLMcode curl_multi_code = curl_multi_add_handle(_curl_multi.get(), curl_easy.get());
 
@@ -187,7 +188,6 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
         return;
     };
 
-    const std::lock_guard lock(_contextsMutex);
     std::pair<std::unique_ptr<CURL, decltype(&curl_easy_cleanup)>, std::unique_ptr<NHttpClientLibCurlContext>> pair(std::move(curl_easy), std::move(curl_ctx));
     _contexts.emplace_back(std::move(pair));
 }
@@ -199,8 +199,15 @@ void NHttpClientLibCurl::setBaseUri(const std::string& uri)
 
 void NHttpClientLibCurl::tick()
 {
+    std::unique_lock lock(_mutex, std::try_to_lock);
+    if (!lock.owns_lock()) {
+        return; // return immediately, tick() is expected to get called again. no reason to make tick block.
+    }
+
     int running_handles = 0;
     CURLMcode mc = curl_multi_perform(_curl_multi.get(), &running_handles);
+
+    lock.unlock();
     if (mc)
     {
         // log but do not return -- still see if any pending messages
@@ -212,40 +219,42 @@ void NHttpClientLibCurl::tick()
     do
     {
         int msgq = 0;
+        lock.lock();
         m = curl_multi_info_read(_curl_multi.get(), &msgq);
+        lock.unlock();
+
         if (m && (m->msg == CURLMSG_DONE)) {
             CURL* e = m->easy_handle;
-
+            lock.lock();
             mc = curl_multi_remove_handle(_curl_multi.get(), e);
+
             if (mc)
             {
                 NLOG(Nakama::NLogLevel::Error, "curl_multi_remove_handle() failed, code %d.\n", (int)mc);
             }
 
             std::unique_ptr<NHttpClientLibCurlContext> context = NULL;
+
+            auto it = _contexts.begin();
+            while (it != _contexts.end())
             {
-                const std::lock_guard lock(_contextsMutex);
-
-                auto it = _contexts.begin();
-                while (it != _contexts.end())
+                if (it->first.get() == e)
                 {
-                    if (it->first.get() == e)
-                    {
-                        break;
-                    }
-
-                    it++;
+                    break;
                 }
 
-                if (it == _contexts.end())
-                {
-                    NLOG(Nakama::NLogLevel::Error, "curl_multi_info_read() error: untracked easy handle.");
-                    continue;
-                }
-
-                context = std::move(it->second);
-                _contexts.remove(*it);
+                it++;
             }
+
+            if (it == _contexts.end())
+            {
+                NLOG(Nakama::NLogLevel::Error, "curl_multi_info_read() error: untracked easy handle.");
+                continue;
+            }
+
+            context = std::move(it->second);
+            _contexts.remove(*it);
+            lock.unlock();
 
             auto callback = context->get_callback();
             if (callback != NULL)
@@ -281,7 +290,7 @@ void NHttpClientLibCurl::tick()
 
 void NHttpClientLibCurl::cancelAllRequests()
 {
-    const std::lock_guard lock(_contextsMutex);
+    const std::lock_guard lock(_mutex);
     for (auto it = _contexts.begin(); it != _contexts.end(); it++)
     {
         NHttpResponsePtr responsePtr(new NHttpResponse());
