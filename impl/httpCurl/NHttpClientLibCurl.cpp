@@ -224,8 +224,8 @@ void NHttpClientLibCurl::tick()
         lock.unlock();
 
         if (m && (m->msg == CURLMSG_DONE)) {
-            CURL* e = m->easy_handle;
             lock.lock();
+            CURL* e = m->easy_handle;
             mc = curl_multi_remove_handle(_curl_multi.get(), e);
 
             if (mc)
