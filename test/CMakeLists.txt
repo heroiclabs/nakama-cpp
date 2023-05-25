@@ -31,8 +31,9 @@ project(nakama-test LANGUAGES C CXX)
 
 option(LOGS_ENABLED "Enable log output" ON)
 option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
-set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 option(BUILD_SHARED_NAKAMA_SDK "Whether the local Nakama SDK should be static or shared." ON)
+option(BUILD_EXECUTABLE "Whether or not to make the test an executable for standalone execution." ON)
+set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 
 if(REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
@@ -104,20 +105,24 @@ file(
     "${CMAKE_CURRENT_SOURCE_DIR}/src/realtime/*.h*"
 )
 
-# following this guide: https://medium.com/androiddevelopers/getting-started-with-c-and-android-native-activities-2213b402ffff
+# for Android, we are following this guide: https://medium.com/androiddevelopers/getting-started-with-c-and-android-native-activities-2213b402ffff
 # alternatively we could do this in `Android.mk` but we already use CMake.
-if (ANDROID)
-    find_library(log-lib log)
+if (BUILD_EXECUTABLE)
+    if (ANDROID)
+        find_library(log-lib log)
 
-    add_library(nakama-test ${SRCS})
+        add_library(nakama-test ${SRCS})
 
-    target_link_libraries(nakama-test
-        PUBLIC
-            ${log-lib}
-            android
-    )
+        target_link_libraries(nakama-test
+            PUBLIC
+                ${log-lib}
+                android
+        )
+    else()
+        add_executable(nakama-test MACOSX_BUNDLE ${SRCS})
+    endif()
 else()
-    add_executable(nakama-test MACOSX_BUNDLE ${SRCS})
+    add_library(nakama-test ${SRCS})
 endif()
 
 if (LOGS_ENABLED)
