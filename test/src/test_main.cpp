@@ -24,18 +24,6 @@
 #include <jni.h>
 #endif
 
-eClientType g_clientType = ClientType_Unknown;
-
-extern "C"
-{
-    extern void c_test_pure();
-
-    eClientType getClientType(void)
-    {
-        return g_clientType;
-    }
-}
-
 using namespace std;
 
 namespace Nakama {
@@ -111,10 +99,6 @@ int mainHelper(int argc, char *argv[])
     NLOG(Nakama::NLogLevel::Info, "HTTP port: %d", SERVER_HTTP_PORT);
     NLOG(Nakama::NLogLevel::Info, "key      : %s", SERVER_KEY);
     NLOG(Nakama::NLogLevel::Info, "ssl      : %s", (SERVER_SSL ? "true" : "false"));
-
-
-    // REST client tests
-    g_clientType = ClientType_Rest;
 
     res = Nakama::Test::runAllTests();
     if (res != 0) {
