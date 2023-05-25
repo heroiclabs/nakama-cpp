@@ -14,28 +14,16 @@
  * limitations under the License.
  */
 
-#include "NTestLib.h"
+#include "test_serverConfig.h"
+#include "nakama-cpp/NUtils.h"
+#include "nakama-cpp/NPlatformParams.h"
+#include "nakama-cpp/ClientFactory.h"
+#include "globals.h"
 
-#if defined(__ANDROID__)
-#include <jni.h>
-#endif
+namespace Nakama {
+namespace Test {
 
-#if defined(_MSC_VER)
-#pragma warning(disable:4447)
-#endif
+int runAllTests();
 
-#if defined(__ANDROID__)
-extern "C"
-{
-    JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
-    {
-        Nakama::Test::runAllTests();
-        return JNI_VERSION_1_4;
-    }
 }
-#else
-int main(int argc, char *argv[])
-{
-    return Nakama::Test::runAllTests();
 }
-#endif
