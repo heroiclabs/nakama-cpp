@@ -38,22 +38,25 @@ set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 if(REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
 else()
-    execute_process(
-        COMMAND ${CMAKE_COMMAND} -S .. --preset ${PRESET_NAME} -DBUILD_SHARED_LIBS=${BUILD_SHARED_NAKAMA_SDK}
-        RESULT_VARIABLE result
-    )
 
-    if (result)
-        message(FATAL_ERROR "Configuration of nakama-cpp preset ${PRESET_NAME} failed.")
-    endif()
+    if (${PRESET_NAME})
+        execute_process(
+            COMMAND ${CMAKE_COMMAND} -S .. --preset ${PRESET_NAME} -DBUILD_SHARED_LIBS=${BUILD_SHARED_NAKAMA_SDK}
+            RESULT_VARIABLE result
+        )
 
-    execute_process(
-        COMMAND ${CMAKE_COMMAND} --build ../build/${PRESET_NAME} --config ${NAKAMA_SDK_CONFIG} --target install
-        RESULT_VARIABLE result
-    )
+        if (result)
+            message(FATAL_ERROR "Configuration of nakama-cpp preset ${PRESET_NAME} failed.")
+        endif()
 
-    if (result)
-        message(FATAL_ERROR "Building and installing nakama-cpp with preset ${PRESET_NAME} failed.")
+        execute_process(
+            COMMAND ${CMAKE_COMMAND} --build ../build/${PRESET_NAME} --config ${NAKAMA_SDK_CONFIG} --target install
+            RESULT_VARIABLE result
+        )
+
+        if (result)
+            message(FATAL_ERROR "Building and installing nakama-cpp with preset ${PRESET_NAME} failed.")
+        endif()
     endif()
 endif()
 
