@@ -85,17 +85,6 @@ endif()
 
 find_package(nakama-sdk CONFIG REQUIRED)
 
-if (ADDRESS_SANITIZER)
-    # In the top level CMakeLists we used `add_compile_options` to globally add
-    # Asan instrumentation to everything we compile, but we dont' want it
-    # to be in the test binary, to replicate exactly how asan-enabled dll/so shared
-    # library behaves. So here we remove address sanitizer from test.
-    get_directory_property(_compile_options COMPILE_OPTIONS)
-    list(REMOVE_ITEM _compile_options -fsanitize=address)
-    set_directory_properties(PROPERTIES COMPILE_OPTIONS "${_compiler_options}")
-    unset(_compile_options)
-endif()
-
 file(
     GLOB SRCS
     LIST_DIRECTORIES false
