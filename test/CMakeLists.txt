@@ -31,8 +31,9 @@ project(nakama-test LANGUAGES C CXX)
 
 option(LOGS_ENABLED "Enable log output" ON)
 option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
-set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 option(BUILD_SHARED_NAKAMA_SDK "Whether the local Nakama SDK should be static or shared." ON)
+option(BUILD_EXECUTABLE "Whether or not to make the test an executable for standalone execution." ON)
+set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 
 if(REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
@@ -84,17 +85,6 @@ endif()
 
 find_package(nakama-sdk CONFIG REQUIRED)
 
-if (ADDRESS_SANITIZER)
-    # In the top level CMakeLists we used `add_compile_options` to globally add
-    # Asan instrumentation to everything we compile, but we dont' want it
-    # to be in the test binary, to replicate exactly how asan-enabled dll/so shared
-    # library behaves. So here we remove address sanitizer from test.
-    get_directory_property(_compile_options COMPILE_OPTIONS)
-    list(REMOVE_ITEM _compile_options -fsanitize=address)
-    set_directory_properties(PROPERTIES COMPILE_OPTIONS "${_compiler_options}")
-    unset(_compile_options)
-endif()
-
 file(
     GLOB SRCS
     LIST_DIRECTORIES false
@@ -104,20 +94,24 @@ file(
     "${CMAKE_CURRENT_SOURCE_DIR}/src/realtime/*.h*"
 )
 
-# following this guide: https://medium.com/androiddevelopers/getting-started-with-c-and-android-native-activities-2213b402ffff
+# for Android, we are following this guide: https://medium.com/androiddevelopers/getting-started-with-c-and-android-native-activities-2213b402ffff
 # alternatively we could do this in `Android.mk` but we already use CMake.
-if (ANDROID)
-    find_library(log-lib log)
+if (BUILD_EXECUTABLE)
+    if (ANDROID)
+        find_library(log-lib log)
 
-    add_library(nakama-test ${SRCS})
+        add_library(nakama-test ${SRCS} "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp")
 
-    target_link_libraries(nakama-test
-        PUBLIC
-            ${log-lib}
-            android
-    )
+        target_link_libraries(nakama-test
+            PUBLIC
+                ${log-lib}
+                android
+        )
+    else()
+        add_executable(nakama-test MACOSX_BUNDLE ${SRCS} "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp")
+    endif()
 else()
-    add_executable(nakama-test MACOSX_BUNDLE ${SRCS})
+    add_library(nakama-test ${SRCS})
 endif()
 
 if (LOGS_ENABLED)
@@ -130,19 +124,22 @@ target_link_libraries(nakama-test
 )
 
 target_include_directories(nakama-test
+    PUBLIC include
     PRIVATE src
     ${rapidjson_SOURCE_DIR}/include ### rapidjson probably not setup correctly by its authors, because target_link_libraries should handle this
 )
 
 target_compile_features(nakama-test PRIVATE cxx_std_14)
 
-get_target_property(NAKAMA_TGT_TYPE nakama-sdk TYPE)
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows" AND ${NAKAMA_TGT_TYPE} STREQUAL "SHARED_LIBRARY")
-    # Copy DLL so that nakama-test.exe can find it
-    add_custom_command(TARGET nakama-test POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:nakama-test> $<TARGET_FILE_DIR:nakama-test>
-            COMMAND_EXPAND_LISTS
-            )
+if (BUILD_EXECUTABLE)
+    get_target_property(NAKAMA_TGT_TYPE nakama-sdk TYPE)
+    if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows" AND ${NAKAMA_TGT_TYPE} STREQUAL "SHARED_LIBRARY")
+        # Copy DLL so that nakama-test.exe can find it
+        add_custom_command(TARGET nakama-test POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:nakama-test> $<TARGET_FILE_DIR:nakama-test>
+                COMMAND_EXPAND_LISTS
+                )
+    endif()
 endif()
 
 # no ZERO_CHECK target for Xcode
@@ -156,33 +153,37 @@ else()
     set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/lib/nakama-sdk.framework)
 endif()
 
-set_target_properties(nakama-test PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER "com.test"
-    MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/test.plist
-    XCODE_ATTRIBUTE_ENABLE_BITCODE "NO"
-    XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER "com.heroiclabs.test"
-    XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "YES"
-    XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Apple Development"
-    XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "$ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}"
-    XCODE_LINK_BUILD_PHASE_MODE KNOWN_LOCATION
-    XCODE_EMBED_FRAMEWORKS ${NAKAMA_SDK_FRAMEWORK_LOCATION} ## todo figure out why passing target doesn't work
-    XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
-	XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY	"YES"
-    XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
-)
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+if (BUILD_EXECUTABLE)
     set_target_properties(nakama-test PROPERTIES
-        INSTALL_RPATH @executable_path/Frameworks
+        MACOSX_BUNDLE_GUI_IDENTIFIER "com.test"
+        MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/test.plist
+        XCODE_ATTRIBUTE_ENABLE_BITCODE "NO"
+        XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER "com.heroiclabs.test"
+        XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "YES"
+        XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Apple Development"
+        XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "$ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}"
+        XCODE_LINK_BUILD_PHASE_MODE KNOWN_LOCATION
+        XCODE_EMBED_FRAMEWORKS ${NAKAMA_SDK_FRAMEWORK_LOCATION} ## todo figure out why passing target doesn't work
+        XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
+        XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY	"YES"
+        XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
     )
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set_target_properties(nakama-test PROPERTIES
-        INSTALL_RPATH @executable_path/../Frameworks
-    )
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    set_target_properties(nakama-test PROPERTIES
-        INSTALL_RPATH $ORIGIN
-    )
+
+    if(${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+        set_target_properties(nakama-test PROPERTIES
+            INSTALL_RPATH @executable_path/Frameworks
+        )
+    elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+        set_target_properties(nakama-test PROPERTIES
+            INSTALL_RPATH @executable_path/../Frameworks
+        )
+    elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+        set_target_properties(nakama-test PROPERTIES
+            INSTALL_RPATH $ORIGIN
+        )
+    endif()
+
 endif()
 
 set(_TEST_OUT_DIR "${CMAKE_INSTALL_PREFIX}")
@@ -200,16 +201,18 @@ if (${BUILD_SHARED_NAKAMA_SDK})
     )
 endif()
 
-if (CMAKE_SYSTEM_NAME MATCHES "Windows" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
-    add_custom_target(run
-        COMMAND ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/nakama-test
-        USES_TERMINAL
-        DEPENDS install
-    )
-elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    add_custom_target(run
-        COMMAND $<TARGET_BUNDLE_DIR:nakama-test>/Contents/MacOS/nakama-test
-        USES_TERMINAL
-        DEPENDS install
-    )
+if (BUILD_EXECUTABLE)
+    if (CMAKE_SYSTEM_NAME MATCHES "Windows" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
+        add_custom_target(run
+            COMMAND ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/nakama-test
+            USES_TERMINAL
+            DEPENDS install
+        )
+    elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+        add_custom_target(run
+            COMMAND $<TARGET_BUNDLE_DIR:nakama-test>/Contents/MacOS/nakama-test
+            USES_TERMINAL
+            DEPENDS install
+        )
+    endif()
 endif()

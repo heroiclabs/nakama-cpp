@@ -4,6 +4,10 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [2.8.1] - [2023-05-25]
+### Fixed
+- Fixed a memory issue with retrieving HTTP response codes.
+
 ### [2.8.0] - [2023-05-15]
 ### Added
 - Added an additional `std::future`-based API to `NClient` and `NRtClient`. All methods in these clients have future-based counterpart suffixed with `Async`.

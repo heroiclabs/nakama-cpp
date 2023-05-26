@@ -28,8 +28,6 @@ void test_writeStorageInvalidArgument()
 
     auto successCallback = [&test](NSessionPtr session)
     {
-        NLOG_INFO("Authenticated successfully");
-
         std::vector<NStorageObjectWrite> objects;
         NStorageObjectWrite obj;
 

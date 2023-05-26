@@ -228,7 +228,7 @@ void NHttpClientLibCurl::tick()
             lock.lock();
             result = m->data.result;  // cache here because when we remove the easy handle, m is invalidated.
             CURL* e = m->easy_handle;
-            int response_code;
+            long response_code;
             CURLcode curl_code = curl_easy_getinfo(e, CURLINFO_RESPONSE_CODE, &response_code);
 
             std::unique_ptr<NHttpClientLibCurlContext> context = NULL;
