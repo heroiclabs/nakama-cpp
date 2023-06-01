@@ -222,15 +222,15 @@ if(NOT BUILD_EXECUTABLE)
     )
 endif()
 
-if (${BUILD_SHARED_NAKAMA_SDK})
-    install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
-        RUNTIME DESTINATION ${_TEST_OUT_DIR}
-        LIBRARY DESTINATION ${_TEST_OUT_DIR}
-        FRAMEWORK DESTINATION ${_TEST_OUT_DIR}
-    )
-endif()
-
 if (BUILD_EXECUTABLE)
+    if (${BUILD_SHARED_NAKAMA_SDK})
+        install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
+            RUNTIME DESTINATION ${_TEST_OUT_DIR}
+            LIBRARY DESTINATION ${_TEST_OUT_DIR}
+            FRAMEWORK DESTINATION ${_TEST_OUT_DIR}
+        )
+    endif()
+
     if (CMAKE_SYSTEM_NAME MATCHES "Windows" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
         add_custom_target(run
             COMMAND ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/nakama-test
