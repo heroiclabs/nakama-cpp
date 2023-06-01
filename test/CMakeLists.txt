@@ -117,6 +117,17 @@ else()
     add_library(nakama-test ${SRCS})
 endif()
 
+
+target_include_directories(nakama-test
+    INTERFACE
+        "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    PRIVATE
+        src
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+
 if (LOGS_ENABLED)
     target_compile_definitions(nakama-test PRIVATE "NLOGS_ENABLED")
 endif()
@@ -124,12 +135,6 @@ endif()
 target_link_libraries(nakama-test
     INTERFACE rapidjson
     PRIVATE nakama-sdk
-)
-
-target_include_directories(nakama-test
-    PUBLIC include
-    PRIVATE src
-    ${rapidjson_SOURCE_DIR}/include ### rapidjson probably not setup correctly by its authors, because target_link_libraries should handle this
 )
 
 target_compile_features(nakama-test PRIVATE cxx_std_14)
@@ -192,9 +197,30 @@ endif()
 set(_TEST_OUT_DIR "${CMAKE_INSTALL_PREFIX}")
 
 install(TARGETS nakama-test
+    EXPORT nakama-test-export
     BUNDLE DESTINATION ${_TEST_OUT_DIR}
     RUNTIME DESTINATION ${_TEST_OUT_DIR}
 )
+
+if(NOT BUILD_EXECUTABLE)
+    ## use share directory for export files (at least a vcpkg convention)
+    install(EXPORT nakama-test-export
+            DESTINATION share/nakama-test)
+
+    include(CMakePackageConfigHelpers)
+
+    configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-test-config.cmake.in
+    "${CMAKE_CURRENT_BINARY_DIR}/nakama-test-config.cmake"
+    INSTALL_DESTINATION share/nakama-test
+    NO_SET_AND_CHECK_MACRO
+    NO_CHECK_REQUIRED_COMPONENTS_MACRO
+    )
+
+    install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/nakama-test-config.cmake
+        DESTINATION share/nakama-test
+    )
+endif()
 
 if (${BUILD_SHARED_NAKAMA_SDK})
     install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
