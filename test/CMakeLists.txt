@@ -77,6 +77,8 @@ endif()
 
 find_package(RapidJSON CONFIG REQUIRED)
 find_package(optional-lite)
+find_package(protobuf)
+find_package(curl)
 
 ### CMakePresets.json doesn't seem to pass the ${installDir} to the CMake file, so we have to reconstitute it.
 string(REPLACE ${CMAKE_SOURCE_DIR}/ "" CMAKE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}")

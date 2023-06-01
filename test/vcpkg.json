@@ -8,7 +8,9 @@
             "name": "rapidjson",
             "version>=": "2020-09-14#2"
         },
-        "optional-lite"
+        "optional-lite",
+        "protobuf",
+        "curl"
     ],
     "features": {
         "nakama-sdk": {
