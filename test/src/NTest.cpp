@@ -17,9 +17,9 @@
 
 #include <iostream>
 #include <mutex>
-#include <condition_variable>
-#include "NTest.h"
 #include "nakama-cpp/Nakama.h"
+#include <atomic>
+#include "NTest.h"
 #include "globals.h"
 #include "test_serverConfig.h"
 

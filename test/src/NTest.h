@@ -19,6 +19,7 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <atomic>
 #include <nakama-cpp/NError.h>
 #include "nakama-cpp/NClientInterface.h"
 #include "nakama-cpp/ClientFactory.h"
