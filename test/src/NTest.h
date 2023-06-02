@@ -32,10 +32,13 @@ namespace Test {
     {
     public:
         static NRtClientProtocol RtProtocol;
-
+        static std::function<NClientPtr(Nakama::NClientParameters)> ClientFactory;
+        static std::function<NRtClientPtr(Nakama::NClientPtr)> RtClientFactory;
+        static Nakama::NClientParameters NClientParameters;
+        static std::string ServerHttpKey;
         NTest(const char* name, bool threadedTick = false);
         NTest(std::string name, bool threadedTick = false);
-        NTest(std::string name, NClientParameters parameters);
+        NTest(std::string name, Nakama::NClientParameters parameters);
         ~NTest();
 
         virtual void runTest();

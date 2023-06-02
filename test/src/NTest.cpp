@@ -21,24 +21,27 @@
 #include <atomic>
 #include "NTest.h"
 #include "globals.h"
-#include "test_serverConfig.h"
 
 namespace Nakama {
     namespace Test {
 
         NRtClientProtocol NTest::RtProtocol = NRtClientProtocol::Json;
+        std::function<NClientPtr(Nakama::NClientParameters)> NTest::ClientFactory = nullptr;
+        std::function<NRtClientPtr(Nakama::NClientPtr)> NTest::RtClientFactory = nullptr;
+        NClientParameters NTest::NClientParameters = {};
+        std::string NTest::ServerHttpKey = "defaulthttpkey";
 
         NTest::NTest(std::string name, bool threadedTick)
                 : _name(name), _threadedTick(threadedTick), _rtTickPaused(false),
-                client(createDefaultClient({SERVER_KEY, SERVER_HOST, SERVER_PORT, SERVER_SSL})),
-                rtClient(client->createRtClient())
+                client(NTest::ClientFactory(NTest::NClientParameters)),
+                rtClient(NTest::RtClientFactory(client))
         {
             client->setErrorCallback([this](const NError& error) { stopTest(error); });
             rtClient->setListener(&listener);
             _isDone.store(false);
         }
 
-        NTest::NTest(std::string name, NClientParameters parameters)
+        NTest::NTest(std::string name, Nakama::NClientParameters parameters)
                 : _name(name),
                 client(createDefaultClient(parameters)),
                 rtClient(client->createRtClient())

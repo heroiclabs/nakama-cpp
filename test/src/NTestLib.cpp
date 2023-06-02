@@ -47,17 +47,16 @@ namespace Test {
     }
 
 
-    int runAllTests()
+    int runAllTests(std::function<NClientPtr(Nakama::NClientParameters)> clientFactory, std::function<NRtClientPtr(Nakama::NClientPtr client)> rtClientFactory, std::string serverHttpKey)
     {
+        NTest::ClientFactory = clientFactory;
+        NTest::RtClientFactory = rtClientFactory;
+        NTest::ServerHttpKey = serverHttpKey;
+
+
         int res = 0;
 
         Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
-
-        NLOG(Nakama::NLogLevel::Info, "server config...");
-        NLOG(Nakama::NLogLevel::Info, "host     : %s", SERVER_HOST);
-        NLOG(Nakama::NLogLevel::Info, "HTTP port: %d", SERVER_HTTP_PORT);
-        NLOG(Nakama::NLogLevel::Info, "key      : %s", SERVER_KEY);
-        NLOG(Nakama::NLogLevel::Info, "ssl      : %s", (SERVER_SSL ? "true" : "false"));
 
         test_internals();
 

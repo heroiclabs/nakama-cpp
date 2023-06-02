@@ -18,7 +18,6 @@
 #include "nakama-cpp/NError.h"
 #include "globals.h"
 #include "NTest.h"
-#include "test_serverConfig.h"
 #include "nakama-cpp/NException.h"
 #include "nakama-cpp/realtime/rtdata/NRtException.h"
 #include "TestGuid.h"
@@ -45,10 +44,10 @@ namespace Nakama {
         test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
 
         string json = "{\"v\":\"test\"}";
-        auto rpc1 = test1.client->rpcAsync(SERVER_HTTP_KEY, "clientrpc.rpc", json).get();
+        auto rpc1 = test1.client->rpcAsync(NTest::ServerHttpKey, "clientrpc.rpc", json).get();
         test1.stopTest(!rpc1.payload.empty());
 
-        auto rpc2 = test2.client->rpcAsync(SERVER_HTTP_KEY, "clientrpc.rpc", opt::nullopt).get();
+        auto rpc2 = test2.client->rpcAsync(NTest::ServerHttpKey, "clientrpc.rpc", opt::nullopt).get();
         test2.stopTest(rpc2.payload.empty());
     }
 

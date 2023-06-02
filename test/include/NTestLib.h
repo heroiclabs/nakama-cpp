@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include "test_serverConfig.h"
 #include "nakama-cpp/NUtils.h"
 #include "nakama-cpp/NPlatformParams.h"
 #include "nakama-cpp/ClientFactory.h"
@@ -23,7 +22,9 @@
 namespace Nakama {
 namespace Test {
 
-int runAllTests();
+
+int runAllTests(std::function<NClientPtr(Nakama::NClientParameters)> clientFactory, std::function<NRtClientPtr(Nakama::NClientPtr client)> rtClientFactory, std::string serverHttpKey);
+
 
 }
 }

@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cmake_minimum_required(VERSION 3.18.1)
+cmake_minimum_required(VERSION 3.23)
 
 if(APPLE AND (NOT DEFINED ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}))
     message(FATAL_ERROR "No test development team setup. Please have an entry for NAKAMA_TEST_DEVELOPMENT_TEAM in your environment variables. See README.md for more information.")
@@ -76,8 +76,8 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "iOS" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin"
 endif()
 
 find_package(RapidJSON CONFIG REQUIRED)
-find_package(optional-lite)
-find_package(protobuf)
+find_package(optional-lite CONFIG REQUIRED)
+find_package(Protobuf)
 find_package(curl)
 
 ### CMakePresets.json doesn't seem to pass the ${installDir} to the CMake file, so we have to reconstitute it.
