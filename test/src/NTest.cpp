@@ -43,8 +43,8 @@ namespace Nakama {
 
         NTest::NTest(std::string name, Nakama::NClientParameters parameters)
                 : _name(name),
-                client(createDefaultClient(parameters)),
-                rtClient(client->createRtClient())
+                client(NTest::ClientFactory(parameters)),
+                rtClient(NTest::RtClientFactory(client))
         {
             client->setErrorCallback([this](const NError& error) { stopTest(error); });
             rtClient->setListener(&listener);
