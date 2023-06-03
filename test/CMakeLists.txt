@@ -141,6 +141,13 @@ target_link_libraries(nakama-test
 
 target_compile_features(nakama-test PRIVATE cxx_std_14)
 
+## Some proprietary platforms disable exceptions by default. We need to enable them for the test library.
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  target_compile_options(nakama-test PRIVATE -fexceptions)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  target_compile_options(nakama-test PRIVATE /EHsc)
+endif()
+
 if (BUILD_EXECUTABLE)
     get_target_property(NAKAMA_TGT_TYPE nakama-sdk TYPE)
     if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows" AND ${NAKAMA_TGT_TYPE} STREQUAL "SHARED_LIBRARY")
