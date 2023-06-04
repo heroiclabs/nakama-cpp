@@ -77,8 +77,6 @@ endif()
 
 find_package(RapidJSON CONFIG REQUIRED)
 find_package(optional-lite CONFIG REQUIRED)
-find_package(Protobuf)
-find_package(curl)
 
 ### CMakePresets.json doesn't seem to pass the ${installDir} to the CMake file, so we have to reconstitute it.
 string(REPLACE ${CMAKE_SOURCE_DIR}/ "" CMAKE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}")
@@ -138,6 +136,15 @@ target_link_libraries(nakama-test
     INTERFACE rapidjson
     PRIVATE nakama-sdk
 )
+
+if (NOT BUILD_SHARED_NAKAMA_SDK)
+    find_package(Protobuf CONFIG REQUIRED)
+    find_package(wslay CONFIG REQUIRED)
+    find_package(curl CONFIG REQUIRED)
+    target_link_libraries(nakama-test
+        PRIVATE
+            curl wslay protobuf::libprotobuf)
+endif()
 
 target_compile_features(nakama-test PRIVATE cxx_std_14)
 

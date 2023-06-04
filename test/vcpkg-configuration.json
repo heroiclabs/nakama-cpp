@@ -9,7 +9,7 @@
         {
             "kind": "git",
             "repository": "https://github.com/heroiclabs/nakama-vcpkg-registry",
-            "baseline": "1420c8d42040d81ac71d3b7e3c2f75749a077617",
+            "baseline": "2f32e4a071fec917c63e7c66138fdfa7f103f246",
             "reference": "master",
             "packages": ["nakama-sdk", "wslay"]
         }
