@@ -169,12 +169,13 @@ endif()
 # no ZERO_CHECK target for Xcode
 set(CMAKE_SUPPRESS_REGENERATION true)
 
-set(NAKAMA_SDK_FRAMEWORK_LOCATION "")
 
-if (REMOTE_NAKAMA_SDK)
-    set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/nakama-sdk.framework)
-else()
-    set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/lib/nakama-sdk.framework)
+if (BUILD_SHARED_LIBS)
+    if (REMOTE_NAKAMA_SDK)
+        set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/nakama-sdk.framework)
+    else()
+        set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/lib/nakama-sdk.framework)
+    endif()
 endif()
 
 
@@ -188,11 +189,16 @@ if (BUILD_EXECUTABLE)
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Apple Development"
         XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "$ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}"
         XCODE_LINK_BUILD_PHASE_MODE KNOWN_LOCATION
-        XCODE_EMBED_FRAMEWORKS ${NAKAMA_SDK_FRAMEWORK_LOCATION} ## todo figure out why passing target doesn't work
-        XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
-        XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY	"YES"
         XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
     )
+
+    if (BUILD_SHARED_LIBS)
+        set_target_properties(nakama-test PROPERTIES
+            XCODE_EMBED_FRAMEWORKS ${NAKAMA_SDK_FRAMEWORK_LOCATION} ## todo figure out why passing target doesn't work
+            XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
+            XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY	"YES"
+        )
+    endif()
 
     if(${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
         set_target_properties(nakama-test PROPERTIES

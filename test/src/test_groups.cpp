@@ -52,8 +52,6 @@ public:
     {
         auto successCallback = [this](NGroupListPtr list)
         {
-            cout << "Groups count " + list->groups.size() << endl;
-
             for (auto& group : list->groups)
             {
                 cout << "Group name " + group.name << endl;
@@ -142,8 +140,6 @@ public:
     {
         auto successCallback = [this](NGroupListPtr list)
         {
-            cout << "Groups count " + list->groups.size() << endl;
-
             for (auto& group : list->groups)
             {
                 cout << "Group name " + group.name << endl;
