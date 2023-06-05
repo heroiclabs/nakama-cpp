@@ -102,7 +102,7 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 
-if(APPLE)
+if(APPLE AND BUILD_SHARED_LIBS)
     # Just copy over headers into framework dir, because "official" way of doing it
     # via PUBLIC_HEADER property is full of bugs (see comment on PUBLIC_HEADER property below)
     set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework/Headers)
@@ -313,20 +313,25 @@ foreach(lib ${NAKAMA_SDK_DEPS})
 endforeach()
 
 add_library(nakama-sdk ${NAKAMA_SDK_DEPS_OBJECTS} ${DUMMY_CPP} ${DUMMY_H})
+set_target_properties(nakama-sdk PROPERTIES VERSION ${LIBNAKAMA_VERSION})
 
-set_target_properties(nakama-sdk PROPERTIES
-        FRAMEWORK TRUE
-        FRAMEWORK_VERSION A
+if (BUILD_SHARED_LIBS AND APPLE)
+    set_target_properties(nakama-sdk PROPERTIES
+            FRAMEWORK TRUE
+            FRAMEWORK_VERSION A
 
-        # we deliberately dont list all real headers, because it is a can of worms. See:
-        # - https://gitlab.kitware.com/cmake/cmake/-/issues/16739
-        # - https://gitlab.kitware.com/cmake/cmake/-/issues/22760
-        MACOSX_FRAMEWORK_IDENTIFIER com.heroiclabs.libnakama
-        MACOSX_FRAMEWORK_BUNDLE_VERSION ${LIBNAKAMA_VERSION}
-        MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
-        VERSION ${LIBNAKAMA_VERSION}
-        SOVERSION ${LIBNAKAMA_SOVERSION}
-)
+            # we deliberately dont list all real headers, because it is a can of worms. See:
+            # - https://gitlab.kitware.com/cmake/cmake/-/issues/16739
+            # - https://gitlab.kitware.com/cmake/cmake/-/issues/22760
+            MACOSX_FRAMEWORK_IDENTIFIER com.heroiclabs.libnakama
+            MACOSX_FRAMEWORK_BUNDLE_VERSION ${LIBNAKAMA_VERSION}
+            MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
+            SOVERSION ${LIBNAKAMA_SOVERSION}
+    )
+elseif (APPLE)
+    set_target_properties(nakama-sdk PROPERTIES
+    FRAMEWORK FALSE)
+endif()
 
 add_library(nakama::sdk ALIAS nakama-sdk)
 target_link_libraries(nakama-sdk
@@ -377,6 +382,12 @@ install(EXPORT nakama-export
 
 
 include(CMakePackageConfigHelpers)
+
+if(BUILD_SHARED_LIBS)
+    set(NAKAMA_SDK_BUILD_TYPE "SHARED")
+else()
+    set(NAKAMA_SDK_BUILD_TYPE "STATIC")
+endif()
 
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-sdk-config.cmake.in
   "${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake"

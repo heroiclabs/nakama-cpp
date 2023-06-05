@@ -137,7 +137,7 @@ target_link_libraries(nakama-test
     PRIVATE nakama-sdk
 )
 
-if (NOT BUILD_SHARED_NAKAMA_SDK)
+if (NAKAMA_SDK_BUILD_TYPE STREQUAL "STATIC")
     find_package(Protobuf CONFIG REQUIRED)
     find_package(wslay CONFIG REQUIRED)
     find_package(curl CONFIG REQUIRED)
