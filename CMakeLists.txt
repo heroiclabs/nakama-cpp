@@ -340,7 +340,6 @@ target_link_libraries(nakama-sdk
             nakama-api-proto
             $<$<TARGET_EXISTS:nakama-sdk-core-grpc>:nakama-grpc-proto>
 		${HTTP_IMPL_LIB} ${WS_IMPL_LIB}
-        ${PLATFORM_LIBS}
         )
 
 if (ADDRESS_SANITIZER)
