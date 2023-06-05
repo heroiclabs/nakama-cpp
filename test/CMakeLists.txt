@@ -223,7 +223,7 @@ install(TARGETS nakama-test
 )
 
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/include/*.h")
-install(FILES ${HEADER_LIST} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES ${HEADER_LIST} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/nakama-test)
 
 if(NOT BUILD_EXECUTABLE)
     ## use share directory for export files (at least a vcpkg convention)
