@@ -40,6 +40,28 @@
             "installDir": "out/win-x64"
         },
         {
+            "name": "win-arm64",
+            "inherits": [
+                "default"
+            ],
+            "generator": "Visual Studio 17 2022",
+            "cacheVariables": {
+                "WindowsDesktop": "ON",
+                "VCPKG_HOST_TRIPLET": "arm64-windows-static-heroic",
+                "VCPKG_TARGET_TRIPLET": "arm64-windows-static-heroic",
+                "BUILD_WSLAY": "ON",
+                "BUILD_CURL_IO": "ON",
+                "BUILD_CURL_HTTP": "ON",
+                "VCPKG_MANIFEST_FEATURES": "wslay;curl"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "installDir": "out/win-arm64"
+        },
+        {
             "name": "win-x86",
             "inherits": [
                 "default"
