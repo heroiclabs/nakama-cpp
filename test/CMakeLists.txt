@@ -138,12 +138,9 @@ target_link_libraries(nakama-test
 )
 
 if (NAKAMA_SDK_BUILD_TYPE STREQUAL "STATIC")
-    find_package(Protobuf CONFIG REQUIRED)
-    find_package(wslay CONFIG REQUIRED)
-    find_package(curl CONFIG REQUIRED)
-    target_link_libraries(nakama-test
-        PRIVATE
-            curl wslay protobuf::libprotobuf)
+    find_package(Protobuf CONFIG)
+    find_package(wslay CONFIG)
+    find_package(curl CONFIG)
 endif()
 
 target_compile_features(nakama-test PRIVATE cxx_std_14)

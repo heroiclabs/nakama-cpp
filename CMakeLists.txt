@@ -335,12 +335,22 @@ endif()
 
 add_library(nakama::sdk ALIAS nakama-sdk)
 target_link_libraries(nakama-sdk
-        PUBLIC nakama::sdk-interface ${PTHREADS_LIB}
-        PRIVATE
-            nakama-api-proto
-            $<$<TARGET_EXISTS:nakama-sdk-core-grpc>:nakama-grpc-proto>
-		${HTTP_IMPL_LIB} ${WS_IMPL_LIB}
-        )
+        PUBLIC nakama::sdk-interface ${PTHREADS_LIB})
+
+set(DEPENDENCY_LINK_SCOPE "")
+if (BUILD_SHARED_LIBS)
+    set(DEPENDENCY_LINK_SCOPE "PRIVATE")
+else() # propogate the static dependencies
+    set(DEPENDENCY_LINK_SCOPE "PUBLIC")
+endif()
+
+target_link_libraries(nakama-sdk
+    ${DEPENDENCY_LINK_SCOPE}
+    nakama-api-proto
+    $<$<TARGET_EXISTS:nakama-sdk-core-grpc>:nakama-grpc-proto>
+    ${HTTP_IMPL_LIB} ${WS_IMPL_LIB}
+)
+
 
 if (ADDRESS_SANITIZER)
    if (MSVC)
