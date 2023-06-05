@@ -15,6 +15,7 @@
 
 cmake_minimum_required(VERSION 3.23)
 
+
 if(APPLE AND (NOT DEFINED ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}))
     message(FATAL_ERROR "No test development team setup. Please have an entry for NAKAMA_TEST_DEVELOPMENT_TEAM in your environment variables. See README.md for more information.")
 endif()
@@ -28,6 +29,8 @@ if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
 endif()
 
 project(nakama-test LANGUAGES C CXX)
+
+include(GNUInstallDirs)
 
 option(LOGS_ENABLED "Enable log output" ON)
 option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
@@ -127,7 +130,6 @@ target_include_directories(nakama-test
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-
 if (LOGS_ENABLED)
     target_compile_definitions(nakama-test PRIVATE "NLOGS_ENABLED")
 endif()
@@ -213,13 +215,14 @@ if (BUILD_EXECUTABLE)
 
 endif()
 
-set(_TEST_OUT_DIR "${CMAKE_INSTALL_PREFIX}")
-
 install(TARGETS nakama-test
     EXPORT nakama-test-export
-    BUNDLE DESTINATION ${_TEST_OUT_DIR}
-    RUNTIME DESTINATION ${_TEST_OUT_DIR}
+    BUNDLE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
+
+file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/include/*.h")
+install(FILES ${HEADER_LIST} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 if(NOT BUILD_EXECUTABLE)
     ## use share directory for export files (at least a vcpkg convention)
@@ -229,24 +232,25 @@ if(NOT BUILD_EXECUTABLE)
     include(CMakePackageConfigHelpers)
 
     configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-test-config.cmake.in
-    "${CMAKE_CURRENT_BINARY_DIR}/nakama-test-config.cmake"
-    INSTALL_DESTINATION share/nakama-test
-    NO_SET_AND_CHECK_MACRO
-    NO_CHECK_REQUIRED_COMPONENTS_MACRO
+        "${CMAKE_CURRENT_BINARY_DIR}/nakama-test-config.cmake"
+        INSTALL_DESTINATION share/nakama-test
+        NO_SET_AND_CHECK_MACRO
+        NO_CHECK_REQUIRED_COMPONENTS_MACRO
     )
 
     install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/nakama-test-config.cmake
         DESTINATION share/nakama-test
     )
+
 endif()
 
 if (BUILD_EXECUTABLE)
-    if (${BUILD_SHARED_NAKAMA_SDK})
+    if (${NAKAMA_SDK_BUILD_TYPE} STREQUAL "SHARED")
         install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
-            RUNTIME DESTINATION ${_TEST_OUT_DIR}
-            LIBRARY DESTINATION ${_TEST_OUT_DIR}
-            FRAMEWORK DESTINATION ${_TEST_OUT_DIR}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR}
         )
     endif()
 
