@@ -38,6 +38,12 @@ option(BUILD_SHARED_NAKAMA_SDK "Whether the local Nakama SDK should be static or
 option(BUILD_EXECUTABLE "Whether or not to make the test an executable for standalone execution." ON)
 set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 
+if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
+    if(BUILD_SHARED_LIBS)
+        set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+    endif()
+endif()
+
 if(REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
 else()

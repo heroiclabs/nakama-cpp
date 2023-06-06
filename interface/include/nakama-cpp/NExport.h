@@ -19,8 +19,7 @@
 #undef NAKAMA_API
 
 #ifdef NAKAMA_SHARED_LIBRARY
-
-#if defined _WIN32 || defined __CYGWIN__  || defined __SCE__
+#if defined _WIN32 || defined __CYGWIN__
     #ifdef NAKAMA_SHARED_LIBRARY_EXPORTS
         #define NAKAMA_API __declspec(dllexport)
     #else
