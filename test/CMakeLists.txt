@@ -111,7 +111,7 @@ file(
 )
 
 if (FORCE_DLL_IMPORT_EXPORT AND NOT BUILD_EXECUTABLE)
-    compile_definitions(FORCE_DLL_IMPORT_EXPORT)
+    add_compile_definitions(FORCE_DLL_IMPORT_EXPORT)
 endif()
 
 # for Android, we are following this guide: https://medium.com/androiddevelopers/getting-started-with-c-and-android-native-activities-2213b402ffff
