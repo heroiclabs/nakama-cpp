@@ -1,5 +1,4 @@
-#
-# Copyright 2019 The Nakama Authors
+# Copyright 2023 The Nakama Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +13,6 @@
 # limitations under the License.
 
 cmake_minimum_required(VERSION 3.23)
-
 
 if(APPLE AND (NOT DEFINED ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}))
     message(FATAL_ERROR "No test development team setup. Please have an entry for NAKAMA_TEST_DEVELOPMENT_TEAM in your environment variables. See README.md for more information.")
@@ -46,7 +44,10 @@ if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
         add_compile_definitions(NAKAMA_TEST_SHARED_LIBRARY_EXPORTS)
     endif()
 endif()
+if (NOT BUILD_SHARED_LIBS)
+    list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
 
+endif()
 if(REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
 else()
@@ -109,6 +110,10 @@ file(
     "${CMAKE_CURRENT_SOURCE_DIR}/src/realtime/*.h*"
 )
 
+if (FORCE_DLL_IMPORT_EXPORT AND NOT BUILD_EXECUTABLE)
+    compile_definitions(FORCE_DLL_IMPORT_EXPORT)
+endif()
+
 # for Android, we are following this guide: https://medium.com/androiddevelopers/getting-started-with-c-and-android-native-activities-2213b402ffff
 # alternatively we could do this in `Android.mk` but we already use CMake.
 if (BUILD_EXECUTABLE)
@@ -127,10 +132,6 @@ if (BUILD_EXECUTABLE)
     endif()
 else()
     add_library(nakama-test ${SRCS})
-endif()
-
-if (FORCE_DLL_IMPORT_EXPORT AND NOT BUILD_EXECUTABLE)
-    target_compile_definitions(nakama-test INTERFACE FORCE_DLL_IMPORT_EXPORT)
 endif()
 
 target_include_directories(nakama-test

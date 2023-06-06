@@ -10,8 +10,7 @@
         },
         "optional-lite",
         "protobuf",
-        "curl",
-        "wslay"
+        "curl"
     ],
     "overrides": [
         {"name": "wslay", "version": "1.1.1#6"}
@@ -37,6 +36,14 @@
                     "version>=": "2.6.0#3",
                     "platform": "android",
                     "features": ["wslay", "curl", "cpprestsdk-http", "logs"]
+                }
+            ]
+        },
+        "wslay": {
+            "description": "Websockets library decoupled from IO and handshakes. For testing static Nakama builds.",
+            "dependencies": [
+                {
+                    "name": "wslay"
                 }
             ]
         }

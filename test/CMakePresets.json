@@ -56,6 +56,24 @@
             "installDir": "out/win-x86"
         },
         {
+            "name": "win-arm64",
+            "inherits": [
+                "default"
+            ],
+            "generator": "Visual Studio 17 2022",
+            "cacheVariables": {
+                "WindowsDesktop": "ON",
+                "VCPKG_HOST_TRIPLET": "arm64-windows",
+                "VCPKG_TARGET_TRIPLET": "arm64-windows"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "installDir": "out/win-arm64"
+        },
+        {
             "name": "macosx-arm64-host_arm64",
             "inherits": [
                 "default"
