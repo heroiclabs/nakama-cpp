@@ -36,11 +36,14 @@ option(LOGS_ENABLED "Enable log output" ON)
 option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
 option(BUILD_SHARED_NAKAMA_SDK "Whether the local Nakama SDK should be static or shared." ON)
 option(BUILD_EXECUTABLE "Whether or not to make the test an executable for standalone execution." ON)
+option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
+
 set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 
 if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
     if(BUILD_SHARED_LIBS)
         set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+        add_compile_definitions(NAKAMA_TEST_SHARED_LIBRARY_EXPORTS)
     endif()
 endif()
 
@@ -126,8 +129,9 @@ else()
     add_library(nakama-test ${SRCS})
 endif()
 
-set_target_properties(nakama-test PROPERTIES CXX_VISIBILITY_PRESET default)
-
+if (FORCE_DLL_IMPORT_EXPORT AND NOT BUILD_EXECUTABLE)
+    target_compile_definitions(nakama-test INTERFACE FORCE_DLL_IMPORT_EXPORT)
+endif()
 
 target_include_directories(nakama-test
     INTERFACE
