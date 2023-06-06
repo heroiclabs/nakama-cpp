@@ -22,7 +22,6 @@
 namespace Nakama {
 namespace Test {
 
-
 int runAllTests(std::function<NClientPtr(Nakama::NClientParameters)> clientFactory, std::function<NRtClientPtr(Nakama::NClientPtr client)> rtClientFactory, std::string serverHttpKey);
 
 

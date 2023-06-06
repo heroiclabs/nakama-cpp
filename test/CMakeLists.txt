@@ -44,6 +44,8 @@ if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
     endif()
 endif()
 
+set_target_properties(nakama-test PROPERTIES CXX_VISIBILITY_PRESET default)
+
 if(REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
 else()

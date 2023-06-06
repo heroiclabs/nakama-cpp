@@ -10,6 +10,11 @@ add_library(nakama::sdk-interface ALIAS nakama-sdk-interface)
 # Force nonstd::optional save our choice in config.h
 set(optional_CONFIG_SELECT_OPTIONAL optional_OPTIONAL_NONSTD)
 target_compile_definitions(nakama-sdk-interface INTERFACE optional_CONFIG_SELECT_OPTIONAL=${optional_CONFIG_SELECT_OPTIONAL})
+
+if (FORCE_DLL_IMPORT_EXPORT)
+    target_compile_definitions(nakama-sdk-interface INTERFACE FORCE_DLL_IMPORT_EXPORT)
+endif()
+
 # Create configure file with all
 configure_file(config.h.in nakama-cpp/config.h)
 
