@@ -9,9 +9,8 @@ find_package(wslay CONFIG REQUIRED)
 add_library(nakama-impl-ws-wslay INTERFACE ${srcs})
 
 target_link_libraries(nakama-impl-ws-wslay INTERFACE
-        nakama-api-proto
+        nakama-api-proto nakama::sdk-interface
         wslay nakama-sdk-core-common
-        nakama::sdk-interface
         )
 
 target_include_directories(nakama-impl-ws-wslay INTERFACE
