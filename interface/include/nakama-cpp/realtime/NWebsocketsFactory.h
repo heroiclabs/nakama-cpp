@@ -31,5 +31,13 @@ NAKAMA_NAMESPACE_BEGIN
     NAKAMA_API NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParameters);
 #endif
 
+#if defined BUILD_WEBSOCKET_WSLAY
+    template<typename IO>
+    NRtTransportPtr createWslayWebsocket(const NPlatformParameters& platformParameters, IO io)
+    {
+        return NRtTransportPtr(new NWebsocketWslay<IO>());
+    }
+#endif
+
 
 NAKAMA_NAMESPACE_END
