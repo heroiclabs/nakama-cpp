@@ -38,11 +38,12 @@ option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardl
 
 set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 
+message(" shared libs ${BUILD_SHARED_LIBS}")
+message(" build executable ${BUILD_EXECUTABLE}")
+
 if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
-    if(BUILD_SHARED_LIBS)
-        set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-        add_compile_definitions(NAKAMA_TEST_SHARED_LIBRARY_EXPORTS)
-    endif()
+    set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+    add_compile_definitions(NAKAMA_TEST_SHARED_LIBRARY NAKAMA_TEST_SHARED_LIBRARY_EXPORTS)
 endif()
 if (NOT BUILD_SHARED_LIBS)
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
@@ -117,6 +118,8 @@ endif()
 # for Android, we are following this guide: https://medium.com/androiddevelopers/getting-started-with-c-and-android-native-activities-2213b402ffff
 # alternatively we could do this in `Android.mk` but we already use CMake.
 if (BUILD_EXECUTABLE)
+    add_compile_definitions(BUILD_EXECUTABLE)
+
     if (ANDROID)
         find_library(log-lib log)
 
@@ -131,7 +134,7 @@ if (BUILD_EXECUTABLE)
         add_executable(nakama-test MACOSX_BUNDLE ${SRCS} "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp")
     endif()
 else()
-    add_library(nakama-test ${SRCS})
+    add_library(nakama-test ${SRCS} "${CMAKE_CURRENT_SOURCE_DIR}/include/NTestLib.h")
 endif()
 
 target_include_directories(nakama-test
@@ -228,12 +231,6 @@ if (BUILD_EXECUTABLE)
 
 endif()
 
-install(TARGETS nakama-test
-    EXPORT nakama-test-export
-    BUNDLE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
 
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/include/*.h")
 install(FILES ${HEADER_LIST} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/nakama-test)
@@ -262,11 +259,17 @@ endif()
 if (BUILD_EXECUTABLE)
     if (${NAKAMA_SDK_BUILD_TYPE} STREQUAL "SHARED")
         install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
-            RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_BINDIR}
+            FRAMEWORK DESTINATION ${CMAKE_INSTALL_BINDIR}
         )
     endif()
+
+    install(TARGETS nakama-test
+        EXPORT nakama-test-export
+        BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
 
     if (CMAKE_SYSTEM_NAME MATCHES "Windows" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
         add_custom_target(run
@@ -281,4 +284,20 @@ if (BUILD_EXECUTABLE)
             DEPENDS install
         )
     endif()
+else()
+    if (${NAKAMA_SDK_BUILD_TYPE} STREQUAL "SHARED")
+        install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
+            RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        )
+    endif()
+
+    install(TARGETS nakama-test
+        EXPORT nakama-test-export
+        BUNDLE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    )
 endif()
