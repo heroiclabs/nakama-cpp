@@ -16,6 +16,7 @@
 
 #include <stdint.h>
 #include "NTestLib.h"
+#include "globals.h"
 
 namespace Nakama {
 namespace Test {
