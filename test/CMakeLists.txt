@@ -35,6 +35,7 @@ option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
 option(BUILD_SHARED_NAKAMA_SDK "Whether the local Nakama SDK should be static or shared." ON)
 option(BUILD_EXECUTABLE "Whether or not to make the test an executable for standalone execution." ON)
 option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
+option(INSTALL_NAKAMA_SDK "Whether or not to install the nakama SDK alongside the test executable or library" ON)
 
 set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 
@@ -285,7 +286,7 @@ if (BUILD_EXECUTABLE)
         )
     endif()
 else()
-    if (${NAKAMA_SDK_BUILD_TYPE} STREQUAL "SHARED")
+    if (INSTALL_NAKAMA_SDK AND ${NAKAMA_SDK_BUILD_TYPE} STREQUAL "SHARED")
         install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
             RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
