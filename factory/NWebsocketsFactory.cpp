@@ -21,7 +21,7 @@
 #if defined(BUILD_WEBSOCKET_LIBHTTPCLIENT)
 #include "../../impl/wsLibHttpClient/NWebsocketLibHC.h"
 #elif defined(BUILD_WEBSOCKET_WSLAY)
-#include "NWebsocketWslay.h"
+#include "nakama-cpp/realtime/NWebsocketWslay.h"
     #if defined(BUILD_CURL_IO)
 #include "NetIOCurl.h"
     #endif
