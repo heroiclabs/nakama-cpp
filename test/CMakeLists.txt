@@ -18,6 +18,14 @@ if(APPLE AND (NOT DEFINED ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}))
     message(FATAL_ERROR "No test development team setup. Please have an entry for NAKAMA_TEST_DEVELOPMENT_TEAM in your environment variables. See README.md for more information.")
 endif()
 
+if (NOT BUILD_SHARED_LIBS)
+    list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
+endif()
+
+if(REMOTE_NAKAMA_SDK)
+    list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
+endif()
+
  ## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
 set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake CACHE FILEPATH "Vcpkg toolchain file" FORCE)
 
@@ -46,13 +54,8 @@ if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
     add_compile_definitions(NAKAMA_TEST_SHARED_LIBRARY NAKAMA_TEST_SHARED_LIBRARY_EXPORTS)
 endif()
-if (NOT BUILD_SHARED_LIBS)
-    list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
 
-endif()
-if(REMOTE_NAKAMA_SDK)
-    list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
-else()
+if (NOT REMOTE_NAKAMA_SDK)
 
     if (${PRESET_NAME})
         execute_process(
