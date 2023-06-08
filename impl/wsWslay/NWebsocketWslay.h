@@ -54,7 +54,7 @@ private:
     NetIOAsyncResult http_handshake_init();
     NetIOAsyncResult http_handshake_send();
     NetIOAsyncResult http_handshake_receive();
-    void disconnect(bool remote, std::optional<uint16_t> code);
+    void disconnect(bool remote, opt::optional<uint16_t> code);
 
     std::unique_ptr<WslayIOInterface> _io;
     struct wslay_event_callbacks _callbacks;

@@ -101,7 +101,7 @@ class WslayIOCurl : public WslayIOInterface {
         }
 
         // returns number of bytes sent or negative error code
-        ssize_t send(const void* buf, size_t len, int *would_block) noexcept override {
+        int send(const void* buf, size_t len, int *would_block) noexcept override {
             size_t sent;
             CURLcode res = curl_easy_send(_curl.get(), buf, len, &sent);
             *would_block = 0;
@@ -119,7 +119,7 @@ class WslayIOCurl : public WslayIOInterface {
         }
 
         // returns number of bytes consumed
-        ssize_t recv(void* buf, size_t len, int* would_block) noexcept override {
+        int recv(void* buf, size_t len, int* would_block) noexcept override {
             size_t nbytes;
             CURLcode res = curl_easy_recv(_curl.get(), buf, len, &nbytes);
             *would_block = 0;

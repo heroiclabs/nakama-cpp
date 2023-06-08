@@ -183,7 +183,7 @@ namespace Nakama {
 
     NWebsocketWslay::~NWebsocketWslay() {
         if (_connected) {
-            this->disconnect(false, std::nullopt);
+            this->disconnect(false, opt::nullopt);
         }
     }
 
@@ -217,10 +217,10 @@ namespace Nakama {
     }
 
     void NWebsocketWslay::disconnect() {
-        this->disconnect(false, std::nullopt);
+        this->disconnect(false, opt::nullopt);
     }
 
-    void NWebsocketWslay::disconnect(bool remote, std::optional<uint16_t> code) {
+    void NWebsocketWslay::disconnect(bool remote, opt::optional<uint16_t> code) {
         if (!remote && _state == State::Connected) {
             assert(_ctx);
             // we've asked for disconnect, send close frame before closing socket

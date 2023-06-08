@@ -11,7 +11,7 @@ add_library(nakama-impl-ws-wslay OBJECT ${srcs})
 target_link_libraries(nakama-impl-ws-wslay PUBLIC
         nakama-api-proto nakama::sdk-interface
         nakama-sdk-core-common nakama-sdk-core-misc
-        PRIVATE wslay
+        wslay
     )
 
 target_include_directories(nakama-impl-ws-wslay INTERFACE
