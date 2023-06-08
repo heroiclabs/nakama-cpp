@@ -185,17 +185,13 @@ endif()
 # no ZERO_CHECK target for Xcode
 set(CMAKE_SUPPRESS_REGENERATION true)
 
-
-if (BUILD_SHARED_LIBS)
+if (BUILD_EXECUTABLE)
     if (REMOTE_NAKAMA_SDK)
         set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/nakama-sdk.framework)
     else()
         set(NAKAMA_SDK_FRAMEWORK_LOCATION ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/lib/nakama-sdk.framework)
     endif()
-endif()
 
-
-if (BUILD_EXECUTABLE)
     set_target_properties(nakama-test PROPERTIES
         MACOSX_BUNDLE_GUI_IDENTIFIER "com.test"
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/test.plist
@@ -208,7 +204,8 @@ if (BUILD_EXECUTABLE)
         XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
     )
 
-    if (BUILD_SHARED_LIBS)
+    message("EMBEDDING FROM LOCATION ${NAKAMA_SDK_FRAMEWORK_LOCATION}")
+    if (BUILD_SHARED_NAKAMA_SDK)
         set_target_properties(nakama-test PROPERTIES
             XCODE_EMBED_FRAMEWORKS ${NAKAMA_SDK_FRAMEWORK_LOCATION} ## todo figure out why passing target doesn't work
             XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
@@ -236,29 +233,8 @@ endif()
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/include/*.h")
 install(FILES ${HEADER_LIST} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/nakama-test)
 
-if(NOT BUILD_EXECUTABLE)
-    ## use share directory for export files (at least a vcpkg convention)
-    install(EXPORT nakama-test-export
-            DESTINATION share/nakama-test)
-
-    include(CMakePackageConfigHelpers)
-
-    configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-test-config.cmake.in
-        "${CMAKE_CURRENT_BINARY_DIR}/nakama-test-config.cmake"
-        INSTALL_DESTINATION share/nakama-test
-        NO_SET_AND_CHECK_MACRO
-        NO_CHECK_REQUIRED_COMPONENTS_MACRO
-    )
-
-    install(FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/nakama-test-config.cmake
-        DESTINATION share/nakama-test
-    )
-
-endif()
-
 if (BUILD_EXECUTABLE)
-    if (${NAKAMA_SDK_BUILD_TYPE} STREQUAL "SHARED")
+    if ((NOT CMAKE_SYSTEM_NAME MATCHES "Darwin") AND ${NAKAMA_SDK_BUILD_TYPE} STREQUAL "SHARED")
         install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
             RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
             LIBRARY DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -286,6 +262,24 @@ if (BUILD_EXECUTABLE)
         )
     endif()
 else()
+    ## use share directory for export files (at least a vcpkg convention)
+    install(EXPORT nakama-test-export
+            DESTINATION share/nakama-test)
+
+    include(CMakePackageConfigHelpers)
+
+    configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-test-config.cmake.in
+        "${CMAKE_CURRENT_BINARY_DIR}/nakama-test-config.cmake"
+        INSTALL_DESTINATION share/nakama-test
+        NO_SET_AND_CHECK_MACRO
+        NO_CHECK_REQUIRED_COMPONENTS_MACRO
+    )
+
+    install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/nakama-test-config.cmake
+        DESTINATION share/nakama-test
+    )
+
     if (INSTALL_NAKAMA_SDK AND ${NAKAMA_SDK_BUILD_TYPE} STREQUAL "SHARED")
         install(IMPORTED_RUNTIME_ARTIFACTS nakama-sdk
             RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}

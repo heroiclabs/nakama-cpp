@@ -82,20 +82,20 @@ bool isStringStartsWith(const string & str, const string & prefix)
     return res;
 }
 
-std::optional<URLParts> ParseURL(const string& url) {
+opt::optional<URLParts> ParseURL(const string& url) {
     const std::regex re("([^:]+)://([^:/]+)(:([0-9]+))?/(.+)", std::regex::extended);
     std::smatch m;
     if (!std::regex_match(url, m, re)) {
-        return std::nullopt;
+        return opt::nullopt;
     }
 
-    std::optional<uint16_t> port(nullopt);
+    opt::optional<uint16_t> port(opt::nullopt);
     if (m[4].length() > 0) {
         auto portNum = std::strtoul(m[4].str().c_str(), nullptr, 10);
         if (portNum > 0 && portNum <= std::numeric_limits<uint16_t>::max() ) {
             port = static_cast<uint16_t>(portNum);
         } else {
-            return std::nullopt;
+            return opt::nullopt;
         }
     }
 
@@ -106,7 +106,7 @@ std::optional<URLParts> ParseURL(const string& url) {
         m[5].str(),    //pathAndArgs
         url                // url
     };
-    return std::make_optional(parts);
+    return opt::make_optional(parts);
 }
 
 } // namespace Nakama

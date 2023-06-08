@@ -21,6 +21,10 @@
 #include <nakama-cpp/realtime/NRtTransportInterface.h>
 #include <nakama-cpp/NPlatformParams.h>
 
+#if defined BUILD_WEBSOCKET_WSLAY
+#include <nakama-cpp/realtime/wslay/WslayIOInterface.h>
+#endif
+
 NAKAMA_NAMESPACE_BEGIN
 
     /**
@@ -32,11 +36,7 @@ NAKAMA_NAMESPACE_BEGIN
 #endif
 
 #if defined BUILD_WEBSOCKET_WSLAY
-    template<typename IO>
-    NRtTransportPtr createWslayWebsocket(const NPlatformParameters& platformParameters, IO io)
-    {
-        return NRtTransportPtr(new NWebsocketWslay<IO>());
-    }
+    NRtTransportPtr createWslayWebsocket(std::unique_ptr<WslayIOInterface> io);
 #endif
 
 

@@ -18,6 +18,10 @@
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/NPlatformParams.h"
 
+#ifdef BUILD_WEBSOCKET_WSLAY
+#include "nakama-cpp/realtime/wslay/WslayIOInterface.h"
+#endif
+
 #if defined(BUILD_WEBSOCKET_LIBHTTPCLIENT)
 #include "../../impl/wsLibHttpClient/NWebsocketLibHC.h"
 #elif defined(BUILD_WEBSOCKET_WSLAY)
@@ -39,7 +43,7 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
     #if defined(BUILD_WEBSOCKET_LIBHTTPCLIENT)
     return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
     #elif defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL_IO)
-    return NRtTransportPtr(new NWebsocketWslay<WslayIOCurl>());
+    return NRtTransportPtr(new NWebsocketWslay(std::move(std::unique_ptr<WslayIOInterface>(new WslayIOCurl()))));
     #elif defined(BUILD_WEBSOCKET_CPPRESTSDK)
     return NRtTransportPtr(new NWebsocketCppRest());
     #else
@@ -49,5 +53,11 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
 
 #endif
 
+#ifdef BUILD_WEBSOCKET_WSLAY
+NRtTransportPtr createWslayWebsocket(std::unique_ptr<WslayIOInterface> io)
+{
+    return std::make_shared<NWebsocketWslay>(std::move(io));
+}
+#endif
 
 } // namespace Nakama

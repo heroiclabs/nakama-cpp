@@ -20,8 +20,7 @@
 #include <memory>
 #include <wslay/wslay.h>
 #include "nakama-cpp/realtime/NRtTransportInterface.h"
-#include "StrUtil.h"
-#include "WslayIOInterface.h"
+#include <nakama-cpp/realtime/wslay/WslayIOInterface.h>
 
 namespace Nakama {
 
@@ -36,11 +35,8 @@ enum class State {
 class NWebsocketWslay : public NRtTransportInterface
 {
 public:
-    NWebsocketWslay();
+    NWebsocketWslay(std::unique_ptr<WslayIOInterface> io);
     ~NWebsocketWslay() override;
-
-    NWebsocketWslay (const NWebsocketWslay&) = delete;
-    NWebsocketWslay& operator= (const NWebsocketWslay&) = delete;
 
     void setActivityTimeout(uint32_t timeout) override;
     uint32_t getActivityTimeout() const override;
@@ -60,7 +56,7 @@ private:
     NetIOAsyncResult http_handshake_receive();
     void disconnect(bool remote, std::optional<uint16_t> code);
 
-    std::unique_ptr<WslayIOInterface> io;
+    std::unique_ptr<WslayIOInterface> _io;
     struct wslay_event_callbacks _callbacks;
     std::unique_ptr<std::remove_pointer<wslay_event_context_ptr>::type, decltype(&wslay_event_context_free)> _ctx;
     uint32_t _timeout = 0;

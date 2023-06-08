@@ -18,6 +18,7 @@
 
 #include "nakama-cpp/NTypes.h"
 #include "nakama-cpp/NExport.h"
+#include "nakama-cpp/URLParts.h"
 #include <string>
 #include <optional>
 
@@ -66,16 +67,7 @@ NAKAMA_NAMESPACE_BEGIN
      */
     bool isStringStartsWith(const std::string& str, const std::string& prefix);
 
-    struct URLParts {
-        std::string scheme;
-        std::string host;
-        std::optional<uint16_t> port;
-        std::string pathAndArgs;
-        std::string url;
-    };
-
-
     //Definitely not fully compliant, but good enough for us
-    std::optional<URLParts> ParseURL(const std::string& url);
+    opt::optional<URLParts> ParseURL(const std::string& url);
 
 NAKAMA_NAMESPACE_END
