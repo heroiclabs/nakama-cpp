@@ -18,7 +18,7 @@ if(APPLE AND (NOT DEFINED ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}))
     message(FATAL_ERROR "No test development team setup. Please have an entry for NAKAMA_TEST_DEVELOPMENT_TEAM in your environment variables. See README.md for more information.")
 endif()
 
-if (NOT BUILD_SHARED_NAKAMA_SDK)
+if (NAKAMA_SDK_BUILD_TYPE STREQUAL "STATIC")
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
 endif()
 
@@ -51,26 +51,32 @@ if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
     add_compile_definitions(NAKAMA_TEST_SHARED_LIBRARY NAKAMA_TEST_SHARED_LIBRARY_EXPORTS)
 endif()
 
-if (NOT REMOTE_NAKAMA_SDK)
 
-    if (${PRESET_NAME})
-        execute_process(
-            COMMAND ${CMAKE_COMMAND} -S .. --preset ${PRESET_NAME} -DBUILD_SHARED_LIBS=${BUILD_SHARED_NAKAMA_SDK}
-            RESULT_VARIABLE result
-        )
+if (NOT REMOTE_NAKAMA_SDK AND ${PRESET_NAME})
+    set(BUILD_SHARED_NAKAMA_SDK "")
 
-        if (result)
-            message(FATAL_ERROR "Configuration of nakama-cpp preset ${PRESET_NAME} failed.")
-        endif()
+    if (NAKAMA_SDK_BUILD_TYPE STREQUAL "SHARED")
+        set(BUILD_SHARED_NAKAMA_SDK ON)
+    else()
+        set(BUILD_SHARED_NAKAMA_SDK OFF)
+    endif()
 
-        execute_process(
-            COMMAND ${CMAKE_COMMAND} --build ../build/${PRESET_NAME} --config ${NAKAMA_SDK_CONFIG} --target install
-            RESULT_VARIABLE result
-        )
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} -S .. --preset ${PRESET_NAME} -DBUILD_SHARED_LIBS=${BUILD_SHARED_NAKAMA_SDK}
+        RESULT_VARIABLE result
+    )
 
-        if (result)
-            message(FATAL_ERROR "Building and installing nakama-cpp with preset ${PRESET_NAME} failed.")
-        endif()
+    if (result)
+        message(FATAL_ERROR "Configuration of nakama-cpp preset ${PRESET_NAME} failed.")
+    endif()
+
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} --build ../build/${PRESET_NAME} --config ${NAKAMA_SDK_CONFIG} --target install
+        RESULT_VARIABLE result
+    )
+
+    if (result)
+        message(FATAL_ERROR "Building and installing nakama-cpp with preset ${PRESET_NAME} failed.")
     endif()
 endif()
 
@@ -203,7 +209,7 @@ if (BUILD_EXECUTABLE)
         XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
     )
 
-    if (BUILD_SHARED_NAKAMA_SDK)
+    if (NAKAMA_SDK_BUILD_TYPE STREQUAL "SHARED")
         set_target_properties(nakama-test PROPERTIES
             XCODE_EMBED_FRAMEWORKS ${NAKAMA_SDK_FRAMEWORK_LOCATION} ## todo figure out why passing target doesn't work
             XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY		"YES"		# frameworks must be signed by the same developer as the binary
