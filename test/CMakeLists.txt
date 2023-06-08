@@ -40,15 +40,11 @@ include(GNUInstallDirs)
 
 option(LOGS_ENABLED "Enable log output" ON)
 option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
-option(BUILD_SHARED_NAKAMA_SDK "Whether the local Nakama SDK should be static or shared." ON)
 option(BUILD_EXECUTABLE "Whether or not to make the test an executable for standalone execution." ON)
 option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
 option(INSTALL_NAKAMA_SDK "Whether or not to install the nakama SDK alongside the test executable or library" ON)
 
 set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
-
-message(" shared libs ${BUILD_SHARED_LIBS}")
-message(" build executable ${BUILD_EXECUTABLE}")
 
 if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -207,7 +203,6 @@ if (BUILD_EXECUTABLE)
         XCODE_ATTRIBUTE_CODE_SIGN_STYLE Automatic
     )
 
-    message("EMBEDDING FROM LOCATION ${NAKAMA_SDK_FRAMEWORK_LOCATION}")
     if (BUILD_SHARED_NAKAMA_SDK)
         set_target_properties(nakama-test PROPERTIES
             XCODE_EMBED_FRAMEWORKS ${NAKAMA_SDK_FRAMEWORK_LOCATION} ## todo figure out why passing target doesn't work
