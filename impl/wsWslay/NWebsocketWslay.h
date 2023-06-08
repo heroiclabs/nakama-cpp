@@ -21,7 +21,7 @@
 #include <wslay/wslay.h>
 #include "nakama-cpp/realtime/NRtTransportInterface.h"
 #include "StrUtil.h"
-#include "NetIO.h"
+#include "WslayIOInterface.h"
 
 namespace Nakama {
 
@@ -33,8 +33,6 @@ enum class State {
     Handshake_Receiving,
     Connected
 };
-
-template<typename IO>
 class NWebsocketWslay : public NRtTransportInterface
 {
 public:
@@ -62,7 +60,7 @@ private:
     NetIOAsyncResult http_handshake_receive();
     void disconnect(bool remote, std::optional<uint16_t> code);
 
-    IO io;
+    std::unique_ptr<WslayIOInterface> io;
     struct wslay_event_callbacks _callbacks;
     std::unique_ptr<std::remove_pointer<wslay_event_context_ptr>::type, decltype(&wslay_event_context_free)> _ctx;
     uint32_t _timeout = 0;
@@ -78,6 +76,3 @@ private:
 };
 
 }
-// Template classes are actually header only, but we keep "definitions" separate from declarations
-// to resemble normal .cpp/.h split as in other impls for consistency
-#include "NWebsocketWslay.cpp"

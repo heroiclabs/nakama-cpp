@@ -23,7 +23,7 @@
 #elif defined(BUILD_WEBSOCKET_WSLAY)
 #include "NWebsocketWslay.h"
     #if defined(BUILD_CURL_IO)
-#include "NetIOCurl.h"
+#include "WslayIOCurl.h"
     #endif
 #elif defined(BUILD_WEBSOCKET_CPPRESTSDK)
 #include "NWebsocketCppRest.h"
@@ -39,7 +39,7 @@ NRtTransportPtr createDefaultWebsocket(const NPlatformParameters& platformParams
     #if defined(BUILD_WEBSOCKET_LIBHTTPCLIENT)
     return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
     #elif defined(BUILD_WEBSOCKET_WSLAY) && defined(BUILD_CURL_IO)
-    return NRtTransportPtr(new NWebsocketWslay<NetIOCurl>());
+    return NRtTransportPtr(new NWebsocketWslay<WslayIOCurl>());
     #elif defined(BUILD_WEBSOCKET_CPPRESTSDK)
     return NRtTransportPtr(new NWebsocketCppRest());
     #else

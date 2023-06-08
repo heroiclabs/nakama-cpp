@@ -4,7 +4,7 @@
 #include <curl/curl.h>
 #include <nakama-cpp/log/NLogger.h>
 #include "StrUtil.h"
-#include "NetIO.h"
+#include "WslayIOInterface.h"
 
 #if __ANDROID__
 #include "AndroidCA.h"
@@ -12,8 +12,8 @@
 
 NAKAMA_NAMESPACE_BEGIN
 
-struct NetIOCurl {
-    NetIOCurl() noexcept:
+class WslayIOCurl : WslayIOInterface {
+    WslayIOCurl() noexcept:
         _curl(nullptr, curl_easy_cleanup),
         _curlm(curl_multi_init(), curl_multi_cleanup),
         _curl_url(nullptr, curl_url_cleanup)

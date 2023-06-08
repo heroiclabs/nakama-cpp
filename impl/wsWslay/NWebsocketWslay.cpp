@@ -12,8 +12,7 @@
 #include "sha1.h"
 
 namespace Nakama {
-    template<typename IO>
-    void NWebsocketWslay<IO>::on_msg_recv_callback(wslay_event_context_ptr /*ctx*/, const struct wslay_event_on_msg_recv_arg* arg, void* user_data) {
+    void NWebsocketWslay::on_msg_recv_callback(wslay_event_context_ptr /*ctx*/, const struct wslay_event_on_msg_recv_arg* arg, void* user_data) {
         auto ws = static_cast<NWebsocketWslay*>(user_data);
 
         NLOG(NLogLevel::Debug, "Received WS message. Opcode: %d Length: %d", arg->opcode, arg->msg_length);
@@ -38,8 +37,7 @@ namespace Nakama {
         return 0;
     }
 
-    template<typename IO>
-    ssize_t NWebsocketWslay<IO>::recv_callback(wslay_event_context_ptr ctx, uint8_t* data, size_t len, int /*flags*/, void* user_data) {
+    ssize_t NWebsocketWslay::recv_callback(wslay_event_context_ptr ctx, uint8_t* data, size_t len, int /*flags*/, void* user_data) {
         auto ws = static_cast<NWebsocketWslay*>(user_data);
 
         if (!ws->_buf.empty()) {  // together with handshake response server sent us message, "read" it
@@ -50,7 +48,7 @@ namespace Nakama {
         }
 
         int would_block = 0;
-        int ret = ws->io.recv(data, len, &would_block);
+        int ret = ws->io->recv(data, len, &would_block);
         if (would_block) {
             wslay_event_set_error(ctx, WSLAY_ERR_WOULDBLOCK);
             return -1;
@@ -72,11 +70,10 @@ namespace Nakama {
     }
 
 
-    template<typename IO>
-    ssize_t NWebsocketWslay<IO>::send_callback(wslay_event_context_ptr ctx, const uint8_t* data, size_t len, int /*flags*/, void* user_data) {
+    ssize_t NWebsocketWslay::send_callback(wslay_event_context_ptr ctx, const uint8_t* data, size_t len, int /*flags*/, void* user_data) {
         auto ws = static_cast<NWebsocketWslay*>(user_data);
         int would_block = 0;
-        int ret = ws->io.send(data, len, &would_block);
+        int ret = ws->io->send(data, len, &would_block);
         if (ret < 0) {
             wslay_event_set_error(ctx, WSLAY_ERR_CALLBACK_FAILURE);
             return -1;
@@ -93,8 +90,7 @@ namespace Nakama {
         return {reinterpret_cast<char *>(&rnd[0]), sizeof(rnd) };
     }
 
-    template<typename IO>
-    NetIOAsyncResult NWebsocketWslay<IO>::http_handshake_init() {
+    NetIOAsyncResult NWebsocketWslay::http_handshake_init() {
         _client_key = Nakama::base64Encode(get_random16());
 
         bool useSsl = _url.scheme == "wss";
@@ -114,11 +110,10 @@ namespace Nakama {
         return NetIOAsyncResult::DONE;
     }
 
-    template<typename IO>
-    NetIOAsyncResult NWebsocketWslay<IO>::http_handshake_send() {
+    NetIOAsyncResult NWebsocketWslay::http_handshake_send() {
         int would_block = 0;
         while (_buf_iter != _buf.end() || would_block != 0) {
-            int sent = this->io.send(&*_buf_iter, _buf.end() - _buf_iter, &would_block);
+            int sent = this->io->send(&*_buf_iter, _buf.end() - _buf_iter, &would_block);
             if (sent < 0) { return NetIOAsyncResult::ERR; }
             std::advance(_buf_iter, sent);
         }
@@ -131,12 +126,11 @@ namespace Nakama {
         return NetIOAsyncResult::AGAIN;
     }
 
-    template<typename IO>
-    NetIOAsyncResult NWebsocketWslay<IO>::http_handshake_receive() {
+    NetIOAsyncResult NWebsocketWslay::http_handshake_receive() {
         int would_block = 0;
         do {
             char rbuf[1024]{};
-            int read = this->io.recv(&rbuf[0], sizeof(rbuf), &would_block);
+            int read = this->io->recv(&rbuf[0], sizeof(rbuf), &would_block);
             if (would_block != 0) {
                 return NetIOAsyncResult::AGAIN;
             } else if (read < 0) {
@@ -173,8 +167,7 @@ namespace Nakama {
     }
 
 
-    template<typename IO>
-    NWebsocketWslay<IO>::NWebsocketWslay() :
+    NWebsocketWslay::NWebsocketWslay() :
         io{},
         _callbacks{
             recv_callback,
@@ -188,15 +181,13 @@ namespace Nakama {
         _ctx(nullptr, wslay_event_context_free), _state(State::Disconnected)
     {}
 
-    template<typename IO>
-    NWebsocketWslay<IO>::~NWebsocketWslay() {
+    NWebsocketWslay::~NWebsocketWslay() {
         if (_connected) {
             this->disconnect(false, std::nullopt);
         }
     }
 
-    template<typename IO>
-    void NWebsocketWslay<IO>::connect(const std::string& url, NRtTransportType transportType) {
+    void NWebsocketWslay::connect(const std::string& url, NRtTransportType transportType) {
         assert(!_ctx);
         {
             wslay_event_context_ptr p;
@@ -217,7 +208,7 @@ namespace Nakama {
         }
         _url = urlOpt.value();
 
-        if (this->io.connect_init(_url) == NetIOAsyncResult::ERR) {
+        if (this->io->connect_init(_url) == NetIOAsyncResult::ERR) {
             fireOnError("Failed connect");
             return;
         }
@@ -225,13 +216,11 @@ namespace Nakama {
 
     }
 
-    template<typename IO>
-    void NWebsocketWslay<IO>::disconnect() {
+    void NWebsocketWslay::disconnect() {
         this->disconnect(false, std::nullopt);
     }
 
-    template<typename IO>
-    void NWebsocketWslay<IO>::disconnect(bool remote, std::optional<uint16_t> code) {
+    void NWebsocketWslay::disconnect(bool remote, std::optional<uint16_t> code) {
         if (!remote && _state == State::Connected) {
             assert(_ctx);
             // we've asked for disconnect, send close frame before closing socket
@@ -239,7 +228,7 @@ namespace Nakama {
             wslay_event_send(_ctx.get());
         }
 
-        this->io.close();
+        this->io->close();
         if (code) {
             assert(_connected);
             NRtClientDisconnectInfo info;
@@ -255,13 +244,11 @@ namespace Nakama {
     }
 
 
-    template<typename IO>
-    uint32_t NWebsocketWslay<IO>::getActivityTimeout() const {
+    uint32_t NWebsocketWslay::getActivityTimeout() const {
         return this->_timeout;
     }
 
-    template<typename IO>
-    bool NWebsocketWslay<IO>::send(const NBytes& data) {
+    bool NWebsocketWslay::send(const NBytes& data) {
         struct wslay_event_msg msg{
             _opcode,
             reinterpret_cast<const uint8_t*>(&data[0]),
@@ -278,13 +265,11 @@ namespace Nakama {
     }
 
 
-    template<typename IO>
-    void NWebsocketWslay<IO>::setActivityTimeout(uint32_t timeout) {
+    void NWebsocketWslay::setActivityTimeout(uint32_t timeout) {
         this->_timeout = timeout;
     }
 
-    template<typename IO>
-    void NWebsocketWslay<IO>::tick() {
+    void NWebsocketWslay::tick() {
         // most common case
         if (_state == State::Connected) {
             int ret = wslay_event_recv(_ctx.get());
@@ -318,7 +303,7 @@ namespace Nakama {
         do {
             if (_state == State::Connecting) {
                 NLOG_DEBUG("Wslay state: Connecting");
-                res = this->io.connect_tick();
+                res = this->io->connect_tick();
                 if (res == NetIOAsyncResult::DONE) {
                     _state = State::Handshake_Sending;
                     res = this->http_handshake_init();
@@ -351,7 +336,7 @@ namespace Nakama {
             }
             NLOG(NLogLevel::Debug, "Wslay result: ERROR %s", errMessage.c_str());
             _state = State::Disconnected;
-            this->io.close();
+            this->io->close();
             fireOnError(errMessage);
             return;
         }
