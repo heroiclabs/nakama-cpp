@@ -18,7 +18,7 @@ if(APPLE AND (NOT DEFINED ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}))
     message(FATAL_ERROR "No test development team setup. Please have an entry for NAKAMA_TEST_DEVELOPMENT_TEAM in your environment variables. See README.md for more information.")
 endif()
 
-if (NOT BUILD_SHARED_LIBS)
+if (NOT BUILD_SHARED_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
 endif()
 
