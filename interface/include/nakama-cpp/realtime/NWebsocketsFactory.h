@@ -36,7 +36,7 @@ NAKAMA_NAMESPACE_BEGIN
 #endif
 
 #if defined BUILD_WEBSOCKET_WSLAY
-    NRtTransportPtr createWslayWebsocket(std::unique_ptr<WslayIOInterface> io);
+    NAKAMA_API NRtTransportPtr createWslayWebsocket(std::unique_ptr<WslayIOInterface> io);
 #endif
 
 
