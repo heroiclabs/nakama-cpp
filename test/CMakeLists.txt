@@ -18,6 +18,16 @@ if(APPLE AND (NOT DEFINED ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}))
     message(FATAL_ERROR "No test development team setup. Please have an entry for NAKAMA_TEST_DEVELOPMENT_TEAM in your environment variables. See README.md for more information.")
 endif()
 
+### CMakePresets.json doesn't seem to pass the ${installDir} to the CMake file, so we have to reconstitute it.
+string(REPLACE ${CMAKE_SOURCE_DIR}/ "" CMAKE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}")
+get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
+
+if (NOT REMOTE_NAKAMA_SDK)
+    set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/share/nakama-sdk)
+endif()
+
+find_package(nakama-sdk CONFIG REQUIRED)
+
 if (NAKAMA_SDK_BUILD_TYPE STREQUAL "STATIC")
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
 endif()
@@ -98,16 +108,6 @@ endif()
 find_package(RapidJSON CONFIG REQUIRED)
 find_package(optional-lite CONFIG REQUIRED)
 
-### CMakePresets.json doesn't seem to pass the ${installDir} to the CMake file, so we have to reconstitute it.
-string(REPLACE ${CMAKE_SOURCE_DIR}/ "" CMAKE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}")
-get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
-
-if (NOT REMOTE_NAKAMA_SDK)
-    set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/share/nakama-sdk)
-endif()
-
-find_package(nakama-sdk CONFIG REQUIRED)
-
 file(
     GLOB SRCS
     LIST_DIRECTORIES false
@@ -157,7 +157,7 @@ if (LOGS_ENABLED)
 endif()
 
 target_link_libraries(nakama-test
-    INTERFACE rapidjson
+    PRIVATE rapidjson
     PRIVATE nakama-sdk
 )
 
