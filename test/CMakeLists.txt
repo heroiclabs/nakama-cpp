@@ -24,9 +24,9 @@ get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
 
 if (NOT REMOTE_NAKAMA_SDK)
     set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/share/nakama-sdk)
+    find_package(nakama-sdk CONFIG REQUIRED)
 endif()
 
-find_package(nakama-sdk CONFIG REQUIRED)
 
 if (NAKAMA_SDK_BUILD_TYPE STREQUAL "STATIC")
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
@@ -55,6 +55,10 @@ option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardl
 option(INSTALL_NAKAMA_SDK "Whether or not to install the nakama SDK alongside the test executable or library" ON)
 
 set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
+
+if (REMOTE_NAKAMA_SDK)
+    find_package(nakama-sdk CONFIG REQUIRED)
+endif()
 
 if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)

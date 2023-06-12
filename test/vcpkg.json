@@ -21,21 +21,21 @@
             "dependencies": [
                 {
                     "name": "nakama-sdk",
-                    "version>=": "2.6.0#3",
+                    "version>=": "2.8.0#4",
                     "platform": "ios | osx | linux",
-                    "features": ["wslay", "curl", "libhttpclient-http"]
+                    "features": ["wslay", "curl-io", "curl-http", "logs"]
                 },
                 {
                     "name": "nakama-sdk",
-                    "version>=": "2.6.0#3",
+                    "version>=": "2.8.0#4",
                     "platform": "windows",
-                    "features": ["libhttpclient-ws", "libhttpclient-http", "logs"]
+                    "features": ["wslay", "curl-io", "curl-http", "logs"]
                 },
                 {
                     "name": "nakama-sdk",
-                    "version>=": "2.6.0#3",
+                    "version>=": "2.8.0#4",
                     "platform": "android",
-                    "features": ["wslay", "curl", "cpprestsdk-http", "logs"]
+                    "features": ["wslay", "curl-io", "curl-http", "logs"]
                 }
             ]
         },
