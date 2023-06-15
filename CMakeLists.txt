@@ -33,7 +33,7 @@ if (WITH_LIBHTTPCLIENT_HTTP)
     set(HTTP_IMPL "libhttpclient")
 elseif (WITH_CPPRESTSDK)
     set(HTTP_IMPL "cpprestsdk")
-elseif (BUILD_CURL_HTTP)
+elseif (BUILD_CURL_HTTP OR BUILD_CURL_HTTP_SYSTEM)
     set(HTTP_IMPL "curl")
 endif()
 
@@ -284,7 +284,7 @@ if (WITH_LIBHTTPCLIENT_WS)
 elseif (BUILD_WEBSOCKET_WSLAY)
     set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_WSLAY)
 
-    if (BUILD_CURL_IO)
+    if (BUILD_CURL_IO OR BUILD_CURL_IO_SYSTEM)
         set(WS_IO_COMPILE_DEFINITION BUILD_CURL_IO)
     else()
         # no IO baked in for Wslay -- we expect user to provide the IO.
