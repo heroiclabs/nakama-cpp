@@ -404,9 +404,13 @@ configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-sdk-config.cmak
   INSTALL_DESTINATION share/nakama-sdk
   NO_SET_AND_CHECK_MACRO
   NO_CHECK_REQUIRED_COMPONENTS_MACRO
-  )
+)
+
+## for any variables that need to be read by consuming packages before their project() call, since find_package must be done after project()
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-sdk-preconfig.cmake.in ${CMAKE_BINARY_DIR}/nakama-sdk-preconfig.cmake)
 
 install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-preconfig.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake
   DESTINATION share/nakama-sdk
 )
