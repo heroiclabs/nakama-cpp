@@ -24,7 +24,9 @@ get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
 
 if (NOT REMOTE_NAKAMA_SDK)
     set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/share/nakama-sdk)
-    find_package(nakama-sdk CONFIG REQUIRED)
+    # read the preconfig file so we know if its static or dynamic but wait until after the project() command to actually call find_package()
+    # so that the platform settings are properly setup
+    include(${nakama-sdk_DIR}/nakama-sdk-preconfig.cmake)
 endif()
 
 
@@ -32,7 +34,7 @@ if (NAKAMA_SDK_BUILD_TYPE STREQUAL "STATIC")
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
 endif()
 
-if(REMOTE_NAKAMA_SDK)
+if (REMOTE_NAKAMA_SDK)
     list(APPEND VCPKG_MANIFEST_FEATURES "nakama-sdk")
 endif()
 
@@ -56,9 +58,7 @@ option(INSTALL_NAKAMA_SDK "Whether or not to install the nakama SDK alongside th
 
 set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 
-if (REMOTE_NAKAMA_SDK)
-    find_package(nakama-sdk CONFIG REQUIRED)
-endif()
+find_package(nakama-sdk CONFIG REQUIRED)
 
 if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
