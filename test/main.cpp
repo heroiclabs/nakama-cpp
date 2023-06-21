@@ -17,6 +17,7 @@
 #include <memory.h>
 #include "nakama-cpp/realtime/NWebsocketsFactory.h"
 #include "NTestLib.h"
+#include "NTest.h"
 
 #if defined(__ANDROID__)
 #include <jni.h>
@@ -71,8 +72,10 @@ extern "C"
 #else
 int main(int argc, char *argv[])
 {
+    Nakama::Test::NTest::NClientParameters = {SERVER_KEY, SERVER_HOST, SERVER_PORT, SERVER_SSL};
+
     auto clientFactory = [](Nakama::NClientParameters parameters)->Nakama::NClientPtr{
-        return Nakama::createDefaultClient({SERVER_KEY, SERVER_HOST, SERVER_PORT, SERVER_SSL});
+        return Nakama::createDefaultClient(parameters);
     };
 
     auto rtClientFactory = [](Nakama::NClientPtr client)->Nakama::NRtClientPtr{
