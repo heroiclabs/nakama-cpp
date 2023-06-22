@@ -48,12 +48,12 @@ namespace Test {
     }
 
 
-    int runAllTests(std::function<NClientPtr(Nakama::NClientParameters)> clientFactory, std::function<NRtClientPtr(Nakama::NClientPtr client)> rtClientFactory, std::string serverHttpKey)
+    int runAllTests(std::function<NClientPtr(Nakama::NClientParameters)> clientFactory, std::function<NRtClientPtr(Nakama::NClientPtr client)> rtClientFactory, NClientParameters parameters, std::string serverHttpKey)
     {
         NTest::ClientFactory = clientFactory;
         NTest::RtClientFactory = rtClientFactory;
         NTest::ServerHttpKey = serverHttpKey;
-
+        NTest::NClientParameters = parameters;
 
         int res = 0;
 

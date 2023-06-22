@@ -72,8 +72,6 @@ extern "C"
 #else
 int main(int argc, char *argv[])
 {
-    Nakama::Test::NTest::NClientParameters = {SERVER_KEY, SERVER_HOST, SERVER_PORT, SERVER_SSL};
-
     auto clientFactory = [](Nakama::NClientParameters parameters)->Nakama::NClientPtr{
         return Nakama::createDefaultClient(parameters);
     };
@@ -82,6 +80,6 @@ int main(int argc, char *argv[])
         return client->createRtClient();
     };
 
-    return Nakama::Test::runAllTests(clientFactory, rtClientFactory, SERVER_HTTP_KEY);
+    return Nakama::Test::runAllTests(clientFactory, rtClientFactory, {SERVER_KEY, SERVER_HOST, SERVER_PORT, SERVER_SSL}, SERVER_HTTP_KEY);
 }
 #endif

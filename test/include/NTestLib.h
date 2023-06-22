@@ -41,7 +41,7 @@
 namespace Nakama {
 namespace Test {
 
-NAKAMA_TEST_API int runAllTests(std::function<NClientPtr(Nakama::NClientParameters)> clientFactory, std::function<NRtClientPtr(Nakama::NClientPtr client)> rtClientFactory, std::string serverHttpKey);
+NAKAMA_TEST_API int runAllTests(std::function<NClientPtr(Nakama::NClientParameters)> clientFactory, std::function<NRtClientPtr(Nakama::NClientPtr client)> rtClientFactory, NClientParameters parameters, std::string serverHttpKey);
 
 }
 }
