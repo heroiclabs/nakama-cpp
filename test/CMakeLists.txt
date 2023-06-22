@@ -60,6 +60,11 @@ set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 
 find_package(nakama-sdk CONFIG REQUIRED)
 
+if (REMOTE_NAKAMA_SDK)
+    # read the preconfig file so we know if its static or dynamic.
+    include(${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/nakama-sdk/nakama-sdk-preconfig.cmake)
+endif()
+
 if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
     add_compile_definitions(NAKAMA_TEST_SHARED_LIBRARY NAKAMA_TEST_SHARED_LIBRARY_EXPORTS)

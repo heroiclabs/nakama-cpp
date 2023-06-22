@@ -92,7 +92,7 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     switch (req.method) {
         case NHttpReqMethod::POST:
             callMethod = "POST";
-            // manually set content-length because the infra expects it
+            // manually set content-length if there's no body.
             if (req.body.empty()) {
                 headers_list = curl_slist_append(headers_list, "Content-Length: 0");
                 if (headers_list == NULL)
