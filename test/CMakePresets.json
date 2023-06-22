@@ -16,6 +16,7 @@
                 "RAPIDJSON_BUILD_EXAMPLES": "OFF",
                 "RAPIDJSON_BUILD_TESTS": "OFF",
                 "RAPIDJSON_BUILD_THIRDPARTY_GTEST": "OFF",
+                "CMAKE_CONFIGURATION_TYPES": "Debug",
                 "PRESET_NAME": "${presetName}"
             }
         },

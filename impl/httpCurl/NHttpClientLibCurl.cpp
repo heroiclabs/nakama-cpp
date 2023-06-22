@@ -92,6 +92,15 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     switch (req.method) {
         case NHttpReqMethod::POST:
             callMethod = "POST";
+            // manually set content-length because the infra expects it
+            if (req.body.empty()) {
+                headers_list = curl_slist_append(headers_list, "Content-Length: 0");
+                if (headers_list == NULL)
+                {
+                    NLOG(Nakama::NLogLevel::Error, "error writing header: Content-Length");
+                    return;
+                }
+            }
             break;
         case NHttpReqMethod::GET:
             callMethod = "GET";
