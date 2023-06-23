@@ -117,6 +117,7 @@ namespace Nakama {
             {
                 ++g_failedTestsCount;
                 printTestName("Failed");
+                std::cout << std::flush;
                 abort();
             }
         }
