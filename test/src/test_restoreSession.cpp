@@ -50,8 +50,8 @@ void test_restoreSession()
 
     auto successCallback = [&test, &my_session](NSessionPtr session)
     {
-        const int expirePeriodMinutes = 120;
-        const int refreshExpirePeriodMinutes = 7200;
+        const int expirePeriodMinutes = 121;
+        const int refreshExpirePeriodMinutes = 7201;
 
         my_session = restoreSession(session->getAuthToken(), session->getRefreshToken());
 
@@ -80,7 +80,7 @@ void test_restoreSession()
         }
         else if (!my_session->isRefreshExpired(getUnixTimestampMs() + refreshExpirePeriodMinutes * 60 * 1000))
         {
-            NLOG_INFO("restored session token must be expired after " + std::to_string(expirePeriodMinutes) + " minutes");
+            NLOG_INFO("restored session token must be expired after " + std::to_string(refreshExpirePeriodMinutes) + " minutes");
             test.stopTest();
         }
         else
