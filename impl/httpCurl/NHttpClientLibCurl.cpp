@@ -169,6 +169,7 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     }
 
     /* ask libcurl to show us the verbose output */
+#ifdef CURL_DEBUG
     curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_VERBOSE, 1L);
     if (curl_code != CURLE_OK)
     {
@@ -176,7 +177,6 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
         return;
     }
 
-#ifdef CURL_DEBUG
     curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_DEBUGFUNCTION, debug_callback);
     if (curl_code != CURLE_OK)
     {
