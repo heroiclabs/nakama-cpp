@@ -43,7 +43,9 @@ class WslayIOCurl : public WslayIOInterface {
             _curl.reset(curl_easy_init());
             curl_easy_setopt(_curl.get(), CURLOPT_CURLU, u.get());
             curl_easy_setopt(_curl.get(), CURLOPT_CONNECT_ONLY, 1);
+    #ifdef CURL_DEBUG
             curl_easy_setopt(_curl.get(), CURLOPT_VERBOSE, 1);
+    #endif
             curl_easy_setopt(_curl.get(), CURLOPT_CONNECTTIMEOUT, 5);
 
     #if __ANDROID__
