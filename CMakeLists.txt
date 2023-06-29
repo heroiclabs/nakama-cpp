@@ -45,14 +45,6 @@ elseif (WITH_CPPRESTSDK)
     set(WS_IMPL "cpprestsdk")
 endif()
 
-if (DEFINED ANDROID_ABI)
-    if (DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
-        message(FATAL_ERROR "Cannot specify an external chainload toolchain if building for Android.")
-    endif()
-
-    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
-endif()
-
 cmake_policy(SET CMP0012 NEW)
 
 ## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
