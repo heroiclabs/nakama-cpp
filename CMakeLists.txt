@@ -24,6 +24,7 @@ set(FETCHCONTENT_UPDATES_DISCONNECTED OFF)
 option(DISTRIBUTE_OPTIONAL_LITE "Distribute optional lite with the Nakama client." ON)
 option(BUILD_SHARED_LIBS "Build a shared library." ON)
 option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
+option(BUILD_APPLE_FRAMEWORK "Build frameworks instead of .dylib files for Apple." ON)
 
 set(HTTP_IMPL "")
 set(WS_IMPL "")
@@ -95,7 +96,7 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 
-if(APPLE AND BUILD_SHARED_LIBS)
+if(APPLE AND BUILD_SHARED_LIBS AND BUILD_APPLE_FRAMEWORK)
     # Just copy over headers into framework dir, because "official" way of doing it
     # via PUBLIC_HEADER property is full of bugs (see comment on PUBLIC_HEADER property below)
     set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework/Headers)
@@ -308,7 +309,7 @@ endforeach()
 add_library(nakama-sdk ${NAKAMA_SDK_DEPS_OBJECTS} ${DUMMY_CPP} ${DUMMY_H})
 set_target_properties(nakama-sdk PROPERTIES VERSION ${LIBNAKAMA_VERSION})
 
-if (BUILD_SHARED_LIBS AND APPLE)
+if (BUILD_SHARED_LIBS AND APPLE AND BUILD_APPLE_FRAMEWORK)
     set_target_properties(nakama-sdk PROPERTIES
             FRAMEWORK TRUE
             FRAMEWORK_VERSION A
