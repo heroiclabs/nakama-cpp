@@ -307,7 +307,6 @@ foreach(lib ${NAKAMA_SDK_DEPS})
 endforeach()
 
 add_library(nakama-sdk ${NAKAMA_SDK_DEPS_OBJECTS} ${DUMMY_CPP} ${DUMMY_H})
-set_target_properties(nakama-sdk PROPERTIES VERSION ${LIBNAKAMA_VERSION})
 
 if (BUILD_SHARED_LIBS AND APPLE AND BUILD_APPLE_FRAMEWORK)
     set_target_properties(nakama-sdk PROPERTIES
@@ -320,7 +319,6 @@ if (BUILD_SHARED_LIBS AND APPLE AND BUILD_APPLE_FRAMEWORK)
             MACOSX_FRAMEWORK_IDENTIFIER com.heroiclabs.libnakama
             MACOSX_FRAMEWORK_BUNDLE_VERSION ${LIBNAKAMA_VERSION}
             MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
-            SOVERSION ${LIBNAKAMA_SOVERSION}
     )
 elseif (APPLE)
     set_target_properties(nakama-sdk PROPERTIES
