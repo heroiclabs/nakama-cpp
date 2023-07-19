@@ -417,5 +417,4 @@ if (DISTRIBUTE_OPTIONAL_LITE)
 endif()
 
 # Call last so they can reference any target previously defined
-include(cmake/linkerFlagsTargets.cmake)
 include(cmake/localCompilerFlags.cmake)
