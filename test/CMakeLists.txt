@@ -14,6 +14,8 @@
 
 cmake_minimum_required(VERSION 3.23)
 
+option(ADDRESS_SANITIZER "Enable address sanitizer (broken on windows)" OFF)
+
 if(APPLE AND (NOT DEFINED ENV{NAKAMA_TEST_DEVELOPMENT_TEAM}))
     message(FATAL_ERROR "No test development team setup. Please have an entry for NAKAMA_TEST_DEVELOPMENT_TEAM in your environment variables. See README.md for more information.")
 endif()
@@ -55,6 +57,8 @@ option(REMOTE_NAKAMA_SDK "Use a remote (vcpkg) installation of Nakama" OFF)
 option(BUILD_EXECUTABLE "Whether or not to make the test an executable for standalone execution." ON)
 option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
 option(INSTALL_NAKAMA_SDK "Whether or not to install the nakama SDK alongside the test executable or library" ON)
+option(NAKAMA_SDK_AUTOBUILD "Whether or not to automatically configure and build the Nakama SDK. Only works for local builds." OFF)
+option(ADDRESS_SANITIZER "Enable address sanitizer (broken on windows)" OFF)
 
 set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 
@@ -70,8 +74,13 @@ if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
     add_compile_definitions(NAKAMA_TEST_SHARED_LIBRARY NAKAMA_TEST_SHARED_LIBRARY_EXPORTS)
 endif()
 
+if (ADDRESS_SANITIZER)
+    add_compile_options(-fsanitize=address -O1 -fno-optimize-sibling-calls -fno-omit-frame-pointer)
+    string(REPLACE /RTC1 "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
+    link_libraries("-fsanitize=address")
+endif()
 
-if (NOT REMOTE_NAKAMA_SDK AND PRESET_NAME)
+if (NAKAMA_SDK_AUTOBUILD AND NOT REMOTE_NAKAMA_SDK AND PRESET_NAME)
     set(BUILD_SHARED_NAKAMA_SDK "")
 
     if (NAKAMA_SDK_BUILD_TYPE STREQUAL "SHARED")
