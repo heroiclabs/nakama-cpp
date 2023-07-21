@@ -88,7 +88,6 @@ endif(LOGS_ENABLED)
 if (ADDRESS_SANITIZER)
     add_compile_options(-fsanitize=address -O1 -fno-optimize-sibling-calls -fno-omit-frame-pointer)
     string(REPLACE /RTC1 "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
-    link_libraries("-fsanitize=address")
 endif()
 
 if(BUILD_SHARED_LIBS)

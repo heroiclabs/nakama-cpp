@@ -74,12 +74,6 @@ if (NOT BUILD_EXECUTABLE AND BUILD_SHARED_LIBS)
     add_compile_definitions(NAKAMA_TEST_SHARED_LIBRARY NAKAMA_TEST_SHARED_LIBRARY_EXPORTS)
 endif()
 
-if (ADDRESS_SANITIZER)
-    add_compile_options(-fsanitize=address -O1 -fno-optimize-sibling-calls -fno-omit-frame-pointer)
-    string(REPLACE /RTC1 "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
-    link_libraries("-fsanitize=address")
-endif()
-
 if (NAKAMA_SDK_AUTOBUILD AND NOT REMOTE_NAKAMA_SDK AND PRESET_NAME)
     set(BUILD_SHARED_NAKAMA_SDK "")
 
@@ -143,7 +137,6 @@ endif()
 # alternatively we could do this in `Android.mk` but we already use CMake.
 if (BUILD_EXECUTABLE)
     add_compile_definitions(BUILD_EXECUTABLE)
-
     if (ANDROID)
         find_library(log-lib log)
 
@@ -159,6 +152,12 @@ if (BUILD_EXECUTABLE)
     endif()
 else()
     add_library(nakama-test ${SRCS} "${CMAKE_CURRENT_SOURCE_DIR}/include/NTestLib.h")
+endif()
+
+if (ADDRESS_SANITIZER)
+    add_compile_options(-fsanitize=address -O1 -fno-optimize-sibling-calls -fno-omit-frame-pointer)
+    string(REPLACE /RTC1 "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
+    target_link_options(nakama-test PRIVATE -fsanitize=address)
 endif()
 
 target_include_directories(nakama-test
