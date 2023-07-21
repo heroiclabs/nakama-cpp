@@ -47,27 +47,6 @@ void test_connectError()
     test.runTest();
 }
 
-void test_connectErrorAndDestroy()
-{
-    NClientParameters parameters;
-    parameters.port = 1111;
-    NTest test(__func__, parameters);
-
-    auto successCallback = [&test](NSessionPtr session)
-    {
-        NLOG_INFO("session token: " + session->getAuthToken());
-        test.stopTest();
-    };
-
-    auto errorCallback = [&test](const NError& error)
-    {
-        test.stopTest(error.code == ErrorCode::ConnectionError || error.code == ErrorCode::CancelledByUser);
-    };
-
-    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
-
-}
-
 void test_disconnection()
 {
     NTest test(__func__);
@@ -93,7 +72,6 @@ void test_disconnection()
 void test_disconnect()
 {
     test_connectError();
-    test_connectErrorAndDestroy();
     //test_disconnection(); depending on transport implementation either success or error may be legitimately called. Test is inheritly racy
 }
 

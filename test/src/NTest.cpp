@@ -43,6 +43,7 @@ namespace Nakama {
 
         NTest::NTest(std::string name, Nakama::NClientParameters parameters)
                 : _name(name),
+                _threadedTick(false),
                 client(NTest::ClientFactory(parameters)),
                 rtClient(NTest::RtClientFactory(client))
         {
@@ -59,7 +60,6 @@ namespace Nakama {
             if (_threadedTick)
             {
                 _tickThread.join();
-
             }
         }
 
