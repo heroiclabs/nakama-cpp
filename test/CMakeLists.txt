@@ -24,12 +24,10 @@ endif()
 string(REPLACE ${CMAKE_SOURCE_DIR}/ "" CMAKE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}")
 get_filename_component(_NAKAMA_PROJECT "${CMAKE_SOURCE_DIR}" DIRECTORY)
 
-if (NOT REMOTE_NAKAMA_SDK)
-    set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/share/nakama-sdk)
-    # read the preconfig file so we know if its static or dynamic but wait until after the project() command to actually call find_package()
-    # so that the platform settings are properly setup
-    include(${nakama-sdk_DIR}/nakama-sdk-preconfig.cmake)
-endif()
+set(nakama-sdk_DIR ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/share/nakama-sdk)
+# read the preconfig file so we know if its static or dynamic but wait until after the project() command to actually call find_package()
+# so that the platform settings are properly setup
+include(${nakama-sdk_DIR}/nakama-sdk-preconfig.cmake)
 
 
 if (NAKAMA_SDK_BUILD_TYPE STREQUAL "STATIC")
@@ -59,10 +57,14 @@ option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardl
 option(INSTALL_NAKAMA_SDK "Whether or not to install the nakama SDK alongside the test executable or library" ON)
 option(NAKAMA_SDK_AUTOBUILD "Whether or not to automatically configure and build the Nakama SDK. Only works for local builds." OFF)
 option(ADDRESS_SANITIZER "Enable address sanitizer (broken on windows)" OFF)
+option(NAKAMA_SDK_BASIC_LINK "Link to a local installation of Nakama without using its export file." OFF)
+
 
 set(NAKAMA_SDK_CONFIG "Debug" CACHE STRING "The Nakama SDK configuration")
 
-find_package(nakama-sdk CONFIG REQUIRED)
+if (NOT NAKAMA_SDK_BASIC_LINK)
+    find_package(nakama-sdk CONFIG REQUIRED)
+endif()
 
 if (REMOTE_NAKAMA_SDK)
     # read the preconfig file so we know if its static or dynamic.
@@ -175,8 +177,20 @@ endif()
 
 target_link_libraries(nakama-test
     PRIVATE rapidjson
-    PRIVATE nakama-sdk
 )
+
+if (NAKAMA_SDK_BASIC_LINK)
+    if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+        target_link_libraries(nakama-test PRIVATE ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/lib/nakama-sdk.framework/nakama-sdk)
+        target_include_directories(nakama-test PRIVATE ${_NAKAMA_PROJECT}/${CMAKE_INSTALL_DIR}/lib/nakama-sdk.framework/Headers)
+    else()
+        message(FATAL_ERROR "Unsupported platform for basic linkage to nakama-sdk.")
+    endif()
+else()
+    target_link_libraries(nakama-test
+        PRIVATE nakama-sdk
+    )
+endif()
 
 if (NAKAMA_SDK_BUILD_TYPE STREQUAL "STATIC")
     find_package(Protobuf CONFIG)
@@ -193,7 +207,7 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   target_compile_options(nakama-test PRIVATE /EHsc)
 endif()
 
-if (BUILD_EXECUTABLE)
+if (BUILD_EXECUTABLE AND NOT NAKAMA_SDK_BASIC_LINK)
     get_target_property(NAKAMA_TGT_TYPE nakama-sdk TYPE)
     if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows" AND ${NAKAMA_TGT_TYPE} STREQUAL "SHARED_LIBRARY")
         # Copy DLL so that nakama-test.exe can find it
