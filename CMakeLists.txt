@@ -46,6 +46,39 @@ elseif (WITH_CPPRESTSDK)
     set(WS_IMPL "cpprestsdk")
 endif()
 
+set(HTTP_COMPILE_DEFINITION "")
+
+if(WITH_LIBHTTPCLIENT_HTTP)
+    set(HTTP_COMPILE_DEFINITION "BUILD_HTTP_LIBHTTPCLIENT")
+elseif(WITH_CPPRESTSDK)
+    set(HTTP_COMPILE_DEFINITION "BUILD_HTTP_CPPRESTSDK")
+elseif(BUILD_CURL_HTTP OR BUILD_CURL_HTTP_SYSTEM)
+    set(HTTP_COMPILE_DEFINITION "BUILD_HTTP_CURL")
+else()
+    set(HTTP_COMPILE_DEFINITION "WITH_EXTERNAL_HTTP")
+endif()
+
+set(WS_COMPILE_DEFINITION "")
+set(WS_IO_COMPILE_DEFINITION "")
+
+if (WITH_LIBHTTPCLIENT_WS)
+    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_LIBHTTPCLIENT)
+elseif (BUILD_WSLAY)
+    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_WSLAY)
+
+    if (BUILD_CURL_IO OR BUILD_CURL_IO_SYSTEM)
+        set(WS_IO_COMPILE_DEFINITION BUILD_CURL_IO)
+    else()
+        # no IO baked in for Wslay -- we expect user to provide the IO.
+        set(WS_IO_COMPILE_DEFINITION BUILD_IO_EXTERNAL)
+    endif()
+elseif (WITH_CPPRESTSDK)
+    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_CPPRESTSDK)
+else()
+    # no WS baked in -- we expect user to provide WS transport
+    set(WS_COMPILE_DEFINITION WITH_EXTERNAL_WS)
+endif()
+
 cmake_policy(SET CMP0012 NEW)
 
 ## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
@@ -268,36 +301,6 @@ list(APPEND NAKAMA_SDK_DEPS
 if (BUILD_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS nakama-sdk-core-grpc)
 endif()
-
-
-set(WS_COMPILE_DEFINITION "")
-
-if (WITH_LIBHTTPCLIENT_WS)
-    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_LIBHTTPCLIENT)
-elseif (BUILD_WEBSOCKET_WSLAY)
-    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_WSLAY)
-
-    if (BUILD_CURL_IO OR BUILD_CURL_IO_SYSTEM)
-        set(WS_IO_COMPILE_DEFINITION BUILD_CURL_IO)
-    else()
-        # no IO baked in for Wslay -- we expect user to provide the IO.
-        set(WS_IO_COMPILE_DEFINITION BUILD_IO_EXTERNAL)
-    endif()
-
-    target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC ${WS_IO_COMPILE_DEFINITION})
-    target_compile_definitions(nakama-sdk-core-rt PUBLIC ${WS_IO_COMPILE_DEFINITION})
-    target_compile_definitions(nakama-sdk-interface INTERFACE ${WS_IO_COMPILE_DEFINITION})
-elseif (WITH_CPPRESTSDK)
-    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_CPPRESTSDK)
-else()
-    # no WS baked in -- we expect user to provide WS transport
-    set(WS_COMPILE_DEFINITION WITH_EXTERNAL_WS)
-endif()
-
-target_compile_definitions(nakama-sdk-core-rt PUBLIC ${WS_COMPILE_DEFINITION})
-target_compile_definitions(nakama-sdk-core-common PUBLIC ${WS_COMPILE_DEFINITION})
-target_compile_definitions(nakama-sdk-rtclient-factory PUBLIC ${WS_COMPILE_DEFINITION})
-target_compile_definitions(nakama-sdk-interface INTERFACE ${WS_COMPILE_DEFINITION})
 
 set(NAKAMA_SDK_DEPS_OBJECTS "")
 

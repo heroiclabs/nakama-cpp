@@ -1,1 +1,6 @@
+#pragma once
+
 #cmakedefine optional_CONFIG_SELECT_OPTIONAL @optional_CONFIG_SELECT_OPTIONAL@
+#define @HTTP_COMPILE_DEFINITION@
+#define @WS_COMPILE_DEFINITION@
+#define @WS_IO_COMPILE_DEFINITION@
