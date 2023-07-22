@@ -77,6 +77,7 @@ elseif (WITH_CPPRESTSDK)
 else()
     # no WS baked in -- we expect user to provide WS transport
     set(WS_COMPILE_DEFINITION WITH_EXTERNAL_WS)
+    set(WS_IO_COMPILE_DEFINITION WITH_EXTERNAL_WS_IO)
 endif()
 
 cmake_policy(SET CMP0012 NEW)
