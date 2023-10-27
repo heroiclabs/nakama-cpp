@@ -22,7 +22,7 @@ namespace Test {
 
 using namespace std;
 
-void test_error_NotFound()
+void test_error_NotFoundDevice()
 {
     NTest test(__func__);
 
@@ -38,6 +38,26 @@ void test_error_NotFound()
     };
 
     test.client->authenticateDevice("_not_existing_device_id_", opt::nullopt, false, {}, successCallback, errorCallback);
+
+    test.runTest();
+}
+
+void test_error_NotFoundEmail()
+{
+    NTest test(__func__);
+
+    auto successCallback = [&test](NSessionPtr session)
+    {
+        NLOG_INFO("session token: " + session->getAuthToken());
+        test.stopTest(false);
+    };
+
+    auto errorCallback = [&test](const NError& error)
+    {
+        test.stopTest(error.code == ErrorCode::NotFound);
+    };
+
+    test.client->authenticateEmail("email_not_found@gmail.com", "no_password", "", false, {}, successCallback, errorCallback);
 
     test.runTest();
 }
@@ -100,7 +120,8 @@ void test_error_Unauthenticated()
 
 void test_errors()
 {
-    test_error_NotFound();
+    test_error_NotFoundEmail();
+    test_error_NotFoundDevice();
     test_error_InvalidArgument();
     test_error_InvalidArgument2();
     test_error_Unauthenticated();
