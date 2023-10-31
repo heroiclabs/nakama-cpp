@@ -76,7 +76,7 @@ namespace Nakama {
             bool threadedTick = true;
             NTest test(__func__, threadedTick);
             test.setTestTimeoutMs(15000);
-            bool hadConnectCallback = false;
+
             test.runTest();
 
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
@@ -91,6 +91,30 @@ namespace Nakama {
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
             test.stopTest(true);
+        }
+
+        void test_rt_connect_callback()
+        {
+            bool threadedTick = true;
+
+            NTest test(__func__, true);
+            test.runTest();
+
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+            bool connected = false;
+
+            test.listener.setConnectCallback([&connected](){
+                connected = true;
+            });
+
+            test.rtClient->connect(session, true);
+
+            // try to trigger any issues with the underlying promise.
+            std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+
+            test.stopTest(connected);
+
         }
     }
 }
