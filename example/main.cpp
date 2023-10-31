@@ -25,6 +25,7 @@
     #include <jni.h>
 #endif
 
+int mainHelper();
 
 #if __ANDROID__
 
@@ -37,7 +38,7 @@ extern "C"
 
 #else
 int main() {
-    mainHelper();
+    return mainHelper();
 }
 
 #endif
