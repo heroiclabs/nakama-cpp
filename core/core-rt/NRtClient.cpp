@@ -114,7 +114,7 @@ std::future<void> NRtClient::connectAsync(NSessionPtr session, bool createStatus
         // if old promise not ready, just complete it for the user.
         _connectPromise->set_value();
     }
-    catch(const std::future_error& e)
+    catch(const std::future_error&)
     {
         // if we get an exception here, it means the connect promise has completed already from a previous connect.
         // this is very expected. there is no way to check from the promise itself if it has completed already.
@@ -201,7 +201,7 @@ void NRtClient::onTransportConnected()
         // signal to the user's future that the connection has completed.
         _connectPromise->set_value();
     }
-    catch (const std::future_error& e)
+    catch (const std::future_error&)
     {
         // if we get an exception here, it means the connect promise has completed already from a previous connect.
         // this can happen if the transport double fires or some other unexpected cases, like the user disconnecting while a connection is being made.
