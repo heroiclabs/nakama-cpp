@@ -4,6 +4,10 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [2.8.2] - [2023-10-31]
+### Fixed
+- Fixed a race condition that could happen during socket connection which would cause `std::future_error` to be thrown.
+
 ### [2.8.1] - [2023-05-25]
 ### Fixed
 - Fixed a memory issue with retrieving HTTP response codes.
