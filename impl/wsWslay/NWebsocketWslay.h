@@ -46,6 +46,9 @@ public:
     void disconnect() override;
     bool send(const NBytes& data) override;
 
+protected:
+    bool isConnecting() override;
+
 private:
     static ssize_t recv_callback(wslay_event_context_ptr ctx, uint8_t* data, size_t len, int flags, void* user_data);
     static ssize_t send_callback(wslay_event_context_ptr ctx, const uint8_t* data, size_t len, int flags, void* user_data);

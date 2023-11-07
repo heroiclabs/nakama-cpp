@@ -88,6 +88,11 @@ NAKAMA_NAMESPACE_BEGIN
         virtual bool isConnected() const { return _connected; }
 
         /**
+         * @return True if connecting to server.
+         */
+        virtual bool isConnecting() = 0;
+
+        /**
          * Close the connection with the server.
          *
          * Expectations from the implementation are:
