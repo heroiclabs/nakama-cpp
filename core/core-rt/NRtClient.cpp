@@ -150,9 +150,9 @@ std::future<void> NRtClient::disconnectAsync()
 {
     // currently, disconnect callback is invoked immediately by client here, so we just return a completed future.
     disconnect();
-    std::promise<void> promise = std::promise<void>();
-    promise.set_value();
-    return promise.get_future();
+    std::promise<void> emptyPromise = std::promise<void>();
+    emptyPromise.set_value();
+    return emptyPromise.get_future();
 }
 
 void NRtClient::disconnect(const NRtClientDisconnectInfo& info)
