@@ -116,5 +116,50 @@ namespace Nakama {
             test.stopTest(connected);
 
         }
+
+        void test_rt_double_connect_async()
+        {
+             bool threadedTick = true;
+
+            NTest test(__func__, true);
+            test.runTest();
+
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+            bool connected = false;
+
+            test.listener.setConnectCallback([&connected](){
+                connected = true;
+            });
+
+            // should not throw any errors.
+            test.rtClient->connectAsync(session, true).get();
+            test.rtClient->connectAsync(session, true).get();
+
+            test.stopTest(connected);
+        }
+
+        void test_rt_double_connect()
+        {
+            bool threadedTick = true;
+
+            NTest test(__func__, true);
+            test.runTest();
+
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+            bool connected = false;
+
+            test.listener.setConnectCallback([&connected](){
+                connected = true;
+            });
+
+            // should not throw any errors.
+            test.rtClient->connect(session, true);
+            test.rtClient->connect(session, true);
+
+            test.stopTest(connected);
+        }
+
     }
 }
