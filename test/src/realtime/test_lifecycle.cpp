@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <condition_variable>
 #include <thread>
 #include "NTest.h"
 #include "globals.h"
@@ -149,17 +150,25 @@ namespace Nakama {
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
 
             bool connected = false;
+            std::mutex mtx;
+            std::condition_variable cv;
 
-            test.listener.setConnectCallback([&connected](){
+            test.listener.setConnectCallback([&](){
+                std::unique_lock<std::mutex> lock(mtx);
                 connected = true;
+                cv.notify_one();
             });
 
             // should not throw any errors.
             test.rtClient->connect(session, true);
             test.rtClient->connect(session, true);
 
+            {
+                std::unique_lock<std::mutex> lock(mtx);
+                cv.wait(lock, [&](){ return connected; }); // Wait until `connected` becomes true.
+            }
+
             test.stopTest(connected);
         }
-
     }
 }
