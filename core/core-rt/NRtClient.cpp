@@ -77,6 +77,11 @@ void NRtClient::setListener(NRtClientListenerInterface * listener)
 
 void NRtClient::connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol)
 {
+    if (_transport->isConnected() || _transport->isConnecting())
+    {
+        return;
+    }
+
     std::string url;
     NRtTransportType transportType;
 
@@ -109,15 +114,11 @@ void NRtClient::connect(NSessionPtr session, bool createStatus, NRtClientProtoco
 
 std::future<void> NRtClient::connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol)
 {
-    try
+    if (_transport->isConnected() || _transport->isConnecting())
     {
-        // if old promise not ready, just complete it for the user.
-        _connectPromise->set_value();
-    }
-    catch(const std::future_error&)
-    {
-        // if we get an exception here, it means the connect promise has completed already from a previous connect.
-        // this is very expected. there is no way to check from the promise itself if it has completed already.
+        std::promise<void> emptyPromise = std::promise<void>();
+        emptyPromise.set_value();
+        return emptyPromise.get_future();
     }
 
     // stomp the old promise
