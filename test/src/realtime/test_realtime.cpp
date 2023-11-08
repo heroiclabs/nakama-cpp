@@ -35,6 +35,8 @@ void test_rt_quickdestroy();
 void test_rt_rapiddisconnect();
 void test_rt_reconnect();
 void test_rt_connect_callback();
+void test_rt_double_connect();
+void test_rt_double_connect_async();
 
 void run_realtime_tests()
 {
@@ -53,6 +55,9 @@ void test_realtime()
     // These tests are not protocol specific
     test_rt_rapiddisconnect();
     test_rt_connect_callback();
+    test_rt_double_connect();
+    test_rt_double_connect_async();
+
     /// change to 10 iterations to trigger https://github.com/microsoft/libHttpClient/issues/698 bug
     for (int i = 0; i < 1; i++) {
         test_rt_reconnect();

@@ -6,7 +6,7 @@ If you are building for Mac/iOS, you'll need to set your NAKAMA_TEST_DEVELOPMENT
 
 In-tree example:
 ```
-cd example
+cd test
 cmake --list-presets
 cmake --preset <configure-preset>
 cmake --build build/<build-preset> --target install run

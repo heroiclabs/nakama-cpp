@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <condition_variable>
 #include <thread>
 #include "NTest.h"
 #include "globals.h"
@@ -115,6 +116,59 @@ namespace Nakama {
 
             test.stopTest(connected);
 
+        }
+
+        void test_rt_double_connect_async()
+        {
+             bool threadedTick = true;
+
+            NTest test(__func__, true);
+            test.runTest();
+
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+            bool connected = false;
+
+            test.listener.setConnectCallback([&connected](){
+                connected = true;
+            });
+
+            // should not throw any errors.
+            test.rtClient->connectAsync(session, true).get();
+            test.rtClient->connectAsync(session, true).get();
+
+            test.stopTest(connected);
+        }
+
+        void test_rt_double_connect()
+        {
+            bool threadedTick = true;
+
+            NTest test(__func__, true);
+            test.runTest();
+
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+            bool connected = false;
+            std::mutex mtx;
+            std::condition_variable cv;
+
+            test.listener.setConnectCallback([&](){
+                std::unique_lock<std::mutex> lock(mtx);
+                connected = true;
+                cv.notify_one();
+            });
+
+            // should not throw any errors.
+            test.rtClient->connect(session, true);
+            test.rtClient->connect(session, true);
+
+            {
+                std::unique_lock<std::mutex> lock(mtx);
+                cv.wait(lock, [&](){ return connected; }); // Wait until `connected` becomes true.
+            }
+
+            test.stopTest(connected);
         }
     }
 }

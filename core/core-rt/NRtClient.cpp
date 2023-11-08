@@ -77,6 +77,11 @@ void NRtClient::setListener(NRtClientListenerInterface * listener)
 
 void NRtClient::connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol)
 {
+    if (_transport->isConnected() || _transport->isConnecting())
+    {
+        return;
+    }
+
     std::string url;
     NRtTransportType transportType;
 
@@ -109,15 +114,11 @@ void NRtClient::connect(NSessionPtr session, bool createStatus, NRtClientProtoco
 
 std::future<void> NRtClient::connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol)
 {
-    try
+    if (_transport->isConnected() || _transport->isConnecting())
     {
-        // if old promise not ready, just complete it for the user.
-        _connectPromise->set_value();
-    }
-    catch(const std::future_error&)
-    {
-        // if we get an exception here, it means the connect promise has completed already from a previous connect.
-        // this is very expected. there is no way to check from the promise itself if it has completed already.
+        std::promise<void> emptyPromise = std::promise<void>();
+        emptyPromise.set_value();
+        return emptyPromise.get_future();
     }
 
     // stomp the old promise
@@ -135,6 +136,11 @@ std::future<void> NRtClient::connectAsync(NSessionPtr session, bool createStatus
     return _connectPromise->get_future();
 }
 
+bool NRtClient::isConnecting() const
+{
+    return _transport->isConnecting();
+}
+
 bool NRtClient::isConnected() const
 {
     return _transport->isConnected();
@@ -150,9 +156,9 @@ std::future<void> NRtClient::disconnectAsync()
 {
     // currently, disconnect callback is invoked immediately by client here, so we just return a completed future.
     disconnect();
-    std::promise<void> promise = std::promise<void>();
-    promise.set_value();
-    return promise.get_future();
+    std::promise<void> emptyPromise = std::promise<void>();
+    emptyPromise.set_value();
+    return emptyPromise.get_future();
 }
 
 void NRtClient::disconnect(const NRtClientDisconnectInfo& info)
