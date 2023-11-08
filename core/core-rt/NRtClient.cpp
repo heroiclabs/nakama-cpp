@@ -136,6 +136,11 @@ std::future<void> NRtClient::connectAsync(NSessionPtr session, bool createStatus
     return _connectPromise->get_future();
 }
 
+bool NRtClient::isConnecting() const
+{
+    return _transport->isConnecting();
+}
+
 bool NRtClient::isConnected() const
 {
     return _transport->isConnected();

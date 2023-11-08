@@ -152,6 +152,11 @@ NAKAMA_NAMESPACE_BEGIN
         virtual std::future<void> connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol = NRtClientProtocol::Protobuf) = 0;
 
         /**
+         * @return True if connecting to server.
+         */
+        virtual bool isConnecting() const = 0;
+
+        /**
          * @return True if connected to server.
          */
         virtual bool isConnected() const = 0;

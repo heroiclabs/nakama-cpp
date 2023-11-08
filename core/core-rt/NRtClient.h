@@ -59,6 +59,7 @@ namespace Nakama {
         void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
         std::future<void> connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
 
+        bool isConnecting() const override;
         bool isConnected() const override;
 
         void disconnect() override;
