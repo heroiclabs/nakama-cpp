@@ -7,6 +7,7 @@ The format is based on [keep a changelog](http://keepachangelog.com/) and this p
 ### [2.8.3] - [2023-10-31]
 ### Fixed
 - `NRtClient` will now guard against multiple connection attempts without disconnecting from the socket.
+- `NRtClient` now exposes an `isConnecting()` method for checking if an active connection attempt is being made.
 
 ### [2.8.2] - [2023-10-31]
 ### Fixed
