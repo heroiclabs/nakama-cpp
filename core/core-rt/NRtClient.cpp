@@ -33,7 +33,7 @@ NRtClient::NRtClient(NRtTransportPtr transport, const std::string& host, int32_t
     , _port(port)
     , _ssl(ssl)
     , _transport(transport)
-    , _connectPromise(std::make_unique<std::promise<void>>())
+    , _connectPromise(nullptr)
 {
     NLOG_INFO("Created");
 
@@ -121,12 +121,11 @@ std::future<void> NRtClient::connectAsync(NSessionPtr session, bool createStatus
         return emptyPromise.get_future();
     }
 
-    // stomp the old promise
     _connectPromise = std::make_unique<std::promise<void>>();
-
+    // get future before connecting in case callbacks fire and modify promise (e.g., multithreading).
+    std::future<void> connectFuture = _connectPromise->get_future();
     connect(session, createStatus, protocol);
-
-    return _connectPromise->get_future();
+    return connectFuture;
 }
 
 bool NRtClient::isConnecting() const
@@ -197,13 +196,19 @@ void NRtClient::onTransportConnected()
 
     try
     {
-        // signal to the user's future that the connection has completed.
-        _connectPromise->set_value();
+        if (_connectPromise)
+        {
+            // signal to the user's future that the connection has completed.
+            _connectPromise->set_value();
+            _connectPromise.reset(nullptr);
+        }
     }
-    catch (const std::future_error&)
+    catch (const std::future_error& e)
     {
-        // if we get an exception here, it means the connect promise has completed already from a previous connect.
-        // this can happen if the transport double fires or some other unexpected cases, like the user disconnecting while a connection is being made.
+        //  std::future_error on the following conditions:
+        //  *this has no shared state. The error code is set to no_state.
+        //  The shared state already stores a value or exception. The error code is set to promise_already_satisfied.
+        NLOG_WARN("Unexpected exception caught on transport connect: " + std::string(e.what()));
     }
 }
 
@@ -220,12 +225,19 @@ void NRtClient::onTransportDisconnected(const NRtClientDisconnectInfo& info)
 
     try
     {
-        // assume we are disconnecting mid-connect
-       _connectPromise->set_exception(std::make_exception_ptr<NRtException>(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "Disconnected while connecting."))));
+        if (_connectPromise)
+        {
+            // assume we are disconnecting mid-connect
+            _connectPromise->set_exception(std::make_exception_ptr<NRtException>(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "Disconnected while connecting."))));
+            _connectPromise.reset(nullptr);
+        }
     }
-    catch(const std::future_error& e)
+    catch (const std::future_error& e)
     {
-        // we've already set the state on this, so we've already connected, so nothing else to do.
+        // std::future_error on the following conditions:
+        // *this has no shared state. The error code is set to no_state.
+        // The shared state already stores a value or exception. The error code is set to promise_already_satisfied.
+        NLOG_WARN("Unexpected exception caught on transport disconnect: " + std::string(e.what()));
     }
 
 
@@ -248,14 +260,19 @@ void NRtClient::onTransportError(const std::string& description)
 
     try
     {
-        _connectPromise->set_exception(std::make_exception_ptr<NRtException>(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "An error occurred while connecting."))));
+        if (_connectPromise)
+        {
+            _connectPromise->set_exception(std::make_exception_ptr<NRtException>(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "An error occurred while connecting."))));
+            _connectPromise.reset(nullptr);
+        }
     }
-    catch
+    catch (const std::future_error& e)
     {
-        // expected to throw an exception if we are already completed. no way to check if std::future is completed, it cannot be double-retrieved with get_future().
+        // std::future_error on the following conditions:
+        // *this has no shared state. The error code is set to no_state.
+        // The shared state already stores a value or exception. The error code is set to promise_already_satisfied.
+        NLOG_WARN("Unexpected exception caught on transport error: " + std::string(e.what()));
     }
-
-
 }
 
 void NRtClient::onTransportMessage(const NBytes & data)
