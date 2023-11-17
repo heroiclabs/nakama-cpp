@@ -124,13 +124,6 @@ std::future<void> NRtClient::connectAsync(NSessionPtr session, bool createStatus
     // stomp the old promise
     _connectPromise = std::make_unique<std::promise<void>>();
 
-    // already connected
-    if (_transport->isConnected()) {
-
-        _connectPromise->set_value();
-        return _connectPromise->get_future();
-    }
-
     connect(session, createStatus, protocol);
 
     return _connectPromise->get_future();
