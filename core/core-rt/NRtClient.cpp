@@ -246,11 +246,16 @@ void NRtClient::onTransportError(const std::string& description)
         _listener->onError(error);
     }
 
-    bool futureCompleted = _connectPromise->get_future().wait_for(std::chrono::seconds(0)) == std::future_status::ready;
-    if (!futureCompleted)
+    try
     {
         _connectPromise->set_exception(std::make_exception_ptr<NRtException>(NRtException(NRtError(RtErrorCode::CONNECT_ERROR, "An error occurred while connecting."))));
     }
+    catch
+    {
+        // expected to throw an exception if we are already completed. no way to check if std::future is completed, it cannot be double-retrieved with get_future().
+    }
+
+
 }
 
 void NRtClient::onTransportMessage(const NBytes & data)

@@ -170,5 +170,15 @@ namespace Nakama {
 
             test.stopTest(connected);
         }
+
+        void test_connectivity_loss()
+        {
+            bool threadedTick = true;
+            NTest test(__func__, threadedTick);
+            test.setTestTimeoutMs(60 * 1000);
+            test.runTest();
+            NSessionPtr session = test.client->authenticateDeviceAsync("mytestdevice0001", opt::nullopt, opt::nullopt, {}).get();
+            test.rtClient->connect(session, true);
+        }
     }
 }
