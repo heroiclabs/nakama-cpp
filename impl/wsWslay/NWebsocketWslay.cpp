@@ -337,6 +337,7 @@ namespace Nakama {
             NLOG(NLogLevel::Debug, "Wslay result: ERROR %s", errMessage.c_str());
             _state = State::Disconnected;
             this->_io->close();
+            _ctx.reset(nullptr);
             fireOnError(errMessage);
             return;
         }

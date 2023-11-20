@@ -37,6 +37,7 @@ void test_rt_reconnect();
 void test_rt_connect_callback();
 void test_rt_double_connect();
 void test_rt_double_connect_async();
+void test_connectivity_loss();
 
 void run_realtime_tests()
 {
@@ -57,6 +58,9 @@ void test_realtime()
     test_rt_connect_callback();
     test_rt_double_connect();
     test_rt_double_connect_async();
+
+    // optional "test". run websocket for a full minute. useful for testing connection loss with network link conditioner.
+    // test_connectivity_loss();
 
     /// change to 10 iterations to trigger https://github.com/microsoft/libHttpClient/issues/698 bug
     for (int i = 0; i < 1; i++) {
