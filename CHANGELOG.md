@@ -4,6 +4,10 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [2.8.4] - [2023-11-25]
+### Fixed
+- Fixed an issue where `NRtClient` would throw an exception when connecting over poor Wifi connections.
+
 ### [2.8.3] - [2023-10-31]
 ### Fixed
 - `NRtClient` will now guard against multiple connection attempts without disconnecting from the socket.
