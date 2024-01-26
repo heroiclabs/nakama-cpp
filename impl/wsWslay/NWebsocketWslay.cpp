@@ -229,20 +229,20 @@ namespace Nakama {
         }
 
         this->_io->close();
-        if (code) {
-            assert(_connected);
-            NRtClientDisconnectInfo info;
-            info.code = code.value();
-            info.remote = remote;
-            fireOnDisconnected(info);
-        }
+
         _connected = false;
         _state = State::Disconnected;
 
         // after close frame was sent or received wslay_context is tainted and need to be recreated
         _ctx.reset(nullptr);
-    }
 
+        if (code) {
+            NRtClientDisconnectInfo info;
+            info.code = code.value();
+            info.remote = remote;
+            fireOnDisconnected(info);
+        }
+    }
 
     uint32_t NWebsocketWslay::getActivityTimeout() const {
         return this->_timeout;
