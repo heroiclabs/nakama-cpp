@@ -52,7 +52,7 @@ namespace Nakama {
             NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
             bool createStatus = false;
             test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
-            const NGroup group = test.client->createGroupAsync(session, "group chat " + session->getAuthToken(), "a group for chatting", "", "", false, {}).get();
+            const NGroup group = test.client->createGroupAsync(session, TestGuid::newGuid(), "a group for chatting", "", "", false, {}).get();
             const NChannelPtr channelPtr = test.rtClient->joinChatAsync(group.id, NChannelType::GROUP, {}, {}).get();
             test.stopTest(true);
         }

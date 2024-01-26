@@ -171,6 +171,51 @@ namespace Nakama {
             test.stopTest(connected);
         }
 
+        // requires session.single_socket to be true.
+        void test_rt_simultaneous_connect()
+        {
+            bool threadedTick = true;
+
+            NTest test(__func__, threadedTick);
+            test.runTest();
+
+            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+            test.rtClient->connectAsync(session, true).get();
+
+            bool disconnected = false;
+            std::mutex disconnectedMtx;
+            std::condition_variable disconnectedCV;
+
+            test.listener.setDisconnectCallback([&](const NRtClientDisconnectInfo& info) {
+                std::unique_lock<std::mutex> lock(disconnectedMtx);
+                disconnected = true;
+                disconnectedCV.notify_one();
+            });
+
+            std::atomic<bool> rtClient2Tick(true);
+            auto rtClient2 = test.client->createRtClient();
+            rtClient2->connect(session, true);
+
+            std::thread tickThread([&]() {
+                while (rtClient2Tick.load()) {
+                    rtClient2->tick();
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                }
+            });
+
+            {
+                std::unique_lock<std::mutex> lock(disconnectedMtx);
+                disconnectedCV.wait(lock, [&](){ return disconnected; }); // Wait until rtClient1 disconnects due to new connect.
+            }
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // see if any tick() from rtClient2 causes exceptions to get thrown.
+            rtClient2Tick.store(false);
+            tickThread.join();
+
+            test.stopTest(true);
+        }
+
         void test_connectivity_loss()
         {
             bool threadedTick = true;

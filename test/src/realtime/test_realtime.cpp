@@ -37,6 +37,8 @@ void test_rt_reconnect();
 void test_rt_connect_callback();
 void test_rt_double_connect();
 void test_rt_double_connect_async();
+void test_rt_simultaneous_connect();
+
 void test_connectivity_loss();
 
 void run_realtime_tests()
@@ -58,6 +60,8 @@ void test_realtime()
     test_rt_connect_callback();
     test_rt_double_connect();
     test_rt_double_connect_async();
+    // optional test. requires session.single_socket to be true in server configuration.
+    // test_rt_simultaneous_connect();
 
     // optional "test". run websocket for a full minute. useful for testing connection loss with network link conditioner.
     // test_connectivity_loss();
