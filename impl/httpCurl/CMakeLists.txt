@@ -9,14 +9,11 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 add_library(nakama-impl-http-libcurl OBJECT ${srcs})
 
-if (NOT BUILD_CURL_HTTP_SYSTEM)
-    find_package(CURL CONFIG REQUIRED)
+find_package(CURL CONFIG REQUIRED)
 
-    target_link_libraries(nakama-impl-http-libcurl
-        PUBLIC CURL::libcurl
-    )
-endif()
-
+target_link_libraries(nakama-impl-http-libcurl
+    PUBLIC CURL::libcurl
+)
 
 target_link_libraries(nakama-impl-http-libcurl
     PUBLIC nakama-api-proto nakama::sdk-interface

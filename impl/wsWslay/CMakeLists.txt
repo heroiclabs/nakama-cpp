@@ -18,7 +18,7 @@ target_include_directories(nakama-impl-ws-wslay INTERFACE
         "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>")
 
-if (BUILD_CURL_IO AND NOT BUILD_CURL_IO_SYSTEM)
+if (BUILD_CURL_IO OR BUILD_CURL_IO_SYSTEM)
     find_package(CURL CONFIG REQUIRED)
     target_link_libraries(nakama-impl-ws-wslay PRIVATE CURL::libcurl)
 endif()
