@@ -16,7 +16,7 @@ else()
 endif()
 
 target_link_libraries(nakama-impl-http-libcurl
-    PUBLIC CURL::libcurl
+    PRIVATE CURL::libcurl
 )
 
 target_link_libraries(nakama-impl-http-libcurl
