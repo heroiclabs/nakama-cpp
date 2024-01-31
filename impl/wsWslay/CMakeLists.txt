@@ -19,7 +19,11 @@ target_include_directories(nakama-impl-ws-wslay INTERFACE
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>")
 
 if (BUILD_CURL_IO OR BUILD_CURL_IO_SYSTEM)
-    find_package(CURL CONFIG REQUIRED)
+    if (BUILD_CURL_IO_SYSTEM)
+        find_package(CURL REQUIRED)
+    else()
+        find_package(CURL CONFIG REQUIRED)
+    endif()
     target_link_libraries(nakama-impl-ws-wslay PRIVATE CURL::libcurl)
 endif()
 
