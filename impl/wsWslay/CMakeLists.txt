@@ -18,13 +18,9 @@ target_include_directories(nakama-impl-ws-wslay INTERFACE
         "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>")
 
+
 if (BUILD_CURL_IO OR BUILD_CURL_IO_SYSTEM)
-    if (BUILD_CURL_IO_SYSTEM)
-        find_package(CURL REQUIRED)
-    else()
-        find_package(CURL CONFIG REQUIRED)
-    endif()
-    target_link_libraries(nakama-impl-ws-wslay PRIVATE CURL::libcurl)
+    target_include_directories(nakama-impl-ws-wslay PRIVATE ${CURL_INCLUDE_DIRS})
 endif()
 
 target_compile_definitions(nakama-impl-ws-wslay PUBLIC "WSLAY_NETIO_${WSLAY_NETIO}")

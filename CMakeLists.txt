@@ -80,6 +80,15 @@ else()
     set(WS_IO_COMPILE_DEFINITION WITH_EXTERNAL_WS_IO)
 endif()
 
+if (BUILD_CURL_IO_SYSTEM OR BUILD_CURL_IO OR BUILD_CURL_HTTP_SYSTEM OR BUILD_CURL_HTTP)
+    if (BUILD_CURL_IO_SYSTEM OR BUILD_CURL_HTTP_SYSTEM)
+        find_package(CURL REQUIRED) # system curl not guaranteed to contain a CMake config file.
+    else()
+        find_package(CURL CONFIG REQUIRED)
+    endif()
+endif()
+
+
 cmake_policy(SET CMP0012 NEW)
 
 ## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
@@ -287,7 +296,6 @@ if (APPLE)
     file(TOUCH ${CMAKE_BINARY_DIR}/dummy.h ${CMAKE_BINARY_DIR}/dummy.cpp)
     set(DUMMY_CPP ${CMAKE_BINARY_DIR}/dummy.cpp)
     set(DUMMY_H ${CMAKE_BINARY_DIR}/dummy.h)
-    list(APPEND NAKAMA_SDK_DEPS)
 endif()
 
 list(APPEND NAKAMA_SDK_DEPS
@@ -359,6 +367,12 @@ if (ADDRESS_SANITIZER)
         # Uncomment bellow if main executable is NOT compiled with asan (pretty limited diagnostics in this case).
         # target_link_libraries(nakama-sdk PRIVATE asan)
    endif()
+endif()
+
+
+# ensure we only perform a single 'target_link_libraries' to libcurl to prevent duplicate linkage for linkers that do not deduplicate.
+if (BUILD_CURL_IO_SYSTEM OR BUILD_CURL_IO OR BUILD_CURL_HTTP_SYSTEM OR BUILD_CURL_HTTP)
+    target_link_libraries(nakama-sdk PRIVATE CURL::libcurl)
 endif()
 
 install(TARGETS
