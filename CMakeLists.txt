@@ -80,15 +80,6 @@ else()
     set(WS_IO_COMPILE_DEFINITION WITH_EXTERNAL_WS_IO)
 endif()
 
-if (BUILD_CURL_IO_SYSTEM OR BUILD_CURL_IO OR BUILD_CURL_HTTP_SYSTEM OR BUILD_CURL_HTTP)
-    if (BUILD_CURL_IO_SYSTEM OR BUILD_CURL_HTTP_SYSTEM)
-        find_package(CURL REQUIRED) # system curl not guaranteed to contain a CMake config file.
-    else()
-        find_package(CURL CONFIG REQUIRED)
-    endif()
-endif()
-
-
 cmake_policy(SET CMP0012 NEW)
 
 ## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
@@ -144,6 +135,14 @@ if(APPLE AND BUILD_SHARED_LIBS AND BUILD_APPLE_FRAMEWORK)
     # via PUBLIC_HEADER property is full of bugs (see comment on PUBLIC_HEADER property below)
     set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework/Headers)
 
+endif()
+
+if (BUILD_CURL_IO_SYSTEM OR BUILD_CURL_IO OR BUILD_CURL_HTTP_SYSTEM OR BUILD_CURL_HTTP)
+    if (BUILD_CURL_IO_SYSTEM OR BUILD_CURL_HTTP_SYSTEM)
+        find_package(CURL REQUIRED) # system curl not guaranteed to contain a CMake config file.
+    else()
+        find_package(CURL CONFIG REQUIRED)
+    endif()
 endif()
 
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
