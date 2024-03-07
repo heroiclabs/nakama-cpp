@@ -16,6 +16,12 @@ RUN --mount=type=cache,target=/var/cache/apt --mount=type=cache,target=/var/lib/
  apt install -y g++-11 python3-distutils
 EOT
 
+RUN <<EOT bash -ue
+ git clone https://github.com/microsoft/vcpkg.git
+EOT
+
+ENV VCPKG_ROOT=/vcpkg
+
 ARG CMAKE_ARGS=""
 
 ENV CC=/usr/bin/gcc-11 CXX=/usr/bin/g++-11
