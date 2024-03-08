@@ -1,10 +1,12 @@
 # syntax=docker/dockerfile:1.4
-ARG UBUNTU_BASE=ubuntu:18.04
+ARG UBUNTU_BASE=ubuntu:20.04
 FROM $UBUNTU_BASE
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 RUN --mount=type=cache,target=/var/cache/apt --mount=type=cache,target=/var/lib/apt \
-  apt update && apt-get install --no-install-recommends -y libc-dev curl zip unzip ca-certificates busybox git-core pkg-config software-properties-common
+  apt update && apt-get install --no-install-recommends -y libc-dev curl zip unzip ca-certificates busybox git-core pkg-config software-properties-common make
 
 RUN --mount=type=cache,target=/var/cache/apt --mount=type=cache,target=/var/lib/apt <<EOT bash -ue
  mkdir -p /opt/cmake /opt/ninja
@@ -15,6 +17,12 @@ RUN --mount=type=cache,target=/var/cache/apt --mount=type=cache,target=/var/lib/
  add-apt-repository --yes ppa:ubuntu-toolchain-r/test
  apt install -y g++-11 python3-distutils
 EOT
+
+RUN <<EOT bash -ue
+ git clone https://github.com/microsoft/vcpkg.git
+EOT
+
+ENV VCPKG_ROOT=/vcpkg
 
 ARG CMAKE_ARGS=""
 
