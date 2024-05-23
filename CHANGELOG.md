@@ -4,6 +4,10 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [2.8.5] - [2024-05-23]
+### Fixed
+- Fixed initialization of shared pointer in `authenticateSteamAsync`.
+
 ### [2.8.4] - [2023-11-25]
 ### Fixed
 - Fixed an issue where `NRtClient` would throw an exception when connecting over poor Wifi connections.
