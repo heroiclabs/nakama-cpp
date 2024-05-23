@@ -204,7 +204,7 @@ std::future<NSessionPtr> BaseClient::authenticateSteamAsync(
     bool create,
     const NStringMap& vars)
 {
-    auto promise = std::shared_ptr<std::promise<NSessionPtr>>();
+    auto promise = std::make_shared<std::promise<NSessionPtr>>();
 
     authenticateSteam(token, username, create, vars,
         [=](NSessionPtr session) {
