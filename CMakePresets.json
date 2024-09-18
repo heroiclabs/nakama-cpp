@@ -1,8 +1,8 @@
 {
-    "version": 3,
+    "version": 6,
     "cmakeMinimumRequired": {
         "major": 3,
-        "minor": 21,
+        "minor": 29,
         "patch": 0
     },
     "configurePresets": [
@@ -12,9 +12,10 @@
             "description": "No shipped websocket or http implementation.",
             "binaryDir": "build/${presetName}",
             "hidden": true,
+            "toolchainFile": "${sourceDir}/submodules/vcpkg/scripts/buildsystems/vcpkg.cmake",
             "cacheVariables": {
-                "LOGS_ENABLED": "ON",
-                "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk"
+                "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk",
+                "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets;${sourceDir}/submodules/devkits/cmake/triplets"
             }
         },
         {
@@ -22,9 +23,9 @@
             "inherits": [
                 "default"
             ],
-            "generator": "Visual Studio 17 2022",
+            "generator": "Ninja Multi-Config",
             "cacheVariables": {
-                "WindowsDesktop": "ON",
+                "CMAKE_SYSTEM_PROCESSOR": "AMD64",
                 "VCPKG_HOST_TRIPLET": "x64-windows-static-heroic",
                 "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic",
                 "BUILD_WSLAY": "ON",
@@ -44,9 +45,9 @@
             "inherits": [
                 "default"
             ],
-            "generator": "Visual Studio 17 2022",
+            "generator": "Ninja Multi-Config",
             "cacheVariables": {
-                "WindowsDesktop": "ON",
+                "CMAKE_SYSTEM_PROCESSOR": "arm64",
                 "VCPKG_HOST_TRIPLET": "arm64-windows-static-heroic",
                 "VCPKG_TARGET_TRIPLET": "arm64-windows-static-heroic",
                 "BUILD_WSLAY": "ON",
@@ -60,29 +61,6 @@
                 "rhs": "Windows"
             },
             "installDir": "out/win-arm64"
-        },
-        {
-            "name": "win-x86",
-            "inherits": [
-                "default"
-            ],
-            "generator": "Visual Studio 17 2022",
-            "architecture": "Win32",
-            "cacheVariables": {
-                "WindowsDesktop": "ON",
-                "VCPKG_HOST_TRIPLET": "x86-windows-release",
-                "VCPKG_TARGET_TRIPLET": "x86-windows-release",
-                "BUILD_WSLAY": "ON",
-                "BUILD_CURL_IO": "ON",
-                "BUILD_CURL_HTTP": "ON",
-                "VCPKG_MANIFEST_FEATURES": "wslay;curl"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Windows"
-            },
-            "installDir": "out/win-x86"
         },
         {
             "name": "macosx-arm64-host_arm64",

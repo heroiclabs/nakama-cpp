@@ -90,7 +90,7 @@ NAKAMA_NAMESPACE_BEGIN
         /**
          * @return True if connecting to server.
          */
-        virtual bool isConnecting() = 0;
+        virtual bool isConnecting() const = 0;
 
         /**
          * Close the connection with the server.

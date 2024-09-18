@@ -1,0 +1,10 @@
+[submodule "submodules/vcpkg"]
+	path = submodules/vcpkg
+	url = https://github.com/microsoft/vcpkg
+[submodule "submodules/private"]
+	path = submodules/private
+	url = https://github.com/heroiclabs/nakama-cpp-private
+[submodule "submodules/devkits"]
+	path = submodules/devkits
+	url = https://github.com/heroiclabs/console-devkits.git
+	shallow = true

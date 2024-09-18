@@ -47,7 +47,7 @@ public:
     bool send(const NBytes& data) override;
 
 protected:
-    bool isConnecting() override;
+    bool isConnecting() const override;
 
 private:
     static ssize_t recv_callback(wslay_event_context_ptr ctx, uint8_t* data, size_t len, int flags, void* user_data);
