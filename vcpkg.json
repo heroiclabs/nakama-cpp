@@ -91,6 +91,7 @@
         }
     },
     "overrides": [
-        { "name": "curl", "version": "8.0.1" }
+        { "name": "curl", "version": "8.0.1" },
+        { "name": "vcpkg-cmake", "version": "2024-04-23" }
     ]
 }

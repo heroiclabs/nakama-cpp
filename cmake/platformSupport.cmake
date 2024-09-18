@@ -1,5 +1,9 @@
-# Various platform specific defines
+# NDAed platforms might configure it already
+if (__PLATFORM_SUPPORT_CONFIGURED)
+    return()
+endif()
 
+# Various platform specific defines
 if (CMAKE_SYSTEM_NAME STREQUAL Windows OR WindowsDesktop)
     set(WindowsDesktop ON)
     message("Configuring Windows Desktop build")
@@ -35,3 +39,5 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     find_package(Threads REQUIRED)
     set(PTHREADS_LIB Threads::Threads)
 endif()
+
+set(__PLATFORM_SUPPORT_CONFIGURED ON)

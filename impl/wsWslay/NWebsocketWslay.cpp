@@ -343,7 +343,7 @@ namespace Nakama {
         }
     }
 
-    bool NWebsocketWslay::isConnecting()
+    bool NWebsocketWslay::isConnecting() const
     {
         return _state == State::Connecting || _state == State::Handshake_Receiving || _state == State::Handshake_Sending;
     }

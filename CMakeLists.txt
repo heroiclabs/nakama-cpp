@@ -1,6 +1,7 @@
 # I think we are constrained to the version that the latest android sdk uses, for Android builds.
 cmake_minimum_required(VERSION 3.22.1)
 include(version.cmake)
+include(cmake/checkPresets.cmake)
 
 if (CMAKE_OSX_SYSROOT STREQUAL "iphonesimulator")
     # this hack seems to be required for now, otherwise CMake still thinks we are building for arm...
@@ -12,9 +13,7 @@ if (ANDROID)
 endif()
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
-set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/triplets")
 set(CMAKE_SUPPRESS_REGENERATION true) ## for Xcode
-set(VCPKG_PREFER_SYSTEM_LIBS OFF)
 
 ## TODO figure out why vcpkg seems to toggle these on and prevent downloading from fetchcontent
 set(FETCHCONTENT_FULLY_DISCONNECTED OFF)
@@ -83,12 +82,14 @@ endif()
 cmake_policy(SET CMP0012 NEW)
 
 ## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
-set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake CACHE FILEPATH "Vcpkg toolchain file" FORCE)
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/submodules/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE FILEPATH "Vcpkg toolchain file" FORCE)
 
 if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
     # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
     set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
 endif()
+
+include("submodules/devkits/cmake/platform-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 
 project(nakama-sdk LANGUAGES CXX)
 
@@ -97,6 +98,8 @@ include(cmake/compilerFlags.cmake)
 include(cmake/linkerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
+
+include(InstallRequiredSystemLibraries)
 
 set(CMAKE_CXX_STANDARD 17)
 option(LOGS_ENABLED "Enable log output" ON)
@@ -147,74 +150,7 @@ endif()
 
 if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
     if (NOT LIBHTTPCLIENT_BUILTIN)
-        if (LINUX OR APPLE)
-            find_package(CURL CONFIG REQUIRED)
-            target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
-        endif()
-
-        if (ANDROID)
-            set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake/Android/libHttpClient)
-            set(LIBHTTPCLIENT_TARGET libHttpClient.Android)
-        else()
-            set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake)
-
-            if(XDK)
-                if (WINRT)
-                    set(LIBHTTPCLIENT_TARGET libHttpClient.XDK.WinRT)
-                else()
-                    set(LIBHTTPCLIENT_TARGET libHttpClient.XDK.C)
-                endif()
-            elseif (BUILDWIN32)
-                set(LIBHTTPCLIENT_TARGET libHttpClient.Win32.C)
-            elseif (GDK)
-                set(LIBHTTPCLIENT_TARGET libHttpClient.GDK.C)
-            elseif (APPLE)
-                set(LIBHTTPCLIENT_TARGET libHttpClient.Apple.C)
-            elseif(DEFINED LINUX)
-                set(LIBHTTPCLIENT_TARGET libHttpClient.Linux.C)
-            else()
-                if (WINRT)
-                    set(LIBHTTPCLIENT_TARGET libHttpClient.UWP.WinRT)
-                else()
-                    set(LIBHTTPCLIENT_TARGET libHttpClient.UWP.C)
-                endif()
-            endif()
-        endif()
-
-        # We build LIBHTTPCLIENT as OBJECT library so that its symbols
-        # wont be excluded due to '--exclude-libs ALL' linker flag. Although we
-        # dont expose libhttpclient in our API , we still want it's symbols exported
-        # in our ABI, because that is how JVM finds native code on Android platform.
-        list(APPEND NAKAMA_SDK_DEPS ${LIBHTTPCLIENT_TARGET})
-
-        set(LIBHTTPCLIENT_OBJECT_LIBRARY TRUE)
-        set(WAS_SHARED_LIBS ${BUILD_SHARED_LIBS})
-
-        ## force libhttpclient to build statically
-        set(BUILD_SHARED_LIBS OFF)
-        FetchContent_Declare(
-            libHttpClient
-            GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
-            GIT_TAG        c535d5943516bb5d8f3a50858da617ebd0dd3f3f
-            SOURCE_SUBDIR  ${LIBHTTPCLIENT_SOURCE_SUBDIR}
-            GIT_PROGRESS TRUE
-            GIT_SHALLOW TRUE
-            USES_TERMINAL_DOWNLOAD TRUE
-        )
-
-        FetchContent_MakeAvailable(libHttpClient)
-        if (${WAS_SHARED_LIBS})
-            set(BUILD_SHARED_LIBS ON)
-        endif()
-
-        if (NOT WS_IMPL STREQUAL "libhttpclient")
-            target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
-        else()
-            if (LIBHTTPCLIENT_FORCE_WEBSOCKETPP)
-                message(STATUS "Forcing libhttpclient to use websocketpp even on modern Windows platforms")
-                target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_FORCE_WINSOCKETPP")
-            endif()
-        endif()
+        include(cmake/libhttpClient.cmake)
     endif()
 endif()
 

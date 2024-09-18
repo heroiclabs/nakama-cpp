@@ -39,6 +39,7 @@ namespace Nakama {
         void disconnect() override;
 
         bool send(const NBytes& data) override;
+        bool isConnecting() const override { return false; };
 
     private:
         explicit NWebsocketLibHC(XTaskQueueHandle q);
