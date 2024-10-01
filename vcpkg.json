@@ -5,11 +5,7 @@
   "dependencies": [
     "protobuf",
     "rapidjson",
-    "optional-lite",
-    {
-      "name": "abseil",
-      "features": ["cxx17"]
-    }
+    "optional-lite"
   ],
   "features": {
     "libhttpclient-ws": {
