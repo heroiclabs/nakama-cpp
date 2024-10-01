@@ -18,8 +18,6 @@ file(
 
 #set(CMAKE_INCLUDE_CURRENT_DIR ON)
 #set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
-find_package(absl CONFIG REQUIRED)
-find_package(Threads REQUIRED)
 
 add_library(nakama-sdk-core-common OBJECT ${srcs})
 
@@ -30,7 +28,7 @@ target_link_libraries(nakama-sdk-core-common
             nakama::api-proto
             $<$<TARGET_EXISTS:nakama::grpc-proto>:nakama::grpc-proto>
         PRIVATE
-            absl::strings   # because of StrUtil::Base64Encode
+            protobuf::libprotobuf   # because of StrUtil::Base64Encode
         )
 
 target_include_directories(nakama-sdk-core-common PUBLIC
