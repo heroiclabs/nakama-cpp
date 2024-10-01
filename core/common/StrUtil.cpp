@@ -16,7 +16,7 @@
 
 #include <sstream>
 #include "StrUtil.h"
-#include <google/protobuf/stubs/strutil.h>
+#include <absl/strings/escaping.h>
 
 #include <regex>
 
@@ -28,7 +28,7 @@ std::string base64Encode(const Base64Buffer& buffer)
 {
     std::string base64str;
 
-    google::protobuf::Base64Escape((const unsigned char *)buffer.data(), static_cast<int>(buffer.size()), &base64str, true);
+    absl::Base64Escape(buffer, &base64str);
 
     return base64str;
 }
@@ -37,7 +37,7 @@ std::string base64EncodeUrl(const Base64Buffer& buffer)
 {
     std::string base64str;
 
-    google::protobuf::WebSafeBase64Escape((const unsigned char *)buffer.data(), static_cast<int>(buffer.size()), &base64str, true);
+    absl::WebSafeBase64Escape(buffer, &base64str);
 
     return base64str;
 }
@@ -46,7 +46,7 @@ Base64Buffer base64DecodeUrl(const std::string& base64str)
 {
     Base64Buffer buffer;
 
-    google::protobuf::WebSafeBase64Unescape(base64str, &buffer);
+    absl::WebSafeBase64Unescape(base64str, &buffer);
 
     return buffer;
 }
