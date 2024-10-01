@@ -213,6 +213,7 @@ if (CREATE_JAR)
     install(FILES ${LIBNAKAMA_AAR} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
 
+find_package(absl CONFIG REQUIRED)
 find_package(optional-lite CONFIG REQUIRED)
 # SDK API
 add_subdirectory(interface)
@@ -273,8 +274,15 @@ elseif (APPLE)
 endif()
 
 add_library(nakama::sdk ALIAS nakama-sdk)
+find_package(Threads REQUIRED)
+set(PTHREADS_LIB Threads::Threads)
 target_link_libraries(nakama-sdk
-        PUBLIC nakama::sdk-interface ${PTHREADS_LIB})
+        PUBLIC
+            nakama::sdk-interface
+            ${PTHREADS_LIB}
+        PRIVATE
+            absl::synchronization
+)
 
 set(DEPENDENCY_LINK_SCOPE "")
 if (BUILD_SHARED_LIBS)
