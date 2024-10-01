@@ -15,6 +15,7 @@
             "toolchainFile": "${sourceDir}/submodules/vcpkg/scripts/buildsystems/vcpkg.cmake",
             "cacheVariables": {
                 "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk",
+                "VCPKG_OVERLAY_PORTS": "${sourceDir}/cmake/vcpkg-ports",
                 "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets;${sourceDir}/submodules/devkits/cmake/triplets"
             }
         },
