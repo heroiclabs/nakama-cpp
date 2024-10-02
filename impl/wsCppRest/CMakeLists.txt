@@ -16,4 +16,3 @@ target_link_libraries(nakama-impl-ws-cppRest
         PRIVATE cpprestsdk::cpprest OpenSSL::SSL
         )
 add_library(nakama::impl-ws-cppRest ALIAS nakama-impl-ws-cppRest)
-set(WS_IMPL_LIB nakama-impl-ws-cppRest PARENT_SCOPE)

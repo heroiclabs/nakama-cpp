@@ -65,8 +65,7 @@ endif()
 # in our ABI, because that is how JVM finds native code on Android platform.
 list(APPEND NAKAMA_SDK_DEPS ${LIBHTTPCLIENT_TARGET})
 
-
-if (NOT WS_IMPL STREQUAL "libhttpclient")
+if (WITH_WS_LIBHTTPC)
     target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
 else()
     if (LIBHTTPCLIENT_FORCE_WEBSOCKETPP)

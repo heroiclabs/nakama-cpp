@@ -3,6 +3,48 @@ cmake_minimum_required(VERSION 3.22.1)
 include(version.cmake)
 include(cmake/checkPresets.cmake)
 
+option(WITH_HTTP_CURL "Use CURL for HTTP transport" OFF)
+option(WITH_HTTP_LIBHTTPC "Use libHttpClient for HTTP transport" OFF)
+option(WITH_HTTP_CPPREST "Use CppRestSDK for HTTP transport" OFF)
+
+option(WITH_WS_WSLAY "Use wslay for WS transport" OFF)
+option(WITH_WS_LIBHTTPC "Use libHttpClient for WS transport" OFF)
+option(WITH_WS_CPPREST "Use CppRestSDK for WS transport" OFF)
+
+option(CFG_WSLAY_CURL_IO "Use CURL-based NetIO when wslay is enabled" ON)
+option(CFG_LIBHTTPC_SYSTEM "Use system-installed libhttpc" OFF)
+option(CFG_CURL_SYSTEM "Use system-installed libCURL" OFF)
+
+option(WITH_GRPC_CLIENT "Build gRPC Client" OFF)
+
+if (WITH_HTTP_CURL OR (WITH_WS_WSLAY AND CFG_WSLAY_CURL_IO))
+    if (NOT CFG_CURL_SYSTEM)
+        list(APPEND VCPKG_MANIFEST_FEATURES "curl")
+    endif()
+endif()
+
+if (WITH_HTTP_LIBHTTPC AND NOT CFG_LIBHTTPC_SYSTEM)
+    list(APPEND VCPKG_MANIFEST_FEATURES "libhttpclient-http")
+endif()
+
+if (WITH_WS_LIBHTTPC AND NOT CFG_LIBHTTPC_SYSTEM)
+    list(APPEND VCPKG_MANIFEST_FEATURES "libhttpclient-ws")
+endif()
+
+if (WITH_HTTP_CPPREST OR WITH_WS_CPPREST)
+    list(APPEND VCPKG_MANIFEST_FEATURES "cpprestsdk")
+endif()
+
+if (WITH_HTTP_LIBHTTPC OR WITH_HTTP_CURL OR WITH_HTTP_CPPREST)
+    # This var goes into public config.h, so set it early
+    set(HAVE_DEFAULT_TRANSPORT_FACTORY ON)
+endif()
+
+if (WITH_WS_LIBHTTPC OR WITH_WS_WSLAY OR WITH_WS_CPPREST)
+    # This var goes into public config.h, so set it early
+    set(HAVE_DEFAULT_RT_TRANSPORT_FACTORY ON)
+endif()
+
 if (CMAKE_OSX_SYSROOT STREQUAL "iphonesimulator")
     # this hack seems to be required for now, otherwise CMake still thinks we are building for arm...
     set(CMAKE_XCODE_ATTRIBUTE_EXCLUDED_ARCHS[sdk=iphonesimulator*] "arm64")
@@ -21,63 +63,10 @@ set(FETCHCONTENT_UPDATES_DISCONNECTED OFF)
 
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(DISTRIBUTE_OPTIONAL_LITE "Distribute optional lite with the Nakama client." ON)
-option(BUILD_SHARED_LIBS "Build a shared library." ON)
 option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
 option(BUILD_APPLE_FRAMEWORK "Build frameworks instead of .dylib files for Apple." ON)
 
-set(HTTP_IMPL "")
-set(WS_IMPL "")
-set(NAKAMA_SDK_DEPS "")
-
-if (WITH_LIBHTTPCLIENT_HTTP)
-    set(HTTP_IMPL "libhttpclient")
-elseif (WITH_CPPRESTSDK)
-    set(HTTP_IMPL "cpprestsdk")
-elseif (BUILD_CURL_HTTP OR BUILD_CURL_HTTP_SYSTEM)
-    set(HTTP_IMPL "curl")
-endif()
-
-if (WITH_LIBHTTPCLIENT_WS)
-    set(WS_IMPL "libhttpclient")
-elseif (BUILD_WSLAY)
-    set(WS_IMPL "wslay")
-elseif (WITH_CPPRESTSDK)
-    set(WS_IMPL "cpprestsdk")
-endif()
-
-set(HTTP_COMPILE_DEFINITION "")
-
-if(WITH_LIBHTTPCLIENT_HTTP)
-    set(HTTP_COMPILE_DEFINITION "BUILD_HTTP_LIBHTTPCLIENT")
-elseif(WITH_CPPRESTSDK)
-    set(HTTP_COMPILE_DEFINITION "BUILD_HTTP_CPPRESTSDK")
-elseif(BUILD_CURL_HTTP OR BUILD_CURL_HTTP_SYSTEM)
-    set(HTTP_COMPILE_DEFINITION "BUILD_HTTP_CURL")
-else()
-    set(HTTP_COMPILE_DEFINITION "WITH_EXTERNAL_HTTP")
-endif()
-
-set(WS_COMPILE_DEFINITION "")
-set(WS_IO_COMPILE_DEFINITION "")
-
-if (WITH_LIBHTTPCLIENT_WS)
-    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_LIBHTTPCLIENT)
-elseif (BUILD_WSLAY)
-    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_WSLAY)
-
-    if (BUILD_CURL_IO OR BUILD_CURL_IO_SYSTEM)
-        set(WS_IO_COMPILE_DEFINITION BUILD_CURL_IO)
-    else()
-        # no IO baked in for Wslay -- we expect user to provide the IO.
-        set(WS_IO_COMPILE_DEFINITION BUILD_IO_EXTERNAL)
-    endif()
-elseif (WITH_CPPRESTSDK)
-    set(WS_COMPILE_DEFINITION BUILD_WEBSOCKET_CPPRESTSDK)
-else()
-    # no WS baked in -- we expect user to provide WS transport
-    set(WS_COMPILE_DEFINITION WITH_EXTERNAL_WS)
-    set(WS_IO_COMPILE_DEFINITION WITH_EXTERNAL_WS_IO)
-endif()
+set(NAKAMA_SDK_DEPS)
 
 cmake_policy(SET CMP0012 NEW)
 
@@ -90,6 +79,7 @@ if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
 endif()
 
 include("submodules/devkits/cmake/platform-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
+include("submodules/private/cmake/preproject-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 
 project(nakama-sdk LANGUAGES CXX)
 
@@ -110,14 +100,6 @@ endif()
 
 option(ADDRESS_SANITIZER "Enable address sanitizer (broken on windows)" OFF)
 
-# libhttpclient uses websocketpp when system winhttp doesn't provide one (< Windows 8)
-# this flag allows us to force use of websocketpp so that it can be tested on current Windows versions
-option(LIBHTTPCLIENT_FORCE_WEBSOCKETPP "Force use of websocketpp instead of winhttp in the libhttpclient" OFF)
-
-if (LIBHTTPCLIENT_FORCE_WEBSOCKETPP)
-    list(APPEND VCPKG_MANIFEST_FEATURES "websocketpp")
-endif()
-
 if(LOGS_ENABLED)
     add_compile_definitions(NLOGS_ENABLED)
 endif(LOGS_ENABLED)
@@ -127,67 +109,81 @@ if (ADDRESS_SANITIZER)
     string(REPLACE /RTC1 "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
 endif()
 
-if(BUILD_SHARED_LIBS)
-    set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-    add_compile_definitions(NAKAMA_SHARED_LIBRARY NAKAMA_SHARED_LIBRARY_EXPORTS)
-endif()
+add_compile_definitions(NAKAMA_SHARED_LIBRARY NAKAMA_SHARED_LIBRARY_EXPORTS)
 
-
-if(APPLE AND BUILD_SHARED_LIBS AND BUILD_APPLE_FRAMEWORK)
+if(APPLE AND BUILD_APPLE_FRAMEWORK)
     # Just copy over headers into framework dir, because "official" way of doing it
     # via PUBLIC_HEADER property is full of bugs (see comment on PUBLIC_HEADER property below)
     set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework/Headers)
 
 endif()
 
-if (BUILD_CURL_IO_SYSTEM OR BUILD_CURL_IO OR BUILD_CURL_HTTP_SYSTEM OR BUILD_CURL_HTTP)
-    if (BUILD_CURL_IO_SYSTEM OR BUILD_CURL_HTTP_SYSTEM)
+if (WITH_HTTP_CURL OR (WITH_WS_WSLAY AND CFG_WSLAY_CURL_IO))
+    if (CFG_CURL_SYSTEM)
         find_package(CURL REQUIRED) # system curl not guaranteed to contain a CMake config file.
     else()
         find_package(CURL CONFIG REQUIRED)
     endif()
 endif()
 
-if(WS_IMPL STREQUAL "libhttpclient" OR HTTP_IMPL STREQUAL "libhttpclient")
-    if (NOT LIBHTTPCLIENT_BUILTIN)
+
+if(WITH_HTTP_LIBHTTPC OR WITH_WS_LIBHTTPC)
+    # build libHttpClient dependency if not using system
+    if (NOT CFG_LIBHTTPC_SYSTEM)
         include(cmake/libhttpClient.cmake)
     endif()
 endif()
 
-if (HTTP_IMPL STREQUAL "cpprestsdk")
+find_package(optional-lite CONFIG REQUIRED)
+# SDK API
+add_subdirectory(interface)
+
+# Implements API, but without concrete implementations of transports
+add_subdirectory(core EXCLUDE_FROM_ALL)
+
+# Factories, that's where all messy ifdefs to select concrete implementations are
+add_subdirectory(factory EXCLUDE_FROM_ALL)
+
+include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL RESULT_VARIABLE PRIVATE_TARGETS)
+
+if (WITH_HTTP_CPPREST)
+    set(HTTP_IMPL_LIB nakama-impl-http-cppRest)
     add_subdirectory(impl/httpCppRest EXCLUDE_FROM_ALL)
-elseif(HTTP_IMPL STREQUAL "curl")
+elseif(WITH_HTTP_CURL)
+    set(HTTP_IMPL_LIB nakama-impl-http-libcurl)
     add_subdirectory(impl/httpCurl EXCLUDE_FROM_ALL)
+elseif(WITH_HTTP_LIBHTTPC)
+    set(HTTP_IMPL_LIB nakama-impl-http-libhttpclient)
+    add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
+endif()
+if (HTTP_IMPL_LIB)
+    target_link_libraries(nakama-sdk-client-factory INTERFACE ${HTTP_IMPL_LIB} $<TARGET_OBJECTS:${HTTP_IMPL_LIB}>)
 endif()
 
-add_library(nakama-ws-impl INTERFACE)
-if(WS_IMPL STREQUAL "libhttpclient")
+if(WITH_WS_LIBHTTPC)
     set(WS_IMPL_LIB nakama-impl-ws-libhttpclient)
     add_subdirectory(impl/wsLibHttpClient EXCLUDE_FROM_ALL)
-elseif(WS_IMPL STREQUAL "wslay")
-    set(BUILD_WEBSOCKET_WSLAY ON)
+elseif(WITH_WS_WSLAY)
     set(WS_IMPL_LIB nakama-impl-ws-wslay)
     add_subdirectory(impl/wsWslay EXCLUDE_FROM_ALL)
-elseif(WS_IMPL STREQUAL "cpprestsdk")
+elseif(WITH_WS_CPPREST)
     set(WS_IMPL_LIB nakama-impl-ws-cppRest)
     add_subdirectory(impl/wsCppRest EXCLUDE_FROM_ALL)
 endif()
-
-if(HTTP_IMPL STREQUAL "libhttpclient")
-    set(BUILD_HTTP_LIBHTTPCLIENT ON)
-    add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
+if (WS_IMPL_LIB)
+    target_link_libraries(nakama-sdk-rtclient-factory INTERFACE ${WS_IMPL_LIB} $<TARGET_OBJECTS:${WS_IMPL_LIB}>)
 endif()
 
-if (ANDROID AND (HTTP_IMPL STREQUAL "curl" OR WS_IMPL STREQUAL "wslay"))
+if (ANDROID AND (WITH_HTTP_CURL OR WITH_WS_WSLAY))
     add_subdirectory(impl/android)
     set(CREATE_JAR TRUE) # we need the code for accessing native Android CA store.
 
-    if (HTTP_IMPL STREQUAL "curl")
+    if (TARGET nakama-impl-http-libcurl)
         target_link_libraries(nakama-impl-http-libcurl PUBLIC android-ca)
     endif()
 
-    if (WS_IMPL STREQUAL "wslay")
-        target_link_libraries(nakama-impl-ws-wslay INTERFACE android-ca)
+    if (TARGET nakama-impl-ws-wslay)
+        target_link_libraries(nakama-impl-ws-wslay PUBLIC android-ca)
     endif()
 
     list(APPEND NAKAMA_SDK_DEPS android-ca)
@@ -213,16 +209,6 @@ if (CREATE_JAR)
     install(FILES ${LIBNAKAMA_AAR} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
 
-find_package(optional-lite CONFIG REQUIRED)
-# SDK API
-add_subdirectory(interface)
-
-# Factories, that's where all messy ifdefs to select concrete implementations are
-add_subdirectory(factory EXCLUDE_FROM_ALL)
-
-# Implements API, but without concrete implementations of transports
-add_subdirectory(core EXCLUDE_FROM_ALL)
-
 # create dummy file because pure "library of libraries" is not supported: https://gitlab.kitware.com/cmake/cmake/-/issues/23688
 set(DUMMY_CPP "")
 set(DUMMY_H "")
@@ -233,29 +219,39 @@ if (APPLE)
     set(DUMMY_H ${CMAKE_BINARY_DIR}/dummy.h)
 endif()
 
-list(APPEND NAKAMA_SDK_DEPS
-    nakama-sdk-core-misc
-    nakama-sdk-core-rest
-    nakama-sdk-core-rt
-    nakama-sdk-core-common
-    nakama-sdk-client-factory
-    nakama-sdk-rtclient-factory
-)
 
-if (BUILD_GRPC_CLIENT)
-    list(APPEND NAKAMA_SDK_DEPS nakama-sdk-core-grpc)
+# Use 'nakama::' ALIASes because it forces CMake to reference
+# defined target and not to fallback to '-lname' when target doesn't exist,
+# thus failing at configure time, rather than at link time should we make mistake
+# in build scripts
+list(APPEND NAKAMA_SDK_DEPS
+        nakama::sdk-core-misc
+        nakama::sdk-core-rest
+        nakama::sdk-core-rt
+        nakama::sdk-core-common
+        nakama::sdk-client-factory
+        nakama::sdk-rtclient-factory
+)
+if (WITH_GRPC_CLIENT)
+    list(APPEND NAKAMA_SDK_DEPS nakama::sdk-core-grpc)
 endif()
 
-set(NAKAMA_SDK_DEPS_OBJECTS "")
+add_library(nakama-sdk SHARED ${DUMMY_CPP} ${DUMMY_H})
+add_library(nakama::sdk ALIAS nakama-sdk)
+target_link_libraries(nakama-sdk
+        PUBLIC
+            nakama::sdk-interface
+        PRIVATE
+            nakama::api-proto
+            $<$<TARGET_EXISTS:nakama::sdk-core-grpc>:nakama::grpc-proto>
+            ${NAKAMA_SDK_DEPS}
+)
+if (WITH_HTTP_CURL OR (WITH_WS_WSLAY AND CFG_WSLAY_CURL_IO))
+    target_link_libraries(nakama-sdk PRIVATE CURL::libcurl)
+endif()
 
-foreach(lib ${NAKAMA_SDK_DEPS})
-  # Append the TARGET_OBJECTS of the current library to the list
-  list(APPEND NAKAMA_SDK_DEPS_OBJECTS $<TARGET_OBJECTS:${lib}>)
-endforeach()
 
-add_library(nakama-sdk ${NAKAMA_SDK_DEPS_OBJECTS} ${DUMMY_CPP} ${DUMMY_H})
-
-if (BUILD_SHARED_LIBS AND APPLE AND BUILD_APPLE_FRAMEWORK)
+if (APPLE AND BUILD_APPLE_FRAMEWORK)
     set_target_properties(nakama-sdk PROPERTIES
             FRAMEWORK TRUE
             FRAMEWORK_VERSION A
@@ -272,29 +268,6 @@ elseif (APPLE)
     FRAMEWORK FALSE)
 endif()
 
-add_library(nakama::sdk ALIAS nakama-sdk)
-find_package(Threads REQUIRED)
-set(PTHREADS_LIB Threads::Threads)
-target_link_libraries(nakama-sdk
-        PUBLIC
-            nakama::sdk-interface
-            ${PTHREADS_LIB}
-)
-
-set(DEPENDENCY_LINK_SCOPE "")
-if (BUILD_SHARED_LIBS)
-    set(DEPENDENCY_LINK_SCOPE "PRIVATE")
-else() # propogate the static dependencies
-    set(DEPENDENCY_LINK_SCOPE "PUBLIC")
-endif()
-
-target_link_libraries(nakama-sdk
-    ${DEPENDENCY_LINK_SCOPE}
-    nakama-api-proto
-    $<$<TARGET_EXISTS:nakama-sdk-core-grpc>:nakama-grpc-proto>
-    ${HTTP_IMPL_LIB} ${WS_IMPL_LIB}
-)
-
 
 if (ADDRESS_SANITIZER)
    if (MSVC)
@@ -310,18 +283,15 @@ if (ADDRESS_SANITIZER)
 endif()
 
 
-# ensure we only perform a single 'target_link_libraries' to libcurl to prevent duplicate linkage for linkers that do not deduplicate.
-if (BUILD_CURL_IO_SYSTEM OR BUILD_CURL_IO OR BUILD_CURL_HTTP_SYSTEM OR BUILD_CURL_HTTP)
-    target_link_libraries(nakama-sdk PRIVATE CURL::libcurl)
-endif()
-
+#Install doesn't support ALIASes, transform them into 'flat' non alias names
+list(TRANSFORM NAKAMA_SDK_DEPS REPLACE "::" "-" OUTPUT_VARIABLE NAKAMA_SDK_DEPS_TARGETS)
 install(TARGETS
             nakama-sdk
             nakama-sdk-interface
             nakama-api-proto
             ${HTTP_IMPL_LIB}
             ${WS_IMPL_LIB}
-            ${NAKAMA_SDK_DEPS}
+            ${NAKAMA_SDK_DEPS_TARGETS}
         EXPORT nakama-export
         FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
@@ -331,7 +301,7 @@ install(TARGETS
         INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
 
-if(MSVC AND BUILD_SHARED_LIBS)
+if(MSVC)
     install(FILES $<TARGET_PDB_FILE:nakama-sdk> DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT nakama-sdk OPTIONAL)
 endif()
 
@@ -339,14 +309,7 @@ endif()
 install(EXPORT nakama-export
         DESTINATION share/nakama-sdk)
 
-
 include(CMakePackageConfigHelpers)
-
-if(BUILD_SHARED_LIBS)
-    set(NAKAMA_SDK_BUILD_TYPE "SHARED")
-else()
-    set(NAKAMA_SDK_BUILD_TYPE "STATIC")
-endif()
 
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-sdk-config.cmake.in
   "${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake"

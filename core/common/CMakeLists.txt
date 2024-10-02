@@ -19,14 +19,15 @@ file(
 #set(CMAKE_INCLUDE_CURRENT_DIR ON)
 #set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
-add_library(nakama-sdk-core-common OBJECT ${srcs})
+ add_library(nakama-sdk-core-common OBJECT ${srcs})
+ add_library(nakama::sdk-core-common ALIAS nakama-sdk-core-common)
 
 target_link_libraries(nakama-sdk-core-common
         PUBLIC
             nakama-sdk-interface
             # required for datahelper
             nakama::api-proto
-            $<$<TARGET_EXISTS:nakama::grpc-proto>:nakama::grpc-proto>
+            $<TARGET_NAME_IF_EXISTS:nakama::grpc-proto>
         PRIVATE
             protobuf::libprotobuf   # because of StrUtil::Base64Encode
         )

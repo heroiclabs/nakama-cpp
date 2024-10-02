@@ -14,4 +14,3 @@ target_link_libraries(nakama-impl-http-cppRest
         PRIVATE cpprestsdk::cpprest
         )
 add_library(nakama::impl-http-cppRest ALIAS nakama-impl-http-cppRest)
-set(HTTP_IMPL_LIB nakama-impl-http-cppRest PARENT_SCOPE)
