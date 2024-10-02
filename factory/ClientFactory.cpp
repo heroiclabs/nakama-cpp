@@ -18,26 +18,26 @@
 #include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/NClientInterface.h"
 
-#ifdef BUILD_GRPC_CLIENT
+#ifdef WITH_GRPC_CLIENT
     #include "../core/core-grpc/GrpcClient.h"
 #endif
 
 #include "../core/core-rest/RestClient.h"
 
-#ifdef BUILD_HTTP_LIBHTTPCLIENT
+#ifdef WITH_HTTP_LIBHTTPC
 #include "../../impl/httpLibHttpClient/NHttpClientLibHC.h"
-#elif defined(BUILD_HTTP_CPPRESTSDK)
+#elif defined(WITH_HTTP_CPPREST)
 #include "../../impl/httpCppRest/NHttpClientCppRest.h"
-#elif defined(BUILD_HTTP_CURL)
+#elif defined(WITH_HTTP_CURL)
 #include "../../impl/httpCurl/NHttpClientLibCurl.h"
 #endif
 
 namespace Nakama {
 
-#if !defined(WITH_EXTERNAL_HTTP) || defined(BUILD_GRPC_CLIENT)
+#if !defined(WITH_PRIVATE_HTTP) || defined(WITH_GRPC_CLIENT)
 NClientPtr createDefaultClient(const NClientParameters& parameters)
 {
-    #if defined(BUILD_GRPC_CLIENT)
+    #if defined(WITH_GRPC_CLIENT)
     return createGrpcClient(parameters);
     #else
     return createRestClient(parameters, createDefaultHttpTransport(parameters.platformParams));
@@ -45,7 +45,7 @@ NClientPtr createDefaultClient(const NClientParameters& parameters)
 }
 #endif
 
-#if BUILD_GRPC_CLIENT
+#ifdef WITH_GRPC_CLIENT
 
 NClientPtr createGrpcClient(const NClientParameters& parameters)
 {
@@ -67,16 +67,16 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
     return client;
 }
 
-#ifndef WITH_EXTERNAL_HTTP
+#ifndef WITH_PRIVATE_HTTP
 NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platformParams)
 {
     (void)platformParams;  // silence unused variable warning on some platforms
     // Compilation error if no implementation is selected
-    #if defined(BUILD_HTTP_LIBHTTPCLIENT)
+    #if defined(WITH_HTTP_LIBHTTPC)
     return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
-    #elif defined(BUILD_HTTP_CPPRESTSDK)
+    #elif defined(WITH_HTTP_CPPREST)
     return NHttpTransportPtr(new NHttpClientCppRest(platformParams));
-    #elif defined(BUILD_HTTP_CURL)
+    #elif defined(WITH_HTTP_CURL)
     return NHttpTransportPtr(new NHttpClientLibCurl(platformParams));
     #else
         #error Could not find default http transport for platform.

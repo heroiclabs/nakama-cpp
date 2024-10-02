@@ -94,7 +94,7 @@ NAKAMA_NAMESPACE_BEGIN
          */
         virtual void tick() = 0;
 
-#if !defined(WITH_EXTERNAL_WS) && !defined(BUILD_IO_EXTERNAL)
+#if defined(HAVE_DEFAULT_RT_TRANSPORT_FACTORY)
         /**
          * Create a new real-time client with parameters from client.
          * @return a new NRtClient instance.

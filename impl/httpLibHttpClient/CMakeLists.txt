@@ -20,4 +20,3 @@ target_link_libraries(nakama-impl-http-libhttpclient
         # configure include paths
         PUBLIC ${LIBHTTPCLIENT_TARGET}
         )
-set(HTTP_IMPL_LIB nakama-impl-http-libhttpclient PARENT_SCOPE)

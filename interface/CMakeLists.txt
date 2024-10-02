@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.23)
-project(nakama-sdk-core LANGUAGES CXX)
 include(GNUInstallDirs)
 
 file(GLOB CORE_HEADERS
@@ -9,12 +7,6 @@ file(GLOB CORE_HEADERS
     include/nakama-cpp/data/realtime/*
     include/nakama-cpp/data/realtime/rtdata/*
 )
-
-if (WS_IMPL STREQUAL "wslay")
-    file(GLOB WSLAY_HEADERS include/nakama-cpp/data/realtime/wslay/*)
-    list(APPEND CORE_HEADERS ${WSLAY_HEADERS})
-endif()
-
 
 add_library(nakama-sdk-interface INTERFACE ${CORE_HEADERS})
 add_library(nakama::sdk-interface ALIAS nakama-sdk-interface)

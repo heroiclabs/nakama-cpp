@@ -35,7 +35,6 @@ set(CMAKE_USER_MAKE_RULES_OVERRIDE "${CMAKE_CURRENT_LIST_FILE}")
 # Common compilation flags. Same file used by SDK code and to build vcpkg dependencies.
 include_guard()
 
-
 # Minimize what's visible outside of shared lib
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_C_VISIBILITY_PRESET hidden)

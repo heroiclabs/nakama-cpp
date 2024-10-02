@@ -14,5 +14,3 @@ target_include_directories(nakama-impl-http-libcurl PRIVATE ${CURL_INCLUDE_DIRS}
 target_link_libraries(nakama-impl-http-libcurl
     PUBLIC nakama-api-proto nakama::sdk-interface
 )
-
-set(HTTP_IMPL_LIB nakama-impl-http-libcurl PARENT_SCOPE)

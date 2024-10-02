@@ -27,12 +27,9 @@
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
                 "CMAKE_SYSTEM_PROCESSOR": "AMD64",
-                "VCPKG_HOST_TRIPLET": "x64-windows-static-heroic",
                 "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic",
-                "BUILD_WSLAY": "ON",
-                "BUILD_CURL_IO": "ON",
-                "BUILD_CURL_HTTP": "ON",
-                "VCPKG_MANIFEST_FEATURES": "wslay;curl"
+                "WITH_WS_WSLAY": "ON",
+                "WITH_HTTP_CURL": "ON"
             },
             "condition": {
                 "type": "equals",
@@ -44,40 +41,26 @@
         {
             "name": "win-arm64",
             "inherits": [
-                "default"
+                "default", "win-x64"
             ],
-            "generator": "Ninja Multi-Config",
             "cacheVariables": {
-                "CMAKE_SYSTEM_PROCESSOR": "arm64",
-                "VCPKG_HOST_TRIPLET": "arm64-windows-static-heroic",
-                "VCPKG_TARGET_TRIPLET": "arm64-windows-static-heroic",
-                "BUILD_WSLAY": "ON",
-                "BUILD_CURL_IO": "ON",
-                "BUILD_CURL_HTTP": "ON",
-                "VCPKG_MANIFEST_FEATURES": "wslay;curl"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Windows"
+                "CMAKE_SYSTEM_PROCESSOR": "ARM64",
+                "VCPKG_TARGET_TRIPLET": "arm64-windows-static-heroic"
             },
             "installDir": "out/win-arm64"
         },
         {
-            "name": "macosx-arm64-host_arm64",
+            "name": "macosx-arm64",
             "inherits": [
                 "default"
             ],
             "installDir": "out/macosx-arm64",
             "generator": "Xcode",
             "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
                 "VCPKG_TARGET_TRIPLET": "arm64-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "arm64",
-                "BUILD_WSLAY": "ON",
-                "BUILD_CURL_IO": "ON",
-                "BUILD_CURL_HTTP": "ON",
-                "VCPKG_MANIFEST_FEATURES": "wslay;curl"
+                "WITH_WS_WSLAY": "ON",
+                "WITH_HTTP_CURL": "ON"
             },
             "condition": {
                 "type": "equals",
@@ -86,83 +69,36 @@
             }
         },
         {
-            "name": "macosx-arm64-host_x64",
+            "name": "macosx-x64",
             "inherits": [
-                "macosx-arm64-host_arm64"
+                "macosx-arm64"
             ],
             "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
-                "CMAKE_OSX_ARCHITECTURES": "arm64"
-            },
-            "installDir": "out/macosx-arm64"
-        },
-        {
-            "name": "macosx-x64-host_x64",
-            "inherits": [
-                "macosx-arm64-host_x64"
-            ],
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
                 "VCPKG_TARGET_TRIPLET": "x64-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "x86_64"
             },
             "installDir": "out/macosx-x64"
         },
         {
-            "name": "macosx-x64-host_arm64",
+            "name": "ios-arm64",
             "inherits": [
-                "macosx-x64-host_x64"
-            ],
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
-                "CMAKE_OSX_ARCHITECTURES": "x86_64"
-            }
-        },
-        {
-            "name": "ios-arm64-host_arm64",
-            "inherits": [
-                "macosx-arm64-host_arm64"
+                "macosx-arm64"
             ],
             "cacheVariables": {
                 "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
-                "CMAKE_SYSTEM_NAME": "iOS",
-                "BUILD_WSLAY": "ON",
-                "BUILD_CURL_IO": "ON"
+                "CMAKE_SYSTEM_NAME": "iOS"
             },
             "installDir": "out/ios-arm64"
         },
         {
-            "name": "ios-arm64-host_x64",
+            "name": "iphonesimulator-x64",
             "inherits": [
-                "ios-arm64-host_arm64"
-            ],
-            "installDir": "out/ios-arm64",
-            "cacheVariables": {
-                "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
-                "VCPKG_HOST_TRIPLET": "x64-osx-heroic"
-            }
-        },
-        {
-            "name": "iphonesimulator-x64-host_arm64",
-            "inherits": [
-                "macosx-x64-host_arm64"
+                "ios-arm64"
             ],
             "cacheVariables": {
                 "VCPKG_TARGET_TRIPLET": "x64-iphonesimulator-heroic",
-                "CMAKE_SYSTEM_NAME": "iOS",
                 "CMAKE_OSX_SYSROOT": "iphonesimulator",
-                "CMAKE_OSX_ARCHITECTURES": "x86_64",
-                "BUILD_WSLAY": "ON",
-                "BUILD_CURL": "ON"
-            }
-        },
-        {
-            "name": "iphonesimulator-x64-host_x64",
-            "inherits": [
-                "iphonesimulator-x64-host_arm64"
-            ],
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-osx-heroic"
+                "CMAKE_OSX_ARCHITECTURES": "x86_64"
             }
         },
         {
@@ -177,11 +113,9 @@
                 "ANDROID_ARM_NEON": "ON",
                 "ANDROID_STL": "c++_shared",
                 "ANDROID_PLATFORM": "android-21",
-                "BUILD_CURL_HTTP": "ON",
-                "BUILD_WSLAY": "ON",
-                "BUILD_CURL_IO": "ON",
-                "CMAKE_SYSTEM_NAME": "Android",
-                "VCPKG_MANIFEST_FEATURES": "curl;wslay"
+                "WITH_HTTP_CURL": "ON",
+                "WITH_WS_WSLAY": "ON",
+                "CMAKE_SYSTEM_NAME": "Android"
             },
             "condition": {
                 "type": "equals",
@@ -190,110 +124,24 @@
             }
         },
         {
-            "name": "android-arm64-v8a-host_osx_x64",
+            "name": "android-arm64-v8a",
             "inherits": [
                 "android-default"
             ],
-            "generator": "Ninja Multi-Config",
             "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
                 "VCPKG_TARGET_TRIPLET": "arm64-android-heroic",
                 "ANDROID_ABI": "arm64-v8a"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
             },
             "installDir": "out/android-arm64-v8a"
         },
         {
-            "name": "android-x64-host_osx_x64",
+            "name": "android-armeabi-v7a",
             "inherits": [
                 "android-default"
             ],
-            "generator": "Ninja Multi-Config",
             "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
-                "VCPKG_TARGET_TRIPLET": "x64-android-heroic",
-                "ANDROID_ABI": "x86_64"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
-            },
-            "installDir": "out/android-x64"
-        },
-        {
-            "name": "android-armeabi-v7a-host_osx_x64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-osx-heroic",
                 "VCPKG_TARGET_TRIPLET": "arm-neon-android-heroic",
-                "ANDROID_ABI": "armeabi-v7a"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
-            },
-            "installDir": "out/android-armeabi-v7a"
-        },
-        {
-            "name": "android-armeabi-v7a-host_osx_arm64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
-                "VCPKG_TARGET_TRIPLET": "arm-neon-android-heroic",
-                "ANDROID_ABI": "armeabi-v7a"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
-            },
-            "installDir": "out/android-armeabi-v7a"
-        },
-        {
-            "name": "android-arm64-v8a-host_osx_arm64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
-                "VCPKG_TARGET_TRIPLET": "arm64-android-heroic",
-                "ANDROID_ABI": "arm64-v8a"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
-            },
-            "installDir": "out/android-arm64-v8a"
-        },
-        {
-            "name": "android-x64-host_osx_arm64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "arm64-osx-heroic",
-                "VCPKG_TARGET_TRIPLET": "x64-android-heroic",
                 "ANDROID_ABI": "x86_64"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
             },
             "installDir": "out/android-x64"
         },
@@ -304,12 +152,9 @@
             ],
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-linux-heroic",
                 "VCPKG_TARGET_TRIPLET": "x64-linux-heroic",
-                "BUILD_CURL_HTTP": "ON",
-                "BUILD_WSLAY": "ON",
-                "BUILD_CURL_IO": "ON",
-                "VCPKG_MANIFEST_FEATURES": "curl;wslay"
+                "WITH_HTTP_CURL": "ON",
+                "WITH_WS_WSLAY": "ON"
             },
             "condition": {
                 "type": "equals",
@@ -329,60 +174,6 @@
                 "CXX": "/usr/bin/g++-11"
             },
             "installDir": "out/ubuntu1804-amd64"
-        },
-        {
-            "name": "android-armeabi-v7a-host_linux-x64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-linux-release",
-                "VCPKG_TARGET_TRIPLET": "arm-neon-android-heroic",
-                "ANDROID_ABI": "armeabi-v7a"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Linux"
-            },
-            "installDir": "out/android-armeabi-v7a"
-        },
-        {
-            "name": "android-arm64-v8a-host_linux-x64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-linux-release",
-                "VCPKG_TARGET_TRIPLET": "arm64-android-heroic",
-                "ANDROID_ABI": "arm64-v8a"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Linux"
-            },
-            "installDir": "out/android-arm64-v8a"
-        },
-        {
-            "name": "android-x64-host_linux-x64",
-            "inherits": [
-                "android-default"
-            ],
-            "generator": "Ninja Multi-Config",
-            "cacheVariables": {
-                "VCPKG_HOST_TRIPLET": "x64-linux-release",
-                "VCPKG_TARGET_TRIPLET": "x64-android-heroic",
-                "ANDROID_ABI": "x86_64"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Linux"
-            },
-            "installDir": "out/android-x64"
         }
     ]
 }

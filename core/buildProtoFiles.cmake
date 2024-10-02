@@ -37,7 +37,7 @@ protobuf_generate(TARGET nakama-api-proto
 
 message("done generating")
 
-if (BUILD_GRPC_CLIENT)
+if (WITH_GRPC_CLIENT)
 #### apigrpc.proto ####
 
 # apigrpc.proto references 'api.proto' using canonical name 'github.com/heroiclabs/nakama-common/api/api.proto'
@@ -107,4 +107,4 @@ protobuf_generate(TARGET nakama-grpc-proto
         PROTOC_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR}
         PROTOC_OPTIONS "--grpc_out=${CMAKE_CURRENT_BINARY_DIR}"
         )
-endif(BUILD_GRPC_CLIENT)
+endif(WITH_GRPC_CLIENT)

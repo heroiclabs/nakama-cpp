@@ -1,5 +1,3 @@
-project(nakama-sdk-cpp-core-rest LANGUAGES CXX)
-
 file(
         GLOB_RECURSE srcs
         LIST_DIRECTORIES false
@@ -19,8 +17,9 @@ target_compile_definitions(nakama-sdk-core-rest PRIVATE
         RAPIDJSON_HAS_CXX11_RVALUE_REFS=1
         )
 target_link_libraries(nakama-sdk-core-rest
-        PUBLIC nakama-sdk-interface
+        PUBLIC
+                nakama::sdk-interface
+                nakama::sdk-core-common
         PRIVATE rapidjson
-                nakama-sdk-core-common
-                nakama-sdk-core-rt
+                nakama::sdk-core-rt
         )

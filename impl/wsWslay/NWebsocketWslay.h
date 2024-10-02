@@ -19,8 +19,8 @@
 #include <string>
 #include <memory>
 #include <wslay/wslay.h>
-#include "nakama-cpp/realtime/NRtTransportInterface.h"
-#include <nakama-cpp/realtime/wslay/WslayIOInterface.h>
+#include <nakama-cpp/realtime/NRtTransportInterface.h>
+#include "WslayIOInterface.h"
 
 namespace Nakama {
 
