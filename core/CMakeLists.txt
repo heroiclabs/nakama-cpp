@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 3.29)
-project(nakama-sdk-cpp DESCRIPTION "Nakama C++ Client" LANGUAGES CXX)
-
 set(NAKAMA_GIT_TAG "master" CACHE STRING "nakama Git tag to fetch Proto files from")
 set(NAKAMA_COMMON_GIT_TAG "master" CACHE STRING "nakama-common Git tag to fetch Proto files from")
 

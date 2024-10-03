@@ -1,6 +1,4 @@
 # Fetch proto files from nakama and nakama-common and builds them
-include(FetchContent)
-
 set(NAKAMA_COMMON ${CMAKE_CURRENT_BINARY_DIR}/nakama-common-master)
 set(NAKAMA ${CMAKE_CURRENT_BINARY_DIR}/nakama-master)
 
