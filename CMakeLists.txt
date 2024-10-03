@@ -57,10 +57,6 @@ endif()
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
 set(CMAKE_SUPPRESS_REGENERATION true) ## for Xcode
 
-## TODO figure out why vcpkg seems to toggle these on and prevent downloading from fetchcontent
-set(FETCHCONTENT_FULLY_DISCONNECTED OFF)
-set(FETCHCONTENT_UPDATES_DISCONNECTED OFF)
-
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(DISTRIBUTE_OPTIONAL_LITE "Distribute optional lite with the Nakama client." ON)
 option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
