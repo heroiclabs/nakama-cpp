@@ -15,20 +15,10 @@ endif()
 
 ## force libhttpclient to build statically
 set(BUILD_SHARED_LIBS OFF)
-FetchContent_Declare(
-        libHttpClient
-        GIT_REPOSITORY https://github.com/heroiclabs/libHttpClient.git
-        GIT_TAG        c535d5943516bb5d8f3a50858da617ebd0dd3f3f
-        SOURCE_SUBDIR  ${LIBHTTPCLIENT_SOURCE_SUBDIR}
-        GIT_PROGRESS TRUE
-        GIT_SHALLOW TRUE
-        GIT_SUBMODULES ""
-)
 
-FetchContent_MakeAvailable(libHttpClient)
-if (${WAS_SHARED_LIBS})
-    set(BUILD_SHARED_LIBS ON)
-endif()
+add_subdirectory("${CMAKE_SOURCE_DIR}/submodules/libHttpClient/${LIBHTTPCLIENT_SOURCE_SUBDIR}")
+
+set(BUILD_SHARED_LIBS ${WAS_SHARED_LIBS})
 
 if (ANDROID)
     set(LIBHTTPCLIENT_TARGET libHttpClient.Android)
@@ -65,7 +55,7 @@ endif()
 # in our ABI, because that is how JVM finds native code on Android platform.
 list(APPEND NAKAMA_SDK_DEPS ${LIBHTTPCLIENT_TARGET})
 
-if (WITH_WS_LIBHTTPC)
+if (NOT WITH_WS_LIBHTTPC)
     target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
 else()
     if (LIBHTTPCLIENT_FORCE_WEBSOCKETPP)

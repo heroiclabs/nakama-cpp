@@ -16,9 +16,11 @@
 
 #pragma once
 
-#include <httpClient.h>
 #include <nakama-cpp/NHttpTransportInterface.h>
 #include <nakama-cpp/NPlatformParams.h>
+
+#include <httpClient/httpClient.h>
+
 #include <atomic>
 
 namespace Nakama {

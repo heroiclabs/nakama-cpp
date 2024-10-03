@@ -8,6 +8,7 @@ file(
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 add_library(nakama-impl-http-libhttpclient OBJECT ${srcs})
+add_library(nakama::impl-http-libhttpclient ALIAS nakama-impl-http-libhttpclient)
 
 if (APPLE)
     target_compile_definitions(nakama-impl-http-libhttpclient INTERFACE "HC_APPLE_POSIX")
