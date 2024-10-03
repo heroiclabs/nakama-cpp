@@ -105,7 +105,7 @@ if (ADDRESS_SANITIZER)
     string(REPLACE /RTC1 "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
 endif()
 
-add_compile_definitions(NAKAMA_SHARED_LIBRARY NAKAMA_SHARED_LIBRARY_EXPORTS)
+add_compile_definitions(NAKAMA_SHARED_LIBRARY_EXPORTS)
 
 if(APPLE AND BUILD_APPLE_FRAMEWORK)
     # Just copy over headers into framework dir, because "official" way of doing it
