@@ -153,7 +153,9 @@ elseif(WITH_HTTP_LIBHTTPC)
     add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
 endif()
 if (HTTP_IMPL_LIB)
-    target_link_libraries(nakama-sdk-client-factory INTERFACE ${HTTP_IMPL_LIB} $<TARGET_OBJECTS:${HTTP_IMPL_LIB}>)
+    target_link_libraries(nakama-sdk-client-factory
+            PUBLIC ${HTTP_IMPL_LIB}
+            INTERFACE $<TARGET_OBJECTS:${HTTP_IMPL_LIB}>)
 endif()
 
 if(WITH_WS_LIBHTTPC)
@@ -167,7 +169,9 @@ elseif(WITH_WS_CPPREST)
     add_subdirectory(impl/wsCppRest EXCLUDE_FROM_ALL)
 endif()
 if (WS_IMPL_LIB)
-    target_link_libraries(nakama-sdk-rtclient-factory INTERFACE ${WS_IMPL_LIB} $<TARGET_OBJECTS:${WS_IMPL_LIB}>)
+    target_link_libraries(nakama-sdk-rtclient-factory
+            PUBLIC ${WS_IMPL_LIB}
+            INTERFACE $<TARGET_OBJECTS:${WS_IMPL_LIB}>)
 endif()
 
 if (ANDROID AND (WITH_HTTP_CURL OR WITH_WS_WSLAY))

@@ -8,3 +8,7 @@
 	path = submodules/devkits
 	url = https://github.com/heroiclabs/console-devkits.git
 	shallow = true
+[submodule "submodules/libHttpClient"]
+	path = submodules/libHttpClient
+	url = https://github.com/heroiclabs/libHttpClient.git
+	branch = luke/additional-cmake-fixes
