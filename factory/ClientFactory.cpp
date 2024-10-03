@@ -34,7 +34,7 @@
 
 namespace Nakama {
 
-#if !defined(WITH_PRIVATE_HTTP) || defined(WITH_GRPC_CLIENT)
+#if defined(HAVE_DEFAULT_TRANSPORT_FACTORY) || defined(WITH_GRPC_CLIENT)
 NClientPtr createDefaultClient(const NClientParameters& parameters)
 {
     #if defined(WITH_GRPC_CLIENT)

@@ -250,7 +250,6 @@ if (WITH_HTTP_CURL OR (WITH_WS_WSLAY AND CFG_WSLAY_CURL_IO))
     target_link_libraries(nakama-sdk PRIVATE CURL::libcurl)
 endif()
 
-
 if (APPLE AND BUILD_APPLE_FRAMEWORK)
     set_target_properties(nakama-sdk PROPERTIES
             FRAMEWORK TRUE
@@ -304,6 +303,7 @@ install(TARGETS
 if(MSVC)
     install(FILES $<TARGET_PDB_FILE:nakama-sdk> DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT nakama-sdk OPTIONAL)
 endif()
+
 
 ## use share directory for export files (at least a vcpkg convention)
 install(EXPORT nakama-export
