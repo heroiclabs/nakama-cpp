@@ -17,6 +17,10 @@ option(CFG_CURL_SYSTEM "Use system-installed libCURL" OFF)
 
 option(WITH_GRPC_CLIENT "Build gRPC Client" OFF)
 
+if (WITH_WS_WSLAY)
+    list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
+endif()
+
 if (WITH_HTTP_CURL OR (WITH_WS_WSLAY AND CFG_WSLAY_CURL_IO))
     if (NOT CFG_CURL_SYSTEM)
         list(APPEND VCPKG_MANIFEST_FEATURES "curl")
@@ -74,6 +78,7 @@ if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
     set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
 endif()
 
+include("cmake/triplets/${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 include("submodules/devkits/cmake/platform-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 include("submodules/private/cmake/preproject-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 
@@ -154,7 +159,7 @@ elseif(WITH_HTTP_LIBHTTPC)
 endif()
 if (HTTP_IMPL_LIB)
     target_link_libraries(nakama-sdk-client-factory
-            PUBLIC ${HTTP_IMPL_LIB}
+            PRIVATE ${HTTP_IMPL_LIB}
             INTERFACE $<TARGET_OBJECTS:${HTTP_IMPL_LIB}>)
 endif()
 
@@ -170,7 +175,7 @@ elseif(WITH_WS_CPPREST)
 endif()
 if (WS_IMPL_LIB)
     target_link_libraries(nakama-sdk-rtclient-factory
-            PUBLIC ${WS_IMPL_LIB}
+            PRIVATE ${WS_IMPL_LIB}
             INTERFACE $<TARGET_OBJECTS:${WS_IMPL_LIB}>)
 endif()
 
@@ -178,11 +183,11 @@ if (ANDROID AND (WITH_HTTP_CURL OR WITH_WS_WSLAY))
     add_subdirectory(impl/android)
     set(CREATE_JAR TRUE) # we need the code for accessing native Android CA store.
 
-    if (TARGET nakama-impl-http-libcurl)
+    if (TARGET nakama::impl-http-libcurl)
         target_link_libraries(nakama-impl-http-libcurl PUBLIC android-ca)
     endif()
 
-    if (TARGET nakama-impl-ws-wslay)
+    if (TARGET nakama::impl-ws-wslay)
         target_link_libraries(nakama-impl-ws-wslay PUBLIC android-ca)
     endif()
 
