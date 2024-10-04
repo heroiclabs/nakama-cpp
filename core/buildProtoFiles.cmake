@@ -22,10 +22,7 @@ add_library(nakama-api-proto OBJECT ${NAKAMA_API_PROTO_FILES})
 add_library(nakama::api-proto ALIAS nakama-api-proto)
 
 target_link_libraries(nakama-api-proto PRIVATE protobuf::libprotobuf)
-target_include_directories(nakama-api-proto PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-)
+target_include_directories(nakama-api-proto PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 
 protobuf_generate(TARGET nakama-api-proto
         LANGUAGE cpp
@@ -70,10 +67,7 @@ target_link_libraries(nakama-grpc-proto
         PUBLIC -Wl,--exclude-libs=ALL
                gRPC::grpc++
         )
-target_include_directories(nakama-grpc-proto PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-        )
+target_include_directories(nakama-grpc-proto PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 
 install(TARGETS
         nakama-grpc-proto

@@ -5,15 +5,9 @@ endif()
 
 # Various platform specific defines
 if (CMAKE_SYSTEM_NAME STREQUAL Windows OR WindowsDesktop)
-    set(WindowsDesktop ON)
-    message("Configuring Windows Desktop build")
-    # Sets minimual Windows version we are targeting
-    # https://docs.microsoft.com/en-us/windows/win32/WinProg/using-the-windows-headers
-    add_compile_definitions(NTDDI_VERSION=NTDDI_WIN7 _WIN32_WINNT=_WIN32_WINNT_WIN7)
-    set(BUILDWIN32 ON)  # libhttpclient
+    add_compile_definitions(_UNICODE UNICODE)
     set(CMAKE_INSTALL_BINDIR ${CMAKE_INSTALL_LIBDIR})  # place .dll where .lib is so that multiplatform archives can be created
 elseif(CMAKE_SYSTEM_NAME STREQUAL Darwin)
-    set(Darwin)
     message("Configuring Apple MacOSX build")
     # when changing, dont forget also set it in {arm64,x64}-osx-heroic vcpkg triplet
     # NOTE: we can't use CMAKE_SYSTEM_PROCESSOR here because it is always arm64 on M1 silicon for some reason

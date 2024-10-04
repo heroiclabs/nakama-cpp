@@ -178,8 +178,6 @@ Note: to use logging macros you have to define `NLOGS_ENABLED`.
 
 Nakama C++ client has built-in support for WebSocket. This is available on all supported platforms.
 
-Client will default to use the Websocket transport provided by [C++ REST SDK](https://github.com/microsoft/cpprestsdk).
-
 You can use a custom Websocket transport by implementing the [NRtTransportInterface](https://github.com/heroiclabs/nakama-cpp/blob/master/include/nakama-cpp/realtime/NRtTransportInterface.h):
 
 ```cpp
@@ -212,14 +210,9 @@ Then you will need to load our native library from Java by calling `System.loadL
 
 # How to build
 
-## Prerequisite
-
-You should download vcpkg (https://github.com/microsoft/vcpkg) somewhere on your machine set your $VCPKG_ROOT environment variable to point to the
-repository.
-
 ### Windows
 
-- [CMake >= 3.22](https://cmake.org/download/)
+- [CMake >= 3.29](https://cmake.org/download/)
 - [Ninja](https://ninja-build.org/)
 - [Build Tools for Visual Studio 2022](https://visualstudio.microsoft.com/downloads/)
 
@@ -299,10 +292,6 @@ Your NDK is typically located within your SDK:`<sdk>/ndk/<ndk-version>`
 
 Our prebuilt libraries target Android NDK 25.1.8937393.
 
-### Windows 32-Bit
-
-We support native 32-bit builds. Keep in mind that when building from source, you must run your command
-in a 32-bit (e.g., C:\Windows\System32\cmd.exe) environment.
 
 ### Build modifiers
 
@@ -317,15 +306,13 @@ Supported build modifiers are:
   websocketpp transport and uses it if Windows doesn't support websocket natively (< Windows 8).
   You can set this build modifier to force use of websocketpp transport, so that it can be tested without
   installing Windows 7. If you
-- `WITH_LIBCXX`: dynamically link with libc++ instead of libstdc++ on Linux platform.
-  - `LIBCXX_STATIC`: link libc++ statically
 - `ADDRESS_SANITIZER`: instrument library with [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer)
 
 Build modifiers are CMake variables passed at configure time using `-D` switch.
 Example use:
 
 ```
-cmake --preset linux-amd64 -DWITH_LIBCXX=ON
+cmake --preset linux-amd64 -DADDRESS_SANITIZER=ON
 ```
 
 ## Release

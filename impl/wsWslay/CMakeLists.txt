@@ -16,8 +16,8 @@ target_link_libraries(nakama-impl-ws-wslay
         nakama::sdk-core-common nakama::sdk-core-misc wslay
 )
 
-target_include_directories(nakama-impl-ws-wslay INTERFACE
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>  # for WslayIOInterface.h
+target_include_directories(nakama-impl-ws-wslay
+        INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}  # for WslayIOInterface.h
 )
 
 if (CFG_WSLAY_CURL_IO)

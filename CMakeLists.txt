@@ -27,12 +27,8 @@ if (WITH_HTTP_CURL OR (WITH_WS_WSLAY AND CFG_WSLAY_CURL_IO))
     endif()
 endif()
 
-if (WITH_HTTP_LIBHTTPC AND NOT CFG_LIBHTTPC_SYSTEM)
-    list(APPEND VCPKG_MANIFEST_FEATURES "libhttpclient-http")
-endif()
-
-if (WITH_WS_LIBHTTPC AND NOT CFG_LIBHTTPC_SYSTEM)
-    list(APPEND VCPKG_MANIFEST_FEATURES "libhttpclient-ws")
+if ((WITH_WS_LIBHTTPC OR WITH_HTTP_LIBHTTPC) AND NOT CFG_LIBHTTPC_SYSTEM)
+    list(APPEND VCPKG_MANIFEST_FEATURES "libhttpclient")
 endif()
 
 if (WITH_HTTP_CPPREST OR WITH_WS_CPPREST)
@@ -90,8 +86,6 @@ include(cmake/linkerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
 
-include(InstallRequiredSystemLibraries)
-
 set(CMAKE_CXX_STANDARD 17)
 option(LOGS_ENABLED "Enable log output" ON)
 
@@ -145,7 +139,7 @@ add_subdirectory(core EXCLUDE_FROM_ALL)
 # Factories, that's where all messy ifdefs to select concrete implementations are
 add_subdirectory(factory EXCLUDE_FROM_ALL)
 
-include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL RESULT_VARIABLE PRIVATE_TARGETS)
+include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 
 if (WITH_HTTP_CPPREST)
     set(HTTP_IMPL_LIB nakama-impl-http-cppRest)
@@ -287,20 +281,14 @@ if (ADDRESS_SANITIZER)
 endif()
 
 
-#Install doesn't support ALIASes, transform them into 'flat' non alias names
-list(TRANSFORM NAKAMA_SDK_DEPS REPLACE "::" "-" OUTPUT_VARIABLE NAKAMA_SDK_DEPS_TARGETS)
 install(TARGETS
             nakama-sdk
             nakama-sdk-interface
-            nakama-api-proto
-            ${HTTP_IMPL_LIB}
-            ${WS_IMPL_LIB}
-            ${NAKAMA_SDK_DEPS_TARGETS}
         EXPORT nakama-export
-        FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
-        RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT nakama-sdk
+        FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
         FILE_SET HEADERS COMPONENT headers
         INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
@@ -323,11 +311,8 @@ configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-sdk-config.cmak
   NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
 
-## for any variables that need to be read by consuming packages before their project() call, since find_package must be done after project()
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/nakama-sdk-preconfig.cmake.in ${CMAKE_BINARY_DIR}/nakama-sdk-preconfig.cmake)
 
 install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-preconfig.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake
   DESTINATION share/nakama-sdk
 )
