@@ -32,9 +32,8 @@ target_link_libraries(nakama-sdk-core-common
             protobuf::libprotobuf   # because of StrUtil::Base64Encode
         )
 
-target_include_directories(nakama-sdk-core-common PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-        $<INSTALL_INTERFACE:include>
+target_include_directories(nakama-sdk-core-common
+        PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 

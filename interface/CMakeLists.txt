@@ -1,11 +1,7 @@
 include(GNUInstallDirs)
 
-file(GLOB CORE_HEADERS
-    include/nakama-cpp/*
-    include/nakama-cpp/data/*
-    include/nakama-cpp/data/log/*
-    include/nakama-cpp/data/realtime/*
-    include/nakama-cpp/data/realtime/rtdata/*
+file(GLOB_RECURSE CORE_HEADERS
+    include/*.h
 )
 
 add_library(nakama-sdk-interface INTERFACE ${CORE_HEADERS})

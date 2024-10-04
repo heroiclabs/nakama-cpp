@@ -8,15 +8,16 @@ set(LIBHTTPCLIENT_OBJECT_LIBRARY TRUE)
 set(WAS_SHARED_LIBS ${BUILD_SHARED_LIBS})
 
 if (ANDROID)
-    set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake/Android/libHttpClient)
-else()
-    set(LIBHTTPCLIENT_SOURCE_SUBDIR Utilities/CMake)
+    set(LIBHTTPCLIENT_SOURCE_SUBDIR "Build/libHttpClient.Android")
+    return()
 endif()
+
+add_subdirectory(cmake/libHttpClient)
 
 ## force libhttpclient to build statically
 set(BUILD_SHARED_LIBS OFF)
 
-add_subdirectory("${CMAKE_SOURCE_DIR}/submodules/libHttpClient/${LIBHTTPCLIENT_SOURCE_SUBDIR}")
+#add_subdirectory("${CMAKE_SOURCE_DIR}/submodules/libHttpClient/${LIBHTTPCLIENT_SOURCE_SUBDIR}")
 
 set(BUILD_SHARED_LIBS ${WAS_SHARED_LIBS})
 
@@ -48,6 +49,7 @@ else()
         endif()
     endif()
 endif()
+set(LIBHTTPCLIENT_TARGET "libHttpClient")
 
 # We build LIBHTTPCLIENT as OBJECT library so that its symbols
 # wont be excluded due to '--exclude-libs ALL' linker flag. Although we
@@ -57,9 +59,4 @@ list(APPEND NAKAMA_SDK_DEPS ${LIBHTTPCLIENT_TARGET})
 
 if (NOT WITH_WS_LIBHTTPC)
     target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_NOWEBSOCKETS")
-else()
-    if (LIBHTTPCLIENT_FORCE_WEBSOCKETPP)
-        message(STATUS "Forcing libhttpclient to use websocketpp even on modern Windows platforms")
-        target_compile_definitions(${LIBHTTPCLIENT_TARGET} PRIVATE "HC_FORCE_WINSOCKETPP")
-    endif()
 endif()

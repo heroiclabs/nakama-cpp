@@ -8,28 +8,11 @@
     "optional-lite"
   ],
   "features": {
-    "libhttpclient-ws": {
-      "description": "Websockets library that delegates to other implementations.",
-      "supports": "windows | android",
+    "libhttpclient": {
+      "description": "libhttpclient dependencies",
       "dependencies": [
-        {
-          "name": "websocketpp",
-          "default-features": false,
-          "platform": "windows"
-        },
-        {
-          "name": "asio",
-          "platform": "windows"
-        },
-        {
-          "name": "openssl",
-          "platform": "windows"
-        }
+        {"name":  "zlib"}
       ]
-    },
-    "libhttpclient-http": {
-      "description": "HTTP library that delegates to other implementations.",
-      "supports": "windows | android | osx | ios | linux"
     },
     "wslay": {
       "description": "Websockets library decoupled from IO and handshakes.",
