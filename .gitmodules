@@ -10,5 +10,4 @@
 	shallow = true
 [submodule "submodules/libHttpClient"]
 	path = submodules/libHttpClient
-	url = https://github.com/heroiclabs/libHttpClient.git
-	branch = luke/additional-cmake-fixes
+	url = https://github.com/microsoft/libHttpClient.git
