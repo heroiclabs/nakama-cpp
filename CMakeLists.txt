@@ -235,6 +235,7 @@ list(APPEND NAKAMA_SDK_DEPS
         nakama::sdk-core-common
         nakama::sdk-client-factory
         nakama::sdk-rtclient-factory
+		satori::client
 )
 if (WITH_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS nakama::sdk-core-grpc)

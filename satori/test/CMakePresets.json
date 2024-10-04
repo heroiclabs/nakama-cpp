@@ -1,0 +1,340 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "Default",
+            "binaryDir": "build/${presetName}",
+            "hidden": true,
+            "cacheVariables": {
+                "RAPIDJSON_BUILD_DOC": "OFF",
+                "RAPIDJSON_BUILD_EXAMPLES": "OFF",
+                "RAPIDJSON_BUILD_TESTS": "OFF",
+                "RAPIDJSON_BUILD_THIRDPARTY_GTEST": "OFF",
+                "CMAKE_CONFIGURATION_TYPES": "Debug",
+                "PRESET_NAME": "${presetName}"
+            }
+        },
+        {
+            "name": "win-x64",
+            "inherits": [
+                "default"
+            ],
+            "cacheVariables": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "installDir": "out/win-x64"
+        },
+        {
+            "name": "win-x86",
+            "inherits": [
+                "default"
+            ],
+            "generator": "Visual Studio 17 2022",
+            "architecture": "Win32",
+            "cacheVariables": {
+                "WindowsDesktop": "ON",
+                "VCPKG_HOST_TRIPLET": "x86-windows",
+                "VCPKG_TARGET_TRIPLET": "x86-windows"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "installDir": "out/win-x86"
+        },
+        {
+            "name": "win-arm64",
+            "inherits": [
+                "default"
+            ],
+            "generator": "Visual Studio 17 2022",
+            "cacheVariables": {
+                "WindowsDesktop": "ON",
+                "VCPKG_HOST_TRIPLET": "arm64-windows",
+                "VCPKG_TARGET_TRIPLET": "arm64-windows"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "installDir": "out/win-arm64"
+        },
+        {
+            "name": "macosx-arm64-host_arm64",
+            "inherits": [
+                "default"
+            ],
+            "generator": "Xcode",
+            "cacheVariables": {
+                "CMAKE_OSX_ARCHITECTURES": "arm64"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/macosx-arm64"
+        },
+        {
+            "name": "macosx-arm64-host_x64",
+            "inherits": [
+                "macosx-arm64-host_arm64"
+            ],
+            "generator": "Xcode",
+            "cacheVariables": {
+                "CMAKE_OSX_ARCHITECTURES": "arm64"
+            },
+            "installDir": "out/macosx-x64"
+        },
+        {
+            "name": "macosx-x64-host_x64",
+            "inherits": [
+                "macosx-arm64-host_x64"
+            ],
+            "generator": "Xcode",
+            "cacheVariables": {
+                "CMAKE_OSX_ARCHITECTURES": "x86_64"
+            },
+            "installDir": "out/macosx-x64"
+        },
+        {
+            "name": "macosx-x64-host_arm64",
+            "inherits": [
+                "macosx-x64-host_x64"
+            ],
+            "generator": "Xcode",
+            "cacheVariables": {
+                "CMAKE_OSX_ARCHITECTURES": "x86_64"
+            },
+            "installDir": "out/macosx-arm64"
+        },
+        {
+            "name": "ios-arm64-host_arm64",
+            "inherits": [
+                "macosx-arm64-host_arm64"
+            ],
+            "generator": "Xcode",
+            "cacheVariables": {
+                "CMAKE_SYSTEM_NAME": "iOS",
+                "CMAKE_SYSTEM_VERSION": "15"
+            },
+            "installDir": "out/ios-arm64"
+        },
+        {
+            "name": "ios-arm64-host_x64",
+            "inherits": [
+                "ios-arm64-host_arm64"
+            ],
+            "generator": "Xcode",
+            "installDir": "out/ios-arm64"
+        },
+        {
+            "name": "iphonesimulator-x64-host_arm64",
+            "inherits": [
+                "macosx-x64-host_arm64"
+            ],
+            "generator": "Xcode",
+            "cacheVariables": {
+                "CMAKE_SYSTEM_NAME": "iOS",
+                "CMAKE_OSX_SYSROOT": "iphonesimulator",
+                "CMAKE_OSX_ARCHITECTURES": "x86_64"
+            }
+        },
+        {
+            "name": "iphonesimulator-x64-host_x64",
+            "inherits": [
+                "iphonesimulator-x64-host_arm64"
+            ]
+        },
+        {
+            "name": "linux-amd64",
+            "inherits": [
+                "default"
+            ],
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "generator": "Ninja Multi-Config",
+            "installDir": "out/linux-amd64"
+        },
+        {
+            "name": "android-default",
+            "inherits": [
+                "default"
+            ],
+            "hidden": true,
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "ANDROID_USE_LEGACY_TOOLCHAIN_FILE": "FALSE",
+                "ANDROID_STL": "c++_shared",
+                "ANDROID_PLATFORM": "android-21",
+                "CMAKE_SYSTEM_NAME": "Android",
+                "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "environment": {
+                "NDK": "$env{ANDROID_NDK_HOME}"
+            }
+        },
+        {
+            "name": "android-arm64-v8a-host_osx_x64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-osx",
+                "VCPKG_TARGET_TRIPLET": "arm64-android",
+                "ANDROID_ABI": "arm64-v8a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-arm64-v8a"
+        },
+        {
+            "name": "android-arm64-v8a-host_osx_arm64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "arm64-osx",
+                "VCPKG_TARGET_TRIPLET": "arm64-android",
+                "ANDROID_ABI": "arm64-v8a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-arm64-v8a"
+        },
+        {
+            "name": "android-x64-host_osx_x64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-osx",
+                "VCPKG_TARGET_TRIPLET": "x64-android",
+                "ANDROID_ABI": "x86_64"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-x64"
+        },
+        {
+            "name": "android-arm64-v8a-host_linux-x64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-linux-release",
+                "VCPKG_TARGET_TRIPLET": "arm64-android",
+                "ANDROID_ABI": "arm64-v8a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "installDir": "out/android-arm64-v8a"
+        },
+        {
+            "name": "android-x64-host_linux-x64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-linux-release",
+                "VCPKG_TARGET_TRIPLET": "x64-android",
+                "ANDROID_ABI": "x86_64"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "installDir": "out/android-x64"
+        },
+        {
+            "name": "android-armeabi-v7a-host_linux-x64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-linux-release",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android",
+                "ANDROID_ABI": "armeabi-v7a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "installDir": "out/android-armeabi-v7a"
+        },
+        {
+            "name": "android-armeabi-v7a-host_osx_x64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "x64-osx",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android",
+                "ANDROID_ABI": "armeabi-v7a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-armeabi-v7a"
+        },
+        {
+            "name": "android-armeabi-v7a-host_osx_arm64",
+            "inherits": [
+                "android-default"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "VCPKG_HOST_TRIPLET": "arm64-osx",
+                "VCPKG_TARGET_TRIPLET": "arm-neon-android",
+                "ANDROID_ABI": "armeabi-v7a"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "installDir": "out/android-armeabi-v7a"
+        }
+    ]
+}
