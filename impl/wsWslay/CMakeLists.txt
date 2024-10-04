@@ -1,5 +1,5 @@
 file(
-        GLOB_RECURSE srcs
+        GLOB srcs
         LIST_DIRECTORIES false
         "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
@@ -17,10 +17,15 @@ target_link_libraries(nakama-impl-ws-wslay
 )
 
 target_include_directories(nakama-impl-ws-wslay INTERFACE
-        "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>")
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>  # for WslayIOInterface.h
+)
 
-
-if (CFG_WSLAY_CUR_IO)
-    target_include_directories(nakama-impl-ws-wslay PRIVATE ${CURL_INCLUDE_DIRS})
+if (CFG_WSLAY_CURL_IO)
+    # Even though WslayIOCUrl is in this lib, it is a header and gets compiled
+    # in the factory lib where it #include'd.
+    # So we need to CMake INTERFACE anything might be required to compile
+    target_link_libraries(nakama-impl-ws-wslay INTERFACE
+            CURL::libcurl
+            nakama::sdk-core-common # for StrUtil.h
+    )
 endif()

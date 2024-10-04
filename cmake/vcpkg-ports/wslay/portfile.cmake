@@ -8,33 +8,17 @@ vcpkg_from_github(
     HEAD_REF master
     PATCHES
         msvc_compat.patch
-#        msvc_compat2.patch
+        msvc_compat2.patch
 )
 
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "static" BUILD_STATIC)
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" BUILD_SHARED)
 
-vcpkg_check_features(
-    OUT_FEATURE_OPTIONS FEATURE_OPTIONS
-    FEATURES
-        windows-use-msbuild WINDOWS_USE_MSBUILD
-)
-
-if(WINDOWS_USE_MSBUILD)
-    set(WINDOWS_USE_MSBUILD_OPTION "WINDOWS_USE_MSBUILD")
-else()
-    set(WINDOWS_USE_MSBUILD_OPTION "")
-endif()
-
 vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-  ${WINDOWS_USE_MSBUILD_OPTION}
     OPTIONS
         -DWSLAY_STATIC=${BUILD_STATIC}
         -DWSLAY_SHARED=${BUILD_SHARED}
-
-        # On consoles system header files are using GNU extensions
-        -DCMAKE_C_FLAGS_INIT="-Wno-gnu-statement-expression"
 )
 vcpkg_cmake_install()
 

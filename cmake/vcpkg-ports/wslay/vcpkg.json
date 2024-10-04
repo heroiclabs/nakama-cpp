@@ -14,10 +14,5 @@
       "name": "vcpkg-cmake-config",
       "host": true
     }
-  ],
-  "features": {
-    "windows-use-msbuild": {
-      "description": "Whether or not to compile the SDK with MSBuild on Windows machines."
-    }
-  }
+  ]
 }

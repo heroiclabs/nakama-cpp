@@ -15,7 +15,8 @@ add_library(nakama::sdk-rtclient-factory ALIAS nakama-sdk-rtclient-factory)
 target_link_libraries(nakama-sdk-rtclient-factory
         PUBLIC nakama::sdk-interface)
 target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE
-        $<$<BOOL:${WITH_WS_WSLAY}>:WITH_WS_WLAY>
+        $<$<BOOL:${WITH_WS_WSLAY}>:WITH_WS_WSLAY>
+        $<$<BOOL:${CFG_WSLAY_CURL_IO}>:CFG_WSLAY_CURL_IO>
         $<$<BOOL:${WITH_WS_LIBHTTPC}>:WITH_WS_LIBHTTPC>
         $<$<BOOL:${WITH_WS_CPPREST}>:WITH_WS_CPPREST>
 )
