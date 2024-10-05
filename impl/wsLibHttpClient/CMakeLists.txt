@@ -8,6 +8,7 @@ file(
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 add_library(nakama-impl-ws-libhttpclient OBJECT ${srcs})
+add_library(nakama::impl-ws-libhttpclient ALIAS nakama-impl-ws-libhttpclient)
 target_link_libraries(nakama-impl-ws-libhttpclient
         PUBLIC nakama-api-proto nakama::sdk-interface
         # libhttpclient is OBJECT library, so this link wont create
