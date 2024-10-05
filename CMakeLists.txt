@@ -142,13 +142,13 @@ add_subdirectory(factory EXCLUDE_FROM_ALL)
 include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 
 if (WITH_HTTP_CPPREST)
-    set(HTTP_IMPL_LIB nakama-impl-http-cppRest)
+    set(HTTP_IMPL_LIB nakama::impl-http-cppRest)
     add_subdirectory(impl/httpCppRest EXCLUDE_FROM_ALL)
 elseif(WITH_HTTP_CURL)
-    set(HTTP_IMPL_LIB nakama-impl-http-libcurl)
+    set(HTTP_IMPL_LIB nakama::impl-http-libcurl)
     add_subdirectory(impl/httpCurl EXCLUDE_FROM_ALL)
 elseif(WITH_HTTP_LIBHTTPC)
-    set(HTTP_IMPL_LIB nakama-impl-http-libhttpclient)
+    set(HTTP_IMPL_LIB nakama::impl-http-libhttpclient)
     add_subdirectory(impl/httpLibHttpClient EXCLUDE_FROM_ALL)
 endif()
 if (HTTP_IMPL_LIB)
@@ -158,13 +158,13 @@ if (HTTP_IMPL_LIB)
 endif()
 
 if(WITH_WS_LIBHTTPC)
-    set(WS_IMPL_LIB nakama-impl-ws-libhttpclient)
+    set(WS_IMPL_LIB nakama::impl-ws-libhttpclient)
     add_subdirectory(impl/wsLibHttpClient EXCLUDE_FROM_ALL)
 elseif(WITH_WS_WSLAY)
-    set(WS_IMPL_LIB nakama-impl-ws-wslay)
+    set(WS_IMPL_LIB nakama::impl-ws-wslay)
     add_subdirectory(impl/wsWslay EXCLUDE_FROM_ALL)
 elseif(WITH_WS_CPPREST)
-    set(WS_IMPL_LIB nakama-impl-ws-cppRest)
+    set(WS_IMPL_LIB nakama::impl-ws-cppRest)
     add_subdirectory(impl/wsCppRest EXCLUDE_FROM_ALL)
 endif()
 if (WS_IMPL_LIB)
@@ -242,7 +242,8 @@ target_link_libraries(nakama-sdk
             nakama::sdk-interface
         PRIVATE
             nakama::api-proto
-            $<$<TARGET_EXISTS:nakama::sdk-core-grpc>:nakama::grpc-proto>
+            $<TARGET_NAME_IF_EXISTS:nakama::sdk-core-grpc>
+            $<$<BOOL:${LIBHTTPCLIENT_TARGET}>:$<TARGET_NAME_IF_EXISTS:${LIBHTTPCLIENT_TARGET}>>
             ${NAKAMA_SDK_DEPS}
 )
 if (WITH_HTTP_CURL OR (WITH_WS_WSLAY AND CFG_WSLAY_CURL_IO))
