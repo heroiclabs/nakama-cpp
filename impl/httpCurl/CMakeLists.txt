@@ -8,6 +8,7 @@ file(
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 add_library(nakama-impl-http-libcurl OBJECT ${srcs})
+add_library(nakama::impl-http-libcurl ALIAS nakama-impl-http-libcurl)
 
 target_include_directories(nakama-impl-http-libcurl PRIVATE ${CURL_INCLUDE_DIRS})
 

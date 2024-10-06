@@ -11,3 +11,4 @@
 [submodule "submodules/libHttpClient"]
 	path = submodules/libHttpClient
 	url = https://github.com/microsoft/libHttpClient.git
+	fetchRecurseSubmodules = false

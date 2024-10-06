@@ -51,15 +51,15 @@
             "installDir": "out/win-arm64"
         },
         {
-            "name": "macosx-arm64",
+            "name": "macosx-universal",
             "inherits": [
                 "default"
             ],
-            "installDir": "out/macosx-arm64",
+            "installDir": "out/macosx-universal",
             "generator": "Xcode",
             "cacheVariables": {
-                "VCPKG_TARGET_TRIPLET": "arm64-osx-heroic",
-                "CMAKE_OSX_ARCHITECTURES": "arm64",
+                "VCPKG_TARGET_TRIPLET": "universal-osx-heroic",
+                "CMAKE_OSX_ARCHITECTURES": "arm64;x86_64",
                 "WITH_WS_WSLAY": "ON",
                 "WITH_HTTP_CURL": "ON"
             },
@@ -70,20 +70,9 @@
             }
         },
         {
-            "name": "macosx-x64",
-            "inherits": [
-                "macosx-arm64"
-            ],
-            "cacheVariables": {
-                "VCPKG_TARGET_TRIPLET": "x64-osx-heroic",
-                "CMAKE_OSX_ARCHITECTURES": "x86_64"
-            },
-            "installDir": "out/macosx-x64"
-        },
-        {
             "name": "ios-arm64",
             "inherits": [
-                "macosx-arm64"
+                "macosx-universal"
             ],
             "cacheVariables": {
                 "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",

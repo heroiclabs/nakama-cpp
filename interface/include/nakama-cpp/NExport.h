@@ -29,7 +29,7 @@
     #endif
 #elif __GNUC__ >= 4
     #ifdef NAKAMA_SHARED_LIBRARY_EXPORTS
-        #define NAKAMA_API __attribute__((visibility("protected")))
+        #define NAKAMA_API __attribute__((visibility("default")))
     #else
         #define NAKAMA_API
     #endif
