@@ -349,13 +349,13 @@ transports, `libhttpclient` itself can use different implementations depending o
 
 HTTP:
 
-Platform | Transport              |
-  --- |---------------------------|
-Windows | libhttpclient -> winhttp  |
-Android | libcurl                 |
-Linux | libhttpclient->curl       |
-MacOS | libhttpclient -> OS       |
-iOS   | libhttpclient -> OS       |
+Platform | Transport                |
+  --- |--------------------------|
+Windows | libhttpclient -> winhttp |
+Android | libcurl                  |
+Linux | libcurl (system from OS) |
+MacOS | libcurl                  |
+iOS   | libcurl                  |
 
 Websockets:
 
