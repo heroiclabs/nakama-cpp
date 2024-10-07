@@ -4,6 +4,22 @@ All notable changes to this project are documented below.
 
 The format is based on [keep a changelog](http://keepachangelog.com/) and this project uses [semantic versioning](http://semver.org/).
 
+### [unreleased]
+
+## Fixed
+- Fixed libHttpClient builds
+
+## Changed
+
+- Removed support for Windows 7
+- Updated dependencies:
+  * Discontinued the use of the libHttpClient fork in favor of the upstream version.
+- Significant improvements in the build process across all platforms:
+  * The `VCPKG_ROOT` setup is no longer required; it is now included as a submodule within the project.
+  * Private NDAed platforms are now built within the same build tree.
+  * Transport implementation selection has been streamlined with the introduction of `WITH_HTTP_*` and `WITH_WS_*` build options.
+  * macOS now natively builds universal binaries, eliminating the need for a manual `lipo` step.
+  
 ### [2.8.5] - [2024-05-23]
 ### Fixed
 - Fixed initialization of shared pointer in `authenticateSteamAsync`.
