@@ -5,7 +5,7 @@ set(VCPKG_CMAKE_SYSTEM_NAME iOS)
 
 # HeroicLabs additions to standard triplets:
 set(VCPKG_BUILD_TYPE release)
-set(VCPKG_OSX_DEPLOYMENT_TARGET "11")
+set(VCPKG_OSX_DEPLOYMENT_TARGET "12")
 set(VCPKG_OSX_ARCHITECTURES "arm64")
 
 include(${CMAKE_CURRENT_LIST_DIR}/feature-visibility-hidden.cmake)

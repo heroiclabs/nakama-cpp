@@ -24,7 +24,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL iOS)
     message("Configuring Apple iOS build")
     # Don't forget to edit ./cmake/triplets too!
     # Value is picked based on  https://developer.apple.com/support/app-store/ numbers
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "11")
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "12")
     set(CMAKE_OSX_ARCHITECTURES "arm64")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     message("Configuring Linux build")
