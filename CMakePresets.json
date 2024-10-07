@@ -17,7 +17,8 @@
                 "CMAKE_INSTALL_DEFAULT_COMPONENT_NAME": "nakama-sdk",
                 "VCPKG_OVERLAY_PORTS": "${sourceDir}/cmake/vcpkg-ports",
                 "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets;${sourceDir}/submodules/devkits/cmake/triplets"
-            }
+            },
+            "installDir": "out/${presetName}"
         },
         {
             "name": "win-x64",
@@ -36,8 +37,7 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Windows"
-            },
-            "installDir": "out/win-x64"
+            }
         },
         {
             "name": "win-arm64",
@@ -47,15 +47,13 @@
             "cacheVariables": {
                 "CMAKE_SYSTEM_PROCESSOR": "ARM64",
                 "VCPKG_TARGET_TRIPLET": "arm64-windows-static-heroic"
-            },
-            "installDir": "out/win-arm64"
+            }
         },
         {
             "name": "macosx-universal",
             "inherits": [
                 "default"
             ],
-            "installDir": "out/macosx-universal",
             "generator": "Xcode",
             "cacheVariables": {
                 "VCPKG_TARGET_TRIPLET": "universal-osx-heroic",
@@ -78,18 +76,16 @@
                 "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
                 "CMAKE_SYSTEM_NAME": "iOS",
                 "CMAKE_OSX_ARCHITECTURES": "arm64"
-            },
-            "installDir": "out/ios-arm64"
+            }
         },
         {
-            "name": "iphonesimulator-x64",
+            "name": "iphonesimulator-arm64",
             "inherits": [
                 "ios-arm64"
             ],
             "cacheVariables": {
-                "VCPKG_TARGET_TRIPLET": "x64-iphonesimulator-heroic",
-                "CMAKE_OSX_SYSROOT": "iphonesimulator",
-                "CMAKE_OSX_ARCHITECTURES": "x86_64"
+                "VCPKG_TARGET_TRIPLET": "arm64-iphonesimulator-heroic",
+                "CMAKE_OSX_SYSROOT": "iphonesimulator"
             }
         },
         {
@@ -122,8 +118,7 @@
             "cacheVariables": {
                 "VCPKG_TARGET_TRIPLET": "arm64-android-heroic",
                 "ANDROID_ABI": "arm64-v8a"
-            },
-            "installDir": "out/android-arm64-v8a"
+            }
         },
         {
             "name": "android-armeabi-v7a",
@@ -132,9 +127,8 @@
             ],
             "cacheVariables": {
                 "VCPKG_TARGET_TRIPLET": "arm-neon-android-heroic",
-                "ANDROID_ABI": "x86_64"
-            },
-            "installDir": "out/android-x64"
+                "ANDROID_ABI": "armeabi-v7a"
+            }
         },
         {
             "name": "linux-amd64",
@@ -151,8 +145,7 @@
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Linux"
-            },
-            "installDir": "out/linux-amd64"
+            }
         },
         {
             "name": "ubuntu1804-amd64",

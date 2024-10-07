@@ -45,11 +45,6 @@ if (WITH_WS_LIBHTTPC OR WITH_WS_WSLAY OR WITH_WS_CPPREST)
     set(HAVE_DEFAULT_RT_TRANSPORT_FACTORY ON)
 endif()
 
-if (CMAKE_OSX_SYSROOT STREQUAL "iphonesimulator")
-    # this hack seems to be required for now, otherwise CMake still thinks we are building for arm...
-    set(CMAKE_XCODE_ATTRIBUTE_EXCLUDED_ARCHS[sdk=iphonesimulator*] "arm64")
-endif()
-
 if (ANDROID)
     SET(ANDROID_USE_LEGACY_TOOLCHAIN_FILE FALSE)
 endif()
