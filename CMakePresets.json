@@ -76,7 +76,8 @@
             ],
             "cacheVariables": {
                 "VCPKG_TARGET_TRIPLET": "arm64-ios-heroic",
-                "CMAKE_SYSTEM_NAME": "iOS"
+                "CMAKE_SYSTEM_NAME": "iOS",
+                "CMAKE_OSX_ARCHITECTURES": "arm64"
             },
             "installDir": "out/ios-arm64"
         },
