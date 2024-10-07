@@ -232,6 +232,11 @@ git submodule update --filter=blob:none --init ':!submodules/devkits' ':!submodu
 - Ninja
 - gcc-c++/clang++
 
+Fedora:
+```
+sudo dnf install cmake ninja-build libcurl-devel gcc g++
+```
+
 #### Ubuntu 18.04
 
 Fresh Ubuntu 18.04 setup:

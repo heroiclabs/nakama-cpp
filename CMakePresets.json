@@ -2,7 +2,7 @@
     "version": 6,
     "cmakeMinimumRequired": {
         "major": 3,
-        "minor": 29,
+        "minor": 28,
         "patch": 0
     },
     "configurePresets": [
@@ -139,7 +139,11 @@
             "cacheVariables": {
                 "VCPKG_TARGET_TRIPLET": "x64-linux-heroic",
                 "WITH_HTTP_CURL": "ON",
-                "WITH_WS_WSLAY": "ON"
+                "WITH_WS_WSLAY": "ON",
+                "CFG_CURL_SYSTEM": "ON"
+            },
+            "environment": {
+                "VCPKG_FORCE_SYSTEM_BINARIES": "1"
             },
             "condition": {
                 "type": "equals",
