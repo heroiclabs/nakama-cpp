@@ -1,6 +1,4 @@
 # Fetch proto files from nakama and nakama-common and builds them
-include(FetchContent)
-
 set(NAKAMA_COMMON ${CMAKE_CURRENT_BINARY_DIR}/nakama-common-master)
 set(NAKAMA ${CMAKE_CURRENT_BINARY_DIR}/nakama-master)
 
@@ -24,10 +22,7 @@ add_library(nakama-api-proto OBJECT ${NAKAMA_API_PROTO_FILES})
 add_library(nakama::api-proto ALIAS nakama-api-proto)
 
 target_link_libraries(nakama-api-proto PRIVATE protobuf::libprotobuf)
-target_include_directories(nakama-api-proto PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-)
+target_include_directories(nakama-api-proto PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 
 protobuf_generate(TARGET nakama-api-proto
         LANGUAGE cpp
@@ -37,7 +32,7 @@ protobuf_generate(TARGET nakama-api-proto
 
 message("done generating")
 
-if (BUILD_GRPC_CLIENT)
+if (WITH_GRPC_CLIENT)
 #### apigrpc.proto ####
 
 # apigrpc.proto references 'api.proto' using canonical name 'github.com/heroiclabs/nakama-common/api/api.proto'
@@ -72,10 +67,7 @@ target_link_libraries(nakama-grpc-proto
         PUBLIC -Wl,--exclude-libs=ALL
                gRPC::grpc++
         )
-target_include_directories(nakama-grpc-proto PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-        )
+target_include_directories(nakama-grpc-proto PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 
 install(TARGETS
         nakama-grpc-proto
@@ -107,4 +99,4 @@ protobuf_generate(TARGET nakama-grpc-proto
         PROTOC_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR}
         PROTOC_OPTIONS "--grpc_out=${CMAKE_CURRENT_BINARY_DIR}"
         )
-endif(BUILD_GRPC_CLIENT)
+endif(WITH_GRPC_CLIENT)

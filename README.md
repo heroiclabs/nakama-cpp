@@ -178,8 +178,6 @@ Note: to use logging macros you have to define `NLOGS_ENABLED`.
 
 Nakama C++ client has built-in support for WebSocket. This is available on all supported platforms.
 
-Client will default to use the Websocket transport provided by [C++ REST SDK](https://github.com/microsoft/cpprestsdk).
-
 You can use a custom Websocket transport by implementing the [NRtTransportInterface](https://github.com/heroiclabs/nakama-cpp/blob/master/include/nakama-cpp/realtime/NRtTransportInterface.h):
 
 ```cpp
@@ -212,22 +210,49 @@ Then you will need to load our native library from Java by calling `System.loadL
 
 # How to build
 
-## Prerequisite
+First, clone the repository. It uses some submodules that are not publicly available and are needed to build
+`nakama-sdk` on NDAed platforms. It is not an error if `./submodules/devkits` and `./submodules/private` are
+not available. To clone cleanly use following commands:
 
-You should download vcpkg (https://github.com/microsoft/vcpkg) somewhere on your machine set your $VCPKG_ROOT environment variable to point to the
-repository.
+```
+git clone --filter=blob:none https://github.com/heroiclabs/nakama-cpp 
+cd nakama-cpp
+git submodule update --filter=blob:none --init ':!submodules/devkits' ':!submodules/private'
+```
 
 ### Windows
 
-- [CMake >= 3.22](https://cmake.org/download/)
+Use following command from powershell to install minimal set of required dependencies
+```
+winget install Git.Git Ninja-build.Ninja Kitware.CMake
+
+winget install Microsoft.VisualStudio.2022.BuildTools --override ("--wait " +
+   "--passive " +
+   "--add Microsoft.VisualStudio.Component.VC.Tools.ARM " +
+   "--add Microsoft.VisualStudio.Component.VC.Tools.ARM64 " +
+   "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 " +
+   "--add Microsoft.VisualStudio.Component.Windows11SDK.22621 ")
+```
+
+
+- Git
+- [CMake >= 3.29](https://cmake.org/download/)
 - [Ninja](https://ninja-build.org/)
 - [Build Tools for Visual Studio 2022](https://visualstudio.microsoft.com/downloads/)
+- Windows 11 SDK v.22000
+
 
 ### Linux
 
 - CMake
 - Ninja
 - gcc-c++/clang++
+- libcurl-dev (Debian/Ubuntu) or libcurl-devel (RPM based distros)
+
+Fedora:
+```
+sudo dnf install cmake ninja-build libcurl-devel gcc g++
+```
 
 #### Ubuntu 18.04
 
@@ -299,10 +324,10 @@ Your NDK is typically located within your SDK:`<sdk>/ndk/<ndk-version>`
 
 Our prebuilt libraries target Android NDK 25.1.8937393.
 
-### Windows 32-Bit
+### Mac OSX Universal binary
 
-We support native 32-bit builds. Keep in mind that when building from source, you must run your command
-in a 32-bit (e.g., C:\Windows\System32\cmd.exe) environment.
+Mac OSX preset is `macosx-universal` builds Framework with universal binaries
+for x86_64 and arm64 architectures.
 
 ### Build modifiers
 
@@ -313,19 +338,13 @@ a way to alter build behaviour of any preset with a build modifiers mechanism.
 
 Supported build modifiers are:
 
-- `LIBHTTPCLIENT_FORCE_WEBSOCKETPP`: On Windows platforms libhttpclient always includes
-  websocketpp transport and uses it if Windows doesn't support websocket natively (< Windows 8).
-  You can set this build modifier to force use of websocketpp transport, so that it can be tested without
-  installing Windows 7. If you
-- `WITH_LIBCXX`: dynamically link with libc++ instead of libstdc++ on Linux platform.
-  - `LIBCXX_STATIC`: link libc++ statically
 - `ADDRESS_SANITIZER`: instrument library with [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer)
 
 Build modifiers are CMake variables passed at configure time using `-D` switch.
 Example use:
 
 ```
-cmake --preset linux-amd64 -DWITH_LIBCXX=ON
+cmake --preset linux-amd64 -DADDRESS_SANITIZER=ON
 ```
 
 ## Release
@@ -339,31 +358,6 @@ You should see dynamic library and headers in the `./out` directory. This is you
 It is safe to combine (overlay) multiple platforms releases in the same directory structure, because
 binary artifacts paths won't clash and include files are identical on all platforms.
 
-### MacOSX Universal binary
-
-Currently, our dependency manager can't build non-CMake based projects as universal binary.
-Watch [this PR](https://github.com/microsoft/vcpkg/pull/22898) for a proper fix. Until then
-building universal binaries requires building shared libs for `arm64` and `x86_64` architectures
-and gluing them together with [lipo](https://developer.apple.com/documentation/apple-silicon/building-a-universal-macos-binary/)
-tool.
-
-To build universal binary first compile individual shared lib for arm64 and x86_64. Following commands are for M1,
-adjust preset names if you are on Intel CPU:
-
-```
-cmake --preset macosx-x64-host_arm64
-cmake --build build/macosx-x64-host_arm64 --config MinSizeRel --target install
-
-cmake --preset macosx-arm64-host_arm64
-cmake --build build/macosx-arm64-host_arm64 --config MinSizeRel --target install
-```
-
-```
-cp -r out/macosx-x64 out/macosx-universal
-lipo -create -output out/macosx-universal/nakama-sdk.framework/Versions/A/nakama-sdk out/macosx-{arm64,x64}/nakama-sdk.framework/nakama-sdk
-```
-
-You can then archive and release `out/osx-universal`  directory.
 
 ## Transports
 
@@ -372,14 +366,13 @@ transports, `libhttpclient` itself can use different implementations depending o
 
 HTTP:
 
-Platform | Transport              |
-  --- |---------------------------|
-Windows | libhttpclient -> winhttp  |
-Android | libcurl                 |
-Linux | libhttpclient->curl       |
-MacOS | libhttpclient -> OS       |
-iOS   | libhttpclient -> OS       |
-Windows 7 | libhttpclient -> websocketpp |
+Platform | Transport                |
+  --- |--------------------------|
+Windows | libhttpclient -> winhttp |
+Android | libcurl                  |
+Linux | libcurl (system from OS) |
+MacOS | libcurl                  |
+iOS   | libcurl                  |
 
 Websockets:
 
@@ -390,7 +383,6 @@ Android | wslay                    |
 Linux | wslay                      |
 MacOS | wslay                      |
 iOS   | wslay                      |
-Windows 7 | libhttpclient -> websocketpp |
 
 
 # How to integrate the SDK
@@ -415,7 +407,7 @@ Our SDK integrates with vcpkg by providing itself and a few dependencies through
             "repository": "https://github.com/heroiclabs/nakama-vcpkg-registry",
             "baseline": "<commit>",
             "reference": "<branch>",
-            "packages": ["nakama-sdk", "wslay"]
+            "packages": ["nakama-sdk"]
         }
     ]
 }
@@ -425,10 +417,5 @@ Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
     "dependencies": [
       {
         "name": "nakama-sdk"
-        "features": [<desired-feature-1>, <desired-feature-2>]
       }]
 ```
-
-vcpkg does not currently allow us to provide default features per platform, so you must specify your desired transports/features in your own vcpkg.json.
-
-For an example, look at how our [cocos-2d-x client](https://github.com/heroiclabs/nakama-cocos2d-x.git) does this. Also see our [our built-in transports](#transports) for each platform that we represent with vcpkg features. If you do not specify a transport for the platform, the client will expect you to pass in your own at runtime.

@@ -1,20 +1,8 @@
-cmake_minimum_required(VERSION 3.23)
-project(nakama-sdk-core LANGUAGES CXX)
 include(GNUInstallDirs)
 
-file(GLOB CORE_HEADERS
-    include/nakama-cpp/*
-    include/nakama-cpp/data/*
-    include/nakama-cpp/data/log/*
-    include/nakama-cpp/data/realtime/*
-    include/nakama-cpp/data/realtime/rtdata/*
+file(GLOB_RECURSE CORE_HEADERS
+    include/*.h
 )
-
-if (WS_IMPL STREQUAL "wslay")
-    file(GLOB WSLAY_HEADERS include/nakama-cpp/data/realtime/wslay/*)
-    list(APPEND CORE_HEADERS ${WSLAY_HEADERS})
-endif()
-
 
 add_library(nakama-sdk-interface INTERFACE ${CORE_HEADERS})
 add_library(nakama::sdk-interface ALIAS nakama-sdk-interface)
@@ -22,10 +10,6 @@ add_library(nakama::sdk-interface ALIAS nakama-sdk-interface)
 # Force nonstd::optional save our choice in config.h
 set(optional_CONFIG_SELECT_OPTIONAL optional_OPTIONAL_NONSTD)
 target_compile_definitions(nakama-sdk-interface INTERFACE optional_CONFIG_SELECT_OPTIONAL=${optional_CONFIG_SELECT_OPTIONAL})
-
-if (FORCE_DLL_IMPORT_EXPORT)
-    target_compile_definitions(nakama-sdk-interface INTERFACE FORCE_DLL_IMPORT_EXPORT)
-endif()
 
 # Create configure file with all
 configure_file(config.h.in nakama-cpp/config.h)

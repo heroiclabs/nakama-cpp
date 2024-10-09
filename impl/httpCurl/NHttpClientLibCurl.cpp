@@ -279,7 +279,7 @@ void NHttpClientLibCurl::tick()
                 }
                 else
                 {
-                    response->statusCode = response_code;
+                    response->statusCode = static_cast<int>(response_code);
 
                     if (curl_code != CURLE_OK)
                     {

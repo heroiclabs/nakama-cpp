@@ -16,17 +16,17 @@
 
 
 #include <future>
-#include "nakama-cpp/NClientInterface.h"
-#include "nakama-cpp/log/NLogger.h"
-#include "nakama-cpp/realtime/NWebsocketsFactory.h"
-#include "nakama-cpp/NException.h"
+#include <nakama-cpp/NClientInterface.h>
+#include <nakama-cpp/log/NLogger.h>
+#include <nakama-cpp/realtime/NWebsocketsFactory.h>
+#include <nakama-cpp/NException.h>
 #include "BaseClient.h"
 #include "../core-rt/NRtClient.h"
 
 namespace Nakama
 {
 
-#if !defined(WITH_EXTERNAL_WS) && !defined(BUILD_IO_EXTERNAL)
+#if defined(HAVE_DEFAULT_RT_TRANSPORT_FACTORY)
 NRtClientPtr BaseClient::createRtClient()
 {
     return createRtClient(createDefaultWebsocket(_platformParams));

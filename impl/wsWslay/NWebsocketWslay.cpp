@@ -5,7 +5,7 @@
 
 #include "StrUtil.h"
 #include <wslay/wslay.h>
-#include "nakama-cpp/log/NLogger.h"
+#include <nakama-cpp/log/NLogger.h>
 #include "NWebsocketWslay.h"
 #include <random>
 #include <optional>
@@ -343,7 +343,7 @@ namespace Nakama {
         }
     }
 
-    bool NWebsocketWslay::isConnecting()
+    bool NWebsocketWslay::isConnecting() const
     {
         return _state == State::Connecting || _state == State::Handshake_Receiving || _state == State::Handshake_Sending;
     }

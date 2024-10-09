@@ -1,0 +1,26 @@
+if (LINUX OR APPLE)
+    find_package(CURL CONFIG REQUIRED)
+    target_compile_definitions(CURL::libcurl INTERFACE CURL_STRICTER)
+endif()
+
+if (ANDROID)
+    ## force libhttpclient to build statically
+    set(WAS_SHARED_LIBS ${BUILD_SHARED_LIBS})
+    set(BUILD_SHARED_LIBS OFF)
+    set(LIBHTTPCLIENT_SOURCE_SUBDIR "Build/libHttpClient.Android")
+    add_subdirectory("${CMAKE_SOURCE_DIR}/submodules/libHttpClient/${LIBHTTPCLIENT_SOURCE_SUBDIR}")
+    set(BUILD_SHARED_LIBS ${WAS_SHARED_LIBS})
+    set(LIBHTTPCLIENT_TARGET libHttpClient.Android)
+else ()
+    add_subdirectory(cmake/libHttpClient)
+    set(LIBHTTPCLIENT_TARGET libHttpClient)
+endif()
+
+if (GDK)
+    include(submodules/devkits/cmake/gdk-targets.cmake)
+    target_link_libraries(libHttpClient PRIVATE GDK::XCurl)
+endif()
+
+if (NOT WITH_WS_LIBHTTPC)
+    target_compile_definitions(libHttpClient PRIVATE "HC_NOWEBSOCKETS")
+endif()

@@ -23,9 +23,10 @@ file(
 )
 
 add_library(nakama-sdk-core-misc OBJECT ${_source_list})
+add_library(nakama::sdk-core-misc ALIAS nakama-sdk-core-misc)
 
 target_link_libraries(nakama-sdk-core-misc
-        PUBLIC nakama-sdk-interface
+        PUBLIC nakama::sdk-interface
         )
 
 if(ANDROID)
