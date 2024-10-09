@@ -9,6 +9,7 @@ endif()
 
 if(DEFINED VCPKG_CMAKE_SYSTEM_VERSION)
     set(CMAKE_SYSTEM_VERSION "${VCPKG_CMAKE_SYSTEM_VERSION}" CACHE STRING "" FORCE)
+    set(CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION "${VCPKG_CMAKE_SYSTEM_VERSION}")
 elseif(NOT DEFINED CMAKE_SYSTEM_VERSION)
     message(FATAL_ERROR "BUG: We should align vcpkg dependencies and our project on Windows SDK version. Include triplet vars in main project")
 endif()

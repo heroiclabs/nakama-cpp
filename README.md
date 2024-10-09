@@ -222,15 +222,32 @@ git submodule update --filter=blob:none --init ':!submodules/devkits' ':!submodu
 
 ### Windows
 
+Use following command from powershell to install minimal set of required dependencies
+```
+winget install Git.Git Ninja-build.Ninja Kitware.CMake
+
+winget install Microsoft.VisualStudio.2022.BuildTools --override ("--wait " +
+   "--passive " +
+   "--add Microsoft.VisualStudio.Component.VC.Tools.ARM " +
+   "--add Microsoft.VisualStudio.Component.VC.Tools.ARM64 " +
+   "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 " +
+   "--add Microsoft.VisualStudio.Component.Windows11SDK.22621 ")
+```
+
+
+- Git
 - [CMake >= 3.29](https://cmake.org/download/)
 - [Ninja](https://ninja-build.org/)
 - [Build Tools for Visual Studio 2022](https://visualstudio.microsoft.com/downloads/)
+- Windows 11 SDK v.22000
+
 
 ### Linux
 
 - CMake
 - Ninja
 - gcc-c++/clang++
+- libcurl-dev (Debian/Ubuntu) or libcurl-devel (RPM based distros)
 
 Fedora:
 ```
@@ -390,7 +407,7 @@ Our SDK integrates with vcpkg by providing itself and a few dependencies through
             "repository": "https://github.com/heroiclabs/nakama-vcpkg-registry",
             "baseline": "<commit>",
             "reference": "<branch>",
-            "packages": ["nakama-sdk", "wslay"]
+            "packages": ["nakama-sdk"]
         }
     ]
 }
@@ -400,10 +417,5 @@ Then you can add it as you would any other vcpkg port in your `vcpkg.json`:
     "dependencies": [
       {
         "name": "nakama-sdk"
-        "features": [<desired-feature-1>, <desired-feature-2>]
       }]
 ```
-
-vcpkg does not currently allow us to provide default features per platform, so you must specify your desired transports/features in your own vcpkg.json.
-
-For an example, look at how our [cocos-2d-x client](https://github.com/heroiclabs/nakama-cocos2d-x.git) does this. Also see our [our built-in transports](#transports) for each platform that we represent with vcpkg features. If you do not specify a transport for the platform, the client will expect you to pass in your own at runtime.
