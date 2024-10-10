@@ -2,19 +2,15 @@ plugins {
     id("com.android.library")
 }
 
+//java {
+//    toolchain {
+//        languageVersion = JavaLanguageVersion.of(17)
+//    }
+//}
+
 android {
     namespace = "com.heroiclabs.nakama"
     compileSdk = 34
-
-    buildFeatures {
-        prefabPublishing = true
-    }
-
-    prefab {
-        create("nakama-sdk") {
-            headers = ""
-        }
-    }
 
     defaultConfig {
         ndkVersion = "27.1.12297006"
@@ -37,8 +33,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-}
 
-dependencies {
-    implementation("androidx.appcompat:appcompat:1.7.0")
+    dependencies {
+        implementation("androidx.annotation:annotation:1.8.2")
+    }
 }
