@@ -144,6 +144,8 @@ add_subdirectory(core EXCLUDE_FROM_ALL)
 # Factories, that's where all messy ifdefs to select concrete implementations are
 add_subdirectory(factory EXCLUDE_FROM_ALL)
 
+add_subdirectory(satori)
+
 include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 
 if (WITH_HTTP_CPPREST)

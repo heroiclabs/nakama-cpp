@@ -14,20 +14,14 @@
  * limitations under the License.
  */
 
+#include <iostream>
+
 #include "SatoriRestClient.h"
 
 SatoriRestClient::SatoriRestClient(const SClientParameters &parameters) {
-	auto grpcChannel = grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials());
-
-	std::cout << "-------------- GetFeature --------------" << std::endl;
-	guide.GetFeature();
-	std::cout << "-------------- ListFeatures --------------" << std::endl;
-	guide.ListFeatures();
-	std::cout << "-------------- RecordRoute --------------" << std::endl;
-	guide.RecordRoute();
-	std::cout << "-------------- RouteChat --------------" << std::endl;
-	guide.RouteChat();
+	std::cout << "-------------- SatoriRestClient --------------" << std::endl;
 }
 
 SatoriRestClient::~SatoriRestClient() {
+	std::cout << "-------------- ~SatoriRestClient --------------" << std::endl;
 }
