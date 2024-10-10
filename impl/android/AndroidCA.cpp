@@ -66,7 +66,7 @@ extern "C"
 
         // Find the class. JNI_OnLoad is called from with the application-level rather than just system level class loader. This allows this to work.
 
-        jclass cls = env->FindClass("com/heroiclabs/nakamasdk/AndroidCA");
+        jclass cls = env->FindClass("com/heroiclabs/nakama/AndroidCA");
         if (cls == NULL)
         {
             __android_log_print(ANDROID_LOG_ERROR, "nakama", "Failed to find class com/heroiclabs/nakamasdk/AndroidCA");
