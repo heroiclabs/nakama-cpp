@@ -5,6 +5,7 @@ out
 /test/Engine
 CMakeUserPresets.json
 local.properties
+.cxx
 
 # Ignore Gradle project-specific cache directory
 android/.gradle
