@@ -2,13 +2,18 @@ plugins {
     id("com.android.library")
 }
 
+//java {
+//    toolchain {
+//        languageVersion = JavaLanguageVersion.of(17)
+//    }
+//}
+
 android {
     namespace = "com.heroiclabs.nakama"
     compileSdk = 34
 
     buildFeatures {
         prefabPublishing = true
-        prefab = true
     }
 
     prefab {
@@ -38,7 +43,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-}
 
 dependencies {
         implementation("androidx.annotation:annotation:1.9.1")
