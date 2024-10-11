@@ -1,17 +1,8 @@
-# Fetch proto files from nakama and nakama-common and builds them
-set(SATORI ${CMAKE_CURRENT_BINARY_DIR}/satori-master)
-
-set(SATORI_ZIP ${SATORI}.zip)
-
-file(DOWNLOAD https://github.com/heroiclabs/satori/archive/refs/heads/master.zip ${SATORI_ZIP})
-
-file(ARCHIVE_EXTRACT INPUT ${SATORI_ZIP} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-
 #### API proto ####
 
 file(GLOB_RECURSE SATORI_API_PROTO_FILES
-        ${SATORI}/api/*.proto
-        )
+        ${CMAKE_CURRENT_SOURCE_DIR}/api/*.proto
+)
 
 add_library(satori-api-proto OBJECT ${SATORI_API_PROTO_FILES})
 add_library(satori::api-proto ALIAS satori-api-proto)
