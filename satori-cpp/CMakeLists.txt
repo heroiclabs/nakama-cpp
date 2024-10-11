@@ -1,7 +1,6 @@
-cmake_minimum_required(VERSION 3.22)
-project(satori-sdk-cpp DESCRIPTION "Satori C++ Client" LANGUAGES CXX)
+set(SATORI_GIT_TAG "master" CACHE STRING "satori Git tag to fetch Proto files from")
 
-file(GLOB_RECURSE SATORI_CORE_HEADERS
+file(GLOB_RECURSE SATORI_CPP_HEADERS
 		include/*.h
 )
 # TODO: split buildProtoFiles into grpc and api-proto
