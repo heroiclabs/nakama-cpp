@@ -18,25 +18,95 @@
 
 #include <string>
 
-struct SClientParameters
-{
- /// The key used to authenticate with the server without a session. Defaults to "defaultkey".
- std::string serverKey = "defaultkey";
+#include "nakama-cpp/satori/SClientInterface.h"
+#include "nakama-cpp/satori/SatoriClientFactory.h"
+#include "nakama-cpp/satori/HardcodedLowLevelSatoriAPI.h"
 
- /// The host address of the server. Defaults to "127.0.0.1".
- std::string host = "127.0.0.1";
+namespace Satori {
+	class SatoriBaseClient : public SClientInterface {
+	public:
+		std::future<SSessionPtr> authenticateAsync(
+			const std::string& id,
+			const std::unordered_map<std::string,std::string>& defaultProperties,
+			const std::unordered_map<std::string,std::string>& customProperties
+		) override;
 
- /// The port number of the server.
- int32_t port = 7349;
+		std::future<SSessionPtr> authenticateRefreshAsync(
+			SSessionPtr session
+		) override;
 
- /// Set connection strings to use the secure mode with the server. Defaults to false.
- /// The server must be configured to make use of this option. With HTTP, GRPC, and WebSockets the server must
- /// be configured with an SSL certificate or use a load balancer which performs SSL termination.
- /// For rUDP you must configure the server to expose it's IP address so it can be bundled within session tokens.
- /// See the server documentation for more information.
- bool ssl = false;
-};
+		std::future<void> authenticateLogoutAsync(
+			SSessionPtr session
+		) override;
 
-class SatoriBaseClient {
+		std::future<void> deleteIdentityAsync(
+			SSessionPtr session
+		) override;
 
-};
+		std::future<void> postEventAsync(
+			SSessionPtr session,
+			const std::vector<SEvent>& events
+		) override;
+
+		std::future<SExperimentList> getExperimentsAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& names
+		) override;
+
+		std::future<SFlagList> getFlagsAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& names
+		) override;
+
+		std::future<SLiveEventList> getLiveEventsAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& liveEventNames
+		) override;
+
+		std::future<SSessionPtr> identifyAsync(
+			SSessionPtr session,
+			const std::string& id,
+			const std::unordered_map<std::string,std::string>& defaultProperties,
+			const std::unordered_map<std::string,std::string>& customProperties
+		) override;
+
+		std::future<SProperties> listIdentityPropertiesAsync(
+			SSessionPtr session
+		) override;
+
+		std::future<void> updatePropertiesAsync(
+			SSessionPtr session,
+			const std::unordered_map<std::string, std::string> &defaultProperties,
+			const std::unordered_map<std::string, std::string> &customProperties,
+			const bool recompute
+		) override;
+
+		std::future<SGetMessageListResponse> getMessagesAsync(
+			SSessionPtr session,
+			int32_t limit,
+			bool forward,
+			const std::string& cursor
+		) override;
+
+		std::future<void> updateMessageAsync(
+			SSessionPtr session,
+			const std::string& messageId,
+			const Nakama::NTimestamp readTime,
+			const Nakama::NTimestamp consumeTime
+		) override;
+
+		std::future<void> deleteMessageAsync(
+			SSessionPtr session,
+			const std::string& messageId
+		) override;
+
+	protected:
+		int _port = 0;
+		std::string _host;
+		bool _ssl = false;
+		std::string _basicAuthMetadata;
+		Nakama::ErrorCallback _defaultErrorCallback;
+		void* _userData = nullptr;
+		Nakama::NPlatformParameters _platformParams;
+	};
+}

@@ -82,6 +82,6 @@ NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platform
         #error Could not find default http transport for platform.
     #endif
 }
-#endif //WITH_EXTRNAL_HTTP
+#endif //WITH_PRIVATE_HTTP
 
 }

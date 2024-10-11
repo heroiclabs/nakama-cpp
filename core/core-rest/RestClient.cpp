@@ -1559,7 +1559,7 @@ void RestClient::deleteGroup(
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        sendReq(ctx, NHttpReqMethod::DEL, "/v2/group/" + groupId, "");
+        sendReq(ctx, NHttpReqMethod::DEL, "/v2/group/" + encodeURIComponent(groupId), "");
     }
     catch (exception& e)
     {
@@ -1590,7 +1590,7 @@ void RestClient::addGroupUsers(
             args.emplace("user_ids", id);
         }
 
-        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/add", "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + encodeURIComponent(groupId) + "/add", "", std::move(args));
     }
     catch (exception& e)
     {
@@ -1630,7 +1630,7 @@ void RestClient::listGroupUsers(
         if (state) args.emplace("state", std::to_string((int32_t)*state));
         if (!cursor.empty()) args.emplace("cursor", encodeURIComponent(cursor));
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/group/" + groupId + "/user", "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/group/" + encodeURIComponent(groupId) + "/user", "", std::move(args));
     }
     catch (exception& e)
     {
@@ -1656,7 +1656,7 @@ void RestClient::kickGroupUsers(NSessionPtr session, const std::string & groupId
             args.emplace("user_ids", id);
         }
 
-        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/kick", "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + encodeURIComponent(groupId) + "/kick", "", std::move(args));
     }
     catch (exception& e)
     {
@@ -1675,7 +1675,7 @@ void RestClient::joinGroup(NSessionPtr session, const std::string & groupId, std
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/join", "");
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + encodeURIComponent(groupId) + "/join", "");
     }
     catch (exception& e)
     {
@@ -1694,7 +1694,7 @@ void RestClient::leaveGroup(NSessionPtr session, const std::string & groupId, st
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/leave", "");
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + encodeURIComponent(groupId) + "/leave", "");
     }
     catch (exception& e)
     {
@@ -1792,7 +1792,7 @@ void RestClient::listUserGroups(
         if (state) args.emplace("state", std::to_string((int32_t)*state));
         if (!cursor.empty()) args.emplace("cursor", encodeURIComponent(cursor));
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/user/" + userId + "/group", "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/user/" + encodeURIComponent(userId) + "/group", "", std::move(args));
     }
     catch (exception& e)
     {
@@ -1818,7 +1818,7 @@ void RestClient::promoteGroupUsers(NSessionPtr session, const std::string & grou
             args.emplace("user_ids", id);
         }
 
-        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/promote", "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + encodeURIComponent(groupId) + "/promote", "", std::move(args));
     }
     catch (exception& e)
     {
@@ -1849,7 +1849,7 @@ void RestClient::demoteGroupUsers(
             args.emplace("user_ids", id);
         }
 
-        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + groupId + "/demote", "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + encodeURIComponent(groupId) + "/demote", "", std::move(args));
     }
     catch (exception& e)
     {
@@ -1889,7 +1889,7 @@ void RestClient::updateGroup(
 
         string body = jsonDocToStr(document);
 
-        sendReq(ctx, NHttpReqMethod::PUT, "/v2/group/" + groupId, std::move(body));
+        sendReq(ctx, NHttpReqMethod::PUT, "/v2/group/" + encodeURIComponent(groupId), std::move(body));
     }
     catch (exception& e)
     {
@@ -1933,7 +1933,7 @@ void RestClient::listLeaderboardRecords(
         if (limit) args.emplace("limit", std::to_string(*limit));
         if (cursor) args.emplace("cursor", encodeURIComponent(*cursor));
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/leaderboard/" + leaderboardId, "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/leaderboard/" + encodeURIComponent(leaderboardId), "", std::move(args));
     }
     catch (exception& e)
     {
@@ -1970,7 +1970,7 @@ void RestClient::listLeaderboardRecordsAroundOwner(
 
         if (limit) args.emplace("limit", std::to_string(*limit));
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/leaderboard/" + leaderboardId + "/owner/" + ownerId, "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/leaderboard/" + encodeURIComponent(leaderboardId) + "/owner/" + encodeURIComponent(ownerId), "", std::move(args));
     }
     catch (exception& e)
     {
@@ -2013,7 +2013,7 @@ void RestClient::writeLeaderboardRecord(
 
         string body = jsonDocToStr(document);
 
-        sendReq(ctx, NHttpReqMethod::POST, "/v2/leaderboard/" + leaderboardId, std::move(body));
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/leaderboard/" + encodeURIComponent(leaderboardId), std::move(body));
     }
     catch (exception& e)
     {
@@ -2056,7 +2056,7 @@ void RestClient::writeTournamentRecord(
 
         string body = jsonDocToStr(document);
 
-        sendReq(ctx, NHttpReqMethod::PUT, "/v2/tournament/" + tournamentId, std::move(body));
+        sendReq(ctx, NHttpReqMethod::PUT, "/v2/tournament/" + encodeURIComponent(tournamentId), std::move(body));
     }
     catch (exception& e)
     {
@@ -2075,7 +2075,7 @@ void RestClient::deleteLeaderboardRecord(NSessionPtr session, const std::string 
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        sendReq(ctx, NHttpReqMethod::DEL, "/v2/leaderboard/" + leaderboardId, "");
+        sendReq(ctx, NHttpReqMethod::DEL, "/v2/leaderboard/" + encodeURIComponent(leaderboardId), "");
     }
     catch (exception& e)
     {
@@ -2229,7 +2229,7 @@ void RestClient::listChannelMessages(
         if (cursor) args.emplace("cursor", encodeURIComponent(*cursor));
         if (forward) AddBoolArg(args, "forward", *forward);
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/channel/" + channelId, "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/channel/" + encodeURIComponent(channelId), "", std::move(args));
     }
     catch (exception& e)
     {
@@ -2318,7 +2318,7 @@ void RestClient::listTournamentRecords(
             args.emplace("owner_ids", id);
         }
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament/" + tournamentId, "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament/" + encodeURIComponent(tournamentId), "", std::move(args));
     }
     catch (exception& e)
     {
@@ -2355,7 +2355,7 @@ void RestClient::listTournamentRecordsAroundOwner(
 
         if (limit) args.emplace("limit", std::to_string(*limit));
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament/" + tournamentId + "/owner/" + ownerId, "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/tournament/" + encodeURIComponent(tournamentId) + "/owner/" + encodeURIComponent(ownerId), "", std::move(args));
     }
     catch (exception& e)
     {
@@ -2374,7 +2374,7 @@ void RestClient::joinTournament(NSessionPtr session, const std::string & tournam
         ctx->successCallback = successCallback;
         ctx->errorCallback = errorCallback;
 
-        sendReq(ctx, NHttpReqMethod::POST, "/v2/tournament/" + tournamentId + "/join", "");
+        sendReq(ctx, NHttpReqMethod::POST, "/v2/tournament/" + encodeURIComponent(tournamentId) + "/join", "");
     }
     catch (exception& e)
     {
@@ -2412,7 +2412,7 @@ void RestClient::listStorageObjects(
         if (limit) args.emplace("limit", std::to_string(*limit));
         if (cursor) args.emplace("cursor", encodeURIComponent(*cursor));
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/storage/" + collection, "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/storage/" + encodeURIComponent(collection), "", std::move(args));
     }
     catch (exception& e)
     {
@@ -2452,7 +2452,7 @@ void RestClient::listUsersStorageObjects(
         if (limit) args.emplace("limit", std::to_string(*limit));
         if (cursor) args.emplace("cursor", encodeURIComponent(*cursor));
 
-        sendReq(ctx, NHttpReqMethod::GET, "/v2/storage/" + collection, "", std::move(args));
+        sendReq(ctx, NHttpReqMethod::GET, "/v2/storage/" + encodeURIComponent(collection), "", std::move(args));
     }
     catch (exception& e)
     {
