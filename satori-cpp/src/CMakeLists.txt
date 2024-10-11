@@ -3,7 +3,7 @@ project(satori-client-cpp-base LANGUAGES CXX)
 file(
 	GLOB_RECURSE SRCS
 	LIST_DIRECTORIES false
-	#"${CMAKE_CURRENT_SOURCE_DIR}/*.pb.cc"
+	"${CMAKE_CURRENT_SOURCE_DIR}/*.pb.cc"
 	"${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )

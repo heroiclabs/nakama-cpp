@@ -4,6 +4,9 @@ project(satori-sdk-cpp DESCRIPTION "Satori C++ Client" LANGUAGES CXX)
 file(GLOB_RECURSE SATORI_CORE_HEADERS
 		include/*.h
 )
+# TODO: split buildProtoFiles into grpc and api-proto
+find_package(Protobuf CONFIG REQUIRED)
+include(buildProtoFiles.cmake)
 #add_library(satori-ccp-interface INTERFACE ${SATORI_CORE_HEADERS})
 #add_library(satori::ccp-interface ALIAS satori-ccp-interface)
 

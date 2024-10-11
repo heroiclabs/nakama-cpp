@@ -30,7 +30,7 @@ protobuf_generate(TARGET nakama-api-proto
         PROTOC_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR}
         )
 
-message("done generating")
+message("done generating nakama api")
 
 if (WITH_GRPC_CLIENT)
 #### apigrpc.proto ####
