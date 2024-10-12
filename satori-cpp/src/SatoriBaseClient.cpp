@@ -15,3 +15,6 @@
  */
 
 #include "SatoriBaseClient.h"
+
+namespace Satori {
+}

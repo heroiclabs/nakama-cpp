@@ -18,10 +18,12 @@
 
 #include "SatoriRestClient.h"
 
-SatoriRestClient::SatoriRestClient(const SClientParameters &parameters) {
-	std::cout << "-------------- SatoriRestClient --------------" << std::endl;
-}
+namespace Satori {
+	SatoriRestClient::SatoriRestClient(const Nakama::NClientParameters &parameters) {
+		std::cout << "-------------- SatoriRestClient --------------" << std::endl;
+	}
 
-SatoriRestClient::~SatoriRestClient() {
-	std::cout << "-------------- ~SatoriRestClient --------------" << std::endl;
+	SatoriRestClient::~SatoriRestClient() {
+		std::cout << "-------------- ~SatoriRestClient --------------" << std::endl;
+	}
 }

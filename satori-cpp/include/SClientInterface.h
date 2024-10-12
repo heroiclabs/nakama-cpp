@@ -18,7 +18,8 @@
 
 #include <memory>
 
-#include <SExport.h>
+#include "SExport.h"
+#include "NClientInterface.h"
 
 namespace Satori {
 

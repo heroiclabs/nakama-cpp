@@ -16,19 +16,4 @@
 
 #pragma once
 
-#include <set>
-
-#include "SatoriBaseClient.h"
-#include "../../core/core-rest/RestClient.h"
-
-namespace Satori {
-	class SatoriRestClient : public SatoriBaseClient {
-	public:
-		explicit SatoriRestClient(const Nakama::NClientParameters& parameters);
-		~SatoriRestClient();
-
-	private:
-		std::set<Nakama::RestReqContext*> _reqContexts;
-		Nakama::NHttpTransportPtr _httpClient;
-	};
-}
+#include "nakama-cpp/ClientFactory.h"
