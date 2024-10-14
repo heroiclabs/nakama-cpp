@@ -17,3 +17,4 @@
 #pragma once
 
 #include "nakama-cpp/ClientFactory.h"
+#include "SClientInterface.h"

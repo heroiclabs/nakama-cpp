@@ -26,5 +26,7 @@ int main(int argc, char** argv) {
 	Nakama::NClientParameters parameters = Nakama::NClientParameters();
 	Satori::SatoriRestClient client = Satori::SatoriRestClient(parameters);
 
+
+
 	return 0;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Nakama Authors
+* Copyright 2024 The Nakama Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,4 @@
  * limitations under the License.
  */
 
-#pragma once
-
-#include <memory>
-
-#include "SExport.h"
-#include "nakama-cpp/NClientInterface.h"
-
-namespace Satori {
-
-    /**
-     * A client interface to interact with Satori server.
-     */
-    class SATORI_API SClientInterface
-    {
-    public:
-        virtual ~SClientInterface() {}
-    };
-
-    using SClientPtr = std::shared_ptr<SClientInterface>;
-
-}
+#include "HardcodedLowLevelSatoriAPI.h"

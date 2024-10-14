@@ -20,6 +20,7 @@
 
 #include "SatoriBaseClient.h"
 #include "../../core/core-rest/RestClient.h"
+#include "HardcodedLowLevelSatoriAPI.h"
 
 namespace Satori {
 	class SatoriRestClient : public SatoriBaseClient {

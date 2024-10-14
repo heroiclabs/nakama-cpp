@@ -293,6 +293,8 @@ endif()
 install(TARGETS
             nakama-sdk
             nakama-sdk-interface
+            satori-client
+            satori-sdk-interface
         EXPORT nakama-export
         FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
