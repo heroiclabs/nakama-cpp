@@ -18,11 +18,14 @@
 
 #include <string>
 
-#include "nakama-cpp/NClientInterface.h"
+#include "SClientInterface.h"
 #include "SatoriClientFactory.h"
+#include "HardcodedLowLevelSatoriAPI.h"
 
 namespace Satori {
-	class SatoriBaseClient {
+	class SatoriBaseClient : public SClientInterface {
+	public:
+		std::future<SLiveEventList> getLiveEventsAsync(Nakama::NSessionPtr session, const std::vector<std::string>& liveEventNames);
 
 	protected:
 		int _port = 0;

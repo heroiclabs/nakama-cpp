@@ -15,14 +15,23 @@
  */
 
 #include <iostream>
+#include <string>
+#include <memory>
 
 #include "SatoriRestClient.h"
 
+#include "DataHelper.h"
 #include "nakama-cpp/NakamaVersion.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "StrUtil.h"
 
 namespace Satori {
+
+	void AddBoolArg(Nakama::NHttpQueryArgs& args, std::string&& name, bool value)
+	{
+		value ? args.emplace(name, "true") : args.emplace(name, "false");
+	}
+
 	SatoriRestClient::SatoriRestClient(const Nakama::NClientParameters &parameters, Nakama::NHttpTransportPtr httpClient)
 	: _httpClient(std::move(httpClient)) {
 		NLOG(Nakama::NLogLevel::Info, "Created. NakamaSdkVersion: %s", Nakama::getNakamaSdkVersion());
@@ -70,5 +79,67 @@ namespace Satori {
 
 	void SatoriRestClient::tick() {
 		_httpClient->tick();
+	}
+
+	void SatoriRestClient::getLiveEvents(
+		Nakama::NSessionPtr session,
+		const std::vector<std::string> &liveEventNames,
+		std::function<void(const SLiveEventList &)> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+		try {
+			NLOG_INFO("...");
+
+			auto liveEventsData(std::make_shared<nakama::api::Users>());
+			RestReqContext* ctx = createReqContext(liveEventsData.get());
+			setSessionAuth(ctx, session);
+
+			if (successCallback)
+			{
+				ctx->successCallback = [liveEventsData, successCallback]()
+				{
+					SLiveEventList liveEventsList;
+					Nakama::assign(liveEventsList, *liveEventsData);
+					successCallback(liveEventsList);
+				};
+			}
+			ctx->errorCallback = errorCallback;
+
+			Nakama::NHttpQueryArgs args;
+
+			for (auto& liveEventName : liveEventNames)
+			{
+				args.emplace("facebook_ids", liveEventName);
+			}
+
+			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v2/user", "", std::move(args));
+		}
+		catch (std::exception& e)
+		{
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
+	}
+
+	RestReqContext * SatoriRestClient::createReqContext(google::protobuf::Message *data) {
+	}
+
+	void SatoriRestClient::setBasicAuth(RestReqContext *ctx) {
+	}
+
+	void SatoriRestClient::setSessionAuth(RestReqContext *ctx, Nakama::NSessionPtr session) {
+	}
+
+	void SatoriRestClient::sendReq(RestReqContext *ctx, Nakama::NHttpReqMethod method, std::string &&path,
+		std::string &&body, Nakama::NHttpQueryArgs &&args) {
+	}
+
+	void SatoriRestClient::sendRpc(RestReqContext *ctx, const std::string &id, const std::string &payload,
+		Nakama::NHttpQueryArgs &&args) {
+	}
+
+	void SatoriRestClient::onResponse(RestReqContext *reqContext, Nakama::NHttpResponsePtr response) {
+	}
+
+	void SatoriRestClient::reqError(RestReqContext *reqContext, const Nakama::NError &error) {
 	}
 }

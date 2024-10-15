@@ -27,8 +27,7 @@ int main(int argc, char** argv) {
 	Nakama::NClientParameters parameters = Nakama::NClientParameters();
 	Satori::SatoriRestClient client = Satori::SatoriRestClient(parameters, createDefaultHttpTransport(parameters.platformParams));
 
-	Satori::GetLiveEventsRequest livEvReq;
-	Satori::GetLiveEvents(livEvReq);
+	//client.getLiveEventsAsync();
 
 	return 0;
 }

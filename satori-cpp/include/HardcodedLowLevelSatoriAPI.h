@@ -23,7 +23,7 @@
 
 namespace Satori {
     // Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
-    struct AuthenticateLogoutRequest {
+    struct SAuthenticateLogoutRequest {
         // Session token to log out.
         std::string token;
         // Refresh token to invalidate.
@@ -31,13 +31,13 @@ namespace Satori {
     };
 
     // Authenticate against the server with a refresh token.
-    struct AuthenticateRefreshRequest {
+    struct SAuthenticateRefreshRequest {
         // Refresh token.
         std::string refresh_token;
     };
 
     // Authentication request
-    struct AuthenticateRequest {
+    struct SAuthenticateRequest {
         // Identity ID. Must be between eight and 128 characters (inclusive).
         // Must be an alphanumeric string with only underscores and hyphens allowed.
         std::string id;
@@ -50,7 +50,7 @@ namespace Satori {
     };
 
     // A single event. Usually, but not necessarily, part of a batch.
-    struct Event {
+    struct SEvent {
         // Event name.
         std::string name;
         // Optional event ID assigned by the client, used to de-duplicate in retransmission scenarios.
@@ -65,13 +65,13 @@ namespace Satori {
     };
 
     // Publish an event to the server
-    struct EventRequest {
+    struct SEventRequest {
         // Some number of events produced by a client.
-        std::vector<Event> events;
+        std::vector<SEvent> events;
     };
 
     // An experiment that this user is partaking.
-    struct Experiment {
+    struct SExperiment {
         // Experiment name
         std::string name;
         // Value associated with this Experiment.
@@ -79,13 +79,13 @@ namespace Satori {
     };
 
     // All experiments that this identity is involved with.
-    struct ExperimentList {
+    struct SExperimentList {
         // All experiments for this identity.
-        std::vector<Experiment> experiments;
+        std::vector<SExperiment> experiments;
     };
 
     // Feature flag available to the identity.
-    struct Flag {
+    struct SFlag {
         // Flag name
         std::string name;
         // Value associated with this flag.
@@ -95,31 +95,31 @@ namespace Satori {
     };
 
     // All flags available to the identity
-    struct FlagList {
+    struct SFlagList {
         // All flags
-        std::vector<Flag> flags;
+        std::vector<SFlag> flags;
     };
 
     // Request to get all experiments data.
-    struct GetExperimentsRequest {
+    struct SGetExperimentsRequest {
         // Experiment names; if empty string all experiments are returned.
         std::vector<std::string> names;
     };
 
     // Request to get all flags data.
-    struct GetFlagsRequest {
+    struct SGetFlagsRequest {
         // Flag names; if empty string all flags are returned.
         std::vector<std::string> names;
     };
 
     // Request to get all live events.
-    struct GetLiveEventsRequest {
+    struct SGetLiveEventsRequest {
         // Live event names; if empty string all live events are returned.
         std::vector<std::string> names;
     };
 
     // Enrich/replace the current session with a new ID.
-    struct IdentifyRequest {
+    struct SIdentifyRequest {
         // Identity ID to enrich the current session and return a new session. Old session will no longer be usable.
         std::string id;
         // Optional default properties to update with this call.
@@ -131,7 +131,7 @@ namespace Satori {
     };
 
     // A single live event.
-    struct LiveEvent {
+    struct SLiveEvent {
         // Name.
         std::string name;
         // Description.
@@ -155,13 +155,13 @@ namespace Satori {
     };
 
     // List of Live events.
-    struct LiveEventList {
+    struct SLiveEventList {
         // Live events.
-        std::vector<LiveEvent> live_events;
+        std::vector<SLiveEvent> live_events;
     };
 
     // Properties associated with an identity.
-    struct Properties {
+    struct SProperties {
         // Event default properties.
         std::map<std::string,std::string> default_properties;
         // Event computed properties.
@@ -171,17 +171,17 @@ namespace Satori {
     };
 
     // A session.
-    struct Session {
+    struct SSession {
         // Token credential.
         std::string token;
         // Refresh token.
         std::string refresh_token;
         // Properties associated with this identity.
-        Properties properties;
+        SProperties properties;
     };
 
     // Update Properties associated with this identity.
-    struct UpdatePropertiesRequest {
+    struct SUpdatePropertiesRequest {
         // Event default properties.
         std::map<std::string,std::string> default_properties;
         // Event custom properties.
@@ -191,7 +191,7 @@ namespace Satori {
     };
 
 
-    struct GetMessageListRequest {
+    struct SGetMessageListRequest {
         // Max number of messages to return. Between 1 and 100.
         int32_t limit;
         // True if listing should be older messages to newer, false if reverse.
@@ -201,7 +201,7 @@ namespace Satori {
     };
 
     // A scheduled message.
-    struct Message {
+    struct SMessage {
         // The identifier of the schedule.
         std::string schedule_id;
         // The send time for the message.
@@ -227,9 +227,9 @@ namespace Satori {
     };
 
     // A response containing all the messages for an identity.
-    struct GetMessageListResponse {
+    struct SGetMessageListResponse {
         // The list of messages.
-        std::vector<Message> messages;
+        std::vector<SMessage> messages;
         // The cursor to send when retrieving the next page, if any.
         std::string next_cursor;
         // The cursor to send when retrieving the previous page, if any.
@@ -239,7 +239,7 @@ namespace Satori {
     };
 
     // The request to update the status of a message.
-    struct UpdateMessageRequest {
+    struct SUpdateMessageRequest {
         // The identifier of the messages.
         std::string id;
         // The time the message was read at the client.
@@ -249,148 +249,8 @@ namespace Satori {
     };
 
     // The request to delete a scheduled message.
-    struct DeleteMessageRequest {
+    struct SDeleteMessageRequest {
         // The identifier of the message.
         std::string id;
     };
-
-    LiveEventList GetLiveEvents(const GetLiveEventsRequest& liveEventsRequest);
-
-    /*
-// List available live events.
-rpc GetLiveEvents (GetLiveEventsRequest) returns (LiveEventList) {
-option (google.api.http).get = "/v1/live-event";
-}
-* */
-
-/*
-rpc Authenticate (AuthenticateRequest) returns (Session) {
-option (google.api.http) = {
-post: "/v1/authenticate",
-body: "*"
-};
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-security: {
-security_requirement: {
-key: "BasicAuth";
-value: {};
-}
-}
-};
-}
-
-// Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
-rpc AuthenticateLogout (AuthenticateLogoutRequest) returns (google.protobuf.Empty) {
-option (google.api.http) = {
-post: "/v1/authenticate/logout",
-body: "*"
-};
-}
-
-// Refresh a user's session using a refresh token retrieved from a previous authentication request.
-rpc AuthenticateRefresh (AuthenticateRefreshRequest) returns (Session) {
-option (google.api.http) = {
-post: "/v1/authenticate/refresh",
-body: "*"
-};
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-security: {
-security_requirement: {
-key: "BasicAuth";
-value: {};
-}
-}
-};
-}
-
-// Delete the caller's identity and associated data.
-rpc DeleteIdentity(google.protobuf.Empty) returns (google.protobuf.Empty) {
-option (google.api.http).delete = "/v1/identity";
-}
-
-// Publish an event for this session.
-rpc Event(EventRequest) returns (google.protobuf.Empty) {
-option (google.api.http) = {
-post: "/v1/event",
-body: "*"
-};
-}
-
-// Get or list all available experiments for this identity.
-rpc GetExperiments (GetExperimentsRequest) returns (ExperimentList) {
-option (google.api.http).get = "/v1/experiment";
-}
-
-// List all available flags for this identity.
-rpc GetFlags (GetFlagsRequest) returns (FlagList) {
-option (google.api.http).get = "/v1/flag";
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-// Either HTTP key in query param or Bearer authentication.
-security: {
-security_requirement: {
-key: "HttpKeyAuth";
-value: {};
-}
-security_requirement: {
-key: "BearerJwt";
-value: {};
-}
-}
-};
-}
-
-// List available live events.
-rpc GetLiveEvents (GetLiveEventsRequest) returns (LiveEventList) {
-option (google.api.http).get = "/v1/live-event";
-}
-
-// A healthcheck which load balancers can use to check the service.
-rpc Healthcheck (google.protobuf.Empty) returns (google.protobuf.Empty) {
-option (google.api.http).get = "/healthcheck";
-}
-
-// Enrich/replace the current session with new identifier.
-rpc Identify(IdentifyRequest) returns (Session) {
-option (google.api.http) = {
-put: "/v1/identify",
-body: "*"
-};
-}
-
-// List properties associated with this identity.
-rpc ListProperties (google.protobuf.Empty) returns (Properties) {
-option (google.api.http).get = "/v1/properties";
-}
-
-// A readycheck which load balancers can use to check the service.
-rpc Readycheck (google.protobuf.Empty) returns (google.protobuf.Empty) {
-option (google.api.http).get = "/readycheck";
-}
-
-// Update identity properties.
-rpc UpdateProperties(UpdatePropertiesRequest) returns (google.protobuf.Empty) {
-option (google.api.http) = {
-put: "/v1/properties",
-body: "*"
-};
-}
-
-// Get the list of messages for the identity.
-rpc GetMessageList (GetMessageListRequest) returns (GetMessageListResponse) {
-option (google.api.http).get = "/v1/message";
-}
-
-// Updates a message for an identity.
-rpc UpdateMessage (UpdateMessageRequest) returns (google.protobuf.Empty) {
-option (google.api.http) = {
-put: "/v1/message/{id}",
-body: "*"
-};
-}
-
-// Deletes a message for an identity.
-rpc DeleteMessage (DeleteMessageRequest) returns (google.protobuf.Empty) {
-option (google.api.http).delete = "/v1/message/{id}";
-}
-*/
 }

@@ -15,6 +15,23 @@
  */
 
 #include "SatoriBaseClient.h"
+#include "nakama-cpp/NException.h"
 
 namespace Satori {
+	std::future<SLiveEventList> SatoriBaseClient::getLiveEventsAsync(
+		Nakama::NSessionPtr session,
+		const std::vector<std::string>& liveEventNames
+	){
+		std::shared_ptr<std::promise<SLiveEventList>> promise = std::make_shared<std::promise<SLiveEventList>>();
+
+		getLiveEvents(session, liveEventNames,
+		[=](const SLiveEventList& liveEvents) {
+			promise->set_value(liveEvents);
+		},
+		[=](const Nakama::NError& error) {
+			promise->set_exception(std::make_exception_ptr<Nakama::NException>(error));
+		});
+
+		return promise->get_future();
+	}
 }

@@ -18,7 +18,4 @@
 
 
 namespace Satori {
-	LiveEventList GetLiveEvents(const GetLiveEventsRequest &liveEventsRequest) {
-          return LiveEventList();
-	}
 }
