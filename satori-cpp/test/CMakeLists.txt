@@ -20,6 +20,7 @@ target_link_libraries(satori-test
 		${HTTP_IMPL_LIB}
 		nakama::sdk-core-common
 		nakama::sdk-client-factory
+		nakama::sdk-core-misc
 )
 
 target_compile_features(satori-test PRIVATE cxx_std_14)
