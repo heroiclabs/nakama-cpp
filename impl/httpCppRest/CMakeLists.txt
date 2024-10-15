@@ -13,5 +13,4 @@ add_library(nakama::impl-http-cppRest ALIAS nakama-impl-http-cppRest)
 target_link_libraries(nakama-impl-http-cppRest
         PUBLIC nakama-api-proto nakama::sdk-interface
         PRIVATE cpprestsdk::cpprest
-        )
-add_library(nakama::impl-http-cppRest ALIAS nakama-impl-http-cppRest)
+)

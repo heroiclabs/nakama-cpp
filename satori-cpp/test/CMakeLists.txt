@@ -15,6 +15,9 @@ add_executable(satori-test MACOSX_BUNDLE ${SRCS})
 target_link_libraries(satori-test
 	PUBLIC
 		satori::client
+	PRIVATE
+		nakama::sdk-interface
+		${HTTP_IMPL_LIB}
 )
 
 target_compile_features(satori-test PRIVATE cxx_std_14)

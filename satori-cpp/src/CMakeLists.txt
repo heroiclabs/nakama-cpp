@@ -17,7 +17,7 @@ add_library(satori::client ALIAS satori-client)
 target_link_libraries(satori-client
 	PUBLIC
 		satori::sdk-interface
-		#${HTTP_IMPL_LIB} # We would use this if this client had all the implementations that nakama has, but for now, it only has http rest
 	PRIVATE
-		nakama::sdk-interface
+		${HTTP_IMPL_LIB}
+
 )

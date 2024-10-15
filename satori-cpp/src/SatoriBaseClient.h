@@ -24,5 +24,13 @@
 namespace Satori {
 	class SatoriBaseClient {
 
+	protected:
+		int _port;
+		std::string _host;
+		bool _ssl = false;
+		std::string _basicAuthMetadata;
+		Nakama::ErrorCallback _defaultErrorCallback;
+		void* _userData = nullptr;
+		Nakama::NPlatformParameters _platformParams;
 	};
 }
