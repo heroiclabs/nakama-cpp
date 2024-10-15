@@ -14,6 +14,8 @@ target_sources(satori-sdk-interface INTERFACE
 	FILE_SET HEADERS FILES BASE_DIRS include FILES ${CORE_HEADERS}
 )
 
+target_compile_definitions(satori-sdk-interface INTERFACE CORE_HEADERS)
+
 target_include_directories(satori-sdk-interface INTERFACE
 	"$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
 	"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>")
