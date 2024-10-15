@@ -23,6 +23,5 @@ target_link_libraries(satori-client
 	PUBLIC
 		satori::sdk-interface
 	PRIVATE
-		${HTTP_IMPL_LIB}
 		nakama::sdk-core-common
 )
