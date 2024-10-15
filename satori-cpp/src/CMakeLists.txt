@@ -19,5 +19,6 @@ target_link_libraries(satori-client
 		satori::sdk-interface
 	PRIVATE
 		${HTTP_IMPL_LIB}
-
+		nakama::sdk-core-common
+		nakama::impl-http-libcurl
 )

@@ -20,6 +20,7 @@
 
 #include "nakama-cpp/NakamaVersion.h"
 #include "nakama-cpp/log/NLogger.h"
+#include "StrUtil.h"
 
 namespace Satori {
 	SatoriRestClient::SatoriRestClient(const Nakama::NClientParameters &parameters, Nakama::NHttpTransportPtr httpClient)
@@ -44,7 +45,7 @@ namespace Satori {
 
 		_httpClient->setBaseUri(baseUrl);
 
-		_basicAuthMetadata = "Basic " + base64Encode(parameters.serverKey + ":");
+		_basicAuthMetadata = "Basic " + Nakama::base64Encode(parameters.serverKey + ":");
 	}
 
 	SatoriRestClient::~SatoriRestClient() {

@@ -21,12 +21,17 @@
 #include "../src/SatoriRestClient.h"
 #include "../../impl/httpCurl/NHttpClientLibCurl.h"
 
+Nakama::NHttpTransportPtr createDefaultHttpTransport(const Nakama::NPlatformParameters& platformParams)
+{
+	(void)platformParams;  // silence unused variable warning on some platforms
+	return Nakama::NHttpTransportPtr(new Nakama::NHttpClientLibCurl(platformParams));
+}
+
 int main(int argc, char** argv) {
 	std::cout << "Hello, World, I'm Satori cpp interface!\n";
 
 	Nakama::NClientParameters parameters = Nakama::NClientParameters();
-	Nakama::NHttpClientLibCurl httpImpl = Nakama::NHttpClientLibCurl(parameters.platformParams);
-	Satori::SatoriRestClient client = Satori::SatoriRestClient(parameters, Nakama::NHttpTransportPtr(&httpImpl));
+	Satori::SatoriRestClient client = Satori::SatoriRestClient(parameters, createDefaultHttpTransport(parameters.platformParams));
 
 	Satori::GetLiveEventsRequest livEvReq;
 	Satori::GetLiveEvents(livEvReq);

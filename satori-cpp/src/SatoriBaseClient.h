@@ -25,7 +25,7 @@ namespace Satori {
 	class SatoriBaseClient {
 
 	protected:
-		int _port;
+		int _port = 0;
 		std::string _host;
 		bool _ssl = false;
 		std::string _basicAuthMetadata;
