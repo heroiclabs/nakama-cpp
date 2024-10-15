@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-#include "HardcodedLowLevelSatoriAPI.h"
+#include "nakama-cpp/satori/HardcodedLowLevelSatoriAPI.h"
 
 
 namespace Satori {

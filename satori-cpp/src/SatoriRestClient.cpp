@@ -90,17 +90,15 @@ namespace Satori {
 		try {
 			NLOG_INFO("...");
 
-			auto liveEventsData(std::make_shared<nakama::api::Users>());
-			RestReqContext* ctx = createReqContext(liveEventsData.get());
+			auto liveEventsData(std::make_shared<SLiveEventList>());
+			RestReqContext* ctx = nullptr;//createReqContext(liveEventsData.get());
 			setSessionAuth(ctx, session);
 
 			if (successCallback)
 			{
 				ctx->successCallback = [liveEventsData, successCallback]()
 				{
-					SLiveEventList liveEventsList;
-					Nakama::assign(liveEventsList, *liveEventsData);
-					successCallback(liveEventsList);
+					successCallback(*liveEventsData);
 				};
 			}
 			ctx->errorCallback = errorCallback;

@@ -12,13 +12,14 @@ file(
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_executable(satori-test MACOSX_BUNDLE ${SRCS})
+
 target_link_libraries(satori-test
-	PUBLIC
-		satori::client
 	PRIVATE
+		satori::client
 		nakama::sdk-interface
 		${HTTP_IMPL_LIB}
 		nakama::sdk-core-common
+		nakama::sdk-client-factory
 )
 
 target_compile_features(satori-test PRIVATE cxx_std_14)

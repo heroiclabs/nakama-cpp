@@ -18,9 +18,9 @@
 
 #include <string>
 
-#include "SClientInterface.h"
-#include "SatoriClientFactory.h"
-#include "HardcodedLowLevelSatoriAPI.h"
+#include "nakama-cpp/satori/SClientInterface.h"
+#include "nakama-cpp/satori/SatoriClientFactory.h"
+#include "nakama-cpp/satori/HardcodedLowLevelSatoriAPI.h"
 
 namespace Satori {
 	class SatoriBaseClient : public SClientInterface {

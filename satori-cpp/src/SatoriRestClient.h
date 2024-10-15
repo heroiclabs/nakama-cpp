@@ -20,7 +20,7 @@
 #include <google/protobuf/message.h>
 
 #include "SatoriBaseClient.h"
-#include "HardcodedLowLevelSatoriAPI.h"
+#include "nakama-cpp/satori/HardcodedLowLevelSatoriAPI.h"
 
 namespace Satori {
 	struct RestReqContext

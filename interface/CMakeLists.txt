@@ -24,4 +24,3 @@ target_include_directories(nakama-sdk-interface INTERFACE
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>")
 
 target_link_libraries(nakama-sdk-interface INTERFACE nonstd::optional-lite)
-

@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-#include <string>
 #include <iostream>
 
 #include "nakama-cpp/ClientFactory.h"
 #include "../src/SatoriRestClient.h"
-#include "../../impl/httpCurl/NHttpClientLibCurl.h"
 
 int main(int argc, char** argv) {
 	std::cout << "Hello, World, I'm Satori cpp interface!\n";
 
 	Nakama::NClientParameters parameters = Nakama::NClientParameters();
-	Satori::SatoriRestClient client = Satori::SatoriRestClient(parameters, createDefaultHttpTransport(parameters.platformParams));
+	Satori::SatoriRestClient client = Satori::SatoriRestClient(parameters, Nakama::createDefaultHttpTransport(parameters.platformParams));
 
 	//client.getLiveEventsAsync();
 
