@@ -99,6 +99,8 @@ namespace Satori {
 
 	void SatoriRestClient::authenticate(
 		std::string id,
+		std::map<std::string, std::string> defaultProperties,
+		std::map<std::string, std::string> computedProperties,
 		std::function<void(SSessionPtr)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
@@ -134,8 +136,8 @@ namespace Satori {
 
 	void SatoriRestClient::getLiveEvents(
 		SSessionPtr session,
-		const std::vector<std::string> &liveEventNames,
-		std::function<void(const SLiveEventList &)> successCallback,
+		const std::vector<std::string>& liveEventNames,
+		std::function<void(SLiveEventList)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
 		try {

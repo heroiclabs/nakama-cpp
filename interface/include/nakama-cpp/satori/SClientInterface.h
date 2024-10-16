@@ -19,49 +19,60 @@
 #include <memory>
 
 #include "HardcodedLowLevelSatoriAPI.h"
-#include "SExport.h"
 #include "nakama-cpp/NClientInterface.h"
 #include "google/protobuf/message.h"
 
 namespace Satori {
 
-	// A satori client session.
-	struct SSession {
-		// Token credential.
-		std::string token;
-		// Refresh token.
-		std::string refresh_token;
-		// Properties associated with this identity.
-		SProperties properties;
-	};
-
-	using SSessionPtr = std::shared_ptr<SSession>;
+    using SSessionPtr = std::shared_ptr<SSession>;
 
     /**
      * A client interface to interact with Satori server.
      */
-    class SATORI_API SClientInterface
+    class NAKAMA_API SClientInterface
     {
     public:
     	virtual ~SClientInterface() {}
 
-    	/**
-		 * Create a Session by authenticating.
-		 * @param id Identity ID. Must be between eight and 128 characters (inclusive). Must be an alphanumeric string with only underscores and hyphens allowed.
-		 */
     	virtual void authenticate(
     		std::string id,
-			std::function<void(SSessionPtr)> successCallback = nullptr,
-			Nakama::ErrorCallback errorCallback = nullptr
-		) = 0;
+    		std::map<std::string,std::string> defaultProperties,
+    		std::map<std::string,std::string> customProperties,
+    		std::function<void (SSessionPtr)> successCallback = nullptr,
+    		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-    	/**
-		 * Create a Session by authenticating.
-		 * @param id Identity ID. Must be between eight and 128 characters (inclusive). Must be an alphanumeric string with only underscores and hyphens allowed.
-		 */
-    	virtual std::future<SSessionPtr> authenticateAsync(
-    		std::string id
-		) = 0;
+    	virtual void authenticateRefresh(
+            SSession session,
+    		std::function<void (SSessionPtr)> successCallback = nullptr,
+    		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual void authenticateLogout(
+            SSessionPtr session,
+    		std::function<void()> successCallback = nullptr,
+    		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual void deleteIdentity(
+            SSessionPtr session,
+			std::function<void()> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual void postEvent(
+            SSessionPtr session,
+    		std::vector <SEvent> events,
+    		std::function<void()> successCallback = nullptr,
+    		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual void getExperiments(
+            SSessionPtr session,
+    		std::vector<std::string> names,
+			std::function<void(const SExperimentList&)> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual void getFlags(
+            SSessionPtr session,
+			std::vector<std::string> names,
+			std::function<void(std::vector<SFlag>)> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	/**
 		 * Request to get all live events.
@@ -70,9 +81,9 @@ namespace Satori {
 		 * @param liveEventNames Live event names; if empty string all live events are returned.
 		 */
     	virtual void getLiveEvents(
-		    SSessionPtr session,
-			const std::vector<std::string>& liveEventNames = {},
-			std::function<void(const SLiveEventList&)> successCallback = nullptr,
+            SSessionPtr session,
+			const std::vector<std::string>& liveEventNames,
+			std::function<void(SLiveEventList)> successCallback = nullptr,
 		    Nakama::ErrorCallback errorCallback = nullptr
 		) = 0;
 
@@ -83,9 +94,53 @@ namespace Satori {
 		 * @param liveEventNames Live event names; if empty string all live events are returned.
 		 */
     	virtual std::future<SLiveEventList> getLiveEventsAsync(
-		    SSessionPtr session,
-			const std::vector<std::string>& liveEventNames = {}
+    		SSessionPtr session,
+			const std::vector<std::string>& liveEventNames
 		) = 0;
+
+    	virtual void identify(
+            SSessionPtr session,
+    		std::string id,
+    		std::map<std::string,std::string> defaultProperties,
+    		std::map<std::string,std::string> customProperties,
+    		std::function<void (SSession)> successCallback = nullptr,
+    		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual void listIdentityProperties(
+            SSessionPtr session,
+    		std::function<void (SProperties)> successCallback = nullptr,
+    		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual void updateProperties(
+    		SSessionPtr session,
+    		std::map<std::string,std::string> defaultProperties,
+    		std::map<std::string,std::string> customProperties,
+    		std::function<void()> successCallback = nullptr,
+    		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual void getMessages(
+			SSessionPtr session,
+			int32_t limit,
+			bool forward,
+			std::string cursor,
+			std::function<void(SGetMessageListResponse)> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual void updateMessage(
+    		SSessionPtr session,
+    		std::string messageId,
+    		std::chrono::time_point<std::chrono::system_clock> readTime,
+    		std::chrono::time_point<std::chrono::system_clock> consumeTime,
+    		std::function<void()> successCallback = nullptr,
+    		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual void deleteMessage(
+    		SSessionPtr session,
+    		std::string messageId,
+    		std::function<void()> successCallback = nullptr,
+    		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+
 
     	    /*
 // List available live events.

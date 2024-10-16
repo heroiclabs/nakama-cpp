@@ -29,16 +29,18 @@ namespace Satori {
 		void disconnect();
 		void tick();
 
-		virtual void authenticate(
+		void authenticate(
 			std::string id,
+			std::map<std::string, std::string> defaultProperties,
+			std::map<std::string, std::string> customProperties,
 			std::function<void(SSessionPtr)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr
 		) override;
 
 		void getLiveEvents(
 			SSessionPtr session,
-			const std::vector<std::string>& liveEventNames = {},
-			std::function<void(const SLiveEventList&)> successCallback = nullptr,
+			const std::vector<std::string>& liveEventNames,
+			std::function<void(SLiveEventList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr
 		) override;
 
@@ -47,3 +49,4 @@ namespace Satori {
 
 	};
 }
+

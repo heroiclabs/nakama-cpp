@@ -25,13 +25,14 @@
 namespace Satori {
 	class SatoriBaseClient : public SClientInterface {
 	public:
-		std::future<SSessionPtr> authenticateAsync(
-			std::string id
-		) override;
-		std::future<SLiveEventList> getLiveEventsAsync(
-			SSessionPtr session,
-			const std::vector<std::string>& liveEventNames = {}
-		) override;
+		// std::future<SSessionPtr> authenticateAsync(
+		// 	std::string id
+		// ) override;
+		//
+		// std::future<SLiveEventList> getLiveEventsAsync(
+		// 	SSessionPtr session,
+		// 	const std::vector<std::string>& liveEventNames = {}
+		// ) override;
 
 	protected:
 		int _port = 0;
