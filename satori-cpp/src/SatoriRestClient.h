@@ -17,20 +17,11 @@
 #pragma once
 
 #include <set>
-#include <google/protobuf/message.h>
 
 #include "SatoriBaseClient.h"
 #include "nakama-cpp/satori/HardcodedLowLevelSatoriAPI.h"
 
 namespace Satori {
-	struct RestReqContext
-	{
-		std::string auth;
-		std::function<void()> successCallback;
-		Nakama::ErrorCallback errorCallback;
-		google::protobuf::Message* data = nullptr;
-	};
-
 	class SatoriRestClient : public SatoriBaseClient {
 	public:
 		explicit SatoriRestClient(const Nakama::NClientParameters& parameters, Nakama::NHttpTransportPtr httpClient);
@@ -52,29 +43,6 @@ namespace Satori {
 		) override;
 
 	private:
-		RestReqContext* createReqContext(google::protobuf::Message* data);
-		void setBasicAuth(RestReqContext* ctx);
-		void setSessionAuth(RestReqContext* ctx, SSessionPtr session);
-
-		void sendReq(
-			RestReqContext* ctx,
-			Nakama::NHttpReqMethod method,
-			std::string&& path,
-			std::string&& body,
-			Nakama::NHttpQueryArgs&& args = Nakama::NHttpQueryArgs());
-
-		void sendRpc(
-			RestReqContext* ctx,
-			const std::string& id,
-			const std::string& payload,
-			Nakama::NHttpQueryArgs&& args
-		);
-
-		void onResponse(RestReqContext* reqContext, Nakama::NHttpResponsePtr response);
-		void reqError(RestReqContext* reqContext, const Nakama::NError& error);
-
-	private:
-		std::set<RestReqContext*> _reqContexts;
 		Nakama::NHttpTransportPtr _httpClient;
 
 	};
