@@ -21,8 +21,21 @@
 #include "HardcodedLowLevelSatoriAPI.h"
 #include "SExport.h"
 #include "nakama-cpp/NClientInterface.h"
+#include "google/protobuf/message.h"
 
 namespace Satori {
+
+	// A satori client session.
+	struct SSession {
+		// Token credential.
+		std::string token;
+		// Refresh token.
+		std::string refresh_token;
+		// Properties associated with this identity.
+		SProperties properties;
+	};
+
+	using SSessionPtr = std::shared_ptr<SSession>;
 
     /**
      * A client interface to interact with Satori server.
@@ -30,7 +43,25 @@ namespace Satori {
     class SATORI_API SClientInterface
     {
     public:
-        virtual ~SClientInterface() {}
+    	virtual ~SClientInterface() {}
+
+    	/**
+		 * Create a Session by authenticating.
+		 * @param id Identity ID. Must be between eight and 128 characters (inclusive). Must be an alphanumeric string with only underscores and hyphens allowed.
+		 */
+    	virtual void authenticate(
+    		std::string id,
+			std::function<void(SSessionPtr)> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr
+		) = 0;
+
+    	/**
+		 * Create a Session by authenticating.
+		 * @param id Identity ID. Must be between eight and 128 characters (inclusive). Must be an alphanumeric string with only underscores and hyphens allowed.
+		 */
+    	virtual std::future<SSessionPtr> authenticateAsync(
+    		std::string id
+		) = 0;
 
     	/**
 		 * Request to get all live events.
@@ -39,7 +70,7 @@ namespace Satori {
 		 * @param liveEventNames Live event names; if empty string all live events are returned.
 		 */
     	virtual void getLiveEvents(
-		    Nakama::NSessionPtr session,
+		    SSessionPtr session,
 			const std::vector<std::string>& liveEventNames = {},
 			std::function<void(const SLiveEventList&)> successCallback = nullptr,
 		    Nakama::ErrorCallback errorCallback = nullptr
@@ -49,12 +80,10 @@ namespace Satori {
 		 * Fetch one or more users by id, usernames, and Facebook ids.
 		 *
 		 * @param session The session of the user.
-		 * @param ids List of user IDs.
-		 * @param usernames List of usernames.
-		 * @param facebookIds List of Facebook IDs.
+		 * @param liveEventNames Live event names; if empty string all live events are returned.
 		 */
     	virtual std::future<SLiveEventList> getLiveEventsAsync(
-		    Nakama::NSessionPtr session,
+		    SSessionPtr session,
 			const std::vector<std::string>& liveEventNames = {}
 		) = 0;
 

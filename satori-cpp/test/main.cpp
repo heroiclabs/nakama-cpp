@@ -24,8 +24,9 @@ int main(int argc, char** argv) {
 
 	Nakama::NClientParameters parameters = Nakama::NClientParameters();
 	Satori::SatoriRestClient client = Satori::SatoriRestClient(parameters, Nakama::createDefaultHttpTransport(parameters.platformParams));
-
-	//client.getLiveEventsAsync();
+	Satori::SSessionPtr session = client.authenticateAsync("11111111-1111-0000-0000-000000000000").get();
+	auto liveEvents = client.getLiveEventsAsync(session).get();
+	std::cout << "Live events num:" << liveEvents.live_events.size() << std::endl;
 
 	return 0;
 }

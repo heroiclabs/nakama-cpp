@@ -38,8 +38,14 @@ namespace Satori {
 		void disconnect();
 		void tick();
 
+		virtual void authenticate(
+			std::string id,
+			std::function<void(SSessionPtr)> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr
+		) override;
+
 		void getLiveEvents(
-			Nakama::NSessionPtr session,
+			SSessionPtr session,
 			const std::vector<std::string>& liveEventNames = {},
 			std::function<void(const SLiveEventList&)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr
@@ -48,7 +54,7 @@ namespace Satori {
 	private:
 		RestReqContext* createReqContext(google::protobuf::Message* data);
 		void setBasicAuth(RestReqContext* ctx);
-		void setSessionAuth(RestReqContext* ctx, Nakama::NSessionPtr session);
+		void setSessionAuth(RestReqContext* ctx, SSessionPtr session);
 
 		void sendReq(
 			RestReqContext* ctx,

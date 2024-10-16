@@ -170,16 +170,6 @@ namespace Satori {
         std::map<std::string,std::string> custom_properties;
     };
 
-    // A session.
-    struct SSession {
-        // Token credential.
-        std::string token;
-        // Refresh token.
-        std::string refresh_token;
-        // Properties associated with this identity.
-        SProperties properties;
-    };
-
     // Update Properties associated with this identity.
     struct SUpdatePropertiesRequest {
         // Event default properties.

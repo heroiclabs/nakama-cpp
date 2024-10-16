@@ -19,11 +19,15 @@
 #include <memory>
 
 #include "SatoriRestClient.h"
-
 #include "DataHelper.h"
 #include "nakama-cpp/NakamaVersion.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "StrUtil.h"
+#include "RapidjsonHelper.h"
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
+
+#include "DefaultSession.h"
 
 namespace Satori {
 
@@ -32,9 +36,33 @@ namespace Satori {
 		value ? args.emplace(name, "true") : args.emplace(name, "false");
 	}
 
+	std::string jsonDocToStr(Nakama::rapidjson::Document& document)
+	{
+		Nakama::rapidjson::StringBuffer buffer;
+		Nakama::rapidjson::Writer<Nakama::rapidjson::StringBuffer> writer(buffer);
+		document.Accept(writer);
+		return buffer.GetString();
+	}
+
+	void addVarsToJsonDoc(Nakama::rapidjson::Document& document, const Nakama::NStringMap& vars)
+	{
+		if (!vars.empty())
+		{
+			Nakama::rapidjson::Value jsonObj;
+			jsonObj.SetObject();
+
+			for (auto& p : vars)
+			{
+				jsonObj.AddMember(Nakama::rapidjson::Value::StringRefType(p.first.c_str()), p.second, document.GetAllocator());
+			}
+
+			document.AddMember("vars", std::move(jsonObj), document.GetAllocator());
+		}
+	}
+
 	SatoriRestClient::SatoriRestClient(const Nakama::NClientParameters &parameters, Nakama::NHttpTransportPtr httpClient)
 	: _httpClient(std::move(httpClient)) {
-		NLOG(Nakama::NLogLevel::Info, "Created. NakamaSdkVersion: %s", Nakama::getNakamaSdkVersion());
+		NLOG(Nakama::NLogLevel::Info, "Created Satori Client. NakamaSdkVersion: %s", Nakama::getNakamaSdkVersion());
 
 		_host = parameters.host;
 		_ssl = parameters.ssl;
@@ -81,8 +109,41 @@ namespace Satori {
 		_httpClient->tick();
 	}
 
+	void SatoriRestClient::authenticate(
+		std::string id,
+		std::function<void(SSessionPtr)> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+		try {
+			NLOG_INFO("...");
+
+			auto sessionData(std::make_shared<SSession>());
+			RestReqContext* ctx = nullptr; return;// TODO: Critical! this must be a Message descendant: createReqContext(sessionData.get());
+			setBasicAuth(ctx);
+
+			if (successCallback)
+			{
+				ctx->successCallback = [sessionData, successCallback]() {
+					SSessionPtr session(new SSession{sessionData->token, sessionData->refresh_token});
+					successCallback(session);
+				};
+			}
+			ctx->errorCallback = errorCallback;
+
+			Nakama::NHttpQueryArgs args;
+
+			args.emplace("id", Nakama::encodeURIComponent(id));
+
+			sendReq(ctx, Nakama::NHttpReqMethod::POST, "/v1/authenticate", "", std::move(args));
+		}
+		catch (std::exception& e)
+		{
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
+	}
+
 	void SatoriRestClient::getLiveEvents(
-		Nakama::NSessionPtr session,
+		SSessionPtr session,
 		const std::vector<std::string> &liveEventNames,
 		std::function<void(const SLiveEventList &)> successCallback,
 		Nakama::ErrorCallback errorCallback
@@ -107,10 +168,10 @@ namespace Satori {
 
 			for (auto& liveEventName : liveEventNames)
 			{
-				args.emplace("facebook_ids", liveEventName);
+				args.emplace("names", liveEventName);
 			}
 
-			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v2/user", "", std::move(args));
+			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/live-event", "", std::move(args));
 		}
 		catch (std::exception& e)
 		{
@@ -118,13 +179,19 @@ namespace Satori {
 		}
 	}
 
-	RestReqContext * SatoriRestClient::createReqContext(google::protobuf::Message *data) {
+	RestReqContext* SatoriRestClient::createReqContext(google::protobuf::Message *data) {
+		RestReqContext* ctx = new RestReqContext();
+		ctx->data = data;
+		_reqContexts.emplace(ctx);
+		return ctx;
 	}
 
 	void SatoriRestClient::setBasicAuth(RestReqContext *ctx) {
+		ctx->auth.append(_basicAuthMetadata);
 	}
 
-	void SatoriRestClient::setSessionAuth(RestReqContext *ctx, Nakama::NSessionPtr session) {
+	void SatoriRestClient::setSessionAuth(RestReqContext *ctx, SSessionPtr session) {
+		ctx->auth.append("Bearer ").append(session->token);
 	}
 
 	void SatoriRestClient::sendReq(RestReqContext *ctx, Nakama::NHttpReqMethod method, std::string &&path,
