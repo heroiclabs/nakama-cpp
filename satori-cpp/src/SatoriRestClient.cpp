@@ -24,8 +24,11 @@
 #include "nakama-cpp/log/NLogger.h"
 #include "StrUtil.h"
 #include "RapidjsonHelper.h"
+
 #include <rapidjson/writer.h>
 #include <rapidjson/stringbuffer.h>
+
+
 
 #include "DefaultSession.h"
 
@@ -164,8 +167,15 @@ namespace Satori {
 				req.headers.emplace("Authorization", std::move(auth));
 			}
 
-			_httpClient->request(req, [this, &successCallback, &errorCallback](Nakama::NHttpResponsePtr response) {
+			_httpClient->request(req, [this, successCallback=std::move(successCallback), errorCallback=std::move(errorCallback)](Nakama::NHttpResponsePtr response) {
 				std::shared_ptr<SLiveEventList> liveEventsData(std::make_shared<SLiveEventList>());
+				if (response->statusCode == 200)
+				{
+					rapidjson::Document document;
+					response->body
+
+				}
+
 				auto requestSuccessCallback = [liveEventsData, successCallback]()
 				{
 					successCallback(*liveEventsData);

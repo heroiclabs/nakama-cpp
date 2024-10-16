@@ -22,6 +22,14 @@
 #include "nakama-cpp/satori/HardcodedLowLevelSatoriAPI.h"
 
 namespace Satori {
+
+    struct RestReqContext
+    {
+        std::string auth;
+        std::function<void()> successCallback;
+        Nakama::ErrorCallback errorCallback;
+    };
+
 	class SatoriRestClient : public SatoriBaseClient {
 	public:
 		explicit SatoriRestClient(const Nakama::NClientParameters& parameters, Nakama::NHttpTransportPtr httpClient);
@@ -46,7 +54,12 @@ namespace Satori {
 
 	private:
 		Nakama::NHttpTransportPtr _httpClient;
-
+        void sendReq(
+            RestReqContext* ctx,
+            Nakama::NHttpReqMethod method,
+            std::string&& path,
+            std::string&& body,
+            Nakama::NHttpQueryArgs&& args = Nakama::NHttpQueryArgs());
 	};
 }
 
