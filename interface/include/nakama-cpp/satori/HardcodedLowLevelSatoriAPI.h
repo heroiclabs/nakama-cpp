@@ -24,7 +24,7 @@
 namespace Satori {
     struct SFromJsonInterface {
         virtual ~SFromJsonInterface() {}
-        virtual bool jsonToType(std::string jsonString, SFromJsonInterface* result) = 0;
+        virtual bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) = 0;
     };
 
     // Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
@@ -158,7 +158,7 @@ namespace Satori {
         // Reset CRON schedule, if configured.
         std::string reset_cron;
 
-        bool jsonToType(std::string jsonString, SFromJsonInterface* result) override;
+        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
     };
 
     // List of Live events.
@@ -166,7 +166,7 @@ namespace Satori {
         // Live events.
         std::vector<SLiveEvent> live_events;
 
-        bool jsonToType(std::string jsonString, SFromJsonInterface* result) override;
+        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
     };
 
     // Properties associated with an identity.
@@ -180,13 +180,15 @@ namespace Satori {
     };
 
     // A session.
-    struct SSession {
+    struct SSession : public SFromJsonInterface {
         // Token credential.
         std::string token;
         // Refresh token.
         std::string refresh_token;
         // Properties associated with this identity.
         SProperties properties;
+
+        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
     };
 
     // Update Properties associated with this identity.

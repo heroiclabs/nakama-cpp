@@ -28,7 +28,7 @@ namespace Satori {
         std::string auth;
         std::function<void()> successCallback;
         Nakama::ErrorCallback errorCallback;
-        SFromJsonInterface* data = nullptr;
+        std::shared_ptr<SFromJsonInterface> data = nullptr;
     };
 
 	class SatoriRestClient : public SatoriBaseClient {
@@ -140,7 +140,9 @@ namespace Satori {
 			Nakama::ErrorCallback errorCallback = nullptr
 		) override {}
 	private:
-		RestReqContext* createReqContext(SFromJsonInterface* data);
+		RestReqContext* createReqContext(std::shared_ptr<SFromJsonInterface> data);
+		void setBasicAuth(RestReqContext* ctx);
+		void setSessionAuth(RestReqContext* ctx, const SSessionPtr session);
 		// Takes ownership of ctx pointer
         void sendReq(
             RestReqContext* ctx,
@@ -153,7 +155,7 @@ namespace Satori {
 		void reqError(RestReqContext* ctx, const Nakama::NError &error) const;
 
 	private:
-		std::set<RestReqContext*> _reqContexts;
+		//std::set<RestReqContext*> _reqContexts;
 		Nakama::NHttpTransportPtr _httpClient;
 	};
 }

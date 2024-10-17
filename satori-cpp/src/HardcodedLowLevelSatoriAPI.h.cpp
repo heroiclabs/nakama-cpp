@@ -6,14 +6,21 @@
 #include "rapidjson/document.h"
 
 namespace Satori{
-	bool SLiveEvent::jsonToType(std::string jsonString, SFromJsonInterface *result) {
+	bool SLiveEvent::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
 		rapidjson::Document d;
 		d.Parse(jsonString.c_str());
 
 		return false;
 	}
 
-	bool SLiveEventList::jsonToType(std::string jsonString, SFromJsonInterface *result) {
+	bool SLiveEventList::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+		rapidjson::Document d;
+		d.Parse(jsonString.c_str());
+
+		return false;
+	}
+
+	bool SSession::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
 		rapidjson::Document d;
 		d.Parse(jsonString.c_str());
 
