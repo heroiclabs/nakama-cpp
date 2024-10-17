@@ -132,8 +132,6 @@ namespace Satori {
 		try {
 			NLOG_INFO("...");
 
-			std::string auth(_basicAuthMetadata.append("Bearer ").append(session->token));
-
 			Nakama::NHttpQueryArgs args;
 
 			for (auto& liveEventName : liveEventNames) {
