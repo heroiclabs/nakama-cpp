@@ -23,14 +23,12 @@
 #include "nakama-cpp/log/NLogger.h"
 
 namespace Satori {
-	template <typename T>
     struct RestReqContext
     {
         std::string auth;
         std::function<void()> successCallback;
         Nakama::ErrorCallback errorCallback;
-        T* data = nullptr;
-		std::function<bool(std::string, T*)> jsonToType;
+        SFromJsonInterface* data = nullptr;
     };
 
 	class SatoriRestClient : public SatoriBaseClient {
@@ -44,13 +42,13 @@ namespace Satori {
 			std::string id,
 			std::map<std::string, std::string> defaultProperties,
 			std::map<std::string, std::string> customProperties,
-			std::function<void(SSessionPtr)> successCallback = nullptr,
+			std::function<void(const SSessionPtr&)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr
 		) override;
 
 		void authenticateRefresh(
 			SSession session,
-			std::function<void (SSessionPtr)> successCallback = nullptr,
+			std::function<void (const SSessionPtr&)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr
 		) override {}
 
@@ -141,133 +139,22 @@ namespace Satori {
 			std::function<void()> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr
 		) override {}
-
 	private:
-		Nakama::NHttpTransportPtr _httpClient;
-
+		RestReqContext* createReqContext(SFromJsonInterface* data);
 		// Takes ownership of ctx pointer
-		template <typename T>
         void sendReq(
-            RestReqContext<T>* ctx,
+            RestReqContext* ctx,
             Nakama::NHttpReqMethod method,
             std::string&& path,
             std::string&& body,
-            Nakama::NHttpQueryArgs&& args = Nakama::NHttpQueryArgs()){
-			if(ctx == nullptr) {
-				reqError<T>(nullptr, Nakama::NError("Satori request context not found.", Nakama::ErrorCode::InternalError));
-				return;
-			}
-
-			Nakama::NHttpRequest req;
-
-			req.method    = method;
-			req.path      = std::move(path);
-			req.body      = std::move(body);
-			req.queryArgs = std::move(args);
-
-			req.headers.emplace("Accept", "application/json");
-			req.headers.emplace("Content-Type", "application/json");
-			if (!ctx->auth.empty()) {
-				req.headers.emplace("Authorization", std::move(ctx->auth));
-			}
-
-			_httpClient->request(req, [this, ctx](Nakama::NHttpResponsePtr response) {
-				// TODO: Convert this boilerplate lambda back into a function that can be used from within Satori cpp. Boilerplate begins here	============
-				[&]()//void RestClient::onResponse(RestReqContext* reqContext, NHttpResponsePtr response)
-				{
-			        if (response->statusCode == 200) {// OK
-			            if (ctx && ctx->successCallback) {
-			                bool ok = true;
-			            	assert(ctx->jsonToType);
-			                if (ctx->data && !ctx->jsonToType(response->body, ctx->data)) {
-		                        reqError<T>(ctx, Nakama::NError("Parse JSON failed fro Satori. HTTP body: " + response->body, Nakama::ErrorCode::InternalError));
-		                    }
-
-			                if (ok) {
-			                    ctx->successCallback();
-			                }
-			            }
-			        } else {
-			            std::string errMessage;
-			            Nakama::ErrorCode code = Nakama::ErrorCode::Unknown;
-
-			            if (response->statusCode == Nakama::InternalStatusCodes::CONNECTION_ERROR) {
-			                code = Nakama::ErrorCode::ConnectionError;
-			                errMessage.append("message: ").append(response->errorMessage);
-			            } else if (response->statusCode == Nakama::InternalStatusCodes::CANCELLED_BY_USER) {
-			                code = Nakama::ErrorCode::CancelledByUser;
-			                errMessage.append("message: ").append(response->errorMessage);
-			            } else if (response->statusCode == Nakama::InternalStatusCodes::INTERNAL_TRANSPORT_ERROR) {
-			                code = Nakama::ErrorCode::InternalError;
-			                errMessage.append("message: ").append(response->errorMessage);
-			            } else if (!response->body.empty() && response->body[0] == '{') {// have to be JSON
-			                /*
-			                 try {
-			                    rapidjson::Document document;
-
-			                    if (document.Parse(response->body).HasParseError()) {
-			                        errMessage = "Parse JSON failed: " + response->body;
-			                        code = Nakama::ErrorCode::InternalError;
-			                    } else {
-			                        auto& jsonMessage = document["message"];
-			                        auto& jsonCode    = document["code"];
-
-			                        if (jsonMessage.IsString()) {
-			                            errMessage.append("message: ").append(jsonMessage.GetString());
-			                        }
-
-			                        if (jsonCode.IsNumber()) {
-			                            int serverErrCode = jsonCode.GetInt();
-
-			                            switch (serverErrCode) {
-			                            case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
-			                            case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
-			                            case grpc::StatusCode::NOT_FOUND        : code = ErrorCode::NotFound; break;
-			                            case grpc::StatusCode::ALREADY_EXISTS   : code = ErrorCode::AlreadyExists; break;
-			                            case grpc::StatusCode::INVALID_ARGUMENT : code = ErrorCode::InvalidArgument; break;
-			                            case grpc::StatusCode::UNAUTHENTICATED  : code = ErrorCode::Unauthenticated; break;
-			                            case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
-
-			                            default:
-			                                errMessage.append("\ncode: ").append(std::to_string(serverErrCode));
-			                                break;
-			                            }
-			                        }
-			                    }
-			                } catch (std::exception& e) {
-			                    NLOG_ERROR("exception: " + std::string(e.what()));
-			                }
-			                */
-			            }
-
-			            if (errMessage.empty()) {
-			                errMessage.append("message: ").append(response->errorMessage);
-			                errMessage.append("\nHTTP status: ").append(std::to_string(response->statusCode));
-			                errMessage.append("\nbody: ").append(response->body);
-			            }
-
-			            reqError(ctx, Nakama::NError(std::move(errMessage), code));
-			        }
-				}();
-				// TODO: Convert this boilerplate lambda back into a function that can be used from within Satori cpp. Boilerplate ends here	============
-			});
-
-			delete ctx;
-	}
+            Nakama::NHttpQueryArgs&& args = Nakama::NHttpQueryArgs());
 
 		// Does not take ownership of ctx pointer
-		template <typename T>
-		void reqError(RestReqContext<T>* ctx, const Nakama::NError &error) const{
-			NLOG_ERROR(error);
+		void reqError(RestReqContext* ctx, const Nakama::NError &error) const;
 
-			if (ctx && ctx->errorCallback) {
-				ctx->errorCallback(error);
-			} else if (_defaultErrorCallback) {
-				_defaultErrorCallback(error);
-			} else {
-				NLOG_WARN("^ error not handled");
-			}
-		}
+	private:
+		std::set<RestReqContext*> _reqContexts;
+		Nakama::NHttpTransportPtr _httpClient;
 	};
 }
 

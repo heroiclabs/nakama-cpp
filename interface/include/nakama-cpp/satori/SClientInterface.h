@@ -17,6 +17,7 @@
 #pragma once
 
 #include <memory>
+#include <future>
 
 #include "HardcodedLowLevelSatoriAPI.h"
 #include "nakama-cpp/NClientInterface.h"
@@ -38,7 +39,7 @@ namespace Satori {
     		std::string id,
     		std::map<std::string,std::string> defaultProperties,
     		std::map<std::string,std::string> customProperties,
-    		std::function<void (SSessionPtr)> successCallback = nullptr,
+    		std::function<void (const SSessionPtr&)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SSessionPtr> authenticateAsync(
@@ -48,7 +49,7 @@ namespace Satori {
 
     	virtual void authenticateRefresh(
             SSession session,
-    		std::function<void (SSessionPtr)> successCallback = nullptr,
+    		std::function<void (const SSessionPtr&)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual void authenticateLogout(

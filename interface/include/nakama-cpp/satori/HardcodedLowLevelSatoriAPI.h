@@ -22,6 +22,11 @@
 #include <ctime>
 
 namespace Satori {
+    struct SFromJsonInterface {
+        virtual ~SFromJsonInterface() {}
+        virtual bool jsonToType(std::string jsonString, SFromJsonInterface* result) = 0;
+    };
+
     // Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
     struct SAuthenticateLogoutRequest {
         // Session token to log out.
@@ -131,7 +136,7 @@ namespace Satori {
     };
 
     // A single live event.
-    struct SLiveEvent {
+    struct SLiveEvent : public SFromJsonInterface {
         // Name.
         std::string name;
         // Description.
@@ -152,12 +157,16 @@ namespace Satori {
         int64_t duration_sec;
         // Reset CRON schedule, if configured.
         std::string reset_cron;
+
+        bool jsonToType(std::string jsonString, SFromJsonInterface* result) override;
     };
 
     // List of Live events.
-    struct SLiveEventList {
+    struct SLiveEventList : public SFromJsonInterface {
         // Live events.
         std::vector<SLiveEvent> live_events;
+
+        bool jsonToType(std::string jsonString, SFromJsonInterface* result) override;
     };
 
     // Properties associated with an identity.
