@@ -41,6 +41,11 @@ namespace Satori {
     		std::function<void (SSessionPtr)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
+    	virtual std::future<SSessionPtr> authenticateAsync(
+    		std::string id,
+			std::map<std::string,std::string> defaultProperties,
+			std::map<std::string,std::string> customProperties) = 0;
+
     	virtual void authenticateRefresh(
             SSession session,
     		std::function<void (SSessionPtr)> successCallback = nullptr,
@@ -84,8 +89,7 @@ namespace Satori {
             SSessionPtr session,
 			const std::vector<std::string>& liveEventNames,
 			std::function<void(SLiveEventList)> successCallback = nullptr,
-		    Nakama::ErrorCallback errorCallback = nullptr
-		) = 0;
+		    Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	/**
 		 * Fetch one or more users by id, usernames, and Facebook ids.
@@ -95,8 +99,7 @@ namespace Satori {
 		 */
     	virtual std::future<SLiveEventList> getLiveEventsAsync(
     		SSessionPtr session,
-			const std::vector<std::string>& liveEventNames
-		) = 0;
+			const std::vector<std::string>& liveEventNames) = 0;
 
     	virtual void identify(
             SSessionPtr session,
