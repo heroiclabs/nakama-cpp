@@ -32,8 +32,7 @@ R getFromFuture(std::future<R> f, Satori::SatoriRestClient& client) {
 }
 
 int main(int argc, char** argv) {
-
-	//try {
+	try {
 		std::cout << "Hello, World, I'm Satori cpp interface!\n";
 
 		bool done = false;
@@ -47,11 +46,11 @@ int main(int argc, char** argv) {
 		Satori::SLiveEventList liveEvents = getFromFuture(client.getLiveEventsAsync(session), client);
 
 		std::cout << "Live events num:" << liveEvents.live_events.size() << std::endl;
-	// } catch (const std::future_error& e) {
-	// 	std::cout << "Caught a future_error with code \"" << e.code()
-	// 			  << "\"\nMessage: \"" << e.what() << "\"\n";
-	// } catch (const std::exception& e) {
-	// 	std::cout << "Caught a exception with code \"" << e.what() << "\"\n";
-	// }
+	} catch (const std::future_error& e) {
+		std::cout << "Caught a future_error with code \"" << e.code()
+				  << "\"\nMessage: \"" << e.what() << "\"\n";
+	} catch (const std::exception& e) {
+		std::cout << "Caught a exception with code \"" << e.what() << "\"\n";
+	}
 	return 0;
 }

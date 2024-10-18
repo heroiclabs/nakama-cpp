@@ -205,8 +205,11 @@ namespace Satori {
 		        if (response->statusCode == 200) {// OK
 		            if (ctx && ctx->successCallback) {
 		                bool ok = true;
-		                if (ctx->data && !ctx->data->jsonToType(response->body, ctx->data)) {
-	                        reqError(ctx, Nakama::NError("Parse JSON failed fro Satori. HTTP body: " + response->body, Nakama::ErrorCode::InternalError));
+		            	if (ctx->data) {
+		            		ok = ctx->data->jsonToType(response->body, ctx->data);
+							if (!ok) {
+								reqError(ctx, Nakama::NError("Parse JSON failed for Satori. HTTP body: " + response->body, Nakama::ErrorCode::InternalError));
+							}
 	                    }
 
 		                if (ok) {
