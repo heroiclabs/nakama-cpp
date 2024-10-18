@@ -170,13 +170,15 @@ namespace Satori {
     };
 
     // Properties associated with an identity.
-    struct SProperties {
+    struct SProperties : public SFromJsonInterface {
         // Event default properties.
         std::map<std::string,std::string> default_properties;
         // Event computed properties.
         std::map<std::string,std::string> computed_properties;
         // Event custom properties.
         std::map<std::string,std::string> custom_properties;
+
+        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
     };
 
     // A session.
