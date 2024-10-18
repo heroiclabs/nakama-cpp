@@ -112,11 +112,15 @@ namespace Satori {
 			};
 			ctx->errorCallback = std::move(errorCallback);
 
-			Nakama::NHttpQueryArgs args;
 
-			args.emplace("id", Nakama::encodeURIComponent(id));
+			Nakama::rapidjson::Document document;
+			document.SetObject();
 
-			sendReq(ctx, Nakama::NHttpReqMethod::POST, "/v1/authenticate", "", std::move(args));
+			document.AddMember("id", id, document.GetAllocator());
+
+			std::string body = jsonDocToStr(document);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::POST, "/v1/authenticate", std::move(body));
 
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));

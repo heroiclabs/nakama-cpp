@@ -1,3 +1,6 @@
+To find the apiKey within the satori server, you can connect to http://localhost:7451/settings/server-keys and get the default key for testing.
+If you deployed the docker from the satori repo directly, you can connect with the default credentials admin@satoriserver.com/password
+
 To generate the interface, you need the repositories nakama and satori in the same parent folder as this repository.
 
 On nakama:

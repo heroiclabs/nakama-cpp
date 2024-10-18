@@ -20,7 +20,7 @@
 #include "../src/SatoriRestClient.h"
 
 template<typename R>
-R getFuture(std::future<R> f, Satori::SatoriRestClient& client) {
+R getFromFuture(std::future<R> f, Satori::SatoriRestClient& client) {
 	if(!f.valid()) {
 		return R();
 	}
@@ -33,25 +33,25 @@ R getFuture(std::future<R> f, Satori::SatoriRestClient& client) {
 
 int main(int argc, char** argv) {
 
-	try {
+	//try {
 		std::cout << "Hello, World, I'm Satori cpp interface!\n";
 
 		bool done = false;
 
 		Nakama::NClientParameters parameters = Nakama::NClientParameters();
-		parameters.serverKey = "apiKey";
+		parameters.serverKey = "a76ae76b-3342-4cbd-9c54-f532c5c1a949";
 		Satori::SatoriRestClient client = Satori::SatoriRestClient(parameters, Nakama::createDefaultHttpTransport(parameters.platformParams));
 
-		Satori::SSessionPtr session = getFuture(client.authenticateAsync("11111111-1111-0000-0000-000000000000"), client);
+		Satori::SSessionPtr session = getFromFuture(client.authenticateAsync("11111111-1111-0000-0000-000000000000"), client);
 
-		Satori::SLiveEventList liveEvents = getFuture(client.getLiveEventsAsync(session), client);
+		Satori::SLiveEventList liveEvents = getFromFuture(client.getLiveEventsAsync(session), client);
 
 		std::cout << "Live events num:" << liveEvents.live_events.size() << std::endl;
-	} catch (const std::future_error& e) {
-		std::cout << "Caught a future_error with code \"" << e.code()
-				  << "\"\nMessage: \"" << e.what() << "\"\n";
-	} catch (const std::exception& e) {
-		std::cout << "Caught a exception with code \"" << e.what() << "\"\n";
-	}
+	// } catch (const std::future_error& e) {
+	// 	std::cout << "Caught a future_error with code \"" << e.code()
+	// 			  << "\"\nMessage: \"" << e.what() << "\"\n";
+	// } catch (const std::exception& e) {
+	// 	std::cout << "Caught a exception with code \"" << e.what() << "\"\n";
+	// }
 	return 0;
 }
