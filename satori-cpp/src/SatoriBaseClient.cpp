@@ -20,12 +20,12 @@
 namespace Satori {
 	std::future<SSessionPtr> SatoriBaseClient::authenticateAsync(
 		std::string id,
-		std::map<std::string,std::string> defaultProperties,
-		std::map<std::string,std::string> customProperties
+		std::unordered_map<std::string,std::string> defaultProperties,
+		std::unordered_map<std::string,std::string> customProperties
 	) {
 		auto promise = std::make_shared<std::promise<SSessionPtr>>();
 
-		authenticate(id, {}, {},
+		authenticate(id, defaultProperties, customProperties,
 			[=](const SSessionPtr& session) {
 				promise->set_value(session);
 			},
@@ -56,12 +56,12 @@ namespace Satori {
 	std::future<SSessionPtr> SatoriBaseClient::identifyAsync(
 		SSessionPtr session,
 		std::string id,
-		std::map<std::string, std::string> defaultProperties,
-		std::map<std::string, std::string> customProperties
+		std::unordered_map<std::string, std::string> defaultProperties,
+		std::unordered_map<std::string, std::string> customProperties
 	) {
 		std::shared_ptr<std::promise<SSessionPtr>> promise = std::make_shared<std::promise<SSessionPtr>>();
 
-		identify(session, id, {}, {},
+		identify(session, id, defaultProperties, customProperties,
 			[=](const SSessionPtr& session) {
 				promise->set_value(session);
 			},

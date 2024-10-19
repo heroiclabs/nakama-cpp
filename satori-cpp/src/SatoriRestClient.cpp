@@ -95,8 +95,8 @@ namespace Satori {
 
 	void SatoriRestClient::authenticate(
 		std::string id,
-		std::map<std::string, std::string> defaultProperties,
-		std::map<std::string, std::string> computedProperties,
+		std::unordered_map<std::string, std::string> defaultProperties,
+		std::unordered_map<std::string, std::string> computedProperties,
 		std::function<void(const SSessionPtr&)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
@@ -161,8 +161,8 @@ namespace Satori {
 	void SatoriRestClient::identify(
 		SSessionPtr session,
 		std::string id,
-		std::map<std::string, std::string> defaultProperties,
-		std::map<std::string, std::string> customProperties,
+		std::unordered_map<std::string, std::string> defaultProperties,
+		std::unordered_map<std::string, std::string> customProperties,
 		std::function<void(const SSessionPtr&)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {

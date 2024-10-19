@@ -40,15 +40,15 @@ namespace Satori {
 
     	virtual void authenticate(
     		std::string id,
-    		std::map<std::string,std::string> defaultProperties = {},
-    		std::map<std::string,std::string> customProperties = {},
+    		std::unordered_map<std::string,std::string> defaultProperties = {},
+    		std::unordered_map<std::string,std::string> customProperties = {},
     		std::function<void (const SSessionPtr&)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SSessionPtr> authenticateAsync(
     		std::string id,
-			std::map<std::string,std::string> defaultProperties = {},
-			std::map<std::string,std::string> customProperties = {}) = 0;
+			std::unordered_map<std::string,std::string> defaultProperties = {},
+			std::unordered_map<std::string,std::string> customProperties = {}) = 0;
 
     	virtual void authenticateRefresh(
             SSession session,
@@ -108,16 +108,16 @@ namespace Satori {
     	virtual void identify(
             SSessionPtr session,
     		std::string id,
-    		std::map<std::string,std::string> defaultProperties = {},
-    		std::map<std::string,std::string> customProperties = {},
+    		std::unordered_map<std::string,std::string> defaultProperties = {},
+    		std::unordered_map<std::string,std::string> customProperties = {},
     		std::function<void (const SSessionPtr&)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SSessionPtr> identifyAsync(
 			SSessionPtr session,
 			std::string id,
-			std::map<std::string,std::string> defaultProperties = {},
-			std::map<std::string,std::string> customProperties = {}) = 0;
+			std::unordered_map<std::string,std::string> defaultProperties = {},
+			std::unordered_map<std::string,std::string> customProperties = {}) = 0;
 
     	virtual void listIdentityProperties(
             SSessionPtr session,
@@ -126,8 +126,8 @@ namespace Satori {
 
     	virtual void updateProperties(
     		SSessionPtr session,
-    		std::map<std::string,std::string> defaultProperties,
-    		std::map<std::string,std::string> customProperties,
+    		std::unordered_map<std::string,std::string> defaultProperties,
+    		std::unordered_map<std::string,std::string> customProperties,
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 

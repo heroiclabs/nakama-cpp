@@ -52,10 +52,10 @@ namespace Satori {
         std::string id;
         // Optional default properties to update with this call.
         // If not set, properties are left as they are on the server.
-        std::map<std::string,std::string> default_properties;
+        std::unordered_map<std::string,std::string> default_properties;
         // Optional custom properties to update with this call.
         // If not set, properties are left as they are on the server.
-        std::map<std::string,std::string> custom_properties;
+        std::unordered_map<std::string,std::string> custom_properties;
 
         bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
     };
@@ -68,7 +68,7 @@ namespace Satori {
         // If not supplied the server will assign a randomly generated unique event identifier.
         std::string id;
         // Event metadata, if any.
-        std::map<std::string,std::string> metadata;
+        std::unordered_map<std::string,std::string> metadata;
         // Optional value.
         std::string value;
         // The time when the event was triggered on the producer side.
@@ -198,11 +198,11 @@ namespace Satori {
     // Properties associated with an identity.
     struct SProperties : public SFromJsonInterface {
         // Event default properties.
-        std::map<std::string,std::string> default_properties;
+        std::unordered_map<std::string,std::string> default_properties;
         // Event computed properties.
-        std::map<std::string,std::string> computed_properties;
+        std::unordered_map<std::string,std::string> computed_properties;
         // Event custom properties.
-        std::map<std::string,std::string> custom_properties;
+        std::unordered_map<std::string,std::string> custom_properties;
 
         bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
     };
@@ -222,9 +222,9 @@ namespace Satori {
     // Update Properties associated with this identity.
     struct SUpdatePropertiesRequest : public SFromJsonInterface {
         // Event default properties.
-        std::map<std::string,std::string> default_properties;
+        std::unordered_map<std::string,std::string> default_properties;
         // Event custom properties.
-        std::map<std::string,std::string> custom_properties;
+        std::unordered_map<std::string,std::string> custom_properties;
         // Informs the server to recompute the audience membership of the identity.
         bool recompute;
 

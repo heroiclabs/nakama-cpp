@@ -40,8 +40,8 @@ namespace Satori {
 
 		void authenticate(
 			std::string id,
-			std::map<std::string, std::string> defaultProperties,
-			std::map<std::string, std::string> customProperties,
+			std::unordered_map<std::string, std::string> defaultProperties,
+			std::unordered_map<std::string, std::string> customProperties,
 			std::function<void(const SSessionPtr&)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
@@ -95,8 +95,8 @@ namespace Satori {
 		void identify(
 			SSessionPtr session,
 			std::string id,
-			std::map<std::string,std::string> defaultProperties,
-			std::map<std::string,std::string> customProperties,
+			std::unordered_map<std::string,std::string> defaultProperties,
+			std::unordered_map<std::string,std::string> customProperties,
 			std::function<void (const SSessionPtr&)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
@@ -109,8 +109,8 @@ namespace Satori {
 
 		void updateProperties(
 			SSessionPtr session,
-			std::map<std::string,std::string> defaultProperties,
-			std::map<std::string,std::string> customProperties,
+			std::unordered_map<std::string,std::string> defaultProperties,
+			std::unordered_map<std::string,std::string> customProperties,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override {}

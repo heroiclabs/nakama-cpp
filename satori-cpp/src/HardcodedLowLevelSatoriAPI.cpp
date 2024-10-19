@@ -21,7 +21,7 @@
 #include "rapidjson/error/en.h"
 
 namespace Satori{
-	bool jsonValueToStringMap(const rapidjson::Value& input, std::map<std::string, std::string>& output) {
+	bool jsonValueToStringMap(const rapidjson::Value& input, std::unordered_map<std::string, std::string>& output) {
 		for (rapidjson::Value::ConstMemberIterator iter = input.MemberBegin(); iter != input.MemberEnd(); ++iter){
 			output[iter->name.GetString()] = iter->value.GetString();
 		}
