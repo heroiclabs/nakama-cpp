@@ -35,17 +35,20 @@ namespace Satori {
     public:
     	virtual ~SClientInterface() {}
 
+    	virtual void disconnect() = 0;
+    	virtual void tick() = 0;
+
     	virtual void authenticate(
     		std::string id,
-    		std::map<std::string,std::string> defaultProperties,
-    		std::map<std::string,std::string> customProperties,
+    		std::map<std::string,std::string> defaultProperties = {},
+    		std::map<std::string,std::string> customProperties = {},
     		std::function<void (const SSessionPtr&)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SSessionPtr> authenticateAsync(
     		std::string id,
-			std::map<std::string,std::string> defaultProperties,
-			std::map<std::string,std::string> customProperties) = 0;
+			std::map<std::string,std::string> defaultProperties = {},
+			std::map<std::string,std::string> customProperties = {}) = 0;
 
     	virtual void authenticateRefresh(
             SSession session,
@@ -88,7 +91,7 @@ namespace Satori {
 		 */
     	virtual void getLiveEvents(
             SSessionPtr session,
-			const std::vector<std::string>& liveEventNames,
+			const std::vector<std::string>& liveEventNames = {},
 			std::function<void(SLiveEventList)> successCallback = nullptr,
 		    Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
@@ -100,15 +103,21 @@ namespace Satori {
 		 */
     	virtual std::future<SLiveEventList> getLiveEventsAsync(
     		SSessionPtr session,
-			const std::vector<std::string>& liveEventNames) = 0;
+			const std::vector<std::string>& liveEventNames = {}) = 0;
 
     	virtual void identify(
             SSessionPtr session,
     		std::string id,
-    		std::map<std::string,std::string> defaultProperties,
-    		std::map<std::string,std::string> customProperties,
-    		std::function<void (SSession)> successCallback = nullptr,
+    		std::map<std::string,std::string> defaultProperties = {},
+    		std::map<std::string,std::string> customProperties = {},
+    		std::function<void (const SSessionPtr&)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual std::future<SSessionPtr> identifyAsync(
+			SSessionPtr session,
+			std::string id,
+			std::map<std::string,std::string> defaultProperties = {},
+			std::map<std::string,std::string> customProperties = {}) = 0;
 
     	virtual void listIdentityProperties(
             SSessionPtr session,

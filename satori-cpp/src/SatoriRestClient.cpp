@@ -158,6 +158,64 @@ namespace Satori {
 		}
 	}
 
+	void SatoriRestClient::identify(
+		SSessionPtr session,
+		std::string id,
+		std::map<std::string, std::string> defaultProperties,
+		std::map<std::string, std::string> customProperties,
+		std::function<void(const SSessionPtr&)> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+		try {
+			NLOG_INFO("...");
+
+			auto sessionData(std::make_shared<SSession>());
+			RestReqContext* ctx = createReqContext(sessionData);
+			setSessionAuth(ctx, session);
+			ctx->successCallback = [sessionData, successCallback]()
+			{
+				successCallback(sessionData);
+			};
+			ctx->errorCallback = std::move(errorCallback);
+
+			Nakama::rapidjson::Document document;
+			document.SetObject();
+
+			document.AddMember("id", id, document.GetAllocator());
+
+			Nakama::rapidjson::Value jsonDefaultProperties;
+			jsonDefaultProperties.SetObject();
+			for (auto& obj : defaultProperties)
+			{
+				jsonDefaultProperties.AddMember(
+					Nakama::rapidjson::Value(obj.first,document.GetAllocator()).Move(),
+					Nakama::rapidjson::Value(obj.second, document.GetAllocator()).Move(),
+					document.GetAllocator()
+				);
+			}
+			document.AddMember("default", std::move(jsonDefaultProperties), document.GetAllocator());
+
+			Nakama::rapidjson::Value jsonCustomProperties;
+			jsonCustomProperties.SetObject();
+			for (auto& obj : customProperties)
+			{
+				jsonCustomProperties.AddMember(
+					Nakama::rapidjson::Value(obj.first,document.GetAllocator()).Move(),
+					Nakama::rapidjson::Value(obj.second, document.GetAllocator()).Move(),
+					document.GetAllocator()
+				);
+			}
+			document.AddMember("custom", std::move(jsonCustomProperties), document.GetAllocator());
+
+			std::string body = jsonDocToStr(document);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::PUT, "/v1/identify", std::move(body));
+
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
+	}
+
 	RestReqContext* SatoriRestClient::createReqContext(std::shared_ptr<SFromJsonInterface> data) {
 		RestReqContext* ctx = new RestReqContext();
 		ctx->data = data;

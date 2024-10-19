@@ -43,12 +43,31 @@ namespace Satori {
 		std::shared_ptr<std::promise<SLiveEventList>> promise = std::make_shared<std::promise<SLiveEventList>>();
 
 		getLiveEvents(session, liveEventNames,
-		[=](const SLiveEventList& liveEvents) {
-			promise->set_value(liveEvents);
-		},
-		[=](const Nakama::NError& error) {
-			promise->set_exception(std::make_exception_ptr<Nakama::NException>(error));
-		});
+			[=](const SLiveEventList& liveEvents) {
+				promise->set_value(liveEvents);
+			},
+			[=](const Nakama::NError& error) {
+				promise->set_exception(std::make_exception_ptr<Nakama::NException>(error));
+			});
+
+		return promise->get_future();
+	}
+
+	std::future<SSessionPtr> SatoriBaseClient::identifyAsync(
+		SSessionPtr session,
+		std::string id,
+		std::map<std::string, std::string> defaultProperties,
+		std::map<std::string, std::string> customProperties
+	) {
+		std::shared_ptr<std::promise<SSessionPtr>> promise = std::make_shared<std::promise<SSessionPtr>>();
+
+		identify(session, id, {}, {},
+			[=](const SSessionPtr& session) {
+				promise->set_value(session);
+			},
+			[=](const Nakama::NError& error) {
+				promise->set_exception(std::make_exception_ptr<Nakama::NException>(error));
+			});
 
 		return promise->get_future();
 	}

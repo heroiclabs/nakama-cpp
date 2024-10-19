@@ -21,6 +21,7 @@ target_link_libraries(satori-test
 		nakama::sdk-core-common
 		nakama::sdk-client-factory
 		nakama::sdk-core-misc
+		nakama::sdk-core-rest
 )
 
 target_compile_features(satori-test PRIVATE cxx_std_14)

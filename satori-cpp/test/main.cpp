@@ -16,16 +16,15 @@
 
 #include <iostream>
 
-#include "nakama-cpp/ClientFactory.h"
-#include "../src/SatoriRestClient.h"
+#include "nakama-cpp/satori/SatoriClientFactory.h"
 
 template<typename R>
-R getFromFuture(std::future<R> f, Satori::SatoriRestClient& client) {
+R getFromFuture(std::future<R> f, Satori::SClientPtr client) {
 	if(!f.valid()) {
 		return R();
 	}
 	while(!(f.wait_for(std::chrono::seconds(0)) == std::future_status::ready)) {
-		client.tick();
+		client->tick();
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
 	return f.get();
@@ -39,11 +38,11 @@ int main(int argc, char** argv) {
 
 		Nakama::NClientParameters parameters = Nakama::NClientParameters();
 		parameters.serverKey = "a76ae76b-3342-4cbd-9c54-f532c5c1a949";
-		Satori::SatoriRestClient client = Satori::SatoriRestClient(parameters, Nakama::createDefaultHttpTransport(parameters.platformParams));
+		Satori::SClientPtr client = Satori::createRestClient(parameters, Nakama::createDefaultHttpTransport(parameters.platformParams));
 
-		Satori::SSessionPtr session = getFromFuture(client.authenticateAsync("11111111-1111-0000-0000-000000000000"), client);
+		Satori::SSessionPtr session = getFromFuture(client->authenticateAsync("11111111-1111-0000-0000-000000000000"), client);
 
-		Satori::SLiveEventList liveEvents = getFromFuture(client.getLiveEventsAsync(session), client);
+		Satori::SLiveEventList liveEvents = getFromFuture(client->getLiveEventsAsync(session), client);
 
 		std::cout << "Live events num:" << liveEvents.live_events.size() << std::endl;
 	} catch (const std::future_error& e) {

@@ -27,13 +27,20 @@ namespace Satori {
 	public:
 		std::future<SSessionPtr> authenticateAsync(
 			std::string id,
-			std::map<std::string,std::string> defaultProperties = {},
-			std::map<std::string,std::string> customProperties = {}
+			std::map<std::string,std::string> defaultProperties,
+			std::map<std::string,std::string> customProperties
 		) override;
 
 		std::future<SLiveEventList> getLiveEventsAsync(
 			SSessionPtr session,
-			const std::vector<std::string>& liveEventNames = {}
+			const std::vector<std::string>& liveEventNames
+		) override;
+
+		std::future<SSessionPtr> identifyAsync(
+			SSessionPtr session,
+			std::string id,
+			std::map<std::string,std::string> defaultProperties,
+			std::map<std::string,std::string> customProperties
 		) override;
 
 	protected:
