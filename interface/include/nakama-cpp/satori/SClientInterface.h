@@ -39,20 +39,20 @@ namespace Satori {
     	virtual void tick() = 0;
 
     	virtual void authenticate(
-    		std::string id,
-    		std::unordered_map<std::string,std::string> defaultProperties = {},
-    		std::unordered_map<std::string,std::string> customProperties = {},
-    		std::function<void (const SSessionPtr&)> successCallback = nullptr,
+    		const std::string& id,
+    		const std::unordered_map<std::string,std::string>& defaultProperties = {},
+    		const std::unordered_map<std::string,std::string>& customProperties = {},
+    		std::function<void (SSessionPtr)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SSessionPtr> authenticateAsync(
-    		std::string id,
-			std::unordered_map<std::string,std::string> defaultProperties = {},
-			std::unordered_map<std::string,std::string> customProperties = {}) = 0;
+    		const std::string& id,
+			const std::unordered_map<std::string,std::string>& defaultProperties = {},
+			const std::unordered_map<std::string,std::string>& customProperties = {}) = 0;
 
     	virtual void authenticateRefresh(
             SSession session,
-    		std::function<void (const SSessionPtr&)> successCallback = nullptr,
+    		std::function<void (SSessionPtr)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual void authenticateLogout(
@@ -67,21 +67,25 @@ namespace Satori {
 
     	virtual void postEvent(
             SSessionPtr session,
-    		std::vector <SEvent> events,
+    		const std::vector<SEvent>& events,
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual void getExperiments(
             SSessionPtr session,
-    		std::vector<std::string> names,
-			std::function<void(const SExperimentList&)> successCallback = nullptr,
+    		const std::vector<std::string>& names,
+			std::function<void(SExperimentList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual void getFlags(
             SSessionPtr session,
-			std::vector<std::string> names,
-			std::function<void(std::vector<SFlag>)> successCallback = nullptr,
+			const std::vector<std::string>& names = {},
+			std::function<void(SFlagList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual std::future<SFlagList> getFlagsAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& names = {}) = 0;
 
     	/**
 		 * Request to get all live events.
@@ -107,17 +111,17 @@ namespace Satori {
 
     	virtual void identify(
             SSessionPtr session,
-    		std::string id,
-    		std::unordered_map<std::string,std::string> defaultProperties = {},
-    		std::unordered_map<std::string,std::string> customProperties = {},
-    		std::function<void (const SSessionPtr&)> successCallback = nullptr,
+    		const std::string& id,
+    		const std::unordered_map<std::string,std::string>& defaultProperties = {},
+    		const std::unordered_map<std::string,std::string>& customProperties = {},
+    		std::function<void (SSessionPtr)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SSessionPtr> identifyAsync(
 			SSessionPtr session,
-			std::string id,
-			std::unordered_map<std::string,std::string> defaultProperties = {},
-			std::unordered_map<std::string,std::string> customProperties = {}) = 0;
+			const std::string& id,
+			const std::unordered_map<std::string,std::string>& defaultProperties = {},
+			const std::unordered_map<std::string,std::string>& customProperties = {}) = 0;
 
     	virtual void listIdentityProperties(
             SSessionPtr session,
@@ -126,30 +130,35 @@ namespace Satori {
 
     	virtual void updateProperties(
     		SSessionPtr session,
-    		std::unordered_map<std::string,std::string> defaultProperties,
-    		std::unordered_map<std::string,std::string> customProperties,
+    		const std::unordered_map<std::string,std::string>& defaultProperties = {},
+    		const std::unordered_map<std::string,std::string>& customProperties = {},
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual std::future<void> updatePropertiesAsync(
+			SSessionPtr session,
+			const std::unordered_map<std::string,std::string>& defaultProperties = {},
+			const std::unordered_map<std::string,std::string>& customProperties = {}) = 0;
 
     	virtual void getMessages(
 			SSessionPtr session,
 			int32_t limit,
 			bool forward,
-			std::string cursor,
+			const std::string& cursor,
 			std::function<void(SGetMessageListResponse)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual void updateMessage(
     		SSessionPtr session,
-    		std::string messageId,
-    		std::chrono::time_point<std::chrono::system_clock> readTime,
-    		std::chrono::time_point<std::chrono::system_clock> consumeTime,
+    		const std::string& messageId,
+    		const std::chrono::time_point<std::chrono::system_clock>& readTime,
+    		const std::chrono::time_point<std::chrono::system_clock>& consumeTime,
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual void deleteMessage(
     		SSessionPtr session,
-    		std::string messageId,
+    		const std::string& messageId,
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 

@@ -34,21 +34,21 @@ namespace Satori {
 	class SatoriRestClient : public SatoriBaseClient {
 	public:
 		explicit SatoriRestClient(const Nakama::NClientParameters& parameters, Nakama::NHttpTransportPtr httpClient);
-		~SatoriRestClient();
+		~SatoriRestClient() override;
 		void disconnect() override;
 		void tick() override;
 
 		void authenticate(
-			std::string id,
-			std::unordered_map<std::string, std::string> defaultProperties,
-			std::unordered_map<std::string, std::string> customProperties,
-			std::function<void(const SSessionPtr&)> successCallback,
+			const std::string& id,
+			const std::unordered_map<std::string, std::string>& defaultProperties,
+			const std::unordered_map<std::string, std::string>& customProperties,
+			std::function<void(SSessionPtr)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
 
 		void authenticateRefresh(
 			SSession session,
-			std::function<void (const SSessionPtr&)> successCallback,
+			std::function<void (SSessionPtr)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override {}
 
@@ -66,24 +66,24 @@ namespace Satori {
 
 		void postEvent(
 			SSessionPtr session,
-			std::vector <SEvent> events,
+			const std::vector<SEvent>& events,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override {}
 
 		void getExperiments(
 			SSessionPtr session,
-			std::vector<std::string> names,
-			std::function<void(const SExperimentList&)> successCallback,
+			const std::vector<std::string>& names,
+			std::function<void(SExperimentList)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override {}
 
 		void getFlags(
 			SSessionPtr session,
-			std::vector<std::string> names,
-			std::function<void(std::vector<SFlag>)> successCallback,
+			const std::vector<std::string>& names,
+			std::function<void(SFlagList)> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 
 		void getLiveEvents(
 			SSessionPtr session,
@@ -94,10 +94,10 @@ namespace Satori {
 
 		void identify(
 			SSessionPtr session,
-			std::string id,
-			std::unordered_map<std::string,std::string> defaultProperties,
-			std::unordered_map<std::string,std::string> customProperties,
-			std::function<void (const SSessionPtr&)> successCallback,
+			const std::string& id,
+			const std::unordered_map<std::string,std::string>& defaultProperties,
+			const std::unordered_map<std::string,std::string>& customProperties,
+			std::function<void (SSessionPtr)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
 
@@ -109,8 +109,8 @@ namespace Satori {
 
 		void updateProperties(
 			SSessionPtr session,
-			std::unordered_map<std::string,std::string> defaultProperties,
-			std::unordered_map<std::string,std::string> customProperties,
+			const std::unordered_map<std::string,std::string>& defaultProperties,
+			const std::unordered_map<std::string,std::string>& customProperties,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override {}
@@ -119,23 +119,23 @@ namespace Satori {
 			SSessionPtr session,
 			int32_t limit,
 			bool forward,
-			std::string cursor,
+			const std::string& cursor,
 			std::function<void(SGetMessageListResponse)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override {}
 
 		void updateMessage(
 			SSessionPtr session,
-			std::string messageId,
-			std::chrono::time_point<std::chrono::system_clock> readTime,
-			std::chrono::time_point<std::chrono::system_clock> consumeTime,
+			const std::string& messageId,
+			const std::chrono::time_point<std::chrono::system_clock>& readTime,
+			const std::chrono::time_point<std::chrono::system_clock>& consumeTime,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override {}
 
 		void deleteMessage(
 			SSessionPtr session,
-			std::string messageId,
+			const std::string& messageId,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override {}

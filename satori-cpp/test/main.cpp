@@ -43,9 +43,10 @@ int main(int argc, char** argv) {
 		Satori::SSessionPtr session1 = getFromFuture(client->authenticateAsync("11111111-1111-0000-0000-000000000000",{},{{"pushTokenIos", "foo"}}), client);
 		Satori::SSessionPtr session2 = getFromFuture(client->authenticateAsync("22222222-2222-0000-0000-000000000000",{},{{"pushTokenAndroid", "bar"}}), client);
 		Satori::SSessionPtr session3 = getFromFuture(client->identifyAsync(session1, "22222222-2222-0000-0000-000000000000"), client);
-		Satori::SLiveEventList liveEvents = getFromFuture(client->getLiveEventsAsync(session3), client);
+		Satori::SFlagList testResult = getFromFuture(client->getFlagsAsync(session3), client);
 
-		std::cout << "Live events num:" << liveEvents.live_events.size() << std::endl;
+		//Satori::SLiveEventList liveEvents = getFromFuture(client->getLiveEventsAsync(session3), client);
+		//std::cout << "Live events num:" << liveEvents.live_events.size() << std::endl;
 	} catch (const std::future_error& e) {
 		std::cout << "Caught a future_error with code \"" << e.code()
 				  << "\"\nMessage: \"" << e.what() << "\"\n";

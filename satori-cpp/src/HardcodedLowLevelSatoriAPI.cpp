@@ -21,6 +21,13 @@
 #include "rapidjson/error/en.h"
 
 namespace Satori{
+	bool jsonValueToStringVector(const rapidjson::Value& input, std::vector<std::string>& output) {
+		for (rapidjson::Value::ConstMemberIterator iter = input.MemberBegin(); iter != input.MemberEnd(); ++iter){
+			output.emplace_back(iter->value.GetString());
+		}
+		return true;
+	}
+
 	bool jsonValueToStringMap(const rapidjson::Value& input, std::unordered_map<std::string, std::string>& output) {
 		for (rapidjson::Value::ConstMemberIterator iter = input.MemberBegin(); iter != input.MemberEnd(); ++iter){
 			output[iter->name.GetString()] = iter->value.GetString();
@@ -63,14 +70,55 @@ namespace Satori{
 		return false;
 	}
 
-	bool SFlag::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool jsonValueToSFlag(const rapidjson::Value& input, SFlag& output){
+		if(input.HasMember("name") && !input["name"].IsString()) {
+			return false;
+		}
+		output.name = input["name"].GetString();
+		if(input.HasMember("value") && !input["value"].IsString()) {
+			return false;
+		}
+		output.value = input["value"].GetString();
+		// TODO: Figure out how to obtain this value and set it here if it can be obtained from the json we have
+		bool condition_changed = false;
+		return true;
+	}
 
-		return false;
+	bool SFlag::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+		std::shared_ptr<SFlag> typedResult = std::dynamic_pointer_cast<SFlag>(result);
+		if(typedResult == nullptr) {
+			NLOG_ERROR(Nakama::NError("Incorrect empty result type passed to SFlag::jsonToType"));
+			return false;
+		}
+		rapidjson::Document d;
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SFlag JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
+		return jsonValueToSFlag(d, *typedResult);
 	}
 
 	bool SFlagList::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+		std::shared_ptr<SFlagList> typedResult = std::dynamic_pointer_cast<SFlagList>(result);
+		if(typedResult == nullptr) {
+			NLOG_ERROR(Nakama::NError("Incorrect empty result type passed to SFlagList::jsonToType"));
+			return false;
+		}
+		rapidjson::Document d;
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SFlagList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
 
-		return false;
+		// TODO: Error handling! Now if some field is not as expected, it just crashes. Example at: https://github.com/Tencent/rapidjson/blob/master/example/tutorial/tutorial.cpp
+		for (auto& jsonFlag : d["flags"].GetArray()) {
+			SFlag flag;
+			if(!jsonValueToSFlag(jsonFlag, flag)) {
+				return false;
+			}
+			typedResult->flags.emplace_back(flag);
+		}
+		return true;
 	}
 
 	bool SGetExperimentsRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
@@ -107,8 +155,7 @@ namespace Satori{
 		return false;
 	}
 
-	bool jsonValueToSProperty(const rapidjson::Value& input, SProperties& output){
-		// TODO: Error handling! Now if some field is not as expected, it just crashes. https://github.com/Tencent/rapidjson/blob/master/example/tutorial/tutorial.cpp
+	bool jsonValueToSProperties(const rapidjson::Value& input, SProperties& output){
 		if(input.HasMember("default") && !jsonValueToStringMap(input["default"], output.default_properties)) {
 			return false;
 		}
@@ -132,7 +179,7 @@ namespace Satori{
 			NLOG_ERROR(Nakama::NError("Parse SProperties JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
 			return false;
 		}
-		return jsonValueToSProperty(d, *typedResult);
+		return jsonValueToSProperties(d, *typedResult);
 	}
 
 	bool SSession::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
@@ -146,13 +193,10 @@ namespace Satori{
 			NLOG_ERROR(Nakama::NError("Parse SSession JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
 			return false;
 		}
-		// TODO: Error handling! Now if some field is not as expected, it just crashes. https://github.com/Tencent/rapidjson/blob/master/example/tutorial/tutorial.cpp
+		// TODO: Error handling! Now if some field is not as expected, it just crashes. Example at: https://github.com/Tencent/rapidjson/blob/master/example/tutorial/tutorial.cpp
 		typedResult->token = d["token"].GetString();
 		typedResult->refresh_token = d["refresh_token"].GetString();
-		if(!jsonValueToSProperty(d["properties"], typedResult->properties)) {
-			return false;
-		}
-		return true;
+		return jsonValueToSProperties(d["properties"], typedResult->properties);
 	}
 
 	bool SUpdatePropertiesRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {

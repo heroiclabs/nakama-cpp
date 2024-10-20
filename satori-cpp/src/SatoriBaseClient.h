@@ -26,9 +26,14 @@ namespace Satori {
 	class SatoriBaseClient : public SClientInterface {
 	public:
 		std::future<SSessionPtr> authenticateAsync(
-			std::string id,
-			std::unordered_map<std::string,std::string> defaultProperties,
-			std::unordered_map<std::string,std::string> customProperties
+			const std::string& id,
+			const std::unordered_map<std::string,std::string>& defaultProperties,
+			const std::unordered_map<std::string,std::string>& customProperties
+		) override;
+
+		std::future<SFlagList> getFlagsAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& names
 		) override;
 
 		std::future<SLiveEventList> getLiveEventsAsync(
@@ -38,11 +43,16 @@ namespace Satori {
 
 		std::future<SSessionPtr> identifyAsync(
 			SSessionPtr session,
-			std::string id,
-			std::unordered_map<std::string,std::string> defaultProperties,
-			std::unordered_map<std::string,std::string> customProperties
+			const std::string& id,
+			const std::unordered_map<std::string,std::string>& defaultProperties,
+			const std::unordered_map<std::string,std::string>& customProperties
 		) override;
 
+		std::future<void> updatePropertiesAsync(
+			SSessionPtr session,
+			const std::unordered_map<std::string, std::string> &defaultProperties,
+			const std::unordered_map<std::string, std::string> &customProperties
+		) override;
 	protected:
 		int _port = 0;
 		std::string _host;

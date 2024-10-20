@@ -94,10 +94,10 @@ namespace Satori {
 	}
 
 	void SatoriRestClient::authenticate(
-		std::string id,
-		std::unordered_map<std::string, std::string> defaultProperties,
-		std::unordered_map<std::string, std::string> computedProperties,
-		std::function<void(const SSessionPtr&)> successCallback,
+		const std::string& id,
+		const std::unordered_map<std::string, std::string>& defaultProperties,
+		const std::unordered_map<std::string, std::string>& computedProperties,
+		std::function<void(SSessionPtr)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
 		try {
@@ -121,6 +121,37 @@ namespace Satori {
 			std::string body = jsonDocToStr(document);
 
 			sendReq(ctx, Nakama::NHttpReqMethod::POST, "/v1/authenticate", std::move(body));
+
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
+	}
+
+	void SatoriRestClient::getFlags(
+		SSessionPtr session,
+		const std::vector<std::string>& names,
+		std::function<void(SFlagList)> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+		try {
+			NLOG_INFO("...");
+
+			Nakama::NHttpQueryArgs args;
+
+			for (auto& name : names) {
+				args.emplace("names", name);
+			}
+
+			std::shared_ptr<SFlagList> flagsData(std::make_shared<SFlagList>());
+			RestReqContext* ctx(createReqContext(flagsData));
+			setSessionAuth(ctx, session);
+			ctx->successCallback = [flagsData, successCallback]()
+			{
+				successCallback(*flagsData);
+			};
+			ctx->errorCallback = std::move(errorCallback);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/flag", "", std::move(args));
 
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));
@@ -160,10 +191,10 @@ namespace Satori {
 
 	void SatoriRestClient::identify(
 		SSessionPtr session,
-		std::string id,
-		std::unordered_map<std::string, std::string> defaultProperties,
-		std::unordered_map<std::string, std::string> customProperties,
-		std::function<void(const SSessionPtr&)> successCallback,
+		const std::string& id,
+		const std::unordered_map<std::string, std::string>& defaultProperties,
+		const std::unordered_map<std::string, std::string>& customProperties,
+		std::function<void(SSessionPtr)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
 		try {

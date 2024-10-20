@@ -19,15 +19,32 @@
 
 namespace Satori {
 	std::future<SSessionPtr> SatoriBaseClient::authenticateAsync(
-		std::string id,
-		std::unordered_map<std::string,std::string> defaultProperties,
-		std::unordered_map<std::string,std::string> customProperties
+		const std::string& id,
+		const std::unordered_map<std::string,std::string>& defaultProperties,
+		const std::unordered_map<std::string,std::string>& customProperties
 	) {
 		auto promise = std::make_shared<std::promise<SSessionPtr>>();
 
 		authenticate(id, defaultProperties, customProperties,
 			[=](const SSessionPtr& session) {
 				promise->set_value(session);
+			},
+			[=](const Nakama::NError& error) {
+				promise->set_exception(std::make_exception_ptr<Nakama::NException>(error));
+			});
+
+		return promise->get_future();
+	}
+
+	std::future<SFlagList> SatoriBaseClient::getFlagsAsync(
+		SSessionPtr session,
+		const std::vector<std::string>& names
+	) {
+		std::shared_ptr<std::promise<SFlagList>> promise = std::make_shared<std::promise<SFlagList>>();
+
+		getFlags(session, names,
+			[=](const SFlagList& flags) {
+				promise->set_value(flags);
 			},
 			[=](const Nakama::NError& error) {
 				promise->set_exception(std::make_exception_ptr<Nakama::NException>(error));
@@ -55,15 +72,33 @@ namespace Satori {
 
 	std::future<SSessionPtr> SatoriBaseClient::identifyAsync(
 		SSessionPtr session,
-		std::string id,
-		std::unordered_map<std::string, std::string> defaultProperties,
-		std::unordered_map<std::string, std::string> customProperties
+		const std::string& id,
+		const std::unordered_map<std::string, std::string>& defaultProperties,
+		const std::unordered_map<std::string, std::string>& customProperties
 	) {
 		std::shared_ptr<std::promise<SSessionPtr>> promise = std::make_shared<std::promise<SSessionPtr>>();
 
 		identify(session, id, defaultProperties, customProperties,
 			[=](const SSessionPtr& session) {
 				promise->set_value(session);
+			},
+			[=](const Nakama::NError& error) {
+				promise->set_exception(std::make_exception_ptr<Nakama::NException>(error));
+			});
+
+		return promise->get_future();
+	}
+
+	std::future<void> SatoriBaseClient::updatePropertiesAsync(
+		SSessionPtr session,
+		const std::unordered_map<std::string, std::string>& defaultProperties,
+		const std::unordered_map<std::string, std::string>& customProperties
+	) {
+		std::shared_ptr<std::promise<void>> promise = std::make_shared<std::promise<void>>();
+
+		updateProperties(session, defaultProperties, customProperties,
+			[=]() {
+				promise->set_value();
 			},
 			[=](const Nakama::NError& error) {
 				promise->set_exception(std::make_exception_ptr<Nakama::NException>(error));
