@@ -18,7 +18,7 @@
 
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <ctime>
 
 namespace Satori {
@@ -153,10 +153,10 @@ namespace Satori {
         std::string id;
         // Optional default properties to update with this call.
         // If not set, properties are left as they are on the server.
-        std::map<std::string,std::string> default_properties;
+        std::unordered_map<std::string,std::string> default_properties;
         // Optional custom properties to update with this call.
         // If not set, properties are left as they are on the server.
-        std::map<std::string,std::string> custom_properties;
+        std::unordered_map<std::string,std::string> custom_properties;
 
         bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
     };
@@ -250,7 +250,7 @@ namespace Satori {
         // The send time for the message.
         int64_t send_time;
         // A key-value pairs of metadata.
-        std::map<std::string, std::string> metadata;
+        std::unordered_map<std::string, std::string> metadata;
         // The time the message was created.
         int64_t create_time;
         // The time the message was updated.
