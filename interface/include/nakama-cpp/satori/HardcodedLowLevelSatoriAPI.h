@@ -249,17 +249,17 @@ namespace Satori {
         // The identifier of the schedule.
         std::string schedule_id;
         // The send time for the message.
-        int64_t send_time;
+        Nakama::NTimestamp send_time;
         // A key-value pairs of metadata.
         std::unordered_map<std::string, std::string> metadata;
         // The time the message was created.
-        int64_t create_time;
+        Nakama::NTimestamp create_time;
         // The time the message was updated.
-        int64_t update_time;
+        Nakama::NTimestamp update_time;
         // The time the message was read by the client.
-        int64_t read_time;
+        Nakama::NTimestamp read_time;
         // The time the message was consumed by the identity.
-        int64_t consume_time;
+        Nakama::NTimestamp consume_time;
         // The message's text.
         std::string text;
         // The message's unique identifier.
@@ -291,9 +291,9 @@ namespace Satori {
         // The identifier of the messages.
         std::string id;
         // The time the message was read at the client.
-        int64_t read_time;
+        Nakama::NTimestamp read_time;
         // The time the message was consumed by the identity.
-        int64_t consume_time;
+        Nakama::NTimestamp consume_time;
 
         bool fromJson(std::string jsonString) override;
     };

@@ -496,18 +496,58 @@ namespace Satori {
 		std::function<void(SGetMessageListResponse)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
-		/**/
+		try {
+			NLOG_INFO("...");
+
+			Nakama::NHttpQueryArgs args;
+
+			args.emplace("limit", std::to_string(limit));
+			args.emplace("forward", forward? "true" : "false");
+			if (!cursor.empty()) {args.emplace("cursor", Nakama::encodeURIComponent(cursor));}
+
+			std::shared_ptr<SGetMessageListResponse> messagesData(std::make_shared<SGetMessageListResponse>());
+			RestReqContext* ctx(createReqContext(messagesData));
+			setSessionAuth(ctx, session);
+			ctx->successCallback = [messagesData, successCallback]()
+			{
+				successCallback(*messagesData);
+			};
+			ctx->errorCallback = std::move(errorCallback);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/message", "", std::move(args));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
 	}
 
 	void SatoriRestClient::updateMessage(
 		SSessionPtr session,
 		const std::string& messageId,
-		const std::chrono::time_point<std::chrono::system_clock>& readTime,
-		const std::chrono::time_point<std::chrono::system_clock>& consumeTime,
+		const Nakama::NTimestamp readTime,
+		const Nakama::NTimestamp consumeTime,
 		std::function<void()> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
-		/**/
+		try {
+			NLOG_INFO("...");
+
+			RestReqContext* ctx = createReqContext(nullptr);
+			setSessionAuth(ctx, session);
+			ctx->successCallback = std::move(successCallback);
+			ctx->errorCallback = std::move(errorCallback);
+
+			Nakama::rapidjson::Document document;
+			document.SetObject();
+
+			document.AddMember("read_time", readTime, document.GetAllocator());
+			document.AddMember("consume_time", consumeTime, document.GetAllocator());
+
+			std::string body = jsonDocToStr(document);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::PUT, "/v1/message/" + Nakama::encodeURIComponent(messageId), std::move(body));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
 	}
 
 	void SatoriRestClient::deleteMessage(
@@ -526,7 +566,7 @@ namespace Satori {
 			ctx->successCallback = std::move(successCallback);
 			ctx->errorCallback = std::move(errorCallback);
 
-			sendReq(ctx, Nakama::NHttpReqMethod::DEL, "/v1/message/" + messageId, "");
+			sendReq(ctx, Nakama::NHttpReqMethod::DEL, "/v1/message/" + Nakama::encodeURIComponent(messageId), "");
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));
 		}

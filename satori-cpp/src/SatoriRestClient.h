@@ -128,8 +128,8 @@ namespace Satori {
 		void updateMessage(
 			SSessionPtr session,
 			const std::string& messageId,
-			const std::chrono::time_point<std::chrono::system_clock>& readTime,
-			const std::chrono::time_point<std::chrono::system_clock>& consumeTime,
+			const Nakama::NTimestamp readTime,
+			const Nakama::NTimestamp consumeTime,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
