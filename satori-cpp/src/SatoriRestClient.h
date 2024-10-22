@@ -111,6 +111,7 @@ namespace Satori {
 			SSessionPtr session,
 			const std::unordered_map<std::string,std::string>& defaultProperties,
 			const std::unordered_map<std::string,std::string>& customProperties,
+			const bool recompute,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;

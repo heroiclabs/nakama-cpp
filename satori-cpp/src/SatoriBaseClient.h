@@ -51,7 +51,8 @@ namespace Satori {
 		std::future<void> updatePropertiesAsync(
 			SSessionPtr session,
 			const std::unordered_map<std::string, std::string> &defaultProperties,
-			const std::unordered_map<std::string, std::string> &customProperties
+			const std::unordered_map<std::string, std::string> &customProperties,
+			const bool recompute
 		) override;
 	protected:
 		int _port = 0;

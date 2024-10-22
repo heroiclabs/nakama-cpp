@@ -92,11 +92,12 @@ namespace Satori {
 	std::future<void> SatoriBaseClient::updatePropertiesAsync(
 		SSessionPtr session,
 		const std::unordered_map<std::string, std::string>& defaultProperties,
-		const std::unordered_map<std::string, std::string>& customProperties
+		const std::unordered_map<std::string, std::string>& customProperties,
+		const bool recompute
 	) {
 		std::shared_ptr<std::promise<void>> promise = std::make_shared<std::promise<void>>();
 
-		updateProperties(session, defaultProperties, customProperties,
+		updateProperties(session, defaultProperties, customProperties, recompute,
 			[=]() {
 				promise->set_value();
 			},

@@ -132,13 +132,15 @@ namespace Satori {
     		SSessionPtr session,
     		const std::unordered_map<std::string,std::string>& defaultProperties = {},
     		const std::unordered_map<std::string,std::string>& customProperties = {},
+			const bool recompute = false,
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<void> updatePropertiesAsync(
 			SSessionPtr session,
 			const std::unordered_map<std::string,std::string>& defaultProperties = {},
-			const std::unordered_map<std::string,std::string>& customProperties = {}) = 0;
+			const std::unordered_map<std::string,std::string>& customProperties = {},
+			const bool recompute = false) = 0;
 
     	virtual void getMessages(
 			SSessionPtr session,
