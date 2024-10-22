@@ -24,7 +24,7 @@
 namespace Satori {
     struct SFromJsonInterface {
         virtual ~SFromJsonInterface() {}
-        virtual bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) = 0;
+        virtual bool fromJson(std::string jsonString) = 0;
     };
 
     // Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
@@ -34,7 +34,7 @@ namespace Satori {
         // Refresh token to invalidate.
         std::string refresh_token;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // Authenticate against the server with a refresh token.
@@ -42,7 +42,7 @@ namespace Satori {
         // Refresh token.
         std::string refresh_token;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // Authentication request
@@ -57,7 +57,7 @@ namespace Satori {
         // If not set, properties are left as they are on the server.
         std::unordered_map<std::string,std::string> custom_properties;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // A single event. Usually, but not necessarily, part of a batch.
@@ -74,7 +74,7 @@ namespace Satori {
         // The time when the event was triggered on the producer side.
         time_t timestamp;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // Publish an event to the server
@@ -82,7 +82,7 @@ namespace Satori {
         // Some number of events produced by a client.
         std::vector<SEvent> events;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // An experiment that this user is partaking.
@@ -92,7 +92,7 @@ namespace Satori {
         // Value associated with this Experiment.
         std::string value;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // All experiments that this identity is involved with.
@@ -100,7 +100,7 @@ namespace Satori {
         // All experiments for this identity.
         std::vector<SExperiment> experiments;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // Feature flag available to the identity.
@@ -112,7 +112,7 @@ namespace Satori {
         // Whether the value for this flag has conditionally changed from the default state.
         bool condition_changed;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // All flags available to the identity
@@ -120,7 +120,7 @@ namespace Satori {
         // All flags
         std::vector<SFlag> flags;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // Request to get all experiments data.
@@ -128,7 +128,7 @@ namespace Satori {
         // Experiment names; if empty string all experiments are returned.
         std::vector<std::string> names;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // Request to get all flags data.
@@ -136,7 +136,7 @@ namespace Satori {
         // Flag names; if empty string all flags are returned.
         std::vector<std::string> names;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // Request to get all live events.
@@ -144,7 +144,7 @@ namespace Satori {
         // Live event names; if empty string all live events are returned.
         std::vector<std::string> names;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // Enrich/replace the current session with a new ID.
@@ -158,7 +158,7 @@ namespace Satori {
         // If not set, properties are left as they are on the server.
         std::unordered_map<std::string,std::string> custom_properties;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // A single live event.
@@ -184,7 +184,7 @@ namespace Satori {
         // Reset CRON schedule, if configured.
         std::string reset_cron;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // List of Live events.
@@ -192,7 +192,7 @@ namespace Satori {
         // Live events.
         std::vector<SLiveEvent> live_events;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // Properties associated with an identity.
@@ -204,7 +204,7 @@ namespace Satori {
         // Event custom properties.
         std::unordered_map<std::string,std::string> custom_properties;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // A session.
@@ -216,7 +216,7 @@ namespace Satori {
         // Properties associated with this identity.
         SProperties properties;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // Update Properties associated with this identity.
@@ -228,7 +228,7 @@ namespace Satori {
         // Informs the server to recompute the audience membership of the identity.
         bool recompute;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
 
@@ -240,7 +240,7 @@ namespace Satori {
         // A pagination cursor, if any.
         std::string cursor;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // A scheduled message.
@@ -268,7 +268,7 @@ namespace Satori {
         // The message's image url.
         std::string image_url;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // A response containing all the messages for an identity.
@@ -282,7 +282,7 @@ namespace Satori {
         // Cacheable cursor to list newer messages. Durable and designed to be stored, unlike next/prev cursors.
         std::string cacheable_cursor;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // The request to update the status of a message.
@@ -294,7 +294,7 @@ namespace Satori {
         // The time the message was consumed by the identity.
         int64_t consume_time;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 
     // The request to delete a scheduled message.
@@ -302,6 +302,6 @@ namespace Satori {
         // The identifier of the message.
         std::string id;
 
-        bool jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) override;
+        bool fromJson(std::string jsonString) override;
     };
 }

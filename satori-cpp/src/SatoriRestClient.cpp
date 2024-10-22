@@ -295,9 +295,9 @@ namespace Satori {
 		            if (ctx && ctx->successCallback) {
 		                bool ok = true;
 		            	if (ctx->data) {
-		            		ok = ctx->data->jsonToType(response->body, ctx->data);
+		            		ok = ctx->data->fromJson(response->body);
 							if (!ok) {
-								reqError(ctx, Nakama::NError("Parse JSON failed for Satori. HTTP body: " + response->body, Nakama::ErrorCode::InternalError));
+								reqError(ctx, Nakama::NError("Parse JSON failed for Satori. HTTP body: <<" + response->body + ">>", Nakama::ErrorCode::InternalError));
 							}
 	                    }
 

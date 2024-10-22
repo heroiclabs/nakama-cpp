@@ -35,37 +35,37 @@ namespace Satori{
 		return true;
 	}
 
-	bool SAuthenticateLogoutRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SAuthenticateLogoutRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SAuthenticateRefreshRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SAuthenticateRefreshRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SAuthenticateRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SAuthenticateRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SEvent::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SEvent::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SEventRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SEventRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SExperiment::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SExperiment::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SExperimentList::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SExperimentList::fromJson(std::string jsonString) {
 
 		return false;
 	}
@@ -84,75 +84,132 @@ namespace Satori{
 		return true;
 	}
 
-	bool SFlag::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
-		std::shared_ptr<SFlag> typedResult = std::dynamic_pointer_cast<SFlag>(result);
-		if(typedResult == nullptr) {
-			NLOG_ERROR(Nakama::NError("Incorrect empty result type passed to SFlag::jsonToType"));
-			return false;
-		}
+	bool SFlag::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SFlag JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
 			return false;
 		}
-		return jsonValueToSFlag(d, *typedResult);
+		return jsonValueToSFlag(d, *this);
 	}
 
-	bool SFlagList::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
-		std::shared_ptr<SFlagList> typedResult = std::dynamic_pointer_cast<SFlagList>(result);
-		if(typedResult == nullptr) {
-			NLOG_ERROR(Nakama::NError("Incorrect empty result type passed to SFlagList::jsonToType"));
-			return false;
-		}
+	bool SFlagList::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SFlagList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
 			return false;
 		}
 
-		// TODO: Error handling! Now if some field is not as expected, it just crashes. Example at: https://github.com/Tencent/rapidjson/blob/master/example/tutorial/tutorial.cpp
-		for (auto& jsonFlag : d["flags"].GetArray()) {
-			SFlag flag;
-			if(!jsonValueToSFlag(jsonFlag, flag)) {
+		if(d.HasMember("flags")) {
+			if(!d["flags"].IsArray()) {
 				return false;
 			}
-			typedResult->flags.emplace_back(flag);
+			for (auto& jsonFlag : d["flags"].GetArray()) {
+				SFlag flag;
+				if(!jsonValueToSFlag(jsonFlag, flag)) {
+					return false;
+				}
+				this->flags.emplace_back(flag);
+			}
+			return true;
 		}
+	}
+
+	bool SGetExperimentsRequest::fromJson(std::string jsonString) {
+
+		return false;
+	}
+
+	bool SGetFlagsRequest::fromJson(std::string jsonString) {
+
+		return false;
+	}
+
+	bool SGetLiveEventsRequest::fromJson(std::string jsonString) {
+
+		return false;
+	}
+
+	bool SIdentifyRequest::fromJson(std::string jsonString) {
+
+		return false;
+	}
+
+	bool jsonValueToSLiveEvent(const rapidjson::Value& input, SLiveEvent& output){
+		if(input.HasMember("name") && !input["name"].IsString()) {
+			return false;
+		}
+		output.name = input["name"].GetString();
+		if(input.HasMember("description") && !input["description"].IsString()) {
+			return false;
+		}
+		output.description = input["description"].GetString();
+		if(input.HasMember("value") && !input["value"].IsString()) {
+			return false;
+		}
+		output.value = input["value"].GetString();
+		if(input.HasMember("active_start_time_sec") && !input["active_start_time_sec"].IsInt64()) {
+			return false;
+		}
+		output.active_start_time_sec = input["active_start_time_sec"].GetInt64();
+		if(input.HasMember("active_end_time_sec") && !input["active_end_time_sec"].IsInt64()) {
+			return false;
+		}
+		output.active_end_time_sec = input["active_end_time_sec"].GetInt64();
+		if(input.HasMember("id") && !input["id"].IsString()) {
+			return false;
+		}
+		output.id = input["id"].GetString();
+		if(input.HasMember("start_time_sec") && !input["start_time_sec"].IsInt64()) {
+			return false;
+		}
+		output.start_time_sec = input["start_time_sec"].GetInt64();
+		if(input.HasMember("end_time_sec") && !input["end_time_sec"].IsInt64()) {
+			return false;
+		}
+		output.end_time_sec = input["end_time_sec"].GetInt64();
+		if(input.HasMember("duration_sec") && !input["duration_sec"].IsInt64()) {
+			return false;
+		}
+		output.duration_sec = input["duration_sec"].GetInt64();
+		if(input.HasMember("reset_cron") && !input["reset_cron"].IsString()) {
+			return false;
+		}
+		output.reset_cron = input["reset_cron"].GetString();
+		// TODO: Figure out how to obtain this value and set it here if it can be obtained from the json we have
+		bool condition_changed = false;
 		return true;
 	}
 
-	bool SGetExperimentsRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
-
-		return false;
-	}
-
-	bool SGetFlagsRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
-
-		return false;
-	}
-
-	bool SGetLiveEventsRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
-
-		return false;
-	}
-
-	bool SIdentifyRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
-
-		return false;
-	}
-
-	bool SLiveEvent::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SLiveEvent::fromJson(std::string jsonString) {
 		rapidjson::Document d;
-		d.Parse(jsonString.c_str());
-
-		return false;
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SLiveEvent JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
+		return jsonValueToSLiveEvent(d, *this);
 	}
 
-	bool SLiveEventList::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SLiveEventList::fromJson(std::string jsonString) {
 		rapidjson::Document d;
-		d.Parse(jsonString.c_str());
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SLiveEventList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
 
-		return false;
+		if(d.HasMember("live_events")) {
+			if(!d["live_events"].IsArray()) {
+				return false;
+			}
+			for (auto& jsonLiveEvent : d["live_events"].GetArray()) {
+				SLiveEvent liveEvent;
+				if(!jsonValueToSLiveEvent(jsonLiveEvent, liveEvent)) {
+					return false;
+				}
+				this->live_events.emplace_back(liveEvent);
+			}
+		}
+		return true;
 	}
 
 	bool jsonValueToSProperties(const rapidjson::Value& input, SProperties& output){
@@ -168,63 +225,53 @@ namespace Satori{
 		return true;
 	}
 
-	bool SProperties::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
-		std::shared_ptr<SProperties> typedResult = std::dynamic_pointer_cast<SProperties>(result);
-		if(typedResult == nullptr) {
-			NLOG_ERROR(Nakama::NError("Incorrect empty result type passed to SProperties::jsonToType"));
-			return false;
-		}
+	bool SProperties::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SProperties JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
 			return false;
 		}
-		return jsonValueToSProperties(d, *typedResult);
+		return jsonValueToSProperties(d, *this);
 	}
 
-	bool SSession::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
-		std::shared_ptr<SSession> typedResult = std::dynamic_pointer_cast<SSession>(result);
-		if(typedResult == nullptr) {
-			NLOG_ERROR(Nakama::NError("Incorrect empty result type passed to SSession::jsonToType"));
-			return false;
-		}
+	bool SSession::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SSession JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
 			return false;
 		}
 		// TODO: Error handling! Now if some field is not as expected, it just crashes. Example at: https://github.com/Tencent/rapidjson/blob/master/example/tutorial/tutorial.cpp
-		typedResult->token = d["token"].GetString();
-		typedResult->refresh_token = d["refresh_token"].GetString();
-		return jsonValueToSProperties(d["properties"], typedResult->properties);
+		this->token = d["token"].GetString();
+		this->refresh_token = d["refresh_token"].GetString();
+		return jsonValueToSProperties(d["properties"], this->properties);
 	}
 
-	bool SUpdatePropertiesRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SUpdatePropertiesRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SGetMessageListRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SGetMessageListRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SMessage::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SMessage::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SGetMessageListResponse::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SGetMessageListResponse::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SUpdateMessageRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SUpdateMessageRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SDeleteMessageRequest::jsonToType(std::string jsonString, std::shared_ptr<SFromJsonInterface> result) {
+	bool SDeleteMessageRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}

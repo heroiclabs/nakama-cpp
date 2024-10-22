@@ -32,7 +32,7 @@ R getFromFuture(std::future<R> f, Satori::SClientPtr client) {
 
 int main(int argc, char** argv) {
 	try {
-		std::cout << "Hello, World, I'm Satori cpp interface!\n";
+		std::cout << "Satori cpp interface test begns:\n";
 
 		bool done = false;
 
@@ -44,9 +44,12 @@ int main(int argc, char** argv) {
 		Satori::SSessionPtr session2 = getFromFuture(client->authenticateAsync("22222222-2222-0000-0000-000000000000",{},{{"pushTokenAndroid", "bar"}}), client);
 		Satori::SSessionPtr session3 = getFromFuture(client->identifyAsync(session1, "22222222-2222-0000-0000-000000000000"), client);
 		Satori::SFlagList testResult = getFromFuture(client->getFlagsAsync(session3), client);
+		std::cout << "Flags:" << testResult.flags.size() << std::endl;
+		Satori::SFlagList testResult2 = getFromFuture(client->getFlagsAsync(session3, {"Hiro-Event-Leaderboards", "Hiro-Inventory"}), client);
 
-		//Satori::SLiveEventList liveEvents = getFromFuture(client->getLiveEventsAsync(session3), client);
-		//std::cout << "Live events num:" << liveEvents.live_events.size() << std::endl;
+		Satori::SLiveEventList liveEvents = getFromFuture(client->getLiveEventsAsync(session3), client);
+		std::cout << "Live events:" << liveEvents.live_events.size() << std::endl;
+		std::cout << "Satori cpp interface test end.\n";
 	} catch (const std::future_error& e) {
 		std::cout << "Caught a future_error with code \"" << e.code()
 				  << "\"\nMessage: \"" << e.what() << "\"\n";
