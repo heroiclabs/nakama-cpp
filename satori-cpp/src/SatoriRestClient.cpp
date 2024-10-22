@@ -86,6 +86,18 @@ namespace Satori {
 
 	SatoriRestClient::~SatoriRestClient() {
 		disconnect();
+
+		if (_reqContexts.size() > 0)
+		{
+			NLOG(Nakama::NLogLevel::Warn, "Not handled %u request(s) detected.", _reqContexts.size());
+
+			for (RestReqContext* reqContext : _reqContexts)
+			{
+				delete reqContext;
+			}
+
+			_reqContexts.clear();
+		}
 	}
 
 	void SatoriRestClient::disconnect() {
@@ -336,7 +348,7 @@ namespace Satori {
 	RestReqContext* SatoriRestClient::createReqContext(std::shared_ptr<SFromJsonInterface> data) {
 		RestReqContext* ctx = new RestReqContext();
 		ctx->data = data;
-		//_reqContexts.emplace(ctx);
+		_reqContexts.emplace(ctx);
 		return ctx;
 	}
 
@@ -359,7 +371,6 @@ namespace Satori {
 			reqError(nullptr, Nakama::NError("Satori request context not found.", Nakama::ErrorCode::InternalError));
 			return;
 		}
-
 		Nakama::NHttpRequest req;
 
 		req.method    = method;
@@ -377,83 +388,90 @@ namespace Satori {
 			// TODO: Convert this boilerplate lambda back into a function that can be used from within Satori cpp. Boilerplate begins here	============
 			[&]()//void RestClient::onResponse(RestReqContext* reqContext, NHttpResponsePtr response)
 			{
-		        if (response->statusCode == 200) {// OK
-		            if (ctx && ctx->successCallback) {
-		                bool ok = true;
-		            	if (ctx->data) {
-		            		ok = ctx->data->fromJson(response->body);
-							if (!ok) {
-								reqError(ctx, Nakama::NError("Parse JSON failed for Satori. HTTP body: <<" + response->body + ">>", Nakama::ErrorCode::InternalError));
+				auto it = _reqContexts.find(ctx);
+				if (it != _reqContexts.end()) {
+					if (response->statusCode == 200) {// OK
+						if (ctx && ctx->successCallback) {
+							bool ok = true;
+							if (ctx->data) {
+								ok = ctx->data->fromJson(response->body);
+								if (!ok) {
+									reqError(ctx, Nakama::NError("Parse JSON failed for Satori. HTTP body: <<" + response->body + ">>", Nakama::ErrorCode::InternalError));
+								}
 							}
-	                    }
 
-		                if (ok) {
-		                    ctx->successCallback();
-		                }
-		            }
-		        } else {
-		            std::string errMessage;
-		            Nakama::ErrorCode code = Nakama::ErrorCode::Unknown;
+							if (ok) {
+								ctx->successCallback();
+							}
+						}
+					} else {
+						std::string errMessage;
+						Nakama::ErrorCode code = Nakama::ErrorCode::Unknown;
 
-		            if (response->statusCode == Nakama::InternalStatusCodes::CONNECTION_ERROR) {
-		                code = Nakama::ErrorCode::ConnectionError;
-		                errMessage.append("message: ").append(response->errorMessage);
-		            } else if (response->statusCode == Nakama::InternalStatusCodes::CANCELLED_BY_USER) {
-		                code = Nakama::ErrorCode::CancelledByUser;
-		                errMessage.append("message: ").append(response->errorMessage);
-		            } else if (response->statusCode == Nakama::InternalStatusCodes::INTERNAL_TRANSPORT_ERROR) {
-		                code = Nakama::ErrorCode::InternalError;
-		                errMessage.append("message: ").append(response->errorMessage);
-		            } else if (!response->body.empty() && response->body[0] == '{') {// have to be JSON
-		                /*
-		                 try {
-		                    rapidjson::Document document;
+						if (response->statusCode == Nakama::InternalStatusCodes::CONNECTION_ERROR) {
+							code = Nakama::ErrorCode::ConnectionError;
+							errMessage.append("message: ").append(response->errorMessage);
+						} else if (response->statusCode == Nakama::InternalStatusCodes::CANCELLED_BY_USER) {
+							code = Nakama::ErrorCode::CancelledByUser;
+							errMessage.append("message: ").append(response->errorMessage);
+						} else if (response->statusCode == Nakama::InternalStatusCodes::INTERNAL_TRANSPORT_ERROR) {
+							code = Nakama::ErrorCode::InternalError;
+							errMessage.append("message: ").append(response->errorMessage);
+						} else if (!response->body.empty() && response->body[0] == '{') {// have to be JSON
+							/*
+							 try {
+								rapidjson::Document document;
 
-		                    if (document.Parse(response->body).HasParseError()) {
-		                        errMessage = "Parse JSON failed: " + response->body;
-		                        code = Nakama::ErrorCode::InternalError;
-		                    } else {
-		                        auto& jsonMessage = document["message"];
-		                        auto& jsonCode    = document["code"];
+								if (document.Parse(response->body).HasParseError()) {
+									errMessage = "Parse JSON failed: " + response->body;
+									code = Nakama::ErrorCode::InternalError;
+								} else {
+									auto& jsonMessage = document["message"];
+									auto& jsonCode    = document["code"];
 
-		                        if (jsonMessage.IsString()) {
-		                            errMessage.append("message: ").append(jsonMessage.GetString());
-		                        }
+									if (jsonMessage.IsString()) {
+										errMessage.append("message: ").append(jsonMessage.GetString());
+									}
 
-		                        if (jsonCode.IsNumber()) {
-		                            int serverErrCode = jsonCode.GetInt();
+									if (jsonCode.IsNumber()) {
+										int serverErrCode = jsonCode.GetInt();
 
-		                            switch (serverErrCode) {
-		                            case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
-		                            case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
-		                            case grpc::StatusCode::NOT_FOUND        : code = ErrorCode::NotFound; break;
-		                            case grpc::StatusCode::ALREADY_EXISTS   : code = ErrorCode::AlreadyExists; break;
-		                            case grpc::StatusCode::INVALID_ARGUMENT : code = ErrorCode::InvalidArgument; break;
-		                            case grpc::StatusCode::UNAUTHENTICATED  : code = ErrorCode::Unauthenticated; break;
-		                            case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
+										switch (serverErrCode) {
+										case grpc::StatusCode::UNAVAILABLE      : code = ErrorCode::ConnectionError; break;
+										case grpc::StatusCode::INTERNAL         : code = ErrorCode::InternalError; break;
+										case grpc::StatusCode::NOT_FOUND        : code = ErrorCode::NotFound; break;
+										case grpc::StatusCode::ALREADY_EXISTS   : code = ErrorCode::AlreadyExists; break;
+										case grpc::StatusCode::INVALID_ARGUMENT : code = ErrorCode::InvalidArgument; break;
+										case grpc::StatusCode::UNAUTHENTICATED  : code = ErrorCode::Unauthenticated; break;
+										case grpc::StatusCode::PERMISSION_DENIED: code = ErrorCode::PermissionDenied; break;
 
-		                            default:
-		                                errMessage.append("\ncode: ").append(std::to_string(serverErrCode));
-		                                break;
-		                            }
-		                        }
-		                    }
-		                } catch (std::exception& e) {
-		                    NLOG_ERROR("exception: " + std::string(e.what()));
-		                }
-		                */
-		            }
+										default:
+											errMessage.append("\ncode: ").append(std::to_string(serverErrCode));
+											break;
+										}
+									}
+								}
+							} catch (std::exception& e) {
+								NLOG_ERROR("exception: " + std::string(e.what()));
+							}
+							*/
+						}
 
-		            if (errMessage.empty()) {
-		                errMessage.append("message: ").append(response->errorMessage);
-		                errMessage.append("\nHTTP status: ").append(std::to_string(response->statusCode));
-		                errMessage.append("\nbody: ").append(response->body);
-		            }
+						if (errMessage.empty()) {
+							errMessage.append("message: ").append(response->errorMessage);
+							errMessage.append("\nHTTP status: ").append(std::to_string(response->statusCode));
+							errMessage.append("\nbody: ").append(response->body);
+						}
 
-		            reqError(ctx, Nakama::NError(std::move(errMessage), code));
-		        }
+						reqError(ctx, Nakama::NError(std::move(errMessage), code));
+					}
 
-				delete ctx;
+					delete ctx;
+					_reqContexts.erase(it);
+				} else {
+					reqError(nullptr, Nakama::NError("Not found satori request context.", Nakama::ErrorCode::InternalError));
+					delete ctx;
+				}
 			}();
 			// TODO: Convert this boilerplate lambda back into a function that can be used from within Satori cpp. Boilerplate ends here	============
 		});

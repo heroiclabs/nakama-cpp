@@ -155,7 +155,7 @@ namespace Satori {
 		void reqError(RestReqContext* ctx, const Nakama::NError &error) const;
 
 	private:
-		//std::set<RestReqContext*> _reqContexts;
+		std::set<RestReqContext*> _reqContexts;
 		Nakama::NHttpTransportPtr _httpClient;
 	};
 }
