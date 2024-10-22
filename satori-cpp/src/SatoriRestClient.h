@@ -47,7 +47,7 @@ namespace Satori {
 		) override;
 
 		void authenticateRefresh(
-			SSession session,
+			SSessionPtr session,
 			std::function<void (SSessionPtr)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;

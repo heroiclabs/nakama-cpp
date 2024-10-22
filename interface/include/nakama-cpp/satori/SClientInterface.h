@@ -51,7 +51,7 @@ namespace Satori {
 			const std::unordered_map<std::string,std::string>& customProperties = {}) = 0;
 
     	virtual void authenticateRefresh(
-            SSession session,
+            SSessionPtr session,
     		std::function<void (SSessionPtr)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 

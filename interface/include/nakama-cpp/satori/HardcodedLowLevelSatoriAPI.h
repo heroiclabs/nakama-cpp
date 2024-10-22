@@ -20,6 +20,7 @@
 #include <vector>
 #include <unordered_map>
 #include <ctime>
+#include "nakama-cpp/NTypes.h"
 
 namespace Satori {
     struct SFromJsonInterface {
@@ -72,7 +73,7 @@ namespace Satori {
         // Optional value.
         std::string value;
         // The time when the event was triggered on the producer side.
-        time_t timestamp;
+        Nakama::NTimestamp timestamp;
 
         bool fromJson(std::string jsonString) override;
     };

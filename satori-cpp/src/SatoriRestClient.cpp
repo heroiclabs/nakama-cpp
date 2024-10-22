@@ -85,7 +85,7 @@ namespace Satori {
 	}
 
 	SatoriRestClient::~SatoriRestClient() {
-		disconnect();
+		SatoriRestClient::disconnect();
 
 		if (_reqContexts.size() > 0)
 		{
@@ -127,7 +127,6 @@ namespace Satori {
 			};
 			ctx->errorCallback = std::move(errorCallback);
 
-
 			Nakama::rapidjson::Document document;
 			document.SetObject();
 
@@ -136,17 +135,39 @@ namespace Satori {
 			std::string body = jsonDocToStr(document);
 
 			sendReq(ctx, Nakama::NHttpReqMethod::POST, "/v1/authenticate", std::move(body));
-
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));
 		}
 	}
 
 	void SatoriRestClient::authenticateRefresh(
-		SSession session,
+		SSessionPtr session,
 		std::function<void(SSessionPtr)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
+		try {
+			NLOG_INFO("...");
+
+			auto sessionData(std::make_shared<SSession>());
+			RestReqContext* ctx = createReqContext(sessionData);
+			setBasicAuth(ctx);
+			ctx->successCallback = [sessionData, successCallback]()
+			{
+				successCallback(sessionData);
+			};
+			ctx->errorCallback = std::move(errorCallback);
+
+			Nakama::rapidjson::Document document;
+			document.SetObject();
+
+			document.AddMember("refresh_token", session->refresh_token, document.GetAllocator());
+
+			std::string body = jsonDocToStr(document);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::POST, "/v1/authenticate/refresh", std::move(body));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
 	}
 
 	void SatoriRestClient::authenticateLogout(
@@ -154,6 +175,26 @@ namespace Satori {
 		std::function<void()> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
+		try {
+			NLOG_INFO("...");
+
+			RestReqContext* ctx = createReqContext(nullptr);
+			setSessionAuth(ctx, session);
+			ctx->successCallback = std::move(successCallback);
+			ctx->errorCallback = std::move(errorCallback);
+
+			Nakama::rapidjson::Document document;
+			document.SetObject();
+
+			document.AddMember("token", session->token, document.GetAllocator());
+			document.AddMember("refresh_token", session->refresh_token, document.GetAllocator());
+
+			std::string body = jsonDocToStr(document);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::POST, "/v1/authenticate/logout", std::move(body));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
 	}
 
 	void SatoriRestClient::deleteIdentity(
@@ -161,6 +202,20 @@ namespace Satori {
 		std::function<void()> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
+		try {
+			NLOG_INFO("...");
+
+			Nakama::NHttpQueryArgs args;
+
+			RestReqContext* ctx = createReqContext(nullptr);
+			setSessionAuth(ctx, session);
+			ctx->successCallback = std::move(successCallback);
+			ctx->errorCallback = std::move(errorCallback);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::DEL, "/v1/identity", "");
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
 	}
 
 	void SatoriRestClient::postEvent(
@@ -169,6 +224,44 @@ namespace Satori {
 	    std::function<void()> successCallback,
 	    Nakama::ErrorCallback errorCallback
 	) {
+		try {
+			NLOG_INFO("...");
+
+			RestReqContext* ctx = createReqContext(nullptr);
+			setSessionAuth(ctx, session);
+			ctx->successCallback = std::move(successCallback);
+			ctx->errorCallback = std::move(errorCallback);
+
+			Nakama::rapidjson::Document document;
+			document.SetObject();
+			Nakama::rapidjson::Value jsonEvents;
+			jsonEvents.SetArray();
+			for (const SEvent& event: events)
+			{
+				Nakama::rapidjson::Value jsonEvent;
+				jsonEvent.SetObject();
+
+				jsonEvent.AddMember("name", event.name, document.GetAllocator());
+				jsonEvent.AddMember("id", event.id, document.GetAllocator());
+				jsonEvent.AddMember("value", event.value, document.GetAllocator());
+				jsonEvent.AddMember("timestamp", event.timestamp, document.GetAllocator());
+				Nakama::rapidjson::Value jsonMetadata;
+				jsonMetadata.SetObject();
+				for (auto& p : event.metadata) {
+					jsonMetadata.AddMember(Nakama::rapidjson::Value::StringRefType(p.first.c_str()), p.second, document.GetAllocator());
+				}
+				jsonEvent.AddMember("metadata", std::move(jsonMetadata), document.GetAllocator());
+
+				jsonEvents.PushBack(std::move(jsonEvent), document.GetAllocator());
+			}
+			document.AddMember("events", std::move(jsonEvents), document.GetAllocator());
+
+			std::string body = jsonDocToStr(document);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::POST, "/v1/event", std::move(body));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
 	}
 
 	void SatoriRestClient::getExperiments(
@@ -177,6 +270,28 @@ namespace Satori {
 		std::function<void(SExperimentList)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
+		try {
+			NLOG_INFO("...");
+
+			Nakama::NHttpQueryArgs args;
+
+			for (auto& name : names) {
+				args.emplace("names", name);
+			}
+
+			std::shared_ptr<SExperimentList> experimentsData(std::make_shared<SExperimentList>());
+			RestReqContext* ctx(createReqContext(experimentsData));
+			setSessionAuth(ctx, session);
+			ctx->successCallback = [experimentsData, successCallback]()
+			{
+				successCallback(*experimentsData);
+			};
+			ctx->errorCallback = std::move(errorCallback);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/experiment", "", std::move(args));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
 	}
 
 	void SatoriRestClient::getFlags(
@@ -204,7 +319,6 @@ namespace Satori {
 			ctx->errorCallback = std::move(errorCallback);
 
 			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/flag", "", std::move(args));
-
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));
 		}
@@ -235,7 +349,6 @@ namespace Satori {
 			ctx->errorCallback = std::move(errorCallback);
 
 			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/live-event", "", std::move(args));
-
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));
 		}
@@ -293,7 +406,6 @@ namespace Satori {
 			std::string body = jsonDocToStr(document);
 
 			sendReq(ctx, Nakama::NHttpReqMethod::PUT, "/v1/identify", std::move(body));
-
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));
 		}
@@ -304,6 +416,25 @@ namespace Satori {
 		std::function<void(SProperties)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
+		try {
+			NLOG_INFO("...");
+
+			Nakama::NHttpQueryArgs args;
+
+			std::shared_ptr<SProperties> propertiesData(std::make_shared<SProperties>());
+			RestReqContext* ctx(createReqContext(propertiesData));
+			setSessionAuth(ctx, session);
+			ctx->successCallback = [propertiesData, successCallback]()
+			{
+				successCallback(*propertiesData);
+			};
+			ctx->errorCallback = std::move(errorCallback);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/properties", "", std::move(args));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
+		/**/
 	}
 
 	void SatoriRestClient::updateProperties(
@@ -315,6 +446,7 @@ namespace Satori {
 		std::function<void()> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
+		/**/
 	}
 
 	void SatoriRestClient::getMessages(
@@ -325,6 +457,7 @@ namespace Satori {
 		std::function<void(SGetMessageListResponse)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
+		/**/
 	}
 
 	void SatoriRestClient::updateMessage(
@@ -335,6 +468,7 @@ namespace Satori {
 		std::function<void()> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
+		/**/
 	}
 
 	void SatoriRestClient::deleteMessage(
@@ -343,6 +477,7 @@ namespace Satori {
 		std::function<void()> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
+/**/
 	}
 
 	RestReqContext* SatoriRestClient::createReqContext(std::shared_ptr<SFromJsonInterface> data) {
