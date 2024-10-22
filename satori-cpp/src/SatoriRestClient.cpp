@@ -57,8 +57,11 @@ namespace Satori {
 		}
 	}
 
-	SatoriRestClient::SatoriRestClient(const Nakama::NClientParameters &parameters, Nakama::NHttpTransportPtr httpClient)
-	: _httpClient(std::move(httpClient)) {
+	SatoriRestClient::SatoriRestClient(
+		const Nakama::NClientParameters &parameters,
+		Nakama::NHttpTransportPtr httpClient
+	) : _httpClient(std::move(httpClient))
+	{
 		NLOG(Nakama::NLogLevel::Info, "Created Satori Client. NakamaSdkVersion: %s", Nakama::getNakamaSdkVersion());
 
 		_host = parameters.host;
@@ -125,6 +128,43 @@ namespace Satori {
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));
 		}
+	}
+
+	void SatoriRestClient::authenticateRefresh(
+		SSession session,
+		std::function<void(SSessionPtr)> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+	}
+
+	void SatoriRestClient::authenticateLogout(
+		SSessionPtr session,
+		std::function<void()> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+	}
+
+	void SatoriRestClient::deleteIdentity(
+		SSessionPtr session,
+		std::function<void()> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+	}
+
+	void SatoriRestClient::postEvent(
+		SSessionPtr session,
+		const std::vector<SEvent> &events,
+	    std::function<void()> successCallback,
+	    Nakama::ErrorCallback errorCallback
+	) {
+	}
+
+	void SatoriRestClient::getExperiments(
+		SSessionPtr session,
+		const std::vector<std::string> &names,
+		std::function<void(SExperimentList)> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
 	}
 
 	void SatoriRestClient::getFlags(
@@ -245,6 +285,52 @@ namespace Satori {
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));
 		}
+	}
+
+	void SatoriRestClient::listIdentityProperties(
+		SSessionPtr session,
+		std::function<void(SProperties)> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+	}
+
+	void SatoriRestClient::updateProperties(
+		SSessionPtr session,
+		const std::unordered_map<std::string,
+		std::string> &defaultProperties,
+		const std::unordered_map<std::string,
+		std::string> &customProperties,
+		std::function<void()> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+	}
+
+	void SatoriRestClient::getMessages(
+		SSessionPtr session,
+		int32_t limit,
+		bool forward,
+		const std::string &cursor,
+		std::function<void(SGetMessageListResponse)> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+	}
+
+	void SatoriRestClient::updateMessage(
+		SSessionPtr session,
+		const std::string &messageId,
+		const std::chrono::time_point<std::chrono::system_clock> &readTime,
+		const std::chrono::time_point<std::chrono::system_clock> &consumeTime,
+		std::function<void()> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+	}
+
+	void SatoriRestClient::deleteMessage(
+		SSessionPtr session,
+		const std::string &messageId,
+		std::function<void()> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
 	}
 
 	RestReqContext* SatoriRestClient::createReqContext(std::shared_ptr<SFromJsonInterface> data) {

@@ -50,33 +50,33 @@ namespace Satori {
 			SSession session,
 			std::function<void (SSessionPtr)> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 
 		void authenticateLogout(
 			SSessionPtr session,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 
 		void deleteIdentity(
 			SSessionPtr session,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 
 		void postEvent(
 			SSessionPtr session,
 			const std::vector<SEvent>& events,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 
 		void getExperiments(
 			SSessionPtr session,
 			const std::vector<std::string>& names,
 			std::function<void(SExperimentList)> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 
 		void getFlags(
 			SSessionPtr session,
@@ -105,7 +105,7 @@ namespace Satori {
 			SSessionPtr session,
 			std::function<void (SProperties)> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 
 		void updateProperties(
 			SSessionPtr session,
@@ -113,7 +113,7 @@ namespace Satori {
 			const std::unordered_map<std::string,std::string>& customProperties,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 
 		void getMessages(
 			SSessionPtr session,
@@ -122,7 +122,7 @@ namespace Satori {
 			const std::string& cursor,
 			std::function<void(SGetMessageListResponse)> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 
 		void updateMessage(
 			SSessionPtr session,
@@ -131,14 +131,14 @@ namespace Satori {
 			const std::chrono::time_point<std::chrono::system_clock>& consumeTime,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 
 		void deleteMessage(
 			SSessionPtr session,
 			const std::string& messageId,
 			std::function<void()> successCallback,
 			Nakama::ErrorCallback errorCallback
-		) override {}
+		) override;
 	private:
 		RestReqContext* createReqContext(std::shared_ptr<SFromJsonInterface> data);
 		void setBasicAuth(RestReqContext* ctx);
