@@ -30,9 +30,20 @@ R getFromFuture(std::future<R> f, Satori::SClientPtr client) {
 	return f.get();
 }
 
+bool getFromFuture(std::future<void> f, Satori::SClientPtr client) {
+	if(!f.valid()) {
+		return false;
+	}
+	while(!(f.wait_for(std::chrono::seconds(0)) == std::future_status::ready)) {
+		client->tick();
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	}
+	return true;
+}
+
 int main(int argc, char** argv) {
 	try {
-		std::cout << "Satori cpp interface test begns:\n";
+		std::cout << "Hello, World, I'm Satori cpp interface!\n";
 
 		bool done = false;
 
@@ -46,13 +57,17 @@ int main(int argc, char** argv) {
 		Satori::SFlagList testResult = getFromFuture(client->getFlagsAsync(session3), client);
 		std::cout << "Flags:" << testResult.flags.size() << std::endl;
 		Satori::SFlagList testResult2 = getFromFuture(client->getFlagsAsync(session3, {"Hiro-Event-Leaderboards", "Hiro-Inventory"}), client);
+		Satori::SEvent testEvent;
+		testEvent.name = "testEvent";
+		std::vector<Satori::SEvent> testEvents = {testEvent};
+		bool testResult3 = getFromFuture(client->postEventAsync(session3, testEvents), client);
+		Satori::SLiveEventList testResult4 = getFromFuture(client->getLiveEventsAsync(session3), client);
 
 		Satori::SLiveEventList liveEvents = getFromFuture(client->getLiveEventsAsync(session3), client);
-		std::cout << "Live events:" << liveEvents.live_events.size() << std::endl;
-		std::cout << "Satori cpp interface test end.\n";
-//	} catch (const std::future_error& e) {
-//		std::cout << "Caught a future_error with code \"" << e.code()
-//				  << "\"\nMessage: \"" << e.what() << "\"\n";
+		std::cout << "Live events num:" << liveEvents.live_events.size() << std::endl;
+	} catch (const std::future_error& e) {
+		std::cout << "Caught a future_error with code \"" << e.code()
+				  << "\"\nMessage: \"" << e.what() << "\"\n";
 	} catch (const std::exception& e) {
 		std::cout << "Caught a exception with code \"" << e.what() << "\"\n";
 	}
