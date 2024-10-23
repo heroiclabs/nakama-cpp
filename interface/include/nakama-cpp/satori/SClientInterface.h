@@ -55,15 +55,24 @@ namespace Satori {
     		std::function<void (SSessionPtr)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
+    	virtual std::future<SSessionPtr> authenticateRefreshAsync(
+			SSessionPtr session) = 0;
+
     	virtual void authenticateLogout(
             SSessionPtr session,
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
+    	virtual std::future<void> authenticateLogoutAsync(
+			SSessionPtr session) = 0;
+
     	virtual void deleteIdentity(
             SSessionPtr session,
 			std::function<void()> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual std::future<void> deleteIdentityAsync(
+			SSessionPtr session) = 0;
 
     	virtual void postEvent(
             SSessionPtr session,
@@ -71,11 +80,19 @@ namespace Satori {
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
+    	virtual std::future<void> postEventAsync(
+			SSessionPtr session,
+			const std::vector<SEvent>& events) = 0;
+
     	virtual void getExperiments(
             SSessionPtr session,
     		const std::vector<std::string>& names,
 			std::function<void(SExperimentList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual std::future<SExperimentList> getExperimentsAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& names) = 0;
 
     	virtual void getFlags(
             SSessionPtr session,
@@ -128,6 +145,9 @@ namespace Satori {
     		std::function<void (SProperties)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
+    	virtual std::future<SProperties> listIdentityPropertiesAsync(
+			SSessionPtr session) = 0;
+
     	virtual void updateProperties(
     		SSessionPtr session,
     		const std::unordered_map<std::string,std::string>& defaultProperties = {},
@@ -150,6 +170,12 @@ namespace Satori {
 			std::function<void(SGetMessageListResponse)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
+    	virtual std::future<SGetMessageListResponse> getMessagesAsync(
+			SSessionPtr session,
+			int32_t limit,
+			bool forward,
+			const std::string& cursor) = 0;
+
     	virtual void updateMessage(
     		SSessionPtr session,
     		const std::string& messageId,
@@ -158,11 +184,21 @@ namespace Satori {
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
+    	virtual std::future<void> updateMessageAsync(
+			SSessionPtr session,
+			const std::string& messageId,
+			const Nakama::NTimestamp readTime,
+			const Nakama::NTimestamp consumeTime) = 0;
+
     	virtual void deleteMessage(
     		SSessionPtr session,
     		const std::string& messageId,
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual std::future<void> deleteMessageAsync(
+			SSessionPtr session,
+			const std::string& messageId) = 0;
     };
 
     using SClientPtr = std::shared_ptr<SClientInterface>;

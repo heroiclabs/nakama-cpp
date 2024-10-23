@@ -31,6 +31,28 @@ namespace Satori {
 			const std::unordered_map<std::string,std::string>& customProperties
 		) override;
 
+		std::future<SSessionPtr> authenticateRefreshAsync(
+			SSessionPtr session
+		) override;
+
+		std::future<void> authenticateLogoutAsync(
+			SSessionPtr session
+		) override;
+
+		std::future<void> deleteIdentityAsync(
+			SSessionPtr session
+		) override;
+
+		std::future<void> postEventAsync(
+			SSessionPtr session,
+			const std::vector<SEvent>& events
+		) override;
+
+		std::future<SExperimentList> getExperimentsAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& names
+		) override;
+
 		std::future<SFlagList> getFlagsAsync(
 			SSessionPtr session,
 			const std::vector<std::string>& names
@@ -48,12 +70,36 @@ namespace Satori {
 			const std::unordered_map<std::string,std::string>& customProperties
 		) override;
 
+		std::future<SProperties> listIdentityPropertiesAsync(
+			SSessionPtr session
+		) override;
+
 		std::future<void> updatePropertiesAsync(
 			SSessionPtr session,
 			const std::unordered_map<std::string, std::string> &defaultProperties,
 			const std::unordered_map<std::string, std::string> &customProperties,
 			const bool recompute
 		) override;
+
+		std::future<SGetMessageListResponse> getMessagesAsync(
+			SSessionPtr session,
+			int32_t limit,
+			bool forward,
+			const std::string& cursor
+		) override;
+
+		std::future<void> updateMessageAsync(
+			SSessionPtr session,
+			const std::string& messageId,
+			const Nakama::NTimestamp readTime,
+			const Nakama::NTimestamp consumeTime
+		) override;
+
+		std::future<void> deleteMessageAsync(
+			SSessionPtr session,
+			const std::string& messageId
+		) override;
+
 	protected:
 		int _port = 0;
 		std::string _host;

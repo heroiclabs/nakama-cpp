@@ -50,9 +50,9 @@ int main(int argc, char** argv) {
 		Satori::SLiveEventList liveEvents = getFromFuture(client->getLiveEventsAsync(session3), client);
 		std::cout << "Live events:" << liveEvents.live_events.size() << std::endl;
 		std::cout << "Satori cpp interface test end.\n";
-	} catch (const std::future_error& e) {
-		std::cout << "Caught a future_error with code \"" << e.code()
-				  << "\"\nMessage: \"" << e.what() << "\"\n";
+//	} catch (const std::future_error& e) {
+//		std::cout << "Caught a future_error with code \"" << e.code()
+//				  << "\"\nMessage: \"" << e.what() << "\"\n";
 	} catch (const std::exception& e) {
 		std::cout << "Caught a exception with code \"" << e.what() << "\"\n";
 	}

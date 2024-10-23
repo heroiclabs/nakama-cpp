@@ -50,9 +50,36 @@ namespace Satori{
 		return false;
 	}
 
-	bool SEvent::fromJson(std::string jsonString) {
+	bool jsonValueToSEvent(const rapidjson::Value& input, SEvent& output){
+		if(input.HasMember("name") && !input["name"].IsString()) {
+			return false;
+		}
+		output.name = input["name"].GetString();
+		if(input.HasMember("id") && !input["id"].IsString()) {
+			return false;
+		}
+		output.id = input["id"].GetString();
+		if(input.HasMember("metadata") && !jsonValueToStringMap(input["metadata"], output.metadata)) {
+			return false;
+		}
+		if(input.HasMember("value") && !input["value"].IsString()) {
+			return false;
+		}
+		output.value = input["value"].GetString();
+		if(input.HasMember("timestamp") && !input["timestamp"].IsInt64()) {
+			return false;
+		}
+		output.timestamp = input["timestamp"].GetInt64();
+		return true;
+	}
 
-		return false;
+	bool SEvent::fromJson(std::string jsonString) {
+		rapidjson::Document d;
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SEvent JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
+		return jsonValueToSEvent(d, *this);
 	}
 
 	bool SEventRequest::fromJson(std::string jsonString) {
@@ -60,14 +87,47 @@ namespace Satori{
 		return false;
 	}
 
-	bool SExperiment::fromJson(std::string jsonString) {
+	bool jsonValueToSExperiment(const rapidjson::Value& input, SExperiment& output){
+		if(input.HasMember("name") && !input["name"].IsString()) {
+			return false;
+		}
+		output.name = input["name"].GetString();
+		if(input.HasMember("value") && !input["value"].IsString()) {
+			return false;
+		}
+		output.value = input["value"].GetString();
+		return true;
+	}
 
-		return false;
+	bool SExperiment::fromJson(std::string jsonString) {
+		rapidjson::Document d;
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SExperiment JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
+		return jsonValueToSExperiment(d, *this);
 	}
 
 	bool SExperimentList::fromJson(std::string jsonString) {
+		rapidjson::Document d;
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SExperimentList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
 
-		return false;
+		if(d.HasMember("experiments")) {
+			if(!d["experiments"].IsArray()) {
+				return false;
+			}
+			for (auto& jsonExperiment : d["experiments"].GetArray()) {
+				SExperiment experiment;
+				if(!jsonValueToSExperiment(jsonExperiment, experiment)) {
+					return false;
+				}
+				this->experiments.emplace_back(experiment);
+			}
+			return true;
+		}
 	}
 
 	bool jsonValueToSFlag(const rapidjson::Value& input, SFlag& output){
@@ -80,7 +140,7 @@ namespace Satori{
 		}
 		output.value = input["value"].GetString();
 		// TODO: Figure out how to obtain this value and set it here if it can be obtained from the json we have
-		bool condition_changed = false;
+		output.condition_changed = false;
 		return true;
 	}
 
@@ -176,8 +236,6 @@ namespace Satori{
 			return false;
 		}
 		output.reset_cron = input["reset_cron"].GetString();
-		// TODO: Figure out how to obtain this value and set it here if it can be obtained from the json we have
-		bool condition_changed = false;
 		return true;
 	}
 
@@ -256,14 +314,93 @@ namespace Satori{
 		return false;
 	}
 
-	bool SMessage::fromJson(std::string jsonString) {
+	bool jsonValueToSMessage(const rapidjson::Value& input, SMessage& output){
+		if(input.HasMember("schedule_id") && !input["schedule_id"].IsString()) {
+			return false;
+		}
+		output.schedule_id = input["schedule_id"].GetString();
+		if(input.HasMember("send_time") && !input["send_time"].IsInt64()) {
+			return false;
+		}
+		output.send_time = input["send_time"].GetInt64();
+		if(input.HasMember("metadata") && !jsonValueToStringMap(input["metadata"], output.metadata)) {
+			return false;
+		}
+		if(input.HasMember("create_time") && !input["create_time"].IsInt64()) {
+			return false;
+		}
+		output.create_time = input["create_time"].GetInt64();
+		if(input.HasMember("update_time") && !input["update_time"].IsInt64()) {
+			return false;
+		}
+		output.update_time = input["update_time"].GetInt64();
+		if(input.HasMember("read_time") && !input["read_time"].IsInt64()) {
+			return false;
+		}
+		output.read_time = input["read_time"].GetInt64();
+		if(input.HasMember("consume_time") && !input["consume_time"].IsInt64()) {
+			return false;
+		}
+		output.consume_time = input["consume_time"].GetInt64();
+		if(input.HasMember("text") && !input["text"].IsString()) {
+			return false;
+		}
+		output.text = input["text"].GetString();
+		if(input.HasMember("id") && !input["id"].IsString()) {
+			return false;
+		}
+		output.id = input["id"].GetString();
+		if(input.HasMember("title") && !input["title"].IsString()) {
+			return false;
+		}
+		output.title = input["title"].GetString();
+		if(input.HasMember("image_url") && !input["image_url"].IsString()) {
+			return false;
+		}
+		output.image_url = input["image_url"].GetString();
+		return true;
+	}
 
-		return false;
+	bool SMessage::fromJson(std::string jsonString) {
+		rapidjson::Document d;
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SMessage JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
+		return jsonValueToSMessage(d, *this);
 	}
 
 	bool SGetMessageListResponse::fromJson(std::string jsonString) {
-
-		return false;
+		rapidjson::Document d;
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SGetMessageListResponse JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
+		if(d.HasMember("messages")) {
+			if(!d["messages"].IsArray()) {
+				return false;
+			}
+			for (auto& jsonMessage : d["messages"].GetArray()) {
+				SMessage message;
+				if(!jsonValueToSMessage(jsonMessage, message)) {
+					return false;
+				}
+				this->messages.emplace_back(message);
+			}
+		}
+		if(d.HasMember("next_cursor") && !d["next_cursor"].IsString()) {
+			return false;
+		}
+		this->next_cursor = d["next_cursor"].GetString();
+		if(d.HasMember("prev_cursor") && !d["prev_cursor"].IsString()) {
+			return false;
+		}
+		this->prev_cursor = d["prev_cursor"].GetString();
+		if(d.HasMember("cacheable_cursor") && !d["cacheable_cursor"].IsString()) {
+			return false;
+		}
+		this->cacheable_cursor = d["cacheable_cursor"].GetString();
+		return true;
 	}
 
 	bool SUpdateMessageRequest::fromJson(std::string jsonString) {
