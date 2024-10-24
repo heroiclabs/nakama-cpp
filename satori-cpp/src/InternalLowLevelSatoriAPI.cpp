@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
+#include "InternalLowLevelSatoriAPI.h"
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/log/NLogger.h"
-#include "nakama-cpp/satori/HardcodedLowLevelSatoriAPI.h"
 #include "rapidjson/document.h"
 #include "rapidjson/error/en.h"
 
@@ -35,17 +35,17 @@ namespace Satori{
 		return true;
 	}
 
-	bool SAuthenticateLogoutRequest::fromJson(std::string jsonString) {
+	bool SInternalAuthenticateLogoutRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SAuthenticateRefreshRequest::fromJson(std::string jsonString) {
+	bool SInternalAuthenticateRefreshRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SAuthenticateRequest::fromJson(std::string jsonString) {
+	bool SInternalAuthenticateRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
@@ -73,7 +73,7 @@ namespace Satori{
 		return true;
 	}
 
-	bool SEvent::fromJson(std::string jsonString) {
+	bool SInternalEvent::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SEvent JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -82,7 +82,7 @@ namespace Satori{
 		return jsonValueToSEvent(d, *this);
 	}
 
-	bool SEventRequest::fromJson(std::string jsonString) {
+	bool SInternalEventRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
@@ -99,7 +99,7 @@ namespace Satori{
 		return true;
 	}
 
-	bool SExperiment::fromJson(std::string jsonString) {
+	bool SInternalExperiment::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SExperiment JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -108,7 +108,7 @@ namespace Satori{
 		return jsonValueToSExperiment(d, *this);
 	}
 
-	bool SExperimentList::fromJson(std::string jsonString) {
+	bool SInternalExperimentList::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SExperimentList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -144,7 +144,7 @@ namespace Satori{
 		return true;
 	}
 
-	bool SFlag::fromJson(std::string jsonString) {
+	bool SInternalFlag::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SFlag JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -153,7 +153,7 @@ namespace Satori{
 		return jsonValueToSFlag(d, *this);
 	}
 
-	bool SFlagList::fromJson(std::string jsonString) {
+	bool SInternalFlagList::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SFlagList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -176,22 +176,22 @@ namespace Satori{
 		return true;
 	}
 
-	bool SGetExperimentsRequest::fromJson(std::string jsonString) {
+	bool SInternalGetExperimentsRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SGetFlagsRequest::fromJson(std::string jsonString) {
+	bool SInternalGetFlagsRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SGetLiveEventsRequest::fromJson(std::string jsonString) {
+	bool SInternalGetLiveEventsRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SIdentifyRequest::fromJson(std::string jsonString) {
+	bool SInternalIdentifyRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
@@ -240,7 +240,7 @@ namespace Satori{
 		return true;
 	}
 
-	bool SLiveEvent::fromJson(std::string jsonString) {
+	bool SInternalLiveEvent::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SLiveEvent JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -249,7 +249,7 @@ namespace Satori{
 		return jsonValueToSLiveEvent(d, *this);
 	}
 
-	bool SLiveEventList::fromJson(std::string jsonString) {
+	bool SInternalLiveEventList::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SLiveEventList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -284,7 +284,7 @@ namespace Satori{
 		return true;
 	}
 
-	bool SProperties::fromJson(std::string jsonString) {
+	bool SInternalProperties::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SProperties JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -293,7 +293,7 @@ namespace Satori{
 		return jsonValueToSProperties(d, *this);
 	}
 
-	bool SSession::fromJson(std::string jsonString) {
+	bool SInternalSession::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SSession JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -305,12 +305,12 @@ namespace Satori{
 		return jsonValueToSProperties(d["properties"], this->properties);
 	}
 
-	bool SUpdatePropertiesRequest::fromJson(std::string jsonString) {
+	bool SInternalUpdatePropertiesRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SGetMessageListRequest::fromJson(std::string jsonString) {
+	bool SInternalGetMessageListRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
@@ -362,7 +362,7 @@ namespace Satori{
 		return true;
 	}
 
-	bool SMessage::fromJson(std::string jsonString) {
+	bool SInternalMessage::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SMessage JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -371,7 +371,7 @@ namespace Satori{
 		return jsonValueToSMessage(d, *this);
 	}
 
-	bool SGetMessageListResponse::fromJson(std::string jsonString) {
+	bool SInternalGetMessageListResponse::fromJson(std::string jsonString) {
 		rapidjson::Document d;
 		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
 			NLOG_ERROR(Nakama::NError("Parse SGetMessageListResponse JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
@@ -404,12 +404,12 @@ namespace Satori{
 		return true;
 	}
 
-	bool SUpdateMessageRequest::fromJson(std::string jsonString) {
+	bool SInternalUpdateMessageRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}
 
-	bool SDeleteMessageRequest::fromJson(std::string jsonString) {
+	bool SInternalDeleteMessageRequest::fromJson(std::string jsonString) {
 
 		return false;
 	}

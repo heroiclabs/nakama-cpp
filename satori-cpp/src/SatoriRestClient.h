@@ -19,7 +19,7 @@
 #include <set>
 
 #include "SatoriBaseClient.h"
-#include "nakama-cpp/satori/HardcodedLowLevelSatoriAPI.h"
+#include "InternalLowLevelSatoriAPI.h"
 #include "nakama-cpp/log/NLogger.h"
 
 namespace Satori {

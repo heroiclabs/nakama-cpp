@@ -36,7 +36,9 @@ namespace Satori {
 		return promise->get_future();
 	}
 
-	std::future<SSessionPtr> SatoriBaseClient::authenticateRefreshAsync(SSessionPtr inSession) {
+	std::future<SSessionPtr> SatoriBaseClient::authenticateRefreshAsync(
+		SSessionPtr inSession
+	) {
 		auto promise = std::make_shared<std::promise<SSessionPtr>>();
 
 		authenticateRefresh(inSession,
@@ -50,7 +52,9 @@ namespace Satori {
 		return promise->get_future();
 	}
 
-	std::future<void> SatoriBaseClient::authenticateLogoutAsync(SSessionPtr session) {
+	std::future<void> SatoriBaseClient::authenticateLogoutAsync(
+		SSessionPtr session
+	) {
 		std::shared_ptr<std::promise<void>> promise = std::make_shared<std::promise<void>>();
 
 		authenticateLogout(session,
@@ -64,7 +68,9 @@ namespace Satori {
 		return promise->get_future();
 	}
 
-	std::future<void> SatoriBaseClient::deleteIdentityAsync(SSessionPtr session) {
+	std::future<void> SatoriBaseClient::deleteIdentityAsync(
+		SSessionPtr session
+	) {
 		std::shared_ptr<std::promise<void>> promise = std::make_shared<std::promise<void>>();
 
 		deleteIdentity(session,
@@ -81,7 +87,7 @@ namespace Satori {
 	std::future<void> SatoriBaseClient::postEventAsync(
 		SSessionPtr session,
 		const std::vector<SEvent> &events
-		) {
+	) {
 		std::shared_ptr<std::promise<void>> promise = std::make_shared<std::promise<void>>();
 
 		postEvent(session, events,
@@ -147,16 +153,16 @@ namespace Satori {
 	}
 
 	std::future<SSessionPtr> SatoriBaseClient::identifyAsync(
-		SSessionPtr session,
+		SSessionPtr inSession,
 		const std::string& id,
 		const std::unordered_map<std::string, std::string>& defaultProperties,
 		const std::unordered_map<std::string, std::string>& customProperties
 	) {
 		std::shared_ptr<std::promise<SSessionPtr>> promise = std::make_shared<std::promise<SSessionPtr>>();
 
-		identify(session, id, defaultProperties, customProperties,
-			[=](const SSessionPtr& session) {
-				promise->set_value(session);
+		identify(inSession, id, defaultProperties, customProperties,
+			[=](const SSessionPtr& outSession) {
+				promise->set_value(outSession);
 			},
 			[=](const Nakama::NError& error) {
 				promise->set_exception(std::make_exception_ptr<Nakama::NException>(error));
@@ -165,7 +171,9 @@ namespace Satori {
 		return promise->get_future();
 	}
 
-	std::future<SProperties> SatoriBaseClient::listIdentityPropertiesAsync(SSessionPtr session) {
+	std::future<SProperties> SatoriBaseClient::listIdentityPropertiesAsync(
+		SSessionPtr session
+	) {
 		std::shared_ptr<std::promise<SProperties>> promise = std::make_shared<std::promise<SProperties>>();
 
 		listIdentityProperties(session,

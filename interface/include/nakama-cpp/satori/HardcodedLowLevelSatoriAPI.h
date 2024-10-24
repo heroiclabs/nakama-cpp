@@ -23,31 +23,23 @@
 #include "nakama-cpp/NTypes.h"
 
 namespace Satori {
-    struct SFromJsonInterface {
-        virtual ~SFromJsonInterface() {}
-        virtual bool fromJson(std::string jsonString) = 0;
-    };
 
     // Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
-    struct SAuthenticateLogoutRequest : public SFromJsonInterface {
+    struct SAuthenticateLogoutRequest {
         // Session token to log out.
         std::string token;
         // Refresh token to invalidate.
         std::string refresh_token;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // Authenticate against the server with a refresh token.
-    struct SAuthenticateRefreshRequest : public SFromJsonInterface {
+    struct SAuthenticateRefreshRequest {
         // Refresh token.
         std::string refresh_token;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // Authentication request
-    struct SAuthenticateRequest : public SFromJsonInterface {
+    struct SAuthenticateRequest {
         // Identity ID. Must be between eight and 128 characters (inclusive).
         // Must be an alphanumeric string with only underscores and hyphens allowed.
         std::string id;
@@ -57,12 +49,10 @@ namespace Satori {
         // Optional custom properties to update with this call.
         // If not set, properties are left as they are on the server.
         std::unordered_map<std::string,std::string> custom_properties;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // A single event. Usually, but not necessarily, part of a batch.
-    struct SEvent : public SFromJsonInterface {
+    struct SEvent {
         // Event name.
         std::string name;
         // Optional event ID assigned by the client, used to de-duplicate in retransmission scenarios.
@@ -74,82 +64,64 @@ namespace Satori {
         std::string value;
         // The time when the event was triggered on the producer side.
         Nakama::NTimestamp timestamp;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // Publish an event to the server
-    struct SEventRequest : public SFromJsonInterface {
+    struct SEventRequest {
         // Some number of events produced by a client.
         std::vector<SEvent> events;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // An experiment that this user is partaking.
-    struct SExperiment : public SFromJsonInterface {
+    struct SExperiment {
         // Experiment name
         std::string name;
         // Value associated with this Experiment.
         std::string value;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // All experiments that this identity is involved with.
-    struct SExperimentList : public SFromJsonInterface {
+    struct SExperimentList {
         // All experiments for this identity.
         std::vector<SExperiment> experiments;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // Feature flag available to the identity.
-    struct SFlag : public SFromJsonInterface {
+    struct SFlag {
         // Flag name
         std::string name;
         // Value associated with this flag.
         std::string value;
         // Whether the value for this flag has conditionally changed from the default state.
         bool condition_changed;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // All flags available to the identity
-    struct SFlagList : public SFromJsonInterface {
+    struct SFlagList {
         // All flags
         std::vector<SFlag> flags;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // Request to get all experiments data.
-    struct SGetExperimentsRequest : public SFromJsonInterface {
+    struct SGetExperimentsRequest {
         // Experiment names; if empty string all experiments are returned.
         std::vector<std::string> names;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // Request to get all flags data.
-    struct SGetFlagsRequest : public SFromJsonInterface {
+    struct SGetFlagsRequest {
         // Flag names; if empty string all flags are returned.
         std::vector<std::string> names;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // Request to get all live events.
-    struct SGetLiveEventsRequest : public SFromJsonInterface {
+    struct SGetLiveEventsRequest {
         // Live event names; if empty string all live events are returned.
         std::vector<std::string> names;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // Enrich/replace the current session with a new ID.
-    struct SIdentifyRequest : public SFromJsonInterface {
+    struct SIdentifyRequest {
         // Identity ID to enrich the current session and return a new session. Old session will no longer be usable.
         std::string id;
         // Optional default properties to update with this call.
@@ -158,12 +130,10 @@ namespace Satori {
         // Optional custom properties to update with this call.
         // If not set, properties are left as they are on the server.
         std::unordered_map<std::string,std::string> custom_properties;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // A single live event.
-    struct SLiveEvent : public SFromJsonInterface {
+    struct SLiveEvent {
         // Name.
         std::string name;
         // Description.
@@ -184,68 +154,56 @@ namespace Satori {
         int64_t duration_sec;
         // Reset CRON schedule, if configured.
         std::string reset_cron;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // List of Live events.
-    struct SLiveEventList : public SFromJsonInterface {
+    struct SLiveEventList {
         // Live events.
         std::vector<SLiveEvent> live_events;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // Properties associated with an identity.
-    struct SProperties : public SFromJsonInterface {
+    struct SProperties {
         // Event default properties.
         std::unordered_map<std::string,std::string> default_properties;
         // Event computed properties.
         std::unordered_map<std::string,std::string> computed_properties;
         // Event custom properties.
         std::unordered_map<std::string,std::string> custom_properties;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // A session.
-    struct SSession : public SFromJsonInterface {
+    struct SSession {
         // Token credential.
         std::string token;
         // Refresh token.
         std::string refresh_token;
         // Properties associated with this identity.
         SProperties properties;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // Update Properties associated with this identity.
-    struct SUpdatePropertiesRequest : public SFromJsonInterface {
+    struct SUpdatePropertiesRequest {
         // Event default properties.
         std::unordered_map<std::string,std::string> default_properties;
         // Event custom properties.
         std::unordered_map<std::string,std::string> custom_properties;
         // Informs the server to recompute the audience membership of the identity.
         bool recompute;
-
-        bool fromJson(std::string jsonString) override;
     };
 
 
-    struct SGetMessageListRequest : public SFromJsonInterface {
+    struct SGetMessageListRequest {
         // Max number of messages to return. Between 1 and 100.
         int32_t limit;
         // True if listing should be older messages to newer, false if reverse.
         bool forward;
         // A pagination cursor, if any.
         std::string cursor;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // A scheduled message.
-    struct SMessage : public SFromJsonInterface {
+    struct SMessage {
         // The identifier of the schedule.
         std::string schedule_id;
         // The send time for the message.
@@ -268,12 +226,10 @@ namespace Satori {
         std::string title;
         // The message's image url.
         std::string image_url;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // A response containing all the messages for an identity.
-    struct SGetMessageListResponse : public SFromJsonInterface {
+    struct SGetMessageListResponse {
         // The list of messages.
         std::vector<SMessage> messages;
         // The cursor to send when retrieving the next page, if any.
@@ -282,27 +238,21 @@ namespace Satori {
         std::string prev_cursor;
         // Cacheable cursor to list newer messages. Durable and designed to be stored, unlike next/prev cursors.
         std::string cacheable_cursor;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // The request to update the status of a message.
-    struct SUpdateMessageRequest : public SFromJsonInterface {
+    struct SUpdateMessageRequest {
         // The identifier of the messages.
         std::string id;
         // The time the message was read at the client.
         Nakama::NTimestamp read_time;
         // The time the message was consumed by the identity.
         Nakama::NTimestamp consume_time;
-
-        bool fromJson(std::string jsonString) override;
     };
 
     // The request to delete a scheduled message.
-    struct SDeleteMessageRequest : public SFromJsonInterface {
+    struct SDeleteMessageRequest {
         // The identifier of the message.
         std::string id;
-
-        bool fromJson(std::string jsonString) override;
     };
 }

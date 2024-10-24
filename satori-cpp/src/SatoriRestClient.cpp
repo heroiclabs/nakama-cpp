@@ -118,7 +118,7 @@ namespace Satori {
 		try {
 			NLOG_INFO("...");
 
-			auto sessionData(std::make_shared<SSession>());
+			std::shared_ptr<SInternalSession> sessionData(std::make_shared<SInternalSession>());
 			RestReqContext* ctx = createReqContext(sessionData);
 			setBasicAuth(ctx);
 			ctx->successCallback = [sessionData, successCallback]()
@@ -148,7 +148,7 @@ namespace Satori {
 		try {
 			NLOG_INFO("...");
 
-			auto sessionData(std::make_shared<SSession>());
+			std::shared_ptr<SInternalSession> sessionData(std::make_shared<SInternalSession>());
 			RestReqContext* ctx = createReqContext(sessionData);
 			setBasicAuth(ctx);
 			ctx->successCallback = [sessionData, successCallback]()
@@ -279,12 +279,12 @@ namespace Satori {
 				args.emplace("names", name);
 			}
 
-			std::shared_ptr<SExperimentList> experimentsData(std::make_shared<SExperimentList>());
+			std::shared_ptr<SInternalExperimentList> experimentsData(std::make_shared<SInternalExperimentList>());
 			RestReqContext* ctx(createReqContext(experimentsData));
 			setSessionAuth(ctx, session);
 			ctx->successCallback = [experimentsData, successCallback]()
 			{
-				successCallback(*experimentsData);
+				successCallback(static_cast<SExperimentList>(*experimentsData));
 			};
 			ctx->errorCallback = std::move(errorCallback);
 
@@ -309,12 +309,12 @@ namespace Satori {
 				args.emplace("names", name);
 			}
 
-			std::shared_ptr<SFlagList> flagsData(std::make_shared<SFlagList>());
+			std::shared_ptr<SInternalFlagList> flagsData(std::make_shared<SInternalFlagList>());
 			RestReqContext* ctx(createReqContext(flagsData));
 			setSessionAuth(ctx, session);
 			ctx->successCallback = [flagsData, successCallback]()
 			{
-				successCallback(*flagsData);
+				successCallback(static_cast<SFlagList>(*flagsData));
 			};
 			ctx->errorCallback = std::move(errorCallback);
 
@@ -339,12 +339,12 @@ namespace Satori {
 				args.emplace("names", liveEventName);
 			}
 
-			std::shared_ptr<SLiveEventList> liveEventsData(std::make_shared<SLiveEventList>());
+			std::shared_ptr<SInternalLiveEventList> liveEventsData(std::make_shared<SInternalLiveEventList>());
 			RestReqContext* ctx(createReqContext(liveEventsData));
 			setSessionAuth(ctx, session);
 			ctx->successCallback = [liveEventsData, successCallback]()
 			{
-				successCallback(*liveEventsData);
+				successCallback(static_cast<SLiveEventList>(*liveEventsData));
 			};
 			ctx->errorCallback = std::move(errorCallback);
 
@@ -365,7 +365,7 @@ namespace Satori {
 		try {
 			NLOG_INFO("...");
 
-			auto sessionData(std::make_shared<SSession>());
+			std::shared_ptr<SInternalSession> sessionData(std::make_shared<SInternalSession>());
 			RestReqContext* ctx = createReqContext(sessionData);
 			setSessionAuth(ctx, session);
 			ctx->successCallback = [sessionData, successCallback]()
@@ -421,12 +421,12 @@ namespace Satori {
 
 			Nakama::NHttpQueryArgs args;
 
-			std::shared_ptr<SProperties> propertiesData(std::make_shared<SProperties>());
+			std::shared_ptr<SInternalProperties> propertiesData(std::make_shared<SInternalProperties>());
 			RestReqContext* ctx(createReqContext(propertiesData));
 			setSessionAuth(ctx, session);
 			ctx->successCallback = [propertiesData, successCallback]()
 			{
-				successCallback(*propertiesData);
+				successCallback(static_cast<SProperties>(*propertiesData));
 			};
 			ctx->errorCallback = std::move(errorCallback);
 
@@ -505,12 +505,12 @@ namespace Satori {
 			args.emplace("forward", forward? "true" : "false");
 			if (!cursor.empty()) {args.emplace("cursor", Nakama::encodeURIComponent(cursor));}
 
-			std::shared_ptr<SGetMessageListResponse> messagesData(std::make_shared<SGetMessageListResponse>());
+			std::shared_ptr<SInternalGetMessageListResponse> messagesData(std::make_shared<SInternalGetMessageListResponse>());
 			RestReqContext* ctx(createReqContext(messagesData));
 			setSessionAuth(ctx, session);
 			ctx->successCallback = [messagesData, successCallback]()
 			{
-				successCallback(*messagesData);
+				successCallback(static_cast<SGetMessageListResponse>(*messagesData));
 			};
 			ctx->errorCallback = std::move(errorCallback);
 
