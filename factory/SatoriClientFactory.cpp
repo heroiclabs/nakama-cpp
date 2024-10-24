@@ -14,14 +14,20 @@
 * limitations under the License.
 */
 
-#include "nakama-cpp/satori/SatoriClientFactory.h"
-#include "SatoriRestClient.h"
+#include "../interface/include/nakama-cpp/satori/SatoriClientFactory.h"
+#include "../satori-cpp/src/SatoriRestClient.h"
 
 namespace Satori {
 	SClientPtr createRestClient(
 		const Nakama::NClientParameters &parameters,
 		Nakama::NHttpTransportPtr httpTransport
 	) {
+		if (!httpTransport)
+		{
+			NLOG_ERROR("HTTP transport cannot be null.");
+			return nullptr;
+		}
+
 		return std::make_shared<SatoriRestClient>(parameters, httpTransport == nullptr? createDefaultHttpTransport(parameters.platformParams) : httpTransport);
 	}
 }

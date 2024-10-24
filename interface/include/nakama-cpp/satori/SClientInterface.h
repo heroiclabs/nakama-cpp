@@ -21,7 +21,6 @@
 
 #include "HardcodedLowLevelSatoriAPI.h"
 #include "nakama-cpp/NClientInterface.h"
-#include "google/protobuf/message.h"
 
 namespace Satori {
 

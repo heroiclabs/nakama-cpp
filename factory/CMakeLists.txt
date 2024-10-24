@@ -1,4 +1,4 @@
-add_library(nakama-sdk-client-factory OBJECT ClientFactory.cpp)
+add_library(nakama-sdk-client-factory OBJECT ClientFactory.cpp SatoriClientFactory.cpp)
 add_library(nakama::sdk-client-factory ALIAS nakama-sdk-client-factory)
 target_link_libraries(nakama-sdk-client-factory
         PRIVATE nakama::sdk-core-rest
