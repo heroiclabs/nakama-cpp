@@ -126,8 +126,8 @@ namespace Satori{
 				}
 				this->experiments.emplace_back(experiment);
 			}
-			return true;
 		}
+		return true;
 	}
 
 	bool jsonValueToSFlag(const rapidjson::Value& input, SFlag& output){
@@ -171,8 +171,9 @@ namespace Satori{
 				}
 				this->flags.emplace_back(flag);
 			}
-			return true;
 		}
+
+		return true;
 	}
 
 	bool SGetExperimentsRequest::fromJson(std::string jsonString) {
