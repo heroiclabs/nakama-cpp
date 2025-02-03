@@ -58,6 +58,11 @@ namespace Satori {
 			const std::vector<std::string>& names
 		) override;
 
+		std::future<SFlagOverrideList> getFlagOverridesAsync(
+			SSessionPtr session,
+			const std::vector<std::string> &names
+		) override;
+
 		std::future<SLiveEventList> getLiveEventsAsync(
 			SSessionPtr session,
 			const std::vector<std::string>& liveEventNames

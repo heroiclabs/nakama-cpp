@@ -103,6 +103,16 @@ namespace Satori {
 			SSessionPtr session,
 			const std::vector<std::string>& names = {}) = 0;
 
+    	virtual void getFlagOverrides(
+			SSessionPtr session,
+			const std::vector<std::string> &names = {},
+			std::function<void(SFlagOverrideList)> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual std::future<SFlagOverrideList> getFlagOverridesAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& names = {}) = 0;
+
     	/**
 		 * Request to get all live events.
 		 *

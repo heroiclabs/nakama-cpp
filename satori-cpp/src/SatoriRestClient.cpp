@@ -327,6 +327,36 @@ namespace Satori {
 		}
 	}
 
+	void SatoriRestClient::getFlagOverrides(
+		SSessionPtr session,
+		const std::vector<std::string>& names,
+		std::function<void(SFlagOverrideList)> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+		try {
+			NLOG_INFO("...");
+
+			Nakama::NHttpQueryArgs args;
+
+			for (auto& name : names) {
+				args.emplace("names", name);
+			}
+
+			std::shared_ptr<SInternalFlagOverrideList> flagOverridesData(std::make_shared<SInternalFlagOverrideList>());
+			RestReqContext* ctx(createReqContext(flagOverridesData));
+			setSessionAuth(ctx, session);
+			ctx->successCallback = [flagOverridesData, successCallback]()
+			{
+				successCallback(static_cast<SFlagOverrideList>(*flagOverridesData));
+			};
+			ctx->errorCallback = std::move(errorCallback);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/flag/override", "", std::move(args));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
+	}
+
 	void SatoriRestClient::getLiveEvents(
 		SSessionPtr session,
 		const std::vector<std::string>& liveEventNames,

@@ -60,6 +60,14 @@ namespace Satori {
         bool fromJson(std::string jsonString) override;
     };
 
+    struct SInternalFlagOverride : public SFlagOverride, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
+
+    struct SInternalFlagOverrideList : public SFlagOverrideList, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
+
     struct SInternalGetExperimentsRequest : public SGetExperimentsRequest, public SFromJsonInterface {
         bool fromJson(std::string jsonString) override;
     };

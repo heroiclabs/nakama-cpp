@@ -85,6 +85,13 @@ namespace Satori {
 			Nakama::ErrorCallback errorCallback
 		) override;
 
+		void getFlagOverrides(
+			SSessionPtr session,
+			const std::vector<std::string> &names,
+			std::function<void(SFlagOverrideList)> successCallback,
+			Nakama::ErrorCallback errorCallback
+		) override;
+
 		void getLiveEvents(
 			SSessionPtr session,
 			const std::vector<std::string>& liveEventNames,

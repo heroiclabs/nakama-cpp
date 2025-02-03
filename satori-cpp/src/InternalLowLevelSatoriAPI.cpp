@@ -15,6 +15,10 @@
  */
 
 #include "InternalLowLevelSatoriAPI.h"
+
+#include <iostream>
+#include <ostream>
+
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/log/NLogger.h"
 #include "rapidjson/document.h"
@@ -51,25 +55,33 @@ namespace Satori{
 	}
 
 	bool jsonValueToSEvent(const rapidjson::Value& input, SEvent& output){
-		if(input.HasMember("name") && !input["name"].IsString()) {
-			return false;
+		if(input.HasMember("name")) {
+			if(!input["name"].IsString()) {
+				return false;
+			}
+			output.name = input["name"].GetString();
 		}
-		output.name = input["name"].GetString();
-		if(input.HasMember("id") && !input["id"].IsString()) {
-			return false;
+		if(input.HasMember("id")) {
+			if(!input["id"].IsString()) {
+				return false;
+			}
+			output.id = input["id"].GetString();
 		}
-		output.id = input["id"].GetString();
 		if(input.HasMember("metadata") && !jsonValueToStringMap(input["metadata"], output.metadata)) {
 			return false;
 		}
-		if(input.HasMember("value") && !input["value"].IsString()) {
-			return false;
+		if(input.HasMember("value")) {
+			if(!input["value"].IsString()) {
+				return false;
+			}
+			output.value = input["value"].GetString();
 		}
-		output.value = input["value"].GetString();
-		if(input.HasMember("timestamp") && !input["timestamp"].IsInt64()) {
-			return false;
+		if(input.HasMember("timestamp")) {
+			if(!input["timestamp"].IsInt64()) {
+				return false;
+			}
+			output.timestamp = input["timestamp"].GetInt64();
 		}
-		output.timestamp = input["timestamp"].GetInt64();
 		return true;
 	}
 
@@ -83,19 +95,22 @@ namespace Satori{
 	}
 
 	bool SInternalEventRequest::fromJson(std::string jsonString) {
-
 		return false;
 	}
 
 	bool jsonValueToSExperiment(const rapidjson::Value& input, SExperiment& output){
-		if(input.HasMember("name") && !input["name"].IsString()) {
-			return false;
+		if(input.HasMember("name")) {
+			if(!input["name"].IsString()) {
+				return false;
+			}
+			output.name = input["name"].GetString();
 		}
-		output.name = input["name"].GetString();
-		if(input.HasMember("value") && !input["value"].IsString()) {
-			return false;
+		if(input.HasMember("value")) {
+			if(!input["value"].IsString()) {
+				return false;
+			}
+			output.value = input["value"].GetString();
 		}
-		output.value = input["value"].GetString();
 		return true;
 	}
 
@@ -131,16 +146,54 @@ namespace Satori{
 	}
 
 	bool jsonValueToSFlag(const rapidjson::Value& input, SFlag& output){
-		if(input.HasMember("name") && !input["name"].IsString()) {
-			return false;
+		if(input.HasMember("name")) {
+			if(!input["name"].IsString()) {
+				return false;
+			}
+			output.name = input["name"].GetString();
 		}
-		output.name = input["name"].GetString();
-		if(input.HasMember("value") && !input["value"].IsString()) {
-			return false;
+		if(input.HasMember("value")) {
+			if(!input["value"].IsString()) {
+				return false;
+			}
+			output.value = input["value"].GetString();
 		}
-		output.value = input["value"].GetString();
-		// TODO: Figure out how to obtain this value and set it here if it can be obtained from the json we have
-		output.condition_changed = false;
+		if(input.HasMember("condition_changed")) {
+			if(!input["condition_changed"].IsBool()) {
+				return false;
+			}
+			output.condition_changed = input["condition_changed"].GetBool();
+		}
+		if(input.HasMember("change_reason")) {
+			if(!input["change_reason"].IsObject()) {
+				return false;
+			}
+			const auto change_object = input["change_reason"].GetObject();
+			SFlag::SValueChangeReason change_reason;
+			if(change_object.HasMember("name")) {
+				if(!change_object["name"].IsString()) {
+					return false;
+				}
+				change_reason.name = change_object["name"].GetString();
+			}
+			if(change_object.HasMember("variant_name")) {
+				if(!change_object["variant_name"].IsString()) {
+					return false;
+				}
+				change_reason.variant_name = change_object["variant_name"].GetString();
+			}
+			if(change_object.HasMember("type")) {
+				if(!change_object["type"].IsInt()) {
+					return false;
+				}
+				int type_int = change_object["type"].GetInt();
+				if(type_int < SFlag::SValueChangeReason::SType::UNKNOWN || type_int > SFlag::SValueChangeReason::SType::EXPERIMENT) {
+					return false;
+				}
+				change_reason.type = static_cast<SFlag::SValueChangeReason::SType>(type_int);
+			}
+			output.change_reason = change_reason;
+		}
 		return true;
 	}
 
@@ -159,7 +212,6 @@ namespace Satori{
 			NLOG_ERROR(Nakama::NError("Parse SFlagList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
 			return false;
 		}
-
 		if(d.HasMember("flags")) {
 			if(!d["flags"].IsArray()) {
 				return false;
@@ -170,6 +222,82 @@ namespace Satori{
 					return false;
 				}
 				this->flags.emplace_back(flag);
+			}
+		}
+
+		return true;
+	}
+
+	bool jsonValueToSFlagOverride(const rapidjson::Value& input, SFlagOverride& output){
+		if(!input.HasMember("flag_name") || !input["flag_name"].IsString()) {
+			return false;
+		}
+		output.flag_name = input["flag_name"].GetString();
+		if(!input.HasMember("overrides") || !input["overrides"].IsArray()) {
+			return false;
+		}
+		for (auto& jsonFlagOverride : input["overrides"].GetArray()) {
+			SFlagOverride::SValue value;
+			if(!jsonFlagOverride.HasMember("name") || !jsonFlagOverride["name"].IsString()) {
+				return false;
+			}
+			value.name = jsonFlagOverride["name"].GetString();
+			if(!jsonFlagOverride.HasMember("value") || !jsonFlagOverride["value"].IsString()) {
+				return false;
+			}
+			value.value = jsonFlagOverride["value"].GetString();
+			if(jsonFlagOverride.HasMember("variant_name")) {
+				if(!jsonFlagOverride["variant_name"].IsString()) {
+					return false;
+				}
+				value.variant_name = jsonFlagOverride["variant_name"].GetString();
+			}
+			if(jsonFlagOverride.HasMember("type")) {
+				if(!jsonFlagOverride["type"].IsInt()) {
+					return false;
+				}
+				int type_int = jsonFlagOverride["type"].GetInt();
+				if(type_int < SFlagOverride::SType::FLAG || type_int > SFlagOverride::SType::EXPERIMENT_PHASE_VARIANT_FLAG) {
+					return false;
+				}
+				value.type = static_cast<SFlagOverride::SType>(type_int);
+			}
+			if(jsonFlagOverride.HasMember("create_time_sec")) {
+				if(!jsonFlagOverride["create_time_sec"].IsInt64()) {
+					return false;
+				}
+				value.create_time_sec = jsonFlagOverride["create_time_sec"].GetInt64();
+			}
+			output.overrides.emplace_back(value);
+		}
+		return true;
+	}
+
+	bool SInternalFlagOverride::fromJson(std::string jsonString) {
+		rapidjson::Document d;
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SFlagOverride JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
+		return jsonValueToSFlagOverride(d, *this);
+	}
+
+	bool SInternalFlagOverrideList::fromJson(std::string jsonString) {
+		rapidjson::Document d;
+		if(d.ParseInsitu(jsonString.data()).HasParseError()) {
+			NLOG_ERROR(Nakama::NError("Parse SFlagOverrideList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
+			return false;
+		}
+		if(d.HasMember("flags")) {
+			if(!d["flags"].IsArray()) {
+				return false;
+			}
+			for (auto& jsonFlagOverride : d["flags"].GetArray()) {
+				SFlagOverride flagOverride;
+				if(!jsonValueToSFlagOverride(jsonFlagOverride, flagOverride)) {
+					return false;
+				}
+				this->flags.emplace_back(flagOverride);
 			}
 		}
 
@@ -197,46 +325,66 @@ namespace Satori{
 	}
 
 	bool jsonValueToSLiveEvent(const rapidjson::Value& input, SLiveEvent& output){
-		if(input.HasMember("name") && !input["name"].IsString()) {
-			return false;
+		if(input.HasMember("name")) {
+			if(!input["name"].IsString()) {
+				return false;
+			}
+			output.name = input["name"].GetString();
 		}
-		output.name = input["name"].GetString();
-		if(input.HasMember("description") && !input["description"].IsString()) {
-			return false;
+		if(input.HasMember("description")) {
+			if(!input["description"].IsString()) {
+				return false;
+			}
+			output.description = input["description"].GetString();
 		}
-		output.description = input["description"].GetString();
-		if(input.HasMember("value") && !input["value"].IsString()) {
-			return false;
+		if(input.HasMember("value")) {
+			if(!input["value"].IsString()) {
+				return false;
+			}
+			output.value = input["value"].GetString();
 		}
-		output.value = input["value"].GetString();
-		if(input.HasMember("active_start_time_sec") && !input["active_start_time_sec"].IsInt64()) {
-			return false;
+		if(input.HasMember("active_start_time_sec")) {
+			if(!input["active_start_time_sec"].IsInt64()) {
+				return false;
+			}
+			output.active_start_time_sec = input["active_start_time_sec"].GetInt64();
 		}
-		output.active_start_time_sec = input["active_start_time_sec"].GetInt64();
-		if(input.HasMember("active_end_time_sec") && !input["active_end_time_sec"].IsInt64()) {
-			return false;
+		if(input.HasMember("active_end_time_sec")) {
+			if(!input["active_end_time_sec"].IsInt64()) {
+				return false;
+			}
+			output.active_end_time_sec = input["active_end_time_sec"].GetInt64();
 		}
-		output.active_end_time_sec = input["active_end_time_sec"].GetInt64();
-		if(input.HasMember("id") && !input["id"].IsString()) {
-			return false;
+		if(input.HasMember("id")) {
+			if(!input["id"].IsString()) {
+				return false;
+			}
+			output.id = input["id"].GetString();
 		}
-		output.id = input["id"].GetString();
-		if(input.HasMember("start_time_sec") && !input["start_time_sec"].IsInt64()) {
-			return false;
+		if(input.HasMember("start_time_sec")) {
+			if(!input["start_time_sec"].IsInt64()) {
+				return false;
+			}
+			output.start_time_sec = input["start_time_sec"].GetInt64();
 		}
-		output.start_time_sec = input["start_time_sec"].GetInt64();
-		if(input.HasMember("end_time_sec") && !input["end_time_sec"].IsInt64()) {
-			return false;
+		if(input.HasMember("end_time_sec")) {
+			if(!input["end_time_sec"].IsInt64()) {
+				return false;
+			}
+			output.end_time_sec = input["end_time_sec"].GetInt64();
 		}
-		output.end_time_sec = input["end_time_sec"].GetInt64();
-		if(input.HasMember("duration_sec") && !input["duration_sec"].IsInt64()) {
-			return false;
+		if(input.HasMember("duration_sec")) {
+			if(!input["duration_sec"].IsInt64()) {
+				return false;
+			}
+			output.duration_sec = input["duration_sec"].GetInt64();
 		}
-		output.duration_sec = input["duration_sec"].GetInt64();
-		if(input.HasMember("reset_cron") && !input["reset_cron"].IsString()) {
-			return false;
+		if(input.HasMember("reset_cron")) {
+			if(!input["reset_cron"].IsString()) {
+				return false;
+			}
+			output.reset_cron = input["reset_cron"].GetString();
 		}
-		output.reset_cron = input["reset_cron"].GetString();
 		return true;
 	}
 
@@ -299,9 +447,18 @@ namespace Satori{
 			NLOG_ERROR(Nakama::NError("Parse SSession JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.", Nakama::ErrorCode::InternalError));
 			return false;
 		}
-		// TODO: Error handling! Now if some field is not as expected, it just crashes. Example at: https://github.com/Tencent/rapidjson/blob/master/example/tutorial/tutorial.cpp
-		this->token = d["token"].GetString();
-		this->refresh_token = d["refresh_token"].GetString();
+		if(d.HasMember("token")) {
+			if(!d["token"].IsString()) {
+				return false;
+			}
+			this->token = d["token"].GetString();
+		}
+		if(d.HasMember("refresh_token")) {
+			if(!d["refresh_token"].IsString()) {
+				return false;
+			}
+			this->refresh_token = d["refresh_token"].GetString();
+		}
 		return jsonValueToSProperties(d["properties"], this->properties);
 	}
 
@@ -316,49 +473,69 @@ namespace Satori{
 	}
 
 	bool jsonValueToSMessage(const rapidjson::Value& input, SMessage& output){
-		if(input.HasMember("schedule_id") && !input["schedule_id"].IsString()) {
-			return false;
+		if(input.HasMember("schedule_id")) {
+			if(!input["schedule_id"].IsString()) {
+				return false;
+			}
+			output.schedule_id = input["schedule_id"].GetString();
 		}
-		output.schedule_id = input["schedule_id"].GetString();
-		if(input.HasMember("send_time") && !input["send_time"].IsInt64()) {
-			return false;
+		if(input.HasMember("send_time")) {
+			if(!input["send_time"].IsInt64()) {
+				return false;
+			}
+			output.send_time = input["send_time"].GetInt64();
 		}
-		output.send_time = input["send_time"].GetInt64();
 		if(input.HasMember("metadata") && !jsonValueToStringMap(input["metadata"], output.metadata)) {
 			return false;
 		}
-		if(input.HasMember("create_time") && !input["create_time"].IsInt64()) {
-			return false;
+		if(input.HasMember("create_time")) {
+			if(!input["create_time"].IsInt64()) {
+				return false;
+			}
+			output.create_time = input["create_time"].GetInt64();
 		}
-		output.create_time = input["create_time"].GetInt64();
-		if(input.HasMember("update_time") && !input["update_time"].IsInt64()) {
-			return false;
+		if(input.HasMember("update_time")) {
+			if(!input["update_time"].IsInt64()) {
+				return false;
+			}
+			output.update_time = input["update_time"].GetInt64();
 		}
-		output.update_time = input["update_time"].GetInt64();
-		if(input.HasMember("read_time") && !input["read_time"].IsInt64()) {
-			return false;
+		if(input.HasMember("read_time")) {
+			if(!input["read_time"].IsInt64()) {
+				return false;
+			}
+			output.read_time = input["read_time"].GetInt64();
 		}
-		output.read_time = input["read_time"].GetInt64();
-		if(input.HasMember("consume_time") && !input["consume_time"].IsInt64()) {
-			return false;
+		if(input.HasMember("consume_time")) {
+			if(!input["consume_time"].IsInt64()) {
+				return false;
+			}
+			output.consume_time = input["consume_time"].GetInt64();
 		}
-		output.consume_time = input["consume_time"].GetInt64();
-		if(input.HasMember("text") && !input["text"].IsString()) {
-			return false;
+		if(input.HasMember("text")) {
+			if(!input["text"].IsString()) {
+				return false;
+			}
+			output.text = input["text"].GetString();
 		}
-		output.text = input["text"].GetString();
-		if(input.HasMember("id") && !input["id"].IsString()) {
-			return false;
+		if(input.HasMember("id")) {
+			if(!input["id"].IsString()) {
+				return false;
+			}
+			output.id = input["id"].GetString();
 		}
-		output.id = input["id"].GetString();
-		if(input.HasMember("title") && !input["title"].IsString()) {
-			return false;
+		if(input.HasMember("title")) {
+			if(!input["title"].IsString()) {
+				return false;
+			}
+			output.title = input["title"].GetString();
 		}
-		output.title = input["title"].GetString();
-		if(input.HasMember("image_url") && !input["image_url"].IsString()) {
-			return false;
+		if(input.HasMember("image_url")) {
+			if(!input["image_url"].IsString()) {
+				return false;
+			}
+			output.image_url = input["image_url"].GetString();
 		}
-		output.image_url = input["image_url"].GetString();
 		return true;
 	}
 
@@ -389,18 +566,24 @@ namespace Satori{
 				this->messages.emplace_back(message);
 			}
 		}
-		if(d.HasMember("next_cursor") && !d["next_cursor"].IsString()) {
-			return false;
+		if(d.HasMember("next_cursor")) {
+			if(!d["next_cursor"].IsString()) {
+				return false;
+			}
+			this->next_cursor = d["next_cursor"].GetString();
 		}
-		this->next_cursor = d["next_cursor"].GetString();
-		if(d.HasMember("prev_cursor") && !d["prev_cursor"].IsString()) {
-			return false;
+		if(d.HasMember("prev_cursor")) {
+			if(!d["prev_cursor"].IsString()) {
+				return false;
+			}
+			this->prev_cursor = d["prev_cursor"].GetString();
 		}
-		this->prev_cursor = d["prev_cursor"].GetString();
-		if(d.HasMember("cacheable_cursor") && !d["cacheable_cursor"].IsString()) {
-			return false;
+		if(d.HasMember("cacheable_cursor")) {
+			if(!d["cacheable_cursor"].IsString()) {
+				return false;
+			}
+			this->cacheable_cursor = d["cacheable_cursor"].GetString();
 		}
-		this->cacheable_cursor = d["cacheable_cursor"].GetString();
 		return true;
 	}
 

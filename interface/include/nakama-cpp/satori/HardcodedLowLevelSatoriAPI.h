@@ -88,18 +88,70 @@ namespace Satori {
 
     // Feature flag available to the identity.
     struct SFlag {
+        struct SValueChangeReason {
+            enum SType {
+                UNKNOWN = 0,
+                FLAG_VARIANT = 1,
+                LIVE_EVENT = 2,
+                EXPERIMENT = 3
+            };
+
+            // The type of the configuration that declared the override.
+            SType type = SFlag::SValueChangeReason::SType::UNKNOWN;
+            // The name of the configuration that overrides the flag value.
+            std::string name;
+            // The variant name of the configuration that overrides the flag value.
+            std::string variant_name;
+        };
         // Flag name
         std::string name;
         // Value associated with this flag.
         std::string value;
         // Whether the value for this flag has conditionally changed from the default state.
-        bool condition_changed;
+        bool condition_changed = false;
+        // The origin of change on the flag value returned.
+        SValueChangeReason change_reason;
     };
 
     // All flags available to the identity
     struct SFlagList {
         // All flags
         std::vector<SFlag> flags;
+    };
+
+    // Feature flag available to the identity.
+    struct SFlagOverride {
+        enum SType {
+            FLAG = 0,
+            FLAG_VARIANT = 1,
+            LIVE_EVENT_FLAG = 2,
+            LIVE_EVENT_FLAG_VARIANT = 3,
+            EXPERIMENT_PHASE_VARIANT_FLAG = 4
+        };
+        // The details of a flag value override.
+        struct SValue {
+            // The type of the configuration that declared the override.
+            SType type = SType::FLAG;
+            // The name of the configuration that overrides the flag value.
+            std::string name;
+            // The variant name of the configuration that overrides the flag value.
+            std::string variant_name;
+            // The value of the configuration that overrides the flag.
+            std::string value;
+            // The create time of the configuration that overrides the flag.
+            int64_t create_time_sec;
+        };
+
+        // Flag name
+        std::string flag_name;
+        // The list of configuration that affect the value of the flag.
+        std::vector<SValue> overrides;
+    };
+
+    // All flags available to the identity and their value overrides
+    struct SFlagOverrideList {
+        // All flags
+        std::vector<SFlagOverride> flags;
     };
 
     // Request to get all experiments data.

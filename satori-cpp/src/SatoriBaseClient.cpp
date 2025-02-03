@@ -135,6 +135,23 @@ namespace Satori {
 		return promise->get_future();
 	}
 
+	std::future<SFlagOverrideList> SatoriBaseClient::getFlagOverridesAsync(
+		SSessionPtr session,
+		const std::vector<std::string>& names
+	) {
+		std::shared_ptr<std::promise<SFlagOverrideList>> promise = std::make_shared<std::promise<SFlagOverrideList>>();
+
+		getFlagOverrides(session, names,
+			[=](const SFlagOverrideList& flag_overrides) {
+				promise->set_value(flag_overrides);
+			},
+			[=](const Nakama::NError& error) {
+				promise->set_exception(std::make_exception_ptr<Nakama::NException>(error));
+			});
+
+		return promise->get_future();
+	}
+
 	std::future<SLiveEventList> SatoriBaseClient::getLiveEventsAsync(
 		SSessionPtr session,
 		const std::vector<std::string>& liveEventNames
