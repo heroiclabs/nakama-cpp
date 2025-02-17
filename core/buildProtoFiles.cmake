@@ -19,6 +19,7 @@ file(GLOB_RECURSE NAKAMA_API_PROTO_FILES
         ${NAKAMA_COMMON}/rtapi/*.proto
         )
 
+message(${})
 add_library(nakama-api-proto OBJECT ${NAKAMA_API_PROTO_FILES})
 add_library(nakama::api-proto ALIAS nakama-api-proto)
 
@@ -33,7 +34,7 @@ protobuf_generate(TARGET nakama-api-proto
 
 message("done generating nakama api")
 
-if (WITH_GRPC_CLIENT)
+#if (WITH_GRPC_CLIENT)
 #### apigrpc.proto ####
 
 # apigrpc.proto references 'api.proto' using canonical name 'github.com/heroiclabs/nakama-common/api/api.proto'
@@ -100,4 +101,4 @@ protobuf_generate(TARGET nakama-grpc-proto
         PROTOC_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR}
         PROTOC_OPTIONS "--grpc_out=${CMAKE_CURRENT_BINARY_DIR}"
         )
-endif(WITH_GRPC_CLIENT)
+#endif(WITH_GRPC_CLIENT)

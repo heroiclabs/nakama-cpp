@@ -32,6 +32,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Android" AND DEFINED ANDROID_ABI)
     set(WITH_WS_WSLAY ON)
 endif()
 
+list(APPEND VCPKG_MANIFEST_FEATURES "grpc")
 
 if (WITH_WS_WSLAY)
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
@@ -237,11 +238,12 @@ list(APPEND NAKAMA_SDK_DEPS
         nakama::sdk-core-common
         nakama::sdk-client-factory
         nakama::sdk-rtclient-factory
+        satori::api-proto
         satori::client
 )
-if (WITH_GRPC_CLIENT)
+#if (WITH_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS nakama::sdk-core-grpc)
-endif()
+#endif()
 
 add_library(nakama-sdk SHARED ${DUMMY_CPP} ${DUMMY_H})
 add_library(nakama::sdk ALIAS nakama-sdk)

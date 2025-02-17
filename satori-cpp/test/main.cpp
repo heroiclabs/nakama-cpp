@@ -48,15 +48,18 @@ int main(int argc, char** argv) {
 		bool done = false;
 
 		Nakama::NClientParameters parameters = Nakama::NClientParameters();
-		parameters.serverKey = "a76ae76b-3342-4cbd-9c54-f532c5c1a949";
+		parameters.host = "playground.satori-us-east1-b.gcp-heroiclabs.com";
+		parameters.port = 443;
+		parameters.ssl = true;
+		parameters.serverKey = "2d426268-2e4d-43ca-be43-4db3adb1c6f5";
 		Satori::SClientPtr client = Satori::createRestClient(parameters, Nakama::createDefaultHttpTransport(parameters.platformParams));
 
-		Satori::SSessionPtr session1 = getFromFuture(client->authenticateAsync("11111111-1111-0000-0000-000000000000",{},{{"pushTokenIos", "foo"}}), client);
-		Satori::SSessionPtr session2 = getFromFuture(client->authenticateAsync("22222222-2222-0000-0000-000000000000",{},{{"pushTokenAndroid", "bar"}}), client);
-		Satori::SSessionPtr session3 = getFromFuture(client->identifyAsync(session1, "22222222-2222-0000-0000-000000000000"), client);
-		Satori::SFlagList testResult = getFromFuture(client->getFlagsAsync(session3), client);
+		Satori::SSessionPtr session1 = getFromFuture(client->authenticateAsync("11111111-1111-0000-0000-000000000001",{},{{"pushTokenIos", "foo"}}), client);
+		Satori::SSessionPtr session2 = getFromFuture(client->authenticateAsync("22222222-2222-0000-0000-000000000002",{},{{"pushTokenAndroid", "bar"}}), client);
+		Satori::SSessionPtr session3 = getFromFuture(client->identifyAsync(session1, "22222222-2222-0000-0000-000000000002"), client);
+		auto testResult = getFromFuture(client->getFlagOverridesAsync(session3), client);
 		std::cout << "Flags:" << testResult.flags.size() << std::endl;
-		Satori::SFlagList testResult2 = getFromFuture(client->getFlagsAsync(session3, {"Hiro-Event-Leaderboards", "Hiro-Inventory"}), client);
+		auto testResult2 = getFromFuture(client->getFlagsAsync(session3, {"Hiro-Event-Leaderboards", "Hiro-Inventory"}), client);
 		Satori::SEvent testEvent;
 		testEvent.name = "testEvent";
 		testEvent.timestamp = 1337;
