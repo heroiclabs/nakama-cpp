@@ -74,6 +74,8 @@ NAKAMA_NAMESPACE_BEGIN
 
         virtual void setBaseUri(const std::string& uri) = 0;
 
+        virtual void setTimeout(int seconds) = 0;
+
         virtual void tick() = 0;
 
         /**

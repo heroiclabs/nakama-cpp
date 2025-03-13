@@ -32,6 +32,8 @@ namespace Nakama {
 
         void setBaseUri(const std::string& uri) override;
 
+        void setTimeout(int seconds) override;
+
         void tick() override;
 
         void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) override;

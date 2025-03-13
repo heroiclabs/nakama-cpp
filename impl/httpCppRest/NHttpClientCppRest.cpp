@@ -92,6 +92,17 @@ void NHttpClientCppRest::setBaseUri(const std::string& uri)
     _client = std::make_unique<http_client>(http_client(FROM_STD_STR(uri)));
 }
 
+
+
+void NHttpClientCppRest::setTimeout(int seconds)
+{
+    if(_client.get())
+    {
+		// _client->set_timeout(_timeout);
+		_client->setHttpResponseTimeout(seconds);
+	}
+}
+
 void NHttpClientCppRest::tick()
 {
     ReqContextPtr ctx;

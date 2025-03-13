@@ -476,12 +476,13 @@ namespace Nakama {
         ) override;
 
     protected:
-        int _port;
-        std::string _host;
+        int _port = -1;
+        int _timeout = -1;
         bool _ssl = false;
+        std::string _host;
         std::string _basicAuthMetadata;
-        ErrorCallback _defaultErrorCallback;
         void* _userData = nullptr;
+        ErrorCallback _defaultErrorCallback;
         NPlatformParameters _platformParams;
     };
 }

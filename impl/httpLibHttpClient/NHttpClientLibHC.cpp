@@ -107,6 +107,11 @@ void NHttpClientLibHC::setBaseUri(const std::string& uri)
     m_baseUri = uri;
 }
 
+void NHttpClientLibHC::setTimeout(int seconds)
+{
+	HCHttpCallRequestSetTimeout(nullptr, seconds);
+}
+
 #define CHECK_CB(exp, msg, cb) { \
     HRESULT hr = exp; if (FAILED(hr)) { \
         HC_TRACE_ERROR_HR(httpTransportLibHC, hr, msg); \

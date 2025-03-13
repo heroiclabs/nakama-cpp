@@ -46,6 +46,10 @@ NAKAMA_NAMESPACE_BEGIN
         /// See the server documentation for more information.
         bool ssl = false;
 
+        /// Set request timeout in seconds for individual calls
+        /// -1 or other negative number to leave the default
+        int timeout = -1;
+
         /// Platform specific parameters
 #ifdef DEFAULT_PLATFORM_PARAMS
         NPlatformParameters platformParams = {};

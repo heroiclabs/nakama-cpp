@@ -35,12 +35,14 @@ namespace Nakama {
             NHttpClientLibCurl(const NPlatformParameters& platformParameters);
 
             void setBaseUri(const std::string& uri) override;
+            void setTimeout(int seconds) override;
             void tick() override;
             void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) noexcept override;
             void cancelAllRequests() override;
         private:
             std::unique_ptr<CURLM, decltype(&curl_multi_cleanup)> _curl_multi;
             std::string _base_uri;
+            int _timeout = -1;
             // TODO implement curl_easy reuse.
             // TODO would be more performant but less safe as a map with CURL* as key
             std::list<std::pair<std::unique_ptr<CURL, decltype(&curl_easy_cleanup)>, std::unique_ptr<NHttpClientLibCurlContext>>> _contexts;
