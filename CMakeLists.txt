@@ -17,6 +17,8 @@ option(CFG_CURL_SYSTEM "Use system-installed libCURL" OFF)
 
 option(WITH_GRPC_CLIENT "Build gRPC Client" OFF)
 
+option(BUILD_TESTING "Build tests" OFF)
+
 if (WITH_WS_WSLAY)
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
 endif()
@@ -260,6 +262,12 @@ elseif (APPLE)
     set_target_properties(nakama-sdk PROPERTIES
     FRAMEWORK FALSE)
 endif()
+
+if (BUILD_TESTING)
+    # Make tests produce .exe in the same dir as our nakama-sdk.dll
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY $<TARGET_FILE_DIR:nakama-sdk>)
+    add_subdirectory(test)
+endif ()
 
 
 if (ADDRESS_SANITIZER)
