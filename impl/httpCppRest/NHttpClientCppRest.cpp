@@ -98,7 +98,6 @@ void NHttpClientCppRest::setTimeout(int seconds)
 {
     if(_client.get())
     {
-		// _client->set_timeout(_timeout);
 		_client->setHttpResponseTimeout(seconds);
 	}
 }
@@ -109,8 +108,10 @@ void NHttpClientCppRest::tick()
 
     while ((ctx = popFinishedReq()))
     {
-        if (ctx->callback)
-            ctx->callback(ctx->response);
+		if (ctx->callback)
+		{
+			ctx->callback(ctx->response);
+		}
     }
 }
 

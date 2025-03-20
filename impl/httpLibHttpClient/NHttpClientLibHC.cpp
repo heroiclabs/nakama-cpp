@@ -109,7 +109,15 @@ void NHttpClientLibHC::setBaseUri(const std::string& uri)
 
 void NHttpClientLibHC::setTimeout(int seconds)
 {
-	HCHttpCallRequestSetTimeout(nullptr, seconds);
+    m_timeout = seconds;
+    if(m_timeout >= 0)
+    {
+        HRESULT hr = HCHttpCallRequestSetTimeout(nullptr, seconds);
+        if (FAILED(hr))
+        {
+            HC_TRACE_ERROR_HR(httpTransportLibHC, hr, "HCHttpCallRequestSetTimeout default failed");
+        }
+    }
 }
 
 #define CHECK_CB(exp, msg, cb) { \
@@ -244,6 +252,10 @@ void NHttpClientLibHC::request(const NHttpRequest& req, const NHttpResponseCallb
         CHECK_CB(setup_hc_response_to_string(*ctx), "HCHttpCallResponseSetResponseBodyWriteFunction failed", callback);
         asyncBlock->callback = &hc_req_completed_cb;
     };
+
+    if(m_timeout >= 0) {
+        CHECK_CB(HCHttpCallRequestSetTimeout(std::get<0>(*ctx).get(), m_timeout), "HCHttpCallPerformAsync failed", callback);
+    }
     CHECK_CB(HCHttpCallPerformAsync(std::get<0>(*ctx).get(), asyncBlock), "HCHttpCallPerformAsync failed", callback);
 }
 

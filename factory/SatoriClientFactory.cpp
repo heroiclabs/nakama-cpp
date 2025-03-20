@@ -22,7 +22,19 @@ namespace Satori {
 		const Nakama::NClientParameters &parameters,
 		Nakama::NHttpTransportPtr httpTransport
 	) {
-		Nakama::createDefaultHttpTransport(parameters.platformParams);
-		return std::make_shared<SatoriRestClient>(parameters, httpTransport == nullptr? createDefaultHttpTransport(parameters.platformParams) : httpTransport);
+		if (!httpTransport)
+		{
+			httpTransport = Nakama::createDefaultHttpTransport(parameters.platformParams);
+		}
+		if (!httpTransport)
+		{
+			NLOG_ERROR("HTTP transport was null and a default one could not be constructed.");
+			return nullptr;
+		}
+		if(parameters.timeout >= 0)
+		{
+			httpTransport->setTimeout(parameters.timeout);
+		}
+		return std::make_shared<SatoriRestClient>(parameters, httpTransport);
 	}
 }

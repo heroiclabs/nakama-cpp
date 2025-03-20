@@ -72,7 +72,6 @@ RestClient::RestClient(const NClientParameters& parameters, NHttpTransportPtr ht
     _ssl = parameters.ssl;
     _platformParams = parameters.platformParams;
     _port = parameters.port;
-    _timeout = parameters.timeout;
     std::string baseUrl;
 
 
@@ -86,11 +85,6 @@ RestClient::RestClient(const NClientParameters& parameters, NHttpTransportPtr ht
     baseUrl.append("://").append(parameters.host).append(":").append(std::to_string(_port));
 
     _httpClient->setBaseUri(baseUrl);
-
-    if (_timeout >= 0)
-    {
-        _httpClient->setTimeout(_timeout);
-    }
 
     _basicAuthMetadata = "Basic " + base64Encode(parameters.serverKey + ":");
 }

@@ -46,5 +46,6 @@ namespace Nakama {
         std::unique_ptr<std::remove_pointer<XTaskQueueHandle>::type, decltype(&XTaskQueueCloseHandle)> m_queue;
         std::string m_baseUri;
         std::atomic<bool> m_queue_terminated;
+        int m_timeout = -1;
     };
 }

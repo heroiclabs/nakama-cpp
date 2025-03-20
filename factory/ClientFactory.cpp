@@ -62,7 +62,10 @@ NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportP
         NLOG_ERROR("HTTP transport cannot be null.");
         return nullptr;
     }
-
+    if(parameters.timeout >= 0)
+    {
+        httpTransport->setTimeout(parameters.timeout);
+    }
     NClientPtr client(new RestClient(parameters, httpTransport));
     return client;
 }

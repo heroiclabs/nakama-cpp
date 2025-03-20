@@ -477,7 +477,6 @@ namespace Nakama {
 
     protected:
         int _port = -1;
-        int _timeout = -1;
         bool _ssl = false;
         std::string _host;
         std::string _basicAuthMetadata;
