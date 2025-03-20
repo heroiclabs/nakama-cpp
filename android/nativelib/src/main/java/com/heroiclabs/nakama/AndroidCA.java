@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package com.heroiclabs.nakamasdk;
+package com.heroiclabs.nakama;
 
 import androidx.annotation.Keep;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.security.KeyStore;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import android.util.Base64;
 import java.util.Enumeration;

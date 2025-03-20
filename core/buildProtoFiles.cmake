@@ -1,6 +1,7 @@
 # Fetch proto files from nakama and nakama-common and builds them
 set(NAKAMA_COMMON ${CMAKE_CURRENT_BINARY_DIR}/nakama-common-master)
 set(NAKAMA ${CMAKE_CURRENT_BINARY_DIR}/nakama-master)
+set(CACHED_NAKAMA_BINARY_DIR ${NAKAMA} CACHE INTERNAL "")
 
 set(NAKAMA_COMMON_ZIP ${NAKAMA_COMMON}.zip)
 set(NAKAMA_ZIP ${NAKAMA}.zip)
@@ -30,7 +31,7 @@ protobuf_generate(TARGET nakama-api-proto
         PROTOC_OUT_DIR ${CMAKE_CURRENT_BINARY_DIR}
         )
 
-message("done generating")
+message("done generating nakama api")
 
 if (WITH_GRPC_CLIENT)
 #### apigrpc.proto ####
