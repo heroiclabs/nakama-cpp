@@ -79,11 +79,10 @@ bool jsonValueToSEvent(const rapidjson::Value& input, SEvent& output) {
 bool SInternalEvent::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SEvent JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SEvent JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
+                                  std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString +
+                                  " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
   return jsonValueToSEvent(d, *this);
@@ -110,11 +109,10 @@ bool jsonValueToSExperiment(const rapidjson::Value& input, SExperiment& output) 
 bool SInternalExperiment::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SExperiment JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SExperiment JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
+                                  std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString +
+                                  " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
   return jsonValueToSExperiment(d, *this);
@@ -123,11 +121,10 @@ bool SInternalExperiment::fromJson(std::string jsonString) {
 bool SInternalExperimentList::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SExperimentList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SExperimentList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) +
+                                  ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " +
+                                  jsonString + " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
 
@@ -202,11 +199,10 @@ bool jsonValueToSFlag(const rapidjson::Value& input, SFlag& output) {
 bool SInternalFlag::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SFlag JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SFlag JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
+                                  std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString +
+                                  " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
   return jsonValueToSFlag(d, *this);
@@ -215,11 +211,10 @@ bool SInternalFlag::fromJson(std::string jsonString) {
 bool SInternalFlagList::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SFlagList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SFlagList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
+                                  std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString +
+                                  " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
   if (d.HasMember("flags")) {
@@ -286,11 +281,10 @@ bool jsonValueToSFlagOverride(const rapidjson::Value& input, SFlagOverride& outp
 bool SInternalFlagOverride::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SFlagOverride JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SFlagOverride JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
+                                  std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString +
+                                  " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
   return jsonValueToSFlagOverride(d, *this);
@@ -299,11 +293,10 @@ bool SInternalFlagOverride::fromJson(std::string jsonString) {
 bool SInternalFlagOverrideList::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SFlagOverrideList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SFlagOverrideList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) +
+                                  ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " +
+                                  jsonString + " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
   if (d.HasMember("flags")) {
@@ -397,11 +390,10 @@ bool jsonValueToSLiveEvent(const rapidjson::Value& input, SLiveEvent& output) {
 bool SInternalLiveEvent::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SLiveEvent JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SLiveEvent JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
+                                  std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString +
+                                  " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
   return jsonValueToSLiveEvent(d, *this);
@@ -410,11 +402,10 @@ bool SInternalLiveEvent::fromJson(std::string jsonString) {
 bool SInternalLiveEventList::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SLiveEventList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SLiveEventList JSON failed. Error at " + std::to_string(d.GetErrorOffset()) +
+                                  ": " + std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " +
+                                  jsonString + " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
 
@@ -449,11 +440,10 @@ bool jsonValueToSProperties(const rapidjson::Value& input, SProperties& output) 
 bool SInternalProperties::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SProperties JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SProperties JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
+                                  std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString +
+                                  " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
   return jsonValueToSProperties(d, *this);
@@ -462,11 +452,10 @@ bool SInternalProperties::fromJson(std::string jsonString) {
 bool SInternalSession::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SSession JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SSession JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
+                                  std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString +
+                                  " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
   if (d.HasMember("token")) {
@@ -496,37 +485,57 @@ bool jsonValueToSMessage(const rapidjson::Value& input, SMessage& output) {
     output.schedule_id = input["schedule_id"].GetString();
   }
   if (input.HasMember("send_time")) {
-    if (!input["send_time"].IsInt64()) {
+    if (!input["send_time"].IsString()) {
       return false;
     }
-    output.send_time = input["send_time"].GetInt64();
+    std::string time_string = input["send_time"].GetString();
+    size_t string_length = input["send_time"].GetStringLength();
+    output.send_time = std::stoull(time_string, &string_length);
+  } else {
+    output.send_time = 0;
   }
   if (input.HasMember("metadata") && !jsonValueToStringMap(input["metadata"], output.metadata)) {
     return false;
   }
   if (input.HasMember("create_time")) {
-    if (!input["create_time"].IsInt64()) {
+    if (!input["create_time"].IsString()) {
       return false;
     }
-    output.create_time = input["create_time"].GetInt64();
+    std::string time_string = input["create_time"].GetString();
+    size_t string_length = input["create_time"].GetStringLength();
+    output.create_time = std::stoull(time_string, &string_length);
+  } else {
+    output.create_time = 0;
   }
   if (input.HasMember("update_time")) {
-    if (!input["update_time"].IsInt64()) {
+    if (!input["update_time"].IsString()) {
       return false;
     }
-    output.update_time = input["update_time"].GetInt64();
+    std::string time_string = input["update_time"].GetString();
+    size_t string_length = input["update_time"].GetStringLength();
+    output.update_time = std::stoull(time_string, &string_length);
+  } else {
+    output.update_time = 0;
   }
   if (input.HasMember("read_time")) {
-    if (!input["read_time"].IsInt64()) {
+    if (!input["read_time"].IsString()) {
       return false;
     }
-    output.read_time = input["read_time"].GetInt64();
+    std::string time_string = input["read_time"].GetString();
+    size_t string_length = input["read_time"].GetStringLength();
+    output.read_time = std::stoull(time_string, &string_length);
+  } else {
+    output.read_time = 0;
   }
   if (input.HasMember("consume_time")) {
-    if (!input["consume_time"].IsInt64()) {
+    if (!input["consume_time"].IsString()) {
       return false;
     }
-    output.consume_time = input["consume_time"].GetInt64();
+    std::string time_string = input["consume_time"].GetString();
+    size_t string_length = input["consume_time"].GetStringLength();
+    output.consume_time = std::stoull(time_string, &string_length);
+  } else {
+    output.consume_time = 0;
   }
   if (input.HasMember("text")) {
     if (!input["text"].IsString()) {
@@ -558,11 +567,10 @@ bool jsonValueToSMessage(const rapidjson::Value& input, SMessage& output) {
 bool SInternalMessage::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SMessage JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError("Parse SMessage JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
+                                  std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString +
+                                  " >>.",
+                              Nakama::ErrorCode::InternalError));
     return false;
   }
   return jsonValueToSMessage(d, *this);
@@ -571,11 +579,10 @@ bool SInternalMessage::fromJson(std::string jsonString) {
 bool SInternalGetMessageListResponse::fromJson(std::string jsonString) {
   rapidjson::Document d;
   if (d.ParseInsitu(jsonString.data()).HasParseError()) {
-    NLOG_ERROR(
-        Nakama::NError(
-            "Parse SGetMessageListResponse JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
-                std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
-            Nakama::ErrorCode::InternalError));
+    NLOG_ERROR(Nakama::NError(
+        "Parse SGetMessageListResponse JSON failed. Error at " + std::to_string(d.GetErrorOffset()) + ": " +
+            std::string(GetParseError_En(d.GetParseError())) + " HTTP body:<< " + jsonString + " >>.",
+        Nakama::ErrorCode::InternalError));
     return false;
   }
   if (d.HasMember("messages")) {

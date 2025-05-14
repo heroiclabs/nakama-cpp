@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
     bool done = false;
 
     Nakama::NClientParameters parameters = Nakama::NClientParameters();
-    parameters.serverKey = "a76ae76b-3342-4cbd-9c54-f532c5c1a949";
+    parameters.serverKey = "b76214d3-c2a2-4984-9473-3fbd5c55af8e";
     Satori::SClientPtr client =
         Satori::createRestClient(parameters, Nakama::createDefaultHttpTransport(parameters.platformParams));
 
@@ -70,6 +70,14 @@ int main(int argc, char** argv) {
 
     Satori::SLiveEventList liveEvents = getFromFuture(client->getLiveEventsAsync(session3), client);
     std::cout << "Live events num:" << liveEvents.live_events.size() << std::endl;
+    Satori::SGetMessageListResponse messages =
+        getFromFuture(client->getMessagesAsync(session3, 10, false, std::string()), client);
+    std::cout << "Messages size:" << messages.messages.size() << std::endl;
+    if (!messages.messages.empty()) {
+      getFromFuture(client->updateMessageAsync(session3, messages.messages[0].id, messages.messages[0].send_time + 1000,
+                                               messages.messages[0].send_time + 100),
+                    client);
+    }
   } catch (const std::future_error& e) {
     std::cout << "Caught a future_error with code \"" << e.code() << "\"\nMessage: \"" << e.what() << "\"\n";
   } catch (const std::exception& e) {
