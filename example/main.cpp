@@ -51,6 +51,7 @@ int mainHelper() {
     params.port = Nakama::DEFAULT_PORT;
     auto client = Nakama::createDefaultClient(params);
     Nakama::NRtClientPtr rtClient = nullptr;
+    Nakama::NRtDefaultClientListener listener;
     bool done = false;
     auto loginFailedCallback = [&done](const Nakama::NError &error) {
         NLOG_INFO("Failed to login");
@@ -69,10 +70,9 @@ int mainHelper() {
         done = true;
     };
 
-    auto loginSucceededCallback = [&done, &connectSucceededCallback, &rtErrorCallback, &client, &rtClient](Nakama::NSessionPtr session) {
+    auto loginSucceededCallback = [&done, &connectSucceededCallback, &rtErrorCallback, &client, &rtClient, &listener](Nakama::NSessionPtr session) {
         NLOG_INFO("Login successful");
         NLOG_INFO(session->getAuthToken()); // raw JWT token
-        Nakama::NRtDefaultClientListener listener;
         listener.setConnectCallback(connectSucceededCallback);
         listener.setErrorCallback(rtErrorCallback);
         rtClient = client->createRtClient();
