@@ -86,12 +86,18 @@ void test_authenticateRefresh() {
 
     auto errorCallback2 = [&test](const NError& error) { test.stopTest(error); };
 
-    test.client->authenticateRefresh(session1, successCallback2, errorCallback2);
+    NStringMap vars;
+
+    vars.emplace("param1", "test value changed");
+    vars.emplace("param2", "test value new");
+
+    test.client->authenticateRefresh(session1, vars, successCallback2, errorCallback2);
   };
 
   NStringMap vars;
 
   vars.emplace("param1", "test value");
+  vars.emplace("paramC", "test constant");
 
   test.client->authenticateDevice("mytestdevice0001", opt::nullopt, true, vars, successCallback);
 

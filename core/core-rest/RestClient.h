@@ -115,8 +115,11 @@ public:
 
   void authenticateRefresh(
       NSessionPtr session,
-      std::function<void(NSessionPtr)> successCallback = nullptr,
-      ErrorCallback errorCallback = nullptr) override;
+      const NStringMap& vars,
+      std::function<void(NSessionPtr)> successCallback,
+      ErrorCallback errorCallback) override;
+
+  void sessionLogout(NSessionPtr session, std::function<void()> successCallback, ErrorCallback errorCallback) override;
 
   void linkFacebook(
       NSessionPtr session,
@@ -236,8 +239,10 @@ public:
 
   void getAccount(
       NSessionPtr session,
-      std::function<void(const NAccount&)> successCallback = nullptr,
-      ErrorCallback errorCallback = nullptr) override;
+      std::function<void(const NAccount&)> successCallback,
+      ErrorCallback errorCallback) override;
+
+  void deleteAccount(NSessionPtr session, std::function<void()> successCallback, ErrorCallback errorCallback) override;
 
   void updateAccount(
       NSessionPtr session,

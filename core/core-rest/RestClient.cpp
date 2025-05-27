@@ -610,6 +610,7 @@ void RestClient::authenticateSteam(
 
 void RestClient::authenticateRefresh(
     NSessionPtr session,
+    const NStringMap& vars,
     std::function<void(NSessionPtr)> successCallback,
     ErrorCallback errorCallback) {
   try {
@@ -633,10 +634,37 @@ void RestClient::authenticateRefresh(
     document.SetObject();
 
     document.AddMember("token", session->getRefreshToken(), document.GetAllocator());
+    addVarsToJsonDoc(document, vars);
 
     string body = jsonDocToStr(document);
 
     sendReq(ctx, NHttpReqMethod::POST, "/v2/account/session/refresh", std::move(body), std::move(args));
+  } catch (exception& e) {
+    NLOG_ERROR("exception: " + string(e.what()));
+  }
+}
+void RestClient::sessionLogout(
+    NSessionPtr session,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback) {
+  try {
+    RestReqContext* ctx = createReqContext(nullptr);
+    setSessionAuth(ctx, session);
+
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
+
+    NHttpQueryArgs args;
+
+    rapidjson::Document document;
+    document.SetObject();
+
+    document.AddMember("token", session->getAuthToken(), document.GetAllocator());
+    document.AddMember("refreshToken", session->getRefreshToken(), document.GetAllocator());
+
+    string body = jsonDocToStr(document);
+
+    sendReq(ctx, NHttpReqMethod::POST, "/v2/session/logout", std::move(body), std::move(args));
   } catch (exception& e) {
     NLOG_ERROR("exception: " + string(e.what()));
   }
@@ -1158,6 +1186,26 @@ void RestClient::getAccount(
     ctx->errorCallback = errorCallback;
 
     sendReq(ctx, NHttpReqMethod::GET, "/v2/account", "");
+  } catch (exception& e) {
+    NLOG_ERROR("exception: " + string(e.what()));
+  }
+}
+
+void RestClient::deleteAccount(
+    NSessionPtr session,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback) {
+  try {
+    NLOG_INFO("...");
+
+    auto accoutData(make_shared<nakama::api::Account>());
+    RestReqContext* ctx = createReqContext(accoutData.get());
+    setSessionAuth(ctx, session);
+
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
+
+    sendReq(ctx, NHttpReqMethod::DEL, "/v2/account", "");
   } catch (exception& e) {
     NLOG_ERROR("exception: " + string(e.what()));
   }

@@ -258,7 +258,17 @@ public:
    **/
   virtual void authenticateRefresh(
       NSessionPtr session,
+      const NStringMap& vars = {},
       std::function<void(NSessionPtr)> successCallback = nullptr,
+      ErrorCallback errorCallback = nullptr) = 0;
+
+  /**
+   * Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
+   * @param session The session of the user to log out.
+   **/
+  virtual void sessionLogout(
+      NSessionPtr session,
+      std::function<void()> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
   /**
@@ -504,6 +514,16 @@ public:
   virtual void getAccount(
       NSessionPtr session,
       std::function<void(const NAccount&)> successCallback = nullptr,
+      ErrorCallback errorCallback = nullptr) = 0;
+
+  /**
+   * Delete the user account owned by the session.
+   *
+   * @param session The session of the user.
+   */
+  virtual void deleteAccount(
+      NSessionPtr session,
+      std::function<void()> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
   /**
@@ -1251,7 +1271,13 @@ public:
    * Refresh a user's session using a refresh token retrieved from a previous authentication request.
    * @param session The session of the user.
    **/
-  virtual std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session) = 0;
+  virtual std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session, const NStringMap& vars = {}) = 0;
+
+  /**
+   * Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
+   * @param session The session of the user to log out.
+   **/
+  virtual std::future<void> sessionLogoutAsync(NSessionPtr session) = 0;
 
   /**
    * Link a Facebook profile to a user account.
@@ -1434,6 +1460,13 @@ public:
    * @param session The session of the user.
    */
   virtual std::future<NAccount> getAccountAsync(NSessionPtr session) = 0;
+
+  /**
+   * Delete the user account owned by the session.
+   *
+   * @param session The session of the user.
+   */
+  virtual std::future<void> deleteAccountAsync(NSessionPtr session) = 0;
 
   /**
    * Update the current user's account on the server.
