@@ -1,5 +1,5 @@
 # I think we are constrained to the version that the latest android sdk uses, for Android builds.
-cmake_minimum_required(VERSION 3.22.1)
+cmake_minimum_required(VERSION 3.29.3)
 include(version.cmake)
 include(cmake/checkPresets.cmake)
 
@@ -16,6 +16,8 @@ option(CFG_LIBHTTPC_SYSTEM "Use system-installed libhttpc" OFF)
 option(CFG_CURL_SYSTEM "Use system-installed libCURL" OFF)
 
 option(WITH_GRPC_CLIENT "Build gRPC Client" OFF)
+
+option(BUILD_TESTING "Build tests" OFF)
 
 if (WITH_WS_WSLAY)
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
@@ -63,11 +65,6 @@ cmake_policy(SET CMP0012 NEW)
 
 ## force so that gradle doesn't stomp vcpkg toolchain with the android toolchain
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/submodules/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE FILEPATH "Vcpkg toolchain file" FORCE)
-
-if (DEFINED ANDROID_ABI AND NOT DEFINED VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
-    # CmakePresets.json doesn't allow us to use cmake vars in values, so set it here
-    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE $ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake)
-endif()
 
 include("cmake/triplets/${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 include("submodules/devkits/cmake/platform-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
@@ -132,6 +129,8 @@ add_subdirectory(core EXCLUDE_FROM_ALL)
 
 # Factories, that's where all messy ifdefs to select concrete implementations are
 add_subdirectory(factory EXCLUDE_FROM_ALL)
+
+add_subdirectory(satori-cpp)
 
 include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 
@@ -224,6 +223,7 @@ list(APPEND NAKAMA_SDK_DEPS
         nakama::sdk-core-common
         nakama::sdk-client-factory
         nakama::sdk-rtclient-factory
+        satori::client
 )
 if (WITH_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS nakama::sdk-core-grpc)
@@ -260,6 +260,12 @@ elseif (APPLE)
     set_target_properties(nakama-sdk PROPERTIES
     FRAMEWORK FALSE)
 endif()
+
+if (BUILD_TESTING)
+    # Make tests produce .exe in the same dir as our nakama-sdk.dll
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY $<TARGET_FILE_DIR:nakama-sdk>)
+    add_subdirectory(test)
+endif ()
 
 
 if (ADDRESS_SANITIZER)

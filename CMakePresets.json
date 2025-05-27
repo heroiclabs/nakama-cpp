@@ -31,7 +31,8 @@
                 "VCPKG_TARGET_TRIPLET": "x64-windows-static-heroic",
                 "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/cmake/toolchains/vcpkg-msvc.cmake",
                 "WITH_WS_LIBHTTPC": "ON",
-                "WITH_HTTP_LIBHTTPC": "ON"
+                "WITH_HTTP_LIBHTTPC": "ON",
+                "BUILD_TESTING": "ON"
             },
             "condition": {
                 "type": "equals",
@@ -59,7 +60,8 @@
                 "VCPKG_TARGET_TRIPLET": "universal-osx-heroic",
                 "CMAKE_OSX_ARCHITECTURES": "arm64;x86_64",
                 "WITH_WS_WSLAY": "ON",
-                "WITH_HTTP_CURL": "ON"
+                "WITH_HTTP_CURL": "ON",
+                "BUILD_TESTING": "ON"
             },
             "condition": {
                 "type": "equals",
