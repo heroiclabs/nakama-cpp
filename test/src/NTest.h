@@ -46,8 +46,8 @@ namespace Test {
         void stopTest(bool succeeded = false);
         void stopTest(const NError& error);
 
-        void setRtTickPaused(bool paused) {
-            _rtTickPaused = true;
+        void setRtTickPaused(bool paused = true) {
+            _rtTickPaused = paused;
         }
 
         void tick();

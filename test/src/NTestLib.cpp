@@ -24,6 +24,7 @@ namespace Test {
     void test_getAccount();
     void test_authentication();
     void test_errors();
+    void test_timeouts();
     void test_disconnect();
     void test_restoreSession();
     void test_storage();
@@ -63,6 +64,7 @@ namespace Test {
 
         test_authentication();
         test_getAccount();
+        test_timeouts();
         test_disconnect();
         test_errors();
         test_restoreSession();

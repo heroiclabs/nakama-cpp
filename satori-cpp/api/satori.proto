@@ -1,0 +1,430 @@
+// Copyright 2022 GameUp Online, Inc. d/b/a Heroic Labs
+//
+// NOTICE: All information contained herein is, and remains the property of Heroic
+// Labs. and its suppliers, if any. The intellectual and technical concepts contained
+// herein are proprietary to Heroic Labs. and its suppliers and may be covered by U.S.
+// and Foreign Patents, patents in process, and are protected by trade secret or
+// copyright law. Dissemination of this information or reproduction of this material
+// is strictly forbidden unless prior written permission is obtained from Heroic Labs.
+
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/protobuf/wrappers.proto";
+
+option go_package = "github.com/heroiclabs/satori/api";
+
+option java_multiple_files = true;
+option java_outer_classname = "SatoriApi";
+option java_package = "com.heroiclabs.satori.api";
+
+/**
+ * The public client API for the Satori server.
+ */
+package satori.api;
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Satori Server API";
+    version: "1.0";
+    contact: {
+      name: "Heroic Labs";
+      url: "https://heroiclabs.com";
+      email: "hello@heroiclabs.com";
+    };
+  };
+  host: "127.0.0.1:7450";
+  schemes: HTTP;
+  consumes: "application/json";
+  produces: "application/json";
+  security_definitions: {
+    security: {
+      key: "BasicAuth";
+      value: {
+        type: TYPE_BASIC;
+      }
+    }
+    security: {
+      // Made up security so we can apply "Bearer <JWT_TOKEN>"
+      key: "BearerJwt";
+      value: {};
+    }
+  }
+  // Default security definition.
+  security: {
+    security_requirement: {
+      key: "BearerJwt";
+      value: {};
+    }
+  }
+};
+
+/**
+ * The GRPC protocol service for Satori built with GRPC.
+ */
+service Satori {
+  // Authenticate against the server.
+  rpc Authenticate (AuthenticateRequest) returns (Session) {
+    option (google.api.http) = {
+      post: "/v1/authenticate",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "BasicAuth";
+          value: {};
+        }
+      }
+      };
+  }
+
+  // Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
+  rpc AuthenticateLogout (AuthenticateLogoutRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/authenticate/logout",
+      body: "*"
+    };
+  }
+
+  // Refresh a user's session using a refresh token retrieved from a previous authentication request.
+  rpc AuthenticateRefresh (AuthenticateRefreshRequest) returns (Session) {
+    option (google.api.http) = {
+      post: "/v1/authenticate/refresh",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "BasicAuth";
+          value: {};
+        }
+      }
+    };
+  }
+
+  // Delete the caller's identity and associated data.
+  rpc DeleteIdentity(google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option (google.api.http).delete = "/v1/identity";
+  }
+
+  // Publish an event for this session.
+  rpc Event(EventRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/event",
+      body: "*"
+    };
+  }
+
+  // Get or list all available experiments for this identity.
+  rpc GetExperiments (GetExperimentsRequest) returns (ExperimentList) {
+    option (google.api.http).get = "/v1/experiment";
+  }
+
+  // List all available flags for this identity.
+  rpc GetFlags (GetFlagsRequest) returns (FlagList) {
+    option (google.api.http).get = "/v1/flag";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      // Either HTTP key in query param or Bearer authentication.
+      security: {
+        security_requirement: {
+          key: "HttpKeyAuth";
+          value: {};
+        }
+        security_requirement: {
+          key: "BearerJwt";
+          value: {};
+        }
+      }
+    };
+  }
+
+  // List available live events.
+  rpc GetLiveEvents (GetLiveEventsRequest) returns (LiveEventList) {
+    option (google.api.http).get = "/v1/live-event";
+  }
+
+  // A healthcheck which load balancers can use to check the service.
+  rpc Healthcheck (google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option (google.api.http).get = "/healthcheck";
+  }
+
+  // Enrich/replace the current session with new identifier.
+  rpc Identify(IdentifyRequest) returns (Session) {
+    option (google.api.http) = {
+      put: "/v1/identify",
+      body: "*"
+    };
+  }
+
+  // List properties associated with this identity.
+  rpc ListProperties (google.protobuf.Empty) returns (Properties) {
+    option (google.api.http).get = "/v1/properties";
+  }
+
+  // A readycheck which load balancers can use to check the service.
+  rpc Readycheck (google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option (google.api.http).get = "/readycheck";
+  }
+
+  // Update identity properties.
+  rpc UpdateProperties(UpdatePropertiesRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/v1/properties",
+      body: "*"
+    };
+  }
+
+  // Get the list of messages for the identity.
+  rpc GetMessageList (GetMessageListRequest) returns (GetMessageListResponse) {
+    option (google.api.http).get = "/v1/message";
+  }
+
+  // Updates a message for an identity.
+  rpc UpdateMessage (UpdateMessageRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/v1/message/{id}",
+      body: "*"
+    };
+  }
+
+  // Deletes a message for an identity.
+  rpc DeleteMessage (DeleteMessageRequest) returns (google.protobuf.Empty) {
+    option (google.api.http).delete = "/v1/message/{id}";
+  }
+}
+
+// Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
+message AuthenticateLogoutRequest {
+  // Session token to log out.
+  string token = 1;
+  // Refresh token to invalidate.
+  string refresh_token = 2;
+}
+
+// Authenticate against the server with a refresh token.
+message AuthenticateRefreshRequest {
+  // Refresh token.
+  string refresh_token = 1;
+}
+
+// Authentication request
+message AuthenticateRequest {
+  // Identity ID. Must be between eight and 128 characters (inclusive).
+  // Must be an alphanumeric string with only underscores and hyphens allowed.
+  string id = 1;
+  // Optional default properties to update with this call.
+  // If not set, properties are left as they are on the server.
+  map<string,string> default = 2;
+  // Optional custom properties to update with this call.
+  // If not set, properties are left as they are on the server.
+  map<string,string> custom = 3;
+}
+
+// A single event. Usually, but not necessarily, part of a batch.
+message Event {
+  // Event name.
+  string name = 1;
+  // Optional event ID assigned by the client, used to de-duplicate in retransmission scenarios.
+  // If not supplied the server will assign a randomly generated unique event identifier.
+  string id = 2;
+  // Event metadata, if any.
+  map<string,string> metadata = 3;
+  // Optional value.
+  string value = 4;
+  // The time when the event was triggered on the producer side.
+  google.protobuf.Timestamp timestamp = 5;
+}
+
+// Publish an event to the server
+message EventRequest {
+  // Some number of events produced by a client.
+  repeated Event events = 1;
+}
+
+// An experiment that this user is partaking.
+message Experiment {
+  // Experiment name
+  string name = 1;
+  // Value associated with this Experiment.
+  string value = 2;
+}
+
+// All experiments that this identity is involved with.
+message ExperimentList {
+  // All experiments for this identity.
+  repeated Experiment experiments = 1;
+}
+
+// Feature flag available to the identity.
+message Flag {
+  // Flag name
+  string name = 1;
+  // Value associated with this flag.
+  string value = 2;
+  // Whether the value for this flag has conditionally changed from the default state.
+  bool condition_changed = 3;
+}
+
+// All flags available to the identity
+message FlagList {
+  // All flags
+  repeated Flag flags = 1;
+}
+
+// Request to get all experiments data.
+message GetExperimentsRequest {
+  // Experiment names; if empty string all experiments are returned.
+  repeated string names = 1;
+}
+
+// Request to get all flags data.
+message GetFlagsRequest {
+  // Flag names; if empty string all flags are returned.
+  repeated string names = 1;
+}
+
+// Request to get all live events.
+message GetLiveEventsRequest {
+  // Live event names; if empty string all live events are returned.
+  repeated string names = 1;
+}
+
+// Enrich/replace the current session with a new ID.
+message IdentifyRequest {
+  // Identity ID to enrich the current session and return a new session. Old session will no longer be usable.
+  string id = 1;
+  // Optional default properties to update with this call.
+  // If not set, properties are left as they are on the server.
+  map<string,string> default = 2;
+  // Optional custom properties to update with this call.
+  // If not set, properties are left as they are on the server.
+  map<string,string> custom = 3;
+}
+
+// A single live event.
+message LiveEvent {
+  // Name.
+  string name = 1;
+  // Description.
+  string description = 2;
+  // Event value.
+  string value = 3;
+  // Start time of current event run.
+  int64 active_start_time_sec = 4;
+  // End time of current event run.
+  int64 active_end_time_sec = 5;
+  // The live event identifier.
+  string id = 6;
+  // Start time.
+  int64 start_time_sec = 7;
+  // End time, 0 if it repeats forever.
+  int64 end_time_sec = 8;
+  // Duration in seconds.
+  int64 duration_sec = 9;
+  // Reset CRON schedule, if configured.
+  string reset_cron = 10;
+}
+
+// List of Live events.
+message LiveEventList {
+  // Live events.
+  repeated LiveEvent live_events = 1;
+}
+
+// Properties associated with an identity.
+message Properties {
+  // Event default properties.
+  map<string,string> default = 1;
+  // Event computed properties.
+  map<string,string> computed = 2;
+  // Event custom properties.
+  map<string,string> custom = 3;
+}
+
+// A session.
+message Session {
+  // Token credential.
+  string token = 1;
+  // Refresh token.
+  string refresh_token = 2;
+  // Properties associated with this identity.
+  Properties properties = 3;
+}
+
+// Update Properties associated with this identity.
+message UpdatePropertiesRequest {
+  // Event default properties.
+  map<string,string> default = 1;
+  // Event custom properties.
+  map<string,string> custom = 2;
+  // Informs the server to recompute the audience membership of the identity.
+  google.protobuf.BoolValue recompute = 3;
+}
+
+
+message GetMessageListRequest {
+  // Max number of messages to return. Between 1 and 100.
+  int32 limit = 1;
+  // True if listing should be older messages to newer, false if reverse.
+  bool forward = 2;
+  // A pagination cursor, if any.
+  string cursor = 3;
+}
+
+// A response containing all the messages for an identity.
+message GetMessageListResponse {
+  // The list of messages.
+  repeated Message messages = 1;
+  // The cursor to send when retrieving the next page, if any.
+  string next_cursor = 2;
+  // The cursor to send when retrieving the previous page, if any.
+  string prev_cursor = 3;
+  // Cacheable cursor to list newer messages. Durable and designed to be stored, unlike next/prev cursors.
+  string cacheable_cursor = 4;
+}
+
+// A scheduled message.
+message Message {
+  // The identifier of the schedule.
+  string schedule_id = 1;
+  // The send time for the message.
+  int64 send_time = 2;
+  // A key-value pairs of metadata.
+  map<string, string> metadata = 3;
+  // The time the message was created.
+  int64 create_time = 4;
+  // The time the message was updated.
+  int64 update_time = 5;
+  // The time the message was read by the client.
+  int64 read_time = 6;
+  // The time the message was consumed by the identity.
+  int64 consume_time = 7;
+  // The message's text.
+  string text = 8;
+  // The message's unique identifier.
+  string id = 9;
+  // The message's title.
+  string title = 10;
+  // The message's image url.
+  string image_url = 11;
+}
+
+// The request to update the status of a message.
+message UpdateMessageRequest {
+  // The identifier of the messages.
+  string id = 1;
+  // The time the message was read at the client.
+  int64 read_time = 2;
+  // The time the message was consumed by the identity.
+  int64 consume_time = 3;
+}
+
+// The request to delete a scheduled message.
+message DeleteMessageRequest {
+  // The identifier of the message.
+  string id = 1;
+}

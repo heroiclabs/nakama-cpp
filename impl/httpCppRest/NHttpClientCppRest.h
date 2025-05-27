@@ -16,61 +16,62 @@
 
 #pragma once
 
-#include <nakama-cpp/NHttpTransportInterface.h>
-#include "nakama-cpp/NPlatformParams.h"
 #include "cpprest/http_client.h"
+#include "nakama-cpp/NPlatformParams.h"
 #include <list>
 #include <mutex>
+#include <nakama-cpp/NHttpTransportInterface.h>
 
 namespace Nakama {
 
-    class NHttpClientCppRestContext;
+class NHttpClientCppRestContext;
 
-    /**
-     * HTTP client using C++ REST SDK (https://github.com/microsoft/cpprestsdk)
-     */
-    class NHttpClientCppRest : public NHttpTransportInterface
-    {
-    public:
-        using ReqId = uint64_t;
+/**
+ * HTTP client using C++ REST SDK (https://github.com/microsoft/cpprestsdk)
+ */
+class NHttpClientCppRest : public NHttpTransportInterface {
+public:
+  using ReqId = uint64_t;
 
-        NHttpClientCppRest(const NPlatformParameters& platformParams);
-        ~NHttpClientCppRest();
+  NHttpClientCppRest(const NPlatformParameters &platformParams);
+  ~NHttpClientCppRest();
 
-        void setBaseUri(const std::string& uri) override;
+  void setBaseUri(const std::string &uri) override;
 
-        void tick() override;
+  void setTimeout(std::chrono::milliseconds time) override;
 
-        void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) override;
+  void tick() override;
 
-        void cancelAllRequests() override;
+  void request(const NHttpRequest &req,
+               const NHttpResponseCallback &callback = nullptr) override;
 
-    protected:
-        friend class NHttpClientCppRestContext;
+  void cancelAllRequests() override;
 
-        struct ReqContext
-        {
-            ReqContext(ReqId _id) : id(_id) {}
+protected:
+  friend class NHttpClientCppRestContext;
 
-            ReqId id;
-            NHttpResponseCallback callback;
-            NHttpResponsePtr response;
-        };
+  struct ReqContext {
+    ReqContext(ReqId _id) : id(_id) {}
 
-        using ReqContextPtr = std::shared_ptr<ReqContext>;
+    ReqId id;
+    NHttpResponseCallback callback;
+    NHttpResponsePtr response;
+  };
 
-        std::shared_ptr<ReqContext> createReqContext();
-        void finishReq(ReqId id, NHttpResponsePtr response);
-        void finishReqWithError(ReqId id, int statusCode, std::string&& reason);
-        void removePendingReq(ReqId id);
-        ReqContextPtr popFinishedReq();
+  using ReqContextPtr = std::shared_ptr<ReqContext>;
 
-    protected:
-        std::shared_ptr<NHttpClientCppRestContext> _context;
-        std::unique_ptr<web::http::client::http_client> _client;
-        std::list<ReqContextPtr> _pendingRequests;
-        std::list<ReqContextPtr> _finishedRequests;
-        utility::string_t _baseUri;
-    };
+  std::shared_ptr<ReqContext> createReqContext();
+  void finishReq(ReqId id, NHttpResponsePtr response);
+  void finishReqWithError(ReqId id, int statusCode, std::string &&reason);
+  void removePendingReq(ReqId id);
+  ReqContextPtr popFinishedReq();
 
-}
+protected:
+  std::shared_ptr<NHttpClientCppRestContext> _context;
+  std::unique_ptr<web::http::client::http_client> _client;
+  std::list<ReqContextPtr> _pendingRequests;
+  std::list<ReqContextPtr> _finishedRequests;
+  utility::string_t _baseUri;
+};
+
+} // namespace Nakama
