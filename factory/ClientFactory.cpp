@@ -15,11 +15,11 @@
  */
 
 #include "nakama-cpp/ClientFactory.h"
-#include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/NClientInterface.h"
+#include "nakama-cpp/log/NLogger.h"
 
 #ifdef WITH_GRPC_CLIENT
-    #include "../core/core-grpc/GrpcClient.h"
+#include "../core/core-grpc/GrpcClient.h"
 #endif
 
 #include "../core/core-rest/RestClient.h"
@@ -35,56 +35,53 @@
 namespace Nakama {
 
 #if defined(HAVE_DEFAULT_TRANSPORT_FACTORY) || defined(WITH_GRPC_CLIENT)
-NClientPtr createDefaultClient(const NClientParameters& parameters)
-{
-    #if defined(WITH_GRPC_CLIENT)
-    return createGrpcClient(parameters);
-    #else
-    return createRestClient(parameters, createDefaultHttpTransport(parameters.platformParams));
-    #endif
+NClientPtr createDefaultClient(const NClientParameters &parameters) {
+#if defined(WITH_GRPC_CLIENT)
+  return createGrpcClient(parameters);
+#else
+  return createRestClient(
+      parameters, createDefaultHttpTransport(parameters.platformParams));
+#endif
 }
 #endif
 
 #ifdef WITH_GRPC_CLIENT
 
-NClientPtr createGrpcClient(const NClientParameters& parameters)
-{
-    NClientPtr client(new GrpcClient(parameters));
-    return client;
+NClientPtr createGrpcClient(const NClientParameters &parameters) {
+  NClientPtr client(new GrpcClient(parameters));
+  return client;
 }
 
 #endif
 
-NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportPtr httpTransport)
-{
-    if (!httpTransport)
-    {
-        NLOG_ERROR("HTTP transport cannot be null.");
-        return nullptr;
-    }
-    if(parameters.timeout >= 0)
-    {
-        httpTransport->setTimeout(parameters.timeout);
-    }
-    NClientPtr client(new RestClient(parameters, httpTransport));
-    return client;
+NClientPtr createRestClient(const NClientParameters &parameters,
+                            NHttpTransportPtr httpTransport) {
+  if (!httpTransport) {
+    NLOG_ERROR("HTTP transport cannot be null.");
+    return nullptr;
+  }
+  if (parameters.timeout >= std::chrono::milliseconds(0)) {
+    httpTransport->setTimeout(parameters.timeout);
+  }
+  NClientPtr client(new RestClient(parameters, httpTransport));
+  return client;
 }
 
 #ifndef WITH_PRIVATE_HTTP
-NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platformParams)
-{
-    (void)platformParams;  // silence unused variable warning on some platforms
-    // Compilation error if no implementation is selected
-    #if defined(WITH_HTTP_LIBHTTPC)
-    return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
-    #elif defined(WITH_HTTP_CPPREST)
-    return NHttpTransportPtr(new NHttpClientCppRest(platformParams));
-    #elif defined(WITH_HTTP_CURL)
-    return NHttpTransportPtr(new NHttpClientLibCurl(platformParams));
-    #else
-        #error Could not find default http transport for platform.
-    #endif
+NHttpTransportPtr
+createDefaultHttpTransport(const NPlatformParameters &platformParams) {
+  (void)platformParams; // silence unused variable warning on some platforms
+// Compilation error if no implementation is selected
+#if defined(WITH_HTTP_LIBHTTPC)
+  return NHttpTransportPtr(new NHttpClientLibHC(platformParams));
+#elif defined(WITH_HTTP_CPPREST)
+  return NHttpTransportPtr(new NHttpClientCppRest(platformParams));
+#elif defined(WITH_HTTP_CURL)
+  return NHttpTransportPtr(new NHttpClientLibCurl(platformParams));
+#else
+#error Could not find default http transport for platform.
+#endif
 }
-#endif //WITH_PRIVATE_HTTP
+#endif // WITH_PRIVATE_HTTP
 
-}
+} // namespace Nakama

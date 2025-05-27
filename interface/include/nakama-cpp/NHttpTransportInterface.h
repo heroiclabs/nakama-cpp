@@ -16,82 +16,83 @@
 
 #pragma once
 
+#include <chrono>
 #include <functional>
-#include <string>
 #include <map>
 #include <memory>
+#include <string>
 
-#include <nakama-cpp/NTypes.h>
 #include <nakama-cpp/NExport.h>
+#include <nakama-cpp/NTypes.h>
 
 NAKAMA_NAMESPACE_BEGIN
 
-    using NHttpHeaders = std::map<std::string, std::string>;
-    using NHttpQueryArgs = std::multimap<std::string, std::string>;
+using NHttpHeaders = std::map<std::string, std::string>;
+using NHttpQueryArgs = std::multimap<std::string, std::string>;
 
-    enum class NHttpReqMethod
-    {
-        GET,
-        POST,
-        PUT,
-        DEL,
-    };
+enum class NHttpReqMethod {
+  GET,
+  POST,
+  PUT,
+  DEL,
+};
 
-    struct NHttpRequest
-    {
-        NHttpReqMethod method = NHttpReqMethod::POST;
-        NHttpHeaders headers;
-        NHttpQueryArgs queryArgs;
-        std::string path;
-        std::string body;
-    };
+struct NHttpRequest {
+  NHttpReqMethod method = NHttpReqMethod::POST;
+  NHttpHeaders headers;
+  NHttpQueryArgs queryArgs;
+  std::string path;
+  std::string body;
+};
 
-    struct NHttpResponse
-    {
-        int statusCode = 0;            /// HTTP status code, 200 - OK
-        std::string body;              /// response body
-        std::string errorMessage;      /// error message string, intended for use if a local failure (i.e., no error body returned from server)
-    };
+struct NHttpResponse {
+  int statusCode = 0; /// HTTP status code, 200 - OK
+  std::string body;   /// response body
+  std::string
+      errorMessage; /// error message string, intended for use if a local
+                    /// failure (i.e., no error body returned from server)
+};
 
-    using NHttpResponsePtr = std::shared_ptr<NHttpResponse>;
-    using NHttpResponseCallback = std::function<void (NHttpResponsePtr)>;
+using NHttpResponsePtr = std::shared_ptr<NHttpResponse>;
+using NHttpResponseCallback = std::function<void(NHttpResponsePtr)>;
 
-    namespace InternalStatusCodes
-    {
-        static const int CONNECTION_ERROR = 600;            /// this indicates a general connection error
-        static const int NOT_INITIALIZED_ERROR = 601;       /// HTTP client is not initialized properly
-        static const int CANCELLED_BY_USER = 602;           /// cancelled by user
-        static const int INTERNAL_TRANSPORT_ERROR = 603;    /// Errors in HTTP Transport
-    }
+namespace InternalStatusCodes {
+static const int CONNECTION_ERROR =
+    600; /// this indicates a general connection error
+static const int NOT_INITIALIZED_ERROR =
+    601; /// HTTP client is not initialized properly
+static const int CANCELLED_BY_USER = 602;        /// cancelled by user
+static const int INTERNAL_TRANSPORT_ERROR = 603; /// Errors in HTTP Transport
+} // namespace InternalStatusCodes
 
-    /**
-     * HTTP transport interface
-     */
-    class NHttpTransportInterface
-    {
-    public:
-        virtual ~NHttpTransportInterface() {}
+/**
+ * HTTP transport interface
+ */
+class NHttpTransportInterface {
+public:
+  virtual ~NHttpTransportInterface() {}
 
-        virtual void setBaseUri(const std::string& uri) = 0;
+  virtual void setBaseUri(const std::string &uri) = 0;
 
-        virtual void setTimeout(int seconds) = 0;
+  virtual void setTimeout(std::chrono::milliseconds time) = 0;
 
-        virtual void tick() = 0;
+  virtual void tick() = 0;
 
-        /**
-         * Invoke HTTP request
-         */
-        virtual void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) = 0;
+  /**
+   * Invoke HTTP request
+   */
+  virtual void request(const NHttpRequest &req,
+                       const NHttpResponseCallback &callback = nullptr) = 0;
 
-        /**
-         * Cancel all requests
-         *
-         * Note: this doesn't guarantee server will not receive or not received
-         * any currently pending request
-         */
-        virtual void cancelAllRequests() = 0;
-    };
+  /**
+   * Cancel all requests
+   *
+   * Note: this doesn't guarantee server will not receive or not received
+   * any currently pending request
+   */
+  virtual void cancelAllRequests() = 0;
+};
 
-    using NHttpTransportPtr = std::shared_ptr<NHttpTransportInterface>;
+using NHttpTransportPtr = std::shared_ptr<NHttpTransportInterface>;
 
 NAKAMA_NAMESPACE_END

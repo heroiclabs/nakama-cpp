@@ -14,275 +14,252 @@
  * limitations under the License.
  */
 
-#include <memory.h>
-#include "nakama-cpp/log/NLogger.h"
 #include "NHttpClientCppRest.h"
 #include "CppRestUtils.h"
 #include "nakama-cpp/NPlatformParams.h"
+#include "nakama-cpp/log/NLogger.h"
+#include <memory.h>
 
 namespace Nakama {
 
-using namespace web::http;                  // Common HTTP functionality
-using namespace web::http::client;          // HTTP client features
-
+using namespace web::http;         // Common HTTP functionality
+using namespace web::http::client; // HTTP client features
 
 #ifdef __ANDROID__
 static bool initialized_cpp_rest = false;
 #endif
 
-class NHttpClientCppRestContext
-{
+class NHttpClientCppRestContext {
 public:
-    NHttpClientCppRestContext(NHttpClientCppRest& c) : client(c) {}
+  NHttpClientCppRestContext(NHttpClientCppRest &c) : client(c) {}
 
-    void finishReq(NHttpClientCppRest::ReqId id, NHttpResponsePtr response)
-    {
-        std::lock_guard<std::mutex> guard(mutex);
-        if (alive)
-            client.finishReq(id, response);
-    }
+  void finishReq(NHttpClientCppRest::ReqId id, NHttpResponsePtr response) {
+    std::lock_guard<std::mutex> guard(mutex);
+    if (alive)
+      client.finishReq(id, response);
+  }
 
-    void finishReqWithError(NHttpClientCppRest::ReqId id, int statusCode, std::string&& reason)
-    {
-        std::lock_guard<std::mutex> guard(mutex);
-        if (alive)
-            client.finishReqWithError(id, statusCode, std::move(reason));
-    }
+  void finishReqWithError(NHttpClientCppRest::ReqId id, int statusCode,
+                          std::string &&reason) {
+    std::lock_guard<std::mutex> guard(mutex);
+    if (alive)
+      client.finishReqWithError(id, statusCode, std::move(reason));
+  }
 
-    void removePendingReq(NHttpClientCppRest::ReqId id)
-    {
-        std::lock_guard<std::mutex> guard(mutex);
-        if (alive)
-            client.removePendingReq(id);
-    }
+  void removePendingReq(NHttpClientCppRest::ReqId id) {
+    std::lock_guard<std::mutex> guard(mutex);
+    if (alive)
+      client.removePendingReq(id);
+  }
 
-    NHttpClientCppRest& client;
-    NHttpClientCppRest::ReqId nextReqId = 1;
-    std::mutex mutex;
-    bool alive = true;
+  NHttpClientCppRest &client;
+  NHttpClientCppRest::ReqId nextReqId = 1;
+  std::mutex mutex;
+  bool alive = true;
 };
 
 ///////////////////////////////////////////////////////////////
-NHttpClientCppRest::NHttpClientCppRest(const NPlatformParameters& params) : _context(std::make_shared<NHttpClientCppRestContext>(*this))
-{
+NHttpClientCppRest::NHttpClientCppRest(const NPlatformParameters &params)
+    : _context(std::make_shared<NHttpClientCppRestContext>(*this)) {
 #ifdef __ANDROID__
-    if (!initialized_cpp_rest)
-    {
-        cpprest_init(params.javaVM);
-        initialized_cpp_rest = true;
-    }
+  if (!initialized_cpp_rest) {
+    cpprest_init(params.javaVM);
+    initialized_cpp_rest = true;
+  }
 #endif
 }
 
-NHttpClientCppRest::~NHttpClientCppRest()
-{
-    {
-        std::lock_guard<std::mutex> guard(_context->mutex);
-        _context->alive = false;
-    }
-}
-
-void NHttpClientCppRest::setBaseUri(const std::string& uri)
-{
-    if (_client.get())
-    {
-        return;
-    }
-
-    _client = std::make_unique<http_client>(http_client(FROM_STD_STR(uri)));
-}
-
-
-
-void NHttpClientCppRest::setTimeout(int seconds)
-{
-    if(_client.get())
-    {
-		_client->setHttpResponseTimeout(seconds);
-	}
-}
-
-void NHttpClientCppRest::tick()
-{
-    ReqContextPtr ctx;
-
-    while ((ctx = popFinishedReq()))
-    {
-		if (ctx->callback)
-		{
-			ctx->callback(ctx->response);
-		}
-    }
-}
-
-void NHttpClientCppRest::request(const NHttpRequest& req, const NHttpResponseCallback& callback)
-{
-
-    std::shared_ptr<ReqContext> ctx = createReqContext();
-    ReqId reqId = ctx->id;
-    bool hasCallback = !!callback;
-
-    ctx->callback = callback;
-
-    if (!_client)
-    {
-        if (_baseUri.empty())
-        {
-            _context->finishReqWithError(reqId, InternalStatusCodes::NOT_INITIALIZED_ERROR, "[NHttpClientCppRest::request] base uri is not set");
-            return;
-        }
-    }
-
-    // Build request URI and start the request.
-    uri_builder builder(FROM_STD_STR(req.path));
-
-    for (auto p : req.queryArgs)
-    {
-        builder.append_query(FROM_STD_STR(p.first), FROM_STD_STR(p.second));
-    }
-
-    web::http::method theMethod;
-
-    switch (req.method)
-    {
-    case NHttpReqMethod::POST: theMethod = methods::POST; break;
-    case NHttpReqMethod::GET : theMethod = methods::GET; break;
-    case NHttpReqMethod::PUT : theMethod = methods::PUT; break;
-    case NHttpReqMethod::DEL : theMethod = methods::DEL; break;
-    }
-
-    http_request request;
-
-    for (auto p : req.headers)
-    {
-        request.headers().add(FROM_STD_STR(p.first), FROM_STD_STR(p.second));
-    }
-
-    request.set_request_uri(builder.to_string());
-    request.set_body(FROM_STD_STR(req.body));
-    request.set_method(theMethod);
-
-    std::weak_ptr<NHttpClientCppRestContext> context_wptr(_context);
-
-    auto task = _client->request(request);
-    // Task-based continuation
-    (void) task.then([context_wptr, reqId, hasCallback](pplx::task<http_response> previousTask)
-    {
-        try
-        {
-            http_response response = previousTask.get();
-
-            if (hasCallback)
-            {
-                NHttpResponsePtr responsePtr(new NHttpResponse());
-
-                responsePtr->statusCode = response.status_code();
-
-                if (responsePtr->statusCode != 200)
-                {
-                    responsePtr->errorMessage = TO_STD_STR(response.reason_phrase());
-                }
-
-                responsePtr->body = response.extract_utf8string().get();
-
-                auto context = context_wptr.lock();
-                if (context)
-                    context->finishReq(reqId, responsePtr);
-            }
-            else
-            {
-                auto context = context_wptr.lock();
-                if (context)
-                    context->removePendingReq(reqId);
-            }
-        }
-        catch (const std::exception & e)
-        {
-            auto context = context_wptr.lock();
-            if (context)
-                context->finishReqWithError(reqId, InternalStatusCodes::CONNECTION_ERROR, "[NHttpClientCppRest::request] exception: " + std::string(e.what()));
-        }
-    });
-}
-
-void NHttpClientCppRest::cancelAllRequests()
-{
+NHttpClientCppRest::~NHttpClientCppRest() {
+  {
     std::lock_guard<std::mutex> guard(_context->mutex);
+    _context->alive = false;
+  }
+}
 
-    while (!_pendingRequests.empty())
-    {
-        auto& ctx = _pendingRequests.front();
-        if (ctx->callback)
-        {
-            NHttpResponsePtr responsePtr(new NHttpResponse());
+void NHttpClientCppRest::setBaseUri(const std::string &uri) {
+  if (_client.get()) {
+    return;
+  }
 
-            responsePtr->statusCode = InternalStatusCodes::CANCELLED_BY_USER;
-            responsePtr->errorMessage = "cancelled by user";
+  _client = std::make_unique<http_client>(http_client(FROM_STD_STR(uri)));
+}
 
-            ctx->callback(responsePtr);
+void NHttpClientCppRest::setTimeout(std::chrono::milliseconds time) {
+  if (_client.get()) {
+    _client->setHttpResponseTimeout(duration_cast<std::chrono::seconds>(time));
+  }
+}
+
+void NHttpClientCppRest::tick() {
+  ReqContextPtr ctx;
+
+  while ((ctx = popFinishedReq())) {
+    if (ctx->callback) {
+      ctx->callback(ctx->response);
+    }
+  }
+}
+
+void NHttpClientCppRest::request(const NHttpRequest &req,
+                                 const NHttpResponseCallback &callback) {
+
+  std::shared_ptr<ReqContext> ctx = createReqContext();
+  ReqId reqId = ctx->id;
+  bool hasCallback = !!callback;
+
+  ctx->callback = callback;
+
+  if (!_client) {
+    if (_baseUri.empty()) {
+      _context->finishReqWithError(
+          reqId, InternalStatusCodes::NOT_INITIALIZED_ERROR,
+          "[NHttpClientCppRest::request] base uri is not set");
+      return;
+    }
+  }
+
+  // Build request URI and start the request.
+  uri_builder builder(FROM_STD_STR(req.path));
+
+  for (auto p : req.queryArgs) {
+    builder.append_query(FROM_STD_STR(p.first), FROM_STD_STR(p.second));
+  }
+
+  web::http::method theMethod;
+
+  switch (req.method) {
+  case NHttpReqMethod::POST:
+    theMethod = methods::POST;
+    break;
+  case NHttpReqMethod::GET:
+    theMethod = methods::GET;
+    break;
+  case NHttpReqMethod::PUT:
+    theMethod = methods::PUT;
+    break;
+  case NHttpReqMethod::DEL:
+    theMethod = methods::DEL;
+    break;
+  }
+
+  http_request request;
+
+  for (auto p : req.headers) {
+    request.headers().add(FROM_STD_STR(p.first), FROM_STD_STR(p.second));
+  }
+
+  request.set_request_uri(builder.to_string());
+  request.set_body(FROM_STD_STR(req.body));
+  request.set_method(theMethod);
+
+  std::weak_ptr<NHttpClientCppRestContext> context_wptr(_context);
+
+  auto task = _client->request(request);
+  // Task-based continuation
+  (void)task.then([context_wptr, reqId,
+                   hasCallback](pplx::task<http_response> previousTask) {
+    try {
+      http_response response = previousTask.get();
+
+      if (hasCallback) {
+        NHttpResponsePtr responsePtr(new NHttpResponse());
+
+        responsePtr->statusCode = response.status_code();
+
+        if (responsePtr->statusCode != 200) {
+          responsePtr->errorMessage = TO_STD_STR(response.reason_phrase());
         }
 
-        _pendingRequests.pop_front();
+        responsePtr->body = response.extract_utf8string().get();
+
+        auto context = context_wptr.lock();
+        if (context)
+          context->finishReq(reqId, responsePtr);
+      } else {
+        auto context = context_wptr.lock();
+        if (context)
+          context->removePendingReq(reqId);
+      }
+    } catch (const std::exception &e) {
+      auto context = context_wptr.lock();
+      if (context)
+        context->finishReqWithError(
+            reqId, InternalStatusCodes::CONNECTION_ERROR,
+            "[NHttpClientCppRest::request] exception: " +
+                std::string(e.what()));
     }
+  });
 }
 
-std::shared_ptr<NHttpClientCppRest::ReqContext> NHttpClientCppRest::createReqContext()
-{
-    std::shared_ptr<ReqContext> ctx = std::make_shared<ReqContext>(ReqContext(_context->nextReqId++));
+void NHttpClientCppRest::cancelAllRequests() {
+  std::lock_guard<std::mutex> guard(_context->mutex);
 
-    std::lock_guard<std::mutex> guard(_context->mutex);
-    _pendingRequests.emplace_back(ctx);
+  while (!_pendingRequests.empty()) {
+    auto &ctx = _pendingRequests.front();
+    if (ctx->callback) {
+      NHttpResponsePtr responsePtr(new NHttpResponse());
 
-    return ctx;
-}
+      responsePtr->statusCode = InternalStatusCodes::CANCELLED_BY_USER;
+      responsePtr->errorMessage = "cancelled by user";
 
-void NHttpClientCppRest::finishReq(ReqId id, NHttpResponsePtr response)
-{
-    for (auto it = _pendingRequests.begin(); it != _pendingRequests.end(); ++it)
-    {
-        if (it->get()->id == id)
-        {
-            it->get()->response = std::move(response);
-            _finishedRequests.emplace_back(std::move(*it));
-            _pendingRequests.erase(it);
-            break;
-        }
+      ctx->callback(responsePtr);
     }
+
+    _pendingRequests.pop_front();
+  }
 }
 
-void NHttpClientCppRest::finishReqWithError(ReqId id, int statusCode, std::string&& reason)
-{
-    NHttpResponsePtr responsePtr(new NHttpResponse());
+std::shared_ptr<NHttpClientCppRest::ReqContext>
+NHttpClientCppRest::createReqContext() {
+  std::shared_ptr<ReqContext> ctx =
+      std::make_shared<ReqContext>(ReqContext(_context->nextReqId++));
 
-    responsePtr->statusCode = statusCode;
-    responsePtr->errorMessage = std::move(reason);
+  std::lock_guard<std::mutex> guard(_context->mutex);
+  _pendingRequests.emplace_back(ctx);
 
-    finishReq(id, responsePtr);
+  return ctx;
 }
 
-void NHttpClientCppRest::removePendingReq(ReqId id)
-{
-    for (auto it = _pendingRequests.begin(); it != _pendingRequests.end(); ++it)
-    {
-        if (it->get()->id == id)
-        {
-            _pendingRequests.erase(it);
-            break;
-        }
+void NHttpClientCppRest::finishReq(ReqId id, NHttpResponsePtr response) {
+  for (auto it = _pendingRequests.begin(); it != _pendingRequests.end(); ++it) {
+    if (it->get()->id == id) {
+      it->get()->response = std::move(response);
+      _finishedRequests.emplace_back(std::move(*it));
+      _pendingRequests.erase(it);
+      break;
     }
+  }
 }
 
-NHttpClientCppRest::ReqContextPtr NHttpClientCppRest::popFinishedReq()
-{
-    std::lock_guard<std::mutex> guard(_context->mutex);
+void NHttpClientCppRest::finishReqWithError(ReqId id, int statusCode,
+                                            std::string &&reason) {
+  NHttpResponsePtr responsePtr(new NHttpResponse());
 
-    if (_finishedRequests.empty())
-        return nullptr;
+  responsePtr->statusCode = statusCode;
+  responsePtr->errorMessage = std::move(reason);
 
-    ReqContextPtr ctx = std::move(_finishedRequests.front());
-    _finishedRequests.pop_front();
-
-    return ctx;
+  finishReq(id, responsePtr);
 }
 
+void NHttpClientCppRest::removePendingReq(ReqId id) {
+  for (auto it = _pendingRequests.begin(); it != _pendingRequests.end(); ++it) {
+    if (it->get()->id == id) {
+      _pendingRequests.erase(it);
+      break;
+    }
+  }
 }
+
+NHttpClientCppRest::ReqContextPtr NHttpClientCppRest::popFinishedReq() {
+  std::lock_guard<std::mutex> guard(_context->mutex);
+
+  if (_finishedRequests.empty())
+    return nullptr;
+
+  ReqContextPtr ctx = std::move(_finishedRequests.front());
+  _finishedRequests.pop_front();
+
+  return ctx;
+}
+
+} // namespace Nakama

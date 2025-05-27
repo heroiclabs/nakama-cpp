@@ -24,28 +24,34 @@
 #include <atomic>
 
 namespace Nakama {
-    class NHttpClientLibHC: public NHttpTransportInterface
-    {
-    public:
-        NHttpClientLibHC(const NPlatformParameters& platformParameters);
-        ~NHttpClientLibHC() noexcept;
+class NHttpClientLibHC : public NHttpTransportInterface {
+public:
+  NHttpClientLibHC(const NPlatformParameters &platformParameters);
+  ~NHttpClientLibHC() noexcept;
 
-        void setBaseUri(const std::string& uri) override;
+  void setBaseUri(const std::string &uri) override;
 
-        void setTimeout(int seconds) override;
+  void setTimeout(std::chrono::milliseconds time) override;
 
-        void tick() override;
+  void tick() override;
 
-        void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) override;
+  void request(const NHttpRequest &req,
+               const NHttpResponseCallback &callback = nullptr) override;
 
-        void cancelAllRequests() override;
-    private:
-        void submit_cb(const NHttpResponseCallback &cb, int statusCode, std::string body, std::string err = "") noexcept;
-        HRESULT prep_hc_call(const NHttpRequest& req, std::unique_ptr<HC_CALL, decltype(&HCHttpCallCloseHandle)>& call);
+  void cancelAllRequests() override;
 
-        std::unique_ptr<std::remove_pointer<XTaskQueueHandle>::type, decltype(&XTaskQueueCloseHandle)> m_queue;
-        std::string m_baseUri;
-        std::atomic<bool> m_queue_terminated;
-        int m_timeout = -1;
-    };
-}
+private:
+  void submit_cb(const NHttpResponseCallback &cb, int statusCode,
+                 std::string body, std::string err = "") noexcept;
+  HRESULT prep_hc_call(
+      const NHttpRequest &req,
+      std::unique_ptr<HC_CALL, decltype(&HCHttpCallCloseHandle)> &call);
+
+  std::unique_ptr<std::remove_pointer<XTaskQueueHandle>::type,
+                  decltype(&XTaskQueueCloseHandle)>
+      m_queue;
+  std::string m_baseUri;
+  std::atomic<bool> m_queue_terminated;
+  std::chrono::milliseconds m_timeout = std::chrono::seconds(3);
+};
+} // namespace Nakama
