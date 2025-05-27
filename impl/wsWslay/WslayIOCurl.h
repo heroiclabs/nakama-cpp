@@ -47,10 +47,10 @@ public:
 
 #if __ANDROID__
     CACertificateData* data = Nakama::getCaCertificates();
-    if (data == NULL) {
+    if (data == nullptr) {
       // Has System.loadLibrary("nakama-sdk") been called?
       NLOG(Nakama::NLogLevel::Error, "libcurl error: could not access CA Certificates.");
-      return;
+      return NetIOAsyncResult::ERR;
     } else {
       struct curl_blob blob;
       blob.data = reinterpret_cast<char*>(data->data);
