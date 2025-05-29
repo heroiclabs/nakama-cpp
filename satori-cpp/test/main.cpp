@@ -74,9 +74,11 @@ int main(int argc, char** argv) {
         getFromFuture(client->getMessagesAsync(session3, 10, false, std::string()), client);
     std::cout << "Messages size:" << messages.messages.size() << std::endl;
     if (!messages.messages.empty()) {
-      getFromFuture(client->updateMessageAsync(session3, messages.messages[0].id, messages.messages[0].send_time + 1000,
-                                               messages.messages[0].send_time + 100),
-                    client);
+      getFromFuture(
+          client->updateMessageAsync(
+              session3, messages.messages[0].id, messages.messages[0].send_time + 1000,
+              messages.messages[0].send_time + 100),
+          client);
     }
   } catch (const std::future_error& e) {
     std::cout << "Caught a future_error with code \"" << e.code() << "\"\nMessage: \"" << e.what() << "\"\n";
