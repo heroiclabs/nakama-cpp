@@ -18,18 +18,16 @@
 
 namespace Nakama {
 
-bool NRtClientProtocol_Protobuf::serialize(const google::protobuf::Message& message, NBytes& output)
-{
-    size_t size = message.ByteSizeLong();
+bool NRtClientProtocol_Protobuf::serialize(const google::protobuf::Message& message, NBytes& output) {
+  size_t size = message.ByteSizeLong();
 
-    output.resize(size);
+  output.resize(size);
 
-    return message.SerializeToArray(&output[0], static_cast<int>(size));
+  return message.SerializeToArray(&output[0], static_cast<int>(size));
 }
 
-bool NRtClientProtocol_Protobuf::parse(const NBytes& input, google::protobuf::Message& message)
-{
-    return message.ParseFromArray(input.data(), static_cast<int>(input.size()));
+bool NRtClientProtocol_Protobuf::parse(const NBytes& input, google::protobuf::Message& message) {
+  return message.ParseFromArray(input.data(), static_cast<int>(input.size()));
 }
 
-}
+} // namespace Nakama

@@ -10,9 +10,9 @@ add_library(nakama-impl-ws-wslay OBJECT ${srcs})
 add_library(nakama::impl-ws-wslay ALIAS nakama-impl-ws-wslay)
 
 target_link_libraries(nakama-impl-ws-wslay
-    PUBLIC
+        PUBLIC
         nakama::sdk-interface
-    PRIVATE
+        PRIVATE
         nakama::sdk-core-common nakama::sdk-core-misc wslay
 )
 
@@ -28,4 +28,4 @@ if (CFG_WSLAY_CURL_IO)
             CURL::libcurl
             nakama::sdk-core-common # for StrUtil.h
     )
-endif()
+endif ()

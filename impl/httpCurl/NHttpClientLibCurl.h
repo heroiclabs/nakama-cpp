@@ -31,14 +31,12 @@
 namespace Nakama {
 class NHttpClientLibCurl : public NHttpTransportInterface {
 public:
-  NHttpClientLibCurl(const NPlatformParameters &platformParameters);
+  NHttpClientLibCurl(const NPlatformParameters& platformParameters);
 
-  void setBaseUri(const std::string &uri) override;
+  void setBaseUri(const std::string& uri) override;
   void setTimeout(std::chrono::milliseconds time) override;
   void tick() override;
-  void
-  request(const NHttpRequest &req,
-          const NHttpResponseCallback &callback = nullptr) noexcept override;
+  void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) noexcept override;
   void cancelAllRequests() override;
 
 private:
@@ -47,11 +45,9 @@ private:
   std::chrono::milliseconds _timeout = std::chrono::seconds(-1);
   // TODO implement curl_easy reuse.
   // TODO would be more performant but less safe as a map with CURL* as key
-  std::list<std::pair<std::unique_ptr<CURL, decltype(&curl_easy_cleanup)>,
-                      std::unique_ptr<NHttpClientLibCurlContext>>>
+  std::list<std::pair<std::unique_ptr<CURL, decltype(&curl_easy_cleanup)>, std::unique_ptr<NHttpClientLibCurlContext>>>
       _contexts;
-  void handle_curl_easy_set_opt_error(std::string action, CURLcode code,
-                                      const NHttpResponseCallback &callback);
+  void handle_curl_easy_set_opt_error(std::string action, CURLcode code, const NHttpResponseCallback& callback);
   std::mutex _mutex;
 };
 } // namespace Nakama

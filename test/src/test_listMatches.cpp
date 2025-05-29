@@ -22,57 +22,50 @@ namespace Test {
 
 using namespace std;
 
-class NMatchListTest : public NTest
-{
-    NSessionPtr session;
+class NMatchListTest : public NTest {
+  NSessionPtr session;
 
 public:
-    explicit NMatchListTest(const char* name) : NTest(name) {}
+  explicit NMatchListTest(const char* name) : NTest(name) {}
 
-    void runTest() override
-    {
-        auto successCallback = [this](NSessionPtr sess)
-        {
-            this->session = sess;
+  void runTest() override {
+    auto successCallback = [this](NSessionPtr sess) {
+      this->session = sess;
 
-            NLOG_INFO("session token: " + sess->getAuthToken());
+      NLOG_INFO("session token: " + sess->getAuthToken());
 
-            listMatches();
-        };
+      listMatches();
+    };
 
-        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
+    client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
 
-        NTest::runTest();
-    }
+    NTest::runTest();
+  }
 
-    void listMatches()
-    {
-        auto rpcSuccessCallback = [this](const NRpc& rpc)
-        {
-            auto successCallback = [this](NMatchListPtr matchList)
-            {
-                NLOG_INFO("Expecting match count to be 2. Actual count: " + std::to_string(matchList->matches.size()));
-                NTEST_ASSERT(matchList->matches.size() == 2);
-                stopTest(true);
-            };
+  void listMatches() {
+    auto rpcSuccessCallback = [this](const NRpc& rpc) {
+      auto successCallback = [this](NMatchListPtr matchList) {
+        NLOG_INFO("Expecting match count to be 2. Actual count: " + std::to_string(matchList->matches.size()));
+        NTEST_ASSERT(matchList->matches.size() == 2);
+        stopTest(true);
+      };
 
-            int minPlayers = 0;
-            int maxPlayers = 10;
-            int limit = 10;
-            bool authoritative = true;
-            string label = "";
-            string query = "+label.type:freeforall +label.difficulty:>1";
-            client->listMatches(session, minPlayers, maxPlayers, limit, label, query, authoritative, successCallback);
-        };
+      int minPlayers = 0;
+      int maxPlayers = 10;
+      int limit = 10;
+      bool authoritative = true;
+      string label = "";
+      string query = "+label.type:freeforall +label.difficulty:>1";
+      client->listMatches(session, minPlayers, maxPlayers, limit, label, query, authoritative, successCallback);
+    };
 
-        client->rpc(session, "create_matches", "", rpcSuccessCallback);
-    }
+    client->rpc(session, "create_matches", "", rpcSuccessCallback);
+  }
 };
 
-void test_listMatches()
-{
-    NMatchListTest test(__func__);
-    test.runTest();
+void test_listMatches() {
+  NMatchListTest test(__func__);
+  test.runTest();
 }
 
 } // namespace Test

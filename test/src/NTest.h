@@ -16,67 +16,62 @@
 
 #pragma once
 
+#include "nakama-cpp/ClientFactory.h"
+#include "nakama-cpp/NClientInterface.h"
+#include "nakama-cpp/realtime/NRtDefaultClientListener.h"
+#include <atomic>
 #include <iostream>
+#include <nakama-cpp/NError.h>
 #include <string>
 #include <thread>
-#include <atomic>
-#include <nakama-cpp/NError.h>
-#include "nakama-cpp/NClientInterface.h"
-#include "nakama-cpp/ClientFactory.h"
-#include "nakama-cpp/realtime/NRtDefaultClientListener.h"
 
 namespace Nakama {
 namespace Test {
 
-    class NTest
-    {
-    public:
-        static NRtClientProtocol RtProtocol;
-        static std::function<NClientPtr(Nakama::NClientParameters)> ClientFactory;
-        static std::function<NRtClientPtr(Nakama::NClientPtr)> RtClientFactory;
-        static Nakama::NClientParameters NClientParameters;
-        static std::string ServerHttpKey;
-        NTest(const char* name, bool threadedTick = false);
-        NTest(std::string name, bool threadedTick = false);
-        NTest(std::string name, Nakama::NClientParameters parameters);
-        ~NTest();
+class NTest {
+public:
+  static NRtClientProtocol RtProtocol;
+  static std::function<NClientPtr(Nakama::NClientParameters)> ClientFactory;
+  static std::function<NRtClientPtr(Nakama::NClientPtr)> RtClientFactory;
+  static Nakama::NClientParameters NClientParameters;
+  static std::string ServerHttpKey;
+  NTest(const char* name, bool threadedTick = false);
+  NTest(std::string name, bool threadedTick = false);
+  NTest(std::string name, Nakama::NClientParameters parameters);
+  ~NTest();
 
-        virtual void runTest();
+  virtual void runTest();
 
-        void stopTest(bool succeeded = false);
-        void stopTest(const NError& error);
+  void stopTest(bool succeeded = false);
+  void stopTest(const NError& error);
 
-        void setRtTickPaused(bool paused = true) {
-            _rtTickPaused = paused;
-        }
+  void setRtTickPaused(bool paused = true) { _rtTickPaused = paused; }
 
-        void tick();
-        bool checkTimeout(int timePassedMs) {
-            timeoutMs -= timePassedMs;
-            return timeoutMs >= 0;
-        }
-        bool isDone() const { return _isDone.load(); }
-        bool isSucceeded() const { return _testSucceeded.load(); }
+  void tick();
+  bool checkTimeout(int timePassedMs) {
+    timeoutMs -= timePassedMs;
+    return timeoutMs >= 0;
+  }
+  bool isDone() const { return _isDone.load(); }
+  bool isSucceeded() const { return _testSucceeded.load(); }
 
-        void setTestTimeoutMs(int ms) {
-            timeoutMs = ms;
-        }
+  void setTestTimeoutMs(int ms) { timeoutMs = ms; }
 
-        const NClientPtr client;
-        const NRtClientPtr rtClient;
-        NRtDefaultClientListener listener;
+  const NClientPtr client;
+  const NRtClientPtr rtClient;
+  NRtDefaultClientListener listener;
 
-    private:
-        void printTestName(const char* event);
-        std::atomic<bool> _isDone;
-        std::atomic<bool> _testSucceeded;
-        bool _threadedTick = false;
-        std::string _name;
-        std::thread _tickThread;
-        int timeoutMs = 60*1000;
-        bool _rtTickPaused;
-        void runTestInternal();
-    };
+private:
+  void printTestName(const char* event);
+  std::atomic<bool> _isDone;
+  std::atomic<bool> _testSucceeded;
+  bool _threadedTick = false;
+  std::string _name;
+  std::thread _tickThread;
+  int timeoutMs = 60 * 1000;
+  bool _rtTickPaused;
+  void runTestInternal();
+};
 
 } // namespace Test
 } // namespace Nakama

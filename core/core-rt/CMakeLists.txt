@@ -11,9 +11,9 @@ add_library(nakama-sdk-core-rt OBJECT ${srcs})
 add_library(nakama::sdk-core-rt ALIAS nakama-sdk-core-rt)
 target_link_libraries(nakama-sdk-core-rt
         PUBLIC
-                nakama::sdk-interface
-                nakama::api-proto
-                nakama::sdk-core-common
+        nakama::sdk-interface
+        nakama::api-proto
+        nakama::sdk-core-common
         PRIVATE
-                nakama::sdk-rtclient-factory  # because of BaseClient.cpp
-        )
+        nakama::sdk-rtclient-factory  # because of BaseClient.cpp
+)

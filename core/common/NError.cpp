@@ -18,38 +18,43 @@
 
 namespace Nakama {
 
-const char * toString(ErrorCode code)
-{
-    switch (code)
-    {
-    case ErrorCode::Unknown:                 return "Unknown";
-    case ErrorCode::NotFound:                return "NotFound";
-    case ErrorCode::AlreadyExists:           return "AlreadyExists";
-    case ErrorCode::InvalidArgument:         return "InvalidArgument";
-    case ErrorCode::ConnectionError:         return "ConnectionError";
-    case ErrorCode::InternalError:           return "InternalError";
-    case ErrorCode::Unauthenticated:         return "Unauthenticated";
-    case ErrorCode::PermissionDenied:        return "PermissionDenied";
-    case ErrorCode::CancelledByUser:         return "CancelledByUser";
+const char* toString(ErrorCode code) {
+  switch (code) {
+    case ErrorCode::Unknown:
+      return "Unknown";
+    case ErrorCode::NotFound:
+      return "NotFound";
+    case ErrorCode::AlreadyExists:
+      return "AlreadyExists";
+    case ErrorCode::InvalidArgument:
+      return "InvalidArgument";
+    case ErrorCode::ConnectionError:
+      return "ConnectionError";
+    case ErrorCode::InternalError:
+      return "InternalError";
+    case ErrorCode::Unauthenticated:
+      return "Unauthenticated";
+    case ErrorCode::PermissionDenied:
+      return "PermissionDenied";
+    case ErrorCode::CancelledByUser:
+      return "CancelledByUser";
     default:
-        break;
-    }
+      break;
+  }
 
-    return "";
+  return "";
 }
 
-std::string toString(const NError & error)
-{
-    std::string str;
+std::string toString(const NError& error) {
+  std::string str;
 
-    str.append("NError: ").append(toString(error.code));
+  str.append("NError: ").append(toString(error.code));
 
-    if (!error.message.empty())
-    {
-        str.append("\n").append(error.message);
-    }
+  if (!error.message.empty()) {
+    str.append("\n").append(error.message);
+  }
 
-    return str;
+  return str;
 }
 
-}
+} // namespace Nakama

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-#include <sstream>
 #include "StrUtil.h"
 #include <google/protobuf/stubs/strutil.h>
+#include <sstream>
 
 #include <regex>
 
@@ -24,89 +24,81 @@ namespace Nakama {
 
 using namespace std;
 
-std::string base64Encode(const Base64Buffer& buffer)
-{
-    std::string base64str;
+std::string base64Encode(const Base64Buffer& buffer) {
+  std::string base64str;
 
-    google::protobuf::Base64Escape((const unsigned char *)buffer.data(), static_cast<int>(buffer.size()), &base64str, true);
+  google::protobuf::Base64Escape(
+      (const unsigned char*)buffer.data(), static_cast<int>(buffer.size()), &base64str, true);
 
-    return base64str;
+  return base64str;
 }
 
-std::string base64EncodeUrl(const Base64Buffer& buffer)
-{
-    std::string base64str;
+std::string base64EncodeUrl(const Base64Buffer& buffer) {
+  std::string base64str;
 
-    google::protobuf::WebSafeBase64Escape((const unsigned char *)buffer.data(), static_cast<int>(buffer.size()), &base64str, true);
+  google::protobuf::WebSafeBase64Escape(
+      (const unsigned char*)buffer.data(), static_cast<int>(buffer.size()), &base64str, true);
 
-    return base64str;
+  return base64str;
 }
 
-Base64Buffer base64DecodeUrl(const std::string& base64str)
-{
-    Base64Buffer buffer;
+Base64Buffer base64DecodeUrl(const std::string& base64str) {
+  Base64Buffer buffer;
 
-    google::protobuf::WebSafeBase64Unescape(base64str, &buffer);
+  google::protobuf::WebSafeBase64Unescape(base64str, &buffer);
 
-    return buffer;
+  return buffer;
 }
 
-std::string encodeURIComponent(std::string decoded)
-{
-    std::ostringstream oss;
-    std::regex r("[-.0-9A-Za-z_~]");
+std::string encodeURIComponent(std::string decoded) {
+  std::ostringstream oss;
+  std::regex r("[-.0-9A-Za-z_~]");
 
-    for (char c : decoded)
-    {
-        if (std::regex_match(std::string(1, c), r))
-        {
-            oss << c;
-        }
-        else
-        {
-            oss <<'%' << std::uppercase << std::hex << static_cast<uint16_t>(0xff & c) ;
-        }
+  for (char c : decoded) {
+    if (std::regex_match(std::string(1, c), r)) {
+      oss << c;
+    } else {
+      oss << '%' << std::uppercase << std::hex << static_cast<uint16_t>(0xff & c);
     }
-    return oss.str();
+  }
+  return oss.str();
 }
 
-bool isStringStartsWith(const string & str, const string & prefix)
-{
-    bool res = false;
+bool isStringStartsWith(const string& str, const string& prefix) {
+  bool res = false;
 
-    if (str.size() >= prefix.size())
-    {
-        res = (str.compare(0, prefix.size(), prefix) == 0);
-    }
+  if (str.size() >= prefix.size()) {
+    res = (str.compare(0, prefix.size(), prefix) == 0);
+  }
 
-    return res;
+  return res;
 }
 
 opt::optional<URLParts> ParseURL(const string& url) {
-    const std::regex re("([^:]+)://([^:/]+)(:([0-9]+))?/(.+)", std::regex::extended);
-    std::smatch m;
-    if (!std::regex_match(url, m, re)) {
-        return opt::nullopt;
-    }
+  const std::regex re("([^:]+)://([^:/]+)(:([0-9]+))?/(.+)", std::regex::extended);
+  std::smatch m;
+  if (!std::regex_match(url, m, re)) {
+    return opt::nullopt;
+  }
 
-    opt::optional<uint16_t> port(opt::nullopt);
-    if (m[4].length() > 0) {
-        auto portNum = std::strtoul(m[4].str().c_str(), nullptr, 10);
-        if (portNum > 0 && portNum <= std::numeric_limits<uint16_t>::max() ) {
-            port = static_cast<uint16_t>(portNum);
-        } else {
-            return opt::nullopt;
-        }
+  opt::optional<uint16_t> port(opt::nullopt);
+  if (m[4].length() > 0) {
+    auto portNum = std::strtoul(m[4].str().c_str(), nullptr, 10);
+    if (portNum > 0 && portNum <= std::numeric_limits<uint16_t>::max()) {
+      port = static_cast<uint16_t>(portNum);
+    } else {
+      return opt::nullopt;
     }
+  }
 
-    URLParts parts{
-        m[1].str(), //scheme
-        m[2].str(),   //host
-        port,              //port
-        m[5].str(),    //pathAndArgs
-        url                // url
-    };
-    return opt::make_optional(parts);
+  URLParts parts{
+      m[1].str(), // scheme
+      m[2].str(), // host
+      port,       // port
+      m[5].str(), // pathAndArgs
+      url         // url
+  };
+  return opt::make_optional(parts);
 }
 
 } // namespace Nakama

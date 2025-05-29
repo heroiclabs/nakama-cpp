@@ -19,4 +19,4 @@ target_link_libraries(nakama-sdk-core-rest PUBLIC nakama::sdk-core-rt)
 
 if (WITH_GRPC_CLIENT)
     add_subdirectory(core-grpc EXCLUDE_FROM_ALL)
-endif()
+endif ()

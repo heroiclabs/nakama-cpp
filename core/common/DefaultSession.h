@@ -20,34 +20,33 @@
 
 namespace Nakama {
 
-    class DefaultSession : public NSessionInterface
-    {
-    public:
-        DefaultSession(const std::string& token, const std::string& refreshToken, bool created);
-        const std::string& getAuthToken() const override;
-        const std::string& getRefreshToken() const override;
-        bool isCreated() const override;
-        const std::string& getUsername() const override;
-        const std::string& getUserId() const override;
-        NTimestamp getCreateTime() const override;
-        NTimestamp getExpireTime() const override;
-        bool isExpired() const override;
-        bool isExpired(NTimestamp now) const override;
-        bool isRefreshExpired() const override;
-        bool isRefreshExpired(NTimestamp now) const override;
-        const NStringMap& getVariables() const override;
-        std::string getVariable(const std::string& name) const override;
+class DefaultSession : public NSessionInterface {
+public:
+  DefaultSession(const std::string& token, const std::string& refreshToken, bool created);
+  const std::string& getAuthToken() const override;
+  const std::string& getRefreshToken() const override;
+  bool isCreated() const override;
+  const std::string& getUsername() const override;
+  const std::string& getUserId() const override;
+  NTimestamp getCreateTime() const override;
+  NTimestamp getExpireTime() const override;
+  bool isExpired() const override;
+  bool isExpired(NTimestamp now) const override;
+  bool isRefreshExpired() const override;
+  bool isRefreshExpired(NTimestamp now) const override;
+  const NStringMap& getVariables() const override;
+  std::string getVariable(const std::string& name) const override;
 
-    private:
-        std::string _token;
-        std::string _user_id;
-        std::string _username;
-        bool _created = false;
-        NTimestamp _create_time = 0;
-        NTimestamp _expire_time = 0;
-        NStringMap _variables;
-        std::string _refresh_token;
-        NTimestamp _refresh_expire_time;
-        std::string jwtUnpack(std::string token);
-    };
-}
+private:
+  std::string _token;
+  std::string _user_id;
+  std::string _username;
+  bool _created = false;
+  NTimestamp _create_time = 0;
+  NTimestamp _expire_time = 0;
+  NStringMap _variables;
+  std::string _refresh_token;
+  NTimestamp _refresh_expire_time;
+  std::string jwtUnpack(std::string token);
+};
+} // namespace Nakama

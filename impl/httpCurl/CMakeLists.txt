@@ -13,5 +13,5 @@ add_library(nakama::impl-http-libcurl ALIAS nakama-impl-http-libcurl)
 target_include_directories(nakama-impl-http-libcurl PRIVATE ${CURL_INCLUDE_DIRS})
 
 target_link_libraries(nakama-impl-http-libcurl
-    PUBLIC nakama-api-proto nakama::sdk-interface
+        PUBLIC nakama-api-proto nakama::sdk-interface
 )

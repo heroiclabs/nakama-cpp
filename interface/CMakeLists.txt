@@ -1,7 +1,7 @@
 include(GNUInstallDirs)
 
 file(GLOB_RECURSE CORE_HEADERS
-    include/*.h
+        include/*.h
 )
 
 add_library(nakama-sdk-interface INTERFACE ${CORE_HEADERS})
@@ -20,7 +20,7 @@ target_sources(nakama-sdk-interface INTERFACE
 )
 
 target_include_directories(nakama-sdk-interface INTERFACE
-    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>")
+        "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>")
 
 target_link_libraries(nakama-sdk-interface INTERFACE nonstd::optional-lite)

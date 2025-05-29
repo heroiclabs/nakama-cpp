@@ -21,11 +21,10 @@ namespace Nakama {
 
 using namespace std::chrono;
 
-NTimestamp getUnixTimestampMs()
-{
-    milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
+NTimestamp getUnixTimestampMs() {
+  milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 
-    return ms.count();
+  return ms.count();
 }
 
 } // namespace Nakama
