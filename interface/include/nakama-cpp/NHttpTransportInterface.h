@@ -46,21 +46,18 @@ struct NHttpRequest {
 };
 
 struct NHttpResponse {
-  int statusCode = 0; /// HTTP status code, 200 - OK
-  std::string body;   /// response body
-  std::string
-      errorMessage; /// error message string, intended for use if a local
-                    /// failure (i.e., no error body returned from server)
+  int statusCode = 0;       /// HTTP status code, 200 - OK
+  std::string body;         /// response body
+  std::string errorMessage; /// error message string, intended for use if a local
+                            /// failure (i.e., no error body returned from server)
 };
 
 using NHttpResponsePtr = std::shared_ptr<NHttpResponse>;
 using NHttpResponseCallback = std::function<void(NHttpResponsePtr)>;
 
 namespace InternalStatusCodes {
-static const int CONNECTION_ERROR =
-    600; /// this indicates a general connection error
-static const int NOT_INITIALIZED_ERROR =
-    601; /// HTTP client is not initialized properly
+static const int CONNECTION_ERROR = 600;         /// this indicates a general connection error
+static const int NOT_INITIALIZED_ERROR = 601;    /// HTTP client is not initialized properly
 static const int CANCELLED_BY_USER = 602;        /// cancelled by user
 static const int INTERNAL_TRANSPORT_ERROR = 603; /// Errors in HTTP Transport
 } // namespace InternalStatusCodes
@@ -72,7 +69,7 @@ class NHttpTransportInterface {
 public:
   virtual ~NHttpTransportInterface() {}
 
-  virtual void setBaseUri(const std::string &uri) = 0;
+  virtual void setBaseUri(const std::string& uri) = 0;
 
   virtual void setTimeout(std::chrono::milliseconds time) = 0;
 
@@ -81,8 +78,7 @@ public:
   /**
    * Invoke HTTP request
    */
-  virtual void request(const NHttpRequest &req,
-                       const NHttpResponseCallback &callback = nullptr) = 0;
+  virtual void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) = 0;
 
   /**
    * Cancel all requests

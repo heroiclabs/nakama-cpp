@@ -2,7 +2,7 @@ add_library(nakama-sdk-client-factory OBJECT ClientFactory.cpp SatoriClientFacto
 add_library(nakama::sdk-client-factory ALIAS nakama-sdk-client-factory)
 target_link_libraries(nakama-sdk-client-factory
         PRIVATE nakama::sdk-core-rest
-            $<TARGET_NAME_IF_EXISTS:nakama::sdk-core-grpc>)
+        $<TARGET_NAME_IF_EXISTS:nakama::sdk-core-grpc>)
 target_compile_definitions(nakama-sdk-client-factory PRIVATE
         $<$<BOOL:${WITH_GRPC_CLIENT}>:WITH_GRPC_CLIENT>
         $<$<BOOL:${WITH_HTTP_CURL}>:WITH_HTTP_CURL>

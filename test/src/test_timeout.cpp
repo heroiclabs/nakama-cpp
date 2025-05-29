@@ -32,16 +32,13 @@ void test_connectTimeout() {
 
   auto successCallback = [&test](NSessionPtr session) { test.stopTest(); };
 
-  auto errorCallback = [&test](const NError &error) {
+  auto errorCallback = [&test](const NError& error) {
     NLOG_INFO("connect error " + std::to_string((int)error.code));
 
-    test.stopTest(error.code == ErrorCode::ConnectionError ||
-                  error.code == ErrorCode::CancelledByUser);
+    test.stopTest(error.code == ErrorCode::ConnectionError || error.code == ErrorCode::CancelledByUser);
   };
 
-  test.client->authenticateDevice("mytestdevice0007", opt::nullopt,
-                                  opt::nullopt, {}, successCallback,
-                                  errorCallback);
+  test.client->authenticateDevice("mytestdevice0007", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
 
   test.runTest();
 }
@@ -55,15 +52,13 @@ void test_connectTimeoutAmple() {
 
   auto successCallback = [&test](NSessionPtr session) { test.stopTest(true); };
 
-  auto errorCallback = [&test](const NError &error) {
+  auto errorCallback = [&test](const NError& error) {
     NLOG_INFO("connect error " + std::to_string((int)error.code));
 
     test.stopTest();
   };
 
-  test.client->authenticateDevice("mytestdevice0007", opt::nullopt,
-                                  opt::nullopt, {}, successCallback,
-                                  errorCallback);
+  test.client->authenticateDevice("mytestdevice0007", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
 
   test.runTest();
 }

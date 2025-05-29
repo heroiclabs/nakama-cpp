@@ -14,31 +14,28 @@
  * limitations under the License.
  */
 
-
 #pragma once
 
-#include <string>
 #include <curl/curl.h>
 #include <nakama-cpp/NHttpTransportInterface.h>
+#include <string>
 
-namespace Nakama
-{
+namespace Nakama {
 
-class NHttpClientLibCurlContext
-{
-    public:
-        NHttpClientLibCurlContext(const NHttpResponseCallback callback, curl_slist* headers);
-        ~NHttpClientLibCurlContext();
+class NHttpClientLibCurlContext {
+public:
+  NHttpClientLibCurlContext(const NHttpResponseCallback callback, curl_slist* headers);
+  ~NHttpClientLibCurlContext();
 
-        NHttpResponseCallback get_callback();
-        curl_slist* get_headers();
-        std::string get_body();
-        void append_body(std::string body);
+  NHttpResponseCallback get_callback();
+  curl_slist* get_headers();
+  std::string get_body();
+  void append_body(std::string body);
 
-    private:
-        NHttpResponseCallback _callback;
-        curl_slist* _headers;
-        std::string _body;
+private:
+  NHttpResponseCallback _callback;
+  curl_slist* _headers;
+  std::string _body;
 };
 
-}
+} // namespace Nakama

@@ -15,8 +15,8 @@ add_library(nakama-sdk-core-grpc OBJECT ${srcs})
 add_library(nakama::sdk-core-grpc ALIAS nakama-sdk-core-grpc)
 target_link_libraries(nakama-sdk-core-grpc
         PUBLIC
-                nakama::sdk-core-rt
-                nakama::grpc-proto
-                nakama::sdk-core-common
-                nakama::sdk-interface
-        )
+        nakama::sdk-core-rt
+        nakama::grpc-proto
+        nakama::sdk-core-common
+        nakama::sdk-interface
+)

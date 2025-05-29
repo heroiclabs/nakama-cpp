@@ -16,20 +16,19 @@
 
 #pragma once
 
-#include "nakama-cpp/NTypes.h"
 #include "google/protobuf/message.h"
+#include "nakama-cpp/NTypes.h"
 
 namespace Nakama {
 
-    class NRtClientProtocolInterface
-    {
-    public:
-        virtual ~NRtClientProtocolInterface() {}
+class NRtClientProtocolInterface {
+public:
+  virtual ~NRtClientProtocolInterface() {}
 
-        virtual bool serialize(const google::protobuf::Message& message, NBytes& output) = 0;
-        virtual bool parse(const NBytes& input, google::protobuf::Message& message) = 0;
-    };
+  virtual bool serialize(const google::protobuf::Message& message, NBytes& output) = 0;
+  virtual bool parse(const NBytes& input, google::protobuf::Message& message) = 0;
+};
 
-    using NRtClientProtocolPtr = std::shared_ptr<NRtClientProtocolInterface>;
+using NRtClientProtocolPtr = std::shared_ptr<NRtClientProtocolInterface>;
 
-}
+} // namespace Nakama
