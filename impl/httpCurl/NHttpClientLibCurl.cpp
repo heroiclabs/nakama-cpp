@@ -109,8 +109,9 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
     return;
   }
 
-  if (_timeout >= 0) {
-    curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_TIMEOUT, _timeout);
+  if (_timeout >= std::chrono::milliseconds(0)) {
+    curl_code = curl_easy_setopt(
+        curl_easy.get(), CURLOPT_TIMEOUT_MS, duration_cast<std::chrono::milliseconds>(_timeout).count());
     if (curl_code != CURLE_OK) {
       handle_curl_easy_set_opt_error("setting timeout", curl_code, callback);
       return;
@@ -199,7 +200,7 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
 
 void NHttpClientLibCurl::setBaseUri(const std::string& uri) { _base_uri = uri; }
 
-void NHttpClientLibCurl::setTimeout(int seconds) { _timeout = seconds; }
+void NHttpClientLibCurl::setTimeout(std::chrono::milliseconds timeout) { _timeout = timeout; }
 
 void NHttpClientLibCurl::tick() {
   std::unique_lock lock(_mutex, std::try_to_lock);

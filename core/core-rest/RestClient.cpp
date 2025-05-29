@@ -1198,8 +1198,8 @@ void RestClient::deleteAccount(
   try {
     NLOG_INFO("...");
 
-    auto accoutData(make_shared<nakama::api::Account>());
-    RestReqContext* ctx = createReqContext(accoutData.get());
+    auto accountData(make_shared<nakama::api::Account>());
+    RestReqContext* ctx = createReqContext(accountData.get());
     setSessionAuth(ctx, session);
 
     ctx->successCallback = successCallback;
