@@ -15,8 +15,8 @@
  */
 
 #include "nakama-cpp/realtime/NWebsocketsFactory.h"
-#include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/NPlatformParams.h"
+#include "nakama-cpp/log/NLogger.h"
 // Private builds provide their own factory
 #if !defined(WITH_PRIVATE_WS)
 
@@ -24,26 +24,25 @@
 #include "../../impl/wsLibHttpClient/NWebsocketLibHC.h"
 #elif defined(WITH_WS_WSLAY)
 #include "NWebsocketWslay.h"
-    #if defined(CFG_WSLAY_CURL_IO)
+#if defined(CFG_WSLAY_CURL_IO)
 #include "WslayIOCurl.h"
-    #endif
+#endif
 #elif defined(WITH_WS_CPPREST)
 #include "NWebsocketCppRest.h"
 #endif
 
 namespace Nakama {
 
-NRtTransportPtr createDefaultWebsocket([[maybe_unused]] const NPlatformParameters& platformParams)
-{
-    #if defined(WITH_WS_LIBHTTPC)
-    return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
-    #elif defined(WITH_WS_WSLAY) && defined(CFG_WSLAY_CURL_IO)
-    return NRtTransportPtr(new NWebsocketWslay(std::move(std::unique_ptr<WslayIOInterface>(new WslayIOCurl()))));
-    #elif defined(WITH_WS_CPPREST)
-    return NRtTransportPtr(new NWebsocketCppRest());
-    #else
-        #error Could not find default web socket transport or IO for platform.
-    #endif
+NRtTransportPtr createDefaultWebsocket([[maybe_unused]] const NPlatformParameters& platformParams) {
+#if defined(WITH_WS_LIBHTTPC)
+  return NRtTransportPtr(NWebsocketLibHC::New(platformParams));
+#elif defined(WITH_WS_WSLAY) && defined(CFG_WSLAY_CURL_IO)
+  return NRtTransportPtr(new NWebsocketWslay(std::move(std::unique_ptr<WslayIOInterface>(new WslayIOCurl()))));
+#elif defined(WITH_WS_CPPREST)
+  return NRtTransportPtr(new NWebsocketCppRest());
+#else
+#error Could not find default web socket transport or IO for platform.
+#endif
 }
 } // namespace Nakama
 

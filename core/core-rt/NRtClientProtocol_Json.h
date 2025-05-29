@@ -20,11 +20,10 @@
 
 namespace Nakama {
 
-    class NRtClientProtocol_Json : public NRtClientProtocolInterface
-    {
-    public:
-        bool serialize(const google::protobuf::Message& message, NBytes& output) override;
-        bool parse(const NBytes& input, google::protobuf::Message& message) override;
-    };
+class NRtClientProtocol_Json : public NRtClientProtocolInterface {
+public:
+  bool serialize(const google::protobuf::Message& message, NBytes& output) override;
+  bool parse(const NBytes& input, google::protobuf::Message& message) override;
+};
 
-}
+} // namespace Nakama

@@ -16,7 +16,11 @@
 
 #define RAPIDJSON_HAS_STDSTRING 1
 #define RAPIDJSON_NAMESPACE Nakama::rapidjson
-#define RAPIDJSON_NAMESPACE_BEGIN namespace Nakama { namespace rapidjson {
-#define RAPIDJSON_NAMESPACE_END }}
+#define RAPIDJSON_NAMESPACE_BEGIN                                                                                      \
+  namespace Nakama {                                                                                                   \
+  namespace rapidjson {
+#define RAPIDJSON_NAMESPACE_END                                                                                        \
+  }                                                                                                                    \
+  }
 
 #include "rapidjson/document.h"

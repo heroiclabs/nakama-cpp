@@ -16,58 +16,58 @@
 
 #pragma once
 
-#include "nakama-cpp/realtime/NRtTransportInterface.h"
-#include "cpprest/ws_client.h"
 #include "cpprest/http_client.h"
+#include "cpprest/ws_client.h"
+#include "nakama-cpp/realtime/NRtTransportInterface.h"
 #include <list>
 #include <mutex>
 
 namespace Nakama {
 
-    /**
-     * Websocket transport using C++ REST SDK (https://github.com/microsoft/cpprestsdk)
-     */
-    class NWebsocketCppRest : public NRtTransportInterface
-    {
-    public:
-        NWebsocketCppRest();
-        ~NWebsocketCppRest();
+/**
+ * Websocket transport using C++ REST SDK (https://github.com/microsoft/cpprestsdk)
+ */
+class NWebsocketCppRest : public NRtTransportInterface {
+public:
+  NWebsocketCppRest();
+  ~NWebsocketCppRest();
 
-        void setActivityTimeout(uint32_t timeout) override;
-        uint32_t getActivityTimeout() const override;
+  void setActivityTimeout(uint32_t timeout) override;
+  uint32_t getActivityTimeout() const override;
 
-        void tick() override;
+  void tick() override;
 
-        void connect(const std::string& url, NRtTransportType type) override;
+  void connect(const std::string& url, NRtTransportType type) override;
 
-        void disconnect() override;
+  void disconnect() override;
 
-        bool send(const NBytes& data) override;
+  bool send(const NBytes& data) override;
 
-    protected:
-        using UserThreadFunc = std::function<void()>;
+protected:
+  using UserThreadFunc = std::function<void()>;
 
-        void executeInUserThread(UserThreadFunc&& userThreadFunc);
+  void executeInUserThread(UserThreadFunc&& userThreadFunc);
 
-        void onOpened();
-        void onClosed(web::websockets::client::websocket_close_status close_status,
-            const utility::string_t& reason,
-            const std::error_code& error);
-        void onSocketMessage(const web::websockets::client::websocket_incoming_message& msg);
+  void onOpened();
+  void onClosed(
+      web::websockets::client::websocket_close_status close_status,
+      const utility::string_t& reason,
+      const std::error_code& error);
+  void onSocketMessage(const web::websockets::client::websocket_incoming_message& msg);
 
-        void addErrorEvent(std::string&& err);
+  void addErrorEvent(std::string&& err);
 
-        void disconnect(web::websockets::client::websocket_close_status status, const std::string& reason);
+  void disconnect(web::websockets::client::websocket_close_status status, const std::string& reason);
 
-    protected:
-        using WsClient = web::websockets::client::websocket_callback_client;
-        std::unique_ptr<WsClient> _wsClient;
-        NRtTransportType _type = NRtTransportType::Binary;
-        bool _disconnectInitiated = false;
-        std::mutex _mutex;
-        std::list<UserThreadFunc> _userThreadFuncs;
-        uint32_t _activityTimeoutMs = 0;
-        std::atomic<uint64_t> _lastReceivedMessageTimeMs;
-    };
+protected:
+  using WsClient = web::websockets::client::websocket_callback_client;
+  std::unique_ptr<WsClient> _wsClient;
+  NRtTransportType _type = NRtTransportType::Binary;
+  bool _disconnectInitiated = false;
+  std::mutex _mutex;
+  std::list<UserThreadFunc> _userThreadFuncs;
+  uint32_t _activityTimeoutMs = 0;
+  std::atomic<uint64_t> _lastReceivedMessageTimeMs;
+};
 
-}
+} // namespace Nakama

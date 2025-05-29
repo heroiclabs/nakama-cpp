@@ -33,17 +33,16 @@ class NHttpClientCppRest : public NHttpTransportInterface {
 public:
   using ReqId = uint64_t;
 
-  NHttpClientCppRest(const NPlatformParameters &platformParams);
+  NHttpClientCppRest(const NPlatformParameters& platformParams);
   ~NHttpClientCppRest();
 
-  void setBaseUri(const std::string &uri) override;
+  void setBaseUri(const std::string& uri) override;
 
   void setTimeout(std::chrono::milliseconds time) override;
 
   void tick() override;
 
-  void request(const NHttpRequest &req,
-               const NHttpResponseCallback &callback = nullptr) override;
+  void request(const NHttpRequest& req, const NHttpResponseCallback& callback = nullptr) override;
 
   void cancelAllRequests() override;
 
@@ -62,7 +61,7 @@ protected:
 
   std::shared_ptr<ReqContext> createReqContext();
   void finishReq(ReqId id, NHttpResponsePtr response);
-  void finishReqWithError(ReqId id, int statusCode, std::string &&reason);
+  void finishReqWithError(ReqId id, int statusCode, std::string&& reason);
   void removePendingReq(ReqId id);
   ReqContextPtr popFinishedReq();
 

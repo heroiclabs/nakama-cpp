@@ -12,7 +12,7 @@ add_library(nakama::impl-http-libhttpclient ALIAS nakama-impl-http-libhttpclient
 
 if (APPLE)
     target_compile_definitions(nakama-impl-http-libhttpclient INTERFACE "HC_APPLE_POSIX")
-endif()
+endif ()
 
 target_link_libraries(nakama-impl-http-libhttpclient
         PUBLIC nakama-api-proto nakama::sdk-interface
@@ -20,4 +20,4 @@ target_link_libraries(nakama-impl-http-libhttpclient
         # link time dependency on libhttpclient, but still going to
         # configure include paths
         PUBLIC ${LIBHTTPCLIENT_TARGET}
-        )
+)

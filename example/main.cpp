@@ -13,98 +13,88 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <nakama-cpp/Nakama.h>
 #include "nakama-cpp/realtime/NRtDefaultClientListener.h"
-#include <iostream>
 #include <chrono>
-#include <thread>
+#include <iostream>
+#include <nakama-cpp/Nakama.h>
 #include <optional>
+#include <thread>
 
 #if __ANDROID__
-    #include <android_native_app_glue.h>
-    #include <jni.h>
+#include <android_native_app_glue.h>
+#include <jni.h>
 #endif
 
 int mainHelper();
 
 #if __ANDROID__
 
-extern "C"
-{
-    void android_main(struct android_app* app) {
-        mainHelper();
-    }
+extern "C" {
+void android_main(struct android_app* app) { mainHelper(); }
 }
 
 #else
-int main() {
-    return mainHelper();
-}
+int main() { return mainHelper(); }
 
 #endif
 
 int mainHelper() {
-    Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
-    Nakama::NClientParameters params;
-    params.serverKey = "defaultkey";
-    params.host = "127.0.0.1";
-    params.port = Nakama::DEFAULT_PORT;
-    auto client = Nakama::createDefaultClient(params);
-    Nakama::NRtClientPtr rtClient = nullptr;
-    bool done = false;
-    auto loginFailedCallback = [&done](const Nakama::NError &error) {
-        NLOG_INFO("Failed to login");
-        NLOG_INFO(error.message);
-        done = true;
-    };
+  Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
+  Nakama::NClientParameters params;
+  params.serverKey = "defaultkey";
+  params.host = "127.0.0.1";
+  params.port = Nakama::DEFAULT_PORT;
+  auto client = Nakama::createDefaultClient(params);
+  Nakama::NRtClientPtr rtClient = nullptr;
+  bool done = false;
+  auto loginFailedCallback = [&done](const Nakama::NError& error) {
+    NLOG_INFO("Failed to login");
+    NLOG_INFO(error.message);
+    done = true;
+  };
 
-    auto connectSucceededCallback = [&done]() {
-        NLOG_INFO("Done connecting socket");
-        done = true;
-    };
+  auto connectSucceededCallback = [&done]() {
+    NLOG_INFO("Done connecting socket");
+    done = true;
+  };
 
-    auto rtErrorCallback = [&done](const Nakama::NRtError& error) {
-        NLOG_INFO("Error from socket:...");
-        NLOG_INFO(error.message);
-        done = true;
-    };
+  auto rtErrorCallback = [&done](const Nakama::NRtError& error) {
+    NLOG_INFO("Error from socket:...");
+    NLOG_INFO(error.message);
+    done = true;
+  };
 
-    auto loginSucceededCallback = [&done, &connectSucceededCallback, &rtErrorCallback, &client, &rtClient](Nakama::NSessionPtr session) {
-        NLOG_INFO("Login successful");
-        NLOG_INFO(session->getAuthToken()); // raw JWT token
-        Nakama::NRtDefaultClientListener listener;
-        listener.setConnectCallback(connectSucceededCallback);
-        listener.setErrorCallback(rtErrorCallback);
-        rtClient = client->createRtClient();
-        rtClient->setListener(&listener);
-        NLOG_INFO("Connecting socket");
-        rtClient->connect(session, true, Nakama::NRtClientProtocol::Json);
-    };
+  auto loginSucceededCallback = [&done, &connectSucceededCallback, &rtErrorCallback, &client,
+                                 &rtClient](Nakama::NSessionPtr session) {
+    NLOG_INFO("Login successful");
+    NLOG_INFO(session->getAuthToken()); // raw JWT token
+    Nakama::NRtDefaultClientListener listener;
+    listener.setConnectCallback(connectSucceededCallback);
+    listener.setErrorCallback(rtErrorCallback);
+    rtClient = client->createRtClient();
+    rtClient->setListener(&listener);
+    NLOG_INFO("Connecting socket");
+    rtClient->connect(session, true, Nakama::NRtClientProtocol::Json);
+  };
 
-    std::string deviceId = "e872f976-34c1-4c41-88fe-fd6aef118782";
-    NLOG_INFO("Authenticating...");
+  std::string deviceId = "e872f976-34c1-4c41-88fe-fd6aef118782";
+  NLOG_INFO("Authenticating...");
 
-    client->authenticateDevice(
-            deviceId,
-            Nakama::opt::nullopt,
-            Nakama::opt::nullopt,
-            {},
-            loginSucceededCallback,
-            loginFailedCallback);
+  client->authenticateDevice(
+      deviceId, Nakama::opt::nullopt, Nakama::opt::nullopt, {}, loginSucceededCallback, loginFailedCallback);
 
-    while (!done) {
-        client->tick();
+  while (!done) {
+    client->tick();
 
-        if (rtClient)
-        {
-            rtClient->tick();
-        }
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    if (rtClient) {
+      rtClient->tick();
     }
 
-    NLOG_INFO("Press any key to continue");
-    getchar();
-    client->disconnect();
-    return 0;
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+  }
+
+  NLOG_INFO("Press any key to continue");
+  getchar();
+  client->disconnect();
+  return 0;
 }

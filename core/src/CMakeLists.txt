@@ -16,10 +16,10 @@
 
 set(_src_root_path ${CMAKE_CURRENT_LIST_DIR})
 file(
-    GLOB_RECURSE _source_list
-    LIST_DIRECTORIES false
-    "${_src_root_path}/*.c*"
-    "${_src_root_path}/*.h*"
+        GLOB_RECURSE _source_list
+        LIST_DIRECTORIES false
+        "${_src_root_path}/*.c*"
+        "${_src_root_path}/*.h*"
 )
 
 add_library(nakama-sdk-core-misc OBJECT ${_source_list})
@@ -27,10 +27,10 @@ add_library(nakama::sdk-core-misc ALIAS nakama-sdk-core-misc)
 
 target_link_libraries(nakama-sdk-core-misc
         PUBLIC nakama::sdk-interface
-        )
+)
 
-if(ANDROID)
+if (ANDROID)
     target_link_libraries(nakama-sdk-core-misc PRIVATE log)
-endif()
+endif ()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

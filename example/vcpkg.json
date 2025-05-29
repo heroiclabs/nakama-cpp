@@ -1,20 +1,27 @@
 {
-    "name": "nakama-example",
-    "version": "1.0.0",
-    "dependencies": [
-        {
-            "name": "nakama-sdk",
-            "version>=": "2.6.0#3",
-            "platform": "ios | osx | linux",
-            "features": ["wslay", "curl", "libhttpclient-http"]
-        },
-        {
-            "name": "nakama-sdk",
-            "version>=": "2.6.0#3",
-            "platform": "android | windows",
-            "features": ["libhttpclient-ws", "libhttpclient-http"]
-        }
-    ],
-    "default-features": [],
-    "builtin-baseline": "62d01b70df227850b728f5050418b917ad6d2b32"
+  "name": "nakama-example",
+  "version": "1.0.0",
+  "dependencies": [
+    {
+      "name": "nakama-sdk",
+      "version>=": "2.6.0#3",
+      "platform": "ios | osx | linux",
+      "features": [
+        "wslay",
+        "curl",
+        "libhttpclient-http"
+      ]
+    },
+    {
+      "name": "nakama-sdk",
+      "version>=": "2.6.0#3",
+      "platform": "android | windows",
+      "features": [
+        "libhttpclient-ws",
+        "libhttpclient-http"
+      ]
+    }
+  ],
+  "default-features": [],
+  "builtin-baseline": "62d01b70df227850b728f5050418b917ad6d2b32"
 }

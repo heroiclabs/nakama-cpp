@@ -16,29 +16,29 @@ static int debug_callback(CURL* handle, curl_infotype type, char* data, size_t s
   (void)userp;
 
   switch (type) {
-  case CURLINFO_TEXT:
-    NLOG(Nakama::NLogLevel::Debug, "libcurl debug info <=> Text: %s", data);
-  default: /* in case a new one is introduced */
-    return 0;
+    case CURLINFO_TEXT:
+      NLOG(Nakama::NLogLevel::Debug, "libcurl debug info <=> Text: %s", data);
+    default: /* in case a new one is introduced */
+      return 0;
 
-  case CURLINFO_HEADER_OUT:
-    text = "=> Send header";
-    break;
-  case CURLINFO_DATA_OUT:
-    text = "=> Send data";
-    break;
-  case CURLINFO_SSL_DATA_OUT:
-    text = "=> Send SSL data";
-    break;
-  case CURLINFO_HEADER_IN:
-    text = "<= Recv header";
-    break;
-  case CURLINFO_DATA_IN:
-    text = "<= Recv data";
-    break;
-  case CURLINFO_SSL_DATA_IN:
-    text = "<= Recv SSL data";
-    break;
+    case CURLINFO_HEADER_OUT:
+      text = "=> Send header";
+      break;
+    case CURLINFO_DATA_OUT:
+      text = "=> Send data";
+      break;
+    case CURLINFO_SSL_DATA_OUT:
+      text = "=> Send SSL data";
+      break;
+    case CURLINFO_HEADER_IN:
+      text = "<= Recv header";
+      break;
+    case CURLINFO_DATA_IN:
+      text = "<= Recv data";
+      break;
+    case CURLINFO_SSL_DATA_IN:
+      text = "<= Recv SSL data";
+      break;
   }
 
   NLOG(Nakama::NLogLevel::Debug, "libcurl debug info: %s", text);
@@ -81,26 +81,26 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
 
   const char* callMethod = nullptr;
   switch (req.method) {
-  case NHttpReqMethod::POST:
-    callMethod = "POST";
-    // manually set content-length if there's no body.
-    if (req.body.empty()) {
-      headers_list = curl_slist_append(headers_list, "Content-Length: 0");
-      if (headers_list == NULL) {
-        NLOG(Nakama::NLogLevel::Error, "error writing header: Content-Length");
-        return;
+    case NHttpReqMethod::POST:
+      callMethod = "POST";
+      // manually set content-length if there's no body.
+      if (req.body.empty()) {
+        headers_list = curl_slist_append(headers_list, "Content-Length: 0");
+        if (headers_list == NULL) {
+          NLOG(Nakama::NLogLevel::Error, "error writing header: Content-Length");
+          return;
+        }
       }
-    }
-    break;
-  case NHttpReqMethod::GET:
-    callMethod = "GET";
-    break;
-  case NHttpReqMethod::PUT:
-    callMethod = "PUT";
-    break;
-  case NHttpReqMethod::DEL:
-    callMethod = "DELETE";
-    break;
+      break;
+    case NHttpReqMethod::GET:
+      callMethod = "GET";
+      break;
+    case NHttpReqMethod::PUT:
+      callMethod = "PUT";
+      break;
+    case NHttpReqMethod::DEL:
+      callMethod = "DELETE";
+      break;
   }
 
   CURLcode curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_URL, uri.c_str());
@@ -110,8 +110,8 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
   }
 
   if (_timeout >= std::chrono::milliseconds(0)) {
-    curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_TIMEOUT_MS,
-                                 duration_cast<std::chrono::milliseconds>(_timeout).count());
+    curl_code = curl_easy_setopt(
+        curl_easy.get(), CURLOPT_TIMEOUT_MS, duration_cast<std::chrono::milliseconds>(_timeout).count());
     if (curl_code != CURLE_OK) {
       handle_curl_easy_set_opt_error("setting timeout", curl_code, callback);
       return;
@@ -264,10 +264,11 @@ void NHttpClientLibCurl::tick() {
           response->statusCode = static_cast<int>(response_code);
 
           if (curl_code != CURLE_OK) {
-            NLOG(Nakama::NLogLevel::Error,
-                 "curl_easy_getinfo() failed when getting response code, code "
-                 "%d.\n",
-                 (int)curl_code);
+            NLOG(
+                Nakama::NLogLevel::Error,
+                "curl_easy_getinfo() failed when getting response code, code "
+                "%d.\n",
+                (int)curl_code);
           }
         }
 
@@ -302,8 +303,10 @@ void NHttpClientLibCurl::cancelAllRequests() {
   _contexts.clear();
 }
 
-void NHttpClientLibCurl::handle_curl_easy_set_opt_error(std::string action, CURLcode code,
-                                                        const NHttpResponseCallback& callback) {
+void NHttpClientLibCurl::handle_curl_easy_set_opt_error(
+    std::string action,
+    CURLcode code,
+    const NHttpResponseCallback& callback) {
   auto response = std::shared_ptr<NHttpResponse>(new NHttpResponse());
   response->errorMessage =
       "curl_easy_getinfo() error while : " + action + ", code: " + std::string(curl_easy_strerror(code));

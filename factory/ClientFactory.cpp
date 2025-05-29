@@ -35,27 +35,25 @@
 namespace Nakama {
 
 #if defined(HAVE_DEFAULT_TRANSPORT_FACTORY) || defined(WITH_GRPC_CLIENT)
-NClientPtr createDefaultClient(const NClientParameters &parameters) {
+NClientPtr createDefaultClient(const NClientParameters& parameters) {
 #if defined(WITH_GRPC_CLIENT)
   return createGrpcClient(parameters);
 #else
-  return createRestClient(
-      parameters, createDefaultHttpTransport(parameters.platformParams));
+  return createRestClient(parameters, createDefaultHttpTransport(parameters.platformParams));
 #endif
 }
 #endif
 
 #ifdef WITH_GRPC_CLIENT
 
-NClientPtr createGrpcClient(const NClientParameters &parameters) {
+NClientPtr createGrpcClient(const NClientParameters& parameters) {
   NClientPtr client(new GrpcClient(parameters));
   return client;
 }
 
 #endif
 
-NClientPtr createRestClient(const NClientParameters &parameters,
-                            NHttpTransportPtr httpTransport) {
+NClientPtr createRestClient(const NClientParameters& parameters, NHttpTransportPtr httpTransport) {
   if (!httpTransport) {
     NLOG_ERROR("HTTP transport cannot be null.");
     return nullptr;
@@ -68,8 +66,7 @@ NClientPtr createRestClient(const NClientParameters &parameters,
 }
 
 #ifndef WITH_PRIVATE_HTTP
-NHttpTransportPtr
-createDefaultHttpTransport(const NPlatformParameters &platformParams) {
+NHttpTransportPtr createDefaultHttpTransport(const NPlatformParameters& platformParams) {
   (void)platformParams; // silence unused variable warning on some platforms
 // Compilation error if no implementation is selected
 #if defined(WITH_HTTP_LIBHTTPC)

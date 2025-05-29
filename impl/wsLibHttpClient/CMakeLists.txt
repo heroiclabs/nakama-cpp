@@ -15,5 +15,5 @@ target_link_libraries(nakama-impl-ws-libhttpclient
         # link time dependency on libhttpclient, but still going to
         # configure include paths
         PUBLIC ${LIBHTTPCLIENT_TARGET}
-        )
+)
 

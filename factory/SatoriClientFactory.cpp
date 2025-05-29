@@ -18,15 +18,12 @@
 #include "../satori-cpp/src/SatoriRestClient.h"
 
 namespace Satori {
-SClientPtr createRestClient(const Nakama::NClientParameters &parameters,
-                            Nakama::NHttpTransportPtr httpTransport) {
+SClientPtr createRestClient(const Nakama::NClientParameters& parameters, Nakama::NHttpTransportPtr httpTransport) {
   if (!httpTransport) {
-    httpTransport =
-        Nakama::createDefaultHttpTransport(parameters.platformParams);
+    httpTransport = Nakama::createDefaultHttpTransport(parameters.platformParams);
   }
   if (!httpTransport) {
-    NLOG_ERROR(
-        "HTTP transport was null and a default one could not be constructed.");
+    NLOG_ERROR("HTTP transport was null and a default one could not be constructed.");
     return nullptr;
   }
   if (parameters.timeout >= std::chrono::milliseconds(0)) {
