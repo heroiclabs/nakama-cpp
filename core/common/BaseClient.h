@@ -101,7 +101,9 @@ namespace Nakama {
             const NStringMap& vars = {}
         ) override;
 
-        std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session) override;
+  std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session, const NStringMap& vars = {}) override;
+
+  std::future<void> sessionLogoutAsync(NSessionPtr session) override;
 
         std::future<void> linkFacebookAsync(
             NSessionPtr session,
@@ -205,6 +207,8 @@ namespace Nakama {
         std::future<NAccount> getAccountAsync(
             NSessionPtr session
         ) override;
+
+  std::future<void> deleteAccountAsync(NSessionPtr session) override;
 
         std::future<void> updateAccountAsync(
             NSessionPtr session,

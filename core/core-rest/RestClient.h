@@ -125,8 +125,11 @@ namespace Nakama {
 
         void authenticateRefresh(
             NSessionPtr session,
-            std::function<void(NSessionPtr)> successCallback = nullptr,
-            ErrorCallback errorCallback = nullptr) override;
+      const NStringMap& vars,
+      std::function<void(NSessionPtr)> successCallback,
+      ErrorCallback errorCallback) override;
+
+  void sessionLogout(NSessionPtr session, std::function<void()> successCallback, ErrorCallback errorCallback) override;
 
         void linkFacebook(
             NSessionPtr session,
@@ -266,6 +269,8 @@ namespace Nakama {
             std::function<void(const NAccount&)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr
         ) override;
+
+  void deleteAccount(NSessionPtr session, std::function<void()> successCallback, ErrorCallback errorCallback) override;
 
         void updateAccount(
             NSessionPtr session,

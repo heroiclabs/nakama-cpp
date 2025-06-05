@@ -146,11 +146,17 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
 
 #if __ANDROID__
     CACertificateData* data = Nakama::getCaCertificates();
+  if (data == NULL) {
+    // Has System.loadLibrary("nakama-sdk") been called?
+    NLOG(Nakama::NLogLevel::Error, "error obtaining CA Certificates.");
+    return;
+  } else {
     struct curl_blob blob;
     blob.data = reinterpret_cast<char*>(data->data);
     blob.len = data->len;
     blob.flags = CURL_BLOB_COPY;
     curl_easy_setopt(curl_easy.get(), CURLOPT_CAINFO_BLOB, &blob);
+  }
 #endif
 
     curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_WRITEFUNCTION, write_callback);
@@ -210,7 +216,8 @@ void NHttpClientLibCurl::tick()
 {
     std::unique_lock lock(_mutex, std::try_to_lock);
     if (!lock.owns_lock()) {
-        return; // return immediately, tick() is expected to get called again. no reason to make tick block.
+	    return; // return immediately, tick() is expected to get called again. no reason to make tick block.
+            	// reason to make tick block.
     }
 
     int running_handles = 0;

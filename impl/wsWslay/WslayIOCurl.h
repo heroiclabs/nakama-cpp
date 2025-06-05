@@ -50,11 +50,17 @@ class WslayIOCurl : public WslayIOInterface {
 
     #if __ANDROID__
             CACertificateData* data = Nakama::getCaCertificates();
-            struct curl_blob blob;
-            blob.data = reinterpret_cast<char*>(data->data);
-            blob.len = data->len;
-            blob.flags = CURL_BLOB_COPY;
-            curl_easy_setopt(_curl.get(), CURLOPT_CAINFO_BLOB, &blob);
+    if (data == nullptr) {
+      // Has System.loadLibrary("nakama-sdk") been called?
+      NLOG(Nakama::NLogLevel::Error, "libcurl error: could not access CA Certificates.");
+      return NetIOAsyncResult::ERR;
+    } else {
+      struct curl_blob blob;
+      blob.data = reinterpret_cast<char*>(data->data);
+      blob.len = data->len;
+      blob.flags = CURL_BLOB_COPY;
+      curl_easy_setopt(_curl.get(), CURLOPT_CAINFO_BLOB, &blob);
+    }
     #endif
 
             // only way to do async connect is via curl_multi interface

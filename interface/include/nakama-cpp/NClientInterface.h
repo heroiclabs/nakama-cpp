@@ -267,16 +267,26 @@ NAKAMA_NAMESPACE_BEGIN
         **/
         virtual void authenticateRefresh(
             NSessionPtr session,
+      const NStringMap& vars = {},
             std::function<void(NSessionPtr)> successCallback = nullptr,
             ErrorCallback errorCallback = nullptr) = 0;
 
         /**
-         * Link a Facebook profile to a user account.
-         *
-         * @param session The session of the user.
-         * @param accessToken An OAuth access token from the Facebook SDK.
-         * @param importFriends True if the Facebook friends should be imported.
-         */
+   * Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
+   * @param session The session of the user to log out.
+   **/
+  virtual void sessionLogout(
+      NSessionPtr session,
+      std::function<void()> successCallback = nullptr,
+      ErrorCallback errorCallback = nullptr) = 0;
+
+  /**
+   * Link a Facebook profile to a user account.
+   *
+   * @param session The session of the user.
+   * @param accessToken An OAuth access token from the Facebook SDK.
+   * @param importFriends True if the Facebook friends should be imported.
+   */
         virtual void linkFacebook(
             NSessionPtr session,
             const std::string& accessToken,
@@ -533,17 +543,27 @@ NAKAMA_NAMESPACE_BEGIN
             ErrorCallback errorCallback = nullptr
         ) = 0;
 
-        /**
-         * Update the current user's account on the server.
+  /**
+   * Delete the user account owned by the session.
          *
-         * @param session The session for the user.
-         * @param username The new username for the user.
-         * @param displayName A new display name for the user.
-         * @param avatarUrl A new avatar url for the user.
-         * @param langTag A new language tag in BCP-47 format for the user.
-         * @param location A new location for the user.
-         * @param timezone New timezone information for the user.
-         */
+   * @param session The session of the user.
+   */
+  virtual void deleteAccount(
+      NSessionPtr session,
+      std::function<void()> successCallback = nullptr,
+      ErrorCallback errorCallback = nullptr) = 0;
+
+  /**
+   * Update the current user's account on the server.
+   *
+   * @param session The session for the user.
+   * @param username The new username for the user.
+   * @param displayName A new display name for the user.
+   * @param avatarUrl A new avatar url for the user.
+   * @param langTag A new language tag in BCP-47 format for the user.
+   * @param location A new location for the user.
+   * @param timezone New timezone information for the user.
+   */
         virtual void updateAccount(
             NSessionPtr session,
             const opt::optional<std::string>& username    = opt::nullopt,
@@ -1325,15 +1345,21 @@ NAKAMA_NAMESPACE_BEGIN
          * Refresh a user's session using a refresh token retrieved from a previous authentication request.
          * @param session The session of the user.
         **/
-        virtual std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session) = 0;
+  virtual std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session, const NStringMap& vars = {}) = 0;
 
         /**
-         * Link a Facebook profile to a user account.
-         *
-         * @param session The session of the user.
-         * @param accessToken An OAuth access token from the Facebook SDK.
-         * @param importFriends True if the Facebook friends should be imported.
-         */
+   * Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user.
+   * @param session The session of the user to log out.
+   **/
+  virtual std::future<void> sessionLogoutAsync(NSessionPtr session) = 0;
+
+  /**
+   * Link a Facebook profile to a user account.
+   *
+   * @param session The session of the user.
+   * @param accessToken An OAuth access token from the Facebook SDK.
+   * @param importFriends True if the Facebook friends should be imported.
+   */
         virtual std::future<void> linkFacebookAsync(
             NSessionPtr session,
             const std::string& accessToken,
@@ -1555,16 +1581,23 @@ NAKAMA_NAMESPACE_BEGIN
         ) = 0;
 
         /**
-         * Update the current user's account on the server.
-         *
-         * @param session The session for the user.
-         * @param username The new username for the user.
-         * @param displayName A new display name for the user.
-         * @param avatarUrl A new avatar url for the user.
-         * @param langTag A new language tag in BCP-47 format for the user.
-         * @param location A new location for the user.
-         * @param timezone New timezone information for the user.
-         */
+   * Delete the user account owned by the session.
+   *
+   * @param session The session of the user.
+   */
+  virtual std::future<void> deleteAccountAsync(NSessionPtr session) = 0;
+
+  /**
+   * Update the current user's account on the server.
+   *
+   * @param session The session for the user.
+   * @param username The new username for the user.
+   * @param displayName A new display name for the user.
+   * @param avatarUrl A new avatar url for the user.
+   * @param langTag A new language tag in BCP-47 format for the user.
+   * @param location A new location for the user.
+   * @param timezone New timezone information for the user.
+   */
         virtual std::future<void> updateAccountAsync(
             NSessionPtr session,
             const opt::optional<std::string>& username    = opt::nullopt,
