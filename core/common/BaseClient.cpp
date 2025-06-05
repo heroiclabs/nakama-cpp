@@ -165,11 +165,21 @@ std::future<NSessionPtr> BaseClient::authenticateSteamAsync(
   return promise->get_future();
 }
 
-std::future<NSessionPtr> BaseClient::authenticateRefreshAsync(NSessionPtr session) {
+std::future<NSessionPtr> BaseClient::authenticateRefreshAsync(NSessionPtr session, const NStringMap& vars) {
   auto promise = std::make_shared<std::promise<NSessionPtr>>();
 
   authenticateRefresh(
-      session, [=](NSessionPtr session) { promise->set_value(session); },
+      session, vars, [=](NSessionPtr session) { promise->set_value(session); },
+      [=](const NError& error) { promise->set_exception(std::make_exception_ptr<NException>(error)); });
+
+  return promise->get_future();
+}
+
+std::future<void> BaseClient::sessionLogoutAsync(NSessionPtr session) {
+  auto promise = std::make_shared<std::promise<void>>();
+
+  sessionLogout(
+      session, [=]() { promise->set_value(); },
       [=](const NError& error) { promise->set_exception(std::make_exception_ptr<NException>(error)); });
 
   return promise->get_future();
@@ -372,6 +382,16 @@ std::future<NAccount> BaseClient::getAccountAsync(NSessionPtr session) {
 
   getAccount(
       session, [=](const NAccount& account) { promise->set_value(account); },
+      [=](const NError& error) { promise->set_exception(std::make_exception_ptr<NException>(error)); });
+
+  return promise->get_future();
+}
+
+std::future<void> BaseClient::deleteAccountAsync(NSessionPtr session) {
+  auto promise = std::make_shared<std::promise<void>>();
+
+  deleteAccount(
+      session, [=]() { promise->set_value(); },
       [=](const NError& error) { promise->set_exception(std::make_exception_ptr<NException>(error)); });
 
   return promise->get_future();

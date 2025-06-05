@@ -140,11 +140,17 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
 
 #if __ANDROID__
   CACertificateData* data = Nakama::getCaCertificates();
-  struct curl_blob blob;
-  blob.data = reinterpret_cast<char*>(data->data);
-  blob.len = data->len;
-  blob.flags = CURL_BLOB_COPY;
-  curl_easy_setopt(curl_easy.get(), CURLOPT_CAINFO_BLOB, &blob);
+  if (data == NULL) {
+    // Has System.loadLibrary("nakama-sdk") been called?
+    NLOG(Nakama::NLogLevel::Error, "error obtaining CA Certificates.");
+    return;
+  } else {
+    struct curl_blob blob;
+    blob.data = reinterpret_cast<char*>(data->data);
+    blob.len = data->len;
+    blob.flags = CURL_BLOB_COPY;
+    curl_easy_setopt(curl_easy.get(), CURLOPT_CAINFO_BLOB, &blob);
+  }
 #endif
 
   curl_code = curl_easy_setopt(curl_easy.get(), CURLOPT_WRITEFUNCTION, write_callback);
@@ -199,8 +205,7 @@ void NHttpClientLibCurl::setTimeout(std::chrono::milliseconds timeout) { _timeou
 void NHttpClientLibCurl::tick() {
   std::unique_lock lock(_mutex, std::try_to_lock);
   if (!lock.owns_lock()) {
-    return; // return immediately, tick() is expected to get called again. no
-            // reason to make tick block.
+    return; // return immediately, tick() is expected to get called again. no reason to make tick block.
   }
 
   int running_handles = 0;
@@ -223,8 +228,7 @@ void NHttpClientLibCurl::tick() {
 
     if (m && (m->msg == CURLMSG_DONE)) {
       lock.lock();
-      result = m->data.result; // cache here because when we remove the easy
-                               // handle, m is invalidated.
+      result = m->data.result; // cache here because when we remove the easy handle, m is invalidated.
       CURL* e = m->easy_handle;
       long response_code;
       CURLcode curl_code = curl_easy_getinfo(e, CURLINFO_RESPONSE_CODE, &response_code);
@@ -265,9 +269,7 @@ void NHttpClientLibCurl::tick() {
 
           if (curl_code != CURLE_OK) {
             NLOG(
-                Nakama::NLogLevel::Error,
-                "curl_easy_getinfo() failed when getting response code, code "
-                "%d.\n",
+                Nakama::NLogLevel::Error, "curl_easy_getinfo() failed when getting response code, code %d.\n",
                 (int)curl_code);
           }
         }
