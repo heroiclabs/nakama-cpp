@@ -92,7 +92,9 @@ public:
       bool create = false,
       const NStringMap& vars = {}) override;
 
-  std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session) override;
+  std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session, const NStringMap& vars = {}) override;
+
+  std::future<void> sessionLogoutAsync(NSessionPtr session) override;
 
   std::future<void> linkFacebookAsync(
       NSessionPtr session,
@@ -150,6 +152,8 @@ public:
       const opt::optional<bool>& reset = opt::nullopt) override;
 
   std::future<NAccount> getAccountAsync(NSessionPtr session) override;
+
+  std::future<void> deleteAccountAsync(NSessionPtr session) override;
 
   std::future<void> updateAccountAsync(
       NSessionPtr session,
