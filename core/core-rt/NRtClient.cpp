@@ -1088,7 +1088,7 @@ std::future<NChannelPtr> NRtClient::joinChatAsync(
 }
 
 std::future<void> NRtClient::leaveChatAsync(const std::string& channelId) {
-  leaveChatAsync(channelId);
+  leaveChat(channelId);
   auto promise = std::make_shared<std::promise<void>>();
   promise->set_value();
   return promise->get_future();
@@ -1215,7 +1215,7 @@ std::future<void> NRtClient::unfollowUsersAsync(const std::vector<std::string>& 
 }
 
 std::future<void> NRtClient::updateStatusAsync(const std::string& status) {
-  updateStatusAsync(status);
+  updateStatus(status);
   auto promise = std::make_shared<std::promise<void>>();
   promise->set_value();
   return promise->get_future();
