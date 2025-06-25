@@ -101,7 +101,7 @@ void NHttpClientLibHC::setBaseUri(const std::string& uri) { m_baseUri = uri; }
 
 void NHttpClientLibHC::setTimeout(std::chrono::milliseconds timeout) {
   m_timeout = timeout;
-  if (m_timeout >= std::chrono::seconds(0)) {
+  if (m_timeout >= std::chrono::milliseconds(0)) {
     HRESULT hr =
         HCHttpCallRequestSetTimeout(nullptr, std::chrono::duration_cast<std::chrono::seconds>(m_timeout).count());
     if (FAILED(hr)) {
