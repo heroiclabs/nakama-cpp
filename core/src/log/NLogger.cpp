@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/log/NLogger.h"
-#include "nakama-cpp/log/NConsoleLogSink.h"
+#include <nakama-cpp/log/NLogger.h>
+#include <nakama-cpp/log/NConsoleLogSink.h>
 
 namespace Nakama {
 

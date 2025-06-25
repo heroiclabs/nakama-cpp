@@ -19,6 +19,8 @@ option(WITH_GRPC_CLIENT "Build gRPC Client" OFF)
 
 option(BUILD_TESTING "Build tests" OFF)
 
+option(RTTI "Enable RTTI on classes which could be inherited by app" ON)
+
 if (WITH_WS_WSLAY)
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
 endif()
