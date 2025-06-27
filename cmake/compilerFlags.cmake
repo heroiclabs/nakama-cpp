@@ -6,10 +6,10 @@
 # set -Os flag in release builds to get smaller binaries
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS_RELEASE "-Os -DNDEBUG")
-endif()
+endif ()
 if (CMAKE_C_COMPILER_ID STREQUAL "GNU" OR CMAKE_C_COMPILER_ID STREQUAL "Clang")
     set(CMAKE_C_FLAGS_RELEASE "-Os -DNDEBUG")
-endif()
+endif ()
 
 # These embed pdb data into object files, speeds up compilation by avoiding filesystem locking on shared pdb file
 string(REPLACE "/Zi" "/Z7" CMAKE_C_FLAGS_DEBUG_INIT "${CMAKE_C_FLAGS_DEBUG_INIT}")
@@ -43,13 +43,13 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
 
 if (NOT CMAKE_BUILD_TYPE STREQUAL Debug)
-	set(CMAKE_INTERPROCEDURAL_OPTIMIZATION FALSE)
-endif()
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION FALSE)
+endif ()
 
 if (NOT MSVC)
     string(APPEND CMAKE_C_FLAGS " -ffunction-sections -fdata-sections -g")
     string(APPEND CMAKE_CXX_FLAGS " -ffunction-sections -fdata-sections -g")
-else()
+else ()
     string(APPEND CMAKE_C_FLAGS " /Gw /Gy")
     string(APPEND CMAKE_CXX_FLAGS " /Gw /Gy")
-endif()
+endif ()
