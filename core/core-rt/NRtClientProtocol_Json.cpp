@@ -19,20 +19,18 @@
 
 namespace Nakama {
 
-bool NRtClientProtocol_Json::serialize(const google::protobuf::Message& message, NBytes& output)
-{
-    auto status = google::protobuf::util::MessageToJsonString(message, &output);
+bool NRtClientProtocol_Json::serialize(const google::protobuf::Message& message, NBytes& output) {
+  auto status = google::protobuf::util::MessageToJsonString(message, &output);
 
-    return status.ok();
+  return status.ok();
 }
 
-bool NRtClientProtocol_Json::parse(const NBytes& input, google::protobuf::Message& message)
-{
-    google::protobuf::util::JsonParseOptions options;
-    options.ignore_unknown_fields = true;
-    auto status = google::protobuf::util::JsonStringToMessage(input, &message, options);
+bool NRtClientProtocol_Json::parse(const NBytes& input, google::protobuf::Message& message) {
+  google::protobuf::util::JsonParseOptions options;
+  options.ignore_unknown_fields = true;
+  auto status = google::protobuf::util::JsonStringToMessage(input, &message, options);
 
-    return status.ok();
+  return status.ok();
 }
 
-}
+} // namespace Nakama

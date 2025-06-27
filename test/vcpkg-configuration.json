@@ -1,17 +1,19 @@
 {
-    "registries":
-    [
-        {
-            "kind": "builtin",
-            "baseline": "4cb4a5c5ddcb9de0c83c85837ee6974c8333f032",
-            "packages": []
-        },
-        {
-            "kind": "git",
-            "repository": "https://github.com/heroiclabs/nakama-vcpkg-registry",
-            "baseline": "d6557f2635c62879dd58a7719cbfc917c10d42ff",
-            "reference": "master",
-            "packages": ["nakama-sdk", "wslay"]
-        }
-    ]
+  "registries": [
+    {
+      "kind": "builtin",
+      "baseline": "4cb4a5c5ddcb9de0c83c85837ee6974c8333f032",
+      "packages": []
+    },
+    {
+      "kind": "git",
+      "repository": "https://github.com/heroiclabs/nakama-vcpkg-registry",
+      "baseline": "d6557f2635c62879dd58a7719cbfc917c10d42ff",
+      "reference": "master",
+      "packages": [
+        "nakama-sdk",
+        "wslay"
+      ]
+    }
+  ]
 }

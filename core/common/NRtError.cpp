@@ -18,49 +18,54 @@
 
 namespace Nakama {
 
-    const char* toString(RtErrorCode code)
-    {
-        switch (code)
-        {
-        case Nakama::RtErrorCode::CONNECT_ERROR             : return "CONNECT_ERROR";
-        case Nakama::RtErrorCode::TRANSPORT_ERROR           : return "TRANSPORT_ERROR";
-        case Nakama::RtErrorCode::DISCONNECTED              : return "DISCONNECTED";
-        case Nakama::RtErrorCode::RUNTIME_EXCEPTION         : return "RUNTIME_EXCEPTION";
-        case Nakama::RtErrorCode::UNRECOGNIZED_PAYLOAD      : return "UNRECOGNIZED_PAYLOAD";
-        case Nakama::RtErrorCode::MISSING_PAYLOAD           : return "MISSING_PAYLOAD";
-        case Nakama::RtErrorCode::BAD_INPUT                 : return "BAD_INPUT";
-        case Nakama::RtErrorCode::MATCH_NOT_FOUND           : return "MATCH_NOT_FOUND";
-        case Nakama::RtErrorCode::MATCH_JOIN_REJECTED       : return "MATCH_JOIN_REJECTED";
-        case Nakama::RtErrorCode::RUNTIME_FUNCTION_NOT_FOUND: return "RUNTIME_FUNCTION_NOT_FOUND";
-        case Nakama::RtErrorCode::RUNTIME_FUNCTION_EXCEPTION: return "RUNTIME_FUNCTION_EXCEPTION";
-        default:
-            break;
-        }
+const char* toString(RtErrorCode code) {
+  switch (code) {
+    case Nakama::RtErrorCode::CONNECT_ERROR:
+      return "CONNECT_ERROR";
+    case Nakama::RtErrorCode::TRANSPORT_ERROR:
+      return "TRANSPORT_ERROR";
+    case Nakama::RtErrorCode::DISCONNECTED:
+      return "DISCONNECTED";
+    case Nakama::RtErrorCode::RUNTIME_EXCEPTION:
+      return "RUNTIME_EXCEPTION";
+    case Nakama::RtErrorCode::UNRECOGNIZED_PAYLOAD:
+      return "UNRECOGNIZED_PAYLOAD";
+    case Nakama::RtErrorCode::MISSING_PAYLOAD:
+      return "MISSING_PAYLOAD";
+    case Nakama::RtErrorCode::BAD_INPUT:
+      return "BAD_INPUT";
+    case Nakama::RtErrorCode::MATCH_NOT_FOUND:
+      return "MATCH_NOT_FOUND";
+    case Nakama::RtErrorCode::MATCH_JOIN_REJECTED:
+      return "MATCH_JOIN_REJECTED";
+    case Nakama::RtErrorCode::RUNTIME_FUNCTION_NOT_FOUND:
+      return "RUNTIME_FUNCTION_NOT_FOUND";
+    case Nakama::RtErrorCode::RUNTIME_FUNCTION_EXCEPTION:
+      return "RUNTIME_FUNCTION_EXCEPTION";
+    default:
+      break;
+  }
 
-        return "Unknown";
-    }
-
-    std::string toString(const NRtError & error)
-    {
-        std::string str;
-
-        str.append("NRtError: ").append(toString(error.code));
-
-        if (!error.message.empty())
-        {
-            str.append("\n").append(error.message);
-        }
-
-        if (!error.context.empty())
-        {
-            str.append("\nContext:");
-
-            for (auto it : error.context)
-            {
-                str.append("\n").append(it.first).append("=").append(it.second);
-            }
-        }
-
-        return str;
-    }
+  return "Unknown";
 }
+
+std::string toString(const NRtError& error) {
+  std::string str;
+
+  str.append("NRtError: ").append(toString(error.code));
+
+  if (!error.message.empty()) {
+    str.append("\n").append(error.message);
+  }
+
+  if (!error.context.empty()) {
+    str.append("\nContext:");
+
+    for (auto it : error.context) {
+      str.append("\n").append(it.first).append("=").append(it.second);
+    }
+  }
+
+  return str;
+}
+} // namespace Nakama
