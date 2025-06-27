@@ -246,7 +246,7 @@ if (WITH_HTTP_CURL OR (WITH_WS_WSLAY AND CFG_WSLAY_CURL_IO))
     target_link_libraries(nakama-sdk PRIVATE CURL::libcurl)
 endif()
 
-if (APPLE AND BUILD_APPLE_FRAMEWORK)
+if (APPLE)
     set_target_properties(nakama-sdk PROPERTIES
             FRAMEWORK TRUE
             FRAMEWORK_VERSION A
@@ -254,13 +254,11 @@ if (APPLE AND BUILD_APPLE_FRAMEWORK)
             # we deliberately dont list all real headers, because it is a can of worms. See:
             # - https://gitlab.kitware.com/cmake/cmake/-/issues/16739
             # - https://gitlab.kitware.com/cmake/cmake/-/issues/22760
+
             MACOSX_FRAMEWORK_IDENTIFIER com.heroiclabs.libnakama
             MACOSX_FRAMEWORK_BUNDLE_VERSION ${LIBNAKAMA_VERSION}
             MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
     )
-elseif (APPLE)
-    set_target_properties(nakama-sdk PROPERTIES
-    FRAMEWORK FALSE)
 endif()
 
 if (BUILD_TESTING)
