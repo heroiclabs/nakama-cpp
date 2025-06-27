@@ -11,5 +11,5 @@ build-win-x64 config="MinSizeRel":
 
 build-ios-arm64 config="MinSizeRel":
   rm -rf out/ios-arm64
-  cmake --preset=ios-arm64
+  cmake --preset=ios-arm64 -DBUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF
   cmake --build build/ios-arm64 --target install --config {{config}} --verbose
