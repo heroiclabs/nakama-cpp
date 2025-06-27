@@ -24,10 +24,16 @@ file(
 
 add_library(nakama-sdk-core-misc OBJECT ${_source_list})
 add_library(nakama::sdk-core-misc ALIAS nakama-sdk-core-misc)
+target_link_libraries(nakama-sdk-core-misc PRIVATE nakama::sdk-interface)
 
-target_link_libraries(nakama-sdk-core-misc
-        PUBLIC nakama::sdk-interface
-)
+if (RTTI)
+    # enable RTTI flag only on sources with classes inheritable by app
+    if (NOT MSVC)
+        target_compile_options(nakama-sdk-core-misc PRIVATE "-frtti")
+    else()
+        target_compile_options(nakama-sdk-core-misc PRIVATE "/GR")
+    endif()
+endif()
 
 if (ANDROID)
     target_link_libraries(nakama-sdk-core-misc PRIVATE log)
