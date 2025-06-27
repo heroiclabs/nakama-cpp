@@ -59,7 +59,6 @@ set(CMAKE_SUPPRESS_REGENERATION true) ## for Xcode
 # By default, assume user will not obtain optional-lite via third party mechanism.
 option(DISTRIBUTE_OPTIONAL_LITE "Distribute optional lite with the Nakama client." ON)
 option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
-option(BUILD_APPLE_FRAMEWORK "Build frameworks instead of .dylib files for Apple." ON)
 
 set(NAKAMA_SDK_DEPS)
 
@@ -100,7 +99,7 @@ endif()
 
 add_compile_definitions(NAKAMA_SHARED_LIBRARY_EXPORTS)
 
-if(APPLE AND BUILD_APPLE_FRAMEWORK)
+if(APPLE)
     # Just copy over headers into framework dir, because "official" way of doing it
     # via PUBLIC_HEADER property is full of bugs (see comment on PUBLIC_HEADER property below)
     set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_LIBDIR}/nakama-sdk.framework/Headers)
