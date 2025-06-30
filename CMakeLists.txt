@@ -21,6 +21,22 @@ option(BUILD_TESTING "Build tests" OFF)
 
 option(RTTI "Enable RTTI on classes which could be inherited by app" ON)
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Android" AND DEFINED ANDROID_ABI)
+    # We are called from gradle. Do what normally CMakePresets do and
+    # select appropriate triplet, override toolchain file, etc.
+    string(REPLACE "_" "-" ANDROID_ABI_TRIPLET ${ANDROID_ABI})
+    set(VCPKG_TARGET_TRIPLET "${ANDROID_ABI_TRIPLET}-android-heroic")
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+    set(VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_LIST_DIR}/cmake/vcpkg-ports")
+    set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_LIST_DIR}/cmake/triplets")
+    # This env var is used by vcpkg's android toolchain
+    set(ENV{ANDROID_NDK_HOME} "${ANDROID_NDK}")
+
+    set(WITH_HTTP_CURL ON)
+    set(WITH_WS_WSLAY ON)
+endif()
+
+
 if (WITH_WS_WSLAY)
     list(APPEND VCPKG_MANIFEST_FEATURES "wslay")
 endif()
@@ -254,7 +270,6 @@ if (APPLE)
             # we deliberately dont list all real headers, because it is a can of worms. See:
             # - https://gitlab.kitware.com/cmake/cmake/-/issues/16739
             # - https://gitlab.kitware.com/cmake/cmake/-/issues/22760
-
             MACOSX_FRAMEWORK_IDENTIFIER com.heroiclabs.libnakama
             MACOSX_FRAMEWORK_BUNDLE_VERSION ${LIBNAKAMA_VERSION}
             MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
