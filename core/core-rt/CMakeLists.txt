@@ -14,6 +14,7 @@ target_link_libraries(nakama-sdk-core-rt
         nakama::sdk-interface
         nakama::api-proto
         nakama::sdk-core-common
+        protobuf::libprotobuf
         PRIVATE
         nakama::sdk-rtclient-factory  # because of BaseClient.cpp
 )

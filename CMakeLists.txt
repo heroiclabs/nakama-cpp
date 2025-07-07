@@ -134,7 +134,10 @@ if(WITH_HTTP_LIBHTTPC OR WITH_WS_LIBHTTPC)
     endif()
 endif()
 
-find_package(optional-lite CONFIG REQUIRED)
+# unconditional
+find_package(RapidJSON CONFIG REQUIRED)
+
+
 # SDK API
 add_subdirectory(interface)
 

@@ -1,9 +1,6 @@
 set(NAKAMA_GIT_TAG "master" CACHE STRING "nakama Git tag to fetch Proto files from")
 set(NAKAMA_COMMON_GIT_TAG "master" CACHE STRING "nakama-common Git tag to fetch Proto files from")
 
-# unconditional
-find_package(RapidJSON CONFIG REQUIRED)
-
 # unconditional, because core-rt is always built and it uses nakama-api-proto
 # TODO: split buildProtoFiles into grpc and api-proto
 find_package(Protobuf CONFIG REQUIRED)
