@@ -16,9 +16,6 @@
 
 #include <android/log.h>
 #include <jni.h>
-#include <memory.h>
-#include <string.h>
-#include "nakama-cpp/log/NLogger.h"
 #include "AndroidCA.h"
 
 /*
@@ -85,7 +82,7 @@ extern "C"
         jbyteArray certificatesArray = (jbyteArray)env->CallStaticObjectMethod(cls, mid);
         if (certificatesArray == NULL)
         {
-            NLOG_ERROR("Failed to call method getCaCertificates in class com/heroiclabs/nakamasdk/AndroidCA");
+            __android_log_print(ANDROID_LOG_ERROR, "nakama", "Failed to call method getCaCertificates in class com/heroiclabs/nakamasdk/AndroidCA");
             return JNI_ERR;
         }
 
@@ -110,8 +107,9 @@ extern "C"
     {
         if (_certData != nullptr)
         {
-            free(_certData->data);
-            free(_certData);
+            delete(_certData->data);
+            delete(_certData);
+            _certData = nullptr;
         }
     }
 }
