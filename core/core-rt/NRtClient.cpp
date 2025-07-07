@@ -355,8 +355,8 @@ void NRtClient::onTransportMessage(const NBytes& data) {
 void NRtClient::joinChat(
     const std::string& target,
     NChannelType type,
-    const opt::optional<bool>& persistence,
-    const opt::optional<bool>& hidden,
+    const std::optional<bool>& persistence,
+    const std::optional<bool>& hidden,
     std::function<void(NChannelPtr)> successCallback,
     RtErrorCallback errorCallback) {
   NLOG_INFO("...");
@@ -586,12 +586,12 @@ void NRtClient::leaveMatch(
 }
 
 void NRtClient::addMatchmaker(
-    const opt::optional<int32_t>& minCount,
-    const opt::optional<int32_t>& maxCount,
-    const opt::optional<std::string>& query,
+    const std::optional<int32_t>& minCount,
+    const std::optional<int32_t>& maxCount,
+    const std::optional<std::string>& query,
     const NStringMap& stringProperties,
     const NStringDoubleMap& numericProperties,
-    const opt::optional<int32_t>& countMultiple,
+    const std::optional<int32_t>& countMultiple,
     std::function<void(const NMatchmakerTicket&)> successCallback,
     RtErrorCallback errorCallback) {
   NLOG_INFO("...");
@@ -764,7 +764,7 @@ void NRtClient::updateStatus(
 
 void NRtClient::rpc(
     const std::string& id,
-    const opt::optional<std::string>& payload,
+    const std::optional<std::string>& payload,
     std::function<void(const NRpc&)> successCallback,
     RtErrorCallback errorCallback) {
   NLOG_INFO("...");
@@ -823,7 +823,7 @@ void NRtClient::addMatchmakerParty(
     int maxCount,
     const NStringMap& stringProperties,
     const NStringDoubleMap& numericProperties,
-    const opt::optional<int32_t>& countMultiple,
+    const std::optional<int32_t>& countMultiple,
     std::function<void(const NPartyMatchmakerTicket&)> successCallback,
     RtErrorCallback errorCallback) {
   NLOG_INFO("...");
@@ -1076,8 +1076,8 @@ void NRtClient::ping(std::function<void()> successCallback, RtErrorCallback erro
 std::future<NChannelPtr> NRtClient::joinChatAsync(
     const std::string& target,
     NChannelType type,
-    const opt::optional<bool>& persistence,
-    const opt::optional<bool>& hidden) {
+    const std::optional<bool>& persistence,
+    const std::optional<bool>& hidden) {
   auto promise = std::make_shared<std::promise<NChannelPtr>>();
 
   joinChat(
@@ -1163,12 +1163,12 @@ std::future<void> NRtClient::leaveMatchAsync(const std::string& matchId) {
 }
 
 std::future<NMatchmakerTicket> NRtClient::addMatchmakerAsync(
-    const opt::optional<int32_t>& minCount,
-    const opt::optional<int32_t>& maxCount,
-    const opt::optional<std::string>& query,
+    const std::optional<int32_t>& minCount,
+    const std::optional<int32_t>& maxCount,
+    const std::optional<std::string>& query,
     const NStringMap& stringProperties,
     const NStringDoubleMap& numericProperties,
-    const opt::optional<int32_t>& countMultiple) {
+    const std::optional<int32_t>& countMultiple) {
   auto promise = std::make_shared<std::promise<NMatchmakerTicket>>();
 
   addMatchmaker(
@@ -1221,7 +1221,7 @@ std::future<void> NRtClient::updateStatusAsync(const std::string& status) {
   return promise->get_future();
 }
 
-std::future<NRpc> NRtClient::rpcAsync(const std::string& id, const opt::optional<std::string>& payload) {
+std::future<NRpc> NRtClient::rpcAsync(const std::string& id, const std::optional<std::string>& payload) {
   auto promise = std::make_shared<std::promise<NRpc>>();
   std::cout << "rpc async";
 
@@ -1249,7 +1249,7 @@ std::future<NPartyMatchmakerTicket> NRtClient::addMatchmakerPartyAsync(
     int32_t maxCount,
     const NStringMap& stringProperties,
     const NStringDoubleMap& numericProperties,
-    const opt::optional<int32_t>& countMultiple) {
+    const std::optional<int32_t>& countMultiple) {
   auto promise = std::make_shared<std::promise<NPartyMatchmakerTicket>>();
 
   addMatchmakerParty(

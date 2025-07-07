@@ -120,8 +120,8 @@ public:
    */
   virtual void authenticateDevice(
       const std::string& id,
-      const opt::optional<std::string>& username = opt::nullopt,
-      const opt::optional<bool>& create = opt::nullopt,
+      const std::optional<std::string>& username = std::nullopt,
+      const std::optional<bool>& create = std::nullopt,
       const NStringMap& vars = {},
       std::function<void(NSessionPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
@@ -281,7 +281,7 @@ public:
   virtual void linkFacebook(
       NSessionPtr session,
       const std::string& accessToken,
-      const opt::optional<bool>& importFriends = opt::nullopt,
+      const std::optional<bool>& importFriends = std::nullopt,
       std::function<void()> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -502,7 +502,7 @@ public:
   virtual void importFacebookFriends(
       NSessionPtr session,
       const std::string& token,
-      const opt::optional<bool>& reset = opt::nullopt,
+      const std::optional<bool>& reset = std::nullopt,
       std::function<void()> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -539,12 +539,12 @@ public:
    */
   virtual void updateAccount(
       NSessionPtr session,
-      const opt::optional<std::string>& username = opt::nullopt,
-      const opt::optional<std::string>& displayName = opt::nullopt,
-      const opt::optional<std::string>& avatarUrl = opt::nullopt,
-      const opt::optional<std::string>& langTag = opt::nullopt,
-      const opt::optional<std::string>& location = opt::nullopt,
-      const opt::optional<std::string>& timezone = opt::nullopt,
+      const std::optional<std::string>& username = std::nullopt,
+      const std::optional<std::string>& displayName = std::nullopt,
+      const std::optional<std::string>& avatarUrl = std::nullopt,
+      const std::optional<std::string>& langTag = std::nullopt,
+      const std::optional<std::string>& location = std::nullopt,
+      const std::optional<std::string>& timezone = std::nullopt,
       std::function<void()> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -616,8 +616,8 @@ public:
    */
   virtual void listFriends(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NFriend::State>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NFriend::State>& state,
       const std::string& cursor = "",
       std::function<void(NFriendListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
@@ -640,7 +640,7 @@ public:
       const std::string& avatarUrl = "",
       const std::string& langTag = "",
       bool open = false,
-      const opt::optional<int32_t>& maxCount = {},
+      const std::optional<int32_t>& maxCount = {},
       std::function<void(const NGroup&)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -682,8 +682,8 @@ public:
   virtual void listGroupUsers(
       NSessionPtr session,
       const std::string& groupId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor = "",
       std::function<void(NGroupUserListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
@@ -752,8 +752,8 @@ public:
    */
   virtual void listUserGroups(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor = "",
       std::function<void(NUserGroupListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
@@ -770,8 +770,8 @@ public:
   virtual void listUserGroups(
       NSessionPtr session,
       const std::string& userId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor = "",
       std::function<void(NUserGroupListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
@@ -820,11 +820,11 @@ public:
   virtual void updateGroup(
       NSessionPtr session,
       const std::string& groupId,
-      const opt::optional<std::string>& name = opt::nullopt,
-      const opt::optional<std::string>& description = opt::nullopt,
-      const opt::optional<std::string>& avatarUrl = opt::nullopt,
-      const opt::optional<std::string>& langTag = opt::nullopt,
-      const opt::optional<bool>& open = opt::nullopt,
+      const std::optional<std::string>& name = std::nullopt,
+      const std::optional<std::string>& description = std::nullopt,
+      const std::optional<std::string>& avatarUrl = std::nullopt,
+      const std::optional<std::string>& langTag = std::nullopt,
+      const std::optional<bool>& open = std::nullopt,
       std::function<void()> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -841,8 +841,8 @@ public:
       NSessionPtr session,
       const std::string& leaderboardId,
       const std::vector<std::string>& ownerIds = {},
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt,
       std::function<void(NLeaderboardRecordListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -858,7 +858,7 @@ public:
       NSessionPtr session,
       const std::string& leaderboardId,
       const std::string& ownerId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
       std::function<void(NLeaderboardRecordListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -875,8 +875,8 @@ public:
       NSessionPtr session,
       const std::string& leaderboardId,
       std::int64_t score,
-      const opt::optional<std::int64_t>& subscore = opt::nullopt,
-      const opt::optional<std::string>& metadata = opt::nullopt,
+      const std::optional<std::int64_t>& subscore = std::nullopt,
+      const std::optional<std::string>& metadata = std::nullopt,
       std::function<void(NLeaderboardRecord)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -893,8 +893,8 @@ public:
       NSessionPtr session,
       const std::string& tournamentId,
       std::int64_t score,
-      const opt::optional<std::int64_t>& subscore = opt::nullopt,
-      const opt::optional<std::string>& metadata = opt::nullopt,
+      const std::optional<std::int64_t>& subscore = std::nullopt,
+      const std::optional<std::string>& metadata = std::nullopt,
       std::function<void(NLeaderboardRecord)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -922,12 +922,12 @@ public:
    */
   virtual void listMatches(
       NSessionPtr session,
-      const opt::optional<int32_t>& min_size = opt::nullopt,
-      const opt::optional<int32_t>& max_size = opt::nullopt,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& label = opt::nullopt,
-      const opt::optional<std::string>& query = opt::nullopt,
-      const opt::optional<bool>& authoritative = opt::nullopt,
+      const std::optional<int32_t>& min_size = std::nullopt,
+      const std::optional<int32_t>& max_size = std::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& label = std::nullopt,
+      const std::optional<std::string>& query = std::nullopt,
+      const std::optional<bool>& authoritative = std::nullopt,
       std::function<void(NMatchListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -940,8 +940,8 @@ public:
    */
   virtual void listNotifications(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cacheableCursor = opt::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cacheableCursor = std::nullopt,
       std::function<void(NNotificationListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -969,9 +969,9 @@ public:
   virtual void listChannelMessages(
       NSessionPtr session,
       const std::string& channelId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt,
-      const opt::optional<bool>& forward = opt::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt,
+      const std::optional<bool>& forward = std::nullopt,
       std::function<void(NChannelMessageListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -988,12 +988,12 @@ public:
    */
   virtual void listTournaments(
       NSessionPtr session,
-      const opt::optional<uint32_t>& categoryStart = opt::nullopt,
-      const opt::optional<uint32_t>& categoryEnd = opt::nullopt,
-      const opt::optional<uint32_t>& startTime = opt::nullopt,
-      const opt::optional<uint32_t>& endTime = opt::nullopt,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt,
+      const std::optional<uint32_t>& categoryStart = std::nullopt,
+      const std::optional<uint32_t>& categoryEnd = std::nullopt,
+      const std::optional<uint32_t>& startTime = std::nullopt,
+      const std::optional<uint32_t>& endTime = std::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt,
       std::function<void(NTournamentListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -1009,8 +1009,8 @@ public:
   virtual void listTournamentRecords(
       NSessionPtr session,
       const std::string& tournamentId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt,
       const std::vector<std::string>& ownerIds = {},
       std::function<void(NTournamentRecordListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
@@ -1027,7 +1027,7 @@ public:
       NSessionPtr session,
       const std::string& tournamentId,
       const std::string& ownerId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
       std::function<void(NTournamentRecordListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -1054,8 +1054,8 @@ public:
   virtual void listStorageObjects(
       NSessionPtr session,
       const std::string& collection,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt,
       std::function<void(NStorageObjectListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -1072,8 +1072,8 @@ public:
       NSessionPtr session,
       const std::string& collection,
       const std::string& userId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt,
       std::function<void(NStorageObjectListPtr)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -1123,7 +1123,7 @@ public:
   virtual void
   rpc(NSessionPtr session,
       const std::string& id,
-      const opt::optional<std::string>& payload = opt::nullopt,
+      const std::optional<std::string>& payload = std::nullopt,
       std::function<void(const NRpc&)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -1137,7 +1137,7 @@ public:
   virtual void
   rpc(const std::string& http_key,
       const std::string& id,
-      const opt::optional<std::string>& payload = opt::nullopt,
+      const std::optional<std::string>& payload = std::nullopt,
       std::function<void(const NRpc&)> successCallback = nullptr,
       ErrorCallback errorCallback = nullptr) = 0;
 
@@ -1151,8 +1151,8 @@ public:
    */
   virtual std::future<NSessionPtr> authenticateDeviceAsync(
       const std::string& id,
-      const opt::optional<std::string>& username = opt::nullopt,
-      const opt::optional<bool>& create = opt::nullopt,
+      const std::optional<std::string>& username = std::nullopt,
+      const std::optional<bool>& create = std::nullopt,
       const NStringMap& vars = {}) = 0;
 
   /**
@@ -1289,7 +1289,7 @@ public:
   virtual std::future<void> linkFacebookAsync(
       NSessionPtr session,
       const std::string& accessToken,
-      const opt::optional<bool>& importFriends = opt::nullopt) = 0;
+      const std::optional<bool>& importFriends = std::nullopt) = 0;
 
   /**
    * Link an email with password to the user account owned by the session.
@@ -1452,7 +1452,7 @@ public:
   virtual std::future<void> importFacebookFriendsAsync(
       NSessionPtr session,
       const std::string& token,
-      const opt::optional<bool>& reset = opt::nullopt) = 0;
+      const std::optional<bool>& reset = std::nullopt) = 0;
 
   /**
    * Fetch the user account owned by the session.
@@ -1481,12 +1481,12 @@ public:
    */
   virtual std::future<void> updateAccountAsync(
       NSessionPtr session,
-      const opt::optional<std::string>& username = opt::nullopt,
-      const opt::optional<std::string>& displayName = opt::nullopt,
-      const opt::optional<std::string>& avatarUrl = opt::nullopt,
-      const opt::optional<std::string>& langTag = opt::nullopt,
-      const opt::optional<std::string>& location = opt::nullopt,
-      const opt::optional<std::string>& timezone = opt::nullopt) = 0;
+      const std::optional<std::string>& username = std::nullopt,
+      const std::optional<std::string>& displayName = std::nullopt,
+      const std::optional<std::string>& avatarUrl = std::nullopt,
+      const std::optional<std::string>& langTag = std::nullopt,
+      const std::optional<std::string>& location = std::nullopt,
+      const std::optional<std::string>& timezone = std::nullopt) = 0;
 
   /**
    * Fetch one or more users by id, usernames, and Facebook ids.
@@ -1548,8 +1548,8 @@ public:
    */
   virtual std::future<NFriendListPtr> listFriendsAsync(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NFriend::State>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NFriend::State>& state,
       const std::string& cursor = "") = 0;
 
   /**
@@ -1570,7 +1570,7 @@ public:
       const std::string& avatarUrl = "",
       const std::string& langTag = "",
       bool open = false,
-      const opt::optional<int32_t>& maxCount = {}) = 0;
+      const std::optional<int32_t>& maxCount = {}) = 0;
 
   /**
    * Delete a group by id.
@@ -1602,8 +1602,8 @@ public:
   virtual std::future<NGroupUserListPtr> listGroupUsersAsync(
       NSessionPtr session,
       const std::string& groupId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor = "") = 0;
 
   /**
@@ -1653,8 +1653,8 @@ public:
    */
   virtual std::future<NUserGroupListPtr> listUserGroupsAsync(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor = "") = 0;
 
   /**
@@ -1669,8 +1669,8 @@ public:
   virtual std::future<NUserGroupListPtr> listUserGroupsAsync(
       NSessionPtr session,
       const std::string& userId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor = "") = 0;
 
   /**
@@ -1709,11 +1709,11 @@ public:
   virtual std::future<void> updateGroupAsync(
       NSessionPtr session,
       const std::string& groupId,
-      const opt::optional<std::string>& name = opt::nullopt,
-      const opt::optional<std::string>& description = opt::nullopt,
-      const opt::optional<std::string>& avatarUrl = opt::nullopt,
-      const opt::optional<std::string>& langTag = opt::nullopt,
-      const opt::optional<bool>& open = opt::nullopt) = 0;
+      const std::optional<std::string>& name = std::nullopt,
+      const std::optional<std::string>& description = std::nullopt,
+      const std::optional<std::string>& avatarUrl = std::nullopt,
+      const std::optional<std::string>& langTag = std::nullopt,
+      const std::optional<bool>& open = std::nullopt) = 0;
 
   /**
    * List records from a leaderboard.
@@ -1728,8 +1728,8 @@ public:
       NSessionPtr session,
       const std::string& leaderboardId,
       const std::vector<std::string>& ownerIds = {},
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt) = 0;
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt) = 0;
 
   /**
    * List leaderboard records from a given leaderboard around the owner.
@@ -1743,7 +1743,7 @@ public:
       NSessionPtr session,
       const std::string& leaderboardId,
       const std::string& ownerId,
-      const opt::optional<int32_t>& limit = opt::nullopt) = 0;
+      const std::optional<int32_t>& limit = std::nullopt) = 0;
 
   /**
    * Write a record to a leaderboard.
@@ -1758,8 +1758,8 @@ public:
       NSessionPtr session,
       const std::string& leaderboardId,
       std::int64_t score,
-      const opt::optional<std::int64_t>& subscore = opt::nullopt,
-      const opt::optional<std::string>& metadata = opt::nullopt) = 0;
+      const std::optional<std::int64_t>& subscore = std::nullopt,
+      const std::optional<std::string>& metadata = std::nullopt) = 0;
 
   /**
    * A request to submit a score to a tournament.
@@ -1774,8 +1774,8 @@ public:
       NSessionPtr session,
       const std::string& tournamentId,
       std::int64_t score,
-      const opt::optional<std::int64_t>& subscore = opt::nullopt,
-      const opt::optional<std::string>& metadata = opt::nullopt) = 0;
+      const std::optional<std::int64_t>& subscore = std::nullopt,
+      const std::optional<std::string>& metadata = std::nullopt) = 0;
 
   /**
    * Delete a leaderboard record.
@@ -1797,12 +1797,12 @@ public:
    */
   virtual std::future<NMatchListPtr> listMatchesAsync(
       NSessionPtr session,
-      const opt::optional<int32_t>& min_size = opt::nullopt,
-      const opt::optional<int32_t>& max_size = opt::nullopt,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& label = opt::nullopt,
-      const opt::optional<std::string>& query = opt::nullopt,
-      const opt::optional<bool>& authoritative = opt::nullopt) = 0;
+      const std::optional<int32_t>& min_size = std::nullopt,
+      const std::optional<int32_t>& max_size = std::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& label = std::nullopt,
+      const std::optional<std::string>& query = std::nullopt,
+      const std::optional<bool>& authoritative = std::nullopt) = 0;
 
   /**
    * List notifications for the user with an optional cursor.
@@ -1813,8 +1813,8 @@ public:
    */
   virtual std::future<NNotificationListPtr> listNotificationsAsync(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cacheableCursor = opt::nullopt) = 0;
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cacheableCursor = std::nullopt) = 0;
 
   /**
    * Delete one or more notifications by id.
@@ -1837,9 +1837,9 @@ public:
   virtual std::future<NChannelMessageListPtr> listChannelMessagesAsync(
       NSessionPtr session,
       const std::string& channelId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt,
-      const opt::optional<bool>& forward = opt::nullopt) = 0;
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt,
+      const std::optional<bool>& forward = std::nullopt) = 0;
 
   /**
    * List active/upcoming tournaments based on given filters.
@@ -1854,12 +1854,12 @@ public:
    */
   virtual std::future<NTournamentListPtr> listTournamentsAsync(
       NSessionPtr session,
-      const opt::optional<uint32_t>& categoryStart = opt::nullopt,
-      const opt::optional<uint32_t>& categoryEnd = opt::nullopt,
-      const opt::optional<uint32_t>& startTime = opt::nullopt,
-      const opt::optional<uint32_t>& endTime = opt::nullopt,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt) = 0;
+      const std::optional<uint32_t>& categoryStart = std::nullopt,
+      const std::optional<uint32_t>& categoryEnd = std::nullopt,
+      const std::optional<uint32_t>& startTime = std::nullopt,
+      const std::optional<uint32_t>& endTime = std::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt) = 0;
 
   /**
    * List tournament records from a given tournament.
@@ -1873,8 +1873,8 @@ public:
   virtual std::future<NTournamentRecordListPtr> listTournamentRecordsAsync(
       NSessionPtr session,
       const std::string& tournamentId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt,
       const std::vector<std::string>& ownerIds = {}) = 0;
 
   /**
@@ -1889,7 +1889,7 @@ public:
       NSessionPtr session,
       const std::string& tournamentId,
       const std::string& ownerId,
-      const opt::optional<int32_t>& limit = opt::nullopt) = 0;
+      const std::optional<int32_t>& limit = std::nullopt) = 0;
 
   /**
    * Join a tournament if it has open membership or request to join it.
@@ -1910,8 +1910,8 @@ public:
   virtual std::future<NStorageObjectListPtr> listStorageObjectsAsync(
       NSessionPtr session,
       const std::string& collection,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt) = 0;
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt) = 0;
 
   /**
    * List storage objects in a collection which belong to a specific user and have public read access.
@@ -1926,8 +1926,8 @@ public:
       NSessionPtr session,
       const std::string& collection,
       const std::string& userId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt) = 0;
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt) = 0;
 
   /**
    * Write objects to the storage engine.
@@ -1964,7 +1964,7 @@ public:
    * @param payload The payload to send with the function call.
    */
   virtual std::future<NRpc>
-  rpcAsync(NSessionPtr session, const std::string& id, const opt::optional<std::string>& payload = opt::nullopt) = 0;
+  rpcAsync(NSessionPtr session, const std::string& id, const std::optional<std::string>& payload = std::nullopt) = 0;
 
   /**
    * Execute an RPC function with an input payload on the server.
@@ -1976,7 +1976,7 @@ public:
   virtual std::future<NRpc> rpcAsync(
       const std::string& http_key,
       const std::string& id,
-      const opt::optional<std::string>& payload = opt::nullopt) = 0;
+      const std::optional<std::string>& payload = std::nullopt) = 0;
 };
 
 using NClientPtr = std::shared_ptr<NClientInterface>;

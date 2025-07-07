@@ -16,9 +16,10 @@
 
 #include "StrUtil.h"
 #include <google/protobuf/stubs/strutil.h>
-#include <sstream>
 
+#include <sstream>
 #include <regex>
+#include <optional>
 
 namespace Nakama {
 
@@ -74,20 +75,20 @@ bool isStringStartsWith(const string& str, const string& prefix) {
   return res;
 }
 
-opt::optional<URLParts> ParseURL(const string& url) {
+std::optional<URLParts> ParseURL(const string& url) {
   const std::regex re("([^:]+)://([^:/]+)(:([0-9]+))?/(.+)", std::regex::extended);
   std::smatch m;
   if (!std::regex_match(url, m, re)) {
-    return opt::nullopt;
+    return std::nullopt;
   }
 
-  opt::optional<uint16_t> port(opt::nullopt);
+  std::optional<uint16_t> port(std::nullopt);
   if (m[4].length() > 0) {
     auto portNum = std::strtoul(m[4].str().c_str(), nullptr, 10);
     if (portNum > 0 && portNum <= std::numeric_limits<uint16_t>::max()) {
       port = static_cast<uint16_t>(portNum);
     } else {
-      return opt::nullopt;
+      return std::nullopt;
     }
   }
 
@@ -98,7 +99,7 @@ opt::optional<URLParts> ParseURL(const string& url) {
       m[5].str(), // pathAndArgs
       url         // url
   };
-  return opt::make_optional(parts);
+  return std::make_optional(parts);
 }
 
 } // namespace Nakama

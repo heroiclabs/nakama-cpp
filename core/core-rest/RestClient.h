@@ -19,6 +19,9 @@
 #include "../common/BaseClient.h"
 #include <google/protobuf/message.h>
 #include <set>
+#include <optional>
+#include <vector>
+#include <string>
 
 namespace Nakama {
 
@@ -44,8 +47,8 @@ public:
 
   void authenticateDevice(
       const std::string& id,
-      const opt::optional<std::string>& username,
-      const opt::optional<bool>& create,
+      const std::optional<std::string>& username,
+      const std::optional<bool>& create,
       const NStringMap& vars,
       std::function<void(NSessionPtr)> successCallback,
       ErrorCallback errorCallback) override;
@@ -124,7 +127,7 @@ public:
   void linkFacebook(
       NSessionPtr session,
       const std::string& accessToken,
-      const opt::optional<bool>& importFriends,
+      const std::optional<bool>& importFriends,
       std::function<void()> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -233,7 +236,7 @@ public:
   void importFacebookFriends(
       NSessionPtr session,
       const std::string& token,
-      const opt::optional<bool>& reset,
+      const std::optional<bool>& reset,
       std::function<void()> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -246,12 +249,12 @@ public:
 
   void updateAccount(
       NSessionPtr session,
-      const opt::optional<std::string>& username,
-      const opt::optional<std::string>& displayName,
-      const opt::optional<std::string>& avatarUrl,
-      const opt::optional<std::string>& langTag,
-      const opt::optional<std::string>& location,
-      const opt::optional<std::string>& timezone,
+      const std::optional<std::string>& username,
+      const std::optional<std::string>& displayName,
+      const std::optional<std::string>& avatarUrl,
+      const std::optional<std::string>& langTag,
+      const std::optional<std::string>& location,
+      const std::optional<std::string>& timezone,
       std::function<void()> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -286,8 +289,8 @@ public:
 
   void listFriends(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NFriend::State>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NFriend::State>& state,
       const std::string& cursor,
       std::function<void(NFriendListPtr)> successCallback,
       ErrorCallback errorCallback) override;
@@ -299,7 +302,7 @@ public:
       const std::string& avatarUrl,
       const std::string& langTag,
       bool open,
-      const opt::optional<int32_t>& maxCount,
+      const std::optional<int32_t>& maxCount,
       std::function<void(const NGroup&)> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -319,8 +322,8 @@ public:
   void listGroupUsers(
       NSessionPtr session,
       const std::string& groupId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor,
       std::function<void(NGroupUserListPtr)> successCallback,
       ErrorCallback errorCallback) override;
@@ -354,8 +357,8 @@ public:
 
   void listUserGroups(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor,
       std::function<void(NUserGroupListPtr)> successCallback,
       ErrorCallback errorCallback) override;
@@ -363,8 +366,8 @@ public:
   void listUserGroups(
       NSessionPtr session,
       const std::string& userId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor,
       std::function<void(NUserGroupListPtr)> successCallback,
       ErrorCallback errorCallback) override;
@@ -386,11 +389,11 @@ public:
   void updateGroup(
       NSessionPtr session,
       const std::string& groupId,
-      const opt::optional<std::string>& name,
-      const opt::optional<std::string>& description,
-      const opt::optional<std::string>& avatarUrl,
-      const opt::optional<std::string>& langTag,
-      const opt::optional<bool>& open,
+      const std::optional<std::string>& name,
+      const std::optional<std::string>& description,
+      const std::optional<std::string>& avatarUrl,
+      const std::optional<std::string>& langTag,
+      const std::optional<bool>& open,
       std::function<void()> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -398,8 +401,8 @@ public:
       NSessionPtr session,
       const std::string& leaderboardId,
       const std::vector<std::string>& ownerIds,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<std::string>& cursor,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor,
       std::function<void(NLeaderboardRecordListPtr)> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -407,7 +410,7 @@ public:
       NSessionPtr session,
       const std::string& leaderboardId,
       const std::string& ownerId,
-      const opt::optional<int32_t>& limit,
+      const std::optional<int32_t>& limit,
       std::function<void(NLeaderboardRecordListPtr)> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -415,8 +418,8 @@ public:
       NSessionPtr session,
       const std::string& leaderboardId,
       std::int64_t score,
-      const opt::optional<std::int64_t>& subscore,
-      const opt::optional<std::string>& metadata,
+      const std::optional<std::int64_t>& subscore,
+      const std::optional<std::string>& metadata,
       std::function<void(NLeaderboardRecord)> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -424,8 +427,8 @@ public:
       NSessionPtr session,
       const std::string& tournamentId,
       std::int64_t score,
-      const opt::optional<std::int64_t>& subscore,
-      const opt::optional<std::string>& metadata,
+      const std::optional<std::int64_t>& subscore,
+      const std::optional<std::string>& metadata,
       std::function<void(NLeaderboardRecord)> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -437,19 +440,19 @@ public:
 
   void listMatches(
       NSessionPtr session,
-      const opt::optional<int32_t>& min_size,
-      const opt::optional<int32_t>& max_size,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<std::string>& label,
-      const opt::optional<std::string>& query,
-      const opt::optional<bool>& authoritative,
+      const std::optional<int32_t>& min_size,
+      const std::optional<int32_t>& max_size,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& label,
+      const std::optional<std::string>& query,
+      const std::optional<bool>& authoritative,
       std::function<void(NMatchListPtr)> successCallback,
       ErrorCallback errorCallback) override;
 
   void listNotifications(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<std::string>& cacheableCursor,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cacheableCursor,
       std::function<void(NNotificationListPtr)> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -462,28 +465,28 @@ public:
   void listChannelMessages(
       NSessionPtr session,
       const std::string& channelId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<std::string>& cursor,
-      const opt::optional<bool>& forward,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor,
+      const std::optional<bool>& forward,
       std::function<void(NChannelMessageListPtr)> successCallback,
       ErrorCallback errorCallback) override;
 
   void listTournaments(
       NSessionPtr session,
-      const opt::optional<uint32_t>& categoryStart,
-      const opt::optional<uint32_t>& categoryEnd,
-      const opt::optional<uint32_t>& startTime,
-      const opt::optional<uint32_t>& endTime,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<std::string>& cursor,
+      const std::optional<uint32_t>& categoryStart,
+      const std::optional<uint32_t>& categoryEnd,
+      const std::optional<uint32_t>& startTime,
+      const std::optional<uint32_t>& endTime,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor,
       std::function<void(NTournamentListPtr)> successCallback,
       ErrorCallback errorCallback) override;
 
   void listTournamentRecords(
       NSessionPtr session,
       const std::string& tournamentId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<std::string>& cursor,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor,
       const std::vector<std::string>& ownerIds,
       std::function<void(NTournamentRecordListPtr)> successCallback,
       ErrorCallback errorCallback) override;
@@ -492,7 +495,7 @@ public:
       NSessionPtr session,
       const std::string& tournamentId,
       const std::string& ownerId,
-      const opt::optional<int32_t>& limit,
+      const std::optional<int32_t>& limit,
       std::function<void(NTournamentRecordListPtr)> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -505,8 +508,8 @@ public:
   void listStorageObjects(
       NSessionPtr session,
       const std::string& collection,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<std::string>& cursor,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor,
       std::function<void(NStorageObjectListPtr)> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -514,8 +517,8 @@ public:
       NSessionPtr session,
       const std::string& collection,
       const std::string& userId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<std::string>& cursor,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor,
       std::function<void(NStorageObjectListPtr)> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -540,14 +543,14 @@ public:
   void
   rpc(NSessionPtr session,
       const std::string& id,
-      const opt::optional<std::string>& payload,
+      const std::optional<std::string>& payload,
       std::function<void(const NRpc&)> successCallback,
       ErrorCallback errorCallback) override;
 
   void
   rpc(const std::string& http_key,
       const std::string& id,
-      const opt::optional<std::string>& payload,
+      const std::optional<std::string>& payload,
       std::function<void(const NRpc&)> successCallback,
       ErrorCallback errorCallback) override;
 
@@ -564,7 +567,7 @@ private:
       NHttpQueryArgs&& args = NHttpQueryArgs());
 
   void
-  sendRpc(RestReqContext* ctx, const std::string& id, const opt::optional<std::string>& payload, NHttpQueryArgs&& args);
+  sendRpc(RestReqContext* ctx, const std::string& id, const std::optional<std::string>& payload, NHttpQueryArgs&& args);
 
   void onResponse(RestReqContext* reqContext, NHttpResponsePtr response);
   void reqError(RestReqContext* reqContext, const NError& error);

@@ -6,6 +6,9 @@ The format is based on [keep a changelog](http://keepachangelog.com/) and this p
 
 ### [unreleased]
 
+## Breaking changes
+- Switch to std::optional and require C++17 because of it.
+
 ## Fixed
 - Fixed libHttpClient builds
 

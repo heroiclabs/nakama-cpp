@@ -30,8 +30,8 @@ NAKAMA_NAMESPACE_BEGIN
         std::string key;                                          ///< The key of the object within the collection.
         std::string value;                                        ///< The value of the object. Must be JSON
         std::string version;                                      ///< The version hash of the object to check. Possible values are: ["", "*", "#hash#"].
-        opt::optional<NStoragePermissionRead> permissionRead;     ///< The read access permissions for the object.
-        opt::optional<NStoragePermissionWrite> permissionWrite;   ///< The write access permissions for the object.
+        std::optional<NStoragePermissionRead> permissionRead;     ///< The read access permissions for the object.
+        std::optional<NStoragePermissionWrite> permissionWrite;   ///< The write access permissions for the object.
     };
 
 NAKAMA_NAMESPACE_END
