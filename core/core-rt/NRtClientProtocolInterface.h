@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "google/protobuf/message.h"
+#include <google/protobuf/message.h>
 #include "nakama-cpp/NTypes.h"
 
 namespace Nakama {

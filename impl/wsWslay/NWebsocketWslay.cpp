@@ -7,9 +7,11 @@
 #include <wslay/wslay.h>
 #include <nakama-cpp/log/NLogger.h>
 #include "NWebsocketWslay.h"
+#include "sha1.h"
+
 #include <random>
 #include <optional>
-#include "sha1.h"
+#include <cassert>
 
 namespace Nakama {
     void NWebsocketWslay::on_msg_recv_callback(wslay_event_context_ptr /*ctx*/, const struct wslay_event_on_msg_recv_arg* arg, void* user_data) {
@@ -183,7 +185,7 @@ namespace Nakama {
 
     NWebsocketWslay::~NWebsocketWslay() {
         if (_connected) {
-            this->disconnect(false, opt::nullopt);
+            this->disconnect(false, std::nullopt);
         }
     }
 
@@ -217,10 +219,10 @@ namespace Nakama {
     }
 
     void NWebsocketWslay::disconnect() {
-        this->disconnect(false, opt::nullopt);
+        this->disconnect(false, std::nullopt);
     }
 
-    void NWebsocketWslay::disconnect(bool remote, opt::optional<uint16_t> code) {
+    void NWebsocketWslay::disconnect(bool remote, std::optional<uint16_t> code) {
         if (!remote && _state == State::Connected) {
             assert(_ctx);
             // we've asked for disconnect, send close frame before closing socket

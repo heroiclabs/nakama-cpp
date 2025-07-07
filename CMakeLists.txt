@@ -68,8 +68,6 @@ endif()
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
 set(CMAKE_SUPPRESS_REGENERATION true) ## for Xcode
 
-# By default, assume user will not obtain optional-lite via third party mechanism.
-option(DISTRIBUTE_OPTIONAL_LITE "Distribute optional lite with the Nakama client." ON)
 option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
 option(BUILD_APPLE_FRAMEWORK "Build frameworks instead of .dylib files for Apple." ON)
 
@@ -331,16 +329,6 @@ install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake
   DESTINATION share/nakama-sdk
 )
-
-if (DISTRIBUTE_OPTIONAL_LITE)
-    install(DIRECTORY
-        ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/nonstd
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    )
-
-    file(GLOB OPTIONAL_LITE_CONFIGS "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/optional-lite/*.cmake")
-    install(FILES ${OPTIONAL_LITE_CONFIGS} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/optional-lite)
-endif()
 
 # Call last so they can reference any target previously defined
 include(cmake/localCompilerFlags.cmake)

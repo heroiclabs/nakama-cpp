@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <string>
+#include <cassert>
 
 #if __ANDROID__
 #include "AndroidCA.h"
