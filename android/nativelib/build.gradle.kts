@@ -2,23 +2,17 @@ plugins {
     id("com.android.library")
 }
 
-//java {
-//    toolchain {
-//        languageVersion = JavaLanguageVersion.of(17)
-//    }
-//}
-
 android {
     namespace = "com.heroiclabs.nakama"
     compileSdk = 34
 
     buildFeatures {
+        prefab = true
         prefabPublishing = true
     }
 
     prefab {
         create("nakama-sdk") {
-            headers = ""
         }
     }
 
@@ -28,6 +22,7 @@ android {
         externalNativeBuild {
             cmake {
                 arguments("-DANDROID_STL=c++_shared")
+                targets("nakama-sdk")
             }
         }
     }
@@ -35,14 +30,13 @@ android {
     externalNativeBuild {
         cmake {
             path("../../CMakeLists.txt")
-            version = "3.30.2"
+            version = "4.0.3"
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
+    buildToolsVersion = "36.0.0"
+    ndkVersion = "27.2.12479018"
+}
 
 dependencies {
         implementation("androidx.annotation:annotation:1.9.1")

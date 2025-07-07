@@ -111,7 +111,7 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
 
   if (_timeout >= std::chrono::milliseconds(0)) {
     curl_code = curl_easy_setopt(
-        curl_easy.get(), CURLOPT_TIMEOUT_MS, duration_cast<std::chrono::milliseconds>(_timeout).count());
+        curl_easy.get(), CURLOPT_TIMEOUT_MS, std::chrono::duration_cast<std::chrono::milliseconds>(_timeout).count());
     if (curl_code != CURLE_OK) {
       handle_curl_easy_set_opt_error("setting timeout", curl_code, callback);
       return;
@@ -140,7 +140,7 @@ void NHttpClientLibCurl::request(const NHttpRequest& req, const NHttpResponseCal
 
 #if __ANDROID__
   CACertificateData* data = Nakama::getCaCertificates();
-  if (data == NULL) {
+  if (data == nullptr) {
     // Has System.loadLibrary("nakama-sdk") been called?
     NLOG(Nakama::NLogLevel::Error, "error obtaining CA Certificates.");
     return;
