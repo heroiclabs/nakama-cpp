@@ -16,11 +16,14 @@
 
 #include "BaseClient.h"
 #include "../core-rt/NRtClient.h"
-#include <future>
 #include <nakama-cpp/NClientInterface.h>
 #include <nakama-cpp/NException.h>
 #include <nakama-cpp/log/NLogger.h>
 #include <nakama-cpp/realtime/NWebsocketsFactory.h>
+
+#include <optional>
+#include <future>
+#include <vector>
 
 namespace Nakama {
 
@@ -46,8 +49,8 @@ NRtClientPtr BaseClient::createRtClient(NRtTransportPtr transport) {
 
 std::future<NSessionPtr> BaseClient::authenticateDeviceAsync(
     const std::string& id,
-    const opt::optional<std::string>& username,
-    const opt::optional<bool>& create,
+    const std::optional<std::string>& username,
+    const std::optional<bool>& create,
     const NStringMap& vars) {
 
   auto promise = std::make_shared<std::promise<NSessionPtr>>();
@@ -188,7 +191,7 @@ std::future<void> BaseClient::sessionLogoutAsync(NSessionPtr session) {
 std::future<void> BaseClient::linkFacebookAsync(
     NSessionPtr session,
     const std::string& accessToken,
-    const opt::optional<bool>& importFriends) {
+    const std::optional<bool>& importFriends) {
   auto promise = std::make_shared<std::promise<void>>();
 
   linkFacebook(
@@ -367,7 +370,7 @@ std::future<void> BaseClient::unlinkCustomAsync(NSessionPtr session, const std::
 std::future<void> BaseClient::importFacebookFriendsAsync(
     NSessionPtr session,
     const std::string& token,
-    const opt::optional<bool>& reset) {
+    const std::optional<bool>& reset) {
   auto promise = std::make_shared<std::promise<void>>();
 
   importFacebookFriends(
@@ -399,12 +402,12 @@ std::future<void> BaseClient::deleteAccountAsync(NSessionPtr session) {
 
 std::future<void> BaseClient::updateAccountAsync(
     NSessionPtr session,
-    const opt::optional<std::string>& username,
-    const opt::optional<std::string>& displayName,
-    const opt::optional<std::string>& avatarUrl,
-    const opt::optional<std::string>& langTag,
-    const opt::optional<std::string>& location,
-    const opt::optional<std::string>& timezone) {
+    const std::optional<std::string>& username,
+    const std::optional<std::string>& displayName,
+    const std::optional<std::string>& avatarUrl,
+    const std::optional<std::string>& langTag,
+    const std::optional<std::string>& location,
+    const std::optional<std::string>& timezone) {
   auto promise = std::make_shared<std::promise<void>>();
 
   updateAccount(
@@ -469,8 +472,8 @@ std::future<void> BaseClient::blockFriendsAsync(
 
 std::future<NFriendListPtr> BaseClient::listFriendsAsync(
     NSessionPtr session,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<NFriend::State>& state,
+    const std::optional<int32_t>& limit,
+    const std::optional<NFriend::State>& state,
     const std::string& cursor) {
   auto promise = std::make_shared<std::promise<NFriendListPtr>>();
 
@@ -488,7 +491,7 @@ std::future<NGroup> BaseClient::createGroupAsync(
     const std::string& avatarUrl,
     const std::string& langTag,
     bool open,
-    const opt::optional<int32_t>& maxCount) {
+    const std::optional<int32_t>& maxCount) {
   auto promise = std::make_shared<std::promise<NGroup>>();
 
   createGroup(
@@ -523,8 +526,8 @@ BaseClient::addGroupUsersAsync(NSessionPtr session, const std::string& groupId, 
 std::future<NGroupUserListPtr> BaseClient::listGroupUsersAsync(
     NSessionPtr session,
     const std::string& groupId,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<NUserGroupState>& state,
+    const std::optional<int32_t>& limit,
+    const std::optional<NUserGroupState>& state,
     const std::string& cursor) {
   auto promise = std::make_shared<std::promise<NGroupUserListPtr>>();
 
@@ -579,8 +582,8 @@ BaseClient::listGroupsAsync(NSessionPtr session, const std::string& name, int32_
 
 std::future<NUserGroupListPtr> BaseClient::listUserGroupsAsync(
     NSessionPtr session,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<NUserGroupState>& state,
+    const std::optional<int32_t>& limit,
+    const std::optional<NUserGroupState>& state,
     const std::string& cursor) {
   auto promise = std::make_shared<std::promise<NUserGroupListPtr>>();
 
@@ -594,8 +597,8 @@ std::future<NUserGroupListPtr> BaseClient::listUserGroupsAsync(
 std::future<NUserGroupListPtr> BaseClient::listUserGroupsAsync(
     NSessionPtr session,
     const std::string& userId,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<NUserGroupState>& state,
+    const std::optional<int32_t>& limit,
+    const std::optional<NUserGroupState>& state,
     const std::string& cursor) {
   auto promise = std::make_shared<std::promise<NUserGroupListPtr>>();
 
@@ -635,11 +638,11 @@ std::future<void> BaseClient::demoteGroupUsersAsync(
 std::future<void> BaseClient::updateGroupAsync(
     NSessionPtr session,
     const std::string& groupId,
-    const opt::optional<std::string>& name,
-    const opt::optional<std::string>& description,
-    const opt::optional<std::string>& avatarUrl,
-    const opt::optional<std::string>& langTag,
-    const opt::optional<bool>& open) {
+    const std::optional<std::string>& name,
+    const std::optional<std::string>& description,
+    const std::optional<std::string>& avatarUrl,
+    const std::optional<std::string>& langTag,
+    const std::optional<bool>& open) {
   auto promise = std::make_shared<std::promise<void>>();
 
   updateGroup(
@@ -653,8 +656,8 @@ std::future<NLeaderboardRecordListPtr> BaseClient::listLeaderboardRecordsAsync(
     NSessionPtr session,
     const std::string& leaderboardId,
     const std::vector<std::string>& ownerIds,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<std::string>& cursor) {
+    const std::optional<int32_t>& limit,
+    const std::optional<std::string>& cursor) {
   auto promise = std::make_shared<std::promise<NLeaderboardRecordListPtr>>();
 
   listLeaderboardRecords(
@@ -669,7 +672,7 @@ std::future<NLeaderboardRecordListPtr> BaseClient::listLeaderboardRecordsAroundO
     NSessionPtr session,
     const std::string& leaderboardId,
     const std::string& ownerId,
-    const opt::optional<int32_t>& limit) {
+    const std::optional<int32_t>& limit) {
   auto promise = std::make_shared<std::promise<NLeaderboardRecordListPtr>>();
 
   listLeaderboardRecordsAroundOwner(
@@ -684,8 +687,8 @@ std::future<NLeaderboardRecord> BaseClient::writeLeaderboardRecordAsync(
     NSessionPtr session,
     const std::string& leaderboardId,
     std::int64_t score,
-    const opt::optional<std::int64_t>& subscore,
-    const opt::optional<std::string>& metadata) {
+    const std::optional<std::int64_t>& subscore,
+    const std::optional<std::string>& metadata) {
   auto promise = std::make_shared<std::promise<NLeaderboardRecord>>();
 
   writeLeaderboardRecord(
@@ -699,8 +702,8 @@ std::future<NLeaderboardRecord> BaseClient::writeTournamentRecordAsync(
     NSessionPtr session,
     const std::string& tournamentId,
     std::int64_t score,
-    const opt::optional<std::int64_t>& subscore,
-    const opt::optional<std::string>& metadata) {
+    const std::optional<std::int64_t>& subscore,
+    const std::optional<std::string>& metadata) {
   auto promise = std::make_shared<std::promise<NLeaderboardRecord>>();
 
   writeLeaderboardRecord(
@@ -723,12 +726,12 @@ std::future<void> BaseClient::deleteLeaderboardRecordAsync(NSessionPtr session, 
 
 std::future<NMatchListPtr> BaseClient::listMatchesAsync(
     NSessionPtr session,
-    const opt::optional<int32_t>& min_size,
-    const opt::optional<int32_t>& max_size,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<std::string>& label,
-    const opt::optional<std::string>& query,
-    const opt::optional<bool>& authoritative) {
+    const std::optional<int32_t>& min_size,
+    const std::optional<int32_t>& max_size,
+    const std::optional<int32_t>& limit,
+    const std::optional<std::string>& label,
+    const std::optional<std::string>& query,
+    const std::optional<bool>& authoritative) {
   auto promise = std::make_shared<std::promise<NMatchListPtr>>();
 
   listMatches(
@@ -741,8 +744,8 @@ std::future<NMatchListPtr> BaseClient::listMatchesAsync(
 
 std::future<NNotificationListPtr> BaseClient::listNotificationsAsync(
     NSessionPtr session,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<std::string>& cacheableCursor) {
+    const std::optional<int32_t>& limit,
+    const std::optional<std::string>& cacheableCursor) {
   auto promise = std::make_shared<std::promise<NNotificationListPtr>>();
 
   listNotifications(
@@ -767,9 +770,9 @@ BaseClient::deleteNotificationsAsync(NSessionPtr session, const std::vector<std:
 std::future<NChannelMessageListPtr> BaseClient::listChannelMessagesAsync(
     NSessionPtr session,
     const std::string& channelId,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<std::string>& cursor,
-    const opt::optional<bool>& forward) {
+    const std::optional<int32_t>& limit,
+    const std::optional<std::string>& cursor,
+    const std::optional<bool>& forward) {
   auto promise = std::make_shared<std::promise<NChannelMessageListPtr>>();
 
   listChannelMessages(
@@ -782,12 +785,12 @@ std::future<NChannelMessageListPtr> BaseClient::listChannelMessagesAsync(
 
 std::future<NTournamentListPtr> BaseClient::listTournamentsAsync(
     NSessionPtr session,
-    const opt::optional<uint32_t>& categoryStart,
-    const opt::optional<uint32_t>& categoryEnd,
-    const opt::optional<uint32_t>& startTime,
-    const opt::optional<uint32_t>& endTime,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<std::string>& cursor) {
+    const std::optional<uint32_t>& categoryStart,
+    const std::optional<uint32_t>& categoryEnd,
+    const std::optional<uint32_t>& startTime,
+    const std::optional<uint32_t>& endTime,
+    const std::optional<int32_t>& limit,
+    const std::optional<std::string>& cursor) {
   auto promise = std::make_shared<std::promise<NTournamentListPtr>>();
 
   listTournaments(
@@ -801,8 +804,8 @@ std::future<NTournamentListPtr> BaseClient::listTournamentsAsync(
 std::future<NTournamentRecordListPtr> BaseClient::listTournamentRecordsAsync(
     NSessionPtr session,
     const std::string& tournamentId,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<std::string>& cursor,
+    const std::optional<int32_t>& limit,
+    const std::optional<std::string>& cursor,
     const std::vector<std::string>& ownerIds) {
   auto promise = std::make_shared<std::promise<NTournamentRecordListPtr>>();
 
@@ -818,7 +821,7 @@ std::future<NTournamentRecordListPtr> BaseClient::listTournamentRecordsAroundOwn
     NSessionPtr session,
     const std::string& tournamentId,
     const std::string& ownerId,
-    const opt::optional<int32_t>& limit) {
+    const std::optional<int32_t>& limit) {
   auto promise = std::make_shared<std::promise<NTournamentRecordListPtr>>();
 
   listTournamentRecordsAroundOwner(
@@ -842,8 +845,8 @@ std::future<void> BaseClient::joinTournamentAsync(NSessionPtr session, const std
 std::future<NStorageObjectListPtr> BaseClient::listStorageObjectsAsync(
     NSessionPtr session,
     const std::string& collection,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<std::string>& cursor) {
+    const std::optional<int32_t>& limit,
+    const std::optional<std::string>& cursor) {
   auto promise = std::make_shared<std::promise<NStorageObjectListPtr>>();
 
   listStorageObjects(
@@ -857,8 +860,8 @@ std::future<NStorageObjectListPtr> BaseClient::listUsersStorageObjectsAsync(
     NSessionPtr session,
     const std::string& collection,
     const std::string& userId,
-    const opt::optional<int32_t>& limit,
-    const opt::optional<std::string>& cursor) {
+    const std::optional<int32_t>& limit,
+    const std::optional<std::string>& cursor) {
   auto promise = std::make_shared<std::promise<NStorageObjectListPtr>>();
 
   listUsersStorageObjects(
@@ -903,7 +906,7 @@ BaseClient::deleteStorageObjectsAsync(NSessionPtr session, const std::vector<NDe
 }
 
 std::future<NRpc>
-BaseClient::rpcAsync(NSessionPtr session, const std::string& id, const opt::optional<std::string>& payload) {
+BaseClient::rpcAsync(NSessionPtr session, const std::string& id, const std::optional<std::string>& payload) {
   auto promise = std::make_shared<std::promise<NRpc>>();
 
   rpc(
@@ -917,7 +920,7 @@ BaseClient::rpcAsync(NSessionPtr session, const std::string& id, const opt::opti
 }
 
 std::future<NRpc>
-BaseClient::rpcAsync(const std::string& http_key, const std::string& id, const opt::optional<std::string>& payload) {
+BaseClient::rpcAsync(const std::string& http_key, const std::string& id, const std::optional<std::string>& payload) {
   auto promise = std::make_shared<std::promise<NRpc>>();
 
   rpc(

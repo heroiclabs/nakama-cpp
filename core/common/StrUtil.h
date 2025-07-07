@@ -68,6 +68,6 @@ std::string encodeURIComponent(std::string decoded);
 bool isStringStartsWith(const std::string& str, const std::string& prefix);
 
 // Definitely not fully compliant, but good enough for us
-opt::optional<URLParts> ParseURL(const std::string& url);
+std::optional<URLParts> ParseURL(const std::string& url);
 
 NAKAMA_NAMESPACE_END

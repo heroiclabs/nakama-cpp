@@ -21,6 +21,7 @@
 #include <memory>
 #include <vector>
 #include <future>
+#include <optional>
 #include <nakama-cpp/NTypes.h>
 #include <nakama-cpp/NExport.h>
 #include <nakama-cpp/NSessionInterface.h>
@@ -124,14 +125,14 @@ NAKAMA_NAMESPACE_BEGIN
          *
          * @param interval interval in ms send heartbeats in. Passing opt::nullopt disables heartbeats.
          */
-        virtual void setHeartbeatIntervalMs(opt::optional<int> ms) = 0;
+        virtual void setHeartbeatIntervalMs(std::optional<int> ms) = 0;
 
         /**
          * Get heartbeat interval in milliseconds.
          *
          * @return heartbeat interval value or opt::nullopt if disabled
          */
-        virtual opt::optional<int> getHeartbeatIntervalMs() = 0;
+        virtual std::optional<int> getHeartbeatIntervalMs() = 0;
 
         /**
          * Connect to the server.
@@ -182,8 +183,8 @@ NAKAMA_NAMESPACE_BEGIN
         virtual void joinChat(
             const std::string& target,
             NChannelType type,
-            const opt::optional<bool>& persistence = opt::nullopt,
-            const opt::optional<bool>& hidden = opt::nullopt,
+            const std::optional<bool>& persistence = std::nullopt,
+            const std::optional<bool>& hidden = std::nullopt,
             std::function<void (NChannelPtr)> successCallback = nullptr,
             RtErrorCallback errorCallback = nullptr
         ) = 0;
@@ -293,12 +294,12 @@ NAKAMA_NAMESPACE_BEGIN
          * @param countMultiple An optional multiple of the matched count that must be satisfied.
          */
         virtual void addMatchmaker(
-            const opt::optional<int32_t>& minCount = opt::nullopt,
-            const opt::optional<int32_t>& maxCount = opt::nullopt,
-            const opt::optional<std::string>& query = opt::nullopt,
+            const std::optional<int32_t>& minCount = std::nullopt,
+            const std::optional<int32_t>& maxCount = std::nullopt,
+            const std::optional<std::string>& query = std::nullopt,
             const NStringMap& stringProperties = {},
             const NStringDoubleMap& numericProperties = {},
-            const opt::optional<int32_t>& countMultiple = opt::nullopt,
+            const std::optional<int32_t>& countMultiple = std::nullopt,
             std::function<void(const NMatchmakerTicket&)> successCallback = nullptr,
             RtErrorCallback errorCallback = nullptr
         ) = 0;
@@ -372,7 +373,7 @@ NAKAMA_NAMESPACE_BEGIN
          */
         virtual void rpc(
             const std::string& id,
-            const opt::optional<std::string>& payload = opt::nullopt,
+            const std::optional<std::string>& payload = std::nullopt,
             std::function<void(const NRpc&)> successCallback = nullptr,
             RtErrorCallback errorCallback = nullptr
         ) = 0;
@@ -397,7 +398,7 @@ NAKAMA_NAMESPACE_BEGIN
          */
         virtual void addMatchmakerParty(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
             const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {},
-            const opt::optional<int32_t>& countMultiple = opt::nullopt,
+            const std::optional<int32_t>& countMultiple = std::nullopt,
             std::function<void(const NPartyMatchmakerTicket&)> successCallback = nullptr, RtErrorCallback errorCallback = nullptr) = 0;
 
         /**
@@ -471,8 +472,8 @@ NAKAMA_NAMESPACE_BEGIN
         virtual std::future<NChannelPtr> joinChatAsync(
             const std::string& target,
             NChannelType type,
-            const opt::optional<bool>& persistence = opt::nullopt,
-            const opt::optional<bool>& hidden = opt::nullopt
+            const std::optional<bool>& persistence = std::nullopt,
+            const std::optional<bool>& hidden = std::nullopt
         ) = 0;
 
         /**
@@ -563,12 +564,12 @@ NAKAMA_NAMESPACE_BEGIN
          * @param countMultiple An optional multiple of the matched count that must be satisfied.
          */
         virtual std::future<NMatchmakerTicket> addMatchmakerAsync(
-            const opt::optional<int32_t>& minCount = opt::nullopt,
-            const opt::optional<int32_t>& maxCount = opt::nullopt,
-            const opt::optional<std::string>& query = opt::nullopt,
+            const std::optional<int32_t>& minCount = std::nullopt,
+            const std::optional<int32_t>& maxCount = std::nullopt,
+            const std::optional<std::string>& query = std::nullopt,
             const NStringMap& stringProperties = {},
             const NStringDoubleMap& numericProperties = {},
-            const opt::optional<int32_t>& countMultiple = opt::nullopt
+            const std::optional<int32_t>& countMultiple = std::nullopt
         ) = 0;
 
         /**
@@ -632,7 +633,7 @@ NAKAMA_NAMESPACE_BEGIN
          */
         virtual std::future<NRpc> rpcAsync(
             const std::string& id,
-            const opt::optional<std::string>& payload = opt::nullopt
+            const std::optional<std::string>& payload = std::nullopt
         ) = 0;
 
         /**
@@ -655,7 +656,7 @@ NAKAMA_NAMESPACE_BEGIN
          */
         virtual std::future<NPartyMatchmakerTicket> addMatchmakerPartyAsync(const std::string& partyId, const std::string& query, int32_t minCount, int32_t maxCount,
             const NStringMap& stringProperties = {}, const NStringDoubleMap& numericProperties = {},
-            const opt::optional<int32_t>& countMultiple = opt::nullopt) = 0;
+            const std::optional<int32_t>& countMultiple = std::nullopt) = 0;
 
         /**
          * End a party, kicking all party members and closing it.

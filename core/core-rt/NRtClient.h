@@ -46,9 +46,9 @@ public:
   void setUserData(void* userData) override { _userData = userData; }
   void* getUserData() const override { return _userData; }
 
-  void setHeartbeatIntervalMs(opt::optional<int> ms) override { _heartbeatIntervalMs = ms; }
+  void setHeartbeatIntervalMs(std::optional<int> ms) override { _heartbeatIntervalMs = ms; }
 
-  opt::optional<int> getHeartbeatIntervalMs() override { return _heartbeatIntervalMs; }
+  std::optional<int> getHeartbeatIntervalMs() override { return _heartbeatIntervalMs; }
 
   void connect(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
   std::future<void> connectAsync(NSessionPtr session, bool createStatus, NRtClientProtocol protocol) override;
@@ -63,8 +63,8 @@ public:
   void joinChat(
       const std::string& target,
       NChannelType type,
-      const opt::optional<bool>& persistence = opt::nullopt,
-      const opt::optional<bool>& hidden = opt::nullopt,
+      const std::optional<bool>& persistence = std::nullopt,
+      const std::optional<bool>& hidden = std::nullopt,
       std::function<void(NChannelPtr)> successCallback = nullptr,
       RtErrorCallback errorCallback = nullptr) override;
 
@@ -112,12 +112,12 @@ public:
       RtErrorCallback errorCallback = nullptr) override;
 
   void addMatchmaker(
-      const opt::optional<int32_t>& minCount = opt::nullopt,
-      const opt::optional<int32_t>& maxCount = opt::nullopt,
-      const opt::optional<std::string>& query = opt::nullopt,
+      const std::optional<int32_t>& minCount = std::nullopt,
+      const std::optional<int32_t>& maxCount = std::nullopt,
+      const std::optional<std::string>& query = std::nullopt,
       const NStringMap& stringProperties = {},
       const NStringDoubleMap& numericProperties = {},
-      const opt::optional<int32_t>& countMultiple = opt::nullopt,
+      const std::optional<int32_t>& countMultiple = std::nullopt,
       std::function<void(const NMatchmakerTicket&)> successCallback = nullptr,
       RtErrorCallback errorCallback = nullptr) override;
 
@@ -149,7 +149,7 @@ public:
 
   void
   rpc(const std::string& id,
-      const opt::optional<std::string>& payload = opt::nullopt,
+      const std::optional<std::string>& payload = std::nullopt,
       std::function<void(const NRpc&)> successCallback = nullptr,
       RtErrorCallback errorCallback = nullptr) override;
 
@@ -166,7 +166,7 @@ public:
       int maxCount,
       const NStringMap& stringProperties = {},
       const NStringDoubleMap& numericProperties = {},
-      const opt::optional<int32_t>& countMultiple = opt::nullopt,
+      const std::optional<int32_t>& countMultiple = std::nullopt,
       std::function<void(const NPartyMatchmakerTicket&)> successCallback = nullptr,
       RtErrorCallback errorCallback = nullptr) override;
 
@@ -219,8 +219,8 @@ public:
   std::future<NChannelPtr> joinChatAsync(
       const std::string& target,
       NChannelType type,
-      const opt::optional<bool>& persistence = opt::nullopt,
-      const opt::optional<bool>& hidden = opt::nullopt) override;
+      const std::optional<bool>& persistence = std::nullopt,
+      const std::optional<bool>& hidden = std::nullopt) override;
 
   std::future<void> leaveChatAsync(const std::string& channelId) override;
 
@@ -243,12 +243,12 @@ public:
   std::future<void> leaveMatchAsync(const std::string& matchId) override;
 
   std::future<NMatchmakerTicket> addMatchmakerAsync(
-      const opt::optional<int32_t>& minCount = opt::nullopt,
-      const opt::optional<int32_t>& maxCount = opt::nullopt,
-      const opt::optional<std::string>& query = opt::nullopt,
+      const std::optional<int32_t>& minCount = std::nullopt,
+      const std::optional<int32_t>& maxCount = std::nullopt,
+      const std::optional<std::string>& query = std::nullopt,
       const NStringMap& stringProperties = {},
       const NStringDoubleMap& numericProperties = {},
-      const opt::optional<int32_t>& countMultiple = opt::nullopt) override;
+      const std::optional<int32_t>& countMultiple = std::nullopt) override;
 
   std::future<void> removeMatchmakerAsync(const std::string& ticket) override;
 
@@ -264,7 +264,7 @@ public:
 
   std::future<void> updateStatusAsync(const std::string& status) override;
 
-  std::future<NRpc> rpcAsync(const std::string& id, const opt::optional<std::string>& payload = opt::nullopt) override;
+  std::future<NRpc> rpcAsync(const std::string& id, const std::optional<std::string>& payload = std::nullopt) override;
 
   std::future<void> acceptPartyMemberAsync(const std::string& partyId, NUserPresence& presence) override;
 
@@ -275,7 +275,7 @@ public:
       int32_t maxCount,
       const NStringMap& stringProperties = {},
       const NStringDoubleMap& numericProperties = {},
-      const opt::optional<int32_t>& countMultiple = opt::nullopt) override;
+      const std::optional<int32_t>& countMultiple = std::nullopt) override;
 
   std::future<void> closePartyAsync(const std::string& partyId) override;
 
@@ -329,7 +329,7 @@ private:
   NTimestamp _lastMessageTs = 0;   // last message sent. Used to decide whether to send heartbeat
   NTimestamp _lastHeartbeatTs = 0; // last heartbeat. != 0 when we are waiting for the heartbeat response
   bool _heartbeatFailureReported = false;
-  opt::optional<int> _heartbeatIntervalMs = 5000;
+  std::optional<int> _heartbeatIntervalMs = 5000;
   std::atomic<bool> _wantDisconnect = false;
   std::unique_ptr<std::promise<void>> _connectPromise = nullptr;
 };

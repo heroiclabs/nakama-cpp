@@ -1,6 +1,5 @@
 #pragma once
 
-#cmakedefine optional_CONFIG_SELECT_OPTIONAL @optional_CONFIG_SELECT_OPTIONAL@
 #cmakedefine WITH_GRPC_CLIENT
 #cmakedefine HAVE_DEFAULT_TRANSPORT_FACTORY
 #cmakedefine HAVE_DEFAULT_RT_TRANSPORT_FACTORY

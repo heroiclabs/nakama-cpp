@@ -18,6 +18,9 @@
 
 #include "nakama-cpp/ClientFactory.h"
 #include "nakama-cpp/NClientInterface.h"
+#include <optional>
+#include <string>
+#include <vector>
 
 namespace Nakama {
 
@@ -39,8 +42,8 @@ public:
 
   std::future<NSessionPtr> authenticateDeviceAsync(
       const std::string& id,
-      const opt::optional<std::string>& username = opt::nullopt,
-      const opt::optional<bool>& create = opt::nullopt,
+      const std::optional<std::string>& username = std::nullopt,
+      const std::optional<bool>& create = std::nullopt,
       const NStringMap& vars = {}) override;
 
   std::future<NSessionPtr> authenticateEmailAsync(
@@ -99,7 +102,7 @@ public:
   std::future<void> linkFacebookAsync(
       NSessionPtr session,
       const std::string& accessToken,
-      const opt::optional<bool>& importFriends = opt::nullopt) override;
+      const std::optional<bool>& importFriends = std::nullopt) override;
 
   std::future<void> linkEmailAsync(NSessionPtr session, const std::string& email, const std::string& password) override;
 
@@ -149,7 +152,7 @@ public:
   std::future<void> importFacebookFriendsAsync(
       NSessionPtr session,
       const std::string& token,
-      const opt::optional<bool>& reset = opt::nullopt) override;
+      const std::optional<bool>& reset = std::nullopt) override;
 
   std::future<NAccount> getAccountAsync(NSessionPtr session) override;
 
@@ -157,12 +160,12 @@ public:
 
   std::future<void> updateAccountAsync(
       NSessionPtr session,
-      const opt::optional<std::string>& username = opt::nullopt,
-      const opt::optional<std::string>& displayName = opt::nullopt,
-      const opt::optional<std::string>& avatarUrl = opt::nullopt,
-      const opt::optional<std::string>& langTag = opt::nullopt,
-      const opt::optional<std::string>& location = opt::nullopt,
-      const opt::optional<std::string>& timezone = opt::nullopt) override;
+      const std::optional<std::string>& username = std::nullopt,
+      const std::optional<std::string>& displayName = std::nullopt,
+      const std::optional<std::string>& avatarUrl = std::nullopt,
+      const std::optional<std::string>& langTag = std::nullopt,
+      const std::optional<std::string>& location = std::nullopt,
+      const std::optional<std::string>& timezone = std::nullopt) override;
 
   std::future<NUsers> getUsersAsync(
       NSessionPtr session,
@@ -187,8 +190,8 @@ public:
 
   std::future<NFriendListPtr> listFriendsAsync(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NFriend::State>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NFriend::State>& state,
       const std::string& cursor = "") override;
   ;
 
@@ -199,7 +202,7 @@ public:
       const std::string& avatarUrl = "",
       const std::string& langTag = "",
       bool open = false,
-      const opt::optional<int32_t>& maxCount = {}) override;
+      const std::optional<int32_t>& maxCount = {}) override;
 
   std::future<void> deleteGroupAsync(NSessionPtr session, const std::string& groupId) override;
   ;
@@ -210,8 +213,8 @@ public:
   std::future<NGroupUserListPtr> listGroupUsersAsync(
       NSessionPtr session,
       const std::string& groupId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor = "") override;
 
   std::future<void>
@@ -227,15 +230,15 @@ public:
 
   std::future<NUserGroupListPtr> listUserGroupsAsync(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor = "") override;
 
   std::future<NUserGroupListPtr> listUserGroupsAsync(
       NSessionPtr session,
       const std::string& userId,
-      const opt::optional<int32_t>& limit,
-      const opt::optional<NUserGroupState>& state,
+      const std::optional<int32_t>& limit,
+      const std::optional<NUserGroupState>& state,
       const std::string& cursor = "") override;
 
   std::future<void>
@@ -247,54 +250,54 @@ public:
   std::future<void> updateGroupAsync(
       NSessionPtr session,
       const std::string& groupId,
-      const opt::optional<std::string>& name = opt::nullopt,
-      const opt::optional<std::string>& description = opt::nullopt,
-      const opt::optional<std::string>& avatarUrl = opt::nullopt,
-      const opt::optional<std::string>& langTag = opt::nullopt,
-      const opt::optional<bool>& open = opt::nullopt) override;
+      const std::optional<std::string>& name = std::nullopt,
+      const std::optional<std::string>& description = std::nullopt,
+      const std::optional<std::string>& avatarUrl = std::nullopt,
+      const std::optional<std::string>& langTag = std::nullopt,
+      const std::optional<bool>& open = std::nullopt) override;
 
   std::future<NLeaderboardRecordListPtr> listLeaderboardRecordsAsync(
       NSessionPtr session,
       const std::string& leaderboardId,
       const std::vector<std::string>& ownerIds = {},
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt) override;
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt) override;
 
   std::future<NLeaderboardRecordListPtr> listLeaderboardRecordsAroundOwnerAsync(
       NSessionPtr session,
       const std::string& leaderboardId,
       const std::string& ownerId,
-      const opt::optional<int32_t>& limit = opt::nullopt) override;
+      const std::optional<int32_t>& limit = std::nullopt) override;
 
   std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
       NSessionPtr session,
       const std::string& leaderboardId,
       std::int64_t score,
-      const opt::optional<std::int64_t>& subscore = opt::nullopt,
-      const opt::optional<std::string>& metadata = opt::nullopt) override;
+      const std::optional<std::int64_t>& subscore = std::nullopt,
+      const std::optional<std::string>& metadata = std::nullopt) override;
 
   std::future<NLeaderboardRecord> writeTournamentRecordAsync(
       NSessionPtr session,
       const std::string& tournamentId,
       std::int64_t score,
-      const opt::optional<std::int64_t>& subscore = opt::nullopt,
-      const opt::optional<std::string>& metadata = opt::nullopt) override;
+      const std::optional<std::int64_t>& subscore = std::nullopt,
+      const std::optional<std::string>& metadata = std::nullopt) override;
 
   std::future<void> deleteLeaderboardRecordAsync(NSessionPtr session, const std::string& leaderboardId) override;
 
   std::future<NMatchListPtr> listMatchesAsync(
       NSessionPtr session,
-      const opt::optional<int32_t>& min_size = opt::nullopt,
-      const opt::optional<int32_t>& max_size = opt::nullopt,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& label = opt::nullopt,
-      const opt::optional<std::string>& query = opt::nullopt,
-      const opt::optional<bool>& authoritative = opt::nullopt) override;
+      const std::optional<int32_t>& min_size = std::nullopt,
+      const std::optional<int32_t>& max_size = std::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& label = std::nullopt,
+      const std::optional<std::string>& query = std::nullopt,
+      const std::optional<bool>& authoritative = std::nullopt) override;
 
   std::future<NNotificationListPtr> listNotificationsAsync(
       NSessionPtr session,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cacheableCursor = opt::nullopt) override;
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cacheableCursor = std::nullopt) override;
 
   std::future<void>
   deleteNotificationsAsync(NSessionPtr session, const std::vector<std::string>& notificationIds) override;
@@ -302,46 +305,46 @@ public:
   std::future<NChannelMessageListPtr> listChannelMessagesAsync(
       NSessionPtr session,
       const std::string& channelId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt,
-      const opt::optional<bool>& forward = opt::nullopt) override;
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt,
+      const std::optional<bool>& forward = std::nullopt) override;
 
   std::future<NTournamentListPtr> listTournamentsAsync(
       NSessionPtr session,
-      const opt::optional<uint32_t>& categoryStart = opt::nullopt,
-      const opt::optional<uint32_t>& categoryEnd = opt::nullopt,
-      const opt::optional<uint32_t>& startTime = opt::nullopt,
-      const opt::optional<uint32_t>& endTime = opt::nullopt,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt) override;
+      const std::optional<uint32_t>& categoryStart = std::nullopt,
+      const std::optional<uint32_t>& categoryEnd = std::nullopt,
+      const std::optional<uint32_t>& startTime = std::nullopt,
+      const std::optional<uint32_t>& endTime = std::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt) override;
 
   std::future<NTournamentRecordListPtr> listTournamentRecordsAsync(
       NSessionPtr session,
       const std::string& tournamentId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt,
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt,
       const std::vector<std::string>& ownerIds = {}) override;
 
   std::future<NTournamentRecordListPtr> listTournamentRecordsAroundOwnerAsync(
       NSessionPtr session,
       const std::string& tournamentId,
       const std::string& ownerId,
-      const opt::optional<int32_t>& limit = opt::nullopt) override;
+      const std::optional<int32_t>& limit = std::nullopt) override;
 
   std::future<void> joinTournamentAsync(NSessionPtr session, const std::string& tournamentId) override;
 
   std::future<NStorageObjectListPtr> listStorageObjectsAsync(
       NSessionPtr session,
       const std::string& collection,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt) override;
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt) override;
 
   std::future<NStorageObjectListPtr> listUsersStorageObjectsAsync(
       NSessionPtr session,
       const std::string& collection,
       const std::string& userId,
-      const opt::optional<int32_t>& limit = opt::nullopt,
-      const opt::optional<std::string>& cursor = opt::nullopt) override;
+      const std::optional<int32_t>& limit = std::nullopt,
+      const std::optional<std::string>& cursor = std::nullopt) override;
 
   std::future<NStorageObjectAcks>
   writeStorageObjectsAsync(NSessionPtr session, const std::vector<NStorageObjectWrite>& objects) override;
@@ -355,12 +358,12 @@ public:
   std::future<NRpc> rpcAsync(
       NSessionPtr session,
       const std::string& id,
-      const opt::optional<std::string>& payload = opt::nullopt) override;
+      const std::optional<std::string>& payload = std::nullopt) override;
 
   std::future<NRpc> rpcAsync(
       const std::string& http_key,
       const std::string& id,
-      const opt::optional<std::string>& payload = opt::nullopt) override;
+      const std::optional<std::string>& payload = std::nullopt) override;
 
 protected:
   int _port = -1;
