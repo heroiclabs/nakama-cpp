@@ -6,16 +6,6 @@ android {
     namespace = "com.heroiclabs.nakama"
     compileSdk = 34
 
-    buildFeatures {
-        prefab = true
-        prefabPublishing = true
-    }
-
-    prefab {
-        create("nakama-sdk") {
-        }
-    }
-
     defaultConfig {
         ndkVersion = "27.2.12479018"
         minSdk = 28
