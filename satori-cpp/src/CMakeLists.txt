@@ -18,4 +18,5 @@ target_link_libraries(satori-client
         PRIVATE
         nakama::sdk-core-common
         nakama::sdk-interface
+        rapidjson
 )

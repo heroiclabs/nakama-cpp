@@ -18,11 +18,13 @@
 
 #include <iostream>
 #include <ostream>
+#include <string>
+#include <vector>
 
 #include "nakama-cpp/NError.h"
 #include "nakama-cpp/log/NLogger.h"
-#include "rapidjson/document.h"
-#include "rapidjson/error/en.h"
+#include <rapidjson/document.h>
+#include <rapidjson/error/en.h>
 
 namespace Satori {
 bool jsonValueToStringVector(const rapidjson::Value& input, std::vector<std::string>& output) {
