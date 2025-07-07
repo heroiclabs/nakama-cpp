@@ -26,7 +26,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Android" AND DEFINED ANDROID_ABI)
     # select appropriate triplet, override toolchain file, etc.
     string(REPLACE "_" "-" ANDROID_ABI_TRIPLET ${ANDROID_ABI})
     set(VCPKG_TARGET_TRIPLET "${ANDROID_ABI_TRIPLET}-android-heroic")
-    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${ANDROID_NDK}/build/cmake/android-legacy.toolchain.cmake")
     set(VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_LIST_DIR}/cmake/vcpkg-ports")
     set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_LIST_DIR}/cmake/triplets")
     # This env var is used by vcpkg's android toolchain
@@ -63,10 +63,6 @@ endif()
 if (WITH_WS_LIBHTTPC OR WITH_WS_WSLAY OR WITH_WS_CPPREST)
     # This var goes into public config.h, so set it early
     set(HAVE_DEFAULT_RT_TRANSPORT_FACTORY ON)
-endif()
-
-if (ANDROID)
-    SET(ANDROID_USE_LEGACY_TOOLCHAIN_FILE FALSE)
 endif()
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
@@ -184,9 +180,10 @@ if (WS_IMPL_LIB)
             INTERFACE $<TARGET_OBJECTS:${WS_IMPL_LIB}>)
 endif()
 
-if (ANDROID AND (WITH_HTTP_CURL OR WITH_WS_WSLAY))
+if (ANDROID)
     add_subdirectory(impl/android)
-    set(CREATE_JAR TRUE) # we need the code for accessing native Android CA store.
+#    set(CREATE_JAR TRUE) # we need the code for accessing native Android CA store.
+    set(CREATE_JAR FALSE) # we need the code for accessing native Android CA store.
 
     if (TARGET nakama::impl-http-libcurl)
         target_link_libraries(nakama-impl-http-libcurl PUBLIC android-ca)
@@ -195,8 +192,7 @@ if (ANDROID AND (WITH_HTTP_CURL OR WITH_WS_WSLAY))
     if (TARGET nakama::impl-ws-wslay)
         target_link_libraries(nakama-impl-ws-wslay PUBLIC android-ca)
     endif()
-
-    list(APPEND NAKAMA_SDK_DEPS android-ca)
+   list(APPEND NAKAMA_SDK_DEPS nakama::android-ca)
 else()
     set(CREATE_JAR FALSE)
 endif()
