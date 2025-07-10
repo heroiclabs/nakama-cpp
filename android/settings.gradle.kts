@@ -20,4 +20,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "nakama"
-include(":nativelib")
+include(":nakama-sdk")
