@@ -93,11 +93,6 @@
         "WITH_HTTP_CURL": "ON",
         "WITH_WS_WSLAY": "ON",
         "CMAKE_SYSTEM_NAME": "Android"
-      },
-      "condition": {
-        "type": "equals",
-        "lhs": "${hostSystemName}",
-        "rhs": "Darwin"
       }
     },
     {
