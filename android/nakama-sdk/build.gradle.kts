@@ -56,7 +56,7 @@ android {
         minSdk = 28
         externalNativeBuild {
             cmake {
-                arguments("-DANDROID_STL=c++_shared")
+                arguments("-DANDROID_STL=c++_shared", "-DINSIDE_GRADLE=ON")
                 targets("nakama-sdk")
             }
         }
