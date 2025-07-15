@@ -56,7 +56,11 @@ android {
         minSdk = 28
         externalNativeBuild {
             cmake {
-                arguments("-DANDROID_STL=c++_shared", "-DINSIDE_GRADLE=ON")
+                arguments += listOf(
+                    "-DANDROID_STL=c++_shared",
+                    "-DINSIDE_GRADLE=ON",  // this is picked up by our CMake to interpose VCPKG toolchain
+                    "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON",
+                )
                 targets("nakama-sdk")
             }
         }
