@@ -21,12 +21,12 @@ option(BUILD_TESTING "Build tests" OFF)
 
 option(RTTI "Enable RTTI on classes which could be inherited by app" ON)
 
-if (CMAKE_SYSTEM_NAME STREQUAL "Android" AND DEFINED ANDROID_ABI)
+if (INSIDE_GRADLE)
     # We are called from gradle. Do what normally CMakePresets do and
     # select appropriate triplet, override toolchain file, etc.
     string(REPLACE "_" "-" ANDROID_ABI_TRIPLET ${ANDROID_ABI})
     set(VCPKG_TARGET_TRIPLET "${ANDROID_ABI_TRIPLET}-android-heroic")
-    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${ANDROID_NDK}/build/cmake/android-legacy.toolchain.cmake")
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${CMAKE_TOOLCHAIN_FILE}")
     set(VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_LIST_DIR}/cmake/vcpkg-ports")
     set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_LIST_DIR}/cmake/triplets")
     # This env var is used by vcpkg's android toolchain
