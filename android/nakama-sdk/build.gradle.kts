@@ -102,7 +102,7 @@ afterEvaluate {
     // Copy headers after CMake build runs and generates config.h
     copyH.configure {
         val cmakeBuildTasks = tasks.matching { it.name.startsWith("buildCMake") }
-        dependsOn(cmakeBuildTasks)
+        mustRunAfter(cmakeBuildTasks)
     }
 
     // prefab needs to wait until we copyH completes preparing directory with all headers
