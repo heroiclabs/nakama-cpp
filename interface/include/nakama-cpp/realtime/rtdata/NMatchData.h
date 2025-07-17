@@ -18,7 +18,6 @@
 
 #include <nakama-cpp/realtime/rtdata/NUserPresence.h>
 #include <nakama-cpp/NTypes.h>
-#include <nakama-cpp/NExport.h>
 
 NAKAMA_NAMESPACE_BEGIN
 

@@ -22,9 +22,6 @@
 #include <memory>
 #include <vector>
 
-#include <nakama-cpp/NTypes.h>
-#include <nakama-cpp/NExport.h>
-
 NAKAMA_NAMESPACE_BEGIN
 
     enum class NRtTransportType

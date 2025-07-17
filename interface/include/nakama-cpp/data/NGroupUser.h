@@ -18,7 +18,6 @@
 
 #include <nakama-cpp/data/NUser.h>
 #include <nakama-cpp/NTypes.h>
-#include <nakama-cpp/NExport.h>
 
 NAKAMA_NAMESPACE_BEGIN
 

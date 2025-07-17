@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#pragma once
 
 #define RAPIDJSON_HAS_STDSTRING 1
 #define RAPIDJSON_NAMESPACE Nakama::rapidjson

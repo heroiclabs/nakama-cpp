@@ -16,9 +16,9 @@
 
 #pragma once
 
-#include "nakama-cpp/NExport.h"
-#include "nakama-cpp/NTypes.h"
-#include "nakama-cpp/URLParts.h"
+#include <nakama-cpp/NTypes.h>
+#include <nakama-cpp/URLParts.h>
+
 #include <optional>
 #include <string>
 
