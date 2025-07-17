@@ -10,7 +10,7 @@ else ()
     add_executable(nakama-sdk-test ${SOURCES})
 endif ()
 
-target_link_libraries(nakama-sdk-test PRIVATE nakama-sdk)
+target_link_libraries(nakama-sdk-test PRIVATE nakama-sdk rapidjson)
 
 if (MSVC)
     target_compile_options(nakama-sdk-test PRIVATE /W4 /wd4251 /wd4267 /utf-8)
