@@ -22,7 +22,6 @@
 #include <memory>
 #include <string>
 
-#include <nakama-cpp/NExport.h>
 #include <nakama-cpp/NTypes.h>
 
 NAKAMA_NAMESPACE_BEGIN

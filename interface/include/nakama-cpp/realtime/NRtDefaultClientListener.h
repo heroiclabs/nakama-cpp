@@ -17,7 +17,6 @@
 #pragma once
 
 #include <nakama-cpp/NTypes.h>
-#include <nakama-cpp/NExport.h>
 #include <nakama-cpp/realtime/NRtClientListenerInterface.h>
 #include <functional>
 

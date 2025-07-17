@@ -16,7 +16,6 @@
 
 #pragma once
 
-#include <atomic>
 #include <httpClient/httpClient.h>
 #include <memory>
 #include <nakama-cpp/NPlatformParams.h>

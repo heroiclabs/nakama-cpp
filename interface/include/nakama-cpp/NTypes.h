@@ -17,10 +17,8 @@
 #pragma once
 
 #include <nakama-cpp/config.h>
-#include <nakama-cpp/NExport.h>
 #include <cstdint>
 #include <string>
-#include <vector>
 #include <map>
 
 #ifndef NAKAMA_NAMESPACE
