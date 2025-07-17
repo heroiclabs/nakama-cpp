@@ -42,29 +42,29 @@ public:
 
   std::future<NSessionPtr> authenticateDeviceAsync(
       const std::string& id,
-      const std::optional<std::string>& username = std::nullopt,
-      const std::optional<bool>& create = std::nullopt,
-      const NStringMap& vars = {}) override;
+      const std::optional<std::string>& username,
+      const std::optional<bool>& create,
+      const NStringMap& vars) override;
 
   std::future<NSessionPtr> authenticateEmailAsync(
       const std::string& email,
       const std::string& password,
-      const std::string& username = std::string(),
-      bool create = false,
-      const NStringMap& vars = {}) override;
+      const std::string& username,
+      bool create,
+      const NStringMap& vars) override;
 
   std::future<NSessionPtr> authenticateFacebookAsync(
       const std::string& accessToken,
-      const std::string& username = std::string(),
-      bool create = false,
-      bool importFriends = false,
-      const NStringMap& vars = {}) override;
+      const std::string& username,
+      bool create,
+      bool importFriends,
+      const NStringMap& vars) override;
 
   std::future<NSessionPtr> authenticateGoogleAsync(
       const std::string& accessToken,
-      const std::string& username = std::string(),
-      bool create = false,
-      const NStringMap& vars = {}) override;
+      const std::string& username,
+      bool create,
+      const NStringMap& vars) override;
 
   std::future<NSessionPtr> authenticateGameCenterAsync(
       const std::string& playerId,
@@ -73,36 +73,36 @@ public:
       const std::string& salt,
       const std::string& signature,
       const std::string& publicKeyUrl,
-      const std::string& username = std::string(),
-      bool create = false,
-      const NStringMap& vars = {}) override;
+      const std::string& username,
+      bool create,
+      const NStringMap& vars) override;
 
   std::future<NSessionPtr> authenticateAppleAsync(
       const std::string& token,
-      const std::string& username = std::string(),
-      bool create = false,
-      const NStringMap& vars = {}) override;
+      const std::string& username,
+      bool create,
+      const NStringMap& vars) override;
 
   std::future<NSessionPtr> authenticateCustomAsync(
       const std::string& id,
-      const std::string& username = std::string(),
-      bool create = false,
-      const NStringMap& vars = {}) override;
+      const std::string& username,
+      bool create,
+      const NStringMap& vars) override;
 
   std::future<NSessionPtr> authenticateSteamAsync(
       const std::string& token,
-      const std::string& username = std::string(),
-      bool create = false,
-      const NStringMap& vars = {}) override;
+      const std::string& username,
+      bool create,
+      const NStringMap& vars) override;
 
-  std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session, const NStringMap& vars = {}) override;
+  std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session, const NStringMap& vars) override;
 
   std::future<void> sessionLogoutAsync(NSessionPtr session) override;
 
   std::future<void> linkFacebookAsync(
       NSessionPtr session,
       const std::string& accessToken,
-      const std::optional<bool>& importFriends = std::nullopt) override;
+      const std::optional<bool>& importFriends) override;
 
   std::future<void> linkEmailAsync(NSessionPtr session, const std::string& email, const std::string& password) override;
 
@@ -152,7 +152,7 @@ public:
   std::future<void> importFacebookFriendsAsync(
       NSessionPtr session,
       const std::string& token,
-      const std::optional<bool>& reset = std::nullopt) override;
+      const std::optional<bool>& reset) override;
 
   std::future<NAccount> getAccountAsync(NSessionPtr session) override;
 
@@ -160,49 +160,49 @@ public:
 
   std::future<void> updateAccountAsync(
       NSessionPtr session,
-      const std::optional<std::string>& username = std::nullopt,
-      const std::optional<std::string>& displayName = std::nullopt,
-      const std::optional<std::string>& avatarUrl = std::nullopt,
-      const std::optional<std::string>& langTag = std::nullopt,
-      const std::optional<std::string>& location = std::nullopt,
-      const std::optional<std::string>& timezone = std::nullopt) override;
+      const std::optional<std::string>& username,
+      const std::optional<std::string>& displayName,
+      const std::optional<std::string>& avatarUrl,
+      const std::optional<std::string>& langTag,
+      const std::optional<std::string>& location,
+      const std::optional<std::string>& timezone) override;
 
   std::future<NUsers> getUsersAsync(
       NSessionPtr session,
       const std::vector<std::string>& ids,
-      const std::vector<std::string>& usernames = {},
-      const std::vector<std::string>& facebookIds = {}) override;
+      const std::vector<std::string>& usernames,
+      const std::vector<std::string>& facebookIds) override;
 
   std::future<void> addFriendsAsync(
       NSessionPtr session,
       const std::vector<std::string>& ids,
-      const std::vector<std::string>& usernames = {}) override;
+      const std::vector<std::string>& usernames) override;
 
   std::future<void> deleteFriendsAsync(
       NSessionPtr session,
       const std::vector<std::string>& ids,
-      const std::vector<std::string>& usernames = {}) override;
+      const std::vector<std::string>& usernames) override;
 
   std::future<void> blockFriendsAsync(
       NSessionPtr session,
       const std::vector<std::string>& ids,
-      const std::vector<std::string>& usernames = {}) override;
+      const std::vector<std::string>& usernames) override;
 
   std::future<NFriendListPtr> listFriendsAsync(
       NSessionPtr session,
       const std::optional<int32_t>& limit,
       const std::optional<NFriend::State>& state,
-      const std::string& cursor = "") override;
+      const std::string& cursor) override;
   ;
 
   std::future<NGroup> createGroupAsync(
       NSessionPtr session,
       const std::string& name,
-      const std::string& description = "",
-      const std::string& avatarUrl = "",
-      const std::string& langTag = "",
-      bool open = false,
-      const std::optional<int32_t>& maxCount = {}) override;
+      const std::string& description,
+      const std::string& avatarUrl,
+      const std::string& langTag,
+      bool open,
+      const std::optional<int32_t>& maxCount) override;
 
   std::future<void> deleteGroupAsync(NSessionPtr session, const std::string& groupId) override;
   ;
@@ -215,7 +215,7 @@ public:
       const std::string& groupId,
       const std::optional<int32_t>& limit,
       const std::optional<NUserGroupState>& state,
-      const std::string& cursor = "") override;
+      const std::string& cursor) override;
 
   std::future<void>
   kickGroupUsersAsync(NSessionPtr session, const std::string& groupId, const std::vector<std::string>& ids) override;
@@ -225,21 +225,21 @@ public:
   std::future<void> leaveGroupAsync(NSessionPtr session, const std::string& groupId) override;
 
   std::future<NGroupListPtr>
-  listGroupsAsync(NSessionPtr session, const std::string& name, int32_t limit = 0, const std::string& cursor = "")
+  listGroupsAsync(NSessionPtr session, const std::string& name, int32_t limit, const std::string& cursor)
       override;
 
   std::future<NUserGroupListPtr> listUserGroupsAsync(
       NSessionPtr session,
       const std::optional<int32_t>& limit,
       const std::optional<NUserGroupState>& state,
-      const std::string& cursor = "") override;
+      const std::string& cursor) override;
 
   std::future<NUserGroupListPtr> listUserGroupsAsync(
       NSessionPtr session,
       const std::string& userId,
       const std::optional<int32_t>& limit,
       const std::optional<NUserGroupState>& state,
-      const std::string& cursor = "") override;
+      const std::string& cursor) override;
 
   std::future<void>
   promoteGroupUsersAsync(NSessionPtr session, const std::string& groupId, const std::vector<std::string>& ids) override;
@@ -250,54 +250,54 @@ public:
   std::future<void> updateGroupAsync(
       NSessionPtr session,
       const std::string& groupId,
-      const std::optional<std::string>& name = std::nullopt,
-      const std::optional<std::string>& description = std::nullopt,
-      const std::optional<std::string>& avatarUrl = std::nullopt,
-      const std::optional<std::string>& langTag = std::nullopt,
-      const std::optional<bool>& open = std::nullopt) override;
+      const std::optional<std::string>& name,
+      const std::optional<std::string>& description,
+      const std::optional<std::string>& avatarUrl,
+      const std::optional<std::string>& langTag,
+      const std::optional<bool>& open) override;
 
   std::future<NLeaderboardRecordListPtr> listLeaderboardRecordsAsync(
       NSessionPtr session,
       const std::string& leaderboardId,
-      const std::vector<std::string>& ownerIds = {},
-      const std::optional<int32_t>& limit = std::nullopt,
-      const std::optional<std::string>& cursor = std::nullopt) override;
+      const std::vector<std::string>& ownerIds,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor) override;
 
   std::future<NLeaderboardRecordListPtr> listLeaderboardRecordsAroundOwnerAsync(
       NSessionPtr session,
       const std::string& leaderboardId,
       const std::string& ownerId,
-      const std::optional<int32_t>& limit = std::nullopt) override;
+      const std::optional<int32_t>& limit) override;
 
   std::future<NLeaderboardRecord> writeLeaderboardRecordAsync(
       NSessionPtr session,
       const std::string& leaderboardId,
       std::int64_t score,
-      const std::optional<std::int64_t>& subscore = std::nullopt,
-      const std::optional<std::string>& metadata = std::nullopt) override;
+      const std::optional<std::int64_t>& subscore,
+      const std::optional<std::string>& metadata) override;
 
   std::future<NLeaderboardRecord> writeTournamentRecordAsync(
       NSessionPtr session,
       const std::string& tournamentId,
       std::int64_t score,
-      const std::optional<std::int64_t>& subscore = std::nullopt,
-      const std::optional<std::string>& metadata = std::nullopt) override;
+      const std::optional<std::int64_t>& subscore,
+      const std::optional<std::string>& metadata) override;
 
   std::future<void> deleteLeaderboardRecordAsync(NSessionPtr session, const std::string& leaderboardId) override;
 
   std::future<NMatchListPtr> listMatchesAsync(
       NSessionPtr session,
-      const std::optional<int32_t>& min_size = std::nullopt,
-      const std::optional<int32_t>& max_size = std::nullopt,
-      const std::optional<int32_t>& limit = std::nullopt,
-      const std::optional<std::string>& label = std::nullopt,
-      const std::optional<std::string>& query = std::nullopt,
-      const std::optional<bool>& authoritative = std::nullopt) override;
+      const std::optional<int32_t>& min_size,
+      const std::optional<int32_t>& max_size,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& label,
+      const std::optional<std::string>& query,
+      const std::optional<bool>& authoritative) override;
 
   std::future<NNotificationListPtr> listNotificationsAsync(
       NSessionPtr session,
-      const std::optional<int32_t>& limit = std::nullopt,
-      const std::optional<std::string>& cacheableCursor = std::nullopt) override;
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cacheableCursor) override;
 
   std::future<void>
   deleteNotificationsAsync(NSessionPtr session, const std::vector<std::string>& notificationIds) override;
@@ -305,46 +305,46 @@ public:
   std::future<NChannelMessageListPtr> listChannelMessagesAsync(
       NSessionPtr session,
       const std::string& channelId,
-      const std::optional<int32_t>& limit = std::nullopt,
-      const std::optional<std::string>& cursor = std::nullopt,
-      const std::optional<bool>& forward = std::nullopt) override;
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor,
+      const std::optional<bool>& forward) override;
 
   std::future<NTournamentListPtr> listTournamentsAsync(
       NSessionPtr session,
-      const std::optional<uint32_t>& categoryStart = std::nullopt,
-      const std::optional<uint32_t>& categoryEnd = std::nullopt,
-      const std::optional<uint32_t>& startTime = std::nullopt,
-      const std::optional<uint32_t>& endTime = std::nullopt,
-      const std::optional<int32_t>& limit = std::nullopt,
-      const std::optional<std::string>& cursor = std::nullopt) override;
+      const std::optional<uint32_t>& categoryStart,
+      const std::optional<uint32_t>& categoryEnd,
+      const std::optional<uint32_t>& startTime,
+      const std::optional<uint32_t>& endTime,
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor) override;
 
   std::future<NTournamentRecordListPtr> listTournamentRecordsAsync(
       NSessionPtr session,
       const std::string& tournamentId,
-      const std::optional<int32_t>& limit = std::nullopt,
-      const std::optional<std::string>& cursor = std::nullopt,
-      const std::vector<std::string>& ownerIds = {}) override;
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor,
+      const std::vector<std::string>& ownerIds) override;
 
   std::future<NTournamentRecordListPtr> listTournamentRecordsAroundOwnerAsync(
       NSessionPtr session,
       const std::string& tournamentId,
       const std::string& ownerId,
-      const std::optional<int32_t>& limit = std::nullopt) override;
+      const std::optional<int32_t>& limit) override;
 
   std::future<void> joinTournamentAsync(NSessionPtr session, const std::string& tournamentId) override;
 
   std::future<NStorageObjectListPtr> listStorageObjectsAsync(
       NSessionPtr session,
       const std::string& collection,
-      const std::optional<int32_t>& limit = std::nullopt,
-      const std::optional<std::string>& cursor = std::nullopt) override;
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor) override;
 
   std::future<NStorageObjectListPtr> listUsersStorageObjectsAsync(
       NSessionPtr session,
       const std::string& collection,
       const std::string& userId,
-      const std::optional<int32_t>& limit = std::nullopt,
-      const std::optional<std::string>& cursor = std::nullopt) override;
+      const std::optional<int32_t>& limit,
+      const std::optional<std::string>& cursor) override;
 
   std::future<NStorageObjectAcks>
   writeStorageObjectsAsync(NSessionPtr session, const std::vector<NStorageObjectWrite>& objects) override;
@@ -358,12 +358,12 @@ public:
   std::future<NRpc> rpcAsync(
       NSessionPtr session,
       const std::string& id,
-      const std::optional<std::string>& payload = std::nullopt) override;
+      const std::optional<std::string>& payload) override;
 
   std::future<NRpc> rpcAsync(
       const std::string& http_key,
       const std::string& id,
-      const std::optional<std::string>& payload = std::nullopt) override;
+      const std::optional<std::string>& payload) override;
 
 protected:
   int _port = -1;
