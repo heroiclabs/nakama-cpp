@@ -18,6 +18,8 @@
 #include "NTest.h"
 #include "nakama-cpp/NUtils.h"
 
+#include <optional>
+
 namespace Nakama {
 namespace Test {
 
@@ -95,7 +97,7 @@ void test_restoreSession()
         }
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
+    test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
 
     test.runTest();
 }

@@ -17,6 +17,8 @@
 #include "NTest.h"
 #include "globals.h"
 
+#include <optional>
+
 namespace Nakama {
 namespace Test {
 
@@ -54,7 +56,7 @@ void test_authenticateDevice() {
     test.stopTest(session->getAuthToken().empty() == false);
   };
 
-  test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
+  test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
 
   test.runTest();
 }
@@ -71,7 +73,7 @@ void test_authenticateDevice2() {
 
   vars.emplace("param1", "test value");
 
-  test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, vars, successCallback);
+  test.client->authenticateDevice("mytestdevice0001", std::nullopt, std::nullopt, vars, successCallback);
 
   test.runTest();
 }
@@ -99,7 +101,7 @@ void test_authenticateRefresh() {
   vars.emplace("param1", "test value");
   vars.emplace("paramC", "test constant");
 
-  test.client->authenticateDevice("mytestdevice0001", opt::nullopt, true, vars, successCallback);
+  test.client->authenticateDevice("mytestdevice0001", std::nullopt, true, vars, successCallback);
 
   test.runTest();
 }

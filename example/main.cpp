@@ -81,7 +81,7 @@ int mainHelper() {
   NLOG_INFO("Authenticating...");
 
   client->authenticateDevice(
-      deviceId, Nakama::opt::nullopt, Nakama::opt::nullopt, {}, loginSucceededCallback, loginFailedCallback);
+      deviceId, std::nullopt, std::nullopt, {}, loginSucceededCallback, loginFailedCallback);
 
   while (!done) {
     client->tick();

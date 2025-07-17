@@ -17,6 +17,8 @@
 #include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
 
+#include <optional>
+
 namespace Nakama {
 namespace Test {
 
@@ -41,19 +43,19 @@ void test_getAccount()
             };
 
             test.client->updateAccount(session,
-                opt::nullopt,
+                std::nullopt,
                 "Nakama-test",
-                opt::nullopt,
-                opt::nullopt,
-                opt::nullopt,
-                opt::nullopt,
+                std::nullopt,
+                std::nullopt,
+                std::nullopt,
+                std::nullopt,
                 successCallback);
         };
 
         test.client->getAccount(session, successCallback);
     };
 
-    test.client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
+    test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
 
     test.runTest();
 }
