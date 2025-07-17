@@ -16,12 +16,13 @@
 
 #pragma once
 
-#include "nakama-cpp/ClientFactory.h"
-#include "nakama-cpp/NClientInterface.h"
-#include "nakama-cpp/realtime/NRtDefaultClientListener.h"
+#include <nakama-cpp/ClientFactory.h>
+#include <nakama-cpp/NClientInterface.h>
+#include <nakama-cpp/realtime/NRtDefaultClientListener.h>
+#include <nakama-cpp/NError.h>
+
 #include <atomic>
 #include <iostream>
-#include <nakama-cpp/NError.h>
 #include <string>
 #include <thread>
 
