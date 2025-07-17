@@ -123,14 +123,14 @@ NAKAMA_NAMESPACE_BEGIN
          *
          * Default is 5 seconds.
          *
-         * @param interval interval in ms send heartbeats in. Passing opt::nullopt disables heartbeats.
+         * @param interval interval in ms send heartbeats in. Passing std::nullopt disables heartbeats.
          */
         virtual void setHeartbeatIntervalMs(std::optional<int> ms) = 0;
 
         /**
          * Get heartbeat interval in milliseconds.
          *
-         * @return heartbeat interval value or opt::nullopt if disabled
+         * @return heartbeat interval value or std::nullopt if disabled
          */
         virtual std::optional<int> getHeartbeatIntervalMs() = 0;
 

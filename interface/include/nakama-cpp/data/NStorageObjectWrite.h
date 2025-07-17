@@ -19,6 +19,7 @@
 #include <nakama-cpp/NTypes.h>
 #include <nakama-cpp/data/NStoragePermissions.h>
 #include <string>
+#include <optional>
 
 NAKAMA_NAMESPACE_BEGIN
 

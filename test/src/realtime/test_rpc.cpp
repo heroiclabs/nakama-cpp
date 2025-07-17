@@ -15,12 +15,11 @@
  */
 
 #include <exception>
-#include "nakama-cpp/NError.h"
 #include "globals.h"
 #include "NTest.h"
-#include "nakama-cpp/NException.h"
-#include "nakama-cpp/realtime/rtdata/NRtException.h"
 #include "TestGuid.h"
+
+#include <optional>
 
 namespace Nakama {
     namespace Test {
@@ -47,7 +46,7 @@ namespace Nakama {
         auto rpc1 = test1.client->rpcAsync(NTest::ServerHttpKey, "clientrpc.rpc", json).get();
         test1.stopTest(!rpc1.payload.empty());
 
-        auto rpc2 = test2.client->rpcAsync(NTest::ServerHttpKey, "clientrpc.rpc", opt::nullopt).get();
+        auto rpc2 = test2.client->rpcAsync(NTest::ServerHttpKey, "clientrpc.rpc", std::nullopt).get();
         test2.stopTest(rpc2.payload.empty());
     }
 
@@ -60,7 +59,7 @@ namespace Nakama {
 
         NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
 
-        auto rpc1 = test.client->rpcAsync(session, "clientrpc.rpc", opt::nullopt).get();
+        auto rpc1 = test.client->rpcAsync(session, "clientrpc.rpc", std::nullopt).get();
         NTEST_ASSERT(rpc1.payload.empty());
 
         string json = "{\"user_id\":\"" + session->getUserId() + "\"}";
@@ -88,7 +87,7 @@ namespace Nakama {
 
         test.rtClient->connectAsync(session, false).get();
 
-        auto rpc6 = test.rtClient->rpcAsync("clientrpc.rpc", opt::nullopt);
+        auto rpc6 = test.rtClient->rpcAsync("clientrpc.rpc", std::nullopt);
         json = "{\"user_id\":\"" + session->getUserId() + "\"}";
 
         auto rpc7 = test.rtClient->rpcAsync("clientrpc.rpc", json).get();
