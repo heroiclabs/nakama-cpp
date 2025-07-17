@@ -17,6 +17,8 @@
 #include "NTest.h"
 #include "globals.h"
 
+#include <optional>
+
 namespace Nakama {
 namespace Test {
 
@@ -37,7 +39,7 @@ public:
       listMatches();
     };
 
-    client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
+    client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
 
     NTest::runTest();
   }

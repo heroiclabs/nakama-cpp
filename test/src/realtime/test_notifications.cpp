@@ -18,6 +18,8 @@
 #include "NTest.h"
 #include "TestGuid.h"
 
+#include <optional>
+
 namespace Nakama {
 namespace Test {
 
@@ -60,7 +62,7 @@ void test_createListAndDeleteNotifications()
     bool createStatus = false;
     test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
     const Nakama::NRpc rpc = test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
-    NNotificationListPtr list = test.client->listNotificationsAsync(session, opt::nullopt, opt::nullopt).get();
+    NNotificationListPtr list = test.client->listNotificationsAsync(session, std::nullopt, std::nullopt).get();
     if (list->notifications.size() > 0)
     {
         for (auto& notification : list->notifications)

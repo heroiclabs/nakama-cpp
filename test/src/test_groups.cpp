@@ -18,6 +18,8 @@
 #include "nakama-cpp/NSessionInterface.h"
 #include "nakama-cpp/log/NLogger.h"
 
+#include <optional>
+
 namespace Nakama {
 namespace Test {
 
@@ -43,7 +45,7 @@ public:
             listGroups();
         };
 
-        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
+        client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
 
         NTest::runTest();
     }
@@ -86,7 +88,7 @@ public:
             "",  // avatar URL
             "en_US",
             true, // open
-            opt::nullopt,
+            std::nullopt,
             successCallback);
     }
 
@@ -100,11 +102,11 @@ public:
 
         client->updateGroup(session,
             groupId,
-            opt::nullopt,
+            std::nullopt,
             "Nakama is awesome!",
-            opt::nullopt,
-            opt::nullopt,
-            opt::nullopt,
+            std::nullopt,
+            std::nullopt,
+            std::nullopt,
             successCallback
         );
     }
@@ -131,7 +133,7 @@ public:
             listGroups();
         };
 
-        client->authenticateDevice("mytestdevice0000", opt::nullopt, true, {}, successCallback);
+        client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
 
         NTest::runTest();
     }
@@ -156,7 +158,7 @@ public:
                 stopTest(false);
             };
 
-            client->listGroupUsers(this->session, list->groups[0].id, 30, opt::nullopt, "", successCallback, failureCallback);
+            client->listGroupUsers(this->session, list->groups[0].id, 30, std::nullopt, "", successCallback, failureCallback);
 
         };
 

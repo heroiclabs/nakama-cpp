@@ -15,7 +15,9 @@
  */
 
 #include "NTest.h"
-#include "nakama-cpp/log/NLogger.h"
+#include <nakama-cpp/log/NLogger.h>
+
+#include <optional>
 
 namespace Nakama {
 namespace Test {
@@ -42,7 +44,7 @@ void test_connectError()
         test.stopTest(error.code == ErrorCode::ConnectionError || error.code == ErrorCode::CancelledByUser);
     };
 
-    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
+    test.client->authenticateDevice("mytestdevice0001", std::nullopt, std::nullopt, {}, successCallback, errorCallback);
 
     test.runTest();
 }
@@ -62,7 +64,7 @@ void test_disconnection()
         test.stopTest(error);
     };
 
-    test.client->authenticateDevice("mytestdevice0001", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
+    test.client->authenticateDevice("mytestdevice0001", std::nullopt, std::nullopt, {}, successCallback, errorCallback);
 
     test.client->disconnect();
 

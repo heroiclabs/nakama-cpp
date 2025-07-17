@@ -17,6 +17,8 @@
 #include "NTest.h"
 #include "nakama-cpp/log/NLogger.h"
 
+#include <optional>
+
 namespace Nakama {
 namespace Test {
 
@@ -38,7 +40,7 @@ void test_connectTimeout() {
     test.stopTest(error.code == ErrorCode::ConnectionError || error.code == ErrorCode::CancelledByUser);
   };
 
-  test.client->authenticateDevice("mytestdevice0007", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
+  test.client->authenticateDevice("mytestdevice0007", std::nullopt, std::nullopt, {}, successCallback, errorCallback);
 
   test.runTest();
 }
@@ -58,7 +60,7 @@ void test_connectTimeoutAmple() {
     test.stopTest();
   };
 
-  test.client->authenticateDevice("mytestdevice0007", opt::nullopt, opt::nullopt, {}, successCallback, errorCallback);
+  test.client->authenticateDevice("mytestdevice0007", std::nullopt, std::nullopt, {}, successCallback, errorCallback);
 
   test.runTest();
 }

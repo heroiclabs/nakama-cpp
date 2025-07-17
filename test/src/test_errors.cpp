@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
+#include <nakama-cpp/log/NLogger.h>
+
+#include <optional>
 
 namespace Nakama {
 namespace Test {
@@ -37,7 +39,7 @@ void test_error_NotFoundDevice()
         test.stopTest(error.code == ErrorCode::NotFound);
     };
 
-    test.client->authenticateDevice("_not_existing_device_id_", opt::nullopt, false, {}, successCallback, errorCallback);
+    test.client->authenticateDevice("_not_existing_device_id_", std::nullopt, false, {}, successCallback, errorCallback);
 
     test.runTest();
 }
@@ -77,7 +79,7 @@ void test_error_InvalidArgument()
         test.stopTest(error.code == ErrorCode::InvalidArgument);
     };
 
-    test.client->authenticateDevice("", opt::nullopt, false, {}, successCallback, errorCallback);
+    test.client->authenticateDevice("", std::nullopt, false, {}, successCallback, errorCallback);
 
     test.runTest();
 }
@@ -97,7 +99,7 @@ void test_error_InvalidArgument2()
         test.stopTest(error.code == ErrorCode::InvalidArgument);
     };
 
-    test.client->authenticateDevice("1", opt::nullopt, false, {}, successCallback, errorCallback);
+    test.client->authenticateDevice("1", std::nullopt, false, {}, successCallback, errorCallback);
 
     test.runTest();
 }

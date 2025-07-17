@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-#include <condition_variable>
-#include <thread>
 #include "NTest.h"
 #include "globals.h"
 #include "TestGuid.h"
+
+#include <optional>
+#include <condition_variable>
+#include <thread>
 
 namespace Nakama {
     namespace Test {
@@ -222,7 +224,7 @@ namespace Nakama {
             NTest test(__func__, threadedTick);
             test.setTestTimeoutMs(60 * 1000);
             test.runTest();
-            NSessionPtr session = test.client->authenticateDeviceAsync("mytestdevice0001", opt::nullopt, opt::nullopt, {}).get();
+            NSessionPtr session = test.client->authenticateDeviceAsync("mytestdevice0001", std::nullopt, std::nullopt, {}).get();
             test.rtClient->connect(session, true);
         }
     }
