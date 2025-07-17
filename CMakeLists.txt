@@ -134,7 +134,7 @@ endif()
 
 # unconditional
 find_package(RapidJSON CONFIG REQUIRED)
-set_property(TARGET RapidJSON APPEND PROPERTY
+set_property(TARGET rapidjson APPEND PROPERTY
         # on consoles rapidjson fail to detect C++11 strings presence
         # we know we have them, so set them unconditionally
         INTERFACE_COMPILE_DEFINITIONS

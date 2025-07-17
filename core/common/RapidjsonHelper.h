@@ -15,7 +15,6 @@
  */
 #pragma once
 
-#define RAPIDJSON_HAS_STDSTRING 1
 #define RAPIDJSON_NAMESPACE Nakama::rapidjson
 #define RAPIDJSON_NAMESPACE_BEGIN                                                                                      \
   namespace Nakama {                                                                                                   \
@@ -24,4 +23,4 @@
   }                                                                                                                    \
   }
 
-#include "rapidjson/document.h"
+#include <rapidjson/document.h>
