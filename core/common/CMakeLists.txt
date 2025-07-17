@@ -30,6 +30,7 @@
          $<TARGET_NAME_IF_EXISTS:nakama::grpc-proto>
          PRIVATE
          protobuf::libprotobuf   # because of StrUtil::Base64Encode
+         rapidjson
  )
 
  target_include_directories(nakama-sdk-core-common

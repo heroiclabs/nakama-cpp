@@ -1,19 +1,12 @@
 {
   "version-date": "2024-09-27",
   "name": "nakama-sdk",
-  "builtin-baseline": "2e58bb35ff7a3a037920d959ce20cb4d8c22319a",
-  "dependencies": [
-    "protobuf",
-    "rapidjson"
-  ],
+  "builtin-baseline": "d07689ef165f033de5c0710e4f67c193a85373e1",
+  "dependencies": ["protobuf", "rapidjson"],
   "features": {
     "libhttpclient": {
       "description": "libhttpclient dependencies",
-      "dependencies": [
-        {
-          "name": "zlib"
-        }
-      ]
+      "dependencies": [{ "name": "zlib" }]
     },
     "wslay": {
       "description": "Websockets library decoupled from IO and handshakes.",
@@ -33,9 +26,7 @@
         {
           "name": "curl",
           "default-features": false,
-          "features": [
-            "ssl"
-          ]
+          "features": ["ssl"]
         }
       ]
     },
@@ -45,18 +36,14 @@
         {
           "name": "llvm",
           "default-features": false,
-          "features": [
-            "libcxx"
-          ],
+          "features": ["libcxx"],
           "platform": "linux"
         }
       ]
     },
     "grpc": {
       "description": "The grpc networking protocol.",
-      "dependencies": [
-        "grpc"
-      ]
+      "dependencies": ["grpc"]
     },
     "cpprestsdk": {
       "description": "Maintenance-mode HTTP library.",
@@ -64,20 +51,12 @@
         {
           "name": "cpprestsdk",
           "default-features": false,
-          "features": [
-            "websockets"
-          ],
+          "features": ["websockets"],
           "platform": "android"
         }
       ],
       "supports": "android"
     }
   },
-  "overrides": [
-    {
-      "name": "protobuf",
-      "version": "3.21.12",
-      "port-version": 4
-    }
-  ]
+  "overrides": [{ "name": "protobuf", "version": "3.21.12", "port-version": 4 }]
 }
