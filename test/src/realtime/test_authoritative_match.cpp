@@ -16,9 +16,9 @@
 
 #include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
-#define RAPIDJSON_HAS_STDSTRING 1
-#include "rapidjson/document.h"
 #include "TestGuid.h"
+
+#include <rapidjson/document.h>
 
 namespace Nakama {
 namespace Test {
