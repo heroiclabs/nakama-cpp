@@ -153,8 +153,6 @@ add_subdirectory(factory EXCLUDE_FROM_ALL)
 
 add_subdirectory(satori-cpp)
 
-include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
-
 if (WITH_HTTP_CPPREST)
     set(HTTP_IMPL_LIB nakama::impl-http-cppRest)
     add_subdirectory(impl/httpCppRest EXCLUDE_FROM_ALL)
@@ -283,6 +281,9 @@ if (BUILD_TESTING)
     # Make tests produce .exe in the same dir as our nakama-sdk.dll
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY $<TARGET_FILE_DIR:nakama-sdk>)
     add_subdirectory(test)
+    add_subdirectory(submodules/private/test)
+
+    #include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 endif ()
 
 

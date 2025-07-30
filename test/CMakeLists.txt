@@ -12,6 +12,8 @@ endif ()
 
 target_link_libraries(nakama-sdk-test PRIVATE nakama-sdk rapidjson)
 
+set_property(TARGET nakama-sdk-test PROPERTY ENABLE_EXPORTS 1)
+
 if (MSVC)
     target_compile_options(nakama-sdk-test PRIVATE /W4 /wd4251 /wd4267 /utf-8)
     target_link_options(nakama-sdk-test PRIVATE /DEBUG)
