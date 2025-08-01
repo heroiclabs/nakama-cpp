@@ -12,6 +12,8 @@ endif ()
 
 target_link_libraries(nakama-sdk-test PRIVATE nakama-sdk rapidjson)
 
+target_include_directories(nakama-sdk-test PUBLIC include)
+
 set_property(TARGET nakama-sdk-test PROPERTY ENABLE_EXPORTS 1)
 
 if (MSVC)

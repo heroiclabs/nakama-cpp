@@ -235,6 +235,8 @@ endif()
 # defined target and not to fallback to '-lname' when target doesn't exist,
 # thus failing at configure time, rather than at link time should we make mistake
 # in build scripts
+
+
 list(APPEND NAKAMA_SDK_DEPS
         nakama::sdk-core-misc
         nakama::sdk-core-rest
@@ -244,12 +246,21 @@ list(APPEND NAKAMA_SDK_DEPS
         nakama::sdk-rtclient-factory
         satori::client
 )
+
 if (WITH_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS nakama::sdk-core-grpc)
 endif()
 
 add_library(nakama-sdk SHARED ${DUMMY_CPP} ${DUMMY_H})
 add_library(nakama::sdk ALIAS nakama-sdk)
+
+if (BUILD_TESTING)
+    # Make tests produce .exe in the same dir as our nakama-sdk.dll
+    add_subdirectory(test)
+
+    include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
+endif ()
+
 target_link_libraries(nakama-sdk
         PUBLIC
             nakama::sdk-interface
@@ -276,15 +287,6 @@ if (APPLE)
             MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
     )
 endif()
-
-if (BUILD_TESTING)
-    # Make tests produce .exe in the same dir as our nakama-sdk.dll
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY $<TARGET_FILE_DIR:nakama-sdk>)
-    add_subdirectory(test)
-    add_subdirectory(submodules/private/test)
-
-    #include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
-endif ()
 
 
 if (ADDRESS_SANITIZER)
