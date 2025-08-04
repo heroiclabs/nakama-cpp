@@ -1,4 +1,5 @@
-file(GLOB_RECURSE SOURCES include/*.h src/*.cpp src/*.h main.cpp)
+
+file(GLOB_RECURSE SOURCES include/*.h src/*.cpp src/*.h ${CMAKE_SOURCE_DIR}/submodules/private/test/main.cpp)
 
 enable_testing()
 
@@ -14,7 +15,7 @@ target_link_libraries(nakama-sdk-test PRIVATE nakama-sdk rapidjson)
 
 target_include_directories(nakama-sdk-test PUBLIC include)
 
-set_property(TARGET nakama-sdk-test PROPERTY ENABLE_EXPORTS 1)
+include("../submodules/private/test/CMakeLists.txt" OPTIONAL)
 
 if (MSVC)
     target_compile_options(nakama-sdk-test PRIVATE /W4 /wd4251 /wd4267 /utf-8)
