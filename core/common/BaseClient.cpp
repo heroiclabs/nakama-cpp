@@ -27,7 +27,7 @@
 
 namespace Nakama {
 
-#if defined(HAVE_DEFAULT_RT_TRANSPORT_FACTORY)
+#ifdef HAVE_DEFAULT_RT_TRANSPORT_FACTORY
 NRtClientPtr BaseClient::createRtClient() { return createRtClient(createDefaultWebsocket(_platformParams)); }
 #endif
 
