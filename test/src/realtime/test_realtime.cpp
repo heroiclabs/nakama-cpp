@@ -56,7 +56,7 @@ void run_realtime_tests()
 void test_realtime()
 {
     // These tests are not protocol specific
-    //test_rt_rapiddisconnect();
+    test_rt_rapiddisconnect();
     test_rt_connect_callback();
     test_rt_double_connect();
     test_rt_double_connect_async();

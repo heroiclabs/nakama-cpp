@@ -60,17 +60,17 @@ namespace Test {
 
         Nakama::NLogger::initWithConsoleSink(Nakama::NLogLevel::Debug);
 
-      //  test_internals();
+        test_internals();
 
-      //  test_authentication();
-      //  test_getAccount();
-      //  test_timeouts();
-      //  test_disconnect();
-      //  test_errors();
-      //  test_restoreSession();
-       // test_storage();
-       // test_groups();
-        //test_friends();
+        test_authentication();
+        test_getAccount();
+        test_timeouts();
+        test_disconnect();
+        test_errors();
+        test_restoreSession();
+        test_storage();
+        test_groups();
+        test_friends();
         // TODO flaky test_listMatches();
         test_realtime();
 
