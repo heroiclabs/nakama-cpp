@@ -49,6 +49,10 @@ namespace Satori {
         // Optional custom properties to update with this call.
         // If not set, properties are left as they are on the server.
         std::unordered_map<std::string,std::string> custom_properties;
+        // Optional no_session modifies the request to only create/update
+        // an identity without creating a new session. If set to 'true'
+        // the response won't include a token and a refresh token.
+        bool no_session = false;
     };
 
     // A single event. Usually, but not necessarily, part of a batch.
@@ -64,6 +68,14 @@ namespace Satori {
         std::string value;
         // The time when the event was triggered on the producer side. Unit is unix time milliseconds
         Nakama::NTimestamp timestamp;
+        // The identity id associated with the event. Ignored if the event is published as part of a session.
+        std::string identity_id;
+        // The session id associated with the event. Ignored if the event is published as part of a session.
+        std::string session_id;
+        // The session issued at associated with the event. Ignored if the event is published as part of a session.
+        int64_t session_issued_at;
+        // The session expires at associated with the event. Ignored if the event is published as part of a session.
+        int64_t session_expires_at;
     };
 
     // Publish an event to the server
@@ -172,6 +184,12 @@ namespace Satori {
         std::vector<std::string> names;
     };
 
+    // Request to join a 'explicit join' live event.
+    struct SJoinLiveEventRequest {
+        // Live event id to join.
+        std::string id;
+    };
+
     // Enrich/replace the current session with a new ID.
     struct SIdentifyRequest {
         // Identity ID to enrich the current session and return a new session. Old session will no longer be usable.
@@ -212,6 +230,8 @@ namespace Satori {
     struct SLiveEventList {
         // Live events.
         std::vector<SLiveEvent> live_events;
+        // Live events that require explicit join.
+        std::vector<SLiveEvent> explicit_join_live_events;
     };
 
     // Properties associated with an identity.
