@@ -71,6 +71,12 @@ namespace Satori {
 			Nakama::ErrorCallback errorCallback
 		) override;
 
+		void serverEvent(
+			const std::vector<SEvent>& events,
+			std::function<void()> successCallback,
+			Nakama::ErrorCallback errorCallback
+		) override;
+
 		void getExperiments(
 			SSessionPtr session,
 			const std::vector<std::string>& names,
@@ -79,9 +85,23 @@ namespace Satori {
 		) override;
 
 		void getFlags(
+    		const std::string& httpKey,
+			const std::vector<std::string>& names,
+			std::function<void(SFlagList)> successCallback,
+			Nakama::ErrorCallback errorCallback
+		) override;
+
+		void getFlags(
 			SSessionPtr session,
 			const std::vector<std::string>& names,
 			std::function<void(SFlagList)> successCallback,
+			Nakama::ErrorCallback errorCallback
+		) override;
+
+		void getFlagOverrides(
+    		const std::string& httpKey,
+			const std::vector<std::string> &names,
+			std::function<void(SFlagOverrideList)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
 
@@ -97,6 +117,13 @@ namespace Satori {
 			const std::vector<std::string>& liveEventNames,
 			std::function<void(SLiveEventList)> successCallback,
 			Nakama::ErrorCallback errorCallback
+		) override;
+
+		void joinLiveEvent(
+			SSessionPtr session,
+			const std::string& id,
+			std::function<void()> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr
 		) override;
 
 		void identify(

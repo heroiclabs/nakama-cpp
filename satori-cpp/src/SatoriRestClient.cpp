@@ -267,6 +267,57 @@ namespace Satori {
 		}
 	}
 
+	void SatoriRestClient::serverEvent(
+		const std::vector<SEvent> &events,
+		std::function<void()> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+		try {
+			NLOG_INFO("...");
+
+			RestReqContext* ctx = createReqContext(nullptr);
+			ctx->successCallback = std::move(successCallback);
+			ctx->errorCallback = std::move(errorCallback);
+
+			Nakama::rapidjson::Document document;
+			document.SetObject();
+			Nakama::rapidjson::Value jsonEvents;
+			jsonEvents.SetArray();
+			for (const SEvent& event: events)
+			{
+				Nakama::rapidjson::Value jsonEvent;
+				jsonEvent.SetObject();
+
+				jsonEvent.AddMember("name", event.name, document.GetAllocator());
+				jsonEvent.AddMember("id", event.id, document.GetAllocator());
+				jsonEvent.AddMember("value", event.value, document.GetAllocator());
+				jsonEvent.AddMember("identity_id", event.identity_id, document.GetAllocator());
+				jsonEvent.AddMember("session_id", event.session_id, document.GetAllocator());
+				jsonEvent.AddMember("session_issued_at", event.session_issued_at, document.GetAllocator());
+				jsonEvent.AddMember("session_expires_at", event.session_expires_at, document.GetAllocator());
+				google::protobuf::Timestamp timeProto = google::protobuf::util::TimeUtil::MillisecondsToTimestamp(
+					static_cast<int64_t>(event.timestamp));
+				std::string timeString = google::protobuf::util::TimeUtil::ToString(timeProto);
+				jsonEvent.AddMember("timestamp", std::move(timeString), document.GetAllocator());
+				Nakama::rapidjson::Value jsonMetadata;
+				jsonMetadata.SetObject();
+				for (auto& p : event.metadata) {
+					jsonMetadata.AddMember(Nakama::rapidjson::Value::StringRefType(p.first.c_str()), p.second, document.GetAllocator());
+				}
+				jsonEvent.AddMember("metadata", std::move(jsonMetadata), document.GetAllocator());
+
+				jsonEvents.PushBack(std::move(jsonEvent), document.GetAllocator());
+			}
+			document.AddMember("events", std::move(jsonEvents), document.GetAllocator());
+
+			std::string body = jsonDocToStr(document);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::POST, "/v1/server-event", std::move(body));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
+	}
+
 	void SatoriRestClient::getExperiments(
 		SSessionPtr session,
 		const std::vector<std::string>& names,
@@ -297,6 +348,32 @@ namespace Satori {
 		}
 	}
 
+	void SatoriRestClient::getFlags(const std::string &httpKey, const std::vector<std::string> &names,
+	std::function<void(SFlagList)> successCallback, Nakama::ErrorCallback errorCallback) {
+		try {
+			NLOG_INFO("...");
+
+			Nakama::NHttpQueryArgs args;
+
+			for (auto& name : names) {
+				args.emplace("names", name);
+			}
+
+			std::shared_ptr<SInternalFlagList> flagsData(std::make_shared<SInternalFlagList>());
+			RestReqContext* ctx(createReqContext(flagsData));
+			ctx->auth.append(httpKey);
+			ctx->successCallback = [flagsData, successCallback]()
+			{
+				successCallback(static_cast<SFlagList>(*flagsData));
+			};
+			ctx->errorCallback = std::move(errorCallback);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/flag", "", std::move(args));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
+	}
+
 	void SatoriRestClient::getFlags(
 		SSessionPtr session,
 		const std::vector<std::string>& names,
@@ -322,6 +399,32 @@ namespace Satori {
 			ctx->errorCallback = std::move(errorCallback);
 
 			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/flag", "", std::move(args));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
+	}
+
+	void SatoriRestClient::getFlagOverrides(const std::string &httpKey, const std::vector<std::string> &names,
+	std::function<void(SFlagOverrideList)> successCallback, Nakama::ErrorCallback errorCallback) {
+		try {
+			NLOG_INFO("...");
+
+			Nakama::NHttpQueryArgs args;
+
+			for (auto& name : names) {
+				args.emplace("names", name);
+			}
+
+			std::shared_ptr<SInternalFlagOverrideList> flagOverridesData(std::make_shared<SInternalFlagOverrideList>());
+			RestReqContext* ctx(createReqContext(flagOverridesData));
+			ctx->auth.append(httpKey);
+			ctx->successCallback = [flagOverridesData, successCallback]()
+			{
+				successCallback(static_cast<SFlagOverrideList>(*flagOverridesData));
+			};
+			ctx->errorCallback = std::move(errorCallback);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/flag/override", "", std::move(args));
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));
 		}
@@ -382,6 +485,25 @@ namespace Satori {
 			ctx->errorCallback = std::move(errorCallback);
 
 			sendReq(ctx, Nakama::NHttpReqMethod::GET, "/v1/live-event", "", std::move(args));
+		} catch (std::exception& e) {
+			NLOG_ERROR("exception: " + std::string(e.what()));
+		}
+	}
+
+	void SatoriRestClient::joinLiveEvent(
+		SSessionPtr session,
+		const std::string &id,
+		std::function<void()> successCallback,
+		Nakama::ErrorCallback errorCallback
+	) {
+		try {
+			NLOG_INFO("...");
+
+			RestReqContext* ctx = createReqContext(nullptr);
+			ctx->successCallback = std::move(successCallback);
+			ctx->errorCallback = std::move(errorCallback);
+
+			sendReq(ctx, Nakama::NHttpReqMethod::POST, "/v1/live-event/" + Nakama::encodeURIComponent(id) + "/participation", {});
 		} catch (std::exception& e) {
 			NLOG_ERROR("exception: " + std::string(e.what()));
 		}
