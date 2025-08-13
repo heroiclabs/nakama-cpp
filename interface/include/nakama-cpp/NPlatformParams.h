@@ -24,7 +24,9 @@
 
 NAKAMA_NAMESPACE_BEGIN
 
+#ifndef HAVE_CUSTOM_PLATFORM_PARAMS
 // Keeping for API stability in the case that we need to add platform-specific features.
 struct NPlatformParameters {};
+#endif
 
 NAKAMA_NAMESPACE_END
