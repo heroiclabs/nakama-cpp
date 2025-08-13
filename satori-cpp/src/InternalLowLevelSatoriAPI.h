@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Nakama Authors
+* Copyright 2024 The Nakama Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,108 +19,112 @@
 #include "nakama-cpp/satori/HardcodedLowLevelSatoriAPI.h"
 
 namespace Satori {
-struct SFromJsonInterface {
-  virtual ~SFromJsonInterface() {}
-  virtual bool fromJson(std::string jsonString) = 0;
-};
+	struct SFromJsonInterface {
+		virtual ~SFromJsonInterface() {}
+		virtual bool fromJson(std::string jsonString) = 0;
+	};
 
-struct SInternalAuthenticateLogoutRequest : public SAuthenticateLogoutRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalAuthenticateLogoutRequest : public SAuthenticateLogoutRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalAuthenticateRefreshRequest : public SAuthenticateRefreshRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalAuthenticateRefreshRequest : public SAuthenticateRefreshRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalAuthenticateRequest : public SAuthenticateRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalAuthenticateRequest : public SAuthenticateRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalEvent : public SEvent, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalEvent : public SEvent, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalEventRequest : public SEventRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalEventRequest : public SEventRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalExperiment : public SExperiment, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalExperiment : public SExperiment, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalExperimentList : public SExperimentList, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalExperimentList : public SExperimentList, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalFlag : public SFlag, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalFlag : public SFlag, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalFlagList : public SFlagList, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalFlagList : public SFlagList, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalFlagOverride : public SFlagOverride, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalFlagOverride : public SFlagOverride, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalFlagOverrideList : public SFlagOverrideList, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalFlagOverrideList : public SFlagOverrideList, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalGetExperimentsRequest : public SGetExperimentsRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalGetExperimentsRequest : public SGetExperimentsRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalGetFlagsRequest : public SGetFlagsRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalGetFlagsRequest : public SGetFlagsRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalGetLiveEventsRequest : public SGetLiveEventsRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalGetLiveEventsRequest : public SGetLiveEventsRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalIdentifyRequest : public SIdentifyRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalJoinLiveEventRequest : public SJoinLiveEventRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalLiveEvent : public SLiveEvent, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalIdentifyRequest : public SIdentifyRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalLiveEventList : public SLiveEventList, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalLiveEvent : public SLiveEvent, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalProperties : public SProperties, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalLiveEventList : public SLiveEventList, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalSession : public SSession, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalProperties : public SProperties, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalUpdatePropertiesRequest : public SUpdatePropertiesRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalSession : public SSession, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalGetMessageListRequest : public SGetMessageListRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalUpdatePropertiesRequest : public SUpdatePropertiesRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalMessage : public SMessage, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalGetMessageListRequest : public SGetMessageListRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalGetMessageListResponse : public SGetMessageListResponse, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalMessage : public SMessage, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalUpdateMessageRequest : public SUpdateMessageRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
+    struct SInternalGetMessageListResponse : public SGetMessageListResponse, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
 
-struct SInternalDeleteMessageRequest : public SDeleteMessageRequest, public SFromJsonInterface {
-  bool fromJson(std::string jsonString) override;
-};
-} // namespace Satori
+    struct SInternalUpdateMessageRequest : public SUpdateMessageRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
+
+    struct SInternalDeleteMessageRequest : public SDeleteMessageRequest, public SFromJsonInterface {
+        bool fromJson(std::string jsonString) override;
+    };
+}

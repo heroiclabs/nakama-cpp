@@ -119,9 +119,35 @@ service Satori {
     };
   }
 
+  // Publish server events for multiple distinct identities.
+  rpc ServerEvent(EventRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/server-event",
+      body: "*"
+    };
+  }
+
   // Get or list all available experiments for this identity.
   rpc GetExperiments (GetExperimentsRequest) returns (ExperimentList) {
     option (google.api.http).get = "/v1/experiment";
+  }
+
+  // List all available flags and their value overrides for this identity.
+  rpc GetFlagOverrides (GetFlagsRequest) returns (FlagOverrideList) {
+    option (google.api.http).get = "/v1/flag/override";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      // Either HTTP key in query param or Bearer authentication.
+      security: {
+        security_requirement: {
+          key: "HttpKeyAuth";
+          value: {};
+        }
+        security_requirement: {
+          key: "BearerJwt";
+          value: {};
+        }
+      }
+    };
   }
 
   // List all available flags for this identity.
@@ -145,6 +171,13 @@ service Satori {
   // List available live events.
   rpc GetLiveEvents (GetLiveEventsRequest) returns (LiveEventList) {
     option (google.api.http).get = "/v1/live-event";
+  }
+
+  // Join an 'explicit join' live event.
+  rpc JoinLiveEvent(JoinLiveEventRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/live-event/{id}/participation"
+    };
   }
 
   // A healthcheck which load balancers can use to check the service.
@@ -222,6 +255,10 @@ message AuthenticateRequest {
   // Optional custom properties to update with this call.
   // If not set, properties are left as they are on the server.
   map<string,string> custom = 3;
+  // Optional no_session modifies the request to only create/update
+  // an identity without creating a new session. If set to 'true'
+  // the response won't include a token and a refresh token.
+  bool no_session = 4;
 }
 
 // A single event. Usually, but not necessarily, part of a batch.
@@ -237,6 +274,14 @@ message Event {
   string value = 4;
   // The time when the event was triggered on the producer side.
   google.protobuf.Timestamp timestamp = 5;
+    // The identity id associated with the event. Ignored if the event is published as part of a session.
+  string identity_id = 6;
+    // The session id associated with the event. Ignored if the event is published as part of a session.
+  string session_id = 7;
+  // The session issued at associated with the event. Ignored if the event is published as part of a session.
+  int64 session_issued_at = 8;
+  // The session expires at associated with the event. Ignored if the event is published as part of a session.
+  int64 session_expires_at = 9;
 }
 
 // Publish an event to the server
@@ -267,12 +312,66 @@ message Flag {
   string value = 2;
   // Whether the value for this flag has conditionally changed from the default state.
   bool condition_changed = 3;
+  // The origin of change on the flag value returned.
+  ValueChangeReason change_reason = 4;
+
+  message ValueChangeReason {
+    // The type of the configuration that declared the override.
+    Type type = 1;
+    // The name of the configuration that overrides the flag value.
+    string name = 2;
+    // The variant name of the configuration that overrides the flag value.
+    string variant_name = 3;
+
+    enum Type {
+      UNKNOWN = 0;
+      FLAG_VARIANT = 1;
+      LIVE_EVENT = 2;
+      EXPERIMENT = 3;
+    }
+  }
 }
 
 // All flags available to the identity
 message FlagList {
   // All flags
   repeated Flag flags = 1;
+}
+
+// Feature flag available to the identity.
+message FlagOverride {
+  // Flag name
+  string flag_name = 1;
+  // The list of configuration that affect the value of the flag.
+  repeated Value overrides = 2;
+
+  // The details of a flag value override.
+  message Value {
+    // The type of the configuration that declared the override.
+    Type type = 1;
+    // The name of the configuration that overrides the flag value.
+    string name = 2;
+    // The variant name of the configuration that overrides the flag value.
+    string variant_name = 3;
+    // The value of the configuration that overrides the flag.
+    string value = 4;
+    // The create time of the configuration that overrides the flag.
+    int64 create_time_sec = 5;
+  }
+
+  enum Type {
+    FLAG = 0;
+    FLAG_VARIANT = 1;
+    LIVE_EVENT_FLAG = 2;
+    LIVE_EVENT_FLAG_VARIANT = 3;
+    EXPERIMENT_PHASE_VARIANT_FLAG = 4;
+  }
+}
+
+// All flags available to the identity and their value overrides
+message FlagOverrideList {
+  // All flags
+  repeated FlagOverride flags = 1;
 }
 
 // Request to get all experiments data.
@@ -291,6 +390,12 @@ message GetFlagsRequest {
 message GetLiveEventsRequest {
   // Live event names; if empty string all live events are returned.
   repeated string names = 1;
+}
+
+// Request to join a 'explicit join' live event.
+message JoinLiveEventRequest {
+  // Live event id to join.
+  string id = 1;
 }
 
 // Enrich/replace the current session with a new ID.
@@ -333,6 +438,8 @@ message LiveEvent {
 message LiveEventList {
   // Live events.
   repeated LiveEvent live_events = 1;
+  // Live events that require explicit join.
+  repeated LiveEvent explicit_join_live_events = 2;
 }
 
 // Properties associated with an identity.

@@ -75,6 +75,30 @@ bool jsonValueToSEvent(const rapidjson::Value& input, SEvent& output) {
     }
     output.timestamp = input["timestamp"].GetInt64();
   }
+  if (input.HasMember("identity_id")) {
+    if (!input["identity_id"].IsString()) {
+      return false;
+    }
+    output.identity_id = input["identity_id"].GetString();
+  }
+  if (input.HasMember("session_id")) {
+    if (!input["session_id"].IsString()) {
+      return false;
+    }
+    output.session_id = input["session_id"].GetString();
+  }
+  if (input.HasMember("session_issued_at")) {
+    if (!input["session_issued_at"].IsInt64()) {
+      return false;
+    }
+    output.session_issued_at = input["session_issued_at"].GetInt64();
+  }
+  if (input.HasMember("session_expires_at")) {
+    if (!input["session_expires_at"].IsInt64()) {
+      return false;
+    }
+    output.session_expires_at = input["session_expires_at"].GetInt64();
+  }
   return true;
 }
 
@@ -330,6 +354,8 @@ bool SInternalGetFlagsRequest::fromJson(std::string jsonString) { return false; 
 
 bool SInternalGetLiveEventsRequest::fromJson(std::string jsonString) { return false; }
 
+bool SInternalJoinLiveEventRequest::fromJson(std::string jsonString) { return false; }
+
 bool SInternalIdentifyRequest::fromJson(std::string jsonString) { return false; }
 
 bool jsonValueToSLiveEvent(const rapidjson::Value& input, SLiveEvent& output) {
@@ -430,6 +456,18 @@ bool SInternalLiveEventList::fromJson(std::string jsonString) {
         return false;
       }
       this->live_events.emplace_back(liveEvent);
+    }
+  }
+  if (d.HasMember("explicit_join_live_events")) {
+    if (!d["explicit_join_live_events"].IsArray()) {
+      return false;
+    }
+    for (auto& jsonExplicitLiveEvent : d["explicit_join_live_events"].GetArray()) {
+      SLiveEvent explicitLiveEvent;
+      if (!jsonValueToSLiveEvent(jsonExplicitLiveEvent, explicitLiveEvent)) {
+        return false;
+      }
+      this->explicit_join_live_events.emplace_back(explicitLiveEvent);
     }
   }
   return true;
