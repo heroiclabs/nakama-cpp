@@ -56,6 +56,15 @@
         }
       ],
       "supports": "android"
+    },
+    "stdlibv2" : {
+      "description": "Enabled programmatically when needed, do not set yourself",
+      "dependencies": [
+        {
+          "name": "protobuf",
+          "features": ["stdlibv2"]
+        }
+      ]
     }
   },
   "overrides": [{ "name": "protobuf", "version": "3.21.12", "port-version": 4 }]

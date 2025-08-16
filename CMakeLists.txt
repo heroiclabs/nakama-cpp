@@ -90,7 +90,9 @@ include(cmake/linkerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
 
-set(CMAKE_CXX_STANDARD 17)
+if (NOT CMAKE_CXX_STANDARD)
+    set(CMAKE_CXX_STANDARD 17)
+endif()
 option(LOGS_ENABLED "Enable log output" ON)
 
 if(NOT MSVC)
