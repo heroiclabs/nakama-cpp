@@ -44,7 +44,7 @@ NAKAMA_NAMESPACE_BEGIN
       Resource(const Resource&) = delete;
       Resource& operator=(const Resource&) = delete;
       Resource& operator=(Resource&&) = delete;
-      Resource(Resource&& r) = default;
+      Resource(Resource&& o) noexcept : r(o.r), armed(o.armed) { o.armed = false; o.r = T(); }
       explicit operator bool() { return armed; }
 
       T& get() { return r; }
