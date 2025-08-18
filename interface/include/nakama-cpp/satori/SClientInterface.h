@@ -71,16 +71,24 @@ namespace Satori {
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<void> deleteIdentityAsync(
-			SSessionPtr session) = 0;
+    	SSessionPtr session) = 0;
 
     	virtual void postEvent(
-            SSessionPtr session,
-    		const std::vector<SEvent>& events,
-    		std::function<void()> successCallback = nullptr,
-    		Nakama::ErrorCallback errorCallback = nullptr) = 0;
+			SSessionPtr session,
+			const std::vector<SEvent>& events,
+			std::function<void()> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<void> postEventAsync(
 			SSessionPtr session,
+			const std::vector<SEvent>& events) = 0;
+
+    	virtual void serverEvent(
+			const std::vector<SEvent>& events,
+			std::function<void()> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual std::future<void> serverEventAsync(
 			const std::vector<SEvent>& events) = 0;
 
     	virtual void getExperiments(
@@ -94,6 +102,16 @@ namespace Satori {
 			const std::vector<std::string>& names) = 0;
 
     	virtual void getFlags(
+    		const std::string& httpKey,
+			const std::vector<std::string>& names = {},
+			std::function<void(SFlagList)> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual std::future<SFlagList> getFlagsAsync(
+    		const std::string& httpKey,
+			const std::vector<std::string>& names = {}) = 0;
+
+    	virtual void getFlags(
             SSessionPtr session,
 			const std::vector<std::string>& names = {},
 			std::function<void(SFlagList)> successCallback = nullptr,
@@ -101,6 +119,16 @@ namespace Satori {
 
     	virtual std::future<SFlagList> getFlagsAsync(
 			SSessionPtr session,
+			const std::vector<std::string>& names = {}) = 0;
+
+    	virtual void getFlagOverrides(
+    		const std::string& httpKey,
+			const std::vector<std::string> &names = {},
+			std::function<void(SFlagOverrideList)> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+    	virtual std::future<SFlagOverrideList> getFlagOverridesAsync(
+    		const std::string& httpKey,
 			const std::vector<std::string>& names = {}) = 0;
 
     	virtual void getFlagOverrides(
@@ -133,7 +161,19 @@ namespace Satori {
 		 */
     	virtual std::future<SLiveEventList> getLiveEventsAsync(
     		SSessionPtr session,
-			const std::vector<std::string>& liveEventNames = {}) = 0;
+    		const std::vector<std::string>& liveEventNames = {}) = 0;
+
+    	virtual void joinLiveEvent(
+			SSessionPtr session,
+			const std::string& id,
+			std::function<void()> successCallback = nullptr,
+			Nakama::ErrorCallback errorCallback = nullptr
+		) = 0;
+
+    	virtual std::future<void> joinLiveEventAsync(
+			SSessionPtr session,
+			const std::string& id
+		) = 0;
 
     	virtual void identify(
             SSessionPtr session,
