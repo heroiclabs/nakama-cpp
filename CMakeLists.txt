@@ -68,7 +68,8 @@ endif()
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
 set(CMAKE_SUPPRESS_REGENERATION true) ## for Xcode
 
-option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
+option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols using __declspec mechanism regardless of the platform." OFF)
+option(FORCE_DLL_VISIBILITY "Force exporting symbols using visibility attribute regardless of the platform." OFF)
 option(BUILD_APPLE_FRAMEWORK "Build frameworks instead of .dylib files for Apple." ON)
 
 set(NAKAMA_SDK_DEPS)
