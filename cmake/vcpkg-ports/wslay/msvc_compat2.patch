@@ -5,7 +5,7 @@ index 7ab8501..82be717 100644
 @@ -79,6 +79,14 @@ enum wslay_io_flags {
    WSLAY_MSG_MORE = 1
  };
-
+ 
 +#ifdef _MSC_VER
 +#ifdef  _WIN64
 +typedef int64_t ssize_t;

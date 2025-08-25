@@ -27,7 +27,7 @@
     #else
         #define NAKAMA_API __declspec(dllimport)
     #endif
-#elif __GNUC__ >= 4
+#elif __GNUC__ >= 4 || defined FORCE_DLL_VISIBILITY
     #ifdef NAKAMA_SHARED_LIBRARY_EXPORTS
         #define NAKAMA_API __attribute__((visibility("default")))
     #else
