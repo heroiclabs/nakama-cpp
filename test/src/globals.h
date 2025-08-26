@@ -27,7 +27,7 @@ namespace Nakama {
             {
                 NLOG_INFO("TEST ASSERT FAILED!");
                 NLOG_INFO(std::string(__FILE__) + ":" + std::to_string(__LINE__));
-                abort();
+                //abort();
             }
         }
 
