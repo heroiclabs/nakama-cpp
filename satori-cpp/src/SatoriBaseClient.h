@@ -79,7 +79,8 @@ namespace Satori {
 
 		std::future<SLiveEventList> getLiveEventsAsync(
 			SSessionPtr session,
-			const std::vector<std::string>& liveEventNames
+			const std::vector<std::string>& liveEventNames,
+			const int32_t peekDepth
 		) override;
 
 		std::future<void> joinLiveEventAsync(

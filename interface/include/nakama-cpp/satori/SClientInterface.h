@@ -16,8 +16,8 @@
 
 #pragma once
 
-#include <future>
 #include <memory>
+#include <future>
 
 #include "HardcodedLowLevelSatoriAPI.h"
 #include "nakama-cpp/NClientInterface.h"
@@ -29,7 +29,8 @@ namespace Satori {
     /**
      * A client interface to interact with Satori server.
      */
-class NAKAMA_API SClientInterface {
+    class NAKAMA_API SClientInterface
+    {
     public:
     	virtual ~SClientInterface() {}
 
@@ -53,21 +54,24 @@ class NAKAMA_API SClientInterface {
     		std::function<void (SSessionPtr)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<SSessionPtr> authenticateRefreshAsync(SSessionPtr session) = 0;
+    	virtual std::future<SSessionPtr> authenticateRefreshAsync(
+			SSessionPtr session) = 0;
 
     	virtual void authenticateLogout(
             SSessionPtr session,
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<void> authenticateLogoutAsync(SSessionPtr session) = 0;
+    	virtual std::future<void> authenticateLogoutAsync(
+			SSessionPtr session) = 0;
 
     	virtual void deleteIdentity(
             SSessionPtr session,
 			std::function<void()> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<void> deleteIdentityAsync(SSessionPtr session) = 0;
+    	virtual std::future<void> deleteIdentityAsync(
+    	SSessionPtr session) = 0;
 
     	virtual void postEvent(
 			SSessionPtr session,
@@ -75,7 +79,9 @@ class NAKAMA_API SClientInterface {
 			std::function<void()> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<void> postEventAsync(SSessionPtr session, const std::vector<SEvent>& events) = 0;
+    	virtual std::future<void> postEventAsync(
+			SSessionPtr session,
+			const std::vector<SEvent>& events) = 0;
 
     	virtual void serverEvent(
 			const std::vector<SEvent>& events,
@@ -91,8 +97,9 @@ class NAKAMA_API SClientInterface {
 			std::function<void(SExperimentList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<SExperimentList>
-  getExperimentsAsync(SSessionPtr session, const std::vector<std::string>& names) = 0;
+    	virtual std::future<SExperimentList> getExperimentsAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& names) = 0;
 
     	virtual void getFlags(
     		const std::string& httpKey,
@@ -110,7 +117,9 @@ class NAKAMA_API SClientInterface {
 			std::function<void(SFlagList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<SFlagList> getFlagsAsync(SSessionPtr session, const std::vector<std::string>& names = {}) = 0;
+    	virtual std::future<SFlagList> getFlagsAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& names = {}) = 0;
 
     	virtual void getFlagOverrides(
     		const std::string& httpKey,
@@ -128,29 +137,21 @@ class NAKAMA_API SClientInterface {
 			std::function<void(SFlagOverrideList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<SFlagOverrideList>
-  getFlagOverridesAsync(SSessionPtr session, const std::vector<std::string>& names = {}) = 0;
+    	virtual std::future<SFlagOverrideList> getFlagOverridesAsync(
+			SSessionPtr session,
+			const std::vector<std::string>& names = {}) = 0;
 
-    	/**
-		 * Request to get all live events.
-		 *
-		 * @param session The session of the user.
-		 * @param liveEventNames Live event names; if empty string all live events are returned.
-		 */
     	virtual void getLiveEvents(
             SSessionPtr session,
 			const std::vector<std::string>& liveEventNames = {},
+			int32_t peekDepth = 0,
 			std::function<void(SLiveEventList)> successCallback = nullptr,
 		    Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-    	/**
-		 * Fetch one or more users by id, usernames, and Facebook ids.
-		 *
-		 * @param session The session of the user.
-		 * @param liveEventNames Live event names; if empty string all live events are returned.
-		 */
-  virtual std::future<SLiveEventList>
-  getLiveEventsAsync(SSessionPtr session, const std::vector<std::string>& liveEventNames = {}) = 0;
+    	virtual std::future<SLiveEventList> getLiveEventsAsync(
+    		SSessionPtr session,
+			const std::vector<std::string>& liveEventNames = {},
+			int32_t peekDepth = 0) = 0;
 
     	virtual void joinLiveEvent(
 			SSessionPtr session,
@@ -183,7 +184,8 @@ class NAKAMA_API SClientInterface {
     		std::function<void (SProperties)> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<SProperties> listIdentityPropertiesAsync(SSessionPtr session) = 0;
+    	virtual std::future<SProperties> listIdentityPropertiesAsync(
+			SSessionPtr session) = 0;
 
     	virtual void updateProperties(
     		SSessionPtr session,
@@ -207,8 +209,11 @@ class NAKAMA_API SClientInterface {
 			std::function<void(SGetMessageListResponse)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<SGetMessageListResponse>
-  getMessagesAsync(SSessionPtr session, int32_t limit, bool forward, const std::string& cursor) = 0;
+    	virtual std::future<SGetMessageListResponse> getMessagesAsync(
+			SSessionPtr session,
+			int32_t limit,
+			bool forward,
+			const std::string& cursor) = 0;
 
     	virtual void updateMessage(
     		SSessionPtr session,
@@ -230,7 +235,9 @@ class NAKAMA_API SClientInterface {
     		std::function<void()> successCallback = nullptr,
     		Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<void> deleteMessageAsync(SSessionPtr session, const std::string& messageId) = 0;
+    	virtual std::future<void> deleteMessageAsync(
+			SSessionPtr session,
+			const std::string& messageId) = 0;
     };
 
     using SClientPtr = std::shared_ptr<SClientInterface>;

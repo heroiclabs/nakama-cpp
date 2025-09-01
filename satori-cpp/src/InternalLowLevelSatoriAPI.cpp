@@ -419,6 +419,16 @@ bool jsonValueToSLiveEvent(const rapidjson::Value& input, SLiveEvent& output) {
     }
     output.reset_cron = input["reset_cron"].GetString();
   }
+  if (input.HasMember("status")) {
+    if (!input["status"].IsInt()) {
+      return false;
+    }
+    int type_int = input["status"].GetInt();
+    if (type_int < SLiveEvent::SStatus::UNKNOWN || type_int > SLiveEvent::SStatus::TERMINATED) {
+      return false;
+    }
+    output.status = static_cast<SLiveEvent::SStatus>(type_int);
+  }
   return true;
 }
 

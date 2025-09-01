@@ -115,6 +115,7 @@ namespace Satori {
 		void getLiveEvents(
 			SSessionPtr session,
 			const std::vector<std::string>& liveEventNames,
+			const int32_t peekDepth,
 			std::function<void(SLiveEventList)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;

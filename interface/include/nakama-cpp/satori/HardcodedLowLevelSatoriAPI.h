@@ -199,6 +199,13 @@ namespace Satori {
 
     // A single live event.
     struct SLiveEvent {
+        // The status variants of a live event.
+        enum SStatus {
+            UNKNOWN = 0,
+            ACTIVE = 1,
+            UPCOMING = 2,
+            TERMINATED = 3
+        };
         // Name.
         std::string name;
         // Description.
@@ -219,6 +226,8 @@ namespace Satori {
         int64_t duration_sec;
         // Reset CRON schedule, if configured.
         std::string reset_cron;
+        // The status of this live event run.
+        SStatus status;
     };
 
     // List of Live events.

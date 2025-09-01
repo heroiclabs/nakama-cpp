@@ -388,8 +388,17 @@ message GetFlagsRequest {
 
 // Request to get all live events.
 message GetLiveEventsRequest {
-  // Live event names; if empty string all live events are returned.
+  // Live event names; if empty string, all live events are returned.
   repeated string names = 1;
+  // Number of past and upcoming runs to include (0–20).
+  // If 0, only currently active event runs are returned.
+  int32 peek_depth = 2;
+}
+
+// Request to join a 'explicit join' live event.
+message JoinLiveEventRequest {
+  // Live event id to join.
+  string id = 1;
 }
 
 // Request to join a 'explicit join' live event.
@@ -432,6 +441,16 @@ message LiveEvent {
   int64 duration_sec = 9;
   // Reset CRON schedule, if configured.
   string reset_cron = 10;
+  // The status of this live event run.
+  Status status = 11;
+
+  // The status variants of a live event.
+  enum Status {
+    UNKNOWN = 0;
+    ACTIVE = 1;
+    UPCOMING = 2;
+    TERMINATED = 3;
+  }
 }
 
 // List of Live events.

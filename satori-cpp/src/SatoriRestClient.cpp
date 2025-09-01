@@ -463,6 +463,7 @@ namespace Satori {
 	void SatoriRestClient::getLiveEvents(
 		SSessionPtr session,
 		const std::vector<std::string>& liveEventNames,
+                const int32_t peekDepth,
 		std::function<void(SLiveEventList)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
@@ -474,6 +475,7 @@ namespace Satori {
 			for (auto& liveEventName : liveEventNames) {
 				args.emplace("names", liveEventName);
 			}
+		        args.emplace("peek_depth", std::to_string(peekDepth));
 
 			std::shared_ptr<SInternalLiveEventList> liveEventsData(std::make_shared<SInternalLiveEventList>());
 			RestReqContext* ctx(createReqContext(liveEventsData));
