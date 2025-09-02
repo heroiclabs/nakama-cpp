@@ -8,7 +8,7 @@ inline constexpr disarmed_t disarmed{};
 // like unique_ptr but for non-pointer types
 template <typename T, int (*d)(T)> class Resource {
 public:
-  explicit Resource(T v) : r(v) {}
+  explicit Resource(T v) : r(v), armed(true) {}
   explicit Resource(disarmed_t) : r(), armed(false) {}
   ~Resource() { armed ? d(r) : 0; }
 
@@ -43,6 +43,6 @@ public:
 
 private:
   T r;
-  bool armed = true;
+  bool armed;
 };
 } // namespace Nakama
