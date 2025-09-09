@@ -117,11 +117,11 @@ namespace Satori {
 
 	std::future<SExperimentList> SatoriBaseClient::getExperimentsAsync(
 		SSessionPtr session,
-		const std::vector<std::string> &names
+    		const SGetExperimentsRequest& request
 	) {
 		std::shared_ptr<std::promise<SExperimentList>> promise = std::make_shared<std::promise<SExperimentList>>();
 
-		getExperiments(session, names,
+		getExperiments(session, request,
 			[=](const SExperimentList& experiments) {
 				promise->set_value(experiments);
 			},
@@ -133,11 +133,11 @@ namespace Satori {
 	}
 
 	std::future<SFlagList> SatoriBaseClient::getFlagsAsync(const std::string &httpKey,
-		const std::vector<std::string> &names
+			const SGetFlagsRequest &request
 	) {
 		std::shared_ptr<std::promise<SFlagList>> promise = std::make_shared<std::promise<SFlagList>>();
 
-		getFlags(httpKey, names,
+		getFlags(httpKey, request,
 			[=](const SFlagList& flags) {
 				promise->set_value(flags);
 			},
@@ -150,11 +150,11 @@ namespace Satori {
 
 	std::future<SFlagList> SatoriBaseClient::getFlagsAsync(
 		SSessionPtr session,
-		const std::vector<std::string>& names
+			const SGetFlagsRequest &request
 	) {
 		std::shared_ptr<std::promise<SFlagList>> promise = std::make_shared<std::promise<SFlagList>>();
 
-		getFlags(session, names,
+		getFlags(session, request,
 			[=](const SFlagList& flags) {
 				promise->set_value(flags);
 			},
@@ -167,11 +167,11 @@ namespace Satori {
 
 	std::future<SFlagOverrideList> SatoriBaseClient::getFlagOverridesAsync(
 		const std::string &httpKey,
-		const std::vector<std::string> &names
+			const SGetFlagsRequest &request
 	) {
 		std::shared_ptr<std::promise<SFlagOverrideList>> promise = std::make_shared<std::promise<SFlagOverrideList>>();
 
-		getFlagOverrides(httpKey, names,
+		getFlagOverrides(httpKey, request,
 			[=](const SFlagOverrideList& flag_overrides) {
 				promise->set_value(flag_overrides);
 			},
@@ -184,11 +184,11 @@ namespace Satori {
 
 	std::future<SFlagOverrideList> SatoriBaseClient::getFlagOverridesAsync(
 		SSessionPtr session,
-		const std::vector<std::string>& names
+			const SGetFlagsRequest &request
 	) {
 		std::shared_ptr<std::promise<SFlagOverrideList>> promise = std::make_shared<std::promise<SFlagOverrideList>>();
 
-		getFlagOverrides(session, names,
+		getFlagOverrides(session, request,
 			[=](const SFlagOverrideList& flag_overrides) {
 				promise->set_value(flag_overrides);
 			},
@@ -201,12 +201,11 @@ namespace Satori {
 
 	std::future<SLiveEventList> SatoriBaseClient::getLiveEventsAsync(
 		SSessionPtr session,
-		const std::vector<std::string>& liveEventNames,
-                const int32_t peekDepth
+			const SGetLiveEventsRequest& request
 	) {
 		std::shared_ptr<std::promise<SLiveEventList>> promise = std::make_shared<std::promise<SLiveEventList>>();
 
-		getLiveEvents(session, liveEventNames, peekDepth,
+		getLiveEvents(session, request,
 			[=](const SLiveEventList& liveEvents) {
 				promise->set_value(liveEvents);
 			},

@@ -79,43 +79,42 @@ namespace Satori {
 
 		void getExperiments(
 			SSessionPtr session,
-			const std::vector<std::string>& names,
+    		        const SGetExperimentsRequest& request,
 			std::function<void(SExperimentList)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
 
 		void getFlags(
     		const std::string& httpKey,
-			const std::vector<std::string>& names,
+			const SGetFlagsRequest &request,
 			std::function<void(SFlagList)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
 
 		void getFlags(
 			SSessionPtr session,
-			const std::vector<std::string>& names,
+			const SGetFlagsRequest &request,
 			std::function<void(SFlagList)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
 
 		void getFlagOverrides(
     		const std::string& httpKey,
-			const std::vector<std::string> &names,
+			const SGetFlagsRequest &request,
 			std::function<void(SFlagOverrideList)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
 
 		void getFlagOverrides(
 			SSessionPtr session,
-			const std::vector<std::string> &names,
+			const SGetFlagsRequest &request,
 			std::function<void(SFlagOverrideList)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;
 
 		void getLiveEvents(
 			SSessionPtr session,
-			const std::vector<std::string>& liveEventNames,
-			const int32_t peekDepth,
+			const SGetLiveEventsRequest& request,
 			std::function<void(SLiveEventList)> successCallback,
 			Nakama::ErrorCallback errorCallback
 		) override;

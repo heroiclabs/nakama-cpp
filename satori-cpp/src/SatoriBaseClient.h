@@ -54,33 +54,32 @@ namespace Satori {
 
 		std::future<SExperimentList> getExperimentsAsync(
 			SSessionPtr session,
-			const std::vector<std::string>& names
+    		const SGetExperimentsRequest& request
 		) override;
 
 		std::future<SFlagList> getFlagsAsync(
 			const std::string& httpKey,
-			const std::vector<std::string>& names
+			const SGetFlagsRequest &request
 		) override;
 
 		std::future<SFlagList> getFlagsAsync(
 			SSessionPtr session,
-			const std::vector<std::string>& names
+			const SGetFlagsRequest &request
 		) override;
 
 		std::future<SFlagOverrideList> getFlagOverridesAsync(
 			const std::string& httpKey,
-			const std::vector<std::string> &names
+			const SGetFlagsRequest &request
 		) override;
 
 		std::future<SFlagOverrideList> getFlagOverridesAsync(
 			SSessionPtr session,
-			const std::vector<std::string> &names
+			const SGetFlagsRequest &request
 		) override;
 
 		std::future<SLiveEventList> getLiveEventsAsync(
 			SSessionPtr session,
-			const std::vector<std::string>& liveEventNames,
-			const int32_t peekDepth
+			const SGetLiveEventsRequest& request
 		) override;
 
 		std::future<void> joinLiveEventAsync(

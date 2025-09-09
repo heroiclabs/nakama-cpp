@@ -93,65 +93,63 @@ namespace Satori {
 
     	virtual void getExperiments(
             SSessionPtr session,
-    		const std::vector<std::string>& names,
+    		const SGetExperimentsRequest& request,
 			std::function<void(SExperimentList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SExperimentList> getExperimentsAsync(
 			SSessionPtr session,
-			const std::vector<std::string>& names) = 0;
+    		const SGetExperimentsRequest& request) = 0;
 
     	virtual void getFlags(
     		const std::string& httpKey,
-			const std::vector<std::string>& names = {},
+			const SGetFlagsRequest &request,
 			std::function<void(SFlagList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SFlagList> getFlagsAsync(
     		const std::string& httpKey,
-			const std::vector<std::string>& names = {}) = 0;
+			const SGetFlagsRequest &request) = 0;
 
     	virtual void getFlags(
             SSessionPtr session,
-			const std::vector<std::string>& names = {},
+			const SGetFlagsRequest &request,
 			std::function<void(SFlagList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SFlagList> getFlagsAsync(
 			SSessionPtr session,
-			const std::vector<std::string>& names = {}) = 0;
+			const SGetFlagsRequest &request) = 0;
 
     	virtual void getFlagOverrides(
     		const std::string& httpKey,
-			const std::vector<std::string> &names = {},
+			const SGetFlagsRequest &request,
 			std::function<void(SFlagOverrideList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SFlagOverrideList> getFlagOverridesAsync(
     		const std::string& httpKey,
-			const std::vector<std::string>& names = {}) = 0;
+			const SGetFlagsRequest &request) = 0;
 
     	virtual void getFlagOverrides(
 			SSessionPtr session,
-			const std::vector<std::string> &names = {},
+			const SGetFlagsRequest &request,
 			std::function<void(SFlagOverrideList)> successCallback = nullptr,
 			Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SFlagOverrideList> getFlagOverridesAsync(
 			SSessionPtr session,
-			const std::vector<std::string>& names = {}) = 0;
+			const SGetFlagsRequest &request) = 0;
 
     	virtual void getLiveEvents(
             SSessionPtr session,
-			const std::vector<std::string>& liveEventNames = {},
-			int32_t peekDepth = 0,
+			const SGetLiveEventsRequest& request,
 			std::function<void(SLiveEventList)> successCallback = nullptr,
 		    Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
     	virtual std::future<SLiveEventList> getLiveEventsAsync(
     		SSessionPtr session,
-			const std::vector<std::string>& liveEventNames = {},
-			int32_t peekDepth = 0) = 0;
+			const SGetLiveEventsRequest& request) = 0;
 
     	virtual void joinLiveEvent(
 			SSessionPtr session,

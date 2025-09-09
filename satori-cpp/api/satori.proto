@@ -376,29 +376,62 @@ message FlagOverrideList {
 
 // Request to get all experiments data.
 message GetExperimentsRequest {
-  // Experiment names; if empty string all experiments are returned.
+  // [deprecated] Experiment names; if empty string all experiments are returned.
   repeated string names = 1;
+  // Search options.
+  SearchOptions search = 2;
+
+  // The search options available for the List endpoint.
+  message SearchOptions {
+    // Filter by Name.
+    SingleTextValueFilterOption name = 1;
+    // Filter by Label name.
+    MultiTextValueFilterOption label_name = 2;
+  }
 }
 
 // Request to get all flags data.
 message GetFlagsRequest {
-  // Flag names; if empty string all flags are returned.
+  // [deprecated] Flag names; if empty string all flags are returned.
   repeated string names = 1;
+  // Search options for flags; if nil all flags are returned.
+  SearchOptions search = 2;
+
+  // The search options available for the List endpoint.
+  message SearchOptions {
+    // Filter by Name.
+    SingleTextValueFilterOption name = 1;
+    // Filter by Label name.
+    MultiTextValueFilterOption label_name = 2;
+  }
 }
 
 // Request to get all live events.
 message GetLiveEventsRequest {
-  // Live event names; if empty string, all live events are returned.
+  // [deprecated] Live event names; if empty string, all live events are returned.
   repeated string names = 1;
-  // Number of past and upcoming runs to include (0–20).
-  // If 0, only currently active event runs are returned.
-  int32 peek_depth = 2;
-}
+  // Options used for the list of past and future live events to be included in the response.
+  PeekOptions peek = 2;
+  // Search options.
+  SearchOptions search = 3;
 
-// Request to join a 'explicit join' live event.
-message JoinLiveEventRequest {
-  // Live event id to join.
-  string id = 1;
+  message PeekOptions {
+    // The maximum number of unique values that the set of elements
+    // in the past and future list can contain.
+    // If 0, only currently active event runs are returned.
+    int32 max_unique = 1;
+    // The number of extra runs to be returned for each recurring event in
+    // the past and future unique sublists.
+    int32 run_depth = 2;
+  }
+
+  // The search options available for the List endpoint.
+  message SearchOptions {
+    // Filter by Name.
+    SingleTextValueFilterOption name = 1;
+    // Filter by Label name.
+    MultiTextValueFilterOption label_name = 2;
+  }
 }
 
 // Request to join a 'explicit join' live event.
@@ -553,4 +586,25 @@ message UpdateMessageRequest {
 message DeleteMessageRequest {
   // The identifier of the message.
   string id = 1;
+}
+
+
+// The SingleTextValueFilterOption specifies the operation to apply single value fields.
+// Only a single operation can be used at one time.
+message SingleTextValueFilterOption {
+  // Filter by elements matching one of the parameters.
+  repeated string or = 1;
+  // Filter by elements matching exactly the value.
+  string exact = 2;
+  // Filter by elements matching the pattern. Expects a single '%' as a wild card.
+  string like = 3;
+}
+
+// The MultiTextValueFilterOption specifies the operation to apply multi-value fields.
+// Only a single operation can be used at one time.
+message MultiTextValueFilterOption {
+  // Filter by elements matching one of the parameters.
+  repeated string or = 1;
+  // Filter by elements matching all parameters.
+  repeated string and = 2;
 }

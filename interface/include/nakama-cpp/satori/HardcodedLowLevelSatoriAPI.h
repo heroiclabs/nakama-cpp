@@ -21,6 +21,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <optional>
 
 namespace Satori {
 
@@ -101,7 +102,12 @@ namespace Satori {
     // Feature flag available to the identity.
     struct SFlag {
         struct SValueChangeReason {
-    enum SType { UNKNOWN = 0, FLAG_VARIANT = 1, LIVE_EVENT = 2, EXPERIMENT = 3 };
+            enum SType {
+                UNKNOWN = 0,
+                FLAG_VARIANT = 1,
+                LIVE_EVENT = 2,
+                EXPERIMENT = 3
+            };
 
             // The type of the configuration that declared the override.
             SType type = SFlag::SValueChangeReason::SType::UNKNOWN;
@@ -161,22 +167,77 @@ namespace Satori {
         std::vector<SFlagOverride> flags;
     };
 
+    // The SingleTextValueFilterOption specifies the operation to apply single value fields.
+    // Only a single operation can be used at one time.
+    struct SSingleTextValueFilterOption {
+        // Filter by elements matching one of the parameters.
+        std::vector<std::string> or;
+        // Filter by elements matching exactly the value.
+        std::string exact;
+        // Filter by elements matching the pattern. Expects a single '%' as a wild card.
+        std::string like;
+    };
+
+    // The MultiTextValueFilterOption specifies the operation to apply multi-value fields.
+    // Only a single operation can be used at one time.
+    struct SMultiValueFilterOption {
+        // Filter by elements matching one of the parameters.
+        std::vector<std::string> or;
+        // Filter by elements matching all parameters.
+        std::vector<std::string> and;
+    };
+
     // Request to get all experiments data.
     struct SGetExperimentsRequest {
-        // Experiment names; if empty string all experiments are returned.
+        struct SSearchOptions {
+            // Filter by Name.
+            SSingleTextValueFilterOption name;
+            // Filter by Label name.
+            SMultiValueFilterOption label_name;
+        };
+        // [deprecated] Experiment names; if empty string all experiments are returned.
         std::vector<std::string> names;
+        // Search options.
+        SSearchOptions search;
     };
 
     // Request to get all flags data.
     struct SGetFlagsRequest {
-        // Flag names; if empty string all flags are returned.
+        struct SSearchOptions {
+            // Filter by Name.
+            SSingleTextValueFilterOption name;
+            // Filter by Label name.
+            SMultiValueFilterOption label_name;
+        };
+        // [deprecated] Live event names; if empty string, all live events are returned.
         std::vector<std::string> names;
+        // Search options for flags.
+        SSearchOptions search;
     };
 
     // Request to get all live events.
     struct SGetLiveEventsRequest {
+        struct SPeekOptions {
+            // The maximum number of unique values that the set of elements
+            // in the past and future list can contain.
+            // If 0, only currently active event runs are returned.
+            int32_t max_unique;
+            // The number of extra runs to be returned for each recurring event in
+            // the past and future unique sublists.
+            int32_t run_depth;
+        };
+        struct SSearchOptions {
+            // Filter by Name.
+            SSingleTextValueFilterOption name;
+            // Filter by Label name.
+            SMultiValueFilterOption label_name;
+        };
         // Live event names; if empty string all live events are returned.
         std::vector<std::string> names;
+        // Options used for the list of past and future live events to be included in the response.
+        SPeekOptions peek;
+        // Search options.
+        SSearchOptions search;
     };
 
     // Request to join a 'explicit join' live event.
@@ -267,6 +328,7 @@ namespace Satori {
         // Informs the server to recompute the audience membership of the identity.
         bool recompute;
     };
+
 
     struct SGetMessageListRequest {
         // Max number of messages to return. Between 1 and 100.

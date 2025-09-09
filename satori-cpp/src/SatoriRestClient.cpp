@@ -320,18 +320,37 @@ namespace Satori {
 
 	void SatoriRestClient::getExperiments(
 		SSessionPtr session,
-		const std::vector<std::string>& names,
+    		const SGetExperimentsRequest& request,
 		std::function<void(SExperimentList)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
 		try {
 			NLOG_INFO("...");
 
-			Nakama::NHttpQueryArgs args;
+		      Nakama::NHttpQueryArgs args;
+		      for (auto& name : request.names) {
+		        if (!name.empty()) {args.emplace("names", Nakama::encodeURIComponent(name));}
+		      }
 
-			for (auto& name : names) {
-				args.emplace("names", name);
-			}
+		      for (auto& or : request.search.name.or) {
+		        if (!or.empty()) {args.emplace("search.name.or", Nakama::encodeURIComponent(or));}
+		      }
+
+		      if (!request.search.name.exact.empty()) {
+		        args.emplace("search.name.exact", Nakama::encodeURIComponent(request.search.name.exact));
+		      }
+
+		      if (!request.search.name.like.empty()) {
+		        args.emplace("search.name.like", Nakama::encodeURIComponent(request.search.name.like));
+		      }
+
+		      for (auto& or : request.search.label_name.or) {
+		        if (!or.empty()) {args.emplace("search.label_name.or", Nakama::encodeURIComponent(or));}
+		      }
+
+		      for (auto& and : request.search.label_name.and) {
+		        if (!and.empty()) {args.emplace("search.label_name.and", Nakama::encodeURIComponent(and));}
+		      }
 
 			std::shared_ptr<SInternalExperimentList> experimentsData(std::make_shared<SInternalExperimentList>());
 			RestReqContext* ctx(createReqContext(experimentsData));
@@ -348,17 +367,40 @@ namespace Satori {
 		}
 	}
 
-	void SatoriRestClient::getFlags(const std::string &httpKey, const std::vector<std::string> &names,
+void setFlagsArgs(Nakama::NHttpQueryArgs& args, const SGetFlagsRequest &request) {
+	  for (auto& name : request.names) {
+	    if (!name.empty()) {args.emplace("names", Nakama::encodeURIComponent(name));}
+	  }
+
+	  for (auto& or : request.search.name.or) {
+	    if (!or.empty()) {args.emplace("search.name.or", Nakama::encodeURIComponent(or));}
+	  }
+
+	  if (!request.search.name.exact.empty()) {
+	    args.emplace("search.name.exact", Nakama::encodeURIComponent(request.search.name.exact));
+	  }
+
+	  if (!request.search.name.like.empty()) {
+	    args.emplace("search.name.like", Nakama::encodeURIComponent(request.search.name.like));
+	  }
+
+	  for (auto& or : request.search.label_name.or) {
+	    if (!or.empty()) {args.emplace("search.label_name.or", Nakama::encodeURIComponent(or));}
+	  }
+
+	  for (auto& and : request.search.label_name.and) {
+	    if (!and.empty()) {args.emplace("search.label_name.and", Nakama::encodeURIComponent(and));}
+	  }
+	}
+
+	void SatoriRestClient::getFlags(const std::string &httpKey,
+			const SGetFlagsRequest &request,
 	std::function<void(SFlagList)> successCallback, Nakama::ErrorCallback errorCallback) {
 		try {
 			NLOG_INFO("...");
 
 			Nakama::NHttpQueryArgs args;
-
-			for (auto& name : names) {
-				args.emplace("names", name);
-			}
-
+		        setFlagsArgs(args, request);
 			std::shared_ptr<SInternalFlagList> flagsData(std::make_shared<SInternalFlagList>());
 			RestReqContext* ctx(createReqContext(flagsData));
 			ctx->auth.append(httpKey);
@@ -376,18 +418,15 @@ namespace Satori {
 
 	void SatoriRestClient::getFlags(
 		SSessionPtr session,
-		const std::vector<std::string>& names,
+			const SGetFlagsRequest &request,
 		std::function<void(SFlagList)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
 		try {
 			NLOG_INFO("...");
 
-			Nakama::NHttpQueryArgs args;
-
-			for (auto& name : names) {
-				args.emplace("names", name);
-			}
+		        Nakama::NHttpQueryArgs args;
+		        setFlagsArgs(args, request);
 
 			std::shared_ptr<SInternalFlagList> flagsData(std::make_shared<SInternalFlagList>());
 			RestReqContext* ctx(createReqContext(flagsData));
@@ -404,16 +443,14 @@ namespace Satori {
 		}
 	}
 
-	void SatoriRestClient::getFlagOverrides(const std::string &httpKey, const std::vector<std::string> &names,
+	void SatoriRestClient::getFlagOverrides(const std::string &httpKey,
+			const SGetFlagsRequest &request,
 	std::function<void(SFlagOverrideList)> successCallback, Nakama::ErrorCallback errorCallback) {
 		try {
 			NLOG_INFO("...");
 
 			Nakama::NHttpQueryArgs args;
-
-			for (auto& name : names) {
-				args.emplace("names", name);
-			}
+		        setFlagsArgs(args, request);
 
 			std::shared_ptr<SInternalFlagOverrideList> flagOverridesData(std::make_shared<SInternalFlagOverrideList>());
 			RestReqContext* ctx(createReqContext(flagOverridesData));
@@ -432,7 +469,7 @@ namespace Satori {
 
 	void SatoriRestClient::getFlagOverrides(
 		SSessionPtr session,
-		const std::vector<std::string>& names,
+			const SGetFlagsRequest &request,
 		std::function<void(SFlagOverrideList)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
@@ -440,10 +477,7 @@ namespace Satori {
 			NLOG_INFO("...");
 
 			Nakama::NHttpQueryArgs args;
-
-			for (auto& name : names) {
-				args.emplace("names", name);
-			}
+		        setFlagsArgs(args, request);
 
 			std::shared_ptr<SInternalFlagOverrideList> flagOverridesData(std::make_shared<SInternalFlagOverrideList>());
 			RestReqContext* ctx(createReqContext(flagOverridesData));
@@ -462,8 +496,7 @@ namespace Satori {
 
 	void SatoriRestClient::getLiveEvents(
 		SSessionPtr session,
-		const std::vector<std::string>& liveEventNames,
-                const int32_t peekDepth,
+		const SGetLiveEventsRequest& request,
 		std::function<void(SLiveEventList)> successCallback,
 		Nakama::ErrorCallback errorCallback
 	) {
@@ -472,10 +505,32 @@ namespace Satori {
 
 			Nakama::NHttpQueryArgs args;
 
-			for (auto& liveEventName : liveEventNames) {
-				args.emplace("names", liveEventName);
-			}
-		        args.emplace("peek_depth", std::to_string(peekDepth));
+		        for (auto& name : request.names) {
+		          if (!name.empty()) {args.emplace("names", Nakama::encodeURIComponent(name));}
+		        }
+
+		        for (auto& or : request.search.name.or) {
+		          if (!or.empty()) {args.emplace("search.name.or", Nakama::encodeURIComponent(or));}
+		        }
+
+		        if (!request.search.name.exact.empty()) {
+		          args.emplace("search.name.exact", Nakama::encodeURIComponent(request.search.name.exact));
+		        }
+
+		        if (!request.search.name.like.empty()) {
+		          args.emplace("search.name.like", Nakama::encodeURIComponent(request.search.name.like));
+		        }
+
+		        for (auto& or : request.search.label_name.or) {
+		          if (!or.empty()) {args.emplace("search.label_name.or", Nakama::encodeURIComponent(or));}
+		        }
+
+		        for (auto& and : request.search.label_name.and) {
+		          if (!and.empty()) {args.emplace("search.label_name.and", Nakama::encodeURIComponent(and));}
+		        }
+
+		        if (request.peek.max_unique != 0){args.emplace("peek.max_unique", std::to_string(request.peek.max_unique));}
+		        if (request.peek.run_depth != 0){args.emplace("peek.run_depth", std::to_string(request.peek.run_depth));}
 
 			std::shared_ptr<SInternalLiveEventList> liveEventsData(std::make_shared<SInternalLiveEventList>());
 			RestReqContext* ctx(createReqContext(liveEventsData));
