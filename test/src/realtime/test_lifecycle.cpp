@@ -15,217 +15,204 @@
  */
 
 #include "NTest.h"
-#include "globals.h"
 #include "TestGuid.h"
+#include "globals.h"
 
-#include <optional>
 #include <condition_variable>
+#include <optional>
 #include <thread>
 
 namespace Nakama {
-    namespace Test {
+namespace Test {
 
-        void test_rt_rapiddisconnect()
-        {
-            bool threadedTick = true;
-            NTest test(__func__, threadedTick);
-            test.setTestTimeoutMs(5000);
-            test.runTest();
+void test_rt_rapiddisconnect() {
+  bool threadedTick = true;
+  NTest test(__func__, threadedTick);
+  test.setTestTimeoutMs(5000);
+  test.runTest();
 
-            bool hadConnectCallback = false;
-            bool hadDisconnectCallback = false;
+  bool hadConnectCallback = false;
+  bool hadDisconnectCallback = false;
 
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-            bool createStatus = false;
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
 
-            test.listener.setConnectCallback([&hadConnectCallback]() {
-                NLOG_INFO("TEST: Connect");
-                hadConnectCallback = true;
-            });
+  test.listener.setConnectCallback([&hadConnectCallback]() {
+    NLOG_INFO("TEST: Connect");
+    hadConnectCallback = true;
+  });
 
+  test.listener.setDisconnectCallback([&hadDisconnectCallback](const NRtClientDisconnectInfo& /*info*/) {
+    NLOG_INFO("TEST: Disconnect");
+    hadDisconnectCallback = true;
+  });
 
-            test.listener.setDisconnectCallback([&hadDisconnectCallback](const NRtClientDisconnectInfo& /*info*/) {
-                NLOG_INFO("TEST: Disconnect");
-                hadDisconnectCallback = true;
-            });
-
-            test.rtClient->connect(session, createStatus, NTest::RtProtocol);
-            test.rtClient->disconnect();
-            // neither callback should have fired
-            test.stopTest(!hadConnectCallback && !hadDisconnectCallback);
-        }
-
-        void test_rt_reconnect()
-        {
-            bool threadedTick = true;
-            NTest test(__func__, threadedTick);
-            test.setTestTimeoutMs(2000);
-            bool hadConnectCallback = false;
-            test.runTest();
-
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-            bool createStatus = false;
-            test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
-
-            test.rtClient->disconnect();
-            test.rtClient->connectAsync(session, true).get();
-            test.stopTest(true); // connect after disconnect succeeded
-        }
-
-        // optional test -- pass --socket.pong_wait_ms 5000 to Nakama so that it disconnects rtclient after sleep
-        // in order to test how it will react.
-        void test_rt_remote_disconnect()
-        {
-            bool threadedTick = true;
-            NTest test(__func__, threadedTick);
-            test.setTestTimeoutMs(15000);
-
-            test.runTest();
-
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-            bool createStatus = false;
-
-            test.rtClient->createMatchAsync().get();
-            test.setRtTickPaused(true);
-            std::this_thread::sleep_for(std::chrono::milliseconds(10000));
-
-            test.setRtTickPaused(false);
-
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
-            test.stopTest(true);
-        }
-
-        void test_rt_connect_callback()
-        {
-            bool threadedTick = true;
-
-            NTest test(__func__, true);
-            test.runTest();
-
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-
-            bool connected = false;
-
-            test.listener.setConnectCallback([&connected](){
-                connected = true;
-            });
-
-            test.rtClient->connect(session, true);
-
-            // try to trigger any issues with the underlying promise.
-            std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-
-            test.stopTest(connected);
-
-        }
-
-        void test_rt_double_connect_async()
-        {
-             bool threadedTick = true;
-
-            NTest test(__func__, true);
-            test.runTest();
-
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-
-            bool connected = false;
-
-            test.listener.setConnectCallback([&connected](){
-                connected = true;
-            });
-
-            // should not throw any errors.
-            test.rtClient->connectAsync(session, true).get();
-            test.rtClient->connectAsync(session, true).get();
-
-            test.stopTest(connected);
-        }
-
-        void test_rt_double_connect()
-        {
-            bool threadedTick = true;
-
-            NTest test(__func__, true);
-            test.runTest();
-
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-
-            bool connected = false;
-            std::mutex mtx;
-            std::condition_variable cv;
-
-            test.listener.setConnectCallback([&](){
-                std::unique_lock<std::mutex> lock(mtx);
-                connected = true;
-                cv.notify_one();
-            });
-
-            // should not throw any errors.
-            test.rtClient->connect(session, true);
-            test.rtClient->connect(session, true);
-
-            {
-                std::unique_lock<std::mutex> lock(mtx);
-                cv.wait(lock, [&](){ return connected; }); // Wait until `connected` becomes true.
-            }
-
-            test.stopTest(connected);
-        }
-
-        // requires session.single_socket to be true.
-        void test_rt_simultaneous_connect()
-        {
-            bool threadedTick = true;
-
-            NTest test(__func__, threadedTick);
-            test.runTest();
-
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-
-            test.rtClient->connectAsync(session, true).get();
-
-            bool disconnected = false;
-            std::mutex disconnectedMtx;
-            std::condition_variable disconnectedCV;
-
-            test.listener.setDisconnectCallback([&](const NRtClientDisconnectInfo& info) {
-                std::unique_lock<std::mutex> lock(disconnectedMtx);
-                disconnected = true;
-                disconnectedCV.notify_one();
-            });
-
-            std::atomic<bool> rtClient2Tick(true);
-            auto rtClient2 = test.client->createRtClient();
-            rtClient2->connect(session, true);
-
-            std::thread tickThread([&]() {
-                while (rtClient2Tick.load()) {
-                    rtClient2->tick();
-                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
-                }
-            });
-
-            {
-                std::unique_lock<std::mutex> lock(disconnectedMtx);
-                disconnectedCV.wait(lock, [&](){ return disconnected; }); // Wait until rtClient1 disconnects due to new connect.
-            }
-
-            std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // see if any tick() from rtClient2 causes exceptions to get thrown.
-            rtClient2Tick.store(false);
-            tickThread.join();
-
-            test.stopTest(true);
-        }
-
-        void test_connectivity_loss()
-        {
-            bool threadedTick = true;
-            NTest test(__func__, threadedTick);
-            test.setTestTimeoutMs(60 * 1000);
-            test.runTest();
-            NSessionPtr session = test.client->authenticateDeviceAsync("mytestdevice0001", std::nullopt, std::nullopt, {}).get();
-            test.rtClient->connect(session, true);
-        }
-    }
+  test.rtClient->connect(session, createStatus, NTest::RtProtocol);
+  test.rtClient->disconnect();
+  // neither callback should have fired
+  test.stopTest(!hadConnectCallback && !hadDisconnectCallback);
 }
+
+void test_rt_reconnect() {
+  bool threadedTick = true;
+  NTest test(__func__, threadedTick);
+  test.setTestTimeoutMs(2000);
+  bool hadConnectCallback = false;
+  test.runTest();
+
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+  test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
+
+  test.rtClient->disconnect();
+  test.rtClient->connectAsync(session, true).get();
+  test.stopTest(true); // connect after disconnect succeeded
+}
+
+// optional test -- pass --socket.pong_wait_ms 5000 to Nakama so that it disconnects rtclient after sleep
+// in order to test how it will react.
+void test_rt_remote_disconnect() {
+  bool threadedTick = true;
+  NTest test(__func__, threadedTick);
+  test.setTestTimeoutMs(15000);
+
+  test.runTest();
+
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+
+  test.rtClient->createMatchAsync().get();
+  test.setRtTickPaused(true);
+  std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+
+  test.setRtTickPaused(false);
+
+  std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+  test.stopTest(true);
+}
+
+void test_rt_connect_callback() {
+  bool threadedTick = true;
+
+  NTest test(__func__, true);
+  test.runTest();
+
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+  bool connected = false;
+
+  test.listener.setConnectCallback([&connected]() { connected = true; });
+
+  test.rtClient->connect(session, true);
+
+  // try to trigger any issues with the underlying promise.
+  std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+
+  test.stopTest(connected);
+}
+
+void test_rt_double_connect_async() {
+  bool threadedTick = true;
+
+  NTest test(__func__, true);
+  test.runTest();
+
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+  bool connected = false;
+
+  test.listener.setConnectCallback([&connected]() { connected = true; });
+
+  // should not throw any errors.
+  test.rtClient->connectAsync(session, true).get();
+  test.rtClient->connectAsync(session, true).get();
+
+  test.stopTest(connected);
+}
+
+void test_rt_double_connect() {
+  bool threadedTick = true;
+
+  NTest test(__func__, true);
+  test.runTest();
+
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+  bool connected = false;
+  std::mutex mtx;
+  std::condition_variable cv;
+
+  test.listener.setConnectCallback([&]() {
+    std::unique_lock<std::mutex> lock(mtx);
+    connected = true;
+    cv.notify_one();
+  });
+
+  // should not throw any errors.
+  test.rtClient->connect(session, true);
+  test.rtClient->connect(session, true);
+
+  {
+    std::unique_lock<std::mutex> lock(mtx);
+    cv.wait(lock, [&]() { return connected; }); // Wait until `connected` becomes true.
+  }
+
+  test.stopTest(connected);
+}
+
+// requires session.single_socket to be true.
+void test_rt_simultaneous_connect() {
+  bool threadedTick = true;
+
+  NTest test(__func__, threadedTick);
+  test.runTest();
+
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+
+  test.rtClient->connectAsync(session, true).get();
+
+  bool disconnected = false;
+  std::mutex disconnectedMtx;
+  std::condition_variable disconnectedCV;
+
+  test.listener.setDisconnectCallback([&](const NRtClientDisconnectInfo& info) {
+    std::unique_lock<std::mutex> lock(disconnectedMtx);
+    disconnected = true;
+    disconnectedCV.notify_one();
+  });
+
+  std::atomic<bool> rtClient2Tick(true);
+  auto rtClient2 = test.client->createRtClient();
+  rtClient2->connect(session, true);
+
+  std::thread tickThread([&]() {
+    while (rtClient2Tick.load()) {
+      rtClient2->tick();
+      std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    }
+  });
+
+  {
+    std::unique_lock<std::mutex> lock(disconnectedMtx);
+    disconnectedCV.wait(lock, [&]() { return disconnected; }); // Wait until rtClient1 disconnects due to new connect.
+  }
+
+  std::this_thread::sleep_for(
+      std::chrono::milliseconds(2000)); // see if any tick() from rtClient2 causes exceptions to get thrown.
+  rtClient2Tick.store(false);
+  tickThread.join();
+
+  test.stopTest(true);
+}
+
+void test_connectivity_loss() {
+  bool threadedTick = true;
+  NTest test(__func__, threadedTick);
+  test.setTestTimeoutMs(60 * 1000);
+  test.runTest();
+  NSessionPtr session = test.client->authenticateDeviceAsync("mytestdevice0001", std::nullopt, std::nullopt, {}).get();
+  test.rtClient->connect(session, true);
+}
+} // namespace Test
+} // namespace Nakama

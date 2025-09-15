@@ -14,81 +14,72 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
 #include "TestGuid.h"
+#include "nakama-cpp/log/NLogger.h"
 
 #include <optional>
 
 namespace Nakama {
 namespace Test {
 
-void test_createAndDeleteNotifications()
-{
-    bool threadedTick = true;
-    NTest test(__func__, threadedTick);
-    test.runTest();
-    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-    bool createStatus = false;
-    test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
+void test_createAndDeleteNotifications() {
+  bool threadedTick = true;
+  NTest test(__func__, threadedTick);
+  test.runTest();
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+  test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
 
-    std::promise<void> notificationsPromise;
-    test.listener.setNotificationsCallback([&test, session, &notificationsPromise](const NNotificationList& list)
-    {
-        NLOG_INFO("Received notifications: " + std::to_string(list.notifications.size()));
+  std::promise<void> notificationsPromise;
+  test.listener.setNotificationsCallback([&test, session, &notificationsPromise](const NNotificationList& list) {
+    NLOG_INFO("Received notifications: " + std::to_string(list.notifications.size()));
 
-        for (auto& notification : list.notifications)
-        {
-            NLOG_INFO("Notification code: " + std::to_string(notification.code));
-            NLOG_INFO("\tcontent: " + notification.content);
-        }
+    for (auto& notification : list.notifications) {
+      NLOG_INFO("Notification code: " + std::to_string(notification.code));
+      NLOG_INFO("\tcontent: " + notification.content);
+    }
 
-        notificationsPromise.set_value();
-    });
+    notificationsPromise.set_value();
+  });
 
-    test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
+  test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
 
-    notificationsPromise.get_future().get();
-    test.stopTest(true);
-
+  notificationsPromise.get_future().get();
+  test.stopTest(true);
 }
 
-void test_createListAndDeleteNotifications()
-{
-    bool threadedTick = true;
-    NTest test(__func__, threadedTick);
-    test.runTest();
-    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-    bool createStatus = false;
-    test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
-    const Nakama::NRpc rpc = test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
-    NNotificationListPtr list = test.client->listNotificationsAsync(session, std::nullopt, std::nullopt).get();
-    if (list->notifications.size() > 0)
-    {
-        for (auto& notification : list->notifications)
-        {
-            NLOG_INFO("Notification code: " + std::to_string(notification.code));
-            NLOG_INFO("\tcontent: " + notification.content);
-            test.client->deleteNotificationsAsync(session, {notification.id});
-            test.stopTest(true);
-        }
+void test_createListAndDeleteNotifications() {
+  bool threadedTick = true;
+  NTest test(__func__, threadedTick);
+  test.runTest();
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+  test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
+  const Nakama::NRpc rpc =
+      test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
+  NNotificationListPtr list = test.client->listNotificationsAsync(session, std::nullopt, std::nullopt).get();
+  if (list->notifications.size() > 0) {
+    for (auto& notification : list->notifications) {
+      NLOG_INFO("Notification code: " + std::to_string(notification.code));
+      NLOG_INFO("\tcontent: " + notification.content);
+      test.client->deleteNotificationsAsync(session, {notification.id});
+      test.stopTest(true);
     }
-    else
-    {
-        test.stopTest();
-    }
+  } else {
+    test.stopTest();
+  }
 }
 
-void test_notifications()
-{
-    // Notifications tests reqire following lua modules:
-    // download clientrpc.lua and debug_utils.lua from
-    // https://github.com/heroiclabs/nakama/tree/master/data/modules
-    // put to nakama-server/data/modules
-    // restart server
+void test_notifications() {
+  // Notifications tests reqire following lua modules:
+  // download clientrpc.lua and debug_utils.lua from
+  // https://github.com/heroiclabs/nakama/tree/master/data/modules
+  // put to nakama-server/data/modules
+  // restart server
 
-    test_createAndDeleteNotifications();
-    test_createListAndDeleteNotifications();
+  test_createAndDeleteNotifications();
+  test_createListAndDeleteNotifications();
 }
 
 } // namespace Test

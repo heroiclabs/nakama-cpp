@@ -24,57 +24,47 @@ namespace Test {
 
 using namespace std;
 
-void test_connectError()
-{
-    NClientParameters parameters;
-    parameters.port = 1111;
+void test_connectError() {
+  NClientParameters parameters;
+  parameters.port = 1111;
 
-    NTest test(__func__, parameters);
-    test.setTestTimeoutMs(20000);
+  NTest test(__func__, parameters);
+  test.setTestTimeoutMs(20000);
 
-    auto successCallback = [&test](NSessionPtr session)
-    {
-        test.stopTest();
-    };
+  auto successCallback = [&test](NSessionPtr session) { test.stopTest(); };
 
-    auto errorCallback = [&test](const NError& error)
-    {
-        NLOG_INFO("connect error " + std::to_string((int) error.code));
+  auto errorCallback = [&test](const NError& error) {
+    NLOG_INFO("connect error " + std::to_string((int)error.code));
 
-        test.stopTest(error.code == ErrorCode::ConnectionError || error.code == ErrorCode::CancelledByUser);
-    };
+    test.stopTest(error.code == ErrorCode::ConnectionError || error.code == ErrorCode::CancelledByUser);
+  };
 
-    test.client->authenticateDevice("mytestdevice0001", std::nullopt, std::nullopt, {}, successCallback, errorCallback);
+  test.client->authenticateDevice("mytestdevice0001", std::nullopt, std::nullopt, {}, successCallback, errorCallback);
 
-    test.runTest();
+  test.runTest();
 }
 
-void test_disconnection()
-{
-    NTest test(__func__);
+void test_disconnection() {
+  NTest test(__func__);
 
-    auto successCallback = [&test](NSessionPtr session)
-    {
-        NLOG_INFO("session token: " + session->getAuthToken());
-        test.stopTest(true);
-    };
+  auto successCallback = [&test](NSessionPtr session) {
+    NLOG_INFO("session token: " + session->getAuthToken());
+    test.stopTest(true);
+  };
 
-    auto errorCallback = [&test](const NError& error)
-    {
-        test.stopTest(error);
-    };
+  auto errorCallback = [&test](const NError& error) { test.stopTest(error); };
 
-    test.client->authenticateDevice("mytestdevice0001", std::nullopt, std::nullopt, {}, successCallback, errorCallback);
+  test.client->authenticateDevice("mytestdevice0001", std::nullopt, std::nullopt, {}, successCallback, errorCallback);
 
-    test.client->disconnect();
+  test.client->disconnect();
 
-    test.runTest();
+  test.runTest();
 }
 
-void test_disconnect()
-{
-    test_connectError();
-    //test_disconnection(); depending on transport implementation either success or error may be legitimately called. Test is inheritly racy
+void test_disconnect() {
+  test_connectError();
+  // test_disconnection(); depending on transport implementation either success or error may be legitimately called.
+  // Test is inheritly racy
 }
 
 } // namespace Test

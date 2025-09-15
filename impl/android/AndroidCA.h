@@ -17,17 +17,14 @@
 #pragma once
 
 #include <jni.h>
-#include <string.h>
 #include <memory.h>
+#include <string.h>
 
-namespace Nakama
-{
-    struct CACertificateData
-    {
-        unsigned char* data;
-        int len;
-    };
-
-    CACertificateData* getCaCertificates();
+namespace Nakama {
+struct CACertificateData {
+  unsigned char* data;
+  int len;
 };
 
+CACertificateData* getCaCertificates();
+}; // namespace Nakama

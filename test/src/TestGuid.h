@@ -16,14 +16,11 @@
 
 #include <string>
 
-namespace Nakama
-{
-    namespace Test
-    {
-        class TestGuid
-        {
-            public:
-                static std::string newGuid();
-        };
-    };
-}
+namespace Nakama {
+namespace Test {
+class TestGuid {
+public:
+  static std::string newGuid();
+};
+}; // namespace Test
+} // namespace Nakama
