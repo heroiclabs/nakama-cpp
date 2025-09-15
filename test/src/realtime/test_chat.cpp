@@ -14,47 +14,46 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
 #include "TestGuid.h"
+#include "nakama-cpp/log/NLogger.h"
 
 namespace Nakama {
-    namespace Test {
+namespace Test {
 
-        void test_rt_joinChat()
-        {
-            bool threadedTick = true;
-            NTest test(__func__, threadedTick);
-            test.runTest();
+void test_rt_joinChat() {
+  bool threadedTick = true;
+  NTest test(__func__, threadedTick);
+  test.runTest();
 
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-            bool createStatus = false;
-            test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+  test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
 
-            // data must be JSON
-            std::string json_data = "{\"msg\":\"Hello there!\"}";
+  // data must be JSON
+  std::string json_data = "{\"msg\":\"Hello there!\"}";
 
-            const NChannelPtr channel = test.rtClient->joinChatAsync("chat", NChannelType::ROOM, {}, {}).get();
-            const NChannelMessageAck ack = test.rtClient->writeChatMessageAsync(channel->id, json_data).get();
+  const NChannelPtr channel = test.rtClient->joinChatAsync("chat", NChannelType::ROOM, {}, {}).get();
+  const NChannelMessageAck ack = test.rtClient->writeChatMessageAsync(channel->id, json_data).get();
 
-            NLOG_INFO("call stop test");
-            test.stopTest(ack.channelId == channel->id);
-            NLOG_INFO("done call stop test");
-        }
-
-        void test_rt_joinGroupChat()
-        {
-            NLOG_INFO("calling join group chat");
-
-            bool threadedTick = true;
-            NTest test(__func__, threadedTick);
-            test.runTest();
-            NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-            bool createStatus = false;
-            test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
-            const NGroup group = test.client->createGroupAsync(session, TestGuid::newGuid(), "a group for chatting", "", "", false, {}).get();
-            const NChannelPtr channelPtr = test.rtClient->joinChatAsync(group.id, NChannelType::GROUP, {}, {}).get();
-            test.stopTest(true);
-        }
-    }
+  NLOG_INFO("call stop test");
+  test.stopTest(ack.channelId == channel->id);
+  NLOG_INFO("done call stop test");
 }
+
+void test_rt_joinGroupChat() {
+  NLOG_INFO("calling join group chat");
+
+  bool threadedTick = true;
+  NTest test(__func__, threadedTick);
+  test.runTest();
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+  test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
+  const NGroup group =
+      test.client->createGroupAsync(session, TestGuid::newGuid(), "a group for chatting", "", "", false, {}).get();
+  const NChannelPtr channelPtr = test.rtClient->joinChatAsync(group.id, NChannelType::GROUP, {}, {}).get();
+  test.stopTest(true);
+}
+} // namespace Test
+} // namespace Nakama

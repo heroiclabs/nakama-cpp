@@ -80,8 +80,7 @@ int mainHelper() {
   std::string deviceId = "e872f976-34c1-4c41-88fe-fd6aef118782";
   NLOG_INFO("Authenticating...");
 
-  client->authenticateDevice(
-      deviceId, std::nullopt, std::nullopt, {}, loginSucceededCallback, loginFailedCallback);
+  client->authenticateDevice(deviceId, std::nullopt, std::nullopt, {}, loginSucceededCallback, loginFailedCallback);
 
   while (!done) {
     client->tick();

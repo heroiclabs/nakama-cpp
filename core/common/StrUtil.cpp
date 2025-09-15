@@ -17,9 +17,9 @@
 #include "StrUtil.h"
 #include <google/protobuf/stubs/strutil.h>
 
-#include <sstream>
-#include <regex>
 #include <optional>
+#include <regex>
+#include <sstream>
 
 namespace Nakama {
 

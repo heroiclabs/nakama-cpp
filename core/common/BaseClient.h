@@ -77,23 +77,17 @@ public:
       bool create,
       const NStringMap& vars) override;
 
-  std::future<NSessionPtr> authenticateAppleAsync(
-      const std::string& token,
-      const std::string& username,
-      bool create,
-      const NStringMap& vars) override;
+  std::future<NSessionPtr>
+  authenticateAppleAsync(const std::string& token, const std::string& username, bool create, const NStringMap& vars)
+      override;
 
-  std::future<NSessionPtr> authenticateCustomAsync(
-      const std::string& id,
-      const std::string& username,
-      bool create,
-      const NStringMap& vars) override;
+  std::future<NSessionPtr>
+  authenticateCustomAsync(const std::string& id, const std::string& username, bool create, const NStringMap& vars)
+      override;
 
-  std::future<NSessionPtr> authenticateSteamAsync(
-      const std::string& token,
-      const std::string& username,
-      bool create,
-      const NStringMap& vars) override;
+  std::future<NSessionPtr>
+  authenticateSteamAsync(const std::string& token, const std::string& username, bool create, const NStringMap& vars)
+      override;
 
   std::future<NSessionPtr> authenticateRefreshAsync(NSessionPtr session, const NStringMap& vars) override;
 
@@ -149,10 +143,8 @@ public:
 
   std::future<void> unlinkCustomAsync(NSessionPtr session, const std::string& id) override;
 
-  std::future<void> importFacebookFriendsAsync(
-      NSessionPtr session,
-      const std::string& token,
-      const std::optional<bool>& reset) override;
+  std::future<void>
+  importFacebookFriendsAsync(NSessionPtr session, const std::string& token, const std::optional<bool>& reset) override;
 
   std::future<NAccount> getAccountAsync(NSessionPtr session) override;
 
@@ -225,8 +217,7 @@ public:
   std::future<void> leaveGroupAsync(NSessionPtr session, const std::string& groupId) override;
 
   std::future<NGroupListPtr>
-  listGroupsAsync(NSessionPtr session, const std::string& name, int32_t limit, const std::string& cursor)
-      override;
+  listGroupsAsync(NSessionPtr session, const std::string& name, int32_t limit, const std::string& cursor) override;
 
   std::future<NUserGroupListPtr> listUserGroupsAsync(
       NSessionPtr session,
@@ -355,15 +346,11 @@ public:
   std::future<void>
   deleteStorageObjectsAsync(NSessionPtr session, const std::vector<NDeleteStorageObjectId>& objectIds) override;
 
-  std::future<NRpc> rpcAsync(
-      NSessionPtr session,
-      const std::string& id,
-      const std::optional<std::string>& payload) override;
+  std::future<NRpc>
+  rpcAsync(NSessionPtr session, const std::string& id, const std::optional<std::string>& payload) override;
 
-  std::future<NRpc> rpcAsync(
-      const std::string& http_key,
-      const std::string& id,
-      const std::optional<std::string>& payload) override;
+  std::future<NRpc>
+  rpcAsync(const std::string& http_key, const std::string& id, const std::optional<std::string>& payload) override;
 
 protected:
   int _port = -1;

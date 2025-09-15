@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
+#include "nakama-cpp/log/NLogger.h"
 
 #include <optional>
 
@@ -24,40 +24,31 @@ namespace Test {
 
 using namespace std;
 
-void test_getAccount()
-{
-    NTest test(__func__);
+void test_getAccount() {
+  NTest test(__func__);
 
-    auto successCallback = [&test](NSessionPtr session)
-    {
-        NLOG_INFO("session token: " + session->getAuthToken());
+  auto successCallback = [&test](NSessionPtr session) {
+    NLOG_INFO("session token: " + session->getAuthToken());
 
-        auto successCallback = [&test, session](const NAccount& account)
-        {
-            NLOG_INFO("account user id: " + account.user.id);
+    auto successCallback = [&test, session](const NAccount& account) {
+      NLOG_INFO("account user id: " + account.user.id);
 
-            auto successCallback = [&test]()
-            {
-                NLOG_INFO("account updated");
-                test.stopTest(true);
-            };
+      auto successCallback = [&test]() {
+        NLOG_INFO("account updated");
+        test.stopTest(true);
+      };
 
-            test.client->updateAccount(session,
-                std::nullopt,
-                "Nakama-test",
-                std::nullopt,
-                std::nullopt,
-                std::nullopt,
-                std::nullopt,
-                successCallback);
-        };
-
-        test.client->getAccount(session, successCallback);
+      test.client->updateAccount(
+          session, std::nullopt, "Nakama-test", std::nullopt, std::nullopt, std::nullopt, std::nullopt,
+          successCallback);
     };
 
-    test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
+    test.client->getAccount(session, successCallback);
+  };
 
-    test.runTest();
+  test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
+
+  test.runTest();
 }
 
 } // namespace Test

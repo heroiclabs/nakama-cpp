@@ -14,110 +14,104 @@
  * limitations under the License.
  */
 
-#include <exception>
-#include "globals.h"
 #include "NTest.h"
 #include "TestGuid.h"
+#include "globals.h"
+#include <exception>
 
 #include <optional>
 
 namespace Nakama {
-    namespace Test {
+namespace Test {
 
-    using namespace std;
+using namespace std;
 
-    void test_rpc_with_http_key()
-    {
-        bool threadedTick = true;
-        NTest test1(__func__, threadedTick);
-        test1.runTest();
-        NTest test2(__func__, threadedTick);
-        test2.runTest();
+void test_rpc_with_http_key() {
+  bool threadedTick = true;
+  NTest test1(__func__, threadedTick);
+  test1.runTest();
+  NTest test2(__func__, threadedTick);
+  test2.runTest();
 
-        NSessionPtr session1 = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-        bool createStatus = false;
-        test1.rtClient->connectAsync(session1, createStatus, NTest::RtProtocol).get();
+  NSessionPtr session1 = test1.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+  test1.rtClient->connectAsync(session1, createStatus, NTest::RtProtocol).get();
 
+  NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
 
-        NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-        test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
+  string json = "{\"v\":\"test\"}";
+  auto rpc1 = test1.client->rpcAsync(NTest::ServerHttpKey, "clientrpc.rpc", json).get();
+  test1.stopTest(!rpc1.payload.empty());
 
-        string json = "{\"v\":\"test\"}";
-        auto rpc1 = test1.client->rpcAsync(NTest::ServerHttpKey, "clientrpc.rpc", json).get();
-        test1.stopTest(!rpc1.payload.empty());
+  auto rpc2 = test2.client->rpcAsync(NTest::ServerHttpKey, "clientrpc.rpc", std::nullopt).get();
+  test2.stopTest(rpc2.payload.empty());
+}
 
-        auto rpc2 = test2.client->rpcAsync(NTest::ServerHttpKey, "clientrpc.rpc", std::nullopt).get();
-        test2.stopTest(rpc2.payload.empty());
-    }
+void test_rpc_with_auth() {
+  const bool threadedTick = true;
+  NTest test(__func__, threadedTick);
+  test.setTestTimeoutMs(100000);
+  test.runTest();
 
-    void test_rpc_with_auth()
-    {
-        const bool threadedTick = true;
-        NTest test(__func__, threadedTick);
-        test.setTestTimeoutMs(100000);
-        test.runTest();
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
 
-        NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  auto rpc1 = test.client->rpcAsync(session, "clientrpc.rpc", std::nullopt).get();
+  NTEST_ASSERT(rpc1.payload.empty());
 
-        auto rpc1 = test.client->rpcAsync(session, "clientrpc.rpc", std::nullopt).get();
-        NTEST_ASSERT(rpc1.payload.empty());
+  string json = "{\"user_id\":\"" + session->getUserId() + "\"}";
+  auto rpc2 = test.client->rpcAsync(session, "clientrpc.rpc", json).get();
+  NTEST_ASSERT(rpc2.payload == json);
 
-        string json = "{\"user_id\":\"" + session->getUserId() + "\"}";
-        auto rpc2 = test.client->rpcAsync(session, "clientrpc.rpc", json).get();
-        NTEST_ASSERT(rpc2.payload == json);
+  bool caughtException1 = false;
+  try {
+    auto rpc3 = test.client->rpcAsync(session, "clientrpc.rpc_error", "{}").get();
+  }
+  // TODO make catching NException work
+  catch (const std::exception& e) {
+    caughtException1 = true;
+  }
 
-        bool caughtException1 = false;
-        try
-        {
-            auto rpc3 = test.client->rpcAsync(session, "clientrpc.rpc_error", "{}").get();
-        }
-        // TODO make catching NException work
-        catch (const std::exception& e)
-        {
-            caughtException1 = true;
-        }
+  NTEST_ASSERT(caughtException1);
 
-        NTEST_ASSERT(caughtException1);
+  auto rpc4 = test.client->rpcAsync(session, "clientrpc.rpc_get", "{}").get();
+  NTEST_ASSERT(!rpc4.payload.empty());
 
-        auto rpc4 = test.client->rpcAsync(session, "clientrpc.rpc_get", "{}").get();
-        NTEST_ASSERT(!rpc4.payload.empty());
+  auto rpc5 =
+      test.client->rpcAsync(session, "clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}")
+          .get();
+  NTEST_ASSERT(rpc5.payload.empty());
 
-        auto rpc5 = test.client->rpcAsync(session, "clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
-        NTEST_ASSERT(rpc5.payload.empty());
+  test.rtClient->connectAsync(session, false).get();
 
-        test.rtClient->connectAsync(session, false).get();
+  auto rpc6 = test.rtClient->rpcAsync("clientrpc.rpc", std::nullopt);
+  json = "{\"user_id\":\"" + session->getUserId() + "\"}";
 
-        auto rpc6 = test.rtClient->rpcAsync("clientrpc.rpc", std::nullopt);
-        json = "{\"user_id\":\"" + session->getUserId() + "\"}";
+  auto rpc7 = test.rtClient->rpcAsync("clientrpc.rpc", json).get();
+  NTEST_ASSERT(rpc7.payload == json);
 
-        auto rpc7 = test.rtClient->rpcAsync("clientrpc.rpc", json).get();
-        NTEST_ASSERT(rpc7.payload == json);
+  bool caughtException2 = false;
 
-        bool caughtException2 = false;
+  try {
+    test.rtClient->rpcAsync("clientrpc.rpc_error", "{}").get();
+  }
+  // TODO make catching NRtException work
+  catch (const std::exception& e) {
+    caughtException2 = true;
+  }
 
-        try
-        {
-            test.rtClient->rpcAsync("clientrpc.rpc_error", "{}").get();
-        }
-        // TODO make catching NRtException work
-        catch(const std::exception& e)
-        {
-            caughtException2 = true;
-        }
+  NTEST_ASSERT(caughtException2);
 
-        NTEST_ASSERT(caughtException2);
+  auto rpc8 = test.rtClient->rpcAsync("clientrpc.rpc_get", "{}").get();
+  NTEST_ASSERT(!rpc8.payload.empty());
 
-        auto rpc8 = test.rtClient->rpcAsync("clientrpc.rpc_get", "{}").get();
-        NTEST_ASSERT(!rpc8.payload.empty());
+  test.stopTest(true);
+}
 
-        test.stopTest(true);
-    }
+void test_rpc() {
+  test_rpc_with_http_key();
+  test_rpc_with_auth();
+}
 
-    void test_rpc()
-    {
-        test_rpc_with_http_key();
-        test_rpc_with_auth();
-    }
-
-    } // namespace Test
+} // namespace Test
 } // namespace Nakama

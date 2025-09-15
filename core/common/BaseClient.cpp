@@ -21,8 +21,8 @@
 #include <nakama-cpp/log/NLogger.h>
 #include <nakama-cpp/realtime/NWebsocketsFactory.h>
 
-#include <optional>
 #include <future>
+#include <optional>
 #include <vector>
 
 namespace Nakama {

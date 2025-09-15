@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
 #include "TestGuid.h"
+#include "nakama-cpp/log/NLogger.h"
 
 #include <rapidjson/document.h>
 
@@ -25,46 +25,42 @@ namespace Test {
 
 using namespace std;
 
-void test_authoritative_match()
-{
-    bool threadedTick = true;
-    NTest test(__func__ , threadedTick);
-    NTest test2("test_authoritative_match_join", threadedTick);
+void test_authoritative_match() {
+  bool threadedTick = true;
+  NTest test(__func__, threadedTick);
+  NTest test2("test_authoritative_match_join", threadedTick);
 
-    test.runTest();
-    test2.runTest();
+  test.runTest();
+  test2.runTest();
 
-    NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-    bool createStatus = false;
-    test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
+  NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+  test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
 
-    NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
-    test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
+  NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
 
-    const NRpc rpc = test.rtClient->rpcAsync("clientrpc.create_authoritative_match", "{\"debug\": true, \"label\": \"TestAuthoritativeMatch\"}").get();
+  const NRpc rpc =
+      test.rtClient
+          ->rpcAsync("clientrpc.create_authoritative_match", "{\"debug\": true, \"label\": \"TestAuthoritativeMatch\"}")
+          .get();
 
-    rapidjson::Document document;
-    if (!document.Parse(rpc.payload).HasParseError())
-    {
-        auto& jsonMatchId = document["match_id"];
+  rapidjson::Document document;
+  if (!document.Parse(rpc.payload).HasParseError()) {
+    auto& jsonMatchId = document["match_id"];
 
-        if (jsonMatchId.IsString())
-        {
-            string matchId = jsonMatchId.GetString();
-            test2.rtClient->joinMatchAsync(matchId, {}).get();
-        }
-        else
-        {
-            test.stopTest(false);
-        }
+    if (jsonMatchId.IsString()) {
+      string matchId = jsonMatchId.GetString();
+      test2.rtClient->joinMatchAsync(matchId, {}).get();
+    } else {
+      test.stopTest(false);
     }
-    else
-    {
-        test.stopTest(false);
-    }
+  } else {
+    test.stopTest(false);
+  }
 
-    test.stopTest(true);
-    test2.stopTest(true);
+  test.stopTest(true);
+  test2.stopTest(true);
 }
 
 } // namespace Test

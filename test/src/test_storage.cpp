@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
+#include "nakama-cpp/log/NLogger.h"
 
 #include <optional>
 
@@ -24,142 +24,119 @@ namespace Test {
 
 using namespace std;
 
-void test_writeStorageInvalidArgument()
-{
-    NTest test(__func__);
+void test_writeStorageInvalidArgument() {
+  NTest test(__func__);
 
-    auto successCallback = [&test](NSessionPtr session)
-    {
-        std::vector<NStorageObjectWrite> objects;
-        NStorageObjectWrite obj;
+  auto successCallback = [&test](NSessionPtr session) {
+    std::vector<NStorageObjectWrite> objects;
+    NStorageObjectWrite obj;
 
-        obj.collection = "candies";
-        obj.key = "test";
-        obj.value = "25";
+    obj.collection = "candies";
+    obj.key = "test";
+    obj.value = "25";
 
-        objects.push_back(obj);
+    objects.push_back(obj);
 
-        auto errorCallback = [&test](const NError& error)
-        {
-            test.stopTest(error.code == ErrorCode::InvalidArgument);
-        };
+    auto errorCallback = [&test](const NError& error) { test.stopTest(error.code == ErrorCode::InvalidArgument); };
 
-        test.client->writeStorageObjects(session, objects, nullptr, errorCallback);
-    };
+    test.client->writeStorageObjects(session, objects, nullptr, errorCallback);
+  };
 
-    test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
+  test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
 
-    test.runTest();
+  test.runTest();
 }
 
-void test_writeStorage()
-{
-    NTest test(__func__);
+void test_writeStorage() {
+  NTest test(__func__);
 
-    auto successCallback = [&test](NSessionPtr session)
-    {
-        auto writeSuccessCallback = [&test, session](const NStorageObjectAcks& acks)
-        {
-            if (acks.size() == 1)
-            {
-                NLOG_INFO("write ok. version: " + acks[0].version);
+  auto successCallback = [&test](NSessionPtr session) {
+    auto writeSuccessCallback = [&test, session](const NStorageObjectAcks& acks) {
+      if (acks.size() == 1) {
+        NLOG_INFO("write ok. version: " + acks[0].version);
 
-                auto successCallback = [&test](NStorageObjectListPtr list)
-                {
-                    NLOG_INFO("objects count: " + std::to_string(list->objects.size()));
+        auto successCallback = [&test](NStorageObjectListPtr list) {
+          NLOG_INFO("objects count: " + std::to_string(list->objects.size()));
 
-                    test.stopTest(list->objects.size() > 0);
-                };
-
-                test.client->listUsersStorageObjects(session, "candies", session->getUserId(), {}, {}, successCallback);
-            }
-            else
-            {
-                test.stopTest();
-            }
+          test.stopTest(list->objects.size() > 0);
         };
 
-        std::vector<NStorageObjectWrite> objects;
-        NStorageObjectWrite obj;
-
-        obj.collection = "candies";
-        obj.key = "Ice cream";
-        obj.value = "{ \"price\": 25 }";
-        obj.permissionRead = NStoragePermissionRead::OWNER_READ;
-        obj.permissionWrite = NStoragePermissionWrite::OWNER_WRITE;
-
-        objects.push_back(obj);
-
-        test.client->writeStorageObjects(session, objects, writeSuccessCallback);
+        test.client->listUsersStorageObjects(session, "candies", session->getUserId(), {}, {}, successCallback);
+      } else {
+        test.stopTest();
+      }
     };
 
-    test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
+    std::vector<NStorageObjectWrite> objects;
+    NStorageObjectWrite obj;
 
-    test.runTest();
+    obj.collection = "candies";
+    obj.key = "Ice cream";
+    obj.value = "{ \"price\": 25 }";
+    obj.permissionRead = NStoragePermissionRead::OWNER_READ;
+    obj.permissionWrite = NStoragePermissionWrite::OWNER_WRITE;
+
+    objects.push_back(obj);
+
+    test.client->writeStorageObjects(session, objects, writeSuccessCallback);
+  };
+
+  test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
+
+  test.runTest();
 }
 
+void test_writeStorageCursor() {
+  NTest test(__func__);
 
-void test_writeStorageCursor()
-{
-    NTest test(__func__);
+  auto successCallback = [&test](NSessionPtr session) {
+    size_t numCandies = 25;
 
-    auto successCallback = [&test](NSessionPtr session)
-    {
-        size_t numCandies = 25;
+    auto writeSuccessCallback = [&test, session, numCandies](const NStorageObjectAcks& acks) {
+      if (acks.size() == numCandies) {
+        NLOG_INFO("write ok. version: " + acks[0].version);
 
-        auto writeSuccessCallback = [&test, session, numCandies](const NStorageObjectAcks& acks)
-        {
-            if (acks.size() == numCandies)
-            {
-                NLOG_INFO("write ok. version: " + acks[0].version);
+        auto firstListCallback = [&test, session](NStorageObjectListPtr list) {
+          NLOG_INFO("cursor : " + list->cursor);
 
-                auto firstListCallback = [&test, session](NStorageObjectListPtr list)
-                {
-                    NLOG_INFO("cursor : " + list->cursor);
+          auto secondListCallback = [&test, session](NStorageObjectListPtr list) {
+            test.stopTest(list->objects.size() > 0);
+          };
 
-                    auto secondListCallback = [&test, session](NStorageObjectListPtr list)
-                    {
-                        test.stopTest(list->objects.size() > 0);
-                    };
-
-                    test.client->listUsersStorageObjects(session, "candies", session->getUserId(), 10, list->cursor, secondListCallback);
-                };
-
-                test.client->listUsersStorageObjects(session, "candies", session->getUserId(), 10, {}, firstListCallback);
-            }
-            else
-            {
-                test.stopTest();
-            }
+          test.client->listUsersStorageObjects(
+              session, "candies", session->getUserId(), 10, list->cursor, secondListCallback);
         };
 
-        std::vector<NStorageObjectWrite> objects;
-
-        for (size_t i = 0; i < numCandies; i++)
-        {
-            NStorageObjectWrite obj;
-            obj.collection = "candies";
-            obj.key = "Ice cream " + std::to_string(i);
-            obj.value = "{ \"price\": 25 }";
-            obj.permissionRead = NStoragePermissionRead::OWNER_READ;
-            obj.permissionWrite = NStoragePermissionWrite::OWNER_WRITE;
-            objects.push_back(obj);
-        }
-
-        test.client->writeStorageObjects(session, objects, writeSuccessCallback);
+        test.client->listUsersStorageObjects(session, "candies", session->getUserId(), 10, {}, firstListCallback);
+      } else {
+        test.stopTest();
+      }
     };
 
-    test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
+    std::vector<NStorageObjectWrite> objects;
 
-    test.runTest();
+    for (size_t i = 0; i < numCandies; i++) {
+      NStorageObjectWrite obj;
+      obj.collection = "candies";
+      obj.key = "Ice cream " + std::to_string(i);
+      obj.value = "{ \"price\": 25 }";
+      obj.permissionRead = NStoragePermissionRead::OWNER_READ;
+      obj.permissionWrite = NStoragePermissionWrite::OWNER_WRITE;
+      objects.push_back(obj);
+    }
+
+    test.client->writeStorageObjects(session, objects, writeSuccessCallback);
+  };
+
+  test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
+
+  test.runTest();
 }
 
-void test_storage()
-{
-    test_writeStorageInvalidArgument();
-    test_writeStorage();
-    test_writeStorageCursor();
-
+void test_storage() {
+  test_writeStorageInvalidArgument();
+  test_writeStorage();
+  test_writeStorageCursor();
 }
 
 } // namespace Test

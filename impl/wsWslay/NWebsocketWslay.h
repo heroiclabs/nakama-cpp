@@ -16,63 +16,57 @@
 
 #pragma once
 
-#include <string>
-#include <memory>
-#include <wslay/wslay.h>
-#include <nakama-cpp/realtime/NRtTransportInterface.h>
 #include "WslayIOInterface.h"
+#include <memory>
+#include <nakama-cpp/realtime/NRtTransportInterface.h>
 #include <optional>
+#include <string>
+#include <wslay/wslay.h>
 
 namespace Nakama {
 
-enum class State {
-    RemoteDisconnect,
-    Disconnected,
-    Connecting,
-    Handshake_Sending,
-    Handshake_Receiving,
-    Connected
-};
-class NWebsocketWslay : public NRtTransportInterface
-{
+enum class State { RemoteDisconnect, Disconnected, Connecting, Handshake_Sending, Handshake_Receiving, Connected };
+class NWebsocketWslay : public NRtTransportInterface {
 public:
-    NWebsocketWslay(std::unique_ptr<WslayIOInterface> io);
-    ~NWebsocketWslay() override;
+  NWebsocketWslay(std::unique_ptr<WslayIOInterface> io);
+  ~NWebsocketWslay() override;
 
-    void setActivityTimeout(uint32_t timeout) override;
-    uint32_t getActivityTimeout() const override;
+  void setActivityTimeout(uint32_t timeout) override;
+  uint32_t getActivityTimeout() const override;
 
-    void tick() override;
-    void connect(const std::string& url, NRtTransportType type) override;
-    void disconnect() override;
-    bool send(const NBytes& data) override;
+  void tick() override;
+  void connect(const std::string& url, NRtTransportType type) override;
+  void disconnect() override;
+  bool send(const NBytes& data) override;
 
 protected:
-    bool isConnecting() const override;
+  bool isConnecting() const override;
 
 private:
-    static ssize_t recv_callback(wslay_event_context_ptr ctx, uint8_t* data, size_t len, int flags, void* user_data);
-    static ssize_t send_callback(wslay_event_context_ptr ctx, const uint8_t* data, size_t len, int flags, void* user_data);
-    static void on_msg_recv_callback(wslay_event_context_ptr ctx, const struct wslay_event_on_msg_recv_arg* arg, void* user_data);
+  static ssize_t recv_callback(wslay_event_context_ptr ctx, uint8_t* data, size_t len, int flags, void* user_data);
+  static ssize_t
+  send_callback(wslay_event_context_ptr ctx, const uint8_t* data, size_t len, int flags, void* user_data);
+  static void
+  on_msg_recv_callback(wslay_event_context_ptr ctx, const struct wslay_event_on_msg_recv_arg* arg, void* user_data);
 
-    NetIOAsyncResult http_handshake_init();
-    NetIOAsyncResult http_handshake_send();
-    NetIOAsyncResult http_handshake_receive();
-    void disconnect(bool remote, std::optional<uint16_t> code);
+  NetIOAsyncResult http_handshake_init();
+  NetIOAsyncResult http_handshake_send();
+  NetIOAsyncResult http_handshake_receive();
+  void disconnect(bool remote, std::optional<uint16_t> code);
 
-    std::unique_ptr<WslayIOInterface> _io;
-    struct wslay_event_callbacks _callbacks;
-    std::unique_ptr<std::remove_pointer<wslay_event_context_ptr>::type, decltype(&wslay_event_context_free)> _ctx;
-    uint32_t _timeout = 0;
-    uint8_t _opcode = 0xFF; // invalid opcode by default
+  std::unique_ptr<WslayIOInterface> _io;
+  struct wslay_event_callbacks _callbacks;
+  std::unique_ptr<std::remove_pointer<wslay_event_context_ptr>::type, decltype(&wslay_event_context_free)> _ctx;
+  uint32_t _timeout = 0;
+  uint8_t _opcode = 0xFF; // invalid opcode by default
 
-    URLParts _url;
-    std::string _client_key;
-    State _state = State::Disconnected;
+  URLParts _url;
+  std::string _client_key;
+  State _state = State::Disconnected;
 
-    //Http send state
-    std::string _buf;
-    std::string::iterator _buf_iter;
+  // Http send state
+  std::string _buf;
+  std::string::iterator _buf_iter;
 };
 
-}
+} // namespace Nakama

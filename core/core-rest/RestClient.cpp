@@ -27,10 +27,10 @@
 #include <rapidjson/stringbuffer.h>
 #include <rapidjson/writer.h>
 
+#include <functional>
 #include <optional>
 #include <string>
 #include <vector>
-#include <functional>
 
 #undef NMODULE_NAME
 #define NMODULE_NAME "Nakama::RestClient"

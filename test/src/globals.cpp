@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-#include "nakama-cpp/log/NLogger.h"
-#include "NTest.h"
 #include "globals.h"
+#include "NTest.h"
+#include "nakama-cpp/log/NLogger.h"
 
 namespace Nakama {
-    namespace Test {
-        uint32_t g_runTestsCount = 0;
-        uint32_t g_failedTestsCount = 0;
-    }
-}
+namespace Test {
+uint32_t g_runTestsCount = 0;
+uint32_t g_failedTestsCount = 0;
+} // namespace Test
+} // namespace Nakama

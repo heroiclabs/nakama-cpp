@@ -5,9 +5,9 @@
 
 #include <curl/curl.h>
 
+#include <cassert>
 #include <memory>
 #include <string>
-#include <cassert>
 
 #if __ANDROID__
 #include "AndroidCA.h"

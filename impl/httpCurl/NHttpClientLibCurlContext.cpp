@@ -14,42 +14,26 @@
  * limitations under the License.
  */
 
-#include <string>
-#include <curl/curl.h>
-#include "nakama-cpp/NHttpTransportInterface.h"
 #include "NHttpClientLibCurlContext.h"
+#include "nakama-cpp/NHttpTransportInterface.h"
+#include <curl/curl.h>
+#include <string>
 
-namespace Nakama
-{
-    NHttpClientLibCurlContext::NHttpClientLibCurlContext(const NHttpResponseCallback callback, curl_slist* headers) : _callback(callback), _headers(headers)
-    {
-    }
+namespace Nakama {
+NHttpClientLibCurlContext::NHttpClientLibCurlContext(const NHttpResponseCallback callback, curl_slist* headers)
+    : _callback(callback), _headers(headers) {}
 
-    NHttpResponseCallback NHttpClientLibCurlContext::get_callback()
-    {
-        return _callback;
-    }
+NHttpResponseCallback NHttpClientLibCurlContext::get_callback() { return _callback; }
 
-    NHttpClientLibCurlContext::~NHttpClientLibCurlContext()
-    {
-        if (_headers != NULL)
-        {
-            curl_slist_free_all(_headers);
-        }
-    }
-
-    curl_slist* NHttpClientLibCurlContext::get_headers()
-    {
-        return _headers;
-    }
-
-    std::string NHttpClientLibCurlContext::get_body()
-    {
-        return _body;
-    }
-
-    void NHttpClientLibCurlContext::append_body(std::string body)
-    {
-        _body += body;
-    }
+NHttpClientLibCurlContext::~NHttpClientLibCurlContext() {
+  if (_headers != NULL) {
+    curl_slist_free_all(_headers);
+  }
 }
+
+curl_slist* NHttpClientLibCurlContext::get_headers() { return _headers; }
+
+std::string NHttpClientLibCurlContext::get_body() { return _body; }
+
+void NHttpClientLibCurlContext::append_body(std::string body) { _body += body; }
+} // namespace Nakama

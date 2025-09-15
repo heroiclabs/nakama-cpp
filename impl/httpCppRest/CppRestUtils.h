@@ -19,9 +19,9 @@
 #include "cpprest/asyncrt_utils.h"
 
 #ifdef _WIN32
-    #define TO_STD_STR(ws_str)     utility::conversions::to_utf8string(ws_str)
-    #define FROM_STD_STR(utf8str)  utility::conversions::to_string_t(utf8str)
+#define TO_STD_STR(ws_str) utility::conversions::to_utf8string(ws_str)
+#define FROM_STD_STR(utf8str) utility::conversions::to_string_t(utf8str)
 #else
-    #define TO_STD_STR(ws_str)     ws_str
-    #define FROM_STD_STR(utf8str)  utf8str
+#define TO_STD_STR(ws_str) ws_str
+#define FROM_STD_STR(utf8str) utf8str
 #endif

@@ -18,8 +18,8 @@
 
 #include <nakama-cpp/ClientFactory.h>
 #include <nakama-cpp/NClientInterface.h>
-#include <nakama-cpp/realtime/NRtDefaultClientListener.h>
 #include <nakama-cpp/NError.h>
+#include <nakama-cpp/realtime/NRtDefaultClientListener.h>
 
 #include <atomic>
 #include <iostream>

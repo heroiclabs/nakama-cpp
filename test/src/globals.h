@@ -16,23 +16,21 @@
 
 #pragma once
 
-#include "nakama-cpp/log/NLogger.h"
 #include "NTest.h"
+#include "nakama-cpp/log/NLogger.h"
 
 namespace Nakama {
-    namespace Test {
-        static inline void NTEST_ASSERT(bool cond)
-        {
-            if (!cond)
-            {
-                NLOG_INFO("TEST ASSERT FAILED!");
-                NLOG_INFO(std::string(__FILE__) + ":" + std::to_string(__LINE__));
-                //abort();
-            }
-        }
-
-        // stats
-        extern uint32_t g_runTestsCount;
-        extern uint32_t g_failedTestsCount;
-    }
+namespace Test {
+static inline void NTEST_ASSERT(bool cond) {
+  if (!cond) {
+    NLOG_INFO("TEST ASSERT FAILED!");
+    NLOG_INFO(std::string(__FILE__) + ":" + std::to_string(__LINE__));
+    // abort();
+  }
 }
+
+// stats
+extern uint32_t g_runTestsCount;
+extern uint32_t g_failedTestsCount;
+} // namespace Test
+} // namespace Nakama
