@@ -40,10 +40,10 @@ void test_authenticateEmail2() {
     // ensure that username is encoded properly
     NLOG_INFO("session token: " + session->getAuthToken());
     NLOG_INFO("returning username: " + session->getUsername());
-    test.stopTest(!session->getAuthToken().empty() && u8"βσκαταη3" == session->getUsername());
+    test.stopTest(!session->getAuthToken().empty() && session->getUsername().compare("βσκαταη3") == 0);
   };
 
-  test.client->authenticateEmail("test2@mail.com", "12345678", u8"βσκαταη3", true, {}, successCallback);
+  test.client->authenticateEmail("test2@mail.com", "12345678", "βσκαταη3", true, {}, successCallback);
 
   test.runTest();
 }

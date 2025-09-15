@@ -16,18 +16,18 @@
 
 #pragma once
 
-#include <nakama-cpp/NTypes.h>
 #include <nakama-cpp/NExport.h>
+#include <nakama-cpp/NTypes.h>
 
 NAKAMA_NAMESPACE_BEGIN
 
-    /**
-     * Get current UNIX time in milliseconds.
-     * 
-     * Returns number of milliseconds that have elapsed since 00:00:00 Thursday, 1 January 1970.
-     * 
-     * @return UNIX time in milliseconds.
-     */
-    NAKAMA_API NTimestamp getUnixTimestampMs();
+/**
+ * Get current UNIX time in milliseconds.
+ *
+ * Returns number of milliseconds that have elapsed since 00:00:00 Thursday, 1 January 1970.
+ *
+ * @return UNIX time in milliseconds.
+ */
+NAKAMA_API NTimestamp getUnixTimestampMs();
 
 NAKAMA_NAMESPACE_END

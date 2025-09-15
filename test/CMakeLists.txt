@@ -1,4 +1,9 @@
-file(GLOB_RECURSE SOURCES include/*.h src/*.cpp src/*.h main.cpp)
+
+if(BUILD_PRIVATE_TEST AND EXISTS "${CMAKE_SOURCE_DIR}/submodules/private/test/CMakeLists.txt")
+	file(GLOB_RECURSE SOURCES include/*.h src/*.cpp src/*.h ${CMAKE_SOURCE_DIR}/submodules/private/test/main.cpp)
+else()
+	file(GLOB_RECURSE SOURCES include/*.h src/*.cpp src/*.h main.cpp)
+endif()
 
 enable_testing()
 
@@ -11,6 +16,12 @@ else ()
 endif ()
 
 target_link_libraries(nakama-sdk-test PRIVATE nakama-sdk rapidjson)
+
+target_include_directories(nakama-sdk-test PUBLIC include)
+
+if (BUILD_PRIVATE_TEST)
+    include("../submodules/private/test/CMakeLists.txt" OPTIONAL)
+endif()
 
 if (MSVC)
     target_compile_options(nakama-sdk-test PRIVATE /W4 /wd4251 /wd4267 /utf-8)

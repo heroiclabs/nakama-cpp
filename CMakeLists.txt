@@ -68,7 +68,8 @@ endif()
 set(CMAKE_CONFIGURATION_TYPES "Debug;MinSizeRel")
 set(CMAKE_SUPPRESS_REGENERATION true) ## for Xcode
 
-option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols regardless of the platform." OFF)
+option(FORCE_DLL_IMPORT_EXPORT "Force exporting and importing of symbols using __declspec mechanism regardless of the platform." OFF)
+option(FORCE_DLL_VISIBILITY "Force exporting symbols using visibility attribute regardless of the platform." OFF)
 option(BUILD_APPLE_FRAMEWORK "Build frameworks instead of .dylib files for Apple." ON)
 
 set(NAKAMA_SDK_DEPS)
@@ -99,11 +100,17 @@ if(NOT MSVC)
     string(APPEND CMAKE_CXX_FLAGS " -fexceptions")
 endif()
 
+option(UNDEFINED_SANITIZER "Enable undefined sanitizer (broken on windows)" OFF)
 option(ADDRESS_SANITIZER "Enable address sanitizer (broken on windows)" OFF)
 
 if(LOGS_ENABLED)
     add_compile_definitions(NLOGS_ENABLED)
 endif(LOGS_ENABLED)
+
+if (UNDEFINED_SANITIZER)
+    add_compile_options(-fsanitize=undefined -O1)
+    string(REPLACE /RTC1 "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
+endif()
 
 if (ADDRESS_SANITIZER)
     add_compile_options(-fsanitize=address -O1 -fno-optimize-sibling-calls -fno-omit-frame-pointer)
@@ -154,8 +161,6 @@ add_subdirectory(core EXCLUDE_FROM_ALL)
 add_subdirectory(factory EXCLUDE_FROM_ALL)
 
 add_subdirectory(satori-cpp)
-
-include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
 
 if (WITH_HTTP_CPPREST)
     set(HTTP_IMPL_LIB nakama::impl-http-cppRest)
@@ -239,6 +244,8 @@ endif()
 # defined target and not to fallback to '-lname' when target doesn't exist,
 # thus failing at configure time, rather than at link time should we make mistake
 # in build scripts
+
+
 list(APPEND NAKAMA_SDK_DEPS
         nakama::sdk-core-misc
         nakama::sdk-core-rest
@@ -248,12 +255,20 @@ list(APPEND NAKAMA_SDK_DEPS
         nakama::sdk-rtclient-factory
         satori::client
 )
+
 if (WITH_GRPC_CLIENT)
     list(APPEND NAKAMA_SDK_DEPS nakama::sdk-core-grpc)
 endif()
 
 add_library(nakama-sdk SHARED ${DUMMY_CPP} ${DUMMY_H})
 add_library(nakama::sdk ALIAS nakama-sdk)
+
+if (BUILD_TESTING)
+    add_subdirectory(test)
+endif ()
+
+include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
+
 target_link_libraries(nakama-sdk
         PUBLIC
             nakama::sdk-interface
@@ -280,12 +295,6 @@ if (APPLE)
             MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${LIBNAKAMA_VERSION}
     )
 endif()
-
-if (BUILD_TESTING)
-    # Make tests produce .exe in the same dir as our nakama-sdk.dll
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY $<TARGET_FILE_DIR:nakama-sdk>)
-    add_subdirectory(test)
-endif ()
 
 
 if (ADDRESS_SANITIZER)
