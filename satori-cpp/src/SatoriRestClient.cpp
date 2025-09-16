@@ -494,6 +494,7 @@ void SatoriRestClient::joinLiveEvent(
     NLOG_INFO("...");
 
     RestReqContext* ctx = createReqContext(nullptr);
+    setSessionAuth(ctx, session);
     ctx->successCallback = std::move(successCallback);
     ctx->errorCallback = std::move(errorCallback);
 
