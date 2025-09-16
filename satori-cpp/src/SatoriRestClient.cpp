@@ -309,30 +309,9 @@ void SatoriRestClient::getExperiments(
         args.emplace("names", Nakama::encodeURIComponent(name));
       }
     }
-
-    for (auto& or : request.search.name.or) {
-      if (!or.empty()) {
-        args.emplace("search.name.or", Nakama::encodeURIComponent(or));
-      }
-    }
-
-    if (!request.search.name.exact.empty()) {
-      args.emplace("search.name.exact", Nakama::encodeURIComponent(request.search.name.exact));
-    }
-
-    if (!request.search.name.like.empty()) {
-      args.emplace("search.name.like", Nakama::encodeURIComponent(request.search.name.like));
-    }
-
-    for (auto& or : request.search.label_name.or) {
-      if (!or.empty()) {
-        args.emplace("search.label_name.or", Nakama::encodeURIComponent(or));
-      }
-    }
-
-    for (auto&and : request.search.label_name.and) {
-      if (!and.empty()) {
-        args.emplace("search.label_name.and", Nakama::encodeURIComponent(and));
+    for (auto& labels : request.labels) {
+      if (!labels.empty()) {
+        args.emplace("labels", Nakama::encodeURIComponent(labels));
       }
     }
 
@@ -356,30 +335,9 @@ void setFlagsArgs(Nakama::NHttpQueryArgs& args, const SGetFlagsRequest& request)
       args.emplace("names", Nakama::encodeURIComponent(name));
     }
   }
-
-  for (auto& or : request.search.name.or) {
-    if (!or.empty()) {
-      args.emplace("search.name.or", Nakama::encodeURIComponent(or));
-    }
-  }
-
-  if (!request.search.name.exact.empty()) {
-    args.emplace("search.name.exact", Nakama::encodeURIComponent(request.search.name.exact));
-  }
-
-  if (!request.search.name.like.empty()) {
-    args.emplace("search.name.like", Nakama::encodeURIComponent(request.search.name.like));
-  }
-
-  for (auto& or : request.search.label_name.or) {
-    if (!or.empty()) {
-      args.emplace("search.label_name.or", Nakama::encodeURIComponent(or));
-    }
-  }
-
-  for (auto&and : request.search.label_name.and) {
-    if (!and.empty()) {
-      args.emplace("search.label_name.and", Nakama::encodeURIComponent(and));
+  for (auto& labels : request.labels) {
+    if (!labels.empty()) {
+      args.emplace("labels", Nakama::encodeURIComponent(labels));
     }
   }
 }
@@ -394,6 +352,7 @@ void SatoriRestClient::getFlags(
 
     Nakama::NHttpQueryArgs args;
     setFlagsArgs(args, request);
+
     std::shared_ptr<SInternalFlagList> flagsData(std::make_shared<SInternalFlagList>());
     RestReqContext* ctx(createReqContext(flagsData));
     ctx->auth.append(httpKey);
@@ -494,38 +453,22 @@ void SatoriRestClient::getLiveEvents(
         args.emplace("names", Nakama::encodeURIComponent(name));
       }
     }
-
-    for (auto& or : request.search.name.or) {
-      if (!or.empty()) {
-        args.emplace("search.name.or", Nakama::encodeURIComponent(or));
+    for (auto& labels : request.labels) {
+      if (!labels.empty()) {
+        args.emplace("labels", Nakama::encodeURIComponent(labels));
       }
     }
-
-    if (!request.search.name.exact.empty()) {
-      args.emplace("search.name.exact", Nakama::encodeURIComponent(request.search.name.exact));
+    if (request.past_run_count != 0) {
+      args.emplace("past_run_count", std::to_string(request.past_run_count));
     }
-
-    if (!request.search.name.like.empty()) {
-      args.emplace("search.name.like", Nakama::encodeURIComponent(request.search.name.like));
+    if (request.future_run_count != 0) {
+      args.emplace("future_run_count", std::to_string(request.future_run_count));
     }
-
-    for (auto& or : request.search.label_name.or) {
-      if (!or.empty()) {
-        args.emplace("search.label_name.or", Nakama::encodeURIComponent(or));
-      }
+    if (request.start_time_sec != 0) {
+      args.emplace("start_time_sec", std::to_string(request.start_time_sec));
     }
-
-    for (auto&and : request.search.label_name.and) {
-      if (!and.empty()) {
-        args.emplace("search.label_name.and", Nakama::encodeURIComponent(and));
-      }
-    }
-
-    if (request.peek.max_unique != 0) {
-      args.emplace("peek.max_unique", std::to_string(request.peek.max_unique));
-    }
-    if (request.peek.run_depth != 0) {
-      args.emplace("peek.run_depth", std::to_string(request.peek.run_depth));
+    if (request.end_time_sec != 0) {
+      args.emplace("end_time_sec", std::to_string(request.end_time_sec));
     }
 
     std::shared_ptr<SInternalLiveEventList> liveEventsData(std::make_shared<SInternalLiveEventList>());

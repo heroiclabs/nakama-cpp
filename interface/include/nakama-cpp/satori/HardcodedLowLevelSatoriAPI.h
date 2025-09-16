@@ -90,6 +90,8 @@ struct SExperiment {
   std::string name;
   // Value associated with this Experiment.
   std::string value;
+  // The labels associated with this experiment.
+  std::vector<std::string> labels;
 };
 
 // All experiments that this identity is involved with.
@@ -118,6 +120,8 @@ struct SFlag {
   bool condition_changed = false;
   // The origin of change on the flag value returned.
   SValueChangeReason change_reason;
+  // The labels associated with this flag.
+  std::vector<std::string> labels;
 };
 
 // All flags available to the identity
@@ -153,6 +157,8 @@ struct SFlagOverride {
   std::string flag_name;
   // The list of configuration that affect the value of the flag.
   std::vector<SValue> overrides;
+  // The labels associated with this flag.
+  std::vector<std::string> labels;
 };
 
 // All flags available to the identity and their value overrides
@@ -161,77 +167,39 @@ struct SFlagOverrideList {
   std::vector<SFlagOverride> flags;
 };
 
-// The SingleTextValueFilterOption specifies the operation to apply single value fields.
-// Only a single operation can be used at one time.
-struct SSingleTextValueFilterOption {
-  // Filter by elements matching one of the parameters.
-  std::vector<std::string> or ;
-  // Filter by elements matching exactly the value.
-  std::string exact;
-  // Filter by elements matching the pattern. Expects a single '%' as a wild card.
-  std::string like;
-};
-
-// The MultiTextValueFilterOption specifies the operation to apply multi-value fields.
-// Only a single operation can be used at one time.
-struct SMultiValueFilterOption {
-  // Filter by elements matching one of the parameters.
-  std::vector<std::string> or ;
-  // Filter by elements matching all parameters.
-  std::vector<std::string>and;
-};
-
 // Request to get all experiments data.
 struct SGetExperimentsRequest {
-  struct SSearchOptions {
-    // Filter by Name.
-    SSingleTextValueFilterOption name;
-    // Filter by Label name.
-    SMultiValueFilterOption label_name;
-  };
-  // [deprecated] Experiment names; if empty string all experiments are returned.
+  // Experiment names; if empty string, all experiments are returned based on the remaining filters.
   std::vector<std::string> names;
-  // Search options.
-  SSearchOptions search;
+  // Label names that must be defined for each Experiment; if empty string, all experiments are returned based on the
+  // remaining filters.
+  std::vector<std::string> labels;
 };
 
 // Request to get all flags data.
 struct SGetFlagsRequest {
-  struct SSearchOptions {
-    // Filter by Name.
-    SSingleTextValueFilterOption name;
-    // Filter by Label name.
-    SMultiValueFilterOption label_name;
-  };
-  // [deprecated] Live event names; if empty string, all live events are returned.
+  // Flag names; if empty string, all flags are returned based on the remaining filters.
   std::vector<std::string> names;
-  // Search options for flags.
-  SSearchOptions search;
+  // Label names that must be defined for each Flag; if empty string, all flags are returned based on the remaining
+  // filters.
+  std::vector<std::string> labels;
 };
 
 // Request to get all live events.
 struct SGetLiveEventsRequest {
-  struct SPeekOptions {
-    // The maximum number of unique values that the set of elements
-    // in the past and future list can contain.
-    // If 0, only currently active event runs are returned.
-    int32_t max_unique;
-    // The number of extra runs to be returned for each recurring event in
-    // the past and future unique sublists.
-    int32_t run_depth;
-  };
-  struct SSearchOptions {
-    // Filter by Name.
-    SSingleTextValueFilterOption name;
-    // Filter by Label name.
-    SMultiValueFilterOption label_name;
-  };
-  // Live event names; if empty string all live events are returned.
+  // Live event names; if empty string, all live events are returned based on the remaining filters.
   std::vector<std::string> names;
-  // Options used for the list of past and future live events to be included in the response.
-  SPeekOptions peek;
-  // Search options.
-  SSearchOptions search;
+  // Label names that must be defined for each Live Event; if empty string, all live events are returned based on the
+  // remaining filters.
+  std::vector<std::string> labels;
+  // The maximum number of past event runs to return for each live event.
+  int32_t past_run_count;
+  // The maximum number of future event runs to return for each live event.
+  int32_t future_run_count;
+  // Start time of the time window filter to apply.
+  int64_t start_time_sec;
+  // End time of the time window filter to apply.
+  int64_t end_time_sec;
 };
 
 // Request to join a 'explicit join' live event.
@@ -278,6 +246,8 @@ struct SLiveEvent {
   std::string reset_cron;
   // The status of this live event run.
   SStatus status;
+  // The labels associated with this live event.
+  std::vector<std::string> labels;
 };
 
 // List of Live events.

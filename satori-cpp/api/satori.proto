@@ -296,6 +296,8 @@ message Experiment {
   string name = 1;
   // Value associated with this Experiment.
   string value = 2;
+  // The labels associated with this experiment.
+  repeated string labels = 3;
 }
 
 // All experiments that this identity is involved with.
@@ -314,6 +316,8 @@ message Flag {
   bool condition_changed = 3;
   // The origin of change on the flag value returned.
   ValueChangeReason change_reason = 4;
+  // The labels associated with this flag.
+  repeated string labels = 5;
 
   message ValueChangeReason {
     // The type of the configuration that declared the override.
@@ -344,6 +348,8 @@ message FlagOverride {
   string flag_name = 1;
   // The list of configuration that affect the value of the flag.
   repeated Value overrides = 2;
+  // The labels associated with this flag.
+  repeated string labels = 3;
 
   // The details of a flag value override.
   message Value {
@@ -376,62 +382,34 @@ message FlagOverrideList {
 
 // Request to get all experiments data.
 message GetExperimentsRequest {
-  // [deprecated] Experiment names; if empty string all experiments are returned.
+  // Experiment names; if empty string, all experiments are returned based on the remaining filters.
   repeated string names = 1;
-  // Search options.
-  SearchOptions search = 2;
-
-  // The search options available for the List endpoint.
-  message SearchOptions {
-    // Filter by Name.
-    SingleTextValueFilterOption name = 1;
-    // Filter by Label name.
-    MultiTextValueFilterOption label_name = 2;
-  }
+  // Label names that must be defined for each Experiment; if empty string, all experiments are returned based on the remaining filters.
+  repeated string labels = 2;
 }
 
 // Request to get all flags data.
 message GetFlagsRequest {
-  // [deprecated] Flag names; if empty string all flags are returned.
+  // Flag names; if empty string, all flags are returned based on the remaining filters.
   repeated string names = 1;
-  // Search options for flags; if nil all flags are returned.
-  SearchOptions search = 2;
-
-  // The search options available for the List endpoint.
-  message SearchOptions {
-    // Filter by Name.
-    SingleTextValueFilterOption name = 1;
-    // Filter by Label name.
-    MultiTextValueFilterOption label_name = 2;
-  }
+  // Label names that must be defined for each Flag; if empty string, all flags are returned based on the remaining filters.
+  repeated string labels = 2;
 }
 
 // Request to get all live events.
 message GetLiveEventsRequest {
-  // [deprecated] Live event names; if empty string, all live events are returned.
+  // Live event names; if empty string, all live events are returned based on the remaining filters.
   repeated string names = 1;
-  // Options used for the list of past and future live events to be included in the response.
-  PeekOptions peek = 2;
-  // Search options.
-  SearchOptions search = 3;
-
-  message PeekOptions {
-    // The maximum number of unique values that the set of elements
-    // in the past and future list can contain.
-    // If 0, only currently active event runs are returned.
-    int32 max_unique = 1;
-    // The number of extra runs to be returned for each recurring event in
-    // the past and future unique sublists.
-    int32 run_depth = 2;
-  }
-
-  // The search options available for the List endpoint.
-  message SearchOptions {
-    // Filter by Name.
-    SingleTextValueFilterOption name = 1;
-    // Filter by Label name.
-    MultiTextValueFilterOption label_name = 2;
-  }
+  // Label names that must be defined for each Live Event; if empty string, all live events are returned based on the remaining filters.
+  repeated string labels = 2;
+  // The maximum number of past event runs to return for each live event.
+  int32 past_run_count = 3;
+  // The maximum number of future event runs to return for each live event.
+  int32 future_run_count = 4;
+  // Start time of the time window filter to apply.
+  int64 start_time_sec = 5;
+  // End time of the time window filter to apply.
+  int64 end_time_sec = 6;
 }
 
 // Request to join a 'explicit join' live event.
@@ -476,6 +454,8 @@ message LiveEvent {
   string reset_cron = 10;
   // The status of this live event run.
   Status status = 11;
+  // The labels associated with this live event.
+  repeated string labels = 12;
 
   // The status variants of a live event.
   enum Status {
@@ -586,25 +566,4 @@ message UpdateMessageRequest {
 message DeleteMessageRequest {
   // The identifier of the message.
   string id = 1;
-}
-
-
-// The SingleTextValueFilterOption specifies the operation to apply single value fields.
-// Only a single operation can be used at one time.
-message SingleTextValueFilterOption {
-  // Filter by elements matching one of the parameters.
-  repeated string or = 1;
-  // Filter by elements matching exactly the value.
-  string exact = 2;
-  // Filter by elements matching the pattern. Expects a single '%' as a wild card.
-  string like = 3;
-}
-
-// The MultiTextValueFilterOption specifies the operation to apply multi-value fields.
-// Only a single operation can be used at one time.
-message MultiTextValueFilterOption {
-  // Filter by elements matching one of the parameters.
-  repeated string or = 1;
-  // Filter by elements matching all parameters.
-  repeated string and = 2;
 }
