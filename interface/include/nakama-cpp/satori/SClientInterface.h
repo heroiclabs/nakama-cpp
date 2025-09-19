@@ -77,52 +77,71 @@ public:
 
   virtual std::future<void> postEventAsync(SSessionPtr session, const std::vector<SEvent>& events) = 0;
 
+  virtual void serverEvent(
+      const std::vector<SEvent>& events,
+      std::function<void()> successCallback = nullptr,
+      Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+  virtual std::future<void> serverEventAsync(const std::vector<SEvent>& events) = 0;
+
   virtual void getExperiments(
       SSessionPtr session,
-      const std::vector<std::string>& names,
+      const SGetExperimentsRequest& request = SGetExperimentsRequest(),
       std::function<void(SExperimentList)> successCallback = nullptr,
       Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
   virtual std::future<SExperimentList>
-  getExperimentsAsync(SSessionPtr session, const std::vector<std::string>& names) = 0;
+  getExperimentsAsync(SSessionPtr session, const SGetExperimentsRequest& request = SGetExperimentsRequest()) = 0;
 
   virtual void getFlags(
-      SSessionPtr session,
-      const std::vector<std::string>& names = {},
+      const std::string& httpKey,
+      const SGetFlagsRequest& request = SGetFlagsRequest(),
       std::function<void(SFlagList)> successCallback = nullptr,
       Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  virtual std::future<SFlagList> getFlagsAsync(SSessionPtr session, const std::vector<std::string>& names = {}) = 0;
+  virtual std::future<SFlagList> getFlagsAsync(const std::string& httpKey, const SGetFlagsRequest& request = SGetFlagsRequest()) = 0;
+
+  virtual void getFlags(
+      SSessionPtr session,
+      const SGetFlagsRequest& request = SGetFlagsRequest(),
+      std::function<void(SFlagList)> successCallback = nullptr,
+      Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+  virtual std::future<SFlagList> getFlagsAsync(SSessionPtr session, const SGetFlagsRequest& request = SGetFlagsRequest()) = 0;
 
   virtual void getFlagOverrides(
-      SSessionPtr session,
-      const std::vector<std::string>& names = {},
+      const std::string& httpKey,
+      const SGetFlagsRequest& request = SGetFlagsRequest(),
       std::function<void(SFlagOverrideList)> successCallback = nullptr,
       Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
   virtual std::future<SFlagOverrideList>
-  getFlagOverridesAsync(SSessionPtr session, const std::vector<std::string>& names = {}) = 0;
+  getFlagOverridesAsync(const std::string& httpKey, const SGetFlagsRequest& request = SGetFlagsRequest()) = 0;
 
-  /**
-   * Request to get all live events.
-   *
-   * @param session The session of the user.
-   * @param liveEventNames Live event names; if empty string all live events are returned.
-   */
+  virtual void getFlagOverrides(
+      SSessionPtr session,
+      const SGetFlagsRequest& request = SGetFlagsRequest(),
+      std::function<void(SFlagOverrideList)> successCallback = nullptr,
+      Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+  virtual std::future<SFlagOverrideList>
+  getFlagOverridesAsync(SSessionPtr session, const SGetFlagsRequest& request = SGetFlagsRequest()) = 0;
+
   virtual void getLiveEvents(
       SSessionPtr session,
-      const std::vector<std::string>& liveEventNames = {},
+      const SGetLiveEventsRequest& request = SGetLiveEventsRequest(),
       std::function<void(SLiveEventList)> successCallback = nullptr,
       Nakama::ErrorCallback errorCallback = nullptr) = 0;
 
-  /**
-   * Fetch one or more users by id, usernames, and Facebook ids.
-   *
-   * @param session The session of the user.
-   * @param liveEventNames Live event names; if empty string all live events are returned.
-   */
-  virtual std::future<SLiveEventList>
-  getLiveEventsAsync(SSessionPtr session, const std::vector<std::string>& liveEventNames = {}) = 0;
+  virtual std::future<SLiveEventList> getLiveEventsAsync(SSessionPtr session, const SGetLiveEventsRequest& request = SGetLiveEventsRequest()) = 0;
+
+  virtual void joinLiveEvent(
+      SSessionPtr session,
+      const std::string& id,
+      std::function<void()> successCallback = nullptr,
+      Nakama::ErrorCallback errorCallback = nullptr) = 0;
+
+  virtual std::future<void> joinLiveEventAsync(SSessionPtr session, const std::string& id) = 0;
 
   virtual void identify(
       SSessionPtr session,

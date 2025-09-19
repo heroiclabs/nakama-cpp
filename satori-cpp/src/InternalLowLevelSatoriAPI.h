@@ -80,6 +80,10 @@ struct SInternalGetLiveEventsRequest : public SGetLiveEventsRequest, public SFro
   bool fromJson(std::string jsonString) override;
 };
 
+struct SInternalJoinLiveEventRequest : public SJoinLiveEventRequest, public SFromJsonInterface {
+  bool fromJson(std::string jsonString) override;
+};
+
 struct SInternalIdentifyRequest : public SIdentifyRequest, public SFromJsonInterface {
   bool fromJson(std::string jsonString) override;
 };

@@ -38,15 +38,22 @@ public:
 
   std::future<void> postEventAsync(SSessionPtr session, const std::vector<SEvent>& events) override;
 
-  std::future<SExperimentList> getExperimentsAsync(SSessionPtr session, const std::vector<std::string>& names) override;
+  std::future<void> serverEventAsync(const std::vector<SEvent>& events) override;
 
-  std::future<SFlagList> getFlagsAsync(SSessionPtr session, const std::vector<std::string>& names) override;
+  std::future<SExperimentList> getExperimentsAsync(SSessionPtr session, const SGetExperimentsRequest& request) override;
+
+  std::future<SFlagList> getFlagsAsync(const std::string& httpKey, const SGetFlagsRequest& request) override;
+
+  std::future<SFlagList> getFlagsAsync(SSessionPtr session, const SGetFlagsRequest& request) override;
 
   std::future<SFlagOverrideList>
-  getFlagOverridesAsync(SSessionPtr session, const std::vector<std::string>& names) override;
+  getFlagOverridesAsync(const std::string& httpKey, const SGetFlagsRequest& request) override;
 
-  std::future<SLiveEventList>
-  getLiveEventsAsync(SSessionPtr session, const std::vector<std::string>& liveEventNames) override;
+  std::future<SFlagOverrideList> getFlagOverridesAsync(SSessionPtr session, const SGetFlagsRequest& request) override;
+
+  std::future<SLiveEventList> getLiveEventsAsync(SSessionPtr session, const SGetLiveEventsRequest& request) override;
+
+  std::future<void> joinLiveEventAsync(SSessionPtr session, const std::string& id) override;
 
   std::future<SSessionPtr> identifyAsync(
       SSessionPtr session,

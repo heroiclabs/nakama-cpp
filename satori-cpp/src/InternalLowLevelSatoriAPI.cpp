@@ -28,6 +28,7 @@
 
 namespace Satori {
 bool jsonValueToStringVector(const rapidjson::Value& input, std::vector<std::string>& output) {
+  output.reserve(input.Size());
   for (rapidjson::Value::ConstMemberIterator iter = input.MemberBegin(); iter != input.MemberEnd(); ++iter) {
     output.emplace_back(iter->value.GetString());
   }
@@ -35,6 +36,7 @@ bool jsonValueToStringVector(const rapidjson::Value& input, std::vector<std::str
 }
 
 bool jsonValueToStringMap(const rapidjson::Value& input, std::unordered_map<std::string, std::string>& output) {
+  output.reserve(input.Size());
   for (rapidjson::Value::ConstMemberIterator iter = input.MemberBegin(); iter != input.MemberEnd(); ++iter) {
     output[iter->name.GetString()] = iter->value.GetString();
   }
@@ -75,6 +77,30 @@ bool jsonValueToSEvent(const rapidjson::Value& input, SEvent& output) {
     }
     output.timestamp = input["timestamp"].GetInt64();
   }
+  if (input.HasMember("identity_id")) {
+    if (!input["identity_id"].IsString()) {
+      return false;
+    }
+    output.identity_id = input["identity_id"].GetString();
+  }
+  if (input.HasMember("session_id")) {
+    if (!input["session_id"].IsString()) {
+      return false;
+    }
+    output.session_id = input["session_id"].GetString();
+  }
+  if (input.HasMember("session_issued_at")) {
+    if (!input["session_issued_at"].IsInt64()) {
+      return false;
+    }
+    output.session_issued_at = input["session_issued_at"].GetInt64();
+  }
+  if (input.HasMember("session_expires_at")) {
+    if (!input["session_expires_at"].IsInt64()) {
+      return false;
+    }
+    output.session_expires_at = input["session_expires_at"].GetInt64();
+  }
   return true;
 }
 
@@ -105,6 +131,18 @@ bool jsonValueToSExperiment(const rapidjson::Value& input, SExperiment& output) 
       return false;
     }
     output.value = input["value"].GetString();
+  }
+  if (input.HasMember("labels")) {
+    if (!input["labels"].IsArray()) {
+      return false;
+    }
+    output.labels.reserve(input["labels"].Size());
+    for (auto& jsonLabel : input["labels"].GetArray()) {
+      if (!jsonLabel.IsString()) {
+        return false;
+      }
+      output.labels.emplace_back(jsonLabel.GetString());
+    }
   }
   return true;
 }
@@ -137,6 +175,7 @@ bool SInternalExperimentList::fromJson(std::string jsonString) {
     if (!d["experiments"].IsArray()) {
       return false;
     }
+    this->experiments.reserve(d["experiments"].Size());
     for (auto& jsonExperiment : d["experiments"].GetArray()) {
       SExperiment experiment;
       if (!jsonValueToSExperiment(jsonExperiment, experiment)) {
@@ -198,6 +237,18 @@ bool jsonValueToSFlag(const rapidjson::Value& input, SFlag& output) {
     }
     output.change_reason = change_reason;
   }
+  if (input.HasMember("labels")) {
+    if (!input["labels"].IsArray()) {
+      return false;
+    }
+    output.labels.reserve(input["labels"].Size());
+    for (auto& jsonLabel : input["labels"].GetArray()) {
+      if (!jsonLabel.IsString()) {
+        return false;
+      }
+      output.labels.emplace_back(jsonLabel.GetString());
+    }
+  }
   return true;
 }
 
@@ -228,6 +279,7 @@ bool SInternalFlagList::fromJson(std::string jsonString) {
     if (!d["flags"].IsArray()) {
       return false;
     }
+    this->flags.reserve(d["flags"].Size());
     for (auto& jsonFlag : d["flags"].GetArray()) {
       SFlag flag;
       if (!jsonValueToSFlag(jsonFlag, flag)) {
@@ -245,42 +297,57 @@ bool jsonValueToSFlagOverride(const rapidjson::Value& input, SFlagOverride& outp
     return false;
   }
   output.flag_name = input["flag_name"].GetString();
-  if (!input.HasMember("overrides") || !input["overrides"].IsArray()) {
-    return false;
+  if (input.HasMember("overrides")) {
+    if (!input["overrides"].IsArray()) {
+      return false;
+    }
+    output.overrides.reserve(input["overrides"].Size());
+    for (auto& jsonFlagOverride : input["overrides"].GetArray()) {
+      SFlagOverride::SValue value;
+      if (!jsonFlagOverride.HasMember("name") || !jsonFlagOverride["name"].IsString()) {
+        return false;
+      }
+      value.name = jsonFlagOverride["name"].GetString();
+      if (!jsonFlagOverride.HasMember("value") || !jsonFlagOverride["value"].IsString()) {
+        return false;
+      }
+      value.value = jsonFlagOverride["value"].GetString();
+      if (jsonFlagOverride.HasMember("variant_name")) {
+        if (!jsonFlagOverride["variant_name"].IsString()) {
+          return false;
+        }
+        value.variant_name = jsonFlagOverride["variant_name"].GetString();
+      }
+      if (jsonFlagOverride.HasMember("type")) {
+        if (!jsonFlagOverride["type"].IsInt()) {
+          return false;
+        }
+        int type_int = jsonFlagOverride["type"].GetInt();
+        if (type_int < SFlagOverride::SType::FLAG || type_int > SFlagOverride::SType::EXPERIMENT_PHASE_VARIANT_FLAG) {
+          return false;
+        }
+        value.type = static_cast<SFlagOverride::SType>(type_int);
+      }
+      if (jsonFlagOverride.HasMember("create_time_sec")) {
+        if (!jsonFlagOverride["create_time_sec"].IsInt64()) {
+          return false;
+        }
+        value.create_time_sec = jsonFlagOverride["create_time_sec"].GetInt64();
+      }
+      output.overrides.emplace_back(value);
+    }
   }
-  for (auto& jsonFlagOverride : input["overrides"].GetArray()) {
-    SFlagOverride::SValue value;
-    if (!jsonFlagOverride.HasMember("name") || !jsonFlagOverride["name"].IsString()) {
+  if (input.HasMember("labels")) {
+    if (!input["labels"].IsArray()) {
       return false;
     }
-    value.name = jsonFlagOverride["name"].GetString();
-    if (!jsonFlagOverride.HasMember("value") || !jsonFlagOverride["value"].IsString()) {
-      return false;
-    }
-    value.value = jsonFlagOverride["value"].GetString();
-    if (jsonFlagOverride.HasMember("variant_name")) {
-      if (!jsonFlagOverride["variant_name"].IsString()) {
+    output.labels.reserve(input["labels"].Size());
+    for (auto& jsonLabel : input["labels"].GetArray()) {
+      if (!jsonLabel.IsString()) {
         return false;
       }
-      value.variant_name = jsonFlagOverride["variant_name"].GetString();
+      output.labels.emplace_back(jsonLabel.GetString());
     }
-    if (jsonFlagOverride.HasMember("type")) {
-      if (!jsonFlagOverride["type"].IsInt()) {
-        return false;
-      }
-      int type_int = jsonFlagOverride["type"].GetInt();
-      if (type_int < SFlagOverride::SType::FLAG || type_int > SFlagOverride::SType::EXPERIMENT_PHASE_VARIANT_FLAG) {
-        return false;
-      }
-      value.type = static_cast<SFlagOverride::SType>(type_int);
-    }
-    if (jsonFlagOverride.HasMember("create_time_sec")) {
-      if (!jsonFlagOverride["create_time_sec"].IsInt64()) {
-        return false;
-      }
-      value.create_time_sec = jsonFlagOverride["create_time_sec"].GetInt64();
-    }
-    output.overrides.emplace_back(value);
   }
   return true;
 }
@@ -312,6 +379,7 @@ bool SInternalFlagOverrideList::fromJson(std::string jsonString) {
     if (!d["flags"].IsArray()) {
       return false;
     }
+    this->flags.reserve(d["flags"].Size());
     for (auto& jsonFlagOverride : d["flags"].GetArray()) {
       SFlagOverride flagOverride;
       if (!jsonValueToSFlagOverride(jsonFlagOverride, flagOverride)) {
@@ -329,6 +397,8 @@ bool SInternalGetExperimentsRequest::fromJson(std::string jsonString) { return f
 bool SInternalGetFlagsRequest::fromJson(std::string jsonString) { return false; }
 
 bool SInternalGetLiveEventsRequest::fromJson(std::string jsonString) { return false; }
+
+bool SInternalJoinLiveEventRequest::fromJson(std::string jsonString) { return false; }
 
 bool SInternalIdentifyRequest::fromJson(std::string jsonString) { return false; }
 
@@ -393,6 +463,28 @@ bool jsonValueToSLiveEvent(const rapidjson::Value& input, SLiveEvent& output) {
     }
     output.reset_cron = input["reset_cron"].GetString();
   }
+  if (input.HasMember("status")) {
+    if (!input["status"].IsInt()) {
+      return false;
+    }
+    int type_int = input["status"].GetInt();
+    if (type_int < SLiveEvent::SStatus::UNKNOWN || type_int > SLiveEvent::SStatus::TERMINATED) {
+      return false;
+    }
+    output.status = static_cast<SLiveEvent::SStatus>(type_int);
+  }
+  if (input.HasMember("labels")) {
+    if (!input["labels"].IsArray()) {
+      return false;
+    }
+    output.labels.reserve(input["labels"].Size());
+    for (auto& jsonLabel : input["labels"].GetArray()) {
+      if (!jsonLabel.IsString()) {
+        return false;
+      }
+      output.labels.emplace_back(jsonLabel.GetString());
+    }
+  }
   return true;
 }
 
@@ -424,12 +516,26 @@ bool SInternalLiveEventList::fromJson(std::string jsonString) {
     if (!d["live_events"].IsArray()) {
       return false;
     }
+    this->live_events.reserve(d["live_events"].Size());
     for (auto& jsonLiveEvent : d["live_events"].GetArray()) {
       SLiveEvent liveEvent;
       if (!jsonValueToSLiveEvent(jsonLiveEvent, liveEvent)) {
         return false;
       }
       this->live_events.emplace_back(liveEvent);
+    }
+  }
+  if (d.HasMember("explicit_join_live_events")) {
+    if (!d["explicit_join_live_events"].IsArray()) {
+      return false;
+    }
+    this->explicit_join_live_events.reserve(d["explicit_join_live_events"].Size());
+    for (auto& jsonExplicitLiveEvent : d["explicit_join_live_events"].GetArray()) {
+      SLiveEvent explicitLiveEvent;
+      if (!jsonValueToSLiveEvent(jsonExplicitLiveEvent, explicitLiveEvent)) {
+        return false;
+      }
+      this->explicit_join_live_events.emplace_back(explicitLiveEvent);
     }
   }
   return true;
@@ -604,6 +710,7 @@ bool SInternalGetMessageListResponse::fromJson(std::string jsonString) {
     if (!d["messages"].IsArray()) {
       return false;
     }
+    this->messages.reserve(d["messages"].Size());
     for (auto& jsonMessage : d["messages"].GetArray()) {
       SMessage message;
       if (!jsonValueToSMessage(jsonMessage, message)) {

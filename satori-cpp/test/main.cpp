@@ -59,8 +59,9 @@ int main(int argc, char** argv) {
         getFromFuture(client->identifyAsync(session1, "22222222-2222-0000-0000-000000000000"), client);
     Satori::SFlagList testResult = getFromFuture(client->getFlagsAsync(session3), client);
     std::cout << "Flags:" << testResult.flags.size() << std::endl;
-    Satori::SFlagList testResult2 =
-        getFromFuture(client->getFlagsAsync(session3, {"Hiro-Event-Leaderboards", "Hiro-Inventory"}), client);
+    auto flagFilter = Satori::SGetFlagsRequest();
+    flagFilter.names = {"Hiro-Event-Leaderboards", "Hiro-Inventory"};
+    Satori::SFlagList testResult2 = getFromFuture(client->getFlagsAsync(session3, flagFilter), client);
     Satori::SEvent testEvent;
     testEvent.name = "testEvent";
     testEvent.timestamp = 1337;

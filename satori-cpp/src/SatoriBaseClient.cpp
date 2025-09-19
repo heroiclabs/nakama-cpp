@@ -71,44 +71,85 @@ std::future<void> SatoriBaseClient::postEventAsync(SSessionPtr session, const st
   return promise->get_future();
 }
 
-std::future<SExperimentList>
-SatoriBaseClient::getExperimentsAsync(SSessionPtr session, const std::vector<std::string>& names) {
-  std::shared_ptr<std::promise<SExperimentList>> promise = std::make_shared<std::promise<SExperimentList>>();
+std::future<void> SatoriBaseClient::serverEventAsync(const std::vector<SEvent>& events) {
+  std::shared_ptr<std::promise<void>> promise = std::make_shared<std::promise<void>>();
 
-  getExperiments(
-      session, names, [=](const SExperimentList& experiments) { promise->set_value(experiments); },
+  serverEvent(
+      events, [=]() { promise->set_value(); },
       [=](const Nakama::NError& error) { promise->set_exception(std::make_exception_ptr<Nakama::NException>(error)); });
 
   return promise->get_future();
 }
 
-std::future<SFlagList> SatoriBaseClient::getFlagsAsync(SSessionPtr session, const std::vector<std::string>& names) {
+std::future<SExperimentList>
+SatoriBaseClient::getExperimentsAsync(SSessionPtr session, const SGetExperimentsRequest& request) {
+  std::shared_ptr<std::promise<SExperimentList>> promise = std::make_shared<std::promise<SExperimentList>>();
+
+  getExperiments(
+      session, request, [=](const SExperimentList& experiments) { promise->set_value(experiments); },
+      [=](const Nakama::NError& error) { promise->set_exception(std::make_exception_ptr<Nakama::NException>(error)); });
+
+  return promise->get_future();
+}
+
+std::future<SFlagList> SatoriBaseClient::getFlagsAsync(const std::string& httpKey, const SGetFlagsRequest& request) {
   std::shared_ptr<std::promise<SFlagList>> promise = std::make_shared<std::promise<SFlagList>>();
 
   getFlags(
-      session, names, [=](const SFlagList& flags) { promise->set_value(flags); },
+      httpKey, request, [=](const SFlagList& flags) { promise->set_value(flags); },
+      [=](const Nakama::NError& error) { promise->set_exception(std::make_exception_ptr<Nakama::NException>(error)); });
+
+  return promise->get_future();
+}
+
+std::future<SFlagList> SatoriBaseClient::getFlagsAsync(SSessionPtr session, const SGetFlagsRequest& request) {
+  std::shared_ptr<std::promise<SFlagList>> promise = std::make_shared<std::promise<SFlagList>>();
+
+  getFlags(
+      session, request, [=](const SFlagList& flags) { promise->set_value(flags); },
       [=](const Nakama::NError& error) { promise->set_exception(std::make_exception_ptr<Nakama::NException>(error)); });
 
   return promise->get_future();
 }
 
 std::future<SFlagOverrideList>
-SatoriBaseClient::getFlagOverridesAsync(SSessionPtr session, const std::vector<std::string>& names) {
+SatoriBaseClient::getFlagOverridesAsync(const std::string& httpKey, const SGetFlagsRequest& request) {
   std::shared_ptr<std::promise<SFlagOverrideList>> promise = std::make_shared<std::promise<SFlagOverrideList>>();
 
   getFlagOverrides(
-      session, names, [=](const SFlagOverrideList& flag_overrides) { promise->set_value(flag_overrides); },
+      httpKey, request, [=](const SFlagOverrideList& flag_overrides) { promise->set_value(flag_overrides); },
+      [=](const Nakama::NError& error) { promise->set_exception(std::make_exception_ptr<Nakama::NException>(error)); });
+
+  return promise->get_future();
+}
+
+std::future<SFlagOverrideList>
+SatoriBaseClient::getFlagOverridesAsync(SSessionPtr session, const SGetFlagsRequest& request) {
+  std::shared_ptr<std::promise<SFlagOverrideList>> promise = std::make_shared<std::promise<SFlagOverrideList>>();
+
+  getFlagOverrides(
+      session, request, [=](const SFlagOverrideList& flag_overrides) { promise->set_value(flag_overrides); },
       [=](const Nakama::NError& error) { promise->set_exception(std::make_exception_ptr<Nakama::NException>(error)); });
 
   return promise->get_future();
 }
 
 std::future<SLiveEventList>
-SatoriBaseClient::getLiveEventsAsync(SSessionPtr session, const std::vector<std::string>& liveEventNames) {
+SatoriBaseClient::getLiveEventsAsync(SSessionPtr session, const SGetLiveEventsRequest& request) {
   std::shared_ptr<std::promise<SLiveEventList>> promise = std::make_shared<std::promise<SLiveEventList>>();
 
   getLiveEvents(
-      session, liveEventNames, [=](const SLiveEventList& liveEvents) { promise->set_value(liveEvents); },
+      session, request, [=](const SLiveEventList& liveEvents) { promise->set_value(liveEvents); },
+      [=](const Nakama::NError& error) { promise->set_exception(std::make_exception_ptr<Nakama::NException>(error)); });
+
+  return promise->get_future();
+}
+
+std::future<void> SatoriBaseClient::joinLiveEventAsync(SSessionPtr session, const std::string& id) {
+  std::shared_ptr<std::promise<void>> promise = std::make_shared<std::promise<void>>();
+
+  joinLiveEvent(
+      session, id, [=]() { promise->set_value(); },
       [=](const Nakama::NError& error) { promise->set_exception(std::make_exception_ptr<Nakama::NException>(error)); });
 
   return promise->get_future();

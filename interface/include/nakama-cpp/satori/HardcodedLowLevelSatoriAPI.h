@@ -49,6 +49,10 @@ struct SAuthenticateRequest {
   // Optional custom properties to update with this call.
   // If not set, properties are left as they are on the server.
   std::unordered_map<std::string, std::string> custom_properties;
+  // Optional no_session modifies the request to only create/update
+  // an identity without creating a new session. If set to 'true'
+  // the response won't include a token and a refresh token.
+  bool no_session = false;
 };
 
 // A single event. Usually, but not necessarily, part of a batch.
@@ -64,6 +68,14 @@ struct SEvent {
   std::string value;
   // The time when the event was triggered on the producer side. Unit is unix time milliseconds
   Nakama::NTimestamp timestamp;
+  // The identity id associated with the event. Ignored if the event is published as part of a session.
+  std::string identity_id;
+  // The session id associated with the event. Ignored if the event is published as part of a session.
+  std::string session_id;
+  // The session issued at associated with the event. Ignored if the event is published as part of a session.
+  int64_t session_issued_at;
+  // The session expires at associated with the event. Ignored if the event is published as part of a session.
+  int64_t session_expires_at;
 };
 
 // Publish an event to the server
@@ -78,6 +90,8 @@ struct SExperiment {
   std::string name;
   // Value associated with this Experiment.
   std::string value;
+  // The labels associated with this experiment.
+  std::vector<std::string> labels;
 };
 
 // All experiments that this identity is involved with.
@@ -106,6 +120,8 @@ struct SFlag {
   bool condition_changed = false;
   // The origin of change on the flag value returned.
   SValueChangeReason change_reason;
+  // The labels associated with this flag.
+  std::vector<std::string> labels;
 };
 
 // All flags available to the identity
@@ -141,6 +157,8 @@ struct SFlagOverride {
   std::string flag_name;
   // The list of configuration that affect the value of the flag.
   std::vector<SValue> overrides;
+  // The labels associated with this flag.
+  std::vector<std::string> labels;
 };
 
 // All flags available to the identity and their value overrides
@@ -151,20 +169,43 @@ struct SFlagOverrideList {
 
 // Request to get all experiments data.
 struct SGetExperimentsRequest {
-  // Experiment names; if empty string all experiments are returned.
+  // Experiment names; if empty string, all experiments are returned based on the remaining filters.
   std::vector<std::string> names;
+  // Label names that must be defined for each Experiment; if empty string, all experiments are returned based on the
+  // remaining filters.
+  std::vector<std::string> labels;
 };
 
 // Request to get all flags data.
 struct SGetFlagsRequest {
-  // Flag names; if empty string all flags are returned.
+  // Flag names; if empty string, all flags are returned based on the remaining filters.
   std::vector<std::string> names;
+  // Label names that must be defined for each Flag; if empty string, all flags are returned based on the remaining
+  // filters.
+  std::vector<std::string> labels;
 };
 
 // Request to get all live events.
 struct SGetLiveEventsRequest {
-  // Live event names; if empty string all live events are returned.
+  // Live event names; if empty string, all live events are returned based on the remaining filters.
   std::vector<std::string> names;
+  // Label names that must be defined for each Live Event; if empty string, all live events are returned based on the
+  // remaining filters.
+  std::vector<std::string> labels;
+  // The maximum number of past event runs to return for each live event.
+  int32_t past_run_count;
+  // The maximum number of future event runs to return for each live event.
+  int32_t future_run_count;
+  // Start time of the time window filter to apply.
+  int64_t start_time_sec;
+  // End time of the time window filter to apply.
+  int64_t end_time_sec;
+};
+
+// Request to join a 'explicit join' live event.
+struct SJoinLiveEventRequest {
+  // Live event id to join.
+  std::string id;
 };
 
 // Enrich/replace the current session with a new ID.
@@ -181,6 +222,8 @@ struct SIdentifyRequest {
 
 // A single live event.
 struct SLiveEvent {
+  // The status variants of a live event.
+  enum SStatus { UNKNOWN = 0, ACTIVE = 1, UPCOMING = 2, TERMINATED = 3 };
   // Name.
   std::string name;
   // Description.
@@ -201,12 +244,18 @@ struct SLiveEvent {
   int64_t duration_sec;
   // Reset CRON schedule, if configured.
   std::string reset_cron;
+  // The status of this live event run.
+  SStatus status;
+  // The labels associated with this live event.
+  std::vector<std::string> labels;
 };
 
 // List of Live events.
 struct SLiveEventList {
   // Live events.
   std::vector<SLiveEvent> live_events;
+  // Live events that require explicit join.
+  std::vector<SLiveEvent> explicit_join_live_events;
 };
 
 // Properties associated with an identity.
