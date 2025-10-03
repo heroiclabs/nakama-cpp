@@ -33,8 +33,10 @@
          rapidjson
  )
 
+ find_package(Protobuf REQUIRED)
+ 
  target_include_directories(nakama-sdk-core-common
          PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+         ${PROTOBUF_INCLUDE_DIRS}
  )
-
 
