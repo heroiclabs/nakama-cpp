@@ -92,6 +92,10 @@ struct SExperiment {
   std::string value;
   // The labels associated with this experiment.
   std::vector<std::string> labels;
+  // Experiment Phase name
+  std::string phase_name;
+  // Experiment Phase Variant name
+  std::string phase_variant_name;
 };
 
 // All experiments that this identity is involved with.
