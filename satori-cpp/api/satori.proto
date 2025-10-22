@@ -298,6 +298,10 @@ message Experiment {
   string value = 2;
   // The labels associated with this experiment.
   repeated string labels = 3;
+  // Experiment Phase name
+  string phase_name = 4;
+  // Experiment Phase Variant name
+  string phase_variant_name = 5;
 }
 
 // All experiments that this identity is involved with.

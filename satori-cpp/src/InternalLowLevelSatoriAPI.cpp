@@ -144,6 +144,18 @@ bool jsonValueToSExperiment(const rapidjson::Value& input, SExperiment& output) 
       output.labels.emplace_back(jsonLabel.GetString());
     }
   }
+  if (input.HasMember("phase_name")) {
+    if (!input["phase_name"].IsString()) {
+      return false;
+    }
+    output.phase_name = input["phase_name"].GetString();
+  }
+  if (input.HasMember("phase_variant_name")) {
+    if (!input["phase_variant_name"].IsString()) {
+      return false;
+    }
+    output.phase_variant_name = input["phase_variant_name"].GetString();
+  }
   return true;
 }
 
