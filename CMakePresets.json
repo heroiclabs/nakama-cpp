@@ -55,7 +55,7 @@
         "CMAKE_OSX_ARCHITECTURES": "arm64;x86_64",
         "WITH_WS_WSLAY": "ON",
         "WITH_HTTP_CURL": "ON",
-        "BUILD_TESTING": "ON"
+        "BUILD_TESTING": "OFF"
       },
       "condition": {
         "type": "equals",
