@@ -324,6 +324,14 @@ Your NDK is typically located within your SDK:`<sdk>/ndk/<ndk-version>`
 
 Our prebuilt libraries target Android NDK 25.1.8937393.
 
+Android build uses gradle, which requires a JVM installed.
+
+For example, on a windows machine, open a terminal within the nakama-cpp\android folder and run:
+```
+.\gradlew.bat build
+```
+On success, output will be in nakama-cpp\android\nakama-sdk\build\outputs\aar .
+
 ### Mac OSX Universal binary
 
 Mac OSX preset is `macosx-universal` builds Framework with universal binaries
