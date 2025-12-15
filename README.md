@@ -318,12 +318,6 @@ docker buildx build -f scripts/Dockerfile --progress=plain --output=./out .
 
 ### Android
 
-To build for Android set your `ANDROID_NDK_HOME` environment variable to your NDK before building.
-
-Your NDK is typically located within your SDK:`<sdk>/ndk/<ndk-version>`
-
-Our prebuilt libraries target Android NDK 25.1.8937393.
-
 Android build uses gradle, which requires a JVM installed.
 
 For example, on a windows machine, open a terminal within the nakama-cpp\android folder and run:
