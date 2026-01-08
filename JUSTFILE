@@ -14,6 +14,11 @@ build-ios-arm64 config="MinSizeRel":
   cmake --preset=ios-arm64 -DBUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF
   cmake --build build/ios-arm64 --target install --config {{config}} --verbose
 
+build-macos-universal config="MinSizeRel":
+  rm -rf out/macosx-universal
+  cmake --preset=macosx-universal -DBUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF
+  cmake --build build/macosx-universal --target install --config {{config}} --verbose
+
 build-android:
   @cd android && ./gradlew bundleReleaseAar
   @echo "Built ./android/nakama-sdk/build/outputs/aar/nakama-sdk-release.aar"
