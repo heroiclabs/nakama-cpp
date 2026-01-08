@@ -254,6 +254,12 @@ Fedora:
 sudo dnf install cmake ninja-build libcurl-devel gcc g++
 ```
 
+### Mac OSX
+
+- Install XCode (not just command line tools!)
+- `xcodebuild -runFirstLaunch`
+- `brew install cmake pkg-config`
+
 #### Ubuntu 18.04
 
 Fresh Ubuntu 18.04 setup:
