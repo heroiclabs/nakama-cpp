@@ -15,7 +15,7 @@ else ()
     add_executable(nakama-sdk-test ${SOURCES})
 endif ()
 
-target_link_libraries(nakama-sdk-test PRIVATE nakama-sdk rapidjson)
+target_link_libraries(nakama-sdk-test PRIVATE nakama::sdk rapidjson)
 
 target_include_directories(nakama-sdk-test PUBLIC include)
 
@@ -41,3 +41,9 @@ if (APPLE)
 endif()
 
 add_test(NAME "All" COMMAND nakama-sdk-test)
+
+add_custom_command(TARGET nakama-sdk-test POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        $<TARGET_FILE:nakama-sdk>
+        $<TARGET_FILE_DIR:nakama-sdk-test>
+)
