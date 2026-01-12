@@ -4,18 +4,24 @@ plugins {
     id("com.android.library")
 }
 
-if (project.name != "nakama-sdk") {
-    throw GradleException(
-        "Subroject _MUST_ be named 'nakama-sdk', because that is how dependent projects CMake will find us"
-    )
-}
+// Subproject needs to be named 'nakama-sdk' 
+// because that is how dependent CMake projects will find us
+assertSubprojectName("nakama-sdk")
+
+//
+// Check cmake version, because we want 4+ here.
+val systemCmakeVersion = getCmakeVersionString()
+val cmakeMinimumVersion = "4.0.0"
+
+assertMinimumVersion(systemCmakeVersion, cmakeMinimumVersion)
+
 
 var headersDir = Files.createTempDirectory("headers")
 
 // For speed, must be outside of regular build directory, otherwise CMake will recompile all every run
 val cmakeBuildDir = project.layout.projectDirectory.dir(".cxx")
 
-val copyH = tasks.register<Copy>( "copyConfigHeader") {
+val copyH = tasks.register<Copy>("copyConfigHeader") {
     into(headersDir.toFile())
 
     // Copy include files
@@ -74,7 +80,7 @@ android {
     externalNativeBuild {
         cmake {
             path("../../CMakeLists.txt")
-            version = "4.0.3"
+            version = systemCmakeVersion
             buildStagingDirectory = cmakeBuildDir.asFile
         }
     }
@@ -116,4 +122,71 @@ afterEvaluate {
 
 dependencies {
     implementation("androidx.annotation:annotation:1.9.1")
+}
+
+//
+// Throws if subproject name differs from the given one.
+fun assertSubprojectName(name: String) {
+    if (project.name != name) {
+        throw GradleException(
+            "Subroject _MUST_ be named '${name}'."
+        )
+    }
+}
+
+//
+// Gets a CMake version string from system-installed CMake. 
+fun getCmakeVersionString(): String {
+    //
+    // Issue version command to CMake and get output.
+    var cmakeVersionOutput: String
+    try {
+        cmakeVersionOutput = providers.exec {
+            commandLine("cmake", "--version")
+        }.standardOutput.asText.get()
+    }
+    catch (e: Exception) {
+        throw GradleException("Unable to start CMake. Is it installed?")
+    }
+
+    //
+    // CMake will generate multi-line output with
+    // a version number in one of them, so we have to parse it.
+    val versionRegex = Regex("""(\d+)\.(\d+)\.?(\d+)?""")
+    val versionLines = cmakeVersionOutput.lines()
+
+    //
+    // Match every line against a regex and get the first match
+    for (line in versionLines) {
+        var match = versionRegex.find(line)
+        match?.let {
+            val (major, minor, patch) = it.destructured
+            return "${major}.${minor}.${patch}"
+        }
+    }
+
+    // If no match, something went wrong. Shouldn't happen.
+    throw GradleException("Unable to get CMAKE version.")
+}
+
+//
+// Throws an exception if `toAssert` represents
+// an earlier version than `minimumVersion`
+// Compares only major and minor versions.
+// Assumes we will get proper version strings like '1.23.45'
+fun assertMinimumVersion(toAssert: String, minimumVersion: String) {
+    val (aMajor, aMinor) = toAssert.split('.').map { s -> s.toInt() }
+    val (mMajor, mMinor) = minimumVersion.split('.').map { s -> s.toInt() }
+
+    // If we have a bigger major version, we're good.
+    if (aMajor > mMajor) {
+        return
+    }
+    // If our major version is smaller, fail.
+    // Otherwise (majors are the same), if our minor version is smaller, fail.
+    else if (aMajor < mMajor || aMinor < mMinor) {
+        throw GradleException(
+            "Minimum version of CMAKE required is ${minimumVersion}. Version found: ${toAssert}"
+        )
+    }
 }
