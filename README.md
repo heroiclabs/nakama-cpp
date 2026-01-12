@@ -296,11 +296,6 @@ export CC=/usr/bin/gcc-11
 export CXX=/usr/bin/g++-11
 ```
 
-### OS X
-
-- brew install ninja cmake pkg-config
-- XCode or XCode command line tools
-
 ## Build
 
 There are preconfigured presets in the [CMakePresets.json](./CMakePresets.json).
