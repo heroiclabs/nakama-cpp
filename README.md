@@ -330,13 +330,20 @@ docker buildx build -f scripts/Dockerfile --progress=plain --output=./out .
 
 ### Android
 
-Android build uses gradle, which requires a JVM installed.
+Android build uses Gradle, which requires a JVM installed.
 
-For example, on a windows machine, open a terminal within the nakama-cpp\android folder and run:
+For example, on a Windows machine, open a terminal within the `nakama-cpp\android` folder and run:
 ```
 .\gradlew.bat build
 ```
+
 On success, output will be in nakama-cpp\android\nakama-sdk\build\outputs\aar .
+
+If you get errors regarding SDK location, create a `local.properties` file in `android` directory: 
+
+```
+sdk.dir=<Your Android SDK directory>
+```
 
 ### Mac OSX Universal binary
 
