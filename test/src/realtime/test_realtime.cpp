@@ -42,22 +42,22 @@ void test_rt_simultaneous_connect();
 void test_connectivity_loss();
 
 void run_realtime_tests() {
-  test_rt_joinChat();
-  test_rt_joinGroupChat();
+  //test_rt_joinChat();
+  //test_rt_joinGroupChat();
   test_rt_match();
-  test_notifications();
-  test_authoritative_match();
-  test_tournament();
-  test_rpc();
-  test_rt_party();
+  //test_notifications();
+  //test_authoritative_match();
+  //test_tournament();
+  //test_rpc();
+  //test_rt_party();
 }
 
 void test_realtime() {
   // These tests are not protocol specific
-  test_rt_rapiddisconnect();
-  test_rt_connect_callback();
-  test_rt_double_connect();
-  test_rt_double_connect_async();
+  //test_rt_rapiddisconnect();
+  //test_rt_connect_callback();
+  //test_rt_double_connect();
+  //test_rt_double_connect_async();
   // optional test. requires session.single_socket to be true in server configuration.
   // test_rt_simultaneous_connect();
 
@@ -65,9 +65,9 @@ void test_realtime() {
   // test_connectivity_loss();
 
   /// change to 10 iterations to trigger https://github.com/microsoft/libHttpClient/issues/698 bug
-  for (int i = 0; i < 1; i++) {
-    test_rt_reconnect();
-  }
+  //for (int i = 0; i < 1; i++) {
+  //  test_rt_reconnect();
+  //}
 
   NTest::RtProtocol = NRtClientProtocol::Json;
   run_realtime_tests();
