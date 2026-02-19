@@ -57,6 +57,7 @@ public:
   bool isSucceeded() const { return _testSucceeded.load(); }
 
   void setTestTimeoutMs(int ms) { timeoutMs = ms; }
+  void setTickIntervalMs(int ms) { _tickIntervalMs = ms; }
 
   const NClientPtr client;
   const NRtClientPtr rtClient;
@@ -71,6 +72,7 @@ private:
   std::thread _tickThread;
   int timeoutMs = 60 * 1000;
   bool _rtTickPaused;
+  int _tickIntervalMs = 1;
   void runTestInternal();
 };
 

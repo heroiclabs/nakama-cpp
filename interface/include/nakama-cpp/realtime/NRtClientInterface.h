@@ -84,8 +84,13 @@ NAKAMA_NAMESPACE_BEGIN
         virtual ~NRtClientInterface() {}
 
         /**
-         * Pumps requests queue in your thread.
-         * Call it periodically, each 50 ms is ok.
+         * Pumps requests queue and performs network I/O in your thread.
+         * Call it every frame or at a regular interval. The tick rate directly
+         * controls realtime throughput and latency — each round-trip requires
+         * two tick boundaries (one to send, one to receive). For best
+         * performance, tick every 1-2ms during active transfers or once per
+         * frame in your game loop. Safe to call from multiple threads —
+         * concurrent calls are skipped, not queued.
          */
         virtual void tick() = 0;
 

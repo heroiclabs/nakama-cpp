@@ -21,6 +21,7 @@
 #include "rtapi/realtime.pb.h"
 #include <map>
 #include <memory>
+#include <mutex>
 
 namespace Nakama {
 
@@ -332,5 +333,6 @@ private:
   std::optional<int> _heartbeatIntervalMs = 5000;
   std::atomic<bool> _wantDisconnect = false;
   std::unique_ptr<std::promise<void>> _connectPromise = nullptr;
+  std::mutex _tickMutex;
 };
 } // namespace Nakama

@@ -17,7 +17,10 @@
 #include "NTest.h"
 #include "TestGuid.h"
 #include "nakama-cpp/log/NLogger.h"
+#include <atomic>
 #include <chrono>
+#include <mutex>
+#include <condition_variable>
 
 namespace Nakama {
 namespace Test {
@@ -219,10 +222,307 @@ void test_rt_sendmatchdata_throughput() {
   test2.stopTest(true);
 }
 
+void test_rt_throughput_with_tick_interval(int tickIntervalMs) {
+  const int NUM_CHUNKS = 3;
+  const int CHUNK_SIZE = 1 * 1024 * 1024; // 1 MB
+  const int TOTAL_BYTES = NUM_CHUNKS * CHUNK_SIZE;
+  std::string label = "throughput_tick_" + std::to_string(tickIntervalMs) + "ms";
+
+  NLOG_INFO("=== Throughput benchmark (tick=" + std::to_string(tickIntervalMs) + "ms) ===");
+
+  bool threadedTick = true;
+  NTest testSender(label + "_sender", threadedTick);
+  NTest testReceiver(label + "_receiver", threadedTick);
+  testSender.setTickIntervalMs(tickIntervalMs);
+  testReceiver.setTickIntervalMs(tickIntervalMs);
+  testSender.setTestTimeoutMs(60000);
+  testReceiver.setTestTimeoutMs(60000);
+  testSender.runTest();
+  testReceiver.runTest();
+
+  // Authenticate and connect both
+  NSessionPtr senderSession = testSender.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  NSessionPtr receiverSession = testReceiver.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+  testSender.rtClient->connectAsync(senderSession, createStatus, NTest::RtProtocol).get();
+  testReceiver.rtClient->connectAsync(receiverSession, createStatus, NTest::RtProtocol).get();
+
+  // Sender creates match, receiver joins
+  NMatch match = testSender.rtClient->createMatchAsync().get();
+  std::string matchId = match.matchId;
+  testReceiver.rtClient->joinMatchAsync(matchId, {}).get();
+
+  // Prepare 3 x 1MB chunks
+  std::string chunk(CHUNK_SIZE, 'X');
+
+  // Track received chunks
+  std::mutex mtx;
+  std::condition_variable cv;
+  std::atomic<int> chunksReceived{0};
+
+  testReceiver.listener.setMatchDataCallback(
+      [&](const NMatchData& matchData) {
+        int count = chunksReceived.fetch_add(1) + 1;
+        if (count >= NUM_CHUNKS) {
+          std::lock_guard<std::mutex> lock(mtx);
+          cv.notify_all();
+        }
+      });
+
+  // Send 3 chunks in parallel and measure wall-clock time until all received
+  auto t0 = std::chrono::high_resolution_clock::now();
+
+  std::future<void> f1 = testSender.rtClient->sendMatchDataAsync(matchId, 1, chunk);
+  std::future<void> f2 = testSender.rtClient->sendMatchDataAsync(matchId, 2, chunk);
+  std::future<void> f3 = testSender.rtClient->sendMatchDataAsync(matchId, 3, chunk);
+  f1.get();
+  f2.get();
+  f3.get();
+
+  auto tSent = std::chrono::high_resolution_clock::now();
+
+  // Wait for receiver to get all chunks
+  {
+    std::unique_lock<std::mutex> lock(mtx);
+    cv.wait_for(lock, std::chrono::seconds(30), [&]{ return chunksReceived.load() >= NUM_CHUNKS; });
+  }
+
+  auto tRecv = std::chrono::high_resolution_clock::now();
+
+  long long sendMs = std::chrono::duration_cast<std::chrono::milliseconds>(tSent - t0).count();
+  long long totalMs = std::chrono::duration_cast<std::chrono::milliseconds>(tRecv - t0).count();
+  double throughputMBs = (totalMs > 0) ? (double)TOTAL_BYTES / (1024.0 * 1024.0) / ((double)totalMs / 1000.0) : 0.0;
+
+  // Format throughput to 1 decimal place
+  char throughputStr[32];
+  snprintf(throughputStr, sizeof(throughputStr), "%.1f", throughputMBs);
+
+  NLOG_INFO("=== Throughput results (tick=" + std::to_string(tickIntervalMs) + "ms) ==="
+            + " Send: " + std::to_string(sendMs) + "ms"
+            + " Total: " + std::to_string(totalMs) + "ms"
+            + " Throughput: " + throughputStr + " MB/s"
+            + " Chunks received: " + std::to_string(chunksReceived.load()));
+
+  testSender.stopTest(true);
+  testReceiver.stopTest(true);
+}
+
+void test_rt_hotjoin_with_tick_interval(int tickIntervalMs) {
+  const int NUM_ITERATIONS = 5;
+  std::string label = "hotjoin_tick_" + std::to_string(tickIntervalMs) + "ms";
+
+  NLOG_INFO("=== Hot-join benchmark (tick=" + std::to_string(tickIntervalMs) + "ms) ===");
+
+  bool threadedTick = true;
+  NTest testHost(label + "_host", threadedTick);
+  testHost.setTickIntervalMs(tickIntervalMs);
+  testHost.setTestTimeoutMs(30000);
+  testHost.runTest();
+
+  NSessionPtr hostSession = testHost.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+  testHost.rtClient->connectAsync(hostSession, createStatus, NTest::RtProtocol).get();
+
+  NMatch match = testHost.rtClient->createMatchAsync().get();
+  std::string matchId = match.matchId;
+
+  long long totalJoinMs = 0;
+  long long minJoinMs = std::numeric_limits<long long>::max();
+  long long maxJoinMs = 0;
+
+  for (int i = 0; i < NUM_ITERATIONS; i++) {
+    NTest testJoiner(label + "_joiner_" + std::to_string(i), threadedTick);
+    testJoiner.setTickIntervalMs(tickIntervalMs);
+    testJoiner.setTestTimeoutMs(20000);
+    testJoiner.runTest();
+
+    NSessionPtr joinerSession = testJoiner.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+    testJoiner.rtClient->connectAsync(joinerSession, createStatus, NTest::RtProtocol).get();
+
+    auto t0 = std::chrono::high_resolution_clock::now();
+    NMatch joinedMatch = testJoiner.rtClient->joinMatchAsync(matchId, {}).get();
+    auto t1 = std::chrono::high_resolution_clock::now();
+
+    long long ms = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count();
+    totalJoinMs += ms;
+    if (ms < minJoinMs) minJoinMs = ms;
+    if (ms > maxJoinMs) maxJoinMs = ms;
+
+    NLOG_INFO("  [" + std::to_string(tickIntervalMs) + "ms tick] Iteration " + std::to_string(i + 1)
+              + ": joinMatch = " + std::to_string(ms) + "ms");
+
+    testJoiner.rtClient->leaveMatchAsync(matchId).get();
+    testJoiner.stopTest(true);
+  }
+
+  NLOG_INFO("=== Results (tick=" + std::to_string(tickIntervalMs) + "ms) ==="
+            + " Min: " + std::to_string(minJoinMs) + "ms"
+            + " Max: " + std::to_string(maxJoinMs) + "ms"
+            + " Avg: " + std::to_string(totalJoinMs / NUM_ITERATIONS) + "ms");
+
+  testHost.stopTest(true);
+}
+
+void test_rt_concurrent_tick() {
+  const int NUM_TICK_THREADS = 4;
+  const int NUM_SENDS = 20;
+  const int CHUNK_SIZE = 64 * 1024; // 64 KB per message
+
+  NLOG_INFO("=== Concurrent tick() stress test ===");
+  NLOG_INFO("Threads: " + std::to_string(NUM_TICK_THREADS)
+            + ", Sends: " + std::to_string(NUM_SENDS)
+            + ", Chunk: " + std::to_string(CHUNK_SIZE / 1024) + " KB");
+
+  // Create sender and receiver with NO threaded tick — we'll tick manually from multiple threads
+  NTest testSender("concurrent_tick_sender", false);
+  NTest testReceiver("concurrent_tick_receiver", false);
+  testSender.setTestTimeoutMs(30000);
+  testReceiver.setTestTimeoutMs(30000);
+
+  // Authenticate (tick manually during async waits)
+  auto senderAuthFuture = testSender.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true);
+  while (senderAuthFuture.wait_for(std::chrono::milliseconds(1)) != std::future_status::ready) {
+    testSender.client->tick();
+  }
+  NSessionPtr senderSession = senderAuthFuture.get();
+
+  auto receiverAuthFuture = testReceiver.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true);
+  while (receiverAuthFuture.wait_for(std::chrono::milliseconds(1)) != std::future_status::ready) {
+    testReceiver.client->tick();
+  }
+  NSessionPtr receiverSession = receiverAuthFuture.get();
+
+  // Connect RT (tick both clients during connect)
+  bool createStatus = false;
+  auto senderConnFuture = testSender.rtClient->connectAsync(senderSession, createStatus, NTest::RtProtocol);
+  while (senderConnFuture.wait_for(std::chrono::milliseconds(1)) != std::future_status::ready) {
+    testSender.tick();
+  }
+  senderConnFuture.get();
+
+  auto receiverConnFuture = testReceiver.rtClient->connectAsync(receiverSession, createStatus, NTest::RtProtocol);
+  while (receiverConnFuture.wait_for(std::chrono::milliseconds(1)) != std::future_status::ready) {
+    testReceiver.tick();
+  }
+  receiverConnFuture.get();
+
+  // Create match and join
+  auto createFuture = testSender.rtClient->createMatchAsync();
+  while (createFuture.wait_for(std::chrono::milliseconds(1)) != std::future_status::ready) {
+    testSender.tick();
+  }
+  NMatch match = createFuture.get();
+  std::string matchId = match.matchId;
+
+  auto joinFuture = testReceiver.rtClient->joinMatchAsync(matchId, {});
+  while (joinFuture.wait_for(std::chrono::milliseconds(1)) != std::future_status::ready) {
+    testReceiver.tick();
+    testSender.tick();
+  }
+  joinFuture.get();
+
+  NLOG_INFO("Both connected and in match: " + matchId);
+
+  // Track received messages
+  std::atomic<int> chunksReceived{0};
+  std::atomic<int> errors{0};
+  std::mutex cvMtx;
+  std::condition_variable cv;
+
+  testReceiver.listener.setMatchDataCallback(
+      [&](const NMatchData& matchData) {
+        int count = chunksReceived.fetch_add(1) + 1;
+        if (count >= NUM_SENDS) {
+          std::lock_guard<std::mutex> lock(cvMtx);
+          cv.notify_all();
+        }
+      });
+
+  // Prepare chunk
+  std::string chunk(CHUNK_SIZE, 'Z');
+
+  // Launch N threads that all call tick() concurrently on the SAME rtClient + client
+  std::atomic<bool> running{true};
+  std::vector<std::thread> tickThreads;
+
+  for (int t = 0; t < NUM_TICK_THREADS; t++) {
+    tickThreads.emplace_back([&, t]() {
+      NLOG_INFO("  Tick thread " + std::to_string(t) + " started");
+      while (running.load()) {
+        testSender.tick();
+        testReceiver.tick();
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+      }
+      NLOG_INFO("  Tick thread " + std::to_string(t) + " stopped");
+    });
+  }
+
+  // Send messages from the main thread while tick threads are running
+  auto t0 = std::chrono::high_resolution_clock::now();
+
+  for (int i = 0; i < NUM_SENDS; i++) {
+    try {
+      testSender.rtClient->sendMatchData(matchId, 100 + i, chunk);
+    } catch (const std::exception& e) {
+      errors.fetch_add(1);
+      NLOG_INFO("  Send error on message " + std::to_string(i) + ": " + e.what());
+    }
+  }
+
+  // Wait for receiver to get all chunks (or timeout)
+  bool allReceived = false;
+  {
+    std::unique_lock<std::mutex> lock(cvMtx);
+    allReceived = cv.wait_for(lock, std::chrono::seconds(15),
+                               [&]{ return chunksReceived.load() >= NUM_SENDS; });
+  }
+
+  auto t1 = std::chrono::high_resolution_clock::now();
+
+  // Stop tick threads
+  running.store(false);
+  for (auto& t : tickThreads) {
+    t.join();
+  }
+
+  long long totalMs = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count();
+
+  NLOG_INFO("=== Concurrent tick() results ===");
+  NLOG_INFO("  Threads:  " + std::to_string(NUM_TICK_THREADS));
+  NLOG_INFO("  Sent:     " + std::to_string(NUM_SENDS));
+  NLOG_INFO("  Received: " + std::to_string(chunksReceived.load()) + "/" + std::to_string(NUM_SENDS));
+  NLOG_INFO("  Errors:   " + std::to_string(errors.load()));
+  NLOG_INFO("  Time:     " + std::to_string(totalMs) + "ms");
+  NLOG_INFO("  Status:   " + std::string(allReceived ? "ALL RECEIVED" : "INCOMPLETE/TIMEOUT"));
+
+  testSender.stopTest(allReceived && errors.load() == 0);
+  testReceiver.stopTest(allReceived && errors.load() == 0);
+}
+
+void test_rt_hotjoin() {
+  const int tickRates[] = {1, 2, 5, 10, 16, 20, 50};
+
+  NLOG_INFO("=== Throughput tick rate correlation test (3 x 1MB parallel) ===");
+  for (int tickMs : tickRates) {
+    test_rt_throughput_with_tick_interval(tickMs);
+  }
+
+  NLOG_INFO("=== Hot-join tick rate correlation test ===");
+  for (int tickMs : tickRates) {
+    test_rt_hotjoin_with_tick_interval(tickMs);
+  }
+
+  NLOG_INFO("=== All tick rate correlation tests complete ===");
+}
+
 void test_rt_match() {
   //test_rt_create_match();
   //test_rt_matchmaker();
-  test_rt_sendmatchdata_throughput();
+  //test_rt_sendmatchdata_throughput();
+  test_rt_hotjoin();
+  // Disabled by default because it intentionally pushes websocket limits
+  // and can terminate the process when large payloads exceed server/client bounds.
+  // test_rt_concurrent_tick();
 }
 
 } // namespace Test

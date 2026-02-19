@@ -33,15 +33,20 @@ The `createDefaultClient` will create HTTP/1.1 client to use REST API.
 
 ### Tick
 
-The `tick` method pumps requests queue and executes callbacks in your thread. You must call it periodically (recommended every 50ms) in your thread.
+The `tick` method pumps requests queue, performs network I/O, and executes callbacks in your thread. You must call it regularly — ideally every frame in your game loop.
 
 ```cpp
+// In your per-frame update:
 client->tick();
 if (rtClient)
     rtClient->tick();
 ```
 
 Without this the default client and realtime client will not work, and you will not receive responses from the server.
+
+**Important:** The tick rate directly controls realtime throughput and latency. Each realtime round-trip (e.g. `joinMatch`, `sendMatchData`) requires two tick boundaries — one to flush the outgoing message and one to read the server's response. At 60fps (~16ms ticks) latency is roughly 30ms per round-trip. For bulk data transfers, consider ticking more frequently (every 1-2ms) from a dedicated thread during the transfer window.
+
+`tick()` is safe to call from multiple threads — concurrent calls are skipped, not queued.
 
 ### Authenticate
 

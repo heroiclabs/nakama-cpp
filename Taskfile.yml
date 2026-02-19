@@ -1,0 +1,84 @@
+version: '3'
+
+vars:
+  TEST_BIN: ./build/macosx-universal/test/MinSizeRel/nakama-sdk-test.app/Contents/MacOS/nakama-sdk-test
+  SDK_VERSIONS_DIR: ./data/sdk-versions
+  SDK_V290_FRAMEWORK_DIR: ./build/macosx-universal/MinSizeRel
+  COMPOSE_FILE: ./test/server/docker-compose.yml
+
+tasks:
+  nakama:start:
+    desc: Start the Nakama server and PostgreSQL
+    cmds:
+      - open -a Docker
+      - |
+        for i in $(seq 1 30); do
+          if docker info >/dev/null 2>&1; then
+            break
+          fi
+          echo "  Waiting for Docker daemon... ($i/30)"
+          sleep 2
+        done
+      - docker compose -f {{.COMPOSE_FILE}} up -d
+      - echo "Waiting for Nakama to be healthy..."
+      - |
+        for i in $(seq 1 30); do
+          if docker compose -f {{.COMPOSE_FILE}} exec nakama /nakama/nakama healthcheck 2>/dev/null; then
+            break
+          fi
+          echo "  Attempt $i/30 - waiting 2s..."
+          sleep 2
+        done
+      - echo "Nakama is running at http://127.0.0.1:7350"
+
+  nakama:stop:
+    desc: Stop the Nakama server and PostgreSQL
+    cmds:
+      - docker compose -f {{.COMPOSE_FILE}} down
+
+  build:
+    desc: Build the test binary in MinSizeRel
+    cmds:
+      - >
+        cmake --build build/macosx-universal
+        --target nakama-sdk-test --config MinSizeRel
+        -- CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+
+  test:
+    desc: Start Nakama and run the SDK tests (current build)
+    cmds:
+      - task: nakama:start
+      - '{{.TEST_BIN}}'
+
+  test:v2.9.0:
+    desc: Run tests using local v2.9.0 framework build
+    cmds:
+      - task: nakama:start
+      - >
+        DYLD_FRAMEWORK_PATH={{.SDK_V290_FRAMEWORK_DIR}}
+        {{.TEST_BIN}}
+
+  test:v2.8.0:
+    desc: Run tests using v2.8.0 release framework
+    cmds:
+      - task: nakama:start
+      - >
+        DYLD_FRAMEWORK_PATH={{.SDK_VERSIONS_DIR}}/v2.8.0/macosx-arm64/lib
+        {{.TEST_BIN}}
+
+  build:v2.4.1:
+    desc: Build the v2.4.1 hot-join benchmark (x86_64)
+    cmds:
+      - cmake -B {{.SDK_VERSIONS_DIR}}/v2.4.1/bench/build -DCMAKE_OSX_ARCHITECTURES=x86_64 -DCMAKE_BUILD_TYPE=Release {{.SDK_VERSIONS_DIR}}/v2.4.1/bench
+      - cmake --build {{.SDK_VERSIONS_DIR}}/v2.4.1/bench/build --config Release
+
+  test:v2.4.1:
+    desc: Run hot-join benchmark using v2.4.1 SDK (x86_64/Rosetta)
+    cmds:
+      - task: nakama:start
+      - '{{.SDK_VERSIONS_DIR}}/v2.4.1/bench/build/hotjoin_bench'
+
+  nakama:logs:
+    desc: Follow Nakama server logs
+    cmds:
+      - docker compose -f {{.COMPOSE_FILE}} logs -f nakama

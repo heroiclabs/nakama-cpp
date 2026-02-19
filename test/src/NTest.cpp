@@ -80,7 +80,7 @@ void NTest::runTestInternal() {
 
     tick();
 
-    std::chrono::milliseconds sleep_period(50);
+    std::chrono::milliseconds sleep_period(_tickIntervalMs);
     std::this_thread::sleep_for(sleep_period);
   }
 

@@ -57,6 +57,11 @@ NRtClient::~NRtClient() {
 }
 
 void NRtClient::tick() {
+  std::unique_lock lock(_tickMutex, std::try_to_lock);
+  if (!lock.owns_lock()) {
+    return; // another thread is already ticking, skip this call
+  }
+
   heartbeat();
   _transport->tick();
 }

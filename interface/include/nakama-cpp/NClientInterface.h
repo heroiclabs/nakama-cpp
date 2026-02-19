@@ -89,7 +89,10 @@ public:
 
   /**
    * Pumps requests queue in your thread.
-   * Call it periodically, each 50 ms is ok.
+   * Call it every frame or at a regular interval. For latency-sensitive
+   * realtime operations (match data transfer, hot-join), tick as frequently
+   * as possible (every 1-2ms or once per frame). Safe to call from multiple
+   * threads — concurrent calls are skipped, not queued.
    */
   virtual void tick() = 0;
 

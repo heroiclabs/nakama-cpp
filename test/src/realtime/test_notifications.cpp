@@ -43,7 +43,14 @@ void test_createAndDeleteNotifications() {
     notificationsPromise.set_value();
   });
 
-  test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
+  try {
+    test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
+  }
+  catch (const std::exception& e) {
+    NLOG_ERROR("rpcAsync failed: " + std::string(e.what()));
+    test.stopTest(false);
+    return;
+  }
 
   notificationsPromise.get_future().get();
   test.stopTest(true);
@@ -56,8 +63,16 @@ void test_createListAndDeleteNotifications() {
   NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
   bool createStatus = false;
   test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
-  const Nakama::NRpc rpc =
-      test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
+  try {
+    const Nakama::NRpc rpc =
+        test.rtClient->rpcAsync("clientrpc.send_notification", "{\"user_id\":\"" + session->getUserId() + "\"}").get();
+  }
+  catch (const std::exception& e) {
+    NLOG_ERROR("rpcAsync failed: " + std::string(e.what()));
+    test.stopTest(false);
+    return;
+  }
+
   NNotificationListPtr list = test.client->listNotificationsAsync(session, std::nullopt, std::nullopt).get();
   if (list->notifications.size() > 0) {
     for (auto& notification : list->notifications) {
@@ -72,11 +87,8 @@ void test_createListAndDeleteNotifications() {
 }
 
 void test_notifications() {
-  // Notifications tests reqire following lua modules:
-  // download clientrpc.lua and debug_utils.lua from
-  // https://github.com/heroiclabs/nakama/tree/master/data/modules
-  // put to nakama-server/data/modules
-  // restart server
+  // Notifications RPCs are implemented in /test/server/main.go.
+  // Start the test server from /test/server so the Go plugin is loaded.
 
   test_createAndDeleteNotifications();
   test_createListAndDeleteNotifications();
