@@ -14,23 +14,13 @@
  * limitations under the License.
  */
 
-#pragma once
+#include "globals.h"
 
-#include "NTest.h"
-#include "nakama-cpp/log/NLogger.h"
+#include <atomic>
 
 namespace Nakama {
 namespace Test {
-static inline void NTEST_ASSERT(bool cond) {
-  if (!cond) {
-    NLOG_INFO("TEST ASSERT FAILED!");
-    NLOG_INFO(std::string(__FILE__) + ":" + std::to_string(__LINE__));
-    // abort();
-  }
-}
-
-// stats
-extern uint32_t g_runTestsCount;
-extern uint32_t g_failedTestsCount;
+std::atomic<uint32_t> g_runTestsCount{0};
+std::atomic<uint32_t> g_failedTestsCount{0};
 } // namespace Test
 } // namespace Nakama

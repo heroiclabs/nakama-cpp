@@ -1223,12 +1223,10 @@ std::future<void> NRtClient::updateStatusAsync(const std::string& status) {
 
 std::future<NRpc> NRtClient::rpcAsync(const std::string& id, const std::optional<std::string>& payload) {
   auto promise = std::make_shared<std::promise<NRpc>>();
-  std::cout << "rpc async";
 
   rpc(
       id, payload, [=](const NRpc& rpc) { promise->set_value(rpc); },
       [=](const NRtError& error) {
-        std::cout << "exception in lambda";
         promise->set_exception(std::make_exception_ptr<NRtException>(error));
       });
 

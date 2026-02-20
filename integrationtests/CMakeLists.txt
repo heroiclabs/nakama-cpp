@@ -9,29 +9,34 @@ enable_testing()
 
 include_directories(include src)
 
-if (APPLE)
-    add_executable(nakama-sdk-test MACOSX_BUNDLE ${SOURCES})
+set(TEST_TARGET nakama-sdk-test)
+
+if (ANDROID)
+    set(TEST_TARGET nakama-test)
+    add_library(${TEST_TARGET} SHARED ${SOURCES})
+elseif (APPLE)
+    add_executable(${TEST_TARGET} MACOSX_BUNDLE ${SOURCES})
 else ()
-    add_executable(nakama-sdk-test ${SOURCES})
+    add_executable(${TEST_TARGET} ${SOURCES})
 endif ()
 
-target_link_libraries(nakama-sdk-test PRIVATE nakama-sdk rapidjson)
+target_link_libraries(${TEST_TARGET} PRIVATE nakama-sdk rapidjson)
 
-target_include_directories(nakama-sdk-test PUBLIC include)
+target_include_directories(${TEST_TARGET} PUBLIC include)
 
 if (BUILD_PRIVATE_TEST)
     include("../submodules/private/test/CMakeLists.txt" OPTIONAL)
 endif()
 
 if (MSVC)
-    target_compile_options(nakama-sdk-test PRIVATE /W4 /wd4251 /wd4267 /utf-8)
-    target_link_options(nakama-sdk-test PRIVATE /DEBUG)
+    target_compile_options(${TEST_TARGET} PRIVATE /W4 /wd4251 /wd4267 /utf-8)
+    target_link_options(${TEST_TARGET} PRIVATE /DEBUG)
 else ()
-    target_compile_options(nakama-sdk-test PRIVATE -Wall -Wextra -Wpedantic -Wno-unknown-pragmas)
+    target_compile_options(${TEST_TARGET} PRIVATE -Wall -Wextra -Wpedantic -Wno-unknown-pragmas)
 endif ()
 
 if (APPLE)
-    set_target_properties(nakama-sdk-test PROPERTIES
+    set_target_properties(${TEST_TARGET} PROPERTIES
         XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER "com.heroiclabs.test"
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Apple Development"
         XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "Heroic Developer"
@@ -40,4 +45,6 @@ if (APPLE)
 
 endif()
 
-add_test(NAME "All" COMMAND nakama-sdk-test)
+if (NOT ANDROID)
+    add_test(NAME "All" COMMAND ${TEST_TARGET})
+endif()

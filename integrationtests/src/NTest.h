@@ -25,6 +25,7 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <vector>
 
 namespace Nakama {
 namespace Test {
@@ -58,6 +59,9 @@ public:
 
   void setTestTimeoutMs(int ms) { timeoutMs = ms; }
 
+  // Register a session for automatic account deletion after the test completes.
+  void addSession(NSessionPtr session);
+
   const NClientPtr client;
   const NRtClientPtr rtClient;
   NRtDefaultClientListener listener;
@@ -71,7 +75,9 @@ private:
   std::thread _tickThread;
   int timeoutMs = 60 * 1000;
   bool _rtTickPaused;
+  std::vector<NSessionPtr> _sessionsToCleanup;
   void runTestInternal();
+  void cleanupSessions();
 };
 
 } // namespace Test

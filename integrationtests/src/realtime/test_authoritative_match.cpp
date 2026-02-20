@@ -34,16 +34,25 @@ void test_authoritative_match() {
   test2.runTest();
 
   NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  test.addSession(session);
   bool createStatus = false;
   test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
 
   NSessionPtr session2 = test2.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  test2.addSession(session2);
   test2.rtClient->connectAsync(session2, createStatus, NTest::RtProtocol).get();
 
-  const NRpc rpc =
-      test.rtClient
-          ->rpcAsync("clientrpc.create_authoritative_match", "{\"debug\": true, \"label\": \"TestAuthoritativeMatch\"}")
-          .get();
+  NRpc rpc;
+  try {
+    rpc = test.rtClient
+              ->rpcAsync("clientrpc.create_authoritative_match", "{\"debug\": true, \"label\": \"TestAuthoritativeMatch\"}")
+              .get();
+  } catch (const std::exception& e) {
+    NLOG_INFO("rpcAsync failed: " + std::string(e.what()));
+    test.stopTest(false);
+    test2.stopTest(false);
+    return;
+  }
 
   rapidjson::Document document;
   if (!document.Parse(rpc.payload).HasParseError()) {

@@ -16,10 +16,10 @@
 
 #include <iostream>
 #include <memory>
+#include <rapidjson/document.h>
 #include <string>
 
 #include "DataHelper.h"
-#include "RapidjsonHelper.h"
 #include "SatoriRestClient.h"
 #include "StrUtil.h"
 #include "nakama-cpp/NakamaVersion.h"
@@ -36,20 +36,20 @@ void AddBoolArg(Nakama::NHttpQueryArgs& args, std::string&& name, bool value) {
   value ? args.emplace(name, "true") : args.emplace(name, "false");
 }
 
-std::string jsonDocToStr(Nakama::rapidjson::Document& document) {
-  Nakama::rapidjson::StringBuffer buffer;
-  Nakama::rapidjson::Writer<Nakama::rapidjson::StringBuffer> writer(buffer);
+std::string jsonDocToStr(rapidjson::Document& document) {
+  rapidjson::StringBuffer buffer;
+  rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
   document.Accept(writer);
   return buffer.GetString();
 }
 
-void addVarsToJsonDoc(Nakama::rapidjson::Document& document, const Nakama::NStringMap& vars) {
+void addVarsToJsonDoc(rapidjson::Document& document, const Nakama::NStringMap& vars) {
   if (!vars.empty()) {
-    Nakama::rapidjson::Value jsonObj;
+    rapidjson::Value jsonObj;
     jsonObj.SetObject();
 
     for (auto& p : vars) {
-      jsonObj.AddMember(Nakama::rapidjson::Value::StringRefType(p.first.c_str()), p.second, document.GetAllocator());
+      jsonObj.AddMember(rapidjson::Value::StringRefType(p.first.c_str()), p.second, document.GetAllocator());
     }
 
     document.AddMember("vars", std::move(jsonObj), document.GetAllocator());
@@ -112,7 +112,7 @@ void SatoriRestClient::authenticate(
     ctx->successCallback = [sessionData, successCallback]() { successCallback(sessionData); };
     ctx->errorCallback = std::move(errorCallback);
 
-    Nakama::rapidjson::Document document;
+    rapidjson::Document document;
     document.SetObject();
 
     document.AddMember("id", id, document.GetAllocator());
@@ -138,7 +138,7 @@ void SatoriRestClient::authenticateRefresh(
     ctx->successCallback = [sessionData, successCallback]() { successCallback(sessionData); };
     ctx->errorCallback = std::move(errorCallback);
 
-    Nakama::rapidjson::Document document;
+    rapidjson::Document document;
     document.SetObject();
 
     document.AddMember("refresh_token", session->refresh_token, document.GetAllocator());
@@ -163,7 +163,7 @@ void SatoriRestClient::authenticateLogout(
     ctx->successCallback = std::move(successCallback);
     ctx->errorCallback = std::move(errorCallback);
 
-    Nakama::rapidjson::Document document;
+    rapidjson::Document document;
     document.SetObject();
 
     document.AddMember("token", session->token, document.GetAllocator());
@@ -210,12 +210,12 @@ void SatoriRestClient::postEvent(
     ctx->successCallback = std::move(successCallback);
     ctx->errorCallback = std::move(errorCallback);
 
-    Nakama::rapidjson::Document document;
+    rapidjson::Document document;
     document.SetObject();
-    Nakama::rapidjson::Value jsonEvents;
+    rapidjson::Value jsonEvents;
     jsonEvents.SetArray();
     for (const SEvent& event : events) {
-      Nakama::rapidjson::Value jsonEvent;
+      rapidjson::Value jsonEvent;
       jsonEvent.SetObject();
 
       jsonEvent.AddMember("name", event.name, document.GetAllocator());
@@ -225,11 +225,11 @@ void SatoriRestClient::postEvent(
           google::protobuf::util::TimeUtil::MillisecondsToTimestamp(static_cast<int64_t>(event.timestamp));
       std::string timeString = google::protobuf::util::TimeUtil::ToString(timeProto);
       jsonEvent.AddMember("timestamp", std::move(timeString), document.GetAllocator());
-      Nakama::rapidjson::Value jsonMetadata;
+      rapidjson::Value jsonMetadata;
       jsonMetadata.SetObject();
       for (auto& p : event.metadata) {
         jsonMetadata.AddMember(
-            Nakama::rapidjson::Value::StringRefType(p.first.c_str()), p.second, document.GetAllocator());
+            rapidjson::Value::StringRefType(p.first.c_str()), p.second, document.GetAllocator());
       }
       jsonEvent.AddMember("metadata", std::move(jsonMetadata), document.GetAllocator());
 
@@ -256,12 +256,12 @@ void SatoriRestClient::serverEvent(
     ctx->successCallback = std::move(successCallback);
     ctx->errorCallback = std::move(errorCallback);
 
-    Nakama::rapidjson::Document document;
+    rapidjson::Document document;
     document.SetObject();
-    Nakama::rapidjson::Value jsonEvents;
+    rapidjson::Value jsonEvents;
     jsonEvents.SetArray();
     for (const SEvent& event : events) {
-      Nakama::rapidjson::Value jsonEvent;
+      rapidjson::Value jsonEvent;
       jsonEvent.SetObject();
 
       jsonEvent.AddMember("name", event.name, document.GetAllocator());
@@ -275,11 +275,11 @@ void SatoriRestClient::serverEvent(
           google::protobuf::util::TimeUtil::MillisecondsToTimestamp(static_cast<int64_t>(event.timestamp));
       std::string timeString = google::protobuf::util::TimeUtil::ToString(timeProto);
       jsonEvent.AddMember("timestamp", std::move(timeString), document.GetAllocator());
-      Nakama::rapidjson::Value jsonMetadata;
+      rapidjson::Value jsonMetadata;
       jsonMetadata.SetObject();
       for (auto& p : event.metadata) {
         jsonMetadata.AddMember(
-            Nakama::rapidjson::Value::StringRefType(p.first.c_str()), p.second, document.GetAllocator());
+            rapidjson::Value::StringRefType(p.first.c_str()), p.second, document.GetAllocator());
       }
       jsonEvent.AddMember("metadata", std::move(jsonMetadata), document.GetAllocator());
 
@@ -521,26 +521,26 @@ void SatoriRestClient::identify(
     ctx->successCallback = [sessionData, successCallback]() { successCallback(sessionData); };
     ctx->errorCallback = std::move(errorCallback);
 
-    Nakama::rapidjson::Document document;
+    rapidjson::Document document;
     document.SetObject();
 
     document.AddMember("id", id, document.GetAllocator());
 
-    Nakama::rapidjson::Value jsonDefaultProperties;
+    rapidjson::Value jsonDefaultProperties;
     jsonDefaultProperties.SetObject();
     for (auto& obj : defaultProperties) {
       jsonDefaultProperties.AddMember(
-          Nakama::rapidjson::Value(obj.first, document.GetAllocator()).Move(),
-          Nakama::rapidjson::Value(obj.second, document.GetAllocator()).Move(), document.GetAllocator());
+          rapidjson::Value(obj.first, document.GetAllocator()).Move(),
+          rapidjson::Value(obj.second, document.GetAllocator()).Move(), document.GetAllocator());
     }
     document.AddMember("default", std::move(jsonDefaultProperties), document.GetAllocator());
 
-    Nakama::rapidjson::Value jsonCustomProperties;
+    rapidjson::Value jsonCustomProperties;
     jsonCustomProperties.SetObject();
     for (auto& obj : customProperties) {
       jsonCustomProperties.AddMember(
-          Nakama::rapidjson::Value(obj.first, document.GetAllocator()).Move(),
-          Nakama::rapidjson::Value(obj.second, document.GetAllocator()).Move(), document.GetAllocator());
+          rapidjson::Value(obj.first, document.GetAllocator()).Move(),
+          rapidjson::Value(obj.second, document.GetAllocator()).Move(), document.GetAllocator());
     }
     document.AddMember("custom", std::move(jsonCustomProperties), document.GetAllocator());
 
@@ -590,24 +590,24 @@ void SatoriRestClient::updateProperties(
     ctx->successCallback = std::move(successCallback);
     ctx->errorCallback = std::move(errorCallback);
 
-    Nakama::rapidjson::Document document;
+    rapidjson::Document document;
     document.SetObject();
 
-    Nakama::rapidjson::Value jsonDefaultProperties;
+    rapidjson::Value jsonDefaultProperties;
     jsonDefaultProperties.SetObject();
     for (auto& obj : defaultProperties) {
       jsonDefaultProperties.AddMember(
-          Nakama::rapidjson::Value(obj.first, document.GetAllocator()).Move(),
-          Nakama::rapidjson::Value(obj.second, document.GetAllocator()).Move(), document.GetAllocator());
+          rapidjson::Value(obj.first, document.GetAllocator()).Move(),
+          rapidjson::Value(obj.second, document.GetAllocator()).Move(), document.GetAllocator());
     }
     document.AddMember("default", std::move(jsonDefaultProperties), document.GetAllocator());
 
-    Nakama::rapidjson::Value jsonCustomProperties;
+    rapidjson::Value jsonCustomProperties;
     jsonCustomProperties.SetObject();
     for (auto& obj : customProperties) {
       jsonCustomProperties.AddMember(
-          Nakama::rapidjson::Value(obj.first, document.GetAllocator()).Move(),
-          Nakama::rapidjson::Value(obj.second, document.GetAllocator()).Move(), document.GetAllocator());
+          rapidjson::Value(obj.first, document.GetAllocator()).Move(),
+          rapidjson::Value(obj.second, document.GetAllocator()).Move(), document.GetAllocator());
     }
     document.AddMember("custom", std::move(jsonCustomProperties), document.GetAllocator());
     document.AddMember("recompute", recompute, document.GetAllocator());
@@ -667,7 +667,7 @@ void SatoriRestClient::updateMessage(
     ctx->successCallback = std::move(successCallback);
     ctx->errorCallback = std::move(errorCallback);
 
-    Nakama::rapidjson::Document document;
+    rapidjson::Document document;
     document.SetObject();
 
     document.AddMember("read_time", readTime, document.GetAllocator());

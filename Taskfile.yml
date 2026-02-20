@@ -1,0 +1,61 @@
+version: "3"
+
+vars:
+  PRESET: macosx-universal
+  BUILD_DIR: build/{{.PRESET}}
+  CONFIG: MinSizeRel
+  TEST_BIN: "{{.BUILD_DIR}}/integrationtests/{{.CONFIG}}/nakama-sdk-test.app/Contents/MacOS/nakama-sdk-test"
+  COMPOSE_FILE: integrationtests/server/docker-compose.yml
+
+tasks:
+  configure:
+    desc: Configure CMake with test support
+    cmds:
+      - cmake --preset {{.PRESET}} -DBUILD_TESTING=ON
+
+  build:
+    desc: Build the test binary
+    deps: [configure]
+    cmds:
+      - >-
+        cmake --build {{.BUILD_DIR}}
+        --target nakama-sdk-test
+        --config {{.CONFIG}}
+        -- CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+
+  server:up:
+    desc: Start the Nakama test server
+    cmds:
+      - docker compose -f {{.COMPOSE_FILE}} up -d --build
+
+  server:down:
+    desc: Stop the Nakama test server
+    cmds:
+      - docker compose -f {{.COMPOSE_FILE}} down
+
+  server:logs:
+    desc: Tail Nakama server logs
+    cmds:
+      - docker compose -f {{.COMPOSE_FILE}} logs -f nakama
+
+  test:
+    desc: Build and run integration tests
+    deps: [build]
+    cmds:
+      - "{{.TEST_BIN}}"
+
+  tests-android:
+    desc: Build and run Android integration tests (set DEVICE=<adb-serial>, optional ABI=arm64-v8a|armeabi-v7a)
+    vars:
+      ABI: '{{default "arm64-v8a" .ABI}}'
+    preconditions:
+      - sh: test -n "{{.DEVICE}}"
+        msg: "DEVICE is required, e.g. task tests-android DEVICE=<adb-serial>"
+    cmds:
+      - docker compose -f {{.COMPOSE_FILE}} up -d --build
+      - cmake --preset android-{{.ABI}} -DBUILD_TESTING=ON
+      - cmake --build build/android-{{.ABI}} --target install --config Debug
+      - cd integrationtests/android && ./gradlew -Pabi={{.ABI}} assembleDebug
+      - adb -s {{.DEVICE}} reverse tcp:7350 tcp:7350
+      - adb -s {{.DEVICE}} reverse tcp:7351 tcp:7351
+      - cd integrationtests/android && ./deploy.sh {{.DEVICE}}

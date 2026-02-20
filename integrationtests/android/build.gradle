@@ -23,8 +23,15 @@ plugins {
     id('com.android.application') version '7.1.1'
 }
 
+def abi = (project.findProperty("abi") ?: "arm64-v8a").toString()
+def supportedAbis = ["arm64-v8a", "armeabi-v7a"]
+if (!supportedAbis.contains(abi)) {
+    throw new GradleException("Unsupported abi '${abi}'. Supported values: ${supportedAbis}")
+}
+def cmakePreset = "android-${abi}"
+
 dependencies {
-    implementation files("../../out/android-${abi}/lib/libnakama-sdk.aar")
+    implementation files("../../out/${cmakePreset}/lib/libnakama-sdk.aar")
 }
 
 repositories {
@@ -43,13 +50,12 @@ android {
         versionCode 1
         versionName '1.0'
         ndk {
-            abiFilters "${abi}"
+            abiFilters abi
         }
         externalNativeBuild {
             cmake {
                 arguments '--preset',
-                        "android-${abi}-host_${host}",
-                         // TODO figure out why assigning these in CMakePresets.json cache variables doesn't work
+                        cmakePreset,
                         "-DANDROID_STL=c++_shared",
                         "-DCMAKE_BUILD_TYPE=Debug"
                 targets 'nakama-test'

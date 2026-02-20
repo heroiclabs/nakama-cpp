@@ -63,6 +63,26 @@ void NTest::runTest() {
   }
 }
 
+void NTest::addSession(NSessionPtr session) {
+  _sessionsToCleanup.push_back(std::move(session));
+}
+
+void NTest::cleanupSessions() {
+  for (auto& session : _sessionsToCleanup) {
+    try {
+      auto future = client->deleteAccountAsync(session);
+      // Pump ticks while waiting for the delete to complete
+      while (future.wait_for(std::chrono::milliseconds(50)) != std::future_status::ready) {
+        tick();
+      }
+      future.get();
+    } catch (...) {
+      // Best-effort cleanup — don't fail the test on cleanup errors
+    }
+  }
+  _sessionsToCleanup.clear();
+}
+
 void NTest::runTestInternal() {
   if (g_runTestsCount > 0) {
     std::cout << std::endl << std::endl;
@@ -83,6 +103,8 @@ void NTest::runTestInternal() {
     std::chrono::milliseconds sleep_period(50);
     std::this_thread::sleep_for(sleep_period);
   }
+
+  cleanupSessions();
 
   NLOG_INFO("done running tst internal");
 }

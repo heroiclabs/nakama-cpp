@@ -20,7 +20,7 @@
 
 namespace Nakama
 {
-    class NRtException : public std::runtime_error {
+    class NAKAMA_API NRtException : public std::runtime_error {
     public:
         NRtException(const NRtError& error)
             : std::runtime_error(error.message), error(error) {}

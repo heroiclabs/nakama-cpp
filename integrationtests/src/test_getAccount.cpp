@@ -15,6 +15,7 @@
  */
 
 #include "NTest.h"
+#include "TestGuid.h"
 #include "nakama-cpp/log/NLogger.h"
 
 #include <optional>
@@ -24,7 +25,7 @@ namespace Test {
 
 using namespace std;
 
-void test_getAccount() {
+void test_getAccountAndUpdate() {
   NTest test(__func__);
 
   auto successCallback = [&test](NSessionPtr session) {
@@ -49,6 +50,47 @@ void test_getAccount() {
   test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
 
   test.runTest();
+}
+
+void test_updateAccountAllFields() {
+  NTest test(__func__, true);
+  test.runTest();
+
+  try {
+    auto session = test.client->authenticateCustomAsync(TestGuid::newGuid(), "", true).get();
+    test.addSession(session);
+    test.client
+        ->updateAccountAsync(session, std::nullopt, "TestDisplay", "http://example.com/avatar.png", "en", "US", "UTC")
+        .get();
+    NAccount account = test.client->getAccountAsync(session).get();
+    bool ok = account.user.displayName == "TestDisplay" && account.user.avatarUrl == "http://example.com/avatar.png" &&
+              account.user.lang == "en" && account.user.location == "US" && account.user.timeZone == "UTC";
+    test.stopTest(ok);
+  } catch (const std::exception& e) {
+    NLOG_INFO("test failed: " + std::string(e.what()));
+    test.stopTest(false);
+  }
+}
+
+void test_getAccountDetails() {
+  NTest test(__func__, true);
+  test.runTest();
+
+  try {
+    auto session = test.client->authenticateCustomAsync(TestGuid::newGuid(), "", true).get();
+    test.addSession(session);
+    NAccount account = test.client->getAccountAsync(session).get();
+    test.stopTest(!account.user.id.empty() && account.user.createdAt > 0);
+  } catch (const std::exception& e) {
+    NLOG_INFO("test failed: " + std::string(e.what()));
+    test.stopTest(false);
+  }
+}
+
+void test_getAccount() {
+  test_getAccountAndUpdate();
+  test_updateAccountAllFields();
+  test_getAccountDetails();
 }
 
 } // namespace Test

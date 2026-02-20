@@ -34,6 +34,7 @@ void test_tournament() {
   NTest test(__func__, threadedTick);
   test.runTest();
   NSessionPtr session = test.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  test.addSession(session);
 
   bool createStatus = false;
   test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
@@ -70,7 +71,14 @@ void test_tournament() {
   document.Accept(writer);
   string json = buffer.GetString();
 
-  const NRpc rpc = test.rtClient->rpcAsync("clientrpc.create_tournament", json).get();
+  NRpc rpc;
+  try {
+    rpc = test.rtClient->rpcAsync("clientrpc.create_tournament", json).get();
+  } catch (const std::exception& e) {
+    NLOG_INFO("rpcAsync failed: " + std::string(e.what()));
+    test.stopTest(false);
+    return;
+  }
 
   NLOG_INFO("rpc response: " + rpc.payload);
 
