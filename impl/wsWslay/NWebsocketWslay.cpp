@@ -28,8 +28,8 @@ void NWebsocketWslay::on_msg_recv_callback(
     }
   } else {
     // Copy message data — arg memory is only valid during this callback
-    auto data = std::make_shared<NBytes>(reinterpret_cast<const char*>(arg->msg), arg->msg_length);
-    ws->enqueueCallback([ws, data]() { ws->fireOnMessage(*data); });
+    NBytes data(reinterpret_cast<const char*>(arg->msg), arg->msg_length);
+    ws->enqueueCallback([ws, data = std::move(data)]() { ws->fireOnMessage(data); });
   }
 }
 
@@ -185,12 +185,10 @@ NWebsocketWslay::NWebsocketWslay(std::unique_ptr<WslayIOInterface> io)
       _ctx(nullptr, wslay_event_context_free) {}
 
 NWebsocketWslay::~NWebsocketWslay() {
-  if (_ioRunning.load()) {
-    _ioRunning.store(false);
-    if (_ioThread.joinable())
-      _ioThread.join();
-    cleanupConnection();
-  }
+  _ioRunning.store(false);
+  if (_ioThread.joinable())
+    _ioThread.join();
+  cleanupConnection();
 }
 
 void NWebsocketWslay::enqueueCallback(std::function<void()> cb) {

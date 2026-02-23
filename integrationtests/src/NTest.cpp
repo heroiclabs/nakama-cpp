@@ -68,18 +68,39 @@ void NTest::addSession(NSessionPtr session) {
 }
 
 void NTest::cleanupSessions() {
+  // Fire all delete requests concurrently
+  std::vector<std::future<void>> futures;
   for (auto& session : _sessionsToCleanup) {
     try {
-      auto future = client->deleteAccountAsync(session);
-      // Pump ticks while waiting for the delete to complete
-      while (future.wait_for(std::chrono::milliseconds(50)) != std::future_status::ready) {
-        tick();
-      }
-      future.get();
+      futures.push_back(client->deleteAccountAsync(session));
     } catch (...) {
-      // Best-effort cleanup — don't fail the test on cleanup errors
     }
   }
+
+  // Only pump the HTTP client — the RT client is done and late WS messages
+  // could try to fulfill destroyed promises.
+  bool allDone = false;
+  while (!allDone) {
+    client->tick();
+    allDone = true;
+    for (auto& f : futures) {
+      if (f.valid() && f.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready) {
+        allDone = false;
+      }
+    }
+    if (!allDone) {
+      std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+  }
+
+  // Consume results — best-effort, don't fail the test on cleanup errors
+  for (auto& f : futures) {
+    try {
+      if (f.valid()) f.get();
+    } catch (...) {
+    }
+  }
+
   _sessionsToCleanup.clear();
 }
 
@@ -93,14 +114,14 @@ void NTest::runTestInternal() {
   printTestName("Running");
 
   while (!isDone()) {
-    if (!checkTimeout(50)) {
+    if (!checkTimeout(5)) {
       NLOG_INFO("Test timeout");
       stopTest(isSucceeded());
     }
 
     tick();
 
-    std::chrono::milliseconds sleep_period(50);
+    std::chrono::milliseconds sleep_period(5);
     std::this_thread::sleep_for(sleep_period);
   }
 

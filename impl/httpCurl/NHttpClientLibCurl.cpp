@@ -250,6 +250,12 @@ void NHttpClientLibCurl::tick() {
       }
 
       context = std::move(it->second);
+
+      mc = curl_multi_remove_handle(_curl_multi.get(), e);
+      if (mc) {
+        NLOG(Nakama::NLogLevel::Error, "curl_multi_remove_handle() failed, code %d.\n", (int)mc);
+      }
+
       _contexts.remove(*it);
 
       lock.unlock();
@@ -274,14 +280,7 @@ void NHttpClientLibCurl::tick() {
           }
         }
 
-        mc = curl_multi_remove_handle(_curl_multi.get(), e);
         callback(response);
-      } else {
-        mc = curl_multi_remove_handle(_curl_multi.get(), e);
-      }
-
-      if (mc) {
-        NLOG(Nakama::NLogLevel::Error, "curl_multi_remove_handle() failed, code %d.\n", (int)mc);
       }
     }
   } while (m);
