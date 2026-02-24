@@ -197,14 +197,13 @@ void NWebsocketWslay::enqueueCallback(std::function<void()> cb) {
 }
 
 void NWebsocketWslay::cleanupConnection() {
-  if (_state.load() == State::Connected && _ctx) {
+  if (_state.exchange(State::Disconnected) == State::Connected && _ctx) {
     // Best-effort close frame
     wslay_event_queue_close(_ctx.get(), 0, nullptr, 0);
     wslay_event_send(_ctx.get());
   }
 
   _io->close();
-  _state.store(State::Disconnected);
   _connected = false;
   _ctx.reset(nullptr);
 
@@ -328,10 +327,10 @@ void NWebsocketWslay::ioThreadFunc() {
       }
 
       // 3. Check for remote disconnect (set by on_msg_recv_callback for WSLAY_CONNECTION_CLOSE)
-      if (_state.load() == State::RemoteDisconnect) {
+      State expected = State::RemoteDisconnect;
+      if (_state.compare_exchange_strong(expected, State::Disconnected)) {
         uint16_t code = wslay_event_get_status_code_received(_ctx.get());
         _io->close();
-        _state.store(State::Disconnected);
         _ctx.reset(nullptr);
         enqueueCallback([this, code]() {
           NRtClientDisconnectInfo info;
@@ -358,7 +357,7 @@ void NWebsocketWslay::ioThreadFunc() {
         break;
       }
 
-      std::this_thread::sleep_for(std::chrono::milliseconds(1));
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
     } else {
       // Drive connection state machine: Connecting → Handshake_Sending → Handshake_Receiving → Connected
       NetIOAsyncResult res = NetIOAsyncResult::AGAIN;

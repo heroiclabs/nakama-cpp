@@ -28,7 +28,7 @@ services:
       - "-ecx"
       - >
           /nakama/nakama migrate up --database.address postgres:localdb@postgres:5432/nakama &&
-          exec /nakama/nakama --name nakama1 --database.address postgres:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --socket.max_message_size_bytes 4194304
+          exec /nakama/nakama --name nakama1 --database.address postgres:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --socket.max_message_size_bytes 4194304 --socket.outgoing_queue_size 2048
     restart: "no"
     depends_on:
       postgres:
