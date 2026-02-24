@@ -4,3 +4,9 @@
 # Ignore Gradle build output directory
 build
 /.cxx/
+
+# Pre-built native libraries staged by deploy.sh
+/jniLibs/
+
+# Local SDK path
+local.properties

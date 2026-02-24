@@ -65,7 +65,15 @@ extern "C"
 {
     JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
     {
-        Nakama::Test::runAllTests();
+        auto clientFactory = [](Nakama::NClientParameters parameters) -> Nakama::NClientPtr {
+            return Nakama::createDefaultClient(parameters);
+        };
+        auto rtClientFactory = [](Nakama::NClientPtr client) -> Nakama::NRtClientPtr {
+            return client->createRtClient();
+        };
+        Nakama::Test::runAllTests(
+            clientFactory, rtClientFactory,
+            {SERVER_KEY, SERVER_HOST, SERVER_PORT, SERVER_SSL}, SERVER_HTTP_KEY);
         return JNI_VERSION_1_4;
     }
 }

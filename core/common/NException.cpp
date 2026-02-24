@@ -14,18 +14,10 @@
  * limitations under the License.
  */
 
-#pragma once
+#include "nakama-cpp/NException.h"
 
-#include "NRtError.h"
+namespace Nakama {
 
-namespace Nakama
-{
-    class NAKAMA_API NRtException : public std::runtime_error {
-    public:
-        NRtException(const NRtError& error)
-            : std::runtime_error(error.message), error(error) {}
-        ~NRtException() override;
+NException::~NException() = default;
 
-        const NRtError error;
-    };
-}
+} // namespace Nakama

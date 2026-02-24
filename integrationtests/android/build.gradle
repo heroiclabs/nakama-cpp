@@ -28,17 +28,15 @@ def supportedAbis = ["arm64-v8a", "armeabi-v7a"]
 if (!supportedAbis.contains(abi)) {
     throw new GradleException("Unsupported abi '${abi}'. Supported values: ${supportedAbis}")
 }
-def cmakePreset = "android-${abi}"
 
 dependencies {
-    implementation files("../../out/${cmakePreset}/lib/libnakama-sdk.aar")
+    implementation 'androidx.annotation:annotation:1.7.1'
 }
 
 repositories {
     google()
     mavenCentral()
     gradlePluginPortal()
-
 }
 
 android {
@@ -52,20 +50,14 @@ android {
         ndk {
             abiFilters abi
         }
-        externalNativeBuild {
-            cmake {
-                arguments '--preset',
-                        cmakePreset,
-                        "-DANDROID_STL=c++_shared",
-                        "-DCMAKE_BUILD_TYPE=Debug"
-                targets 'nakama-test'
-            }
-        }
     }
-    externalNativeBuild {
-        cmake {
-            version "3.25.0+"
-            path "../CMakeLists.txt"
+    // Native libraries are pre-built via CMake presets and staged into jniLibs/
+    // by deploy.sh. This avoids conflicts between Gradle's CMake integration
+    // and the project's vcpkg-based toolchain.
+    sourceSets {
+        main {
+            java.srcDirs += '../../android/nakama-sdk/src/main/java'
+            jniLibs.srcDirs = ['jniLibs']
         }
     }
     buildTypes {

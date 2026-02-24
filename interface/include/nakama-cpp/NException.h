@@ -24,6 +24,7 @@ namespace Nakama
     public:
         NException(const NError& error)
             : std::runtime_error(error.message), error(error) {}
+        ~NException() override;
 
         const NError error;
     };

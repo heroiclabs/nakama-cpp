@@ -40,10 +40,10 @@ void test_tournament() {
   test.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
 
   NTimestamp start_time = getUnixTimestampMs() / 1000; // starts now in seconds
-  uint32_t duration = 5;                               // in seconds
+  uint32_t duration = 60;                              // in seconds (generous for slow envs like Android emulator)
   string operator_ = "best";                           // one of : "best", "set", "incr"
   string reset_schedule = "";                          // none
-  NTimestamp end_time = start_time + 5;                // end after 5 sec
+  NTimestamp end_time = start_time + 60;               // end after 60 sec
   uint32_t max_size = 10000;                           // first 10,000 players who join
   uint32_t max_num_score = 3;                          // each player can have 3 attempts to score
   bool join_required = true;                           // must join to compete
