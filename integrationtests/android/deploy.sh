@@ -16,6 +16,79 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
+# --- Platform detection ---
+_uname_s=$(uname -s)
+case "$_uname_s" in
+  MINGW*|MSYS*|CYGWIN*) HOST_OS="windows";;
+  Darwin*)               HOST_OS="darwin";;
+  Linux*)                HOST_OS="linux";;
+  *)                     HOST_OS=$(echo "$_uname_s" | tr '[:upper:]' '[:lower:]');;
+esac
+
+# Auto-detect ANDROID_HOME on Windows from LOCALAPPDATA
+if [ -z "${ANDROID_HOME:-}" ]; then
+  case "$HOST_OS" in
+    windows)
+      _localappdata="${LOCALAPPDATA:-}"
+      if [ -n "$_localappdata" ] && [ -d "$_localappdata/Android/Sdk" ]; then
+        export ANDROID_HOME="$_localappdata/Android/Sdk"
+      fi;;
+    darwin)
+      if [ -d "$HOME/Library/Android/sdk" ]; then
+        export ANDROID_HOME="$HOME/Library/Android/sdk"
+      fi;;
+  esac
+fi
+if [ -z "${ANDROID_HOME:-}" ]; then
+  echo "Error: ANDROID_HOME not set and could not be auto-detected."
+  exit 1
+fi
+# Normalize Windows backslashes so CMake doesn't choke on \U escape sequences
+ANDROID_HOME="${ANDROID_HOME//\\//}"
+
+# Resolve adb — prefer PATH, fall back to ANDROID_HOME
+if command -v adb &>/dev/null; then
+  ADB="adb"
+else
+  ADB="$ANDROID_HOME/platform-tools/adb"
+  if [ ! -x "$ADB" ] && [ -x "${ADB}.exe" ]; then
+    ADB="${ADB}.exe"
+  fi
+fi
+
+# Gradle 7.x requires JDK 17. Auto-detect if current JAVA_HOME is too new.
+_need_jdk17=false
+if [ -n "${JAVA_HOME:-}" ]; then
+  _jv=$("$JAVA_HOME/bin/java" -version 2>&1 | head -1 | sed 's/.*"\([0-9]*\)\..*/\1/')
+  [ "${_jv:-0}" -gt 17 ] 2>/dev/null && _need_jdk17=true
+elif command -v java &>/dev/null; then
+  _jv=$(java -version 2>&1 | head -1 | sed 's/.*"\([0-9]*\)\..*/\1/')
+  [ "${_jv:-0}" -gt 17 ] 2>/dev/null && _need_jdk17=true
+fi
+if [ "$_need_jdk17" = true ]; then
+  _found=""
+  case "$HOST_OS" in
+    windows)
+      for _d in "/c/Program Files/Eclipse Adoptium"/jdk-17.*; do
+        [ -d "$_d" ] && _found="$_d" && break
+      done;;
+    darwin)
+      for _d in /Library/Java/JavaVirtualMachines/temurin-17.*/Contents/Home; do
+        [ -d "$_d" ] && _found="$_d" && break
+      done;;
+    linux)
+      for _d in /usr/lib/jvm/temurin-17-* /usr/lib/jvm/java-17-*; do
+        [ -d "$_d" ] && _found="$_d" && break
+      done;;
+  esac
+  if [ -n "$_found" ]; then
+    echo "Auto-detected JDK 17: $_found"
+    export JAVA_HOME="$_found"
+  else
+    echo "Warning: Java ${_jv} detected but Gradle 7.x needs JDK 17. Set JAVA_HOME to JDK 17."
+  fi
+fi
+
 PACKAGE="com.heroiclabs.nakamatest"
 ACTIVITY="${PACKAGE}/.MainActivity"
 TIMEOUT=300  # seconds to wait for test completion
@@ -50,21 +123,25 @@ if [ -z "${ANDROID_NDK_HOME:-}" ]; then
   echo "Auto-detected NDK: $ANDROID_NDK_HOME"
   export ANDROID_NDK_HOME
 fi
+ANDROID_NDK_HOME="${ANDROID_NDK_HOME//\\//}"
 
 # --- Build native libraries ---
 if [ "$skip_build" = false ]; then
   echo "=== Building native libraries (preset: ${cmake_preset}) ==="
 
-  # Configure
+  # Configure and build from the repo root (where CMakePresets.json lives)
+  pushd "$REPO_ROOT" > /dev/null
+
   cmake --preset "$cmake_preset" \
     -DBUILD_TESTING=ON \
     -DCMAKE_ANDROID_NDK="$ANDROID_NDK_HOME" \
     -DCMAKE_ANDROID_ARCH_ABI="$abi" \
     -DCMAKE_MAKE_PROGRAM="$(command -v ninja)"
 
-  # Build
-  cmake --build "$REPO_ROOT/build/${cmake_preset}" --config Debug \
+  cmake --build "build/${cmake_preset}" --config Debug \
     --target nakama-sdk nakama-test
+
+  popd > /dev/null
 
   echo "=== Staging native libraries ==="
 
@@ -79,7 +156,7 @@ if [ "$skip_build" = false ]; then
     arm64-v8a)   triple="aarch64-linux-android";;
     armeabi-v7a) triple="arm-linux-androideabi";;
   esac
-  stl_lib="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-x86_64/sysroot/usr/lib/${triple}/libc++_shared.so"
+  stl_lib="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/${HOST_OS}-x86_64/sysroot/usr/lib/${triple}/libc++_shared.so"
   if [ -f "$stl_lib" ]; then
     cp "$stl_lib" "$jni_dir/"
   else
@@ -95,22 +172,22 @@ cd "$SCRIPT_DIR"
 
 # --- Resolve device serial ---
 if [ -z "$serial" ]; then
-  device_count=$(adb devices | grep -c -w 'device$' || true)
+  device_count=$("$ADB" devices | grep -c -w 'device$' || true)
   if [ "$device_count" -eq 0 ]; then
     echo "Error: No connected devices/emulators found."
     echo "Start an emulator or connect a device, then retry."
     exit 1
   elif [ "$device_count" -gt 1 ]; then
     echo "Error: Multiple devices connected. Specify a serial:"
-    adb devices
+    "$ADB" devices
     exit 1
   fi
-  serial=$(adb devices | grep -w 'device$' | head -1 | awk '{print $1}')
+  serial=$("$ADB" devices | grep -w 'device$' | head -1 | awk '{print $1}')
   echo "Auto-detected device: $serial"
 fi
 
 adb_cmd() {
-  adb -s "$serial" "$@"
+  "$ADB" -s "$serial" "$@"
 }
 
 # --- Set up adb reverse port forwarding ---

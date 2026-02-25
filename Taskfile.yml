@@ -49,17 +49,10 @@ tasks:
       - "{{.TEST_BIN}}"
 
   tests-android:
-    desc: Build and run Android integration tests (set DEVICE=<adb-serial>, optional ABI=arm64-v8a|armeabi-v7a)
+    desc: Build and run Android integration tests (optional DEVICE=<adb-serial>, ABI=arm64-v8a|armeabi-v7a)
     vars:
       ABI: '{{default "arm64-v8a" .ABI}}'
-    preconditions:
-      - sh: test -n "{{.DEVICE}}"
-        msg: "DEVICE is required, e.g. task tests-android DEVICE=<adb-serial>"
+      DEVICE: '{{default "" .DEVICE}}'
     cmds:
       - docker compose -f {{.COMPOSE_FILE}} up -d --build --wait
-      - cmake --preset android-{{.ABI}} -DBUILD_TESTING=ON
-      - cmake --build build/android-{{.ABI}} --target install --config Debug
-      - cd integrationtests/android && ./gradlew -Pabi={{.ABI}} assembleDebug
-      - adb -s {{.DEVICE}} reverse tcp:7350 tcp:7350
-      - adb -s {{.DEVICE}} reverse tcp:7351 tcp:7351
-      - cd integrationtests/android && ./deploy.sh {{.DEVICE}}
+      - cd integrationtests/android && bash deploy.sh {{.DEVICE}} --abi {{.ABI}}
