@@ -1,5 +1,5 @@
 # I think we are constrained to the version that the latest android sdk uses, for Android builds.
-cmake_minimum_required(VERSION 3.29.3)
+cmake_minimum_required(VERSION 3.28)
 include(version.cmake)
 include(cmake/checkPresets.cmake)
 

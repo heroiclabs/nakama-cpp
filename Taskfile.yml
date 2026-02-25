@@ -1,52 +1,65 @@
 version: "3"
 
-vars:
-  PRESET: macosx-universal
-  BUILD_DIR: build/{{.PRESET}}
-  CONFIG: MinSizeRel
-  TEST_BIN: "{{.BUILD_DIR}}/integrationtests/{{.CONFIG}}/nakama-sdk-test.app/Contents/MacOS/nakama-sdk-test"
-  COMPOSE_FILE: integrationtests/server/docker-compose.yml
-
 tasks:
   configure:
     desc: Configure CMake with test support
-    status:
-      - test -f {{.BUILD_DIR}}/build.ninja || test -f {{.BUILD_DIR}}/CMakeCache.txt
     cmds:
-      - cmake --preset {{.PRESET}} -DBUILD_TESTING=ON
+      - cmd: cmake --preset macosx-universal -DBUILD_TESTING=ON
+        platforms: [darwin]
+      - cmd: cmake --preset win-x64 -DBUILD_TESTING=ON
+        platforms: [windows]
+      - cmd: cmake --preset linux-amd64 -DBUILD_TESTING=ON
+        platforms: [linux]
 
   build:
     desc: Build the test binary
     deps: [configure]
     cmds:
-      - >-
-        cmake --build {{.BUILD_DIR}}
-        --target nakama-sdk-test
-        --config {{.CONFIG}}
-        {{if eq OS "darwin"}}-- CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO{{end}}
+      - cmd: >-
+          cmake --build build/macosx-universal
+          --target nakama-sdk-test
+          --config MinSizeRel
+          -- CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+        platforms: [darwin]
+      - cmd: >-
+          cmake --build build/win-x64
+          --target nakama-sdk-test
+          --config MinSizeRel
+        platforms: [windows]
+      - cmd: >-
+          cmake --build build/linux-amd64
+          --target nakama-sdk-test
+          --config MinSizeRel
+        platforms: [linux]
 
   server:up:
     desc: Start the Nakama test server
     cmds:
-      - docker compose -f {{.COMPOSE_FILE}} up -d --build --wait
+      - docker compose -f integrationtests/server/docker-compose.yml up -d --build --wait
 
   server:down:
     desc: Stop the Nakama test server
     cmds:
-      - docker compose -f {{.COMPOSE_FILE}} down
+      - docker compose -f integrationtests/server/docker-compose.yml down
 
   server:logs:
     desc: Tail Nakama server logs
     cmds:
-      - docker compose -f {{.COMPOSE_FILE}} logs -f nakama
+      - docker compose -f integrationtests/server/docker-compose.yml logs -f nakama
 
   test:
     desc: Build and run integration tests (starts server automatically)
     deps: [build]
     cmds:
-      - docker compose -f {{.COMPOSE_FILE}} up -d --build --wait
-      - cp {{.BUILD_DIR}}/{{.CONFIG}}/*.dll {{.BUILD_DIR}}/integrationtests/{{.CONFIG}}/ 2>/dev/null || true
-      - "{{.TEST_BIN}}"
+      - docker compose -f integrationtests/server/docker-compose.yml up -d --build --wait
+      - cmd: cp build/win-x64/MinSizeRel/*.dll build/win-x64/integrationtests/MinSizeRel/ 2>/dev/null || true
+        platforms: [windows]
+      - cmd: build/macosx-universal/integrationtests/MinSizeRel/nakama-sdk-test.app/Contents/MacOS/nakama-sdk-test
+        platforms: [darwin]
+      - cmd: build/win-x64/integrationtests/MinSizeRel/nakama-sdk-test.exe
+        platforms: [windows]
+      - cmd: build/linux-amd64/integrationtests/MinSizeRel/nakama-sdk-test
+        platforms: [linux]
 
   tests-android:
     desc: Build and run Android integration tests (optional DEVICE=<adb-serial>, ABI=arm64-v8a|armeabi-v7a)
@@ -54,5 +67,5 @@ tasks:
       ABI: '{{default "arm64-v8a" .ABI}}'
       DEVICE: '{{default "" .DEVICE}}'
     cmds:
-      - docker compose -f {{.COMPOSE_FILE}} up -d --build --wait
+      - docker compose -f integrationtests/server/docker-compose.yml up -d --build --wait
       - cd integrationtests/android && bash deploy.sh {{.DEVICE}} --abi {{.ABI}}

@@ -11,9 +11,9 @@ add_library(nakama::impl-ws-wslay ALIAS nakama-impl-ws-wslay)
 
 target_link_libraries(nakama-impl-ws-wslay
         PUBLIC
-        nakama::sdk-interface
+        nakama::sdk-interface wslay
         PRIVATE
-        nakama::sdk-core-common nakama::sdk-core-misc wslay
+        nakama::sdk-core-common nakama::sdk-core-misc
 )
 
 target_include_directories(nakama-impl-ws-wslay
