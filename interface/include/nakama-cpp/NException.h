@@ -17,6 +17,7 @@
 #pragma once
 
 #include "NError.h"
+#include <stdexcept>
 
 namespace Nakama
 {

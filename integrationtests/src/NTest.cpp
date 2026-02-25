@@ -19,6 +19,7 @@
 #include "globals.h"
 #include "nakama-cpp/Nakama.h"
 #include <atomic>
+#include <future>
 #include <iostream>
 #include <mutex>
 
@@ -77,28 +78,49 @@ void NTest::cleanupSessions() {
     }
   }
 
-  // Only pump the HTTP client — the RT client is done and late WS messages
-  // could try to fulfill destroyed promises.
-  bool allDone = false;
-  while (!allDone) {
-    client->tick();
-    allDone = true;
-    for (auto& f : futures) {
-      if (f.valid() && f.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready) {
-        allDone = false;
+  // Pump the HTTP client on a detached thread so we can abandon it
+  // if tick() hangs (libHttpClient XTaskQueueDispatch can block when
+  // the queue is torn down by another thread's HCCleanup).
+  auto sharedFutures = std::make_shared<std::vector<std::future<void>>>(std::move(futures));
+  auto clientCopy = client; // extend lifetime via shared_ptr copy
+  auto cleanupDone = std::make_shared<std::atomic<bool>>(false);
+
+  std::thread cleanupThread([clientCopy, sharedFutures, cleanupDone]() {
+    auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(10);
+    bool allDone = false;
+    while (!allDone && std::chrono::steady_clock::now() < deadline) {
+      clientCopy->tick();
+      allDone = true;
+      for (auto& f : *sharedFutures) {
+        if (f.valid() && f.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready) {
+          allDone = false;
+        }
+      }
+      if (!allDone) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
       }
     }
-    if (!allDone) {
-      std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    for (auto& f : *sharedFutures) {
+      try {
+        if (f.valid()) f.get();
+      } catch (...) {
+      }
     }
+    cleanupDone->store(true);
+  });
+
+  // Wait up to 10s for the cleanup thread, then abandon it
+  auto waitStart = std::chrono::steady_clock::now();
+  while (!cleanupDone->load() &&
+         std::chrono::steady_clock::now() - waitStart < std::chrono::seconds(10)) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
   }
 
-  // Consume results — best-effort, don't fail the test on cleanup errors
-  for (auto& f : futures) {
-    try {
-      if (f.valid()) f.get();
-    } catch (...) {
-    }
+  if (cleanupDone->load()) {
+    cleanupThread.join();
+  } else {
+    NLOG_WARN("Session cleanup timed out (tick blocked), abandoning cleanup thread");
+    cleanupThread.detach();
   }
 
   _sessionsToCleanup.clear();

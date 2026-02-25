@@ -21,12 +21,12 @@ tasks:
         cmake --build {{.BUILD_DIR}}
         --target nakama-sdk-test
         --config {{.CONFIG}}
-        -- CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+        {{if eq OS "darwin"}}-- CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO{{end}}
 
   server:up:
     desc: Start the Nakama test server
     cmds:
-      - docker compose -f {{.COMPOSE_FILE}} up -d --build
+      - docker compose -f {{.COMPOSE_FILE}} up -d --build --wait
 
   server:down:
     desc: Stop the Nakama test server
@@ -39,9 +39,11 @@ tasks:
       - docker compose -f {{.COMPOSE_FILE}} logs -f nakama
 
   test:
-    desc: Build and run integration tests
+    desc: Build and run integration tests (starts server automatically)
     deps: [build]
     cmds:
+      - docker compose -f {{.COMPOSE_FILE}} up -d --build --wait
+      - cp {{.BUILD_DIR}}/{{.CONFIG}}/*.dll {{.BUILD_DIR}}/integrationtests/{{.CONFIG}}/ 2>/dev/null || true
       - "{{.TEST_BIN}}"
 
   tests-android:
@@ -52,7 +54,7 @@ tasks:
       - sh: test -n "{{.DEVICE}}"
         msg: "DEVICE is required, e.g. task tests-android DEVICE=<adb-serial>"
     cmds:
-      - docker compose -f {{.COMPOSE_FILE}} up -d --build
+      - docker compose -f {{.COMPOSE_FILE}} up -d --build --wait
       - cmake --preset android-{{.ABI}} -DBUILD_TESTING=ON
       - cmake --build build/android-{{.ABI}} --target install --config Debug
       - cd integrationtests/android && ./gradlew -Pabi={{.ABI}} assembleDebug
