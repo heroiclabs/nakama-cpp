@@ -5,7 +5,10 @@
 build
 /.cxx/
 
-# Pre-built native libraries staged by deploy.sh
+# Logcat output from test runs
+logcat-output.tmp
+
+# Pre-built native libraries
 /jniLibs/
 
 # Local SDK path
