@@ -48,6 +48,7 @@ void test_profiling();
 void test_stress();
 void test_realtime();
 void test_throughput();
+void test_cancellation();
 
 static void runSuiteSafely(const char* suiteName, void (*suite)()) {
   try {
@@ -118,6 +119,7 @@ int runAllTests(
   startSuite("test_stress", test_stress);
   startSuite("test_realtime", test_realtime);
   startSuite("test_throughput", test_throughput);
+  startSuite("test_cancellation", test_cancellation);
 
   for (auto& t : threads) {
     t.join();
