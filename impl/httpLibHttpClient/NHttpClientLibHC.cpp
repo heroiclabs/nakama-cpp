@@ -290,6 +290,7 @@ void NHttpClientLibHC::cancelAllRequests() {
   // being called, then we deadlock should there be any outstanding requests. So
   // instead we use termination callback which will be a last callback on the
   // Completion port
+  m_queue_terminated.store(false, std::memory_order_relaxed);
   XTaskQueueTerminate(m_queue.get(), false, &m_queue_terminated, [](void* ctx) {
     static_cast<std::atomic<bool>*>(ctx)->store(true, std::memory_order_relaxed);
   });
@@ -300,6 +301,17 @@ void NHttpClientLibHC::cancelAllRequests() {
   // atomic bool, not just bool.
   while (!m_queue_terminated.load(std::memory_order_relaxed)) {
     XTaskQueueDispatch(m_queue.get(), XTaskQueuePort::Completion, 50);
+  }
+
+  // XTaskQueueTerminate permanently kills the queue. Create a fresh one
+  // so the client can be reused after cancellation.
+  m_queue.reset(nullptr);
+  XTaskQueueHandle q = nullptr;
+  HRESULT hr = XTaskQueueCreate(XTaskQueueDispatchMode::ThreadPool, XTaskQueueDispatchMode::Manual, &q);
+  if (FAILED(hr)) {
+    HC_TRACE_ERROR(httpTransportLibHC, "Failed to re-create XTaskQueue after cancel: hr=0x%08x", hr);
+  } else {
+    m_queue.reset(q);
   }
 }
 } // namespace Nakama

@@ -10,6 +10,8 @@ vars:
 tasks:
   configure:
     desc: Configure CMake with test support
+    status:
+      - test -f {{.BUILD_DIR}}/build.ninja || test -f {{.BUILD_DIR}}/CMakeCache.txt
     cmds:
       - cmake --preset {{.PRESET}} -DBUILD_TESTING=ON
 
