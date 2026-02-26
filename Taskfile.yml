@@ -229,9 +229,8 @@ tasks:
               exit 1
             fi
             echo "Starting AVD: $avd"
-            "$EMULATOR" -avd "$avd" &>/dev/null &
-            emulator_pid=$!
-            echo "Waiting for device to come online (emulator pid: $emulator_pid)..."
+            {{if eq OS "windows"}}powershell.exe -Command "Start-Process -FilePath '${EMULATOR}' -ArgumentList '-avd','${avd}' -WindowStyle Hidden"{{else}}"$EMULATOR" -avd "$avd" &>/dev/null &{{end}}
+            echo "Waiting for device to come online..."
             "$ADB" wait-for-device
             while [[ "$("$ADB" shell getprop sys.boot_completed 2>/dev/null)" != *"1"* ]]; do
               _sleep 2
@@ -284,6 +283,8 @@ tasks:
         trap 'rm -f "$logfile"; kill $logcat_pid 2>/dev/null || true' EXIT
 
         result=""
+        passed_tests=()
+        failed_tests=()
         SECONDS=0
         last_line=0
 
@@ -293,10 +294,21 @@ tasks:
             current_line=$((current_line + 1))
             [ "$current_line" -le "$last_line" ] && continue
             echo "$line"
-            if [[ "$line" == *"Tests failed: 0"* ]]; then
-              result="passed"
-            elif [[ "$line" == *"Tests failed:"* ]]; then
-              result="failed"
+            if [[ "$line" == *"Succeeded "* ]]; then
+              tname="${line##*Succeeded }"
+              tname="${tname//$'\r'/}"
+              passed_tests+=("$tname")
+            elif [[ "$line" == *"Failed "* ]] && [[ "$line" != *"Tests failed:"* ]]; then
+              tname="${line##*Failed }"
+              tname="${tname//$'\r'/}"
+              failed_tests+=("$tname")
+            fi
+            if [[ "$line" == *"Tests failed:"* ]]; then
+              if [[ "$line" == *"Tests failed: 0"* ]]; then
+                result="passed"
+              else
+                result="failed"
+              fi
             fi
           done < "$logfile"
           last_line=$current_line
@@ -308,13 +320,31 @@ tasks:
 
         echo "---"
 
+        total=$(( ${#passed_tests[@]} + ${#failed_tests[@]} ))
+
         if [ -z "$result" ]; then
-          echo "TIMEOUT: Tests did not complete within ${TIMEOUT}s."
+          # Summary line never arrived; determine result from collected tests
+          if [ ${#failed_tests[@]} -gt 0 ]; then
+            result="failed"
+          elif [ "$total" -gt 0 ]; then
+            result="passed"
+          fi
+        fi
+
+        if [ -z "$result" ]; then
+          echo "TIMEOUT: No test results captured within ${TIMEOUT}s."
           exit 1
         elif [ "$result" = "passed" ]; then
-          echo "ALL TESTS PASSED"
+          echo "ALL $total TESTS PASSED"
           exit 0
         else
-          echo "TESTS FAILED"
+          echo ""
+          echo "=== RESULTS: ${#passed_tests[@]} passed, ${#failed_tests[@]} failed (of $total) ==="
+          echo ""
+          echo "Failed tests:"
+          for t in "${failed_tests[@]}"; do
+            echo "  - $t"
+          done
+          echo ""
           exit 1
         fi
