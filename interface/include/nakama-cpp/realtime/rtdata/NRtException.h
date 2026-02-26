@@ -17,7 +17,6 @@
 #pragma once
 
 #include "NRtError.h"
-#include <stdexcept>
 
 namespace Nakama
 {
@@ -25,7 +24,6 @@ namespace Nakama
     public:
         NRtException(const NRtError& error)
             : std::runtime_error(error.message), error(error) {}
-        ~NRtException() override;
 
         const NRtError error;
     };

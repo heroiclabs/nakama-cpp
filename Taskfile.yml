@@ -1,4 +1,5 @@
 version: "3"
+silent: true
 
 tasks:
   configure:
@@ -66,19 +67,18 @@ tasks:
     vars:
       ABI: '{{default "arm64-v8a" .ABI}}'
       DEVICE: '{{default "" .DEVICE}}'
-      CMAKE_PRESET: 'android-{{.ABI}}'
+      CMAKE_PRESET: "android-{{.ABI}}"
     cmds:
       - docker compose -f integrationtests/server/docker-compose.yml up -d --build --wait
       - |
         set -euo pipefail
 
-        # --- Platform detection ---
-        case "$(uname -s)" in
-          MINGW*|MSYS*|CYGWIN*) HOST_OS="windows";;
-          Darwin*)               HOST_OS="darwin";;
-          Linux*)                HOST_OS="linux";;
-          *)                     HOST_OS=$(uname -s | tr '[:upper:]' '[:lower:]');;
-        esac
+        HOST_OS="{{OS}}"
+
+        # Portable sleep (Taskfile's Windows shell lacks sleep/read -t)
+        _sleep() {
+          {{if eq OS "windows"}}powershell.exe -Command "Start-Sleep -Seconds $1"{{else}}sleep "$1"{{end}}
+        }
 
         # --- Resolve ANDROID_HOME ---
         if [ -z "${ANDROID_HOME:-}" ]; then
@@ -113,7 +113,7 @@ tasks:
         # --- Resolve ANDROID_NDK_HOME ---
         if [ -z "${ANDROID_NDK_HOME:-}" ]; then
           if [ -d "$ANDROID_HOME/ndk" ]; then
-            ANDROID_NDK_HOME=$(ls -d "$ANDROID_HOME/ndk"/*/ 2>/dev/null | sort -V | tail -1 | sed 's:/$::')
+            for _d in "$ANDROID_HOME/ndk"/*/; do [ -d "$_d" ] && ANDROID_NDK_HOME="${_d%/}"; done
           fi
           if [ -z "${ANDROID_NDK_HOME:-}" ] || [ ! -d "${ANDROID_NDK_HOME}" ]; then
             echo "Error: Could not find Android NDK. Set ANDROID_NDK_HOME."
@@ -191,7 +191,7 @@ tasks:
         # --- Build APK ---
         echo "=== Building APK ==="
         cd integrationtests/android
-        bash gradlew assembleCustomDebugType -Pabi="{{.ABI}}"
+        {{if eq OS "windows"}}cmd.exe /c gradlew.bat{{else}}./gradlew{{end}} assembleCustomDebugType -Pabi="{{.ABI}}"
 
         # --- Resolve device serial ---
         PACKAGE="com.heroiclabs.nakamatest"
@@ -200,19 +200,52 @@ tasks:
         LOG_TAG="nakama"
         APK_PATH="build/outputs/apk/customDebugType/nakamatest-customDebugType.apk"
 
+        parse_devices() {
+          devices=()
+          local output
+          output=$("$ADB" devices)
+          while IFS= read -r line; do
+            if [[ "$line" == *$'\t'device ]]; then
+              devices+=("${line%%$'\t'*}")
+            fi
+          done <<< "$output"
+        }
+
         serial="{{.DEVICE}}"
         if [ -z "$serial" ]; then
-          device_count=$("$ADB" devices | grep -c -w 'device$' || true)
-          if [ "$device_count" -eq 0 ]; then
-            echo "Error: No connected devices/emulators found."
-            echo "Start an emulator or connect a device, then retry."
-            exit 1
-          elif [ "$device_count" -gt 1 ]; then
+          parse_devices
+
+          if [ ${#devices[@]} -eq 0 ]; then
+            echo "No connected devices/emulators found. Starting emulator..."
+            EMULATOR="$ANDROID_HOME/emulator/emulator"
+            if [ ! -x "$EMULATOR" ] && [ -x "${EMULATOR}.exe" ]; then
+              EMULATOR="${EMULATOR}.exe"
+            fi
+            avd=$("$EMULATOR" -list-avds)
+            avd="${avd%%$'\n'*}"
+            avd="${avd//$'\r'/}"
+            if [ -z "$avd" ]; then
+              echo "Error: No AVDs found. Create one in Android Studio first."
+              exit 1
+            fi
+            echo "Starting AVD: $avd"
+            "$EMULATOR" -avd "$avd" &>/dev/null &
+            emulator_pid=$!
+            echo "Waiting for device to come online (emulator pid: $emulator_pid)..."
+            "$ADB" wait-for-device
+            while [[ "$("$ADB" shell getprop sys.boot_completed 2>/dev/null)" != *"1"* ]]; do
+              _sleep 2
+            done
+            echo "Emulator booted."
+            parse_devices
+          fi
+
+          if [ ${#devices[@]} -gt 1 ]; then
             echo "Error: Multiple devices connected. Specify DEVICE=<serial>:"
             "$ADB" devices
             exit 1
           fi
-          serial=$("$ADB" devices | grep -w 'device$' | head -1 | awk '{print $1}')
+          serial="${devices[0]}"
           echo "Auto-detected device: $serial"
         fi
 
@@ -246,32 +279,29 @@ tasks:
         echo "---"
 
         logfile="logcat-output.tmp"
+        "$ADB" -s "$serial" logcat -s "${LOG_TAG}:V" -v raw > "$logfile" 2>/dev/null &
+        logcat_pid=$!
         trap 'rm -f "$logfile"; kill $logcat_pid 2>/dev/null || true' EXIT
 
-        adb_cmd logcat -s "${LOG_TAG}:V" -v raw > "$logfile" 2>/dev/null &
-        logcat_pid=$!
-
         result=""
-        start_time=$(date +%s)
-        deadline=$((start_time + TIMEOUT))
-        last_pos=0
+        SECONDS=0
+        last_line=0
 
-        while [ "$(date +%s)" -lt "$deadline" ]; do
-          current_size=$(wc -c < "$logfile" 2>/dev/null || echo 0)
-          if [ "$current_size" -gt "$last_pos" ]; then
-            tail -c +"$((last_pos + 1))" "$logfile" | while IFS= read -r line; do
-              echo "$line"
-            done
-            if grep -q "Tests failed: 0" "$logfile"; then
+        while [ "$SECONDS" -lt "$TIMEOUT" ]; do
+          current_line=0
+          while IFS= read -r line; do
+            current_line=$((current_line + 1))
+            [ "$current_line" -le "$last_line" ] && continue
+            echo "$line"
+            if [[ "$line" == *"Tests failed: 0"* ]]; then
               result="passed"
-              break
-            elif grep -q "Tests failed:" "$logfile"; then
+            elif [[ "$line" == *"Tests failed:"* ]]; then
               result="failed"
-              break
             fi
-            last_pos=$current_size
-          fi
-          sleep 1
+          done < "$logfile"
+          last_line=$current_line
+          [ -n "$result" ] && break
+          _sleep 1
         done
 
         kill $logcat_pid 2>/dev/null || true
@@ -280,8 +310,6 @@ tasks:
 
         if [ -z "$result" ]; then
           echo "TIMEOUT: Tests did not complete within ${TIMEOUT}s."
-          echo "Dumping last logcat output:"
-          tail -50 "$logfile" 2>/dev/null || true
           exit 1
         elif [ "$result" = "passed" ]; then
           echo "ALL TESTS PASSED"
