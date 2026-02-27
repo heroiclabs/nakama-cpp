@@ -17,6 +17,7 @@
 #pragma once
 
 #include "NError.h"
+#include <stdexcept>
 
 namespace Nakama
 {
@@ -24,7 +25,7 @@ namespace Nakama
     public:
         NException(const NError& error)
             : std::runtime_error(error.message), error(error) {}
-        // ~NException() override;
+        ~NException() override;
 
         const NError error;
     };

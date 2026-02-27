@@ -55,7 +55,7 @@ using ErrorCallback = std::function<void(const NError&)>;
  */
 class NAKAMA_API NClientInterface {
 public:
-  virtual ~NClientInterface() {}
+  virtual ~NClientInterface();
 
   /**
    * Set default error callback.

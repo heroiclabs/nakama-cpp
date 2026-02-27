@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Nakama Authors
+ * Copyright 2024 The Nakama Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,10 @@
  * limitations under the License.
  */
 
-#pragma once
+#include "nakama-cpp/satori/SClientInterface.h"
 
-#include "NRtError.h"
-#include <stdexcept>
+namespace Satori {
 
-namespace Nakama
-{
-    class NAKAMA_API NRtException : public std::runtime_error {
-    public:
-        NRtException(const NRtError& error)
-            : std::runtime_error(error.message), error(error) {}
-        ~NRtException() override;
+SClientInterface::~SClientInterface() = default;
 
-        const NRtError error;
-    };
-}
+} // namespace Satori

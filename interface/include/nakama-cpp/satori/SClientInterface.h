@@ -31,7 +31,7 @@ using SSessionPtr = std::shared_ptr<SSession>;
  */
 class NAKAMA_API SClientInterface {
 public:
-  virtual ~SClientInterface() {}
+  virtual ~SClientInterface();
 
   virtual void disconnect() = 0;
   virtual void tick() = 0;

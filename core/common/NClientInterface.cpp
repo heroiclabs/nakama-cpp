@@ -14,19 +14,10 @@
  * limitations under the License.
  */
 
-#pragma once
+#include "nakama-cpp/NClientInterface.h"
 
-#include "NRtError.h"
-#include <stdexcept>
+namespace Nakama {
 
-namespace Nakama
-{
-    class NAKAMA_API NRtException : public std::runtime_error {
-    public:
-        NRtException(const NRtError& error)
-            : std::runtime_error(error.message), error(error) {}
-        ~NRtException() override;
+NClientInterface::~NClientInterface() = default;
 
-        const NRtError error;
-    };
-}
+} // namespace Nakama

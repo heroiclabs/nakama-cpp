@@ -278,6 +278,7 @@ tasks:
         echo "---"
 
         logfile="logcat-output.tmp"
+        > "$logfile"
         "$ADB" -s "$serial" logcat -s "${LOG_TAG}:V" -v raw > "$logfile" 2>/dev/null &
         logcat_pid=$!
         trap 'rm -f "$logfile"; kill $logcat_pid 2>/dev/null || true' EXIT
