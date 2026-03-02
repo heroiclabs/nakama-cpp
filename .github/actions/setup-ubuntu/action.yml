@@ -4,9 +4,9 @@ runs:
   using: "composite"
   steps:
     - run: |
+        mkdir -p ~/bin
         install_ninja() {
           (
-            mkdir -p ~/bin
             cd /tmp
             curl -L -O https://github.com/ninja-build/ninja/releases/download/v1.11.0/ninja-linux.zip
             unzip ninja-linux.zip
