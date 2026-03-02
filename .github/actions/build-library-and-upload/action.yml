@@ -68,7 +68,7 @@ runs:
       if: runner.os == 'Windows'
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ steps.get-folder-name-unix.outputs.folder-name }}
         path: ${{ steps.create-zip-unix.outputs.artifact-path }}
@@ -76,7 +76,7 @@ runs:
       if: runner.os != 'Windows'
 
     - name: Upload artifact (Windows)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ steps.get-folder-name-windows.outputs.folder-name }}-${{ inputs.build-type }}
         path: ${{ steps.create-zip-windows.outputs.artifact-path }}
