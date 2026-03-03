@@ -284,35 +284,24 @@ tasks:
         trap 'rm -f "$logfile"; kill $logcat_pid 2>/dev/null || true' EXIT
 
         result=""
-        passed_tests=()
-        failed_tests=()
         SECONDS=0
         last_line=0
 
         while [ "$SECONDS" -lt "$TIMEOUT" ]; do
-          current_line=0
+          line_num=0
           while IFS= read -r line; do
-            current_line=$((current_line + 1))
-            [ "$current_line" -le "$last_line" ] && continue
-            echo "$line"
-            if [[ "$line" == *"Succeeded "* ]]; then
-              tname="${line##*Succeeded }"
-              tname="${tname//$'\r'/}"
-              passed_tests+=("$tname")
-            elif [[ "$line" == *"Failed "* ]] && [[ "$line" != *"Tests failed:"* ]]; then
-              tname="${line##*Failed }"
-              tname="${tname//$'\r'/}"
-              failed_tests+=("$tname")
+            line_num=$((line_num + 1))
+            if [ "$line_num" -le "$last_line" ]; then
+              continue
             fi
-            if [[ "$line" == *"Tests failed:"* ]]; then
-              if [[ "$line" == *"Tests failed: 0"* ]]; then
-                result="passed"
-              else
-                result="failed"
-              fi
+            echo "$line"
+            if [[ "$line" == *"Tests failed: 0"* ]]; then
+              result="passed"
+            elif [[ "$line" == *"Tests failed:"* ]]; then
+              result="failed"
             fi
           done < "$logfile"
-          last_line=$current_line
+          last_line=$line_num
           [ -n "$result" ] && break
           _sleep 1
         done
@@ -321,31 +310,13 @@ tasks:
 
         echo "---"
 
-        total=$(( ${#passed_tests[@]} + ${#failed_tests[@]} ))
-
         if [ -z "$result" ]; then
-          # Summary line never arrived; determine result from collected tests
-          if [ ${#failed_tests[@]} -gt 0 ]; then
-            result="failed"
-          elif [ "$total" -gt 0 ]; then
-            result="passed"
-          fi
-        fi
-
-        if [ -z "$result" ]; then
-          echo "TIMEOUT: No test results captured within ${TIMEOUT}s."
+          echo "TIMEOUT: Tests did not complete within ${TIMEOUT}s."
           exit 1
         elif [ "$result" = "passed" ]; then
-          echo "ALL $total TESTS PASSED"
+          echo "ALL TESTS PASSED"
           exit 0
         else
-          echo ""
-          echo "=== RESULTS: ${#passed_tests[@]} passed, ${#failed_tests[@]} failed (of $total) ==="
-          echo ""
-          echo "Failed tests:"
-          for t in "${failed_tests[@]}"; do
-            echo "  - $t"
-          done
-          echo ""
+          echo "TESTS FAILED"
           exit 1
         fi

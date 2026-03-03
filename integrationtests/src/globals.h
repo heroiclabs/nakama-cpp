@@ -20,6 +20,9 @@
 #include "nakama-cpp/log/NLogger.h"
 
 #include <atomic>
+#include <mutex>
+#include <string>
+#include <vector>
 
 namespace Nakama {
 namespace Test {
@@ -34,5 +37,7 @@ static inline void NTEST_ASSERT(bool cond) {
 // stats
 extern std::atomic<uint32_t> g_runTestsCount;
 extern std::atomic<uint32_t> g_failedTestsCount;
+extern std::mutex g_failedTestNamesMutex;
+extern std::vector<std::string> g_failedTestNames;
 } // namespace Test
 } // namespace Nakama

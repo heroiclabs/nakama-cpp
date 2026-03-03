@@ -17,6 +17,7 @@
 #include "NTestLib.h"
 #include "globals.h"
 #include <nakama-cpp/NException.h>
+#include <mutex>
 #include <stdint.h>
 #include <thread>
 #include <vector>
@@ -135,6 +136,16 @@ int runAllTests(
   printPercent(std::cout, total, passed);
   NLOG_INFO("Tests failed: " + std::to_string(failed) + " (");
   printPercent(std::cout, total, failed);
+
+  if (failed > 0) {
+    NLOG_INFO("");
+    NLOG_INFO("=== FAILED TESTS ===");
+    std::lock_guard<std::mutex> lock(g_failedTestNamesMutex);
+    for (const auto& name : g_failedTestNames) {
+      NLOG_INFO("  - " + name);
+    }
+    NLOG_INFO("====================");
+  }
 
   return failed == 0 ? 0 : -1;
 }

@@ -17,10 +17,15 @@
 #include "globals.h"
 
 #include <atomic>
+#include <mutex>
+#include <string>
+#include <vector>
 
 namespace Nakama {
 namespace Test {
 std::atomic<uint32_t> g_runTestsCount{0};
 std::atomic<uint32_t> g_failedTestsCount{0};
+std::mutex g_failedTestNamesMutex;
+std::vector<std::string> g_failedTestNames;
 } // namespace Test
 } // namespace Nakama

@@ -160,6 +160,10 @@ void NTest::stopTest(bool succeeded) {
     printTestName("Succeeded");
   } else {
     ++g_failedTestsCount;
+    {
+      std::lock_guard<std::mutex> lock(g_failedTestNamesMutex);
+      g_failedTestNames.push_back(_name);
+    }
     printTestName("Failed");
     std::cout << std::flush;
     // abort();
