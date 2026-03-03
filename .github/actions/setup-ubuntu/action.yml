@@ -3,7 +3,22 @@ description: 'Sets up prereqs for all ubuntu machines'
 runs:
   using: "composite"
   steps:
-    - run: |
+    - name: Install Ubuntu dependencies
+      shell: bash
+      run: |
+        set -euo pipefail
+        sudo apt-get update
+        sudo apt-get install -y \
+          cmake \
+          ninja-build \
+          libcurl4-openssl-dev \
+          gcc \
+          g++
+
+    - name: Ensure ninja + mono available
+      shell: bash
+      run: |
+        set -euo pipefail   
         mkdir -p ~/bin
         install_ninja() {
           (
