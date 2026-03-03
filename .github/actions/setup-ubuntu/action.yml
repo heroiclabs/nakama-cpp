@@ -43,5 +43,4 @@ runs:
 
         ninja --version 2>/dev/null || install_ninja
         ensure_mono
-      shell: bash
 
