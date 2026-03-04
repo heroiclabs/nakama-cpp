@@ -9,6 +9,10 @@ target_compile_definitions(nakama-sdk-client-factory PRIVATE
         $<$<BOOL:${WITH_HTTP_LIBHTTPC}>:WITH_HTTP_LIBHTTPC>
         $<$<BOOL:${WITH_HTTP_CPPREST}>:WITH_HTTP_CPPREST>
 )
+if (WITH_WS_WSLAY)
+    find_package(wslay CONFIG REQUIRED)
+    target_link_libraries(nakama-sdk-rtclient-factory PRIVATE wslay::wslay)
+endif()
 
 add_library(nakama-sdk-rtclient-factory OBJECT NWebsocketsFactory.cpp)
 add_library(nakama::sdk-rtclient-factory ALIAS nakama-sdk-rtclient-factory)
