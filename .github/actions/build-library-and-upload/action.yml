@@ -16,13 +16,8 @@ runs:
     - id: build
       run: |
         rm -rf out
-        cmake --preset ${{ inputs.preset }} -DBUILD_SHARED_LIBS=ON
-        
-        echo "      DEBUG: wslay headers    "
-        find build/${{ inputs.preset }} -path "*wslay.h" -print || true
-        echo "      DEBUG: submodules    "
-        find submodules/vcpkg -path "*wslay.h" -print || true
-        
+        cmake --preset ${{ inputs.preset }} -DBUILD_SHARED_LIBS=ON \
+          -DCMAKE_CXX_FLAGS="-I${PWD}/build/${{ inputs.preset }}/vcpkg_installed/x64-linux-heroic/include"
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} --verbose
         cmake --install ./build/${{ inputs.preset }} --config ${{ inputs.build-type }}
       working-directory: ${{ inputs.nakama-cpp-path }}
@@ -34,7 +29,7 @@ runs:
         path="./out"
         for dir in "$path"/*/; do
           folder_name=$(basename "$dir")
-          echo "folder-name=$folder_name" >> $GITHUB_OUTPUT
+          echo "folder-name=$folder_name" >> $GITHUB_OUTPUT 
         done
       working-directory: ${{ inputs.nakama-cpp-path }}
       shell: bash
