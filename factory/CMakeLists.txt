@@ -22,5 +22,5 @@ $<$<BOOL:${WITH_WS_CPPREST}>:WITH_WS_CPPREST>
 )
 if (WITH_WS_WSLAY)
     find_package(wslay CONFIG REQUIRED)
-    target_link_libraries(nakama-sdk-rtclient-factory PRIVATE wslay::wslay)
+    target_link_libraries(nakama-sdk-rtclient-factory PRIVATE wslay)
 endif()
