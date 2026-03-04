@@ -9,18 +9,18 @@ target_compile_definitions(nakama-sdk-client-factory PRIVATE
         $<$<BOOL:${WITH_HTTP_LIBHTTPC}>:WITH_HTTP_LIBHTTPC>
         $<$<BOOL:${WITH_HTTP_CPPREST}>:WITH_HTTP_CPPREST>
 )
-if (WITH_WS_WSLAY)
-    find_package(wslay CONFIG REQUIRED)
-    target_link_libraries(nakama-sdk-rtclient-factory PRIVATE wslay::wslay)
-endif()
 
 add_library(nakama-sdk-rtclient-factory OBJECT NWebsocketsFactory.cpp)
 add_library(nakama::sdk-rtclient-factory ALIAS nakama-sdk-rtclient-factory)
 target_link_libraries(nakama-sdk-rtclient-factory
-        PUBLIC nakama::sdk-interface)
+PUBLIC nakama::sdk-interface)
 target_compile_definitions(nakama-sdk-rtclient-factory PRIVATE
-        $<$<BOOL:${WITH_WS_WSLAY}>:WITH_WS_WSLAY>
-        $<$<BOOL:${CFG_WSLAY_CURL_IO}>:CFG_WSLAY_CURL_IO>
-        $<$<BOOL:${WITH_WS_LIBHTTPC}>:WITH_WS_LIBHTTPC>
-        $<$<BOOL:${WITH_WS_CPPREST}>:WITH_WS_CPPREST>
+$<$<BOOL:${WITH_WS_WSLAY}>:WITH_WS_WSLAY>
+$<$<BOOL:${CFG_WSLAY_CURL_IO}>:CFG_WSLAY_CURL_IO>
+$<$<BOOL:${WITH_WS_LIBHTTPC}>:WITH_WS_LIBHTTPC>
+$<$<BOOL:${WITH_WS_CPPREST}>:WITH_WS_CPPREST>
 )
+if (WITH_WS_WSLAY)
+    find_package(wslay CONFIG REQUIRED)
+    target_link_libraries(nakama-sdk-rtclient-factory PRIVATE wslay::wslay)
+endif()
