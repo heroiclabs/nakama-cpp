@@ -1,10 +1,5 @@
 name: Build Linux
-on:
-  workflow_call:
-  workflow_dispatch:
-  push:
-    branches:
-      - nata/cicd-linux
+on: [workflow_call, workflow_dispatch]
 jobs:
   build_linux:
     timeout-minutes: 30
