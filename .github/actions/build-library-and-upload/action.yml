@@ -28,7 +28,7 @@ runs:
         path="./out"
         for dir in "$path"/*/; do
           folder_name=$(basename "$dir")
-          echo "folder-name=$folder_name" >> $GITHUB_OUTPUT 
+          echo "folder-name=$folder_name" >> $GITHUB_OUTPUT
         done
       working-directory: ${{ inputs.nakama-cpp-path }}
       shell: bash
