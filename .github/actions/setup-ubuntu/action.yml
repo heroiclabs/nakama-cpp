@@ -20,15 +20,6 @@ runs:
       run: |
         set -euo pipefail   
         mkdir -p ~/bin
-        install_ninja() {
-          (
-            cd /tmp
-            curl -L -O https://github.com/ninja-build/ninja/releases/download/v1.11.0/ninja-linux.zip
-            unzip ninja-linux.zip
-            mv ninja /usr/local/bin/
-          )
-          ninja --version 2>/dev/null
-        }
 
         # vcpkg wants mono, make sure it finds one
         # see: https://github.com/microsoft/vcpkg/issues/25585
