@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - nata/cicd-linux
+      - nata/ci-linux-test
 jobs:
   test_linux:
     timeout-minutes: 30
