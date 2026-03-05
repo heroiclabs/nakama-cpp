@@ -17,13 +17,15 @@
 #pragma once
 
 #include "NError.h"
+#include <stdexcept>
 
 namespace Nakama
 {
-    class NException : public std::runtime_error {
+    class NAKAMA_API NException : public std::runtime_error {
     public:
         NException(const NError& error)
             : std::runtime_error(error.message), error(error) {}
+        ~NException() override;
 
         const NError error;
     };

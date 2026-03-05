@@ -17,10 +17,15 @@
 #pragma once
 
 #include "WslayIOInterface.h"
+#include <atomic>
+#include <functional>
+#include <list>
 #include <memory>
+#include <mutex>
 #include <nakama-cpp/realtime/NRtTransportInterface.h>
-#include <optional>
+#include <queue>
 #include <string>
+#include <thread>
 #include <wslay/wslay.h>
 
 namespace Nakama {
@@ -52,7 +57,9 @@ private:
   NetIOAsyncResult http_handshake_init();
   NetIOAsyncResult http_handshake_send();
   NetIOAsyncResult http_handshake_receive();
-  void disconnect(bool remote, std::optional<uint16_t> code);
+  void ioThreadFunc();
+  void enqueueCallback(std::function<void()> cb);
+  void cleanupConnection();
 
   std::unique_ptr<WslayIOInterface> _io;
   struct wslay_event_callbacks _callbacks;
@@ -62,11 +69,23 @@ private:
 
   URLParts _url;
   std::string _client_key;
-  State _state = State::Disconnected;
+  std::atomic<State> _state{State::Disconnected};
 
   // Http send state
   std::string _buf;
   std::string::iterator _buf_iter;
+
+  // I/O thread lifecycle
+  std::thread _ioThread;
+  std::atomic<bool> _ioRunning{false};
+
+  // Callback dispatch queue: I/O thread enqueues, tick() drains
+  std::mutex _callbackMutex;
+  std::list<std::function<void()>> _callbackQueue;
+
+  // Outgoing message queue: send() enqueues, I/O thread drains
+  std::mutex _sendMutex;
+  std::queue<NBytes> _outgoingQueue;
 };
 
 } // namespace Nakama

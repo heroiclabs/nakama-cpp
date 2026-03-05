@@ -27,7 +27,7 @@ NAKAMA_NAMESPACE_BEGIN
     class NAKAMA_API NSessionInterface
     {
     public:
-        virtual ~NSessionInterface() {}
+        virtual ~NSessionInterface();
 
         /**
          * @return The authentication token used to construct this session.
