@@ -14,6 +14,7 @@ target_link_libraries(nakama-impl-ws-wslay
         nakama::sdk-interface
         PRIVATE
         nakama::sdk-core-common nakama::sdk-core-misc wslay
+        INTERFACE wslay
 )
 
 target_include_directories(nakama-impl-ws-wslay
