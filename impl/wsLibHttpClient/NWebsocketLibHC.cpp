@@ -76,7 +76,7 @@ static NTimestamp getUnixTimestampMs() {
 static HCTraceLevel HCLevelForNLevel(NLogLevel lvl) {
   switch (lvl) {
     case NLogLevel::Debug:
-      return HCTraceLevel::Verbose;
+      return HCTraceLevel::Warning;
     case NLogLevel::Info:
       return HCTraceLevel::Information;
     case NLogLevel::Warn:

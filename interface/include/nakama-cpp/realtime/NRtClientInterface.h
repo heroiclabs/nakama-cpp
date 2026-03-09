@@ -81,7 +81,7 @@ NAKAMA_NAMESPACE_BEGIN
     class NAKAMA_API NRtClientInterface
     {
     public:
-        virtual ~NRtClientInterface() {}
+        virtual ~NRtClientInterface();
 
         /**
          * Pumps requests queue in your thread.

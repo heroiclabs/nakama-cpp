@@ -2,7 +2,7 @@ cmake-build-*
 build
 out
 .idea
-/test/Engine
+/integrationtests/Engine
 CMakeUserPresets.json
 local.properties
 .cxx
@@ -14,3 +14,4 @@ android/.gradle
 android/build
 android/app/.cxx
 .DS_Store
+.cache

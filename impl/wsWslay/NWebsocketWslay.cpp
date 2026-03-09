@@ -1,6 +1,8 @@
+#include <cassert>
+#include <chrono>
 #include <cstring>
 #include <memory>
-#include <regex>
+#include <random>
 #include <string>
 
 #include "NWebsocketWslay.h"
@@ -9,11 +11,8 @@
 #include <nakama-cpp/log/NLogger.h>
 #include <wslay/wslay.h>
 
-#include <cassert>
-#include <optional>
-#include <random>
-
 namespace Nakama {
+
 void NWebsocketWslay::on_msg_recv_callback(
     wslay_event_context_ptr /*ctx*/,
     const struct wslay_event_on_msg_recv_arg* arg,
@@ -25,11 +24,12 @@ void NWebsocketWslay::on_msg_recv_callback(
   if (wslay_is_ctrl_frame(arg->opcode)) {
     if (arg->opcode == WSLAY_CONNECTION_CLOSE) {
       NLOG(NLogLevel::Info, "Remote server closed connection with status code %d", arg->status_code);
-      ws->_state = State::RemoteDisconnect;
+      ws->_state.store(State::RemoteDisconnect);
     }
   } else {
-    std::string s(reinterpret_cast<const char*>(arg->msg), arg->msg_length);
-    ws->fireOnMessage(s);
+    // Copy message data — arg memory is only valid during this callback
+    NBytes data(reinterpret_cast<const char*>(arg->msg), arg->msg_length);
+    ws->enqueueCallback([ws, data = std::move(data)]() { ws->fireOnMessage(data); });
   }
 }
 
@@ -182,11 +182,35 @@ NetIOAsyncResult NWebsocketWslay::http_handshake_receive() {
 NWebsocketWslay::NWebsocketWslay(std::unique_ptr<WslayIOInterface> io)
     : _io(std::move(io)),
       _callbacks{recv_callback, send_callback, genmask_callback, nullptr, nullptr, nullptr, on_msg_recv_callback},
-      _ctx(nullptr, wslay_event_context_free), _state(State::Disconnected) {}
+      _ctx(nullptr, wslay_event_context_free) {}
 
 NWebsocketWslay::~NWebsocketWslay() {
-  if (_connected) {
-    this->disconnect(false, std::nullopt);
+  _ioRunning.store(false);
+  if (_ioThread.joinable())
+    _ioThread.join();
+  cleanupConnection();
+}
+
+void NWebsocketWslay::enqueueCallback(std::function<void()> cb) {
+  std::lock_guard<std::mutex> lock(_callbackMutex);
+  _callbackQueue.push_back(std::move(cb));
+}
+
+void NWebsocketWslay::cleanupConnection() {
+  if (_state.exchange(State::Disconnected) == State::Connected && _ctx) {
+    // Best-effort close frame
+    wslay_event_queue_close(_ctx.get(), 0, nullptr, 0);
+    wslay_event_send(_ctx.get());
+  }
+
+  _io->close();
+  _connected = false;
+  _ctx.reset(nullptr);
+
+  {
+    std::lock_guard<std::mutex> lock(_sendMutex);
+    std::queue<NBytes> empty;
+    _outgoingQueue.swap(empty);
   }
 }
 
@@ -206,139 +230,196 @@ void NWebsocketWslay::connect(const std::string& url, NRtTransportType transport
 
   auto urlOpt = ParseURL(url);
   if (!urlOpt) {
-    fireOnError("Malformed URL");
+    enqueueCallback([this]() { fireOnError("Malformed URL"); });
+    _ctx.reset(nullptr);
     return;
   }
   _url = urlOpt.value();
 
   if (this->_io->connect_init(_url) == NetIOAsyncResult::ERR) {
-    fireOnError("Failed connect");
+    enqueueCallback([this]() { fireOnError("Failed connect"); });
+    _ctx.reset(nullptr);
     return;
   }
-  _state = State::Connecting;
+
+  _state.store(State::Connecting);
+  _ioRunning.store(true);
+  _ioThread = std::thread(&NWebsocketWslay::ioThreadFunc, this);
 }
 
-void NWebsocketWslay::disconnect() { this->disconnect(false, std::nullopt); }
+void NWebsocketWslay::disconnect() {
+  if (!_ioRunning.load() && _state.load() == State::Disconnected)
+    return;
 
-void NWebsocketWslay::disconnect(bool remote, std::optional<uint16_t> code) {
-  if (!remote && _state == State::Connected) {
-    assert(_ctx);
-    // we've asked for disconnect, send close frame before closing socket
-    wslay_event_queue_close(_ctx.get(), 0, nullptr, 0);
-    wslay_event_send(_ctx.get());
+  _ioRunning.store(false);
+  if (_ioThread.joinable())
+    _ioThread.join();
+
+  // Discard pending callbacks — NRtClient handles its own disconnect notification.
+  // This also satisfies the contract: "late messages won't trigger messageCallback"
+  {
+    std::lock_guard<std::mutex> lock(_callbackMutex);
+    _callbackQueue.clear();
   }
 
-  this->_io->close();
-
-  _connected = false;
-  _state = State::Disconnected;
-
-  // after close frame was sent or received wslay_context is tainted and need to be recreated
-  _ctx.reset(nullptr);
-
-  if (code) {
-    NRtClientDisconnectInfo info;
-    info.code = code.value();
-    info.remote = remote;
-    fireOnDisconnected(info);
-  }
+  cleanupConnection();
 }
 
 uint32_t NWebsocketWslay::getActivityTimeout() const { return this->_timeout; }
 
 bool NWebsocketWslay::send(const NBytes& data) {
-  struct wslay_event_msg msg{_opcode, reinterpret_cast<const uint8_t*>(&data[0]), data.size()};
-
-  int ret = wslay_event_queue_msg(_ctx.get(), &msg);
-  if (ret != 0) {
-    NLOG(NLogLevel::Error, "[wslay] unable to queue egress message: %d", ret);
+  if (_state.load() != State::Connected)
     return false;
-  }
 
+  std::lock_guard<std::mutex> lock(_sendMutex);
+  _outgoingQueue.push(data);
   return true;
 }
 
 void NWebsocketWslay::setActivityTimeout(uint32_t timeout) { this->_timeout = timeout; }
 
 void NWebsocketWslay::tick() {
-  // most common case
-  if (_state == State::Connected) {
-    int ret = wslay_event_recv(_ctx.get());
-
-    if (ret != 0) {
-      NLOG(NLogLevel::Error, "[wslay] unable to receive message from peer: %d", ret);
-      disconnect(false, NRtClientDisconnectInfo::Code::TRANSPORT_ERROR);
-      return;
-    }
-
-    ret = wslay_event_send(_ctx.get());
-    if (ret != 0) {
-      NLOG(NLogLevel::Error, "[wslay] unable to send message to peer: %d", ret);
-      disconnect(false, NRtClientDisconnectInfo::Code::TRANSPORT_ERROR);
-      return;
-    }
-
-    return;
+  std::list<std::function<void()>> callbacks;
+  {
+    std::lock_guard<std::mutex> lock(_callbackMutex);
+    callbacks.swap(_callbackQueue);
   }
-
-  // this is set if the wslay_event_recv above reads a close frame.
-  if (_state == State::RemoteDisconnect) {
-    uint16_t code = wslay_event_get_status_code_received(_ctx.get());
-    disconnect(true, code);
+  for (auto& cb : callbacks) {
+    cb();
   }
+}
 
-  // async connect state machine:
-  // Connecting -> Handshake_Sending -> Handshake_Receiving -> Connected
+void NWebsocketWslay::ioThreadFunc() {
+  while (_ioRunning.load()) {
+    State currentState = _state.load();
 
-  NetIOAsyncResult res = NetIOAsyncResult::AGAIN;
-  do {
-    if (_state == State::Connecting) {
-      NLOG_DEBUG("Wslay state: Connecting");
-      res = this->_io->connect_tick();
-      if (res == NetIOAsyncResult::DONE) {
-        _state = State::Handshake_Sending;
-        res = this->http_handshake_init();
+    if (currentState == State::Connected) {
+      // 1. Drain outgoing queue into wslay
+      {
+        std::lock_guard<std::mutex> lock(_sendMutex);
+        while (!_outgoingQueue.empty()) {
+          auto& data = _outgoingQueue.front();
+          struct wslay_event_msg msg {
+            _opcode, reinterpret_cast<const uint8_t*>(data.data()), data.size()
+          };
+          int ret = wslay_event_queue_msg(_ctx.get(), &msg);
+          if (ret != 0) {
+            NLOG(NLogLevel::Error, "[wslay] unable to queue egress message: %d", ret);
+          }
+          _outgoingQueue.pop();
+        }
       }
-    } else if (_state == State::Handshake_Sending) {
-      NLOG_DEBUG("Wslay state: Handshake sending");
-      res = this->http_handshake_send();
-      if (res == NetIOAsyncResult::DONE) {
-        _state = State::Handshake_Receiving;
-      }
-    } else if (_state == State::Handshake_Receiving) {
-      NLOG_DEBUG("Wslay state: Handshake receiving");
-      res = this->http_handshake_receive();
-      if (res == NetIOAsyncResult::DONE) {
-        _state = State::Connected;
-        fireOnConnected();
+
+      // 2. Receive
+      int ret = wslay_event_recv(_ctx.get());
+      if (ret != 0 && ret != WSLAY_ERR_WOULDBLOCK) {
+        NLOG(NLogLevel::Error, "[wslay] unable to receive message from peer: %d", ret);
+        _io->close();
+        _state.store(State::Disconnected);
+        _ctx.reset(nullptr);
+        enqueueCallback([this]() {
+          NRtClientDisconnectInfo info;
+          info.code = NRtClientDisconnectInfo::Code::TRANSPORT_ERROR;
+          info.remote = false;
+          fireOnDisconnected(info);
+        });
         break;
+      }
+
+      // 3. Check for remote disconnect (set by on_msg_recv_callback for WSLAY_CONNECTION_CLOSE)
+      State expected = State::RemoteDisconnect;
+      if (_state.compare_exchange_strong(expected, State::Disconnected)) {
+        uint16_t code = wslay_event_get_status_code_received(_ctx.get());
+        _io->close();
+        _ctx.reset(nullptr);
+        enqueueCallback([this, code]() {
+          NRtClientDisconnectInfo info;
+          info.code = code;
+          info.remote = true;
+          fireOnDisconnected(info);
+        });
+        break;
+      }
+
+      // 4. Send
+      ret = wslay_event_send(_ctx.get());
+      if (ret != 0) {
+        NLOG(NLogLevel::Error, "[wslay] unable to send message to peer: %d", ret);
+        _io->close();
+        _state.store(State::Disconnected);
+        _ctx.reset(nullptr);
+        enqueueCallback([this]() {
+          NRtClientDisconnectInfo info;
+          info.code = NRtClientDisconnectInfo::Code::TRANSPORT_ERROR;
+          info.remote = false;
+          fireOnDisconnected(info);
+        });
+        break;
+      }
+
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    } else {
+      // Drive connection state machine: Connecting → Handshake_Sending → Handshake_Receiving → Connected
+      NetIOAsyncResult res = NetIOAsyncResult::AGAIN;
+      do {
+        currentState = _state.load();
+        if (currentState == State::Connecting) {
+          NLOG_DEBUG("Wslay state: Connecting");
+          res = _io->connect_tick();
+          if (res == NetIOAsyncResult::DONE) {
+            _state.store(State::Handshake_Sending);
+            res = http_handshake_init();
+          }
+        } else if (currentState == State::Handshake_Sending) {
+          NLOG_DEBUG("Wslay state: Handshake sending");
+          res = http_handshake_send();
+          if (res == NetIOAsyncResult::DONE) {
+            _state.store(State::Handshake_Receiving);
+          }
+        } else if (currentState == State::Handshake_Receiving) {
+          NLOG_DEBUG("Wslay state: Handshake receiving");
+          res = http_handshake_receive();
+          if (res == NetIOAsyncResult::DONE) {
+            _state.store(State::Connected);
+            enqueueCallback([this]() { fireOnConnected(); });
+            break;
+          }
+        } else {
+          break;
+        }
+      } while (res == NetIOAsyncResult::DONE);
+
+      if (res == NetIOAsyncResult::ERR) {
+        std::string errMessage;
+        currentState = _state.load();
+        switch (currentState) {
+          case State::Connecting:
+            errMessage = "Failed connect";
+            break;
+          case State::Handshake_Receiving:
+          case State::Handshake_Sending:
+            errMessage = "Failed HTTP handshake";
+            break;
+          default:
+            break;
+        }
+        NLOG(NLogLevel::Debug, "Wslay result: ERROR %s", errMessage.c_str());
+        _state.store(State::Disconnected);
+        _io->close();
+        _ctx.reset(nullptr);
+        enqueueCallback([this, errMessage]() { fireOnError(errMessage); });
+        break;
+      }
+
+      if (res == NetIOAsyncResult::AGAIN) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
       }
     }
-  } while (res == NetIOAsyncResult::DONE); // try to complete multiple stages in one tick
-
-  if (res == NetIOAsyncResult::ERR) {
-    std::string errMessage;
-    switch (_state) {
-      case State::Connecting:
-        errMessage = "Failed connect";
-        break;
-      case State::Handshake_Receiving:
-      case State::Handshake_Sending:
-        errMessage = "Failed HTTP handshake";
-        break;
-      default:
-        break;
-    }
-    NLOG(NLogLevel::Debug, "Wslay result: ERROR %s", errMessage.c_str());
-    _state = State::Disconnected;
-    this->_io->close();
-    _ctx.reset(nullptr);
-    fireOnError(errMessage);
-    return;
   }
 }
 
 bool NWebsocketWslay::isConnecting() const {
-  return _state == State::Connecting || _state == State::Handshake_Receiving || _state == State::Handshake_Sending;
+  State s = _state.load();
+  return s == State::Connecting || s == State::Handshake_Receiving || s == State::Handshake_Sending;
 }
 } // namespace Nakama

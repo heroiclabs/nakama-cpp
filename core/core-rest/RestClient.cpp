@@ -17,20 +17,18 @@
 #include "RestClient.h"
 #include "DataHelper.h"
 #include "DefaultSession.h"
-#include "RapidjsonHelper.h"
+#include <rapidjson/document.h>
 #include "StrUtil.h"
 #include "google/protobuf/util/json_util.h"
 #include "grpc_status_code_enum.h"
 #include "nakama-cpp/NakamaVersion.h"
 #include "nakama-cpp/log/NLogger.h"
-#include "nakama-cpp/realtime/NWebsocketsFactory.h"
 #include <rapidjson/stringbuffer.h>
 #include <rapidjson/writer.h>
 
 #include <functional>
 #include <optional>
 #include <string>
-#include <vector>
 
 #undef NMODULE_NAME
 #define NMODULE_NAME "Nakama::RestClient"
@@ -1203,8 +1201,7 @@ void RestClient::deleteAccount(
   try {
     NLOG_INFO("...");
 
-    auto accountData(make_shared<nakama::api::Account>());
-    RestReqContext* ctx = createReqContext(accountData.get());
+    RestReqContext* ctx = createReqContext(nullptr);
     setSessionAuth(ctx, session);
 
     ctx->successCallback = successCallback;

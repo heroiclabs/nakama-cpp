@@ -35,7 +35,7 @@ NAKAMA_NAMESPACE_BEGIN
     {
     public:
         NLogSinkInterface() {}
-        virtual ~NLogSinkInterface() {}
+        virtual ~NLogSinkInterface();
 
         /**
          * Output log message

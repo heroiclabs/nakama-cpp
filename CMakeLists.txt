@@ -1,5 +1,5 @@
 # I think we are constrained to the version that the latest android sdk uses, for Android builds.
-cmake_minimum_required(VERSION 3.29.3)
+cmake_minimum_required(VERSION 3.28)
 include(version.cmake)
 include(cmake/checkPresets.cmake)
 
@@ -223,7 +223,7 @@ if (CREATE_JAR)
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/android
         VERBATIM
         USES_TERMINAL
-        DEPENDS ${CMAKE_SOURCE_DIR}/test/android/src/main/java/com/heroiclabs/nakamatest/MainActivity.java
+        DEPENDS ${CMAKE_SOURCE_DIR}/integrationtests/android/src/main/java/com/heroiclabs/nakamatest/MainActivity.java
     )
 
     install(FILES ${LIBNAKAMA_AAR} DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -264,7 +264,7 @@ add_library(nakama-sdk SHARED ${DUMMY_CPP} ${DUMMY_H})
 add_library(nakama::sdk ALIAS nakama-sdk)
 
 if (BUILD_TESTING)
-    add_subdirectory(test)
+    add_subdirectory(integrationtests)
 endif ()
 
 include("submodules/private/cmake/target-${VCPKG_TARGET_TRIPLET}.cmake" OPTIONAL)
