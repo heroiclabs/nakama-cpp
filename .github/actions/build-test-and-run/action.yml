@@ -17,12 +17,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-
-    - name: Start docker containers for nakama-integration-tests
+    - name: Start docker container for nakama-integration-tests
       shell: bash
       run: |
-        docker-compose -f integrationtests/server/docker-compose.yml up -d
-      working-directory: integrationtests/server
+        docker-compose up -d
+      working-directory: ${{ inputs.nakama-cpp-path }}/integrationtests/server
     - id: build
       shell: bash
       run: |
