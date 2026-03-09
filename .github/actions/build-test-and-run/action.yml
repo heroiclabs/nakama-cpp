@@ -20,7 +20,7 @@ runs:
     - name: Start docker container for nakama-integration-tests
       shell: bash
       run: |
-        docker-compose up -d
+        docker compose up -d
       working-directory: ${{ inputs.nakama-cpp-path }}/integrationtests/server
     - id: build
       shell: bash
