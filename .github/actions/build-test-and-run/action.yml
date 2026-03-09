@@ -19,11 +19,12 @@ runs:
   steps:
 
     - name: Start docker containers for nakama-integration-tests
+      shell: bash
       run: |
         docker-compose -f integrationtests/server/docker-compose.yml up -d
       working-directory: integrationtests/server
-      shell: bash
     - id: build
+      shell: bash
       run: |
         cmake --preset ${{ inputs.preset }} -DBUILD_SHARED_NAKAMA_SDK=ON
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} --target install run -- ${{ inputs.native-tool-options }}
