@@ -7,9 +7,6 @@ inputs:
   nakama-cpp-path:
     description: 'Relative path under $GITHUB_WORKSPACE to the nakama-cpp repository'
     required: true
-  testrunner-pat:
-    description: 'PAT to access the private Nakama testrunner'
-    required: true
   build-type:
     description: The build type.
     required: true
@@ -20,20 +17,14 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout nakama-client-testrunner
-      uses: actions/checkout@v2
-      with:
-        repository: heroiclabs/nakama-client-testrunner
-        token: ${{ inputs.testrunner-pat }}
-        path: nakama-client-testrunner
-    - name: Start docker containers for nakama-client-testrunner
+
+    - name: Start docker containers for nakama-integration-tests
       run: |
-        docker-compose up -d
-      working-directory: nakama-client-testrunner
+        docker-compose -f integrationtests/server/docker-compose.yml up -d
+      working-directory: integrationtests/server
       shell: bash
     - id: build
       run: |
         cmake --preset ${{ inputs.preset }} -DBUILD_SHARED_NAKAMA_SDK=ON
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} --target install run -- ${{ inputs.native-tool-options }}
-      shell: bash
-      working-directory: ${{ inputs.nakama-cpp-path }}/test
+      working-directory: ${{ inputs.nakama-cpp-path }}/integrationtests
