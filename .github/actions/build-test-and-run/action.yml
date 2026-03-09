@@ -27,4 +27,4 @@ runs:
       run: |
         cmake --preset ${{ inputs.preset }} -DBUILD_SHARED_NAKAMA_SDK=ON
         cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} --target install run -- ${{ inputs.native-tool-options }}
-      working-directory: ${{ inputs.nakama-cpp-path }}/integrationtests
+      working-directory: ${{ inputs.nakama-cpp-path }}
