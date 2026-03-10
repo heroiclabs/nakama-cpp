@@ -17,14 +17,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Start docker container for nakama-integration-tests
+    - name: Install Task
       shell: bash
-      run: |
-        docker compose up -d
-      working-directory: ${{ inputs.nakama-cpp-path }}/integrationtests/server
-    - id: build
+      run: npm install -g @go-task/cli
+
+    - name: Run tests with Task
       shell: bash
-      run: |
-        cmake --preset ${{ inputs.preset }} -DBUILD_SHARED_NAKAMA_SDK=ON
-        cmake --build ./build/${{ inputs.preset }} --config ${{ inputs.build-type }} --target install run -- ${{ inputs.native-tool-options }}
+      run: task test
       working-directory: ${{ inputs.nakama-cpp-path }}
