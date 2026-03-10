@@ -30,7 +30,7 @@ using namespace std;
 void test_authenticateEmail1() {
   NTest test(__func__);
 
-  auto successCallback = [&test](NSessionPtr session) { test.stopTest(!session->getAuthToken().empty()); };
+  auto successCallback = [&test](NSessionPtr session) { test.stopTest(session->getAuthToken().empty()); };
 
   test.client->authenticateEmail("test@mail.com", "12345678", "", true, {}, successCallback);
   test.runTest();
