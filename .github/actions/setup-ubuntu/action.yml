@@ -15,23 +15,23 @@ runs:
           gcc \
           g++
 
-    - name: Ensure ninja + mono available
-      shell: bash
-      run: |
-        set -euo pipefail   
-        mkdir -p ~/bin
+    # - name: Ensure ninja + mono available
+    #   shell: bash
+    #   run: |
+    #     set -euo pipefail   
+    #     mkdir -p ~/bin
 
-        # vcpkg wants mono, make sure it finds one
-        # see: https://github.com/microsoft/vcpkg/issues/25585
-        ensure_mono() {
-          type -p mono || {
-            # mono not found, lets try dotnet
-            type -p dotnet || { echo "ERROR: neither mono nor dotnet found"; exit 1; }
-            ln -s "$(type -p dotnet)" ~/bin/
-          }
-          mono --version >/dev/null
-        }
+    #     # vcpkg wants mono, make sure it finds one
+    #     # see: https://github.com/microsoft/vcpkg/issues/25585
+    #     ensure_mono() {
+    #       type -p mono || {
+    #         # mono not found, lets try dotnet
+    #         type -p dotnet || { echo "ERROR: neither mono nor dotnet found"; exit 1; }
+    #         ln -s "$(type -p dotnet)" ~/bin/
+    #       }
+    #       mono --version >/dev/null
+    #     }
 
-        ninja --version 2>/dev/null || install_ninja
-        ensure_mono
+    #     ninja --version 2>/dev/null || install_ninja
+    #     ensure_mono
 
