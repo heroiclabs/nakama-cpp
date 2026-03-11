@@ -1,7 +1,10 @@
 name: Build Android
-# on: [workflow_call, workflow_dispatch]
+# on: [workflow_call, workflow_dispatch] 
 on:
-  branch: ci-actions-android
+  push:
+    branches:
+      - ci-actions-android
+
 jobs:
   build_android:
     timeout-minutes: 30
