@@ -15,6 +15,7 @@
  */
 
 #include <iostream>
+#include <thread>
 
 #include "nakama-cpp/satori/SatoriClientFactory.h"
 

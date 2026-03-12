@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         build-type: [MinSizeRel]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
@@ -15,7 +15,7 @@ jobs:
       - uses: ./nakama-cpp/.github/actions/setup-vcpkg
         with:
           github_token: ${{ secrets.github_token }}
-          vcpkg-path: vcpkg
+          vcpkg-path: nakama-cpp/submodules/vcpkg
       - uses: ./nakama-cpp/.github/actions/build-library-and-upload
         with:
           nakama-cpp-path: nakama-cpp
@@ -25,10 +25,9 @@ jobs:
         with:
           nakama-cpp-path: nakama-cpp
           preset: linux-amd64
-          testrunner-pat: ${{ secrets.GH_PAT }}
           build-type: ${{ matrix.build-type }}
       - if: failure()
         uses: ./nakama-cpp/.github/actions/handle-failure
         with:
           nakama-cpp-path: nakama-cpp
-          vcpkg-path: vcpkg
+          vcpkg-path: nakama-cpp/submodules/vcpkg

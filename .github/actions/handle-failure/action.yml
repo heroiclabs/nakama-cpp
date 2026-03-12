@@ -65,7 +65,7 @@ runs:
           Pop-Location
         }
       shell: powershell
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: ${{ steps.build.outputs.artifact_name }}-workdir-debug
         path: |

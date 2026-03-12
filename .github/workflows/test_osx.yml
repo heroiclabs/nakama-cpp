@@ -57,7 +57,6 @@ jobs:
           with:
             nakama-cpp-path: nakama-cpp
             preset: ${{ matrix.preset }}
-            testrunner-pat: ${{ secrets.GH_PAT }}
             native-tool-options: "-allowProvisioningUpdates"
             build-type: ${{ matrix.build-type }}
         - if: failure()
