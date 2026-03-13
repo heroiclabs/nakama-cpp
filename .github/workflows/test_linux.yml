@@ -1,5 +1,10 @@
 name: Test Linux
-on: [workflow_dispatch, workflow_call, pull_request]
+# on: [workflow_dispatch, workflow_call, pull_request]
+
+on:
+  push:
+    branches:
+      - ci-fix-artifacts
 jobs:
   test_linux:
     timeout-minutes: 30

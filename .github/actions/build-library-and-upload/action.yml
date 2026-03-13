@@ -50,7 +50,7 @@ runs:
       id: create-zip-unix
       run: |
         folder_name="${{ steps.get-folder-name-unix.outputs.folder-name }}"
-        zip -r "./${folder_name}" "./${folder_name}"
+        zip -r "${folder_name}.zip" "${folder_name}"
         echo "artifact-path=${PWD}/${folder_name}.zip" >> $GITHUB_OUTPUT
       working-directory: ${{ inputs.nakama-cpp-path }}/out
       shell: bash
