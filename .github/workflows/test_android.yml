@@ -1,7 +1,9 @@
 name: Test Android
 # on: [workflow_call, workflow_dispatch]
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - ci-actions-android
 
 jobs:
   test_android:
@@ -23,32 +25,16 @@ jobs:
           git submodule update --init --filter=blob:none -- submodules/vcpkg
         working-directory: nakama-cpp
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
+      - uses: ./nakama-cpp/.github/actions/setup-android
         with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Install NDK & CMake
-        run: |
-          # On GitHub ubuntu runners ANDROID_HOME is set as a shell env var.
-          # sdkmanager is NOT on PATH, use the full path.
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
-            --sdk_root="$ANDROID_HOME" \
-            "ndk;27.2.12479018" \
-            "cmake;4.0.2" \
-            "emulator" \
-            "system-images;android-28;google_apis;x86_64"
-
-      - name: Add CMake to PATH
-        run: echo "$ANDROID_HOME/cmake/4.0.2/bin" >> "$GITHUB_PATH"
-
-      - name: Set VCPKG_ROOT
-        run: echo "VCPKG_ROOT=$GITHUB_WORKSPACE/nakama-cpp/submodules/vcpkg" >> $GITHUB_ENV
-
-      - name: Bootstrap vcpkg
-        run: ./bootstrap-vcpkg.sh -disableMetrics
-        working-directory: nakama-cpp/submodules/vcpkg
+          ndk-version: 27.2.12479018
+          cmake-version: 4.0.2
+          install-emulator: true
+          system-image: "android-28;google_apis;x86_64"
+      
+      - uses: ./nakama-cpp/.github/actions/setup-vcpkg-android
+        with:
+          vcpkg-path: nakama-cpp/submodules/vcpkg
 
       - name: Start Nakama server
         run: docker compose -f integrationtests/server/docker-compose.yml up -d --build --wait
@@ -69,7 +55,7 @@ jobs:
           jni_dir="integrationtests/android/jniLibs/$ABI"
           mkdir -p "$jni_dir"
 
-          cp "build/$CMAKE_PRESET/Debug/libnakama-sdk.so"       "$jni_dir/"
+          cp "build/$CMAKE_PRESET/Debug/libnakama-sdk.so" "$jni_dir/"
           cp "build/$CMAKE_PRESET/integrationtests/Debug/libnakama-test.so" "$jni_dir/"
 
           # Copy libc++_shared.so from NDK

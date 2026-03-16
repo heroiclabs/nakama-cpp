@@ -38,7 +38,8 @@ runs:
           "ndk;${{ inputs.ndk-version }}"
           "cmake;${{ inputs.cmake-version }}"
         )
-
+        
+        #use emulator for test-android
         if [ "${{ inputs.install-emulator }}" = "true" ]; then
           packages+=("emulator")
           if [ -n "${{ inputs.system-image }}" ]; then
