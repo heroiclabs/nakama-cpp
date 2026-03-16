@@ -35,7 +35,7 @@ jobs:
         working-directory: nakama-cpp/android
 
       - name: Upload artifacts
-          uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: nakama-sdk-android-aar
           path: nakama-cpp/android/nakama-sdk/build/outputs/aar/*.aar
