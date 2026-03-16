@@ -21,38 +21,41 @@ jobs:
           git submodule update --init --filter=blob:none -- submodules/vcpkg
         working-directory: nakama-cpp
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
+      - uses: ./nakama-cpp/.github/actions/setup-android
         with:
-          distribution: temurin
-          java-version: '17'
+          ndk-version: 27.2.12479018
+          cmake-version: 4.0.2
+      
+      - uses: ./nakama-cpp/.github/actions/setup-vcpkg-android
+        with:
+          vcpkg-path: nakama-cpp/submodules/vcpkg
 
-      - name: Install NDK & CMake
-        run: |
-          # On GitHub ubuntu runners ANDROID_HOME is set as a shell env var.
-          # sdkmanager is NOT on PATH, use the full path.
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
-            --sdk_root="$ANDROID_HOME" \
-            "ndk;27.2.12479018" \
-            "cmake;4.0.2"
-
-      - name: Add CMake to PATH
-        run: echo "$ANDROID_HOME/cmake/4.0.2/bin" >> "$GITHUB_PATH"
-
-      - name: Set VCPKG_ROOT
-        run: echo "VCPKG_ROOT=$GITHUB_WORKSPACE/nakama-cpp/submodules/vcpkg" >> $GITHUB_ENV
-
-      - name: Bootstrap vcpkg
-        run: ./bootstrap-vcpkg.sh -disableMetrics
-        working-directory: nakama-cpp/submodules/vcpkg
-
-      - name: Build with Gradle
-        run: ./gradlew build --no-daemon
+      - name : Build with Gradle
+        run : ./gradlew build --no-daemon
         working-directory: nakama-cpp/android
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+          uses: actions/upload-artifact@v4
         with:
           name: nakama-sdk-android-aar
           path: nakama-cpp/android/nakama-sdk/build/outputs/aar/*.aar
           if-no-files-found: error
+
+      # - name: Install NDK & CMake
+      #   run: |
+      #     # On GitHub ubuntu runners ANDROID_HOME is set as a shell env var.
+      #     # sdkmanager is NOT on PATH, use the full path.
+      #     "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+      #       --sdk_root="$ANDROID_HOME" \
+      #       "ndk;27.2.12479018" \
+      #       "cmake;4.0.2"
+
+      # - name: Add CMake to PATH
+      #   run: echo "$ANDROID_HOME/cmake/4.0.2/bin" >> "$GITHUB_PATH"
+
+      # - name: Set VCPKG_ROOT
+      #   run: echo "VCPKG_ROOT=$GITHUB_WORKSPACE/nakama-cpp/submodules/vcpkg" >> $GITHUB_ENV
+
+      # - name: Bootstrap vcpkg
+      #   run: ./bootstrap-vcpkg.sh -disableMetrics
+      #   working-directory: nakama-cpp/submodules/vcpkg

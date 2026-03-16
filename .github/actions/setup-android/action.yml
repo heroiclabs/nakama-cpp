@@ -1,0 +1,55 @@
+name: 'Setup Android'
+description: 'Sets up Java and Android SDK components'
+inputs:
+  java-version:
+    description: 'Java version'
+    required: false
+    default: '17'
+  ndk-version:
+    description: 'Android NDK version'
+    required: true
+  cmake-version:
+    description: 'Android CMake version'
+    required: true
+  install-emulator:
+    description: 'Whether to install emulator packages'
+    required: false
+    default: 'false'
+  system-image:
+    description: 'Android system image package'
+    required: false
+    default: ''
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: ${{ inputs.java-version }}
+
+    - name: Install Android SDK packages
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        packages=(
+          "ndk;${{ inputs.ndk-version }}"
+          "cmake;${{ inputs.cmake-version }}"
+        )
+
+        if [ "${{ inputs.install-emulator }}" = "true" ]; then
+          packages+=("emulator")
+          if [ -n "${{ inputs.system-image }}" ]; then
+            packages+=("${{ inputs.system-image }}")
+          fi
+        fi
+
+        "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+          --sdk_root="$ANDROID_HOME" \
+          "${packages[@]}"
+
+    - name: Add CMake to PATH
+      shell: bash
+      run: echo "$ANDROID_HOME/cmake/${{ inputs.cmake-version }}/bin" >> "$GITHUB_PATH"
