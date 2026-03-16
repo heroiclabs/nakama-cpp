@@ -29,15 +29,15 @@ jobs:
 
       - name: Install NDK & CMake
         run: |
-          # The GitHub ubuntu-22.04 runner ships with Android SDK at $ANDROID_HOME
-          sdkmanager --install \
+          # On GitHub ubuntu runners ANDROID_HOME is set as a shell env var.
+          # sdkmanager is NOT on PATH, use the full path.
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+            --sdk_root="$ANDROID_HOME" \
             "ndk;27.2.12479018" \
             "cmake;4.0.2"
-        env:
-          ANDROID_HOME: ${{ env.ANDROID_HOME }}
 
       - name: Add CMake to PATH
-        run: echo "$ANDROID_HOME/cmake/4.0.2/bin" >> $GITHUB_PATH
+        run: echo "$ANDROID_HOME/cmake/4.0.2/bin" >> "$GITHUB_PATH"
 
       - name: Set VCPKG_ROOT
         run: echo "VCPKG_ROOT=$GITHUB_WORKSPACE/nakama-cpp/submodules/vcpkg" >> $GITHUB_ENV
