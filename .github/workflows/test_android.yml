@@ -30,7 +30,7 @@ jobs:
           ndk-version: 27.2.12479018
           cmake-version: 4.0.2
           install-emulator: true
-          system-image: "android-28;google_apis;x86_64"
+          system-image: "system-images;android-28;google_apis;x86_64"
       
       - uses: ./nakama-cpp/.github/actions/setup-vcpkg-android
         with:
