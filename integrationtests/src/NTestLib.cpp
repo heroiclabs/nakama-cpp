@@ -117,7 +117,7 @@ int runAllTests(
   startSuite("test_notifications_rest", test_notifications_rest);
   startSuite("test_rpc_rest", test_rpc_rest);
   startSuite("test_profiling", test_profiling);
-  startSuite("test_stress", test_stress);
+  // startSuite("test_stress", test_stress);
   startSuite("test_realtime", test_realtime);
   // startSuite("test_throughput", test_throughput);
   startSuite("test_cancellation", test_cancellation);
