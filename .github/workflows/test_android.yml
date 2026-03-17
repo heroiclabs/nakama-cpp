@@ -52,14 +52,7 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -memory 2048
           disable-animations: true
           script: |
-            # Reverse-forward Nakama server ports into emulator
-            # so the test app can find the server running on the host
-            for port in 7349 7350 7351; do
-              adb reverse tcp:$port tcp:$port
-            done
-
-            # We pass ABI and additional CMake flags to solve the CURL mismatch
-            # CMAKE_ANDROID_ARCH_ABI is the key for CMake's built-in Android support
+            set -xe
+            for port in 7349 7350 7351; do adb reverse tcp:$port tcp:$port; done
             cd nakama-cpp
-            task test-android ABI=$ABI \
-                 CMAKE_EXTRA="-DCMAKE_ANDROID_ARCH_ABI=$ABI -DANDROID_ABI=$ABI"
+            task test-android ABI=$ABI CMAKE_EXTRA="-DCMAKE_ANDROID_ARCH_ABI=$ABI -DANDROID_ABI=$ABI"
