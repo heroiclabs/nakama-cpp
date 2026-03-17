@@ -91,10 +91,10 @@ int runAllTests(
   // Run internals first (pure unit tests, no server)
   test_internals();
 
-  // Launch all test groups in parallel threads
-  std::vector<std::thread> threads;
-  auto startSuite = [&threads](const char* suiteName, void (*suite)()) {
-    threads.emplace_back([suiteName, suite]() { runSuiteSafely(suiteName, suite); });
+  // Launch all test groups sequentially to avoid resource contention on emulator
+  // std::vector<std::thread> threads;
+  auto startSuite = [](const char* suiteName, void (*suite)()) {
+    runSuiteSafely(suiteName, suite);
   };
 
   startSuite("test_authentication", test_authentication);
