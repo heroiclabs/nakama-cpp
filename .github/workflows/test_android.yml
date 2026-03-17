@@ -40,40 +40,8 @@ jobs:
         run: docker compose -f integrationtests/server/docker-compose.yml up -d --build --wait
         working-directory: nakama-cpp
 
-      - name: Configure & build native test libs
-        run: |
-          # vcpkg uses ANDROID_NDK_HOME env var to find the NDK toolchain
-          cmake --preset "$CMAKE_PRESET" \
-            -DBUILD_TESTING=ON
-
-          cmake --build "build/$CMAKE_PRESET" --config Debug \
-            --target nakama-sdk nakama-test
-        working-directory: nakama-cpp
-
-      - name: Stage native libs into jniLibs
-        run: |
-          jni_dir="integrationtests/android/jniLibs/$ABI"
-          mkdir -p "$jni_dir"
-
-          cp "build/$CMAKE_PRESET/Debug/libnakama-sdk.so" "$jni_dir/"
-          cp "build/$CMAKE_PRESET/integrationtests/Debug/libnakama-test.so" "$jni_dir/"
-
-          # Copy libc++_shared.so from NDK
-          triple="aarch64-linux-android"
-          stl_lib="$ANDROID_HOME/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/${triple}/libc++_shared.so"
-          cp "$stl_lib" "$jni_dir/"
-        working-directory: nakama-cpp
-
-      - name: Build test APK
-        run: ./gradlew assembleCustomDebugType -Pabi="$ABI" --no-daemon
-        working-directory: nakama-cpp/integrationtests/android
-
-      - name: Create AVD
-        run: |
-          echo "no" | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd \
-            --name test_avd \
-            --package "system-images;android-28;google_apis;x86_64" \
-            --force
+      - name: Install Task
+        run: npm install -g @go-task/cli
 
       - name: Run tests on emulator
         uses: reactivecircus/android-emulator-runner@v2
@@ -81,63 +49,17 @@ jobs:
           api-level: 28
           target: google_apis
           arch: x86_64
-          avd-name: test_avd
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -memory 2048
           disable-animations: true
           script: |
-            APK="nakama-cpp/integrationtests/android/build/outputs/apk/customDebugType/nakamatest-customDebugType.apk"
-            PACKAGE="com.heroiclabs.nakamatest"
-            ACTIVITY="${PACKAGE}/.MainActivity"
-            TIMEOUT=300
-            LOG_TAG="nakama"
-
             # Reverse-forward Nakama server ports into emulator
+            # so the test app can find the server running on the host
             for port in 7349 7350 7351; do
               adb reverse tcp:$port tcp:$port
             done
 
-            # Install APK
-            adb uninstall "$PACKAGE" 2>/dev/null || true
-            adb install -r "$APK"
-
-            # Clear logcat, launch app
-            adb logcat -c
-            adb shell am start -n "$ACTIVITY"
-
-            # Stream logcat output and watch for result
-            logfile="logcat-output.tmp"
-            > "$logfile"
-            adb logcat -s "${LOG_TAG}:V" -v raw > "$logfile" 2>/dev/null &
-            logcat_pid=$!
-            trap 'rm -f "$logfile"; kill $logcat_pid 2>/dev/null || true' EXIT
-
-            result=""
-            SECONDS=0
-            last_line=0
-            while [ "$SECONDS" -lt "$TIMEOUT" ]; do
-              line_num=0
-              while IFS= read -r line; do
-                line_num=$((line_num + 1))
-                [ "$line_num" -le "$last_line" ] && continue
-                echo "$line"
-                if [[ "$line" == *"Tests failed: 0"* ]]; then
-                  result="passed"
-                elif [[ "$line" == *"Tests failed:"* ]]; then
-                  result="failed"
-                fi
-              done < "$logfile"
-              last_line=$line_num
-              [ -n "$result" ] && break
-              sleep 1
-            done
-
-            kill $logcat_pid 2>/dev/null || true
-            echo "---"
-
-            if [ -z "$result" ]; then
-              echo "TIMEOUT: Tests did not complete within ${TIMEOUT}s."; exit 1
-            elif [ "$result" = "passed" ]; then
-              echo "ALL TESTS PASSED"; exit 0
-            else
-              echo "TESTS FAILED"; exit 1
-            fi
+            # We pass ABI and additional CMake flags to solve the CURL mismatch
+            # CMAKE_ANDROID_ARCH_ABI is the key for CMake's built-in Android support
+            cd nakama-cpp
+            task test-android ABI=$ABI \
+                 CMAKE_EXTRA="-DCMAKE_ANDROID_ARCH_ABI=$ABI -DANDROID_ABI=$ABI"
