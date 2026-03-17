@@ -52,6 +52,8 @@ runs:
           --sdk_root="$ANDROID_HOME" \
           "${packages[@]}"
 
-    - name: Add CMake to PATH
+    - name: Set Android environment variables
       shell: bash
-      run: echo "$ANDROID_HOME/cmake/${{ inputs.cmake-version }}/bin" >> "$GITHUB_PATH"
+      run: |
+        echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/${{ inputs.ndk-version }}" >> "$GITHUB_ENV"
+        echo "$ANDROID_HOME/cmake/${{ inputs.cmake-version }}/bin" >> "$GITHUB_PATH"

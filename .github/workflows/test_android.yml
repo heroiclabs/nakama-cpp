@@ -40,23 +40,23 @@ jobs:
         run: docker compose -f integrationtests/server/docker-compose.yml up -d --build --wait
         working-directory: nakama-cpp
 
-      - name: Configure & build test
+      - name: Configure & build native test libs
         run: |
+          # vcpkg uses ANDROID_NDK_HOME env var to find the NDK toolchain
           cmake --preset "$CMAKE_PRESET" \
-            -DBUILD_TESTING=ON \
-            -DCMAKE_ANDROID_NDK="$ANDROID_HOME/ndk/27.2.12479018"
+            -DBUILD_TESTING=ON
 
-          cmake --build "build/$CMAKE_PRESET" --config Release \
+          cmake --build "build/$CMAKE_PRESET" --config Debug \
             --target nakama-sdk nakama-test
         working-directory: nakama-cpp
 
-      - name: Stage tests into jniLibs
+      - name: Stage native libs into jniLibs
         run: |
           jni_dir="integrationtests/android/jniLibs/$ABI"
           mkdir -p "$jni_dir"
 
-          cp "build/$CMAKE_PRESET/Release/libnakama-sdk.so" "$jni_dir/"
-          cp "build/$CMAKE_PRESET/integrationtests/Release/libnakama-test.so" "$jni_dir/"
+          cp "build/$CMAKE_PRESET/Debug/libnakama-sdk.so" "$jni_dir/"
+          cp "build/$CMAKE_PRESET/integrationtests/Debug/libnakama-test.so" "$jni_dir/"
 
           # Copy libc++_shared.so from NDK
           triple="aarch64-linux-android"
