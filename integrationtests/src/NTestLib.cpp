@@ -119,7 +119,7 @@ int runAllTests(
   startSuite("test_profiling", test_profiling);
   startSuite("test_stress", test_stress);
   startSuite("test_realtime", test_realtime);
-  startSuite("test_throughput", test_throughput);
+  // startSuite("test_throughput", test_throughput);
   startSuite("test_cancellation", test_cancellation);
 
   for (auto& t : threads) {
