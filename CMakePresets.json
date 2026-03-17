@@ -115,6 +115,14 @@
       }
     },
     {
+      "name": "android-x86_64",
+      "inherits": ["android-default"],
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x86-64-android-heroic",
+        "ANDROID_ABI": "x86_64"
+      }
+    },
+    {
       "name": "linux-amd64",
       "inherits": ["default"],
       "generator": "Ninja Multi-Config",

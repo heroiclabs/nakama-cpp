@@ -180,6 +180,7 @@ tasks:
         case "{{.ABI}}" in
           arm64-v8a)   triple="aarch64-linux-android";;
           armeabi-v7a) triple="arm-linux-androideabi";;
+          x86_64)      triple="x86_64-linux-android";;
         esac
         stl_lib="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/${HOST_OS}-x86_64/sysroot/usr/lib/${triple}/libc++_shared.so"
         if [ -f "$stl_lib" ]; then
