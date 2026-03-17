@@ -30,7 +30,7 @@ jobs:
           ndk-version: 27.2.12479018
           cmake-version: 4.0.2
           install-emulator: true
-          system-image: "system-images;android-28;google_apis;x86_64"
+          system-image: "system-images;android-29;google_apis;x86_64"
       
       - uses: ./nakama-cpp/.github/actions/setup-vcpkg-android
         with:
@@ -46,10 +46,11 @@ jobs:
       - name: Run tests on emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 28
+          api-level: 29
           target: google_apis
           arch: x86_64
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -memory 2048
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -memory 3072 -cores 2
           disable-animations: true
           script: |
-            set -xe && for port in 7349 7350 7351; do adb reverse tcp:$port tcp:$port; done && cd nakama-cpp && task test-android ABI=$ABI CMAKE_EXTRA="-DCMAKE_ANDROID_ARCH_ABI=$ABI -DANDROID_ABI=$ABI"
+            set -xe && for port in 7349 7350 7351; do adb reverse tcp:$port tcp:$port; done && cd nakama-cpp && sleep 30 && task test-android ABI=$ABI CMAKE_EXTRA="-DCMAKE_ANDROID_ARCH_ABI=$ABI -DANDROID_ABI=$ABI"
