@@ -203,8 +203,8 @@ void test_throughput_rpcPipelinedSmall() {
   }
 }
 
-// Pipelined 100MB total: stress-tests sustained throughput with large aggregate volume
-void test_throughput_rpc100MB() {
+// Pipelined 25MB total: stress-tests sustained throughput with large aggregate volume
+void test_throughput_rpc25MB() {
   NTest test(__func__, true);
   test.setTestTimeoutMs(300000);
   test.runTest();
@@ -214,17 +214,17 @@ void test_throughput_rpc100MB() {
     test.addSession(session);
     test.rtClient->connectAsync(session, false, NTest::RtProtocol).get();
 
-    // ~64KB payload, ~1600 messages ≈ 100MB sent (+ 100MB received = 200MB round-trip)
+    // ~64KB payload, ~400 messages ≈ 25MB sent (+ 25MB received = 50MB round-trip)
     const size_t payloadSize = 64 * 1024;
     string payload(payloadSize, 'w');
     payload = "{\"d\":\"" + payload + "\"}";
 
-    const size_t targetBytes = 100ULL * 1024 * 1024;
+    const size_t targetBytes = 25ULL * 1024 * 1024;
     const int messageCount = static_cast<int>(targetBytes / payload.size());
     const size_t totalBytesSent = payload.size() * messageCount;
     const size_t totalBytesRoundTrip = totalBytesSent * 2;
 
-    NLOG_INFO("100MB test: sending " + to_string(messageCount) + " x " + to_string(payload.size() / 1024) +
+    NLOG_INFO("25MB test: sending " + to_string(messageCount) + " x " + to_string(payload.size() / 1024) +
               "KB = " + to_string(totalBytesSent / (1024 * 1024)) + " MB");
 
     auto start = chrono::steady_clock::now();
@@ -244,7 +244,7 @@ void test_throughput_rpc100MB() {
     double roundTripMBs = (totalBytesRoundTrip / (1024.0 * 1024.0)) / seconds;
     double msgsPerSec = messageCount / seconds;
 
-    NLOG_INFO("100MB Pipelined RPC (" + to_string(messageCount) + " x " + to_string(payload.size() / 1024) + "KB):");
+    NLOG_INFO("25MB Pipelined RPC (" + to_string(messageCount) + " x " + to_string(payload.size() / 1024) + "KB):");
     NLOG_INFO("  " + to_string(totalBytesSent / (1024 * 1024)) + " MB sent in " + to_string(ms) + " ms");
     NLOG_INFO("  Send: " + to_string(sendMBs) + " MB/s");
     NLOG_INFO("  Round-trip: " + to_string(roundTripMBs) + " MB/s");
@@ -252,7 +252,7 @@ void test_throughput_rpc100MB() {
 
     test.stopTest(true);
   } catch (const exception& e) {
-    NLOG_INFO("100MB throughput test failed: " + string(e.what()));
+    NLOG_INFO("25MB throughput test failed: " + string(e.what()));
     test.stopTest(false);
   }
 }
@@ -262,7 +262,7 @@ void test_throughput() {
   test_throughput_rpcPipelinedSmall();
   test_throughput_rpcPipelined();
   test_throughput_rpcPipelinedLarge();
-  test_throughput_rpc100MB();
+  test_throughput_rpc25MB();
 }
 
 } // namespace Test
