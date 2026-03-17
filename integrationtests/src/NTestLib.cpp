@@ -122,9 +122,6 @@ int runAllTests(
   // startSuite("test_throughput", test_throughput);
   startSuite("test_cancellation", test_cancellation);
 
-  for (auto& t : threads) {
-    t.join();
-  }
 
   // total stats
   uint32_t total = g_runTestsCount.load();
