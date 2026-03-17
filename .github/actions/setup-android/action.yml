@@ -48,8 +48,8 @@ runs:
           fi
         fi
 
-        # Accept licenses
-        yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" --licenses
+        # Accept licenses (wrap in subshell/ignore error to avoid pipefail issues with 'yes')
+        (yes || true) | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" --licenses || true
 
         "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
           --sdk_root="$ANDROID_HOME" \
