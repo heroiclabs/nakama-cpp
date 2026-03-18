@@ -46,7 +46,7 @@ jobs:
         run: npm install -g @go-task/cli
 
       - name: Run tests on emulator
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@e89f39f1abbbd05b1113a29cf4db69e7540cae5a
         with:
           api-level: 29
           target: google_apis
