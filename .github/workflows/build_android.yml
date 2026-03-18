@@ -3,7 +3,7 @@ on: [workflow_call, workflow_dispatch]
 
 jobs:
   build_android:
-    timeout-minutes: 60
+    timeout-minutes: 30
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout nakama-cpp
@@ -36,22 +36,3 @@ jobs:
           name: nakama-sdk-android-aar
           path: nakama-cpp/android/nakama-sdk/build/outputs/aar/*.aar
           if-no-files-found: error
-
-      # - name: Install NDK & CMake
-      #   run: |
-      #     # On GitHub ubuntu runners ANDROID_HOME is set as a shell env var.
-      #     # sdkmanager is NOT on PATH, use the full path.
-      #     "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
-      #       --sdk_root="$ANDROID_HOME" \
-      #       "ndk;27.2.12479018" \
-      #       "cmake;4.0.2"
-
-      # - name: Add CMake to PATH
-      #   run: echo "$ANDROID_HOME/cmake/4.0.2/bin" >> "$GITHUB_PATH"
-
-      # - name: Set VCPKG_ROOT
-      #   run: echo "VCPKG_ROOT=$GITHUB_WORKSPACE/nakama-cpp/submodules/vcpkg" >> $GITHUB_ENV
-
-      # - name: Bootstrap vcpkg
-      #   run: ./bootstrap-vcpkg.sh -disableMetrics
-      #   working-directory: nakama-cpp/submodules/vcpkg
