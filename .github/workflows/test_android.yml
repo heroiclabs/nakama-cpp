@@ -1,0 +1,63 @@
+name: Test Android
+# on: [workflow_call, workflow_dispatch]
+on:
+  push:
+    branches:
+      - ci-actions-android
+
+jobs:
+  test_android:
+    timeout-minutes: 90
+    runs-on: ubuntu-22.04
+    env:
+      ABI: x86_64
+      CMAKE_PRESET: android-x86_64
+
+    steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Checkout nakama-cpp
+        uses: actions/checkout@v4
+        with:
+          path: nakama-cpp
+          submodules: false
+
+      - name: Checkout vcpkg submodule
+        run: |
+          git submodule update --init --filter=blob:none -- submodules/vcpkg
+        working-directory: nakama-cpp
+
+      - uses: ./nakama-cpp/.github/actions/setup-android
+        with:
+          ndk-version: 27.2.12479018
+          cmake-version: 4.0.2
+          install-emulator: true
+          system-image: "system-images;android-29;google_apis;x86_64"
+      
+      - uses: ./nakama-cpp/.github/actions/setup-vcpkg-android
+        with:
+          vcpkg-path: nakama-cpp/submodules/vcpkg
+
+      - name: Start Nakama server
+        run: docker compose -f integrationtests/server/docker-compose.yml up -d --build --wait
+        working-directory: nakama-cpp
+
+      - name: Install Task
+        run: npm install -g @go-task/cli
+
+      - name: Run tests on emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          target: google_apis
+          arch: x86_64
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -memory 4096 -cores 2
+          disable-animations: true
+          timeout: 50
+          script: |
+            set -xe && for port in 7349 7350 7351; do adb reverse tcp:$port tcp:$port; done && cd nakama-cpp && sleep 30 && task test-android ABI=$ABI CMAKE_EXTRA="-DCMAKE_ANDROID_ARCH_ABI=$ABI -DANDROID_ABI=$ABI"

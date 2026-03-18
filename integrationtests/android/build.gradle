@@ -20,11 +20,11 @@ buildscript {
     }
 }
 plugins {
-    id('com.android.application') version '7.1.1'
+    id('com.android.application') version '7.3.0'
 }
 
 def abi = (project.findProperty("abi") ?: "arm64-v8a").toString()
-def supportedAbis = ["arm64-v8a", "armeabi-v7a"]
+def supportedAbis = ["arm64-v8a", "armeabi-v7a", "x86_64"]
 if (!supportedAbis.contains(abi)) {
     throw new GradleException("Unsupported abi '${abi}'. Supported values: ${supportedAbis}")
 }
@@ -40,11 +40,13 @@ repositories {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdk 34
+    ndkVersion "27.2.12479018"
+
     defaultConfig {
         applicationId "com.heroiclabs.nakamatest"
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdk 21
+        targetSdk 34
         versionCode 1
         versionName '1.0'
         ndk {
