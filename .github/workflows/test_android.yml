@@ -56,4 +56,4 @@ jobs:
           disable-animations: true
           timeout: 50
           script: |
-            set -xe && for port in 7349 7350 7351; do adb reverse tcp:$port tcp:$port; done && cd nakama-cpp && sleep 30 && task test-android ABI=$ABI CMAKE_EXTRA="-DCMAKE_ANDROID_ARCH_ABI=$ABI -DANDROID_ABI=$ABI"
+            set -xe && for port in 7349 7350 7351; do adb reverse tcp:$port tcp:$port; done && cd nakama-cpp && sleep 30 && task test-android ABI=$ABI
