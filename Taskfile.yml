@@ -167,7 +167,7 @@ tasks:
           -DCMAKE_MAKE_PROGRAM="$(command -v ninja)"
 
         cmake --build "build/{{.CMAKE_PRESET}}" --config Debug \
-          --target nakama-sdk nakama-test -- -j 1
+          --target nakama-sdk nakama-test
 
         # --- Stage native libraries for Gradle ---
         echo "=== Staging native libraries ==="
