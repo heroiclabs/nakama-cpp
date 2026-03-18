@@ -1,17 +1,13 @@
 name: Build All
-# on: [workflow_dispatch]
-on:
-  push:
-    branches:
-      - ci-fix-android
+on: [workflow_dispatch]
 jobs:
   build_android:
     uses: ./.github/workflows/build_android.yml
-  # build_ios:
-  #   uses: ./.github/workflows/build_ios.yml
+  build_ios:
+    uses: ./.github/workflows/build_ios.yml
   build_linux:
     uses: ./.github/workflows/build_linux.yml
-  # build_osx:
-  #   uses: ./.github/workflows/build_osx.yml
-  # build_windows:
-  #   uses: ./.github/workflows/build_windows.yml
+  build_osx:
+    uses: ./.github/workflows/build_osx.yml
+  build_windows:
+    uses: ./.github/workflows/build_windows.yml
