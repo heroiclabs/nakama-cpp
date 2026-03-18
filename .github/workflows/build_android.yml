@@ -1,9 +1,5 @@
 name: Build Android
 on: [workflow_call, workflow_dispatch]
-# on:
-#   push:
-#     branches:
-#       - ci-actions-android
 
 jobs:
   build_android:
