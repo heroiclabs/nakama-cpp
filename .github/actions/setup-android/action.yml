@@ -34,17 +34,22 @@ runs:
       run: |
         set -euo pipefail
 
-        # Initialize ANDROID_HOME if not set (standard on x86, missing on ARM)
+        # Initialize ANDROID_HOME if not set
         if [ -z "${ANDROID_HOME:-}" ]; then
           export ANDROID_HOME="$HOME/android-sdk"
           mkdir -p "$ANDROID_HOME"
         fi
         echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
 
+        HOST_ARCH=$(uname -m)
+        echo "Host architecture: $HOST_ARCH"
+
         # Install command-line tools if missing
         if [ ! -d "$ANDROID_HOME/cmdline-tools/latest" ]; then
           echo "Downloading Android Command Line Tools..."
           mkdir -p "$ANDROID_HOME/cmdline-tools"
+          # Note: Google only provides one 'linux' zip, which contains x86_64 binaries.
+          # However, the core tools (sdkmanager, avdmanager) are Java-based and run on ARM64.
           curl -LSs https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip
           unzip -q cmdline-tools.zip -d "$ANDROID_HOME/cmdline-tools"
           mv "$ANDROID_HOME/cmdline-tools/cmdline-tools" "$ANDROID_HOME/cmdline-tools/latest"

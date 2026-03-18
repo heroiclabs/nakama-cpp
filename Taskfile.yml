@@ -167,7 +167,7 @@ tasks:
           -DCMAKE_MAKE_PROGRAM="$(command -v ninja)"
 
         cmake --build "build/{{.CMAKE_PRESET}}" --config Debug \
-          --target nakama-sdk nakama-test
+          --target nakama-sdk nakama-test -- -j 1
 
         # --- Stage native libraries for Gradle ---
         echo "=== Staging native libraries ==="
@@ -181,11 +181,11 @@ tasks:
           arm64-v8a)   triple="aarch64-linux-android";;
           armeabi-v7a) triple="arm-linux-androideabi";;
         esac
-        stl_lib="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/${HOST_OS}-x86_64/sysroot/usr/lib/${triple}/libc++_shared.so"
-        if [ -f "$stl_lib" ]; then
+        stl_lib=$(find "$ANDROID_NDK_HOME/toolchains/llvm/prebuilt" -maxdepth 2 -name "libc++_shared.so" | grep "$triple" | head -n 1)
+        if [ -n "$stl_lib" ] && [ -f "$stl_lib" ]; then
           cp "$stl_lib" "$jni_dir/"
         else
-          echo "Warning: libc++_shared.so not found at $stl_lib"
+          echo "Warning: libc++_shared.so not found for $triple"
         fi
 
         # --- Build APK ---

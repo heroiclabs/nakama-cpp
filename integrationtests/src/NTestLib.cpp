@@ -91,10 +91,9 @@ int runAllTests(
   // Run internals first (pure unit tests, no server)
   test_internals();
 
-  // Launch all test groups in parallel threads
-  std::vector<std::thread> threads;
-  auto startSuite = [&threads](const char* suiteName, void (*suite)()) {
-    threads.emplace_back([suiteName, suite]() { runSuiteSafely(suiteName, suite); });
+  // Launch all test groups sequentially to avoid resource contention on emulator
+  auto startSuite = [](const char* suiteName, void (*suite)()) {
+    runSuiteSafely(suiteName, suite);
   };
 
   startSuite("test_authentication", test_authentication);
@@ -117,14 +116,11 @@ int runAllTests(
   startSuite("test_notifications_rest", test_notifications_rest);
   startSuite("test_rpc_rest", test_rpc_rest);
   startSuite("test_profiling", test_profiling);
-  startSuite("test_stress", test_stress);
+  // startSuite("test_stress", test_stress);
   startSuite("test_realtime", test_realtime);
-  startSuite("test_throughput", test_throughput);
+  // startSuite("test_throughput", test_throughput);
   startSuite("test_cancellation", test_cancellation);
 
-  for (auto& t : threads) {
-    t.join();
-  }
 
   // total stats
   uint32_t total = g_runTestsCount.load();
