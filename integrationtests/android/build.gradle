@@ -16,11 +16,11 @@
 
 buildscript {
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:8.11.0'
     }
 }
 plugins {
-    id('com.android.application') version '7.3.0'
+    id('com.android.application') version '8.11.0'
 }
 
 def abi = (project.findProperty("abi") ?: "arm64-v8a").toString()
@@ -41,8 +41,14 @@ repositories {
 }
 
 android {
+    namespace 'com.heroiclabs.nakamatest'
     compileSdk 34
     ndkVersion "27.2.12479018"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 
     defaultConfig {
         applicationId "com.heroiclabs.nakamatest"
