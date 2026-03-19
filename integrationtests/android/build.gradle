@@ -34,12 +34,6 @@ dependencies {
     implementation project(':nakama-sdk')
 }
 
-repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
-}
-
 android {
     namespace 'com.heroiclabs.nakamatest'
     compileSdk 34

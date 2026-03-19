@@ -9,3 +9,11 @@ pluginManagement {
 rootProject.name = 'nakamatest'
 include ':nakama-sdk'
 project(':nakama-sdk').projectDir = new File(settingsDir, '../../android/nakama-sdk')
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
