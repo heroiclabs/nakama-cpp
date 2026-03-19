@@ -4,6 +4,11 @@ plugins {
     id("com.android.library")
 }
 
+repositories {
+    google()
+    mavenCentral()
+}
+
 // Subproject needs to be named 'nakama-sdk' 
 // because that is how dependent CMake projects will find us
 assertSubprojectName("nakama-sdk")
