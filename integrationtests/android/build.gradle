@@ -31,6 +31,7 @@ if (!supportedAbis.contains(abi)) {
 
 dependencies {
     implementation 'androidx.annotation:annotation:1.7.1'
+    implementation project(':nakama-sdk')
 }
 
 repositories {
@@ -58,7 +59,6 @@ android {
     // and the project's vcpkg-based toolchain.
     sourceSets {
         main {
-            java.srcDirs += '../../android/nakama-sdk/src/main/java'
             jniLibs.srcDirs = ['jniLibs']
         }
     }
