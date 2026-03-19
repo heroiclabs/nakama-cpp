@@ -45,6 +45,7 @@ cd ../../
 
 
  # --- Resolve device serial ---
+ADB="${ADB:-adb}"
 PACKAGE="com.heroiclabs.nakamatest"
         ACTIVITY="${PACKAGE}/.MainActivity"
         TIMEOUT=300
