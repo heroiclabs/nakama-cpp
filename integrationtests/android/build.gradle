@@ -71,6 +71,7 @@ android {
     buildTypes {
         customDebugType {
             debuggable true
+            matchingFallbacks = ['debug', 'release']
         }
         release {
             minifyEnabled false
