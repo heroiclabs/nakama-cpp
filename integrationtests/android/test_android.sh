@@ -18,8 +18,9 @@ cmake --build "build/$CMAKE_PRESET" --config Debug --target nakama-test
 jni_dir="integrationtests/android/jniLibs/$ABI"
 mkdir -p "$jni_dir"
 
-# ONLY stage the test library. The SDK is handled by Gradle.
+# ONLY stage the test and SDK libraries.
 cp "build/$CMAKE_PRESET/integrationtests/Debug/libnakama-test.so" "$jni_dir/"
+cp "build/$CMAKE_PRESET/Debug/libnakama-sdk.so" "$jni_dir/"
 
 case "$ABI" in
   arm64-v8a)   triple="aarch64-linux-android";;
@@ -131,7 +132,7 @@ PACKAGE="com.heroiclabs.nakamatest"
 
         logfile="logcat-output.tmp"
         > "$logfile"
-        "$ADB" -s "$serial" logcat -s "${LOG_TAG}:V" -v raw > "$logfile" 2>/dev/null &
+        "$ADB" -s "$serial" logcat "nakama:V" "AndroidRuntime:E" "ActivityManager:E" "*:S" -v raw > "$logfile" 2>/dev/null &
         logcat_pid=$!
         trap 'rm -f "$logfile"; kill $logcat_pid 2>/dev/null || true' EXIT
 
