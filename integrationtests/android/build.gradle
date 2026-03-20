@@ -65,6 +65,7 @@ android {
     buildTypes {
         customDebugType {
             debuggable true
+            signingConfig signingConfigs.debug
             matchingFallbacks = ['debug', 'release']
         }
         release {
