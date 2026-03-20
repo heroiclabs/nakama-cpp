@@ -66,6 +66,7 @@ android {
                     "-DANDROID_STL=c++_shared",
                     "-DINSIDE_GRADLE=ON",  // this is picked up by our CMake to interpose VCPKG toolchain
                     "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON",
+                    "-DCMAKE_TOOLCHAIN_FILE=${project.rootDir}/../submodules/vcpkg/scripts/buildsystems/vcpkg.cmake",
                 )
                 targets("nakama-sdk")
             }
@@ -94,7 +95,7 @@ android {
     // This is a prefab-only AAR, remove all jniLibs , which are just stripped version
     // of what we already include in prefab
     packaging {
-         jniLibs.excludes += ("**/*.so")
+         // jniLibs.excludes += ("**/*.so")
     }
 
     buildToolsVersion = "36.0.0"

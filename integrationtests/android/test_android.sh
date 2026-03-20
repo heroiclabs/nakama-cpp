@@ -123,8 +123,8 @@ PACKAGE="com.heroiclabs.nakamatest"
 
         # --- Clear logcat and launch ---
         adb_cmd logcat -c
-        echo "Launching $ACTIVITY..."
-        adb_cmd shell am start -n "$ACTIVITY"
+        echo "Launching $PACKAGE via monkey..."
+        adb_cmd shell monkey -p "$PACKAGE" -c android.intent.category.LAUNCHER 1
 
         # --- Monitor logcat for test results ---
         echo "Waiting for test results (timeout: ${TIMEOUT}s)..."
@@ -132,7 +132,7 @@ PACKAGE="com.heroiclabs.nakamatest"
 
         logfile="logcat-output.tmp"
         > "$logfile"
-        "$ADB" -s "$serial" logcat "nakama:V" "AndroidRuntime:E" "ActivityManager:E" "*:S" -v raw > "$logfile" 2>/dev/null &
+        "$ADB" -s "$serial" logcat "libnakama-test:V" "nakama:V" "AndroidRuntime:E" "ActivityManager:E" "*:S" -v raw > "$logfile" 2>/dev/null &
         logcat_pid=$!
         trap 'rm -f "$logfile"; kill $logcat_pid 2>/dev/null || true' EXIT
 
