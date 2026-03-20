@@ -50,7 +50,7 @@ PACKAGE="com.heroiclabs.nakamatest"
         ACTIVITY="${PACKAGE}/.MainActivity"
         TIMEOUT=300
         LOG_TAG="nakama"
-        APK_PATH="integrationtests/android/build/outputs/apk/customDebugType/nakamatest-customDebugType.apk"
+        APK_PATH=$(ls integrationtests/android/build/outputs/apk/customDebugType/*.apk 2>/dev/null | head -n 1)
 
         parse_devices() {
           devices=()
