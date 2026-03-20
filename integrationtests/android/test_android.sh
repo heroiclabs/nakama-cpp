@@ -85,7 +85,7 @@ PACKAGE="com.heroiclabs.nakamatest"
             echo "Waiting for device to come online..."
             "$ADB" wait-for-device
             while [[ "$("$ADB" shell getprop sys.boot_completed 2>/dev/null)" != *"1"* ]]; do
-              _sleep 2
+              sleep 2
             done
             echo "Emulator booted."
             parse_devices
@@ -155,7 +155,7 @@ PACKAGE="com.heroiclabs.nakamatest"
           done < "$logfile"
           last_line=$line_num
           [ -n "$result" ] && break
-          _sleep 1
+          sleep 1
         done
 
         kill $logcat_pid 2>/dev/null || true
