@@ -7,7 +7,7 @@ set -eo pipefail
 : "${ANDROID_NDK_HOME:?Set ANDROID_NDK_HOME}"
 
 echo "=== Building C++ Test Library ==="
-cmake --preset "$CMAKE_PRESET" \
+time cmake --preset "$CMAKE_PRESET" \
   -DBUILD_TESTING=ON \
   -DCMAKE_ANDROID_NDK="$ANDROID_NDK_HOME" \
   -DCMAKE_ANDROID_ARCH_ABI="$ABI" \
@@ -35,12 +35,12 @@ fi
 
 echo "=== Building Official Android SDK (Release) ==="
 cd android
-./gradlew assembleRelease --no-daemon
+time ./gradlew assembleRelease -Pabi="$ABI" --no-daemon
 cd ..
 
 echo "=== Building Integration Tests ==="
 cd integrationtests/android
-./gradlew assembleCustomDebugType --no-daemon
+time ./gradlew assembleCustomDebugType -Pabi="$ABI" --no-daemon
 cd ../../
 
 
