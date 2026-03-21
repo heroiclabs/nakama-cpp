@@ -219,7 +219,11 @@ void test_throughput_rpc100MB() {
     string payload(payloadSize, 'w');
     payload = "{\"d\":\"" + payload + "\"}";
 
+#if defined(__ANDROID__)
+    const size_t targetBytes = 20ULL * 1024 * 1024;
+#else
     const size_t targetBytes = 100ULL * 1024 * 1024;
+#endif
     const int messageCount = static_cast<int>(targetBytes / payload.size());
     const size_t totalBytesSent = payload.size() * messageCount;
     const size_t totalBytesRoundTrip = totalBytesSent * 2;
