@@ -38,6 +38,17 @@ jobs:
       - name: Install Task
         run: npm install -g @go-task/cli
 
+      - name: Build Release AAR
+        run: ./gradlew :nakama-sdk:assembleRelease -Pabi=$ABI
+        working-directory: nakama-cpp/android
+
+      - name: Upload Release AAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: nakama-sdk-android-aar-${{ env.ABI }}
+          path: nakama-cpp/android/nakama-sdk/build/outputs/aar/*-release.aar
+          if-no-files-found: error
+
       - name: Run tests on emulator
         uses: reactivecircus/android-emulator-runner@e89f39f1abbbd05b1113a29cf4db69e7540cae5a
         with:
