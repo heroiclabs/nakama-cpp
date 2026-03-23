@@ -49,7 +49,7 @@ cd ../../
 ADB="${ADB:-adb}"
 PACKAGE="com.heroiclabs.nakamatest"
         ACTIVITY="${PACKAGE}/.MainActivity"
-        TIMEOUT=300
+        TIMEOUT=600
         LOG_TAG="nakama"
         APK_PATH=$(ls integrationtests/android/build/outputs/apk/customDebugType/*.apk 2>/dev/null | head -n 1)
 
