@@ -1,9 +1,5 @@
 name: Test Android
-# on: [workflow_call, workflow_dispatch, pull_request]
-on:
-  push:
-    branches:
-      - android-sh
+on: [workflow_call, workflow_dispatch, pull_request]
 jobs:
   test_android:
     timeout-minutes: 120
