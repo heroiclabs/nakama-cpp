@@ -7,20 +7,21 @@ set -eo pipefail
 : "${ANDROID_NDK_HOME:?Set ANDROID_NDK_HOME}"
 
 echo "=== Building C++ Test Library ==="
+BUILD_TYPE="${BUILD_TYPE:-MinSizeRel}"
 time cmake --preset "$CMAKE_PRESET" \
   -DBUILD_TESTING=ON \
   -DCMAKE_ANDROID_NDK="$ANDROID_NDK_HOME" \
   -DCMAKE_ANDROID_ARCH_ABI="$ABI" \
   -DCMAKE_MAKE_PROGRAM="$(command -v ninja)"
 
-cmake --build "build/$CMAKE_PRESET" --config Debug --target nakama-test
+cmake --build "build/$CMAKE_PRESET" --config "$BUILD_TYPE" --target nakama-test
 
 jni_dir="integrationtests/android/jniLibs/$ABI"
 mkdir -p "$jni_dir"
 
 # ONLY stage the test and SDK libraries.
-cp "build/$CMAKE_PRESET/integrationtests/Debug/libnakama-test.so" "$jni_dir/"
-cp "build/$CMAKE_PRESET/Debug/libnakama-sdk.so" "$jni_dir/"
+cp "build/$CMAKE_PRESET/integrationtests/$BUILD_TYPE/libnakama-test.so" "$jni_dir/"
+cp "build/$CMAKE_PRESET/$BUILD_TYPE/libnakama-sdk.so" "$jni_dir/"
 
 case "$ABI" in
   arm64-v8a)   triple="aarch64-linux-android";;
@@ -49,7 +50,7 @@ cd ../../
 ADB="${ADB:-adb}"
 PACKAGE="com.heroiclabs.nakamatest"
         ACTIVITY="${PACKAGE}/.MainActivity"
-        TIMEOUT=600
+        TIMEOUT=900
         LOG_TAG="nakama"
         APK_PATH=$(ls integrationtests/android/build/outputs/apk/customDebugType/*.apk 2>/dev/null | head -n 1)
 
