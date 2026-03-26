@@ -11,6 +11,14 @@ inputs:
   cmake-version:
     description: 'Android CMake version'
     required: true
+  compile-sdk:
+    description: 'Android compileSdk version (used to install platforms;android-<compile-sdk>)'
+    required: false
+    default: '34'
+  build-tools-version:
+    description: 'Android buildToolsVersion (used to install build-tools;<build-tools-version>)'
+    required: false
+    default: '36.0.0'
   install-emulator:
     description: 'Whether to install emulator packages'
     required: false
@@ -54,6 +62,8 @@ runs:
         SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
 
         packages=(
+          "platforms;android-${{ inputs.compile-sdk }}"
+          "build-tools;${{ inputs.build-tools-version }}"
           "ndk;${{ inputs.ndk-version }}"
           "cmake;${{ inputs.cmake-version }}"
         )
