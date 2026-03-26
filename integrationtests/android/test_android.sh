@@ -16,6 +16,12 @@ time cmake --preset "$CMAKE_PRESET" \
 
 cmake --build "build/$CMAKE_PRESET" --config "$BUILD_TYPE" --target nakama-test
 
+# Build the official SDK AAR first — it must exist before we extract its .so below.
+echo "=== Building Official Android SDK (Release) ==="
+cd android
+time ./gradlew assembleRelease -Pabi="$ABI" --no-daemon
+cd ..
+
 jni_dir="integrationtests/android/jniLibs/$ABI"
 mkdir -p "$jni_dir"
 
@@ -29,10 +35,6 @@ cp "build/$CMAKE_PRESET/integrationtests/$BUILD_TYPE/libnakama-test.so" "$jni_di
 #   -DINSIDE_GRADLE=ON  (vcpkg toolchain interposition workaround)
 # Using the AAR's .so ensures the tested binary matches what ships to users.
 AAR_PATH="android/nakama-sdk/build/outputs/aar/nakama-sdk-release.aar"
-if [ ! -f "$AAR_PATH" ]; then
-  echo "Error: AAR not found at $AAR_PATH. Run './gradlew :nakama-sdk:assembleRelease' first."
-  exit 1
-fi
 unzip -jo "$AAR_PATH" "jni/$ABI/libnakama-sdk.so" -d "$jni_dir/"
 
 case "$ABI" in
@@ -46,11 +48,6 @@ stl_lib="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/${HOST_OS}-x86_64/sysroot/us
 if [ -f "$stl_lib" ]; then
   cp "$stl_lib" "$jni_dir/"
 fi
-
-echo "=== Building Official Android SDK (Release) ==="
-cd android
-time ./gradlew assembleRelease -Pabi="$ABI" --no-daemon
-cd ..
 
 echo "=== Building Integration Tests ==="
 cd integrationtests/android
