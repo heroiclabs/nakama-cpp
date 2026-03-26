@@ -19,9 +19,21 @@ cmake --build "build/$CMAKE_PRESET" --config "$BUILD_TYPE" --target nakama-test
 jni_dir="integrationtests/android/jniLibs/$ABI"
 mkdir -p "$jni_dir"
 
-# ONLY stage the test and SDK libraries.
+# Stage the test runner from the CMake build.
 cp "build/$CMAKE_PRESET/integrationtests/$BUILD_TYPE/libnakama-test.so" "$jni_dir/"
-cp "build/$CMAKE_PRESET/$BUILD_TYPE/libnakama-sdk.so" "$jni_dir/"
+
+# Stage the SDK .so from the Gradle AAR, NOT from the CMake build.
+# The Gradle build passes flags that the direct cmake --preset path does not:
+#   -DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON  (16 KB page alignment, required on Android 15+)
+#   -DANDROID_STL=c++_shared
+#   -DINSIDE_GRADLE=ON  (vcpkg toolchain interposition workaround)
+# Using the AAR's .so ensures the tested binary matches what ships to users.
+AAR_PATH="android/nakama-sdk/build/outputs/aar/nakama-sdk-release.aar"
+if [ ! -f "$AAR_PATH" ]; then
+  echo "Error: AAR not found at $AAR_PATH. Run './gradlew :nakama-sdk:assembleRelease' first."
+  exit 1
+fi
+unzip -jo "$AAR_PATH" "jni/$ABI/libnakama-sdk.so" -d "$jni_dir/"
 
 case "$ABI" in
   arm64-v8a)   triple="aarch64-linux-android";;
