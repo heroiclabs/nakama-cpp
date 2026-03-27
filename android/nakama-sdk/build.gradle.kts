@@ -94,7 +94,7 @@ android {
     // This is a prefab-only AAR, remove all jniLibs , which are just stripped version
     // of what we already include in prefab
     packaging {
-         jniLibs.excludes += ("**/*.so")
+         // jniLibs.excludes += ("**/*.so")
     }
 
     buildToolsVersion = "36.0.0"

@@ -1,0 +1,95 @@
+name: 'Setup Android'
+description: 'Sets up Java and Android SDK components'
+inputs:
+  java-version:
+    description: 'Java version'
+    required: false
+    default: '17'
+  ndk-version:
+    description: 'Android NDK version'
+    required: true
+  cmake-version:
+    description: 'Android CMake version'
+    required: true
+  compile-sdk:
+    description: 'Android compileSdk version (used to install platforms;android-<compile-sdk>)'
+    required: false
+    default: '34'
+  build-tools-version:
+    description: 'Android buildToolsVersion (used to install build-tools;<build-tools-version>)'
+    required: false
+    default: '36.0.0'
+  install-emulator:
+    description: 'Whether to install emulator packages'
+    required: false
+    default: 'false'
+  system-image:
+    description: 'Android system image package'
+    required: false
+    default: ''
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: ${{ inputs.java-version }}
+
+    - name: Install Android SDK packages
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        # Initialize ANDROID_HOME if not set (standard on x86, missing on ARM)
+        if [ -z "${ANDROID_HOME:-}" ]; then
+          export ANDROID_HOME="$HOME/android-sdk"
+          mkdir -p "$ANDROID_HOME"
+        fi
+        echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+
+        # Install command-line tools if missing
+        if [ ! -d "$ANDROID_HOME/cmdline-tools/latest" ]; then
+          echo "Downloading Android Command Line Tools..."
+          mkdir -p "$ANDROID_HOME/cmdline-tools"
+          curl -LSs https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip
+          unzip -q cmdline-tools.zip -d "$ANDROID_HOME/cmdline-tools"
+          mv "$ANDROID_HOME/cmdline-tools/cmdline-tools" "$ANDROID_HOME/cmdline-tools/latest"
+          rm cmdline-tools.zip
+        fi
+
+        SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+
+        packages=(
+          "platforms;android-${{ inputs.compile-sdk }}"
+          "build-tools;${{ inputs.build-tools-version }}"
+          "ndk;${{ inputs.ndk-version }}"
+          "cmake;${{ inputs.cmake-version }}"
+        )
+
+        #use emulator for test-android
+        if [ "${{ inputs.install-emulator }}" = "true" ]; then
+          packages+=("emulator")
+          packages+=("platform-tools")
+          if [ -n "${{ inputs.system-image }}" ]; then
+            packages+=("${{ inputs.system-image }}")
+          fi
+        fi
+
+        # Accept licenses
+        yes | "$SDKMANAGER" --sdk_root="$ANDROID_HOME" --licenses || true
+
+        "$SDKMANAGER" --sdk_root="$ANDROID_HOME" "${packages[@]}"
+
+    - name: Set Android environment variables
+      shell: bash
+      run: |
+        export NDK_PATH="$ANDROID_HOME/ndk/${{ inputs.ndk-version }}"
+        echo "ANDROID_NDK=$NDK_PATH" >> "$GITHUB_ENV"
+        echo "ANDROID_NDK_HOME=$NDK_PATH" >> "$GITHUB_ENV"
+        echo "ANDROID_NDK_ROOT=$NDK_PATH" >> "$GITHUB_ENV"
+        echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+        echo "$ANDROID_HOME/cmake/${{ inputs.cmake-version }}/bin" >> "$GITHUB_PATH"
+        echo "$ANDROID_HOME/platform-tools" >> "$GITHUB_PATH"
+        echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
