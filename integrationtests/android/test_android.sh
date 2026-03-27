@@ -5,6 +5,7 @@ set -eo pipefail
 : "${CMAKE_PRESET:?Set CMAKE_PRESET}"
 : "${VCPKG_ROOT:?Set VCPKG_ROOT}"
 : "${ANDROID_NDK_HOME:?Set ANDROID_NDK_HOME}"
+AAR_PATH="${AAR_PATH:-android/nakama-sdk/build/outputs/aar/nakama-sdk-release.aar}"
 
 echo "=== Building C++ Test Library ==="
 BUILD_TYPE="${BUILD_TYPE:-MinSizeRel}"
@@ -15,12 +16,6 @@ time cmake --preset "$CMAKE_PRESET" \
   -DCMAKE_MAKE_PROGRAM="$(command -v ninja)"
 
 cmake --build "build/$CMAKE_PRESET" --config "$BUILD_TYPE" --target nakama-test
-
-# Build the official SDK AAR first — it must exist before we extract its .so below.
-echo "=== Building Official Android SDK (Release) ==="
-cd android
-time ./gradlew assembleRelease -Pabi="$ABI" --no-daemon
-cd ..
 
 jni_dir="integrationtests/android/jniLibs/$ABI"
 mkdir -p "$jni_dir"
@@ -34,7 +29,10 @@ cp "build/$CMAKE_PRESET/integrationtests/$BUILD_TYPE/libnakama-test.so" "$jni_di
 #   -DANDROID_STL=c++_shared
 #   -DINSIDE_GRADLE=ON  (vcpkg toolchain interposition workaround)
 # Using the AAR's .so ensures the tested binary matches what ships to users.
-AAR_PATH="android/nakama-sdk/build/outputs/aar/nakama-sdk-release.aar"
+if [ ! -f "$AAR_PATH" ]; then
+  echo "Error: AAR not found at $AAR_PATH. Please run './gradlew :nakama-sdk:assembleRelease' first, or run through CI."
+  exit 1
+fi
 unzip -jo "$AAR_PATH" "jni/$ABI/libnakama-sdk.so" -d "$jni_dir/"
 
 case "$ABI" in
