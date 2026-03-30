@@ -44,7 +44,7 @@ void test_writeStorageInvalidArgument() {
     test.client->writeStorageObjects(session, objects, nullptr, errorCallback);
   };
 
-  test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
+  test.client->authenticateDevice(TestGuid::newGuid(), std::nullopt, true, {}, successCallback);
 
   test.runTest();
 }
