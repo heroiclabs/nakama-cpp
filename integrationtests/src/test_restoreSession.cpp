@@ -15,6 +15,7 @@
  */
 
 #include "NTest.h"
+#include "TestGuid.h"
 #include "globals.h"
 #include "nakama-cpp/NUtils.h"
 
@@ -88,7 +89,7 @@ void test_restoreSession() {
     }
   };
 
-  test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
+  test.client->authenticateDevice(TestGuid::newGuid(), std::nullopt, true, {}, successCallback);
 
   test.runTest();
 }

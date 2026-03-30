@@ -47,7 +47,7 @@ void test_getAccountAndUpdate() {
     test.client->getAccount(session, successCallback);
   };
 
-  test.client->authenticateDevice("mytestdevice0000", std::nullopt, true, {}, successCallback);
+  test.client->authenticateDevice(TestGuid::newGuid(), std::nullopt, true, {}, successCallback);
 
   test.runTest();
 }
