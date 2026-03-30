@@ -4,12 +4,16 @@ on:
   workflow_dispatch:
   issue_comment:
     types: [created]
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   test_android:
     if: |
       github.event_name == 'workflow_call' ||
       github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'push') ||
       (github.event.issue.pull_request && contains(github.event.comment.body, '/test android'))
     timeout-minutes: 100
     runs-on: ubuntu-22.04
