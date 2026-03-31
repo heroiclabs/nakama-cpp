@@ -33,7 +33,7 @@ if [ ! -f "$AAR_PATH" ]; then
   echo "Error: AAR not found at $AAR_PATH. Please run './gradlew :nakama-sdk:assembleRelease' first, or run through CI."
   exit 1
 fi
-unzip -jo "$AAR_PATH" "jni/$ABI/libnakama-sdk.so" -d "$jni_dir/"
+unzip -jo "$AAR_PATH" "prefab/modules/nakama-sdk/libs/android.$ABI/libnakama-sdk.so" -d "$jni_dir/"
 
 case "$ABI" in
   arm64-v8a)   triple="aarch64-linux-android";;
