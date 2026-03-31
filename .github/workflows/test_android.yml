@@ -1,0 +1,100 @@
+name: Test Android
+on: 
+  workflow_call:
+  workflow_dispatch:
+  issue_comment:
+    types: [created]
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  test_android:
+    if: |
+      github.event_name == 'workflow_call' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'push') ||
+      (github.event.issue.pull_request && contains(github.event.comment.body, '/test android'))
+    timeout-minutes: 100
+    runs-on: ubuntu-22.04
+    env:
+      ABI: x86_64
+      CMAKE_PRESET: android-x86_64
+
+    steps:
+      - name: Checkout nakama-cpp
+        uses: actions/checkout@v4
+        with:
+          path: nakama-cpp
+          submodules: false
+
+      - name: Checkout vcpkg submodule
+        run: |
+          git submodule update --init --filter=blob:none -- submodules/vcpkg
+        working-directory: nakama-cpp
+
+      - name: Cache Android SDK
+        uses: actions/cache@v4
+        with:
+          path: ~/android-sdk
+          key: android-sdk-${{ hashFiles('.github/actions/setup-android/action.yml') }}
+          restore-keys: |
+            android-sdk-
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: gradle-${{ hashFiles('android/**/*.gradle.kts', 'android/**/*.gradle') }}
+          restore-keys: |
+            gradle-
+
+      - uses: ./nakama-cpp/.github/actions/setup-android
+        with:
+          ndk-version: 27.2.12479018
+          cmake-version: 4.0.2
+          install-emulator: true
+          system-image: "system-images;android-29;google_apis;x86_64"
+      
+      - uses: ./nakama-cpp/.github/actions/setup-vcpkg-android
+        with:
+          vcpkg-path: nakama-cpp/submodules/vcpkg
+
+      - name: Cache CMake build
+        uses: actions/cache@v4
+        with:
+          path: nakama-cpp/build
+          key: cmake-build-${{ env.CMAKE_PRESET }}-${{ hashFiles('CMakeLists.txt', 'vcpkg.json', '**/CMakePresets.json') }}
+          restore-keys: |
+            cmake-build-${{ env.CMAKE_PRESET }}-
+
+      - name: Start Nakama server
+        run: docker compose -f integrationtests/server/docker-compose.yml up -d --build --wait
+        working-directory: nakama-cpp
+
+      - name: Install Task
+        run: npm install -g @go-task/cli
+
+      - name: Build Release AAR
+        run: ./gradlew :nakama-sdk:assembleRelease -Pabi=$ABI
+        working-directory: nakama-cpp/android
+
+      - name: Upload Release AAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: nakama-sdk-android-aar-${{ env.ABI }}
+          path: nakama-cpp/android/nakama-sdk/build/outputs/aar/*-release.aar
+          if-no-files-found: error
+
+      - name: Run tests on emulator
+        uses: reactivecircus/android-emulator-runner@e89f39f1abbbd05b1113a29cf4db69e7540cae5a
+        with:
+          api-level: 29
+          target: google_apis
+          arch: x86_64
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -memory 4096 -cores 2
+          disable-animations: true
+          timeout: 50
+          script: |
+            set -xe && for port in 7349 7350 7351; do adb reverse tcp:$port tcp:$port; done && cd nakama-cpp && sleep 30 && task test-android ABI=$ABI BUILD_TYPE=MinSizeRel

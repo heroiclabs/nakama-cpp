@@ -91,11 +91,18 @@ int runAllTests(
   // Run internals first (pure unit tests, no server)
   test_internals();
 
+#ifdef ANDROID
+  // Launch all test groups sequentially to avoid resource contention on emulator
+  auto startSuite = [](const char* suiteName, void (*suite)()) {
+    runSuiteSafely(suiteName, suite);
+  };
+#else
   // Launch all test groups in parallel threads
   std::vector<std::thread> threads;
   auto startSuite = [&threads](const char* suiteName, void (*suite)()) {
     threads.emplace_back([suiteName, suite]() { runSuiteSafely(suiteName, suite); });
   };
+#endif
 
   startSuite("test_authentication", test_authentication);
   startSuite("test_session", test_session);
@@ -122,9 +129,12 @@ int runAllTests(
   startSuite("test_throughput", test_throughput);
   startSuite("test_cancellation", test_cancellation);
 
+#ifndef ANDROID
   for (auto& t : threads) {
     t.join();
   }
+#endif
+
 
   // total stats
   uint32_t total = g_runTestsCount.load();

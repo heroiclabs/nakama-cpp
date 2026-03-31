@@ -1,29 +1,38 @@
 name: Build Android
 on: [workflow_call, workflow_dispatch]
+
 jobs:
   build_android:
     timeout-minutes: 30
-    strategy:
-      matrix:
-        preset: ["android-arm64-v8a-host_linux-x64", "android-x64-host_linux-x64", "android-armeabi-v7a-host_linux-x64"]
-        build-type: [MinSizeRel]
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout nakama-cpp
+        uses: actions/checkout@v4
         with:
           path: nakama-cpp
-      - uses: ./nakama-cpp/.github/actions/setup-vcpkg
+          submodules: false
+
+      - name: Checkout vcpkg submodule
+        run: |
+          git submodule update --init --filter=blob:none -- submodules/vcpkg
+        working-directory: nakama-cpp
+
+      - uses: ./nakama-cpp/.github/actions/setup-android
         with:
-          github_token: ${{ secrets.github_token }}
-          vcpkg-path: vcpkg
-      - uses: ./nakama-cpp/.github/actions/setup-ubuntu
-      - uses: ./nakama-cpp/.github/actions/build-library-and-upload
+          ndk-version: 27.2.12479018
+          cmake-version: 4.0.2
+      
+      - uses: ./nakama-cpp/.github/actions/setup-vcpkg-android
         with:
-          nakama-cpp-path: nakama-cpp
-          preset: ${{ matrix.preset }}
-          build-type: ${{ matrix.build-type }}
-      - if: failure()
-        uses: ./nakama-cpp/.github/actions/handle-failure
+          vcpkg-path: nakama-cpp/submodules/vcpkg
+
+      - name : Build with Gradle
+        run : ./gradlew build --no-daemon
+        working-directory: nakama-cpp/android
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
         with:
-          nakama-cpp-path: nakama-cpp
-          vcpkg-path: vcpkg
+          name: nakama-sdk-android-aar
+          path: nakama-cpp/android/nakama-sdk/build/outputs/aar/*.aar
+          if-no-files-found: error

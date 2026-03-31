@@ -1,0 +1,28 @@
+name: 'Setup vcpkg for Android'
+description: 'Setup vcpkg for Android workflow'
+inputs:
+  vcpkg-path:
+    description: 'Path to vcpkg'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Export GitHub Actions cache environment variables
+      uses: actions/github-script@v7
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+
+    - name: Set VCPKG_ROOT and Binary Sources
+      shell: bash
+      run: |
+        echo "VCPKG_ROOT=${{ github.workspace }}/${{ inputs.vcpkg-path }}" >> $GITHUB_ENV
+        echo "VCPKG_BINARY_SOURCES=clear;x-gha,readwrite" >> $GITHUB_ENV
+
+    - name: Bootstrap vcpkg
+      shell: bash
+      run: ./bootstrap-vcpkg.sh -disableMetrics
+      working-directory: ${{ inputs.vcpkg-path }}
+      

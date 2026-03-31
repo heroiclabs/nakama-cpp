@@ -16,35 +16,38 @@
 
 buildscript {
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:8.11.0'
     }
 }
 plugins {
-    id('com.android.application') version '7.1.1'
+    id('com.android.application') version '8.11.0'
 }
 
 def abi = (project.findProperty("abi") ?: "arm64-v8a").toString()
-def supportedAbis = ["arm64-v8a", "armeabi-v7a"]
+def supportedAbis = ["arm64-v8a", "armeabi-v7a", "x86_64"]
 if (!supportedAbis.contains(abi)) {
     throw new GradleException("Unsupported abi '${abi}'. Supported values: ${supportedAbis}")
 }
 
 dependencies {
     implementation 'androidx.annotation:annotation:1.7.1'
-}
-
-repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
+    implementation project(':nakama-sdk')
 }
 
 android {
-    compileSdkVersion 30
+    namespace 'com.heroiclabs.nakamatest'
+    compileSdk 34
+    ndkVersion "27.2.12479018"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
     defaultConfig {
         applicationId "com.heroiclabs.nakamatest"
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdk 28
+        targetSdk 34
         versionCode 1
         versionName '1.0'
         ndk {
@@ -56,13 +59,14 @@ android {
     // and the project's vcpkg-based toolchain.
     sourceSets {
         main {
-            java.srcDirs += '../../android/nakama-sdk/src/main/java'
             jniLibs.srcDirs = ['jniLibs']
         }
     }
     buildTypes {
         customDebugType {
             debuggable true
+            signingConfig signingConfigs.debug
+            matchingFallbacks = ['debug', 'release']
         }
         release {
             minifyEnabled false
