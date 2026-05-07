@@ -37,4 +37,12 @@
          PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
  )
 
+ if (RTTI)
+     if (NOT MSVC)
+         target_compile_options(nakama-sdk-core-common PRIVATE "-frtti")
+     else()
+         target_compile_options(nakama-sdk-core-common PRIVATE "/GR")
+     endif()
+ endif()
+
 
