@@ -39,9 +39,11 @@
 
  if (RTTI)
      if (NOT MSVC)
-         target_compile_options(nakama-sdk-core-common PRIVATE "-frtti")
+         set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/NLogSinkInterface.cpp"
+             PROPERTIES COMPILE_OPTIONS "-frtti")
      else()
-         target_compile_options(nakama-sdk-core-common PRIVATE "/GR")
+         set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/NLogSinkInterface.cpp"
+             PROPERTIES COMPILE_OPTIONS "/GR")
      endif()
  endif()
 

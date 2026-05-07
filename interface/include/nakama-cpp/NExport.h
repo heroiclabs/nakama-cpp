@@ -21,19 +21,13 @@
 // That's where FORCE_DLL_IMPORT_EXPORT might be defined on some platforms
 #include <nakama-cpp/config.h>
 
-#if defined FORCE_DLL_VISIBILITY
-    #ifdef NAKAMA_SHARED_LIBRARY_EXPORTS
-        #define NAKAMA_API __attribute__((visibility("default")))
-    #else
-        #define NAKAMA_API
-    #endif
-#elif defined _WIN32 || defined __CYGWIN__ || defined FORCE_DLL_IMPORT_EXPORT
+#if defined _WIN32 || defined __CYGWIN__  || defined FORCE_DLL_IMPORT_EXPORT
     #ifdef NAKAMA_SHARED_LIBRARY_EXPORTS
         #define NAKAMA_API __declspec(dllexport)
     #else
         #define NAKAMA_API __declspec(dllimport)
     #endif
-#elif __GNUC__ >= 4
+#elif __GNUC__ >= 4 || defined FORCE_DLL_VISIBILITY
     #ifdef NAKAMA_SHARED_LIBRARY_EXPORTS
         #define NAKAMA_API __attribute__((visibility("default")))
     #else
