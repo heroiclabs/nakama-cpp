@@ -91,6 +91,13 @@ include(cmake/linkerFlags.cmake)
 include(GNUInstallDirs)
 include(FetchContent)
 
+# Get current git info like commit sha and date
+include(${PROJECT_SOURCE_DIR}/cmake/GitCommands.cmake)
+get_git_dir(${PROJECT_SOURCE_DIR} GIT_DIR)
+get_git_current_hash(${PROJECT_SOURCE_DIR} GIT_SHA1_LONG)
+get_git_current_date(${PROJECT_SOURCE_DIR} GIT_DATE)
+string(SUBSTRING ${GIT_SHA1_LONG} 0 8 GIT_SHA1)
+
 if (NOT CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 17)
 endif()
@@ -346,6 +353,11 @@ install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/nakama-sdk-config.cmake
   DESTINATION share/nakama-sdk
 )
+
+cmake_path(GET CMAKE_INSTALL_PREFIX FILENAME ARCHIVE_SUFFIX)
+# Create a zip archive of the install directory after the install target
+install(CODE "execute_process (COMMAND \${CMAKE_COMMAND} -E tar cf ../nakama-sdk-${GIT_DATE}_${GIT_SHA1}-${ARCHIVE_SUFFIX}-$<CONFIG>.zip --format=zip -- .
+        WORKING_DIRECTORY \${CMAKE_INSTALL_PREFIX}) ")
 
 # Call last so they can reference any target previously defined
 include(cmake/localCompilerFlags.cmake)
