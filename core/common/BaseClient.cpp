@@ -549,6 +549,17 @@ BaseClient::kickGroupUsersAsync(NSessionPtr session, const std::string& groupId,
   return promise->get_future();
 }
 
+std::future<void>
+BaseClient::banGroupUsersAsync(NSessionPtr session, const std::string& groupId, const std::vector<std::string>& ids) {
+  auto promise = std::make_shared<std::promise<void>>();
+
+  banGroupUsers(
+      session, groupId, ids, [=]() { promise->set_value(); },
+      [=](const NError& error) { promise->set_exception(std::make_exception_ptr<NException>(error)); });
+
+  return promise->get_future();
+}
+
 std::future<void> BaseClient::joinGroupAsync(NSessionPtr session, const std::string& groupId) {
   auto promise = std::make_shared<std::promise<void>>();
 

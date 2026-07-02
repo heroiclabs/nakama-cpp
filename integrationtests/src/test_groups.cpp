@@ -252,6 +252,26 @@ void test_addAndKickGroupUser() {
   }
 }
 
+void test_addAndBanGroupUser() {
+  NTest test(__func__, true);
+  test.runTest();
+
+  try {
+    auto session1 = test.client->authenticateCustomAsync(TestGuid::newGuid(), "", true).get();
+    test.addSession(session1);
+    auto session2 = test.client->authenticateCustomAsync(TestGuid::newGuid(), "", true).get();
+    test.addSession(session2);
+    NGroup group =
+        test.client->createGroupAsync(session1, "BanTest-" + TestGuid::newGuid(), "", "", "", true).get();
+    test.client->addGroupUsersAsync(session1, group.id, {session2->getUserId()}).get();
+    test.client->banGroupUsersAsync(session1, group.id, {session2->getUserId()}).get();
+    test.stopTest(true);
+  } catch (const std::exception& e) {
+    NLOG_INFO("test failed: " + std::string(e.what()));
+    test.stopTest(false);
+  }
+}
+
 void test_createClosedGroup() {
   NTest test(__func__, true);
   test.runTest();
@@ -474,6 +494,7 @@ void test_groups() {
   test_deleteGroup();
   test_joinAndLeaveGroup();
   test_addAndKickGroupUser();
+  test_addAndBanGroupUser();
   test_createClosedGroup();
   test_createGroup_withDescription();
   test_updateGroup();

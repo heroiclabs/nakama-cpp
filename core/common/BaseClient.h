@@ -212,6 +212,9 @@ public:
   std::future<void>
   kickGroupUsersAsync(NSessionPtr session, const std::string& groupId, const std::vector<std::string>& ids) override;
 
+  std::future<void>
+  banGroupUsersAsync(NSessionPtr session, const std::string& groupId, const std::vector<std::string>& ids) override;
+
   std::future<void> joinGroupAsync(NSessionPtr session, const std::string& groupId) override;
 
   std::future<void> leaveGroupAsync(NSessionPtr session, const std::string& groupId) override;

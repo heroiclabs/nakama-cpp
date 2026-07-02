@@ -703,6 +703,20 @@ public:
       ErrorCallback errorCallback = nullptr) = 0;
 
   /**
+   * Ban one or more users from the group.
+   *
+   * @param session The session of the user.
+   * @param groupId The id of the group.
+   * @param ids The ids of the users to ban.
+   */
+  virtual void banGroupUsers(
+      NSessionPtr session,
+      const std::string& groupId,
+      const std::vector<std::string>& ids,
+      std::function<void()> successCallback = nullptr,
+      ErrorCallback errorCallback = nullptr) = 0;
+
+  /**
    * Join a group if it has open membership or request to join it.
    *
    * @param session The session of the user.
@@ -1615,6 +1629,9 @@ public:
    */
   virtual std::future<void>
   kickGroupUsersAsync(NSessionPtr session, const std::string& groupId, const std::vector<std::string>& ids) = 0;
+
+  virtual std::future<void> 
+  banGroupUsersAsync(NSessionPtr session, const std::string& groupId, const std::vector<std::string>& ids) = 0;
 
   /**
    * Join a group if it has open membership or request to join it.

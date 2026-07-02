@@ -335,6 +335,13 @@ public:
       std::function<void()> successCallback,
       ErrorCallback errorCallback) override;
 
+ void banGroupUsers(
+    NSessionPtr session,
+    const std::string& groupId,
+    const std::vector<std::string>& ids,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback) override;
+
   void joinGroup(
       NSessionPtr session,
       const std::string& groupId,

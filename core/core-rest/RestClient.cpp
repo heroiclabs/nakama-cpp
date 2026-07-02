@@ -1588,6 +1588,33 @@ void RestClient::kickGroupUsers(
   }
 }
 
+void RestClient::banGroupUsers(
+    NSessionPtr session,
+    const std::string& groupId,
+    const std::vector<std::string>& ids,
+    std::function<void()> successCallback,
+    ErrorCallback errorCallback) {
+  try {
+    NLOG_INFO("...");
+
+    RestReqContext* ctx = createReqContext(nullptr);
+    setSessionAuth(ctx, session);
+
+    ctx->successCallback = successCallback;
+    ctx->errorCallback = errorCallback;
+
+    NHttpQueryArgs args;
+
+    for (auto& id : ids) {
+      args.emplace("user_ids", id);
+    }
+
+    sendReq(ctx, NHttpReqMethod::POST, "/v2/group/" + encodeURIComponent(groupId) + "/ban", "", std::move(args));
+  } catch (exception& e) {
+    NLOG_ERROR("exception: " + string(e.what()));
+  }
+}
+
 void RestClient::joinGroup(
     NSessionPtr session,
     const std::string& groupId,
