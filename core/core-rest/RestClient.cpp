@@ -1595,8 +1595,6 @@ void RestClient::banGroupUsers(
     std::function<void()> successCallback,
     ErrorCallback errorCallback) {
   try {
-    NLOG_INFO("...");
-
     RestReqContext* ctx = createReqContext(nullptr);
     setSessionAuth(ctx, session);
 
