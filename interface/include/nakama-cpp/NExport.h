@@ -16,10 +16,10 @@
 
 #pragma once
 
-#undef NAKAMA_API
-
 // That's where FORCE_DLL_IMPORT_EXPORT might be defined on some platforms
 #include <nakama-cpp/config.h>
+
+#ifndef NAKAMA_API
 
 #if defined _WIN32 || defined __CYGWIN__  || defined FORCE_DLL_IMPORT_EXPORT
     #ifdef NAKAMA_SHARED_LIBRARY_EXPORTS
@@ -36,3 +36,5 @@
 #else
     #define NAKAMA_API
 #endif
+
+#endif // NAKAMA_API
