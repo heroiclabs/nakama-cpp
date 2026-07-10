@@ -185,7 +185,6 @@ public:
       const std::optional<int32_t>& limit,
       const std::optional<NFriend::State>& state,
       const std::string& cursor) override;
-  ;
 
   std::future<NGroup> createGroupAsync(
       NSessionPtr session,
@@ -197,7 +196,6 @@ public:
       const std::optional<int32_t>& maxCount) override;
 
   std::future<void> deleteGroupAsync(NSessionPtr session, const std::string& groupId) override;
-  ;
 
   std::future<void>
   addGroupUsersAsync(NSessionPtr session, const std::string& groupId, const std::vector<std::string>& ids) override;
