@@ -92,8 +92,10 @@ public:
       std::function<void(const NChannelMessageAck&)> successCallback = nullptr,
       RtErrorCallback errorCallback = nullptr) override;
 
-  void
-  createMatch(std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback = nullptr) override;
+  void createMatch( 
+    const std::optional<std::string>& name = std::nullopt,
+    std::function<void(const NMatch&)> successCallback = nullptr, 
+    RtErrorCallback errorCallback = nullptr) override;
 
   void joinMatch(
       const std::string& matchId,
@@ -234,7 +236,7 @@ public:
 
   std::future<void> removeChatMessageAsync(const std::string& channelId, const std::string& messageId) override;
 
-  std::future<NMatch> createMatchAsync() override;
+  std::future<NMatch> createMatchAsync(const std::optional<std::string>& name = std::nullopt) override;
 
   std::future<NMatch> joinMatchAsync(const std::string& matchId, const NStringMap& metadata) override;
 

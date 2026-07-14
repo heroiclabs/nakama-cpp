@@ -108,8 +108,27 @@ void test_rt_matchmaker() {
   test2.stopTest(true);
 }
 
+void test_rt_create_match_with_name() {
+  const bool threadedTick = true;
+  NTest test3(__func__, threadedTick);
+
+  test3.runTest();
+
+  NSessionPtr session = test3.client->authenticateCustomAsync(TestGuid::newGuid(), std::string(), true).get();
+  bool createStatus = false;
+  test3.rtClient->connectAsync(session, createStatus, NTest::RtProtocol).get();
+
+  NMatch match1 = test3.rtClient->createMatchAsync("success").get();
+  NMatch match2 = test3.rtClient->createMatchAsync("success").get();
+
+  test3.stopTest(match1.matchId == match2.matchId);
+
+  NLOG_INFO("stopped create match");
+}
+
 void test_rt_match() {
   test_rt_create_match();
+  test_rt_create_match_with_name();
   test_rt_matchmaker();
 }
 

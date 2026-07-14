@@ -490,12 +490,19 @@ void NRtClient::removeChatMessage(
   send(msg);
 }
 
-void NRtClient::createMatch(std::function<void(const NMatch&)> successCallback, RtErrorCallback errorCallback) {
-  NLOG_INFO("...");
-
+void NRtClient::createMatch(
+  const std::optional<std::string>& name,
+  std::function<void(const NMatch&)> successCallback, 
+  RtErrorCallback errorCallback) {
+  
+    NLOG_INFO("...");
+  
   ::nakama::realtime::Envelope msg;
 
-  msg.mutable_match_create();
+  ::nakama::realtime::MatchCreate* matchCreate = msg.mutable_match_create();
+  if (name.has_value()) {
+       matchCreate->set_name(*name);
+   }
 
   std::shared_ptr<RtRequestContext> ctx = createReqContext(msg);
 
@@ -1125,10 +1132,10 @@ std::future<void> NRtClient::removeChatMessageAsync(const std::string& channelId
   return promise->get_future();
 }
 
-std::future<NMatch> NRtClient::createMatchAsync() {
+std::future<NMatch> NRtClient::createMatchAsync(const std::optional<std::string>& name) {
   auto promise = std::make_shared<std::promise<NMatch>>();
 
-  createMatch(
+  createMatch( name,
       [=](const NMatch& match) { promise->set_value(match); },
       [=](const NRtError& error) { promise->set_exception(std::make_exception_ptr<NRtException>(error)); });
 
