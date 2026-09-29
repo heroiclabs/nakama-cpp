@@ -26,8 +26,10 @@
 #include <unordered_map>
 
 #include "InternalLowLevelSatoriAPI.h"
+#include "SatoriErrorLogSink.h"
 #include "SClientInterface.h"
 #include "nakama-cpp/ClientFactory.h"
+#include "nakama-cpp/log/NLogger.h"
 #include "nakama-cpp/satori/SatoriClientFactory.h"
 
 namespace Satori {
@@ -70,7 +72,9 @@ private:
 public:
     // External client: caller owns the client and tick loop.
     SatoriLifecycle(SClientPtr client, SSessionPtr session)
-        : _client(std::move(client)), _session(std::move(session)) {}
+        : _client(std::move(client)), _session(std::move(session)) {
+        Nakama::NLogger::addSink(std::make_shared<SatoriErrorLogSink>(_client, _session));
+    }
 
     ~SatoriLifecycle() {
         _ticking = false;
@@ -104,7 +108,12 @@ public:
                     std::lock_guard<std::mutex> lock(lc->_sessionMutex);
                     lc->_session = session;
                 }
-                lc->_client->onAppLaunched();
+
+                Nakama::NLogger::addSink(std::make_shared<SatoriErrorLogSink>(lc->_client, session));
+
+                SEvent e;
+                e.name = EventNames::APP_LAUNCHED;
+                lc->_client->postEvent(session, {e}, nullptr, nullptr);
             },
             std::move(onError));
         lc->startTickThread();
@@ -125,33 +134,33 @@ public:
     std::future<void> onAppLaunched() {
         SEvent e;
         e.name = EventNames::APP_LAUNCHED;
-        return _client->postEventAsync(session(), {e});
+        return _client->postEventAsync(getSession(), {e});
     }
 
     std::future<void> onAppForeground() {
         SEvent e;
         e.name = EventNames::APP_FOREGROUND;
-        return _client->postEventAsync(session(), {e});
+        return _client->postEventAsync(getSession(), {e});
     }
 
     std::future<void> onAppBackground() {
         SEvent e;
         e.name = EventNames::APP_BACKGROUND;
-        return _client->postEventAsync(session(), {e});
+        return _client->postEventAsync(getSession(), {e});
     }
 
     std::future<void> onGameStart(const std::string& val) {
         SEvent e;
         e.name = EventNames::GAME_START;
         e.value = val;
-        return _client->postEventAsync(session(), {e});
+        return _client->postEventAsync(getSession(), {e});
     }
 
     std::future<void> onGameEnd(const std::string& val) {
         SEvent e;
         e.name = EventNames::GAME_END;
         e.value = val;
-        return _client->postEventAsync(session(), {e});
+        return _client->postEventAsync(getSession(), {e});
     }
 
 private:
