@@ -16,39 +16,66 @@
 
 #include <nakama-cpp/log/NConsoleLogSink.h>
 #include <nakama-cpp/log/NLogger.h>
+#include <algorithm>
+#include <vector>
 
 namespace Nakama {
 
-static NLogSinkPtr _sink;
+static std::vector<NLogSinkPtr> _sinks;
 
-static bool shouldLog(NLogLevel level) { return _sink && _sink->getLevel() <= level; }
+static bool shouldLog(NLogLevel level) {
+  for (auto& s : _sinks) {
+    if (s && s->getLevel() <= level) {
+      return true;
+    }
+  }
+  return false;
+}
 
 void NLogger::initWithConsoleSink(NLogLevel level) {
-  setSink(std::make_shared<NConsoleLogSink>());
-  _sink->setLevel(level);
+  auto sink = std::make_shared<NConsoleLogSink>();
+  sink->setLevel(level);
+  setSink(std::move(sink));
 }
 
 void NLogger::init(NLogSinkPtr sink, NLogLevel level) {
-  setSink(sink);
-
   if (sink) {
     sink->setLevel(level);
   }
+  setSink(std::move(sink));
 }
 
-NLogSinkPtr NLogger::getSink() { return _sink; }
+void NLogger::addSink(NLogSinkPtr sink) {
+  if (sink) {
+    _sinks.push_back(std::move(sink));
+  }
+}
+
+void NLogger::removeSink(NLogSinkPtr sink) {
+  _sinks.erase(std::remove(_sinks.begin(), _sinks.end(), sink), _sinks.end());
+}
+
+NLogSinkPtr NLogger::getSink() {
+  return _sinks.empty() ? nullptr : _sinks.front();
+}
 
 void NLogger::setSink(NLogSinkPtr sink) {
-  if (_sink) {
-    _sink->flush();
+  for (auto& s : _sinks) {
+    if (s) {
+      s->flush();
+    }
   }
-
-  _sink = std::move(sink);
+  _sinks.clear();
+  if (sink) {
+    _sinks.push_back(std::move(sink));
+  }
 }
 
 void NLogger::setLevel(NLogLevel level) {
-  if (_sink) {
-    _sink->setLevel(level);
+  for (auto& s : _sinks) {
+    if (s) {
+      s->setLevel(level);
+    }
   }
 }
 
@@ -74,19 +101,21 @@ void NLogger::Fatal(const std::string& message, const char* module_name, const c
 
 // this is final log function which sends log to sink
 void NLogger::Log(NLogLevel level, const std::string& message, const char* module_name, const char* func) {
-  if (shouldLog(level)) {
-    if (module_name && module_name[0]) {
-      std::string module_and_func(module_name);
+  if (!shouldLog(level)) return;
 
-      if (func && func[0]) {
-        module_and_func += "::";
-        module_and_func += func;
-      }
-
-      _sink->log(level, message, module_and_func.c_str());
-    } else {
-      _sink->log(level, message, func);
+  const char* func_arg = func;
+  std::string module_and_func;
+  if (module_name && module_name[0]) {
+    module_and_func = module_name;
+    if (func && func[0]) {
+      module_and_func += "::";
+      module_and_func += func;
     }
+    func_arg = module_and_func.c_str();
+  }
+
+  for (auto& s : _sinks) {
+    if (s && s->getLevel() <= level) s->log(level, message, func_arg);
   }
 }
 

@@ -65,6 +65,8 @@ NAKAMA_NAMESPACE_BEGIN
          * @param level logging boundary
          */
         static void init(NLogSinkPtr sink, NLogLevel level = NLogLevel::Info);
+        static void addSink(NLogSinkPtr sink);
+        static void removeSink(NLogSinkPtr sink);
         static NLogSinkPtr getSink();
         static void setSink(NLogSinkPtr sink);
         static void setLevel(NLogLevel level);
