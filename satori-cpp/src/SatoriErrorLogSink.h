@@ -16,7 +16,6 @@
 
 #pragma once
 
-#include <functional>
 #include <string>
 
 #include "SClientInterface.h"
@@ -27,19 +26,18 @@ namespace Satori {
 class SatoriErrorLogSink : public Nakama::NLogSinkInterface {
     private:
       SClientPtr _client;
-      std::function<SSessionPtr()> _sessionGetter;
+      SSessionPtr _session;
 
     public:
-      SatoriErrorLogSink(SClientPtr client, std::function<SSessionPtr()> sessionGetter)
-          : _client(std::move(client)), _sessionGetter(std::move(sessionGetter)) {}
+      SatoriErrorLogSink(SClientPtr client, SSessionPtr session)
+          : _client(std::move(client)), _session(std::move(session)) {}
 
     void log(Nakama::NLogLevel level, const std::string& message, const char* func) override {
         if (level < Nakama::NLogLevel::Error) {
             return;
         }
 
-        auto session = _sessionGetter();
-        if (!session) return;
+        if (!_session) return;
 
         SEvent e;
         e.name = "error";
@@ -47,7 +45,7 @@ class SatoriErrorLogSink : public Nakama::NLogSinkInterface {
         if (func) {
             e.metadata["func"] = func;
         }
-        _client->postEvent(session, {e}, nullptr, nullptr);
+        _client->postEvent(_session, {e}, nullptr, nullptr);
     }
 
     void flush() override {}
